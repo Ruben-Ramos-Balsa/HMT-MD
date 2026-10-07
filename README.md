@@ -4,6 +4,8 @@ Documentos, fuentes y materiales de reproducción del paquete editorial cerrado 
 
 [Descargar el paquete completo](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01/ENTREGA_HMT_USB_2026-10-01_TRANSPORTE.zip) · [Ver la edición y sus comprobadores](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/tag/edicion-2026-10-01)
 
+**Autores:** Oumar Haidara Fall y Rubén Ramos Balsa.
+
 ## Empezar por la guía
 
 | Idioma | Guía del corpus | Colección de PDF |
@@ -49,6 +51,10 @@ py -3 -I -B -S verificar_transporte.py --root ENTREGA_HMT_USB
 El comprobador de transporte coteja el manifiesto original y los 29.013 archivos conservados que enumera, incluidos los metadatos de las dependencias Git. No ejecuta cálculos científicos. El [registro de transporte](transporte/MANIFIESTO_TRANSPORTE.json) documenta las rutas, tamaños y huellas correspondientes.
 
 Se excluyen únicamente los archivos `.DS_Store`, preferencias de visualización de carpetas creadas por macOS. El manifiesto original contiene una entrada para ese archivo volátil en la raíz. Se conserva sin modificación: su verificador estricto informa esa diferencia. El comprobador de transporte declara expresamente la exclusión y usa el resultado distinto `PASS_TRANSPORT_CONTENT` cuando los demás archivos coinciden. Los detalles figuran en la [nota de procedencia](transporte/NOTA_PROCEDENCIA_TRANSPORTE.json).
+
+## Citar la edición
+
+La referencia de esta biblioteca está disponible en [formato BibTeX](CITATION.bib). Al utilizar una obra concreta, cita también su título y edición tal como aparecen en el documento.
 
 ## English
 
