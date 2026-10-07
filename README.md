@@ -4,6 +4,8 @@
 
 **Autores:** Oumar Haidara Fall y Rubén Ramos Balsa.
 
+**[Descargar la biblioteca completa](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-3/Holografia-Modular-Triadica.zip)** · Al descomprimir, abre **00_ABRIR_BIBLIOTECA.html**.
+
 Esta biblioteca permite leer las obras de Holografía Modular Triádica y Mecánica Dimensional, seguir sus manuscritos y estudiar los programas, datos y archivos formales que las acompañan. La edición documental corresponde al 1 de octubre de 2026. La colección incluye 52 PDF en español, inglés y francés, con las tres guías del corpus, y 49 ediciones de fuentes.
 
 **[Serie principal I–XII](#serie-principal-doce-monográficos)** · **[Índice de obras](INDICE_DE_OBRAS.md)** · **[Manuscritos y fuentes](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/04_FUENTES_LATEX/)** · **[Programas, datos y archivos Lean](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/05_REPRODUCCION/)** · **[Citar esta biblioteca](CITATION.bib)**
@@ -72,44 +74,38 @@ Cada ficha del [índice de obras](INDICE_DE_OBRAS.md) enlaza el PDF, la entrada 
 
 ## Citar una obra o la biblioteca
 
-La referencia de la biblioteca está disponible en [CITATION.bib](CITATION.bib). Al utilizar una obra concreta, cita también el título, los autores y la edición que figuran en ella. Para identificar los archivos consultados, conserva la edición y el [manifiesto de esta presentación](CONTROL%20DE%20LA%20EDICI%C3%93N/MANIFIESTO_EDICION.json).
+La referencia de la biblioteca está disponible en [CITATION.bib](CITATION.bib). Al utilizar una obra concreta, cita también el título, los autores y la edición que figuran en ella. Para identificar los archivos consultados, conserva la edición y el [manifiesto de esta presentación](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/06_VERIFICACION/MANIFIESTO_DISTRIBUCION.json).
 
 ## Descargar y conservar la edición
 
-La [edición completa](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/tag/edicion-2026-10-01-presentacion-2) reúne la biblioteca, sus fuentes y todas las dependencias conservadas. Descarga el [ZIP de la edición](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/HOLOGRAFIA_MODULAR_TRIADICA_2026-10-01.zip) para estudiarla localmente.
+La [descarga armonizada del 8 de octubre de 2026](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/tag/edicion-2026-10-01-presentacion-3) contiene el mismo ZIP, byte por byte, que la distribución de Dropbox. La edición documental sigue siendo la del 1 de octubre; esta revisión simplifica su presentación y navegación.
+
+1. Descarga [Holografia-Modular-Triadica.zip](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-3/Holografia-Modular-Triadica.zip).
+2. Descomprímelo y abre la carpeta **Holografía Modular Triádica**.
+3. Abre **00_ABRIR_BIBLIOTECA.html** para elegir idioma y acceder a los documentos y materiales.
+
+La primera pantalla contiene una portada y seis carpetas: PDF en español, inglés y francés, fuentes LaTeX, reproducción y verificación. Las guías y los comprobadores se reúnen dentro de **06_VERIFICACION**.
+
+Los PDF, fuentes, programas científicos, datos y certificados conservan sus bytes. Las versiones anteriores de los archivos de navegación y control están conservadas en [PROCEDENCIA](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/06_VERIFICACION/PROCEDENCIA/). La [descarga anterior](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/tag/edicion-2026-10-01-presentacion-2) continúa disponible para consulta y cita.
 
 <details>
-<summary>Descarga completa y comprobación de archivos</summary>
+<summary>Comprobar la descarga</summary>
 
-La edición ofrece estos cinco archivos:
-
-| Archivo | Contenido |
-| --- | --- |
-| [HOLOGRAFIA_MODULAR_TRIADICA_2026-10-01.zip](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/HOLOGRAFIA_MODULAR_TRIADICA_2026-10-01.zip) | Biblioteca completa con sus fuentes, materiales y dependencias. |
-| [MANIFIESTO_EDICION.json](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/MANIFIESTO_EDICION.json) | Selección de archivos, tamaños y huellas de la edición. |
-| [PROCEDENCIA.json](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/PROCEDENCIA.json) | Correspondencia con la entrega documental de origen. |
-| [verificar_edicion.py](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/verificar_edicion.py) | Comprobador independiente, con la biblioteca estándar de Python. |
-| [SHA256SUMS](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-2/SHA256SUMS) | Huellas SHA-256 de los archivos distribuidos. |
-
-El ZIP completo conserva las nueve carpetas internas `.git` de las dependencias. La vista navegable y los archivos automáticos **Code → Download ZIP** y **Source code** no incluyen esas carpetas; para obtener la distribución completa utiliza el ZIP de la tabla.
-
-La carpeta extraída se llama **HOLOGRAFÍA MODULAR TRIÁDICA**. En Windows conviene usar una ruta corta. Si el entorno limita la longitud de las rutas, renombra únicamente la carpeta exterior a `HMT` y sitúala, por ejemplo, en `C:\HMT`; conserva los nombres y rutas interiores.
-
-## Comprobar la descarga
-
-Guarda `verificar_edicion.py` junto a la carpeta extraída y ejecuta:
+Desde la carpeta extraída, ejecuta:
 
 ```bash
-python3 -I -B -S verificar_edicion.py --root "HOLOGRAFÍA MODULAR TRIÁDICA"
+python3 -I -B -S 06_VERIFICACION/verificar_integridad.py
 ```
 
-En Windows puede utilizarse `py -3` en lugar de `python3`. Si has llamado `HMT` a la carpeta exterior, utiliza `--root HMT`.
+En Windows puede utilizarse `py -3` en lugar de `python3`. También hay lanzadores para Mac y Windows dentro de **06_VERIFICACION**. El resultado esperado es `PASS_LIBRARY_FILES`.
 
-El resultado esperado es `PASS_TRANSPORT_CONTENT`: el cotejo de 29.014 archivos, incluido el manifiesto original, con la selección conservada. El control comprueba la identidad de los archivos y no ejecuta los cálculos científicos.
+El [manifiesto vigente](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/06_VERIFICACION/MANIFIESTO_DISTRIBUCION.json) comprueba los archivos de esta disposición y la conservación de los originales. Los metadatos visuales `.DS_Store` del Finder se excluyen del paquete y del control. Las [instrucciones de verificación](HOLOGRAF%C3%8DA%20MODULAR%20TRI%C3%81DICA/06_VERIFICACION/LEER_VERIFICACION.txt) explican su alcance.
 
-La excepción documentada es la entrada original `.DS_Store`, un archivo volátil de preferencias de visualización de macOS. El manifiesto original se conserva sin cambios; la comprobación de esta edición excluye esa entrada y no equivale a `PASS_FILE_INTEGRITY` de la entrega original. Consulta [PROCEDENCIA.json](CONTROL%20DE%20LA%20EDICI%C3%93N/PROCEDENCIA.json) y los controles de [CONTROL DE LA EDICIÓN](CONTROL%20DE%20LA%20EDICI%C3%93N/).
+El archivo [SHA256SUMS.txt](https://github.com/Ruben-Ramos-Balsa/HMT-MD/releases/download/edicion-2026-10-01-presentacion-3/SHA256SUMS.txt) permite comprobar el ZIP. La verificación de archivos no vuelve a ejecutar los cálculos científicos.
 
-*Correspondencia de nombres:* cuando la documentación conservada utilice el nombre histórico `ENTREGA_HMT_USB`, se refiere a la carpeta que esta presentación denomina **HOLOGRAFÍA MODULAR TRIÁDICA**.
+El ZIP completo conserva las nueve carpetas internas `.git` de las dependencias. La vista navegable y los archivos automáticos **Code → Download ZIP** y **Source code** no incluyen esas carpetas; para obtener la distribución completa utiliza el ZIP indicado arriba.
+
+En Windows conviene extraer en una ruta corta. Puede renombrarse únicamente la carpeta exterior a `HMT`, por ejemplo `C:\HMT`, conservando los nombres interiores.
 
 </details>
 
