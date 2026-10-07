@@ -2,7 +2,7 @@
 """Verify the derived GitHub transport using Python's standard library only.
 
 Usage (after extracting the complete Release ZIP):
-    python3 -I -B -S verificar_transporte.py --root /path/to/ENTREGA_HMT_USB
+    python3 -I -B -S verificar_edicion.py --root "/path/to/HOLOGRAFÍA MODULAR TRIÁDICA"
 
 For the intentionally smaller browsable repository copy, add --view.
 The pinned original manifest remains unchanged, including its excluded Finder row.
@@ -29,7 +29,7 @@ EXCLUDED_RECORD = {
     "bytes": 8196,
     "sha256": "2e806d78415b0dcb357b02a69eb20444cd387490a4dd31450e1e119f6bca42c1",
 }
-ARCHIVE_ROOT = "ENTREGA_HMT_USB"
+ARCHIVE_ROOT = "HOLOGRAFÍA MODULAR TRIÁDICA"
 CHUNK_SIZE = 1024 * 1024
 SCOPE = (
     "Integrity of the derived transport only: retained original-manifest files "
@@ -251,7 +251,7 @@ def verify_tree(root: Path, view: bool = False) -> dict:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", required=True, type=Path, help="Path to the ENTREGA_HMT_USB directory")
+    parser.add_argument("--root", required=True, type=Path, help="Path to the extracted edition directory")
     parser.add_argument("--view", action="store_true", help="Verify only the repository view, which excludes .git components")
     args = parser.parse_args(argv)
     try:
