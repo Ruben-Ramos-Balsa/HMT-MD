@@ -1,0 +1,82 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/libro/certificacion_lean.tex
+\chapter*{Formalisation arithmétique du bilan bilatéral}
+\addcontentsline{toc}{section}{Formalisation arithmétique du bilan bilatéral}
+\label{x_reciprocidad:libro:formalizacion-lean}
+
+La spécialisation nonadique de la loi bilatérale admet une formalisation
+arithmétique indépendante. Le point d’application se situe après la
+construction de ses coefficients et de ses transports : la partition de base dix fixe
+\(a=8\), et les deux registres sont \(8x-y\) et \(9x+y\). Sur ce domaine,
+Lean~4.21.0 vérifie sept théorèmes avec sa bibliothèque \texttt{Std}. Les sources
+formelles et la procédure d’exécution sont fournies en supplément.
+Le présent complément énonce leur contenu mathématique et le relie aux
+démonstrations opératorielles de l’article.
+
+\section*{Identité polynomiale et conservation de la norme}
+
+Pour tous \(x,y\in\mathbb Z\), on a
+\[
+ 9(8x-y)^2+8(9x+y)^2=17(72x^2+y^2).
+\]
+Le développement des deux carrés annule les produits croisés. Lorsque \(y^2=x^2\), la même égalité donne
+\[
+ 9(8x-y)^2+8(9x+y)^2=17\cdot73\,x^2.
+\]
+Ce sont les deux premiers théorèmes formalisés. Le premier exprime un
+bilan pour des entrées entières arbitraires ; le second applique l’hypothèse
+explicite de conservation de la norme. L’entier \(73=72+1\) occupe
+exactement la place qu’il a dans la \cref{x_reciprocidad:lib04:teo-balance}.
+
+\section*{Dimension finie arbitraire}
+
+Soient \(n\in\mathbb N\) et \(x,y:\mathbb N\to\mathbb Z\). Définissons
+\[
+ S_n(x)=\sum_{j<n}x_j^2,
+ \qquad
+ E_n(x,y)=\sum_{j<n}\bigl(9(8x_j-y_j)^2+8(9x_j+y_j)^2\bigr).
+\]
+Les deux théorèmes suivants établissent
+\[
+ E_n(x,y)=17\bigl(72S_n(x)+S_n(y)\bigr)
+\]
+et, sous l'hypothèse \(S_n(y)=S_n(x)\),
+\[
+ E_n(x,y)=17\cdot73\,S_n(x).
+\]
+La preuve formelle procède par récurrence sur \(n\). Le cas initial est la somme vide ; l'étape de récurrence ajoute une coordonnée et applique l'identité polynomiale déjà démontrée. Le quantificateur universel sur \(n\) inclut toutes les dimensions finies. L'hypothèse utilise la somme totale des carrés, si bien qu'elle admet des redistributions entre coordonnées.
+
+\section*{Inversion exacte des canaux bilatéraux}
+
+Écrivons \(q_-=8x-y\) et \(q_+=9x+y\). Les cinquième et sixième théorèmes
+sont les égalités exactes
+\[
+ q_-+q_+=17x,\qquad 8q_+-9q_-=17y.
+\]
+Dans l’image de l’application \((x,y)\mapsto(q_-,q_+)\), les deux membres
+gauches sont des multiples de \(17\). Les divisions récupèrent les deux
+entrées. Le septième théorème formule leur conséquence injective :
+\[
+ \left.
+ \begin{aligned}
+ 8x-y&=8x'-y',\\
+ 9x+y&=9x'+y'
+ \end{aligned}
+ \right\}
+ \quad\Longrightarrow\quad x=x'\ \text{et}\ y=y'.
+\]
+L’annulation dans \(\mathbb Z\) justifie cette conclusion. Le contenu
+formel coïncide avec la récupération de la paire de registres, avant de
+les normaliser comme canaux d’une réalisation métrique.
+
+\section*{Correspondance entre démonstration algébrique et formalisation}
+
+La formalisation utilise des variables entières arbitraires et la récurrence mathématique. Elle constitue donc une preuve des énoncés précédents, distincte de la vérification d'un ensemble fini d'exemples. Le système accepte les termes de preuve sans déclarations axiomatiques ajoutées ni démonstrations différées. Le supplément enregistre également les dépendances logiques communiquées par l'outil pour chaque déclaration.
+
+La loi opératorielle du corps de l’article possède un domaine plus large :
+isométries entre espaces de Hilbert, archive de profondeur arbitraire et
+lecteurs conjugués. Ses démonstrations se trouvent dans les
+\cref{x_reciprocidad:lib04:teo-balance,x_reciprocidad:lib06:simetria,x_reciprocidad:lib06:profundidad}. La preuve Lean
+incorporée ici certifie la spécialisation arithmétique énoncée, avec
+ses quantificateurs et sa structure de départ. La provenance des
+coefficients, la génération du registre et les réalisations exceptionnelles
+conservent les démonstrations précédentes dont elles dépendent.

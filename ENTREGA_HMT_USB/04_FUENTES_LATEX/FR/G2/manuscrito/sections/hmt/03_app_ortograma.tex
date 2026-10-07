@@ -1,0 +1,855 @@
+\ifdefined\HMTAPPFormal
+\chapter{APP : support, opérations et chemins}
+\label{chap:app}
+\index{APP}
+
+\noindent
+Le sigle APP provient de \emph{All Possible Paths}. Il désigne une unique
+structure de chemins sur un support arithmétique fini : le graphe
+sous-jacent possède quatre-vingt-un sommets, tandis que l'ensemble des chemins
+finis, réuni sur toutes les longueurs, est dénombrable. Sa matrice
+arithmétique principale est la table multiplicative nonadique. L'addition est la loi
+interne dont l'accumulation engendre chaque ligne et chaque colonne de cette table et agit
+aussi comme observable de comparaison sur le même support. APP réunit ainsi
+addition, produit et
+composition de trajectoires avant d'effectuer la projection ternaire ou
+l'évaluation archimédienne. La définition suivante fixe de manière exhaustive
+l'univers de chemins considéré.
+
+\section{Domaine, générateurs et relations préformelles du support APP}
+
+Le support d'APP est un tore arithmétique fini : chacune de ses deux
+coordonnées parcourt les neuf classes résiduelles et revient à son origine après
+neuf translations unitaires. Ses quatre-vingt-un points sont donc des
+paires de classes modulo neuf. Le graphe de Cayley associé conserve cette
+structure cyclique : un sommet représente une position, une arête orientée
+représente un déplacement cardinal unitaire et une suite finie
+d'arêtes représente un chemin. Ainsi, \emph{tous les chemins
+possibles} désigne l'ensemble des mots cardinaux finis ayant leur point
+initial dans le tore.
+
+Chaque sommet reçoit simultanément deux évaluations arithmétiques. Le
+\emph{feuillet additif} publie la somme de ses deux coordonnées et le
+\emph{feuillet multiplicatif} publie leur produit. Le terme \emph{feuillet}
+désigne ici une évaluation du même point et du même chemin ; APP conserve
+un unique support et deux fonctions sur celui-ci.
+
+La différence opératoire entre les deux feuillets est exacte. Dans une ligne ou une colonne,
+l'addition agit par translation et accumule de manière répétée le même incrément.
+La multiplication par une unité permute également les classes ; la
+multiplication par un diviseur de zéro replie plusieurs classes sur un même
+résidu. Pour conserver l'information que ce repliement masque, APP élève
+chaque évaluation à ses coordonnées résidu--quotient :
+\[
+ i+j=R^+_{ij}+9q^+_{ij},
+ \qquad
+ ij=R^\times_{ij}+9q^\times_{ij}.
+\]
+Les paires \((R^+,q^+)\) et \((R^\times,q^\times)\) récupèrent les valeurs
+entières antérieures à la réduction. Lors de la concaténation de blocs, la retenue additive
+\(\kappa_9\) enregistre l'écart entre additionner des représentants entiers et
+additionner d'abord leurs résidus ; avec les deux quotients, elle rend la
+récupération compositionnelle. Ainsi, l'accumulation additive construit les trajectoires visibles,
+tandis que le relèvement résidu--quotient déploie les fibres créées par le
+repliement multiplicatif.
+
+Pour un chemin \(\gamma=(x_0,\ldots,x_r)\), la généalogie visible est la
+suite des positions et des paires d'évaluations
+\[
+ \mathcal G_{\rm vis}(\gamma)
+ =\bigl(\gamma;(\Sigma(x_k),\Pi(x_k))_{k=0}^{r}\bigr).
+\]
+Sa généalogie enrichie ajoute, à chaque pas, les quotients, la retenue et
+l'orientation transportée. La projection enrichie--visible conserve le
+chemin et les résidus et oublie précisément ces coordonnées de mémoire. Cette
+distinction sera l'entrée de l'état complet du TRIT et du Topological Phase Kernel.
+Le domaine complet des (104\,976) conditions initiales à double curseur et
+les (468) fibres d'émission qu'elles produisent sont publiés intégralement dans
+\cref{app:catalogo-semillas-app-rev9} ; chaque germe y est distingué de
+l'émission à laquelle il appartient et la multiplicité de la fibre est conservée.
+
+\section{Support arithmétique, translations et observables}
+
+Soit
+\[
+\dr(n)=1+((n-1)\bmod9)\in\{1,\ldots,9\}.
+\]
+Cette application choisit le représentant \(9\) pour la classe nulle. Nous définissons
+\(X_9=(\ZZ/9\ZZ)^2\), sur lequel agit le groupe de translations
+\((\ZZ/9\ZZ)^2\), et fixons l'ensemble symétrique de générateurs
+\[
+ \mathscr D=\{(1,0),(0,1),(-1,0),(0,-1)\}.
+\]
+Le graphe de Cayley
+\[
+ \GraphAPP=\operatorname{Cay}(X_9,\mathscr D)
+\]
+possède \(81\) sommets et quatre arêtes orientées ayant leur origine à chaque sommet.
+Un chemin orienté de longueur \(r\) est une suite
+\(\gamma=(x_0,\ldots,x_r)\) dans \(X_9\) telle que
+\(x_{k+1}-x_k\in\mathscr D\) pour tout \(k<r\). Nous notons
+\(\operatorname{Path}(\GraphAPP)\) l'ensemble de tous les chemins finis
+ainsi définis.
+
+\begin{definition}[Structure APP]
+La structure arithmétique des chemins possibles est le tuple
+\[
+ \AAPP=(X_9,\GraphAPP,\Sigma,\Pi,
+        \operatorname{Path}(\GraphAPP)),
+\]
+où les deux observables de sommet sont
+\[
+\Sigma(i,j)=\dr(i+j),
+\qquad
+\Pi(i,j)=\dr(ij),
+\qquad1\le i,j\le9.
+\]
+\end{definition}
+
+\subsection*{Cadre cardinal et mots de trajectoire}
+
+Pour rendre explicite l'orientation du tore, nous utilisons les coordonnées
+\((\text{ligne},\text{colonne})\), avec les lignes croissantes vers le sud et les
+colonnes croissantes vers l'est, et écrivons
+\[
+ \delta(N)=(-1,0),\qquad \delta(E)=(0,1),\qquad
+ \delta(S)=(1,0),\qquad \delta(O)=(0,-1).
+\]
+Soit \(\mathscr D_{\rm card}=\{E,N,O,S\}\), où \(O\) désigne l'ouest. Étant donnés un point initial
+\(x_0\in X_9\) et un mot \(w=d_1\cdots d_r\in
+\mathscr D_{\rm card}^{r}\), sa trajectoire est
+\[
+ \gamma(x_0;w)_k
+ =x_0+\sum_{j=1}^{k}\delta(d_j)\pmod 9,
+ \qquad 0\leq k\leq r.
+\]
+La correspondance \((x_0,w)\mapsto\gamma(x_0;w)\) est bijective entre
+\(X_9\times\mathscr D_{\rm card}^{r}\) et les chemins orientés de
+longueur \(r\). En particulier, il existe exactement \(81\cdot4^r\) chemins
+de cette longueur lorsque les retours et les reculs sont autorisés.
+
+Le mot \(w\) se ferme sur le tore précisément lorsque
+\[
+\#S(w)-\#N(w)\equiv0\pmod9,
+\qquad
+\#E(w)-\#O(w)\equiv0\pmod9.
+\]
+Pour un mot fermé, le déplacement entier calculé avant réduction
+modulo neuf définit le vecteur d'enroulement
+\[
+ \operatorname{wind}(w)=\frac1{9}
+ \bigl(\#S(w)-\#N(w),\#E(w)-\#O(w)\bigr)\in\ZZ^2.
+\]
+L'inversion de l'orientation inverse l'ordre du mot, échange
+\(E\leftrightarrow O\) et \(N\leftrightarrow S\), et transforme
+\(\operatorname{wind}(w)\) en son opposé. Ce cadre cardinal est celui qui est
+transporté ultérieurement dans le noyau de phase et fait partie de la définition
+de chaque trajectoire.
+
+Les expressions sont écrites ici dans la carte des représentants
+\(\{1,\ldots,9\}\). La formule
+\(\widetilde\Sigma(i,j)=\dr(i+j-1)\) est une carte translatée. Elle représente le
+même tore uniquement lorsque la translation est également appliquée aux indices, aux conditions
+initiales, aux trajectoires positionnelles et aux étiquettes. Toutes les démonstrations suivantes emploient
+\(\Sigma(i,j)=\dr(i+j)\) et n'alternent pas entre les deux cartes.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{\input{figures/fig_app_ortograma}}
+\caption{L'unique matrice APP et sa loi interne. La table multiplicative
+nonadique occupe le corps principal ; chacune de ses lignes est engendrée par
+accumulation additive. L'ombrage violet indique les lignes ou colonnes non
+unitaires ; la ligne bleue identifie le sous-ensemble déterminé par le
+représentant \(9\) de la classe nulle ; le cadre doré souligne le bloc
+central \(2\times2\).}
+\label{fig:app-ortograma}
+\end{figure}
+
+Chaque point de \(X_9\) reçoit simultanément les valeurs du produit et de la somme,
+mais n'appartient pas pour autant à deux matrices APP distinctes. Les chemins de
+\(\operatorname{Path}(\GraphAPP)\) parcourent un unique support ; \(\Pi\)
+publie sa table principale et \(\Sigma\) conserve l'opération interne qui
+engendre les accumulations et permet de mesurer leur incompatibilité.
+
+\begin{proposition}[Structure des lignes et des colonnes]
+\label{prop:app-latina-unidades}
+La matrice de \(\Sigma\) est un carré latin d'ordre neuf. La matrice de
+\(\Pi\) ne l'est pas ; cependant, pour chaque
+\(u\in(\ZZ/9\ZZ)^\times=\{1,2,4,5,7,8\}\), la ligne et la colonne
+correspondant à \(u\) sont des permutations des neuf classes résiduelles.
+\end{proposition}
+
+\begin{proof}
+Une fois \(i\) fixé, l'application \(j\mapsto i+j\) est une translation de
+\(\ZZ/9\ZZ\) ; il en va de même en fixant \(j\). Ainsi, chaque représentant
+apparaît exactement une fois dans chaque ligne et chaque colonne de \(\Sigma\). Pour
+\(\Pi\), la multiplication par \(u\) permute les classes si et seulement si \(u\)
+est une unité. Les lignes correspondant à \(3,6,9\) présentent des répétitions,
+de sorte que la propriété latine ne s'étend pas à toute la matrice
+multiplicative.
+\end{proof}
+
+\section{Structure multiplicative de l'anneau local}
+
+Chaque ligne de la table multiplicative est une addition répétée. La ligne \(i\)
+accumule \(i\) le long d'une direction ; la colonne \(j\) accumule \(j\)
+le long de la direction perpendiculaire. La cellule \((i,j)\) est l'intersection
+des deux accumulations et renvoie \(ij=ji\). La table représente ainsi le produit
+et la commutativité au moyen de deux accumulations transversales sur la même
+grille.
+
+La deuxième ligne est
+\[
+2,4,6,8,1,3,5,7,9.
+\]
+Avant le retour modulaire apparaissent les nombres pairs, et ensuite les impairs. La troisième
+ligne est
+\[
+3,6,9,3,6,9,3,6,9,
+\]
+et rend le radical visible. Soit
+\[
+ R:=\ZZ/9\ZZ,
+ \qquad
+ \mathfrak m:=(3)=\{\overline0,\overline3,\overline6\}.
+\]
+La multiplication par trois définit
+\[
+ M_3:R\longrightarrow R,
+ \qquad x\longmapsto3x,
+ \qquad
+ \ker M_3=\operatorname{im}M_3=\mathfrak m.
+\]
+Par le premier théorème d'isomorphisme, elle induit une identification linéaire
+\begin{equation}
+ \overline M_3:R/\mathfrak m\xrightarrow{\ \sim\ }\mathfrak m,
+ \qquad \overline x\longmapsto3x,
+ \label{eq:multiplicador-tres-radical-rev3}
+\end{equation}
+d'espaces vectoriels sur \(\mathbb F_3\). Ce n'est pas un isomorphisme
+d'anneaux : \(\mathfrak m^2=0\), tandis que le quotient est un corps.
+
+En représentants positifs, les trois phases de
+\eqref{eq:multiplicador-tres-radical-rev3} sont
+\begin{equation}
+ 369\longmapsto693\longmapsto936\longmapsto369,
+ \label{eq:orbita-radical-369-rev3}
+\end{equation}
+produites par le déplacement de phase \(j\mapsto j+1\). La ligne
+correspondant à \(6\equiv-3\pmod9\) inverse l'orientation du même
+cycle. Cette orbite radicale ne doit pas être confondue avec l'entier
+\(369\,693\,100\), qui apparaîtra ensuite comme nombre de chiffres de
+\(9^{9^9}\).
+
+En réduction directe modulo trois,
+\[
+3,6,9\longmapsto0,0,0.
+\]
+Si nous extrayons d'abord le facteur trois et conservons sa coordonnée interne,
+\[
+\eta_{\mathfrak m}(3a)=a\bmod3,
+\qquad
+3,6,9\longmapsto1,2,0.
+\]
+La seconde application conserve la coordonnée interne de l'idéal engendré par
+trois. Elle ne doit pas être confondue avec la projection ternaire orientée qui sera définie
+dans la section consacrée au TRIT\@.
+
+\section{Sous-ensemble de coordonnées de la classe nulle}
+
+Dans le graphe de l'observable multiplicative,
+\[
+\Pi(9,j)=\Pi(i,9)=9.
+\]
+La dernière ligne et la dernière colonne forment une union de dix-sept positions,
+toutes de valeur neuf. Elles ne constituent pas une frontière intrinsèque du tore
+arithmétique : c'est le sous-ensemble de la carte dans lequel au moins une coordonnée
+représente la classe nulle par \(9\). Il existe en outre quatre représentants nuls intérieurs en
+\[
+(3,3),(3,6),(6,3),(6,6).
+\]
+La figure distingue ainsi ce sous-ensemble et les zéros internes de l'idéal
+non unitaire. Le symbole supplémentaire employé plus loin dans la complétion
+cubique appartient à un espace étendu et ne s'identifie à aucun
+d'entre eux.
+
+\section{Extension résidu--quotient}
+
+La réduction modulo neuf conserve le résidu et élimine le quotient de la
+division euclidienne. Pour étudier les deux composantes, nous définissons, en chaque point,
+\[
+i+j=9q^+_{ij}+R^+_{ij},
+\qquad
+ij=9q^\times_{ij}+R^\times_{ij},
+\]
+où \(R^+=\Sigma\), \(R^\times=\Pi\) et les \(q\) conservent le quotient.
+L'extension résidu--quotient d'APP est notée
+\[
+\AAPPlift=(R^+,q^+;R^\times,q^\times).
+\]
+
+Soit \(s_9:\ZZ/9\ZZ\to\{1,\ldots,9\}\) la section de représentants fixée
+par \(\dr\). La retenue additive associée à cette section est
+\[
+ \kappa_9(a,b)
+ =\frac{s_9(a)+s_9(b)-s_9(a+b)}9\in\ZZ.
+\]
+
+\begin{lemma}[Identité cocyclique de la retenue]
+\label{lem:app-cociclo-acarreo}
+Pour tous \(a,b,c\in\ZZ/9\ZZ\),
+\[
+ \kappa_9(a,b)+\kappa_9(a+b,c)
+ =\kappa_9(b,c)+\kappa_9(a,b+c).
+\]
+\end{lemma}
+
+\begin{proof}
+Les deux membres sont égaux à
+\[
+ \frac{s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c)}9.\qedhere
+\]
+\end{proof}
+
+Ce cocycle enregistre l'écart entre additionner des représentants entiers et
+additionner d'abord dans le quotient. C'est la forme compositionnelle de la coordonnée de
+quotient qui réapparaîtra dans la concaténation en base \(1000\).
+
+Les totaux bruts sont
+\[
+\sum_{i,j}(i+j)
+=9\sum_i i+9\sum_j j
+=2\cdot9\cdot45
+=810,
+\]
+et
+\[
+\sum_{i,j}ij
+=\left(\sum_i i\right)\left(\sum_j j\right)
+=45^2
+=2025.
+\]
+Les sommes visibles s'obtiennent à partir des tables :
+\[
+\sum R^+=405,
+\qquad
+\sum R^\times=459.
+\]
+Par conséquent, les sommes totales des coordonnées de quotient sont
+\[
+\sum q^+=\frac{810-405}{9}=45,
+\qquad
+\sum q^\times=\frac{2025-459}{9}=174.
+\]
+
+\begin{exactbox}[title={Décomposition exacte de la différence intégrée}]
+\[
+\boxed{
+2025-810
+=1215
+=(459-405)+9(174-45)
+=54+9\cdot129.}
+\]
+La différence entre les sommes de résidus est \(54\), tandis que la
+différence entre les sommes de quotients est \(129\). L'égalité recompose la
+différence totale entre les observables entières et démontre que la composante
+de quotient contient une information arithmétique non déterminée par la classe
+résiduelle.
+\end{exactbox}
+
+\fi
+
+\ifdefined\HMTAPPDevelopments
+\chapter{Opérateurs arithmétiques et géométrie locale de l'espace des chemins}
+\label{chap:app-operadores}
+
+\section{Localisation de l'excès dans le radical nilpotent}
+
+Le groupe des unités de \(\ZZ/9\ZZ\) est
+\[
+(\ZZ/9\ZZ)^\times=\{1,2,4,5,7,8\},
+\]
+et l'idéal maximal est
+\[
+\mathfrak m=(3)=\{0,3,6\}=\{9,3,6\}_{\rm visual},
+\qquad\mathfrak m^2=0.
+\]
+Chaque ligne unitaire de \(\Pi\) est une permutation de \(1,\ldots,9\) et a pour somme
+\(45\). Les lignes \(3\) et \(6\) ont pour somme \(54\) ; la ligne \(9\), \(81\).
+Donc
+\[
+459=6\cdot45+2\cdot54+81
+\]
+et
+\[
+459-405=2(54-45)+(81-45)=54.
+\]
+Tout l'excès se localise dans le secteur non unitaire.
+
+L'union des lignes et des colonnes \(3,6,9\) contient \(45\) cellules et a pour somme
+\(297\). Son carré central \(3\times3\) a pour somme \(81=3\cdot27\) ; les bras
+extérieurs, \(216=3\cdot72\). Ainsi,
+\[
+297=216+81=3(72+27)=3\cdot99.
+\]
+L'interprétation de \(72\) et de \(27\) s'obtient plus loin à partir du
+bloc central, sélectionné de manière unique.
+
+\section{Espérance conditionnelle par rapport à la projection \(\mathbb Z/9\mathbb Z\to\mathbb Z/3\mathbb Z\)}
+
+La réduction canonique
+\(\ZZ/9\ZZ\to\ZZ/3\ZZ\) détermine la partition
+\[
+ C_1=\{1,4,7\},\qquad
+ C_2=\{2,5,8\},\qquad
+ C_0=\{3,6,9\}.
+\]
+L'espérance conditionnelle uniforme moyenne chaque observable sur les neuf points de chaque bloc
+\(C_a\times C_b\). Les matrices agrégées sont
+\[
+ M_{\Pi}=
+ \begin{pmatrix}4&5&6\\5&4&6\\6&6&9\end{pmatrix},
+ \qquad
+ M_{\Sigma}=
+ \begin{pmatrix}5&6&4\\6&4&5\\4&5&6\end{pmatrix}.
+\]
+Puisque chaque bloc contient neuf positions,
+\[
+ 9\sum_{a,b}(M_\Pi)_{ab}=459,\qquad
+ 9\sum_{a,b}(M_\Sigma)_{ab}=405.
+\]
+Ainsi, le moyennage conserve les totaux des deux observables et localise de
+nouveau leur différence :
+\[
+ \sum M_\Pi-\sum M_\Sigma=51-45=6,\qquad 9\cdot6=54.
+\]
+
+\begin{theorem}[Spectre de l'opérateur multiplicatif agrégé]
+\label{thm:app-espectro-agregado}
+L'opérateur matriciel \(M_\Pi\) satisfait
+\[
+ \det M_\Pi=-9
+\]
+et son spectre réel est
+\[
+ \operatorname{Spec}(M_\Pi)
+ =\{-1,\,9-6\sqrt2,\,9+6\sqrt2\}.
+\]
+En particulier, la forme quadratique associée possède la signature \((2,1)\).
+\end{theorem}
+
+\begin{proof}
+Le développement du déterminant donne \(-9\). Le polynôme caractéristique
+se factorise sous la forme
+\[
+ (\lambda+1)\bigl((\lambda-9)^2-72\bigr).
+\]
+Ses racines sont celles indiquées et \(9-6\sqrt2>0\) ; il existe donc deux
+directions positives et une négative.
+\end{proof}
+
+La décomposition spectrale admet une forme entière sur un sous-réseau
+invariant. Pour
+\[
+ v_-=(1,-1,0),\qquad v_+=(1,1,0),\qquad v_0=(0,0,1),
+\]
+on a \(M_\Pi v_-=-v_-\), tandis que la restriction de \(M_\Pi\) au
+sous-module engendré par \(v_+,v_0\) est représentée par
+\[
+ \begin{pmatrix}9&6\\12&9\end{pmatrix}
+ =3H,\qquad
+ H=\begin{pmatrix}3&2\\4&3\end{pmatrix}\in SL(2,\ZZ).
+\]
+Les valeurs propres de \(H\) sont
+\[
+ 3\pm2\sqrt2=(1\pm\sqrt2)^2.
+\]
+Les trois vecteurs \(v_-,v_+,v_0\) engendrent un sous-réseau d'indice deux dans
+\(\ZZ^3\), car le déterminant de la matrice qui les a pour colonnes vaut
+\(-2\). On n'affirme donc pas ici une somme directe entière de tout
+\(\ZZ^3\) : sur ce sous-réseau invariant, l'opérateur agrégé sépare une
+direction de valeur propre \(-1\) et un sous-module hyperbolique régi par
+l'unité quadratique \(3+2\sqrt2\) ; sur \(\RR^3\), la décomposition spectrale
+est complète.
+
+\section{Commutateur des projecteurs arithmétiques et séparation de leurs images}
+
+La différence entre \(\Sigma\) et \(\Pi\) ne se réduit pas à leurs sommes globales.
+Pour \(d\ge2\), soit \(\mathscr A_d=\{1,\ldots,9\}^d\) et définissons
+\[
+ \Sigma_d(x)=\dr(x_1+\cdots+x_d),\qquad
+ \Pi_d(x)=\dr(x_1\cdots x_d).
+\]
+Dans l'espace de Hilbert \(\ell^2(\mathscr A_d)\), muni de la mesure
+uniforme, notons \(P_{\Sigma,d}\) et \(P_{\Pi,d}\) les espérances
+conditionnelles orthogonales sur les fonctions mesurables par rapport à
+\(\Sigma_d\) et à \(\Pi_d\), respectivement. La table conjointe normalisée est
+\[
+ C^{(d)}_{ab}
+ =\frac{N^{(d)}_{ab}}{\sqrt{n_a m_b}},
+\quad
+ N^{(d)}_{ab}
+ =\#\{x:\Sigma_d(x)=a,\ \Pi_d(x)=b\},
+\]
+où \(n_a=\sum_bN^{(d)}_{ab}\) et \(m_b=\sum_aN^{(d)}_{ab}\).
+
+Sur le support bidimensionnel original, la corrélation conjointe exacte est
+\[
+N^{(2)}=
+\begin{pmatrix}
+0&0&2&0&0&2&3&0&2\\
+3&0&2&0&0&2&0&0&2\\
+0&2&0&0&2&0&0&2&3\\
+0&0&2&3&0&2&0&0&2\\
+0&0&2&3&0&2&0&0&2\\
+0&2&0&0&2&0&0&2&3\\
+3&0&2&0&0&2&0&0&2\\
+0&0&2&0&0&2&3&0&2\\
+0&2&0&0&2&0&0&2&3
+\end{pmatrix}.
+\]
+Les lignes, ordonnées selon la valeur de \(\Sigma\), ont pour somme neuf ; les colonnes,
+ordonnées selon la valeur de \(\Pi\), ont pour somme
+\((6,6,12,6,6,12,6,6,21)\). La corrélation conjointe des deux observables est ainsi déterminée par énumération complète
+avant l'introduction de toute
+application d'évaluation ultérieure.
+
+\begin{proposition}[Commutateurs en dimensions deux et trois]
+\label{prop:app-no-conmutatividad}
+Les deux paires de projecteurs satisfont
+\[
+ \|[P_{\Sigma,2},P_{\Pi,2}]\|=\frac{\sqrt2}{3},
+ \qquad
+ \|[P_{\Sigma,3},P_{\Pi,3}]\|=\frac{\sqrt3}{4}.
+\]
+En particulier, les observables additive et multiplicative n'induisent pas de
+décompositions simultanément compatibles.
+\end{proposition}
+
+\begin{proof}
+Les valeurs singulières \(s\) de \(C^{(d)}\) sont les cosinus des angles
+principaux entre les deux sous-espaces. Dans le bloc bidimensionnel
+correspondant, la norme du commutateur est \(s\sqrt{1-s^2}\). L'énumération
+exacte des \(9^d\) mots produit, pour \(d=2\), les valeurs propres non
+triviales
+\[
+ s^2\in\left\{\frac57,\frac13,\frac13\right\}.
+\]
+Le maximum de \(s^2(1-s^2)\) est \(2/9\), d'où résulte
+\(\sqrt2/3\). Pour \(d=3\), la même construction donne le maximum
+\(s^2(1-s^2)=3/16\), atteint en \(s^2=1/4\), et la norme est donc
+\(\sqrt3/4\). Dans les deux cas, le commutateur est non nul.
+\end{proof}
+
+\begin{proposition}[Intersection des sous-espaces observables]
+\label{prop:app-interseccion-proyectores}
+L'énumération exacte des mots de \(\mathscr A_d\), pour
+\(2\leq d\leq15\), vérifie
+\[
+ \operatorname{Ran}P_{\Sigma,d}\cap
+ \operatorname{Ran}P_{\Pi,d}
+ =\CC\mathbf 1.
+\]
+Dans cet intervalle de dimensions, les fonctions constantes constituent
+l'unique sous-espace commun aux deux décompositions arithmétiques.
+\end{proposition}
+
+\begin{proof}
+Pour deux projections orthogonales, la dimension de l'intersection de leurs
+images coïncide avec la multiplicité de la valeur singulière \(1\) dans la matrice
+de recouvrement \(C^{(d)}\). Le calcul entier des tables
+\(N^{(d)}\), suivi du calcul exact de cette multiplicité, donne la valeur un
+pour chaque \(d=2,\ldots,15\). Le vecteur constant appartient aux deux images ;
+il engendre donc toute l'intersection.
+\end{proof}
+
+La suite des normes ne s'extrapole pas à partir des deux premiers cas.
+En particulier, pour \(d=4\), le même calcul donne
+\[
+ \|[P_{\Sigma,4},P_{\Pi,4}]\|
+ =\sqrt{\frac{2618939}{22240656}}
+ \simeq0.3431538652,
+\]
+ce qui ne coïncide pas avec la prolongation élémentaire \(2/(d+1)\). Ce cas
+constitue un contre-exemple à toute formule inférée uniquement de
+\(d=2,3\).
+
+\section{Bloc central et décomposition spectrale}
+
+La caractérisation du bloc central s'obtient au moyen d'une condition de
+congruence. Pour deux représentants consécutifs \(k,k+1\), considérons
+\[
+B_k=
+\begin{pmatrix}
+k^2&k(k+1)\\
+k(k+1)&(k+1)^2
+\end{pmatrix}\pmod9.
+\]
+
+\begin{theorem}[Unicité du bloc diagonal adjacent]
+\label{thm:app-bloque-central}
+Il existe un unique bloc \(B_k\) dont les entrées diagonales coïncident. Il est
+déterminé par \(k=4\) et vaut
+\[
+B_c=
+\begin{pmatrix}7&2\\2&7\end{pmatrix}.
+\]
+\end{theorem}
+
+\begin{proof}
+L'égalité des diagonales équivaut à
+\[
+k^2\equiv(k+1)^2\pmod9,
+\]
+c'est-à-dire \(2k+1\equiv0\pmod9\). Comme \(2\) est une unité de
+\(\ZZ/9\ZZ\), la congruence a pour unique solution \(k\equiv4\pmod9\).
+\end{proof}
+
+Par conséquent, les positions \(4,5\) de l'observable multiplicative forment
+\[
+B_c=
+\begin{pmatrix}7&2\\2&7\end{pmatrix}
+=7I+2R,
+\qquad
+R=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+\qquad R^2=I.
+\]
+Avec \(P_\pm=(I\pm R)/2\),
+\[
+B_c=9P_++5P_-.
+\]
+\begin{theorem}[Hiérarchie typée de la séparation somme--produit]
+\label{thm:app-jerarquia-cuatro-dos-seis-cincuentaycuatro}
+Le bloc central a un écart spectral local (9-5=4). Son coefficient
+hors diagonale est (2). La compression par les trois classes modulo trois
+produit la différence agrégée (51-45=6), et le déploiement sur les neuf
+positions produit le défaut global
+\[
+ 9\cdot6=459-405=54.
+\]
+Les entiers (4), (2), (6) et (54) appartiennent, respectivement, à
+l'écart spectral, au couplage local, à la compression modulaire et à
+l'intégration bidimensionnelle.
+\end{theorem}
+
+\begin{proof}
+La décomposition \(B_c=7I+2R=9P_++5P_-\) donne l'écart et le
+coefficient local. Les matrices agrégées \(M_\Pi,M_\Sigma\) construites
+ci-dessus satisfont
+\(\sum M_\Pi=51\) et \(\sum M_\Sigma=45\). Chaque entrée agrégée représente
+neuf positions, de sorte que le déploiement multiplie la différence par
+neuf et récupère les totaux (459) et (405).
+\end{proof}
+Leurs concaténations ordonnées produisent les blocs \(72\) et \(27\) :
+\[
+72+27=99,
+\qquad
+72-27=45=\det B_c.
+\]
+La concaténation des entrées diagonales et antidiagonales produit,
+respectivement, \(77\) et \(22\). Par conséquent,
+\[
+ 72+27=77+22=99,\qquad
+ 77-22=55=54+1.
+\]
+Ces égalités expriment deux partitions exactes du même bloc ; elles
+n'identifient pas à elles seules une constante externe.
+
+\begin{proposition}[Relation locale--globale du secteur radical]
+\label{prop:app-local-global-radical}
+La partition par lignes du bloc central reproduit, avec un facteur d'échelle
+trois, la partition du secteur radical :
+\[
+ 3\cdot72=216,\qquad
+ 3\cdot27=81,\qquad
+ 3\cdot99=297.
+\]
+\end{proposition}
+
+\begin{proof}
+Le bloc \(C_0\times C_0\) contient neuf représentants nuls et a pour somme
+\(81\). Les quatre bras restants des lignes et des colonnes de \(C_0\)
+ont pour somme \(216\). Les identités découlent de \(72+27=99\).
+\end{proof}
+
+De plus,
+\[
+M_c:=\frac{B_c}{\sqrt{45}}
+=\exp\left(\frac12\log\frac95\,R\right)
+\in SO^+(1,1).
+\]
+Si \(\eta=\operatorname{diag}(1,-1)\), la matrice normalisée \(M_c\) satisfait
+\(M_c^{\mathsf T}\eta M_c=\eta\), \(\det M_c=1\) et appartient à
+\(SO^+(1,1)\). Cette réalisation finie se limite au bloc \(2\times2\)
+construit ; son interprétation spatio-temporelle requiert le pont dimensionnel
+développé dans le traité de mécanique dimensionnelle.
+
+\begin{proposition}[Famille spectrale APP--TRIT et lecture
+Markov--Lorentz locale]
+\label{prop:app-trit-espectral-markov-lorentz-rev8}
+Pour \(\tau\in\{-1,0,+1\}\), soit
+\[
+ B_\tau=(4+3\tau)I+(5-3\tau)R.
+\]
+Alors
+\[
+ \operatorname{Spec}(B_\tau)=\{9,\,6\tau-1\},
+ \qquad
+ B_\tau=9P_++(6\tau-1)P_-,
+\]
+et le mode différentiel récupère l'orientation au moyen de
+\[
+ \tau=\frac{\lambda_-+1}{6}.
+\]
+En particulier, \(B_{+1}=B_c\). Sa normalisation stochastique
+\[
+ P_B:=\frac{1}{9}B_c=P_++\frac59P_-
+\]
+satisfait, pour tout \(n\geq0\),
+\[
+ P_B^n=P_++\left(\frac59\right)^n P_-.
+\]
+Par conséquent, la contraction du mode antisymétrique est
+\(\kappa_B=5/9\) et l'écart spectral de cette chaîne locale est \(4/9\).
+Si
+\[
+ \eta_c:=\frac12\log\frac95,
+\]
+la normalisation lorentzienne du même bloc satisfait
+\[
+ \frac{B_c}{\sqrt{45}}=\exp(\eta_c R),
+ \qquad
+ \boxed{\frac59=e^{-2\eta_c}}.
+\]
+\end{proposition}
+
+\begin{proof}
+Comme \(R\) agit avec les valeurs propres \(+1\) et \(-1\) sur
+\(\operatorname{im}P_+\) et \(\operatorname{im}P_-\), respectivement, les
+deux valeurs propres de \(B_\tau\) sont
+\[
+ (4+3\tau)+(5-3\tau)=9,\qquad
+ (4+3\tau)-(5-3\tau)=6\tau-1.
+\]
+La formule des puissances découle de
+\(P_\pm^2=P_\pm\) et de \(P_+P_-=0\). Enfin,
+\(e^{-2\eta_c}=e^{-\log(9/5)}=5/9\).
+\end{proof}
+
+Cette coïncidence identifie deux lectures exactes du bloc local : la
+mémoire différentielle décroît avec le même quotient que celui qui encode la rapidité
+dans la réalisation déployée. Elle ne transforme pas \(B_\tau\) en le noyau de
+Markov global du TPK, ni \(5/9\) en une constante physique. Elle n'étend pas non plus
+à elle seule la réalisation \(SO^+(1,1)\) à un espace de Minkowski
+\(3+1\) : ces étapes requièrent des applications dimensionnelles supplémentaires.
+
+\section{Courbure discrète induite par l'interaction des feuillets somme et produit et son défaut de commutation}
+
+Sur le tore, nous écrivons, maintenant en résidus,
+\[
+S(x,y)=x+y,
+\qquad
+P(x,y)=xy\pmod9.
+\]
+Pour toute fonction \(T:X_9\to\ZZ/9\ZZ\), nous fixons les différences progressives
+\[
+ \Delta_xT(x,y)=T(x+1,y)-T(x,y),\qquad
+ \Delta_yT(x,y)=T(x,y+1)-T(x,y),
+\]
+où les coordonnées sont prises modulo neuf. Cette convention fixe également
+l'orientation positive de chaque plaquette : on parcourt d'abord la direction
+\(x\), puis la direction \(y\), et l'on revient par les arêtes opposées.
+Il est important de typer correctement ces deux objets. \(S\) et \(P\) sont
+des potentiels de sommet ; les variables de lien sont leurs différences
+discrètes
+\[
+A_x^T=\Delta_xT,
+\qquad
+A_y^T=\Delta_yT.
+\]
+Pour un mélange ordonné de potentiels \((T_x,T_y)\), nous définissons la
+courbure de plaquette par
+\[
+F(T_x,T_y)
+=\Delta_x A_y^{T_y}-\Delta_y A_x^{T_x}
+=\Delta_x\Delta_yT_y-\Delta_y\Delta_xT_x.
+\]
+Comme
+\[
+\Delta_xS=\Delta_yS=1,
+\qquad
+\Delta_xP=y,
+\qquad
+\Delta_yP=x,
+\]
+on obtient sur les \(81\) plaquettes :
+\[
+F(S,S)=F(P,P)=0,
+\qquad
+F(S,P)=+1,
+\qquad
+F(P,S)=-1\pmod9.
+\]
+Les connexions associées à une unique observable sont plates ; la composition
+mixte des deux observables produit une courbure de signe opposé selon
+l'ordre. Pour un rectangle de coordonnées \(R_{a,b}\) contenu
+dans la carte, nous définissons le Wilson additif de bord comme la somme orientée des
+variables de lien. L'annulation des arêtes intérieures donne
+\[
+ W_{\partial R_{a,b}}(S,P)=ab,\qquad
+ W_{\partial R_{a,b}}(P,S)=-ab\pmod9,
+\]
+qui est l'identité de Stokes finie pour cette convention.
+
+La distinction entre potentiel et lien est algébriquement nécessaire. Si l'on remplaçait
+directement \(A_x,A_y\) par \(S,P\), des termes dépendant de
+\(x,y\) apparaîtraient et les valeurs constantes précédentes ne seraient pas obtenues. La formulation
+typée est celle qui produit le cocycle mixte utilisé plus loin dans la fermeture
+de Heisenberg finie.
+
+\begin{remark}
+La différence intégrée \(54\) et la courbure mixte \(\pm1\) sont des invariants
+distincts. La première compare des sommes globales ; la seconde dépend de l'ordre des
+deux potentiels et se localise sur chaque plaquette. La formulation au moyen
+d'opérateurs autoadjoints et de commutateurs sera développée après la construction de
+l'espace d'états correspondant.
+\end{remark}
+
+\section{Développement de l'opérateur de transition par chemins}
+
+La définition d'APP comprend l'espace
+\(\operatorname{Path}(\GraphAPP)\). Une fois fixé un opérateur de
+transition \(U\) sur les sommets de \(\GraphAPP\), nous supposons que
+\(U_{yx}=0\) dès que \(x\to y\) n'est pas une arête du graphe. Sous cette
+hypothèse de support, ses puissances admettent le développement
+\begin{proposition}[Développement fini par chemins]
+\label{prop:app-suma-caminos}
+Pour chaque \(R\ge1\) et chaque paire de sommets \(i,f\),
+\[
+(U^R)_{fi}
+=\sum_{\substack{\gamma:i\to f\\|\gamma|=R}}
+\prod_{k=0}^{R-1}U_{x_{k+1},x_k},
+\qquad
+\gamma=(x_0=i,x_1,\ldots,x_R=f).
+\]
+\end{proposition}
+
+\begin{proof}
+Pour \(R=1\), l'identité est la définition des éléments de matrice de
+\(U\). Si elle est vraie pour \(R\), alors
+\[
+ (U^{R+1})_{fi}
+ =\sum_j U_{fj}(U^R)_{ji}.
+\]
+Substituer l'hypothèse de récurrence concatène à chaque chemin de longueur \(R\)
+de \(i\) à \(j\) la dernière arête \(j\to f\) ; ainsi, chaque chemin de
+longueur~\(R+1\) apparaît exactement une fois.\qedhere
+\end{proof}
+
+Par conséquent, APP réunit en une seule structure le tore arithmétique fini,
+les observables de somme et de produit, la décomposition résidu--quotient, le
+radical nilpotent et une courbure mixte orientée. Le représentant \(9\) de
+la classe nulle fixe une carte visible du quotient ; le remplacer par \(0\) sans
+transporter simultanément la carte modifie les registres utilisés par la
+dynamique ultérieure.
+\fi

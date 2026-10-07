@@ -1,0 +1,244 @@
+% BEGIN REV09_MULTIPLICIDAD_MODAL
+\subsubsection{Multiplicidad y recuperación de itinerarios modales}
+\label{corpus9:modal:multiplicidad}
+
+La incidencia \(F_{\mathrm{av}}\), construida por el calendario trítico
+en el desarrollo precedente, actúa aquí sobre su envolvente de paseos
+modales. Escribimos
+\[
+ F=F_{\mathrm{av}}=\begin{pmatrix}0&1\\1&1\end{pmatrix},
+ \qquad 0=\Sigma,\quad 1=\Pi.
+\]
+La coordenada de autoescala \(\varphi\) y el rayo positivo
+\(r=(1,\varphi)\) son las salidas ya obtenidas de esa incidencia.
+Sobre ellas se determina la multiplicidad de la lectura escalar y
+se construye una representación reversible de cada itinerario.
+
+Se considera el conjunto de paseos dirigidos finitos
+\(\gamma=(x_0,\ldots,x_n)\) de \(F\). Se distinguen sus extremos
+y longitudes, se admiten repeticiones y se incluyen los paseos triviales.
+Este dominio es el envolvente modal; el estado completo del TPK
+conserva, además, los registros de su historia enriquecida.
+El carácter multiplicativo adopta la forma
+\begin{equation}
+ \chi(\gamma)=\varphi^n\frac{r_{x_0}}{r_{x_n}}
+             =\varphi^{k(\gamma)},\qquad
+ r=(1,\varphi),\quad k(\gamma)=n+x_0-x_n.
+ \label{corpus9:modal:caracter}
+\end{equation}
+Las transiciones \(\Sigma\to\Pi\), \(\Pi\to\Pi\) y
+\(\Pi\to\Sigma\) incrementan \(k\) en \(0\), \(1\) y \(2\),
+respectivamente. El primer paso modifica la ruta manteniendo su
+carácter. En particular, \((1,1)\) y \((0,1,1)\) producen ambos
+\(\varphi\) bajo esta lectura.
+
+\begin{proposition}[Multiplicidad de la lectura de autoescala]
+\label{corpus9:modal:conteo}
+Sea \(\mathcal F_k=\{\gamma:k(\gamma)=k\}\) y
+\(N_k=|\mathcal F_k|\). Entonces
+\begin{equation}
+ N_0=3,\qquad
+ N_k=2\operatorname{tr}(F^k)
+     =2\bigl(\varphi^k+(-\varphi^{-1})^k\bigr)
+     \quad(k\geq1),
+ \label{corpus9:modal:multiplicidad-exacta}
+\end{equation}
+y
+\[
+ \lim_{k\to\infty}N_k^{1/k}=\varphi.
+\]
+\end{proposition}
+
+\begin{proof}
+Dados los extremos \(i,j\in\{0,1\}\), la longitud está determinada
+por \(n=k-i+j\). El número de paseos con esos extremos es
+\((F^n)_{ij}\). Para \(k\geq1\), la suma de los cuatro sectores da
+\[
+ N_k=\operatorname{tr}(F^k)
+      +(F^{k+1})_{01}+(F^{k-1})_{10}.
+\]
+La identidad \(F^2=F+I\) implica, por inducción, que para \(n\geq1\)
+\[
+ F^n=\begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix},
+ \qquad f_0=0,\quad f_1=1,\quad f_{n+1}=f_n+f_{n-1}.
+\]
+Para \(k\geq2\), los dos términos no diagonales son
+\(f_{k+1}+f_{k-1}=\operatorname{tr}(F^k)\); para \(k=1\),
+su suma es \(1+0=1=\operatorname{tr}(F)\), usando \(F^0=I\).
+Para \(k=0\), los únicos paseos son \((0)\), \((1)\) y \((0,1)\).
+Los autovalores de \(F\) son \(\varphi\) y \(-\varphi^{-1}\),
+por lo que su traza proporciona la fórmula cerrada.
+Finalmente,
+\[
+ N_k=2\varphi^k\bigl(1+(-\varphi^{-2})^k\bigr),
+\]
+y el factor entre paréntesis tiende a uno; tomando raíces
+\(k\)-ésimas se obtiene el límite.
+\end{proof}
+
+La autoescala coincide así con la tasa exponencial de crecimiento
+de las genealogías modales finitas que el carácter escalar
+hace indistinguibles.
+
+\paragraph{Refinamiento por composición de los retornos.}
+Sean \(b(\gamma)\) el número de aristas \(\Pi\to\Sigma\) y
+\(c(\gamma)\) el de aristas \(\Pi\to\Pi\). Los incrementos de
+\eqref{corpus9:modal:caracter} dan \(k=2b+c\).
+Con \(z,t\) indeterminadas formales, la incidencia graduada
+\[
+ M(z,t)=\begin{pmatrix}0&1\\tz^2&z\end{pmatrix}
+\]
+registra simultáneamente exponente y retornos. La única arista
+de grado cero es \(\Sigma\to\Pi\), y carece de ciclo de grado cero.
+Por ello cada coeficiente cuenta un conjunto finito de paseos.
+Si \(N_{k,b}\) denota su multiplicidad con valores \(k,b\), la suma
+de todas las longitudes satisface
+\begin{equation}
+ \sum_{k,b\geq0}N_{k,b}z^kt^b
+ =\mathbf1^{\mathsf T}(I-M(z,t))^{-1}\mathbf1
+ =\frac{3-z+tz^2}{1-z-tz^2},
+ \qquad \mathbf1=(1,1)^{\mathsf T}.
+ \label{corpus9:modal:serie-graduada}
+\end{equation}
+En efecto, la entrada \(ij\) de \(M^n\) cuenta los paseos de
+longitud \(n\) con esos extremos y sus pesos. La suma formal
+coeficiente a coeficiente proporciona \((I-M)^{-1}\).
+El determinante de \(I-M\) es \(1-z-tz^2\), y la suma de las
+cuatro entradas de su adjunta es \(3-z+tz^2\).
+
+Para \(k\geq1\) y \(0\leq b\leq\lfloor k/2\rfloor\), resulta
+\begin{equation}
+ N_{k,b}=\frac{2k}{k-b}\binom{k-b}{b}.
+ \label{corpus9:modal:conteo-retornos}
+\end{equation}
+Para demostrarlo, la expansión
+\[
+ (1-z-tz^2)^{-1}=\sum_{m\geq0}(z+tz^2)^m
+\]
+da el coeficiente \(\binom{k-b}{b}\) en \(z^kt^b\).
+La multiplicación por el numerador de
+\eqref{corpus9:modal:serie-graduada} produce
+\[
+ 3\binom{k-b}{b}-\binom{k-b-1}{b}
+   +\binom{k-b-1}{b-1}
+ =2\binom{k-b}{b}+2\binom{k-b-1}{b-1}.
+\]
+Se toman como cero los coeficientes fuera de rango.
+Para \(b\geq1\), la igualdad
+\(\binom{k-b-1}{b-1}=\frac{b}{k-b}\binom{k-b}{b}\)
+da \eqref{corpus9:modal:conteo-retornos}; para \(b=0\), ambos
+miembros valen dos. El término constante se separa:
+\(N_{0,0}=3\). Para \(k=4\) hay catorce paseos, distribuidos en
+\(2\), \(8\) y \(4\) según contengan cero, uno o dos retornos.
+Por tanto, el mismo carácter admite composiciones internas distintas.
+
+\begin{proposition}[Recuperación reversible y transporte de códigos]
+\label{corpus9:modal:recuperador}
+Cada paseo del envolvente modal admite un código
+\[
+ \mathcal C(\gamma)=(k,a),\qquad 0\leq a<N_k,
+\]
+con decodificación \(\mathcal D\) tal que
+\[
+ \mathcal D\mathcal C=\mathrm{id},\qquad
+ \mathcal C\mathcal D=\mathrm{id}.
+\]
+Si \(A_v(\gamma)=\gamma v\) prolonga por una arista admisible y
+\(T\) elimina el último estado de un paseo de longitud positiva,
+sus representaciones
+\[
+ \mathcal E_v=\mathcal C A_v\mathcal D,\qquad
+ \widehat T=\mathcal C T\mathcal D
+\]
+satisfacen, en sus dominios respectivos,
+\begin{equation}
+ \widehat T\mathcal E_v=\mathrm{id},\qquad
+ k(A_v\gamma)-k(\gamma)=1+x_n-v.
+ \label{corpus9:modal:transporte-codigos}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Para cada \(k\), se ordenan los sectores no vacíos por \((n,i,j)\)
+y, dentro de cada sector, los paseos lexicográficamente por sus
+estados. El número de continuaciones de longitud \(m\) desde
+\(v\) hasta \(j\) es \((F^m)_{vj}\). Al recorrer un paseo se suman
+los tamaños de los sectores precedentes y, en cada posición, los
+de las continuaciones lexicográficamente anteriores a la elegida.
+El resultado es su índice \(a\), contado desde cero.
+
+Para invertir el proceso, se resta del índice el tamaño de cada
+sector precedente hasta localizar el único sector que lo contiene.
+En cada posición se procede del mismo modo con los tamaños de
+las continuaciones. Estos conjuntos forman una partición disjunta
+y exhaustiva del sector de partida. Para longitud cero, el único
+paseo de un sector no vacío es su vértice. Suponiendo recuperadas
+las continuaciones de longitud \(m-1\), los intervalos de índices
+de cada primer sucesor identifican unívocamente ese sucesor y el
+índice restante de su continuación. La inducción en \(m\) prueba
+que ambos procedimientos son inversos, tanto sobre paseos como
+sobre los índices \(0,\ldots,N_k-1\).
+
+El orden lexicográfico serializa la ruta existente; las operaciones
+que generan la ruta preceden a esa serialización.
+Como \(T A_v=\mathrm{id}\), las dos identidades inversas dan
+\[
+ \widehat T\mathcal E_v
+ =\mathcal C T\mathcal D\mathcal C A_v\mathcal D
+ =\mathcal C T A_v\mathcal D
+ =\mathrm{id}.
+\]
+Finalmente, la definición del exponente da
+\[
+ k(A_v\gamma)=(n+1)+x_0-v,\qquad
+ k(\gamma)=n+x_0-x_n,
+\]
+cuya diferencia es la segunda identidad.
+\end{proof}
+
+\paragraph{Capacidad de distinción con exponente conocido.}
+Conocido \(k\), una representación binaria inyectiva de longitud
+fija \(\ell\) requiere \(2^\ell\geq N_k\), por el principio de
+las casillas. En consecuencia,
+\(\ell\geq\lceil\log_2N_k\rceil\).
+El índice \(a\) anterior alcanza esa longitud mediante su
+representación binaria, completada con ceros iniciales cuando sea
+necesario. Este mínimo corresponde a la transmisión del índice
+con \(k\) conocido; la transmisión de \(k\) y la delimitación de
+códigos de longitud variable tienen costes propios. Además,
+\[
+ \lim_{k\to\infty}\frac{\log_2N_k}{k}=\log_2\varphi.
+\]
+La igualdad mide capacidad combinatoria de distinción de rutas
+en el envolvente modal.
+
+\paragraph{Información de fibra bajo una distribución explícita.}
+Fijado \(k\), sea \(R_k\) un paseo elegido uniformemente en
+\(\mathcal F_k\). Usamos logaritmos naturales y
+\(H(R_k)=-\sum_{\gamma\in\mathcal F_k}p_\gamma\log p_\gamma\),
+con \(p_\gamma=1/N_k\). Todos estos paseos tienen carácter
+\(\varphi^k\), de modo que
+\[
+ H(R_k\mid\chi(R_k))=\log N_k,\qquad
+ H(R_k\mid\mathcal C(R_k))=0.
+\]
+La primera igualdad procede de que la lectura es constante en la
+fibra; la segunda, de la decodificación única ya demostrada.
+En particular, \(\log N_k/k\to\log\varphi\).
+
+Para \(k=4\), el carácter deja una incertidumbre de \(\log14\)
+nats. Las tres clases \(B=b(R_4)\) tienen probabilidades
+\(2/14\), \(8/14\) y \(4/14\). Condicionada a cada clase, la
+distribución permanece uniforme en sus \(2\), \(8\) o \(4\)
+elementos, respectivamente. Por definición de entropía
+condicional,
+\[
+ H(R_4\mid B)
+ =\frac2{14}\log2+\frac8{14}\log8+\frac4{14}\log4.
+\]
+El índice dentro de la clase, junto con \(B\), recupera unívocamente
+el paseo. Estos valores pertenecen a la distribución uniforme
+de la fibra modal declarada. La medida del espacio completo de
+historias, la realización temporal de \(k\) y cualquier lectura
+térmica conservan sus dominios y transductores respectivos.
+% END REV09_MULTIPLICIDAD_MODAL

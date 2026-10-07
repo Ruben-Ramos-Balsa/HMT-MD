@@ -1,0 +1,352 @@
+% Statistical enlargement for Article V (EN).
+% Main source: N19; ordered-memory antecedent: F044.
+% This file does not modify the active source and is intended for a successor.
+\section{Fourier duality, finite uncertainty, and ordered memory}
+\label{v:n19:sec:incertidumbre-fourier}
+
+The domain of the finite realization follows from the typed chain already
+constructed in the article:
+\begin{equation}
+ \mathsf{APP}\longrightarrow\mathsf{TRIT}\longrightarrow\mathsf{TPK}
+ \longrightarrow X_{\mathrm{enr}}
+ \longrightarrow (\mathbb Z/9\mathbb Z)^3
+ \xrightarrow{\,\beta_{729}\,}
+ \Lambda:=(\mathbb Z/27\mathbb Z)^2
+ \longrightarrow \ell^2(\Lambda).
+ \label{v:n19:eq:cadena-tipificada}
+\end{equation}
+Here \(X_{\mathrm{enr}}\) retains route, orientation, carry, boundary,
+and memory; the passage to \((\mathbb Z/9\mathbb Z)^3\) is the relevant
+positional register. The map \(\beta_{729}\), defined in
+\eqref{v:ant:eq:ii-area-beta729} and proved bijective in
+Proposition~\ref{v:ant:prop:ii-area-beta729}, regroups the six ordered
+trits into two coordinates of order twenty-seven. The positional register
+and the group realization are thereby kept distinct: \(\beta_{729}\)
+transports the ordered incidence, whereas the Fourier transform uses the
+operations intrinsic to \((\mathbb Z/27\mathbb Z)^2\). The genealogy thus
+specifies more than the common cardinality of \(729\) positions.
+
+\subsection{Unitary characters and mutually unbiased bases}
+\label{v:n19:sec:caracteres-mub}
+
+Set \(N:=|\Lambda|=27^2=729\). For
+\(x=(x_1,x_2)\) and \(k=(k_1,k_2)\) in \(\Lambda\), let
+\begin{equation}
+ \chi_k(x):=
+ \exp\!\left(\frac{2\pi i}{27}(k_1x_1+k_2x_2)\right).
+ \label{v:n19:eq:caracteres}
+\end{equation}
+The scalar product of the coordinates is read modulo twenty-seven.
+Character orthogonality gives
+\begin{equation}
+ \sum_{x\in\Lambda}\chi_k(x)\overline{\chi_{\ell}(x)}
+ =N\,\delta_{k,\ell}.
+ \label{v:n19:eq:ortogonalidad-caracteres}
+\end{equation}
+Define the unitary transform \(\mathcal F_\Lambda\) by
+\begin{equation}
+ \widehat\psi(k):=(\mathcal F_\Lambda\psi)(k)
+ =\frac1{\sqrt N}\sum_{x\in\Lambda}\chi_k(x)\psi(x),
+ \qquad
+ \psi(x)=\frac1{\sqrt N}\sum_{k\in\Lambda}
+ \overline{\chi_k(x)}\widehat\psi(k).
+ \label{v:n19:eq:fourier-inversion}
+\end{equation}
+The conjugated character in the second formula is indispensable under
+the positive convention of the first. Equation
+\eqref{v:n19:eq:ortogonalidad-caracteres} proves both inversion and
+\(\|\mathcal F_\Lambda\psi\|_2=\|\psi\|_2\).
+
+\begin{lemma}[Mutual unbiasedness of the bases]
+\label{v:n19:lem:mub}
+Let \(\{e_x:x\in\Lambda\}\) be the position basis and let
+\(f_k(x)=N^{-1/2}\overline{\chi_k(x)}\) be the Fourier basis. Then
+\begin{equation}
+ |\langle e_x,f_k\rangle|=N^{-1/2}=1/27
+ \qquad(x,k\in\Lambda).
+ \label{v:n19:eq:mub}
+\end{equation}
+Thus the two bases are mutually unbiased.
+\end{lemma}
+\begin{proof}
+The orthonormality of \(\{f_k\}\) follows from
+\eqref{v:n19:eq:ortogonalidad-caracteres}; moreover,
+\(\langle e_x,f_k\rangle=f_k(x)\), and every character has modulus one.
+\end{proof}
+
+\subsection{Exact support uncertainty}
+\label{v:n19:sec:soporte}
+
+For a function \(u:\Lambda\to\mathbb C\), write
+\(\operatorname{supp}u=\{x:u(x)\ne0\}\).
+
+\begin{theorem}[Support bound on the triadic torus]
+\label{v:n19:thm:soporte}
+Every nonzero \(\psi\in\ell^2(\Lambda)\) satisfies
+\begin{equation}
+ |\operatorname{supp}\psi|\,
+ |\operatorname{supp}\widehat\psi|\ge N=729.
+ \label{v:n19:eq:cota-soporte}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Set \(S=\operatorname{supp}\psi\) and
+\(T=\operatorname{supp}\widehat\psi\). The correct inversion formula in
+\eqref{v:n19:eq:fourier-inversion} yields, for every \(x\in S\),
+\[
+ |\psi(x)|
+ =\left|\frac1{\sqrt N}\sum_{k\in T}
+       \overline{\chi_k(x)}\widehat\psi(k)\right|
+ \le \sqrt{\frac{|T|}{N}}\,\|\widehat\psi\|_2,
+\]
+by Cauchy--Schwarz and \(|\chi_k(x)|=1\). Squaring and summing over
+\(S\) gives
+\[
+ \|\psi\|_2^2
+ \le\frac{|S||T|}{N}\,\|\widehat\psi\|_2^2
+ =\frac{|S||T|}{N}\,\|\psi\|_2^2.
+\]
+The norm is positive, so cancellation proves
+\eqref{v:n19:eq:cota-soporte}. This is the specialization to the realized
+finite group of the Donoho--Stark support uncertainty
+principle~\cite{donoho_stark_1989}.
+\end{proof}
+
+The chain \eqref{v:n19:eq:cadena-tipificada} fixes the domain before the
+inequality is formulated: APP--TRIT--TPK supplies the positional register,
+and \(\beta_{729}\) supplies its finite realization as the group
+\(\Lambda\).
+
+\subsection{Annihilators and classification of the saturation cases}
+\label{v:n19:sec:anuladores}
+
+For \(H\le\Lambda\), define its annihilator by
+\begin{equation}
+ H^\perp:=\{k\in\Lambda:\chi_k(h)=1\text{ for every }h\in H\}.
+ \label{v:n19:eq:anulador}
+\end{equation}
+For divisors \(a,b\mid27\), consider
+\begin{equation}
+ H_{a,b}:=\{(x_1,x_2)\in\Lambda:
+ x_1\equiv0\pmod a,\ x_2\equiv0\pmod b\}.
+ \label{v:n19:eq:subgrupo-rectangular}
+\end{equation}
+Then
+\begin{equation}
+ |H_{a,b}|=\frac{27}{a}\frac{27}{b},
+ \quad
+ H_{a,b}^{\perp}
+ =\{(k_1,k_2):k_1\equiv0\pmod{27/a},
+                  k_2\equiv0\pmod{27/b}\},
+ \quad |H_{a,b}^{\perp}|=ab.
+ \label{v:n19:eq:anulador-explicito}
+\end{equation}
+Indeed, the geometric sum in each coordinate vanishes unless
+\(27\mid ak_1\) and \(27\mid bk_2\). Consequently, for the normalized
+indicator
+\begin{equation}
+ \psi_{a,b}:=|H_{a,b}|^{-1/2}\mathbf1_{H_{a,b}},
+ \label{v:n19:eq:indicador-normalizado}
+\end{equation}
+one obtains exactly
+\begin{equation}
+ \widehat\psi_{a,b}(k)
+ =\sqrt{\frac{|H_{a,b}|}{N}}\,
+   \mathbf1_{H_{a,b}^{\perp}}(k).
+ \label{v:n19:eq:fourier-indicador}
+\end{equation}
+Thus the transform is uniform on the annihilator and
+\(|H_{a,b}|\,|H_{a,b}^{\perp}|=N\).
+
+\begin{table}[htbp]
+\centering
+\caption{Four exact saturations, with distinct domains.}
+\label{v:n19:tab:saturaciones}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+\((a,b)\) & \(|H_{a,b}|\) & \(|H_{a,b}^{\perp}|\) & product
+ & \((H_{\rm pos},H_{\rm F})\) \\
+\midrule
+\((3,3)\)  & \(81\) & \(9\)  & \(729\) & \((\log81,\log9)\) \\
+\((9,9)\)  & \(9\)  & \(81\) & \(729\) & \((\log9,\log81)\) \\
+\((3,9)\)  & \(27\) & \(27\) & \(729\) & \((\log27,\log27)\) \\
+\((1,27)\) & \(27\) & \(27\) & \(729\) & \((\log27,\log27)\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+The last two rows have the same cardinalities but neither the same subgroup
+nor the same annihilator; numerical equality does not collapse their
+incidence data.
+
+\subsection{Entropic uncertainty by interpolation and differentiation}
+\label{v:n19:sec:entropia}
+
+Let \(\|\psi\|_2=1\), and define the distributions
+\begin{equation}
+ p_x:=|\psi(x)|^2,\qquad q_k:=|\widehat\psi(k)|^2,
+ \qquad
+ H_{\rm pos}:=-\sum_xp_x\log p_x,\quad
+ H_{\rm F}:=-\sum_kq_k\log q_k,
+ \label{v:n19:eq:entropias-distribucion}
+\end{equation}
+with natural logarithms and the convention \(0\log0=0\). These are the
+Shannon entropies of two measurement distributions in conjugate bases.
+
+\begin{theorem}[Entropic bound for the \(\Lambda\) realization]
+\label{v:n19:thm:entropia}
+Every unit vector satisfies
+\begin{equation}
+ H_{\rm pos}(\psi)+H_{\rm F}(\psi)
+ \ge\log N=\log729=6\log3.
+ \label{v:n19:eq:cota-entropica}
+\end{equation}
+\end{theorem}
+\begin{proof}
+From \(\|\mathcal F_\Lambda\|_{\ell^1\to\ell^\infty}
+\le N^{-1/2}\) and unitarity,
+\(\|\mathcal F_\Lambda\|_{\ell^2\to\ell^2}=1\), the Riesz--Thorin
+interpolation theorem~\cite{riesz_1927,thorin_1948} gives, for
+\(1<p\le2\) and \(p'=p/(p-1)\),
+\begin{equation}
+ \|\mathcal F_\Lambda\psi\|_{p'}
+ \le N^{\frac12-\frac1p}\|\psi\|_p.
+ \label{v:n19:eq:riesz-thorin}
+\end{equation}
+Consider
+\begin{equation}
+ g(p):=\log\|\mathcal F_\Lambda\psi\|_{p'}
+       -\log\|\psi\|_p
+       -\left(\frac12-\frac1p\right)\log N.
+ \label{v:n19:eq:funcion-interpolacion}
+\end{equation}
+Equation \eqref{v:n19:eq:riesz-thorin} implies \(g(p)\le0\), whereas
+\(g(2)=0\); hence \(g'_-(2)\ge0\).
+
+For every unit vector \(u\) in finite dimension,
+\begin{equation}
+ \left.\frac{d}{dr}\log\|u\|_r\right|_{r=2}
+ =\frac14\sum_j|u_j|^2\log|u_j|^2
+ =-\frac14H(|u|^2).
+ \label{v:n19:eq:derivada-norma}
+\end{equation}
+Zero coordinates are obtained by continuity, while positive terms are
+differentiable. Since
+\[
+ \left.\frac{dp'}{dp}\right|_{p=2}=-1,
+\]
+left
+differentiation of \eqref{v:n19:eq:funcion-interpolacion} yields
+\begin{equation}
+ g'_-(2)=\frac14
+ \bigl(H_{\rm pos}+H_{\rm F}-\log N\bigr)\ge0,
+ \label{v:n19:eq:derivada-entropica}
+\end{equation}
+which is equivalent to \eqref{v:n19:eq:cota-entropica}.
+
+This derivation lies in the line of entropic uncertainty developed by
+Hirschman and Beckner~\cite{hirschman_1957,beckner_1975}; for arbitrary
+pairs of bases, the maximum-overlap formulation is due to
+Maassen and Uffink~\cite{maassen_uffink_1988}. In the present realization,
+the constant \(\log N\) follows directly by differentiating the
+interpolation factor in \eqref{v:n19:eq:riesz-thorin}.
+\end{proof}
+
+For the states \(\psi_{a,b}\), Equation
+\eqref{v:n19:eq:fourier-indicador} shows that \(p\) and \(q\) are uniform
+on \(H_{a,b}\) and \(H_{a,b}^{\perp}\), respectively. Therefore,
+\[
+ H_{\rm pos}=\log|H_{a,b}|,\qquad
+ H_{\rm F}=\log|H_{a,b}^{\perp}|,\qquad
+ H_{\rm pos}+H_{\rm F}=\log729,
+\]
+which proves entropic saturation for all four cases in
+Table~\ref{v:n19:tab:saturaciones} without numerical approximation.
+
+\subsection{Typed domains of information}
+\label{v:n19:sec:tipos-entropia}
+
+The quantity \(H_{\rm pos}+H_{\rm F}\) measures the sum of two classical
+distribution entropies associated with conjugate measurements.
+Entanglement entropy across the boundary cut, von Neumann entropy of a
+reduced state, thermodynamic entropy and temperature, and the marginal
+entropy of a tritic histogram are defined on distinct objects and domains.
+Every comparison among these quantities is formulated through an explicit
+map specifying domain, codomain, and state. The bound
+\eqref{v:n19:eq:cota-entropica} belongs entirely to
+\(\ell^2(\Lambda)\).
+
+\subsection{Ordered memory on the dodecaphasic domain}
+\label{v:n19:sec:memoria-ordenada}
+
+The F044 result acts on dodecaphasic words and characterizes the ordered
+information retained by the enriched state. Its domain and operators are
+independent of the Fourier realization of N19; the relation between the
+two results compares marginal information with ordered information.
+
+Let \(\tau=(\tau_1,\ldots,\tau_{12})\in\{-1,0,+1\}^{12}\), with
+\(\operatorname{sgn}(0)=0\) and cyclic indices modulo twelve. Define
+\begin{align}
+ G_a&:=\{a,a+4,a+8\},\qquad a=1,2,3,4,\nonumber\\
+ \nu_{120}(\tau)&:=\sum_{a=1}^4
+   \operatorname{sgn}\!\left(\sum_{m\in G_a}\tau_m\right),
+ \label{v:n19:eq:nu120}\\
+ \nu_{270}(\tau)&:=\sum_{m=1}^{12}\tau_m\tau_{m+3}.
+ \label{v:n19:eq:nu270}
+\end{align}
+The words
+\begin{equation}
+ \tau^{(a)}=(1,1,0,0,0,0,0,0,0,0,0,0),\qquad
+ \tau^{(b)}=(1,0,0,1,0,0,0,0,0,0,0,0)
+ \label{v:n19:eq:testigos-orden}
+\end{equation}
+have the same histogram---ten zeros and two ones---and hence the same
+marginal alphabet entropy. Nevertheless,
+\begin{equation}
+ (\nu_{120},\nu_{270})(\tau^{(a)})=(2,0),\qquad
+ (\nu_{120},\nu_{270})(\tau^{(b)})=(2,1).
+ \label{v:n19:eq:testigos-lectura}
+\end{equation}
+The second reader detects a distance-three incidence erased by the
+histogram.
+
+For the involution \(C_M\tau:=-\operatorname{rev}(\tau)\), reversal
+permutes the four classes \(G_a\), while negation reverses their sums;
+the cyclic autocorrelation at lag \(+3\) equals, after reindexing, the one
+at lag \(-3\). Consequently,
+\begin{equation}
+ \nu_{120}(C_M\tau)=-\nu_{120}(\tau),\qquad
+ \nu_{270}(C_M\tau)=\nu_{270}(\tau).
+ \label{v:n19:eq:paridades-lectores}
+\end{equation}
+The reader \(\nu_{120}\) is odd and the quadratic reader \(\nu_{270}\) is
+even. These parities characterize the additional information retained by
+the ordered word.
+
+\subsection{Domain of validity and mathematical conditions}
+\label{v:n19:sec:falsadores}
+
+The conditions delimiting the two results are:
+\begin{enumerate}
+ \item \(\beta_{729}\) is bijective on the positional realization of
+ \(\Lambda\) used in \eqref{v:n19:eq:cadena-tipificada};
+ \item orthogonality \eqref{v:n19:eq:ortogonalidad-caracteres} and the
+ inversion formula with the conjugated character establish unitarity;
+ \item every nonzero state satisfies
+ \(\lvert\operatorname{supp}\psi\rvert
+ \lvert\operatorname{supp}\widehat\psi\rvert\ge729\);
+ \item every unit state satisfies
+ \(H_{\rm pos}+H_{\rm F}\ge\log729\);
+ \item in all four cases of
+ Table~\ref{v:n19:tab:saturaciones}, the transform is uniform on the
+ annihilator and the cardinality product is \(729\);
+ \item the witnesses in \eqref{v:n19:eq:testigos-orden} share a
+ histogram, produce \eqref{v:n19:eq:testigos-lectura}, and satisfy the
+ parities \eqref{v:n19:eq:paridades-lectores}.
+\end{enumerate}
+The first five statements belong to the typed finite realization
+\(\Lambda\) and its unitary Fourier transform; the sixth belongs to the
+dodecaphasic domain of ordered memory. These conditions also provide local
+falsifiers: failure of any corresponding identity, inequality, or witness
+value refutes the statement in its stated domain. The relation between
+N19 and F044 is complementary and keeps their domains and operators
+distinct.

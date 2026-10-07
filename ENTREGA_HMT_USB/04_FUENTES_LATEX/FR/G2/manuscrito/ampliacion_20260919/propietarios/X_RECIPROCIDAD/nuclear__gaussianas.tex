@@ -1,0 +1,234 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/nuclear/gaussianas.tex
+\chapter{Covariance, forme normale et spectre gaussien}
+\label{x_reciprocidad:app:gaussianas-espectro}
+
+La section positive d’action \(\hbar_a\) et la réalisation canonique
+précédente déterminent la normalisation employée ici. On démontre la
+correspondance entre covariance, spectre, pureté et entropie pour un
+nombre fini de modes ; l’espace de Fock conserve toutes ses occupations.
+La réduction symplectique et les formules gaussiennes sont des résultats
+établis qui sont reproduits pour rendre autonome leur application au
+transport de mémoire.
+
+\section{Coordonnées canoniques et fonction caractéristique}
+Dans \(L^2(\RR^d)\), soient \(\widehat q_j=\widehat Q_j/\sqrt{\hbar_a}\),
+\(\widehat p_j=\widehat P_j/\sqrt{\hbar_a}\) et
+\(\widehat z=(\widehat q_1,\widehat p_1,\ldots,\widehat q_d,\widehat p_d)\).
+Sur Schwartz,
+\[
+ [\widehat z_j,\widehat z_k]=iJ_{jk}I,\qquad
+ J=\bigoplus_{j=1}^d\begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\]
+Cette convention fixe le signe de la forme canonique. Les opérateurs de
+Weyl \(\mathcal W(\xi)=\exp(i\xi^{\mathsf T}\widehat z)\) sont définis
+par les fermetures auto-adjointes des combinaisons linéaires indiquées.
+Pour un état centré \(\rho\) de moments d’ordre deux finis, la
+covariance normalisée et sa fonction caractéristique sont
+\[
+ W_{jk}=\Tr\rho(\widehat z_j\widehat z_k+\widehat z_k\widehat z_j),
+ \qquad \chi_\rho(\xi)=\Tr(\rho\mathcal W(\xi)),\qquad
+ V=\frac{\hbar_a}{2}W.
+\]
+L’état est gaussien centré lorsque
+\begin{equation}
+ \chi_\rho(\xi)=\exp(-\xi^{\mathsf T}W\xi/4).
+ \label{x_reciprocidad:app:eq:caracteristica-gaussiana}
+\end{equation}
+L’espérance de \((c^{\mathsf T}\widehat z)^\dagger
+(c^{\mathsf T}\widehat z)\) est \(c^\dagger(W+iJ)c/2\) ; ainsi,
+\(W+iJ\geq0\). De plus, \(W>0\) : si \(v\) est réel et
+\(v^{\mathsf T}Wv=0\), la positivité implique \((W+iJ)v=0\),
+donc \(Jv=0\) et \(v=0\).
+
+\begin{lemma}[Unicité de la fonction caractéristique]
+\label{x_reciprocidad:app:lem:unicidad-weyl}
+Deux opérateurs de classe trace ayant la même fonction caractéristique sont égaux.
+\end{lemma}
+\begin{proof}
+En regroupant les positions et les moments sous la forme \(\xi=(u,v)\),
+\[
+ (\mathcal W(u,v)f)(x)=e^{iu\cdot(x+v/2)}f(x+v).
+\]
+Pour un opérateur de rang fini à vecteurs de Schwartz et de noyau \(K_A\),
+\[
+ \Tr(A\mathcal W(u,v))=\int K_A(x+v/2,x-v/2)e^{iu\cdot x}\,dx.
+\]
+Plancherel et le changement de variables de jacobien absolu un donnent
+\[
+ \|A\|_{\rm HS}^2=(2\pi)^{-d}\int_{\RR^{2d}}
+ |\Tr(A\mathcal W(\xi))|^2\,d\xi.
+\]
+Les opérateurs précédents sont denses dans la classe trace. La convergence
+dans cette norme implique la convergence en Hilbert--Schmidt et la convergence
+uniforme des fonctions caractéristiques, car leur différence est
+bornée par \(\|A-B\|_1\). L’égalité s’étend dans \(L^2\).
+L’appliquer à la différence des opérateurs prouve l’assertion.
+\end{proof}
+
+\section{Réduction symplectique de la forme positive}
+\begin{theorem}[Forme normale de Williamson]
+\label{x_reciprocidad:app:thm:williamson}
+Pour une matrice réelle symétrique \(W>0\) d’ordre \(2d\), il existe
+\(S\in\operatorname{Sp}(2d,\RR)\) et \(\nu_j>0\) tels que
+\[
+ W=SDS^{\mathsf T},\qquad D=\bigoplus_j\nu_jI_2.
+\]
+Les valeurs propres de \(JW\) sont \(\pm i\nu_j\). La condition
+\(W+iJ\geq0\) équivaut à \(\nu_j\geq1\) pour tout \(j\).
+\end{theorem}
+\begin{proof}
+La matrice \(B=W^{1/2}JW^{1/2}\) est antisymétrique et inversible.
+Si \(-B^2u=\nu^2u\) et \(\|u\|=1\), le vecteur
+\(v=-Bu/\nu\) est unitaire et orthogonal à \(u\) ; il satisfait
+\(Bu=-\nu v\), \(Bv=\nu u\). Le complément de cette paire est
+invariant. L’itération produit une matrice orthogonale \(O\) telle que
+\(O^{\mathsf T}BO=JD\). En définissant \(S=W^{1/2}OD^{-1/2}\),
+\[
+ S^{\mathsf T}JS=J,\qquad SDS^{\mathsf T}=W.
+\]
+La similitude \(W^{1/2}(JW)W^{-1/2}=B\) détermine les valeurs
+\(\nu_j\), avec multiplicité. La congruence par \(S^{-1}\)
+transforme \(W+iJ\) en \(D+iJ\) ; chaque bloc a pour valeurs propres
+\(\nu_j+1\) et \(\nu_j-1\).
+\end{proof}
+
+\begin{lemma}[Implémentation unitaire dans un nombre fini de modes]
+\label{x_reciprocidad:app:lem:implementacion-simplectica}
+Toute matrice symplectique \(S\) admet un unitaire \(U_S\) qui satisfait
+\(U_S^\dagger\mathcal W(\xi)U_S=\mathcal W(S^{\mathsf T}\xi)\).
+La conjugaison \(\rho\mapsto U_S\rho U_S^\dagger\) transporte
+la covariance par \(W\mapsto SWS^{\mathsf T}\).
+\end{lemma}
+\begin{proof}
+Dans la décomposition polaire \(S=OP\), l’identité
+\(J^{-1}(S^{\mathsf T}S)J=(S^{\mathsf T}S)^{-1}\), appliquée par
+calcul spectral à la racine positive, prouve \(PJP=J\).
+Alors \(O\) est orthogonale symplectique. Les espaces propres de \(P\)
+s’apparient au moyen de \(J\) avec les valeurs propres \(\lambda,\lambda^{-1}\) ;
+celui de valeur propre un est \(J\)-invariant. Une matrice
+orthogonale symplectique \(K\) réduit donc \(P\) à
+\(\bigoplus_j\operatorname{diag}(e^{r_j},e^{-r_j})\).
+
+La dilatation est mise en œuvre par
+\[
+ (\mathcal D_rf)(x)=e^{-\frac12\sum_jr_j}
+ f(e^{-r_1}x_1,\ldots,e^{-r_d}x_d).
+\]
+Un changement de variables prouve son unitarité et la conjugaison de
+\((\widehat q_j,\widehat p_j)\) en
+\((e^{r_j}\widehat q_j,e^{-r_j}\widehat p_j)\).
+Une transformation orthogonale symplectique commute avec \(J\) et
+correspond à une matrice \(u\in U(d)\) sur
+\(a_j=(\widehat q_j+i\widehat p_j)/\sqrt2\). Sa seconde
+quantification \(\Gamma(u)=\bigoplus_{n\geq0}u^{\otimes_s n}\)
+est unitaire dans \(\mathcal F_s(\CC^d)\), et l’identité sur les
+produits symétriques finis donne la transformation des \(a_j\).
+
+La base de Hermite identifie cet espace à \(L^2(\RR^d)\).
+Pour justifier sa complétude, si \(f\) est orthogonal à tous les
+polynômes multipliés par \(e^{-|x|^2/2}\), la fonction entière
+\(F(z)=\int f(x)e^{-|x|^2/2}e^{z\cdot x}\,dx\) a toutes
+ses dérivées nulles en zéro. Ainsi, \(F=0\) ; en restreignant à
+\(z=i\xi\), l’unicité de Fourier donne \(f=0\). Les
+normalisations et l’orthogonalité résultent de la création et de l’annihilation.
+La composition des mises en œuvre précédentes produit \(U_S\).
+L’égalité de Weyl implique
+\(\chi_{U_S\rho U_S^\dagger}(\xi)=\chi_\rho(S^{\mathsf T}\xi)\),
+qui démontre la loi de covariance.
+\end{proof}
+
+\section{Calcul du spectre de la densité isotrope}
+Dans un mode, les états cohérents normalisés sont
+\[
+ |z\rangle=e^{-|z|^2/2}\sum_{n\geq0}\frac{z^n}{\sqrt{n!}}|n\rangle.
+\]
+Leur fonction de position,
+\(\pi^{-1/4}\exp[-(x-q_0)^2/2+ip_0(x-q_0/2)]\), où
+\(q_0=\sqrt2\Re z\), \(p_0=\sqrt2\Im z\), donne par intégration
+\[
+ \langle z|\mathcal W(u,v)|z\rangle
+ =e^{-(u^2+v^2)/4}e^{i(uq_0+vp_0)}.
+\]
+Pour \(s>0\), l’intégrale
+\[
+ \rho^{(s)}=\frac1{\pi s}\int_{\CC} e^{-|z|^2/s}
+ |z\rangle\langle z|\,d^2z
+\]
+converge en classe trace, est positive et a pour trace un. L’intégration
+angulaire annule ses éléments hors de la diagonale d’occupation ; l’intégration
+radiale donne
+\[
+ \langle n|\rho^{(s)}|n\rangle=\frac{s^n}{(1+s)^{n+1}},\qquad
+ \chi_{\rho^{(s)}}(u,v)=e^{-(2s+1)(u^2+v^2)/4}.
+\]
+Avec \(\nu=2s+1\), l’unique état gaussien de covariance
+\(\nu I_2\) est, par le lemme~\ref{x_reciprocidad:app:lem:unicidad-weyl},
+\begin{equation}
+ \rho_\nu=(1-t)\sum_{n\geq0}t^n|n\rangle\langle n|,
+ \qquad t=\frac{\nu-1}{\nu+1}.
+ \label{x_reciprocidad:app:eq:estado-geometrico}
+\end{equation}
+Le cas \(\nu=1\) est le projecteur sur le vide.
+
+\begin{theorem}[Spectre, pureté et entropie]
+\label{x_reciprocidad:app:thm:espectro-gaussiano}
+Un état gaussien centré de covariance \(W\) et de valeurs
+symplectiques \(\nu_1,\ldots,\nu_d\) est unitairement équivalent
+à \(\bigotimes_j\rho_{\nu_j}\). Ses valeurs propres sont
+\[
+ \lambda_{\symbf{n}}=\prod_j(1-t_j)t_j^{n_j},\qquad
+ t_j=\frac{\nu_j-1}{\nu_j+1},\quad \symbf{n}\in\mathbb N^d.
+\]
+Con \(0\log0=0\),
+\begin{align}
+ \Tr\rho^2&=\prod_j\nu_j^{-1}=(\det W)^{-1/2},
+ \label{x_reciprocidad:app:eq:pureza-general}\\
+ -\Tr(\rho\log\rho)&=\sum_j
+ \left[\frac{\nu_j+1}{2}\log\frac{\nu_j+1}{2}
+ -\frac{\nu_j-1}{2}\log\frac{\nu_j-1}{2}\right].
+ \label{x_reciprocidad:app:eq:entropia-general}
+\end{align}
+\end{theorem}
+\begin{proof}
+Williamson donne \(W=SDS^{\mathsf T}\). Le produit des densités
+isotropes a pour fonction caractéristique \(e^{-\xi^{\mathsf T}D\xi/4}\).
+L’implémentation unitaire et l’unicité de Weyl prouvent
+l’équivalence et la formule spectrale. Dans un mode,
+\[
+ \sum_{n\geq0}(1-t)^2t^{2n}=\frac{1-t}{1+t}=\nu^{-1},
+\]
+et
+\[
+ -\sum_{n\geq0}(1-t)t^n\log((1-t)t^n)
+ =-\log(1-t)-\frac{t}{1-t}\log t.
+\]
+La substitution \(t=(\nu-1)/(\nu+1)\) prouve les formules ; la
+limite en \(t=0\) est nulle. Dans le produit fini, Tonelli justifie
+la somme des termes d’entropie positifs ou nuls, et
+\(\det W=\prod_j\nu_j^2\) donne l’expression déterminantale.
+\end{proof}
+
+Si l’état est la réduction d’un vecteur pur bipartite, ses
+valeurs propres sont les carrés des coefficients de Schmidt.
+La décomposition en valeurs singulières de l’opérateur de Hilbert--Schmidt défini
+par ce vecteur démontre l’égalité des spectres non nuls des deux
+réductions. L’entropie calculée est alors celle d’intrication.
+
+\section{Préparation et transport des deux covariances}
+L’application ultérieure utilise deux entrées gaussiennes pures identiques.
+En général, pour \(M\in\operatorname{Sp}(2d,\RR)\), leur covariance est
+\(V_0=(\hbar_a/2)MM^{\mathsf T}\), et l’entrée conjointe a pour
+covariance \(V_0\oplus V_0\). Le transport physique s’obtient
+en conjuguant \(U_H\) par \(M\oplus M\). Dans la carte équilibrée,
+la covariance normalisée d’entrée est \(I_{4d}\) ; avec
+
+\[
+ T=\frac{8I+H}{9},\qquad D=\frac{\sqrt8(H-I)}9,
+\]
+la première réduction a
+\[
+ W=TT^{\mathsf T}+DD^{\mathsf T}=\frac{8I+HH^{\mathsf T}}9.
+\]
+Sa fonction caractéristique s’obtient en annulant les arguments du
+second groupe de modes. Elle reste donc gaussienne et les théorèmes
+précédents calculent tout son spectre, sans tronquer le registre d’occupation.

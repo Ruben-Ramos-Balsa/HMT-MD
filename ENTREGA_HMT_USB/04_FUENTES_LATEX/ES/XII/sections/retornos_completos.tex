@@ -1,0 +1,176 @@
+\section{Reconstrucción explícita desde los retornos completos}
+\label{ret:seccion}
+
+\subsection{Dominio de estados y extensión bilateral}
+
+Se considera una coordenatización del dominio superviviente generado por
+APP--TRIT--TPK. Un estado de esta coordenatización conserva las hojas operatorias,
+la orientación trítica, el residuo, el cociente, el acarreo, la ruta,
+la frontera, el registro de memoria y el origen del calendario.
+La actualización actúa sobre este estado completo.
+
+Sean \(X_0\) un espacio compacto de Hausdorff no vacío y
+\(F:X_0\to X_0\) una actualización continua y sobreyectiva.
+Estas son las hipótesis del resultado en la coordenatización considerada.
+La extensión bilateral de la actualización es
+\begin{equation}
+ \mathscr X_F=
+ \bigl\{(x_k)_{k\in\ZZ}\in X_0^{\ZZ}:
+                  F(x_k)=x_{k+1}\text{ para todo }k\in\ZZ\bigr\},
+ \label{ret:extension}
+\end{equation}
+con la topología inducida por el producto.
+
+\begin{lemma}[Existencia y transporte bilateral]
+\label{ret:existencia}
+El espacio \(\mathscr X_F\) es compacto, de Hausdorff y no vacío.
+Cada proyección coordenada \(\mathscr X_F\to X_0\) es sobreyectiva.
+El desplazamiento
+\[
+ \sigma((x_k)_{k\in\ZZ})=(x_{k+1})_{k\in\ZZ}
+\]
+es un homeomorfismo de \(\mathscr X_F\).
+\end{lemma}
+\begin{proof}
+Cada condición \(F(x_k)=x_{k+1}\) define un cerrado del producto
+compacto de Hausdorff \(X_0^{\ZZ}\).
+Fijados un índice \(k_0\) y un estado \(z\in X_0\), cualquier colección
+finita de estas condiciones, junto con \(x_{k_0}=z\), admite solución:
+se completan hacia delante mediante \(F\) y hacia atrás mediante
+preimágenes, que existen por sobreyectividad. Las condiciones poseen,
+por tanto, la propiedad de intersección finita. La compacidad produce
+una historia bilateral con \(x_{k_0}=z\).
+
+Los desplazamientos \(\sigma\) y
+\(\sigma^{-1}((x_k))=(x_{k-1})\) conservan las relaciones de
+\eqref{ret:extension}; ambos son continuos por su acción coordenada.
+\end{proof}
+
+\subsection{Muestreo trítico y reconstrucción de todos los pasos}
+
+Fijado el origen del calendario, los instantes tipados de retorno son
+\[
+ \mathcal T_+
+ =\{k\in\ZZ:1+(k\bmod 9)\in\{1,4,7\}\}=3\ZZ.
+\]
+En cada instante se conserva el estado completo \(x_k\).
+Definimos el espacio de registros de retorno por
+\begin{equation}
+ \mathscr Y_+
+ =\bigl\{(y_j)_{j\in\ZZ}\in X_0^{\ZZ}:
+                 F^3(y_j)=y_{j+1}\text{ para todo }j\in\ZZ\bigr\}.
+ \label{ret:registros}
+\end{equation}
+
+\begin{theorem}[Recuperación desde los retornos completos]
+\label{ret:homeomorfismo}
+La aplicación
+\[
+ r=\operatorname{Ret}_+:\mathscr X_F\longrightarrow\mathscr Y_+,
+ \qquad r(x)_j=x_{3j},
+\]
+es un homeomorfismo. Su inversa está dada explícitamente por
+\begin{equation}
+ \boxed{
+  \bigl(r^{-1}(y)\bigr)_{3j+s}=F^s(y_j),
+  \qquad j\in\ZZ,\quad s\in\{0,1,2\}.}
+ \label{ret:inversa}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Para \(x\in\mathscr X_F\),
+\(F^3(x_{3j})=x_{3j+3}\), de modo que \(r(x)\in\mathscr Y_+\).
+Recíprocamente, cada entero \(k\) posee una única expresión
+\(k=3j+s\), con \(j\in\ZZ\) y \(0\le s<3\), también cuando
+\(k<0\). La fórmula \eqref{ret:inversa} define, por tanto, todas las
+coordenadas de una sucesión \(x\).
+
+Si \(s=0\) o \(s=1\), se tiene
+\(F(x_{3j+s})=F^{s+1}(y_j)=x_{3j+s+1}\).
+En la frontera entre dos bloques,
+\[
+ F(x_{3j+2})=F^3(y_j)=y_{j+1}=x_{3j+3}.
+\]
+Así, \(x\in\mathscr X_F\).
+La lectura de sus coordenadas de índice \(3j\) devuelve \(y_j\).
+En sentido inverso, las relaciones de \eqref{ret:extension} dan
+\(x_{3j+s}=F^s(x_{3j})\), por lo que la reconstrucción de \(r(x)\)
+devuelve \(x\) íntegramente.
+
+La aplicación \(r\) es continua por ser una selección de coordenadas.
+Cada coordenada de su inversa es la composición de una proyección
+coordenada con una de las aplicaciones continuas \(I,F,F^2\).
+La inversa es, por consiguiente, continua.
+\end{proof}
+
+Una coordenada discreta adicional, por ejemplo el índice \(m\in\ZZ\)
+de una coordenatización de realización, se conserva mediante
+\[
+ \widetilde r:\ZZ\times\mathscr X_F
+ \longrightarrow\ZZ\times\mathscr Y_+,
+ \qquad \widetilde r(m,x)=(m,r(x)).
+\]
+Su inversa es \((m,y)\mapsto(m,r^{-1}(y))\).
+El mismo resultado vale para un origen de calendario fijo \(a\):
+se sustituyen \(x_{3j}\) y \(x_{3j+s}\) por
+\(x_{a+3j}\) y \(x_{a+3j+s}\).
+
+\subsection{Conjugación del transporte y conservación de las lecturas}
+
+Sea \(\sigma_+(y)_j=y_{j+1}\) el desplazamiento de los registros.
+La reconstrucción anterior da
+\begin{equation}
+ r\sigma^3=\sigma_+r,\qquad
+ (r\sigma r^{-1}(y))_j=F(y_j).
+ \label{ret:conjugacion}
+\end{equation}
+La aplicación de la segunda igualdad es reversible en
+\(\mathscr Y_+\); su inversa es
+\[
+ y\longmapsto\bigl(F^2(y_{j-1})\bigr)_{j\in\ZZ}.
+\]
+En efecto, las dos composiciones se reducen a
+\(F^3(y_{j-1})=y_j\).
+Así, la reversibilidad de la historia bilateral se conserva aun
+cuando la actualización \(F\) sobre un estado aislado sea no inyectiva.
+Si la vuelta nonádica se realiza como \(\Gamma_9=\sigma^9\), entonces
+\begin{equation}
+ r\Gamma_9=\sigma_+^3r.
+ \label{ret:vuelta-nonadica}
+\end{equation}
+
+\begin{corollary}[Lecturas conjuntas y transporte recuperado]
+\label{ret:lecturas}
+Sean \(a:\mathscr X_F\to\mathcal R\) y
+\(q:\mathscr X_F\to\mathcal E\) dos lectores continuos del mismo
+estado, y sea \(d:\mathscr X_F\to\mathscr X_F\) un homeomorfismo del
+dominio calibrado. Entonces
+\[
+ a_+=a\circ r^{-1},\qquad
+ q_+=q\circ r^{-1},\qquad
+ d_+=r\circ d\circ r^{-1}
+\]
+son continuos, \(d_+\) es un homeomorfismo y
+\begin{equation}
+ (a,q)=(a_+,q_+)\circ r,\qquad rd=d_+r.
+ \label{ret:factorizacion}
+\end{equation}
+Para todo entero \(N>0\),
+\[
+ d^Nx=x\quad\Longleftrightarrow\quad d_+^Nr(x)=r(x).
+\]
+\end{corollary}
+\begin{proof}
+Se componen las aplicaciones con el homeomorfismo del
+\cref{ret:homeomorfismo}. La inversa de \(d_+\) es
+\(rd^{-1}r^{-1}\). La identidad
+\(d_+^Nr=rd^N\), junto con la inyectividad de \(r\), prueba la
+última equivalencia.
+\end{proof}
+
+La aplicación a la doble lectura toma
+\(\mathcal R=R_{\rm HMT}\) y el codominio incidencial construido en
+\cref{exc:doble-lectura,exc:limite-inverso}.
+El resultado establece una presentación recuperable de las mismas
+historias, de sus lectores y de su transporte. Su objeto es esta
+equivalencia dinámica de presentaciones.

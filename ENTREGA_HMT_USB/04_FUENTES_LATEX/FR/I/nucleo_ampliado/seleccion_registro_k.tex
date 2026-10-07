@@ -1,0 +1,1084 @@
+% Desarrollo reunido K31-07--K31-15. Inserción anterior a registro_k y alpha.
+% Mantiene explícita la interfaz del repertorio terminal de ocho bloques.
+% Propietarios y localizadores: metadata/K_ALPHA_PROPIETARIOS.md.
+\section{Détermination régionale du descripteur dodécaphasique et sélection du registre de couplage}
+\label{act21:chap:despliegue-selector-k}
+
+La détermination du registre de couplage articule deux constructions
+qu'il convient de déployer dans leur ordre effectif. La première produit les
+antécédents du sélecteur à partir des représentations régionales du TPK :
+bandes de six trits, signatures de colonne, calendrier de conversion,
+descripteur orienté et tableau fonctionnel. La seconde opère sur ces
+antécédents et sur le répertoire terminal de huit blocs, énumère leurs
+ordonnancements admissibles et sélectionne un unique registre au moyen de deux
+conditions simultanées : incidence exceptionnelle et hétérotypie de lecture.
+La valeur du registre apparaît au terme de cette composition.
+
+Le présent développement présuppose les représentations régionales obtenues
+dans les chapitres précédents à partir d'APP--TRIT--TPK. Son propos est de rendre
+explicite chaque opération intermédiaire qui conduit de ces représentations
+au sélecteur fini. Sont ensuite incorporées la réalisation du même
+registre par incidences signées, l'inversion de Hadamard et la
+représentation de la constante de structure fine. Les trois constructions
+conservent leurs domaines respectifs : sélection du registre, récupération
+à partir de ses canaux et évaluation arithmétique de ses représentations.
+
+\subsection{Bandes régionales, codification et signatures entières}
+
+\subsubsection{Domaines et codification des bandes régionales}
+
+On fixe l'ordre des canaux
+\[
+ \chi\in\{\pi,e,\varphi\},
+ \qquad B_\chi(t)\in\mathbb F_3^6,
+ \qquad t\in\mathbb N.
+\]
+Les symboles de canal identifient les régions déjà engendrées. Chaque
+$B_\chi(t)$ conserve la place qu'il occupe dans sa suite de représentations ;
+l'indice $t$ compte les blocs ternaires. L'évaluation naturelle d'une
+bande $b=(b_0,\ldots,b_5)$ est
+\begin{equation}
+ \operatorname{enc}_6(b)=
+ 243b_0+81b_1+27b_2+9b_3+3b_4+b_5,
+ \qquad 0\leq\operatorname{enc}_6(b)<729.
+ \label{act21:eq:kdes-enc6}
+\end{equation}
+Son inverse, avec une largeur fixée, est
+\[
+ \operatorname{dig}_j(n)=
+ \left\lfloor\frac{n}{3^{5-j}}\right\rfloor\bmod3,
+ \qquad 0\leq j<6.
+\]
+Ainsi sont retenus les zéros initiaux : les mots $002001$ et $2001$
+pourraient partager une écriture entière abrégée, mais le type du
+premier contient six positions. Toutes les concaténations qui suivent
+utilisent cette largeur.
+
+Dans la fenêtre de cent blocs, la représentation de six cents trits du
+canal $\chi$ détermine un entier $P_\chi^{(600)}$. L'extraction s'effectue
+par
+\begin{equation}
+ b_\chi(t)=
+ \left\lfloor\frac{P_\chi^{(600)}}{729^{99-t}}\right\rfloor\bmod729,
+ \qquad 0\leq t<100,
+ \qquad B_\chi(t)=\operatorname{enc}_6^{-1}(b_\chi(t)).
+ \label{act21:eq:kdes-extraccion}
+\end{equation}
+L'entier de six cents trits est une représentation du producteur régional ;
+la table de cent lignes est l'évaluation de
+\eqref{act21:eq:kdes-extraccion}. Cette séparation permet de remplacer une table
+historique par son producteur sans modifier le sélecteur qui l'utilise.
+
+\subsubsection{Résidus, quotients, occupation et orientation}
+
+Pour chaque colonne $j$ et temps $t$, on introduit
+\begin{align}
+ T_j(t)&=B_\pi(t)_j+B_e(t)_j+B_\varphi(t)_j,\\
+ q_j(t)&=T_j(t)\bmod3,
+ &c_j(t)&=\left\lfloor T_j(t)/3\right\rfloor,\\
+ a_j(t)&=\bigl(B_\pi(t)_j+B_e(t)_j-B_\varphi(t)_j\bigr)\bmod3,\\
+ w_j(t)&=\mathbf1_{B_\pi(t)_j\ne0}
+       +\mathbf1_{B_e(t)_j\ne0}
+       +\mathbf1_{B_\varphi(t)_j\ne0},
+ &\bar w_j(t)&=w_j(t)\bmod3.
+ \label{act21:eq:kdes-firmas}
+\end{align}
+La soustraction de la troisième expression s'effectue sur les entiers et se réduit
+ensuite. Dans une implémentation sur les naturels, l'expression équivalente
+est $(B_\pi+B_e+3-B_\varphi)\bmod3$ ; la soustraction tronquée altérerait le lecteur.
+
+\begin{proposition}[Reconstruction de la somme de colonne]
+Pour toutes les bandes admissibles,
+\[
+ T_j(t)=q_j(t)+3c_j(t),\qquad
+ 0\leq q_j(t)<3,\quad 0\leq c_j(t)\leq2,
+ \quad0\leq w_j(t)\leq3.
+\]
+\end{proposition}
+\begin{proof}
+Chaque colonne additionne trois représentants de $\{0,1,2\}$, de sorte que
+$0\leq T_j(t)\leq6$. La division euclidienne par trois fournit le reste
+et le quotient indiqués. L'occupation compte trois conditions binaires ;
+sa borne se déduit directement de cette définition.
+\end{proof}
+
+Cette identité conserve le quotient de la somme locale. La reconstruction
+des trois bandes individuelles requiert les bandes elles-mêmes ou un lecteur
+supplémentaire qui les distingue : une somme de colonne a moins de coordonnées
+que le triplet qui la produit. Par conséquent, la ligne temporelle utilisée plus
+tard conserve conjointement les trois bandes et les quatre champs
+$q,a,c,\bar w$.
+
+\subsection{Horloge de conversion et premier avancement nul}
+
+\subsubsection{Capacité ternaire et profondeur décimale}
+
+Une représentation de $t+1$ bandes contient $6(t+1)$ trits. Le calendrier
+de conversion associé est défini par l'entier
+\begin{equation}
+ d_t=\max\{k\in\mathbb N:1000^k\leq3^{6(t+1)}\}
+     =\max\{k\in\mathbb N:1000^k\leq729^{t+1}\}.
+ \label{act21:eq:kdes-reloj}
+\end{equation}
+La définition compare des capacités entières. Le compteur $t$ et la profondeur $d_t$ enregistrent des grandeurs distinctes : une transition ajoute une bande de six trits ; l'horloge compte les puissances complètes de la base décimale mille contenues dans la capacité ternaire accumulée.
+
+\begin{lemma}[Caractérisation entière de l'horloge]
+Pour $t,k\in\mathbb N$ on a
+\[
+ d_t=k\quad\Longleftrightarrow\quad
+ 1000^k\leq729^{t+1}<1000^{k+1}.
+\]
+De plus, $d_t\leq d_{t+1}$.
+\end{lemma}
+\begin{proof}
+Les puissances de mille forment une suite strictement croissante et non bornée. La puissance $729^{t+1}$ se situe entre deux termes consécutifs ; l'exposant inférieur est exactement le maximum de \eqref{act21:eq:kdes-reloj}. L'inégalité $729^{t+1}<729^{t+2}$ implique la monotonie du maximum.
+\end{proof}
+
+\begin{proposition}[Premier avancement nul]
+Le plus petit temps qui satisfait $d_{t+1}=d_t$ est
+\[
+ t_*=20.
+\]
+En particulier,
+\[
+ d_0=0,\quad d_{19}=19,\quad d_{20}=20,
+ \quad d_{21}=20,\quad d_{22}=21.
+\]
+\end{proposition}
+\begin{proof}
+Les comparaisons entières exactes
+\[
+ 1000^{20}\leq729^{21},\qquad
+ 729^{22}<1000^{21},\qquad
+ 1000^{21}\leq729^{23}<1000^{22}
+\]
+donnent les valeurs aux temps vingt, vingt-et-un et vingt-deux. Pour
+$0\leq t\leq20$, l'expression
+$729^{t+1}/1000^t=729(729/1000)^t$ est décroissante et sa valeur en vingt
+est supérieure ou égale à un. Par conséquent,
+$1000^t\leq729^{t+1}<1000^{t+1}$ et $d_t=t$. Aucun temps inférieur à
+vingt ne peut satisfaire $d_{t+1}=d_t$ ; en vingt, c'est le cas.
+Toutes les comparaisons utilisées sont de puissances entières.
+\end{proof}
+
+Le nombre vingt est donc une sortie du critère minimal. La règle qui sélectionne l'instant est ``première avance nulle de l'horloge'' ; l'algorithme et sa preuve peuvent utiliser cette règle sans recevoir vingt comme paramètre externe.
+
+\subsubsection{Retour nonadique et antécédent temporel}
+
+La longueur du retour de phase détermine
+\begin{equation}
+ r=t_*-9=11.
+ \label{act21:eq:kdes-retorno}
+\end{equation}
+Les requêtes du descripteur ont lieu en $t_*+1$, $r+1$ et $r$.
+Cette distribution conserve la relation entre l'instant de pause, la
+translation nonadique et la lecture de phase immédiatement associée. Les
+temps onze, douze et vingt-et-un désignent des positions du calendrier
+régional ; leur différence temporelle reste enregistrée même lorsque deux
+temps produisent la même profondeur décimale.
+
+\subsection{Construction orientée du descripteur de vingt-quatre trits}
+
+\subsubsection{Défauts opposés de semi-bande}
+
+On considère les défauts orientés de la coordinatisation régionale
+\[
+ \delta_+=(0,0,0,1,1,1),\qquad
+ \delta_-=(0,0,0,2,2,2)\in\mathbb F_3^6.
+\]
+Son opposition se vérifie composante par composante :
+\[
+ \delta_++\delta_-=0\quad\text{en }\mathbb F_3^6.
+\]
+Le représentant $2$ réalise $-1$ dans la coordinatisation ternaire. La concaténation
+des queues de trois positions, dans l'ordre négatif--positif, produit
+le mot $222111$. La somme des défauts et la concaténation de leurs
+queues sont des opérations distinctes : la première a pour codomaine
+$\mathbb F_3^6$, tandis que la seconde conserve l'ordre de deux
+segments de longueur trois.
+
+\subsubsection{Charge duale et sélection de phase}
+
+Dans la coordinatisation régionale, la transformation de six coordonnées utilise
+\[
+ A_{\rm reg}=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&1&2&2\\
+ 1&1&0&2&1&2\\
+ 1&1&2&0&2&1\\
+ 1&2&1&2&0&1\\
+ 1&2&2&1&1&0
+ \end{pmatrix}.
+\]
+Avec des vecteurs ligne, la charge duale de $b\in\mathbb F_3^6$ est la somme
+des coordonnées de $bA_{\rm reg}$. Les sommes entières des lignes de
+$A_{\rm reg}$ sont $(5,7,7,7,7,7)$ ; d'où résulte l'expression locale
+\begin{equation}
+ \eta^\vee(b)=2b_0+b_1+b_2+b_3+b_4+b_5\pmod3.
+ \label{act21:eq:kdes-cargadual}
+\end{equation}
+La phase de lecture à l'instant $r$ est
+$\theta_r=(r-1)\bmod3$. Pour chaque canal, on définit
+\[
+ \varepsilon_\chi(r)=
+ \begin{cases}
+ 1,&\eta^\vee(B_\chi(r))=\theta_r,\\
+ 2,&\eta^\vee(B_\chi(r))\ne\theta_r.
+ \end{cases}
+\]
+La représentation phase--charge est
+\begin{equation}
+ D(r)=\varepsilon_\pi(r)B_\pi(r)
+      +\varepsilon_e(r)B_e(r)
+      +\varepsilon_\varphi(r)B_\varphi(r)
+      \quad\text{en }\mathbb F_3^6.
+ \label{act21:eq:kdes-fasecarga}
+\end{equation}
+Le coefficient se détermine par une égalité de charges, avant d'évaluer le mot qui résultera de la combinaison.
+
+\subsubsection{Composition du descripteur}
+
+On désigne par $\Vert$ la concaténation de mots de largeur fixée.
+La construction complète est
+\begin{equation}
+ \begin{split}
+ \Omega_{24}={}&
+ (B_e(t_*+1)+\delta_-)
+ \Vert (\delta_-|_{3,4,5}\Vert\delta_+|_{3,4,5})\\
+ &\Vert(B_\pi(r+1)+B_e(r+1))\Vert D(r).
+ \end{split}
+ \label{act21:eq:kdes-omega}
+\end{equation}
+Chaque terme de longueur six se calcule en $\mathbb F_3^6$ ; la
+concaténation finale a une longueur $6+6+6+6=24$. Cette construction
+sépare le descripteur $\Omega_{24}$ des étapes régionales
+$w_{24}^{\chi}$ : les deux objets partagent la même longueur, mais leurs producteurs
+et leurs places dans la composition sont différents.
+
+\begin{proposition}[Évaluation régionale du descripteur]
+Les représentations régionales et le critère de la première avancée nulle
+déterminent
+\[
+ \Omega_{24}=020022\,222111\,211201\,021101,
+ \qquad [\Omega_{24}]_3=66241910521.
+\]
+\end{proposition}
+\begin{proof}
+Les bandes nécessaires, conservant l'ordre $(\pi,e,\varphi)$, sont
+\[
+ \begin{array}{c|ccc}
+ t&B_\pi(t)&B_e(t)&B_\varphi(t)\\\hline
+ 11&022212&110001&100021\\
+ 12&012012&202222&000120\\
+ 21&221022&020100&211021
+ \end{array}
+\]
+et proviennent de l'extraction \eqref{act21:eq:kdes-extraccion}. Au temps
+vingt-et-un,
+$020100+000222=020022$ en $\mathbb F_3^6$. Les queues des défauts
+apportent $222111$. Au temps douze,
+$012012+202222=211201$.
+
+Pour le temps onze, les charges duales sont respectivement $0,1,2$ ; la phase vaut $(11-1)\bmod3=1$. Les coefficients sont $(2,1,2)$ et
+\[
+ 2(022212)+(110001)+2(100021)=021101
+ \quad\text{en }\mathbb F_3^6.
+\]
+La concaténation de ces quatre résultats donne le mot annoncé.
+Son évaluation entière s'obtient par Horner en base trois, ou par trois
+concaténations successives en base $729$.
+\end{proof}
+
+Le tableau précédent joue un rôle vérificateur : chacune de ses entrées provient du producteur régional. La règle de construction \eqref{act21:eq:kdes-omega} est celle qui permet de reproduire le descripteur sans introduire en tant que donnée la chaîne finale de vingt-quatre trits.
+
+\subsection{Panneau fonctionnel et répertoire terminal}
+
+\subsubsection{Neuf positions régionales}
+
+Le panneau fonctionnel conserve les trois premières bandes de chacun des trois canaux, dans l'ordre régional déclaré :
+\begin{equation}
+ \mathcal P_9=
+ \bigl(b_\pi(0),b_\pi(1),b_\pi(2),
+       b_e(0),b_e(1),b_e(2),
+       b_\varphi(0),b_\varphi(1),b_\varphi(2)\bigr).
+ \label{act21:eq:kdes-panel}
+\end{equation}
+Son évaluation est
+\[
+ \mathcal P_9=(103,161,103,523,457,301,450,398,438).
+\]
+Les neuf positions conservent l'origine régionale, bien que la valeur
+103 apparaisse deux fois. Le panneau comporte neuf incidences ordonnées et
+huit valeurs distinctes. L'énumération ultérieure utilise les incidences ;
+la déduplication des candidats s'effectue à une étape postérieure.
+
+\subsubsection{Répertoire non ordonné de huit blocs}
+
+Le répertoire terminal qui intervient dans cette construction est
+\begin{equation}
+ \mathcal S_{\rm term}=
+ \{002001,020111,200110,121012,
+   010122,001001,221110,222110\}\subset\mathbb F_3^6.
+ \label{act21:eq:kdes-sterm}
+\end{equation}
+Ses huit éléments sont distincts. La codification entière, ordonnée par
+valeur uniquement pour fixer une représentation informatique, est
+\[
+ \{28,55,98,175,437,498,687,714\}.
+\]
+La provenance documentaire de ce répertoire est la segmentation terminale du mot de soixante-douze trits et la récupération par positions au moyen des incidences des lecteurs phase--charge et affine. Le sélecteur développé ci-après reçoit le répertoire sans son ordonnancement historique et met à l'épreuve ses $8!$ ordonnancements.
+
+La formulation exacte de l'implémentation réunie maintient ici une
+interface explicite : les producteurs régionaux remplacent matériellement
+le descripteur, le panneau et les lignes temporelles ; le répertoire
+\eqref{act21:eq:kdes-sterm} conserve son producteur documentaire antérieur. Cette
+distinction identifie où intervient chaque antécédent. L'appartenance de
+huit mots à un répertoire temporel de lecteurs, la sélection de ces
+huit mots et la détermination de leur ordre terminal sont trois
+énoncés différents. La preuve de sélection terminale démontre le
+troisième pour le répertoire déclaré.
+
+La récupération documentaire par positions peut s'exprimer de manière
+exacte. Soit $\mathcal I$ le registre des incidences phase--charge et soit
+$\mathcal J$ le registre de l'extension affine. Chaque incidence conserve
+la position $\ell$ du mot de soixante-douze trits et le mot
+émis $u$. Pour $5\leq\ell\leq12$, on forme
+\[
+ \mathcal S_\ell=
+ \{u:(\ell,u)\in\mathcal I\cup\mathcal J\}.
+\]
+Le récupérateur vérifie que les huit positions apparaissent et que chaque
+$\mathcal S_\ell$ est un singleton. Si $s_\ell$ est son élément unique,
+la sortie livrée au sélecteur est
+\[
+ \mathcal S_{\rm term}=\{s_5,s_6,\ldots,s_{12}\}.
+\]
+La preuve de singleton par position préserve la cohérence des témoins historiques ; l'exportation ultérieure préserve les huit mots et supprime uniquement la mise en ordre historique. Le sélecteur reconstruit l'ordre par l'énumération complète et les conditions terminales, au lieu de le recevoir du registre d'origine.
+
+% RESULTADO_RECUPERADO: K31-10/P10 del inventario REV05.
+% Fuente de las incidencias:
+% 16_CIERRE_GLOBAL_HMT_MD_2026-07-22/02_LECTURA_DODECAFASICA/continuacion_fases/
+% verificar_obstruccion_y_dato_minimo_w72.py, lineas 45--60 y 141--233.
+% RESULTADO_OBSTRUCCION_Y_DATO_MINIMO_W72.json, phase_charge_reader.
+% Fuente de las bandas: N69_signatures_t0_t99.csv, tiempos impresos abajo.
+% Consumidor: PAQUETE_CONTINUIDAD_K_UNIDAD_20260918_BASE_COMPARTIDA/python/
+% selector_orbital_original.py, verify_historical_inputs, lineas 159--193.
+% No se transfiere la restriccion del lector comparativo al generador completo.
+\subsubsection{Incidences temporelles du répertoire terminal et récupération par position}
+\label{act21:sec:repertorio-incidencias-completas}
+
+La représentation du répertoire terminal utilise les mêmes blocs régionaux,
+les mêmes retenues et le même calendrier qui produisent le descripteur initial
+de vingt-quatre trits. Il convient d'expliciter séparément deux opérations de
+cette composition. La première récupère huit mots à partir d'incidences
+temporelles enregistrées. La seconde présente ces huit mots au sélecteur
+dodécaphasique comme un ensemble non ordonné. Le sélecteur rétablit
+l'ordre par ses conditions d'incidence, de cylindre et de clôture.
+Cette distinction permet de conserver les témoins de provenance sans transformer
+l'ordre d'une segmentation historique en donnée d'entrée du sélecteur.
+
+Soit $B_t=(b_{t,0},b_{t,1},b_{t,2})\in(\mathbb F_3^6)^3$ la frontière
+régionale déjà engendrée au temps $t$, avec $0\leq t<100$. Dans la coordinatisation
+utilisée par le registre historique, la matrice d'incidence est
+\[
+ A_{\mathrm{hist}}=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&1&2&2\\
+ 1&1&0&2&1&2\\
+ 1&1&2&0&2&1\\
+ 1&2&1&2&0&1\\
+ 1&2&2&1&1&0
+ \end{pmatrix}.
+\]
+Les mots sont considérés comme des vecteurs ligne. Leurs deux charges et la phase
+chronologique sont
+\[
+ r_{t,i}=\sum_{j=1}^{6}b_{t,i,j},\qquad
+ d_{t,i}=\sum_{j=1}^{6}(b_{t,i}A_{\mathrm{hist}})_j,
+ \qquad \vartheta_t=t-1\pmod 3.
+\]
+Toutes les opérations de ces trois expressions ont lieu dans
+$\mathbb F_3$. L'indice historique identifie une coordinatisation précise de
+l'incidence de Witt ; il maintient explicite la transformation de coordonnées
+lorsqu'une autre présentation de cette même incidence est utilisée.
+
+Pour $c\in\{r_t,d_t\}$, $\delta\in\mathbb F_3$ et
+$\epsilon\in\{1,-1\}$, nous définissons
+\[
+ \eta_i(c,\delta,\epsilon)=
+ \begin{cases}
+  \epsilon,&c_i=\vartheta_t+\delta,\\
+  -\epsilon,&c_i\ne\vartheta_t+\delta,
+ \end{cases}
+ \qquad
+ L_{t,c,\delta,\epsilon}
+   =\sum_{i=0}^{2}\eta_i(c,\delta,\epsilon)b_{t,i}.
+\]
+L'orientation $-1$ s'écrit $2$ lors de l'impression des coefficients
+ternaires. Outre ces douze lecteurs comparatifs par frontière, le
+registre dispose du lecteur affine
+\[
+ L^{\mathrm{af}}_t
+    =\sum_{i=0}^{2}(d_{t,i}+\vartheta_t)b_{t,i}.
+\]
+L'addition de la phase dans le lecteur affine et la comparaison des charges dans
+le lecteur précédent sont des opérations distinctes, toutes deux sur des données déjà
+produites par la frontière TPK.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rccc cc}
+\toprule
+$t$&$b_{t,0}$&$b_{t,1}$&$b_{t,2}$&$r_t$&$d_t$\\
+\midrule
+8 &200121&212212&110110&011&202\\
+11&022212&110001&100021&001&012\\
+30&210112&110202&211110&100&012\\
+34&121022&000011&112110&220&021\\
+37&120121&011202&112221&100&201\\
+49&110212&200212&100122&110&201\\
+58&111121&022121&122201&122&220\\
+67&010012&001220&011120&122&122\\
+75&220000&020111&100002&120&021\\
+81&122201&020202&201122&202&001\\
+90&022112&022110&121010&202&200\\
+\bottomrule
+\end{tabular}
+\caption{Frontières temporelles qui réalisent les incidences imprimées du
+répertoire terminal. Chaque entrée de six chiffres conserve l'ordre des
+six coordonnées de la frontière régionale.}
+\label{act21:tab:terminal-bandas-testigo}
+\end{table}
+
+Le tableau suivant déploie toutes les incidences comparatives du
+registre sur les douze blocs de la segmentation considérée. Les
+lettres $r$ et $d$ désignent respectivement la charge visible et la charge
+duale. La colonne $j$ conserve l'indice de position du témoin historique ;
+l'opération de livraison au sélecteur oublie cet indice après avoir formé
+l'ensemble de mots.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rrcrrc c}
+\toprule
+$j$&$t$&charge&$\delta$&$\epsilon$&$(\eta_0\eta_1\eta_2)$&$L_{t,c,\delta,\epsilon}$\\
+\midrule
+4&11&$d$&0& 1&212&021101\\
+5&67&$d$&1&$-1$&211&002001\\
+5&67&$d$&2& 1&211&002001\\
+5&67&$r$&1&$-1$&211&002001\\
+5&67&$r$&2& 1&211&002001\\
+6&81&$d$&0& 1&222&020111\\
+6&81&$r$&2& 1&222&020111\\
+7&34&$r$&1&$-1$&111&200110\\
+7&75&$d$&1&$-1$&211&200110\\
+7&75&$r$&2&$-1$&211&200110\\
+8&90&$r$&0& 1&121&121012\\
+8&90&$r$&1&$-1$&121&121012\\
+9&49&$d$&0&$-1$&121&010122\\
+11&11&$d$&2&$-1$&211&221110\\
+11&37&$d$&0&$-1$&121&221110\\
+12&8&$d$&0&$-1$&111&222110\\
+12&8&$r$&1&$-1$&111&222110\\
+12&58&$d$&1&$-1$&111&222110\\
+12&58&$r$&0&$-1$&111&222110\\
+\bottomrule
+\end{tabular}
+\caption{Incidences phase--charge complètes sur la segmentation terminale  
+aux cent frontières du registre. Les coïncidences de mots entre  
+lignes conservent leurs temps, orientations et types de charge.}
+\label{act21:tab:terminal-incidencias-completas}
+\end{table}
+
+Le dixième bloc dispose d'un témoin affine. Dans $t=30$ on a
+$d_{30}=(0,1,2)$ et $\vartheta_{30}=2$, d'où
+\[
+ (d_{30,0}+\vartheta_{30},d_{30,1}+\vartheta_{30},
+ d_{30,2}+\vartheta_{30})=(2,0,1)
+\]
+et, en utilisant les bandes du tableau ~\ref{act21:tab:terminal-bandas-testigo},
+\[
+ L^{\mathrm{af}}_{30}
+ =2(210112)+0(110202)+(211110)
+ =(001001)\quad\text{en }\mathbb F_3^6.
+\]
+L'égalité est coordonnée par coordonnée : avant de réduire modulo trois,  
+le vecteur de la somme est $(6,3,1,3,3,4)$.
+
+\begin{proposition}[Récupération intégrale du répertoire par incidences]
+\label{act21:prop:repertorio-terminal-ocho-incidencias}
+Considérons le registre des incidences comparatives du
+tableau~\ref{act21:tab:terminal-incidencias-completas}, augmenté du témoin
+affine $(j,t,L)=(10,30,001001)$. Pour chaque position $5\leq j\leq12$,
+l'ensemble des mots de sortie de ses incidences est un singleton. L'
+extraction de ces huit mots et l'oubli ultérieur de leur ordre
+produisent exactement
+\[
+ \mathcal S_{\mathrm{term}}=
+ \{002001,020111,200110,121012,010122,001001,221110,222110\}.
+\]
+Sa codification en tant que nombres entiers en base trois est
+\[
+ \{28,55,98,175,437,498,687,714\}.
+\]
+\end{proposition}
+\begin{proof}
+La multiplicité d'incidences par position $j=5,6,7,8,9,10,11,12$
+est, respectivement,
+\[
+ (4,2,3,2,1,1,2,4).
+\]
+À chaque position, toutes les lignes impriment le même mot. Chaque ligne se vérifie en substituant ses trois bandes et les trois coefficients dans la formule de $L$ ; le dixième cas a été calculé explicitement au moyen de $L^{\mathrm{af}}_{30}$. Par exemple, en $t=67$ et avec les coefficients $(2,1,1)$, on obtient
+\[
+ 2(010012)+(001220)+(011120)=(002001)\pmod3.
+\]
+Les huit résultats sont distincts en tant que mots de longueur six. Leur codification $\sum_{k=1}^{6}w_k3^{6-k}$ donne, dans l'ordre des positions, $(55,175,498,437,98,28,714,687)$. En oubliant l'ordre, on obtient l'ensemble des entiers énoncé. Ainsi, l'extraction préserve chaque mot complet, y compris ses positions nulles, et fournit huit éléments distincts au sélecteur.
+\end{proof}
+
+La preuve précédente est une récupération exacte à partir d'incidences
+identifiées. Sa donnée d'entrée comprend le registre d'incidences
+avec leurs positions et leurs témoins. La sélection orbitale ultérieure reçoit
+uniquement $\mathcal S_{\mathrm{term}}$ et le descripteur régional initial ;
+elle parcourt les $8!$ ordonnancements et détermine leur compatibilité avec les
+frontières fonctionnelles et les incidences orientées de la roue
+dodécaphasique. Les deux opérations sont ainsi contiguës, avec des domaines
+explicites : provenance temporelle des huit mots et détermination
+constructive de leur ordre.
+
+Le tableau comparatif contient les dix-neuf incidences que sa formule produit sur la segmentation de douze blocs aux cent temps déclarés. Cette exhaustivité finie se vérifie en parcourant $100\cdot2\cdot3\cdot2=1200$ évaluations. Le lecteur affine étend la couverture des positions terminales de sept à huit. Ce décompte caractérise le répertoire local de lecteurs qui vient d'être défini ; les autres opérations du TPK conservent les domaines et les fonctions constructives établis dans leurs dérivations respectives.
+
+\subsection{Lecteurs comparatifs, lecteur affine et incidence temporelle}
+
+\subsubsection{Transformation de Witt du sélecteur}
+
+Le sélecteur utilise la coordinatisation à six coordonnées
+\[
+ A_{\rm ter}=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix}.
+\]
+On définit $W(b)=bA_{\rm ter}$ dans $\mathbb F_3^6$, ainsi que les charges
+\[
+ \eta(b)=\sum_{j=0}^5 b_j\pmod3,
+ \qquad\eta_{\rm ter}^\vee(b)=\eta(W(b)).
+\]
+La coordinatisation du descripteur et celle du sélecteur sont reliées par la
+permutation $\sigma=(0,1,2,4,5,3)$, écrite comme liste d'images :
+\begin{equation}
+ (A_{\rm ter})_{ij}=(A_{\rm reg})_{\sigma(i),\sigma(j)}.
+ \label{act21:eq:kdes-cambio-carta}
+\end{equation}
+
+\begin{lemma}[Compatibilité de la fonctionnelle de charge]
+Pour toute bande $b$, on a
+\[
+ \eta_{\rm ter}^\vee(b)=\eta^\vee(b).
+\]
+\end{lemma}
+\begin{proof}
+La somme entière de chaque ligne correspondante des deux matrices coïncide :
+elle vaut cinq pour la première ligne et sept pour les cinq autres. Par
+distributivité,
+\[
+ \sum_j\sum_i b_i(A_{\rm ter})_{ij}
+ =\sum_i b_i\sum_j(A_{\rm ter})_{ij}
+ =\sum_i b_i\sum_j(A_{\rm reg})_{ij}.
+\]
+La réduction modulo trois donne l'égalité des charges. L'identité des matrices \eqref{act21:eq:kdes-cambio-carta} se vérifie par substitution de ses trente-six entrées et conserve, en outre, le changement de coordonnées.
+\end{proof}
+
+L'égalité de la fonctionnelle totale de charge permet de comparer ses
+représentations. Les transformations vectorielles restent identifiées
+par leurs matrices et par la permutation explicite ; la preuve précédente
+conserve cette information de coordonnées.
+
+\subsubsection{Douze lecteurs comparatifs par instant}
+
+On définit la phase temporelle
+\[
+ \theta(t)=(t+2)\bmod3.
+\]
+Cette écriture réalise également $(t-1)\bmod3$ pour $t=0$, où la phase
+vaut deux. Pour chaque type de charge
+$\nu\in\{\eta,\eta_{\rm ter}^\vee\}$, déplacement
+$o\in\{0,1,2\}$ et orientation $s\in\{1,2\}$, on prend
+\[
+ \epsilon_\chi^{\nu,o,s}(t)=s
+ \begin{cases}
+ 1,&\nu(B_\chi(t))=\theta(t)+o\pmod3,\\
+ 2,&\nu(B_\chi(t))\ne\theta(t)+o\pmod3.
+ \end{cases}
+\]
+Le mot comparatif correspondant est
+\begin{equation}
+ C_{\nu,o,s}(t)=
+ \sum_{\chi\in\{\pi,e,\varphi\}}
+ \epsilon_\chi^{\nu,o,s}(t)B_\chi(t)
+ \quad\text{en }\mathbb F_3^6.
+ \label{act21:eq:kdes-comparativo}
+\end{equation}
+Les paramètres engendrent douze représentations étiquetées par ligne. Deux
+étiquettes peuvent produire le même mot ; les témoins temporels et
+les étiquettes restent disponibles dans le calendrier complet.
+
+\subsubsection{Lecteur affine de phase et de charge}
+
+Le lecteur affine emploie des coefficients
+\[
+ a_\chi^{\rm af}(t)=\eta_{\rm ter}^\vee(B_\chi(t))+\theta(t)
+ \pmod3,
+\]
+et produit
+\begin{equation}
+ F(t)=\sum_{\chi\in\{\pi,e,\varphi\}}
+ a_\chi^{\rm af}(t)B_\chi(t)
+ \quad\text{en }\mathbb F_3^6.
+ \label{act21:eq:kdes-afin}
+\end{equation}
+La règle comparative distingue la coïncidence et la différence de charges ; la règle affine additionne charge et phase avant de combiner les bandes. C'est cette différence opératoire qu'utilise la sélection hétérotypique.
+
+\subsubsection{Incidence mot--résidu}
+
+Soit $R$ la rotation cyclique des six positions d'une bande. À la
+ligne temporelle $t$, on forme le répertoire résiduel
+\[
+ \mathcal R(t)=\{R^jv:
+      v\in\{q(t),a(t),c(t),\bar w(t)\},\ 0\leq j<6\}.
+\]
+Les relations d'incidence temporelle sont
+\begin{align}
+ \mathcal A_{\rm cmp}
+ &=\{(C_{\nu,o,s}(t),u):
+      0\leq t<100,\ u\in\mathcal R(t),\ \nu,o,s\text{ admissibles}\},\\
+ \mathcal A_{\rm af}
+ &=\{(F(t),u):0\leq t<100,\ u\in\mathcal R(t)\}.
+ \label{act21:eq:kdes-atlas}
+\end{align}
+Chaque couple relie un mot lu à un résidu de la même ligne.
+Le temps se quantifie de manière commune dans les deux coordonnées du couple.
+Dans le calendrier employé, les temps $0,\ldots,99$ sont distincts ;
+identifier une même ligne et identifier un même temps sont, par conséquent,
+des opérations équivalentes.
+
+\begin{proposition}[Compression existentielle du répertoire temporel]
+La fonction
+\[
+ M(v,u)=\mathbf1_{(v,u)\in\mathcal A_{\rm cmp}}
+        +2\mathbf1_{(v,u)\in\mathcal A_{\rm af}}
+        \in\{0,1,2,3\}
+\]
+conserve exactement l'existence de chaque type de lecture pour le couple  
+$(v,u)$.
+\end{proposition}
+\begin{proof}
+Le premier bit vaut un exactement lorsqu'il existe un temps, un champ
+résiduel, une rotation et une étiquette comparative qui produisent le couple.
+Le second bit exprime la condition correspondant au lecteur affine.
+L'union par disjonction des bits conserve chaque condition d'existence
+lors du parcours de toutes les lignes. Un couple peut admettre les deux types et, dans ce
+cas, le masque vaut trois.
+\end{proof}
+
+La fonction $M$ est un lecteur d'existence. Les temps témoins, leurs multiplicités et les étiquettes individuelles demeurent dans \eqref{act21:eq:kdes-atlas} et dans le calendrier qui les produit. L'implémentation finie emploie $M$ pour décider de l'hétérotypie, tandis que l'archive généalogique conserve les données de provenance plus riches.
+
+\subsection{Énumération de cylindres et candidats décimaux}
+
+\subsubsection{Concaténation de soixante-douze et soixante-dix-huit trits}
+
+Pour un ordonnancement $\tau=(s_1,\ldots,s_8)$ de
+$\mathcal S_{\rm term}$, on définit
+\[
+ P_{72}(\tau)=[\Omega_{24}\Vert s_1\Vert\cdots\Vert s_8]_3.
+\]
+De manière récursive, on part de $p_0=[\Omega_{24}]_3$ et on calcule
+$p_i=729p_{i-1}+[s_i]_3$ pour $1\leq i\leq8$. Cette récurrence
+conserve les zéros initiaux de chaque bloc par la multiplication
+explicite par $729$. Pour chaque position $b$ du panneau fonctionnel,
+\[
+ P_{78}(\tau,b)=729P_{72}(\tau)+b.
+\]
+Les longueurs sont respectivement $24+8\cdot6=72$ et $72+6=78$.
+Le cylindre ternaire correspondant est
+\begin{equation}
+ I_{\tau,b}=
+ \left[\frac{P_{78}(\tau,b)}{3^{78}},
+       \frac{P_{78}(\tau,b)+1}{3^{78}}\right).
+ \label{act21:eq:kdes-cilindro}
+\end{equation}
+
+\subsubsection{Intersection exacte avec la grille de douze triades}
+
+La lecture décimale utilise douze triades, c'est-à-dire la grille $N/10^{36}$. On utilise les abréviations $D=10^{36}$ et $Q=3^{78}$.
+
+\begin{lemma}[Extrémités entières du cylindre]
+Pour un préfixe entier $p$ de longueur soixante-dix-huit, les numérateurs
+des points de la grille qui appartiennent à son cylindre sont
+\begin{equation}
+ \left\{N\in\mathbb Z:
+ \left\lceil\frac{pD}{Q}\right\rceil
+ \leq N<
+ \left\lceil\frac{(p+1)D}{Q}\right\rceil\right\}.
+ \label{act21:eq:kdes-rejilla}
+\end{equation}
+Chaque cylindre contient au plus un point de cette grille.
+\end{lemma}
+\begin{proof}
+La condition $N/D\in[p/Q,(p+1)/Q)$ est équivalente à
+$pD/Q\leq N<(p+1)D/Q$. Pour $N$ entier, la première inégalité
+est équivalente à $\lceil pD/Q\rceil\leq N$ ; la seconde est équivalente à
+$N<\lceil(p+1)D/Q\rceil$. La longueur de l'intervalle en coordonnée
+$N$ est $D/Q<1$, car $10^{36}<3^{78}$. Par conséquent, il peut contenir,
+au maximum, un entier.
+\end{proof}
+
+Les plafonds sont évalués par division entière :
+$\lceil a/Q\rceil=\lfloor(a+Q-1)/Q\rfloor$ pour $a\geq0$.
+Toute l'énumération utilise des entiers exacts ; le choix des points de frontière est fixé par l'extrémité droite semi-ouverte.
+
+On conserve d'abord la liste indexée d'incidences
+\[
+ \mathcal C_{\rm ind}=
+ \{(\tau,j,N):N/D\in I_{\tau,\mathcal P_9(j)}\},
+ \qquad1\leq j\leq9,
+\]
+et l'on obtient ensuite l'ensemble des numérateurs
+\[
+ \mathcal C=\{N:\exists\tau,j\ (\tau,j,N)\in\mathcal C_{\rm ind}\}.
+\]
+Le passage à $\mathcal C$ élimine des répétitions d'un numérateur, conservées
+dans $\mathcal C_{\rm ind}$ avec leur origine.
+
+\begin{lemma}[Récupération de l'ordre à partir du point du cylindre]
+Si $(\tau,j,N)\in\mathcal C_{\rm ind}$, le bloc numéro $i$ du
+mot de soixante-dix-huit trits se récupère par
+\[
+ \left\lfloor\frac{N\,729^i}{D}\right\rfloor\bmod729,
+ \qquad1\leq i\leq13.
+\]
+En particulier, les blocs cinquième à douzième récupèrent $\tau$.
+\end{lemma}
+\begin{proof}
+L'appartenance au cylindre signifie
+$p\leq QN/D<p+1$, où $p=P_{78}(\tau,\mathcal P_9(j))$.
+Par conséquent, $\lfloor QN/D\rfloor=p$. L'extraction des blocs
+précédents coïncide avec la division successive du préfixe $p$ par
+des puissances de $729$ : tronquer une expansion positionnelle avant d'extraire
+un bloc conserve ce bloc. La formule écrite réalise
+exactement cette extraction. Les quatre premiers blocs forment
+$\Omega_{24}$ et les huit suivants sont l'ordonnancement $\tau$.
+\end{proof}
+
+\begin{proposition}[Recensement exact des candidats]
+Pour $\Omega_{24}$, $\mathcal S_{\rm term}$ et $\mathcal P_9$
+définis précédemment,
+\[
+ \#\operatorname{Ord}(\mathcal S_{\rm term})=40320,
+ \qquad\#\mathcal C_{\rm ind}=21902,
+ \qquad\#\mathcal C=19446.
+\]
+\end{proposition}
+\begin{proof}
+Les huit blocs sont distincts, donc leurs ordonnements sont les
+$8!=40320$ permutations. Pour chaque permutation et chacune des
+neuf positions du panneau, on calcule $p=P_{78}(\tau,b)$, on applique
+les extrêmes \eqref{act21:eq:kdes-rejilla} et on ajoute son unique entier lorsque
+l'intervalle entier n'est pas vide. La somme des cardinaux de ces
+intervalles est $21902$. La réunion de leurs entiers contient $19446$
+éléments distincts. L'évaluation exhaustive de ces opérations
+est certifiée par les théorèmes
+\texttt{indexed\_cylinder\_count} et \texttt{candidate\_count} du
+sélecteur fini. L'algorithme réalise exactement l'énumération
+décrite : permutations, neuf incidences du panneau, limites par
+division entière et élimination des doublons.
+\end{proof}
+
+Les nombres $21902$ et $19446$ comptent des objets différents. Le premier
+compte des incidences indexées qui contiennent un point décimal ; le second
+compte des numérateurs distincts. Le nombre total de requêtes de cylindre
+est $40320\cdot9=362880$, y compris les cylindres dont l'intersection avec
+la grille est vide.
+
+\subsection{Incidence exceptionnelle et condition d'hétérotypie}
+
+\subsubsection{Face exceptionnelle produite par le panneau}
+
+On élève une bande à douze coordonnées par le biais de
+\[
+ \Gamma(b)=(b,W(b))\in\mathbb F_3^{12}.
+\]
+Le support d'un mot est l'ensemble des positions de ses coordonnées non nulles, avec les indices humains $1,\ldots,12$. Les premières bandes régionales du panneau produisent
+\begin{equation}
+ \mathcal B=\operatorname{supp}\Gamma(B_\pi(0))
+          \cap\operatorname{supp}\Gamma(B_e(0))
+          =\{4,6,9,10\}.
+ \label{act21:eq:kdes-cara}
+\end{equation}
+L'opération utilise les mots régionaux $103$ et $523$ et la matrice de Witt du sélecteur. La face se calcule avant de consulter les coordonnées des candidats.
+
+Pour $N\in\mathcal C$, ses douze triades sont
+\begin{equation}
+ K_i(N)=\left\lfloor\frac{N}{1000^{12-i}}\right\rfloor\bmod1000,
+ \qquad1\leq i\leq12.
+ \label{act21:eq:kdes-triadas}
+\end{equation}
+Le support de couronne est
+\[
+ \mathcal H(N)=\{i:K_i(N)\geq729\},
+ \qquad
+ \mathcal C_{\mathcal B}=\{N\in\mathcal C:\mathcal H(N)=\mathcal B\}.
+\]
+La frontière $729=3^6$ relie la bande de six trits avec la triade décimale. L'évaluation exhaustive de l'égalité des supports donne
+\begin{equation}
+ \#\mathcal C_{\mathcal B}=79.
+ \label{act21:eq:kdes-79}
+\end{equation}
+Le support conserve les positions, tandis que le registre complet
+conserve aussi les douze grandeurs. L'étape suivante utilise cette
+information positionnelle conjointement avec des relations entre grandeurs.
+
+\subsubsection{Mots ternaires et différences orientées du candidat}
+
+La $i$-ième bande ternaire du point $N/D$ s'obtient par
+\begin{equation}
+ T_i(N)=\left\lfloor\frac{N\,729^i}{D}\right\rfloor\bmod729,
+ \qquad1\leq i\leq13.
+ \label{act21:eq:kdes-tercandidato}
+\end{equation}
+L'arête orientée $a\to b$ a un résidu
+\begin{equation}
+ R_{a,b}(N)=(K_a(N)-K_b(N))\bmod729.
+ \label{act21:eq:kdes-resarista}
+\end{equation}
+La soustraction s'effectue en $\mathbb Z$ avant la réduction. Pour cette
+arête, on consulte dans les relations \eqref{act21:eq:kdes-atlas} le couple
+\[
+ \bigl(\operatorname{enc}_6^{-1}(T_b(N)),
+  \operatorname{enc}_6^{-1}(R_{a,b}(N))\bigr).
+\]
+C'est donc une consultation conjointe sur le mot cible et sur la différence orientée des triades.
+
+On écrit $\mathrm{Cmp}(a,b;N)$ lorsque le couple appartient à $\mathcal A_{\rm cmp}$ et $\mathrm{Af}(a,b;N)$ lorsqu'il appartient à $\mathcal A_{\rm af}$.
+
+\subsubsection{Détermination de l'orbite transversale}
+
+Le descripteur de vingt-quatre trits détermine les trois premières triades décimales avant les filtrations terminales. En effet, son cylindre satisfait l'inclusion exacte
+\[
+ \left[\frac{66241910521}{3^{24}},
+       \frac{66241910522}{3^{24}}\right)
+ \subseteq
+ \left[\frac{234543140}{10^9},
+       \frac{234543141}{10^9}\right).
+\]
+Les deux inégalités aux extrémités se vérifient par des produits croisés
+entiers. Tout candidat partage donc les trois positions de
+référence $1,2,3$ et leurs représentations $(234,543,140)$.
+
+La translation de pas quatre sur $\mathbb Z/12\mathbb Z$ possède les
+quatre orbites
+\[
+ (1,5,9),\qquad(2,6,10),\qquad(3,7,11),\qquad(4,8,12).
+\]
+Les trois premières contiennent respectivement l'une des positions de référence ; la quatrième est la seule disjointe de $\{1,2,3\}$. La forêt orientée des pas trois et quatre est fixée au moyen des arêtes
+\[
+ \begin{array}{lll}
+ 1\to4,&1\to5,&2\to6,\\
+ 3\to7,&4\to8,&5\to9,\\
+ 6\to10,&7\to11,&8\to12.
+ \end{array}
+\]
+Sa première arête a un pas de trois et les autres ont un pas de quatre. Les deux
+arêtes internes de l'orbite distinguée sont précisément
+$4\to8$ et $8\to12$. Ainsi est fixé le lieu de la condition de
+lecture par la géométrie des positions et par le préfixe initial,
+avant d'examiner les candidats de la face exceptionnelle.
+
+\subsubsection{Condition terminale d'hétérotypie}
+
+La condition terminale est
+\begin{equation}
+ \begin{split}
+ \mathcal T(N)={}&
+ [\mathrm{Cmp}(4,8;N)\wedge\mathrm{Af}(8,12;N)]\\
+ &\vee[\mathrm{Af}(4,8;N)\wedge\mathrm{Cmp}(8,12;N)].
+ \end{split}
+ \label{act21:eq:kdes-heterotipia}
+\end{equation}
+Les deux affectations de types aux deux arêtes sont admises. La
+sélection exige qu'il existe une réalisation de types distincts ; les
+étiquettes individuelles et leurs temps restent disponibles dans les
+témoins d'incidence.
+
+\begin{theorem}[Sélection terminale du registre de couplage]
+Sur le domaine de candidats produit par
+$\Omega_{24}$, $\mathcal S_{\rm term}$, $\mathcal P_9$ et le calendrier
+régional de cent lignes, existe un unique numérateur qui satisfait
+simultanément l'incidence exceptionnelle et l'hétérotypie :
+\[
+ \{N\in\mathcal C_{\mathcal B}:\mathcal T(N)\}
+ =\{234543140729659824621058914794146601\}.
+\]
+Son registre de douze triades est
+\begin{equation}
+ K=(234,543,140,729,659,824,621,058,914,794,146,601).
+ \label{act21:eq:kdes-kfinal}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Le recensement précédent produit les $79$ éléments de
+$\mathcal C_{\mathcal B}$. Pour chacun, on extrait ses douze
+coordonnées par \eqref{act21:eq:kdes-triadas} ; on calcule les bandes de
+destination $T_8,T_{12}$ et les résidus $R_{4,8},R_{8,12}$ ; on consulte
+les deux masques du répertoire temporel et on applique la disjonction
+\eqref{act21:eq:kdes-heterotipia}. La liste résultante contient exactement
+l'entier indiqué, selon l'évaluation exhaustive certifiée par
+\texttt{terminal\_selection}. L'égalité de liste avec un singleton
+implique existence et unicité dans le domaine déclaré. L'extraction
+base mille de cet entier donne \eqref{act21:eq:kdes-kfinal}.
+
+La procédure de sélection reçoit les producteurs et les règles énumérées. L'entier final intervient dans l'énoncé de l'égalité vérifiée, après avoir exécuté la sélection. Cette position logique permet de comparer le résultat sans l'utiliser comme critère de choix.
+\end{proof}
+
+\subsubsection{Témoin arithmétique d'appartenance à un cylindre}
+
+Une des incidences du numérateur sélectionné utilise la mise en ordre
+\[
+ (002001,020111,200110,121012,010122,001001,221110,222110)
+\]
+et la frontière $438=121020_3$. Pour elle,
+\[
+ P_{72}=5283881584882673136514102926090957,
+\]
+\[
+ P_{78}=3851949675379468716518781033120308091.
+\]
+La formule des extrémités entières produit
+\begin{align*}
+ \left\lceil\frac{P_{78}10^{36}}{3^{78}}\right\rceil
+ &=234543140729659824621058914794146601,\\
+ \left\lceil\frac{(P_{78}+1)10^{36}}{3^{78}}\right\rceil
+ &=234543140729659824621058914794146602.
+\end{align*}
+L'unique entier de l'intervalle est donc $N_K$. Les treize bandes ternaires de son point décimal sont
+\[
+ \begin{array}{rrrr}
+ 020022&222111&211201&021101\\
+ 002001&020111&200110&121012\\
+ 010122&001001&221110&222110\\
+ 121020&&&
+ \end{array}
+\]
+Ce calcul exhibe un témoin concret d'appartenance au domaine énuméré. L'unicité du registre procède de l'examen exhaustif de tous les candidats, outre ce témoin particulier.
+
+\subsection{Composition régionale et continuité des réalisations}
+
+\subsubsection{Composition des générateurs régionaux}
+
+Soit $\operatorname{Sel}(\Omega,\mathcal S,\mathcal P,\mathcal N)$ le
+sélecteur défini par l'énumération et les deux filtres précédents.
+Les producteurs régionaux satisfont les égalités
+\[
+ \Omega_{\rm reg}=\Omega_{24},\qquad
+ \mathcal P_{\rm reg}=\mathcal P_9,\qquad
+ \mathcal N_{\rm reg}=\mathcal N_{100},
+\]
+où $\mathcal N_{\rm reg}$ se calcule par extraction de bandes et
+lecture de signatures. Par congruence de fonctions,
+\begin{equation}
+ \begin{split}
+ &\operatorname{Sel}(\Omega_{\rm reg},\mathcal S_{\rm term},
+                    \mathcal P_{\rm reg},\mathcal N_{\rm reg})\\
+ &\hspace{10mm}=
+ \operatorname{Sel}(\Omega_{24},\mathcal S_{\rm term},
+                    \mathcal P_9,\mathcal N_{100})=\{N_K\}.
+ \end{split}
+ \label{act21:eq:kdes-composicion}
+\end{equation}
+L'égalité remplace trois interfaces documentaires par leur construction
+régionale effective. Le répertoire terminal conserve la provenance
+spécifiée dans \eqref{act21:eq:kdes-sterm}.
+
+Le registre se forme alors par les douze divisions euclidiennes de
+\eqref{act21:eq:kdes-triadas}. Chaque coordonnée appartient à
+$\{0,\ldots,999\}$ et la longueur est douze par construction. L'
+implémentation qui prend le premier élément de la liste sélectionnée
+est justifiée par l'égalité avec le singleton : la valeur par défaut
+d'une opération informatique sur des listes vides n'intervient jamais dans
+ce résultat.
+
+\subsubsection{Relation avec les incidences signées et l'inversion}
+
+La construction présente fournit une sélection prospective dans un
+domaine fini explicite. Le développement ultérieur du registre
+dodécaphasique produit ses canaux orientés à partir de l'état
+terminal enrichi et démontre une inversion intégrale par
+Hadamard. Cette inversion récupère un registre à partir de canaux
+compatibles ; ici, on sélectionne un registre à partir de ses
+antécédents régionaux et incidentiels. L'égalité de ses résultats
+permet de composer les deux réalisations en maintenant l'origine de chaque
+opération.
+
+L'unicité de sélection et l'unicité d'inversion sont des propriétés distinctes. La première quantifie les candidats construits dans ce chapitre. La seconde quantifie les registres qui partagent une signature compatible. Leur conjonction justifie que le registre sélectionné puisse être transporté vers la réalisation signée et être récupéré à partir d'elle, sans convertir une récupération rétrospective en producteur du registre.
+
+\subsubsection{Relation entre les recensements terminaux}
+\label{act21:sec:relacion-censos}
+
+La suite
+\[
+ 40320\ \longrightarrow\ 21902\ \longrightarrow\ 19446
+ \ \longrightarrow\ 79\ \longrightarrow\ 1
+\]
+enregistre successivement des ordonnancements, des incidences indexées avec la grille, des numérateurs distincts, des candidats de la face exceptionnelle et des survivants hétérotypiques. La notation à flèches indique l'ordre des opérations ; le deuxième nombre compte une classe d'objets différente de la première.
+
+Le recensement des catalogues régionaux
+$196\cdot197\cdot196\longrightarrow331\longrightarrow2
+\longrightarrow1$, développé à l'endroit correspondant, part d'une
+autre population : blocs régionaux de trois catalogues et conditions
+terminales de Gram, d'occupation, de distance et d'orientation. Les deux recensements
+conservent leurs domaines. Leur convergence vers une même représentation
+s'exprime par l'identification de leurs lecteurs et de leurs sorties ;
+les chiffres intermédiaires décrivent des opérations différentes et restent
+documentés séparément.
+
+\subsubsection{Composition régionale de la constante de structure fine}
+
+La sortie $K$ intervient ensuite dans la composition régionale
+ordonnée et dans la retenue en base mille. Son emploi ultérieur conserve les
+douze positions et la frontière de lecture. Le couplage avec la racine
+analytique et les représentations à profondeur arbitraire utilise cette
+même sortie, avec les coordonnées régionales déjà engendrées et les
+règles de la coordinatisation analytique. Cette dépendance prépare le chapitre
+consacré aux deux réalisations corrélées de la constante de
+structure fine.
+
+La portée de ce chapitre est précise : production du descripteur et de ses antécédents régionaux, détermination du domaine fini, sélection unique sur ce domaine et composition matérielle avec les producteurs. La récurrence analytique de tous les degrés et la compatibilité des retenues infinies sont développées ensuite avec leurs démonstrations propres.
+
+\subsection{Certification exécutable et traçabilité des opérations}
+
+Le développement formel conserve la correspondance entre les
+définitions mathématiques et leurs réalisations exécutables. Les preuves
+des signatures et de l'horloge se trouvent dans
+\texttt{N69RegionalSignature.lean} ; l'extraction des bandes et la
+reproduction des cent lignes, dans
+\texttt{GeneratedN69Rows.lean} ; le critère minimal et la construction
+de $\Omega_{24}$, dans \texttt{RegionalW24.lean}. La compatibilité des
+deux matrices de Witt est réunie dans
+\texttt{WittReaderCompatibility.lean}.
+
+Les lecteurs temporels, les rotations, les résidus orientés et la
+condition hétérotypique sont formalisés dans
+\texttt{TerminalReaders.lean}. L'énumération et les recensements sont
+formalisés dans \texttt{Terminal}\allowbreak\texttt{Orbital}\allowbreak\texttt{Selection.lean}. Le panneau
+régional se relie par \texttt{Regional}\allowbreak\texttt{Panel}\allowbreak\texttt{Bridge.lean}, et la
+composition \eqref{act21:eq:kdes-composicion} s'exprime en
+\texttt{Selected}\allowbreak\texttt{From}\allowbreak%
+\texttt{Regional}\allowbreak\texttt{Inputs.lean}.
+
+Les vérifications finies d'énumération utilisent l'évaluation native de Lean ; leurs rapports enregistrent \texttt{Lean.ofReduceBool}, ainsi que les axiomes logiques habituels de la bibliothèque. La reconstruction régionale du descripteur utilise des preuves du noyau et une réduction ordinaire. Cette distinction décrit les mécanismes de vérification réellement employés. Les reçus de compilation certifient ses modules et dépendances déclarés ; les preuves mathématiques conservent les domaines, producteurs et hypothèses qui ont été explicités dans le corps du chapitre.

@@ -1,0 +1,318 @@
+% Antecedentes recuperados. Fragmento autónomo en sus definiciones;
+% requiere amsmath, amssymb, amsthm, booktabs y longtable del documento principal.
+\section{Réalisation finie du transport avec mémoire de phase}
+\label{iii:hist:antecedentes}
+
+Les deux développements suivants réunissent des mécanismes complémentaires de la
+construction : un transfert fini sur des positions APP, des modes et une phase,
+et une collection de lecteurs cinématiques et constitutifs sur deux canaux
+angulaires. Chaque réalisation conserve son espace d’états, ses opérations
+et ses paramètres. L’opérateur fini a le domaine défini
+ci-dessous ; le TPK enrichi du corps principal conserve en outre ses
+propres coordonnées et prolongements. Les lecteurs réciproques sont présentés
+comme des réalisations auxiliaires avec des formules et un domaine déclarés.
+
+\subsection{Transfert fini sur les positions, les modes et la phase}
+\label{iii:hist:transferencia}
+
+Soit $\operatorname{dr}_9(n)$ le représentant dans $\{1,\ldots,9\}$ de
+$n\bmod9$, avec $9$ comme représentant du résidu nul. Aux positions
+$i,j\in\{0,\ldots,8\}$, on considère les deux tables
+\[
+ A_+(i,j)=\operatorname{dr}_9(i+j+2),\qquad
+ A_\times(i,j)=\operatorname{dr}_9((i+1)(j+1)).
+\]
+Les entrées évaluées ici sont des entiers positifs. Ainsi, la convention
+historique alternative $\operatorname{dr}_9(0)=0$ n’intervient pas dans ces tables.
+L’état fini est
+\[
+ \Omega=(\mathbb Z/9\mathbb Z)^2\times\{+,\times\}
+ \times\{N,E,S,O\}\times\mathbb Z/3\mathbb Z,
+ \qquad |\Omega|=1944.
+\]
+Nous écrivons $x=(i,j,m,d,\tau)$. La transition conserve l’ordre suivant :
+on choisit $d'$, on déplace la position, on lit APP avec le mode antérieur,
+on réduit la lecture modulo $3$, on met à jour le mode et on avance la phase.
+Avec
+\[
+ \delta_N=(-1,0),\quad\delta_E=(0,1),\quad
+ \delta_S=(1,0),\quad\delta_O=(0,-1),
+\]
+les opérations sont
+\begin{align*}
+ (i',j')&=(i,j)+\delta_{d'}\pmod9,\\
+ a&=A_m(i',j')\pmod3,\\
+ m'&=\begin{cases}+,&a=1,\\\times,&a=2,\\m,&a=0,\end{cases}
+ &\tau'&=\tau+1\pmod3.
+\end{align*}
+Ainsi, $F_{d'}(x)=(i',j',m',d',\tau')$. Le coût de rotation et de changement de mode est
+\[
+ c_\lambda(x,d')=\mathbf1_{d'\ne d}+\lambda\mathbf1_{m'\ne m},
+ \qquad \beta>0,\quad\lambda\geq0,
+\]
+et l’opérateur agit sur la base d’états par
+\begin{equation}
+ T_{\beta,\lambda}e_x
+ =\sum_{d'\in\{N,E,S,O\}}
+ e^{-\beta c_\lambda(x,d')}e_{F_{d'}(x)}.
+ \label{iii:hist:T}
+\end{equation}
+Les paramètres $\beta,\lambda$ sont des paramètres déclarés de ce modèle
+fini. La table de référence utilise $(\beta,\lambda)=(1,1)$ ; le cas
+$\lambda=0$ appartient aux tests de sensibilité.
+
+\begin{proposition}[Équivariance de l’antécédent fini]
+\label{iii:hist:equivarianza}
+L’action
+\[
+ \Phi_{u,v,w}(i,j,m,d,\tau)
+ =(i+3u,j+3v,m,d,\tau+w),\qquad
+ (u,v,w)\in(\mathbb Z/3\mathbb Z)^3,
+\]
+commute avec $T_{\beta,\lambda}$.
+\end{proposition}
+\begin{proof}
+On a $\operatorname{dr}_9(n)\equiv n\pmod3$. Par conséquent,
+$A_+(i,j)\equiv i+j+2$ et
+$A_\times(i,j)\equiv(i+1)(j+1)\pmod3$.
+La translation par des multiples de trois préserve les deux lectures réduites.
+Elle commute également avec le déplacement choisi et préserve le mode antérieur,
+le mode postérieur et les deux directions. Elle conserve par conséquent chaque
+indicateur du coût. Enfin, ajouter $w$ à la phase commute avec l’ajout d’une
+unité. Chaque transition et son poids sont transportés vers la transition et le poids
+correspondants ; la somme dans \eqref{iii:hist:T} conserve cette égalité.
+\end{proof}
+
+\begin{theorem}[Décomposition complète par caractères]
+\label{iii:hist:descomposicion}
+Pour $\omega=e^{2\pi i/3}$, l’espace $\mathbb C^\Omega$ se décompose
+unitairement en vingt-sept sous-espaces de dimension $72$. Ses blocs
+satisfont
+\[
+ T(k_a,k_b,k_t)=\omega^{k_t}T(k_a,k_b,0),
+ \qquad k_a,k_b,k_t\in\{0,1,2\}.
+\]
+\end{theorem}
+\begin{proof}
+Nous écrivons $i=3a+r$, $j=3b+s$, avec $a,b,r,s\in\{0,1,2\}$.
+Chaque fibre fine $u=(r,s,m,d)$ a $27$ états $(a,b,\tau)$.
+Nous définissons l’isométrie $U_k:\mathbb C^{72}\to\mathbb C^\Omega$ par
+\[
+ U_ke_u=\frac1{\sqrt{27}}
+ \sum_{a,b,\tau=0}^2
+ \omega^{-(k_aa+k_bb+k_t\tau)}e_{(3a+r,3b+s,m,d,\tau)}.
+\]
+L’orthogonalité des caractères prouve $U_k^*U_\ell=\delta_{k\ell}I$ et
+$\sum_kU_kU_k^*=I$. Si une transition franchit des frontières fines avec des accroissements
+grossiers $\Delta a,\Delta b$, son coefficient dans $U_k^*TU_k$ est
+\[
+ e^{-\beta c_\lambda}\omega^{k_a\Delta a+k_b\Delta b+k_t}.
+\]
+Cela démontre $TU_k=U_kT(k)$ et la décomposition de l’opérateur. L’accroissement
+temporel vaut toujours un, de sorte que le dernier facteur peut être extrait de
+tout le bloc. Lorsque l’on élève au cube, ce facteur temporel disparaît, bien que
+les caractères spatiaux conservent leur fonction.
+\end{proof}
+
+La décomposition précédente repose sur l’équivariance et l’orthogonalité
+des caractères. La non-négativité du bloc trivial garantit en outre une
+valeur propre réelle non négative égale au rayon spectral. Cette propriété
+s’applique à l’espace complet, en conservant également ses états transitoires.
+
+\subsection{Décomposition spectrale et sensibilité paramétrique}
+\label{iii:hist:espectros}
+
+Soient $\rho_1\geq\rho_2$ les deux plus grands modules, comptés avec
+multiplicité, et $g=\rho_1-\rho_2$. Le tableau suivant contient les
+neuf blocs spatiaux ; le théorème précédent détermine les vingt-sept
+blocs temporels complets : pour chaque ligne et chaque $t=0,1,2$, la valeur propre
+dominante est $\omega^t\mu_1(k_a,k_b,0)$, tandis que $\rho_1,\rho_2,g$
+restent identiques. Cette forme conserve explicitement les trois phases.
+Dans ce premier tableau, on fixe $\beta=\lambda=1$.
+
+\begin{center}
+\small
+\begin{tabular}{ccrrrr}
+\toprule
+$k_a$&$k_b$&$\mu_1(k_a,k_b,0)$&$\rho_1$&$\rho_2$&$g$\\
+\midrule
+0&0&1.730888896&1.730888896&1.083076285&0.647812612\\
+0&1&1.459962951&1.459962951&1.116843785&0.343119167\\
+0&2&1.459962951&1.459962951&1.116843785&0.343119167\\
+1&0&1.459962951&1.459962951&1.116843785&0.343119167\\
+1&1&-1.508515719&1.508515719&1.001353790&0.507161929\\
+1&2&-1.514010372&1.514010372&0.971977167&0.542033205\\
+2&0&1.459962951&1.459962951&1.116843785&0.343119167\\
+2&1&-1.514010372&1.514010372&0.971977167&0.542033205\\
+2&2&-1.508515719&1.508515719&1.001353790&0.507161929\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Les signes des valeurs propres dominantes et leurs phases font partie de la
+sortie : les quatre secteurs avec $k_a,k_b\ne0$ ont une valeur dominante réelle négative
+pour $k_t=0$. Son module conserve le taux spectral et son signe conserve une
+information supplémentaire qui intervient lors de la composition des itérations.
+
+Les cinq applications complètes de sensibilité, avec les lignes $k_a$ et les colonnes
+$k_b$, sont les suivantes ; toutes correspondent à $k_t=0$ :
+\begin{align*}
+\rho(1,1)&=\begin{pmatrix}
+1.730888896&1.459962951&1.459962951\\
+1.459962951&1.508515719&1.514010372\\
+1.459962951&1.514010372&1.508515719
+\end{pmatrix},\\
+\rho(1,0)&=\begin{pmatrix}
+2.103638324&1.685504327&1.685504327\\
+1.685504327&1.853245966&1.853245966\\
+1.685504327&1.853245966&1.853245966
+\end{pmatrix},\\
+\rho(1,2)&=\begin{pmatrix}
+1.656915306&1.433869155&1.433869155\\
+1.433869155&1.423885161&1.432116157\\
+1.433869155&1.432116157&1.423885161
+\end{pmatrix},\\
+\rho(0.5,1)&=\begin{pmatrix}
+2.480049445&2.124801655&2.124801655\\
+2.124801655&2.281861809&2.286772914\\
+2.124801655&2.286772914&2.281861809
+\end{pmatrix},\\
+\rho(2,1)&=\begin{pmatrix}
+1.226049377&1.131390710&1.131390710\\
+1.131390710&1.028041508&1.028201900\\
+1.131390710&1.028201900&1.028041508
+\end{pmatrix}.
+\end{align*}
+Ici, $\rho(\beta,\lambda)$ désigne l’application des rayons, non l’opérateur de
+transfert. L’échange $i\leftrightarrow j$ accompagné de l’échange
+correspondant des directions préserve APP, les transitions et le coût ;
+ces applications sont donc symétriques. La variation des paramètres modifie les rayons tout en maintenant
+la décomposition par caractères, qui dépend de la symétrie des
+opérations. Les tableaux montrent des approximations numériques de spectres
+finis. Les identités de transition, d’équivariance et de factorisation
+reposent sur les preuves précédentes ; leurs conséquences numériques sont
+conservées avec les données complètes des vingt-sept composantes.
+
+\subsection{Lecteurs réciproques et tests de sensibilité}
+\label{iii:hist:n6d}
+
+Pour reproduire la réalisation angulaire antécédente, on conserve les mesures
+numériques décimales en degrés
+\[
+ a_{\mathrm h}=7.297352569283802,\qquad
+ c_{\mathrm h}=2.123738338968646.
+\]
+Les angles et la coordonnée adimensionnelle correspondante sont distingués par
+\[
+ A_{\mathrm h}=a_{\mathrm h}{}^\circ,\qquad
+ C_{\mathrm h}=c_{\mathrm h}{}^\circ,\qquad
+ \alpha_{\mathrm h}=a_{\mathrm h}/1000.
+\]
+Ces données permettent de confronter l’antécédent ; les constantes du développement
+en vigueur conservent leur génération antérieure APP--TRIT--TPK et leur représentation
+ultérieure. La reproduction historique ne remplace pas cette génération par les
+décimales écrites ici. La conversion angulaire et les canaux utilisés sont
+\[
+ x_{\mathrm h}=\frac{\pi a_{\mathrm h}}{180},\qquad
+ y_{\mathrm h}=\frac{\pi c_{\mathrm h}}{180},\qquad
+ q_\pm=e^{-(x_{\mathrm h}\pm y_{\mathrm h})},
+ \qquad0<q_+<q_-<1.
+\]
+Le premier lecteur exprime
+\[
+ \epsilon_{90}=q_-^{90}-q_+^{90},\qquad
+ c_\pm=\frac{c_{\mathrm{ref}}}{1\pm\epsilon_{90}}.
+\]
+Ici, $c_{\mathrm{ref}}$ ne fait que normaliser le test cinématique. Pour reproduire
+ses unités, la même valeur de référence historique a été utilisée,
+$299792458\,\mathrm{m\,s^{-1}}$.
+
+\begin{proposition}[Moyenne harmonique et produit de deux feuillets]
+\label{iii:hist:lectores}
+Si $|\epsilon_{90}|<1$, la moyenne harmonique de $c_+$ et $c_-$ est
+$c_{\mathrm{ref}}$. Dans le lecteur constitutif historique
+\[
+ \mu_{\mathrm h}^{\pm}=e^{\pm2\alpha_{\mathrm h}},\qquad
+ \varepsilon_{\mathrm h}^{\pm}=e^{\mp2\alpha_{\mathrm h}},
+\]
+on a $\mu_{\mathrm h}^{\pm}\varepsilon_{\mathrm h}^{\pm}=1$ et
+$Z_+/Z_-=e^{4\alpha_{\mathrm h}}$.
+\end{proposition}
+\begin{proof}
+La somme $c_+^{-1}+c_-^{-1}=2/c_{\mathrm{ref}}$ élimine le terme orienté.
+Dans chaque feuillet, la somme des deux exposants constitutifs est nulle.
+D’autre part, $Z_\pm=\sqrt{\mu_{\mathrm h}^{\pm}/
+\varepsilon_{\mathrm h}^{\pm}}=e^{\pm2\alpha_{\mathrm h}}$.
+Le quotient des impédances conserve donc l’orientation qu’élimine
+le produit constitutif.
+\end{proof}
+
+Le deuxième lecteur historique provient de séries géométriques convergentes :
+\begin{align*}
+ S_a(q)&=\frac{q^a}{1-q^{3a}}
+       =\sum_{j\geq0}q^{a(1+3j)},\\
+ \delta_{a,b}(q)&=S_a(q)-S_b(q),\\
+ R_{a,b}&=\frac{\delta_{a,b}(q_-)-\delta_{a,b}(q_+)}
+ {q_-^a-q_+^a}.
+\end{align*}
+La convergence est valable pour $|q|<1$ ; le dénominateur du dernier quotient est
+positif pour les canaux et les entiers positifs considérés. Les lecteurs
+auxiliaires historiques sont
+\[
+ \zeta_{12}=1-R_{90,120}^2,\qquad
+ \Delta_{4,\mathrm h}=\frac{x_{\mathrm h}-y_{\mathrm h}}{810}
+ \left(1-\frac{7\pi}{12\cdot729}\right),\qquad
+ \xi_{\mathrm h}=1-\frac{27}{160}\Delta_{4,\mathrm h}.
+\]
+L’indice $\mathrm h$ maintient explicite cette définition historique de la
+torsion, en évitant de l’identifier par le symbole à un autre lecteur en vigueur.
+
+L’évaluation à partir des chaînes décimales déclarées donne
+\begin{align*}
+ q_+&=0.848377942576404356\ldots,&
+ q_-&=0.913660151150557274\ldots,\\
+ \epsilon_{90}&=0.000295169439289827959\ldots,&
+ R_{90,120}&=0.933314535237713061\ldots,\\
+ \zeta_{12}&=0.128923978314011665\ldots,&
+ \xi_{\mathrm h}&=0.999981235497802379\ldots.
+\end{align*}
+Le tableau complet des perturbations discrètes est
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$a$&$b$&$R_{a,b}$\\\midrule
+90&120&0.933314535238\\
+90&119&0.927013603649\\
+90&121&0.939071551912\\
+89&120&0.939066204789\\
+91&120&0.927019444194\\
+30&40&0.569215041549\\
+60&80&0.834174862952\\
+\bottomrule
+\end{tabular}
+\end{center}
+La sensibilité angulaire distingue les deux coordonnées de la paire :
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Variable&Variation relative&$R_{90,120}$&Variation en ppm\\\midrule
+$A_{\mathrm h}$&$-0.001$&0.933059250359&$-273.525022305$\\
+$A_{\mathrm h}$&$+0.001$&0.933568846564&$+272.481908792$\\
+$C_{\mathrm h}$&$-0.001$&0.933388163678&$+78.889202964$\\
+$C_{\mathrm h}$&$+0.001$&0.933240822366&$-78.979667757$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Les évaluations ont été réalisées avec $80$ et $120$ chiffres de précision à partir
+des chaînes décimales déclarées. La précision de l’évaluation conserve
+la spécification finie de ces données angulaires.
+
+Enfin, ces lecteurs maintiennent leur place dans la généalogie documentaire.
+L’opérateur constitutif en vigueur
+$V=(I-T^{90})(I-T^{120})^{-1}$ évalue
+$(1-q_\pm^{90})/(1-q_\pm^{120})$ dans ses deux feuillets. La fonctionnelle orientée
+en vigueur utilise $12S_{90}-S_{120}$. La réalisation antécédente conserve le lecteur
+$S_{90}-S_{120}$ et sa normalisation par $q_-^{90}-q_+^{90}$.
+La relation entre eux s’exprime en maintenant chaque opération et ses poids,
+au lieu de les remplacer par un nombre unique ou un même symbole.

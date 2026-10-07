@@ -1,0 +1,92 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/libro/certificacion_lean.tex
+\chapter*{Formalización aritmética del balance bilateral}
+\addcontentsline{toc}{section}{Formalización aritmética del balance bilateral}
+\label{x_reciprocidad:libro:formalizacion-lean}
+
+La especialización nonádica de la ley bilateral admite una formalización
+aritmética independiente. El punto de aplicación se encuentra después de la
+construcción de sus coeficientes y transportes: la partición de base diez fija
+\(a=8\), y los dos registros son \(8x-y\) y \(9x+y\). Sobre ese dominio,
+Lean~4.21.0 verifica siete teoremas con su biblioteca \texttt{Std}. Las fuentes
+formales y el procedimiento de ejecución se proporcionan como suplemento.
+El presente complemento enuncia su contenido matemático y lo relaciona con
+las demostraciones operatorias del artículo.
+
+\section*{Identidad polinómica y conservación de la norma}
+
+Para cualesquiera \(x,y\in\mathbb Z\), se cumple
+\[
+ 9(8x-y)^2+8(9x+y)^2=17(72x^2+y^2).
+\]
+La expansión de los dos cuadrados cancela los productos cruzados. Cuando
+\(y^2=x^2\), la misma igualdad da
+\[
+ 9(8x-y)^2+8(9x+y)^2=17\cdot73\,x^2.
+\]
+Éstos son los dos primeros teoremas formalizados. El primero expresa un
+balance para entradas enteras arbitrarias; el segundo aplica la hipótesis
+explícita de conservación de la norma. El entero \(73=72+1\) ocupa
+exactamente el lugar que tiene en la \cref{x_reciprocidad:lib04:teo-balance}.
+
+\section*{Dimensión finita arbitraria}
+
+Sean \(n\in\mathbb N\) y \(x,y:\mathbb N\to\mathbb Z\). Definamos
+\[
+ S_n(x)=\sum_{j<n}x_j^2,
+ \qquad
+ E_n(x,y)=\sum_{j<n}\bigl(9(8x_j-y_j)^2+8(9x_j+y_j)^2\bigr).
+\]
+Los dos teoremas siguientes establecen
+\[
+ E_n(x,y)=17\bigl(72S_n(x)+S_n(y)\bigr)
+\]
+y, bajo la hipótesis \(S_n(y)=S_n(x)\),
+\[
+ E_n(x,y)=17\cdot73\,S_n(x).
+\]
+La prueba formal procede por inducción sobre \(n\). El caso inicial es la
+suma vacía; el paso de inducción añade una coordenada y aplica la identidad
+polinómica ya demostrada. El cuantificador universal sobre \(n\) incluye
+todas las dimensiones finitas. La hipótesis utiliza la suma total de
+cuadrados, por lo que admite redistribuciones entre coordenadas.
+
+\section*{Inversión exacta de los canales bilaterales}
+
+Escribamos \(q_-=8x-y\) y \(q_+=9x+y\). Los teoremas quinto y sexto
+son las igualdades exactas
+\[
+ q_-+q_+=17x,\qquad 8q_+-9q_-=17y.
+\]
+En la imagen de la aplicación \((x,y)\mapsto(q_-,q_+)\), ambos miembros
+izquierdos son múltiplos de \(17\). Las divisiones recuperan las dos
+entradas. El séptimo teorema formula su consecuencia inyectiva:
+\[
+ \left.
+ \begin{aligned}
+ 8x-y&=8x'-y',\\
+ 9x+y&=9x'+y'
+ \end{aligned}
+ \right\}
+ \quad\Longrightarrow\quad x=x'\ \text{y}\ y=y'.
+\]
+La cancelación en \(\mathbb Z\) justifica esta conclusión. El contenido
+formal coincide con la recuperación del par de registros, antes de
+normalizarlos como canales de una realización métrica.
+
+\section*{Correspondencia entre demostración algebraica y formalización}
+
+La formalización utiliza variables enteras arbitrarias e inducción
+matemática. Por ello constituye una prueba de los enunciados anteriores,
+distinta de la comprobación de un conjunto finito de ejemplos. El sistema
+acepta los términos de prueba sin declaraciones axiomáticas añadidas ni
+demostraciones diferidas. El suplemento registra asimismo las dependencias
+lógicas comunicadas por la herramienta para cada declaración.
+
+La ley operatoria del cuerpo del artículo posee un dominio más amplio:
+isometrías entre espacios de Hilbert, archivo de profundidad arbitraria y
+lectores conjugados. Sus demostraciones se encuentran en las
+\cref{x_reciprocidad:lib04:teo-balance,x_reciprocidad:lib06:simetria,x_reciprocidad:lib06:profundidad}. La prueba Lean
+aquí incorporada certifica la especialización aritmética enunciada, con
+sus cuantificadores y su estructura de partida. La procedencia de los
+coeficientes, la generación del registro y las realizaciones excepcionales
+conservan las demostraciones anteriores de las que dependen.

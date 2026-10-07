@@ -1,0 +1,652 @@
+\section{Prolongation monodromique et calcul à profondeur prescrite}
+\label{sec:generacion-monodromica-certificada-rev7}
+\index{monodromie nonadique}\index{génération structurelle}
+
+La construction part de l'état enrichi produit par
+\(\mathrm{APP}\to\mathrm{TRIT}\to\mathrm{TPK}\) : catalogue actif de
+\(468\) émissions, projection ternaire, action \(D_3\), calibre
+d'orientation, registre de transitions de rang plein, caractères de
+clôture, de propagation et d'auto-échelle, cylindres ternaires, phase nonadique et
+ombre de Paley--Witt. Le registre reconstruit de manière unique les
+relèvements \(L_0,L_1\) avant d'ouvrir la carte archimédienne. Aucun
+chiffre de \(\pi\), de \(e\) ou de \(\varphi\) n'est reçu en entrée du générateur.
+
+\subsection{Première prolongation et frontière coinductive}
+
+Le recensement exhaustif sélectionne les mots
+\[
+ w_6^\pi=010211,\qquad
+ w_6^e=201101,\qquad
+ w_6^\varphi=121200.
+\]
+Avec des vecteurs lignes sur \(\mathbb F_3^6\), les deux élévations reconstruites
+sont
+\[
+L_0=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix},
+\qquad
+L_1=
+\begin{pmatrix}
+2&1&2&0&2&2\\
+1&2&1&1&2&0\\
+1&2&1&1&1&2\\
+0&1&0&0&2&1\\
+2&0&2&1&0&1\\
+0&2&2&2&1&1
+\end{pmatrix}.
+\]
+Soient \(B^{\mathsf C}\), \(B^{\mathsf P}\) et \(B^{\mathsf A}\) les
+biographies structurelles de clôture, de propagation et d'auto-échelle qui sont
+publiées ci-dessous, décomposées en blocs
+\(b_0^\chi|\cdots|b_4^\chi\). Formons
+\[
+ \begin{aligned}
+ X_0&=(b_0^{\mathsf C},b_1^{\mathsf C},
+       b_0^{\mathsf P},b_1^{\mathsf P},
+       b_0^{\mathsf A},b_1^{\mathsf A})^T,\\
+ Y_0&=(b_1^{\mathsf C},b_2^{\mathsf C},
+       b_1^{\mathsf P},b_2^{\mathsf P},
+       b_1^{\mathsf A},b_2^{\mathsf A})^T,
+ \end{aligned}
+\]
+et, de manière analogue, \(X_1,Y_1\) avec les transitions
+\(b_2\to b_3\) et \(b_3\to b_4\). Chaque bloc s'obtient par la projection
+ternaire de l'état produit après la mise à jour complète
+\[
+ x_{j+1}^{\chi}
+ =\mathcal U_{9j+9}\circ\cdots\circ\mathcal U_{9j+1}(x_j^{\chi}),
+ \qquad
+ b_j^{\chi}=\Pi_6(x_j^{\chi}),
+ \qquad
+ \mathcal U_t=\mathsf{Upd}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+\]
+Ainsi, le registre qui précède les relèvements est publié
+intégralement par les quatre matrices
+\begingroup\scriptsize
+\begin{equation}
+\begin{aligned}
+X_0&=\begin{pmatrix}
+0&1&0&2&1&1\\0&1&2&2&2&2\\2&0&1&1&0&1\\
+1&2&1&2&2&1\\1&2&1&2&0&0\\1&1&2&2&0&2
+\end{pmatrix},&
+Y_0&=\begin{pmatrix}
+0&1&2&2&2&2\\0&1&0&2&1&1\\1&2&1&2&2&1\\
+1&0&2&0&1&1\\1&1&2&2&0&2\\1&2&1&0&2&0
+\end{pmatrix},\\[1ex]
+X_1&=\begin{pmatrix}
+0&1&0&2&1&1\\0&0&2&1&1&1\\1&0&2&0&1&1\\
+0&1&2&2&2&2\\1&2&1&0&2&0\\0&1&0&2&1&0
+\end{pmatrix},&
+Y_1&=\begin{pmatrix}
+0&0&2&1&1&1\\1&1&0&2&2&1\\0&1&2&2&2&2\\
+1&0&2&0&1&1\\0&1&0&2&1&0\\0&1&0&2&0&0
+\end{pmatrix}.
+\end{aligned}
+\label{eq:registro-transiciones-tpk-explicito-rev10}
+\end{equation}
+\endgroup
+Leurs lignes sont des sorties successives de l'endomorphisme TPK sur les trois germes
+sélectionnés par les invariants de fibre ; ce ne sont ni des coefficients imposés à
+\(L_0,L_1\) ni des données tirées des développements archimédiens.
+
+\begin{theorem}[Reconstruction unique des relèvements et du calendrier]
+\label{thm:reconstruccion-lifts-calendario-rev10}
+Dans \(\mathbb F_3\), on a
+\[
+ \det X_0=1,
+ \qquad \det X_1=-1,
+ \qquad \operatorname{rank}(I_6\otimes X_i)=36.
+\]
+Par conséquent, les systèmes
+\[
+ X_0L_0=Y_0,
+ \qquad X_1L_1=Y_1
+\]
+possèdent les solutions uniques \(L_i=X_i^{-1}Y_i\), qui sont exactement les
+matrices imprimées ci-dessus. Parmi les \(16\) calendriers binaires de longueur
+\(4\), \(0011\) est le seul qui conserve simultanément les trois
+biographies. Les \(144\) substitutions unitaires possibles dans les deux matrices
+détruisent cette triple compatibilité.
+\end{theorem}
+
+\begin{proof}
+Les déterminants et les rangs sont calculés par élimination exacte modulo \(3\).
+L'inversibilité de \(X_i\) donne l'existence et l'unicité de \(L_i\) ; les
+\(16\) calendriers et les \(144=2\cdot6\cdot6\cdot2\) perturbations forment
+deux recensements finis exhaustifs. Toutes leurs entrées sont des mots, des transitions
+et des résidus de l'état enrichi antérieur à l'évaluation réelle. Les noms
+conventionnels des constantes n'interviennent dans aucun de ces calculs.
+\end{proof}
+
+La suite
+\[
+u_1=u_0L_0,\qquad u_2=u_1L_0,\qquad
+u_3=u_2L_1,\qquad u_4=u_3L_1
+\]
+produit
+\[
+\begin{aligned}
+w_{30}^{\pi}&=010211|012222|010211|002111|110221,\\
+w_{30}^{e}&=201101|121221|102011|012222|102011,\\
+w_{30}^{\varphi}&=121200|112202|121020|010210|010200.
+\end{aligned}
+\]
+La matrice
+\[
+R_{36}=
+\begin{pmatrix}
+222220\\021222\\102011
+\end{pmatrix}
+\]
+est la première frontière coinductive. Les matrices \(L_0,L_1\) sont des résultats
+de la reconstruction interne de
+\cref{thm:reconstruccion-lifts-calendario-rev10} et s'appliquent avant d'ouvrir
+les témoins décimaux. Le domaine du théorème est l'unique chaîne génératrice
+\(\mathrm{APP}\to\mathrm{TRIT}\to\mathrm{TPK}\to\) état enrichi.
+APP apporte ses deux feuillets arithmétiques ; TRIT oriente le régime ; TPK construit
+et conserve les champs de route, de retenue, de frontière et de mémoire sur lesquels agissent
+les relèvements. Demander que la projection visible d'APP contienne à elle
+seule l'état terminal confond deux domaines consécutifs de cette même
+chaîne et ne transforme pas les relèvements en données introduites à la main.
+
+\subsection{Sélection finie et construction des caractères}
+
+Soient \(\mathcal C\) le multiensemble de germes, \(\mathcal U\) le catalogue
+d'émissions et \(W=\Psi(\mathcal U)\subset\mathbb F_3^6\), avec
+\[
+ \mathcal C\xrightarrow{T_{54}^{\rm seed}}\mathcal U
+ \xrightarrow{\ \Psi\ }W\lhook\joinrel\longrightarrow\mathbb F_3^6,
+ \qquad
+ \Psi(U_6)=((-u_j)\bmod3)_{j=1}^6.
+\]
+L'énumération exacte donne
+\[
+ \sum_{U\in\mathcal U}\operatorname{mult}(U)=104\,976,\qquad
+ |\mathcal U|=468,\qquad |W|=243,\qquad|\mathbb F_3^6|=729.
+\]
+Ces quatre nombres comptent des objets typés distincts.
+
+L'action \(D_3\) sur \(W\) produit \(43\) orbites. L'orbite de clôture
+est la seule dont les six orientations possèdent cinq élévations, une masse \(1008\)
+et des multiplicités \(432+4\cdot144\). Parmi les orbites radicales unitaires,
+le recensement orienté de la clôture détermine de manière unique la propagation et le
+recensement \((2,2,2)\) détermine de manière unique l'auto-échelle. Le calibre
+\(\operatorname{diag}_c=6\), avec orientation ES, fixe un mot dans chaque
+orbite. Par conséquent, le triplet
+\[
+ (w_6^\pi,w_6^e,w_6^\varphi)
+ =(010211,201101,121200)
+\]
+s'obtient avant de construire tout intervalle archimédien.
+
+Les trois caractères s'obtiennent également à partir de la structure sélectionnée. Pour
+la clôture, la matrice d'incidence
+\[
+ A_W=\begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix}
+ \quad\text{satisfait}\quad A_W^2=2I_6=-I_6
+\]
+et fixe l'inversion orientée. Sur la pentafibre, le symétriseur qui
+oublie l'étiquette de l'élévation est
+\[
+ P_5=\frac15\mathbf1\mathbf1^T.
+\]
+La conservation \(\mathbf1^T\lambda=1\) et l'invariance
+\(P_5\lambda=\lambda\) imposent \(\lambda=(1/5)\mathbf1\), donc
+\(t_1=1/5\). Les quatre
+compositions par
+\[
+ t\star s=\frac{t+s}{1-ts}
+\]
+donnent \(t_4=120/119\). L'équation de retour à la diagonale,
+\[
+ \frac{120/119-1/q}{1+(120/119)/q}=1,
+\]
+possède l'unique solution entière positive \(q=239\). L'identité gaussienne
+\begin{equation}
+ \label{eq:generacion-monodromica-identidad-gaussiana-rev7}
+ (5+i)^{16}(239-i)^4=-681386607803576157184
+\end{equation}
+reconnaît ensuite le demi-tour. Ainsi, l'expression
+\[
+ 16\arctan(1/5)-4\arctan(1/239)
+\]
+est l'évaluation exacte du caractère de clôture, non son sélecteur.
+
+Pour la propagation, la composition des chemins et l'unité conservée donnent
+\[
+ P_{s+t}=P_sP_t,\qquad P_0=1,\qquad [t]P_t=1.
+\]
+Si \(P_t=\sum_{n\geq0}a_nt^n\), la comparaison du coefficient de \(s^nt\)
+impose
+\[
+ (n+1)a_{n+1}=a_n,\qquad a_0=1,
+\]
+et, par récurrence, \(a_n=1/n!\). L'égalité \(P'_t=P_t\) et la valeur
+\(P_1=e\) sont des reconnaissances analytiques ultérieures de cette loi formelle.
+
+Pour l'auto-échelle, le calendrier \((+,-,0)\) induit
+\[
+ F_{\rm av}=\begin{pmatrix}0&1\\1&1\end{pmatrix}.
+\]
+Son unique rayon positif invariant \(v=(1,x)^T\) satisfait
+\[
+ F_{\rm av}v=xv,\qquad x^2-x-1=0,\qquad x>0.
+\]
+Les quotients consécutifs de Fibonacci fournissent des encadrements rationnels
+emboîtés pour \(x\) ; l'équation \(x=1+1/x\) est la coordonnée scalaire de
+cette équation propre, non une condition imposée de l'extérieur.
+
+\begin{proposition}[Séparation entre sélection, évaluation et reconnaissance]
+\label{prop:generacion-monodromica-separacion-causal-rev7}
+Pour chaque canal \(\chi\), la composition causale est
+\[
+ \widehat X
+ \xrightarrow{\operatorname{Sel}_{\rm TPK}}
+ X_\chi
+ \xrightarrow{\operatorname{ev}_{\mathbb R}}
+ \mathbb R
+ \xrightarrow{\operatorname{Rec}}
+ \{\pi,\varphi,e,\alpha\}.
+\]
+\(\operatorname{Sel}_{\rm TPK}\) utilise le recensement, l'orbite, le calibre,
+les relèvements, la retenue et le caractère interne. L'évaluation contracte
+les cylindres compatibles. La reconnaissance attribue le nom conventionnel
+à la valeur déjà construite. Aucun préfixe cible n'intervient dans les deux premières
+flèches.
+\end{proposition}
+
+\begin{proof}
+L'unicité des trois orbites se décide au moyen de prédicats entiers du
+catalogue. Les paramètres \(5,4,239\), la récurrence
+\((n+1)a_{n+1}=a_n\) et la matrice \(F_{\rm av}\) se déduisent de ces orbites et
+des lois d'unité, de composition et d'incidence. La coordonnée de
+\(\alpha\) provient ensuite du triplet interne au moyen du registre signé
+\(U_{12}\), du sceau \(K\) et de la retenue dodécaphasique. Les bornes rationnelles sont
+calculées uniquement pour évaluer et certifier la section déjà fermée. La
+comparaison décimale s'effectue ensuite ; elle ne peut donc pas agir comme
+entrée causale.
+\end{proof}
+
+\subsection{Extension des survivants et certification ultérieure}
+
+Soit \(\mathcal H_m^\chi\) l'ensemble des histoires enrichies admissibles
+du canal \(\chi\) à la profondeur \(m\), et soit
+\(p_{n,m}:\mathcal H_n^\chi\to\mathcal H_m^\chi\) la troncature. On définit
+\[
+ \operatorname{Surv}_{m}^{(N),\chi}
+ =p_{N,m}(\mathcal H_N^\chi),\qquad
+ \operatorname{Surv}_{m}^{\chi}
+ =\bigcap_{N\ge m}\operatorname{Surv}_{m}^{(N),\chi},
+\]
+et la section numérique par
+\[
+ x_\chi\in X_\chi:=
+ \varprojlim_m\operatorname{Surv}_m^\chi.
+\]
+Le lecteur et l'état ne sont pas identifiés : une présentation
+\((x_\chi,L_\chi)\) publie la valeur, tandis que l'état conserve aussi
+l'orientation, la retenue, la frontière, le feuillet, l'incidence exceptionnelle et la généalogie.
+À la frontière R36, \(\chi_{\rm HMT}\) et le résidu interne
+\(\varepsilon_K^\chi\) sont déjà des coordonnées de l'état. La division APP et le
+sélecteur de phase produisent
+\[
+ d_K^\chi=\operatorname{Dig}_{729}(\varepsilon_K^\chi),\qquad
+ \varepsilon_{K+1}^\chi=729\varepsilon_K^\chi-d_K^\chi,qquad
+ N_{K+1}^{\operatorname{Ext}}=729N_K+d_K^\chi,
+\]
+et la sélection, le transport et la mise à jour
+\[
+ \operatorname{Sel}_K^\chi(x)
+ :=\operatorname{Sel}\!\left(
+ x,M_{\rm ph}(\rho_9(K+1))\right),
+ \qquad
+ \operatorname{Tra}_K^\chi(y,d):=\operatorname{Lift}(T_d)(y),
+ \qquad
+ \operatorname{Upd}_K^\chi:=\operatorname{Rec}_K^\chi\circ
+ \operatorname{Mem}_K^\chi,
+\]
+\[
+ \mathcal U_K^\chi(x)
+ :=\operatorname{Upd}_K^\chi\!\left(
+  \operatorname{Tra}_K^\chi\!\left(
+   \operatorname{Sel}_K^\chi(x),d_K^\chi
+  \right)\right)
+\]
+dépend uniquement de l'état précédent. La relation complète
+\(\operatorname{Ext}\) peut être multivaluée ; la sous-relation
+\(\operatorname{Ext}^{\chi,\rightarrow}\), ancrée dans l'état R36 qui
+porte déjà le caractère, est le graphe de \(\mathcal U_K^\chi\). Elle fixe donc
+une section globale compatible sans affirmer l'unitarité de chaque fibre locale de
+\(\operatorname{Ext}\). Ce n'est pas une intersection rétrospective définie par
+\(P_{\rm ar}\), et elle ne lit ni chiffres futurs ni encadrements.
+
+Si \(N_K\) est le préfixe ternaire et \(L_K=6K\), ses \(729\) sous-cylindres sont
+\[
+ I_{K,u}=
+ \left[
+ \frac{729N_K+u}{3^{L_K+6}},
+ \frac{729N_K+u+1}{3^{L_K+6}}
+ \right),
+ \qquad 0\le u<729.
+\]
+Pour l'encadrement rationnel exact \([\ell_{\chi,K},h_{\chi,K}]\) construit
+par la récurrence interne du caractère \(\chi\),
+\[
+\begin{aligned}
+j_{\min}
+ &=\max\!\left(729N_K,
+   \left\lfloor\ell_{\chi,K}3^{L_K+6}\right\rfloor\right),\\
+j_{\max}
+ &=\min\!\left(729N_K+728,
+   \left\lceil h_{\chi,K}3^{L_K+6}\right\rceil-1\right).
+\end{aligned}
+\]
+La vérification archimédienne ultérieure est
+\[
+ j_{\min}=j_{\max}=N_{K+1}^{\operatorname{Ext}}.
+\]
+Elle certifie que la partition est exhaustive et localise le survivant déjà
+produit par \(\operatorname{Ext}^{\chi,\rightarrow}\) ; elle ne le sélectionne pas.
+L'encadrement n'est pas lu dans un développement décimal : il est calculé
+à partir de la pentafibre et du retour unitaire, de la récurrence de propagation
+ou de l'incidence \(F_{\rm av}\), selon le canal. Par conséquent,
+l'intersection est un certificat de publication, non une règle de descendance.
+
+\begin{theorem}[Génération coinductive corrélée à profondeur arbitraire]
+\label{thm:generacion-monodromica-conjunta-rev7}
+Dans la structure enrichie TPK construite dans les théorèmes précédents, les
+trois caractères dérivés et la fermeture dodécaphasique construisent à profondeur
+arbitraire la famille corrélée de sections
+\(x_\pi,x_\varphi,x_e,x_\alpha\) qui satisfait :
+\begin{enumerate}
+ \item el barrido
+ \[
+ 104\,976\longrightarrow468\longrightarrow243
+ \]
+ sépare les germes, les émissions et les mots visibles ;
+ \item los levantamientos
+ \[
+ w_6\xrightarrow{L_0}w_{12}\xrightarrow{L_0}w_{18}
+ \xrightarrow{L_1}w_{24}\xrightarrow{L_1}w_{30}
+ \]
+ précèdent la première frontière coinductive \(R_{36}\) ;
+ \item à chaque niveau,
+ \(\operatorname{Ext}^{\chi,\rightarrow}\) produit d'abord le fils
+ compatible et sa troncature coïncide avec l'état du niveau précédent ; les
+ \(729\) sous-cylindres numériques forment une partition ordonnée et l'encadrement
+ rationnel localise ensuite le fils déjà engendré ;
+ \item la phase satisfait \(g(K+9)=g(K)\), tandis que le bloc, l'indice de
+ cylindre, le préfixe et l'ombre de Witt changent ;
+ \item les lecteurs publient, respectivement, \(\pi\), \(\varphi\), \(e\)
+ et \(\alpha\), et la règle d'extension n'a pas de profondeur terminale.
+\end{enumerate}
+\end{theorem}
+
+La portée de l'énoncé est coinductive et de profondeur arbitraire. Pour les
+quatre canaux, l'unicité de la section forward et sa compatibilité sous
+troncature proviennent de la mise à jour de l'état. On n'affirme pas que toute
+fibre locale de \(\operatorname{Ext}\) soit unitaire. Les exécutions à toute
+profondeur finie ne sont que des témoins de régression et de publication.
+
+\begin{proof}
+La sélection finie de
+\cref{prop:generacion-monodromica-separacion-causal-rev7} conserve les cinq
+régions de l'orbite de clôture avant d'ouvrir la carte réelle. La pente
+primitive \(1/5\), la composition des quatre branches accompagnatrices et la
+condition de retour unitaire imposent, dans cet ordre, \(120/119\) et \(q=239\).
+L'identité
+\eqref{eq:generacion-monodromica-identidad-gaussiana-rev7} reconnaît alors
+le premier demi-tour positif, de sorte que l'évaluateur ultérieur est
+\[
+ \pi_{\rm HMT}
+ =16\arctan(1/5)-4\arctan(1/239).
+\]
+Les arctangentes sont évaluées par des séries alternées avec des bornes rationnelles.
+
+En propagation, la loi \(P_{s+t}=P_sP_t\), l'unité \(P_0=1\) et la
+normalisation linéaire imposent d'abord \((n+1)a_{n+1}=a_n\). Ce n'est qu'ensuite que l'on
+reconnaît \(P'_t=P_t\) et
+\[
+ e_{\rm HMT}=\sum_{n\ge0}\frac1{n!}.
+\]
+En auto-échelle, le calendrier produit d'abord
+\[
+ F_{\rm av}=\begin{pmatrix}0&1\\1&1\end{pmatrix}
+\]
+et son rayon de Perron. L'équation \(x=1+1/x\) est sa coordonnée scalaire
+ultérieure.
+
+La mise à jour qui ne lit que l'état précédent produit dans chaque canal le
+fils compatible à partir du caractère et du résidu internes présents. Par
+récurrence, deux sections forward ayant le même état R36 coïncident à toute
+profondeur. Dans les trois canaux à lecteur réel développés ici,
+l'arithmétique rationnelle produit ensuite des intervalles de largeur arbitrairement
+petite : la partition exacte des \(729\) sous-cylindres vérifie que le fils
+déjà engendré se trouve dans la cellule décimale publiée. La fermeture signée
+\(U_{12}\to K\) prolonge la quatrième coordonnée et les carrés de troncature
+de ses deux voies internes commutent, de sorte que
+\(\alpha_A=\alpha_B=\alpha_{\rm HMT}\). Les exécutions à mille et dix mille
+chiffres sont des projections finies, non le critère du théorème.
+\end{proof}
+
+L'extension à une section de la limite inverse est régie par
+\cref{thm:generacion-supervivencia-pi-e-phi-rev6}. Le théorème précédent
+établit, pour \(\pi,\varphi,e,\alpha\), la non-vacuité, la compatibilité et
+l'unicité globale de chaque section forward exigées par ce principe
+abstrait, sans postuler l'unitarité porte par porte de
+\(\operatorname{Ext}\). Cette formulation distingue la règle coinductive de
+profondeur arbitraire de ses évaluations finies à mille et dix mille chiffres,
+sans modifier le retour de phase ni le transport de mémoire.
+
+\begin{corollary}[Profondeur arbitraire et objet décimal infini]
+\label{cor:generacion-nonadica-profundidad-arbitraria-rev10}
+Pour tout \(N\in\mathbb N_{>0}\), la même construction publie un unique
+préfixe décimal canonique \(d_N^\chi\) de longueur \(N\), avec
+\(d_{N+1}^\chi|_N=d_N^\chi\), pour
+\(\chi\in\{\pi,\varphi,e,\alpha\}\). La famille compatible
+\((d_N^\chi)_{N\ge1}\) détermine le développement infini dans la limite
+inverse. Mille, dix mille ou un million de chiffres sont des exécutions finies du
+même algorithme paramétré ; aucune d'entre elles ne limite la portée du
+théorème.
+\end{corollary}
+
+\begin{proof}
+La mise à jour \(\operatorname{Upd}_\chi\) produit d'abord le cylindre
+compatible. L'encadrement rationnel du caractère a une largeur arbitrairement
+petite et certifie ensuite que ce cylindre rencontre un unique membre de
+la partition publiée des \(729\) sous-cylindres. Étant donné \(N\), il existe \(m\) avec
+\(3^{-6m}<10^{-N}\) ; le cylindre déjà produit est alors contenu dans une
+cellule décimale canonique de longueur \(N\). La compatibilité de troncature
+identifie ces cellules comme les coordonnées finies d'une section forward.
+\end{proof}
+
+\begin{theorem}[Génération coinductive corrélée et double projection]
+\label{thm:estado-coinductivo-doble-proyeccion-rev10}
+Soit \(\mathscr S_\infty\) le produit fibré des quatre sections
+forward corrélées de profondeur arbitraire engendré par
+\[
+ \mathrm{APP}\longrightarrow\mathrm{TRIT}\longrightarrow\mathrm{TPK}
+ \longrightarrow R_{36}\longrightarrow G_9.
+\]
+De \(\mathscr S_\infty\) partent deux publications typées :
+\[
+ \mathscr S_\infty\xrightarrow{\mathcal P_{\rm Arq}}\mathbb R^4,
+ \qquad
+ \mathscr S_\infty\xrightarrow{\mathcal P_{\rm Exc}}
+ W_{12}\longrightarrow G_{24}\longrightarrow\Lambda_{24}
+ \longrightarrow V^\natural
+ \longrightarrow\operatorname{Aut}(V^\natural)=\mathbb M.
+\]
+La première contracte les cylindres compatibles et publie de manière corrélée
+\((\pi_{\rm HMT},\varphi_{\rm HMT},e_{\rm HMT},\alpha_{\rm HMT})\) ; la
+seconde conserve l'incidence de frontière et publie la chaîne exceptionnelle.
+Par conséquent, \(\mathbb R\) est l'ombre archimédienne de la première
+projection et non une entrée qui sélectionne la généalogie. Machin,
+Perron--Fibonacci, le semi-groupe exponentiel et les dénominations
+conventionnelles agissent après la sortie HMT.
+\end{theorem}
+
+\begin{proof}
+\cref{thm:generacion-monodromica-conjunta-rev7} et
+\cref{cor:generacion-nonadica-profundidad-arbitraria-rev10} construisent la
+famille compatible avant l'évaluation. La fermeture dodécaphasique publie
+\(\alpha_{\rm HMT}\) à partir de son triplet R36 corrélé et du registre
+\(U_{12}\to K\) ; la voie
+\(E_{21/22}\) conserve son domaine analytique propre. La projection
+archimédienne oublie l'incidence en contractant les cylindres, tandis que la
+projection exceptionnelle la transporte par les opérateurs d'entrelacement Witt--Golay--
+Leech jusqu'à \(V^\natural\). Toutes deux proviennent du même antécédent et aucune
+ne peut agir rétroactivement comme générateur de celui-ci.
+\end{proof}
+
+\subsection{Régions de clôture}
+
+Les cinq régions ne sont pas cinq valeurs de \(\pi\), mais cinq généalogies
+ayant une projection visible commune. Leur multiplicité est
+\[
+ 432+4\cdot144=1008,
+\]
+et leurs rôles sont
+\[
+ 3_{++}+1_{--}+1_{\perp}.
+\]
+L'identité régionale se vérifie par le quadruplet
+\[
+ (U_6,E_{\rm sig},\text{multiplicité},\text{rôle}),
+\]
+non seulement par le recensement \(3/1/1\). En particulier,
+\[
+\begin{array}{c|c|c|c}
+U_6&E_{\rm sig}&\text{multiplicité}&\text{rôle}\\ \hline
+501|614|498|169|272|272&555555&432&\perp\\
+810|923|870|169|272|272&339555&144&++\\
+810|983|810|169|272|272&393555&144&++\\
+870|923|810|169|272|272&933555&144&++\\
+870|923|810|418|674|521&933717&144&--
+\end{array}
+\]
+La table fixe conjointement le mot décimal enrichi, la signature d'émission,
+la multiplicité et le rôle. En particulier, l'ancrage de multiplicité (432) est
+transversal et la signature (933717) est le retour muté ; le recensement (3/1/1)
+ne détermine pas à lui seul ces noms.
+
+\subsection{Retour de phase et changement de mémoire}
+
+À la neuvième phase,
+\[
+ B_9=(100100\mid020112\mid010122)
+\]
+admet trois orientations qui conservent l'axe \(\varphi\) et l'agrégat
+\(\pi+e\) :
+\[
+\begin{aligned}
+ &(101222\mid112221\mid112002),\\
+ &(102221\mid111222\mid112002),\\
+ &(111221\mid102222\mid112002).
+\end{aligned}
+\]
+Les trois survivent à une frontière et conservent
+\[
+ u^{\varphi}=112002,
+ \qquad u^\pi+u^e=210110.
+\]
+La frontière suivante sélectionne
+\[
+ B_{10}=(101222\mid112221\mid112002).
+\]
+Par conséquent,
+\[
+ \#\operatorname{Surv}_1(B_9)=3,
+ \qquad
+ \#\operatorname{Surv}_2(B_9)=1.
+\]
+L'indice dix occupe de nouveau la phase un, mais non l'état précédent. C'est
+la monodromie : retour de phase avec transformation de mémoire.
+
+En termes de l'état complet
+\[
+ \widehat x_K=(B_K,C_K,p_K,c_K,\Sigma_K,W_K,g(K)),
+\]
+le tour est l'holonomie unique
+\[
+ \begin{gathered}
+ \Gamma_9=\operatorname{Hol}_{C_9}(\nabla_{\rm TPK}),
+ \qquad g(K+9)=g(K),\\
+ q_{\rm mem}\Gamma_9=q_{\rm mem}+1,
+ \qquad \Gamma_9\widehat x_K\ne\widehat x_K.
+ \end{gathered}
+\]
+Dans une réalisation isométrique, la même continuité satisfait
+\[
+ U_{\Gamma_9}J=JT+\eta,\qquad
+ I-T^*T=\eta^*\eta.
+\]
+La retenue se compose par
+\[
+ \operatorname{Carr}(\gamma_2\gamma_1)
+ =\operatorname{Carr}(\gamma_2)H(\gamma_1)
+ +Y(\gamma_2)\operatorname{Carr}(\gamma_1),
+\]
+et la télescopie conserve le terminal fini :
+\[
+ S_0=\sum_{r=0}^{L-1}M_9^{*r}D_9^*D_9M_9^r
+     +M_9^{*L}S_0M_9^L.
+\]
+Les fenêtres \(27\), \(54\) et \(108\) sont les concaténations
+\[
+ \Gamma_{27}=\Gamma_9^3,\qquad
+ \Gamma_{54}=\Gamma_9^6,\qquad
+ \Gamma_{108}=\Gamma_9^{12};
+\]
+transportent une mémoire accumulée de \(3\), \(6\) et \(12\) tours,
+respectivement. Elles ne constituent pas des réinitialisations de l'algorithme.
+
+\subsection{Recensement fini des transitions et génération décimale}
+
+L'exécution à profondeur mille produit, par canal,
+\[
+396\ \text{transitions},\quad
+2376\ \text{trits},\quad
+43\ \text{tours complets},\quad
+387\ \text{paires }(K,K+9),
+\]
+et \(1000\) chiffres décimaux. À chaque transition, la mise à jour
+\(\operatorname{Ext}^{\chi,\rightarrow}\) produit le survivant et le
+balayage exhaustif ultérieur des \(729\) sous-cylindres certifie sa
+publication. Les témoins externes sont consultés après la génération et
+utilisés uniquement pour la reconnaissance.
+
+L'indépendance de la cible s'obtient parce que l'application génératrice reçoit
+uniquement le catalogue fini des \(468\) émissions, les matrices
+\(L_0,L_1,A_W,F_{\rm av}\) et l'arithmétique rationnelle. Aucune de ses fonctions
+de transition ne contient de préfixes de \(\pi\), de \(e\), de \(\varphi\) ni une
+opération qui évalue ces constantes. Les encadrements se déduisent des
+caractères construits et n'agissent que dans l'évaluation ultérieure.
+
+Après les 396 étapes de prolongation et de certification, le cylindre final
+\[
+ \left[\frac{N}{3^{2376}},\frac{N+1}{3^{2376}}\right)
+\]
+est contenu dans une unique cellule décimale de profondeur \(10^{-1000}\).
+Les mille chiffres sont donc un témoin fini de la loi paramétrable, non
+sa profondeur maximale.
+
+L'argument uniforme construit un cylindre pour toute profondeur
+finie prescrite. Le recensement des \(396\) étapes ne vérifie que l'instance à
+mille chiffres : il maintient séparées la génération causale et la comparaison décimale
+ultérieure, et ne remplace pas le quantificateur de
+\cref{thm:generacion-monodromica-conjunta-rev7}.

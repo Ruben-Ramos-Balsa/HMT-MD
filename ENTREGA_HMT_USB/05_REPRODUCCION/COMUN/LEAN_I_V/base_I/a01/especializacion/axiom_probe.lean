@@ -1,0 +1,7 @@
+import SelectedOrbifoldStateFields
+#print axioms HMT.I.SelectedOrbifoldStateFields.carrier
+#print axioms HMT.I.SelectedOrbifoldStateFields.Y
+#print axioms HMT.I.SelectedOrbifoldStateFields.selected_all_products_constructed
+#print axioms HMT.I.SelectedOrbifoldStateFields.selected_vacuum_creation
+#print axioms HMT.I.SelectedOrbifoldStateFields.selected_conformal_fields
+#print axioms HMT.I.SelectedOrbifoldStateFields.selected_low_weights

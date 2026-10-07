@@ -1,0 +1,135 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N69 --- Ley de transición o axioma cilíndrico\\
+\large Calendario mecánico, no-go afín y protocolo coinductivo de frontera}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N69 ataca el blanco posterior a N68: convertir el protocolo de frontera en una ley de transición autónoma. Se prueba que el calendario abrir/podar es una ley mecánica exacta dada por \(K(t)=\lfloor6(t+1)\log_{1000}3\rfloor\). Se prueban candidatos de transición afín para bloques y firmas, con y sin fase \(12/22\), y no se obtiene una ley robusta. El resultado disciplinado es: seguir intentando derivar \(\mathcal F_{\rm HMT}\), pero si no se logra debe formularse como axioma coinductivo de verificación, no como teorema de generación infinita.
+\end{abstract}
+
+\section{Calendario mecánico}
+
+La cantidad de triadas decimales visibles tras \(t\) bloques es:
+\[
+K(t)=\left\lfloor6(t+1)\log_{1000}3\right\rfloor.
+\]
+Por tanto:
+\[
+\Delta K_t=K(t+1)-K(t)\in\{0,1\}.
+\]
+Los stutters son los \(t\) con:
+\[
+\Delta K_t=0.
+\]
+Esto es una palabra mecánica/Beatty. No es una excepción: es parte infinita del protocolo.
+
+\section{Tests de transición}
+
+Se probaron mapas afines sobre:
+\[
+B_t,
+\qquad
+(q,a,c,\operatorname{colw},\rho_W,r)_t,
+\qquad
+(q,a)_t.
+\]
+También se probaron versiones con fase \(12\) y \(22\). El resumen:
+\[
+\begin{array}{c|c|c|c|c|c}
+\text{modo}&\text{fase}&\dim_{in}&\dim_{out}&N&\text{consistente}\\
+\hline
+B & 0 & 18 & 18 & 45 & False \\
+B & 12 & 30 & 18 & 45 & False \\
+B & 22 & 40 & 18 & 45 & False \\
+signature & 0 & 30 & 30 & 45 & False \\
+signature & 12 & 42 & 30 & 45 & False \\
+signature & 22 & 52 & 30 & 45 & True \\
+qa & 0 & 12 & 12 & 45 & False \\
+qa & 12 & 24 & 12 & 45 & False \\
+qa & 22 & 34 & 12 & 45 & False \\
+\end{array}
+\]
+La conclusión es:
+\[
+\boxed{
+\text{no aparece una ley afín autónoma robusta de transición.}
+}
+\]
+
+\section{Protocolo coinductivo}
+
+La forma correcta del protocolo es:
+\[
+\boxed{
+\text{Cyl}+\text{Beatty}+\text{Frontier}+\text{Survival}.
+}
+\]
+Donde:
+\[
+\text{Cyl}=\text{compatibilidad por intersección de cilindros},
+\]
+\[
+\text{Beatty}=K(t)=\lfloor6(t+1)\log_{1000}3\rfloor,
+\]
+\[
+\text{Frontier}=B_t\mapsto(q,a,c,\operatorname{colw},\rho_W,r),
+\]
+\[
+\text{Survival}=\text{rama admisible si sobrevive como cilindro inverso}.
+\]
+
+\section{Blanco exacto}
+
+El teorema que falta, si queremos generación infinita completa, es:
+\[
+\boxed{
+\mathcal F_{\rm HMT}(B_t,C_t)
+=
+(q,a,c,\operatorname{colw},\rho_W,r)_{t+1}.
+}
+\]
+Si se deriva, la generación infinita queda en forma fuerte. Si no se deriva, la formulación honesta es:
+\[
+\boxed{
+\text{axioma coinductivo de frontera y supervivencia.}
+}
+\]
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: calendario mecánico y cilindro intervalar.}
+}
+\]
+\[
+\boxed{
+\text{verde: protocolo de frontera + supervivencia como verificador.}
+}
+\]
+\[
+\boxed{
+\text{rojo: transición afín simple.}
+}
+\]
+\[
+\boxed{
+\text{amarillo: transición autónoma }\mathcal F_{\rm HMT}.
+}
+\]
+\end{document}

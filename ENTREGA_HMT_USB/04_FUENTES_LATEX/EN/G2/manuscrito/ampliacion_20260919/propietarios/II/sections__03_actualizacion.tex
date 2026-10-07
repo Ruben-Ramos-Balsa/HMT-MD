@@ -1,0 +1,201 @@
+% Propietario conservado: /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/03_actualizacion.tex
+\section{Dodecaphase update and memory register}
+\label{ii:sec:eta} Let $d_t$ be the integer direction code preserved by a TPK trace. This code and the cursor's cardinal direction are distinct coordinates. The twelve windows $E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$ divide the register's 108 steps. The orientation is
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+The event of a window is the output
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{ii:eq:events}
+\end{equation}
+The notation $a_m$ avoids confusing this event with Euler's number. The source register also preserves TRIT orientation, signature, carry and the corresponding history segment, in accordance with the architecture of Section~\ref{ii:ii:tpk-arquitectura}.
+
+\begin{proposition}[Increment produced by transport]
+Let $\mathbf e_m$ be the basis of $\R^{12}$ and
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. If
+$\mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_m$ and $y_m=S^{-m}\mathbf z_m$, then
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{ii:eq:eta}
+\end{equation}
+After a complete turn,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{ii:eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplying the update of $\mathbf z_m$ by $S^{-(m+1)}$ gives
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+Upon iteration, the coefficient of event $a_m$ is $S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Since $S^{12}=I$, we obtain \eqref{ii:eq:cycle}.
+\end{proof}
+
+Boldface here identifies the accumulated vector
+\(\mathbf z_m\in\R^{12}\), whereas the incidence block
+\(z_m\) of \eqref{ii:eq:registro-bloque-incidencial} is an integer between
+\(0\) and \(999\). The moving frame \(y_m\) transports the first object;
+the decimal coding of the second retains its own definition.
+
+Thus, $\eta_m$ is not a free force chosen to impose conservation: it is an expression of the TPK event. Equality of phase after one turn does not cancel accumulated events. This reader preserves counts, while the full register additionally preserves their order and provenance. We distinguish $\eta_m$, a vector increment, from $\eta_{\rm ret}$, a scalar action mantissa, and from $\eta_{\rm el}$, a shape parameter introduced in Section~\ref{ii:sec:ellipse}.
+
+\subsection{Quadratic balance}
+We define
+\[
+\nabla_3=I-S^3,\quad \nabla_4=I-S^4,\quad
+B=\nabla_3^{\mathsf T}\nabla_3+\nabla_4^{\mathsf T}\nabla_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+The oriented readers of the signed register satisfy $(D_jz)_m=z_m-z_{m+j}$; with the convention $S\mathbf e_m=\mathbf e_{m+1}$, we have $D_j=I-S^{-j}=\nabla_j^{\mathsf T}$. Both directions produce the same quadratic form $B$, since powers of $S$ commute. We have $S^{\mathsf T}BS=B$ and $B_{00}=4$. Substituting \eqref{ii:eq:eta} yields exactly
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\label{ii:ii:mem:balance}
+\end{equation}
+Likewise, the charge $q(y)=\sum_jy_j$ satisfies $q(y_{m+1})-q(y_m)=a_m$. The proof expands the quadratic polynomial after removing the permutation $S^{-1}$. No metrological value enters this calculation. The form $\mathcal M$ measures this register; interpreting it as a determined physical energy would require the corresponding dimensional reader.
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/03b_memoria_resolvente.tex
+\subsection{Transport resolvents and preservation of memory}
+\label{ii:subsec:ii-memoria-resolvente}
+
+The extended history determines the windows \(I_m=\{9m+1,\ldots,9m+9\}\), for \(m\geq0\). With this section's numbering, \(I_m=E_m\) during the first cycle. Let \(\sigma_m\in\{-1,1\}\) be the orientation preserved by this history; for \(0\leq m<12\), it coincides with \(\Sigma_{12}(m)\). We define
+\[
+ a_m=\sigma_m\sum_{t\in I_m}\mathbf1_{\{2,4,6,8\}}(d_t),
+ \qquad |a_m|\leq9.
+\]
+The register and the moving frame are extended by
+\[
+ \mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_{m\bmod12},\qquad y_m=S^{-m}\mathbf z_m.
+\]
+The initial state \(\mathbf z_0\) preserves the previous history; it is zero for an initially empty prefix. In this subsection we write \(R=S^{-1}\) for frame transport. The update \eqref{ii:eq:eta} is maintained in every window. The orientation and subsequent events are obtained from the extended history: the return of the frame does not presuppose periodicity of the event sequence.
+
+\begin{proposition}[Truncation identity with terminal state]
+For $N\geq1$, let
+\[
+Y_N(u)=\sum_{m=0}^N y_mu^m,\qquad
+H_{\eta,N}(u)=\sum_{m=0}^{N-1}\eta_mu^m.
+\]
+The exact polynomial identity holds
+\begin{equation}
+(I-uR)Y_N(u)=y_0+uH_{\eta,N}(u)-u^{N+1}Ry_N.
+\label{ii:mem:identidad-finita}
+\end{equation}
+\end{proposition}
+\begin{proof}
+In degrees $1\leq m\leq N$, the coefficient of the left-hand side is $y_m-Ry_{m-1}=\eta_{m-1}$, by \eqref{ii:eq:eta}. Its coefficients in degrees zero and $N+1$ are $y_0$ and $-Ry_N$, respectively. Comparing coefficients proves the equality.
+\end{proof}
+
+The terminal term preserves the transported memory when a history is cut. The identity allows a finite evaluation to be compared with its extension while keeping explicit the state that remains at the boundary.
+
+\subsubsection{Correspondence with common-core transport}
+
+The window numbering of Section~\ref{ii:subsec:memoria-resolvente}
+and that used here describe the same partition of the history. The
+correspondence is
+\[
+ \underbrace{I_m=E_{m+1}}_{\text{index of the common kernel}}
+ \quad\longleftrightarrow\quad
+ \underbrace{I_m=E_m}_{\text{index of this section}},
+ \qquad 0\leq m<12.
+\]
+The subscript changes the name of the window; its nine transitions,
+its orientation \(\sigma_m=\Sigma_{12}(m)\), its event \(a_m\), and
+its position in the record remain the same. For every prolongation,
+\(R=S^{-1}\), \(y_m=S^{-m}\mathbf z_m\), and
+update~\eqref{ii:eq:eta} coincide with
+\eqref{ii:mem:actualizacion}. Orientation and the event sequence
+retain their dependence on the history, also after
+frame return.
+
+This identification allows Proposition~\ref{ii:mem:prop-serie}
+to be applied directly: series~\eqref{ii:mem:serie},
+bound~\eqref{ii:mem:cota}, and uniform convergence of its derivatives
+correspond to this same record and the same window clock. The
+finite identity~\eqref{ii:mem:identidad-finita} also determines the terminal
+term when that series is truncated. Its hypotheses retain the initial history
+and the bounded event \(|a_m|\leq9\).
+
+When the record is reused, Proposition~\ref{ii:mem:prop-schur} jointly
+preserves the operator, source, and reader through
+\eqref{ii:mem:schur-fuente} and~\eqref{ii:mem:schur-lector}. Example
+\eqref{ii:mem:ejemplo-ciclo} specifies the effect of the excursions omitted
+by a compression. The affine composition~\eqref{ii:mem:cociclo-tres}, the
+intermediate blocks~\eqref{ii:mem:schur-intermedio}, and identity
+\eqref{ii:mem:schur-transitivo} ensure consistency when segments
+are concatenated or several layers eliminated. Their complete proofs reside
+in Section~\ref{ii:subsec:memoria-resolvente}, with the domains,
+sources, and reading maps specified there.
+
+Balance~\eqref{ii:ii:mem:balance} preserves the correspondence between the
+oriented readers of the signed record and the common quadratic form.
+The distinction between the accumulated vector \(\mathbf z_m\) and the
+incidence decimal block \(z_m\) remains that established in this section.
+The transport identities apply to memory thus typed; they do not
+by themselves determine additional analytic coefficients.
+
+% END OWNER
+
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/ii_sello_y_lectura.tex
+\section{Dodecaphase seal and reversible rational reading}
+\label{ii:sec:sello}
+
+The terminal register has a visible coordinate and a signed coordinate. The seal is obtained from the latter through the orbitwise Hadamard transformation; a subsequent scalar reading recovers the seal when its representation frame is preserved. This property specifies what a structural definition of a constant means here: production and recovery maps are made explicit alongside its value.
+
+Let $U\in\Z^{12}$ be the signed coordinate produced by the register, $H_4$ the Hadamard matrix developed in Section~\ref{ii:sec:action} and $P_{\rm orb}$ the permutation grouping
+\[
+ (1,4,7,10),\qquad(2,5,8,11),\qquad(3,6,9,12).
+\]
+Define
+\[
+ \mathcal H_{12}=P_{\rm orb}^{-1}
+ (H_4\oplus H_4\oplus H_4)P_{\rm orb}.
+\]
+We have $\mathcal H_{12}^2=4I$. When $\mathcal H_{12}U\equiv0\pmod4$, the integral seal is
+\[
+ K=\tfrac14\mathcal H_{12}U,
+ \qquad U=\mathcal H_{12}K.
+\]
+The transverse differences $D_3K,D_4K$ and charge $Q(K)$ recover the channels specified by the register in Section~\ref{x_reciprocidad:sec:k-registro}. The seal is thus a reconstructible coordinate of that oriented register; depth and complete history remain distinct fields.
+
+\begin{proposition}[Recovery of blocks and transport of the origin]
+Fix an integer base $b\ge2$ and twelve ordered positions, and let
+$K_j\in\{0,\ldots,b-1\}$. Define
+\[
+ I(K)=\sum_{j=1}^{12}K_jb^{12-j},\qquad
+ \kappa(K)=\frac{I(K)}{b^{12}-1}.
+\]
+The exact reading $\kappa$ uniquely determines the twelve blocks. For the rotation $\rho K=(K_2,\ldots,K_{12},K_1)$,
+\[
+ \boxed{\kappa(\rho K)=b\kappa(K)-K_1.}
+\]
+\end{proposition}
+\begin{proof}
+The integer $I=(b^{12}-1)\kappa$ decomposes uniquely into twelve base-$b$ positions, padding the necessary leading positions with zeros. On the other hand,
+\[
+ I(\rho K)=bI(K)-K_1(b^{12}-1).
+\]
+Dividing by $b^{12}-1$ gives the transformation law. For the constant block $K_j=b-1$, the reading is $\kappa=1$; the fixed periodic representation type likewise preserves its recovery.
+\end{proof}
+
+In the register's base $1000$, three-digit blocks remain recoverable, including leading zeros. The periodic rational reading preserves more than a truncated decimal approximation. Changing the phase origin generally changes its value according to the preceding identity; after twelve rotations, it returns. The memory advance of the TPK state is an additional transformation: periodicity of the reader does not identify accumulated histories.
+
+\begin{apunte}{reversible reading and information}
+Exact block recovery is a property of the rational reader in its ordered
+frame. Word complexity, the entropy of a symbolic dynamics, reduced-state
+entropy, and thermodynamic production are distinct objects. A relation
+between them requires the distribution or state and the corresponding
+transport map to be specified; reversibility of the seal alone does not
+identify these functionals.
+\end{apunte}
+
+% END OWNER
+

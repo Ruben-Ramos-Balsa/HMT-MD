@@ -1,0 +1,218 @@
+\section{Registres de retenue et d’incidence et reconstruction projective des histoires}
+\label{lib07:armonizacion}
+La construction APP--TRIT--TPK fixe un état enrichi avant
+ses réalisations numériques, incidentielles et opératorielles. Les registres
+qui interviennent dans cette construction se distinguent par l’opération
+qu’ils permettent d’inverser et par les relations qu’ils conservent. Cette section
+réunit ces distinctions et compose la récupération avec le raffinement.
+
+\subsection{Retenue, histoire, incidence et archive}
+La retenue des sections~\ref{lib03:residuo} et
+\ref{lib03:memoria} est une donnée arithmétique entière. Sa conservation,
+avec la profondeur et l’état final, restitue l’antécédent
+par l’inverse explicite~\eqref{lib03:inversa-afin}.
+L’histoire du transport contient la suite ordonnée d’opérations,
+de feuillets, d’orientations et de retours. En elle, deux étapes de même phase
+peuvent avoir des registres cumulés distincts. L’holonomie agit sur
+cette histoire et sur le repère dans lequel ses lectures sont effectuées.
+
+Le registre d’incidence conserve les relations de frontière
+utilisées par les constructions exceptionnelles. L’objet ordonné \(K\)
+et sa lecture \(\kappa_{\rm ag}\) interviennent avec les normalisations
+et les applications de la section~\ref{lib01:identificacion}.
+La suffisance pour récupérer un opérateur s’y exprime au moyen
+des réponses du repère et de l’inversion correspondante.
+La mémoire d’archive de la section~\ref{lib04:archivo}, pour sa part,
+est une suite de composantes d’un espace de Hilbert. L’identité
+télescopique~\eqref{lib04:telescopia} conserve la norme entre l’état
+restant et les composantes archivées ; l’inverse
+\eqref{lib04:recuperacion-infinita} reconstruit l’amplitude initiale.
+
+Ces quatre fonctions se composent en conservant leurs types. Un entier de retenue, un mot de transport, une incidence et une amplitude archivée constituent des données distinctes du système. Les preuves de récupération spécifient quelle combinaison de ces données suffit à chaque lecture. La figure~\ref{lib07:fig-registros} représente cette hiérarchie fonctionnelle.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+ node distance=9mm,
+ box/.style={draw=ink,rounded corners=2pt,fill=white,align=center,
+ text width=58mm,minimum height=15mm,font=\small},
+ arr/.style={-{Latex[length=2mm]},draw=ink,thick}]
+\node[box,text width=125mm] (s) {État enrichi APP--TRIT--TPK\\
+ opération, feuillet, orientation, frontière et mémoire};
+\node[box] (a) at (-33mm,-30mm)
+ {Retenue arithmétique\\Résidu, profondeur et inverse};
+\node[box] (h) at (33mm,-30mm)
+ {Histoire de transport\\Composition ordonnée et holonomie};
+\node[box] (q) at (-33mm,-62mm)
+ {Registre d’incidence\\Lectures de frontière et repère};
+\node[box] (m) at (33mm,-62mm)
+ {Archive de récupération\\Composantes et reconstruction};
+\node[box,text width=125mm] (r) at (0,-94mm)
+ {Récupération compatible avec le raffinement\\
+ Inverses typés et relations conservées};
+\draw[arr] (s.south -| a.north)--(a);
+\draw[arr] (s.south -| h.north)--(h);
+\draw[arr] (a)--(q);
+\draw[arr] (h)--(m);
+\draw[arr] (q.south)--(r.north -| q.south);
+\draw[arr] (m.south)--(r.north -| m.south);
+\end{tikzpicture}
+\caption{Organisation des registres selon leur fonction. Les flèches inférieures indiquent la composition de conditions de récupération, et non l'identification des quatre types de données.}
+\label{lib07:fig-registros}
+\end{figure}
+
+\subsection{Arbre de raffinement et poids locaux}
+Soit \(H_k\) l’ensemble fini des préfixes admissibles de profondeur
+\(k\), avec les troncatures \(p_{k+1,k}\), du système d’histoires déjà
+construit. Une émission est comptée avec sa multiplicité et
+\(d(\zeta)>0\) désigne le nombre d’émissions depuis \(\zeta\).
+La distribution uniforme des germes et le poids local
+\(1/d(\zeta)\) définissent \(\mu_k\). La somme des poids des
+prolongements d’un préfixe coïncide avec son poids : les mesures sont
+compatibles et déterminent la mesure cylindrique \(\mu\).
+Les propositions de mémoire de fibre et de
+naturalité de la mesure sont démontrées ci-après, avec ces définitions explicites.
+
+\subsection{Lecteurs enrichis et mémoire de fibre}
+\label{sec:ch-memoria-fibra}
+
+La différence entre histoire et valeur admet un critère opérationnel. À un
+niveau fini \(H_k\), soient \(q_k:H_k\to Z_k\) un lecteur et
+\(M_k:H_k\to\mathcal M_k\) le registre conservé. Le lecteur enrichi
+est \(\widehat q_k=(q_k,M_k)\). La mémoire distingue des états d'une même
+fibre du lecteur ; sa suffisance se vérifie dans le domaine considéré.
+Cette formulation intègre à l'article lui-même le développement complet de
+l'information de fibre utilisée ci-après.
+
+\begin{proposition}[Récupérabilité à un niveau fini]
+\label{prop:ch-recuperabilidad-fibra}
+Il existe une inverse de \(\widehat q_k\) sur son image si et seulement si \(\widehat q_k\) est injectif. Pour une variable aléatoire \(Z\) à valeurs dans \(H_k\) et de distribution \(\mu_k\), on a
+\[
+ \mathsf H(Z)=\mathsf H(q_k(Z))+\mathsf H(Z\mid q_k(Z)).
+\]
+Si \(\widehat q_k\) est injectif sur le support de \(Z\), alors
+\[
+ \mathsf H(Z\mid q_k(Z),M_k(Z))=0.
+\]
+Ici, \(\mathsf H(Z)=-\sum_z\Pr(Z=z)\log\Pr(Z=z)\), avec
+\(0\log0=0\), est l'entropie finie en nats ; l'entropie conditionnelle est
+la moyenne de l'entropie des distributions conditionnelles.
+\end{proposition}
+
+\begin{proof}
+Un inverse récupère un unique antécédent, ce qui exige l’injectivité ;
+réciproquement, celle-ci permet d’attribuer à chaque paire exprimée son unique
+antécédent. Puisque \(q_k(Z)\) est une fonction déterministe de \(Z\),
+regrouper la somme qui définit \(\mathsf H(Z)\) par fibres de \(q_k\) donne la
+règle de la chaîne. Si la paire \((q_k(Z),M_k(Z))\) distingue le support,
+chaque distribution conditionnelle correspondante est concentrée sur un seul
+état et son entropie est nulle.
+
+\end{proof}
+
+Ne pas exprimer une coordonnée et effacer le registre qui permet de la récupérer sont
+des opérations différentes. Ce résultat n’identifie pas l’entropie à la cardinalité
+du continu et n’introduit pas d’interprétation thermique : son domaine, son lecteur et sa
+distribution sont ceux qui viennent d’être fixés.
+
+
+\subsection{Équivariance de la mesure sous les symétries de l'arbre}
+\label{sec:ch-naturalidad-medida}
+
+\begin{proposition}[Transport conjoint de l'arbre et de sa mesure]
+\label{prop:ch-naturalidad-medida}
+Soit \(g=(g_k)_{k\geq0}\) une collection de bijections \(g_k:H_k\to H_k\)
+qui commute avec les troncatures, fixe la racine et transporte bijectivement
+les émissions admissibles, en conservant leurs multiplicités. Alors
+
+\[
+ d(g_k\zeta)=d(\zeta),\qquad
+ (g_k)_*\mu_k=\mu_k,\qquad (g_\infty)_*\mu=\mu.
+\]
+Plus généralement, si \(\mu_\zeta\) est la loi des continuations d'une
+histoire \(\zeta\in H_k\), on a
+\[
+ (g_\infty)_*\mu_\zeta=\mu_{g_k\zeta}.
+\]
+\end{proposition}
+
+\begin{proof}
+La bijection des émissions conserve leur nombre avec multiplicités. La
+distribution uniforme des germes est également invariante. Chaque trajectoire
+et son image reçoivent donc le même produit de poids locaux
+\(1/d(\zeta)\). On obtient l'égalité des mesures à chaque niveau et dans
+chaque cylindre. La cohérence avec les troncatures définit \(g_\infty\),
+et l'unicité de la mesure déterminée par les cylindres prouve l'égalité
+à la limite. Le même argument, en commençant en \(\zeta\), prouve
+l'affirmation sur les continuations.
+\end{proof}
+
+On obtient ainsi la naturalité de l'arbre et de la mesure : un changement cohérent
+de représentation transporte les poids et n'oblige pas à les choisir à nouveau.
+La conservation des émissions et des multiplicités est une hypothèse essentielle de
+la proposition, et non une donnée ajoutée après la construction.
+
+\subsection{Récupération d'histoires et transport de l'appartenance}
+\begin{proposition}[Compatibilité des inverses et des collections]
+\label{lib07:prop-familias}
+Soient \(H_k\) les niveaux précédents et \(Y_k=\widehat q_k(H_k)\).
+Supposons que \(\widehat q_k:H_k\to Y_k\) soit bijectif et qu’il existe
+des troncatures \(s_{k+1,k}\) telles que
+\[
+ s_{k+1,k}\widehat q_{k+1}=\widehat q_k p_{k+1,k}.
+\]
+Alors les inverses finis induisent une bijection
+\[
+ \widehat q_\infty:\varprojlim H_k\longrightarrow\varprojlim Y_k.
+\]
+Si \(H=\varprojlim H_k\), \(Y=\varprojlim Y_k\) et \(\mathcal T(A)=\widehat q_\infty[A]\), l'application \(\mathcal T:\mathcal P(H)\to\mathcal P(Y)\) est bijective et préserve les réunions, les intersections, les compléments relatifs et l'appartenance. Chaque restriction \(A\to\mathcal T(A)\) est une bijection.
+\end{proposition}
+\begin{proof}
+En composant l’identité de compatibilité avec les inverses, on obtient
+\[
+ p_{k+1,k}\widehat q_{k+1}^{-1}
+   =\widehat q_k^{-1}s_{k+1,k}.
+\]
+Par conséquent, une collection compatible \(y=(y_k)\) détermine la collection
+compatible \(x=(\widehat q_k^{-1}(y_k))\). Les deux applications
+coordonnées sont inverses. L’image directe par une bijection a
+pour inverse l’image directe par la bijection inverse. Pour toute
+collection \((A_i)_{i\in I}\) de sous-ensembles de \(H\),
+\[
+ \begin{aligned}
+ \mathcal T\Bigl(\bigcup_i A_i\Bigr)&=\bigcup_i\mathcal T(A_i),\\
+ \mathcal T\Bigl(\bigcap_i A_i\Bigr)&=\bigcap_i\mathcal T(A_i),\\
+ \mathcal T(H\setminus A)&=Y\setminus\mathcal T(A).
+ \end{aligned}
+\]
+La première égalité utilise la définition de l'image. Pour la deuxième et la troisième, l'unicité de l'antécédent permet de transférer les conditions d'appartenance. Enfin, \(x\in A\) équivaut à \(\widehat q_\infty(x)\in\mathcal T(A)\), ce qui prouve également l'affirmation sur les restrictions.
+\end{proof}
+
+Le théorème de raffinement des routes~\ref{lib05:teo-rutas}
+fournit une réalisation de cette compatibilité sur les étiquettes
+arithmétiques et leurs retenues. Le résultat distingue la récupération
+de chaque état et la conservation des opérations sur les collections.
+Au niveau des amplitudes, le relèvement unitaire
+de~\ref{lib05:prop-unitaria} transporte en outre le produit scalaire.
+Au niveau probabiliste, la proposition
+\ref{prop:ch-naturalidad-medida} conserve les poids lorsque les
+émissions sont transportées avec leurs multiplicités.
+
+\subsection{Articulation avec la clôture généalogique du continu}
+La section~\ref{sec:cierre-cardinal-nativo} construit une clôture
+généalogique \(\mathfrak G\) et établit l’identité cardinale
+\(2^{\aleph_0}=\aleph_1\) sur son ensemble interne des parties. La clôture,
+le code générateur et l’histoire réalisée font partie de sa
+définition ; sa représentation ensembliste est établie après la
+construction généalogique, au moyen des opérations et des démonstrations
+incorporées dans cette section.
+
+La présente articulation incorpore les preuves de mémoire,
+de naturalité et de transport des collections qu’utilise cette relation avec
+la conservation. La chaîne démonstrative se trouve distinguée :
+les inverses retrouvent les états ; leur compatibilité retrouve les
+histoires ; la bijection transporte les opérations d’appartenance ;
+la clôture généalogique de la section~\ref{sec:cierre-cardinal-nativo} fixe le domaine
+de l’énoncé cardinal. Ainsi, la récupération et l’organisation
+des collections s’intègrent dans la double projection avec leurs
+objets, opérations et conclusions respectifs.

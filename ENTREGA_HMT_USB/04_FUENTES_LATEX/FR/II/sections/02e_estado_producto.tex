@@ -1,0 +1,86 @@
+% Fragmento de inserción breve. Desarrollo y procedencia en la misma carpeta.
+\subsubsection{Mémoire arithmétique du canal multiplicatif}
+\label{prd-arit:seccion}
+
+La conservation de la signature régionale se prolonge à l'évaluation
+arithmétique complète d'APP. Pour une position orientée
+\(x=(i,j,d)\in\{1,\ldots,9\}^2\times\{N,E,S,O\}\), soit
+\(\chi(x)=(a,b,\epsilon)\), où \(a\) est la coordonnée fixe,
+\(b\) la coordonnée mobile et \(\epsilon\) son orientation :
+\[
+ \chi(i,j,N)=(j,i,-1),\quad \chi(i,j,S)=(j,i,+1),\qquad
+ \chi(i,j,E)=(i,j,+1),\quad \chi(i,j,O)=(i,j,-1).
+\]
+L'étiquette d'axe \(\iota\in\{i,j\}\) conserve laquelle des
+deux coordonnées originales se déplace. En écrivant
+\(\langle b\rangle_9=1+((b-1)\bmod9)\), les opérateurs et
+l'évaluation sont
+\begin{align}
+ \overline P(a,b,\epsilon)&=(a,\langle b+\epsilon\rangle_9,\epsilon),
+ &\overline H(a,b,\epsilon)&=(a,b,-\epsilon),\label{prd-arit:PH}\\
+ n(a,b)&=ab,&r(a,b)&=\langle ab\rangle_9,\qquad
+ q(a,b)=\frac{ab-r(a,b)}9.\label{prd-arit:rq}
+\end{align}
+
+\begin{proposition}[Représentation exacte du transport arithmétique]
+\label{prd-arit:minimal}
+On a \(\chi P=\overline P\chi\) et
+\(\chi H=\overline H\chi\). La représentation \(\chi\)
+possède \(162\) états et est la moins fine des représentations
+stables sous \(P,H\) qui conservent le produit entier ou,
+de manière équivalente, le couple \((r,q)\). Conserver également \(\iota\)
+permet de retrouver les \(324\) positions orientées originales.
+\end{proposition}
+\begin{proof}
+L'avancée modifie seulement \(b\), et le demi-tour seulement
+\(\epsilon\), ce qui démontre les deux identités de transport.
+Les neuf observations \(n_k=n(\overline P^k\chi(x))\),
+\(0\leq k<9\), parcourent \(a,2a,\ldots,9a\). On retrouve ainsi
+\(a=\min_k n_k\), \(b=n_0/a\) et le signe par
+\((n_1/a-n_0/a)\bmod9\in\{1,8\}\). Toute équivalence stable
+conservant \(n\) conserve ces neuf observations et distingue donc
+tous les états \((a,b,\epsilon)\).
+L'identité \(n=r+9q\) démontre l'équivalence des deux
+évaluations. Chaque fibre de \(\chi\) contient les deux chemins
+transposés : \((i,j,d)\mapsto(j,i,d^\top)\), avec
+\(N^\top=O,O^\top=N,E^\top=S,S^\top=E\). L'étiquette d'axe distingue
+ces deux préimages et permet de reconstruire la position et la direction.
+\end{proof}
+
+Le sélecteur TRIT active le produit en \(t\equiv2,5,8\pmod9\),
+avant chaque avancée. Le demi-tour agit à l'achèvement de chaque
+intervalle de \(27\) instants. Si \(y_{t-1}\) désigne l'état arithmétique
+précédent, l'incrément et sa mémoire accumulée sont déterminés par
+\begin{equation}
+ \eta_q(t)=\mathbf1_{\{t\equiv2\ (3)\}}q(y_{t-1}),\qquad
+ \lambda_q(t)=\lambda_q(t-1)+\eta_q(t),\quad \lambda_q(0)=0.
+ \label{prd-arit:incremento}
+\end{equation}
+On a \(0\leq q(a,b)\leq a-1\). Pour inverser une
+mise à jour, on annule d'abord le demi-tour correspondant,
+puis l'avancée, et l'on soustrait enfin le quotient retrouvé de
+l'état précédent. Le registre conserve la phase, l'axe, l'ordre des événements et
+la mémoire ; \(\lambda_q\) est un cocycle additif de ce transport.
+
+Chaque bloc de \(27\) contient neuf avancées et parcourt une fois
+la coordonnée mobile. Le retour de position et d'orientation
+en \(54\), et de phase en \(108\), coexiste donc avec
+\begin{equation}
+ \lambda_q(108N)=NQ_\times^+(a),\qquad
+ Q_\times^+(a)=\frac{180a-4\sum_{b=1}^9r(a,b)}9,
+ \qquad N\geq0.
+ \label{prd-arit:retorno}
+\end{equation}
+En effet, chaque bloc somme les produits \(a,2a,\ldots,9a\) ;
+sommer \(n=r+9q\) sur les quatre blocs donne la formule. Si
+\(a\) est premier avec \(9\), les résidus ont pour somme \(45\), et
+\(Q_\times^+(a)=20(a-1)\). Dans la fenêtre \(j\), comptée à partir de
+\(j=0\), le signe relatif du calendrier est
+\(\sigma_j=(-1)^{\lfloor j/3\rfloor}\), et l'orientation
+effective est \(\epsilon_j=\epsilon_0\sigma_j\).
+La charge signée par \(\sigma_j\) s'annule ; la charge pondérée
+par l'orientation effective s'annule également lorsqu'elle est multipliée par
+\(\epsilon_0\). Le registre conserve l'orientation initiale, la charge
+accumulée et ses incréments. Ces quantités appartiennent
+au curseur multiplicatif ; les lecteurs d'une trajectoire qui
+alterne les deux feuillets agissent sur le registre de cette trajectoire.

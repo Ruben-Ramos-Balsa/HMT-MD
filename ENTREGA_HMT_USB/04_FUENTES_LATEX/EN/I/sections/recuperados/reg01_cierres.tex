@@ -1,0 +1,255 @@
+% BEGIN R28_REGIONAL_CLOSURES
+% Insert after REG01. This is not a standalone document.
+% Provenance: U012_biografia_estructural_pi.tex, lines 175--324.
+% Oriented witnesses: verificar_cierres_regionales.py; same problem,
+% representatives different from the walks printed in U012.
+% Emitter SHA-256: 42fdacab582de8e2d2cb7dfafc6204d200aef01249b3dcc37949e39507f066d8.
+\subsubsection{Block multigraph and five minimal regional closures}
+\label{regcl27:seccion}
+
+The \(468\) emissions in \(\mathcal U_6\), produced by the
+APP--TRIT--TPK emitter, determine a block multigraph. Identifying its
+regional anchors makes it possible to solve a joint edge-covering
+problem: to traverse the APP, propagation, autoscale, and each closure
+region's incidences within a single closed walk. The local six-junction
+cycle of Section~\ref{sec:rec27-empalmes} and these covers retain their
+respective traversal conditions.
+
+\paragraph{Block graph and exact phase quotient.}
+For \(U=(U_1,\ldots,U_6)\in\mathcal U_6\), define
+\begin{equation}
+ A(U)=(U_1,U_2,U_3),\qquad B(U)=(U_4,U_5,U_6).
+ \label{regcl27:mitades}
+\end{equation}
+The undirected multigraph \(\widetilde G\) has as vertices the triples
+occurring as \(A(U)\) or \(B(U)\), and one edge labelled by each \(U\),
+incident at those two triples. All \(468\) labels are retained:
+distinct emissions are not identified merely because they share
+endpoints or because one interchanges the halves of another.
+
+Internal phase acts on each triple by cyclic rotation:
+\begin{equation}
+ (a,b,c)\sim(b,c,a)\sim(c,a,b),\qquad
+ \operatorname{can}(a,b,c)
+ =\min_{\rm lex}\{(a,b,c),(b,c,a),(c,a,b)\}.
+ \label{regcl27:fase}
+\end{equation}
+The graph \(G\) replaces the endpoints of edge \(U\) by
+\(\operatorname{can}A(U)\) and \(\operatorname{can}B(U)\), retaining
+its label. The equivalence acts precisely by the three cyclic rotations
+of each vertex; every emission retains its identity as an edge.
+
+Enumeration from the same emitter and component searches give
+\begin{equation}
+\begin{array}{c|r|l}
+ & |V|&\text{component sizes}\\ \hline
+ \widetilde G&96&(28,28,28,4,4,4)\\
+ G&32&(28,4)
+\end{array}
+\label{regcl27:componentes}
+\end{equation}
+These data are obtained by collecting distinct endpoints, adding each
+incidence in both directions, and traversing each unvisited component
+by breadth-first search. Adjacency may be deduplicated when counting
+components, but parallel labels are retained when searching for
+closures with prescribed edges.
+
+\paragraph{APP anchor and regional numbering.}
+The three common edges are
+\begin{equation}
+\begin{aligned}
+ U_{\rm APP}&=903|850|850|252|109|252,\\
+ U_e&=850|963|890|149|252|212,\\
+ U_\varphi&=830|943|830|109|252|252.
+\end{aligned}
+\label{regcl27:anclajes}
+\end{equation}
+Fix the endpoint
+\(v_{\rm APP}=\operatorname{can}A(U_{\rm APP})=850|850|903\).
+For the five already constructed regions, use the following order,
+which places the transverse region in the fifth row:
+\begin{equation}
+\begin{array}{c|l|c|r}
+ i&U_\pi^{(i)}&\rho_i&m_i\\ \hline
+ 1&810|923|870|169|272|272&++&144\\
+ 2&810|983|810|169|272|272&++&144\\
+ 3&870|923|810|169|272|272&++&144\\
+ 4&870|923|810|418|674|521&--&144\\
+ 5&501|614|498|169|272|272&\perp&432
+\end{array}
+\label{regcl27:regiones}
+\end{equation}
+This numbering distinguishes the three \(++\) regions, the mutated
+return \( -- \), and the transverse region \(\perp\). Accordingly,
+\(\rho=(++ ,++ ,++ ,--,\perp)\) and
+\(m=(144,144,144,144,432)\) in this order; their sum remains \(1008\).
+
+\paragraph{Five complete witnesses with traversal directions.}
+In each table, row \(j\) means traversing the edge labelled \(e_j\)
+from \(v_{j-1}\) to \(v_j\). Endpoints are canonical phase representatives;
+since \(G\) is undirected, the pair \((v_{j-1},v_j)\) specifies
+the traversal direction of the labelled edge.
+Each table contains exactly eight edges and satisfies
+\(v_0=v_8=v_{\rm APP}\).
+
+The breadth-first search described in the proof yields the following
+witnesses, one for each set of four target edges. Minimality concerns
+length; several walks may attain that length.
+\paragraph{Witness \(i=1\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(109|252|252|850|903|850\)&\(109|252|252\)\\
+2&\(109|252|252\)&\(109|252|252|810|923|870\)&\(810|923|870\)\\
+3&\(810|923|870\)&\(810|923|870|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Witness \(i=2\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|810|983|810\)&\(810|810|983\)\\
+3&\(810|810|983\)&\(810|983|810|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Witness \(i=3\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+3&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+4&\(149|252|212\)&\(149|252|212|870|923|810\)&\(810|870|923\)\\
+5&\(810|870|923\)&\(870|923|810|169|272|272\)&\(169|272|272\)\\
+6&\(169|272|272\)&\(169|272|272|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Witness \(i=4\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+3&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+4&\(149|252|212\)&\(149|252|212|870|923|810\)&\(810|870|923\)\\
+5&\(810|870|923\)&\(870|923|810|418|674|521\)&\(418|674|521\)\\
+6&\(418|674|521\)&\(418|674|521|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Witness \(i=5\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(109|252|252|850|903|850\)&\(109|252|252\)\\
+2&\(109|252|252\)&\(109|252|252|501|614|498\)&\(498|501|614\)\\
+3&\(498|501|614\)&\(501|614|498|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{theorem}[Minimality of the five regional edge covers]
+\label{regcl27:minimalidad}
+For each \(i\in\{1,\ldots,5\}\), among closed walks in \(G\)
+traversing every edge of
+\[
+ E_i^*=\{U_{\rm APP},U_e,U_\varphi,U_\pi^{(i)}\}
+\]
+at least once, the minimum length, counting traversals with multiplicity,
+is eight. Vertices and edges may be repeated.
+\end{theorem}
+
+\begin{proof}
+Every closed walk traversing \(U_{\rm APP}\) passes through
+\(v_{\rm APP}\). Cyclic rotation of its step list allows it to start at
+that vertex without changing length or coverage. It therefore suffices
+to solve the problem with a fixed starting vertex.
+
+The search space is the finite set
+\[
+ \mathscr S_i=V(G)\times\mathcal P(E_i^*),
+ \qquad |\mathscr S_i|\le32\cdot16=512.
+\]
+The initial state is \(s_0=(v_{\rm APP},\varnothing)\), and the terminal
+state is \(s_*=(v_{\rm APP},E_i^*)\). Traversing an edge \(e\)
+incident at \(v\) towards its other endpoint \(v'\) updates the state by
+\begin{equation}
+ (v,M)\longmapsto\bigl(v',M\cup(E_i^*\cap\{e\})\bigr).
+ \label{regcl27:transicion-bfs}
+\end{equation}
+The mask records edge labels, not just endpoints; distinct parallel
+edges must therefore not be collapsed.
+
+Every transition has unit cost. A FIFO queue initialized at \(s_0\)
+extracts states in increasing distance, marks each state on its first
+visit, and stores its predecessor and traversed label.
+Equivalently, with \(\mathcal F_0=\{s_0\}\), the new layers are
+\[
+ \mathcal F_{k+1}
+ =\operatorname{Succ}(\mathcal F_k)
+   \setminus\bigcup_{j=0}^{k}\mathcal F_j.
+\]
+Induction shows that \(\mathcal F_k\) contains exactly the states whose
+minimum distance from \(s_0\) is \(k\). Finite enumeration over the
+specified emitter gives, for each of the five regions,
+\[
+ s_*\notin\bigcup_{k=0}^{7}\mathcal F_k,\qquad s_*\in\mathcal F_8,
+ \qquad (\ell_1,\ell_2,\ell_3,\ell_4,\ell_5)=(8,8,8,8,8).
+\]
+The tables exhibit the five upper bounds, including all four required
+labels in each case. Exhaustive exploration of the preceding layers
+proves the lower bound. Together they establish minimality for the
+declared problem.
+\end{proof}
+
+Length eight characterizes the joint coverage of four incidences in
+each closure region. The quotient retains emission labels and their
+junctions between phase classes; enriched temporal evolution also
+preserves orientation and memory. This description links all five
+regions to the same propagation, autoscale, and APP anchors and
+complements the local six-junction cycle. Coinductive prolongation
+retains its operators and cylinders together with these orientation
+and memory data.
+% END R28_REGIONAL_CLOSURES

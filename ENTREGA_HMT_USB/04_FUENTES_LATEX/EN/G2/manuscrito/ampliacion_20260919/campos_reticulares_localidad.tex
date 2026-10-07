@@ -1,0 +1,436 @@
+\section[Fields on the incidence lattice]{Generation and locality of fields on the incidence lattice}
+\label{sec:df-campos-reticulares}
+
+The lattice construction is carried out after the selection of the dodecaphase register and its incidences. The marked origin, the integral product and the parity form used by the state space arise from that construction. The operations producing the fields, their coefficients and their locality relations are made explicit below. The same lattice enters into state generation, products on the vacuum and commutators of all integer modes.
+
+\subsection{Location of the marked origin and persistence of incidence}
+
+% Fuentes: lean/incidencia/SelectedRegionalIncidence.lean;
+% deltas/union/ConcreteNativeFourPlusOne.lean y SelectedExceptionalChain.lean.
+% El antecedente SelectedFromRegionalInputs conserva en su propietario la
+% interfaz S8 no ordenada y Lean.ofReduceBool del selector terminal. Este
+% capítulo desarrolla sus salidas; no declara eliminadas esas dependencias.
+
+Write \(K_i\), \(0\leq i<12\), for the coordinates of the selected register. The two support readings are
+\begin{equation}
+ T_K=\{i:K_i\geq729\},\qquad
+ H_K=\{i:p_i+e_i-f_i-K_i<0\},
+ \label{eq:df-soportes-K}
+\end{equation}
+where \(p_i,e_i,f_i\) are the regional blocks used by the pre-carry reader. The upper support uses the integer threshold \(729\); the negative support uses the sign of the pre-carry before reduction. Two different operations on the same register are thus preserved.
+
+The selection already established gives
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+\]
+as the evaluation of the register, and produces the flag \(T_K\subset H_K\), with \(|T_K|=4\), \(|H_K|=6\). The regional propagation and self-scaling incidences, together with the APP support, determine the set
+\[
+ O_K=(E_{\mathrm{inc}}\cap F_{\mathrm{inc}})
+       \setminus(H_K\cup A_{\mathrm{inc}}).
+\]
+The incidence construction proves that \(O_K\) is a singleton. Its unique element, \(o\), fixes the marked origin preserved throughout what follows.
+
+In the concrete Golay realization, the support \(T_K\) corresponds to \(\{4,6,8,14\}\). The four hexads incident to this support have four octadic lifts; the complete octadic star has five elements. Their difference is a single additional octad. The support \(H_K\), in turn, has a unique octadic lift in the same realization. These properties arise from the concrete residual realization and preserve the regional origin of the selected support.
+
+The marked lattice neighbour \(\Lambda_o\) obtained from that incidence has rank \(24\), an integral even bilinear form, integral self-duality and quadratic minimum \(4\). The radial vector used by the marked construction has square \(54\). We denote by \(\langle x,y\rangle\in\mathbb Z\) the integral form of \(\Lambda_o\). The theorems of this section use precisely that lattice and that form, already constructed.
+
+\subsection{Parity cocycle and twisted lattice algebra}
+\label{subsec:df-cociclo}
+
+% Fuentes: deltas/voa/TriangularSignCocycle.lean,
+% WittLatticeCocycle.lean y WittComplexAlgebra.lean.
+
+Choose an integral basis \((b_i)_{i=1}^{r}\) of \(\Lambda_o\), with \(r=24\). This choice presents the coordinates of a lattice already obtained. Its Gram matrix is \(G_{ij}=\langle b_i,b_j\rangle\). For \(x=\sum_i x_i b_i\), \(y=\sum_i y_i b_i\), define
+\begin{equation}
+ \tau(x,y)=\sum_{i<j}x_iG_{ij}y_j\pmod2,
+ \qquad \varepsilon(x,y)=(-1)^{\tau(x,y)}.
+ \label{eq:df-cociclo}
+\end{equation}
+
+\begin{proposition}[Cocycle identity and parity commutator]
+\label{prop:df-cociclo}
+The following hold
+\begin{align}
+ \varepsilon(x,y)\varepsilon(x+y,z)
+ &=\varepsilon(y,z)\varepsilon(x,y+z),\label{eq:df-identidad-cociclica}\\
+ \varepsilon(x,y)\varepsilon(y,x)
+ &=(-1)^{\langle x,y\rangle},\label{eq:df-conmutador-cociclo}\\
+ \varepsilon(0,x)&=\varepsilon(x,0)=1.
+\end{align}
+\end{proposition}
+
+\begin{proof}
+The bilinearity of \(\tau\) in \(\mathbb F_2\) gives \(\tau(x,y)+\tau(x+y,z)=\tau(y,z)+\tau(x,y+z)\), and applying \(a\mapsto(-1)^a\) yields \eqref{eq:df-identidad-cociclica}. The symmetry of \(G\), together with the evenness of its diagonal, allows the two triangular sums to be combined:
+\[
+ \tau(x,y)+\tau(y,x)
+ =\sum_{i,j}x_iG_{ij}y_j
+ =\langle x,y\rangle\pmod2.
+\]
+This proves \eqref{eq:df-conmutador-cociclo}. The identities involving zero follow directly from \eqref{eq:df-cociclo}.
+\end{proof}
+
+The twisted complex algebra \(\mathbb C_{\varepsilon}[\Lambda_o]\) consists of finite linear combinations of symbols \(\mathbf e^x\), with product
+\begin{equation}
+ \mathbf e^x\mathbf e^y=\varepsilon(x,y)\mathbf e^{x+y}.
+ \label{eq:df-producto-torcido}
+\end{equation}
+The cocycle identity proves associativity, and \(\mathbf e^0\) is the unit. The notation \(\mathbf e^x\) denotes the basic element of charge \(x\) and preserves the full lattice label.
+
+\subsection{Oscillator space and Heisenberg representation}
+\label{subsec:df-osciladores}
+
+% Fuente: deltas/voa/LatticeOscillatorFock.lean.
+
+Let \(\mathfrak h=\mathbb C\otimes_{\mathbb Z}\Lambda_o\). The algebraic oscillator space is
+\[
+ \mathfrak h_-=
+ \bigoplus_{n\geq1}\mathfrak h\,t^{-n},
+ \qquad
+ M(1)=\operatorname{Sym}_{\mathbb C}(\mathfrak h_-).
+\]
+The support of each vector is finite, whereas the set of available frequencies includes all positive integers. The state space that simultaneously preserves oscillator occupation and lattice charge is
+\begin{equation}
+ V_{\Lambda_o}=M(1)\otimes_{\mathbb C}
+                  \mathbb C_{\varepsilon}[\Lambda_o],
+ \qquad \mathbf1=1\otimes\mathbf e^0.
+ \label{eq:df-espacio-estados}
+\end{equation}
+
+For \(x\in\Lambda_o\) and \(n\geq1\), the operator \(x(-n)\) multiplies by the generator \(x\,t^{-n}\). The operator \(x(n)\) is the derivation of \(M(1)\) determined by
+\begin{equation}
+ x(n)(y\,t^{-m})=n\,\delta_{n,m}\langle x,y\rangle.
+ \label{eq:df-derivacion-oscilatoria}
+\end{equation}
+Both act as the identity on the second factor of \eqref{eq:df-espacio-estados}. The zero mode acts on the charge through
+\[
+ x(0)(v\otimes\mathbf e^y)
+ =\langle x,y\rangle v\otimes\mathbf e^y.
+\]
+
+\begin{theorem}[Commutation relations and non-emptiness]
+\label{thm:df-heisenberg}
+For \(m,n\geq1\),
+\begin{align}
+ [x(n),y(-m)]&=n\delta_{n,m}\langle x,y\rangle I,
+ \label{eq:df-CCR}\\
+ [x(-n),y(-m)]&=0,
+ & [x(n),y(m)]&=0.
+\end{align}
+Moreover, \(x(n)\mathbf1=0\) and \(\mathbf1\ne0\).
+\end{theorem}
+
+\begin{proof}
+If \(D\) is a derivation and \(M_a\) multiplication by \(a\), the Leibniz rule gives \([D,M_a](v)=D(a)v\). Applied to \eqref{eq:df-derivacion-oscilatoria}, it yields \eqref{eq:df-CCR}. The multiplication operators commute because the symmetric algebra is commutative; the coordinate derivations commute on the generators and, by Leibniz, on all monomials. Annihilation of the vacuum follows by differentiating the unit. Finally, the functional extracting the coefficient of the empty monomial and zero charge takes the value \(1\) on \(\mathbf1\), so the vacuum is nonzero. Extension by tensor product preserves all the identities.
+\end{proof}
+
+Each oscillator monomial has an integer weight \(\operatorname{wt}(a)=\sum_{n,i}n a_{n,i}\), where \(a_{n,i}\) are its occupations. This grading provides finite bounds for the sums occurring in the field coefficients.
+
+\subsection{Creation and annihilation coefficients in all degrees}
+\label{subsec:df-exponenciales}
+
+% Fuentes: deltas/campos/LatticeCreationExponential.lean,
+% LatticeAnnihilationExponential.lean y LatticeAnnihilationEnergy.lean.
+
+The two formal operator series are constructed
+\begin{equation}
+ E^-_x(z)=\exp\!\left(\sum_{n\geq1}\frac{x(-n)}n z^n\right)
+         =\sum_{d\geq0}C_x(d)z^d,
+ \label{eq:df-creacion}
+\end{equation}
+\begin{equation}
+ E^+_x(s)=\exp\!\left(-\sum_{n\geq1}\frac{x(n)}n s^n\right)
+         =\sum_{r\geq0}A_x(r)s^r.
+ \label{eq:df-aniquilacion}
+\end{equation}
+These exponentials are formal operations on the modes already constructed. Each coefficient is defined by a finite sum. In particular, if \(P_x(z)=\sum_{n\geq1}x(-n)z^n/n\), then
+\begin{equation}
+ C_x(d)=\sum_{q=0}^{d}\frac1{q!}[z^d]P_x(z)^q,
+ \label{eq:df-coeficiente-creacion}
+\end{equation}
+and the analogous formula for \(A_x(r)\) is obtained by substituting the annihilation potential. The composition order of the endomorphisms is preserved in every power.
+
+\begin{lemma}[Stabilization of the coefficients]
+\label{lem:df-estabilizacion} For any formal potential \(P\) with zero constant term, \([z^d]P^q=0\) when \(q>d\). Therefore, extending the upper bound of \eqref{eq:df-coeficiente-creacion} to any \(N\geq d\) preserves its value. Moreover,
+\[
+ C_x(0)=A_x(0)=I,
+ \qquad A_x(r)1=0\quad(r>0).
+\]
+If \(v\) has weight at most \(N\), then \(A_x(r)v=0\) for \(r>N\).
+\end{lemma}
+
+\begin{proof}
+Each factor of \(P\) has degree at least one, so a product of \(q\) factors has degree at least \(q\). This argument uses only the grading and also applies to noncommutative coefficients. The degree-zero identities come from the empty power. Every nonempty composition of annihilation modes annihilates the unit. Finally, a term of degree \(r\) in the annihilation potential reduces the oscillator weight by \(r\). A reduction exceeding the initial weight gives zero; by linearity, the conclusion holds throughout the subspace of weight at most \(N\).
+\end{proof}
+
+The first coefficients illustrate the normalization:
+\begin{align*}
+ C_x(1)&=x(-1),&
+ C_x(2)&=\tfrac12\bigl(x(-1)^2+x(-2)\bigr),\\
+ A_x(1)&=-x(1),&
+ A_x(2)&=\tfrac12\bigl(x(1)^2-x(2)\bigr).
+\end{align*}
+Each denominator arises from the frequency or the order of the formal power. The Gram form entering the commutators remains the integral form of the marked lattice.
+
+\subsection{Charge field and Laurent truncation bound}
+\label{subsec:df-campo-carga}
+
+% Fuente: deltas/campos/LatticeChargedVertexField.lean.
+
+The field associated with a charge \(x\in\Lambda_o\) is written
+\begin{equation}
+ Y_x(z)=E^-_x(z)E^+_x(z^{-1})\,e_x z^{x(0)},
+ \qquad Y_x(z)=\sum_{k\in\mathbb Z}Y_x[k]z^k,
+ \label{eq:df-campo}
+\end{equation}
+where \(e_x\mathbf e^y=\varepsilon(x,y)\mathbf e^{x+y}\). The following formula defines its coefficients on a monomial basis and makes the finiteness of each operation explicit.
+
+\begin{definition}[Field coefficient on a charged state]
+If \(v\) is a monomial of weight \(N\), define
+\begin{equation}
+ Y_x[k](v\otimes\mathbf e^y)
+ =\varepsilon(x,y)
+ \sum_{j=0}^{N}
+ C_x\bigl(k-\langle x,y\rangle+j\bigr)A_x(j)v
+       \otimes\mathbf e^{x+y},
+ \label{eq:df-coeficiente-campo}
+\end{equation}
+with the convention \(C_x(d)=0\) for \(d<0\). It extends linearly to \(V_{\Lambda_o}\).
+\end{definition}
+
+\begin{theorem}[Stability, truncation and creation of charge states]
+\label{thm:df-campo-truncamiento} The formula \eqref{eq:df-coeficiente-campo} is independent of any weight bound greater than \(N\). We have
+\begin{equation}
+ k<\langle x,y\rangle-N
+ \quad\Longrightarrow\quad
+ Y_x[k](v\otimes\mathbf e^y)=0.
+ \label{eq:df-truncamiento-laurent}
+\end{equation}
+Each state therefore admits a lower Laurent bound. On the vacuum,
+\begin{equation}
+ Y_x[k]\mathbf1=
+ \begin{cases}
+ C_x(k)1\otimes\mathbf e^x,&k\geq0,\\
+ 0,&k<0.
+ \end{cases}
+ \label{eq:df-campo-vacio}
+\end{equation}
+In particular, \(Y_x[0]\mathbf1=1\otimes\mathbf e^x\).
+\end{theorem}
+
+\begin{proof}
+Extending the bound adds terms \(A_x(j)v\) with \(j>N\), which vanish by Lemma~\ref{lem:df-estabilizacion}. If the inequality in \eqref{eq:df-truncamiento-laurent} holds, all indices \(k-\langle x,y\rangle+j\), with \(j\leq N\), are negative; every summand vanishes. A finite linear combination of monomials retains the smallest of its bounds, proving the assertion for any state. On \(\mathbf1\), only \(j=0\) remains, and \(\varepsilon(x,0)=1\), \(\langle x,0\rangle=0\). We obtain \eqref{eq:df-campo-vacio}.
+\end{proof}
+
+\begin{theorem}[Generation of the entire lattice state space]
+\label{thm:df-generacion-campos} The subspace generated from the vacuum by finite compositions of the operators \(Y_x[0]\), \(x\in\Lambda_o\), and all creation modes \(b_i(-n)\), \(n\geq1\), is \(V_{\Lambda_o}\).
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:df-campo-vacio}, applying \(Y_x[0]\) to the vacuum produces the ground state of any charge \(x\). The creation operators multiply by the generators of the symmetric algebra; finite compositions of them produce all monomials on that ground state. Oscillator monomials multiplied by the elements \(\mathbf e^x\) constitute an algebraic basis of \eqref{eq:df-espacio-estados}. Their linear span is therefore the entire space. The argument covers every frequency, finite occupation and lattice charge.
+\end{proof}
+
+\begin{corollary}[Determination of intertwiners by the vacuum]
+Two endomorphisms of \(V_{\Lambda_o}\) that commute with all generators of the preceding theorem and agree on the vacuum are equal.
+\end{corollary}
+
+\begin{proof}
+Commutation transports equality on the vacuum to every finite composition of generators. Total generation and linearity extend that equality to the entire space.
+\end{proof}
+
+\subsection{Scalar contraction and normal ordering of products}
+\label{subsec:df-contraccion}
+
+% Fuentes: deltas/generacion/LatticeExponentialContraction.lean,
+% LatticeContractionFactor.lean, LatticeNormalOrdering.lean;
+% deltas/productos/LatticeVacuumContraction.lean.
+
+The integer product \(p=\langle x,y\rangle\) fixes a scalar sequence by the recurrence
+\begin{equation}
+ s_p(0)=1,\qquad
+ (r+1)s_p(r+1)=(r-p)s_p(r).
+ \label{eq:df-contraccion-recurrencia}
+\end{equation}
+The recurrence determines each coefficient from the preceding one. Its closed expression is \(s_p(r)=(-1)^r\binom pr\), using the generalized integer binomial coefficient. The first terms are
+\[
+ 1,\quad -p,\quad \frac{p(p-1)}2,\quad
+ -\frac{p(p-1)(p-2)}6.
+\]
+
+\begin{proposition}[Formal contraction factor]
+\label{prop:df-factor-contraccion} The series \(S_p(u)=\sum_{r\geq0}s_p(r)u^r\) satisfies
+\begin{equation}
+ (1-u)S_p'(u)=-pS_p(u),\qquad S_p(0)=1.
+ \label{eq:df-ecuacion-factor}
+\end{equation}
+It is the unique formal solution of these conditions. Moreover,
+\[
+ S_{p+q}=S_pS_q,qquad S_0=1,qquad S_1=1-u,qquad
+ S_pS_{-p}=1.
+\]
+For \(p\geq0\), \(S_p(u)=(1-u)^p\), and its coefficients of degree greater than \(p\) vanish.
+\end{proposition}
+
+\begin{proof}
+Comparing the coefficient of \(u^r\) in \eqref{eq:df-ecuacion-factor} reproduces exactly \eqref{eq:df-contraccion-recurrencia}. Since \(r+1\ne0\), the coefficients are determined inductively. The Leibniz rule shows that \(S_pS_q\) satisfies the same equation as \(S_{p+q}\) and has the same constant term; uniqueness gives the multiplicative identity. The cases \(0,1\) are verified directly. The inverse identity follows from the case \(q=-p\), and natural powers are obtained by induction. If \(p\) is natural, step \(r=p\) of the recurrence produces zero and subsequent steps preserve that zero.
+\end{proof}
+
+\begin{theorem}[Normal ordering in all degrees]
+\label{thm:df-ordenacion} The series constructed from the modes satisfy
+\begin{equation}
+ E^+_x(s)E^-_y(z)
+ =S_{\langle x,y\rangle}(sz),E^-_y(z)E^+_x(s).
+ \label{eq:df-ordenacion-normal}
+\end{equation}
+In coefficients, for \(r,d\geq0\),
+\begin{equation}
+ A_x(r)C_y(d)
+ =\sum_{i=0}^{\min(r,d)}
+ s_{\langle x,y\rangle}(i),
+ C_y(d-i)A_x(r-i).
+ \label{eq:df-ordenacion-coeficientes}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let \(Q_x(s)=-\sum_{n\geq1}x(n)s^n/n\) and \(P_y(z)=\sum_{m\geq1}y(-m)z^m/m\). By \eqref{eq:df-CCR},
+\[
+ [Q_x(s),P_y(z)]
+ =-\langle x,y\rangle\sum_{n\geq1}\frac{(sz)^n}{n}\,I.
+\]
+The commutator is central. The exponential identity for two potentials with central commutator is proved here coefficient by coefficient: commuting a power of \(Q_x\) through a power of \(P_y\) adds the scalar terms of that commutator; the sums in each bidegree are finite by Lemma~\ref{lem:df-estabilizacion}. The resulting scalar factor has constant term one and satisfies \eqref{eq:df-ecuacion-factor}, with \(p=\langle x,y\rangle\); by the uniqueness in Proposition~\ref{prop:df-factor-contraccion}, it is \(S_p(sz)\). This proves \eqref{eq:df-ordenacion-normal}. Extracting the coefficient \(s^rz^d\) gives \eqref{eq:df-ordenacion-coeficientes}; the contraction factor consumes the same degree \(i\) in both variables, which yields the bound \(i\leq\min(r,d)\).
+\end{proof}
+
+\begin{theorem}[Exact contraction of states created from the vacuum]
+\label{thm:df-contraccion-vacio} For every pair of charges \(x,y\) and all degrees \(r,d\),
+\begin{equation}
+ A_x(r)C_y(d)1=
+ \begin{cases}
+ s_{\langle x,y\rangle}(r),C_y(d-r)1,&r\leq d,\\
+ 0,&r>d.
+ \end{cases}
+ \label{eq:df-contraccion-vacio}
+\end{equation}
+On the diagonal \(r=d\), the result is \(s_{\langle x,y\rangle}(r)1\). If \(\langle x,y\rangle=p\geq0\), it also vanishes for \(r>p\).
+\end{theorem}
+
+\begin{proof}
+We evaluate \eqref{eq:df-ordenacion-coeficientes} on \(1\). Lemma~\ref{lem:df-estabilizacion} annihilates all summands with \(r-i>0\). Only \(i=r\) remains, provided that \(r\leq d\). For \(r=d\), \(C_y(0)=I\). The final vanishing follows from the polynomial bound of \(S_p\).
+\end{proof}
+
+For example, \(A_x(1)C_y(1)1=-\langle x,y\rangle1\). For \(p=-1\), the recurrence gives \(s_{-1}(r)=1\) in all degrees; for \(p=2\), it gives \((1,-2,1,0,\ldots)\). These two evaluations exhibit, respectively, a contraction of unbounded order and a finite polynomial cancellation, both determined by the same integral lattice form.
+
+\subsection{Mixed commutator in all integer modes}
+\label{subsec:df-conmutador-mixto}
+
+% Fuentes: deltas/integracion/LatticePositiveMixedFields.lean,
+% LatticeNegativeMixedFields.lean y LatticeAllMixedFields.lean.
+
+For \(x\in\Lambda_o\), write \(H_x(m)=x(m)\), with \(m\in\mathbb Z\), including negative creation modes, the zero charge mode and positive annihilation modes.
+
+\begin{theorem}[Integral mixed commutator]
+\label{thm:df-conmutador-mixto} For all charges \(x,y\) and all integers \(m,k\),
+\begin{equation}
+ [H_x(m),Y_y[k]]
+ =\langle x,y\rangle,Y_y[k-m].
+ \label{eq:df-conmutador-mixto}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We treat the three signs of \(m\) separately, preserving in each case the field coefficients of \eqref{eq:df-coeficiente-campo}.
+
+If \(m>0\), the Heisenberg relation gives
+\[
+ [x(m),C_y(d)]=
+ \begin{cases}
+ \langle x,y\rangle C_y(d-m),&d\geq m,\\
+ 0,&d<m.
+ \end{cases}
+\]
+Positive modes commute with the annihilation coefficients and with the charge shift. Commuting term by term in \eqref{eq:df-coeficiente-campo} decreases the creation degree by \(m\), which amounts to replacing \(k\) by \(k-m\). The weight cutoff remains valid because annihilation decreases the weight.
+
+If \(m=0\), the field shifts the charge \(z\) to \(y+z\). The difference between the zero-mode eigenvalues is \(\langle x,y+z\rangle-\langle x,z\rangle=\langle x,y\rangle\). Oscillator operators preserve charge, yielding \eqref{eq:df-conmutador-mixto} with \(k-m=k\).
+
+Finally, let \(m=-a\), with \(a>0\). Creation modes commute with one another, whereas the relation derived from \eqref{eq:df-CCR} and \eqref{eq:df-aniquilacion} is
+\[
+ [x(-a),A_y(j)]=
+ \begin{cases}
+ \langle x,y\rangle A_y(j-a),&j\geq a,\\
+ 0,&j<a.
+ \end{cases}
+\]
+If the initial state has weight at most \(N\), after creating mode \(-a\) it has weight at most \(N+a\). We use this common cutoff in both terms of the commutator. Summands with \(j<a\) vanish; we reindex the remaining ones by \(j=r+a\), \(0\leq r\leq N\). The creation degree becomes \(k-\langle y,z\rangle+r+a\), exactly the field coefficient with index \(k+a=k-m\). The identity is proved on charged monomial states and extends by linearity to the whole space.
+\end{proof}
+
+The shift of the field index correctly distinguishes the orientation of the modes: a positive mode subtracts its frequency, a negative mode adds it and the zero mode preserves the index. The three cases realize a single identity in \(\mathbb Z\).
+
+\subsection{Mixed locality by coefficientwise cancellation}
+\label{subsec:df-localidad-mixta}
+
+% Fuentes: deltas/integracion/LatticeMixedLocalityCriterion.lean,
+% LatticeMixedLocality.lean y SelectedMixedFieldLocality.lean.
+
+Consider the Heisenberg field \(H_x(z)=\sum_{m\in\mathbb Z}H_x(m)z^{-m-1}\). For a bivariate series with coefficients \(F(a,b)\), multiplication by \(z-w\) acts as
+\begin{equation}
+ (\mathcal C F)(a,b)=F(a-1,b)-F(a,b-1).
+ \label{eq:df-operador-cruce}
+\end{equation}
+The ordered compositions of the two fields have coefficients
+\[
+ F(a,b)=H_x(-a-1)Y_y[b],\qquad
+ G(a,b)=Y_y[b]H_x(-a-1).
+\]
+
+\begin{theorem}[Mixed locality of order one]
+\label{thm:df-localidad-mixta} The constructed fields satisfy
+\begin{equation}
+ (z-w)H_x(z)Y_y(w)=(z-w)Y_y(w)H_x(z).
+ \label{eq:df-localidad-mixta}
+\end{equation}
+The equality is an identity of endomorphism coefficients on all of \(V_{\Lambda_o}\).
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:df-operador-cruce}, coefficient \((a,b)\) of the difference is
+\[
+ [H_x(-a),Y_y[b]]-[H_x(-a-1),Y_y[b-1]].
+\]
+Theorem~\ref{thm:df-conmutador-mixto} turns both terms into \(\langle x,y\rangle Y_y[a+b]\). Their difference is zero for all integers \(a,b\). The identity holds in the endomorphisms, hence simultaneously for all states.
+\end{proof}
+
+\subsection{Locality of charged fields and preservation of the origin}
+\label{subsec:df-localidad-cargada}
+
+% Fuentes: deltas/localidad/LatticeFactorConvolution.lean,
+% LatticeChargedLocality.lean, LatticeChargedLocalityFull.lean,
+% SelectedFieldLocality.lean y deltas/integracion/SelectedMixedFieldLocality.lean.
+
+Normal ordering also proves locality for two charge fields. Let \(p=\langle x,y\rangle\) and \(N_p=\max(0,-p)\). The contraction factor for the two orders is expanded in the formal regions \(w/z\) and \(z/w\); their relative parity is fixed by \eqref{eq:df-conmutador-cociclo}.
+
+\begin{theorem}[Uniform locality of charged fields]
+\label{thm:df-localidad-cargada}
+For arbitrary \(x,y\in\Lambda_o\),
+\begin{equation}
+ (z-w)^{N_p}Y_x(z)Y_y(w)
+ =(z-w)^{N_p}Y_y(w)Y_x(z),
+ \qquad N_p=\max(0,-\langle x,y\rangle).
+ \label{eq:df-localidad-cargada}
+\end{equation}
+The exponent depends on the charges and is valid for all states.
+\end{theorem}
+
+\begin{proof}
+On a state of bounded weight, products of field coefficients are expressed through \eqref{eq:df-ordenacion-coeficientes}, charge shifts and the cocycle. The sums for each coefficient are finite: annihilation has a weight cutoff, and the two variables of the ordered product have a lower bound. The cocycle identity combines the shifts into the same charge element \(x+y\), and the commutator identity supplies the factor \((-1)^p\) between the two orders.
+
+The resulting scalar factors are the two expansions of \((z-w)^p\). If \(p\geq0\), both are the same polynomial and agree without additional multiplication. If \(p<0\), multiplication by \((z-w)^{-p}\) transforms both expansions into the factor one. Formally, each application of \(\mathcal C\) raises the exponent of both expansions by one; after \(-p\) applications the exponent reaches zero. This cancellation is independent of the chosen weight cutoff and of the charge of the state on which the fields act. Thus \eqref{eq:df-localidad-cargada} holds on every charged monomial state, and linearity extends it to \(V_{\Lambda_o}\).
+\end{proof}
+
+\begin{theorem}[Conservative composition of incidence, generation and locality]
+\label{thm:df-composicion-campos} With the origin \(o\) produced by the incidence of the selected register fixed, the same space \(V_{\Lambda_o}\) jointly satisfies: generation from the vacuum in Theorem~\ref{thm:df-generacion-campos}, products in all degrees in Theorem~\ref{thm:df-contraccion-vacio}, charged locality in \eqref{eq:df-localidad-cargada} and mixed locality in \eqref{eq:df-localidad-mixta}. Its integral form, cocycle, vacuum and charge operators are those defined from \(\Lambda_o\) in this section.
+\end{theorem}
+
+\begin{proof}
+All the preceding statements are quantified over the same lattice and the same integral form. When specialized to the origin \(o\) already selected, their objects coincide by definition: the cocycle uses the basis of \(\Lambda_o\), the oscillators use its Gram form, the fields use those oscillators and that cocycle, and the products use those same field coefficients. The conjunction of the theorems therefore preserves the incidence flag of \eqref{eq:df-soportes-K} and all dependencies that determined the origin. No specialization introduces a new lattice choice.
+\end{proof}
+
+The demonstrative chain precisely distinguishes its operations: regional blocks determine prefixes, cylinders and signatures; dodecaphase selection and incidence produce the lattice origin; the lattice determines the integral form and cocycle; these fix the modes, fields and their products. The resulting field structure is thus endowed with total generation and locality identities in the full algebraic space. The chapters devoted to reconstructing the vertex-operator structure, the twisted sector and the exceptional realization use these results with their respective additional hypotheses, preserving this same generative provenance.

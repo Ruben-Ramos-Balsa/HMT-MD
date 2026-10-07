@@ -1,0 +1,134 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N74 --- Monodromía de nueve puertas\\
+\large La raíz vuelve; el borde recuerda}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N74 prueba la lectura sugerida por la novena puerta: la torre no es una sucesión plana ni una periodicidad ordinaria. Es una monodromía de nueve fases. La fase \(g(K)=K\bmod9\) retorna cada nueve puertas, pero el estado de frontera no retorna idéntico: vuelve cargado por carry, cola y supervivencia. La ley visible es: \(\varphi\) fija el eje, \(\pi/e\) forman el espejo móvil, y el futuro selecciona la orientación. La novena puerta no crea la ley; la hace visible.
+\end{abstract}
+
+\section{Ley de fase}
+
+Definimos:
+\[
+g(K)=K\bmod9,\qquad 0\equiv9.
+\]
+Entonces:
+\[
+\boxed{
+g(K+9)=g(K).
+}
+\]
+Pero la frontera no es periódica:
+\[
+\boxed{
+\mathcal S_{K+9}\neq \mathcal S_K\quad\text{en general}.
+}
+\]
+Así, la torre es:
+\[
+\boxed{
+\text{monodromía, no periodicidad.}
+}
+\]
+
+\section{Perfil por fase}
+
+\[
+\begin{array}{c|c|c|c|c}
+\text{fase}&\#&t&\#\text{orient.}&h_{\max}\\
+\hline
+1 & 1 & 10 & 1 & 2 \\
+2 & 3 & 11,20,21 & 3 & 3 \\
+3 & 1 & 12 & 1 & 2 \\
+4 & 2 & 13,23 & 2 & 3 \\
+5 & 3 & 5,14,24 & 3 & 2 \\
+6 & 3 & 6,15,25 & 3 & 3 \\
+7 & 2 & 7,16 & 2 & 3 \\
+8 & 2 & 8,17 & 2 & 3 \\
+9 & 1 & 9 & 1 & 2 \\
+\end{array}
+\]
+
+\section{Retorno \(t\to t+9\)}
+
+\[
+\begin{array}{c|c|c|c|c|c|c}
+t&t+9&K\bmod9&\text{tipo}_t&\text{tipo}_{t+9}&\varphi=&\pi+e=\\
+\hline
+5 & 14 & 5 & orientation_gate & orientation_gate & False & False \\
+6 & 15 & 6 & orientation_gate & orientation_gate & False & False \\
+7 & 16 & 7 & orientation_gate & orientation_gate & False & False \\
+8 & 17 & 8 & orientation_gate & orientation_gate & False & False \\
+11 & 20 & 2 & orientation_gate & orientation_gate & False & False \\
+12 & 21 & 3 & orientation_gate & orientation_gate & False & False \\
+14 & 23 & 5 & orientation_gate & orientation_gate & False & False \\
+15 & 24 & 6 & orientation_gate & orientation_gate & False & False \\
+16 & 25 & 7 & orientation_gate & orientation_gate & False & False \\
+\end{array}
+\]
+
+La fase retorna, pero los valores de frontera no se repiten. Eso es memoria de carry.
+
+\section{Puerta de orientación}
+
+De N73:
+\[
+q=u^\pi+u^e+u^\varphi,\qquad
+a=u^\pi+u^e-u^\varphi,
+\]
+por tanto:
+\[
+\boxed{
+u^\varphi=2(q-a),
+\qquad
+u^\pi+u^e=q-u^\varphi.
+}
+\]
+Si hay ambigüedad local, sólo puede vivir en el reparto \(\pi/e\). Por eso:
+\[
+\boxed{
+\varphi=\text{eje fijo},
+\qquad
+\pi/e=\text{espejo móvil}.
+}
+\]
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: la ley correcta es de nueve fases con monodromía de carry.}
+}
+\]
+\[
+\boxed{
+\text{verde: la novena puerta es una puerta de orientación visible, no un stutter.}
+}
+\]
+\[
+\boxed{
+\text{verde: la raíz vuelve y el borde recuerda.}
+}
+\]
+\[
+\boxed{
+\text{amarillo: convertir esta monodromía finita auditada en teorema infinito.}
+}
+\]
+\end{document}

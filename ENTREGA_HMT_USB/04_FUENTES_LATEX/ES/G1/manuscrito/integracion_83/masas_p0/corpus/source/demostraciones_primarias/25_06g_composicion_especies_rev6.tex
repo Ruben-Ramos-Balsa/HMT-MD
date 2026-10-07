@@ -1,0 +1,716 @@
+\chapter{Composición de rutas, registros y firmas}
+\label{chap:composicion-especies-rev6}
+\index{composición de rutas}
+\index{composición de registros}
+\index{mesón!expresión composicional}
+\index{barión!expresión composicional}
+
+Una especie compuesta no puede entrar en la ley de masas como un nombre al
+que se asigna retrospectivamente una fila de cinco enteros. Antes de la firma
+debe existir un objeto que pueda componerse. El atlas del
+\cref{chap:atlas-genealogia-masas} proporciona el alfabeto finito; la
+extensión superviviente y el registro del
+\cref{chap:extension-ruta-caracter} proporcionan la memoria que puede
+componerse. La cuestión de este capítulo es construir el estrato intermedio
+sin consultar masas objetivo:
+\[
+\begin{gathered}
+ \text{configuración composicional tipada}
+ \longrightarrow
+ \text{registros completos de sus constituyentes}\\
+ \longrightarrow
+ \text{registro compuesto}
+ \longrightarrow
+ \ZZ^5.
+\end{gathered}
+\]
+
+El orden de las flechas es parte del resultado. Las expresiones se forman
+antes de asignarles una realización física; los registros se componen antes
+de extraer la firma; la firma se evalúa mediante el carácter sólo después de
+haber compuesto la memoria. De este modo, el dominio compuesto no queda
+reducido a las especies incluidas en una tabla metrológica.
+
+\section{Clasificación interna y gramática composicional}
+\label{sec:alfabeto-composicional-rev6}
+
+Sea
+\[
+ \mathcal C_{81}=I_9\times I_9,
+ \qquad I_9=\{1,\ldots,9\},
+\]
+el atlas de celdas, y sea
+\[
+ \rho(r,c)=(10-r,10-c)
+\]
+su inversión central. Denotamos por
+\(\mathcal L,\mathcal N,\mathcal D,\mathcal U\) los subconjuntos de
+leptones cargados, neutrinos, quarks de tipo abajo y quarks de tipo arriba,
+respectivamente, y ponemos
+\[
+ \mathcal Q=\mathcal D\sqcup\mathcal U.
+\]
+Cada celda posee un nivel combinatorio
+\(\operatorname{gen}(x)\). En el sector quark se conserva además el residuo
+de color
+\[
+ \kappa(x)=r(x)-c(x)\pmod3.
+\]
+Escribimos
+\[
+ \mathcal Q_a=\{q\in\mathcal Q:\kappa(q)=a\},
+ \qquad a\in\mathbb Z/3\mathbb Z.
+\]
+Por la \cref{prop:color-atlas},
+\[
+ |\mathcal Q_0|=|\mathcal Q_1|=|\mathcal Q_2|=12.
+\]
+
+\begin{definition}[Dual formal e identidad de celda]
+\label{def:dual-identidad-composicional}
+Para una sección de celda orientada \(x\), su dual formal \(x^\vee\) invierte
+la orientación de carga y de color, y tiene soporte \(\rho(x)\). La
+notación conserva la distinción
+\[
+ x^\vee\ne \rho(x)
+\]
+cuando \(\rho(x)\) se considera como celda sin orientación. Para cada
+\(x\in\mathcal C_{81}\), denotamos por
+\(\operatorname{id}_x:x\to x\) la flecha identidad. El conjunto de
+identidades es
+\[
+ \mathfrak I
+ :=\{\operatorname{id}_x:x\in\mathcal C_{81}\}.
+\]
+\end{definition}
+
+La identidad \(\operatorname{id}_x\) es una flecha neutra del sistema
+composicional.
+No es, por esa sola condición, una realización de un bosón neutro. Del mismo
+modo, el dual formal incorpora orientación y no puede sustituirse por una
+segunda celda desnuda.
+
+\begin{definition}[Expresiones mesónicas y bariónicas]
+\label{def:expresiones-mesonicas-barionicas}
+El conjunto de expresiones mesónicas neutras en color es
+\[
+ \mathfrak M
+ :=
+ \left\{
+   M(q,q')=q\otimes{(q')}^\vee:
+   q,q'\in\mathcal Q,\ \kappa(q)=\kappa(q')
+ \right\}.
+\]
+Los pares son ordenados. Su residuo total es
+\(\kappa(q)-\kappa(q')=0\).
+
+El conjunto de expresiones bariónicas con posiciones de color fijadas es
+\[
+ \mathfrak B
+ :=
+ \mathcal Q_0\times\mathcal Q_1\times\mathcal Q_2,
+\]
+y escribimos
+\[
+ B(q_0,q_1,q_2)=q_0\otimes q_1\otimes q_2.
+\]
+Su neutralidad residual es la identidad
+\[
+ 0+1+2=0\pmod3.
+\]
+\end{definition}
+
+Estas expresiones son objetos sintácticos tipados. En particular, no se ha
+tomado todavía un cociente por permutaciones, espín, sabor, estadística,
+energía de enlace o equivalencia dinámica.
+
+\begin{definition}[Flechas cargadas compatibles]
+\label{def:flechas-cargadas-compatibles}
+Las flechas leptónicas orientadas son
+\[
+ \mathfrak A_\ell
+ :=
+ \left\{
+ (x,y)\in
+   (\mathcal L\times\mathcal N)
+   \sqcup
+   (\mathcal N\times\mathcal L):
+ \operatorname{gen}(x)=\operatorname{gen}(y)
+ \right\}.
+\]
+Las flechas quark orientadas son
+\[
+ \mathfrak A_q
+ :=
+ \left\{
+ (x,y)\in
+   (\mathcal U\times\mathcal D)
+   \sqcup
+   (\mathcal D\times\mathcal U):
+ \begin{array}{l}
+ \operatorname{gen}(x)=\operatorname{gen}(y),\\[-2pt]
+ \kappa(x)=\kappa(y)
+ \end{array}
+ \right\}.
+\]
+Ponemos
+\[
+ \mathfrak A_{\rm ch}:=\mathfrak A_\ell\sqcup\mathfrak A_q.
+\]
+\end{definition}
+
+La igualdad de nivel tipa la transición en ambos sectores; la igualdad de
+color se exige además en el sector quark. La orientación distingue \(x\to y\)
+de \(y\to x\).
+
+\begin{definition}[Sistema finito de composiciones tipadas]
+\label{def:gramatica-celular-compuesta}
+El sistema composicional finito es la unión disjunta tipada
+\[
+ \mathfrak G_{\rm comp}
+ :=
+ \mathcal C_{81}
+ \sqcup\mathfrak I
+ \sqcup\mathfrak M
+ \sqcup\mathfrak B
+ \sqcup\mathfrak A_{\rm ch}.
+\]
+Las \(81\) celdas son los generadores primitivos. Las \(81\) identidades son
+flechas sobre esos mismos generadores y no un segundo atlas.
+\end{definition}
+
+\section{Censo combinatorio de composiciones de rutas independiente de datos metrológicos}
+\label{sec:censo-composicional-rev6}
+
+\begin{theorem}[Censo del sistema finito de composiciones]
+\label{thm:censo-gramatica-composicional-rev6}
+El sistema de la \cref{def:gramatica-celular-compuesta} contiene
+\[
+ \boxed{\begin{gathered}
+        81\ \text{identidades},\qquad
+        432\ \text{expresiones mesónicas},\\
+        1728\ \text{expresiones bariónicas},\qquad
+        372\ \text{flechas cargadas}
+ \end{gathered}}
+\]
+Las flechas cargadas se descomponen exactamente como
+\[
+ 372=320_{\text{leptónicas}}+52_{\text{quark}}.
+\]
+El censo depende sólo del atlas, de su inversión, de los niveles y del
+residuo de color. No utiliza masas, unidades ni firmas publicadas.
+Los cuatro cardinales cuentan expresiones composicionales internas o flechas
+admisibles del sistema; no cuentan especies físicas distintas, partículas
+físicas ni masas.
+\end{theorem}
+
+\begin{proof}
+La asignación \(x\mapsto\operatorname{id}_x\) es biyectiva, de modo que
+\[
+ |\mathfrak I|=|\mathcal C_{81}|=81.
+\]
+Para los mesones, la condición de neutralidad permite escoger
+independientemente un par ordenado dentro de cada clase de color. Como cada
+clase contiene doce celdas,
+\[
+ |\mathfrak M|
+ =\sum_{a\in\mathbb Z/3\mathbb Z}|\mathcal Q_a|^2
+ =3\cdot12^2
+ =432.
+\]
+Para los bariones, las posiciones \(0,1,2\) están fijadas, y por tanto
+\[
+ |\mathfrak B|
+ =|\mathcal Q_0||\mathcal Q_1||\mathcal Q_2|
+ =12^3
+ =1728.
+\]
+
+Las familias leptónicas cargadas tienen tamaños
+\[
+ |\mathcal L_{G0}|=1,\qquad
+ |\mathcal L_{G2}|=8,\qquad
+ |\mathcal L_{G4}|=16,
+\]
+mientras las familias neutrínicas tienen tamaños
+\[
+ |\mathcal N_{G1}|=2,\quad
+ |\mathcal N_{G2}|=4,\quad
+ |\mathcal N_{G3}|=6,\quad
+ |\mathcal N_{G4}|=8.
+\]
+Sólo \(G2\) y \(G4\) son niveles comunes. Como se cuentan ambas
+orientaciones,
+\[
+ |\mathfrak A_\ell|
+ =2(8\cdot4+16\cdot8)
+ =320.
+\]
+
+Para las flechas quark, en el orden de colores \((0,1,2)\), las
+multiplicidades de tipo arriba y tipo abajo en los niveles comunes son
+\[
+\begin{array}{ccc}
+ &\mathcal U&\mathcal D\\
+ G1&(2,1,1)&(0,1,1)\\
+ G3&(4,4,4)&(2,2,2).
+\end{array}
+\]
+El número de pares de una orientación y del mismo color es, por ello,
+\[
+ (2\cdot0+1\cdot1+1\cdot1)
+ +(4\cdot2+4\cdot2+4\cdot2)
+ =2+24=26.
+\]
+Al incluir la orientación contraria se obtiene
+\[
+ |\mathfrak A_q|=2\cdot26=52.
+\]
+Finalmente,
+\[
+ |\mathfrak A_{\rm ch}|=320+52=372.
+\]
+Ninguna de estas reglas contiene un valor objetivo o un vector de masa.
+\end{proof}
+
+\begin{corollary}[Constructor composicional sin blancos]
+\label{cor:constructor-composicional-sin-blancos}
+El constructor que enumera conjuntamente identidades, expresiones mesónicas,
+expresiones bariónicas y flechas cargadas factoriza por los campos tipados
+\[
+ (\text{sector},\text{familia},\text{nivel},\kappa,\rho)
+\]
+del atlas. Con la notación anterior, sus cuatro codominios son
+\(\mathfrak I,\mathfrak M,\mathfrak B,\mathfrak A_{\rm ch}\).
+En particular, el censo puede fijarse antes de abrir cualquier tabla de firmas.
+\end{corollary}
+
+\begin{proof}
+Las cuatro definiciones y el cálculo del
+\cref{thm:censo-gramatica-composicional-rev6} emplean únicamente esos campos.
+La tabla de firmas no pertenece al dominio de ninguna de las reglas.
+\end{proof}
+
+La independencia de blancos no significa que las expresiones hayan adquirido
+ya un nombre físico. Significa algo anterior y más preciso: existe un dominio
+composicional construido sin usar como criterio la cantidad que después se
+evaluará.
+
+\section{Transporte de memoria desde la ruta compuesta hasta la firma integral}
+\label{sec:memoria-composicion-especies-rev6}
+
+Sea \(\gamma\in\Gamma_{108}^{\rm enr}\) una presentación enriquecida de una
+extensión. Su registro leído contiene
+\[
+ \mathcal E(\gamma)
+ =
+ (n_A,e_0,\ldots,e_{11},T_\zeta,C_\zeta),
+\]
+además de los datos de fase, hoja, orientación y borde que tipan una composición.
+Los doce eventos no son reemplazables por su total antes de componer. Para
+\(0\le i<6\), definimos
+\[
+ p_i=e_i+e_{i+6},
+ \qquad
+ a_i=e_i-e_{i+6},
+\]
+\[
+ s_C=\sum_{i=0}^{5}p_i,
+ \qquad
+ M_i=p_i-p_5\quad(0\le i<5).
+\]
+Con \(M_5=(M_0,\ldots,M_4)\) y
+\(A_6=(a_0,\ldots,a_5)\), la reconstrucción es
+\[
+ p_5=\frac{s_C-\sum_{i=0}^{4}M_i}{6},
+ \qquad
+ p_i=p_5+M_i,
+\]
+\[
+ e_i=\frac{p_i+a_i}{2},
+ \qquad
+ e_{i+6}=\frac{p_i-a_i}{2}.
+\]
+Por el \cref{thm:memoria-1-5-6}, sobre la imagen integral se obtiene la
+descomposición reversible
+\[
+ \boxed{(s_C,M_5,A_6),\qquad 1+5+6=12.}
+\]
+El primer bloque conserva el total visible; el segundo, la forma relativa
+dentro de la hoja simétrica; el tercero, la memoria entre las dos semicoronas.
+
+La coordenada torsional fuerte requiere además la cocadena a nivel de paso:
+\[
+ k_{\Delta_4}=T_\zeta-2C_\zeta.
+\]
+No es una función del mero patrón de eventos nulos. Esta diferencia será
+esencial al interpretar el rombo de no descenso.
+
+\begin{definition}[Dato de composición orientada]
+\label{def:dato-empalme-orientado-rev6}
+Sean \(\Gamma,\Lambda\) dos registros enriquecidos. Un dato de composición es un
+par \((g,B)\), donde \(g\) alinea fase, hoja, orientación y posición en la
+interfaz, y \(B\) es la subtraza común, con su contribución a la acción, sus
+doce eventos, sus predecesores torsionales y su corona. Sobre el dominio en
+que esos datos son compatibles se define
+\[
+ \boxed{
+ {(n,e)}_\Gamma\star_{(g,B)}{(n,e)}_\Lambda
+ =
+ \bigl(
+ n_\Gamma+n_\Lambda-n_B,\,
+ e_\Gamma+g e_\Lambda-e_B
+ \bigr).}
+\]
+La palabra torsional y la corona se componen en el mismo nivel, antes de
+calcular \(T_\zeta,C_\zeta\) y \(k_{\Delta_4}\).
+\end{definition}
+
+La fórmula es una inclusión-exclusión de historias sobre una subtraza
+identificada. Está demostrada con estructura de partida explícita: los
+registros, el transporte \(g\), el borde \(B\), la orientación y la palabra
+de predecesores forman parte de la entrada. El sistema composicional no elige por
+sí sola ninguno de esos datos.
+
+\begin{definition}[Extractor posterior a la composición]
+\label{def:extractor-posterior-empalme-rev6}
+Para un registro enriquecido completo se define
+\[
+ L_{\rm tick}(\gamma)
+ =
+ \bigl(
+ n_A,s_C,k_{\Delta_4},
+ \nu_{120}^{\rm ev},\nu_{270}
+ \bigr)\in\ZZ^5,
+\]
+donde, si \(\tau_m=\operatorname{sgn}(e_m)\) e
+\(I_a=\{a,a+4,a+8\}\pmod {12}\),
+\[
+ \nu_{120}^{\rm ev}
+ =
+ \sum_{a=0}^{3}
+ \operatorname{sgn}\left(\sum_{m\in I_a}e_m\right),
+ \qquad
+ \nu_{270}
+ =
+ \sum_{m=0}^{11}\tau_m\tau_{m+3}.
+\]
+La firma de una composición se define por
+\[
+ \operatorname{Sig}(\Gamma,\Lambda;g,B)
+ :=
+ L_{\rm tick}
+ \bigl(\Gamma\star_{(g,B)}\Lambda\bigr).
+\]
+\end{definition}
+
+Los signos y las autocorrelaciones se aplican al registro ya compuesto. Por
+ello, la definición no equivale a sumar las firmas de los constituyentes.
+
+\section{Diagrama conmutativo de composición y preservación de la fibra}
+\label{sec:rombo-no-descenso-composicional-rev6}
+
+El catálogo histórico B1 emplea una proyección de eventos que conviene
+tipar por separado. Sea
+\[
+ \Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-),
+ \qquad \tau_m=\operatorname{sgn}(e_m),
+\]
+y definamos la proxy de eventos nulos
+\[
+ K_0(e)
+ =
+ \sum_{\tau_m=0}\Sigma_{12}(m).
+\]
+La proyección exacta es
+\[
+ F_0(n_A,e)
+ =
+ \left(
+ n_A,\,
+ \sum_m e_m,\,
+ K_0(e),\,
+ \sum_{a=0}^{3}
+   \operatorname{sgn}\sum_{m\in I_a}e_m,\,
+ \sum_m\tau_m\tau_{m+3}
+ \right)\in\ZZ^5.
+\]
+Para dos registros alineados, escribimos
+\[
+ (n,e)\boxplus(n',e')=(n+n',e+e').
+\]
+Esta operación es el caso sin subtraza común y con alineamiento identidad del
+caso de composición de eventos.
+
+\begin{proposition}[Obstrucción al descenso de la proyección B1]
+\label{prop:no-descenso-proyeccion-b1-rev6}
+No existe una operación binaria
+\[
+ \mu:\ZZ^5\times\ZZ^5\longrightarrow\ZZ^5
+\]
+tal que
+\[
+ F_0(\Gamma\boxplus\Lambda)
+ =
+ \mu\bigl(F_0(\Gamma),F_0(\Lambda)\bigr)
+\]
+para todos los registros B1.
+\end{proposition}
+
+\begin{proof}
+Consideremos las rutas, escritas en la carta
+\((r,c,h_0,v_0)\),
+\[
+ a=(1,3,-1,+1),
+ \qquad
+ b=(6,7,-1,+1),
+ \qquad
+ c=(1,2,-1,-1).
+\]
+Las dos primeras tienen registros de eventos distintos:
+\[
+\begin{aligned}
+ e(a)&=(5,4,4,-4,-4,-6,\;5,4,4,-4,-4,-6),\\
+ e(b)&=(4,5,4,-4,-6,-4,\;4,5,4,-4,-6,-4),
+\end{aligned}
+\]
+pero publican la misma cinco-tupla:
+\[
+ F_0(a)=F_0(b)=(8,-2,0,0,-12).
+\]
+La ruta de prueba tiene
+\[
+ e(c)=(1,4,1,-2,-4,-3,\;1,4,1,-2,-4,-3)
+\]
+y
+\[
+ F_0(c)=(28,-6,0,-4,-12).
+\]
+Al sumar primero los eventos y reevaluar después, se obtiene
+\[
+ F_0(a\boxplus c)=(36,-8,0,0,-12),
+\]
+\[
+ F_0(b\boxplus c)=(36,-8,0,-2,-12).
+\]
+Los dos pares de entradas de la supuesta \(\mu\) son iguales, pero las
+salidas difieren en \(\nu_{120}^{\rm ev}\). Esto contradice la existencia de
+\(\mu\).
+\end{proof}
+
+El censo exhaustivo del mismo dominio contiene \(324\) rutas, \(53\)
+cinco-tuplas proxy y \(198\) estados de eventos distintos. Cuarenta y dos
+fibras de la proyección contienen más de un estado enriquecido; cuarenta de
+ellas son separadas por alguna ruta de prueba. El rombo anterior es el testigo
+canónico más breve de esa pérdida de información.
+
+\begin{remark}[Separación tipada entre el representante \(K_0\) y la torsión fuerte]
+\label{rem:proxy-no-torsion-fuerte-rev6}
+La tercera coordenada de \(F_0\) es \(K_0(e)\), que en B1 toma valores en
+\(\{-4,-2,0,2,4\}\). No se identifica con
+\(k_{\Delta_4}=T_\zeta-2C_\zeta\). De hecho, existen rutas con el mismo
+\(n_A\) y el mismo vector de doce eventos a las que el lector torsional
+asigna valores distintos porque conserva los predecesores de cada iteración
+y la corona.
+
+La \cref{prop:no-descenso-proyeccion-b1-rev6} demuestra exactamente que la
+proyección B1 de cinco coordenadas no transporta la superposición de
+registros. No afirma una imposibilidad universal para toda estructura futura
+sobre \(\ZZ^5\), ni autoriza a sustituir \(K_0\) por
+\(k_{\Delta_4}\). En el lector fuerte, la salida se define mediante la
+\cref{def:extractor-posterior-empalme-rev6}: primero se compone la palabra
+enriquecida y después se reextraen sus cinco coordenadas.
+\end{remark}
+
+\section{Teorema de composición de registros independiente de datos metrológicos}
+\label{sec:teorema-composicional-sin-blancos-rev6}
+
+\begin{theorem}[Cierre composicional sin blancos]
+\label{thm:cierre-composicional-sin-blancos-rev6}
+Fijados el atlas \(\mathcal C_{81}\), la dualidad formal, el residuo de color
+y el registro enriquecido del \cref{chap:extension-ruta-caracter}, se cumplen
+las afirmaciones siguientes.
+\begin{enumerate}
+ \item Existe el sistema finito de composiciones tipadas
+ \(\mathfrak G_{\rm comp}\) con \(81\) identidades, \(432\) expresiones
+ mesónicas, \(1728\) expresiones bariónicas y \(372\) flechas cargadas,
+ descompuestas como \(320+52\).
+
+ \item El sistema se construye sin masas objetivo. Su salida es una
+ expresión, órbita o multisección tipada, no una masa ni una etiqueta física
+ individualizada.
+
+ \item Dada una expresión y dados registros constituyentes con un árbol
+ explícito de composiciones compatibles \((g,B)\), la operación produce un
+ registro enriquecido. Su firma se obtiene por la aplicación
+ \[
+ \boxed{
+ \bigl(
+ \text{expresión},
+ \text{registros},
+ \text{composiciones orientadas}
+ \bigr)
+ \xrightarrow{\ \mathfrak C_{12}\ }
+ \text{registro compuesto}
+ \xrightarrow{\ L_{\rm tick}\ }
+ \ZZ^5.}
+ \]
+ Aquí \(\mathfrak C_{12}\) denota la iteración de
+ \(\star_{(g,B)}\) con el parentizado y los bordes incluidos en los datos.
+
+ \item La proyección B1 a cinco enteros no constituye por sí sola un espacio
+ composicional: el diagrama con \(\boxplus\) no desciende a
+ \(\ZZ^5\). Por tanto, reemplazar cada registro por su cinco-tupla antes del
+ composición pierde información necesaria para reevaluar al menos
+ \(\nu_{120}^{\rm ev}\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+El primer punto es el
+\cref{thm:censo-gramatica-composicional-rev6}. El segundo es el
+\cref{cor:constructor-composicional-sin-blancos}. Para el tercero, cada
+arista del árbol de composición se evalúa mediante la
+\cref{def:dato-empalme-orientado-rev6}; como los bordes y transportes forman
+parte del dominio, la iteración produce un registro sobre el cual está
+definido \(L_{\rm tick}\). No se utiliza una firma intermedia como sustituto
+del registro. El cuarto punto es la
+\cref{prop:no-descenso-proyeccion-b1-rev6}.
+\end{proof}
+
+La fórmula correcta de la firma compuesta es, por tanto,
+\[
+ \operatorname{Sig}_{\rm comp}
+ =
+ L_{\rm tick}\circ\mathfrak C_{12}.
+\]
+No es una suma de filas de masa. Sólo después puede aplicarse el carácter
+formal o su especialización global:
+\[
+ \text{registro compuesto}
+ \xrightarrow{L_{\rm tick}}\ZZ^5
+ \xrightarrow{\chi_{\rm form}}\operatorname{Fun}(\mathcal P,\RR_{>0})
+ \longrightarrow
+ \text{carta dimensional}.
+\]
+
+\section{Reconstrucción genealógica de mezcla, generación y persistencia de sabor}
+\label{sec:significado-genealogico-composicion-rev6}
+
+El teorema anterior completa un estrato que una lista de masas no puede
+mostrar. Las celdas primitivas no se limitan a recibir nombres; generan
+identidades, pares duales, triples de color y flechas orientadas mediante
+reglas internas. Los objetos compuestos aparecen así dentro del dominio antes
+de toda comparación metrológica.
+
+La genealogía tampoco se reduce al árbol sintáctico. Dos expresiones con el
+mismo número de constituyentes pueden componerse de maneras distintas porque
+la fase, la hoja, la orientación y la subtraza común forman parte del dato.
+El registro conserva esas diferencias hasta que han actuado los signos, las
+correlaciones y la torsión. La masa, cuando exista una realización
+dimensional, será una lectura posterior de esa memoria compuesta.
+
+Este orden explica por qué \(\ZZ^5\) no es el dominio de composición aunque
+sea el dominio del carácter. El grupo \((\ZZ^5,+)\) existe y el carácter es
+multiplicativo sobre él; lo que no existe para la proyección B1 es una ley
+que recupere desde las cinco-tuplas la superposición que ya olvidó la
+colocación de los doce eventos. La linealidad del carácter no devuelve la
+información eliminada por el extractor.
+
+\section{Del sistema composicional interno a la realización física}
+\label{sec:delimitacion-composicion-especies-rev6}
+
+El \cref{thm:cierre-composicional-sin-blancos-rev6} construye el dominio
+anterior a los nombres físicos: expresiones ordenadas, duales, triples de
+color y flechas compatibles. Sus cardinales cuentan posibilidades internas
+de composición. Una especie física, en cambio, es una representación persistente
+con sabor, color, espín, estadística y canal determinados. Confundir ambos
+niveles convertiría un censo de expresiones en un falso catálogo de
+partículas.
+
+\begin{definition}[Dato de realización física]
+\label{def:dato-realizacion-fisica-rev6}
+Un dato de realización para una especie \(X\) es la tupla
+\[
+ \mathfrak D_X=
+ \bigl(
+ \mathfrak t_X,\mathfrak s_X,
+ (\mathcal L_{X_i})_{i=1}^{r},
+ \mathcal T_X,(g_X,B_X)
+ \bigr),
+\]
+donde:
+\begin{enumerate}
+ \item \(\mathfrak t_X\) fija el tipo físico ---elemental, nulo, mesónico,
+ bariónico, multiquark o topológico--- y su representación;
+ \item \(\mathfrak s_X\) es la multisección o expresión interna realizada;
+ \item \(\mathcal L_{X_i}\) son los registros enriquecidos de los
+ constituyentes;
+ \item \(\mathcal T_X\) fija sabor, color, espín, estadística y
+ simetrización;
+ \item \((g_X,B_X)\) fija el árbol de composición, sus transportes y sus
+ subtrazas comunes.
+\end{enumerate}
+La tupla se declara sin consultar la masa o la anchura que después se
+evaluarán.
+\end{definition}
+
+\begin{proposition}[La realización cambia el registro, no la ley]
+\label{prop:realizacion-compuesta-ley-unica-rev6}
+Todo dato \(\mathfrak D_X\) determina un registro compuesto
+\[
+ \mathcal L_X
+ =\mathfrak C_{12}
+   \bigl((\mathcal L_{X_i})_{i=1}^{r};
+         \mathcal T_X,g_X,B_X\bigr),
+\]
+una firma \(v_X=L_{\rm tick}(\mathcal L_X)\) y el carácter central universal
+\[
+ \chi_0(v_X-v_e).
+\]
+Si la genealogía aporta además un refinamiento espectral tipado
+\(\eta_X\in\mathcal E_{\mathfrak S}\), la evaluación completa es
+\[
+ m_X
+ =m_e^{\rm HMT}\,
+   \chi_{\rm full}(v_X-v_e,\eta_X).
+\]
+El carácter central y el refinamiento pertenecen a niveles distintos; la
+completitud de la torre no sustituye el mapa prospectivo que produzca
+\(\eta_X\).
+Si \(X\) es inestable, su anchura pertenece al lector temporal
+\(\Gamma_X=\hbar_{\rm int}/\tau_X^{\rm life}\), no a una sexta coordenada de
+la firma de masa.
+\end{proposition}
+
+\begin{proof}
+El dato de realización contiene exactamente las entradas de
+\(\mathfrak C_{12}\). El
+\cref{thm:cierre-composicional-sin-blancos-rev6} produce el registro
+enriquecido y la \cref{def:extractor-posterior-empalme-rev6} produce su
+firma. El carácter central y su elevación espectral son los de
+\cref{eq:caracter-masa-global-rev7,eq:ley-masa-todos-registros-rev6}. La
+anchura usa una recta temporal y por ello tiene otro dominio.
+\end{proof}
+
+La separación de niveles queda así fijada:
+\[
+\boxed{
+\begin{gathered}
+\text{sistema composicional interno}
+\longrightarrow\text{dato de realización}
+\longrightarrow\text{registro compuesto}\\
+\longrightarrow\text{firma}
+\longrightarrow\text{carácter central}
+\longrightarrow\text{refinamiento espectral}
+\longrightarrow\text{comparación física}.
+\end{gathered}}
+\]
+Las \(432\) expresiones mesónicas, las \(1728\) bariónicas y las \(372\)
+flechas cargadas ocupan sólo la primera casilla y no constituyen un
+inventario de partículas. El Modelo Estándar conserva su conjunto tipado de
+especies y cada especie ocupa la cadena mediante su propio dato de
+realización. La regla causal es única en todos los sectores:
+\[
+ \boxed{\text{componer extensiones y registros;\quad leer la firma después}.}
+\]

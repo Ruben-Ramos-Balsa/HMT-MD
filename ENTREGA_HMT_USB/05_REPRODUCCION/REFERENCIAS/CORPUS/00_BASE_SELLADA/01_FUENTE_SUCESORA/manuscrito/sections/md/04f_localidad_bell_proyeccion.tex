@@ -1,0 +1,280 @@
+\chapter{Localidad de Bell y proyección holográfica}
+\label{chap:localidad-bell-proyeccion}
+\index{Bell, desigualdad de}\index{CHSH}\index{EPR}
+\index{localidad}\index{no señalización}\index{independencia de ajustes}
+
+La formulación EPR, el teorema de Bell y la condición de no señalización
+responden a preguntas distintas \cite{EinsteinPodolskyRosen1935,Bell1964,
+ClauserHorneShimonyHolt1969}. Una memoria global compartida no constituye por
+sí sola una violación de localidad de Bell; tampoco una base ternaria o la
+elección de \(\log 3\) como unidad de información modifican una desigualdad
+de correlación. Esta sección fija los tipos necesarios y determina con
+exactitud qué está probado y qué permanece abierto en HMT--MD.
+
+\section{Escenario bipartito y premisas de localidad}
+\label{sec:escenario-bell-hmt}
+
+Considérense ajustes \(a,b\in\{0,1\}\), resultados
+\(A,B\in\{-1,+1\}\) y una variable compartida
+\(\lambda\in\Lambda\). Sea \(\rho\) una medida de probabilidad sobre
+\(\Lambda\). La expresión
+\[
+ P(A,B\mid a,b)
+ =\int_\Lambda
+ P_A(A\mid a,\lambda)\,
+ P_B(B\mid b,\lambda)\,d\rho(\lambda)
+ \tag{B1}\label{eq:factorizacion-bell-local}
+\]
+reúne dos premisas diferentes:
+
+\begin{enumerate}
+\item \emph{factorización local}: condicionado por \(\lambda\), el resultado
+de cada ala depende sólo de su ajuste local;
+\item \emph{independencia de ajustes}: la medida satisface
+\(d\rho(\lambda\mid a,b)=d\rho(\lambda)\).
+\end{enumerate}
+
+Se exige, además, normalización de las probabilidades y ausencia de una
+selección de datos dependiente de \(a,b,A,B\). La terminología
+\emph{localidad de Bell} se reservará aquí para este conjunto explícito de
+hipótesis; no designa únicamente ausencia de señal superlumínica.
+
+Definimos
+\[
+ E_{ab}:=\sum_{A,B=\pm1}AB\,P(A,B\mid a,b)
+\]
+y el funcional CHSH
+\[
+ S_{\rm CHSH}:=E_{00}+E_{01}+E_{10}-E_{11}.
+ \tag{B2}\label{eq:funcional-chsh}
+\]
+
+\begin{theorem}[Cota CHSH bajo factorización local]
+\label{thm:cota-chsh-local}
+Si se satisfacen \eqref{eq:factorizacion-bell-local}, la independencia de
+ajustes, la normalización y la ausencia de postselección dependiente de los
+datos, entonces
+\[
+ \bigl|S_{\rm CHSH}\bigr|\leq2.
+ \tag{B3}\label{eq:cota-chsh-dos}
+\]
+\end{theorem}
+
+\begin{proof}
+Para cada \(\lambda\), sean
+\[
+ x_a(\lambda):=\sum_{A=\pm1}A\,P_A(A\mid a,\lambda),
+ \qquad
+ y_b(\lambda):=\sum_{B=\pm1}B\,P_B(B\mid b,\lambda).
+\]
+Se tiene \(|x_a|,|y_b|\leq1\). La contribución condicionada al funcional es
+\[
+ s(\lambda)
+ =x_0(y_0+y_1)+x_1(y_0-y_1).
+\]
+Por la desigualdad triangular,
+\[
+ |s(\lambda)|
+ \leq |y_0+y_1|+|y_0-y_1|\leq2,
+\]
+pues \(y_0,y_1\in[-1,1]\). Integrar respecto de la misma medida \(\rho\),
+independiente de \(a,b\), conserva la cota.
+\end{proof}
+
+\begin{corollary}[No señalización y su recíproco falso]
+\label{cor:no-senalizacion-bell}
+Las hipótesis del teorema implican
+\[
+ \sum_B P(A,B\mid a,b)=P(A\mid a),
+ \qquad
+ \sum_A P(A,B\mid a,b)=P(B\mid b).
+ \tag{B4}\label{eq:no-senalizacion-bell}
+\]
+La no señalización, considerada aisladamente, no implica la factorización
+local de \eqref{eq:factorizacion-bell-local}.
+\end{corollary}
+
+\begin{proof}
+La primera identidad se obtiene sumando el factor \(P_B\), cuya
+normalización vale uno; la segunda es simétrica. La implicación recíproca no
+forma parte del argumento y existen distribuciones no señalizantes fuera del
+politopo local.
+\end{proof}
+
+\begin{statusbox}
+El teorema y el corolario son resultados
+\textsc{exactos internos} de teoría de probabilidades finita. Su aplicación
+a un aparato HMT--MD está
+\textsc{demostrada con estructura de partida explícita} cuando se construyen
+la medida, los ajustes y los mapas de resultado.
+\end{statusbox}
+
+\section{Proyección Bell del estado enriquecido común y preservación del estatuto físico}
+\label{sec:estado-enriquecido-bell}
+
+Sea \(X_{\rm enr}\) un espacio de estados enriquecidos y sean
+\[
+ r_A:\{0,1\}\times X_{\rm enr}\longrightarrow[-1,1],
+ \qquad
+ r_B:\{0,1\}\times X_{\rm enr}\longrightarrow[-1,1]
+\]
+dos lectores locales. Un estado puede contener memoria de frontera,
+orientación, ruta y registro; toda esa información puede incorporarse a
+\(\lambda=x\in X_{\rm enr}\).
+
+\begin{theorem}[Una proyección local de un estado global sigue siendo
+Bell-local]
+\label{thm:no-promocion-bell-por-proyeccion}
+Supóngase que:
+
+\begin{enumerate}
+\item \(x\in X_{\rm enr}\) se distribuye según una medida \(\mu\)
+independiente de \(a,b\);
+\item el resultado de Alice depende sólo de \((a,x)\) y el de Bob sólo de
+\((b,x)\);
+\item el promedio usa todas las realizaciones sin selección contextual.
+\end{enumerate}
+
+Entonces las correlaciones inducidas satisfacen
+\[
+ E_{ab}=\int_{X_{\rm enr}}r_A(a,x)r_B(b,x)\,d\mu(x),
+\qquad
+ |S_{\rm CHSH}|\leq2.
+ \tag{B5}\label{eq:no-go-proyeccion-local}
+\]
+\end{theorem}
+
+\begin{proof}
+Se aplica el argumento del \cref{thm:cota-chsh-local} con
+\(\lambda=x\), \(x_a=r_A(a,x)\) e \(y_b=r_B(b,x)\). La riqueza interna de
+\(x\) no modifica la cota mientras se conserven las tres hipótesis.
+\end{proof}
+
+Este resultado impide una inferencia improcedente: una extensión global con
+memoria puede explicar por qué dos lecturas comparten estructura, pero no
+produce por sí sola una violación de Bell. Para obtener
+\(|S_{\rm CHSH}|>2\), una realización debe abandonar o reformular al menos una
+de las premisas: factorización, independencia de ajustes o muestreo no
+contextual. Si la proyección depende conjuntamente de \(a\) y \(b\), deja de
+ser local en el sentido de \eqref{eq:factorizacion-bell-local}; todavía habría
+que probar separadamente \eqref{eq:no-senalizacion-bell}.
+
+\section{Distinción entre localidad, funcional ternario y dependencia contextual}
+\label{sec:cotejo-bell-historico}
+
+Intervienen tres construcciones matemáticas que no deben identificarse:
+
+\begin{enumerate}
+\item la frase arquitectónica según la cual una extensión conserva memoria
+global y sus lecturas locales publican proyecciones parciales;
+\item el funcional ternario cíclico \(\mathcal B_3\), cuyos resultados
+admiten también el valor \(0\);
+\item el funcional contextual de información trítica \(I_3^{\rm ctx}\),
+para el cual puede ocurrir \(I_3^{\rm ctx}(\lambda;a,b)>0\).
+\end{enumerate}
+
+El primer estrato es una interpretación holográfica compatible con el estado
+enriquecido. No especifica aún una distribución bipartita
+\(P_{\rm HMT}(A,B\mid a,b)\). El segundo no es el funcional CHSH
+\eqref{eq:funcional-chsh}: cambia el alfabeto de resultados, el muestreo y la
+normalización. La pretendida anulación por ortogonalidad no es una identidad:
+de que dos ejes sean ortogonales no se sigue que una de las dos proyecciones
+de un vector se anule. En efecto, para
+\(v=(1,1)\), \(u(0)=(1,0)\) y
+\(u(\pi/2)=(0,1)\), ambas proyecciones valen \(1\). Por consiguiente, esa
+anulación no puede utilizarse para acotar \(\mathcal B_3\).
+
+La tercera construcción relaja expresamente la independencia de ajustes. Si
+\(\kappa\leq pH\), con \(H>0\), se deduce
+\(p\geq\kappa/H\), no \(p\leq\kappa/H\); la desigualdad no proporciona la
+cota superior de \(p\) que requeriría la conclusión propuesta para CHSH.
+Asimismo, una partición binaria admisible requiere un censo exhaustivo de
+políticas; sin ese censo no se obtiene la cota. Por estas dos razones, la
+desigualdad informacional \(S\leq3\) no constituye una cota de Bell local bajo
+las premisas estándar.
+
+La base del logaritmo sólo cambia la unidad:
+\[
+ I_3(X;Y)=\frac{I_e(X;Y)}{\log 3}.
+ \tag{B6}\label{eq:cambio-base-informacion-bell}
+\]
+En particular, ni un trit ni \(\log 3\) seleccionan una distribución, prueban
+factorización o alteran la cota \(|S_{\rm CHSH}|\leq2\).
+El factor \(\log3\) de la escala térmica por decisión triádica de
+\cref{def:escala-termica-triadica} es una formalización distinta: cuantifica
+la información de tres alternativas equiprobables y no constituye una prueba
+de Bell.
+
+Ningún rótulo algorítmico sustituye un mapa con dominio, codominio y regla
+capaz de producir correlaciones CHSH. La fórmula interpretativa «ER=EPR»
+requiere un entrelazador explícito entre corte geométrico, estado bipartito,
+álgebra de observables y probabilidades.
+
+La construcción global--local demuestra la existencia del estado enriquecido
+y sus proyecciones. Una realización de correlaciones de Bell debe añadir un
+estado bipartito, dos familias de observables locales y una medida conjunta
+que reproduzca las probabilidades. Sin esos datos no se deducen una violación
+CHSH, la saturación de Tsirelson ni una equivalencia ER--EPR.
+
+\section{Criterio de realización y protocolo de contraste}
+\label{sec:programa-bell-hmt}
+
+Una promoción científica exige construir, en este orden,
+\[
+\begin{aligned}
+X_{\rm enr}
+&\longrightarrow
+\bigl(\Omega_A,\Omega_B,\mu\bigr)\\
+&\longrightarrow
+\bigl(r_A,r_B,\mathcal A,\mathcal B\bigr)\\
+&\longrightarrow
+P_{\rm HMT}(A,B\mid a,b)
+\longrightarrow
+\bigl(E_{00},E_{01},E_{10},E_{11},S_{\rm CHSH}\bigr),
+\end{aligned}
+\tag{B7}\label{eq:programa-bell-hmt}
+\]
+donde \(\mathcal A,\mathcal B\) son las reglas de elección de ajustes. Antes
+de abrir resultados experimentales deben congelarse:
+
+\begin{enumerate}
+\item la medida \(\mu\) y el dominio de estados;
+\item la regla que asigna ajustes y la hipótesis, o renuncia explícita, de
+independencia;
+\item los mapas de resultado y el tratamiento de salidas nulas;
+\item la regla de muestreo, pérdidas y coincidencias;
+\item las cuatro correlaciones y la convención de signos;
+\item la prueba de no señalización;
+\item el intervalo de confianza y el falsador previamente registrado.
+\end{enumerate}
+
+Sólo después puede evaluarse si el mecanismo conserva la localidad de la
+dinámica interna y, a la vez, produce una distribución proyectada no
+Bell-local. Esta doble afirmación no se deduce del lenguaje holográfico: debe
+probarse sobre \eqref{eq:programa-bell-hmt}.
+
+\begin{criterion}[Control de Bell, localidad y no localidad]
+\label{crit:bell-localidad-no-localidad}
+La realización queda refutada o indebidamente tipada si ocurre cualquiera de
+los siguientes hechos:
+
+\begin{enumerate}
+\item se afirma una desigualdad sin definir \(P(A,B\mid a,b)\), los ajustes y
+los resultados;
+\item se conserva \eqref{eq:factorizacion-bell-local} con independencia de
+ajustes y, no obstante, se certifica \(|S_{\rm CHSH}|>2\);
+\item se usa \(I_3(\lambda;a,b)>0\) y se denomina al modelo
+«independiente de ajustes»;
+\item una postselección dependiente de ajustes o resultados se oculta en la
+proyección;
+\item la distribución proyectada permite señalización;
+\item se identifica \(\mathcal B_3\), \(\log 3\) o «ER=EPR» con CHSH sin
+construir el entrelazador correspondiente.
+\end{enumerate}
+\end{criterion}
+
+El censo ejecutable asociado enumera las dieciséis estrategias deterministas
+locales binarias y verifica que todas satisfacen
+\(|S_{\rm CHSH}|=2\). Por convexidad, este control cubre el politopo local
+binario completo; no constituye una simulación de una interfaz HMT aún
+ausente.

@@ -1,0 +1,648 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\usepackage{xcolor}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{observacion}[teorema]{Observación}
+\newtheorem{conjetura}[teorema]{Conjetura}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\St}{\operatorname{St}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\Wdoce}{W_{12}}
+\newcommand{\Wveinticuatro}{W_{24}}
+\newcommand{\G}{\mathcal G_{12}}
+\newcommand{\Leech}{\Lambda_{\mathrm{Leech}}}
+\newcommand{\Vnat}{V^\natural}
+\newcommand{\Monster}{\mathbb M}
+\newcommand{\KR}{K_{R12}^{\mathrm{can}}}
+\newcommand{\BC}{B_{\mathfrak C}}
+\newcommand{\Halpha}{H_\alpha^-}
+\newcommand{\Hplus}{H_\alpha^+}
+\newcommand{\Ppi}{P_\pi}
+\newcommand{\He}{H_e}
+\newcommand{\Hphi}{H_\varphi}
+\newcommand{\Happ}{H_{\rm APP}}
+\newcommand{\muW}{\mu_W}
+\newcommand{\LR}{\mathcal L_{\mathbb R}}
+
+\newcommand{\statement}[1]{\begin{center}\fbox{\begin{minipage}{0.92\linewidth}#1\end{minipage}}\end{center}}
+
+\title{\bfseries Holografía Modular Triádica\\
+\large Núcleo finito de \(\alpha\), estrellas de Witt, \(W_{24}\), Moonshine y lectura dimensional del continuo}
+\author{Documento de consolidación técnica}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este documento consolida el núcleo actual del programa HMT. La tesis matemática es que la constante de estructura fina \(\alpha\) no aparece como una salida decimal aislada, sino como el lift archimedeano del pétalo negativo de una estrella de Witt cuya 4-cara nuclear es la corona \(729\) del corrector dodecafásico. El corrector \(K_{R12}^{\rm can}\) se presenta como objeto alpha-free: primero se obtiene \(U_{12}\) desde APP/TPK/LOG9, y después \(K_{R12}^{\rm can}\) se recupera como solución entera única de un sistema Hadamard invertible. Sobre esa base se demuestra el cierre por carry, la lectura gauge, la incidencia \(B_K=H_e\cap P_\pi\), la hexada de préstamo \(H_\alpha^-\in W_{12}\), el campo de emparejamientos de Witt, la generación de \(M_{12}\), la rigidez del marco HMT y la extensión \(W_{24}\) como geometría ambiente. La última parte formula la interpretación conceptual: el continuo no se toma como dato primario, sino como lectura de borde de una estructura finita de fase.
+\end{abstract}
+
+\section{Tesis central}
+
+La formulación refinada es:
+\statement{\(\alpha\) es el lift archimedeano del pétalo negativo de una estrella de Witt cuya 4-cara nuclear es la corona 729 del corrector.}
+La cadena mínima es:
+\[
+APP/TPK \to U_{12} \to K_{R12}^{\rm can}\to B_K\to \mu_W(B_K)\to H_\alpha^-\to\alpha.
+\]
+La cadena modular asociada es:
+\[
+H_\alpha^-\to W_{12}\to\mathcal G_{12}\to A_2^{12}\to\Leech\to\Vnat\to\Monster.
+\]
+La frase conceptual del programa es:
+\statement{El número deja de ser sólo valor y se vuelve sección de una geometría finita de borde.}
+
+\section{Estatus lógico}
+
+\[
+\begin{array}{c|c}
+\text{bloque} & \text{estatus}\\
+\hline
+APP/TPK\to U_{12} & \text{certificado computacional alpha-free}\\
+U_{12}\to K_{R12} & \text{teorema lineal + ILP único}\\
+K_{R12}\to\alpha\text{ por carry} & \text{cierre aritmético certificado}\\
+\text{carry como gauge} & \text{teorema algebraico}\\
+H_\alpha^-\in W_{12} & \text{verificación exacta}\\
+B_K=H_e\cap P_\pi & \text{igualdad finita exacta}\\
+\mu_W(B_K)\text{ y pétalo negativo} & \text{verificación exacta}\\
+\langle\sigma_B\rangle=M_{12} & \text{verificación exacta de grupo finito}\\
+\Stab(H_\alpha,H_e,H_\varphi,H_{\rm APP})=1 & \text{verificación exacta}\\
+W_{24}\text{ como ambiente} & \text{lift octádico verificado en modelo}\\
+\text{Golay--Leech--Moonshine} & \text{completación modular estándar}\\
+\text{radión, RR--5, masas, constitutivas} & \text{companion/desarrollo posterior}
+\end{array}
+\]
+
+\section{Origen alpha-free de \(K_{R12}\)}
+
+El corrector dodecafásico no debe introducirse como una máscara post hoc. Se fija mediante dos capas.
+
+La capa upstream enumera el espacio completo de semillas:
+\[
+(\Z_9^2\times D_4)^2,
+\]
+con
+\[
+104\,976\text{ semillas}.
+\]
+Bajo la variante canónica
+\[
+\texttt{LOG9\_discrete\_log\_gen2\_canonical},
+\]
+se obtienen
+\[
+468\text{ salidas orientadas}.
+\]
+La salida congelada es:
+\[
+U_{12}=(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997).
+\]
+Esta fase no usa \(\alpha\).
+
+El paso downstream \(U_{12}\to K\) se resuelve con tres bloques Hadamard:
+\[
+H_4=
+\begin{pmatrix}
+1&1&1&1\\
+1&1&-1&-1\\
+1&-1&1&-1\\
+1&-1&-1&1
+\end{pmatrix},
+\qquad
+\det(H_4)=-16.
+\]
+La matriz total \(A\) es una permutación por filas/columnas de
+\[
+\operatorname{blockdiag}(H_4,H_4,H_4),
+\]
+por lo que
+\[
+\det(A)=\det(H_4)^3=-4096\neq0.
+\]
+Los bloques de \(U\) son:
+\[
+U_1=(2378,-452,-668,-322),
+\]
+\[
+U_2=(1406,998,-204,-28),
+\]
+\[
+U_3=(2479,-551,-371,-997).
+\]
+La solución entera única en \(0\le K_i\le999\) es:
+\[
+K_1=(234,729,621,794),
+\]
+\[
+K_2=(543,659,058,146),
+\]
+\[
+K_3=(140,824,914,601).
+\]
+Ordenando por slots dodecafásicos:
+\[
+\boxed{
+K_{R12}^{\rm can}
+=
+(234,543,140,729,659,824,621,058,914,794,146,601).
+}
+\]
+
+\begin{teorema}[unicidad de \(K_{R12}\)]
+Como \(A K=U\) tiene matriz invertible sobre \(\mathbb Q\), hay a lo sumo una solución racional. La solución calculada es entera y satisface \(0\le K_i\le999\). Por tanto, el ILP factible tiene exactamente un punto.
+\end{teorema}
+
+\section{Cierre aritmético de \(\alpha\)}
+
+Las triadas usadas son:
+\[
+d_\pi=(141,592,653,589,793,238,462,643,383,279,502,884),
+\]
+\[
+d_e=(718,281,828,459,045,235,360,287,471,352,662,497),
+\]
+\[
+d_\varphi=(618,033,988,749,894,848,204,586,834,365,638,117).
+\]
+Definimos:
+\[
+s_k=d_\pi(k)+d_e(k)-d_\varphi(k)-K_k.
+\]
+Con \(K=K_{R12}^{\rm can}\):
+\[
+s=(007,297,353,-430,-715,-1199,-003,286,-894,-528,380,663).
+\]
+El carry derecha--izquierda cumple:
+\[
+s_k+c_{k+1}=d_\alpha(k)+1000c_k,\qquad 0\le d_\alpha(k)<1000.
+\]
+La salida es:
+\[
+d_\alpha=(007,297,352,569,283,800,997,285,105,472,380,663),
+\]
+por lo que:
+\[
+\alpha_{\rm HMT}=0.007297352569283800997285105472380663\ldots.
+\]
+
+\section{Carry como gauge}
+
+Sea:
+\[
+\omega_K(k)=d_\pi(k)+d_e(k)-d_\varphi(k)-K_k.
+\]
+Si:
+\[
+K'_k=K_k+b_{k+1}-1000b_k,\qquad c'_k=c_k+b_k,
+\]
+entonces:
+\[
+\omega_{K'}(k)+c'_{k+1}=d_\alpha(k)+1000c'_k.
+\]
+Luego \(d_\alpha(k)\) es invariante bajo \(K\mapsto K+\delta_{1000}b\).
+
+\statement{El carry es una trivialización gauge discreta; \(\alpha\) es holonomía archimedeana.}
+
+\section{Anatomía \(729+271\)}
+
+\[
+1000=729+271=3^6+271.
+\]
+Cada entrada de \(K\) se escribe:
+\[
+K_i=a_i+729b_i,\qquad b_i\in\{0,1\}.
+\]
+La palabra alta es:
+\[
+b=(0,0,0,1,0,1,0,0,1,1,0,0).
+\]
+Por tanto:
+\[
+B_K=\{i:K_i\ge729\}=\{4,6,9,10\}.
+\]
+
+\section{Golay ternario y \(W_{12}\)}
+
+En gauge sistemático:
+\[
+G=[I_6\mid A],
+\]
+\[
+A=
+\begin{pmatrix}
+0&2&2&2&2&2\\
+1&0&2&1&1&2\\
+1&2&0&2&1&1\\
+1&1&2&0&2&1\\
+1&1&1&2&0&2\\
+1&2&1&1&2&0
+\end{pmatrix}
+\pmod 3.
+\]
+Para \(w\in\F_3^6\):
+\[
+c(w)=(w,wA)\in\F_3^{12}.
+\]
+El enumerador es:
+\[
+W_C(z)=1+264z^6+440z^9+24z^{12}.
+\]
+Los \(264\) codewords de peso \(6\), identificados por \(c\sim-c\), dan \(132\) soportes, que forman:
+\[
+\boxed{W_{12}=S(5,6,12).}
+\]
+
+\section{Lectura Golay de los canales}
+
+\[
+w_\pi=010211,\qquad w_e=201101,\qquad w_\varphi=121200,\qquad w_{\rm APP}=022020.
+\]
+Soportes:
+\[
+P_\pi=\supp(c(w_\pi))=\{2,4,5,6,7,8,9,10,11\},
+\]
+peso \(9\), obstrucción de clausura.
+\[
+H_e=\supp(c(w_e))=\{1,3,4,6,9,10\},
+\]
+\[
+H_\varphi=\supp(c(w_\varphi))=\{1,2,3,4,7,9\},
+\]
+\[
+H_{\rm APP}=\supp(c(w_{\rm APP}))=\{2,3,5,10,11,12\}.
+\]
+Estos tres son hexadas.
+
+\section{Igualdad crítica}
+
+\[
+H_e\cap P_\pi
+=
+\{1,3,4,6,9,10\}
+\cap
+\{2,4,5,6,7,8,9,10,11\}
+=
+\{4,6,9,10\}.
+\]
+Pero:
+\[
+B_K=\{4,6,9,10\}.
+\]
+Por tanto:
+\[
+\boxed{B_K=H_e\cap P_\pi.}
+\]
+Además, \(H_e\) es la única hexada \(H\in W_{12}\) tal que:
+\[
+H\cap P_\pi=B_K.
+\]
+
+\section{Hexada de préstamo}
+
+El soporte negativo de \(s\) es:
+\[
+H_\alpha^-=\{i:s_i<0\}=\{4,5,6,7,9,10\}.
+\]
+Se verifica:
+\[
+H_\alpha^-\in W_{12}.
+\]
+Su complemento:
+\[
+H_\alpha^+=\{1,2,3,8,11,12\}
+\]
+también es hexada. Así:
+\[
+[12]=H_\alpha^-\sqcup H_\alpha^+
+\]
+es una partición de Witt.
+
+\section{Campo de emparejamientos}
+
+Para toda 4-cara \(B\):
+\[
+\mu_W(B)=\{H\setminus B:\ H\in W_{12},\ B\subset H\}.
+\]
+Como \(W_{12}=S(5,6,12)\), \(\mu_W(B)\) es un emparejamiento perfecto de \([12]\setminus B\).
+
+Para \(B_K\):
+\[
+\mu_W(B_K)=\{\{1,3\},\{2,11\},\{8,12\},\{5,7\}\}.
+\]
+La partición de signo da:
+\[
+\{1,3\}_{++},\quad \{2,11\}_{++},\quad \{8,12\}_{++},\quad \{5,7\}_{--}.
+\]
+Por tanto:
+\[
+\boxed{H_\alpha^-=B_K\cup\{5,7\}.}
+\]
+
+\section{Papel de \(\varphi\)}
+
+\[
+H_\varphi\cap P_\pi
+=
+\{1,2,3,4,7,9\}\cap\{2,4,5,6,7,8,9,10,11\}
+=
+\{2,4,7,9\}.
+\]
+Fuera de \(B_K\), quedan:
+\[
+\{2,7\}.
+\]
+El signo distingue:
+\[
+s_2=+297>0,\qquad s_7=-003<0.
+\]
+Así:
+\[
+p_\varphi^-=7.
+\]
+Luego:
+\[
+\boxed{
+H_\alpha^-=
+\St_{W_{12}}\Big((H_e\cap P_\pi)\cup\{p_\varphi^-\}\Big).
+}
+\]
+
+\section{\(M_{12}\), involuciones locales y rigidez}
+
+Para cada 4-cara \(B\), define \(\sigma_B\) como la involución que fija \(B\) y transpone los cuatro pares de \(\mu_W(B)\). Se verifica:
+\[
+\sigma_B(W_{12})=W_{12}.
+\]
+El grupo:
+\[
+\Gamma_W=\langle\sigma_B:\ |B|=4\rangle
+\]
+tiene:
+\[
+|\Gamma_W|=95040=|\Aut(W_{12})|.
+\]
+Por tanto:
+\[
+\boxed{\Gamma_W=M_{12}.}
+\]
+Para \(B_K\):
+\[
+\sigma_{B_K}=(1\,3)(2\,11)(5\,7)(8\,12).
+\]
+
+Cadena de estabilizadores:
+\[
+\begin{array}{c|c}
+\text{configuración marcada} & \text{orden}\\
+\hline
+H_\alpha^- & 720\\
+(H_\alpha^-,6) & 120\\
+B_K & 192\\
+(B_K,H_\alpha^-) & 48\\
+(B_K,H_\alpha^-,H_e) & 16\\
+(H_\alpha^-,H_e,H_\varphi) & 2\\
+(H_\alpha^-,H_e,H_\varphi,H_{\rm APP}) & 1
+\end{array}
+\]
+Por tanto:
+\[
+\boxed{
+\Stab_{M_{12}}(H_\alpha^-,H_e,H_\varphi,H_{\rm APP})=\{1\}.
+}
+\]
+El marco HMT mata todo gauge residual de \(M_{12}\).
+
+\section{\(W_{24}\): ambiente octádico}
+
+El sistema grande:
+\[
+W_{24}=S(5,8,24)
+\]
+posee octadas. Fijado un dodecad \(D\), las octadas que cortan \(D\) en seis puntos inducen:
+\[
+W_{12}=\{O\cap D:\ O\in W_{24},\ |O\cap D|=6\}.
+\]
+Así:
+\statement{\(W_{12}\) es la geometría visible; \(W_{24}\) es la geometría ambiente.}
+
+Cada hexada visible \(H\subset D\) se levanta a:
+\[
+O=H\cup R_{\rm ext},
+\]
+donde \(R_{\rm ext}\subset D^c\) es un par exterior.
+
+Para \(B_K\subset D\), en \(W_{24}\) hay:
+\[
+\lambda_4^{(24)}=
+\frac{\binom{24-4}{5-4}}{\binom{8-4}{5-4}}=5
+\]
+octadas.
+
+Estas cinco octadas se dividen en:
+\[
+4\text{ octadas residuales con }|O\cap D|=6,
+\]
+\[
+1\text{ octada transversal con }|O\cap D|=4.
+\]
+
+Esto explica una estructura:
+\[
+4\text{ visibles}+1\text{ transversal}.
+\]
+
+\section{Fibra de \(\pi\) y \(W_{24}\)}
+
+La fibra:
+\[
+f^{-1}(w_6(\pi))
+\]
+tiene cinco preimágenes y firma interna:
+\[
+3+1+1.
+\]
+
+Tabla:
+\[
+\begin{array}{c|c|c|c|c|c}
+\text{clase} & \text{uid} & \text{count} & E{\rm sig} & \text{plus} & KR{\rm band}\\
+\hline
+T & 258 & 432 & 5,5,5,5,5,5 & NO/4 & 121000121000\\
+R_- & 283 & 144 & 9,3,3,7,1,7 & NO/5 & 222121222121\\
+R_+ & 319 & 144 & 3,3,9,5,5,5 & ES/6 & 222000222000\\
+R_+ & 347 & 144 & 9,3,3,5,5,5 & ES/6 & 222000222000\\
+R_+ & 350 & 144 & 3,9,3,5,5,5 & ES/6 & 222000222000
+\end{array}
+\]
+
+Así:
+\[
+\mathcal F_\pi=
+\mathcal F_\pi^{++}\sqcup
+\mathcal F_\pi^{--}\sqcup
+\mathcal F_\pi^\perp,
+\]
+con:
+\[
+|\mathcal F_\pi^{++}|=3,\quad
+|\mathcal F_\pi^{--}|=1,\quad
+|\mathcal F_\pi^\perp|=1.
+\]
+
+La estrella \(W_{24}\) de \(B_K\) tiene la misma firma:
+\[
+3\text{ residuales positivas}
++
+1\text{ residual negativa}
++
+1\text{ transversal}.
+\]
+
+Por tanto:
+\[
+\boxed{
+\operatorname{sig}(\mathcal F_\pi)=
+\operatorname{sig}(\Star_{W_{24}}(B_K))=3+1+1.
+}
+\]
+
+Conjetura/identificación operativa:
+\[
+\Theta_\pi:f^{-1}(w_6(\pi))\to\{O\in W_{24}:B_K\subset O\}.
+\]
+Las ramas \(ES/KR=222000\) corresponden a los tres pétalos positivos. La rama \(NO/KR=222121\) corresponde al pétalo negativo visible. La rama especial \(5^6/count=432\) corresponde a la octada transversal.
+
+Si se aceptan las anclas internas:
+\[
+\varphi\to\pi\to e\to\varphi
+\]
+y el puente mínimo hacia \(U_{\rm APP}\), se fija una biyección individual:
+\[
+\Theta_\pi(319)=B_K\cup\{1,3\}=H_e,
+\]
+\[
+\Theta_\pi(350)=B_K\cup\{2,11\},
+\]
+\[
+\Theta_\pi(347)=B_K\cup\{8,12\},
+\]
+\[
+\Theta_\pi(283)=B_K\cup\{5,7\}=H_\alpha^-,
+\]
+\[
+\Theta_\pi(258)=O_{\rm tr}(B_K).
+\]
+
+\section{Kernel \(90/120\)}
+
+Una hexada tiene:
+\[
+\binom64=15
+\]
+4-caras.
+
+Ponderando por tamaño de hexada:
+\[
+6\binom64=90.
+\]
+
+Ponderando por tamaño de octada:
+\[
+8\binom64=120.
+\]
+
+Además:
+\[
+270=3\cdot90,\qquad 360=3\cdot120.
+\]
+
+Conjetura:
+\statement{\(90/120\) es la sombra combinatoria de la transición de hexada visible \(6\) a octada ambiente \(8\) sobre las 15 cuatro-caras.}
+
+\section{Moonshine}
+
+Ruta ternaria visible:
+\[
+W_{12}\to
+\text{Golay ternario }[12,6,6]_3
+\to
+A_2^{12}
+\to
+\Leech.
+\]
+
+Ruta binaria ambiente:
+\[
+W_{24}\to
+\text{Golay binario }[24,12,8]_2
+\to
+\Leech.
+\]
+
+Ambas convergen:
+\[
+\Leech\to\Vnat\to\Monster.
+\]
+
+Por tanto:
+\statement{La lectura ternaria de 12 fases es una sección visible de una lectura binaria octádica de 24 puntos.}
+
+\section{Lectura dimensional del continuo}
+
+La interpretación conceptual debe redactarse con prudencia. HMT no afirma simplemente discreto contra continuo. Afirma una transducción de borde.
+
+La dimensión no es sólo un contenedor, sino un régimen de compatibilidad entre cantidad, orden, orientación y borde. El continuo aparece cuando ese régimen admite una lectura archimedeana estable.
+
+Definiciones conceptuales útiles:
+\statement{Dimensión = compatibilidad estable entre cantidad, orden y borde.}
+\statement{Continuo = lectura archimedeana estable de esa compatibilidad.}
+\statement{Inercia = transporte conforme sin cambio de sección.}
+\statement{Fuerza = cambio de sección dimensional.}
+
+La primera ley de Newton puede reinterpretarse como principio de conformidad dimensional: en ausencia de perturbación externa, el cuerpo conserva el régimen de transporte que hace estable su lectura espacial; la trayectoria rectilínea uniforme es la manifestación cinemática de una sección dimensional no perturbada.
+
+El infinitesimal, en esta lectura, no es un trocito casi cero, sino la huella continua de una corrección discreta de borde. Monster no es lo opuesto del infinitesimal, sino el cierre global excepcional de coherencia modular. Ambos responden a la misma pregunta: cómo se conserva coherencia al cambiar de escala o régimen.
+
+\section{Cierre}
+
+La descripción global compacta es:
+\[
+APP/TPK
+\to
+\mathcal F_\pi
+\to
+\Theta_\pi
+\to
+\Star_{W_{24}}(B_K)
+\to
+\Halpha
+\to
+\alpha,
+\]
+con:
+\[
+B_K=H_e\cap P_\pi=\{i:K_i\ge729\}.
+\]
+
+La frase final:
+\statement{La rueda de 12 fases es la sección visible de una geometría octádica de 24 puntos, y la fibra de \(\pi\) es la primera huella micro de esa completación.}
+
+\end{document}

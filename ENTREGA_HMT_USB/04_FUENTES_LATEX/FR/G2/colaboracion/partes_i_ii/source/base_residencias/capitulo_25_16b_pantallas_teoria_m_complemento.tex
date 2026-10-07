@@ -1,0 +1,678 @@
+\label{chap:pantallas-dualidad}
+\index{écran algébrique}
+\index{dualité résidu--quotient}
+
+Les entiers \(10\), \(11\), \(24\) et \(26\) apparaissent dans la construction par
+des procédures algébriques différentes : longueur d'un code, dimension d'un
+module, rang d'un réseau et dimension d'un quotient orthogonal.
+L'objectif de cette section est de reconstruire ces procédures et les applications qui
+les relient. Une égalité entre entiers ne suffira pas à identifier les
+objets qu'ils dénombrent.
+
+Nous appellerons \emph{écran algébrique} un sous-espace ou quotient accompagné
+de l'application qui le sélectionne. Cette dénomination n'introduit pas une nouvelle classe
+d'espaces : elle abrège le couple formé par l'objet linéaire et son projecteur ou
+application quotient. Avec cette convention, les réductions
+
+\[
+12\longrightarrow11\longrightarrow10,
+\qquad
+26\longrightarrow24
+\]
+
+sont des énoncés sur des applications définies, non des décompositions numérologiques.
+La première chaîne provient d'une représentation de \(A_5\) marquée par le
+vecteur dodécaphasique \(K\) ; la seconde, d'une réduction isotrope d'un
+réseau lorentzien. Toutes deux s'appuient sur la branche exceptionnelle construite dans
+les sections précédentes, mais ne sont pas le même mécanisme.
+
+\section{Le quotient parfait à \(11\) coordonnées}
+\label{sec:golay-once}
+
+Soit
+
+\[
+C_W=[12,6,6]_3
+\]
+
+le code ternaire étendu de Golay. Le poinçonnage d'une coordonnée
+produit le code ternaire de Golay
+
+\[
+G_{11}=[11,6,5]_3\subset\mathbb F_3^{11}
+\]
+
+\cite{MacWilliamsSloane1977}. La longueur onze appartient ici à l'espace
+ambiant du code ; elle n'est pas introduite au moyen d'une interprétation physique.
+
+\begin{definition}[Boule ternaire]
+Pour \(x\in\mathbb F_3^n\) et \(t\geq0\), la boule de Hamming de rayon \(t\)
+centrée en \(x\) est
+\[
+B_t(x)=\{y\in\mathbb F_3^n:d_H(x,y)\leq t\}.
+\]
+Son cardinal, indépendant de \(x\), est
+\[
+V_3(n,t)=\sum_{j=0}^{t}\binom nj2^j.
+\]
+\end{definition}
+
+\begin{theorem}[Perfection de \(G_{11}\)]
+\label{thm:g11-perfecto}
+Les boules de Hamming de rayon deux centrées sur les mots de \(G_{11}\)
+constituent une partition de \(\mathbb F_3^{11}\). En particulier,
+\[
+V_3(11,2)=243,
+\qquad
+|G_{11}|\,V_3(11,2)=3^{11}.
+\]
+\end{theorem}
+
+\begin{proof}
+La distance minimale de \(G_{11}\) est cinq. Si deux boules de rayon deux,
+centrées sur des mots distincts \(c,c'\in G_{11}\), avaient un élément
+commun \(y\), l'inégalité triangulaire donnerait
+\[
+d_H(c,c')\leq d_H(c,y)+d_H(y,c')\leq4,
+\]
+en contradiction avec \(d_H(c,c')\geq5\). Les boules sont donc
+disjointes. Leur cardinal est
+\[
+V_3(11,2)
+=\binom{11}{0}+2\binom{11}{1}+2^2\binom{11}{2}
+=1+22+220=243=3^5.
+\]
+Puisque \(G_{11}\) est de dimension six, il contient \(3^6\) mots. En
+conséquence,
+\[
+3^6V_3(11,2)=3^6\cdot3^5=3^{11}
+=|\mathbb F_3^{11}|.
+\]
+La réunion disjointe des boules a le cardinal de l'espace ambiant et
+coïncide donc avec lui.
+\end{proof}
+
+Le décodage parfait attribue à chaque mot reçu un unique mot
+de code à une distance au plus deux. De manière équivalente, l'espace des
+syndromes a \(3^{11-6}=243\) éléments. Cette apparition de \(243\) doit
+être distinguée de la couche cubique
+
+\[
+3\cdot9^2=243
+\]
+
+de la complétion \(1000=729+243+27+1\). Une quantité dénombre les syndromes
+d'un code ; l'autre dénombre les positions d'une couche de frontière. L'égalité
+des cardinaux autorise une comparaison, mais ne fournit pas de bijection
+canonique entre les deux réalisations.
+
+Il convient également de séparer la partition métrique
+
+\[
+243=1+22+220
+\]
+
+de l'identité typée
+
+\[
+243=1+22+90+120+10.
+\]
+
+Dans la seconde expression, \(90=6\binom62\) et
+\(120=8\binom62\) comptent des familles d'incidences dans l'extension
+hexade--octade, tandis que \(10\) sera la dimension d'un écran linéaire.
+Ce ne sont pas des sous-ensembles de poids \(0,1,2\) d'une même boule de Hamming.
+La construction de plans qui sous-tend cette extension s'inscrit dans la
+théorie classique des systèmes de Witt \cite{AssmusKey1992}.
+
+\section{\(2\) descendants du code ternaire étendu}
+\label{sec:dos-descendientes-cw}
+
+La longueur onze n'est pas le seul rang qui descend de \(C_W\). Le même
+code intervient dans le recollement du réseau de racines \(A_2^{12}\), dont le
+rang est vingt-quatre. Après fixation des données de chambre et du vecteur de
+voisinage construits dans la branche exceptionnelle, le voisin d'indice trois sans
+racines est le réseau de Leech \(\Lambda_{24}\). La structure des
+dépendances est
+
+\begin{equation}
+\label{eq:dos-descendientes-cw}
+\begin{gathered}
+C_W\xrightarrow{\text{poncturation}}G_{11}\subset\mathbb F_3^{11},\\[2mm]
+C_W\xrightarrow{\text{recollement}}N(A_2^{12})
+\xrightarrow{\text{voisin d'indice }3}\Lambda_{24}.
+\end{gathered}
+\end{equation}
+
+La première flèche est un morphisme de codes ; la seconde ligne appartient à la
+théorie des réseaux. La source ternaire commune explique la coexistence des
+rangs onze et vingt-quatre sans les identifier. En particulier, \(11\) n'est pas
+une sous-dimension de \(24\), et \(24\) ne s'obtient pas en complétant le code
+poinçonné.
+
+\begin{proposition}[Bifurcation des rangs]
+La construction \eqref{eq:dos-descendientes-cw} produit deux invariants de
+types distincts :
+\[
+\operatorname{length}(G_{11})=11,
+\qquad
+\operatorname{rank}(\Lambda_{24})=24.
+\]
+Leur provenance commune est le code \(C_W\) ; aucune des deux égalités
+n'implique un isomorphisme entre l'espace des coordonnées du code et
+l'espace réel engendré par le réseau.
+\end{proposition}
+
+\begin{proof}
+Le poinçonnage élimine l'une des douze positions et ne modifie pas la dimension
+six du code, d'où la longueur onze. Chaque copie de \(A_2\) est de rang
+deux ; c'est pourquoi \(A_2^{12}\), ses recollements d'indice fini et ses voisins de
+rang plein sont de rang vingt-quatre. Les objets vivent respectivement
+dans les catégories des codes sur \(\mathbb F_3\) et des réseaux entiers. Un
+isomorphisme entre eux ne serait même pas bien typé sans un foncteur
+supplémentaire.
+\end{proof}
+
+\section{La représentation icosaédrique de dimension \(12\)}
+\label{sec:representacion-a5-doce}
+
+La réduction \(12\to11\to10\) provient d'une seconde réalisation du nombre
+douze. Soit \(V_{12}=\mathbb R^{12}\) le module de permutation de \(A_5\) sur
+les douze sommets d'un icosaèdre. Notons \(\rho\) cette représentation
+et \(\chi_{12}\) son caractère. Pour fixer sans ambiguïté la correspondance
+avec les douze positions dodécaphasiques, nous réalisons les sommets comme les classes latérales
+à gauche \(A_5/H\), où \(A_5\) agit sur \(\{0,1,2,3,4\}\) et
+\[
+ H=\langle(0\ 1\ 2\ 3\ 4)\rangle\cong C_5.
+\]
+La position \(j\) est identifiée à la classe latérale \(r_jH\), pour les
+représentants suivants, écrits en notation des images :
+\[
+\begin{array}{c|c@{\qquad}c|c@{\qquad}c|c}
+j&r_j&j&r_j&j&r_j\\ \hline
+1&(3,2,4,1,0)&5&(3,2,0,4,1)&9&(3,1,2,4,0)\\
+2&(3,1,0,2,4)&6&(4,0,1,2,3)&10&(2,1,4,3,0)\\
+3&(0,1,3,4,2)&7&(4,3,2,1,0)&11&(3,4,1,2,0)\\
+4&(1,4,2,3,0)&8&(0,2,3,1,4)&12&(4,2,1,3,0)
+\end{array}
+\]
+Ce tableau est la donnée d'orientation qui permet d'appliquer un projecteur de
+\(A_5\) au vecteur \(K\) ; sans lui, une norme en coordonnées dépendrait d'une
+permutation non spécifiée. Dans l'ordre des classes de conjugaison
+
+\[
+1A,\quad2A,\quad3A,\quad5A,\quad5B,
+\]
+
+les tailles des classes et le nombre de points fixes sont
+
+\[
+\begin{array}{c|rrrrr}
+ &1A&2A&3A&5A&5B\\ \hline
+|C|&1&15&20&12&12\\
+\chi_{12}&12&0&0&2&2.
+\end{array}
+\]
+
+En effet, les rotations d'ordres deux et trois ne fixent pas de sommets, tandis
+que chaque rotation d'ordre cinq fixe les deux sommets de son axe. Écrivons
+
+\[
+\phi=\frac{1+\sqrt5}{2},
+\qquad
+\phi'=\frac{1-\sqrt5}{2},
+\qquad
+\phi+\phi'=1.
+\]
+
+La partie pertinente de la table des caractères de \(A_5\) est
+
+\[
+\begin{array}{c|rrrrr}
+ &1A&2A&3A&5A&5B\\ \hline
+\chi_1&1&1&1&1&1\\
+\chi_3&3&-1&0&\phi&\phi'\\
+\chi_{3'}&3&-1&0&\phi'&\phi\\
+\chi_4&4&0&1&-1&-1\\
+\chi_5&5&1&-1&0&0.
+\end{array}
+\]
+
+\begin{theorem}[Décomposition du module icosaédrique]
+\label{thm:descomposicion-a5}
+La représentation de permutation sur les douze sommets se décompose sous la forme
+\[
+V_{12}\cong V_1\oplus V_3\oplus V_{3'}\oplus V_5.
+\]
+Le sous-espace orthogonal au vecteur uniforme est
+\[
+V_{11}:=\mathbf1^\perp
+\cong V_3\oplus V_{3'}\oplus V_5
+\]
+et est de dimension onze.
+\end{theorem}
+
+\begin{proof}
+La multiplicité d'un caractère irréductible \(\chi\) dans \(\chi_{12}\) est
+\[
+\langle\chi_{12},\chi\rangle
+=\frac1{60}\sum_C|C|\chi_{12}(C)\chi(C).
+\]
+Seuls \(1A,5A,5B\) contribuent. Pour les caractères de dimensions un, trois,
+trois prime, quatre et cinq, on obtient respectivement
+\[
+\frac{12+24+24}{60}=1,
+\]
+\[
+\frac{36+24(\phi+\phi')}{60}=1,
+\qquad
+\frac{36+24(\phi'+\phi)}{60}=1,
+\]
+\[
+\frac{48-24-24}{60}=0,
+\qquad
+\frac{60}{60}=1.
+\]
+Les multiplicités sont donc \((1,1,1,0,1)\). L'unique vecteur fixé par
+toutes les permutations est le vecteur uniforme
+\(\mathbf1=(1,\ldots,1)\). Son complément orthogonal contient les trois
+termes non triviaux et est de dimension \(3+3+5=11\).
+\end{proof}
+
+Le projecteur orthogonal sur \(V_{11}\) est explicite :
+
+\[
+P_{11}=I_{12}-\frac1{12}J_{12},
+\]
+
+où \(J_{12}\) est la matrice dont toutes les entrées valent un. Ainsi, la première
+réduction est l'application
+
+\[
+\mathbb R^{12}\longrightarrow V_{11},
+\qquad
+x\longmapsto x-\frac1{12}\Bigl(\sum_{j=1}^{12}x_j\Bigr)\mathbf1.
+\]
+
+Cette formule spécifie l'information éliminée : exclusivement la
+composante uniforme. L'égalité \(12=1+11\) est une conséquence de la
+décomposition du module, non une convention dimensionnelle.
+
+\section[Polarisation du secteur tridimensionnel]{Polarisation du secteur tridimensionnel déterminée par K}
+\label{sec:reduccion-once-diez}
+
+Considérons le vecteur dodécaphasique déjà obtenu,
+
+\[
+K=(234,543,140,729,659,824,621,58,914,794,146,601),
+\qquad
+\sum_{j=1}^{12}K_j=6263.
+\]
+
+Sa composante de somme nulle est
+
+\[
+\widetilde K=P_{11}K
+=K-\frac{6263}{12}\mathbf1.
+\]
+
+Pour sélectionner l'une des deux représentations tridimensionnelles, nous utilisons la
+bijection position--classe latérale fixée dans le tableau précédent. Le projecteur central
+correspondant s'écrit
+
+\[
+P_{\mathrm{ico},3}=\frac{3}{60}\sum_{g\in A_5}\chi_3(g^{-1})\rho(g).
+\]
+
+La somme contient des matrices de permutation et des coefficients dans
+\(\mathbb Q(\sqrt5)\) ; par conséquent, \(P_{\mathrm{ico},3}\) est un opérateur exact sur
+ce corps, satisfait \(P_{\mathrm{ico},3}^2=P_{\mathrm{ico},3}=P_{\mathrm{ico},3}^{\mathsf T}\) et est de rang trois.
+
+\begin{definition}[Direction polarisante]
+La projection icosaédrique du vecteur et la droite qu'elle engendre sont
+\[
+u_K=P_{\mathrm{ico},3}\widetilde K,
+\qquad
+\ell_K=\mathbb R u_K.
+\]
+\end{definition}
+
+\begin{lemma}[Non-dégénérescence de la polarisation]
+\label{lem:norma-uk}
+Pour le vecteur \(K\) et la correspondance position--classe latérale déclarée,
+\[
+\|u_K\|^2
+=\frac{6638585+2275584\sqrt5}{20}>0.
+\]
+En particulier, \(\ell_K\) est une droite bien définie.
+\end{lemma}
+
+\begin{proof}
+En substituant l'expression de \(P_{\mathrm{ico},3}\) dans
+\(\|u_K\|^2=\widetilde K^{\mathsf T}P_{\mathrm{ico},3}\widetilde K\), la somme se réduit à
+\[
+\frac3{60}\sum_{g\in A_5}
+\chi_3(g^{-1})\,
+\widetilde K^{\mathsf T}\rho(g)\widetilde K.
+\]
+Chaque produit scalaire est rationnel, puisque \(\rho(g)\) est une matrice de
+permutation et \(\widetilde K\in\mathbb Q^{12}\). La séparation des deux
+classes d'ordre cinq ne laisse comme seule partie irrationnelle qu'un multiple de
+\(\sqrt5\). La somme exacte des soixante termes est
+\[
+\frac{6638585}{20}+\frac{2275584}{20}\sqrt5.
+\]
+Les deux coefficients sont positifs et \(\sqrt5>0\) ; la norme ne
+s'annule donc pas.
+\end{proof}
+
+L'énumération exacte du groupe et des douze classes latérales reconstruit le
+projecteur sur \(\mathbb Q(\sqrt5)\), vérifie son idempotence et produit la
+norme précédente.
+
+\begin{theorem}[Réduction polarisée \(11\to10\)]
+\label{thm:once-diez}
+Soit
+\[
+V_{10}:=(V_3\cap\ell_K^\perp)\oplus V_{3'}\oplus V_5.
+\]
+Alors
+\[
+V_{11}=\ell_K\oplus V_{10},
+\qquad
+\dim V_{10}=10.
+\]
+Le projecteur sur l'écran de dimension dix est
+\[
+P_{10}=P_{11}-\frac{u_Ku_K^{\mathsf T}}{\|u_K\|^2}.
+\]
+\end{theorem}
+
+\begin{proof}
+D'après le \cref{lem:norma-uk}, \(u_K\neq0\) et, par définition, \(u_K\in V_3\).
+D'où
+\[
+V_3=\ell_K\oplus(V_3\cap\ell_K^\perp).
+\]
+En ajoutant les termes orthogonaux \(V_{3'}\) et \(V_5\), le
+\cref{thm:descomposicion-a5} donne
+\[
+V_{11}=\ell_K\oplus
+\bigl((V_3\cap\ell_K^\perp)\oplus V_{3'}\oplus V_5\bigr).
+\]
+La dimension du second terme est \(2+3+5=10\). La formule de \(P_{10}\)
+soustrait à \(P_{11}\) le projecteur orthogonal de rang un sur \(\ell_K\), de
+sorte que son image est précisément \(V_{10}\).
+\end{proof}
+
+\begin{corollary}[Décomposition exacte \(1+3+7\)]
+\label{cor:descomposicion-1-3-7}
+Soit
+\[
+W_7(K):=(V_3\cap\ell_K^\perp)\oplus V_5.
+\]
+Alors
+\[
+\boxed{
+V_{11}=\ell_K\oplus V_{3'}\oplus W_7(K),
+\qquad
+\dim(\ell_K,V_{3'},W_7)=(1,3,7),}
+\]
+et
+\[
+\boxed{
+V_{10}=V_{3'}\oplus W_7(K),
+\qquad 10=3+7.}
+\]
+\end{corollary}
+
+\begin{proof}
+\(\ell_K\subset V_3\) est une droite, de sorte que
+\(\dim(V_3\cap\ell_K^\perp)=2\). Par conséquent,
+\(\dim W_7=2+5=7\), et les deux décompositions découlent du
+\cref{thm:once-diez}.
+\end{proof}
+
+\begin{remark}[Condition supplémentaire pour la lecture \(1+3+6\)]
+\label{rem:interfaz-1-3-6}
+Les décompositions exactes \(1+3+7\) et \(3+7\) ne sélectionnent pas à elles seules
+un temps, un espace étendu tridimensionnel ni un secteur compact de rang
+six. Une réalisation physique doit choisir une droite
+\(\ell_t\subset W_7(K)\), démontrer
+\[
+W_7(K)=\ell_t\oplus W_6,
+\]
+construire un réseau de rang plein
+\(\Lambda_6\subset W_6\), stable sous le transport, interpréter
+\(W_6/\Lambda_6\) comme le secteur compact et présenter un entrelaceur entre le
+lecteur temporel du TRIT, \(W_6\) et ce réseau. Le même transport doit
+préserver séparément les trois directions étendues du terme
+\(V_{3'}\), sans les mélanger avec \(\ell_t\) ni avec le quotient compact. Ce n'est que
+sous ces hypothèses que l'on obtient les décompositions
+\[
+\boxed{
+V_{11}=\ell_K\oplus\ell_t\oplus V_{3'}\oplus W_6,
+\qquad 11=1+1+3+6,}
+\]
+\[
+\boxed{
+V_{10}=\ell_t\oplus V_{3'}\oplus W_6,
+\qquad 10=1+3+6.}
+\]
+L'absence d'un choix naturel de \(\ell_t\), de stabilité de
+\(\Lambda_6\), de rang plein, de séparation des trois directions
+étendues ou de l'entrelaceur réfuterait cette réalisation, sans modifier le
+corollaire algébrique \(1+3+7\).
+\end{remark}
+
+La réduction n'est pas \(A_5\)-équivariante en l'absence de la donnée marquée. Le
+sous-module \(V_3\) est irréductible et ne contient pas de droite \(A_5\)-invariante ;
+la direction \(\ell_K\) apparaît après l'introduction de \(K\). La séquence
+
+\[
+12\longrightarrow11\longrightarrow10
+\]
+
+possède ainsi deux natures distinctes : le passage \(12\to11\) est canonique pour
+l'action de permutation, tandis que \(11\to10\) est une polarisation
+relative au vecteur \(K\) et à la correspondance position--classe latérale déclarée.
+
+\section{Réduction isotrope de rang \(26\to24\)}
+\label{sec:reduccion-26-24}
+
+Soit \(U\) le plan hyperbolique entier de base \(e_+,e_-\) et de matrice de Gram
+
+\[
+\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+
+C'est un réseau pair, unimodulaire et de signature \((1,1)\). Le réseau
+
+\[
+L_{26}:=\Lambda_{24}\oplus U
+\]
+
+est pair, unimodulaire et de signature \((25,1)\) ; par la classification des réseaux
+indéfinis pairs unimodulaires, il s'identifie à \(II_{25,1}\)
+\cite{ConwaySloane1999}.
+
+L'adjectif \emph{lorentzien} est employé au sens algébrique : il indique la
+présence d'une direction négative dans la forme bilinéaire. La terminologie
+provient de la géométrie de Lorentz et de Minkowski
+\cite{Lorentz1904,Minkowski1909} ; elle n'identifie pas à elle seule le réseau à
+un espace-temps physique.
+
+\begin{theorem}[Réduction nulle]
+\label{thm:reduccion-nula}
+Pour le vecteur isotrope primitif \(e_+\in U\), il existe un isomorphisme
+canonique, une fois la décomposition \(L_{26}=\Lambda_{24}\oplus U\) fixée,
+\[
+e_+^\perp/\mathbb Ze_+\cong\Lambda_{24}.
+\]
+\end{theorem}
+
+\begin{proof}
+Tout élément de \(L_{26}\) s'écrit de manière unique sous la forme
+\(x=\lambda+ae_++be_-\), avec
+\(\lambda\in\Lambda_{24}\) et \(a,b\in\mathbb Z\). Puisque la somme est
+orthogonale et \(\langle e_-,e_+\rangle=1\),
+\[
+\langle x,e_+\rangle=b.
+\]
+Par conséquent,
+\[
+e_+^\perp=\Lambda_{24}\oplus\mathbb Ze_+.
+\]
+Le quotient par \(\mathbb Ze_+\) élimine le second terme et conserve le
+premier, ce qui définit l'isomorphisme affirmé.
+\end{proof}
+
+La dimension diminue de deux parce que la condition d'orthogonalité élimine
+une direction et que le quotient élimine la direction nulle restante. Il ne s'agit pas
+d'une projection orthogonale sur un complément positif : une droite
+isotrope est contenue dans son propre orthogonal. C'est la raison algébrique
+pour laquelle la procédure correcte est \(e_+^\perp/\mathbb Ze_+\).
+
+La matrice du plan \(U\) coïncide formellement avec la matrice qui échange
+les deux secteurs du transport bidirectionnel. L'adopter comme forme de Gram
+établit une réalisation concrète en réseau de cet opérateur involutif. La réduction
+\cref{thm:reduccion-nula} est alors exacte au sein de cette réalisation ;
+la coïncidence matricielle, à elle seule, n'identifie pas le réseau à un
+espace-temps physique.
+
+Ce cadre ambiant est également celui employé dans la construction de Borcherds : le
+secteur de charge centrale vingt-quatre est combiné au plan lorentzien de
+rang deux avant la réduction qui conduit à l'algèbre de Lie monstrueuse
+\cite{Borcherds1992}. La relation pertinente ici est le quotient de réseau
+explicite ; la théorie des algèbres d'opérateurs de sommets suit le corridor
+classique décrit précédemment.
+
+
+\section{Correspondance icosaédrique de McKay et type \texorpdfstring{\(E_8\)}{E8}}
+\label{sec:tres-ochos}
+
+Trois occurrences de l'entier huit interviennent près de cette frontière :
+
+\[
+8_{\rm oct}=|O_H|,
+\qquad
+V_8:=V_{3'}\oplus V_5,
+\qquad
+\operatorname{rank}(E_8)=8.
+\]
+
+La première est le cardinal d'une octade du système de Witt ; la deuxième est
+un module réel de \(A_5\) ; la troisième est le rang d'un système de racines. Ce ne
+sont pas des instances d'un unique objet. Le pont classique pertinent passe par le
+groupe icosaédrique binaire :
+
+\[
+A_5\longleftarrow2A_5\subset SU(2)
+\xrightarrow{\text{McKay}}\widetilde E_8
+\]
+
+\cite{McKay1980}. Dans la correspondance de McKay, les sommets du diagramme
+affine codent les représentations irréductibles de \(2A_5\), et les arêtes
+décrivent la décomposition du produit tensoriel avec la représentation
+bidimensionnelle naturelle. Cette construction explique pourquoi l'icosaèdre et
+\(E_8\) sont liés ; elle n'identifie pas une octade de Witt au module
+\(V_8\), ni l'un de ceux-ci au réseau \(E_8\).
+
+\begin{proposition}[Séparation catégorielle de trois invariants de valeur huit]
+Aucune égalité entre les trois invariants précédents ne définit par elle-même
+un entrelaceur. Pour en relier deux, il faut respectivement
+une application des ensembles d'incidence vers les modules, des modules de \(A_5\) vers les
+modules de \(2A_5\), ou des représentations vers des données de réseaux.
+\end{proposition}
+
+\begin{proof}
+Le cardinal d'un ensemble, la dimension d'un espace vectoriel et le rang
+d'un réseau sont des invariants dans des catégories différentes. Un isomorphisme dans
+l'une d'elles n'est pas défini pour les objets des autres. La
+correspondance de McKay fournit l'un des foncteurs intermédiaires, mais pas
+les autres ; c'est pourquoi la coïncidence de l'entier huit est insuffisante.
+\end{proof}
+
+\section{Réduction dimensionnelle et contexte de la théorie M}
+\label{sec:interfaz-teoria-m}
+
+Les constructions précédentes produisent deux occurrences exactes de onze. La
+première est la longueur du code parfait \(G_{11}\) ; la seconde est la
+dimension du module actif \(V_{11}=\mathbf1^\perp\). Ces objets ne
+s'identifient pas : l'un est défini sur \(\mathbb F_3\) et l'autre sur
+\(\mathbb R\). La réduction à dix appartient exclusivement au second et
+dépend de la droite marquée \(\ell_K\).
+
+La supergravité en onze dimensions et le réseau de dualités qui a conduit à la
+formulation de la théorie M fournissent le contexte physique dans lequel une direction
+d'un espace à onze dimensions peut être compactifiée et produire des théories à dix
+dimensions \cite{CremmerJuliaScherk1978,HullTownsend1995,Witten1995,Townsend1995}.
+La correspondance dimensionnelle suggérée par la construction HMT s'organise
+dans le dictionnaire suivant :
+
+\[
+\begin{array}{>{\raggedright\arraybackslash}p{0.42\textwidth}
+                >{\raggedright\arraybackslash}p{0.46\textwidth}}
+\toprule
+\textbf{Objeto algebraico} & \textbf{Dato requerido en una realización física}\\
+\midrule
+\(V_{11}=\ell_K\oplus V_{10}\) &
+una dirección compacta y una pantalla de diez dimensiones con un mapa de
+campos definido\\
+\((m,w,R_0)\mapsto(w,m,R_0^{-1})\) &
+sectores de momento y enrollamiento, radio físico y escala de cuerda\\
+\(\Lambda_{24}\oplus U\cong II_{25,1}\) &
+una interpretación dinámica del sector reticular lorentziano\\
+\(C_W\to G_{11}\) y \(C_W\to\Lambda_{24}\) &
+un entrelazador que preserve incidencia, acción y espectro\\
+\bottomrule
+\end{array}
+\]
+
+Dans la supergravité à onze dimensions, une réalisation complète doit inclure
+au moins le champ métrique \(g_{MN}\), la trois-forme \(C_{MNP}\), le
+gravitino \(\psi_M\), son action et ses transformations de supersymétrie. Pour
+que l'écran \(V_{11}=\ell_K\oplus V_{10}\) représente une compactification
+physique, il faut une application qui envoie ces champs sur des données sur
+\(\ell_K\) et \(V_{10}\) et qui préserve la dynamique et la limite de basse
+énergie. Aucun de ces champs n'entre comme hypothèse dans les
+\cref{thm:g11-perfecto,thm:once-diez,thm:reduccion-nula,thm:dualidad-visible-memoria}.
+
+Par conséquent, l'interface possède deux niveaux bien différenciés. Au
+niveau algébrique sont démontrées la perfection du code, la
+décomposition \(12=1+3+3'+5\), la polarisation \(11=1+10\), la réduction
+isotrope \(26\to24\) et l'involution de rayon. Au niveau physique, ces
+structures fournissent un domaine et des équations de compatibilité pour
+construire un dictionnaire avec la théorie M. La seconde tâche ajoute des champs et de la
+dynamique ; elle ne modifie pas le premier niveau et n'est pas utilisée pour le démontrer.
+
+\Needspace{24\baselineskip}
+\section{Diagramme des quotients et des réductions de rang}
+\label{sec:sintesis-pantallas}
+
+Le diagramme des rangs peut être résumé sans perdre ses types :
+
+\[
+\begin{array}{ccccc}
+&&C_W=[12,6,6]_3&&\\[1mm]
+&\swarrow&&\searrow&\\[-1mm]
+G_{11}\subset\mathbb F_3^{11}&&&&N(A_2^{12})\longrightarrow\Lambda_{24}\\[2mm]
+&&V_{12}=\mathbb R^{12}&&\\[-1mm]
+&&\downarrow P_{11}&&\\[-1mm]
+&&V_{11}=V_3\oplus V_{3'}\oplus V_5&&\\[-1mm]
+&&\downarrow P_{10}(K)&&\\[-1mm]
+&&V_{10}&&\\[2mm]
+&&II_{25,1}=\Lambda_{24}\oplus U&&\\[-1mm]
+&&\downarrow\ e_+^\perp/\mathbb Ze_+&&\\[-1mm]
+&&\Lambda_{24}.&&
+\end{array}
+\]
+
+La flèche \(P_{11}\) élimine le mode uniforme ; \(P_{10}(K)\) élimine la
+direction sélectionnée par \(K\) ; la réduction nulle élimine une paire
+isotrope au moyen de l'orthogonal et du quotient. L'involution
+\(\mathsf T\) agit dans un domaine de réseau élargi et relie des rayons
+réciproques. Ce sont les mécanismes mathématiques qui soutiennent l'interface
+dimensionnelle. Leur formulation explicite permet de distinguer précisément les
+théorèmes de rang des interprétations physiques qui peuvent être édifiées
+sur eux.

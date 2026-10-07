@@ -1,0 +1,228 @@
+% Separate development, 9 September 2026.
+% Extends the product reader of centro_electronico_registros.tex.
+% Does not identify the spatial half-turn with a physical conjugation.
+\subsubsection{Bidirectionality of the product reader and quotient memory}
+\label{bim09:seccion}
+
+The product reading preserves four arithmetic coordinates before
+determining a signature. For $x=(i,j)\in D_9^2$, $D_9=\{1,\ldots,9\}$,
+define
+\[
+ N(x)=ij,\qquad r(x)=1+((ij-1)\bmod9),\qquad
+ q(x)=\frac{N(x)-r(x)}9,
+\]
+and the discrete reader
+\[
+ \ell(1,2,4,8,7,5)=(0,1,2,3,4,5),\qquad
+ \ell(3)=\ell(6)=\ell(9)=0.
+\]
+Thus $N=r+9q$ simultaneously preserves the integer product, positive residue,
+and arithmetic quotient. The function $f_\ell(x)=\ell(r(x))$ is the
+coordinate used by the regional signature. The functions $N,r,q$, and
+$f_\ell$ have a positional domain; the transport direction remains
+in the oriented seed.
+
+\paragraph{Advance, half-turn, and reading before transport.}
+
+Let $\mathscr X_\times=D_9^2\times\{N,E,S,O\}$. The cardinal vectors
+are $\nu_N=(-1,0)$, $\nu_E=(0,1)$, $\nu_S=(1,0)$,
+$\nu_O=(0,-1)$. Positional addition is reduced to positive representatives
+modulo nine. Define
+\[
+ P(x,d)=(x+\nu_d,d),\qquad H(x,d)=(x,\bar d),
+ \qquad \nu_{\bar d}=-\nu_d.
+\]
+These operators satisfy $P^9=I$, $H^2=I$, and $HPH=P^{-1}$.
+
+In the first fifty-four TPK transitions, the product channel
+is activated in phases $2,5,8$ of each nonadic window. Each activation
+reads the position before advance. After transitions $27$ and $54$,
+$H$ is applied. Thus the eighteen positions read are, for a
+seed $s$,
+\[
+ P^0s,P^1s,\ldots,P^8s,\quad
+ HP^9s,\,P H P^9s,\ldots,P^8H P^9s,
+\]
+with the understanding that the positional reading omits only direction.
+For any positional function $f$, put $f_n=f(P^ns)$, with
+indices modulo nine. The word of raw readings is
+\begin{equation}
+ \mathcal R_f(s)=
+ (f_0,f_1,\ldots,f_8,\ f_0,f_8,f_7,\ldots,f_1).
+ \label{bim09:palabra}
+\end{equation}
+The six window sums, each comprising three activations, are
+\begin{align}
+ A_j^f(s)&=f_{3j}+f_{3j+1}+f_{3j+2},&&0\leq j<3,\label{bim09:ida}\\
+ A_{3+j}^f(s)&=f_{-3j}+f_{-3j-1}+f_{-3j-2},&&0\leq j<3.
+ \label{bim09:vuelta}
+\end{align}
+For $f=f_\ell$, the signature is
+$E_{\rm sig}(s)=([A_0^f]_{10},\ldots,[A_5^f]_{10})$.
+The decimal quotient of each accumulator is
+$c_j^{10}=\lfloor A_j^f/10\rfloor$, and it preserves
+$A_j^f=[A_j^f]_{10}+10c_j^{10}$.
+
+\begin{proposition}[Half-turn and permutation of half-cycles]
+\label{bim09:media-vuelta}
+For every oriented seed and every positional function $f$,
+\[
+ \mathcal R_f(Hs)=\operatorname{rot}_9\mathcal R_f(s),\qquad
+ A_j^f(Hs)=A_{j+3\bmod6}^f(s).
+\]
+The same permutation transports the decimal residues and quotients
+of the accumulators. It applies, in particular, to $N,r,q$, and $f_\ell$.
+\end{proposition}
+\begin{proof}
+The relation $P^nH=HP^{-n}$ and equality $f(Hs)=f(s)$ give
+$f(P^nHs)=f(P^{-n}s)=f_{-n}$. Substitution into
+\eqref{bim09:palabra} exchanges its two groups of nine entries.
+Summation in groups of three produces the window identity. Euclidean
+division by ten is performed componentwise and respects the
+permutation.
+\end{proof}
+
+Advance also has an exact law on the accumulators:
+\begin{align}
+ A_j^f(Ps)-A_j^f(s)&=f_{3j+3}-f_{3j},&&0\leq j<3,
+ \label{bim09:avance-ida}\\
+ A_{3+j}^f(Ps)-A_{3+j}^f(s)&=f_{1-3j}-f_{-2-3j},&&0\leq j<3.
+ \label{bim09:avance-vuelta}
+\end{align}
+The proof consists in canceling the two common summands of each window.
+Transport of a signature therefore requires the boundary evaluations
+appearing in these differences, in addition to the sums already
+expressed.
+
+\paragraph{Chronological inversion and boundary terms.}
+
+Let $\gamma=(x_0,\ldots,x_n)$ be a recorded trajectory, and let
+$\gamma^\dagger=(x_n,\ldots,x_0)$ be its chronological inversion, with each
+edge oriented in the opposite direction. For a positional function $f$,
+the reading before each advance is
+\[
+ C_f(\gamma)=\sum_{t=0}^{n-1}f(x_t).
+\]
+Then
+\begin{equation}
+ C_f(\gamma^\dagger)=C_f(\gamma)+f(x_n)-f(x_0).
+ \label{bim09:frontera-inversion}
+\end{equation}
+If $n=3m$ and $A_j^f$ groups three consecutive edges,
+\begin{equation}
+ A_j^f(\gamma^\dagger)=A_{m-1-j}^f(\gamma)
+ +f(x_{3(m-j)})-f(x_{3(m-j-1)}).
+ \label{bim09:frontera-ventana}
+\end{equation}
+Both formulas follow because the reverse trajectory reads the arrival
+endpoints of the original edges. The interior summands coincide;
+the difference preserves the endpoints.
+
+For an antisymmetric edge observable $a(x,y)=-a(y,x)$, its word
+does transform according to
+\[
+ \mathcal R_a(\gamma^\dagger)
+ =-\operatorname{rev}\mathcal R_a(\gamma).
+\]
+This identity acts on oriented edges. Identities
+\eqref{bim09:frontera-inversion}--\eqref{bim09:frontera-ventana}
+act on positional readings. The half-turn $H$ changes the
+initial direction and preserves calendar order; chronological
+inversion reverses the complete record. Their domains and reading rules
+are specified separately.
+
+\paragraph{Occupation cocycle and memory preserved on outward and return paths.}
+
+For a cardinal edge $x\to y$, with positive representatives
+$\widetilde x,\widetilde y$, the covering crossing is
+\[
+ b(x,y)=\frac{\widetilde x+\nu_d-\widetilde y}{9}\in\mathbb Z^2.
+\]
+The identity $b(y,x)=-b(x,y)$ holds. In the free category of recorded
+paths, define the additive reader
+\begin{equation}
+ \mathfrak m(\gamma)=
+ \left(\sum_{t=0}^{n-1}b(x_t,x_{t+1}),\ C_q(\gamma),\ n\right).
+ \label{bim09:memoria-aditiva}
+\end{equation}
+Concatenation satisfies
+$\mathfrak m(\gamma_2\circ\gamma_1)=
+\mathfrak m(\gamma_1)+\mathfrak m(\gamma_2)$.
+It is an additive cocycle on recorded trajectories: the record preserves
+outward and return edges as different events.
+
+By \eqref{bim09:frontera-inversion},
+\begin{equation}
+ \mathfrak m(\gamma^\dagger\circ\gamma)=
+ \bigl(0,\ 2C_q(\gamma)+q(x_n)-q(x_0),\ 2n\bigr),
+ \label{bim09:memoria-retorno}
+\end{equation}
+where $\gamma^\dagger\circ\gamma$ denotes the temporal concatenation
+of the outward path followed by the return. The oriented sum of crossings cancels;
+arithmetic occupation and length remain. This reader does not
+descend to the quotient that identifies a path followed by its inverse
+with the empty trajectory, since that quotient eliminates the events
+preserved by the second and third coordinates.
+
+There is also a purely boundary-based even reading:
+\[
+ V_b(\gamma)=\sum_{t=0}^{n-1}
+ b(x_t,x_{t+1})b(x_t,x_{t+1})^{\mathsf T},\qquad
+ V_b(\gamma^\dagger\circ\gamma)=2V_b(\gamma).
+\]
+The odd and even readings record distinct properties of
+the same edges; both are computed before the path is forgotten.
+
+\paragraph{Exact application to the signature fiber \texorpdfstring{$555555$}{555555}.}
+
+The finite enumeration of $\mathscr X_\times$ contains $324$ seeds,
+$26$ signatures, and $24$ seeds with signature $555555$. The stable
+partition under $P,H$ refines this fiber into three classes of eight elements.
+They can be labeled by their signature after one advance:
+\[
+ \mathscr C_{177},\quad\mathscr C_{717},\quad\mathscr C_{771}.
+\]
+The half-turn action is
+\[
+ H\mathscr C_{177}=\mathscr C_{177},\qquad
+ H\mathscr C_{717}=\mathscr C_{771},\qquad
+ H\mathscr C_{771}=\mathscr C_{717}.
+\]
+The attached finite certificate verifies these identities on all
+representatives. In the twenty-four seeds, the six raw accumulators
+of $f_\ell$ are exactly five. Hence the decimal quotients
+$c_j^{10}$ vanish on this fiber. The additional information
+is observed in the positions, integer evaluations, and arithmetic
+quotients, which have readings different from that signature.
+
+The fixed transverse coordinate $a$ of the cardinal path is $4$ or
+$5$ in these seeds. During one turn of nine advances, each
+value of the moving coordinate $u\in D_9$ is traversed once. Since
+$\gcd(a,9)=1$, the positive residues $r(au)$ permute $D_9$.
+This gives, without using a physical constant,
+\[
+ \sum_{u=1}^9au=45a,\qquad
+ \sum_{u=1}^9r(au)=45,\qquad
+ \sum_{u=1}^9q(au)=5(a-1).
+\]
+The subsequent return traverses the same positions in the opposite direction.
+Over the eighteen activations,
+\begin{equation}
+ \sum N=90a,\qquad\sum r=90,\qquad
+ \sum q=10(a-1)=
+ \begin{cases}30,&a=4,\\40,&a=5.\end{cases}
+ \label{bim09:ocupacion-30-40}
+\end{equation}
+The accumulated integer product is, respectively, $360$ or $450$.
+The net winding is zero; the sum of quotients and the eighteen
+incidences preserve the history of the reading. Each of the three
+signature classes contains representatives of both transverse values.
+The same signature and the same transport class of that finite quotient
+can therefore coexist with distinct arithmetic occupations.
+
+These results connect preserved memory with concrete
+operations: permutation of half-cycles, boundary differences,
+arithmetic quotients, and incidence records. The physical-mathematical
+identification of any subsequent reader preserves its own
+maps; the identities proved here belong to the internal dynamics
+of the product channel.

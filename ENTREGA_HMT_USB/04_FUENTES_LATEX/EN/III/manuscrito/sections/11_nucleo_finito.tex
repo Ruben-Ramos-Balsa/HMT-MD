@@ -1,0 +1,362 @@
+\section{Exhaustive enumeration and finite determination of transport operators}
+\label{iii:nucleo-finito}
+
+This appendix develops two finite operations with different starting
+data. The first enumerates the initial conditions of the two cursors
+and constructs their emissions through the declared arithmetic recurrence.
+The second determines transport operators from the regional
+transition register. Separating their domains specifies
+what each proof produces: enumeration constructs the emission
+catalogue; matrix reconstruction determines the operators compatible
+with the register. The reconstruction theorem is not used as a proof
+of the prior production of that register.
+
+The primitives of the first operation are the support $I_9^2$, the four
+cardinal orientations, the tritic selector, the pre-displacement readout,
+orientation reversals and the emission rule.
+Their definitions are brought together below. Those of the second operation are the
+four transition matrices in~\eqref{iii:nf-registro}.
+Their unique reconstruction is proved in
+Theorem~\ref{iii:nf-unicidad}; the resulting calendar is given
+in~\eqref{iii:nf-calendario}. These determinations preserve
+the starting data specified for each operation.
+
+\subsection{Complete domain of initial conditions}
+
+Let $I_9=\{0,\ldots,8\}$ and let
+\[
+ \mathcal D=\{N,E,S,O\},\qquad
+ v_N=(-1,0),\quad v_E=(0,1),\quad
+ v_S=(1,0),\quad v_O=(0,-1).
+\]
+An initial cursor condition is $s=(i,j,d)\in
+\mathcal S=I_9^2\times\mathcal D$. The two cursors are independent
+in the initial domain
+\begin{equation}
+ \Omega=\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S|=9^2\cdot4=324,
+ \qquad |\Omega|=324^2=104\,976.
+ \label{iii:nf-dominio}
+\end{equation}
+Index $i$ corresponds to the positive APP label $i+1$. For
+positive integers, positive reduction is $\rho_9(n)=1+[(n-1)]_9$,
+where $[a]_b$ denotes the representative in $\{0,\ldots,b-1\}$.
+The residual evaluations of the two sheets are
+\[
+ \sigma(i,j)=\rho_9(i+j+2),\qquad
+ \varpi(i,j)=\rho_9((i+1)(j+1)).
+\]
+The finite multiplicative readout uses
+\begin{equation}
+ \begin{array}{c|rrrrrrrrr}
+ a&1&2&3&4&5&6&7&8&9\\ \hline
+ \ell_9(a)&0&1&0&2&5&0&4&3&0
+ \end{array}.
+ \label{iii:nf-log}
+\end{equation}
+On units, $\ell_9$ is the discrete exponent in base $2$.
+On $3,6,9$, the value $0$ constitutes the declared extension of the
+emission observable; membership in that sector remains in the
+trajectory register.
+
+For $1\le t\le54$, define
+\[
+ r_t=1+[(t-1)]_9,
+ \qquad
+ \tau_t=
+ \begin{cases}
+ +1,&r_t\in\{1,4,7\},\\
+ -1,&r_t\in\{2,5,8\},\\
+ 0,&r_t\in\{3,6,9\}.
+ \end{cases}
+\]
+Each cursor preserves its position $z_t$ immediately before step
+$t$ and its orientation vector $v_t$. The additive cursor is active
+when $\tau_t=+1$; the multiplicative cursor, when $\tau_t=-1$. For each
+of them, with activity indicator $a_t$, the update is
+\begin{equation}
+ z_{t+1}=[z_t+a_tv_t]_9,
+ \qquad
+ v_{t+1}=
+ \begin{cases}
+ -v_t,&t\in\{27,54\},\\
+ v_t,&t\notin\{27,54\}.
+ \end{cases}
+ \label{iii:nf-actualizacion}
+\end{equation}
+The readout at step $t$ is taken at $z_t$, before displacement.
+The neutral event preserves both positions. This convention fixes
+unambiguously the window endpoints and the effect of
+cardinal reversals.
+
+In the windows $W_m=\{9m-8,\ldots,9m\}$, $1\le m\le6$, let
+\begin{align}
+ S_m(s_+)&=\sum_{\substack{t\in W_m\\\tau_t=+1}}
+                 \sigma(z_t^+),&
+ E_m(s_\times)&=\sum_{\substack{t\in W_m\\\tau_t=-1}}
+                 \ell_9(\varpi(z_t^\times)),
+ \label{iii:nf-firmas}\\
+ s_m&=[S_m]_{10},&e_m&=[E_m]_{10}.\notag
+\end{align}
+Each window contains three events of each type. The signatures $s$ and $e$
+are the six components of these residues, not the integers $S_m,E_m$
+before reduction.
+
+\subsection{Census of signatures and emissions}
+
+The emission of a pair of initial conditions is determined by
+\begin{equation}
+ U_m=100s_m+10[s_m+e_m]_{10}+[3s_m+5e_m+1]_{10},
+ \qquad 1\le m\le6.
+ \label{iii:nf-emision}
+\end{equation}
+The final term $1$ is $[7\cdot3]_{10}$, corresponding to the three
+neutral events. This rule's coefficients belong to the declared
+recurrence. The real constants studied subsequently
+do not enter enumeration of its domain or its evaluation.
+
+\begin{proposition}[Injective factorization of the finite catalogue]
+\label{iii:nf-inyectividad}
+Emission distinguishes every signature pair $(s,e)$. There are $18$ additive
+and $26$ multiplicative signatures; their pairs produce $468$ emissions.
+The multiplicities of these emissions are $144$, $432$ and $1944$,
+with $432$, $18$ and $18$ emissions, respectively.
+\end{proposition}
+
+\begin{proof}
+The hundreds digit of $U_m$ recovers $s_m$. If $b_m$ is its
+tens digit, then $e_m=[b_m-s_m]_{10}$. The units digit verifies
+the third congruence of \eqref{iii:nf-emision}. Thus, the
+coupling is injective.
+
+The census is obtained by traversing, in the full Cartesian order,
+$i=0,\ldots,8$, $j=0,\ldots,8$ and $d=N,E,S,O$, and applying the $54$
+steps of \eqref{iii:nf-actualizacion}. The $324$ additive conditions
+are distributed over the following $18$ signatures, each with $18$
+preimages. In the tables, a sequence of six digits represents
+the six ordered components of a signature.
+\begin{center}
+\begin{tabular}{ccc}
+$122564$&$122898$&$212645$\\
+$212988$&$221456$&$221889$\\
+$456221$&$465898$&$546988$\\
+$564122$&$645212$&$654889$\\
+$889221$&$889654$&$898122$\\
+$898465$&$988212$&$988546$
+\end{tabular}
+\end{center}
+For the multiplicative cursor, the signatures and their multiplicities are
+\begin{center}
+\begin{tabular}{rr@{\qquad}rr}
+Signature&Multiplicity&Signature&Multiplicity\\ \hline
+$000000$&$108$&$555555$&$24$\\
+$177393$&$8$&$555717$&$8$\\
+$177555$&$8$&$555771$&$8$\\
+$177771$&$8$&$555933$&$8$\\
+$339555$&$8$&$717555$&$8$\\
+$339771$&$8$&$717717$&$8$\\
+$339933$&$8$&$717933$&$8$\\
+$393177$&$8$&$771177$&$8$\\
+$393393$&$8$&$771339$&$8$\\
+$393555$&$8$&$771555$&$8$\\
+$555177$&$8$&$933339$&$8$\\
+$555339$&$8$&$933555$&$8$\\
+$555393$&$8$&$933717$&$8$
+\end{tabular}
+\end{center}
+These tables result from the finite sums \eqref{iii:nf-firmas}, with
+domain, readout order and reversals already specified. Their sums
+of multiplicities are $18\cdot18=324$ and
+$24\cdot8+24+108=324$. The Cartesian domain
+\eqref{iii:nf-dominio} permits every signature pair to be realized.
+Injectivity gives $18\cdot26=468$ emissions and the
+multiplicities
+\[
+ (18\cdot24,\ 18\cdot8)=(432,144),\qquad
+ (18,\ 18\cdot24)=(18,432),\qquad
+ (18,\ 18\cdot108)=(18,1944),
+\]
+where each pair indicates the number of emissions and multiplicity of their fibres.
+Finally,
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+Enumeration thus exhausts the complete domain of initial conditions.
+\end{proof}
+
+The oriented ternary reduction is
+\[
+ \Psi(U)=([-U_1]_3,\ldots,[-U_6]_3).
+\]
+Applied to the $18\cdot26$ emissions of the preceding tables,
+it produces the following fibre census. Here $r$ counts distinct
+emissions, not initial conditions.
+\begin{equation}
+ \begin{array}{c|rrrrrr}
+ r&1&2&3&4&5&6\\ \hline
+ \#\{w:\#\Psi^{-1}(w)=r\}&132&66&18&3&6&18
+ \end{array}.
+ \label{iii:nf-censo-ternario}
+\end{equation}
+The sum of the second row is $243$, while its weighted sum
+with weights $r$ is $468$. The image of $243$ words is therefore distinguished
+from the ambient space $\mathbb F_3^6$, containing $729$ words. The accompanying
+certificate preserves all signatures with their preimages, the $468$
+emissions and their ternary reduction; the preceding formulas provide
+a complete procedure for reconstructing them.
+
+\subsection{Transition register and reconstruction of the lifts}
+
+This subsection fixes the regional register of the cited source.
+Let $b_0^\chi,\ldots,b_4^\chi\in\mathbb F_3^6$, with
+$\chi\in\{\mathsf C,\mathsf P,\mathsf A\}$, be its three sequences.
+The register organizes transitions $b_0\to b_1\to b_2$ in
+$X_0,Y_0$ and transitions $b_2\to b_3\to b_4$ in $X_1,Y_1$,
+using row vectors and the same regional order:
+\begingroup\small
+\begin{equation}
+\begin{aligned}
+X_0&=\begin{pmatrix}
+0&1&0&2&1&1\\0&1&2&2&2&2\\2&0&1&1&0&1\\
+1&2&1&2&2&1\\1&2&1&2&0&0\\1&1&2&2&0&2
+\end{pmatrix},&
+Y_0&=\begin{pmatrix}
+0&1&2&2&2&2\\0&1&0&2&1&1\\1&2&1&2&2&1\\
+1&0&2&0&1&1\\1&1&2&2&0&2\\1&2&1&0&2&0
+\end{pmatrix},\\[1ex]
+X_1&=\begin{pmatrix}
+0&1&0&2&1&1\\0&0&2&1&1&1\\1&0&2&0&1&1\\
+0&1&2&2&2&2\\1&2&1&0&2&0\\0&1&0&2&1&0
+\end{pmatrix},&
+Y_1&=\begin{pmatrix}
+0&0&2&1&1&1\\1&1&0&2&2&1\\0&1&2&2&2&2\\
+1&0&2&0&1&1\\0&1&0&2&1&0\\0&1&0&2&0&0
+\end{pmatrix}.
+\end{aligned}
+\label{iii:nf-registro}
+\end{equation}
+\endgroup
+The preceding production is expressed in its source through
+the composition of selection, transport and update:
+\[
+ x_{j+1}^{\chi}
+ =\mathcal U_{9j+9}\circ\cdots\circ\mathcal U_{9j+1}(x_j^{\chi}),
+ \qquad b_j^\chi=\Pi_6(x_j^\chi),
+ \qquad\mathcal U_t=\mathsf{Upd}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+\]
+The following result starts from register \eqref{iii:nf-registro}.
+Its proof reconstructs the operators and verifies
+transition compatibility; it does not attribute coordinatewise
+production of states $x_j^\chi$ to matrix inversion.
+
+\begin{proposition}[Uniqueness on the regional register]
+\label{iii:nf-unicidad}
+The systems $X_aL_a=Y_a$, $a=0,1$, have a unique solution over
+$\mathbb F_3$. The two solutions are
+\begingroup\small
+\begin{equation}
+L_0=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},\qquad
+L_1=\begin{pmatrix}
+2&1&2&0&2&2\\1&2&1&1&2&0\\1&2&1&1&1&2\\
+0&1&0&0&2&1\\2&0&2&1&0&1\\0&2&2&2&1&1
+\end{pmatrix}.
+\label{iii:nf-lifts}
+\end{equation}
+\endgroup
+\end{proposition}
+
+\begin{proof}
+Elimination in $\mathbb F_3$ gives $\det X_0=1$ and
+$\det X_1=2=-1$. Each map $L\mapsto X_aL$ is therefore
+an automorphism of the $36$-dimensional matrix space; under columnwise
+vectorization it is represented by $I_6\otimes X_a$.
+One obtains $L_a=X_a^{-1}Y_a$. Multiplication of the matrices in
+\eqref{iii:nf-lifts} by the respective matrices $X_a$ reproduces the
+two matrices $Y_a$ of \eqref{iii:nf-registro}; existence and uniqueness
+are established on that register.
+\end{proof}
+
+The three resulting sequences, explicitly separated into blocks,
+are
+\begin{align*}
+ B^{\mathsf C}&=010211\mid012222\mid010211\mid002111\mid110221,\\
+ B^{\mathsf P}&=201101\mid121221\mid102011\mid012222\mid102011,\\
+ B^{\mathsf A}&=121200\mid112202\mid121020\mid010210\mid010200.
+\end{align*}
+Each block preserves its six positions. Concatenation is not
+identified with a base-ten integer.
+
+\subsection{Exhaustiveness of the calendar and stability of reconstruction}
+
+A binary calendar is $c=(c_0,c_1,c_2,c_3)\in\{0,1\}^4$.
+Define the number of transitions incompatible with the register by
+\begin{equation}
+ d(c)=\sum_{\chi\in\{\mathsf C,\mathsf P,\mathsf A\}}
+       \sum_{j=0}^{3}
+       \mathbf1\{b_j^\chi L_{c_j}\ne b_{j+1}^\chi\}.
+ \label{iii:nf-calendario}
+\end{equation}
+Multiplying the preceding sequences by
+\eqref{iii:nf-lifts} gives
+\[
+ d(c)=3\,d_{\rm H}(c,(0,0,1,1)),
+\]
+where $d_{\rm H}$ is Hamming distance: at each of the
+four positions, the alternative operator fails to satisfy all three
+regional transitions. The complete census is
+\begin{center}
+\begin{tabular}{cr@{\qquad}cr@{\qquad}cr@{\qquad}cr}
+$c$&$d(c)$&$c$&$d(c)$&$c$&$d(c)$&$c$&$d(c)$\\ \hline
+$0000$&$6$&$0100$&$9$&$1000$&$9$&$1100$&$12$\\
+$0001$&$3$&$0101$&$6$&$1001$&$6$&$1101$&$9$\\
+$0010$&$3$&$0110$&$6$&$1010$&$6$&$1110$&$9$\\
+$0011$&$0$&$0111$&$3$&$1011$&$3$&$1111$&$6$
+\end{tabular}
+\end{center}
+Consequently, $0011$ is the unique calendar reproducing the
+three complete sequences.
+
+Sensitivity to matrix entries likewise admits an
+exhaustive proof without approximations. A single-entry modification
+replaces $L_a$ by $L_a+\lambda E_{ij}$, with
+$a\in\{0,1\}$, $1\le i,j\le6$ and
+$\lambda\in\mathbb F_3\setminus\{0\}$. There are
+$2\cdot6\cdot6\cdot2=144$ such modifications. Since
+$X_a$ is invertible,
+\[
+ X_a(L_a+\lambda E_{ij})-Y_a
+ =\lambda X_aE_{ij}\ne0.
+\]
+Every modification destroys at least one transition of the
+corresponding register. The executable certificate also enumerates
+the $144$ modifications and preserves, for each, the number of
+violated transitions.
+
+The proved property is rigidity of the operators with respect to the
+fixed regional register. Reproducing a prior construction
+of the register itself requires the coordinatewise action of its selection,
+transport and update operators. That dependency is kept
+separate from the rigidity theorem, the finite emission catalogue and
+the subsequent analytic realizations.
+
+\subsection{Reproduction certificate and location of the data}
+
+The program \texttt{verificar\_nucleo\_finito.py} traverses the $324$
+conditions of each cursor and forms the product of the resulting classes.
+The documentary catalogue is loaded after this construction to
+compare emissions and their multiplicities. In the second part,
+the four transition matrices are extracted from the verbatim
+copy of the source; solutions are computed by exact elimination
+modulo $3$ before comparison with the printed matrices. The receipt
+\texttt{NUCLEO\_FINITO.json} preserves the domains, preimages,
+emissions, $16$ calendars and $144$ modifications.
+
+Verification uses exact integers and residues. It receives no
+metrological values or real expansions of the constants. Its scope
+is that of the finite operations and starting data specified
+in this appendix. The proofs of compatibility at unbounded
+depth and physical identifications retain their respective
+domains and expository obligations.

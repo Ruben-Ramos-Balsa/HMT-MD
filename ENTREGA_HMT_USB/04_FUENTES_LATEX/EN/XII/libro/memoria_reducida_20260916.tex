@@ -1,0 +1,93 @@
+\subsection{Causal reduction of the bilateral update}
+\label{lib04:reduccion-causal}
+
+The preceding unitary update realizes the transport of the state and its
+memory in a common space. Observation of the first component admits an
+equivalent description that explicitly retains the contribution of the
+record. This description follows from the transport already constructed,
+with the same coefficients and orientation: memory removed from the list
+of variables reappears as dependence on earlier states.
+
+Fix the operators \(A,D\) of \eqref{lib04:ad} and a realization
+\(H\oplus H\). For \(n\geq0\), let
+\begin{equation}
+ v_{n+1}=Av_n-D^*m_n,\qquad
+ m_{n+1}=Dv_n+A^*m_n.
+ \label{lib04:recurrencia-memoria}
+\end{equation}
+The joint update is \(\mathscr R_a\) and preserves
+\(\|v_n\|^2+\|m_n\|^2\).
+
+\begin{proposition}[Exact elimination of the auxiliary record]
+\label{lib04:prop-memoria-reducida}
+For every \(n\geq0\), interpreting the empty sum as zero,
+\begin{align}
+ m_n&=(A^*)^n m_0+
+       \sum_{k=0}^{n-1}(A^*)^{n-1-k}Dv_k,
+       \label{lib04:memoria-explicita}\\
+ v_{n+1}&=Av_n-D^*(A^*)^n m_0
+       +\sum_{k=0}^{n-1}\mathscr K_{n-1-k}v_k,
+       \label{lib04:evolucion-reducida}\\
+ \mathscr K_j&=-D^*(A^*)^jD\quad(j\geq0).
+       \label{lib04:nucleo-retardo}
+\end{align}
+The reduced equation, together with \eqref{lib04:memoria-explicita}, is
+equivalent to the joint recurrence for the same data \((v_0,m_0)\).
+\end{proposition}
+\begin{proof}
+The first identity holds for \(n=0\). If it holds for \(n\), the second
+equation in \eqref{lib04:recurrencia-memoria} gives
+\[
+ m_{n+1}=(A^*)^{n+1}m_0+
+ \sum_{k=0}^{n-1}(A^*)^{n-k}Dv_k+Dv_n,
+\]
+which is the identity at \(n+1\). Substitution at depth \(n\) into the
+first equation proves \eqref{lib04:evolucion-reducida}. Conversely, if
+\(v_n\) satisfies the reduced equation and \(m_n\) is defined by
+\eqref{lib04:memoria-explicita}, the same difference of sums proves
+\(m_{n+1}=Dv_n+A^*m_n\); substitution recovers the other equation.
+\end{proof}
+
+The kernel \(\mathscr K_j\) describes a transfer into the record,
+\(j\) updates within it, and re-entry into the observed component.
+The term \(-D^*(A^*)^nm_0\) preserves the initial memory. Omitting it
+corresponds to the particular case \(m_0=0\), rather than an identity of
+the general transport. Equation \eqref{lib04:evolucion-reducida} involves
+only the current and earlier states. The causal character of this reduction
+follows from the order of the joint recurrence.
+
+The normalization of the balance also provides an explicit estimate.
+Since \(Q_-=aI-U\), we have
+\(\|A\|^2\leq r_a=(a+1)^3/((a+1)^3+a^3)<1\), whereas
+\(D^*D\leq I\). Consequently,
+\begin{equation}
+ \|\mathscr K_j\|\leq r_a^{j/2},\qquad
+ \sum_{j\geq0}\|\mathscr K_j\|
+ \leq\frac{1}{1-\sqrt{r_a}}.
+ \label{lib04:cota-nucleo-retardo}
+\end{equation}
+This bound controls the weight of memory in the reduced equation; the norm
+of the joint state remains conserved by the unitary update.
+
+The proposition is the temporal realization of the Schur reduction in
+\cref{mem:prop-schur}. For the formal series
+\(V(z)=\sum_{n\geq0}v_nz^n\) and
+\(M(z)=\sum_{n\geq0}m_nz^n\), the recurrences yield
+\(V=v_0+zAV-zD^*M\) and \(M=m_0+zDV+zA^*M\). Eliminating \(M\),
+\begin{equation}
+ V(z)=\bigl[I-zA+z^2D^*(I-zA^*)^{-1}D\bigr]^{-1}
+       \bigl[v_0-zD^*(I-zA^*)^{-1}m_0\bigr].
+ \label{lib04:schur-bilateral}
+\end{equation}
+The formal inverses exist because their constant terms are identities;
+the state series and the joint resolvent also converge for \(|z|<1\).
+The initial source and the effective operator transform together. A readout
+that also acts on \(m_n\) retains its contribution through
+\eqref{lib04:memoria-explicita}, in accordance with \eqref{mem:schur-lector}.
+
+Re-entry here updates an incoming record. By contrast, the archiving policy
+below retains each complement in a distinct coordinate. Each operation has
+its own conservation law. The kernel \(\mathscr K_j\), Green propagators,
+and a dimensional force have different types: the first eliminates a state
+component, Green propagators solve source equations with support conditions, and
+the force adds a dynamical realization and its units.

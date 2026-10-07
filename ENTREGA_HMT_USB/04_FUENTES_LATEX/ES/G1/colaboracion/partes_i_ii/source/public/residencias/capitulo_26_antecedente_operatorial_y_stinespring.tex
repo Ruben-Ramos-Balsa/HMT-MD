@@ -1,0 +1,157 @@
+\section{Cuadrado mágico cuántico no semiclásico en una esquina APP}
+\label{sec:cpe-qms-no-semiclasico}
+
+En \(\mathbb C^4\), con base \(e_1,e_2,e_3,e_4\), considérese el arreglo de
+vectores
+\[
+\begin{array}{cccc}
+e_1&e_2&e_3&e_4\\
+e_2&e_1&e_4&e_3\\
+(e_3+e_4)/\sqrt2&(e_3-e_4)/\sqrt2&(e_1+e_2)/\sqrt2&(e_1-e_2)/\sqrt2\\
+(e_3-e_4)/\sqrt2&(e_3+e_4)/\sqrt2&(e_1-e_2)/\sqrt2&(e_1+e_2)/\sqrt2.
+\end{array}
+\]
+Sea \(P_{ij}\) el proyector de rango uno sobre el vector situado en la
+celda \((i,j)\). Cada fila y cada columna es una base ortonormal, luego
+\begin{equation}
+ \sum_jP_{ij}=I_4,
+ \qquad \sum_iP_{ij}=I_4.
+ \label{eq:cpe-qms4}
+\end{equation}
+Para realizarlo en la fibra APP de dimensión \(9\), se fija
+\begin{equation}
+ A_{ij}:=P_{ij}\oplus\frac14I_5\in M_9(\mathbb C).
+ \label{eq:cpe-qms9}
+\end{equation}
+
+\begin{theorem}[No semiclasicidad certificada]
+\label{thm:cpe-qms-no-semiclasico}
+La matriz \(A=(A_{ij})_{i,j=1}^4\) es un cuadrado mágico cuántico y no admite
+una descomposición semiclásica
+\[
+ A_{ij}=\sum_{\pi:\,\pi(i)=j}Q_\pi,
+ \qquad Q_\pi\succeq0,
+ \qquad\sum_\pi Q_\pi=I_9.
+\]
+\end{theorem}
+
+\begin{proof}
+Las identidades de fila y columna se siguen de
+\eqref{eq:cpe-qms4}; cuatro copias de \(I_5/4\) suman \(I_5\). Si existiera
+una descomposición semiclásica, su compresión a la esquina \(\mathbb C^4\)
+sería una medición conjunta de las PVM definidas por las filas
+\((P_{ij})_j\). Las mediciones proyectivas conjuntamente medibles conmutan.
+Sin embargo,
+\[
+ \left[
+ |e_1\rangle\langle e_1|,
+ \left|\frac{e_1+e_2}{\sqrt2}\right\rangle
+ \left\langle\frac{e_1+e_2}{\sqrt2}\right|
+ \right]
+ =\frac12
+ \begin{pmatrix}0&1\\-1&0\end{pmatrix}
+ \oplus0_2\ne0.
+\]
+La contradicción prueba la no semiclasicidad. La compresión proporciona, a
+la vez, un testigo analítico de inviabilidad del problema semidefinido.
+\end{proof}
+
+Cada fila define un canal UCP
+\[
+ \Phi_i:\ell^\infty_4\to M_9,
+ \qquad \Phi_i(\delta_j)=A_{ij},
+\]
+y cada columna define otro. Así, las normalizaciones mágicas se traducen a
+mapas completamente positivos con dominio y codominio explícitos; no se usa
+un símbolo \(J(\operatorname{id})\) sin haber fijado esos tipos.
+
+\section{Sistema cónico de rutas y universalidad genealógica interna}
+\label{sec:cpe-s-system-universalidad}
+
+Para cada perfil finito \(c\), sea \(G_c\) el grupoide finito de rutas TPK
+con ese perfil y sea \(A(c)=C^*(G_c)\). En nivel matricial \(s\), se toma el
+cono
+\[
+ \mathcal C_s(c)=M_s(A(c))_+.
+\]
+Una ruta \(r:c\to d\), representada por la isometría parcial \(v_r\),
+induce el mapa CP
+\[
+ T_r(a)=v_r^*av_r.
+\]
+
+\begin{theorem}[Sistema cónico functorial de las rutas TPK]
+\label{thm:cpe-s-system-tpk}
+Las asignaciones \(c\mapsto(\mathcal C_s(c))_{s\ge1}\) y
+\(r\mapsto T_r\) respetan identidad, composición, amplificación matricial y
+truncamiento genealógico. La categoría CPM generada por las fibras finitas
+es monoidal compacta: el dual de una fibra es su espacio conjugado y las
+coevaluaciones y evaluaciones son las copas y tapas canónicas. El límite
+proyectivo de estos sistemas conserva todos los mapas CP compatibles.
+\end{theorem}
+
+\begin{proof}
+La positividad completa de \(a\mapsto v_r^*av_r\) es inmediata de su forma
+de Kraus. Para rutas composables,
+\(v_{r_2r_1}=v_{r_2}v_{r_1}\), luego
+\(T_{r_2r_1}=T_{r_1}T_{r_2}\) con la varianza declarada. Las inclusiones y
+esperanzas condicionales de los niveles finitos son UCP y forman cuadrados
+conmutativos. La compactación de CPM en dimensión finita es la construcción
+estándar por espacios conjugados; la compatibilidad de truncación permite
+pasar al límite coordenada a coordenada.
+\end{proof}
+
+Sea \(\mathsf P_{\rm HMT}\) el conjunto numerable de códigos de rutas
+finitas y sea \(\mathsf C_{\rm HMT}\) el espacio de estados con su contexto
+completo. La evaluación
+\[
+ \operatorname{Ev}(\ulcorner r\urcorner,x)=T_r(x)
+\]
+conserva origen, destino, hoja, orientación, acarreo, frontera y palabra de
+ruta.
+
+\begin{corollary}[Universalidad genealógicamente fiel en el dominio HMT]
+\label{cor:cpe-universalidad-genealogica}
+El evaluador \(\operatorname{Ev}\) es universal para la clase declarada de
+transportes TPK finitos y sus límites compatibles: todo transporte de esa
+clase posee un código, la composición se realiza concatenando códigos y la
+reducción conserva la genealogía completa. Esta universalidad interna no se
+extiende por decreto a una clase externa de objetivos no tipada.
+\end{corollary}
+
+\section{Identificación de la memoria de Stinespring con el registro local TPK}
+\label{sec:cpe-stinespring-tpk}
+
+En la esperanza nonádica, la dilatación de Stinespring conserva en una base
+\(\{e_a\}_{a=0}^8\) el dígito descartado. Para un estado TPK \(x\), sea
+\(\lambda(x,a)\) la etiqueta completa de la continuación por el dígito
+\(a\). Se define la isometría
+\[
+ W_x:e_a\longmapsto e_{\lambda(x,a)}
+\]
+desde la memoria mínima de Stinespring hacia el registro local TPK\@. Sea
+\(F_xe_{\lambda(x,a)}=e_a\) el funtor de olvido restringido a su imagen.
+
+\Needspace{12\baselineskip}
+\begin{theorem}[La memoria TPK refina la memoria mínima de Stinespring]
+\label{thm:cpe-stinespring-tpk}
+Para todo \(x\),
+\[
+ W_x^*W_x=I_9,
+ \qquad F_xW_x=I_9.
+\]
+La familia \((W_x)_x\) entrelaza la inclusión de un nuevo dígito y los
+truncamientos. En profundidad \(m\), el tensor de estas isometrías identifica
+la ancilla \((\mathbb C^9)^{\otimes m}\) con el subregistro TPK que conserva
+la sucesión de extensiones; las coordenadas adicionales de hoja, acarreo,
+frontera y ruta explican por qué la memoria TPK es un refinamiento y no una
+segunda copia de la ancilla.
+\end{theorem}
+
+\begin{proof}
+Continuaciones con dígitos distintos poseen etiquetas ortogonales, por lo
+que \(W_x\) es isométrica. La definición de \(F_x\) prueba la segunda
+identidad. La composición de extensiones concatena las etiquetas en el mismo
+orden que el producto tensorial de las ancillas; de ahí la naturalidad bajo
+truncamiento y la afirmación a profundidad arbitraria.
+\end{proof}

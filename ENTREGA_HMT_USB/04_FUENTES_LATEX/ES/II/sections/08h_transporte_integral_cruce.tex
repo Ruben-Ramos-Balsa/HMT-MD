@@ -1,0 +1,185 @@
+% FORMALIZACION_NUEVA de la elevacion de N39, compatible con (rho9,q9),
+% T_d y Upd_t; arquitectura de residuo/cociente y orientacion preexistente.
+% Fragmento de investigacion separado. No selecciona las reglas CKM N42.
+\subsubsection{Transporte de acarreo y holonomía entera del cruce aritmético}
+\label{subsec:transporte-entero-cruce}
+
+La lectura modular del cruce admite una realización integral que mantiene
+la información acumulada al atravesar el borde. Se desarrolla aquí esa
+realización mediante los cocientes de transporte. Su dominio es una coordenatización
+elevada del soporte APP; la posterior asignación de una región a un sector
+angular conserva su propio mapa de incidencia.
+
+\paragraph{Coordenatización nonádica y transporte elevado.}
+Se emplea la descomposición exacta
+\[
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\left\lfloor\frac{n-1}{9}\right\rfloor,
+ \qquad n=\rho_9(n)+9q_9(n).
+\]
+Una posición elevada es
+$z=(x,y,q_x,q_y)\in D_9^2\times\mathbb Z^2$, donde
+$X=x+9q_x$ e $Y=y+9q_y$. El incremento entero $u$ de la primera
+coordenada actúa por
+\[
+ T^x_u(x,y,q_x,q_y)=
+ \bigl(\rho_9(x+u),y,q_x+c_9(x;u),q_y\bigr),\qquad
+ c_9(x;u)=\left\lfloor\frac{x+u-1}{9}\right\rfloor.
+\]
+La segunda coordenada se transporta de la misma manera. Los avances
+cardinales corresponden a $u=\pm1$; el incremento nulo conserva el estado.
+El cociclo satisface
+\[
+ c_9(x;u+v)=c_9(x;u)+c_9(\rho_9(x+u);v).
+\]
+En efecto, ambas partes son el cociente de la única descomposición de
+$x+u+v$ con residuo en $D_9$. Por consiguiente,
+$T^x_vT^x_u=T^x_{u+v}$ y $T^x_{-u}=(T^x_u)^{-1}$; los transportes
+de las dos coordenadas conmutan. El estado conserva el número de cruces
+de borde, incluso cuando la posición visible retorna.
+
+\paragraph{Hojas elevadas y actualización de los registros.}
+La realización integral se fija prolongando las operaciones aritméticas
+APP a las coordenadas transportadas:
+\begin{align*}
+ \widetilde S(z)&=X+Y=x+y+9(q_x+q_y),\\
+ \widetilde P(z)&=XY
+ =xy+9(q_xy+q_yx)+81q_xq_y.
+\end{align*}
+En cada posición se conserva el registro de ambas hojas
+\[
+ \bigl(\rho_9(\widetilde S),q_9(\widetilde S),
+       \rho_9(\widetilde P),q_9(\widetilde P)\bigr).
+\]
+Si $e:z\to z'$ es un enlace y $T$ la hoja seleccionada, su incremento
+íntegro se obtiene del registro antes y después del transporte:
+\begin{equation}
+ \delta_e\widetilde T=
+ \rho_9(\widetilde T(z'))-\rho_9(\widetilde T(z))
+ +9\bigl(q_9(\widetilde T(z'))-q_9(\widetilde T(z))\bigr).
+ \label{eq:cruce-incremento-registro}
+\end{equation}
+Esta identidad explicita la conservación: el salto del residuo y el
+incremento del cociente reconstruyen juntos la variación de la hoja.
+La selección de hoja, el transporte cardinal y la actualización del
+registro son operaciones distintas. En esta coordenatización se compone primero la
+selección ordenada de hojas $(T_x,T_y)$ con $T_d$ y con la actualización
+de sus cocientes; la fórmula no postula que todo el TPK quede reducido
+a esta representación local.
+
+\begin{proposition}[Curvatura integral y transporte de frontera]
+\label{prop:cruce-stokes-integral}
+Defínanse
+$\widetilde A_x=\delta_x\widetilde T_x$ y
+$\widetilde A_y=\delta_y\widetilde T_y$, mediante
+\eqref{eq:cruce-incremento-registro}, y sea
+\[
+ \widetilde F_{xy}(X,Y)=
+ \widetilde A_x(X,Y)+\widetilde A_y(X+1,Y)
+ -\widetilde A_x(X,Y+1)-\widetilde A_y(X,Y).
+\]
+Las elecciones homogéneas tienen curvatura cero. Las elecciones mixtas
+$(\widetilde S,\widetilde P)$ y
+$(\widetilde P,\widetilde S)$ tienen curvatura, respectivamente,
+$+1$ y $-1$ como enteros. Para el borde positivo de un rectángulo
+$R_{a,b}$ de lados enteros $a,b>0$,
+\[
+ \widetilde W_{SP}(\partial R_{a,b})=ab,\qquad
+ \widetilde W_{PS}(\partial R_{a,b})=-ab.
+\]
+El resultado es independiente del punto base y del número de cruces
+de las costuras nonádicas.
+\end{proposition}
+
+\begin{proof}
+La reconstrucción exacta de ambas hojas da
+\[
+ \delta_x\widetilde S=\delta_y\widetilde S=1,
+ \qquad\delta_x\widetilde P=Y,
+ \qquad\delta_y\widetilde P=X.
+\]
+Por tanto, la conexión $SP$ es $(1,X)$, con curvatura
+$1+(X+1)-1-X=1$; la conexión $PS$ es $(Y,1)$, con curvatura
+$Y+1-(Y+1)-1=-1$. Para una hoja única se cancelan las diferencias
+mixtas. La suma de curvaturas de las $ab$ plaquetas cancela cada
+enlace interior con su inverso y conserva los enlaces de frontera.
+Así se obtiene $\pm ab$ en $\mathbb Z$. Los cocientes transportados
+garantizan que la misma identidad rige al atravesar cualquier costura.
+\end{proof}
+
+El acumulador de frontera puede conservarse a su vez en forma nonádica:
+$W=r_W+9q_W$. Para una contribución entera $w_e$, se actualiza mediante
+\[
+ r_W'=\rho_9(r_W+w_e),\qquad
+ q_W'=q_W+\left\lfloor\frac{r_W+w_e-1}{9}\right\rfloor.
+\]
+La composición por enlaces proporciona la misma suma que su evaluación
+entera directa. En esta coordenatización, el cero entero tiene coordenadas
+$(r_W,q_W)=(9,-1)$; esta es una representación aritmética del acumulador,
+sin identificación adicional con los distintos ceros orientados del TRIT.
+
+\paragraph{Tres operaciones sobre la orientación.}
+Sea $\gamma$ una ruta cardinal cerrada. Su inversión temporal
+$\gamma^{-1}$ invierte el orden de enlaces y la orientación de cada uno;
+por aditividad,
+\[
+ \widetilde W_{SP}(\gamma^{-1})=-\widetilde W_{SP}(\gamma).
+\]
+El intercambio de las hojas satisface asimismo
+\[
+ \widetilde W_{PS}(\gamma)=-\widetilde W_{SP}(\gamma).
+\]
+Para comprobarlo en cualquier ruta, obsérvese que la suma de ambas
+conexiones es el incremento exacto de
+$\widetilde S+\widetilde P=X+Y+XY$; su integral sobre un lazo es cero.
+
+La semivuelta simultánea de las dos direcciones actúa, por otra parte,
+mediante $J_c(X,Y)=(2c_x-X,2c_y-Y)$, con $2c\in\mathbb Z^2$,
+de modo que preserva la coordenatización reticular. Para un lazo se cumple
+\[
+ \widetilde W_{SP}(J_c\gamma)=\widetilde W_{SP}(\gamma).
+\]
+En efecto, la contribución horizontal cerrada es cero y la vertical
+se transforma como
+$\sum (2c_x-X)(-\delta Y)=\sum X\delta Y$, pues
+$\sum\delta Y=0$. Una semivuelta espacial preserva, por tanto, la
+orientación areal de esta coordenatización. Su combinación con la inversión temporal
+o con el intercambio de hojas se calcula componiendo las operaciones
+correspondientes.
+
+La diferencia es pertinente para el registro electrónico: la inversión
+simultánea de los dos desplazamientos cada $27$ avances produce, en
+ventanas de $9$, la sucesión
+\[
+ \tau_j=(-1)^{\lfloor j/3\rfloor},\qquad 0\leq j<12,
+ \qquad (+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+Esta sucesión registra orientaciones de avance. La holonomía requiere
+además los enlaces recorridos, las hojas seleccionadas y los cocientes
+acumulados. Así, el transporte de la orientación electrónica se conserva
+sin identificar una semivuelta de ambos ejes con la inversión temporal
+de un lazo.
+
+\paragraph{Aplicación al cruce marcado y alcance sectorial.}
+Para el cruce rectangular de lados $4$ y $7$, esta realización evalúa
+exactamente
+\[
+ \widetilde W_{SP}=28=1+9\cdot3,\qquad
+ \widetilde W_{SP}(\gamma^{-1})=-28=8+9(-4).
+\]
+El entero conserva el área orientada; el residuo aislado representa sólo
+su clase nonádica. Por ejemplo, desde $(7,1)$ los representantes
+periódicos de los enlaces suman $-35$, mientras que la corrección de
+acarreo añade $63$ y recupera $28$.
+
+En la incidencia marcada del lector angular, el $4$ es
+$|H_e\cap P_\pi|$ y el $7$ es el pivote marcado $p_\varphi$.
+La lectura rectangular aporta un realizador entero del producto
+$|H_e\cap P_\pi|\,p_\varphi$ una vez declarado ese cruce. El
+mapa que identifique esa región con el sector $12$ debe conservar
+la marca y la orientación del sistema sectorial de
+la Definición~\ref{def:ii09-sistema-sectorial}. Las asignaciones
+sectoriales $12,23,13$ y sus combinaciones de $A,h,\Delta^\circ$
+son una especificación adicional a la ley de holonomía rectangular.
+El presente resultado materializa la elevación de área, el acarreo y
+sus involuciones, con esos datos de partida explícitos.

@@ -1,0 +1,432 @@
+% Tipado autónomo de la carta dodecafásica terminal.
+\subsection{Coordinatisation dodécaphasique signée de l’état TPK plein}
+\label{subsec:registro-evaluacion-incidencial}
+
+La coordinatisation dodécaphasique et une éventuelle factorisation par la projection brute de 108 étapes (CT108) sont des objets de types distincts. Soit \(X\in\mathsf{TPKFullState}\) un état enrichi complet et soit \(\rho_{108}(X)\in\mathsf{CT108RawProjection}\) l'objet obtenu en oubliant l'orientation, le feuillet, la retenue, la signature de frontière, la mémoire et le registre dodécaphasique. Dans les coordonnées canoniques de l'état complet, on écrit
+\[
+ X=(X_{\mathrm{APP}},X_{\mathrm{TRIT}},X_{\mathrm{route}},X_{\mathrm{mem}},
+       C_{\mathrm{term}},U_{12}^{\mathrm{sgn}},
+       X_{\mathrm{frontera}},\ldots).
+\]
+Le lecteur actif est, par définition, la projection de cette coordonnée déjà
+engendrée et conservée :
+\[
+ \mathcal S_{12}:=\operatorname{pr}_{U_{12}^{\mathrm{sgn}}}:
+ \mathsf{TPKFullState}\longrightarrow\mathsf{SignedDodecaphaseState}.
+\]
+Dans le sous-réseau compatible de l’état plein, cette projection coïncide avec le
+lecteur composé
+\begin{equation}
+ \mathcal S_{12}\equiv R_{\mathrm{sgn}}
+ :=\Pi_H\circ\mathcal E_{108}^{90,120}\circ\mathcal R_{12}.
+ \label{eq:registro-identidad-s12-rsgn}
+\end{equation}
+Ainsi, \(\mathcal S_{12}\) lit une coordonnée conservée du même état ;
+il ne reçoit pas de constante
+conventionnelle ni de table métrologique. Son domaine n’est pas remplacé par
+\(\mathsf{CT108RawProjection}\), car ce remplacement exigerait en outre une
+factorisation \(\mathcal S_{12}=\Xi\circ\rho_{108}\). Une telle factorisation n’est
+ni présupposée ni nécessaire ici ; elle exigerait de démontrer que la lecture signée est
+constante sur les fibres de \(\rho_{108}\). Le théorème interne opère
+directement sur l’état TPK plein.
+
+Pour fixer le contenu d'une réalisation d'incidence possible, soit \(\mathscr L\) un livre de visites et de traces orientées appartenant à \(X\). Chaque visite conserve le chemin, la position APP, le feuillet, l'instant, la multiplicité et l'incidence de frontière. L'évaluation arithmétique produit l'entier et sa décomposition
+\[
+ n_v=r_v+9q_v,\qquad 1\leq r_v\leq9.
+\]
+L'entier \(n_v\) se calcule à partir du feuillet de somme ou de produit ; son
+résidu n'est pas reçu comme une valeur indépendante. La distinction entre
+incidence de couronne et incidence intérieure demeure explicite pour les
+visites de résidu \(9\).
+
+Dans la fenêtre temporelle
+\(E_m=\{9(m-1)+1,\ldots,9m\}\), on distingue les domaines
+\[
+ \mathscr V_m=\{v:t(v)\in E_m\},\qquad
+ \mathscr T_m=\{\theta:\operatorname{origen}(\theta)\in E_m\}.
+\]
+La présentation par dénombrements considère
+\begin{align}
+ A_m&=\sum_{v\in\mathscr V_m}w(v)
+             \mathbf1_{\{1,3,5,7\}}(r(v)),\\
+ C_m&=-\sum_{\theta\in\mathscr T_m}u(\theta)\sigma(\theta)
+      =\sum_{j\geq0}\bigl(\nu^-_{120,m}(j)-\nu^+_{120,m}(j)\bigr),\\
+ V_m&=\sum_{v\in\mathscr V_m}w(v)
+              \mathbf1_{\{9\}}(r(v))\epsilon_\partial(v).
+\end{align}
+Ici, \(w(v)\) est la multiplicité incidencielle et
+\(\epsilon_\partial(v)=1\) sur la couronne, \(-1\) à l'intérieur.
+Les traces comptées par \(\nu^\pm\) doivent être énumérées au moyen de la règle
+correspondante du livre. La somme entière exige un support fini ou une
+construction alternative qui détermine sa signification. Le nombre
+d'incidences chronologiques et la longueur réduite \(120(1+3j)\) sont de
+types distincts ; leur relation exige l'unité de longueur du lecteur.
+
+On définit \([x]_{10}\in\{0,\ldots,9\}\) comme le représentant
+euclidien, et l'on conserve les quotients
+\[
+ x=[x]_{10}+10\lfloor x/10\rfloor.
+\]
+Le bloc incidenciel est
+\begin{equation}
+ z_m=100[A_m]_{10}+10[C_m]_{10}+[V_m]_{10}.
+ \label{eq:registro-bloque-incidencial}
+\end{equation}
+Par composition, on obtient l'application
+\begin{equation}
+ \mathcal E_{\rm cnt}(\mathscr L)=
+ \left((z_m-z_{m+3})_{m=1}^{12},
+       (z_m-z_{m+4})_{m=1}^{12},\sum_{m=1}^{12}z_m\right).
+\label{eq:registro-composicion-incidencial}
+\end{equation}
+Les indices se lisent cycliquement modulo \(12\). Dans ce paragraphe,
+\((D_jz)_m=z_m-z_{m+j}\), pour \(j=3,4\), et
+\(Q(z)=\sum_{m=1}^{12}z_m\) ; par conséquent, la composition précédente est
+\((D_3z,D_4z,Q(z))\). Cette convention est conservée dans
+\S\ref{subsec:k-transversal}, où est démontrée la reconstruction
+entière complète.
+Cette formule produit ses coordonnées à partir des dénombrements. Elle n’utilise
+ni \(K\), ni \(U\), ni \(\alpha\), ni les coordonnées transversales attendues
+comme arguments.
+
+\subsubsection{Représentation terminale et fermeture exacte de ses coordinatisations}
+
+L'état terminal canonique est
+\[
+ X_{\mathrm{term}}
+ =\bigl(\mathcal U_{108}\circ\cdots\circ\mathcal U_1\bigr)
+   (X_{\mathrm{seed}}),
+ \qquad
+ \mathcal U_t=\mathsf{Upd}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t,
+\]
+où chaque \(\mathcal U_t\) agit sur l'état TPK complet, et non sur sa projection brute. Parmi les coordonnées produites et préservées avant la représentation signée figure
+\[
+ C_{\mathrm{term}}=\operatorname{pr}_{C}(X_{\mathrm{term}})
+ =(b^{90},b^{120},Q_{\mathrm{TPK}}),
+\]
+avec
+\begin{align*}
+ b^{90}={}&(-495,-116,-684,108,601,-90,
+              -173,-88,313,560,-397,461),\\
+ b^{120}={}&(-425,-281,-481,671,-255,30,
+               475,-543,680,251,6,-128),\\
+ Q_{\mathrm{TPK}}={}&6263.
+\end{align*}
+On n'introduit pas ici de table ultérieure : \(C_{\mathrm{term}}\) est la coordonnée transversale que \(\mathcal E_{108}^{90,120}\) produit dans l'évolution de l'état complet. Sur le sous-réseau compatible d'états TPK, la coordinatisation satisfait l'identité d'opérateurs
+\begin{equation}
+ \mathcal S_{12}=\operatorname{pr}_{U}
+ =\Pi_H\circ\operatorname{pr}_{C}.
+ \label{eq:registro-identidad-s12-pih}
+\end{equation}
+L’identité est formulée sur l’état TPK plein et ne présuppose pas la descente
+de \(\mathcal S_{12}\) par \(\rho_{108}\).
+
+L'évaluation ultérieure à partir des vingt-cinq champs exprimés est exposée sans saut. Pour \(1\le r\le3\), soient
+\[
+ B_r=\sum_{j=0}^{3}b^{120}_{r+3j},\qquad
+ d_{r,j}=b^{90}_{r+3j},
+\]
+et
+\[
+ s_1=\frac{Q_{\mathrm{TPK}}+2B_1+B_2}{3},\qquad
+ s_2=s_1-B_1,\qquad s_3=s_2-B_2.
+\]
+La substitution des vingt-cinq champs précédents donne, intégralement,
+\[
+ (B_1,B_2,B_3)=(972,-1073,101),\qquad
+ (s_1,s_2,s_3)=(2378,1406,2479).
+\]
+En appliquant
+\[
+ U^{(r)}=(s_r,d_{r,1}-d_{r,3},d_{r,0}+d_{r,2},d_{r,0}-d_{r,2})
+\]
+on obtient, composante par composante,
+\begin{align*}
+ U^{(1)}&=(2378,-452,-668,-322),\\
+ U^{(2)}&=(1406,998,-204,-28),\\
+ U^{(3)}&=(2479,-551,-371,-997).
+\end{align*}
+L'entrelacement par colonnes évalue donc la coordinatisation signée :
+\begin{equation}
+ U_{\mathrm{term}}:=\mathcal S_{12}(X_{\mathrm{term}})
+ =(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997).
+ \label{eq:registro-uterm-desde-estado-pleno}
+\end{equation}
+
+\begin{theorem}[Clôture exacte ultérieure entre \texorpdfstring{\(U\)}{U}, \texorpdfstring{\(K\)}{K} et les canaux]
+\label{thm:registro-evaluacion-terminal-recuperada}
+Une fois la coordinatisation signée \eqref{eq:registro-uterm-desde-estado-pleno} exprimée par projection, la transformée orbitale de Hadamard exprime, à une étape ultérieure,
+\[
+ K=(234,543,140,729,659,824,621,058,914,794,146,601),
+\]
+et l’extracteur transversal \((D_3,D_4,Q)\) produit
+\begin{align}
+ b^{90}={}&(-495,-116,-684,108,601,-90,
+             -173,-88,313,560,-397,461),\notag\\
+ b^{120}={}&(-425,-281,-481,671,-255,30,
+              475,-543,680,251,6,-128),\notag\\
+ Q_{\mathrm{TPK}}={}&6263.
+ \label{eq:registro-canales-terminales-producidos}
+\end{align}
+La composition est une bijection exacte entre le sous-réseau compatible d'états signés, le sceau \(K\) et sa coordonnée transversale \(C_{\mathrm{term}}=(b^{90},b^{120},Q_{\mathrm{TPK}})\). En particulier,
+\begin{equation}
+ C_{\mathrm{term}}=(D_3K,D_4K,Q(K)).
+ \label{eq:registro-cterm-desde-xterm}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+En regroupant \(U_{\mathrm{term}}\) en ses trois orbites de pas trois, on obtient
+\[
+ \begin{aligned}
+  u^{(0)}&=(2378,-452,-668,-322),&
+  \tfrac14H_4u^{(0)}&=(234,729,621,794),\\
+  u^{(1)}&=(1406,998,-204,-28),&
+  \tfrac14H_4u^{(1)}&=(543,659,58,146),\\
+  u^{(2)}&=(2479,-551,-371,-997),&
+  \tfrac14H_4u^{(2)}&=(140,824,914,601).
+ \end{aligned}
+\]
+Les divisions sont exactes dans \(\mathbb Z\). L'entrelacement par colonnes exprime \(K\). Enfin, les douze soustractions cycliques de pas trois et quatre et la somme totale donnent, composante par composante, \eqref{eq:registro-canales-terminales-producidos}. La proposition \ref{prop:k-transversal} démontre l'inverse entier, et le théorème~\ref{thm:k-naturalidad-lector-firmado} démontre la naturalité par raffinement. Aucune opération ne reçoit \(\alpha\), CODATA, une table métrologique ou une constante conventionnelle.
+\end{proof}
+
+\begin{remark}[Forme opératorielle complète et contrôle exécutable ciblé]
+La flèche terminale n’est pas postulée à partir d’une table : c’est la composition
+typée
+\[
+ X_{\mathrm{term}}
+ \xrightarrow{\mathcal R_{12}}\mathscr L(X_{\mathrm{term}})
+ \xrightarrow{\mathcal E_{108}^{90,120}}C_{\mathrm{term}}
+ \xrightarrow{\Pi_H}U_{\mathrm{term}}
+ \xrightarrow{\mathcal H_{12}^{-1}}K .
+\]
+Les définitions précédentes parcourent les douze fenêtres qui partitionnent les cent huit étapes et expriment chaque coordonnée de canal comme une somme finie de ses visites et de ses traces, avec orientation, feuillet, retenue, frontière et mémoire. C'est la matérialisation mathématique de la production de \(C_{\mathrm{term}}\) ; un développement tabulaire ligne par ligne serait une autre sérialisation de la même somme, et non une prémisse supplémentaire du théorème. L'exécutable focal réévalue exactement la coordinatisation finie \(C_{\mathrm{term}}\leftrightarrow U_{\mathrm{term}}\leftrightarrow K\) comme contrôle reproductible supplémentaire. La démonstration de l'hypothèse du continu demeure formulée sur APP--TRIT--TPK, l'état enrichi complet, ses représentations corrélées et la structure discrète conjointe.
+\end{remark}
+
+Ni \(\mathcal S_{12}\), ni \(U\), ni \(K\), ni \(\alpha\) ne sont des entrées externes ou des sélecteurs conventionnels de la construction discrète du continu. Ce sont des coordonnées et des représentations typées du même état APP--TRIT--TPK. La coordonnée \(\alpha_{\mathrm{HMT}}\) est une sortie dérivée et corrélée de cette génération unique ; son ordre de représentation ne rompt pas la continuité de l'objet et n'affaiblit pas sa dérivation.
+
+La formule incidencielle \eqref{eq:registro-composicion-incidencial} décrit
+une réalisation supplémentaire lorsqu’on déploie un livre complet
+\(\mathscr L(X_{\mathrm{term}})\). Le théorème précédent n’affirme pas que la
+coordonnée signée puisse être reconstruite après avoir oublié ce livre au moyen de
+\(\rho_{108}\) ; il n’a pas non plus besoin d’une telle assertion. Cette séparation évite
+de confondre la clôture interne de l’état enrichi avec un problème inverse
+posé sur une projection qui a précisément éliminé l’information
+d’orientation et de mémoire.
+
+L'application \(\Pi_H\), exécutée dans la coordinatisation, produit à partir de \(C_{\mathrm{term}}\) la coordonnée signée et ses trois orbites de pas trois :
+\begin{align*}
+ U_{\mathrm{term}}^{(1)}&=\Pi_H^{(1)}(C_{\mathrm{term}})
+                         =(2378,-452,-668,-322),\\
+ U_{\mathrm{term}}^{(2)}&=\Pi_H^{(2)}(C_{\mathrm{term}})
+                         =(1406,998,-204,-28),\\
+ U_{\mathrm{term}}^{(3)}&=\Pi_H^{(3)}(C_{\mathrm{term}})
+                         =(2479,-551,-371,-997).
+\end{align*}
+Soit \(\mathcal P_{\mathrm{orb}}:\mathbb Z^{12}\to(\mathbb Z^4)^3\) le
+regroupement orbital
+\[
+ \mathcal P_{\mathrm{orb}}(U)
+ =\bigl((U_1,U_4,U_7,U_{10}),
+        (U_2,U_5,U_8,U_{11}),
+        (U_3,U_6,U_9,U_{12})\bigr),
+\]
+et soit \(\operatorname{Int}_{3,4}=\mathcal P_{\mathrm{orb}}^{-1}\)
+l’entrelacement par colonnes de trois quadruplets. Nous définissons en outre
+\[
+ \operatorname{Dig}_{10}^{(3)}(z)
+ =\left(\left\lfloor\frac z{100}\right\rfloor,
+         \left\lfloor\frac z{10}\right\rfloor\bmod10,
+         z\bmod10\right),\qquad0\le z\le999.
+\]
+La coordinatisation modulaire terminale est l'application effective sur l'état compatible des canaux
+\begin{equation}
+ \mathcal G_{\mathrm{term}}(C)
+ :=\left[(\operatorname{Dig}_{10}^{(3)})^{12}
+ \circ\operatorname{Int}_{3,4}
+ \circ\left(\tfrac14H_4\oplus\tfrac14H_4
+                    \oplus\tfrac14H_4\right)
+  \circ\mathcal P_{\mathrm{orb}}\right]\!\left(\Pi_H(C)\right).
+ \label{eq:registro-generador-modular-terminal}
+\end{equation}
+Son domaine est le sous-ensemble du sous-réseau d’intégralité des coordonnées
+compatibles de \(\mathbb Z^{25}\)
+dans lequel \(\Pi_H\) est entier, les trois images orbitales par \(H_4\) sont
+divisibles par quatre et les douze coordonnées résultantes appartiennent à
+\(\{0,\ldots,999\}\). Il ne reçoit ni \(U_{\mathrm{term}}\), ni \(K\), ni \(\alpha\),
+ni table décimale ni valeur métrologique ; l’entrelacement, l’origine de phase
+et l’orientation font partie du type de la coordonnée de canaux.
+
+La coordonnée de vérification est sérialisée dans \path{metadata/semilla-registro-terminal.json}. Ce fichier contient \(C_{\mathrm{term}}\), l'origine de phase et l'orientation ; il ne contient ni \(U_{\mathrm{term}}\), ni \(K\), ni les douze lignes résiduelles. Le programme focal applique \(\mathcal G_{\mathrm{term}}\), exprime \(U_{\mathrm{term}}\), \(K\) et les résidus, puis retourne par \((D_3,D_4,Q)\) au même \(C_{\mathrm{term}}\). Commencer à cet endroit permet une vérification focale exacte de la coordinatisation finie ultérieure. Cela ne redéfinit pas le domaine de la coordinatisation signée \eqref{eq:registro-uterm-desde-estado-pleno}, ne remplace pas la preuve précédente et n'attribue pas à l'auxiliaire la production de la coordonnée qu'il reçoit.
+
+\begin{proposition}[Calcul modulaire des douze lignes terminales]
+\label{prop:registro-generacion-modular-terminal}
+L'évaluation de \(\mathcal G_{\mathrm{term}}\) sur la coordonnée produite \(C_{\mathrm{term}}\) obtient d'abord \(U_{\mathrm{term}}\), puis les quadruplets de phase
+\[
+ (234,729,621,794),\qquad(543,659,058,146),\qquad
+ (140,824,914,601),
+\]
+et, après entrelacement, produit exactement les douze lignes du tableau suivant. C'est la vérification algébrique postérieure au théorème~\ref{thm:registro-evaluacion-terminal-recuperada} ; elle ne remplace pas la représentation de la coordinatisation signée de l'état TPK complet.
+\end{proposition}
+
+\begin{proof}
+Les formules de \(\Pi_H\) donnent les trois blocs signés écrits ci-dessus. Le produit par \(H_4/4\) donne ensuite, sans arrondi,
+\begin{align*}
+ \tfrac14H_4(2378,-452,-668,-322)^T&=(234,729,621,794)^T,\\
+ \tfrac14H_4(1406,998,-204,-28)^T&=(543,659,58,146)^T,\\
+ \tfrac14H_4(2479,-551,-371,-997)^T&=(140,824,914,601)^T.
+\end{align*}
+Les douze divisions sont exactes dans \(\mathbb Z\). L’entrelacement par colonnes donne
+\[
+ \begin{split}
+ (&234,543,140,729,659,824,\\
+  &621,058,914,794,146,601),
+ \end{split}
+\]
+et \(\operatorname{Dig}_{10}^{(3)}\) fournit de manière unique ses trois
+restes décimaux. Le vérificateur auxiliaire inclus dans le paquet exécute
+ces mêmes opérations ; ses contrôles négatifs altèrent l’état des canaux
+ou son origine de phase.
+\end{proof}
+
+Notons
+\[
+ \mathscr F_{\mathrm{term}}^{(10)}
+ :=\bigl((a_m,c_m,v_m)\bigr)_{m=1}^{12}
+\]
+la coordinatisation des chiffres exprimée par \(\operatorname{Dig}_{10}^{(3)}(K_m)\). Lorsqu'on dispose d'une réalisation incidentielle complète, \((a_m,c_m,v_m)=([A_m]_{10},[C_m]_{10},[V_m]_{10})\) est vérifiée ; cette égalité n'est pas postulée pour reconstruire le registre après l'avoir oublié. Chaque ligne conserve l'indice de fenêtre et n'est donc pas un ensemble de chiffres interchangeables.
+
+\begin{center}
+\begin{tabular}{c@{\qquad}ccc@{\qquad}c}
+\toprule
+\(m\)&\(a_m\)&\(c_m\)&\(v_m\)&\(K_m\)\\
+\midrule
+1&2&3&4&234\\
+2&5&4&3&543\\
+3&1&4&0&140\\
+4&7&2&9&729\\
+5&6&5&9&659\\
+6&8&2&4&824\\
+7&6&2&1&621\\
+8&0&5&8&058\\
+9&9&1&4&914\\
+10&7&9&4&794\\
+11&1&4&6&146\\
+12&6&0&1&601\\
+\bottomrule
+\end{tabular}
+\end{center}
+En conséquence,
+\begin{equation}
+ z^{\mathrm{term}}
+ =(234,543,140,729,659,824,621,058,914,794,146,601).
+ \label{eq:registro-terminal-residuos}
+\end{equation}
+
+\begin{proposition}[Retour terminal de la collection calculée vers les canaux]
+\label{prop:registro-terminal-coordenadas}
+La recomposition décimale de \(\mathscr F_{\mathrm{term}}^{(10)}\), suivie
+de l’extracteur transversal, produit, sans consulter \(\alpha\) ni un tableau
+métrologique,
+\begin{align*}
+ D_3z^{\mathrm{term}}={}&(-495,-116,-684,108,601,-90,
+ &\hspace{18mm}-173,-88,313,560,-397,461),\\
+ D_4z^{\mathrm{term}}={}&(-425,-281,-481,671,-255,30,
+ &\hspace{18mm}475,-543,680,251,6,-128),\\
+ Q(z^{\mathrm{term}})={}&6263.
+\end{align*}
+Ce sont exactement les vingt-cinq coordonnées
+\((b^{90},b^{120},Q_{\mathrm{TPK}})\) utilisées par le lecteur harmonique.
+\end{proposition}
+
+\begin{proof}
+La formation décimale de chaque ligne donne \eqref{eq:registro-terminal-residuos}. Soustraire cycliquement l'entrée \(m+3\) et l'entrée \(m+4\) produit, composante par composante, les deux vecteurs écrits ; la somme des douze entrées est \(6263\). Le calcul est répété dans le vérificateur autonome de l'ensemble documentaire. La collection terminale est une représentation calculée de l'état des canaux. L'évaluation transversale retourne exactement au germe \(C_{\mathrm{term}}\) ; la lecture harmonique restitue ensuite \(U_{\mathrm{term}}\) et l'inverse de Hadamard le même \(K\). Cela prouve la concordance des deux coordinatisations sans utiliser alpha comme sélecteur.
+\end{proof}
+
+La coordinatisation \(\mathscr F_{\mathrm{term}}^{(10)}\) est suffisante et nécessaire pour cette évaluation transversale. Le tableau est un certificat décimal de la sortie exprimée, et non une réédition visite par visite du registre orienté. L'état enrichi conserve en outre les quotients euclidiens, les visites, les traces et la provenance ; ces champs ne sont pas déclarés récupérables à partir des trente-six résidus, et ne sont pas nécessaires au théorème cardinal de cet article.
+
+\begin{proposition}[Information arithmétique suffisante et nécessaire]
+\label{prop:registro-36-residuos}
+Soient \(N,N'\in\mathbb Z^{12\times3}\), ordonnés selon les dénombrements
+\((A,C,V)\). Pour l'application définie par
+\eqref{eq:registro-bloque-incidencial}--\eqref{eq:registro-composicion-incidencial},
+\[
+ \mathcal E_{\rm cnt}(N)=\mathcal E_{\rm cnt}(N')
+ \quad\Longleftrightarrow\quad
+ N-N'\in10\mathbb Z^{36}.
+\]
+En particulier, les \(36\) résidus sectoriels déterminent exactement
+la sortie à \(25\) coordonnées. La conservation des quotients et
+de la provenance constitue une information supplémentaire du registre.
+\end{proposition}
+
+\begin{proof}
+L'égalité modulo \(10\) produit les mêmes blocs et, par conséquent,
+les mêmes coordonnées transversales. Réciproquement, si les coordonnées
+transversales coïncident, \(D_3(z-z')=D_4(z-z')=0\). Les pas
+\(3\) et \(4\) engendrent le cycle de longueur \(12\), de sorte que
+\(z-z'\) est constant. L'égalité des charges totales annule cette
+constante. Enfin, la représentation décimale d'un entier compris entre
+\(0\) et \(999\) possède trois chiffres uniques. On récupère ainsi les
+trois résidus de chaque fenêtre. L'assertion est une identité algébrique
+pour tous \(N,N'\), et non une inférence obtenue par des essais finis.
+\end{proof}
+
+\subsection{Conjugaison des dénombrements et termes de frontière}
+\label{subsec:registro-conjugacion-incidencial}
+
+Soit \(\rho(m)=13-m\). Considérons une conjugaison d'incidences
+qui inverse l'ordre des fenêtres, conserve la classe arithmétique et la
+classe de frontière des visites et échange les canaux des traces.
+Alors
+\[
+ (A_m^\dagger,C_m^\dagger,V_m^\dagger)
+ =(A_{\rho(m)},-C_{\rho(m)},V_{\rho(m)}).
+\]
+Si \(c_m=[C_m]_{10}\), la réduction décimale produit l'identité
+\begin{equation}
+ z_m^\dagger=z_{\rho(m)}
+       +100\mathbf1_{\{c_{\rho(m)}\ne0\}}-20c_{\rho(m)}.
+ \label{eq:registro-conjugacion-decimal}
+\end{equation}
+En effet, \([-C]_{10}=0\) lorsque \([C]_{10}=0\), et
+\([-C]_{10}=10-[C]_{10}\) dans le cas contraire. La formule conserve
+exactement cette différence. La négation du canal n'équivaut pas à nier
+le bloc décimal complet.
+
+L'application de cette identité à une involution concrète du TPK exige
+de vérifier son action sur les incidences. Pour un lecteur d'occupations
+évalué avant l'avancement, l'inversion d'une route
+\(\gamma=(x_0,\ldots,x_n)\) satisfait
+\[
+ \sum_{k=0}^{n-1}f(x_{n-k})
+ =\sum_{k=0}^{n-1}f(x_k)+f(x_n)-f(x_0).
+\]
+Les termes aux extrémités sont incorporés avant la réduction modulo
+\(10\). Ils s'annulent sur les routes fermées ; dans les fenêtres ouvertes, ils peuvent
+modifier leurs résidus. Cette correction, déjà présente dans le développement
+bidirectionnel du transport, spécifie ce que doit conserver le raccordement
+entre la route et les dénombrements.
+
+\begin{proposition}[Nécessité de l'information non périodique du registre]
+Supposons que l’observable d’une famille fixe de chemins satisfasse
+\(o(t+54)=o(t)\), que la multiplicité soit conservée sous ce retour
+et que le même lecteur local agisse dans les fenêtres de \(9\) instants.
+Alors ses dénombrements et blocs satisfont
+\[
+ (A,C,V)_{m+6}=(A,C,V)_m,\qquad z_{m+6}=z_m.
+\]
+\end{proposition}
+
+\begin{proof}
+La translation \(t\mapsto t+54\) envoie \(E_m\) bijectivement
+sur \(E_{m+6}\), en conservant chaque incidence comptée et sa multiplicité.
+L'égalité se transmet à la somme et à la réduction décimale.
+\end{proof}
+
+Une présentation à \(12\) blocs distincts exige donc que
+le lecteur conserve une information qui ne se factorise pas par cet observable
+de période \(54\) : sélection d'incidences, orientation effective,
+extrémités, multiplicité ou mémoire. La proposition délimite une réduction
+inadmissible de l'état ; elle n'affirme pas que la dynamique complète possède une
+période \(54\) et ne détermine pas à elle seule son lecteur terminal.

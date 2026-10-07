@@ -1,0 +1,612 @@
+\section{Ternary incidence, discriminant gluing, and the Leech construction}
+\label{sec:lf-foundations}
+
+The lattice construction uses the incidence information that
+accompanies the dodecaphasic record. Its domain preserves the ternary
+words, the frame in which they are represented, the pre-carry
+orientation, and the flag distinguishing one of the twelve positions. The
+passage to a lattice transmits these data through successive
+operations: linear encoding, incidence selection, discriminant
+gluing, and formation of a neighbour. Lattice classification
+enters after proving positivity, evenness, self-duality,
+and the absence of roots in the resulting construction.
+
+These operations continue the same APP--TRIT--TPK
+generation and the same compatible refinement of the joint
+continuum that precede numerical reading \cite{HMT-IV}.
+The finite matrix, code, and metric defined below
+are realizations with precise domains. The lattice
+proof receives the marked state; the final scalar of a
+constant plays the role of neither a glue code nor a length.
+
+\subsection{Elliptic chart and incidence transport}
+\label{subsec:lf-incidence}
+
+The six units \(\{1,2,4,5,7,8\}\) modulo nine, preserved
+by modular transport, admit a six-position chart.
+We identify it with
+\(\mathbb P^1(\mathbb F_5)=\{\infty,0,1,2,3,4\}\), in that order.
+This identification fixes coordinates for realizing the quadratic
+relation of the elliptic regime of TRIT.
+
+Let \(\chi:\mathbb F_5\to\{0,1,-1\}\) be the quadratic character:
+\(\chi(0)=0\), \(\chi(1)=\chi(4)=1\), and
+\(\chi(2)=\chi(3)=-1\). We define the integer matrix
+\(C_{\mathrm P}\) with zero diagonal,
+\((C_{\mathrm P})_{\infty,a}=(C_{\mathrm P})_{a,\infty}=1\),
+and finite entries \((C_{\mathrm P})_{a,b}=\chi(b-a)\).
+Its square is \(5I_6\). Indeed, each diagonal entry of the
+square sums five units. The off-diagonal entries involving
+\(\infty\) vanish because the sum of
+\(\chi\) is zero. For two distinct finite indices, the
+contribution of one from position \(\infty\) cancels with
+\(\sum_c\chi(c-a)\chi(c-b)=-1\). This last identity is verified
+directly on the five residues, or through the affine
+substitution taking \((a,b)\) to \((0,1)\).
+
+Reduction modulo three produces the symmetric matrix
+\begin{equation}
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix},
+ \qquad A_W^2=2I_6=-I_6
+ \quad\text{in }\mathbb F_3.
+ \label{eq:lf-aw}
+\end{equation}
+The equality preserves the elliptic type in this finite codomain.
+The finite field and the subsequent Archimedean realization of the
+imaginary unit have different domains.
+
+For a matrix \(A\in M_6(\mathbb F_3)\) and a row word
+\(w\in\mathbb F_3^6\), we write
+\[
+ \gamma_A(w)=(w,wA)\in\mathbb F_3^{12}.
+\]
+If \(f\in\operatorname{GL}_6(\mathbb F_3)\), then
+\begin{equation}
+ \gamma_{fAf^{-1}}(wf^{-1})
+   =\gamma_A(w)(f^{-1}\oplus f^{-1}).
+ \label{eq:lf-frame-covariance}
+\end{equation}
+The first half is \(wf^{-1}\); the second is
+\(wf^{-1}fAf^{-1}=wAf^{-1}\), proving the identity.
+
+Let \(X_n^{\mathrm{mar}}\) be the space of enriched prefixes of
+length \(n\), with a declared initial frame, and let
+\(p_{n,m}:X_n^{\mathrm{mar}}\to X_m^{\mathrm{mar}}\) be its
+truncations. At step \(j\), the prefix contains a visible
+word \(w_j\) and a frame \(f_j\). The frame update
+has the form \(f_{j+1}=g_j(x)f_j\), where \(g_j(x)\) depends
+only on information already contained in the prefix. A
+compatible prolongation therefore preserves all previous
+frames.
+
+\begin{proposition}[Naturality of incidence transport]
+\label{prop:lf-incidence-naturality}
+The map
+\begin{equation}
+ \mathcal Q_n(x)=
+ \bigl((f_j,\gamma_{f_jA_Wf_j^{-1}}(w_j))\bigr)_{0\leq j<n}
+ \label{eq:lf-Qn}
+\end{equation}
+satisfies \(r_{n,m}\mathcal Q_n=\mathcal Q_mp_{n,m}\), where \(r_{n,m}\) truncates
+to the first \(m\) encoded components. It therefore induces a
+map between the inverse limits of the prefix
+and marked-incidence systems.
+\end{proposition}
+\begin{proof}
+Two compatible prefixes have the same words and the same
+transport operators up to step \(m-1\). Starting from the
+same initial frame, the recursive relation gives by induction the
+same \(f_j\) up to that step. The first
+\(m\) components of \eqref{eq:lf-Qn} therefore agree. The universal
+property of the inverse limit produces the prolongation map.
+\end{proof}
+
+In each frame, the first projection of \(\gamma_A\) exactly
+recovers the visible word. This scope is local: deep
+memory is preserved in the enriched state, and its
+recovery requires the corresponding coordinates. Passing
+from words to supports retains even less information.
+Likewise, a general change of basis in
+\(\operatorname{GL}_6(\mathbb F_3)\) also transports the Hamming
+metric and the incidence of the chart. Monomial changes
+preserve them directly. The supports used in this
+section are computed in the explicit chart \eqref{eq:lf-aw}.
+
+The preceding naturality makes explicit the incidence reading that
+accompanies the numerical cylinders. Cylinder nesting
+and restriction of \eqref{eq:lf-Qn} act on the same
+compatible prefix, preserving respectively its positional
+evaluation and its marked relations. The ambient space
+\(\mathbb F_3^6\), of \(729\) words, provides the linear
+domain of the encoding; it remains distinct from
+the \(243\) visible words and the \(468\) emissions in the
+admissible APP--TRIT--TPK census.
+
+\subsection{Self-dual ternary code and enumeration of its weights}
+\label{subsec:lf-code}
+
+\begin{definition}[Code of the dodecaphasic chart]
+The linear code associated with \eqref{eq:lf-aw} is
+\[
+ C_W=\{(w,wA_W):w\in\mathbb F_3^6\}\subset\mathbb F_3^{12}.
+\]
+The weight \(\operatorname{wt}(c)\) counts the nonzero coordinates
+of \(c\), and \(\operatorname{supp}(c)\subset\{1,\ldots,12\}\)
+is its set of nonzero positions. A hexad is the support
+of a word of weight six; their collection is denoted by \(\mathcal H\).
+\end{definition}
+
+\begin{theorem}[Self-duality, minimum distance, and enumerator]
+\label{thm:lf-code}
+The code \(C_W\) is self-dual with parameters \([12,6,6]_3\) and
+has enumerator
+\begin{equation}
+ W_{C_W}(z)=1+264z^6+440z^9+24z^{12}.
+ \label{eq:lf-enumerator}
+\end{equation}
+\end{theorem}
+\begin{proof}
+The generator matrix \([I_6\mid A_W]\) has rank six.
+By the symmetry of \(A_W\) and \eqref{eq:lf-aw},
+\[
+ [I_6\mid A_W][I_6\mid A_W]^{\mathsf T}
+       =I_6+A_W^2=0.
+\]
+Thus the code is self-orthogonal of dimension half its
+length and is consequently self-dual.
+
+The remaining enumeration is a finite integer operation on
+the explicit matrix. For \(r\in\{0,\ldots,6\}\), we group
+the words by \(\operatorname{wt}(w)=r\). The following table
+gives the number of words of each total weight:
+\[
+\begin{array}{c|rrrr|r}
+r&0&6&9&12&\text{total}\\ \hline
+0&1&0&0&0&1\\
+1&0&12&0&0&12\\
+2&0&60&0&0&60\\
+3&0&120&40&0&160\\
+4&0&60&180&0&240\\
+5&0&12&180&0&192\\
+6&0&0&40&24&64\\ \hline
+\text{total}&1&264&440&24&729
+\end{array}
+\]
+Each row contains \(\binom6r2^r\) words. To verify
+all its entries, let \(q\) be an integer from \(0\) to \(728\), and
+define its six ternary digits
+\[
+ d_i(q)=\left\lfloor\frac{q}{3^{6-i}}\right\rfloor\bmod3,
+ \qquad
+ e_j(q)=\left(\sum_{i=1}^{6}d_i(q)(A_W)_{ij}\right)\bmod3.
+\]
+The row and column of the contribution of \(q\) are,
+respectively,
+\[
+ r(q)=\sum_i\mathbf1_{\{d_i(q)\ne0\}},\qquad
+ h(q)=r(q)+\sum_j\mathbf1_{\{e_j(q)\ne0\}}.
+\]
+The accumulation recurrence starts with
+\(T^{(0)}_{r,h}=0\) and applies
+\[
+ T^{(q+1)}_{r,h}
+ =T^{(q)}_{r,h}
+   +\mathbf1_{\{r=r(q)\}}\mathbf1_{\{h=h(q)\}}
+ \quad(0\leq q<729).
+\]
+It produces exactly the table shown. Ternary expansion
+gives a bijection between these \(729\) integers and all words
+in \(\mathbb F_3^6\), so the operation exhausts the code.
+Summing its rows proves \eqref{eq:lf-enumerator}; the first
+nonzero weight is six.
+\end{proof}
+
+\begin{remark}[Reproducible evaluation of the finite recurrence]
+The following loop literally implements the sums in the proof.
+Its only data are the integers of the matrix
+\eqref{eq:lf-aw}; it computes the enumerator before comparing it with
+the equality obtained.
+\end{remark}
+{\small
+\begin{verbatim}
+from collections import Counter
+from itertools import product
+A = ((0,1,1,1,1,1), (1,0,1,2,2,1),
+     (1,1,0,1,2,2), (1,2,1,0,1,2),
+     (1,2,2,1,0,1), (1,1,2,2,1,0))
+rows = [Counter() for _ in range(7)]
+for w in product(range(3), repeat=6):
+    v = tuple(sum(w[i]*A[i][j] for i in range(6)) % 3
+              for j in range(6))
+    r = sum(x != 0 for x in w)
+    h = r + sum(x != 0 for x in v)
+    rows[r][h] += 1
+total = sum(rows, Counter())
+if dict(total) != {0:1, 6:264, 9:440, 12:24}:
+    raise ArithmeticError("Incompatible enumerator")
+\end{verbatim}
+}
+
+\begin{proposition}[Hexads and the Witt design]
+\label{prop:lf-witt}
+The collection \(\mathcal H\) contains \(132\) hexads, and every
+five-element set of positions belongs to a unique hexad.
+\end{proposition}
+\begin{proof}
+Two words of weight six with the same support differ by
+a scalar. Indeed, among their six ratios of nonzero
+coordinates, one of the signs \(1,-1\) occurs at least three
+times. Subtracting the corresponding multiple, if the words
+were not proportional, would yield a nonzero word
+of weight at most three, contradicting
+Theorem~\ref{thm:lf-code}. Each support thus corresponds to
+the pair \(\{c,-c\}\), and there are \(264/2=132\) supports.
+
+If two distinct supports shared five positions,
+one of the two ratios would occur at least three times
+in that intersection. The linear combination cancelling those
+coordinates would be supported on a union of size seven
+and have weight at most four. The minimum distance rules this out.
+A five-element set therefore belongs to at most one hexad.
+Since
+\[
+ 132\binom65=792=\binom{12}{5},
+\]
+it belongs to exactly one.
+\end{proof}
+
+The constructed object is the extended ternary Golay code
+with its small Witt design. Recognition occurs
+after encoding, self-duality, and the distance
+computation. The lattice construction requires only
+the properties already proved and the marked flag
+obtained next.
+
+\subsection{Dodecaphasic flag and origin selection}
+\label{subsec:lf-flag}
+
+The frame of the generated record preserves the words
+\[
+ w_\pi=010211,\qquad
+ w_e=201101,\qquad
+ w_\varphi=121200,\qquad
+ w_{\mathrm{APP}}=022020.
+\]
+The subscripts \(\pi,e,\varphi\) identify the corresponding
+reading regions of the constants; here \(w_e\) preserves
+the Euler region. Applying \(\gamma_{A_W}\) and taking supports gives
+\[
+\begin{aligned}
+ P_\pi&=\{2,4,5,6,7,8,9,10,11\},\\
+ H_e&=\{1,3,4,6,9,10\},\\
+ H_\varphi&=\{1,2,3,4,7,9\},\\
+ H_{\mathrm{APP}}&=\{2,3,5,10,11,12\}.
+\end{aligned}
+\]
+The first support has weight nine; the remaining three are
+hexads. The record
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601)
+\]
+selects
+\[
+ B_K=\{j:K_j\geq729\}=\{4,6,9,10\}=H_e\cap P_\pi.
+\]
+The threshold \(729\) belongs to the block format of the
+declared reading. In this particular record, integer
+thresholds from \(660\) to \(729\) produce the same support, so
+the support preserves the selected incidence,
+while the complete record also preserves the blocks
+and the threshold of its reading.
+
+The signed pre-carry record is
+\[
+\begin{split}
+ Z_0={}&(7,297,353,-430,-715,-1199,\\
+       &\hspace{9mm}-3,286,-894,-528,380,663).
+\end{split}
+\]
+Its negative support is the hexad
+\[
+ H_\alpha^-=\{4,5,6,7,9,10\}.
+\]
+The signs are received from the pre-carry state and are not
+extracted from the expansion of the final scalar.
+
+\begin{proposition}[Agreement of signed and incidence selection]
+\label{prop:lf-flag}
+The hexad \(H_\alpha^-\) is the unique \(H\in\mathcal H\) satisfying
+\[
+\begin{gathered}
+ B_K\subset H\subset P_\pi,\\
+ (|H\cap H_e|,|H\cap H_\varphi|,
+                   |H\cap H_{\mathrm{APP}}|)=(4,3,2).
+\end{gathered}
+\]
+\end{proposition}
+\begin{proof}
+Encoding the words of weight six, or applying the preceding
+finite recurrence to their supports, gives the four
+hexads over \(B_K\). Their complementary pairs are
+\[
+ \{1,3\},\qquad\{2,11\},\qquad\{5,7\},\qquad\{8,12\}.
+\]
+Only the second and third are contained in \(P_\pi\).
+The hexad of the second has intersections of size three
+with \(H_\varphi\) and with \(H_{\mathrm{APP}}\), and therefore
+fails the last condition. That of the third has
+intersections \(4,3,2\), and agrees with \(H_\alpha^-\).
+\end{proof}
+
+\begin{lemma}[Origin of the marked flag]
+\label{lem:lf-origin}
+The origin selected by incidence is
+\[
+ o_*=(H_e\cap H_\varphi)
+                 \setminus(H_\alpha^-\cup H_{\mathrm{APP}})
+     =\{1\}.
+\]
+Selection commutes with every bijection applied
+simultaneously to the supports.
+\end{lemma}
+\begin{proof}
+The intersection \(H_e\cap H_\varphi\) is
+\(\{1,3,4,9\}\). The subtracted union contains \(3,4,9\)
+and excludes \(1\). Equivariance follows because
+bijections commute with union, intersection, and difference.
+\end{proof}
+
+The flag distinguishes one component among twelve before the
+metric step. The radial vector is determined afterwards,
+within a declared positive chamber. Combinatorial selection
+and the lattice operation are thereby kept
+distinct and connected.
+
+\subsection{Ternary gluing of the twelve components}
+\label{subsec:lf-glue}
+
+Let \(A_2=\mathbb Za_1\oplus\mathbb Za_2\), with bilinear
+form of matrix
+\[
+ B_2=\begin{pmatrix}2&-1\\-1&2\end{pmatrix},
+ \qquad \rho=a_1+a_2,\qquad \rho^2=2.
+\]
+For \(x=ua_1+va_2\),
+\[
+ x^2=2(u^2-uv+v^2).
+\]
+The identity
+\(4(u^2-uv+v^2)=(2u-v)^2+3v^2\) shows
+positivity. The determinant is three. The three
+classes of \(A_2^*/A_2\) are represented by
+\[
+ \varpi_0=0,\qquad
+ \varpi_1=\frac{2a_1+a_2}{3},\qquad
+ \varpi_2=\frac{a_1+2a_2}{3}.
+\]
+Pairing with \(a_1,a_2\) verifies that these
+vectors belong to \(A_2^*\), and
+\(2\varpi_1-\varpi_2=a_1\). Hence
+\(j\mapsto\varpi_j+A_2\) additively identifies
+\(\mathbb F_3\) with the discriminant.
+
+For \(c\in C_W\), we define
+\(\phi(c)=(\varpi_{c_1},\ldots,\varpi_{c_{12}})\)
+and
+\begin{equation}
+ N=\bigcup_{c\in C_W}\bigl(A_2^{12}+\phi(c)\bigr).
+ \label{eq:lf-glue}
+\end{equation}
+
+\begin{theorem}[Even unimodular glue lattice]
+\label{thm:lf-niemeier}
+The set \(N\) is a positive, even,
+unimodular lattice of rank \(24\). Its norm-two vectors
+are exactly the roots of \(A_2^{12}\).
+\end{theorem}
+\begin{proof}
+Linearity of the code and additivity of the discriminant
+make the union a subgroup of
+\((A_2^*)^{12}\) containing \(A_2^{12}\).
+It is therefore a lattice of rank \(24\).
+
+The pairing of discriminant classes is
+\(2cd/3\) modulo \(\mathbb Z\) in each component.
+Self-orthogonality of \(C_W\) makes their sum vanish and proves
+integrality of \(N\). The norm of a class
+represented by \(\phi(c)\) is
+\(2\operatorname{wt}(c)/3\) modulo \(2\mathbb Z\).
+All weights in \eqref{eq:lf-enumerator} are
+multiples of three, so \(N\) is even.
+
+Its index over \(A_2^{12}\) is \(|C_W|=3^6\).
+Using the determinant of the Gram matrix,
+\[
+ \det N=\frac{\det(A_2^{12})}{[N:A_2^{12}]^2}
+       =\frac{3^{12}}{(3^6)^2}=1.
+\]
+The ambient form is the orthogonal sum of twelve positive
+forms; this proves positivity.
+Integrality and determinant one imply
+\(N^*=N\).
+
+In a nonzero class of the local discriminant, a
+vector has the form \((ua_1+va_2)/3\), with residues
+\((u,v)\equiv(2,1)\) o \((1,2)\pmod3\).
+The integer \(u^2-uv+v^2\) is positive and divisible
+by three, so it is at least three. The representatives
+\(\varpi_1,\varpi_2\) attain that value: the minimum
+norm of each nonzero class is \(2/3\).
+A nonzero codeword has at least
+six nonzero coordinates. Every vector in a nontrivial
+glue class therefore has norm
+at least \(6(2/3)=4\).
+
+In \(A_2^{12}\), norm two can only come
+from a single component, because each component
+has minimum positive even norm two. The solutions
+of \(u^2-uv+v^2=1\) are
+\((\pm1,0),(0,\pm1),(1,1),(-1,-1)\).
+These are the six roots of \(A_2\), and complete the census
+of roots of \(N\).
+\end{proof}
+
+The preceding properties identify \(N\) as the
+Niemeier lattice with root system \(A_2^{12}\).
+The description of all its roots is needed to
+control which ones survive passage to the neighbour.
+
+\subsection{Radial chamber and rootless neighbour}
+\label{subsec:lf-neighbour}
+
+We fix the radial chamber
+\[
+ v(a)=\sum_{j=1}^{12}a_j\rho_j,\qquad
+ a_j=1+3b_j,\qquad b_j\in\mathbb Z_{\geq0},
+\]
+where \(\rho_j\) is the copy of \(\rho\) in
+component \(j\). Evenness of an index-three neighbour
+requires \(v(a)^2\equiv0\pmod{18}\).
+Since
+\[
+ v(a)^2=2\sum_j(1+3b_j)^2
+       =24+12\sum_jb_j+18\sum_jb_j^2,
+\]
+the congruence is equivalent to \(\sum_jb_j\equiv1\pmod3\).
+The minimum norm within the chamber is attained with
+a single \(b_j=1\) and all others zero, and equals \(54\).
+The origin \(o_*=1\) of Lemma~\ref{lem:lf-origin}
+selects
+\begin{equation}
+ v_\alpha=4\rho_1+\rho_2+\cdots+\rho_{12},
+ \qquad v_\alpha^2=54.
+ \label{eq:lf-valpha}
+\end{equation}
+The qualification ``minimum'' refers to the declared
+chamber. In the full residue class,
+\((a_1-2a_2,\rho,\ldots,\rho)\) represents the
+same class modulo three and has norm
+\(14+11\cdot2=36\). This distinction preserves
+the condition determining the coefficient four.
+
+We define
+\begin{equation}
+\begin{split}
+ N_0&=\{x\in N:\langle x,v_\alpha\rangle\equiv0\pmod3\},\\
+ \Lambda&=N_0+\mathbb Z\,v_\alpha/3.
+\end{split}
+\label{eq:lf-lambda}
+\end{equation}
+
+\begin{theorem}[Even self-dual rootless neighbour]
+\label{thm:lf-leech}
+The construction \eqref{eq:lf-lambda} is a
+positive, even, self-dual lattice of rank \(24\)
+with no norm-two vectors. Consequently, it is
+isometric to the Leech lattice.
+\end{theorem}
+\begin{proof}
+The character \(x\mapsto\langle x,v_\alpha\rangle\bmod3\)
+is nonzero. A simple root of component \(j\)
+has pairing \(a_j\equiv1\pmod3\) with
+\(a_j\rho_j\). Hence \([N:N_0]=3\), whence
+\(\det N_0=9\).
+
+For \(x\in N_0\), the pairing
+\(\langle x,v_\alpha/3\rangle\) is an integer, so
+\(v_\alpha/3\in N_0^*\). Moreover,
+\(\langle v_\alpha,v_\alpha\rangle=54\) implies
+\(v_\alpha\in N_0\). If \(v_\alpha/3\in N\),
+integrality of \(N\) would force all
+pairings of \(N\) with \(v_\alpha\) to be
+divisible by three, contradicting the nonzero
+character. The class of \(v_\alpha/3\) over \(N_0\)
+therefore has order exactly three. It follows that
+\[
+ [\Lambda:N_0]=3,\qquad
+ \det\Lambda=\frac9{3^2}=1.
+\]
+The pairings of \(N_0\) with the new
+generator are integers, and the norm of this generator
+is six. The extension is integral. For
+\(x\in N_0\) and \(m\in\mathbb Z\),
+\[
+ \left(x+m\frac{v_\alpha}{3}\right)^2
+ =x^2+2m\frac{\langle x,v_\alpha\rangle}{3}
+       +6m^2\in2\mathbb Z.
+\]
+Thus \(\Lambda\) is even; its integrality and
+determinant one prove self-duality.
+Positivity and rank are inherited from the ambient
+Euclidean space.
+
+To exclude roots, we first consider the
+class \(N_0\). All roots of \(N\) belong
+to \(A_2^{12}\) by Theorem~\ref{thm:lf-niemeier}.
+The pairings of its six local roots
+with \(a_j\rho_j\) are \(\pm a_j,\pm2a_j\),
+congruent to \(\pm1,\pm2\pmod3\).
+No root belongs to \(N_0\).
+
+The other two classes of \(\Lambda/N_0\) can
+be represented by \(\pm v_\alpha/3\).
+In each component, their vectors belong to
+one of the classes
+\[
+ A_2+\varpi_j\pm\rho/3,\qquad j=0,1,2.
+\]
+The distinguished component has the same
+description because \(4\rho/3\equiv\rho/3\pmod{A_2}\).
+For the numerators \((u,v)\) in
+\((ua_1+va_2)/3\), the six residues are
+\[
+ (1,1),(0,2),(2,0),(2,2),(1,0),(0,1)\pmod3.
+\]
+All are nonzero. Positivity of
+\(u^2-uv+v^2\) forces it to be at least one,
+and the representatives
+\((1,1),(0,-1),(-1,0),(-1,-1),(1,0),(0,1)\)
+attain that minimum in all six classes.
+Each component has norm at least \(2/9\).
+A vector in either of the two new
+classes has norm at least
+\[
+ 12\cdot\frac29=\frac83>2.
+\]
+Roots have been excluded in all three classes.
+The classification theorem for positive
+even unimodular lattices of rank twenty-four
+identifies the unique rootless case with the
+Leech lattice \cite{ConwaySloane}.
+\end{proof}
+
+The final identification uses an external
+classification on an object whose properties have already
+been proved. Selection of the distinguished
+component preserves the flag arising from the
+signed record; the subscript \(\alpha\) expresses
+that provenance. The norm and coefficients of the
+radial vector are obtained from the metric and
+the chamber through the stated congruence.
+
+The lattice \(\Lambda\), its bilinear form, its
+twelve ambient planes, and the vector \(v_\alpha/3\)
+are thereby determined with all the properties
+used by the subsequent deformation. The
+code also contains the word
+\[
+ c_*=(1,1,1,1,1,1,2,1,1,1,1,1),
+\]
+since \(q_*=(1,1,1,1,1,1)\) satisfies
+\(q_*A_W=(2,1,1,1,1,1)\). This is the
+full-support datum that allows us to construct and
+prove stability of the order-three
+isometry in Section~\ref{sec:leech-dualidad}.

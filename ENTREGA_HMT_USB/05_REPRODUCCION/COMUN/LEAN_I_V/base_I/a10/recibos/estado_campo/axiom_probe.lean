@@ -1,0 +1,87 @@
+import HeisenbergDerivativeModes
+import LatticeNormalOrderedField
+import LatticeDescendantFields
+import LatticeNormalProductDerivativeBridge
+import LatticeOscillatorWords
+import LatticeStateFieldMap
+import SelectedStateField
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_factorial
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_bounded_pole
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeField
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeField_coefficient
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_zero
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_creation
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_gap
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_nonnegativeMode
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_vacuum_negative
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_vacuum_constant
+#print axioms HMT.IV.HeisenbergDerivativeModes.exists_nonnegativeMode_bound
+#print axioms HMT.IV.HeisenbergDerivativeModes.creationPart
+#print axioms HMT.IV.HeisenbergDerivativeModes.nonnegativePart
+#print axioms HMT.IV.HeisenbergDerivativeModes.derivativeCoefficient_split
+#print axioms HMT.IV.HeisenbergDerivativeModes.creationPart_negative
+#print axioms HMT.IV.HeisenbergDerivativeModes.nonnegativePart_nonnegative
+#print axioms HMT.IV.HeisenbergDerivativeModes.nonnegativePart_bounded_pole
+#print axioms HMT.IV.HeisenbergDerivativeModes.nonnegativePart_vacuum
+#print axioms HMT.IV.LatticeNormalOrderedField.locallyFiniteSum
+#print axioms HMT.IV.LatticeNormalOrderedField.creationTerm
+#print axioms HMT.IV.LatticeNormalOrderedField.annihilationTerm
+#print axioms HMT.IV.LatticeNormalOrderedField.field_has_bound
+#print axioms HMT.IV.LatticeNormalOrderedField.nonnegative_modes_bounded
+#print axioms HMT.IV.LatticeNormalOrderedField.creationTerm_finite
+#print axioms HMT.IV.LatticeNormalOrderedField.annihilationTerm_finite
+#print axioms HMT.IV.LatticeNormalOrderedField.normalCoefficient
+#print axioms HMT.IV.LatticeNormalOrderedField.normalCoefficient_apply
+#print axioms HMT.IV.LatticeNormalOrderedField.normalCoefficient_bounded
+#print axioms HMT.IV.LatticeNormalOrderedField.normalField
+#print axioms HMT.IV.LatticeNormalOrderedField.normalField_coefficient
+#print axioms HMT.IV.LatticeDescendantFields.Creates
+#print axioms HMT.IV.LatticeDescendantFields.nonnegative_modes_vacuum
+#print axioms HMT.IV.LatticeDescendantFields.annihilationTerm_vacuum
+#print axioms HMT.IV.LatticeDescendantFields.normalField_creates
+#print axioms HMT.IV.LatticeDescendantFields.chargedField_creates
+#print axioms HMT.IV.LatticeDescendantFields.descendantState
+#print axioms HMT.IV.LatticeDescendantFields.descendantField
+#print axioms HMT.IV.LatticeDescendantFields.descendantField_creates
+#print axioms HMT.IV.LatticeDescendantFields.descendantField_recovers_state
+#print axioms HMT.IV.LatticeDescendantFields.descendantField_regular_at_vacuum
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.creationTerm_eq_derivative
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.annihilationTerm_eq_derivative
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.normalCoefficient_eq_derivative_sums
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.normalField_eq_derivative_sums
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.normalCoefficient_zero_charge
+#print axioms HMT.IV.LatticeNormalProductDerivativeBridge.normalField_zero_charge
+#print axioms HMT.IV.LatticeOscillatorWords.stateForWord
+#print axioms HMT.IV.LatticeOscillatorWords.wordOccupation
+#print axioms HMT.IV.LatticeOscillatorWords.stateForWord_nil
+#print axioms HMT.IV.LatticeOscillatorWords.stateForWord_cons
+#print axioms HMT.IV.LatticeOscillatorWords.wordOccupation_toFinsupp
+#print axioms HMT.IV.LatticeOscillatorWords.wordForOccupation
+#print axioms HMT.IV.LatticeOscillatorWords.wordForOccupation_zero
+#print axioms HMT.IV.LatticeOscillatorWords.wordForOccupation_counts
+#print axioms HMT.IV.LatticeOscillatorWords.stateForWord_basis
+#print axioms HMT.IV.LatticeOscillatorWords.carrierBasis_wordForOccupation
+#print axioms HMT.IV.LatticeOscillatorWords.every_carrierBasis_has_word
+#print axioms HMT.IV.LatticeOscillatorWords.equal_occupations_same_state
+#print axioms HMT.IV.LatticeStateFieldMap.descendantState_eq_word
+#print axioms HMT.IV.LatticeStateFieldMap.stateField
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_basis
+#print axioms HMT.IV.LatticeStateFieldMap.vacuumRead
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_creation_identity
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_negative_vacuum
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_creates
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_injective
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_ground_state
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_vacuum_coefficient
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_laurent_bound
+#print axioms HMT.IV.LatticeStateFieldMap.wordForOccupation_single
+#print axioms HMT.IV.LatticeStateFieldMap.stateField_one_oscillator
+#print axioms HMT.I.SelectedStateField.carrier
+#print axioms HMT.I.SelectedStateField.Y
+#print axioms HMT.I.SelectedStateField.selected_field_creates
+#print axioms HMT.I.SelectedStateField.selected_field_injective
+#print axioms HMT.I.SelectedStateField.selected_ground_field
+#print axioms HMT.I.SelectedStateField.selected_vacuum_field
+#print axioms HMT.I.SelectedStateField.selected_field_truncation
+#print axioms HMT.I.SelectedStateField.selected_state_fields_and_generator_localities

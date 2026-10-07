@@ -1,0 +1,140 @@
+\section{Reconstruction de la géométrie positive à partir de la mémoire nonadique}
+\label{sec:memory}
+
+L'extraction dodécaphasique conserve davantage d'information qu'une direction de déformation. La direction sélectionne un mouvement ; le registre complet détermine également la partition sur laquelle ce mouvement agit. La récupération du registre à partir de ses mémoires permet de formuler cette distinction comme un théorème de reconstruction. Le résultat découle de la composition des compressions nonadiques du corpus \cite{hmtX} ; son application géométrique conserve la charge uniforme et les compléments des deux étapes.
+
+Dans cette section, les coordonnées sont numérotées de zéro à onze. Soit \(\mathsf S:\RR^{12}\to\RR^{12}\) le décalage \((\mathsf Sx)_i=x_{i+1}\), avec indices modulo douze. Dans la coordinatisation euclidienne postérieure à l'état enrichi, on définit
+\[
+ T_j=\frac{8I+\mathsf S^j}{9},\qquad
+ D_j=\frac{\sqrt8}{9}(\mathsf S^j-I),\qquad j\in\{3,4\}.
+\]
+Le coefficient huit compte les positions ordinaires de la coordinatisation nonadique ; la neuvième position contient le transport. L'orthogonalité du décalage implique, par multiplication directe,
+\[
+ T_j^*T_j+D_j^*D_j=I.
+\]
+La première mémoire est le complément de la première compression ; la seconde
+est prise sur l’état qui a déjà traversé cette compression. Par conséquent,
+\begin{equation}
+ q=\mathbf1^*K,\qquad m_0=D_3K,\qquad m_1=D_4T_3K,
+ \qquad MK=(m_0,m_1).
+ \label{eq:mem-data}
+\end{equation}
+L’ordre de la composition fait partie de l’objet. L’application
+\(M:\RR^{12}\to\RR^{24}\) conserve deux observations corrélées,
+produites par une même trajectoire linéaire.
+
+\begin{theorem}[Inversion exacte de la représentation de mémoire]
+\label{thm:memory-inversion}
+L'application \(K\mapsto(q,MK)\) est un isomorphisme linéaire entre \(\RR^{12}\) et \(\RR\times\operatorname{im}M\). Son inverse s'obtient au moyen de
+\begin{align}
+ T_3^{-1}&=\frac{512I-64\mathsf S^3+8\mathsf S^6-\mathsf S^9}{455},
+ \label{eq:memory-T-inverse}\\
+ b&=-\frac9{\sqrt8}m_0,\qquad
+ c=-\frac9{\sqrt8}T_3^{-1}m_1,\qquad w_i=c_i-b_{i+1},\notag\\
+ B_0&=0,\qquad B_i=\sum_{j=0}^{i-1}w_j,\qquad
+ K_i=\frac{q+\sum_{j=0}^{11}B_j}{12}-B_i.
+ \label{eq:memory-inverse}
+\end{align}
+\end{theorem}
+\begin{proof}
+En écrivant \(X=\mathsf S^3\), on a \(X^4=I\) et
+\((8I+X)(512I-64X+8X^2-X^3)=4095I\). La division par neuf
+prouve \eqref{eq:memory-T-inverse}. Tous les opérateurs utilisés sont des
+polynômes du même décalage et commutent. Ainsi,
+\[
+ b=(I-\mathsf S^3)K,\qquad c=(I-\mathsf S^4)K,
+ \qquad w_i=K_i-K_{i+1}.
+\]
+La somme télescopique donne \(B_i=K_0-K_i\) ; sommer cette égalité sur
+les douze positions fournit \eqref{eq:memory-inverse}. En outre,
+\(MK=0\) équivaut à l’invariance sous \(\mathsf S^3\) et
+\(\mathsf S^4\). Comme \(\mathsf S=\mathsf S^4(\mathsf S^3)^{-1}\),
+le noyau est exactement \(\RR\mathbf1\). La charge récupère cette
+composante et démontre l’injectivité. La décomposition
+\(K=(q/12)\mathbf1+K^\perp\) prouve la surjectivité sur le
+codomaine déclaré.
+\end{proof}
+
+La forme géométrique est déterminée par l'information qu'une lecture comprimée semblait avoir déplacée. Le complément vectoriel contient les différences entre positions ; la charge contient la composante commune. Leur réunion reconstruit les douze coordonnées avant leur normalisation en longueurs. Cette affirmation relie des opérations effectives : compression, archivage des compléments et inversion. La conservation d'une norme exprime une propriété distincte et, à elle seule, plus faible que cette récupérabilité.
+
+\subsection{Cône de mémoire compatible et stabilité des mineurs}
+
+Soit \(L\) la pseudo-inverse de \(M\), d’image
+\(\mathbf1^\perp\). De manière équivalente,
+\[
+ L=\left(M^*M\big|_{\mathbf1^\perp}\right)^{-1}M^*,
+ \qquad LM=P_{11},\qquad K=\frac q{12}\mathbf1+Lm.
+\]
+La notation d’inverse restreint s’interprète comme un opérateur à
+valeurs dans \(\mathbf1^\perp\). La positivité stricte du registre
+équivaut à l’appartenance au cône ouvert
+\begin{equation}
+ \mathcal M_+=\left\{(q,m)\in\RR\times\operatorname{im}M:
+ \frac q{12}\mathbf1+Lm>0\right\}.
+ \label{eq:memory-positive-cone}
+\end{equation}
+Les inégalités sont coordonnées. Le cône a dimension douze ; sa section
+à charge positive fixée a dimension onze. En particulier, les vingt-quatre
+entrées des deux mémoires satisfont des relations de compatibilité.
+
+\begin{proposition}[Constante optimale de reconstruction en norme euclidienne]
+\label{prop:memory-stability}
+On a \(\|L\|=9/4\). Pour des perturbations arbitraires des observations,
+\begin{equation}
+ \|\delta K\|^2\leq\frac{|\delta q|^2}{12}
+ +\frac{81}{16}\bigl(\|\delta m_0\|^2+\|\delta m_1\|^2\bigr).
+ \label{eq:memory-stability}
+\end{equation}
+\end{proposition}
+\begin{proof}
+La base de Fourier diagonalise \(\mathsf S\). Si \(z^{12}=1\), la valeur propre de \(M^*M\) dans le mode correspondant est
+\[
+ \lambda(z)=\frac8{81}|z^3-1|^2
+ +\frac8{81}|z^4-1|^2\left|\frac{8+z^3}{9}\right|^2.
+\]
+L’évaluation des douze modes donne
+\[
+ \operatorname{Spec}(M^*M)=
+ \left\{0^{[1]},(16/81)^{[2]},(8/27)^{[2]},(32/81)^{[1]},
+ (952/2187)^{[4]},(1256/2187)^{[2]}\right\}.
+\]
+Les exposants entre crochets indiquent la multiplicité. La plus petite valeur propre
+positive est \(16/81\), d’où \(\|L\|=9/4\). La composante uniforme
+\((\delta q/12)\mathbf1\) est orthogonale à \(L\delta m\) ; l’identité
+de Pythagore et la norme de \(L\) produisent \eqref{eq:memory-stability}.
+\end{proof}
+
+Pour passer à la géométrie des intervalles, nous reprenons la numérotation de un à douze
+et posons \(d_j=K_j/q\), \(t_0=0\),
+\(t_j=\sum_{r=1}^j d_r\). Le cône \eqref{eq:memory-positive-cone}
+détermine exactement \(0=t_0<t_1<\cdots<t_{12}=1\), et donc
+\[
+ \Delta_{ij}=t_j-t_i=\sum_{i<r\leq j}d_r>0\qquad(i<j).
+\]
+Ce sont les mineurs de la matrice de chemins construite dans la section \ref{app:network-cluster}. Leur dépendance à la mémoire est explicite. Les points \((t_j,t_j^2)\) sont également déterminés et produisent la réalisation amplituédrique de rang un développée ensuite.
+
+Si la racine du membre droit de \eqref{eq:memory-stability} est inférieure à \(\min_j K_j\), la reconstruction perturbée demeure dans le cône positif. Pour le registre exprimé, \(\min_jK_j=58\) ; à charge fixe, il suffit que
+\[
+ \sqrt{\|\delta m_0\|^2+\|\delta m_1\|^2}<\frac{232}{9}.
+\]
+La borne conserve l'ordre des sommets et le signe de tous les mineurs ordonnés. Elle décrit la stabilité de cette coordinatisation mathématique, avec la normalisation indiquée. Pour des observations hors de \(\operatorname{im}M\), la reconstruction utilise la projection \(MLm\) ; le résidu \((I-ML)m\) est conservé séparément lorsqu'il importe de restituer l'observation intégrale.
+
+\subsection{Récupération nodale et réduction à la frontière}
+
+La partition obtenue a également une réalisation quadratique :
+\[
+ \mathcal E_d(f)=\sum_{j=1}^{12}\frac{|f_j-f_{j-1}|^2}{d_j}
+ =f^*L_df.
+\]
+Le laplacien nodal récupère chaque longueur par \(d_j=-1/(L_d)_{j-1,j}\). Si seules les extrémités globales sont conservées, la minimisation élimine les nœuds intérieurs et produit, en revanche, la matrice \(\left(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\right)\),
+puisque \(\sum_jd_j=1\). Le lecteur nodal distingue la forme des intervalles ;
+le lecteur à deux extrémités n’observe que leur longueur totale.
+
+La démonstration de cette élimination est formulée intégralement dans la section
+énergétique : le prolongement affine minimisant \(Hf\) et le détail \(z\),
+nul aux anciens nœuds, vérifient
+\[
+ \mathcal E_{\widetilde d}(Hf+z)
+ =\mathcal E_d(f)+\mathcal E_{\widetilde d}(z).
+\]
+Le second terme est non négatif et s'annule exactement pour le détail nul. La lecture effective conserve l'énergie minimale ; la paire \((f,z)\) conserve en outre la configuration raffinée. Ainsi, positivité des mineurs, positivité énergétique et récupérabilité de la mémoire sont reliées au moyen d'applications définies sur la même partition, tout en maintenant leurs espaces d'arrivée respectifs.

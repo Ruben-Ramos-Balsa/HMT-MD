@@ -1,0 +1,551 @@
+\chapter{Inversion constitutiva and curva modular cargada}
+\label{rm:chap:curva-modular-reconstruccion}
+
+\section{The Spectral Completion from \(3\) to \(4\)}
+
+The vacuum operator of \cref{rm:ch:vacuum} is obtained by applying to the
+angular operator the function
+\begin{equation}
+ F(q):=\frac{1-q^{90}}{1-q^{120}},
+ \qquad 0<q<1.
+ \label{rm:eq:curve-Fq}
+\end{equation}
+The factorization of the two channels by the elementary mode \(30\),
+\begin{equation}
+ 90=3\cdot30,
+ \qquad
+ 120=4\cdot30,
+ \label{rm:eq:curve-90-120}
+\end{equation}
+allows \(s=q^{30}\) to be introduced and written as
+\begin{equation}
+ F(q)=f(s),
+ \qquad
+ f(s):=\frac{1+s+s^2}{1+s+s^2+s^3}.
+ \label{rm:eq:curve-fs}
+\end{equation}
+The numerator contains three consecutive stages of the mode, and the denominator
+incorporates the fourth. The completion defect is
+\begin{equation}
+ 1-f(s)=\frac{s^3}{1+s+s^2+s^3}>0.
+ \label{rm:eq:curve-completion-defect}
+\end{equation}
+Thus, the fourth stage is recorded as positive memory within the
+response.
+
+\begin{theorem}[Bijectivity of the response \(3\to4\)]
+\label{rm:thm:curve-F-bijection}
+The function \(F\) is a decreasing analytic diffeomorphism
+\begin{equation}
+ \boxed{F:(0,1)\xrightarrow{\;\sim\;}(3/4,1).}
+ \label{rm:eq:curve-F-range}
+\end{equation}
+for each \(r\in(3/4,1)\), the value \(q=F^{-1}(r)\) is obtained as
+\(q=s^{1/30}\), where \(s\in(0,1)\) is the root \emph{unique} of
+\begin{equation}
+ r s^3+(r-1)(1+s+s^2)=0.
+ \label{rm:eq:curve-inverse-cubic}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The derivative with respect to \(s\) is
+\begin{equation}
+ f'(s)
+ =-\frac{s^2(3+2s+s^2)}{(1+s+s^2+s^3)^2}<0
+ \qquad(0<s<1).
+ \label{rm:eq:curve-f-derivative}
+\end{equation}
+As \(\dd s/\dd q=30q^{29}>0\), tambiin \(F'(q)<0\). The limites are
+\[
+ \lim_{q\to0^+}F(q)=1,
+ \qquad
+ \lim_{q\to1^-}F(q)=\frac{90}{120}=\frac34.
+\]
+Continuity and strict monotonicity prove bijectivity; the derivative
+does not vanish on the interval, so the inverse function theorem
+proves analyticity. Multiplying
+\(r=(1+s+s^2)/(1+s+s^2+s^3)\) by the denominator produces
+\cref{rm:eq:curve-inverse-cubic}; uniqueness of its root in \((0,1)\) is
+equivalent to the injectivity already proved.
+\end{proof}
+
+The inverter \cref{rm:eq:curve-inverse-cubic} provides a numerical procedure that is
+intrinsic. A bisection on \((0,1)\) preserves the interval and
+certifies each digit; a Newton method can accelerate it using
+\cref{rm:eq:curve-f-derivative}. Decimal evaluation enters after
+fixing the equation and its root, which is unique.
+
+\section{Exact reconstruction of the angular state from the vacuum}
+
+Let
+\begin{equation}
+ T=q_+P_++q_-P_-,
+ \qquad
+ \mathcal V=F(T)=r_+P_++r_-P_-,
+ \qquad
+ r_\pm=F(q_\pm).
+ \label{rm:eq:curve-T-V}
+\end{equation}
+The two dimensionless constitutive quantities are assigned to the sheets through
+\begin{equation}
+ \widehat\varepsilon=r_+^2,
+ \qquad
+ \widehat\mu=r_-^2.
+ \label{rm:eq:curve-mu-epsilon}
+\end{equation}
+
+\begin{theorem}[Reconstruction constitutive reversible]
+\label{rm:thm:curve-vacuum-tomography}
+The complete constitutive response determines the angular antecedent. In the
+labeled spectral basis,
+\begin{align}
+ \boxed{q_+=F^{-1}(\sqrt{\widehat\varepsilon}),}
+ &\qquad
+ \boxed{q_-=F^{-1}(\sqrt{\widehat\mu}),}
+ \label{rm:eq:curve-recover-qpm}\\
+ \boxed{D_A=q_+q_-}
+ &=F^{-1}(\sqrt{\widehat\varepsilon})
+   F^{-1}(\sqrt{\widehat\mu}),
+ \label{rm:eq:curve-recover-DA}\\
+ \boxed{A_{\rm rad}=-\frac12\log D_A,}
+ &\qquad
+ \boxed{C^*_{\rm rad}=\frac12\log\frac{q_-}{q_+}.}
+ \label{rm:eq:curve-recover-A-C}
+\end{align}
+If the operator \(\mathcal V\) is known, rather than its two labelled
+eigenvalues, the reconstruction takes the form of functional calculus
+\begin{equation}
+ \boxed{T=F^{-1}(\mathcal V).}
+ \label{rm:eq:curve-functional-inverse}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The eigenvalues of \(\mathcal V\) belong to \((3/4,1)\), and the positive root of each constitutive relation is \(r_\pm\). The \cref{rm:thm:curve-F-bijection} provides a unique \(q_\pm\) for each sheet. The formulas of \(D_A,A_{\rm rad},C^*_{\rm rad}\) are the inverses of \cref{rm:eq:modular-determinant-ratio}. For the operator form, the spectral theorem applies the continuous function \(F^{-1}\) to the spectrum of \(\mathcal V\).
+\end{proof}
+
+When only the two numbers
+\((\widehat\mu,\widehat\varepsilon)\) are retained, the assignment to sheets is part
+of the typed data. The operator \(\mathcal V\) also contains its
+spectral projectors and reconstructs the full representation. This
+distinction separates spectral reconstruction from the choice of a
+basis.
+
+The remaining readings are recovered simultaneously:
+\begin{equation}
+ \widehat Z=\frac{r_-}{r_+}
+ =\sqrt{\frac{\widehat\mu}{\widehat\varepsilon}},
+ \qquad
+ \widehat c=\frac1{r_-r_+}
+ =\frac1{\sqrt{\widehat\mu\widehat\varepsilon}}.
+ \label{rm:eq:curve-recover-Z-c}
+\end{equation}
+The product of the sheets publishes the common
+propagation; the quotient publishes constitutive
+orientation. Under \(C^*\mapsto-C^*\), the two constitutive quantities
+are exchanged, \(\widehat Z\) is inverted, and \(\widehat c\) remains fixed.
+
+\begin{corollary}[Electroweak cross-check]
+\label{rm:cor:curve-weak-control}
+At the angular interface where
+\((m_W^{\angle}/m_Z^{\angle})^2=D_A\), the reconstruction of the vacuum
+implies
+\begin{equation}
+ \boxed{
+ \sin^2\theta_W^{\rm OS,HMT}
+ =1-F^{-1}(\sqrt{\widehat\varepsilon})
+      F^{-1}(\sqrt{\widehat\mu}).}
+ \label{rm:eq:curve-weak-from-vacuum}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The \cref{rm:thm:curve-vacuum-tomography} reconstructs \(D_A\). The stated angular
+interface defines
+\(\sin^2\theta_W^{\rm OS}=1-(m_W/m_Z)^2=1-D_A\).
+\end{proof}
+
+The equation \cref{rm:eq:curve-weak-from-vacuum} is a consistency check between sister
+readers. The causal genealogy continues from \(T\): the vacuum
+applies \(F(T)\), and the electroweak reader applies \(\det T\). The
+invertibility of \(F\) permits comparison of the two publications without
+making either one the foundation of the other.
+
+\section{The loaded modular curve}
+
+The identity
+\begin{equation}
+ D_A=\exp\!\left(-\frac{100\pi}{9}\alpha_{\HMT}\right)
+ \label{rm:eq:curve-D-alpha}
+\end{equation}
+suggests using the determinant as a global coordinate of the family. For
+\(D\in(0,1)\), we define
+\begin{equation}
+ \boxed{
+ Q(D):=-\frac9{25}\log D,}
+ \qquad
+ a(D):=\frac{Q(D)}{4\pi}
+ =-\frac9{100\pi}\log D.
+ \label{rm:eq:curve-Q-a}
+\end{equation}
+At the HMT point, \(a(D_A)=\alpha_{\HMT}\) and
+\begin{equation}
+ \boxed{Q(D_A)=4\pi\alpha_{\HMT}=:e_g^2.}
+ \label{rm:eq:curve-Q-gauge}
+\end{equation}
+The symbol \(Q(D)\) here designates the dimensionless charged coupling;
+it is distinct from every dimensional section of charge or energy.
+
+To make the regional reader self-contained, we introduce the quintic
+character
+\begin{equation}
+ \begin{aligned}
+ H_5(a):={}&\frac12\sqrt{\frac{1000a}{\varphi_{\HMT}}}-a
+ +\frac9{16}a^2-\frac59a^3
+ +\frac7{48}a^4-\frac1{54}a^5,
+ \end{aligned}
+ \label{rm:eq:curve-H5}
+\end{equation}
+the regional germ
+\begin{equation}
+ \mathcal C_\pi(a,D)
+ :=169a^6+\frac{Da^7}{1-Da},
+ \label{rm:eq:curve-Cpi}
+\end{equation}
+and the oriented phase
+\begin{equation}
+ y(D):=\frac{\pi}{90}\bigl(H_5(a(D))+a(D)\bigr)
+ -\mathcal C_\pi(a(D),D).
+ \label{rm:eq:curve-yD}
+\end{equation}
+The selector \(169\), the finite term of degree six, and
+the geometric prolongation of degree seven retain
+their regional provenance. The condition \(0<Da(D)<1\)
+guarantees convergence of the germ.
+
+We define the oriented quotient.
+\begin{equation}
+ \varrho_{\rm or}(D):=\ee^{2y(D)}
+ \label{rm:eq:curve-rho-or}
+\end{equation}
+and the admissible interval
+\begin{equation}
+ \mathcal I_{\rm mod}:=
+ \left\{D\in(0,1):
+ 0<Da(D)<1,
+ \ |y(D)|<-\frac12\log D
+ \right\}.
+ \label{rm:eq:curve-domain}
+\end{equation}
+The second inequality ensures that the two reconstructed channels are strict contractions.
+
+\begin{definition}[Modular curve loaded]
+\label{rm:def:charged-modular-curve} The charged modular curve is the map
+\begin{equation}
+ \Gamma_{\rm ch}:\mathcal I_{\rm mod}\longrightarrow(0,1)\times\R_{>0},
+ \qquad
+ \boxed{\Gamma_{\rm ch}(D)=\bigl(D,\varrho_{\rm or}(D)\bigr).}
+ \label{rm:eq:curve-Gamma}
+\end{equation}
+On it,
+\begin{equation}
+ q_-(D)=\sqrt{D\varrho_{\rm or}(D)},
+ \qquad
+ q_+(D)=\sqrt{\frac{D}{\varrho_{\rm or}(D)}}.
+ \label{rm:eq:curve-qD}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Functional rank one]
+\label{rm:thm:curve-rank-one}
+The curve \(\Gamma_{\rm ch}\) is an analytic immersion of rank one.
+The generic space of positive bilayer contractions requires two
+independent coordinates \((D,\varrho_{\rm or})\); the HMT reader restricts
+that space to the graph \(\varrho_{\rm or}=\varrho_{\rm or}(D)\).
+Moreover,
+\begin{equation}
+ A_{\rm rad}(D)=-\frac12\log D
+ =\frac{50\pi}{9}a(D),
+ \qquad
+ C^*_{\rm rad}(D)=y(D).
+ \label{rm:eq:curve-A-C-D}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The functions of \cref{rm:eq:curve-Q-a,rm:eq:curve-H5,rm:eq:curve-Cpi,rm:eq:curve-yD}
+are analytic on \(\mathcal I_{\rm mod}\). The first component of
+\(\Gamma_{\rm ch}'(D)\) is one, so the derivative never vanishes and its rank
+is one. The identities \cref{rm:eq:curve-A-C-D} follow directly from the
+definitions. Finally, the product and quotient of
+\cref{rm:eq:curve-qD} are \(D\) and \(\varrho_{\rm or}(D)\), respectively.
+\end{proof}
+
+The resolvent family of the chapter previous is restricted to the same curve:
+\begin{equation}
+ \mathfrak M_D(z)
+ :=Q(D)^{-1}\bigl(zI-T(D)\bigr)^{-1},
+ \qquad
+ T(D)=q_+(D)P_++q_-(D)P_-.
+ \label{rm:eq:curve-resolvent-D}
+\end{equation}
+At the point \(D_A\), the equality \(Q(D_A)=4\pi\mathfrak A_\beta\)
+identifies \(\mathfrak M_D\) with \(\mathfrak M_\beta\). The coupling,
+intensity, orientation, and vacuum are thus coordinated by a
+single genealogical variable, while their reader functions remain
+typed.
+
+\section{Confluence between vacuum, Higgs and impedance}
+
+The vacuum reader publishes along the curve
+\begin{align}
+ \widehat\mu(D)&=F(q_-(D))^2,
+ &\widehat\varepsilon(D)&=F(q_+(D))^2,
+ \label{rm:eq:curve-vacuum-D}\\
+ \widehat Z(D)&=\frac{F(q_-(D))}{F(q_+(D))},
+ &\widehat c(D)&=\frac1{F(q_-(D))F(q_+(D))}.
+ \label{rm:eq:curve-Z-c-D}
+\end{align}
+By the injectivity of \(F\), either complete operator pair
+reconstructs \((D,\varrho_{\rm or})\).
+
+The Higgs angular route contains the orientation through
+\begin{equation}
+ \frac{m_H^{\angle}}{m_W^{\angle}}
+ =\exp\!\left(3A_{\rm rad}+\frac53C^*_{\rm rad}\right).
+ \label{rm:eq:curve-HW-ratio}
+\end{equation}
+In the tree interface with
+\(m_H^2=2\lambda_Hv^2\) and \(m_W^2=g^2v^2/4\), this identity is equivalent to
+\begin{equation}
+ \lambda_H
+ =\frac{Q(D)}{8(1-D)}D^{-3}
+  \varrho_{\rm or}(D)^{5/3}.
+ \label{rm:eq:curve-lambda-H}
+\end{equation}
+Therefore, the scalar
+\begin{equation}
+ \Xi_H(D,\lambda_H)
+ :=\frac{8(1-D)D^3\lambda_H}{Q(D)}
+ \label{rm:eq:curve-Xi-H}
+\end{equation}
+satisfies
+\begin{equation}
+ \boxed{
+ \Xi_H=\varrho_{\rm or}^{5/3},
+ \qquad
+ \varrho_{\rm or}=\Xi_H^{3/5}.}
+ \label{rm:eq:curve-Higgs-rho}
+\end{equation}
+
+\begin{corollary}[Higgs--impedance reconstruction]
+\label{rm:cor:curve-Higgs-impedance}
+Under the declared tree-level interface and for \(\Xi_H>0\),
+\begin{equation}
+ \boxed{
+ \widehat Z
+ =\frac{
+ F\!\left(\sqrt D\,\Xi_H^{3/10}\right)}
+ {F\!\left(\sqrt D\,\Xi_H^{-3/10}\right)}.}
+ \label{rm:eq:curve-Higgs-Z}
+\end{equation}
+The same quotient orientado is reconstructed by three vias:
+\begin{equation}
+ \varrho_{\rm or}^{\rm HMT}(D)
+ =\frac{F^{-1}(\sqrt{\widehat\mu})}
+        {F^{-1}(\sqrt{\widehat\varepsilon})}
+ =\Xi_H(D,\lambda_H)^{3/5}.
+ \label{rm:eq:curve-triple-confluence}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The equation \cref{rm:eq:curve-Higgs-rho} gives
+\(q_-=\sqrt D\,\Xi_H^{3/10}\) and
+\(q_+=\sqrt D\,\Xi_H^{-3/10}\). Substituting them in
+\(\widehat Z=F(q_-)/F(q_+)\) proves \cref{rm:eq:curve-Higgs-Z}. The second
+equality of \cref{rm:eq:curve-triple-confluence} is
+\cref{rm:eq:curve-Higgs-rho}; the first proceeds of the
+\cref{rm:thm:curve-vacuum-tomography}.
+\end{proof}
+
+The substitution of \(\lambda_H\) obtained from
+\cref{rm:eq:curve-lambda-H} turns
+\cref{rm:eq:curve-triple-confluence} into an algebraic consistency identity.
+A determination of \(\lambda_H\) from an independent reader turns
+the same equation into a falsifiable cross-check of the orientation. This
+separation prevents the attribution of probative independence to a mere inversion of
+the starting equation.
+
+The gauge partition also assumes a form determined purely
+by \(D\):
+\begin{equation}
+ g^2=\frac{Q(D)}{1-D},
+ \qquad
+ g'^2=\frac{Q(D)}D,
+ \qquad
+ \boxed{
+ \frac1{g^2}+\frac1{g'^2}=\frac1{Q(D)}
+ =-\frac{25}{9\log D}.}
+ \label{rm:eq:curve-gauge-harmonic}
+\end{equation}
+The total coupling \(Q(D)\) is apportioned between the two gauge sectors,
+and the harmonic sum exactly recovers the charged macro-object.
+
+\section{Compatible causal section matching with orientation and boundary data}
+
+The coupling \(Q(D)\) should be distinguished from the Planck energy,
+which we shall denote by \(\mathcal Q_P=E_P\). The Planck pair defines an
+internal velocity
+\begin{equation}
+ c_{\rm int}:=\frac{\mathcal Q_P\ell_P}{\hbar},
+ \label{rm:eq:curve-c-int}
+\end{equation}
+while the constitutive operator defines
+\begin{equation}
+ c_{\rm vac}:=\frac1{\sqrt{\mu_{\rm vac}\varepsilon_{\rm vac}}}.
+ \label{rm:eq:curve-c-vac}
+\end{equation}
+Both expressions live in typed causal curves. A sewing morphism
+\begin{equation}
+ J_C:L_C^{\rm vac}\longrightarrow L_C^{\rm grav}
+ \label{rm:eq:curve-JC}
+\end{equation}
+allows their comparison, and their dimensionless defect is
+\begin{equation}
+ \boxed{
+ \Xi_c
+ :=\frac{\mathcal Q_P\ell_P}{\hbar}
+   \sqrt{\mu_{\rm vac}\varepsilon_{\rm vac}}
+ =\frac{c_{\rm int}}{c_{\rm vac}}.}
+ \label{rm:eq:curve-Xi-c}
+\end{equation}
+
+\begin{criterion}[Causal seam]
+\label{rm:crit:curve-causal-seam}
+The electromagnetic vacuum and the gravitational realization publish the
+same causal section exactly when
+\begin{equation}
+ \boxed{\Xi_c=1,}
+ \qquad
+ J_C(c_{\rm vac})=c_{\rm int}.
+ \label{rm:eq:curve-Xi-one}
+\end{equation}
+\end{criterion}
+
+Once this seam is satisfied, the CT108 identity
+\(
+G=(54/\pi)^2c^5t_0^2/\hbar
+\)
+is expressed entirely through the constitutive product:
+\begin{equation}
+ \boxed{
+ G=\left(\frac{54}{\pi}\right)^2
+ \frac{t_0^2}
+ {\hbar(\mu_{\rm vac}\varepsilon_{\rm vac})^{5/2}}.}
+ \label{rm:eq:curve-G-from-vacuum}
+\end{equation}
+Gravity uses the even product of the leaves; impedance and charge
+use the oriented quotient
+\begin{equation}
+ Z_{\rm vac}^2=\frac{\mu_{\rm vac}}{\varepsilon_{\rm vac}}.
+ \label{rm:eq:curve-Z-oriented}
+\end{equation}
+The pair product--quotient distributes, therefore, causality and orientation
+without disaggregating the spectral antecedent.
+
+\section{Stable reconstruction in the UHF tower}
+
+Let \(\tau_m=\tau_2\otimes\tau_{9^m}\) be the normalized trace of
+\(\mathcal A_m=M_2\otimes M_{9^m}\), and let
+\begin{equation}
+ T_m=T\otimes I_{9^m},
+ \qquad
+ \mathcal V_m=F(T_m)=\mathcal V\otimes I_{9^m}.
+ \label{rm:eq:curve-UHF-TV}
+\end{equation}
+Functional inversion commutes with refinement:
+\begin{equation}
+ F^{-1}(\mathcal V_m)=T_m,
+ \qquad
+ E_m(\mathcal V_{m+1})=\mathcal V_m,
+ \qquad
+ E_m(T_{m+1})=T_m.
+ \label{rm:eq:curve-UHF-inversion}
+\end{equation}
+
+The ordinary matrix determinant of \(T_m\) is \(D_A^{9^m}\). The
+invariant compatible with refinement is the normalized logarithmic
+determinant
+\begin{equation}
+ \boxed{
+ \mathfrak d_m(T_m)
+ :=\exp\!\left(2\tau_m(\log T_m)\right)=D_A.}
+ \label{rm:eq:curve-normalized-determinant}
+\end{equation}
+The orientation admits the equally stable prolongation
+\begin{equation}
+ \boxed{
+ \mathfrak r_m(T_m,R_m)
+ :=\exp\!\left(-2\tau_m(R_m\log T_m)\right)
+ =\varrho_{\rm or},}
+ \qquad
+ R_m=R\otimes I_{9^m}.
+ \label{rm:eq:curve-normalized-orientation}
+\end{equation}
+
+\begin{proposition}[Stability of reconstruction at every depth]
+\label{rm:prop:curve-UHF-tomography}
+For every \(m\), the pair
+\begin{equation}
+ \left(
+ \mathfrak d_m(F^{-1}(\mathcal V_m)),
+ \mathfrak r_m(F^{-1}(\mathcal V_m),R_m)
+ \right)
+ \label{rm:eq:curve-UHF-pair}
+\end{equation}
+equals \((D_A,\varrho_{\rm or})\). Consequently, it reconstructs the same coordinates \(A_{\rm rad}\) and \(C^*_{\rm rad}\) at every level and in the UHF limit.
+\end{proposition}
+
+\begin{proof}
+Since
+\(\log T_m=(\log T)\otimes I_{9^m}\), the normalized trace eliminates the
+amplification factor. Moreover,
+\[
+ \tau_2(\log T)=\frac12(\log q_++\log q_-)=\frac12\log D_A
+\]
+and
+\[
+ \tau_2(R\log T)=-y=-\frac12\log\varrho_{\rm or}.
+\]
+The equations \cref{rm:eq:curve-normalized-determinant,rm:eq:curve-normalized-orientation}
+follow upon exponentiation. Functional inversion of
+\cref{rm:eq:curve-UHF-inversion} completes the reconstruction.
+\end{proof}
+
+This formulation shows that the completion \(3\to4\) preserves its
+reconstructive capacity at every depth. The nonadic cylinders
+increase the resolution of the state; the normalized determinant,
+orientation, response, and modular curve remain natural with respect
+to the expectations.
+
+\section{Separation between internal quantum identities, physical interfaces, and reconstruction obstructions}
+
+\begin{proofstatusbox}
+The monotonicity and bijectivity of \(F\), the operatorial inversion, the
+reconstruction \((q_+,q_-,D_A,C^*)\), the rank one of
+\(\Gamma_{\rm ch}\), the harmonic gauge identity, and UHF stability
+are exact results. The charged modular curve formalizes a pre-existing
+authorial architecture with explicit starting structure: closure of
+\(\alpha_{\HMT}\), regional selector \(169\), character \(H_5\), germ
+\(\mathcal C_\pi\), and orientation. The
+Higgs--impedance equality is exact within the tree interface; it constitutes an
+independent proof only when \(\lambda_H\) follows from a distinct reader.
+The condition \(\Xi_c=1\) and the subsequent gravitational equation
+are a typed physical interface whose promotion requires the morphism \(J_C\).
+\end{proofstatusbox}
+
+\begin{falsifierbox}
+The reconstruction is refuted if \(F'(q)\) changes sign in \((0,1)\), if the cubic equation admits two roots in that interval, if \(F^{-1}(\mathcal V)\) does not recover \(T\), or if the constitutive relations reconstruct a product different from \(D_A\). The curve is refuted if \(Q(D_A)\ne4\pi\alpha_{\HMT}\), if its derivative loses rank, if \(q_\pm(D)\) leaves \((0,1)\) within the declared domain, or if the three reconstructions of \(\varrho_{\rm or}\) in \cref{rm:eq:curve-triple-confluence} disagree under the same normalization. The causal seam is refuted by \(\Xi_c\ne1\) after applying the line morphism. In the tower, using the ordinary determinant as though it were invariant would produce \(D_A^{9^m}\); the correct control requires \cref{rm:eq:curve-normalized-determinant}.
+\end{falsifierbox}

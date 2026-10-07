@@ -1,0 +1,312 @@
+\ifdefined\HMTIncludeParticleCore
+\chapter{Secciones persistentes y propagación finita}
+\label{chap:particula}
+
+La noción matemática de partícula se introduce después de la estructura de
+frontera y antes de especializar su dinámica. Su soporte primario es una
+extensión superviviente del sistema de estados TPK\@. Una trayectoria
+orientada es la sombra secuencial de esa extensión; sobre ella, los grados
+internos forman un fibrado discreto. El propagador, la suma de caminos y las
+representaciones de Clifford se incorporan después de construir la recta de
+acción. Esta jerarquía impide que una partícula se defina mediante la elección
+externa de una fila o de una ruta y separa el objeto matemático de su posterior
+identificación con una especie física.
+
+\section{Extensión superviviente y proyección observable}
+
+Sea \((\mathcal S_m,\rho_{m+1,m})\) el sistema inverso de estados que
+superan los cierres hasta profundidad \(m\). Un estado global es una familia
+compatible
+\[
+ x=(x_m)_m\in\Omega_{\HMT}^{\rm surv}
+ :=\varprojlim_m\mathcal S_m.
+\]
+Una carta secuencial de profundidad \(R\) produce una ruta
+\[
+ \gamma_x^{[R]}=\operatorname{sh}_R(x)
+ =(c_0\longrightarrow\cdots\longrightarrow c_R).
+\]
+El símbolo \(\operatorname{sh}\) denota una lectura de sombra: diferentes
+cartas pueden presentar un mismo estado global, mientras conserven hoja,
+orientación, borde y registro. En el
+\cref{chap:extension-ruta-caracter} se construye el registro enriquecido que
+hace descender el carácter de acción desde estas presentaciones a la
+extensión.
+
+\section{Partícula como sección compatible de un fibrado discreto}
+
+Sea \(\Gamma_{\rm TPK}\) el grafo cuyos vértices son estados completos del
+núcleo de fase topológica y cuyas aristas son transformaciones admisibles.
+Para \(x\in\Omega_{\HMT}^{\rm surv}\) y su trayectoria observada
+\[
+ \gamma_x=(c_0\longrightarrow c_1\longrightarrow\cdots
+ \longrightarrow c_R),
+\]
+sea \(\operatorname{Typ}(c_t)\) el conjunto finito de tipos aritméticos,
+orientaciones y memorias sobre el estado \(c_t\), y sea
+\(E_{c_t}=\mathbb C[\operatorname{Typ}(c_t)]\) el espacio vectorial complejo
+libre generado por esos tipos. El fibrado discreto restringido a \(\gamma_x\) es
+\[
+ \mathcal B_{\gamma_x}=\bigsqcup_{t=0}^{R}E_{c_t}
+ \longrightarrow\{0,\ldots,R\}.
+\]
+Cada arista \(c_t\to c_{t+1}\) induce una aplicación lineal de transporte
+\(\tau_t:E_{c_t}\to E_{c_{t+1}}\).
+
+\begin{definition}[Partícula matemática]
+Una partícula de Mecánica Dimensional es una tupla
+\[
+ \mathfrak p=(x,\gamma_x,\mathcal B_{\gamma_x},s,n,U),
+\]
+donde \(x\in\Omega_{\HMT}^{\rm surv}\) es la extensión superviviente y
+\(\gamma_x=\operatorname{sh}_R(x)\) su sombra en la carta declarada; además,
+\[
+ s:\{0,\ldots,R\}\longrightarrow\mathcal B_{\gamma_x},\qquad
+ s(t)\in E_{c_t},\qquad s(t+1)=\tau_t(s(t)),
+\]
+es una sección compatible;
+\[
+ n:\bigsqcup_{t=0}^{R}\operatorname{Modes}(E_{c_t})
+ \longrightarrow\mathbb N
+\]
+es su función de ocupación, donde
+\(\operatorname{Modes}(E_{c_t}):=\operatorname{Typ}(c_t)\) denota la base
+distinguida del espacio vectorial libre; y
+\[
+ U_{t_2,t_1}:E_{c_{t_1}}\longrightarrow E_{c_{t_2}}
+\]
+es una familia de propagadores lineales que entrelaza los transportes,
+\(U_{t,t}=\operatorname{id}_{E_{c_t}}\),
+\(U_{t+1,t}=\tau_t\), y satisface
+\[
+ U_{t_3,t_2}\circ U_{t_2,t_1}=U_{t_3,t_1}
+ \qquad(0\leq t_1\leq t_2\leq t_3\leq R).
+\]
+Cada composición está definida entre las fibras correspondientes.
+La identificación de \(\mathfrak p\) con una especie
+física requiere, además, una representación del grupo de simetría pertinente
+y un mapa desde estados HMT hacia los estados de dicha representación.
+\end{definition}
+
+La extensión conserva la genealogía y el registro; la ruta expone su lectura
+ordenada; los grados internos pertenecen a las fibras, la ocupación a \(n\) y
+la evolución a \(U\). La partícula es la compatibilidad de estos niveles, no
+uno de ellos por separado. En particular, la ruta no es escogida por la
+partícula: es una proyección de la extensión que la realiza.
+\fi
+
+\ifdefined\HMTIncludeParticleQuantum
+\section{Expansión matricial como suma finita de caminos}
+\index{camino!expansión matricial finita}
+
+\begin{theorem}[Expansión matricial como suma finita de caminos]
+Sea \(U\) una matriz indexada por un conjunto finito de estados. Para
+\(R\geq1\),
+\[
+ (U^R)_{fi}
+ =\sum_{\substack{\gamma:i\to f\\|\gamma|=R}}
+ \prod_{\ell\in\gamma}U_\ell.
+\]
+\end{theorem}
+\begin{proof}
+La multiplicación matricial proporciona
+\[
+ (U^R)_{fi}=\sum_{x_1,\ldots,x_{R-1}}
+ U_{fx_{R-1}}\cdots U_{x_2x_1}U_{x_1i}.
+\]
+Cada tupla de índices intermedios determina una trayectoria de longitud \(R\),
+y cada trayectoria aparece una vez. La igualdad es enteramente finita; no
+presupone un límite funcional ni una integral de caminos continua
+\cite{Feynman1948}.
+\end{proof}
+
+La identidad anterior es una expansión matricial finita exacta: compone los
+pesos ordenados de historias HMT ya construidas. Cuando \(U\) realiza un
+operador de evolución, esta expansión proporciona el antecedente discreto de
+la suma de caminos de Feynman. El paso desde la suma finita hasta una integral
+sobre genealogías y, después, hasta un propagador físico se formula por
+separado en la \cref{sec:integral-genealogica-caminos-rev2}.
+
+\begin{corollary}[Amplitud global de la banda finita]
+\label{cor:amplitud-global-banda-finita}
+Sea \(X\) el conjunto finito de estados, sea
+\(\psi_0\in\mathbb C^X\) y defínase \(\psi_R=U^R\psi_0\). Entonces, para
+cada estado final \(f\),
+\[
+ \psi_R(f)
+ =\sum_{i\in X}
+   \sum_{\substack{\gamma:i\to f\\|\gamma|=R}}
+   w_U(\gamma)\,\psi_0(i),
+ \qquad
+ w_U(\gamma):=
+ \prod_{t=1}^{R}U_{x_t x_{t-1}}.
+\]
+Si \(U\) es unitario, además,
+\[
+ \|\psi_R\|_2=\|\psi_0\|_2.
+\]
+\end{corollary}
+
+\begin{proof}
+La primera identidad resulta de aplicar el teorema anterior a cada
+coeficiente de
+\[
+ (U^R\psi_0)(f)=\sum_{i\in X}(U^R)_{fi}\psi_0(i).
+\]
+Si \(U\) es unitario, también lo es \(U^R\), y la segunda igualdad se sigue
+de la invariancia de la norma hermítica.
+\end{proof}
+
+El vector \(\psi_R=U^R\psi_0\) es la función de onda HMT a profundidad finita
+\(R\) sobre el espacio discreto de estados declarado. Cada componente
+\(\psi_R(f)\) suma coherentemente las amplitudes de todas las historias que
+terminan en \(f\). Si \(U\) es unitario, la norma total se conserva. La
+realización como función de onda de una especie física concreta consiste
+después en especificar la representación que identifica ese espacio HMT, su
+propagador y sus observables con el sector físico correspondiente.
+
+\section{Representación real de Clifford y realificación de Dirac}
+\label{sec:dirac-real-hmt-md}
+\index{Dirac!realificación}\index{Clifford!representación real}
+\index{función de onda!amplitud global finita}
+
+Conviene separar dos resultados algebraicos. El primero exhibe una
+representación real de la relación de Clifford lorentziana. El segundo
+realifica cualquier ecuación compleja de Dirac que haya sido fijada de
+antemano. Ninguno selecciona por sí solo la derivada covariante, la conexión,
+el espacio físico de espinores ni la masa.
+
+Sean
+\[
+ I_2=\begin{pmatrix}1&0\\0&1\end{pmatrix},
+ \qquad
+ J_2=\begin{pmatrix}0&1\\-1&0\end{pmatrix},
+ \qquad
+ R_2=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+ \qquad
+ Z_2=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+Estas matrices satisfacen
+\[
+ J_2^2=-I_2,\qquad R_2^2=Z_2^2=I_2,
+\]
+y anticonmutan dos a dos.
+
+\begin{theorem}[Representación real explícita de
+\(\mathrm{Cl}(3,1)\)]
+\label{thm:clifford-real-31}
+Las matrices reales
+\[
+ \gamma_0=J_2\otimes I_2,\qquad
+ \gamma_1=R_2\otimes I_2,\qquad
+ \gamma_2=Z_2\otimes R_2,\qquad
+ \gamma_3=Z_2\otimes Z_2
+\]
+verifican
+\[
+ \gamma_\mu\gamma_\nu+\gamma_\nu\gamma_\mu
+ =2\eta_{\mu\nu}I_4,
+ \qquad
+ \eta=\operatorname{diag}(-1,1,1,1).
+\]
+Por consiguiente, determinan una representación real de
+\(\mathrm{Cl}(3,1)\cong M_4(\mathbb R)\).
+\end{theorem}
+
+\begin{proof}
+Los cuadrados de los productos de Kronecker dan
+\(\gamma_0^2=-I_4\) y \(\gamma_k^2=I_4\) para \(k=1,2,3\).
+Para índices distintos, la anticomutación de \(J_2,R_2,Z_2\), o la de
+los segundos factores \(R_2,Z_2\) cuando los primeros coinciden, anula el
+anticomutador. Éstas son exactamente las relaciones universales que definen
+el álgebra de Clifford de signatura \((-+++)\).
+\end{proof}
+
+Para enunciar el segundo resultado sin identificar objetos de dominios
+distintos, sea \(A=A_1+\mathrm iA_2\in M_n(\mathbb C)\), con
+\(A_1,A_2\in M_n(\mathbb R)\), y defínase
+\[
+ \rho_{\rm sp}(A):=
+ \begin{pmatrix}
+  A_1&-A_2\\
+  A_2&A_1
+ \end{pmatrix},
+ \qquad
+ J_{\rm sp}:=\rho_{\rm sp}(\mathrm iI_n)
+ =\begin{pmatrix}
+  0&-I_n\\
+  I_n&0
+ \end{pmatrix}.
+\]
+
+\begin{theorem}[Realificación exacta de una ecuación de Dirac fijada]
+\label{thm:realificacion-dirac}
+La aplicación \(\rho_{\rm sp}\) es un homomorfismo real inyectivo y satisface
+\[
+ \rho_{\rm sp}(AB)=\rho_{\rm sp}(A)\rho_{\rm sp}(B),
+ \qquad
+ \rho_{\rm sp}(A^\dagger)=\rho_{\rm sp}(A)^{\mathsf T},
+ \]
+\[
+ J_{\rm sp}^{\,2}=-I_{2n},
+ \qquad
+ [J_{\rm sp},\rho_{\rm sp}(A)]=0.
+\]
+Sean \(\gamma^\mu\in M_n(\mathbb C)\) una representación compleja de
+Clifford, \(D_\mu\) operadores complejos lineales ya fijados y
+\(\Psi=(\operatorname{Re}\psi,\operatorname{Im}\psi)^{\mathsf T}\) la
+realificación de \(\psi\). Supóngase que cada \(D_\mu\) es complejo lineal y
+compatible con esta realificación. Entonces
+\[
+ \bigl(\mathrm i\gamma^\mu D_\mu-mI_n\bigr)\psi=0
+\]
+es equivalente a
+\[
+ \rho_{\rm sp}\!\left[
+  \bigl(\mathrm i\gamma^\mu D_\mu-mI_n\bigr)\psi
+ \right]=0
+ \quad\Longleftrightarrow\quad
+ \bigl(
+ J_{\rm sp}\rho_{\rm sp}(\gamma^\mu D_\mu)
+ -mI_{2n}
+ \bigr)\Psi=0,
+\]
+y, por multiplicatividad,
+\[
+ \bigl(
+ J_{\rm sp}\Gamma^\mu D_\mu^{\mathbb R}
+ -mI_{2n}
+ \bigr)\Psi=0,
+ \qquad
+ \Gamma^\mu:=\rho_{\rm sp}(\gamma^\mu),
+\]
+donde \(D_\mu^{\mathbb R}\) es la realificación de \(D_\mu\).
+Para \(n=4\), esta segunda construcción actúa en dimensión real ocho; no es
+la representación real irreducible de dimensión cuatro del teorema anterior.
+\end{theorem}
+
+\begin{proof}
+La multiplicación por bloques demuestra directamente que
+\(\rho_{\rm sp}\) preserva sumas, productos, adjuntos y la identidad, y que
+su núcleo es nulo. La matriz \(J_{\rm sp}\) representa la multiplicación compleja por
+\(\mathrm i\); por ello su cuadrado es \(-I_{2n}\) y conmuta con todo
+operador complejo lineal realificado. Aplicar \(\rho_{\rm sp}\) al operador
+\(\mathrm i\gamma^\mu D_\mu-mI_n\) produce exactamente el operador real del
+enunciado, de modo que ambos núcleos se corresponden bajo
+\(\psi\mapsto\Psi\).
+\end{proof}
+
+La raíz ternaria
+\(J_W\in\operatorname{End}_{\mathbb F_3}(\mathbb F_3^6)\) construida en
+\cref{chap:algebras-cuadraticas-orden-nueve} y la estructura
+\(J_{\rm sp}\) sobre un espacio espinorial real son objetos distintos.
+Comparten la relación polinómica \(X^2+1=0\), pero no se identifican sin un
+entrelazador que cambie correctamente de dominio y de escalares.
+
+La expansión finita de caminos, el
+\cref{cor:amplitud-global-banda-finita,thm:clifford-real-31,%
+thm:realificacion-dirac} son resultados algebraicos exactos. Juntos
+distinguen expansión de caminos, representación real de
+\(\mathrm{Cl}(3,1)\) y realificación de una ecuación compleja de Dirac: tres
+objetos coordinados, pero no intercambiables.
+\fi

@@ -1,0 +1,1253 @@
+\chapter{État commun, arbre des prolongements et mesure généalogique}
+\label{chap:continuo-estado-arbol-medida-comun}
+
+\begin{thesisbox}[title={Un seul état enrichi avant toute discrimination interne}]
+L'objet de ce chapitre est l'état fini complet produit par \(\APP\), orienté par TRIT et transporté par \(\TPK\). À partir de lui se construisent le groupoïde des symétries réversibles, l'arbre de tous les prolongements admissibles, la multisection des histoires complètes et sa mesure canonique. Aucun domaine spécialisé n'est introduit : le domaine est l'ensemble total des états effectivement engendrés par le même mécanisme \(\APP\)--TRIT--\(\TPK\). On ne sélectionne pas non plus un feuillet, une continuation ou une lecture ultérieure.
+\end{thesisbox}
+
+\section{Données finies produites par APP}
+\label{sec:continuo-comun-app-finito}
+
+Pour chaque profondeur \(k\geq0\), nous notons \(\mathsf A_k\) l'ensemble fini des préfixes cellulaires produits par APP, et
+\begin{equation}
+\label{eq:continuo-comun-app-truncamiento}
+ \rho^{\APP}_{k+1,k}:\mathsf A_{k+1}\longrightarrow\mathsf A_k
+\end{equation}
+l'effacement du dernier raffinement. Cet effacement conserve le préfixe déjà construit. La cellule neutre d'APP fournit un prolongement
+\begin{equation}
+\label{eq:continuo-comun-app-degeneracion}
+ \eta^{\APP}_k:\mathsf A_k\longrightarrow\mathsf A_{k+1},
+ \qquad
+ \rho^{\APP}_{k+1,k}\eta^{\APP}_k=I_{\mathsf A_k}.
+\end{equation}
+Écrivons
+\begin{equation}
+\label{eq:continuo-comun-emision-neutra-app}
+ \varepsilon^0_k(a):a\longrightarrow\eta^{\APP}_k(a)
+\end{equation}
+pour l'émission qui réalise ce prolongement. Ainsi restent distincts sa cible, \(\eta^{\APP}_k(a)\), et l'opération qui la produit, \(\varepsilon^0_k(a)\). On n'interprète pas \(\eta^{\APP}_k\) comme une absence d'histoire : elle enregistre un raffinement de longueur un à émission neutre et conserve matériellement l'état précédent.
+
+Chaque \(a\in\mathsf A_k\) porte simultanément les deux feuillets d'APP,
+\begin{equation}
+\label{eq:continuo-comun-dos-hojas}
+ \operatorname{Sh}_k(a)
+ =\bigl(\Sigma_k(a),\Pi_k(a)\bigr)
+ \in\mathsf H_k^{\Sigma}\times\mathsf H_k^{\Pi},
+\end{equation}
+et non un élément choisi dans la paire. Pour une émission élémentaire \(\epsilon:a\to a'\), APP produit en outre deux divisions euclidiennes typées,
+\begin{equation}
+\label{eq:continuo-comun-residuo-cociente-app}
+ \delta^{\diamond}(\epsilon)
+ =\operatorname{res}^{\diamond}(\epsilon)
+  +9\operatorname{quo}^{\diamond}(\epsilon),
+ \qquad
+ \operatorname{res}^{\diamond}(\epsilon)\in\{0,\ldots,8\},
+ \quad
+ \operatorname{quo}^{\diamond}(\epsilon)\in\mathbb Z,
+\end{equation}
+où \(\diamond\in\{\Sigma,\Pi\}\). L'étiquette \(\diamond\) indique uniquement le feuillet en cours de lecture ; les deux divisions demeurent dans le même registre.
+
+La source et la cible cellulaires de \(\epsilon\) déterminent sa frontière orientée
+\begin{equation}
+\label{eq:continuo-comun-frontera-elemental}
+ \partial\epsilon:=t(\epsilon)-s(\epsilon).
+\end{equation}
+L'émission neutre satisfait
+\begin{equation}
+\label{eq:continuo-comun-neutral-app-datos}
+ \operatorname{res}^{\diamond}(\varepsilon^0_k(a))=0,
+ \qquad
+ \operatorname{quo}^{\diamond}(\varepsilon^0_k(a))=0,
+ \qquad
+ \partial\varepsilon^0_k(a)=0.
+\end{equation}
+
+\begin{definition}[Graphe orienté des émissions APP]
+\label{def:continuo-comun-grafo-app}
+Soit \(\mathsf E_k(a)\) l'ensemble fini des émissions APP de longueur un issues de \(a\in\mathsf A_k\). Nous conservons les émissions avec leur multiplicité : deux opérations ayant la même cible, mais des résidus, quotients ou provenances différents, sont des éléments distincts de \(\mathsf E_k(a)\). Par \eqref{eq:continuo-comun-app-degeneracion},
+\begin{equation}
+\label{eq:continuo-comun-out-no-vacio-app}
+ \varepsilon^0_k(a)\in\mathsf E_k(a),
+ \qquad
+ 1\leq \#\mathsf E_k(a)<\infty.
+\end{equation}
+\end{definition}
+
+\section{Relèvement TRIT : orientation et retenue généalogique produites}
+\label{sec:continuo-comun-trit-lift}
+
+L'incidence signée d'une émission APP est un entier \(\Delta(\epsilon)\). Le représentant équilibré modulo trois donne de manière unique
+\begin{equation}
+\label{eq:continuo-comun-trit-euclid}
+ \Delta(\epsilon)
+ =\operatorname{or}(\epsilon)+3\kappa(\epsilon),
+ \qquad
+ \operatorname{or}(\epsilon)\in\{-1,0,+1\},
+ \quad
+ \kappa(\epsilon)\in\mathbb Z.
+\end{equation}
+Ainsi, l'orientation et la retenue ne sont pas des conditions imposées à une histoire : ce sont des fonctions totales de la donnée APP.
+
+Pour rendre la composition visible, soit \(\mathsf C_{\epsilon}:\mathsf M_{s(\epsilon)}\to
+\mathsf M_{t(\epsilon)}\) le transport de mémoire induit par l'émission. La retenue native d'une composition satisfait
+\begin{equation}
+\label{eq:continuo-comun-cociclo-carry}
+ \kappa(\epsilon_2\epsilon_1)
+ =\kappa(\epsilon_2)
+  +\mathsf C_{\epsilon_2}\kappa(\epsilon_1),
+\end{equation}
+dès que \(t(\epsilon_1)=s(\epsilon_2)\). Pour l'identité et l'émission neutre,
+\begin{equation}
+\label{eq:continuo-comun-carry-unidad}
+ \kappa(I_a)=0,
+ \qquad
+ \kappa(\varepsilon^0_k(a))=0,
+ \qquad
+ \mathsf C_{I_a}=I_{\mathsf M_a}.
+\end{equation}
+
+\begin{lemma}[Associativité du registre de retenue]
+\label{lem:continuo-comun-asociatividad-carry}
+Pour trois émissions composables, l'évaluation de \(\kappa(\epsilon_3\epsilon_2\epsilon_1)\) ne dépend pas du parenthésage.
+\end{lemma}
+
+\begin{proof}
+En appliquant deux fois \eqref{eq:continuo-comun-cociclo-carry} au parenthésage gauche, on obtient
+\[
+ \kappa(\epsilon_3)
+ +\mathsf C_{\epsilon_3}\kappa(\epsilon_2)
+ +\mathsf C_{\epsilon_3}\mathsf C_{\epsilon_2}
+  \kappa(\epsilon_1).
+\]
+Le parenthésage droit produit la même expression, car le transport de mémoire est fonctoriel : \(\mathsf C_{\epsilon_3\epsilon_2}
+=\mathsf C_{\epsilon_3}\mathsf C_{\epsilon_2}\).
+\end{proof}
+
+La réversion orientée d'une émission réversible se note \(\overline\epsilon\). TRIT agit par
+\begin{equation}
+\label{eq:continuo-comun-reversion-trit}
+ \operatorname{or}(\overline\epsilon)
+ =-\operatorname{or}(\epsilon),
+ \qquad
+ \partial\overline\epsilon=-\partial\epsilon,
+ \qquad
+ \mathsf C_{\overline\epsilon}=\mathsf C_\epsilon^{-1}.
+\end{equation}
+La retenue inverse est déterminée, et non choisie, par
+\begin{equation}
+\label{eq:continuo-comun-carry-inverso}
+ \kappa(\overline\epsilon)
+ =-\mathsf C_\epsilon^{-1}\kappa(\epsilon),
+\end{equation}
+puisque \(\kappa(\overline\epsilon\epsilon)=0\).
+
+\section{Transport TPK des \(2\) feuillets et de la mémoire}
+\label{sec:continuo-comun-tpk-transporte}
+
+La chronologie du TPK fait partie du type de chaque émission et ne se reconstruit pas a posteriori en comptant des lettres. Nous retrouvons ici l'action de l'odomètre de \cref{def:odometro-9-12,prop:proyeccion-fase-longitud}. Soit
+\begin{equation}
+\label{eq:continuo-comun-ciclo-fase-tpk}
+ C_9:=\mathbb Z/9\mathbb Z,\qquad
+ \widetilde{\mathcal O}_{9}:=\mathbb Z_{\geq0}\times C_9,\qquad
+ \mathcal O_{9,12}:=\mathbb Z/12\mathbb Z\times C_9.
+\end{equation}
+L'état déroulé de phase et de mémoire est \(\mathsf Q_k=(w_k,r_k)\in\widetilde{\mathcal O}_{9}\) ; sa réduction \((w,r)\mapsto([w]_{12},r)\) restitue \(\mathcal O_{9,12}\). La graine canonique de l'horloge est
+\begin{equation}
+\label{eq:continuo-comun-semilla-fase-tpk}
+ \mathsf Q_0(a_0):=(0,[0]_9)\qquad(a_0\in\mathsf A_0);
+\end{equation}
+les autres choix d'origine sont ses translations cohérentes par \(C_9\) et ne modifient pas la loi d'actualisation. Pour \(\bar r\in\{0,\ldots,8\}\), nous posons
+\begin{equation}
+\label{eq:continuo-comun-carry-fase-tpk}
+ \chi_9(r):=\left\lfloor\frac{\bar r+1}{9}\right\rfloor.
+\end{equation}
+Toute émission \(\epsilon\) faisant passer de la profondeur \(k\) à la profondeur \(k+1\) agit sur l'odomètre par
+\begin{equation}
+\label{eq:continuo-comun-accion-fase-tpk}
+ \sigma_9(w,r):=(w+\chi_9(r),r+[1]_9),\qquad
+ \mathsf Q_{k+1}(\epsilon_*\widehat x_k)
+ =\sigma_9\mathsf Q_k(\widehat x_k).
+\end{equation}
+Sa composante de phase est, par définition typée,
+\begin{equation}
+\label{eq:continuo-comun-fase-emision-tpk}
+ \operatorname{ph}(\epsilon):r_k\longmapsto r_k+[1]_9,
+ \qquad
+ \operatorname{ph}(\epsilon_n\cdots\epsilon_1):
+ r_k\longmapsto r_k+[n]_9.
+\end{equation}
+Nous écrivons \(g_k:=r_k\in C_9\) pour la phase exprimée et \(q^{(9)}_k:=w_k\) pour la mémoire verticale, ainsi que \(\beta_k:=[w_k]_{12}\) pour sa réduction dodécaphasique. L'itération de \eqref{eq:continuo-comun-accion-fase-tpk} est
+\begin{equation}
+\label{eq:continuo-comun-iteracion-fase-tpk}
+ \sigma_9^n(w,r)=
+ \left(w+\left\lfloor\frac{\bar r+n}{9}\right\rfloor,
+       r+[n]_9\right).
+\end{equation}
+En effet, les termes \(\chi_9(r),\chi_9(r+[1]_9),\ldots,\chi_9(r+[n-1]_9)\) comptent exactement les passages du représentant \(8\) au représentant \(0\), au nombre de \(\lfloor(\bar r+n)/9\rfloor\). En particulier,
+\begin{equation}
+\label{eq:continuo-comun-retorno-fase-avance-memoria}
+ \sigma_9^9(w,r)=(w+1,r),\qquad
+ g_{k+9}=g_k,\qquad q^{(9)}_{k+9}=q^{(9)}_k+1.
+\end{equation}
+Même l'émission neutre d'APP réalise \(g_k\mapsto g_{k+1}\) : elle est neutre en résidu, quotient, retenue et frontière, mais enregistre qu'une extension a eu lieu. Le mot de phase
+\begin{equation}
+\label{eq:continuo-comun-palabra-fase-tpk}
+ \boldsymbol\tau_k^{(N)}:=(g_k,g_{k+1},\ldots,g_N),
+ \qquad g_{j+1}=g_j+[1]_9,
+\end{equation}
+et la mémoire \(q^{(9)}\) typent par des objets distincts le retour de phase et le changement d'état.
+
+\subsection{Renouvellement simultané de la fibre complète}
+\label{sec:continuo-comun-kph}
+
+L'odomètre précédent conserve la chronologie de chaque extension. Le même tour nonadique possède en outre la réalisation markovienne interne, déjà construite sur le catalogue APP--TPK, qui renouvelle simultanément les deux coordonnées de la fibre complète. Il est essentiel de conserver les deux réalisations et de ne pas identifier une arête générique de l'arbre à une émission du catalogue sans application de typage.
+
+\begin{proposition}[Réalisation markovienne interne de la connexion nonadique]
+\label{prop:continuo-comun-kph-heredada}
+\label{pII-full:thm:seleccion-novena-fase}
+Soient le domaine des graines APP, son émission observable et ses multiplicités
+\[
+ T_{\min}:\Omega_{\rm seed}\twoheadrightarrow\mathcal U_6,
+ \qquad
+ m(u):=\#T_{\min}^{-1}(u),
+\]
+et la factorisation produite par le TPK
+\[
+ \mathcal U_6\simeq\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S_+|=18,\qquad |\mathcal S_\times|=26.
+\]
+Sur les fonctions définies sur \(\mathcal U_6\), les deux espérances conditionnelles agissent par
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal S_+}f(s',e),
+ \qquad
+ (E_\times f)(s,e)=\frac1{26}
+ \sum_{e'\in\mathcal S_\times}f(s,e').
+\]
+Pour
+\[
+ \tau=(+1,-1,0,+1,-1,0,+1,-1,0),
+ \qquad
+ P_{+1}=E_+,\quad P_{-1}=E_\times,\quad P_0=I,
+\]
+le transfert de catalogue et son relèvement à toutes les graines sont
+\begin{align}
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr)
+ &=P_{\tau(r)}(u,v),
+ \label{eq:continuo-comun-kph-catalogo}\\
+ L_0(\omega,\omega')&=\mathbf1_{\{\omega=\omega'\}},\nonumber\\
+ L_+(\omega,\omega')
+ &=\frac{E_+(T_{\min}\omega,T_{\min}\omega')}
+         {m(T_{\min}\omega')},\nonumber\\
+ L_\times(\omega,\omega')
+ &=\frac{E_\times(T_{\min}\omega,T_{\min}\omega')}
+         {m(T_{\min}\omega')},\nonumber\\
+ \widehat{\mathcal K}_{\rm ph}
+ \bigl((\omega,r),(\omega',r+1)\bigr)
+ &=L_{\tau(r)}(\omega,\omega').
+ \label{eq:continuo-comun-kph-elevada}
+\end{align}
+Pour \(u=T_{\min}\omega\), on a phase par phase
+\begin{equation}
+\label{eq:continuo-comun-kph-lumpability}
+ \sum_{\omega':\,T_{\min}\omega'=v}
+ \widehat{\mathcal K}_{\rm ph}
+ \bigl((\omega,r),(\omega',r+1)\bigr)
+ =
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr).
+\end{equation}
+En particulier,
+\begin{equation}
+\label{eq:continuo-comun-kph-novena-potencia}
+ \boxed{\;
+ \mathcal K_{\rm ph}^{\,9}\big|_r=E_+E_\times,
+ \qquad
+ (E_+E_\times)(u,v)=\frac1{468}.
+ \;}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Dans une phase \(+\) ou \(\times\), la somme de \eqref{eq:continuo-comun-kph-elevada} sur \(T_{\min}^{-1}(v)\) annule exactement le dénominateur \(m(v)\) ; dans une phase zéro, \(L_0\) se projette sur l'identité. Cela démontre \eqref{eq:continuo-comun-kph-lumpability}. Les opérateurs \(E_+\), \(E_\times\) et \(I\) sont idempotents et commutent, et chacun apparaît trois fois dans le mot nonadique. Par conséquent
+\[
+ \prod_{r\in C_9}P_{\tau(r)}
+ =E_+^3E_\times^3I^3=E_+E_\times.
+\]
+La composition renouvelle d'abord une coordonnée de cardinal \(18\), puis l'autre de cardinal \(26\), de sorte que chaque cible reçoit \(1/(18\cdot26)=1/468\).
+\end{proof}
+
+\begin{remark}[Deux réalisations internes, sans identification fictive]
+\label{rem:continuo-comun-kph-no-identificacion-aristas}
+Le transfert \(\mathcal K_{\rm ph}\) est la réalisation globale du catalogue complet, et \(\sigma_9\) est l'action chronologique sur chaque état de l'arbre. L'une ne se substitue pas à l'autre. Une égalité arête par arête nécessiterait une application supplémentaire
+\[
+ \operatorname{Cat}_{k,x}:\operatorname{Out}(x)\longrightarrow\mathcal U_6
+\]
+vérifiant l'identité correspondante de somme sur les fibres. Cette application n'est pas utilisée dans ce volume. La monodromie complète \eqref{eq:continuo-comun-kph-novena-potencia} provient du catalogue APP--TPK, tandis que la généalogie de chaque histoire demeure dans l'arbre et son registre.
+\end{remark}
+
+TPK associe à chaque émission admissible un transport typé de la paire de feuillets,
+\begin{equation}
+\label{eq:continuo-comun-transporte-hojas}
+ U_\epsilon:
+ \mathsf H_{s(\epsilon)}^{\Sigma}\times
+ \mathsf H_{s(\epsilon)}^{\Pi}
+ \longrightarrow
+ \mathsf H_{t(\epsilon)}^{\Sigma}\times
+ \mathsf H_{t(\epsilon)}^{\Pi},
+\end{equation}
+avec
+\begin{equation}
+\label{eq:continuo-comun-transporte-hojas-funtorial}
+ U_{I_a}=I,
+ \qquad
+ U_{\epsilon_2\epsilon_1}=U_{\epsilon_2}U_{\epsilon_1}.
+\end{equation}
+Le codomaine de \(U_\epsilon\) demeure la paire complète. Aucune opération de ce chapitre ne remplace \((\Sigma,\Pi)\) par l'une de ses coordonnées.
+
+Soit \(m\in\mathsf M_{s(\epsilon)}\) une mémoire accumulée. L'action TPK sur celle-ci est la transformation affine
+\begin{equation}
+\label{eq:continuo-comun-accion-memoria}
+ \mathsf U_\epsilon(m)
+ :=\mathsf C_\epsilon m+\kappa(\epsilon).
+\end{equation}
+
+\begin{lemma}[Action TPK sur la mémoire]
+\label{lem:continuo-comun-accion-memoria}
+Les transformations \(\mathsf U_\epsilon\) satisfont
+\begin{equation}
+\label{eq:continuo-comun-accion-memoria-composicion}
+ \mathsf U_{I_a}=I,
+ \qquad
+ \mathsf U_{\epsilon_2\epsilon_1}
+ =\mathsf U_{\epsilon_2}\mathsf U_{\epsilon_1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+L'identité découle de \eqref{eq:continuo-comun-carry-unidad}. Pour la composition,
+\begin{align*}
+ \mathsf U_{\epsilon_2}\mathsf U_{\epsilon_1}(m)
+ &=\mathsf C_{\epsilon_2}
+   \bigl(\mathsf C_{\epsilon_1}m+\kappa(\epsilon_1)\bigr)
+   +\kappa(\epsilon_2)\\
+ &=\mathsf C_{\epsilon_2\epsilon_1}m
+   +\kappa(\epsilon_2)
+   +\mathsf C_{\epsilon_2}\kappa(\epsilon_1)\\
+ &=\mathsf C_{\epsilon_2\epsilon_1}m
+   +\kappa(\epsilon_2\epsilon_1),
+\end{align*}
+où la dernière égalité est \eqref{eq:continuo-comun-cociclo-carry}.
+\end{proof}
+
+Un parcours fini est un mot composable
+\begin{equation}
+\label{eq:continuo-comun-ruta}
+ \gamma=\epsilon_1\epsilon_2\cdots\epsilon_k.
+\end{equation}
+Sa frontière, son transport, sa retenue et sa mémoire sont
+\begin{align}
+ \partial\gamma
+ &:=\sum_{j=1}^{k}\partial\epsilon_j,
+ \label{eq:continuo-comun-frontera-ruta}\\
+ U_\gamma
+ &:=U_{\epsilon_k}\cdots U_{\epsilon_1},
+ \label{eq:continuo-comun-transporte-ruta}\\
+ \kappa(\gamma)
+ &:=\kappa(\epsilon_k)
+   +\sum_{j=1}^{k-1}
+    \mathsf C_{\epsilon_k}\cdots\mathsf C_{\epsilon_{j+1}}
+    \kappa(\epsilon_j),
+ \label{eq:continuo-comun-carry-ruta}\\
+ m(\gamma;m_0)
+ &:=\mathsf U_{\epsilon_k}\cdots
+       \mathsf U_{\epsilon_1}(m_0).
+ \label{eq:continuo-comun-memoria-ruta}
+\end{align}
+Dans \eqref{eq:continuo-comun-frontera-ruta}, les extrémités intérieures s'annulent et il reste
+\begin{equation}
+\label{eq:continuo-comun-frontera-telescopica}
+ \partial\gamma=t(\epsilon_k)-s(\epsilon_1).
+\end{equation}
+
+\section{L'état commun et son domaine total}
+\label{sec:continuo-comun-estado-total}
+
+\begin{definition}[Registre élémentaire]
+\label{def:continuo-comun-ledger-elemental}
+Pour une émission située entre deux préfixes enrichis consécutifs, nous notons \(\mathsf Q^-(\epsilon)=(w^-(\epsilon),r^-(\epsilon))\) l'odomètre du préfixe source et
+\begin{equation}
+\label{eq:continuo-comun-ledger-fase-extremos}
+ \mathsf Q^+(\epsilon):=\sigma_9\mathsf Q^-(\epsilon)
+ =(w^-(\epsilon)+\chi_9(r^-(\epsilon)),r^-(\epsilon)+[1]_9)
+\end{equation}
+celui du préfixe cible. Ainsi, l'odomètre n'est pas appliqué à une cellule APP nue. Le registre de l'émission est
+\begin{equation}
+\label{eq:continuo-comun-ledger-elemental}
+ \lambda(\epsilon):=\bigl(
+ s(\epsilon),t(\epsilon),
+ \operatorname{res}^{\Sigma}(\epsilon),
+ \operatorname{quo}^{\Sigma}(\epsilon),
+ \operatorname{res}^{\Pi}(\epsilon),
+ \operatorname{quo}^{\Pi}(\epsilon),
+ \operatorname{or}(\epsilon),
+ \kappa(\epsilon),
+ \partial\epsilon,
+ \mathsf Q^-(\epsilon),\mathsf Q^+(\epsilon)\bigr).
+\end{equation}
+Le registre de \(\gamma\) est le mot ordonné
+\begin{equation}
+\label{eq:continuo-comun-ledger-ruta}
+ \operatorname{Led}(\gamma)
+ :=\bigl(\lambda(\epsilon_1),\ldots,
+          \lambda(\epsilon_k)\bigr).
+\end{equation}
+Conserver ce mot, et non seulement sa somme, distingue deux histoires possédant la même sortie terminale.
+\end{definition}
+
+\subsection{Lecteur complet de l'état TPK}
+\label{sec:continuo-comun-lector-estado-tpk}
+
+La profondeur \(K\) des blocs TPK et la profondeur \(k\) de l'arbre des extensions sont des types distincts. Dans cette sous-section, \(K\) désigne exclusivement la profondeur de l'état TPK déjà engendré par le mécanisme opératoriel ; elle ne s'identifie ni à \(k\) ni à une arête générique.
+
+\begin{definition}[Lecteur compact de mémoire nonadique]
+\label{def:continuo-comun-lector-compacto-nonadico}
+L'état enrichi TPK de profondeur \(K\) est
+\begin{equation}
+\label{eq:continuo-comun-estado-tpk-completo}
+ v_K=
+ \bigl(
+ B_K,\boldsymbol\delta_K,\boldsymbol x_K,
+ \boldsymbol{\mathcal C}_K,\Sigma_K,
+ \omega_K,\ell_K,g(K),\Lambda_K
+ \bigr),
+ \qquad
+ B_K=(u_K^\pi,u_K^e,u_K^\varphi).
+\end{equation}
+Son lecteur compact n'ajoute pas de coordonnées : il les exprime à partir de ce même état,
+\begin{equation}
+\label{eq:continuo-comun-lector-compacto-nonadico}
+ \mathfrak r_9(v_K)
+ :=\bigl(B_K,C_K,p_K,c_K,\Sigma_K,W_K,g(K)\bigr),
+\end{equation}
+où
+\begin{equation}
+\label{eq:continuo-comun-lector-compacto-componentes}
+\begin{aligned}
+ C_K&:=\boldsymbol{\mathcal C}_K
+      =\bigl(C_K^\chi\bigr)_{\chi\in\{\pi,e,\varphi\}},\\
+ C_K^\chi&:=(N_K^\chi,L_K^\chi,r_K^\chi,
+             D_K^\chi,A_K^\chi,B_K^\chi),\\
+ p_K&:=(B_0,\ldots,B_K),\\
+ c_K&:=(\boldsymbol\delta_K,\boldsymbol x_K,
+       \kappa(\gamma^{\rm TPK}_{0:K})),
+\end{aligned}
+\end{equation}
+et la projection orientée de Witt est conservée sous la forme
+\begin{equation}
+\label{eq:continuo-comun-sombra-witt}
+ W_K:=
+ \bigl((u_K^\chi,u_K^\chi A_W)\bigr)_
+       {\chi\in\{\pi,e,\varphi\}},
+ \qquad
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix},
+ \qquad A_W^2=-I_6.
+\end{equation}
+Le parcours \(\gamma^{\rm TPK}_{0:K}\) est le mot des extensions codé par \(\Lambda_K\) ; son préfixe de longueur \(j\) est celui qui produit \(v_j\). La signature est la sortie de la primitive interne explicite
+\begin{equation}
+\label{eq:continuo-comun-primitiva-firma-tpk}
+ \Sigma_B:
+ \mathsf B_{\rm TPK}\times\mathsf C_{\rm TPK}
+ \times\mathbb Z[\mathsf A]\times\Omega_{12}\times\mathsf L_{\rm TPK}
+ \longrightarrow\mathsf S_{\rm TPK},
+ \quad
+ (B,c,\partial\gamma,\omega,\ell)\longmapsto
+ \Sigma_B(B,c,\partial\gamma,\omega,\ell),
+\end{equation}
+avec \(\Sigma_B(g\cdot-)=g\cdot\Sigma_B(-)\) pour chaque symétrie TPK. Sa structure initiale explicite est \((B_K,c_K,\partial\gamma^{\rm TPK}_{0:K},\omega_K,\ell_K)\). Elle n'est pas remplacée par une signature extérieure ni inférée rétrospectivement à partir d'un lecteur numérique.
+\end{definition}
+
+L'action du pas \(K\mapsto K+1\) s'écrit sans omettre l'état profond. Pour chaque \(\chi\in\{\pi,e,\varphi\}\),
+\begin{equation}
+\label{eq:continuo-comun-update-hensel-tpk}
+ y_K^\chi=x_K^\chi A_H,\qquad
+ u_{K+1}^\chi=y_K^\chi\bmod3,\qquad
+ x_{K+1}^\chi=\frac{y_K^\chi-u_{K+1}^\chi}{3},
+\end{equation}
+avec
+\[
+ A_H=
+ \begin{pmatrix}
+ 2&2&2&1&2&1\\
+ 2&1&2&2&1&1\\
+ 1&0&0&1&0&2\\
+ 0&0&1&1&1&0\\
+ 2&2&2&0&2&1\\
+ 2&1&2&1&0&0
+ \end{pmatrix},
+ \qquad \det A_H=1.
+\]
+Si
+\[
+ \operatorname{ind}_3(u_1,\ldots,u_6)
+ :=\sum_{j=1}^{6}\overline u_j\,3^{6-j}
+ \in\{0,\ldots,728\},
+\]
+l'actualisation du préfixe et de ses \(729\) sous-cylindres est
+\begin{align}
+ N_{K+1}^\chi
+ &=729N_K^\chi+\operatorname{ind}_3(u_{K+1}^\chi),
+ &L_{K+1}^\chi&=L_K^\chi+6,
+ \label{eq:continuo-comun-update-cilindro-indice}\\
+ I_{K,u}^\chi
+ &:=
+ \left[
+  \frac{729N_K^\chi+u}{3^{L_K^\chi+6}},
+  \frac{729N_K^\chi+u+1}{3^{L_K^\chi+6}}
+ \right),
+ &0&\leq u<729.
+ \label{eq:continuo-comun-update-cilindro-intervalo}
+\end{align}
+Le cylindre décimal et la retenue associée s'actualisent selon les deux cas entiers du même opérateur \(\mathcal C_{3,1000}\). Si aucune nouvelle triade décimale n'est exprimée,
+\begin{equation}
+\label{eq:continuo-comun-update-cilindro-sin-triada}
+ r_{K+1}^\chi=r_K^\chi,\qquad D_{K+1}^\chi=D_K^\chi,\qquad
+ A_{K+1}^\chi=729A_K^\chi+
+ \operatorname{ind}_3(u_{K+1}^\chi)1000^{r_K^\chi},\qquad
+ B_{K+1}^\chi=A_{K+1}^\chi+1000^{r_K^\chi}.
+\end{equation}
+La primitive \(\mathcal C_{3,1000}\) produit la donnée optionnelle
+\[
+ d_{K+1,\chi}^{\rm dec}\in
+ \{\bot\}\sqcup\{0,\ldots,999\};
+\]
+dans le premier cas, elle vaut \(d_{K+1,\chi}^{\rm dec}=\bot\). Si une triade apparaît, nous écrivons \(d_{K+1,\chi}^{\rm dec}=\delta_{K+1}^\chi\in\{0,\ldots,999\}\) et
+\begin{equation}
+\label{eq:continuo-comun-update-cilindro-con-triada}
+ \begin{aligned}
+ r_{K+1}^\chi&=r_K^\chi+1,\qquad
+ D_{K+1}^\chi=1000D_K^\chi+\delta_{K+1}^\chi,\\
+ A_{K+1}^\chi&=729000A_K^\chi
+ +\operatorname{ind}_3(u_{K+1}^\chi)1000^{r_K^\chi+1}
+ -729\delta_{K+1}^\chi3^{L_K^\chi},\\
+ B_{K+1}^\chi&=A_{K+1}^\chi+1000^{r_K^\chi+1}.
+ \end{aligned}
+\end{equation}
+Le registre \(\boldsymbol\delta_{K+1}\) ajoute ces triades et les deux cocycles conjoints
+\begin{equation}
+\label{eq:continuo-comun-update-triadas-carry-conjunto}
+ \begin{gathered}
+ q_{K+1}=(u_{K+1}^\pi+u_{K+1}^e+u_{K+1}^\varphi)\bmod3,
+ \quad
+ c_{K+1}^{\rm joint}=\frac{u_{K+1}^\pi+u_{K+1}^e+u_{K+1}^\varphi-q_{K+1}}3,\\
+ a_{K+1}=(u_{K+1}^\pi+u_{K+1}^e-u_{K+1}^\varphi)\bmod3,
+ \quad
+ h_{K+1}^{\rm joint}=\frac{u_{K+1}^\pi+u_{K+1}^e-u_{K+1}^\varphi-a_{K+1}}3,\\
+ \boldsymbol\delta_{K+1}
+ =\boldsymbol\delta_K\star
+ \bigl((d_{K+1,\chi}^{\rm dec})_\chi,
+       c_{K+1}^{\rm joint},h_{K+1}^{\rm joint}\bigr).
+ \end{gathered}
+\end{equation}
+Ainsi, \(C_{K+1}\), \(\boldsymbol\delta_{K+1}\) et \(\boldsymbol x_{K+1}\) possèdent des actions concrètes, non seulement des noms. Les autres coordonnées s'actualisent simultanément par
+\begin{align}
+ p_{K+1}&=p_K\star B_{K+1},
+ \label{eq:continuo-comun-update-prefijo-tpk}\\
+ \kappa(\gamma^{\rm TPK}_{0:K+1})
+ &=\kappa(\varepsilon^{\rm TPK}_{K+1})
+   +\mathsf C_{\varepsilon^{\rm TPK}_{K+1}}
+    \kappa(\gamma^{\rm TPK}_{0:K}),
+ \label{eq:continuo-comun-update-carry-lector-tpk}\\
+ c_{K+1}^{\rm comp}
+ &:=(\boldsymbol\delta_{K+1},\boldsymbol x_{K+1},
+       \kappa(\gamma^{\rm TPK}_{0:K+1})),
+ \label{eq:continuo-comun-update-carry-compacto-tpk}\\
+ \Sigma_{K+1}
+ &=\Sigma_B\bigl(
+ B_{K+1},c_{K+1}^{\rm comp},
+ \partial\gamma^{\rm TPK}_{0:K}
+ +\partial\varepsilon^{\rm TPK}_{K+1},
+ \omega_{K+1},\ell_{K+1}\bigr),
+ \label{eq:continuo-comun-update-firma-tpk}\\
+ W_{K+1}
+ &=\bigl((u_{K+1}^\chi,u_{K+1}^\chi A_W)\bigr)_\chi,
+ &g(K+1)&=g(K)+[1]_9.
+ \label{eq:continuo-comun-update-witt-fase-tpk}
+\end{align}
+Puisque \(A_H\) est inversible modulo trois et que \(A_W^2=-I_6\), les actualisations résiduelle et de projection ne confondent pas des blocs distincts. La troncature conserve les suites complètes
+\[
+ (B_0,\ldots,B_K),\ (C_0,\ldots,C_K),\
+ (p_0,\ldots,p_K),\ (c_0,\ldots,c_K),\
+ (\Sigma_0,\ldots,\Sigma_K),\ (W_0,\ldots,W_K)
+\]
+et supprime simultanément leur dernière entrée. Le lecteur \(\mathfrak r_9\) commute donc avec l'effacement d'un bloc.
+
+\begin{proposition}[Portée universelle et portée certifiée de l'absence de réinitialisation]
+\label{prop:continuo-comun-no-reinicio-alcance}
+Dans tout tour horizontal de neuf pas sont conservés
+\[
+ g(K+9)=g(K),\qquad
+ q_{\rm mem}(K+9)=q_{\rm mem}(K)+1,
+\]
+et le préfixe se prolonge par neuf émissions, si bien que l'état ne se réinitialise pas. Dans la section conjointe certifiée \(\chi\in\{\pi,e,\varphi\}\), \(0\leq K<387\), on a en outre
+\begin{equation}
+\label{eq:continuo-comun-no-reinicio-certificado}
+ (p_K,C_K)\neq(p_{K+9},C_{K+9}),\qquad
+ (B_K,\mathbf N_K,W_K)\neq
+ (B_{K+9},\mathbf N_{K+9},W_{K+9}),
+ \qquad
+ \mathbf N_K:=(N_K^\pi,N_K^e,N_K^\varphi).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Les deux identités universelles sont l'itération exacte de \eqref{eq:continuo-comun-accion-fase-tpk} ; le préfixe conserve les neuf entrées ajoutées par \eqref{eq:continuo-comun-update-prefijo-tpk}. Pour la section conjointe, la récurrence \eqref{eq:continuo-comun-update-cilindro-indice} compare les \(387\) paires nonadiques de chacun des trois canaux et produit \eqref{eq:continuo-comun-no-reinicio-certificado} ; c'est l'affirmation certifiée dans \cref{thm:generacion-monodromica-conjunta-rev7}. Enfin, \(u\mapsto(u,uA_W)\) est injective, de sorte que le changement de bloc conserve également celui de sa projection complète. Cette dernière inégalité n'est pas étendue à un prolongement neutre arbitraire hors de la section certifiée.
+\end{proof}
+
+\begin{definition}[État APP--TRIT--TPK de profondeur \(k\)]
+\label{def:continuo-comun-estado}
+Pour un parcours \(\gamma=\epsilon_1\cdots\epsilon_k\) issu d'une cellule APP \(a_0\), l'état enrichi commun est
+\begin{equation}
+\label{eq:continuo-comun-estado}
+ \widehat x_k(\gamma):=\Bigl(
+  a_0,\ldots,a_k;
+  \operatorname{Sh}_0,\ldots,\operatorname{Sh}_k;
+  \mathbf{res}_k,\mathbf{quo}_k;
+  \mathbf{or}_k,\mathbf\kappa_k;
+  \mathsf Q_k;g_k;q^{(9)}_k;\beta_k;m_k;\partial\gamma;\gamma;
+  \operatorname{Led}(\gamma)
+ \Bigr),
+\end{equation}
+où
+\begin{align*}
+ \mathbf{res}_k
+ &:=\bigl(
+  (\operatorname{res}^{\Sigma}(\epsilon_j),
+   \operatorname{res}^{\Pi}(\epsilon_j))
+  \bigr)_{1\leq j\leq k},\\
+ \mathbf{quo}_k
+ &:=\bigl(
+  (\operatorname{quo}^{\Sigma}(\epsilon_j),
+   \operatorname{quo}^{\Pi}(\epsilon_j))
+  \bigr)_{1\leq j\leq k},\\
+ \mathbf{or}_k
+ &:=\bigl(\operatorname{or}(\epsilon_j)\bigr)_{1\leq j\leq k},
+ \qquad
+ \mathbf\kappa_k
+ :=\bigl(\kappa(\epsilon_j)\bigr)_{1\leq j\leq k},\\
+ m_k&:=m(\gamma;m_0).
+\end{align*}
+Les feuillets intermédiaires s'obtiennent par \(\operatorname{Sh}_{j}=U_{\epsilon_j}\operatorname{Sh}_{j-1}\).
+\end{definition}
+
+La présence simultanée du parcours et du registre empêche d'identifier des mots distincts qui se terminent dans la même cellule. L'état n'est pas une liste de cardinaux : chaque coordonnée possède les équations de type et de composition des sections précédentes.
+
+\begin{definition}[Domaine total de profondeur finie]
+\label{def:continuo-comun-dominio-total}
+Soit
+\begin{equation}
+\label{eq:continuo-comun-dominio-total}
+ \widehat{\mathcal X}^{\rm tot}_k
+ :=\left\{
+  \widehat x_k(\epsilon_1\cdots\epsilon_k):
+  \begin{array}{l}
+   a_0\in\mathsf A_0,\\
+   \epsilon_j\in\mathsf E_{j-1}(a_{j-1}),\\
+   s(\epsilon_j)=a_{j-1},\ t(\epsilon_j)=a_j
+  \end{array}
+ \right\}.
+\end{equation}
+Aucune condition d'une expression ultérieure n'est ajoutée à \eqref{eq:continuo-comun-dominio-total}. Appartenir au domaine signifie exactement avoir été produit par les actions totales \eqref{eq:continuo-comun-residuo-cociente-app}, \eqref{eq:continuo-comun-trit-euclid} et \eqref{eq:continuo-comun-accion-fase-tpk}--\eqref{eq:continuo-comun-accion-memoria}.
+\end{definition}
+
+La troncature commune efface la dernière émission ainsi que toutes les entrées du registre qu'elle a produites, et elles seules :
+\begin{equation}
+\label{eq:continuo-comun-truncamiento-total}
+ \rho_{k+1,k}:\widehat{\mathcal X}^{\rm tot}_{k+1}
+ \longrightarrow\widehat{\mathcal X}^{\rm tot}_k,
+ \qquad
+ \rho_{k+1,k}\widehat x_{k+1}
+ =\widehat x_k.
+\end{equation}
+Soit \(\varepsilon^0_k(x)\) l'émission neutre \eqref{eq:continuo-comun-emision-neutra-app} appliquée à l'extrémité APP de \(x\). Le prolongement neutre définit
+\begin{equation}
+\label{eq:continuo-comun-seccion-total}
+ \eta_k:\widehat{\mathcal X}^{\rm tot}_k
+ \longrightarrow\widehat{\mathcal X}^{\rm tot}_{k+1},
+ \qquad
+ \eta_k(x):=(\varepsilon^0_k(x))_*x,
+ \qquad
+ \rho_{k+1,k}\eta_k=I.
+\end{equation}
+
+\begin{proposition}[Finitude, non-vacuité et surjectivité]
+\label{prop:continuo-comun-total-finito}
+Pour tout \(k\), l'ensemble \(\widehat{\mathcal X}^{\rm tot}_k\) est fini et non vide, et \(\rho_{k+1,k}\) est surjectif.
+\end{proposition}
+
+\begin{proof}
+APP produit un ensemble fini non vide à la profondeur zéro. À chaque pas, chaque état possède un ensemble fini d'émissions par \eqref{eq:continuo-comun-out-no-vacio-app} ; par récurrence, il n'existe qu'un nombre fini de mots de longueur \(k\). La suite des prolongements neutres produit au moins un mot de chaque longueur. Enfin, \eqref{eq:continuo-comun-seccion-total} est un inverse à droite de la troncature, qui est donc surjective.
+\end{proof}
+
+\section{Groupoïde fini des symétries réversibles}
+\label{sec:continuo-comun-groupoide}
+
+Les opérations réversibles d'APP, de TRIT et du TPK agissent sur l'état entier. Soit \(\mathsf U\) le groupe des systèmes cohérents \(g=(g_k)_{k\geq0}\) engendrés par ces opérations, où
+\begin{equation}
+\label{eq:continuo-comun-simetria-coherente}
+ \rho_{k+1,k}g_{k+1}=g_k\rho_{k+1,k},
+ \qquad
+ g_{k+1}\eta_k=\eta_kg_k.
+\end{equation}
+Nous notons \(\mathsf U_k\) son image dans \(\operatorname{Sym}(\widehat{\mathcal X}^{\rm tot}_k)\). Cette image est finie puisqu'elle agit sur un ensemble fini. L'action de \(g_k\) sur
+\begin{equation*}
+ \widehat x=(a_{\leq k};\operatorname{Sh}_{\leq k};
+ \mathbf{res},\mathbf{quo};\mathbf{or},\mathbf\kappa;
+ \mathsf Q_k;g_k;q_k^{(9)};\beta_k;m;\partial\gamma;\gamma;
+ \operatorname{Led}(\gamma))
+\end{equation*}
+est
+\begin{equation}
+\label{eq:continuo-comun-accion-reversible}
+\begin{aligned}
+ g_k\cdot\widehat x:=\bigl(&
+ g_k a_{\leq k};
+ U_{g_k}\operatorname{Sh}_{\leq k};
+ \mathbf{res}(g_k\gamma),\mathbf{quo}(g_k\gamma);
+ \mathbf{or}(g_k\gamma),\mathbf\kappa(g_k\gamma);\\
+ &\mathsf Q(g_k\gamma);g(g_k\gamma);q^{(9)}(g_k\gamma);
+ \beta(g_k\gamma);
+ \mathsf U_{g_k}(m);
+ (g_k)_*\partial\gamma;
+ g_k\gamma;
+ \operatorname{Led}(g_k\gamma)\bigr).
+\end{aligned}
+\end{equation}
+Tous les termes du membre de droite sont recalculés selon les règles APP, TRIT et TPK ; ils ne sont pas copiés comme des étiquettes indépendantes.
+
+\begin{definition}[Groupoïde d'action commun]
+\label{def:continuo-comun-groupoide}
+Le groupoïde fini de profondeur \(k\) est
+\begin{equation}
+\label{eq:continuo-comun-groupoide}
+ \mathfrak G_k
+ :=\mathsf U_k\ltimes\widehat{\mathcal X}^{\rm tot}_k.
+\end{equation}
+Ses objets sont les états communs. Une flèche \((g_k,\widehat x)\) a pour source \(\widehat x\), pour cible \(g_k\cdot\widehat x\), pour identité \((I,\widehat x)\) et pour inverse \((g_k^{-1},g_k\cdot\widehat x)\).
+\end{definition}
+
+\begin{lemma}[L'action conserve toutes les équations d'état]
+\label{lem:continuo-comun-groupoide-conserva}
+L'action \eqref{eq:continuo-comun-accion-reversible} conserve la paire de feuillets, les divisions APP, l'orientation TRIT, la retenue, l'odomètre de phase, la mémoire verticale, sa réduction dodécaphasique, la mémoire affine, la frontière, le parcours et le registre, dans leurs types respectifs. En outre,
+\begin{equation}
+\label{eq:continuo-comun-groupoide-accion}
+ I\cdot\widehat x=\widehat x,
+ \qquad
+ (g_{2,k}g_{1,k})\cdot\widehat x
+ =g_{2,k}\cdot(g_{1,k}\cdot\widehat x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Les divisions APP sont uniques, de sorte que l'action sur une émission détermine à nouveau ses résidus et quotients. La décomposition équilibrée \eqref{eq:continuo-comun-trit-euclid} est également unique. La composition de la retenue est associative par \cref{lem:continuo-comun-asociatividad-carry} ; l'action sur la mémoire l'est par \cref{lem:continuo-comun-accion-memoria} ; et la frontière est fonctorielle par \eqref{eq:continuo-comun-frontera-telescopica}. Enfin, l'action sur le mot ordonné induit l'action sur son registre entrée par entrée. La cohérence avec l'odomètre recalcule \(Q\), \(g\) et \(q^{(9)}\) à partir du parcours transformé et conserve \eqref{eq:continuo-comun-accion-fase-tpk}. Ces identités prouvent \eqref{eq:continuo-comun-groupoide-accion}.
+\end{proof}
+
+\section{Arbre fini de tous les prolongements}
+\label{sec:continuo-comun-arbol}
+
+Pour \(x\in\widehat{\mathcal X}^{\rm tot}_k\), soit \(\operatorname{Out}(x)\) l'ensemble de toutes les émissions TPK admissibles de longueur un issues de l'extrémité de \(x\). Une émission appartient à \(\operatorname{Out}(x)\) uniquement lorsque son action actualise conjointement toutes les coordonnées de \eqref{eq:continuo-comun-estado}. En particulier,
+\begin{equation}
+\label{eq:continuo-comun-out-finito}
+ 1\leq d(x):=\#\operatorname{Out}(x)<\infty,
+ \qquad
+ \varepsilon^0_k(x)\in\operatorname{Out}(x).
+\end{equation}
+
+\begin{definition}[Arbre tronqué des prolongements]
+\label{def:continuo-comun-arbol-finito}
+Étant donnés \(N\geq k\) et \(x\in\widehat{\mathcal X}^{\rm tot}_k\), nous définissons \(\mathscr T_{k,N}(x)\) comme l'arbre enraciné dont les sommets de hauteur \(j\), \(0\leq j\leq N-k\), sont les mots
+\begin{equation}
+\label{eq:continuo-comun-vertice-arbol}
+ h=(\epsilon_{k+1},\ldots,\epsilon_{k+j}),
+ \qquad
+ \epsilon_{n+1}\in\operatorname{Out}(x_n),
+ \qquad
+ x_{n+1}=(\epsilon_{n+1})_*x_n,
+\end{equation}
+avec pour racine le mot vide. Une arête ajoute une émission à la fin. Deux mots atteignant le même état terminal restent des sommets distincts si leurs registres diffèrent.
+\end{definition}
+
+La dernière condition est essentielle : l'arbre enregistre des généalogies, non le quotient qui ne retient que la cible. Son niveau terminal est
+\begin{equation}
+\label{eq:continuo-comun-terminal-finito}
+ \operatorname{Term}_{k,N}(x)
+ :=\{h\in\mathscr T_{k,N}(x):|h|=N-k\}.
+\end{equation}
+Chaque \(h\) conserve l'état terminal complet
+\begin{equation}
+\label{eq:continuo-comun-registro-terminal}
+ \operatorname{ter}_{N}(h)
+ :=\bigl(x_N,m_N,\partial(\gamma h),
+          \gamma h,\operatorname{Led}(\gamma h)\bigr).
+\end{equation}
+
+\begin{proposition}[Finitude et non-vacuité à tout horizon]
+\label{prop:continuo-comun-arbol-finito-no-vacio}
+Pour tous \(x\), \(k\) et \(N\geq k\), l'arbre \(\mathscr T_{k,N}(x)\) est fini et \(\operatorname{Term}_{k,N}(x)\neq\varnothing\).
+\end{proposition}
+
+\begin{proof}
+La racine possède un nombre fini et strictement positif de successeurs par \eqref{eq:continuo-comun-out-finito}. En appliquant le même argument à chaque niveau, on obtient par récurrence la finitude à tout horizon fini. Le mot formé d'émissions neutres \((\varepsilon^0_k,\varepsilon^0_{k+1},\ldots,
+\varepsilon^0_{N-1})\) est un sommet terminal, de sorte que le niveau \eqref{eq:continuo-comun-terminal-finito} n'est pas vide.
+\end{proof}
+
+L'effacement de la dernière émission définit
+\begin{equation}
+\label{eq:continuo-comun-proyeccion-terminal}
+ \pi_{N+1,N}:\operatorname{Term}_{k,N+1}(x)
+ \longrightarrow\operatorname{Term}_{k,N}(x).
+\end{equation}
+
+\begin{lemma}[Surjectivité terminale]
+\label{lem:continuo-comun-terminal-sobreyectivo}
+L'application \(\pi_{N+1,N}\) est surjective pour tout \(N\geq k\).
+\end{lemma}
+
+\begin{proof}
+Soit \(h\in\operatorname{Term}_{k,N}(x)\), d'état terminal \(v_h\). L'ajout de l'émission \(\varepsilon_N^0(v_h)\) produit \(h'\in\operatorname{Term}_{k,N+1}(x)\) et \(\pi_{N+1,N}(h')=h\).
+\end{proof}
+
+\section{Connexion nonadique : phase, holonomie et mémoire}
+\label{sec:continuo-comun-gamma9-total}
+
+Un mot de neuf émissions n'est pas appelé holonomie au seul motif qu'il est de longueur neuf. On conserve d'abord la connexion horizontale déterminée par le foncteur de phase. Pour \(r\in C_9\), nous définissons
+\begin{equation}
+\label{eq:continuo-comun-relacion-horizontal-fase}
+ \begin{split}
+ \mathscr R_{r,k}:=\bigl\{
+ (x,\epsilon,\epsilon_*x):\;&
+ x\in\widehat{\mathcal X}^{\rm tot}_k,\quad
+ \epsilon\in\operatorname{Out}(x),\\
+ &\mathsf Q_k(x)=(w,r),\quad
+ \mathsf Q_{k+1}(\epsilon_*x)=\sigma_9(w,r)
+ \bigr\}.
+ \end{split}
+\end{equation}
+La dernière égalité ne restreint pas le domaine : c'est l'action totale \eqref{eq:continuo-comun-accion-fase-tpk} de toute émission TPK élémentaire. La connexion transporte simultanément feuillet, mémoire et registre :
+\begin{equation}
+\label{eq:continuo-comun-conexion-tpk-generador}
+ \nabla_{\rm TPK}(\epsilon):=
+ \bigl(\operatorname{ph}(\epsilon),U_\epsilon,
+       \mathsf U_\epsilon,\lambda(\epsilon)\bigr).
+\end{equation}
+Sa composition se calcule au moyen de \eqref{eq:continuo-comun-transporte-hojas-funtorial}, de \eqref{eq:continuo-comun-accion-memoria-composicion} et de la concaténation du registre.
+
+Le sommet du tour nonadique est désormais l'ensemble des relèvements horizontaux compatibles avec la phase
+\begin{equation}
+\label{eq:continuo-comun-gamma9-apice}
+ \begin{split}
+ \mathsf Z^{\Gamma}_{9,k}:=\coprod_{r\in C_9}\bigl\{
+ (x,\epsilon_1,\ldots,\epsilon_9):\;&x_0=x,\quad
+ x_i=(\epsilon_i)_*x_{i-1},\\
+ &(x_{i-1},\epsilon_i,x_i)
+ \in\mathscr R_{r+i-1,k+i-1},\quad 1\leq i\leq9
+ \bigr\},
+ \end{split}
+\end{equation}
+ où les indices de \(r+i-1\) se lisent dans \(C_9\). Le terme est déterminé de manière unique par \(r=g_k(x)\), de sorte que le coproduit ne duplique pas les témoins. Les applications source et cible sont
+\begin{equation}
+\label{eq:continuo-comun-gamma9-span}
+ \widehat{\mathcal X}^{\rm tot}_k
+ \xleftarrow{\ s_{9,k}\ }
+ \mathsf Z^{\Gamma}_{9,k}
+ \xrightarrow{\ t_{9,k}\ }
+ \widehat{\mathcal X}^{\rm tot}_{k+9},
+ \qquad
+ s_{9,k}(x,\boldsymbol\epsilon)=x,\quad
+ t_{9,k}(x,\boldsymbol\epsilon)
+ =(\epsilon_9\cdots\epsilon_1)_*x.
+\end{equation}
+L'holonomie relationnelle est
+\begin{equation}
+\label{eq:continuo-comun-gamma9-relacion}
+ \Gamma_{9,k}:=
+ \{(s_{9,k}z,t_{9,k}z):z\in\mathsf Z^{\Gamma}_{9,k}\}
+ =\operatorname{Hol}_{C_9}(\nabla_{\rm TPK}).
+\end{equation}
+
+\begin{lemma}[Le niveau neuf de l'arbre réalise l'holonomie]
+\label{lem:continuo-comun-gamma9-arbol}
+L'application qui oublie les états intermédiaires déjà déterminés par les émissions induit une bijection
+\begin{equation}
+\label{eq:continuo-comun-gamma9-apice-arbol}
+ \mathsf Z^{\Gamma}_{9,k}
+ \xrightarrow{\ \cong\ }
+ \coprod_{x\in\widehat{\mathcal X}^{\rm tot}_k}
+ \operatorname{Term}_{k,k+9}(x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Chaque arête de \(\operatorname{Out}(x_i)\) satisfait \eqref{eq:continuo-comun-accion-fase-tpk} ; ainsi, un mot terminal de longueur neuf détermine les neuf éléments de \eqref{eq:continuo-comun-relacion-horizontal-fase}. Réciproquement, un relèvement horizontal de \eqref{eq:continuo-comun-gamma9-apice} est un mot composable de l'arbre. Les deux opérations conservent les émissions et sont inverses. Ainsi, \eqref{eq:continuo-comun-gamma9-apice-arbol} est un théorème dérivé de la connexion, non sa définition.
+\end{proof}
+
+\begin{proposition}[Retour de phase, progression de la mémoire et absence de réinitialisation]
+\label{prop:continuo-comun-gamma9-retorno-memoria}
+Pour tout \(z=(x,\epsilon_1,\ldots,\epsilon_9)\) du sommet,
+\begin{align}
+ g(t_{9,k}z)&=g(s_{9,k}z),
+ \label{eq:continuo-comun-gamma9-retorno-fase}\\
+ q^{(9)}(t_{9,k}z)&=q^{(9)}(s_{9,k}z)+1,
+ \label{eq:continuo-comun-gamma9-avance-memoria}\\
+ \operatorname{Led}(t_{9,k}z)
+ &=\operatorname{Led}(s_{9,k}z)\star
+   \bigl(\lambda(\epsilon_1),\ldots,\lambda(\epsilon_9)\bigr).
+ \label{eq:continuo-comun-gamma9-ledger}
+\end{align}
+En particulier, l'identification de phase \(g(t_{9,k}z)=g(s_{9,k}z)\) n'induit pas d'identification des états : après transport des deux registres vers le même type de comparaison, leurs mémoires verticales diffèrent d'une unité. C'est la phase exprimée qui revient, non l'état enrichi.
+\end{proposition}
+
+\begin{proof}
+Les deux premières identités sont \eqref{eq:continuo-comun-retorno-fase-avance-memoria}. La troisième est la définition de la concaténation du registre. Puisque la mémoire verticale diffère d'une unité, les états complets sont distincts, même si une coordonnée visible supplémentaire pouvait coïncider.
+\end{proof}
+
+\begin{proposition}[Compression isométrique de la même holonomie]
+\label{prop:continuo-comun-gamma9-compresion-isometrica}
+Soit \(U_{\Gamma_9}:\mathcal H_{\rm full}\to\mathcal H_{\rm full}\) une réalisation isométrique de l'holonomie précédente, et soit \(J:\mathcal H_{\rm vis}\to\mathcal H_{\rm full}\) l'inclusion isométrique du registre visible, avec \(E:=J^*\) et \(P:=JE\). Nous définissons
+\begin{equation}
+\label{eq:continuo-comun-gamma9-compresion-datos}
+ T:=EU_{\Gamma_9}J,\qquad
+ \eta:=(I-P)U_{\Gamma_9}J.
+\end{equation}
+Alors
+\begin{equation}
+\label{eq:continuo-comun-gamma9-compresion}
+ \boxed{\;
+ U_{\Gamma_9}J=JT+\eta,\qquad
+ I-T^*T=\eta^*\eta.
+ \;}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+En insérant \(I=P+(I-P)\) devant \(U_{\Gamma_9}J\), on obtient
+\[
+ U_{\Gamma_9}J
+ =JEU_{\Gamma_9}J+(I-P)U_{\Gamma_9}J
+ =JT+\eta.
+\]
+Les deux termes appartiennent à des sous-espaces orthogonaux. Puisque \(U_{\Gamma_9}\) et \(J\) sont des isométries,
+\[
+ I=(U_{\Gamma_9}J)^*(U_{\Gamma_9}J)
+   =T^*T+\eta^*\eta,
+\]
+ce qui constitue la seconde identité.
+\end{proof}
+
+\begin{proposition}[Totalité et équivariance de l'holonomie]
+\label{prop:continuo-comun-gamma9-total-natural}
+L'application \(s_{9,k}\) est surjective. Les neuf prolongements neutres forment la section
+\begin{equation}
+\label{eq:continuo-comun-gamma9-seccion-neutra}
+ \begin{gathered}
+ x_0:=x,\qquad
+ \varepsilon^0_{k+i}:=\varepsilon^0_{k+i}(x_i),\qquad
+ x_{i+1}:=(\varepsilon^0_{k+i})_*x_i\quad(0\leq i<9),\\
+ \eta^{(9)}_k(x):=
+ (x,\varepsilon^0_k,\ldots,\varepsilon^0_{k+8})
+ \in\mathsf Z^{\Gamma}_{9,k},
+ \qquad s_{9,k}\eta^{(9)}_k=I.
+ \end{gathered}
+\end{equation}
+Toute symétrie cohérente \(a\) dont l'action sur l'odomètre satisfait \(\mathsf Q\,a=\bar a\,\mathsf Q\) et \(\bar a\,\sigma_9=\sigma_9\,\bar a\) induit
+\[
+ a^Z(x,\epsilon_1,\ldots,\epsilon_9)
+ :=(a x,a\epsilon_1,\ldots,a\epsilon_9)
+\]
+et vérifie
+\begin{equation}
+\label{eq:continuo-comun-gamma9-naturalidad}
+ s_{9,k}a^Z=a_ks_{9,k},
+ \qquad
+ t_{9,k}a^Z=a_{k+9}t_{9,k}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Le mot neutre existe en toute source et satisfait l'action de phase \eqref{eq:continuo-comun-accion-fase-tpk} ; cela prouve la section et la surjectivité. La condition \(\bar a\sigma_9=\sigma_9\bar a\) envoie les relations horizontales sur des relations horizontales. L'action entrée par entrée conserve composition, retenue, mémoire, frontière et registre ; lire le premier ou le dernier état avant ou après l'action donne \eqref{eq:continuo-comun-gamma9-naturalidad}.
+\end{proof}
+
+\section{Survie totale et multisection complète}
+\label{sec:continuo-comun-supervivencia}
+
+\begin{definition}[Survie produite]
+\label{def:continuo-comun-supervivencia}
+Un état \(x\in\widehat{\mathcal X}^{\rm tot}_k\) survit lorsque
+\begin{equation}
+\label{eq:continuo-comun-supervivencia}
+ \operatorname{Term}_{k,N}(x)\neq\varnothing
+ \qquad\text{pour tout }N\geq k.
+\end{equation}
+Nous notons \(\operatorname{Surv}_k\) l'ensemble de ces états.
+\end{definition}
+
+\begin{theorem}[Le domaine total est survivant]
+\label{thm:continuo-comun-total-superviviente}
+À toute profondeur,
+\begin{equation}
+\label{eq:continuo-comun-surv-igual-total}
+ \operatorname{Surv}_k=\widehat{\mathcal X}^{\rm tot}_k.
+\end{equation}
+En particulier, la survie ne définit pas un sous-ensemble supposé avant la construction de l'état.
+\end{theorem}
+
+\begin{proof}
+L'inclusion \(\operatorname{Surv}_k\subseteq
+\widehat{\mathcal X}^{\rm tot}_k\) appartient à la définition. L'inclusion opposée est exactement la non-vacuité à tout horizon démontrée dans \cref{prop:continuo-comun-arbol-finito-no-vacio}.
+\end{proof}
+
+\begin{definition}[Multisection des prolongements complets]
+\label{def:continuo-comun-multiseccion}
+La multisection complète au-dessus de \(x\) est la limite inverse
+\begin{equation}
+\label{eq:continuo-comun-multiseccion}
+ \operatorname{Msect}(x)
+ :=\varprojlim_{N\geq k}
+ \bigl(\operatorname{Term}_{k,N}(x),\pi_{N+1,N}\bigr).
+\end{equation}
+Ses éléments sont toutes les histoires infinies compatibles qui prolongent \(x\). Aucune ne reçoit de priorité au sein de \eqref{eq:continuo-comun-multiseccion}.
+\end{definition}
+
+\begin{theorem}[Non-vacuité concrète de la multisection]
+\label{thm:continuo-comun-multiseccion-no-vacia}
+Pour tout \(x\in\widehat{\mathcal X}^{\rm tot}_k\),
+\begin{equation}
+\label{eq:continuo-comun-multiseccion-no-vacia}
+ \operatorname{Msect}(x)\neq\varnothing.
+\end{equation}
+En outre, chaque coordonnée finie d'une histoire de \(\operatorname{Msect}(x)\) conserve les deux feuillets, l'orientation, la retenue, la mémoire, la frontière, le parcours et le registre de l'état qu'elle prolonge.
+\end{theorem}
+
+\begin{proof}
+Les ensembles terminaux sont finis et non vides par \cref{prop:continuo-comun-arbol-finito-no-vacio}, et leurs applications de liaison sont surjectives par \cref{lem:continuo-comun-terminal-sobreyectivo}. On peut construire récursivement un élément compatible : on part de la racine et, à chaque pas, on conserve un prolongement du préfixe précédent. Le prolongement neutre garantit que le processus ne s'arrête jamais. La compatibilité des coordonnées découle du fait que chaque arête de l'arbre agit par l'unique action d'état définie dans \eqref{eq:continuo-comun-estado}.
+\end{proof}
+
+\section{Mesure canonique engendrée par l'arbre}
+\label{sec:continuo-comun-medida}
+
+La mesure n'est pas introduite comme un poids extérieur sur les sorties. Elle s'obtient en comptant les émissions admissibles à chaque sommet avant de choisir une continuation.
+
+\begin{definition}[Poids local et mesure à horizon donné]
+\label{def:continuo-comun-medida-finita}
+Pour \(v\in\widehat{\mathcal X}^{\rm tot}_j\) et \(\epsilon\in\operatorname{Out}(v)\), nous posons
+\begin{equation}
+\label{eq:continuo-comun-peso-local}
+ p_v(\epsilon):=\frac{1}{d(v)}\in\mathbb Q_{>0}.
+\end{equation}
+Si \(h=(\epsilon_{k+1},\ldots,\epsilon_N)\in
+\operatorname{Term}_{k,N}(x)\) et si \(x_j\) est le préfixe précédant \(\epsilon_{j+1}\), nous définissons
+\begin{equation}
+\label{eq:continuo-comun-medida-horizonte}
+ \mu_{x,N}(h)
+ :=\prod_{j=k}^{N-1}p_{x_j}(\epsilon_{j+1})
+ =\prod_{j=k}^{N-1}\frac{1}{d(x_j)}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Normalisation]
+\label{lem:continuo-comun-medida-normalizada}
+Pour tout horizon \(N\geq k\),
+\begin{equation}
+\label{eq:continuo-comun-medida-suma-uno}
+ \sum_{h\in\operatorname{Term}_{k,N}(x)}\mu_{x,N}(h)=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+À la hauteur un, \(\sum_{\epsilon\in\operatorname{Out}(x)}d(x)^{-1}=1\). En supposant la normalisation à la hauteur \(N-k\), chaque préfixe terminal \(h\), d'état final \(v_h\), contribue au niveau suivant par
+\[
+ \sum_{\epsilon\in\operatorname{Out}(v_h)}
+ \mu_{x,N}(h)p_{v_h}(\epsilon)
+ =\mu_{x,N}(h).
+\]
+La sommation sur tous les préfixes prouve l'identité par récurrence.
+\end{proof}
+
+\begin{proposition}[Cohérence projective]
+\label{prop:continuo-comun-medida-consistente}
+Les mesures finies satisfont
+\begin{equation}
+\label{eq:continuo-comun-medida-pushforward}
+ (\pi_{N+1,N})_*\mu_{x,N+1}=\mu_{x,N}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Pour \(h\in\operatorname{Term}_{k,N}(x)\), la masse de sa fibre est
+\begin{align*}
+ \sum_{\pi_{N+1,N}(h')=h}\mu_{x,N+1}(h')
+ &=\mu_{x,N}(h)
+   \sum_{\epsilon\in\operatorname{Out}(v_h)}p_{v_h}(\epsilon)\\
+ &=\mu_{x,N}(h).
+\end{align*}
+C'est précisément l'égalité des mesures ponctuelles équivalente à \eqref{eq:continuo-comun-medida-pushforward}.
+\end{proof}
+
+Les cylindres de la multisection sont
+\begin{equation}
+\label{eq:continuo-comun-cilindro-msect}
+ [h]_{x,N}
+ :=\{\omega\in\operatorname{Msect}(x):
+       \omega|_N=h\}.
+\end{equation}
+
+\begin{theorem}[Mesure canonique des prolongements]
+\label{thm:continuo-comun-medida-canonica}
+Il existe une unique mesure de cylindres \(\mu_x\) sur \(\operatorname{Msect}(x)\) telle que
+\begin{equation}
+\label{eq:continuo-comun-medida-cilindro}
+ \mu_x([h]_{x,N})=\mu_{x,N}(h).
+\end{equation}
+Elle est normalisée, son support est la multisection entière, et elle s'obtient uniquement à partir des ensembles finis de prolongements APP--TRIT--TPK.
+\end{theorem}
+
+\begin{proof}
+La cohérence de \cref{prop:continuo-comun-medida-consistente} rend \eqref{eq:continuo-comun-medida-cilindro} indépendante de l'horizon dans lequel un cylindre est représenté. La normalisation provient de \cref{lem:continuo-comun-medida-normalizada}. Deux cylindres sont soit disjoints, soit emboîtés ; les masses finies définissent donc de manière unique une mesure additive sur l'algèbre des cylindres. La multisection est une limite d'ensembles finis discrets et les cylindres constituent sa base compacte ; la mesure se prolonge de manière unique à la \(\sigma\)-algèbre qu'ils engendrent. Enfin, \(p_v(\epsilon)>0\) pour toute émission admissible, si bien que tout cylindre non vide possède une masse positive et que le support est la multisection complète.
+\end{proof}
+
+\section{Naturalité sous les symétries et les troncatures}
+\label{sec:continuo-comun-naturalidad}
+
+Un système cohérent \(g=(g_j)_{j\geq0}\in\mathsf U\) transporte une émission sortante de profondeur \(j\) au moyen de
+\begin{equation}
+\label{eq:continuo-comun-accion-out}
+ (g_{j+1},g_j)_*:\operatorname{Out}(x)\longrightarrow
+      \operatorname{Out}(g_j\cdot x),
+ \qquad
+ \epsilon\longmapsto g_{j+1}\epsilon g_j^{-1}.
+\end{equation}
+Les relations TPK font de \eqref{eq:continuo-comun-accion-out} une bijection préservant les multiplicités. L'action sur chaque entrée donne un isomorphisme d'arbres
+\begin{equation}
+\label{eq:continuo-comun-isomorfismo-arbol}
+ g_{*,N}:\mathscr T_{k,N}(x)
+ \xrightarrow{\ \cong\ }
+ \mathscr T_{k,N}(g_k\cdot x).
+\end{equation}
+
+\begin{theorem}[Naturalité de l'arbre, de la multisection et de la mesure]
+\label{thm:continuo-comun-naturalidad}
+Pour toute symétrie réversible cohérente \(g=(g_j)_{j\geq0}\),
+\begin{align}
+ \pi_{N+1,N}g_{*,N+1}
+ &=g_{*,N}\pi_{N+1,N},
+ \label{eq:continuo-comun-naturalidad-terminal}\\
+ g_*\operatorname{Msect}(x)
+ &=\operatorname{Msect}(g_k\cdot x),
+ \label{eq:continuo-comun-naturalidad-msect}\\
+ (g_{*,N})_*\mu_{x,N}
+ &=\mu_{g_k\cdot x,N},
+ \qquad
+ (g_*)_*\mu_x=\mu_{g_k\cdot x}.
+ \label{eq:continuo-comun-naturalidad-medida}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+La première égalité exprime que l'action entrée par entrée commute avec l'effacement de la dernière entrée. Le passage à la limite inverse donne \eqref{eq:continuo-comun-naturalidad-msect}. Puisque \eqref{eq:continuo-comun-accion-out} est bijective, \(d(g_j\cdot v)=d(v)\) ; par \eqref{eq:continuo-comun-medida-horizonte}, un mot et son image ont le même poids. Cela prouve la première égalité de mesures de \eqref{eq:continuo-comun-naturalidad-medida}. La seconde se déduit sur les cylindres au moyen de \eqref{eq:continuo-comun-medida-cilindro}, et les cylindres déterminent la mesure.
+\end{proof}
+
+Les troncatures de l'état et celles de l'arbre forment également le carré
+\begin{equation}
+\label{eq:continuo-comun-cuadrado-truncamiento}
+\begin{CD}
+ \operatorname{Term}_{k,N+1}(x)
+ @>{\pi_{N+1,N}}>>
+ \operatorname{Term}_{k,N}(x)\\
+ @V{\operatorname{ter}_{N+1}}VV
+ @VV{\operatorname{ter}_{N}}V\\
+ \widehat{\mathcal X}^{\rm tot}_{N+1}
+ @>{\rho_{N+1,N}}>>
+ \widehat{\mathcal X}^{\rm tot}_{N}.
+\end{CD}
+\end{equation}
+La commutativité est littérale : les deux parcours effacent la dernière émission et sa dernière entrée de registre.
+
+\section{Limite inverse \(\widehat\Omega\) des histoires complètes et état enrichi commun APP–TRIT–TPK}
+\label{sec:continuo-comun-limite}
+
+Les surjections \eqref{eq:continuo-comun-truncamiento-total} produisent l'objet des histoires complètes
+\begin{equation}
+\label{eq:continuo-comun-omega}
+ \widehat\Omega
+ :=\varprojlim_k
+ \bigl(\widehat{\mathcal X}^{\rm tot}_k,\rho_{k+1,k}\bigr).
+\end{equation}
+Un élément \(\widehat x=(\widehat x_k)_{k\geq0}\) contient, à chaque profondeur, la même paire de feuillets transportée, les orientations et retenues produites, la mémoire accumulée, les frontières, le parcours et le registre complet. Sa fibre de continuations depuis tout préfixe est \(\operatorname{Msect}(\widehat x_k)\), munie de \(\mu_{\widehat x_k}\).
+
+\begin{theorem}[État enrichi commun APP--TRIT--TPK]
+\label{thm:continuo-comun-propietario}
+Le système
+\begin{equation}
+\label{eq:continuo-comun-propietario}
+ \mathfrak C^{\rm gen}:=\Biggl(
+ \begin{aligned}
+ &\{\widehat{\mathcal X}^{\rm tot}_k,\rho_{k+1,k},\eta_k\}_{k\geq0},
+   \widehat\Omega,\{\mathfrak G_k\}_{k\geq0},
+   \{\mathscr T_{k,N}\}_{N\geq k},\\
+ &\operatorname{Msect},\operatorname{Surv},\{\mu_x\},
+   \{\mathfrak r_9(v_K)\}_{K\geq0},
+   \mathcal K_{\rm ph},\widehat{\mathcal K}_{\rm ph},\\
+ &\operatorname{Sh},\operatorname{or},\kappa,
+   \mathsf Q,g,q^{(9)},\beta,m,\partial,\gamma,\operatorname{Led},\\
+ &\{\mathsf Z^\Gamma_{9,k},s_{9,k},t_{9,k},\Gamma_{9,k}\}_{k\geq0}
+ \end{aligned}
+ \Biggr)
+\end{equation}
+est défini pour tout état produit par APP--TRIT--TPK\@. Il est non vide, naturel sous les symétries réversibles et compatible avec le raffinement. En particulier :
+\begin{enumerate}
+ \item les deux feuillets sont transportés ensemble ;
+ \item l'orientation et la retenue sont calculées par la division TRIT ;
+ \item la mémoire obéit à l'action affine TPK ;
+ \item la phase obéit à l'odomètre TPK, revient après neuf émissions et la mémoire verticale avance d'une unité ;
+ \item la réalisation markovienne de ce tour satisfait \(\mathcal K_{\rm ph}^9=E_+E_\times\) et renouvelle uniformément la fibre complète de \(468=18\cdot26\) émissions ;
+ \item le lecteur compact conserve bloc, cylindre, préfixe, retenue, signature, projection de Witt et phase, avec leurs actualisations et troncatures ;
+ \item frontière, parcours et registre se composent sans effacer les extrémités ni l'ordre des émissions ;
+ \item tout état survit et possède une multisection non vide de prolongements complets ;
+ \item la mesure canonique est projective et possède un support sur tous ces prolongements.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+La totalité et la finitude découlent de \cref{prop:continuo-comun-total-finito}. Les identités des feuillets, de la retenue et de la mémoire sont démontrées dans \cref{lem:continuo-comun-asociatividad-carry,lem:continuo-comun-accion-memoria} ; la phase, la mémoire verticale et l'holonomie nonadique, y compris sa réalisation sur la fibre et son lecteur d'état, sont démontrées dans \cref{prop:continuo-comun-gamma9-retorno-memoria,prop:continuo-comun-gamma9-total-natural,prop:continuo-comun-kph-heredada,prop:continuo-comun-gamma9-compresion-isometrica,prop:continuo-comun-no-reinicio-alcance} ; la frontière conserve ses extrémités par \eqref{eq:continuo-comun-frontera-telescopica}. La survie totale et la non-vacuité des multisections sont \cref{thm:continuo-comun-total-superviviente,thm:continuo-comun-multiseccion-no-vacia}. L'existence, la cohérence et le support de la mesure sont \cref{prop:continuo-comun-medida-consistente,thm:continuo-comun-medida-canonica}. Enfin, la compatibilité avec les symétries et les troncatures est démontrée dans \cref{thm:continuo-comun-naturalidad} et \eqref{eq:continuo-comun-cuadrado-truncamiento}.
+\end{proof}
+
+\section{Nécessité structurelle et provenance}
+\label{sec:continuo-comun-falsadores}
+
+\begin{proposition}[Falsificateurs de l'état enrichi commun]
+\label{prop:continuo-comun-falsadores}
+Chacune des opérations suivantes remplace \(\mathfrak C^{\rm gen}\) par un autre objet et bloque le transfert des théorèmes précédents :
+\begin{enumerate}
+ \item choisir \(\Sigma\) ou \(\Pi\) et écarter l'autre feuillet ;
+ \item conserver le résidu et effacer le quotient ;
+ \item conserver le signe TRIT et effacer sa retenue ;
+ \item remplacer le registre ordonné par sa valeur terminale ;
+ \item identifier deux mots parce qu'ils atteignent la même cellule ;
+ \item choisir une continuation et la substituer à la multisection ;
+ \item déclarer la survie sans exhiber des prolongements à chaque horizon ;
+ \item normaliser uniformément le seul dernier niveau, en ignorant les degrés des préfixes et en perdant la cohérence projective ;
+ \item utiliser une lecture ultérieure pour décider quels états entrent dans \(\widehat{\mathcal X}^{\rm tot}_k\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Les six premiers points suppriment des coordonnées ou des relations présentes dans la définition de l'état, de l'arbre ou de la multisection. Le septième supprime la preuve de \cref{thm:continuo-comun-total-superviviente}. Le huitième peut violer \eqref{eq:continuo-comun-medida-pushforward} lorsque les degrés terminaux ne sont pas constants. Le dernier remplace le domaine total \eqref{eq:continuo-comun-dominio-total} par une sélection rétrospective.
+\end{proof}
+
+Les cellules APP, la paire de feuillets, le relèvement TRIT, les extensions TPK, le cocycle de retenue, la mémoire, la frontière, le parcours et la conservation du registre constituent les structures initiales. Sur celles-ci sont réunis dans un domaine unique le groupoïde fini, l'arbre des mots, la multisection et la mesure locale normalisée. Les théorèmes de survie totale, de non-vacuité, de cohérence et de naturalité certifient cette construction conjointe.

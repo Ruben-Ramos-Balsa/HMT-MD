@@ -1,0 +1,150 @@
+% Suplemento de trabajo. No sustituye registro_k.tex ni cierra por decreto E108.
+% Procedencia y alcance: INFORME_RECUPERACION.md, misma carpeta.
+\subsection{Évaluation incidencielle antérieure au registre dodécaphasique}
+\label{subsec:registro-evaluacion-incidencial}
+
+La récupération d’un registre à partir de ses différences cycliques et de sa
+charge totale est une question distincte de l’évaluation de ces coordonnées
+sur le registre des incidences. Le premier problème est résolu au moyen de
+l’extracteur transversal de la proposition~\ref{prop:k-transversal}.
+Pour le second, une présentation historique du
+registre fournit trois dénombrements entiers dans chaque fenêtre. Il est utile
+d’expliciter leur composition et de déterminer exactement l’information que
+requiert leur évaluation.
+
+Soit \(\mathscr L\) un livre de visites et de traces orientées préalablement
+généré. Chaque visite conserve la route, la position APP, le feuillet,
+l'instant, la multiplicité et l'incidence de frontière. L'évaluation
+arithmétique produit l'entier et sa décomposition
+\[
+ n_t=r_t+9q_t,\qquad 1\leq r_t\leq9.
+\]
+L'entier \(n_t\) se calcule à partir du feuillet de somme ou de produit ; son
+résidu n'est pas reçu comme une valeur indépendante. La distinction entre
+incidence de couronne et incidence intérieure demeure explicite pour les
+visites de résidu \(9\).
+
+Dans la fenêtre \(E_m\), la présentation par dénombrements considère
+\begin{align}
+ A_m&=\sum_{v\in E_m}w(v)
+             \mathbf1_{\{1,3,5,7\}}(r(v)),\\
+ C_m&=\sum_{j\geq0}\bigl(\nu^-_{120,m}(j)-\nu^+_{120,m}(j)\bigr),\\
+ V_m&=\sum_{v\in E_m}w(v)\mathbf1_{\{9\}}(r(v))\epsilon_\partial(v).
+\end{align}
+Ici, \(w(v)\) est la multiplicité d'incidence et \(\epsilon_\partial(v)=1\) dans la couronne, \(-1\) à l'intérieur. Les traces comptées par \(\nu^\pm\) doivent être énumérées au moyen de la règle correspondante de l'article. La somme entière requiert un support fini ou une construction alternative qui détermine son sens. Le nombre d'incidences chronologiques et la longueur réduite \(120(1+3j)\) ont des types distincts ; leur relation exige l'unité de longueur du lecteur.
+
+On définit \([x]_{10}\in\{0,\ldots,9\}\) comme le représentant
+euclidien, et l'on conserve les quotients
+\[
+ x=[x]_{10}+10\lfloor x/10\rfloor.
+\]
+Le bloc incidenciel est
+\begin{equation}
+ z_m=100[A_m]_{10}+10[C_m]_{10}+[V_m]_{10}.
+ \label{eq:registro-bloque-incidencial}
+\end{equation}
+Par composition, on obtient l'application
+\begin{equation}
+ \mathcal E_{\rm cnt}(\mathscr L)=
+ \left((z_m-z_{m+3})_{m=1}^{12},
+       (z_m-z_{m+4})_{m=1}^{12},\sum_{m=1}^{12}z_m\right).
+\label{eq:registro-composicion-incidencial}
+\end{equation}
+Les indices se lisent cycliquement modulo \(12\). Dans cette partie,
+\((D_jz)_m=z_m-z_{m+j}\), pour \(j=3,4\), et
+\(Q(z)=\sum_{m=1}^{12}z_m\) ; par conséquent, la composition précédente est
+\((D_3z,D_4z,Q(z))\). Cette convention est conservée dans
+\S\ref{subsec:k-transversal}, où est démontrée la reconstruction
+entière complète.
+Cette formule produit ses coordonnées à partir des dénombrements. Elle n’utilise
+ni \(K\), ni \(U\), ni \(\alpha\), ni les coordonnées transversales attendues
+comme arguments. Son identification à
+\(\mathcal E_{108}^{90,120}\) nécessite de la composer avec la famille et
+les incidences effectives de l’état terminal ; elle ne se déduit pas uniquement
+de l’inversibilité du système transversal.
+
+\begin{proposition}[Information arithmétique suffisante et nécessaire]
+\label{prop:registro-36-residuos}
+Soient \(N,N'\in\mathbb Z^{12\times3}\), ordonnés selon les dénombrements
+\((A,C,V)\). Pour l'application définie par
+\eqref{eq:registro-bloque-incidencial}--\eqref{eq:registro-composicion-incidencial},
+\[
+ \mathcal E_{\rm cnt}(N)=\mathcal E_{\rm cnt}(N')
+ \quad\Longleftrightarrow\quad
+ N-N'\in10\mathbb Z^{36}.
+\]
+En particulier, les \(36\) résidus sectoriels déterminent exactement
+la sortie à \(25\) coordonnées. La conservation des quotients et
+de la provenance constitue une information supplémentaire du registre.
+\end{proposition}
+
+\begin{proof}
+L'égalité modulo \(10\) produit les mêmes blocs et, par conséquent,
+les mêmes coordonnées transversales. Réciproquement, si les coordonnées
+transversales coïncident, \(D_3(z-z')=D_4(z-z')=0\). Les pas
+\(3\) et \(4\) engendrent le cycle de longueur \(12\), de sorte que
+\(z-z'\) est constant. L'égalité des charges totales annule cette
+constante. Enfin, la représentation décimale d'un entier compris entre
+\(0\) et \(999\) possède trois chiffres uniques. On récupère ainsi les
+trois résidus de chaque fenêtre. L'assertion est une identité algébrique
+pour tous \(N,N'\), et non une inférence obtenue par des essais finis.
+\end{proof}
+
+\subsection{Conjugaison des dénombrements et termes de frontière}
+\label{subsec:registro-conjugacion-incidencial}
+
+Soit \(\rho(m)=13-m\). Considérons une conjugaison d'incidences
+qui inverse l'ordre des fenêtres, conserve la classe arithmétique et la
+classe de frontière des visites et échange les canaux des traces.
+Alors
+\[
+ (A_m^\dagger,C_m^\dagger,V_m^\dagger)
+ =(A_{\rho(m)},-C_{\rho(m)},V_{\rho(m)}).
+\]
+Si \(c_m=[C_m]_{10}\), la réduction décimale produit l'identité
+\begin{equation}
+ z_m^\dagger=z_{\rho(m)}
+       +100\mathbf1_{\{c_{\rho(m)}\ne0\}}-20c_{\rho(m)}.
+ \label{eq:registro-conjugacion-decimal}
+\end{equation}
+En effet, \([-C]_{10}=0\) lorsque \([C]_{10}=0\), et
+\([-C]_{10}=10-[C]_{10}\) dans le cas contraire. La formule conserve
+exactement cette différence. La négation du canal n'équivaut pas à nier
+le bloc décimal complet.
+
+L'application de cette identité à une involution concrète du TPK exige
+de vérifier son action sur les incidences. Pour un lecteur d'occupations
+évalué avant l'avancement, l'inversion d'une route
+\(\gamma=(x_0,\ldots,x_n)\) satisfait
+\[
+ \sum_{k=0}^{n-1}f(x_{n-k})
+ =\sum_{k=0}^{n-1}f(x_k)+f(x_n)-f(x_0).
+\]
+Les termes aux extrémités sont incorporés avant la réduction modulo
+\(10\). Ils s'annulent sur les routes fermées ; dans les fenêtres ouvertes, ils peuvent
+modifier leurs résidus. Cette correction, déjà présente dans le développement
+bidirectionnel du transport, spécifie ce que doit conserver le raccordement
+entre la route et les dénombrements.
+
+\begin{proposition}[Nécessité de l'information non périodique du registre]
+Supposons que l’observable d’une famille fixe de chemins satisfasse
+\(o(t+54)=o(t)\), que la multiplicité soit conservée sous ce retour
+et que le même lecteur local agisse dans les fenêtres de \(9\) instants.
+Alors ses dénombrements et blocs satisfont
+\[
+ (A,C,V)_{m+6}=(A,C,V)_m,\qquad z_{m+6}=z_m.
+\]
+\end{proposition}
+
+\begin{proof}
+La translation \(t\mapsto t+54\) envoie \(E_m\) bijectivement
+sur \(E_{m+6}\), en conservant chaque incidence comptée et sa multiplicité.
+L'égalité se transmet à la somme et à la réduction décimale.
+\end{proof}
+
+Une présentation à \(12\) blocs distincts exige donc que
+le lecteur conserve une information qui ne se factorise pas par cet observable
+de période \(54\) : sélection d'incidences, orientation effective,
+extrémités, multiplicité ou mémoire. La proposition délimite une réduction
+inadmissible de l'état ; elle n'affirme pas que la dynamique complète possède une
+période \(54\) et ne détermine pas à elle seule son lecteur terminal.

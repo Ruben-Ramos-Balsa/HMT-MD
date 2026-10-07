@@ -1,0 +1,165 @@
+\subsubsection{Modulus refinement and preservation of the two readers}
+\label{mg03:refinamiento}
+
+Identity \eqref{eq:defecto-integrado} preserves the integer defect
+\(1215\) through residue \(54\) and quotient \(129\). Its
+generalization requires separate specifications of the reading modulus,
+the support size and the number of coordinates. These three operations
+produce distinct counting laws from the same APP sheets.
+
+For \(N\geq2\), fix the positive representative
+\[
+ \rho_N(s)=1+((s-1)\bmod N)\in\{1,\ldots,N\},
+ \qquad s=\rho_N(s)+NQ_N(s),\quad Q_N(s)\in\mathbb Z.
+\]
+On \(\{1,\ldots,N\}^2\), the full-modulus readings are
+\(\rho_N(i+j)\) and \(\rho_N(ij)\). Their sums are denoted by
+\(S_+^{\mathrm{full}}(N)\) and \(S_\times^{\mathrm{full}}(N)\).
+
+\begin{proposition}[Defect law for an integer modulus]
+For every \(N\geq2\),
+\begin{align}
+ S_+^{\mathrm{full}}(N)&=\frac{N^2(N+1)}2,
+ \label{mg03:suma-plena}\\
+ S_\times^{\mathrm{full}}(N)&=
+ \frac N2\left(N^2+\sum_{i=1}^{N}\gcd(i,N)\right),
+ \label{mg03:producto-pleno}\\
+ \Delta_N^{\mathrm{full}}&=
+ \frac N2\left(\sum_{i=1}^{N}\gcd(i,N)-N\right).
+ \label{mg03:defecto-pleno}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+In an additive row, translation by \(i\) permutes the \(N\) residue
+classes and their positive representatives. Each row sums to
+\(N(N+1)/2\), proving \eqref{mg03:suma-plena}. For a multiplicative
+row, let \(g=\gcd(i,N)\). The image of \(j\mapsto ij\pmod N\)
+contains the \(N/g\) residue classes divisible by \(g\), and each
+has \(g\) preimages. Their positive representatives are
+\(g,2g,\ldots,N\), whose sum is
+\[
+ g\frac{(N/g)(N/g+1)}2=\frac{N(N+g)}{2g}.
+\]
+Multiplicity \(g\) gives \(N(N+g)/2\) per row. Summation over
+\(i\) yields \eqref{mg03:producto-pleno}; subtracting
+\eqref{mg03:suma-plena} gives \eqref{mg03:defecto-pleno}.
+\end{proof}
+
+\begin{corollary}[Prime-power moduli]
+If \(N=p^m\), where \(p\) is prime and \(m\geq1\), then
+\begin{equation}
+ \sum_{i=1}^{p^m}\gcd(i,p^m)
+ =p^m+m(p-1)p^{m-1},\qquad
+ \Delta_{p^m}^{\mathrm{full}}
+ =\frac{m(p-1)}2p^{2m-1}.
+ \label{mg03:primo-potencia}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For each \(0\leq k<m\), there are
+\(p^{m-k}-p^{m-k-1}\) indices with exact \(p\)-adic valuation
+\(k\). Their greatest common divisor with \(p^m\) is \(p^k\),
+so this stratum contributes \((p-1)p^{m-1}\). The \(m\) strata
+contribute \(m(p-1)p^{m-1}\), whereas the index \(i=p^m\)
+contributes \(p^m\). Substitution into \eqref{mg03:defecto-pleno}
+gives the second formula.
+\end{proof}
+
+The triadic specialization is
+\(\Delta_{3^m}^{\mathrm{full}}=m3^{2m-1}\). The first moduli
+display both sums together with their difference:
+\[
+\begin{array}{c|r|r|r}
+ N&S_+^{\mathrm{full}}&S_\times^{\mathrm{full}}&\Delta_N^{\mathrm{full}}\\\hline
+ 3&18&21&3\\
+ 9&405&459&54\\
+ 27&10206&10935&729\\
+ 81&269001&277749&8748
+\end{array}
+\]
+
+Periodic refinement instead retains \(\rho_9\) and enlarges the
+support to \(\{1,\ldots,9r\}^2\), with integer \(r\geq1\). Each pair of residues modulo
+nine has \(r^2\) representatives in this support, for both addition
+and multiplication. Consequently,
+\begin{equation}
+ S_+^{\mathrm{per}}(9r;9)=r^2\,405,\quad
+ S_\times^{\mathrm{per}}(9r;9)=r^2\,459,\quad
+ \Delta^{\mathrm{per}}(9r;9)=r^2\,54.
+ \label{mg03:periodico}
+\end{equation}
+For \(r=3\), the sums are \(3645\) and \(4131\), and the defect
+is \(486\). The full-modulus reading at \(27\) produces \(729\)
+because it updates both the modulus and its representatives; the periodic
+reading produces \(486\) because it retains modulus nine and multiplies
+its incidences by nine. In both readings, the divisions
+\(i+j=R^++NQ^+\), \(ij=R^\times+NQ^\times\), with the modulus
+actually employed, preserve the integer identity at each cell and after
+summation. This specifies the datum accompanying each defect.
+
+\subsubsection{Dimensional variation at fixed modulus nine}
+\label{mg03:dimension}
+
+A second extension retains the modulus and increases the number of
+factors. For \(d\geq1\), let
+\[
+ \mathcal A_d=\{1,\ldots,9\}^d,\qquad
+ \Sigma_d(x)=\rho_9\!\left(\sum_{j=1}^d x_j\right),\qquad
+ \Pi_d(x)=\rho_9\!\left(\prod_{j=1}^d x_j\right).
+\]
+
+\begin{proposition}[Dimensional count for accumulation and multiplication]
+The sums of the two readers over \(\mathcal A_d\) are
+\begin{equation}
+ S_{+,d}=45\,9^{d-1},\qquad
+ S_{\times,d}=9^{d+1}-9(d+3)6^{d-1}.
+ \label{mg03:ley-dimensional}
+\end{equation}
+Therefore,
+\begin{equation}
+ \frac{S_{\times,d}-S_{+,d}}{9^d}
+ =4-(d+3)\left(\frac23\right)^{d-1}
+ \longrightarrow4.
+ \label{mg03:limite-dimensional}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For each fixed choice of the first \(d-1\) coordinates, the final
+coordinate traverses every additive residue once. Each positive
+representative occurs \(9^{d-1}\) times, and their sum is \(45\);
+this proves the additive formula.
+
+For multiplication, distinguish the units \(U=\{1,2,4,5,7,8\}\),
+the multiples of three of valuation one \(T=\{3,6\}\), and the
+zero representative \(9\). The \(6^d\) words whose factors all
+belong to \(U\) distribute their products uniformly over the six
+units: fixing \(d-1\) factors leaves a permutation of the group
+under multiplication by the last factor. Their contribution is
+\(27\,6^{d-1}\).
+
+The words with exactly one factor in \(T\) and all other factors
+in \(U\) number \(2d6^{d-1}\). For each position of the singular
+factor and each choice of the remaining units, its two possible values
+\(3,6\) produce each of the residues \(3,6\) once. Their contribution
+is \(9d6^{d-1}\). Every remaining word contains a factor \(9\),
+or at least two factors in \(T\), so its product has representative
+\(9\). Their number is \(9^d-6^d-2d6^{d-1}\). Thus
+\[
+ S_{\times,d}=27\,6^{d-1}+9d6^{d-1}
+ +9\bigl(9^d-6^d-2d6^{d-1}\bigr),
+\]
+which simplifies to \eqref{mg03:ley-dimensional}. Dividing by
+\(9^d\) and subtracting the additive mean \(5\) gives
+\eqref{mg03:limite-dimensional}; the term
+\((d+3)(2/3)^{d-1}\) tends to zero.
+\end{proof}
+
+Dimension two recovers \(S_{+,2}=405\), \(S_{\times,2}=459\)
+and total defect \(54\). The limit \(4\) belongs to the mean
+defect under increasing dimension. Total defect, preserved quotient
+and dimensional mean are specified readers of APP arithmetic; TRIT
+and TPK subsequently transport these data with their orientation,
+modulus and mathematical residence.

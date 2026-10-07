@@ -1,0 +1,285 @@
+\chapter{Interacción bidireccional: conjugación de propagadores avanzado y retardado y condiciones de borde del absorbedor}
+\label{chap:mt-accion-interaccion-absorbedor}
+
+Una ruta se vuelve dinámica cuando recibe un funcional de acción y unas
+condiciones de frontera. La acción asigna peso a la historia completa; su
+variación selecciona transportes compatibles con los extremos; la
+interacción acopla grados de libertad que comparten una frontera; la lectura
+bidireccional conserva las orientaciones temporal directa e inversa del
+mismo antecedente. En este marco, emisión y absorción forman extremos de un
+problema de contorno común.
+
+El absorbedor ocupa una posición precisa en la arquitectura. HMT aporta la
+banda orientada, la memoria de ida y retorno y las involuciones discretas.
+La Mecánica Dimensional añade el operador de evolución, las corrientes y el
+transductor de acción. Una realización física de absorbedor enlaza esa
+estructura con propagadores avanzados y retardados y con condiciones de
+borde causales. Las identidades algebraicas del primer tramo están
+demostradas en sus dominios; el último enlace mantiene el estatuto de
+interfaz física hasta construir el entrelazador completo.
+
+\section{Funcional de acción sobre rutas enriquecidas}
+
+Sea $\gamma=((c_0,\mu_0),(d_1,\ldots,d_L))$ una ruta finita, con direcciones
+$d_t$ y hojas $\mu_t\in\{\Sigma,\Pi\}$. Definimos
+\[
+ \operatorname{turn}(\gamma)
+ =\#\{2\leq t\leq L:d_t\neq d_{t-1}\},
+\]
+\[
+ \operatorname{switch}(\gamma)
+ =\#\{2\leq t\leq L:\mu_t\neq\mu_{t-1}\}.
+\]
+
+\begin{definicionnarrativa}[title={Acción discreta de interacción mínima}]
+\label{def:mt-accion-minima}
+Para $\lambda\geq0$, la acción local de ruta es
+\begin{equation}
+ \mathcal A_\lambda(\gamma)
+ =\operatorname{turn}(\gamma)
+ +\lambda\operatorname{switch}(\gamma)
+ =\sum_{t=2}^{L}
+ \bigl[1-\delta_{d_t,d_{t-1}}
+ +\lambda(1-\delta_{\mu_t,\mu_{t-1}})\bigr].
+ \label{eq:mt-accion-minima}
+\end{equation}
+La primera contribución mide variación direccional y la segunda mide
+transporte entre hojas.
+\end{definicionnarrativa}
+
+La acción general incorpora también borde, acarreo y memoria:
+\begin{equation}
+ \mathcal S[\gamma]
+ =\sum_{e\in\gamma}\mathcal L_e
+ +\mathcal B_{\rm in}(\partial_-\gamma)
+ +\mathcal B_{\rm out}(\partial_+\gamma)
+ +\mathcal M(\gamma).
+ \label{eq:mt-accion-ruta-general}
+\end{equation}
+Aquí $\mathcal L_e$ es el coste local, $\mathcal B_{\rm in/out}$ fija los
+datos admisibles de los extremos y $\mathcal M$ conserva la información que
+la publicación visible contrae. La variación se realiza dentro de una clase
+de rutas con los mismos tipos de frontera.
+
+\begin{lecturafisica}[title={Principio de mínima interacción compatible con memoria}]
+\label{prin:mt-minima-interaccion}
+Entre las prolongaciones compatibles con los datos de frontera, la
+realización física seleccionada extrema el funcional de acción dentro del
+sector que conserva la memoria exigida por la composición.
+\end{lecturafisica}
+
+El principio fija la clase del problema variacional. Una dinámica concreta
+añade el Hamiltoniano o lagrangiano del sector y demuestra que su extremo
+produce las ecuaciones de movimiento. La memoria funciona como restricción
+dinámica: dos rutas con la misma sombra final pueden pertenecer a clases
+variacionales distintas.
+
+\section{Interacción como acoplamiento tipado}
+
+Sean $\mathfrak p_1$ y $\mathfrak p_2$ dos secciones realizadas sobre rutas
+$\gamma_1$ y $\gamma_2$. Una interacción en una frontera $B$ consiste en
+un morfismo
+\begin{equation}
+ \mathcal I_B:
+ E^{(1)}_B\otimes E^{(2)}_B
+ \longrightarrow E^{(12)}_B
+ \label{eq:mt-interaccion-frontera}
+\end{equation}
+y en un término de acción $\mathcal S_{\rm int}$ compatible con las
+representaciones del sector. El morfismo conserva los tipos compartidos y
+transforma los grados internos según las reglas de acoplamiento. La
+composición completa adopta la forma
+\[
+ (\gamma_2,s_2)\star_{(B,\mathcal I_B)}(\gamma_1,s_1),
+\]
+donde el registro de $B$ se cuenta una vez y la memoria de los dos lados se
+transporta al estado compuesto.
+
+La covariancia de la interacción exige, para cada transformación de simetría
+$g$,
+\begin{equation}
+ \rho_{12}(g)\,\mathcal I_B
+ =\mathcal I_B\bigl(\rho_1(g)\otimes\rho_2(g)\bigr).
+ \label{eq:mt-covariancia-interaccion}
+\end{equation}
+Esta identidad decide si el acoplamiento pertenece a la representación
+física declarada. En los sectores electromagnético y de color, la misma
+estructura se expresa mediante una conexión y su transporte paralelo.
+
+\section{Conjugación temporal del propagador}
+
+Sea $\mathcal H_{\mathbb R}$ la realificación del espacio cuántico, dotada
+de una estructura compleja $J_E$ con $J_E^2=-I$. Sea $H=H^*$ un operador
+autoadjunto con dominio común invariante y sea $C$ una involución ortogonal
+que satisface
+\begin{equation}
+ HJ_E=J_EH,\qquad
+ CJ_EC^{-1}=-J_E,
+ \qquad CHC^{-1}=H.
+ \label{eq:mt-hipotesis-reversion-propagador}
+\end{equation}
+
+\begin{resultado}[title={Teorema: Reversión bidireccional del grupo de evolución}]
+\label{thm:mt-reversion-propagador}
+El operador
+\begin{equation}
+ U(t)=\exp\!\left(-\frac{J_EHt}{\hbar_{\rm int}}\right)
+ \label{eq:mt-grupo-evolucion}
+\end{equation}
+forma un grupo unitario uniparamétrico y cumple
+\begin{equation}
+ \boxed{CU(t)C^{-1}=U(-t)}.
+ \label{eq:mt-reversion-unitaria}
+\end{equation}
+\end{resultado}
+
+\paragraph{Demostración de la reversión bidireccional del grupo unitario \(U(t)\): \(CU(t)C^{-1}=U(-t)\)}
+El generador $A=-J_EH/\hbar_{\rm int}$ es antiadjunto. El teorema de Stone
+produce el grupo unitario $U(t)=e^{tA}$. Las hipótesis de
+\eqref{eq:mt-hipotesis-reversion-propagador} dan $CAC^{-1}=-A$; el cálculo
+funcional entrega $Ce^{tA}C^{-1}=e^{-tA}$.
+
+
+La involución $C_M=-\operatorname{rev}$ de las palabras de ruta aporta el
+dato genealógico de orientación. Cuando el funtor físico lleva $C_M$ a la
+involución $C$ del teorema, las secciones partícula y antipartícula quedan
+representadas por orientaciones temporales conjugadas del mismo grupo
+unitario. La identidad está demostrada con la estructura de partida
+explícita: autoadjunción, dominio, estructura compleja e involución.
+
+\section{Propagadores avanzados y retardados}
+
+Sea $L$ el operador hiperbólico de una realización de campos y sean
+$G_{\rm ret}$ y $G_{\rm adv}$ sus inversos fundamentales con soportes
+causales futuro y pasado, respectivamente:
+\begin{equation}
+ LG_{\rm ret}=LG_{\rm adv}=I,
+ \qquad
+ \operatorname{supp}(G_{\rm ret}f)\subset J^+(\operatorname{supp}f),
+ \qquad
+ \operatorname{supp}(G_{\rm adv}f)\subset J^-(\operatorname{supp}f).
+ \label{eq:mt-green-avanzado-retardado}
+\end{equation}
+La diferencia causal
+$E=G_{\rm ret}-G_{\rm adv}$ transporta datos entre soluciones y la media
+simétrica
+\[
+ G_{\rm sym}=\frac12(G_{\rm ret}+G_{\rm adv})
+\]
+realiza un núcleo temporalmente simétrico.
+
+Una interfaz HMT--MD hacia esta teoría es una familia de mapas
+\begin{equation}
+ \mathfrak I_{\rm prop}:
+ (\gamma,\gamma^\vee,\mathcal B_\gamma,U,C_M)
+ \longrightarrow
+ (G_{\rm ret},G_{\rm adv},E,\mathcal H_{\rm field})
+ \label{eq:mt-interfaz-green}
+\end{equation}
+que entrelaza la involución de ruta con el intercambio
+$G_{\rm ret}\leftrightarrow G_{\rm adv}$, preserva el producto interno o la
+forma simpléctica pertinente y lleva las acciones de ambos lados a la misma
+forma funcional. Este mapa constituye la condición matemática que convierte
+la orientación bidireccional interna en propagación avanzada--retardada de
+campos.
+
+\section{Realización HMT–MD del absorbedor mediante inversión de rutas y conjugación partícula–antipartícula}
+
+\begin{definicionnarrativa}[title={Sistema de emisión--absorción bidireccional}]
+\label{def:mt-absorbedor}
+Una realización física de absorbedor es un problema de contorno formado por
+una corriente emisora $J_{\rm em}$, una respuesta absorbente $J_{\rm abs}$,
+los propagadores $G_{\rm ret}$ y $G_{\rm adv}$, y condiciones de borde que
+cierran conjuntamente las dos orientaciones del transporte. Su acción
+efectiva temporalmente simétrica posee la forma
+\begin{equation}
+ \mathcal S_{\rm abs}[J]
+ =\mathcal S_{\rm matter}[J]
+ +\frac12\langle J,G_{\rm sym}J\rangle,
+ \qquad J=J_{\rm em}+J_{\rm abs},
+ \label{eq:mt-accion-absorbedor}
+\end{equation}
+y sus condiciones de contorno determinan la parte radiativa observada.
+\end{definicionnarrativa}
+
+La definición expresa una teoría de acción a distancia o de respuesta de
+contorno en lenguaje operatorio. Dentro de HMT--MD, la banda aporta el par
+$(\gamma,\gamma^\vee)$; el resultado de reversión bidireccional aporta
+la reversión exacta del grupo unitario; el funtor
+$\mathfrak I_{\rm prop}$ debe aportar causalidad, producto interno y
+condiciones de borde. La arquitectura del absorbedor prolonga la estructura
+bidireccional ya construida. Su realización permanece como interfaz física,
+y la construcción del entrelazador causal completo constituye un problema
+matemático explícitamente delimitado.
+
+El cierre físico exige cuatro identidades verificables:
+\begin{enumerate}
+ \item conmutatividad entre conjugación de ruta e intercambio de los dos
+ propagadores;
+ \item igualdad de las acciones transportadas por
+ $\mathfrak I_{\rm prop}$;
+ \item conservación de la forma simpléctica o del producto interno;
+ \item compatibilidad de las condiciones de emisión y absorción bajo
+ refinamiento de la ruta.
+\end{enumerate}
+Un fallo en cualquiera de estas identidades refuta la realización particular
+y deja intacta la reversión operatoria ya demostrada en
+\eqref{eq:mt-reversion-unitaria}.
+
+\section{Las acciones separadas de \texorpdfstring{$C$}{C},
+\texorpdfstring{$P$}{P} y \texorpdfstring{$T$}{T}}
+
+Sobre una ruta completa definimos tres involuciones tipadas:
+\begin{enumerate}
+ \item $C$ intercambia las hojas $\Sigma\leftrightarrow\Pi$ y conjuga los
+ caracteres orientados;
+ \item $P$ refleja la carta espacial, por ejemplo
+ $(i,j)\mapsto(i,-j)\pmod9$, junto con
+ $E\leftrightarrow W$;
+ \item $T$ invierte el orden del registro, reemplaza cada dirección por su
+ opuesta y permuta los extremos de la ruta.
+\end{enumerate}
+Cada operación actúa sobre un componente distinto del estado. Su composición
+$CPT$ actúa sobre hoja, espacio y orientación temporal a la vez.
+
+\begin{resultado}[title={Teorema: Invariancia discreta individual y conjunta}]
+\label{thm:mt-cpt-rutas}
+Para toda ruta $\gamma$ y todo $\lambda\geq0$,
+\begin{equation}
+ \mathcal A_\lambda(\gamma)
+ =\mathcal A_\lambda(C\gamma)
+ =\mathcal A_\lambda(P\gamma)
+ =\mathcal A_\lambda(T\gamma)
+ =\mathcal A_\lambda(CPT\gamma).
+ \label{eq:mt-invariancia-cpt-rutas}
+\end{equation}
+\end{resultado}
+
+\paragraph{Compatibilidad de las acciones \(C\), \(P\) y \(T\) con la reversión unitaria \(U(t)\mapsto U(-t)\)}
+$P$ permuta el alfabeto de direcciones y conserva el patrón de igualdades
+entre pasos consecutivos. $C$ permuta globalmente las hojas y conserva el
+patrón de cambios de hoja. $T$ invierte el orden de ambas sucesiones y
+conserva el número de transiciones adyacentes. Cada involución preserva por
+separado los dos sumandos de
+\eqref{eq:mt-accion-minima}; la composición hereda la invariancia.
+
+
+El teorema pertenece al registro discreto y su acción local. La matriz CKM
+realizada en la base de sabor posee un invariante de Jarlskog distinto de
+cero y, por tanto, violación CP en esa representación. Ambos resultados son
+compatibles: un lector orientado puede distinguir estados relacionados por
+$CP$ mientras el funcional local
+$\mathcal A_\lambda$ conserva cada involución. La
+realización del teorema CPT relativista de campos añade localidad,
+covariancia de Lorentz, estructura espectral y representación de campos. En
+ese dominio ampliado, CPT conjunta constituye la simetría a preservar. En el
+dominio interno, el cierre CKM y la expansión temporal permanecen compatibles
+con la invariancia CPT demostrada para la acción discreta.
+
+Quedan así separados tres estratos. La invariancia de
+\eqref{eq:mt-invariancia-cpt-rutas} es un teorema interno exacto. La identidad
+\eqref{eq:mt-reversion-unitaria} está demostrada con estructura de partida
+explícita. La teoría física del absorbedor y el teorema CPT de campos exigen
+los entrelazadores propios de sus codominios. Esta separación mantiene la
+orientación temporal inversa dentro de la definición de partícula y concede
+a cada afirmación la fuerza que le corresponde.

@@ -1,0 +1,127 @@
+\subsubsection{Transporte electrónico bidireccional y registro aritmético}
+\label{ii:transporte-electronico}
+
+La representación central utiliza una celda compartida por las dos
+evaluaciones APP. Sus coordenadas pertenecen a \(D_9=\{1,\ldots,9\}\),
+y la inversión \((r,c)\mapsto(10-r,10-c)\) tiene el punto fijo único
+\((5,5)\). El estado visible se escribe \((r,c,h,v,n)\), con
+\(h,v\in\{-1,1\}\) e índice cronológico entero \(n\geq0\).
+El selector trítico repite \((+1,-1,0)\). En la hoja aditiva se lee
+\(r+c\) y se traslada la columna en la dirección \(h\); en la
+multiplicativa se lee \(rc\) y se traslada la fila en la dirección
+\(v\). El umbral conserva la posición. Ambas orientaciones se
+invierten al completar cada intervalo de veintisiete actualizaciones.
+
+Para expresar la lectura y el acarreo con el mismo convenio positivo,
+definimos
+\[
+ [z]^+_9=1+((z-1)\bmod9),\qquad
+ q_9(z)=\frac{z-[z]^+_9}{9}.
+\]
+La evaluación precede al desplazamiento. Si \(a_n\) es el entero
+leído, el evento conserva \((a_n,[a_n]^+_9,q_9(a_n))\), la hoja,
+la posición anterior, la orientación y el cruce de frontera. El
+símbolo trítico es \([a_n]^+_9\bmod3\). El levantamiento espacial
+retiene, por ejemplo, el entero
+\(q_9(c+h)\) cuando \(c\) se sustituye por \([c+h]^+_9\).
+
+La representación de celda compartida y la representación de dos
+cursores de \eqref{ii:tpk-fobs-posiciones} tienen estados visibles
+diferentes. Sus registros quedan relacionados con el estado TPK por
+sus mapas de representación respectivos. Para la trayectoria central
+se utiliza aquí, de forma íntegra, la actualización sobre la celda
+compartida que produce la palabra electrónica.
+
+\begin{proposition}[Actualización invertible con cocientes conservados]
+\label{ii:electron-inversa-cocientes}
+Añadamos al estado visible dos registros enteros \(Q_+,Q_\times\)
+y dos números de enrollamiento \(W_r,W_c\). Cada lectura activa
+incrementa el registro de su hoja en \(q_9(a_n)\); cada desplazamiento
+incrementa el enrollamiento correspondiente en su cruce de frontera.
+Esta actualización posee una inversa explícita sobre su imagen.
+\end{proposition}
+\begin{proof}
+El índice posterior determina el modo anterior y si acaba de ocurrir
+una inversión de orientaciones. Se deshace primero esa inversión.
+Si el modo era aditivo, se recupera la columna previa como
+\([c-h]^+_9\); si era multiplicativo, se recupera la fila como
+\([r-v]^+_9\). El modo neutro conserva ambas coordenadas. La celda
+recuperada determina nuevamente el entero leído, su residuo, su
+cociente y el cruce de frontera. Restando esos incrementos de
+\(Q_+,Q_\times,W_r,W_c\) e invirtiendo el índice cronológico se
+recupera exactamente el estado precedente. La composición de estas
+inversas recupera una historia finita completa. La concatenación de
+eventos conserva además el orden de las lecturas.
+\end{proof}
+
+Los registros \(Q_+,Q_\times\) son una representación mediante sumas explícitas
+de la historia de cocientes. La construcción se integra en la fibra
+de memoria junto con sus demás coordenadas. Su ley de composición,
+para historias concatenables \(u,v\), es
+\[
+ Q_s(uv)=Q_s(u)+Q_s(v),\qquad s\in\{+,\times\},
+\]
+donde la segunda historia comienza en el estado final de la primera.
+La inversión algebraica de una actualización resta sus incrementos;
+recorrer posteriormente un trayecto espacial de vuelta registra
+nuevas evaluaciones. Esa distinción conserva simultáneamente la
+reversibilidad del transporte y la duración de la historia.
+
+\begin{proposition}[Retorno central y acumulación exacta]
+\label{ii:electron-memoria-retorno}
+Desde \((r,c,h,v,n)=(5,5,1,1,0)\) y registros iniciales nulos, la
+proyección espacial y sus orientaciones retornan después de cincuenta y cuatro
+actualizaciones. En ese intervalo,
+\[
+ (\Delta W_r,\Delta W_c)=(0,0),\qquad
+ (\Delta Q_+,\Delta Q_\times)=(10,46).
+\]
+Después de \(54N\) actualizaciones, para todo entero \(N\geq0\),
+se tiene \((Q_+,Q_\times)=(10N,46N)\), mientras las coordenadas
+espaciales y sus orientaciones retornan. El índice entero toma el valor
+\(54N\); el calendario dodecafásico módulo \(108\) retorna para
+\(N\) par.
+\end{proposition}
+\begin{proof}
+Cada par de modos activos desplaza una vez cada coordenada. En
+veintisiete actualizaciones ambas recorren una vuelta de nueve
+posiciones y retornan a la diagonal central; después se invierten
+\(h,v\). El bloque siguiente recorre la vuelta opuesta. Los cruces
+espaciales se cancelan entre ambos bloques.
+
+En cada bloque las lecturas aditivas recorren \(2k\),
+\(1\leq k\leq9\), cuyo cociente positivo suma cinco. Las lecturas
+multiplicativas del bloque positivo recorren
+\(k[k+1]^+_9\). Su suma entera y su suma de residuos son
+\[
+ \sum_{k=1}^9 k[k+1]^+_9=249,\qquad
+ \sum_{k=1}^9[k[k+1]^+_9]^+_9=42.
+\]
+La segunda identidad resulta de la lista
+\((2,6,3,2,3,6,2,9,9)\). Por división euclídea,
+la suma de cocientes es \((249-42)/9=23\). La sustitución
+\(k\mapsto[k-1]^+_9\) muestra que el bloque negativo contiene
+el mismo multiconjunto de productos. Ambos bloques producen, por
+tanto, diez y cuarenta y seis unidades de los registros respectivos.
+La proyección espacial y sus orientaciones vuelven a sus valores
+iniciales. Las reglas de activación y de inversión se repiten al
+desplazar el índice en \(54\), y los incrementos no dependen de los
+registros acumulados. La ley aditiva
+anterior prueba por inducción la fórmula para todo \(N\).
+\end{proof}
+
+La lectura trítica y la orientación por ventanas proporcionan, sobre
+la misma trayectoria,
+\[
+ \gamma_e=\bigl((100000220)^3(120200000)^3\bigr)^2,\qquad
+ \tau_e=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+Las potencias representan concatenaciones. Los lectores de
+discrepancias y de ventanas desarrollados en
+\eqref{eq:el-kd} y \eqref{eq:el-komega} calculan ambos
+\((80,54,6)\). La evaluación se obtiene de la trayectoria antes
+de incorporar \(\alpha\), la sección de acción o una masa.
+La memoria de cocientes conserva información adicional a ese triple:
+en ciento ocho actualizaciones registra \((20,92)\), con
+enrollamiento espacial neto nulo. Cada representación mantiene así el
+tipo del observable que la produce.

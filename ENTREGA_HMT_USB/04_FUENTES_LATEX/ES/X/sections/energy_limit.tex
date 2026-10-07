@@ -1,0 +1,309 @@
+\section{Reconstrucción analítica de la energía y memoria del refinamiento}
+\label{sec:limite-energetico-k}
+
+Las separaciones positivas construidas a partir del registro dodecafásico
+determinan una partición ordenada y, por la sección anterior, una forma
+de Dirichlet sobre sus valores nodales. Su refinamiento posee dos
+operaciones complementarias: la interpolación armónica conserva la energía
+de los datos heredados, mientras cada detalle registra la variación
+incorporada entre esos datos. El paso a profundidad ilimitada consiste en
+reunir esta colección compatible mediante una norma que controle la suma de
+sus detalles. El resultado concierne a la realización analítica
+unidimensional de la energía; conserva como antecedente la construcción
+HMT del registro y de la estructura discreta conjunta del continuo.
+
+\subsection{Particiones anidadas y espacios de interpolación}
+
+Fijemos la partición inicial
+\(P_0=\{0=t_0<t_1<\cdots<t_{12}=1\}\), cuyas longitudes son
+\(d_j=t_j-t_{j-1}=K_j/\sum_iK_i>0\). Sea
+\((P_n)_{n\geq0}\) una sucesión de particiones finitas anidadas de
+\([0,1]\), obtenidas por subdivisión de los intervalos anteriores.
+Escribiremos
+\[
+ |P_n|=\max\{b-a:[a,b]\text{ es un intervalo de }P_n\},
+ \qquad \lim_{n\to\infty}|P_n|=0.
+\]
+La subdivisión reiterada de cada intervalo en un número fijo de sucesores
+iguales, al menos dos, satisface esta condición. Para otras reglas, la
+contracción de la malla es una hipótesis explícita de este lector.
+Las etiquetas de los sucesores y sus datos de acarreo acompañan la
+subdivisión y conservan la procedencia del refinamiento.
+
+Sea \(V_n\) el espacio complejo de funciones continuas sobre \([0,1]\)
+que son afines en cada intervalo de \(P_n\). La energía y la norma
+energética se definen por
+\begin{equation}
+ \mathcal E_n(f)
+ =\sum_{[a,b]\in P_n}\frac{|f(b)-f(a)|^2}{b-a}
+ =\int_0^1|f'(x)|^2\,dx,
+ \qquad
+ \|f\|_{\mathcal E}^2=|f(0)|^2+\mathcal E_n(f).
+ \label{eq:energia-afines-k}
+\end{equation}
+La igualdad integral resulta de que la derivada de una función afín es
+constante en cada intervalo. La energía coincide así exactamente con
+la forma nodal ya construida. La inclusión \(V_n\subset V_{n+1}\)
+interpreta la misma función afín en una partición más fina; conserva
+tanto \(f(0)\) como la energía y es isométrica para
+\(\|\cdot\|_{\mathcal E}\).
+
+El valor inicial tiene una función precisa: fija la componente constante
+que la forma de Dirichlet identifica en su núcleo. La energía controla
+las diferencias, y el par formado por el valor inicial y esas diferencias
+determina el observable. En el espacio de Sobolev
+\(H^1([0,1];\mathbb C)\), cuyos elementos tienen representante
+absolutamente continuo con derivada débil en \(L^2\), esta norma es
+equivalente a la norma usual. En efecto,
+\(f(x)=f(0)+\int_0^xf'(t)\,dt\) controla la norma de \(f\) a
+partir de \(|f(0)|\) y \(\|f'\|_{L^2}\); la integración de la
+misma identidad controla a su vez \(|f(0)|\) mediante
+\(\|f\|_{L^2}+\|f'\|_{L^2}\).
+
+\subsection{Reconstrucción de una función a partir de sus valores compatibles}
+
+\begin{theorem}[Reconstrucción energética y completación de las interpolaciones]
+\label{thm:limite-energia-h1-k}
+Sea \(f_n\in V_n\) una colección compatible por restricción a los
+nodos heredados:
+\[
+ f_{n+1}(a)=f_n(a)
+ \quad\text{para todo nodo }a\text{ de }P_n.
+\]
+Si \(\sup_n\mathcal E_n(f_n)<\infty\), existe una única función
+\(f\in H^1([0,1];\mathbb C)\), considerada en su representante
+continuo, cuyos valores en todos esos nodos son los prescritos. Además,
+\(f_n\to f\) uniformemente y en \(H^1\), y
+\begin{equation}
+ \int_0^1|f'(x)|^2\,dx
+ =\lim_{n\to\infty}\mathcal E_n(f_n).
+ \label{eq:limite-energia-h1-k}
+\end{equation}
+Recíprocamente, la interpolación nodal de cualquier elemento de \(H^1\)
+produce una colección de esta clase. Por tanto, la completación de
+\(\bigcup_n V_n\) en la norma energética es \(H^1([0,1];\mathbb C)\).
+\end{theorem}
+
+\begin{proof}
+Pongamos \(g_n=f_n'\in L^2([0,1];\mathbb C)\). Para
+\(m\geq n\), la compatibilidad de los valores en los extremos de cada
+intervalo \([a,b]\) de \(P_n\) proporciona
+\[
+ \frac1{b-a}\int_a^bg_m(x)\,dx
+ =\frac{f_m(b)-f_m(a)}{b-a}
+ =\frac{f_n(b)-f_n(a)}{b-a}
+ =g_n\big|_{(a,b)}.
+\]
+Sea \(W_n\) el espacio de funciones de \(L^2\) constantes en cada
+intervalo de \(P_n\), y sea \(Q_n:L^2\to W_n\) la proyección
+ortogonal dada por los promedios sobre dichos intervalos. La identidad
+anterior afirma \(Q_ng_m=g_n\). En consecuencia,
+\(g_m-g_n\) es ortogonal a \(g_n\) y
+\begin{equation}
+ \|g_m-g_n\|_{L^2}^2
+ =\mathcal E_m(f_m)-\mathcal E_n(f_n).
+ \label{eq:pitagoras-gradientes-k}
+\end{equation}
+Las energías son crecientes y acotadas. La identidad de Pitágoras
+prueba que \((g_n)\) es una sucesión de Cauchy en \(L^2\), con
+límite \(g\). Definamos
+\[
+ f(x)=f_0(0)+\int_0^xg(t)\,dt.
+\]
+Esta función pertenece a \(H^1\), tiene derivada débil \(g\) y
+satisface, por la desigualdad de Cauchy--Schwarz,
+\begin{equation}
+ \sup_{x\in[0,1]}|f_n(x)-f(x)|
+ \leq\|g_n-g\|_{L^2}\longrightarrow0.
+ \label{eq:convergencia-uniforme-energia-k}
+\end{equation}
+La convergencia uniforme conserva cada valor nodal prescrito; junto con
+la convergencia de las derivadas en \(L^2\), da la convergencia en
+\(H^1\). La convergencia de las normas de las derivadas prueba
+\eqref{eq:limite-energia-h1-k}. La unión de los nodos es densa porque
+\(|P_n|\to0\); dos representantes continuos con los mismos valores
+en esa unión coinciden. Se obtiene la unicidad.
+
+Para la recíproca, tomemos \(f\in H^1\) en su representante
+continuo y sea \(f_n\) su interpolación en los nodos de \(P_n\).
+Su derivada es \(g_n=Q_nf'\). Las proyecciones \(Q_n\) son
+contractivas en \(L^2\). Para una función continua \(v\), el
+error \(|Q_nv-v|\) está acotado por su módulo de continuidad
+evaluado en \(|P_n|\), que tiende a cero. La densidad de las
+funciones continuas en \(L^2\) y la contractividad implican
+\(Q_ng\to g\) para todo \(g\in L^2\): dado un aproximante
+continuo \(v\), se emplea
+\[
+ \|Q_ng-g\|_{L^2}
+ \leq 2\|g-v\|_{L^2}+\|Q_nv-v\|_{L^2}.
+\]
+Aplicando esta convergencia a \(g=f'\), se obtienen la convergencia
+de las derivadas y, mediante \eqref{eq:convergencia-uniforme-energia-k},
+las de las funciones. La contractividad acota sus energías por
+\(\|f'\|_{L^2}^2\), y la convergencia de las normas prueba de
+nuevo la identidad del límite. Toda función de \(H^1\) es, por
+tanto, límite energético de elementos de \(\bigcup_nV_n\).
+La equivalencia de normas y la completitud de \(H^1\) identifican
+la completación enunciada.
+\end{proof}
+
+El argumento describe concretamente qué se conserva al pasar de la red
+a la función. Cada derivada finita registra el promedio de todas las
+derivadas posteriores en su intervalo; al refinar, se incorporan
+componentes ortogonales que mantienen ese promedio. La energía acotada
+controla la suma total de esas incorporaciones. El valor continuo se
+recupera entonces integrando la derivada límite y conservando el valor
+inicial. La realización analítica reúne, por esta vía explícita, la
+información compatible de los niveles finitos.
+
+\subsection{Descomposición ortogonal de la memoria por escalas}
+
+Sea \(H_n\) la interpolación armónica de los valores de \(P_n\)
+sobre los nodos de \(P_{n+1}\), interpretada como función de
+\(V_{n+1}\), y definamos el detalle
+\[
+ z_{n+1}=f_{n+1}-H_nf_n.
+\]
+Por \eqref{eq:detalle-energia-k}, el detalle se anula en los nodos
+heredados. Su derivada tiene promedio cero en cada intervalo antiguo
+y es ortogonal a \(W_n\). Para niveles distintos, la derivada de
+un detalle anterior pertenece a ese espacio de funciones constantes;
+las derivadas de los detalles son, por tanto, ortogonales entre sí.
+La misma ortogonalidad vale frente a \(f_0'\).
+
+\begin{proposition}[Identidad de energía y recuperación de los detalles]
+\label{prop:memoria-energetica-escalas-k}
+Para toda profundidad finita \(N\),
+\begin{equation}
+ \mathcal E_N(f_N)
+ =\mathcal E_0(f_0)
+ +\sum_{n=0}^{N-1}\mathcal E_{n+1}(z_{n+1}).
+ \label{eq:energia-telescopica-detalles-k}
+\end{equation}
+Si la colección satisface las hipótesis del
+Teorema~\ref{thm:limite-energia-h1-k}, la serie de la derecha
+converge y su suma es \(\int_0^1|f'|^2\). Los datos \(f_0\)
+y todos los detalles determinan la colección compatible completa y su
+realización analítica.
+\end{proposition}
+\begin{proof}
+La identidad finita resulta de sumar
+\(\mathcal E_{n+1}(f_{n+1})
+=\mathcal E_n(f_n)+\mathcal E_{n+1}(z_{n+1})\), que es la
+descomposición ortogonal de la sección anterior. Los sumandos son
+no negativos y las sumas parciales convergen por
+\eqref{eq:limite-energia-h1-k}. La reconstrucción finita se efectúa
+recursivamente mediante \(f_{n+1}=H_nf_n+z_{n+1}\); el teorema
+precedente determina después la función límite. Recíprocamente, una
+función de \(H^1\) determina sus interpolaciones y, por diferencia,
+todos estos detalles. Cada flecha conserva así sus datos propios.
+\end{proof}
+
+La eliminación variacional de nodos interiores selecciona el detalle
+nulo en el nivel eliminado. La conservación de los detalles permite
+recuperar cualquier configuración compatible de energía finita. La
+respuesta efectiva y la configuración completa poseen, de esta manera,
+una relación precisa: la primera registra el mínimo sobre las variables
+interiores; la segunda añade las componentes ortogonales y su energía.
+
+\subsection{Transporte de la realización analítica bajo el flujo positivo}
+
+La dirección \(u=P_3P_{11}K\), recuperada antes de la evaluación
+energética \cite{hmtX}, determina la colección de separaciones de
+\eqref{eq:schur-flujo-k}. Su parámetro \(s\in\mathbb R\)
+describe esta deformación analítica. Escribamos
+\[
+ d_j(s)=\frac{K_je^{su_j}}{\sum_\ell K_\ell e^{su_\ell}},
+ \qquad
+ t_i(s)=\sum_{j=1}^id_j(s),
+ \qquad
+ a_j(s)=\frac{d_j(s)}{d_j(0)}>0.
+\]
+Sea \(F_s:[0,1]\to[0,1]\) la aplicación que envía cada
+\(t_i(0)\) a \(t_i(s)\) y es afín en los intervalos iniciales.
+Es un homeomorfismo creciente, de pendiente \(a_j(s)\) en el
+intervalo \([t_{j-1}(0),t_j(0)]\). Su inversa es también afín
+por intervalos y ambas aplicaciones son Lipschitz.
+
+Supongamos que cada subdivisión hereda las fracciones de longitud y la
+dirección de su intervalo predecesor, como en la sección anterior. Todos
+los nodos refinados se transportan entonces mediante el mismo \(F_s\).
+Denotemos sus particiones por \(P_n(s)=F_s(P_n(0))\) y sus
+espacios de interpolación por \(V_n(s)\). La aplicación
+\[
+ U_s f=f\circ F_s^{-1}
+\]
+transporta \(V_n(0)\) a \(V_n(s)\), preserva los valores
+nodales correspondientes y prolonga esta acción a \(H^1\).
+
+\begin{theorem}[Equivalencia energética y conmutación con el refinamiento]
+\label{thm:transporte-h1-flujo-k}
+Para todo \(f\in H^1([0,1];\mathbb C)\),
+\begin{equation}
+ \int_0^1|(U_sf)'(y)|^2\,dy
+ =\sum_{j=1}^{12}\frac1{a_j(s)}
+ \int_{t_{j-1}(0)}^{t_j(0)}|f'(x)|^2\,dx.
+ \label{eq:transporte-energia-h1-k}
+\end{equation}
+Para \(s\) en cualquier intervalo compacto, las normas energéticas
+antes y después del transporte son uniformemente equivalentes y
+\(|P_n(s)|\to0\) uniformemente en ese compacto. La interpolación
+armónica y la restricción a nodos heredados conmutan con \(U_s\);
+la reconstrucción y la minimización de los detalles se transportan
+tanto a profundidad finita como en la realización \(H^1\).
+\end{theorem}
+
+\begin{proof}
+En el intervalo inicial \(j\), la regla de la cadena y el cambio
+de variable \(y=F_s(x)\) proporcionan
+\((U_sf)'(F_s(x))=f'(x)/a_j(s)\) y \(dy=a_j(s)\,dx\).
+La integración y la suma sobre los intervalos prueban
+\eqref{eq:transporte-energia-h1-k}. La fórmula vale para los
+representantes absolutamente continuos, y su lado derecho es finito.
+
+Fijado un intervalo compacto de parámetros, la continuidad y positividad
+de los doce factores dan constantes \(0<a_-\leq a_+<\infty\)
+tales que \(a_-\leq a_j(s)\leq a_+\) para todo \(j\) y
+todo \(s\) de ese compacto. Por tanto,
+\[
+ \frac1{a_+}\mathcal E(f)
+ \leq\mathcal E(U_sf)
+ \leq\frac1{a_-}\mathcal E(f),
+ \qquad
+ |P_n(s)|\leq a_+|P_n(0)|.
+\]
+Como \((U_sf)(0)=f(0)\), se obtiene además
+\[
+ \min\{1,a_+^{-1}\}\|f\|_{\mathcal E}^2
+ \leq\|U_sf\|_{\mathcal E}^2
+ \leq\max\{1,a_-^{-1}\}\|f\|_{\mathcal E}^2.
+\]
+Estas cotas prueban la equivalencia uniforme y la conservación de la
+condición de malla decreciente.
+
+En cada arista predecesor, los coeficientes de interpolación son las sumas
+parciales de las fracciones heredadas, independientes de \(s\).
+Si \(H_n(s)\) denota su interpolación, se tiene
+\(U_sH_n(0)=H_n(s)U_s\) en los espacios correspondientes.
+La restricción conmuta porque los nodos se transportan con sus valores.
+La descomposición en función armónica y detalle se conserva, y la
+identidad de Schur de \eqref{eq:schur-flujo-k} preserva su
+caracterización variacional. Finalmente, la continuidad acotada de
+\(U_s\) permite pasar al límite \(H^1\). En particular, una
+colección reconstruida antes del transporte converge después a \(U_sf\),
+con los mismos valores nodales transportados.
+\end{proof}
+
+La ley \eqref{eq:transporte-energia-h1-k} identifica los factores
+métricos exactos de la deformación: el cambio de longitud de cada
+intervalo modifica inversamente su contribución energética. La
+equivalencia de normas conserva las configuraciones de energía finita,
+y el archivo de detalles conserva su reconstrucción. Se obtiene así una
+realización analítica completa de este lector del registro positivo.
+Su compatibilidad con las formas canónicas se articula sobre las
+subdivisiones de un dominio fijo: la suma de formas conserva el objeto
+meromorfo, mientras la reducción variacional y los detalles conservan
+la respuesta energética y el observable refinado. La identificación
+con formas amplituhedrales de rango superior conserva las condiciones
+específicas de cobertura, grado y correspondencia de residuos
+establecidas para aquella realización.

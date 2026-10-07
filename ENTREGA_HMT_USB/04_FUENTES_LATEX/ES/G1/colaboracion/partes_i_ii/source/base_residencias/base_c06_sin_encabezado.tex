@@ -1,0 +1,201 @@
+\label{chap:83-06}
+
+\section{Medida proyectiva y conservación evolutiva de la unidad}
+\label{p12-83-c6-s1:chap:medida-proyectiva}
+
+La topología de cilindros permite hablar de proximidad; una teoría de caminos
+necesita además pesos. La conservación evolutiva de la unidad adquiere aquí
+una forma probabilística exacta: cada cilindro reparte su peso entre sus
+extensiones y la suma total permanece igual a uno. La unidad no queda fija en
+una celda; se transporta a través del refinamiento.
+
+\subsection{Pesos consistentes sobre niveles finitos}
+
+Sea \(\mu_n\) una probabilidad sobre el conjunto finito
+\(\mathcal S_n\). La familia es \emph{proyectivamente consistente} cuando
+\begin{equation}
+ \mu_n(a)
+ =\sum_{\substack{b\in\mathcal S_{n+1}\\
+                   \rho_{n+1,n}(b)=a}}
+   \mu_{n+1}(b)
+ \qquad(a\in\mathcal S_n).
+ \label{p12-83-c6-s1:eq:consistencia-pesos}
+\end{equation}
+Esta igualdad expresa la conservación local de la unidad: el peso de una
+historia truncada es la suma de los pesos de todos sus hijos.
+
+\begin{theorem}[Medida genealógica sobre cilindros]
+\label{p12-83-c6-s1:thm:medida-genealogica}
+Toda familia de probabilidades finitas que satisface
+\eqref{p12-83-c6-s1:eq:consistencia-pesos} determina una única probabilidad de Borel
+\(\mu_\infty\) sobre \(\Omega_\infty\) tal que
+\begin{equation}
+ \mu_\infty([a]_n)=\mu_n(a).
+ \label{p12-83-c6-s1:eq:medida-cilindro}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+\[
+ \mathscr A
+ :=\{\text{uniones finitas de cilindros}\}
+\]
+es un álgebra: la intersección de dos cilindros es vacía o un cilindro del
+nivel más profundo. Todo elemento de \(\mathscr A\) puede refinarse a una
+unión disjunta de cilindros de un mismo nivel. Si
+\(A=\bigsqcup_{a\in I}[a]_n\), ponemos
+\[
+ \mu_0(A)=\sum_{a\in I}\mu_n(a).
+\]
+Iterar \eqref{p12-83-c6-s1:eq:consistencia-pesos} demuestra que el valor no depende del
+nivel común elegido.
+
+Si un cilindro \([a]_n\) es vacío, la ramificación finita y el lema de König
+\cite{Koenig1936}
+implican que existe una profundidad sin descendientes de \(a\). La
+consistencia iterada da entonces \(\mu_n(a)=0\). Por ello \(\mu_0\) está bien
+definida incluso para representaciones que contienen cilindros vacíos y es
+finitamente aditiva.
+
+Los cilindros son abiertos y cerrados. Si una sucesión decreciente de
+elementos de \(\mathscr A\) tuviera intersección vacía, la compacidad
+implicaría que alguno de ellos ya es vacío; por ello \(\mu_0\) es continua en
+el vacío y constituye una premedida numerablemente aditiva. El teorema de extensión de
+Carathéodory ---equivalentemente, la extensión de Kolmogórov para este sistema
+proyectivo finito--- la prolonga a la \(\sigma\)-álgebra generada por los
+cilindros \cite{Caratheodory1914,Kolmogorov1933}. Ésta es la Boreliana de
+\(\Omega_\infty\), y la finitud de la
+medida garantiza unicidad.
+\end{proof}
+
+La medida puede proceder de transiciones locales. Si
+\(P_n(b\mid a)\ge0\) satisface
+\[
+ \sum_{\rho_{n+1,n}(b)=a}P_n(b\mid a)=1,
+\]
+entonces
+\(\mu_{n+1}(b)=\mu_n(a)P_n(b\mid a)\) es consistente. La uniformidad es una
+elección posible, no una obligación. Los pesos pueden depender de hoja,
+acarreo, orientación, un coste de acción no negativo o un registro siempre
+que preserven la suma. Por ejemplo,
+\[
+ P_n(b\mid a)
+ =\frac{e^{-\beta a_n(b\mid a)}}
+        {\sum_{b'\mapsto a}e^{-\beta a_n(b'\mid a)}},
+ \qquad a_n\geq0,
+\]
+define pesos positivos normalizados. La fase ortogonal de acción pertenece al
+kernel del \cref{chap:integral-genealogica}; no se inserta en estas
+probabilidades positivas.
+
+\subsection{Desintegración de la medida genealógica sobre fibras de igual valor arquimediano}
+
+La evaluación arquimediana transporta la medida a \(K\):
+\begin{equation}
+ \nu:=\Val_*\mu_\infty,
+ \qquad
+ \nu(B)=\mu_\infty(\Val^{-1}(B)).
+ \label{p12-83-c6-s1:eq:pushforward-arquimediano}
+\end{equation}
+La probabilidad visible de una región suma el peso de todas las genealogías que
+la publican. Cuando dos secciones poseen el mismo valor, sus contribuciones se
+agregan en \(\nu\), aunque permanezcan separadas en \(\mu_\infty\).
+
+\begin{proposition}[Desintegración por valores]
+Si \(K\) es un espacio estándar de Borel, existe una familia de medidas
+condicionadas \(\{\mu_y\}_{y\in K}\), definida para \(\nu\)-casi todo \(y\),
+tal que \(\mu_y\) está soportada en \(\mathfrak G_y=\Val^{-1}(y)\) y
+\[
+ \int_{\Omega_\infty}F\dd\mu_\infty
+ =\int_K\left(\int_{\mathfrak G_y}F\dd\mu_y\right)\dd\nu(y)
+\]
+para toda función integrable \(F\).
+\end{proposition}
+
+Esta fórmula separa valor y genealogía en el nivel de la medida. La física que
+dependa sólo del valor integra primero toda la fibra; una observable de memoria
+puede distinguir distribuciones \(\mu_y\) diferentes sobre la misma
+coordenada real.
+
+\subsection{Condicionamiento como poda de futuros}
+
+Sea \(A\subseteq\Omega_\infty\) un suceso observable con
+\(\mu_\infty(A)>0\). La medida condicionada es
+\begin{equation}
+ \mu_\infty(B\mid A)
+ =\frac{\mu_\infty(B\cap A)}{\mu_\infty(A)}.
+ \label{p12-83-c6-s1:eq:condicionamiento-genealogico}
+\end{equation}
+Cuando \(A\) es la lectura de un registro, su intersección con cada cilindro
+elimina las extensiones incompatibles. La normalización no crea nuevas ramas:
+redistribuye la unidad entre las que han sobrevivido.
+
+\begin{proposition}[Actualización compatible]
+Si \(A\) es unión de cilindros a nivel \(m\), entonces para todo \(n\ge m\)
+la distribución condicionada sobre \(\mathcal S_n\) se obtiene suprimiendo los
+estados cuyos truncamientos no pertenecen a \(A\) y renormalizando los pesos
+restantes. Las distribuciones condicionadas siguen satisfaciendo
+\eqref{p12-83-c6-s1:eq:consistencia-pesos}.
+\end{proposition}
+
+\begin{proof}
+La identidad es la regla de Bayes sobre conjuntos finitos. La suma de los
+pesos de los hijos condicionados coincide con el peso condicionado del padre,
+porque intersección y unión disjunta conmutan.
+\end{proof}
+
+\subsection{Conservación combinatoria y completación dimensional}
+
+La misma ley aparece en la completación binomial:
+\[
+ 1=\sum_{r=0}^{d}\binom dr
+ \left(\frac9{10}\right)^{d-r}
+ \left(\frac1{10}\right)^r.
+\]
+En dimensión tres,
+\[
+ 1000=729+243+27+1,
+\]
+de modo que interior, caras nuevas, aristas extremas y vértice final forman
+una partición de la unidad decimal. El paso
+\(729+270=999\to729+271=1000\) distingue el estado anterior al cierre de la
+unidad completada. En el sistema de caminos, la identidad análoga es
+\[
+ \mu([a]_n)=\sum_{b\mapsto a}\mu([b]_{n+1}).
+\]
+La unidad evoluciona al distribuirse por los estratos y se recupera al sumar
+la genealogía completa.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,node distance=12mm and 17mm,
+  box/.style={draw=hmtblue,rounded corners,fill=hmtlightblue,align=center,
+              minimum width=28mm,minimum height=8mm},
+  leaf/.style={draw=hmtgreen,rounded corners,fill=hmtlightgreen,align=center,
+               minimum width=22mm,minimum height=7mm}]
+\node[box] (a) {$[a]_n$\\peso $\mu_n(a)$};
+\node[leaf,below left=of a] (b1) {$[b_1]_{n+1}$\\$\mu_{n+1}(b_1)$};
+\node[leaf,below=of a] (b2) {$[b_2]_{n+1}$\\$\mu_{n+1}(b_2)$};
+\node[leaf,below right=of a] (b3) {$[b_3]_{n+1}$\\$\mu_{n+1}(b_3)$};
+\draw[->] (a)--(b1); \draw[->] (a)--(b2); \draw[->] (a)--(b3);
+\node[below=20mm of b2,align=center,text width=.78\textwidth] (eq)
+ {$\mu_n(a)=\mu_{n+1}(b_1)+\mu_{n+1}(b_2)+\mu_{n+1}(b_3)$:\\
+  la unidad se conserva al refinar la genealogía.};
+\end{tikzpicture}
+\caption{Conservación proyectiva del peso sobre cilindros.}
+\label{p12-83-c6-s1:fig:conservacion-peso-cilindros}
+\end{figure}
+
+\begin{statusbox}
+La medida proyectiva se construye sobre el sistema inverso HMT.
+El teorema de extensión es matemática clásica; la identificación de sus
+cilindros con estados TPK es exacta una vez fijados los pesos de transición.
+La selección de una medida física concreta pertenece al modelo dinámico y no
+se deduce únicamente del censo de ramas.
+\end{statusbox}
+
+La medida proyectiva queda caracterizada por positividad, conservación del
+peso entre padres e hijos y condicionamiento dentro del suceso observado. Una
+realización experimental completa añade la preparación y el protocolo de
+muestreo; con esos datos, la misma medida produce probabilidades de lectura
+comparables con frecuencias.

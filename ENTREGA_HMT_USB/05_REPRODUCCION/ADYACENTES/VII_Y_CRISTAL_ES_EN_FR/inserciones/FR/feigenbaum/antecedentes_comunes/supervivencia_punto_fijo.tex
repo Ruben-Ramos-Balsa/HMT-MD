@@ -1,0 +1,134 @@
+% Propietario reproducido por unidad demostrativa; véase PROPIETARIOS_CONTINUO_UNIVERSO.json.
+% Origen: XI ES CUMPLIMIENTO_EDITORIAL_20260928, sections/supervivencia_punto_fijo.tex:1--146.
+% Cuerpos y pruebas conservados; sólo namespace, rutas y remisiones contextuales declaradas.
+% BEGIN REV09_SUPERVIVENCIA_PUNTO_FIJO
+\subsection{Survie par élagage des prolongements}
+\label{hmtfg:base:corpus9:xi:supervivencia}
+
+La mémoire rétrospective distingue les histoires enregistrées par les
+opérations APP--TRIT--TPK ; la compatibilité prospective organise leurs
+prolongements admissibles. Soit \(S\) l’espace des états complets
+atteignables par ces opérations. Chaque état conserve les feuillets, les résidus,
+les quotients, l’orientation, la retenue, la mémoire et les données de frontière ; lorsque la
+transition dépend de la profondeur, celle-ci fait partie de l’état.
+Soient \(E\subseteq S\times S\) la relation effective de prolongement et
+\(A\subseteq S\) l’ensemble admissible déterminé par la compatibilité de
+ces registres. Ainsi, l’admissibilité se décide au moyen des opérations et
+des conditions de frontière qui engendrent l’histoire.
+
+Pour \(X\subseteq S\), nous définissons
+\begin{equation}
+ \operatorname{Pre}_{E}(X)
+ =\{s\in S:\exists t\in X,\ (s,t)\in E\},
+ \qquad
+ F_{\mathrm{surv}}(X)=A\cap\operatorname{Pre}_{E}(X).
+ \label{hmtfg:base:corpus9:xi:operador-poda}
+\end{equation}
+La suite d’élagage s’obtient par
+\begin{equation}
+ V_0=A,\qquad
+ V_{n+1}=F_{\mathrm{surv}}(V_n),\qquad
+ V_\infty=\bigcap_{n\geq0}V_n.
+ \label{hmtfg:base:corpus9:xi:sucesion-poda}
+\end{equation}
+
+\begin{proposition}[Survie et plus grand point fixe]
+\label{hmtfg:base:corpus9:xi:mayor-punto-fijo}
+L’ensemble \(V_n\) se compose exactement des états de \(A\) qui admettent
+un prolongement de \(n\) étapes dont les états appartiennent à \(A\). La
+suite \((V_n)\) est décroissante. Si chaque état a un nombre fini
+de successeurs admissibles, alors
+\[
+ V_\infty=F_{\mathrm{surv}}(V_\infty)
+          =\nu F_{\mathrm{surv}},
+\]
+où \(\nu F_{\mathrm{surv}}\) désigne le plus grand point fixe pour l’inclusion.
+Ses éléments sont précisément les états qui admettent un prolongement
+infini compatible.
+\end{proposition}
+
+\begin{proof}
+Pour \(n=0\), un prolongement de longueur zéro consiste en l'état lui-même de \(A\). Si la caractérisation vaut pour \(n\), un état appartient à \(V_{n+1}\) exactement lorsqu'il appartient à \(A\) et possède un successeur dans \(V_n\) ; préfixer cette arête produit un prolongement admissible de \(n+1\) étapes. Cette équivalence prouve l'affirmation par récurrence. En outre, \(V_1\subseteq V_0\), et la monotonie de \(F_{\mathrm{surv}}\) propage \(V_{n+1}\subseteq V_n\).
+
+Soit \(s\in V_\infty\), et écrivons
+\(E(s)=\{t\in S:(s,t)\in E\}\). Comme \(s\in V_{n+1}\) pour tout \(n\),
+les ensembles \(E(s)\cap V_n\) sont non vides, finis et décroissants.
+Leur intersection contient un élément \(t\), qui appartient à
+\(V_\infty\) et vérifie \((s,t)\in E\). Par conséquent,
+\(V_\infty\subseteq F_{\mathrm{surv}}(V_\infty)\).
+Réciproquement, la monotonie donne
+\(F_{\mathrm{surv}}(V_\infty)\subseteq V_{n+1}\) pour tout \(n\) ;
+l’image est également contenue dans \(A=V_0\), de sorte qu’elle appartient à
+\(V_\infty\). Cela prouve l’égalité de point fixe.
+
+Si \(W=F_{\mathrm{surv}}(W)\), alors \(W\subseteq A=V_0\).
+De \(W\subseteq V_n\), on déduit
+\(W=F_{\mathrm{surv}}(W)\subseteq F_{\mathrm{surv}}(V_n)=V_{n+1}\).
+La récurrence implique \(W\subseteq V_\infty\), qui prouve la maximalité.
+Enfin, l’arbre des prolongements d’un état de \(V_\infty\)
+est à ramification finie et possède un niveau non vide à toute profondeur.
+Le lemme de König fournit une branche infinie. Dans le sens inverse, les
+préfixes de tout prolongement infini situent son état initial
+dans tous les \(V_n\).
+\end{proof}
+
+\paragraph{Ramification et stabilisation.}
+L'hypothèse de finitude possède un contrôle explicite. Considérons une racine avec une branche terminale distincte de chaque longueur entière positive, toutes les branches étant admissibles et disjointes après la racine. La racine admet des prolongements de toute longueur finie et appartient à tous les \(V_n\) ; chacun de ses successeurs appartient à une branche de longueur bornée. La racine ne possède donc ni prolongement infini ni successeur dans \(V_\infty\). Cet arbre a une ramification infinie à la racine.
+En revanche, si \(A\) est fini, chaque inclusion stricte \(V_{n+1}\subsetneq V_n\) élimine au moins un état. L'élagage atteint un point fixe après, au plus, \(|A|\) éliminations strictes de couches. Cette borne appartient au domaine fini \(A\).
+
+\paragraph{Unicité de la continuation.}
+Pour \(s\in V_\infty\), les successeurs qui conservent la survie forment
+\[
+ E(s)\cap V_\infty.
+\]
+La sélection de l’état suivant est unique exactement lorsque
+\begin{equation}
+ \#\bigl(E(s)\cap V_\infty\bigr)=1.
+ \label{hmtfg:base:corpus9:xi:unicidad-sucesor}
+\end{equation}
+Un prolongement infini est unique lorsque cette condition est maintenue
+à chaque état de la route. En effet, chaque successeur survivant possède
+un prolongement infini par la proposition précédente ; deux successeurs
+distincts produisent deux routes distinctes. Lorsque le successeur est unique à
+chaque étape, les préfixes sont déterminés successivement.
+La pluralité des successeurs viables exprime une multiplicité de
+prolongements dans le même domaine de survie.
+
+\begin{proposition}[Conjugaison des deux directions de prolongement]
+\label{hmtfg:base:corpus9:xi:conjugacion-supervivencia}
+Soit \(C:S\to S\) une involution telle que \(C(A)=A\) et
+\begin{equation}
+ (x,y)\in E\quad\Longleftrightarrow\quad(Cy,Cx)\in E.
+ \label{hmtfg:base:corpus9:xi:involucion-prolongaciones}
+\end{equation}
+Notons \(V_n^+\) l’élagage pour \(E\) et \(V_n^-\) l’élagage
+pour \(E^{-1}\), tous deux d’ensemble initial \(A\). Alors
+\[
+ C(V_n^+)=V_n^-\quad(n\geq0),\qquad
+ C(V_\infty^+)=V_\infty^-.
+\]
+\end{proposition}
+
+\begin{proof}
+Si \(s_0,\ldots,s_n\) est une route admissible pour \(E\), la suite
+\(Cs_0,\ldots,Cs_n\) est une route admissible pour \(E^{-1}\) :
+pour chaque \(j\), l’hypothèse convertit
+\((s_j,s_{j+1})\in E\) en \((Cs_{j+1},Cs_j)\in E\).
+Tous ses états appartiennent à \(A\). La même opération appliquée une autre
+fois récupère la route initiale car \(C^2=I\) ; elle établit donc une
+bijection entre les prolongements finis des deux directions.
+La caractérisation de \(V_n^\pm\) par les routes donne
+\(C(V_n^+)=V_n^-\). Comme \(C\) est bijective, elle commute avec
+l’intersection de ces ensembles, et l’on obtient l’égalité de
+\(V_\infty^\pm\).
+\end{proof}
+
+L’involution transporte l’ensemble survivant d’une direction vers celui
+de la direction conjuguée. La prolongeabilité infinie dans les deux
+directions correspond à \(V_\infty^+\cap V_\infty^-\) ; l’unicité
+d’une route conserve le critère de
+\eqref{hmtfg:base:corpus9:xi:unicidad-sucesor}. La rétention d’une généalogie
+et la restriction de son arbre de continuations sont deux opérations
+typées sur les mêmes registres. L’attribution d’une entropie à
+ces lectures exige, en outre, la mesure d’histoires correspondante.
+% END REV09_SUPERVIVENCIA_PUNTO_FIJO

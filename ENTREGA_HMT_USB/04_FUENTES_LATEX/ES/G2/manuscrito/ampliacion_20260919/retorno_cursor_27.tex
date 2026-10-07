@@ -1,0 +1,203 @@
+% DF-001, CF-007/012, P09 del inventario REV05.
+% Residencia: APP toroidal y transporte de cursor; ejemplo tras el cociclo.
+% Propietarios: PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/
+% deltas/integracion/APPRouteWinding.lean (íntegro),
+% lean/biblioteca/TPKTransport.lean:19--143, 155--229,
+% lean/biblioteca/TPKFiniteCursor.lean:17--146.
+% Estatuto: RESULTADO_RECUPERADO; desarrollo del ejemplo finito efectivo,
+% sin identificar el factor observable con todo el estado enriquecido.
+
+\section[Retorno espacial y enrollamiento del cursor]{Retorno espacial y conservación del enrollamiento en el calendario de veintisiete transiciones}
+\label{rc27:sec:cursor}
+
+Las dos coordenadas periódicas de APP proceden de dos coordenadas
+enteras transportadas. La lectura residual identifica posiciones que
+difieren en múltiplos de nueve; los cocientes enteros conservan las
+vueltas de ese transporte. El calendario TPK proporciona un ejemplo
+completo en el que la posición residual retorna y el cursor levantado
+conserva un desplazamiento horizontal distinto de cero.
+
+\subsection{Coordenadas levantadas y cociclo de frontera}
+
+Para $z\in\mathbb Z$, sea
+\[
+\rho_9(z)=1+((z-1)\bmod9),\qquad
+q_9(z)=\left\lfloor\frac{z-1}{9}\right\rfloor.
+\]
+La división euclídea, también para coordenadas negativas, da
+\begin{equation}
+z=\rho_9(z)+9q_9(z),\qquad1\le\rho_9(z)\le9.
+\label{rc27:eq:division}
+\end{equation}
+El acarreo de transporte de un incremento $a\in\mathbb Z$ es
+\[
+c(z,a)=q_9(z+a)-q_9(z).
+\]
+De \eqref{rc27:eq:division} se deducen
+\begin{align}
+\rho_9(z+a)+9c(z,a)&=\rho_9(z)+a,\\
+c(z,a+b)&=c(z,a)+c(z+a,b).
+\label{rc27:eq:cociclo}
+\end{align}
+La segunda identidad sigue de cancelar $q_9(z+a)$ en el miembro
+derecho. El segundo incremento se evalúa desde el extremo del primero;
+esa dependencia conserva la información del cruce de frontera.
+
+Sea $D=\{N,E,S,O\}$, con desplazamientos
+\[
+\delta(N)=(-1,0),\quad\delta(E)=(0,1),\quad
+\delta(S)=(1,0),\quad\delta(O)=(0,-1).
+\]
+Para una palabra de direcciones $w=d_1\cdots d_n$, definamos
+$\Delta(w)=\sum_j\delta(d_j)$ y, desde $o=(o_1,o_2)$,
+\[
+\operatorname{Ext}(o,w)=o+\Delta(w),\qquad
+\nu(o,w)=\bigl(c(o_1,\Delta_1(w)),c(o_2,\Delta_2(w))\bigr).
+\]
+El vector $\nu$ registra ambos enrollamientos.
+
+\begin{proposition}[Composición e inversión de las vueltas]
+Para dos rutas concatenables $u,v$ se cumple
+\[
+\nu(o,uv)=\nu(o,u)+\nu(\operatorname{Ext}(o,u),v).
+\]
+Si $w^{-1}$ invierte el orden y reemplaza cada dirección por su
+opuesta, entonces
+\[
+\operatorname{Ext}(\operatorname{Ext}(o,w),w^{-1})=o,
+\qquad
+\nu(\operatorname{Ext}(o,w),w^{-1})=-\nu(o,w).
+\]
+Para una ruta espacialmente cerrada en APP,
+\[
+\nu(o,w)=\Delta(w)/9\in\mathbb Z^2.
+\]
+\end{proposition}
+\begin{proof}
+La suma de desplazamientos es aditiva bajo concatenación. Aplicar
+\eqref{rc27:eq:cociclo} en cada coordenada demuestra la primera
+identidad. La inversión da $\Delta(w^{-1})=-\Delta(w)$ y recupera
+el extremo inicial. Restar los cocientes en orden contrario cambia
+el signo de $\nu$. Por último, el cierre espacial equivale a
+$\rho_9(o_i+\Delta_i)=\rho_9(o_i)$ para ambas coordenadas; la primera
+igualdad de \eqref{rc27:eq:cociclo} da entonces $9\nu_i=\Delta_i$.
+\end{proof}
+
+Los ciclos de nueve movimientos al sur y de nueve movimientos al este,
+desde $(1,1)$, tienen vueltas $(1,0)$ y $(0,1)$, respectivamente.
+Son dos ciclos independientes de la superficie periódica APP.
+
+\subsection{Actualización de los dos cursores}
+
+Un cursor observable levantado es $c=(x,y,d)\in\mathbb Z^2\times D$.
+La fase $p$ pertenece a $\mathbb Z/108\mathbb Z$ y se representa
+por $0,\ldots,107$. En la hoja aditiva se activa el desplazamiento
+cuando $p\equiv0\pmod3$; en la multiplicativa, cuando
+$p\equiv1\pmod3$. Definamos
+\[
+a_+(p)=\mathbf1_{\{p\equiv0\ (3)\}},\qquad
+a_\times(p)=\mathbf1_{\{p\equiv1\ (3)\}},\qquad
+\varepsilon(p)=\mathbf1_{\{p+1\equiv0\ (27)\}}.
+\]
+El operador observable actúa mediante
+\begin{equation}
+c'_s=\bigl(x_s+a_s(p)\delta_1(d_s),\,
+           y_s+a_s(p)\delta_2(d_s),\,
+           \operatorname{op}^{\varepsilon(p)}d_s\bigr),
+\qquad p'=p+1\pmod{108},
+\label{rc27:eq:actualizacion}
+\end{equation}
+donde $s\in\{+,\times\}$ y $\operatorname{op}$ intercambia
+$N$ con $S$ y $E$ con $O$.
+El desplazamiento utiliza la dirección anterior y, después, la
+transición de semiciclo actualiza la orientación.
+
+La inversa recupera primero $p=p'-1\pmod{108}$, restituye
+$d_s=\operatorname{op}^{\varepsilon(p)}d'_s$ y resta
+$a_s(p)\delta(d_s)$ de las coordenadas. Como
+$\operatorname{op}^2=I$, ambas composiciones son la identidad.
+
+\begin{theorem}[Retorno espacial efectivo en la primera semicorona]
+\label{rc27:thm:ejemplo}
+Partamos de
+$c_+(0)=c_\times(0)=(1,1,E)$ y $p(0)=0$.
+Después de veintisiete transiciones de
+\eqref{rc27:eq:actualizacion}, se obtiene
+\[
+c_+(27)=c_\times(27)=(1,10,O),\qquad p(27)=27.
+\]
+Ambas posiciones residuales vuelven a $(1,1)$, mientras que el
+cociente horizontal aumenta en una unidad y el vertical permanece
+invariable.
+\end{theorem}
+\begin{proof}
+Para $0\le n\le27$, el número de activaciones aditivas anteriores
+a la transición $n$ es $\lfloor(n+2)/3\rfloor$; el número de
+activaciones multiplicativas es $\lfloor(n+1)/3\rfloor$. Antes
+de la transición de fase $26$ a $27$ no hay inversión de dirección.
+Por inducción en $n$, las coordenadas son
+\[
+x_+(n)=x_\times(n)=1,\qquad
+y_+(n)=1+\left\lfloor\frac{n+2}{3}\right\rfloor,\qquad
+y_\times(n)=1+\left\lfloor\frac{n+1}{3}\right\rfloor.
+\]
+Las direcciones son $E$ para $0\le n<27$ y $O$ para $n=27$.
+La descomposición en cada grupo de tres transiciones es
+\[
+\begin{array}{c|c|c|c}
+n&y_+(n)&y_\times(n)&\text{dirección}\\\hline
+3k&1+k&1+k&E\\
+3k+1&2+k&1+k&E\\
+3k+2&2+k&2+k&E
+\end{array}
+\quad(0\le k\le8),
+\]
+y el extremo final es $(y_+,y_\times,d)=(10,10,O)$.
+Hay nueve activaciones en cada hoja. La transición final tiene fase
+previa $26$, de clase dos módulo tres; por ello invierte las
+direcciones y mantiene las coordenadas que ya alcanzaron diez.
+
+Finalmente, $\rho_9(10)=1$, $q_9(10)=1$,
+$\rho_9(1)=1$ y $q_9(1)=0$. La posición residual coincide con
+la inicial, y el enrollamiento espacial es $(0,1)$.
+\end{proof}
+
+El retorno de este ejemplo es espacial. La dirección y la fase
+registradas son $(O,27)$ al final y $(E,0)$ al inicio. El ejemplo
+conserva expresamente los tres datos: posición residual, orientación y
+fase; su igualdad o diferencia se establece para cada uno.
+
+\subsection{Recuperación del cursor y compatibilidad a toda profundidad}
+
+\begin{proposition}[Recuperación del cursor levantado]
+La posición residual, la dirección y los dos cocientes enteros
+determinan unívocamente el cursor $c=(x,y,d)$.
+\end{proposition}
+\begin{proof}
+Las dos identidades \eqref{rc27:eq:division} recuperan $x$ e $y$
+y la dirección se conserva en la proyección observable. Si esos
+cinco datos coinciden para dos cursores, coinciden sus tres
+componentes y, por tanto, los cursores son iguales.
+\end{proof}
+
+Sea $P$ la proyección de los dos cursores a sus posiciones módulo
+nueve, conservando sus direcciones y la fase. La actualización
+finita $T_{\rm fin}$ usa los mismos indicadores de activación y
+orientación, con suma residual en las coordenadas. Si $T$ es
+\eqref{rc27:eq:actualizacion}, entonces
+\[
+PT=T_{\rm fin}P,\qquad PT^n=T_{\rm fin}^{\,n}P
+\quad(n\ge0).
+\]
+La primera igualdad resulta de la compatibilidad de la reducción
+módulo nueve con la suma y de la conservación de dirección y fase;
+la segunda se demuestra por inducción en $n$.
+
+El archivo ordenado de estados observables puede prolongarse mediante
+$(q,\mathcal A)\mapsto(Tq,\mathcal A\Vert q)$.
+Después de $n$ transiciones conserva su prefijo inicial y su longitud
+aumenta en $n$. Esta operación mantiene separados el estado corriente,
+el enrollamiento y el registro de sus estados anteriores. En la
+construcción enriquecida completa, el factor observable se compone
+con las demás lecturas de cilindro, incidencia y memoria mediante sus
+proyecciones declaradas.

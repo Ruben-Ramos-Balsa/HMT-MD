@@ -1,0 +1,203 @@
+% DF-001, CF-007/012, P09 del inventario REV05.
+% Residencia: APP toroidal y transporte de cursor; ejemplo tras el cociclo.
+% Propietarios: PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/
+% deltas/integracion/APPRouteWinding.lean (íntegro),
+% lean/biblioteca/TPKTransport.lean:19--143, 155--229,
+% lean/biblioteca/TPKFiniteCursor.lean:17--146.
+% Estatuto: RESULTADO_RECUPERADO; desarrollo del ejemplo finito efectivo,
+% sin identificar el factor observable con todo el estado enriquecido.
+
+\section[Retour spatial et enroulement du curseur]{Retour spatial et conservation de l'enroulement dans le calendrier de vingt-sept transitions}
+\label{rc27:sec:cursor}
+
+Les deux coordonnées périodiques de l'APP proviennent de deux coordonnées
+entières transportées. La lecture résiduelle identifie les positions qui
+diffèrent de multiples de neuf ; les quotients entiers conservent les
+tours de ce transport. Le calendrier TPK fournit un exemple
+complet dans lequel la position résiduelle revient et le curseur relevé
+conserve un déplacement horizontal non nul.
+
+\subsection{Coordonnées relevées et cocycle de frontière}
+
+Pour $z\in\mathbb Z$, soit
+\[
+\rho_9(z)=1+((z-1)\bmod9),\qquad
+q_9(z)=\left\lfloor\frac{z-1}{9}\right\rfloor.
+\]
+La division euclidienne, également pour les coordonnées négatives, donne
+\begin{equation}
+z=\rho_9(z)+9q_9(z),\qquad1\le\rho_9(z)\le9.
+\label{rc27:eq:division}
+\end{equation}
+La retenue de transport d'un incrément $a\in\mathbb Z$ est
+\[
+c(z,a)=q_9(z+a)-q_9(z).
+\]
+De \eqref{rc27:eq:division} se déduisent
+\begin{align}
+\rho_9(z+a)+9c(z,a)&=\rho_9(z)+a,\\
+c(z,a+b)&=c(z,a)+c(z+a,b).
+\label{rc27:eq:cociclo}
+\end{align}
+La seconde identité découle de l'annulation de $q_9(z+a)$ dans le membre
+de droite. Le second incrément est évalué depuis l'extrémité du premier ;
+cette dépendance conserve l'information du franchissement de frontière.
+
+Soit $D=\{N,E,S,O\}$, avec les déplacements
+\[
+\delta(N)=(-1,0),\quad\delta(E)=(0,1),\quad
+\delta(S)=(1,0),\quad\delta(O)=(0,-1).
+\]
+Pour un mot de directions $w=d_1\cdots d_n$, définissons
+$\Delta(w)=\sum_j\delta(d_j)$ et, depuis $o=(o_1,o_2)$,
+\[
+\operatorname{Ext}(o,w)=o+\Delta(w),\qquad
+\nu(o,w)=\bigl(c(o_1,\Delta_1(w)),c(o_2,\Delta_2(w))\bigr).
+\]
+Le vecteur $\nu$ enregistre les deux enroulements.
+
+\begin{proposition}[Composition et inversion des tours]
+Pour deux routes concaténables $u,v$, on a
+\[
+\nu(o,uv)=\nu(o,u)+\nu(\operatorname{Ext}(o,u),v).
+\]
+Si $w^{-1}$ inverse l'ordre et remplace chaque direction par son
+opposée, alors
+\[
+\operatorname{Ext}(\operatorname{Ext}(o,w),w^{-1})=o,
+\qquad
+\nu(\operatorname{Ext}(o,w),w^{-1})=-\nu(o,w).
+\]
+Pour une route spatialement fermée dans l'APP,
+\[
+\nu(o,w)=\Delta(w)/9\in\mathbb Z^2.
+\]
+\end{proposition}
+\begin{proof}
+La somme des déplacements est additive sous concaténation. Appliquer
+\eqref{rc27:eq:cociclo} dans chaque coordonnée démontre la première
+identité. L'inversion donne $\Delta(w^{-1})=-\Delta(w)$ et récupère
+l'extrémité initiale. Soustraire les quotients dans l'ordre contraire change
+le signe de $\nu$. Enfin, la fermeture spatiale équivaut à
+$\rho_9(o_i+\Delta_i)=\rho_9(o_i)$ pour les deux coordonnées ; la première
+égalité de \eqref{rc27:eq:cociclo} donne alors $9\nu_i=\Delta_i$.
+\end{proof}
+
+Les cycles de neuf mouvements vers le sud et de neuf mouvements vers l'est,
+depuis $(1,1)$, ont pour tours $(1,0)$ et $(0,1)$, respectivement.
+Ce sont deux cycles indépendants de la surface périodique APP.
+
+\subsection{Mise à jour des deux curseurs}
+
+Un curseur observable relevé est $c=(x,y,d)\in\mathbb Z^2\times D$.
+La phase $p$ appartient à $\mathbb Z/108\mathbb Z$ et est représentée
+par $0,\ldots,107$. Dans le feuillet additif, le déplacement est activé
+lorsque $p\equiv0\pmod3$ ; dans le multiplicatif, lorsque
+$p\equiv1\pmod3$. Définissons
+\[
+a_+(p)=\mathbf1_{\{p\equiv0\ (3)\}},\qquad
+a_\times(p)=\mathbf1_{\{p\equiv1\ (3)\}},\qquad
+\varepsilon(p)=\mathbf1_{\{p+1\equiv0\ (27)\}}.
+\]
+L'opérateur observable agit au moyen de
+\begin{equation}
+c'_s=\bigl(x_s+a_s(p)\delta_1(d_s),\,
+           y_s+a_s(p)\delta_2(d_s),\,
+           \operatorname{op}^{\varepsilon(p)}d_s\bigr),
+\qquad p'=p+1\pmod{108},
+\label{rc27:eq:actualizacion}
+\end{equation}
+où $s\in\{+,\times\}$ et $\operatorname{op}$ échange
+$N$ avec $S$ et $E$ avec $O$.
+Le déplacement utilise la direction précédente, puis la
+transition de demi-cycle met à jour l'orientation.
+
+L'inverse récupère d'abord $p=p'-1\pmod{108}$, restitue
+$d_s=\operatorname{op}^{\varepsilon(p)}d'_s$ et soustrait
+$a_s(p)\delta(d_s)$ des coordonnées. Comme
+$\operatorname{op}^2=I$, les deux compositions sont l'identité.
+
+\begin{theorem}[Retour spatial effectif dans la première demi-couronne]
+\label{rc27:thm:ejemplo}
+Partons de
+$c_+(0)=c_\times(0)=(1,1,E)$ et $p(0)=0$.
+Après vingt-sept transitions de
+\eqref{rc27:eq:actualizacion}, on obtient
+\[
+c_+(27)=c_\times(27)=(1,10,O),\qquad p(27)=27.
+\]
+Les deux positions résiduelles reviennent à $(1,1)$, tandis que le
+quotient horizontal augmente d'une unité et que le quotient vertical demeure
+invariable.
+\end{theorem}
+\begin{proof}
+Pour $0\le n\le27$, le nombre d'activations additives antérieures
+à la transition $n$ est $\lfloor(n+2)/3\rfloor$ ; le nombre
+d'activations multiplicatives est $\lfloor(n+1)/3\rfloor$. Avant
+la transition de phase de $26$ à $27$, il n'y a pas d'inversion de direction.
+Par récurrence sur $n$, les coordonnées sont
+\[
+x_+(n)=x_\times(n)=1,\qquad
+y_+(n)=1+\left\lfloor\frac{n+2}{3}\right\rfloor,\qquad
+y_\times(n)=1+\left\lfloor\frac{n+1}{3}\right\rfloor.
+\]
+Les directions sont $E$ pour $0\le n<27$ et $O$ pour $n=27$.
+La décomposition dans chaque groupe de trois transitions est
+\[
+\begin{array}{c|c|c|c}
+n&y_+(n)&y_\times(n)&\text{direction}\\\hline
+3k&1+k&1+k&E\\
+3k+1&2+k&1+k&E\\
+3k+2&2+k&2+k&E
+\end{array}
+\quad(0\le k\le8),
+\]
+et l'extrémité finale est $(y_+,y_\times,d)=(10,10,O)$.
+Il y a neuf activations dans chaque feuillet. La transition finale a pour phase
+préalable $26$, de classe deux modulo trois ; elle inverse donc les
+directions et maintient les coordonnées qui ont déjà atteint dix.
+
+Enfin, $\rho_9(10)=1$, $q_9(10)=1$,
+$\rho_9(1)=1$ et $q_9(1)=0$. La position résiduelle coïncide avec
+la position initiale, et l'enroulement spatial est $(0,1)$.
+\end{proof}
+
+Le retour de cet exemple est spatial. La direction et la phase
+enregistrées sont $(O,27)$ à la fin et $(E,0)$ au début. L'exemple
+conserve expressément les trois données : position résiduelle, orientation et
+phase ; leur égalité ou leur différence est établie pour chacune.
+
+\subsection{Récupération du curseur et compatibilité à toute profondeur}
+
+\begin{proposition}[Récupération du curseur relevé]
+La position résiduelle, la direction et les deux quotients entiers
+déterminent de manière unique le curseur $c=(x,y,d)$.
+\end{proposition}
+\begin{proof}
+Les deux identités \eqref{rc27:eq:division} récupèrent $x$ et $y$
+et la direction est conservée dans la projection observable. Si ces
+cinq données coïncident pour deux curseurs, leurs trois
+composantes coïncident et, par conséquent, les curseurs sont égaux.
+\end{proof}
+
+Soit $P$ la projection des deux curseurs sur leurs positions modulo
+neuf, en conservant leurs directions et la phase. La mise à jour
+finie $T_{\rm fin}$ utilise les mêmes indicateurs d'activation et
+d'orientation, avec une somme résiduelle dans les coordonnées. Si $T$ est
+\eqref{rc27:eq:actualizacion}, alors
+\[
+PT=T_{\rm fin}P,\qquad PT^n=T_{\rm fin}^{\,n}P
+\quad(n\ge0).
+\]
+La première égalité résulte de la compatibilité de la réduction
+modulo neuf avec l'addition et de la conservation de la direction et de la phase ;
+la seconde se démontre par récurrence sur $n$.
+
+L'archive ordonnée des états observables peut être prolongée au moyen de
+$(q,\mathcal A)\mapsto(Tq,\mathcal A\Vert q)$.
+Après $n$ transitions, elle conserve son préfixe initial et sa longueur
+augmente de $n$. Cette opération maintient séparés l'état courant,
+l'enroulement et le registre de ses états antérieurs. Dans la
+construction enrichie complète, le facteur observable se compose
+avec les autres lectures de cylindre, d'incidence et de mémoire au moyen de leurs
+projections déclarées.

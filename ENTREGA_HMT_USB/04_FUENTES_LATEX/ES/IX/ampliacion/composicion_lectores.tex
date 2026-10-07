@@ -1,0 +1,113 @@
+\section{Composición de lectores y transporte de normalización}
+\label{ix-add:composicion-lectores}
+
+Las formas normales, las clases residuales y el operador de numeración
+proceden de las construcciones APP--TRIT--TPK desarrolladas antes. El estado
+enriquecido conserva su ruta, orientación, acarreo y memoria dentro de la
+estructura discreta conjunta del continuo. Las operaciones siguientes actúan
+sobre su realización espectral posterior: especifican qué información
+permanece al componer lectores, formar momentos o cambiar su normalización.
+
+Se conserva $Qe_n=ne_n$ sobre $\mathcal H=\ell^2(\mathbb N_{>0})$.
+Sea $a:\mathbb Z/q\mathbb Z\to\mathbb C$ una tabla residual fijada,
+con $q\geq1$, y sea $D_ae_n=a(n)e_n$. El coeficiente de índice $q$
+representa la clase cero. Para $t>0$ se obtiene
+\[
+ K_a(t)=\operatorname{Tr}(e^{-tQ}D_a)
+ =\frac{P_a(e^{-t})}{1-e^{-qt}},\qquad
+ P_a(r)=\sum_{j=1}^{q}a(j)r^j.
+\]
+En efecto, escribir $n=qk+j$ agrupa una serie absolutamente convergente
+y permite sumar las progresiones geométricas de cada clase.
+
+\subsection{Momentos, derivadas y recuperación del lector}
+\HMTresultado{Proposición}{Realización de Mellin y recuperación de la tabla}{ix-add:heat-mellin}
+Si $\Re s>1$, el operador $Q^{-s}D_a$ es de clase traza y
+\[
+ M_a(s):=\operatorname{Tr}(Q^{-s}D_a)
+ =\frac1{\Gamma(s)}\int_0^\infty t^{s-1}K_a(t)\,dt.
+\]
+Para cada entero $k\geq0$,
+\[
+ M_a^{(k)}(s)=\operatorname{Tr}\bigl((-\log Q)^kQ^{-s}D_a\bigr).
+\]
+El núcleo completo $K_a$, junto con el período declarado, determina
+unívocamente la tabla $a$.
+
+\textbf{Demostración.} Para $\sigma=\Re s>1$,
+\[
+ \sum_{n\geq1}|a(n)|\int_0^\infty
+ t^{\sigma-1}e^{-nt}\,dt
+ \leq\|a\|_\infty\Gamma(\sigma)\sum_{n\geq1}n^{-\sigma}<\infty.
+\]
+Se puede integrar término a término. La integral de cada modo es
+$\Gamma(s)n^{-s}$. En un compacto de ese semiplano, las series con
+factores $(\log n)^k$ convergen uniformemente, lo que justifica las
+derivadas y sus trazas. Finalmente,
+\[
+ P_a(r)=(1-r^q)K_a(-\log r),\qquad 0<r<1.
+\]
+Dos polinomios que coinciden en ese intervalo tienen los mismos
+coeficientes; éstos recuperan la tabla. \hfill$\square$
+
+La recuperación utiliza el núcleo completo. Un momento aislado es un
+funcional de los coeficientes y puede anular información. Por ejemplo,
+la tabla auxiliar $a(n)=1$ en los impares y $a(n)=-3$ en los pares
+tiene $D_a\ne0$, pero
+\[
+ M_a(2)=\left(\frac34-3\frac14\right)Z(2)=0.
+\]
+Este control distingue el lector de su momento; no altera los lectores
+seleccionados por la construcción HMT. La tabla recuperada tampoco
+identifica toda la historia enriquecida que la produjo.
+
+\subsection{Producto diagonal y producto tensorial}
+\HMTresultado{Proposición}{Dos leyes de composición espectral}{ix-add:diagonal-tensor}
+Sean $a,b$ dos tablas periódicas, extendidas a un período común. En
+$\Re s>1$, la composición sobre un mismo índice satisface
+\[
+ D_aD_b=D_{ab},\qquad
+ \operatorname{Tr}(Q^{-s}D_aD_b)=\sum_{n\geq1}\frac{a(n)b(n)}{n^s}.
+\]
+El producto de sus momentos tiene la realización distinta
+\[
+ M_a(s)M_b(s)=
+ \operatorname{Tr}_{\mathcal H\otimes\mathcal H}
+ \bigl((Q\otimes Q)^{-s}(D_a\otimes D_b)\bigr)
+ =\sum_{k\geq1}\frac{(a*b)(k)}{k^s},
+\]
+\[
+ (a*b)(k)=\sum_{d\mid k}a(d)b(k/d).
+\]
+\textbf{Demostración.} La primera igualdad se verifica sobre $e_n$.
+Sobre $e_m\otimes e_n$, el operador de numeración tensorial tiene
+autovalor $mn$ y el lector tiene coeficiente $a(m)b(n)$. La suma de
+valores absolutos está acotada por
+$\|a\|_\infty\|b\|_\infty Z(\sigma)^2$, con $\sigma>1$.
+Puede factorizarse y reagruparse por $k=mn$; los pares correspondientes
+a cada divisor de $k$ producen la convolución escrita. \hfill$\square$
+
+El producto diagonal conserva un mismo modo y reúne sus datos residuales;
+en particular, el lector dodecafásico compuesto conserva las clases
+módulo tres y cuatro en el mismo índice. El producto tensorial mantiene
+dos índices antes de agruparlos. El primero conserva periodicidad; la
+convolución no necesariamente: para $a=b=1$ sus coeficientes cuentan
+divisores y son no acotados, pues el valor en $2^j$ es $j+1$.
+La tabla diagonal de ese ejemplo sigue siendo constante. Esta diferencia
+impide sustituir una operación por la otra.
+
+La distinción suma--producto se conserva asimismo en el núcleo de calor:
+\[
+ \operatorname{Tr}\bigl(e^{-t(Q\otimes Q)}(D_a\otimes D_b)\bigr)
+ =\sum_{m,n\geq1}a(m)b(n)e^{-tmn},
+\]
+\[
+ K_a(t)K_b(t)=\operatorname{Tr}
+ \bigl(e^{-t(Q\otimes I+I\otimes Q)}(D_a\otimes D_b)\bigr).
+\]
+Para $t>0$, la primera suma absoluta está dominada por
+$\|a\|_\infty\|b\|_\infty\sum_{m\geq1}e^{-tm}/(1-e^{-tm})$,
+que converge; la segunda factoriza en dos series convergentes. Sus
+autovalores son respectivamente $mn$ y $m+n$. La realización tensorial
+expresa estas operaciones posteriores y no presupone independencia
+estadística entre las historias de procedencia.

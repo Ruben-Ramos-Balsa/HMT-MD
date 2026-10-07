@@ -1,0 +1,374 @@
+% Propietario reproducido por unidad demostrativa; véase PROPIETARIOS_CONTINUO_UNIVERSO.json.
+% Origen: XI ES CUMPLIMIENTO_EDITORIAL_20260928, sections/ch_cierre_cardinal.tex:26--403.
+% Cuerpos y pruebas conservados; sólo namespace, rutas y remisiones contextuales declaradas.
+\subsection{Extension of states and transfinite semantic extension}
+
+Let
+
+\[
+ \Sigma_{\rm HMT}
+ =\bigl(\dot R_{\rm APP},\dot R_{\rm TRIT},\dot R_{\rm TPK},
+ \dot R_{U},\dot R_{\Gamma_9},\dot R_{\rm Ext},\dot R_\rho,
+ \dot R_{\pi},\dot R_{\varphi},\dot R_e,\dot R_{\alpha},
+ \dot R_{\rm ar},\dot R_{\rm exc}\bigr)
+\tag{33}\label{hmtfg:base:eq:ch-signatura}
+\]
+
+be the countable \textbf{relational} signature whose effective code is \(h\).
+Each \(\dot R_S\) is the graph of the operator \(S\) on the codes where it is
+defined; no external function is assumed to be total within each level. The
+graphs \(\dot R_{\pi},\dot R_{\varphi},\dot R_e,\dot R_{\alpha}\) are the
+output readers constructed by coinductive generation and dodecaphase closure;
+they do not take the conventional values of the constants as arguments. Their
+presence in \(\Sigma_{\rm HMT}\) ensures that the closure preserves the full
+state: it simultaneously integrates the routes that express value and the
+incidence that extends toward the exceptional realization.
+
+At each horizon, the state code records the APP--TRIT--TPK coordinates, the
+route, sheet, carry, boundary, and memory; at its representation stages it also
+records \(P_N,\Phi_N,E_N,A_N\), where \(A_N\) is the prefix of
+\(\alpha_{\rm HMT}\) produced by the same state. These coordinates do not
+select the branch from outside: they are part of the history being encoded.
+Once a primitive-recursive numbering of the finite coordinates of a state is
+fixed, every inverse history
+\(x_\infty=(x_N)_{N\geq1}\in X_\infty^{\rm enr}\) determines the code
+\[
+ \operatorname{code}(x_\infty)
+ :=\{\langle N,j,c\rangle:(x_N)_j\text{ has code }c\}\subseteq\omega.
+\]
+The coherence equations
+\(\rho_{N+1,N}(x_{N+1})=x_N\) make it possible to decode the history uniquely
+from that real. We write \(m_\infty\) for the code of the realized history and
+\(m_\infty(n)\) for its characteristic function under the fixed numbering.
+The operator code \(h\) and this complete ledger are combined, by means of a
+primitive-recursive pairing function, into the real
+
+\[
+ u_{h,m}:=
+ \{\langle0,\langle n,h(n)\rangle\rangle:n<\omega\}
+ \cup
+ \{\langle1,\langle n,m_\infty(n)\rangle\rangle:n<\omega\}.
+\tag{33a}\label{hmtfg:base:eq:ch-codigo-conjunto}
+\]
+
+The two primitive projections recover \(h\) and \(m_\infty\) from
+\(u_{h,m}\).
+
+The first extension is the metric and operator extension of the finite states.
+For \(N\ge1\), let \(\widehat{\mathcal X}^{\rm enr,raw}_{6N}\) be the set of
+raw enriched states of length \(6N\), and define the surviving subsystem
+set-theoretically by
+\[
+\begin{aligned}
+ X_N
+ &:=\widehat{\mathcal X}^{\rm enr,surv}_{6N}\\
+ &:=\Bigl\{x\in\widehat{\mathcal X}^{\rm enr,raw}_{6N}:\\[-.2ex]
+ &\qquad\forall M>N\ \exists z\in
+   \widehat{\mathcal X}^{\rm enr,raw}_{6M}\;\text{ such that}\\[-.2ex]
+ &\qquad\operatorname{tr}_{6M,6N}(z)=x\ \wedge\
+   z\text{ satisfies every intermediate TPK transition}\Bigr\}.
+\end{aligned}
+\]
+and set
+\[
+ \rho_{N+1,N}:=\operatorname{tr}_{6N+6,6N}\!\upharpoonright X_{N+1},
+\]
+and
+\[
+ \operatorname{Ext}_N(x):=
+ \{y\in X_{N+1}:(x,y)\in
+ \operatorname{Ext}_{6N+6,6N}\}.
+\]
+The root level is included without any implicit exception:
+\[
+ X_0:=\{\ast\},\qquad
+ \rho_{1,0}:X_1\to X_0\text{ is constant},\qquad
+ \operatorname{Ext}_0(\ast):=X_1.
+\]
+The superscript \(\mathrm{surv}\) denotes the pruned tree of states possessing
+compatible TPK descendants at every finite horizon. The TPK extension law
+established in the preceding sections proves that the emitted seeds belong to
+this tree; finite branching and Kőnig's lemma turn compatibility at every
+horizon into an infinite branch. In particular,
+
+\[
+ \forall N\ge0\;\forall x\in X_N\quad
+ \varnothing\ne\operatorname{Ext}_N(x)
+ \subseteq\rho_{N+1,N}^{-1}(x).
+\tag{34}\label{hmtfg:base:eq:ch-extension-no-vacia}
+\]
+
+By the same finitely branching tree lemma, every surviving seed has a
+compatible extension
+
+\[
+ x_\infty=(x_N)_{N\ge1}\in
+ X_\infty^{\rm enr}:=\varprojlim_N(X_N,\rho_{N+1,N}).
+\tag{35}\label{hmtfg:base:eq:ch-limite-inverso}
+\]
+
+The second extension acts \textbf{afterward} on the complete code of that
+realized history.
+It is not inferred from the mere existence of the finite operator
+\(\operatorname{Ext}_N\): at the set-theoretic scale, it formalizes the HMT principle that
+only those objects possessing a genealogical derivation
+from the state and its rules belong to the full domain. The transfinite semantic
+extension is:
+
+\[
+ \begin{aligned}
+  \mathfrak G_0(h,m_\infty)
+  &:=\operatorname{TC}\bigl(\{\omega,u_{h,m},h,m_\infty\}\bigr),\\
+  \mathfrak G_{\beta+1}(h,m_\infty)
+  &:=\operatorname{Def}_{\Sigma_{\rm HMT}}
+       \bigl(\mathfrak G_\beta(h,m_\infty)\bigr),\\
+  \mathfrak G_\lambda(h,m_\infty)
+  &:=\bigcup_{\beta<\lambda}\mathfrak G_\beta(h,m_\infty)
+       \quad(\lambda\text{ limit}),\\
+  \mathfrak G_{\rm HMT}(h,m_\infty)
+  &:=\bigcup_{\beta\in\operatorname{Ord}}
+       \mathfrak G_\beta(h,m_\infty).
+ \end{aligned}
+\tag{36}\label{hmtfg:base:eq:ch-clausura-transfinita}
+\]
+
+The Continuum Hypothesis and a target bijection are not introduced among the
+conditions defining the successor operator; the operator is given
+prospectively by
+
+\[
+ \operatorname{Def}_{\Sigma_{\rm HMT}}(M)
+ :=M\cup
+ \Bigl\{
+   \{x\in M:\langle M,\in,
+       (\dot R_S\cap M^{k_S})_{S\in\Sigma_{\rm HMT}}\rangle
+       \models\varphi(x,\bar p)\}:
+   \ulcorner\varphi\urcorner\in\omega,
+   \ \bar p\in M^{<\omega}
+ \Bigr\}.
+\tag{37}\label{hmtfg:base:eq:ch-operador-def}
+\]
+
+That is, it simultaneously expresses all subsets definable by a finite formula
+of the HMT relational language and parameters already produced by the
+genealogy. It consults neither a target real value, a conventional constant, a
+target cardinal, nor an external model. Formula~\eqref{hmtfg:base:eq:ch-operador-def}
+defines the transfinite closure over the previously constructed seeds,
+operators, enriched state, ledger, and double projection.
+
+\begin{lemma}[Joint coding of the HMT program and the realized ledger]
+\label{hmtfg:base:thm:ch-6}
+The pair formed by the operator code \(h\) and the ledger \(m_\infty\) is
+encoded by a single real \(u_{h,m}\subseteq\omega\), and every formula of
+\(\Sigma_{\rm HMT}\) is uniformly translated into a formula of the language
+\(\{\in,u_{h,m}\}\).
+
+\end{lemma}
+\begin{proof}
+Both \(h\) and \(m_\infty\) are sequences of natural numbers: \(h\) encodes
+the signature, the finite tables, and the operator programs; \(m_\infty\)
+encodes one realized history, not the complete history space.
+Formula~\eqref{hmtfg:base:eq:ch-codigo-conjunto} and its two decoders prove the first
+assertion. Each symbol in~\eqref{hmtfg:base:eq:ch-signatura} denotes its \textbf{graph
+relation encoded in \(h\)}, never the external graph of all its possible
+evaluations. APP, TRIT, \(U_t\), \(\Gamma_9\), the restrictions \(\rho\), and
+the finite extensions have primitive-recursive graphs on integer codes and,
+therefore, \(\Delta_0\) formulas absolute between transitive levels. The two
+representations are expressed as graph relations through the formulas
+
+\[
+ \begin{aligned}
+ \dot R_{\rm ar}(x,y)
+ &\;\Longleftrightarrow\;
+ \forall k\in\omega\;\exists N\;\forall n\ge N\quad
+ |\mu_n(x)-y|<2^{-k},\\
+ \dot R_{\rm exc}(x,c,z)
+ &\;\Longleftrightarrow\;
+ \forall N\in\omega\quad z\!\upharpoonright N
+   =E_N(x\!\upharpoonright N,c\!\upharpoonright N),
+ \end{aligned}
+\tag{37c$_0$}\label{hmtfg:base:eq:ch-grafos-publicacion}
+\]
+
+where \(\mu_n\) and \(E_N\) are the rational/finite functions whose codes
+occur in \(h\). Every atomic formula containing an HMT symbol is inductively
+replaced by its graph formula with parameter \(u_{h,m}\). Connectives and
+quantifiers are preserved. This induction on syntactic complexity produces a
+translation \(\varphi\mapsto\varphi^*\) such that, for every transitive level
+\(M\) of~\eqref{hmtfg:base:eq:ch-clausura-transfinita} containing the parameters,
+
+\[
+ \langle M,\in,(\dot R_S\cap M^{k_S})_S\rangle
+   \models\varphi(\bar a)
+ \quad\Longleftrightarrow\quad
+ M\models\varphi^*(\bar a;u_{h,m}).
+\tag{37c}\label{hmtfg:base:eq:ch-eliminacion-uniforme}
+\]
+
+Thus, \eqref{hmtfg:base:eq:ch-operador-def} cannot consult an oracle, a target decimal
+table, or an uncoded relation that introduces uncountably many objects in a
+single step.
+\end{proof}
+
+HMT semantics is now defined \textbf{independently of identifying it with
+\(\mathfrak G\)}. Let \(\mathcal T_0^{\rm HMT}\) be the set of canonical names
+of the elements of
+\(\mathfrak G_0(h,m_\infty)=
+\operatorname{TC}(\{\omega,u_{h,m},h,m_\infty\})\). In particular, the
+initial level contains the realized ledger \(m_\infty\), not every history
+in \(X_\infty^{\rm enr}\) as primitive parameters. The admissible terms are
+the well-founded trees obtained by
+
+\[
+ \begin{aligned}
+ \mathcal T^{\rm HMT}_{\beta+1}
+ &:={\mathcal T}^{\rm HMT}_\beta\cup
+ \{\langle\beta,\ulcorner\varphi\urcorner,
+       t_0,\ldots,t_{k-1}\rangle:
+       t_i\in\mathcal T^{\rm HMT}_\beta\},\\
+ \mathcal T^{\rm HMT}_\lambda&:=
+       \bigcup_{\beta<\lambda}\mathcal T^{\rm HMT}_\beta,
+ \qquad
+ \mathcal T^{\rm HMT}:=
+       \bigcup_{\beta\in\operatorname{Ord}}\mathcal T^{\rm HMT}_\beta.
+ \end{aligned}
+\tag{37a}\label{hmtfg:base:eq:ch-terminos}
+\]
+
+The value of a successor term is the subset of the preceding level defined by
+\(\varphi\) in the induced relational structure, with the values of
+\(t_0,\ldots,t_{k-1}\) as parameters. Before any set-theoretic comparison,
+define
+
+\[
+ \operatorname{Ob}_{\rm sem}^{\rm HMT}(h,m_\infty)
+ :=\{\llbracket t\rrbracket:t\in\mathcal T^{\rm HMT}\}.
+\tag{37b}\label{hmtfg:base:eq:ch-objetos-semanticos}
+\]
+
+This is the rule of \textbf{generative exhaustiveness} adopted by HMT: every object in the entire domain must have one of those derivation trees and every admissible tree expresses an object. It is not a consequence of finite branching. The continuum hypothesis is not introduced into this rule; it is obtained through the proof developed in the article. Neither an enumeration of the reals nor a target bijection is introduced as data.
+
+\begin{theorem}[Equivalence between term semantics and the genealogical hierarchy]
+\label{hmtfg:base:thm:ch-6a}
+The evaluation of the preceding terms satisfies
+
+\[
+ \operatorname{Ob}_{\rm sem}^{\rm HMT}(h,m_\infty)
+ =\mathfrak G_{\rm HMT}(h,m_\infty).
+\tag{37d}\label{hmtfg:base:eq:ch-equivalencia-semantica}
+\]
+
+\end{theorem}
+\begin{proof}
+By transfinite induction. At the initial level, the two classes coincide. If
+every value of a term in \(\mathcal T^{\rm HMT}_\beta\) belongs to
+\(\mathfrak G_\beta\), the semantics of a successor term is one of the subsets
+in~\eqref{hmtfg:base:eq:ch-operador-def}. Conversely, every subset in
+~\eqref{hmtfg:base:eq:ch-operador-def} is given by a formula code and a finite tuple of
+parameters; by the induction hypothesis those parameters possess terms, and
+~\eqref{hmtfg:base:eq:ch-terminos} forms the term that denotes it. At a limit, both
+constructions take the same union.
+\end{proof}
+
+\Needspace{9\baselineskip}
+The state encoder is compatible with truncations and sends every TPK extension
+to a successor term. Let
+\(\mathcal T_N^{\rm st}\subset\mathcal T^{\rm HMT}\) be the subclass of terms
+encoding complete states of depth \(N\), and let
+\(\tau_{N+1,N}:\mathcal T_{N+1}^{\rm st}\to\mathcal T_N^{\rm st}\) delete the
+last block together with the corresponding truncation of the genealogical
+ledger, carry, and memory. If \(J_N:X_N\to\mathcal T_N^{\rm st}\) is the
+complete encoder, compatibility with \(\operatorname{Ext}_N\) proves the
+well-typed identity
+
+\[
+ \forall x\in X_N\ \forall y\in\operatorname{Ext}_N(x)\qquad
+ \tau_{N+1,N}\bigl(J_{N+1}(y)\bigr)=J_N(x).
+\tag{37e$_0$}\label{hmtfg:base:eq:ch-naturalidad-codificador}
+\]
+
+Define within the semantics
+\[
+ \operatorname{Succ}^{\rm TPK}_{N+1}(J_N(x)):=
+ \{t\in\mathcal T_{N+1}^{\rm st}:\exists y\in X_{N+1}\,
+   (y\in\operatorname{Ext}_N(x)\ \wedge\ t=J_{N+1}(y))\}.
+\]
+Choose \(\beta\) such that \(\mathfrak G_\beta\) contains \(x\), \(X_N\),
+\(X_{N+1}\), the finite graphs of
+\(\operatorname{Ext}_N,J_N,J_{N+1}\), and their codes in \(h\). Then the
+primitive-recursive formula for the graph of \(\operatorname{Ext}_N\) gives
+
+\[
+ J_{N+1}[\operatorname{Ext}_N(x)]
+ =\operatorname{Succ}^{\rm TPK}_{N+1}(J_N(x)),
+ \qquad
+ J_{N+1}[\operatorname{Ext}_N(x)]
+ \in\mathfrak G_{\beta+1},
+\tag{37e}\label{hmtfg:base:eq:ch-sucesores-semanticos}
+\]
+
+and both sides are formed by the graph formula of the same TPK extension.
+Equations~\eqref{hmtfg:base:eq:ch-naturalidad-codificador}--\eqref{hmtfg:base:eq:ch-sucesores-semanticos}
+are the explicit semantic link: the subclass of successor terms is exactly the
+image of the admissible extensions, and its truncation commutes. The complete
+fiber of \(\rho\) is not identified with \(\operatorname{Ext}_N\), nor is
+\(\operatorname{Def}\) identified with TPK merely by nomenclature.
+
+\begin{lemma}[Transitivity, axioms, and well-ordering of the genealogical model]
+\label{hmtfg:base:thm:ch-6b}
+\(\mathfrak G_{\rm HMT}(h,m_\infty)\) is a transitive class, contains all
+ordinals, satisfies Zermelo--Fraenkel set theory (ZF), and possesses a
+definable global well-order; it therefore satisfies Choice and all axioms used
+in the subsequent cardinal comparison.
+
+\end{lemma}
+\begin{proof}
+Abbreviate \(B=\mathfrak G_0\) and \(u=u_{h,m}\). Induction on
+~\eqref{hmtfg:base:eq:ch-clausura-transfinita} proves simultaneously that every level is
+transitive and that \(\mathfrak G_\alpha\in\mathfrak G_{\alpha+1}\); if all
+ordinals smaller than \(\alpha\) are present, their set is definable at the
+corresponding level and expresses \(\alpha\). Hence the union contains all
+ordinals. Extensionality and Foundation are inherited from the ambient
+universe; Empty Set and Infinity belong to \(B\). Once a level containing the
+parameters is chosen, the formulas defining \(\{a,b\}\), \(\bigcup a\), and
+subsets by Separation express them at a successor level.
+
+For Collection--Replacement, let \(F\) be a functional relation definable in
+\(\mathfrak G\) on the set \(a\). The reflection scheme relative to the
+definable hierarchy
+\((\mathfrak G_\xi,\in,u_{h,m})_{\xi\in\mathrm{Ord}}\), applied in the ambient
+metatheory to the finite list of formulas defining \(F\), produces a level
+\(\mathfrak G_\theta\) containing \(a\) and the parameters and correct for
+those formulas. The ranks of the witnesses in \(F[a]\) are then bounded by
+\(\theta\); Separation over \(\mathfrak G_\theta\) forms the image in
+\(\mathfrak G_{\theta+1}\). For Power Set, the internal set to be constructed
+is not presupposed. Given \(a\in\mathfrak G_\gamma\), consider in the ambient
+metatheory the already existing set \(\mathcal P^V(a)\). For every
+\(b\in\mathcal P^V(a)\cap\mathfrak G\), let \(r(b)\) be its first
+genealogical stage. Since \(\mathfrak G\) is a definable class, Separation in
+the ambient metatheory first forms the set
+\(\mathcal P^V(a)\cap\mathfrak G\). Replacement \textbf{in the ambient
+metatheory}, applied to that set, bounds the ordinals \(r(b)\) by some
+\(\theta\). Consequently,
+\[
+ \mathcal P^{\mathfrak G}(a)
+ =\{b\in\mathfrak G_\theta:b\subseteq a\},
+\]
+and the right-hand side is expressed by Separation in
+\(\mathfrak G_{\theta+1}\). It does not introduce into \(\mathfrak G\) the
+subsets external to the semantics~\eqref{hmtfg:base:eq:ch-objetos-semanticos}. This is the
+noncircular rank-bounding argument.
+
+Finally, each object is assigned its first level of birth and its least
+\textbf{derivation name}: a well-founded, finitely branching derivation tree
+(and, by~\eqref{hmtfg:base:eq:ch-terminos}, finite for each individual name), labeled by
+a level ordinal, a formula code, and the tuple of names of its parameters.
+These names are ordered by transfinite recursion: first by the ordinal label,
+then by the formula code, and then lexicographically by the already ordered
+parameter names. The least name of each value defines a class relation
+\(<_{\mathfrak G}\) that compares all objects. It is a definable global
+well-order and, by taking the least element of every nonempty set, proves
+Choice.
+\end{proof}
+
+\input{\HMTFGRoot/latex/antecedentes_comunes/ch_reflexion_testigos.tex}

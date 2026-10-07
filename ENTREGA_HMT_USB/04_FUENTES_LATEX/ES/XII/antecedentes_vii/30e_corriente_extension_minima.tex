@@ -1,0 +1,307 @@
+% Artículo VII. Incorporación aditiva, 10-09-2026.
+% RESULTADO_RECUPERADO: fuentes_conservadas/18_clausura_energetica.tex,
+% líneas 357--485: Gramiano, peso, extensión mínima y eliminación de Schur;
+% líneas 149--180 y 235--295: normalización y unicidad de la respuesta.
+% Residencia anterior en VII: 30_pantalla_y_respuesta.tex,
+% vii:prop:incidencia, vii:eq:lambda-pantalla, vii:prop:minima-extension.
+% FORMALIZACION_NUEVA / CERTIFICADO_NUEVO: diferencial del mínimo con
+% incidencia, frontera y normalización variables; incidencia transportada
+% por bloques y composición con coordenadas de conexión.
+% La familia de rutas que realiza cada incidencia se mantiene explícita.
+% No se atribuyen al propietario histórico ni esa familia diferenciable
+% completa ni la evaluación de una amplitud material de espín.
+% Dependencias: 30, 30c y la convención variacional de 31. No modifica
+% esos fragmentos ni constituye por sí solo una realización material.
+
+\section{Diferencial de la extensión mínima de frontera}
+\label{vii:sec:corriente-extension-minima}
+
+La incidencia cúbica determina simultáneamente el campo de extensión
+mínima y el peso de su respuesta. Para un dato de frontera, ambos se
+calculan mediante el inverso del Gramiano de incidencia. Se desarrolla
+ahora el diferencial de esa misma operación, conservando las variaciones
+de la frontera, del transporte y de la escala de normalización. De este
+modo, el campo que interviene en la respuesta queda seleccionado por
+el problema variacional de pantalla.
+
+\subsection{Campo minimizante y peso de respuesta}
+\label{vii:subsec:extension-minima-parametrizada}
+
+Sean \(H\) y \(Q\) espacios hermíticos de dimensión finita, con
+productos fijos y antilineales en la primera variable. El caso real se
+obtiene sustituyendo los adjuntos por transpuestas. En un abierto de
+parámetros reales \(\Omega\), consideremos colecciones de clase \(C^1\)
+\[
+ \mathsf C(\theta):H\longrightarrow Q,\qquad
+ b(\theta)\in Q,\qquad \chi(\theta)>0,
+ \qquad \operatorname{Ran}\mathsf C(\theta)=Q.
+\]
+La sobreyectividad equivale a rango fila completo en bases ortonormales.
+Definimos el Gramiano, el potencial conjugado y la extensión
+\begin{equation}
+ \mathsf L=\mathsf C\mathsf C^*,\qquad
+ y=\mathsf L^{-1}b,\qquad f_{\min}=\mathsf C^*y,
+ \qquad \Lambda=\chi\mathsf L^{-1}.
+ \label{vii:eq:gramiano-extension-minima}
+\end{equation}
+La incidencia \(\mathsf C\) y el emparejamiento celular \(M\) de
+\eqref{vii:eq:coordenadas-corriente-material} son operadores diferentes.
+
+\begin{proposition}[Selección variacional de la extensión]
+\label{vii:prop:minimo-parametrizado}
+La extensión \(f_{\min}\) es la única minimizante de la norma entre
+los campos \(f\in H\) que satisfacen \(\mathsf C f=b\). Su energía es
+\begin{equation}
+ E(\theta)=\chi\min_{\mathsf C f=b}\|f\|^2
+ =\chi\langle b,\mathsf L^{-1}b\rangle
+ =\langle b,\Lambda b\rangle.
+ \label{vii:eq:energia-extension-minima}
+\end{equation}
+El campo \(f_{\min}\), el potencial \(y\) y la energía \(E\)
+dependen de manera \(C^1\) de los parámetros.
+\end{proposition}
+
+\begin{proof}
+La sobreyectividad de \(\mathsf C\) hace inyectivo a \(\mathsf C^*\),
+por lo que \(\langle z,\mathsf Lz\rangle=\|\mathsf C^*z\|^2>0\)
+para \(z\ne0\). Así, \(\mathsf L\) es invertible y
+\(\mathsf C f_{\min}=\mathsf L y=b\). Toda solución es
+\(f_{\min}+z\), con \(z\in\ker\mathsf C\). Como
+\(f_{\min}\in\operatorname{Ran}\mathsf C^*=(\ker\mathsf C)^\perp\),
+\[
+ \|f_{\min}+z\|^2=\|f_{\min}\|^2+\|z\|^2,
+ \qquad
+ \|f_{\min}\|^2=\langle y,\mathsf L y\rangle
+ =\langle b,\mathsf L^{-1}b\rangle.
+\]
+Estas identidades prueban el mínimo, su unicidad y su valor. La inversión
+es una operación diferenciable en el abierto de matrices invertibles;
+las expresiones de \eqref{vii:eq:gramiano-extension-minima} proporcionan
+la regularidad afirmada.
+\end{proof}
+
+La realización cúbica de \ref{vii:prop:incidencia} corresponde a
+\(H=\mathbb R^{\{-1,1\}^3}\), al cociente de pantalla
+\(Q=P_\square\mathbb R^6\) y a la incidencia \(\mathsf C=M:H\to Q\).
+Su Gramiano y su normalización son
+\begin{equation}
+ \mathsf L_\square=12P_u+4P_-,\qquad
+ \chi_m=\frac{112}{81\ell_m^2},\qquad
+ \Lambda_m=\frac{28}{243\ell_m^2}(P_u+3P_-).
+ \label{vii:eq:normalizacion-minimo-cubico}
+\end{equation}
+El factor \(112/81\) procede de la soldadura y del defecto cuadrático
+de compresión de \eqref{vii:eq:lambda-pantalla}. Si \(b\) tiene dimensión
+de longitud, también la tienen \(y\) y \(f_{\min}\), la incidencia es
+adimensional y \(E\) es adimensional. La conversión a acción utiliza
+la normalización en la recta de acción que se especifica más adelante.
+
+\Needspace{15\baselineskip}
+\subsection{Diferencial completo del mínimo}
+\label{vii:subsec:diferencial-minimo}
+
+\begin{theorem}[Respuesta a la variación de incidencia y frontera]
+\label{vii:thm:diferencial-minimo}
+Para toda dirección tangente real \(\delta\theta\), se tiene
+\begin{equation}
+ \delta E
+ =\delta\chi\,\langle b,y\rangle
+   +2\chi\operatorname{Re}
+       \langle y,\delta b-(\delta\mathsf C)f_{\min}\rangle.
+ \label{vii:eq:diferencial-minimo-completo}
+\end{equation}
+Si \(\chi=112/(81\ell_m^2)\), con \(\ell_m>0\) variable,
+\begin{equation}
+ \delta E=-2E\frac{\delta\ell_m}{\ell_m}
+ +2\chi_m\operatorname{Re}
+       \langle y,\delta b-(\delta\mathsf C)f_{\min}\rangle.
+ \label{vii:eq:diferencial-minimo-escala}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Diferenciar \(\mathsf L\mathsf L^{-1}=I_Q\) da
+\[
+ \delta\mathsf L^{-1}
+ =-\mathsf L^{-1}(\delta\mathsf L)\mathsf L^{-1},\qquad
+ \delta\mathsf L=(\delta\mathsf C)\mathsf C^*
+                      +\mathsf C(\delta\mathsf C)^*.
+\]
+Aplicando la regla del producto a \eqref{vii:eq:energia-extension-minima}
+y usando la autoadjunción de \(\mathsf L^{-1}\), resulta
+\[
+ \delta E=\delta\chi\,\langle b,y\rangle
+ +2\chi\operatorname{Re}\langle y,\delta b\rangle
+ -\chi\langle y,(\delta\mathsf L)y\rangle.
+\]
+Los dos términos del último producto son conjugados entre sí y
+\(\mathsf C^*y=f_{\min}\); por tanto,
+\[
+ \langle y,(\delta\mathsf L)y\rangle
+ =2\operatorname{Re}\langle y,(\delta\mathsf C)f_{\min}\rangle.
+\]
+Se obtiene \eqref{vii:eq:diferencial-minimo-completo}.
+Finalmente, \(\delta\chi_m=-2\chi_m\delta\ell_m/\ell_m\)
+produce \eqref{vii:eq:diferencial-minimo-escala}.
+\end{proof}
+
+La fórmula incorpora la variación del campo minimizante mediante la
+ecuación que lo determina. También se comprueba directamente:
+\(\mathsf C\delta f_{\min}=\delta b-(\delta\mathsf C)f_{\min}\)
+y \(f_{\min}=\mathsf C^*y\) implican
+\[
+ \delta\|f_{\min}\|^2
+ =2\operatorname{Re}\langle f_{\min},\delta f_{\min}\rangle
+ =2\operatorname{Re}
+     \langle y,\delta b-(\delta\mathsf C)f_{\min}\rangle.
+\]
+Por ejemplo, si \(\mathsf C\) es fijo y \(b=\ell_m b_0\), con
+\(b_0\) fijo, los dos términos de
+\eqref{vii:eq:diferencial-minimo-escala} se cancelan y la energía
+permanece constante. Este control conserva conjuntamente la dimensión
+de frontera y su normalización.
+
+\subsection{Cociente fijo y cambios de marco}
+\label{vii:subsec:marcos-minimo}
+
+Las derivadas anteriores están tomadas en espacios \(H,Q\) y productos
+hermíticos fijos. En la presentación de seis caras, la inversa siempre
+actúa sobre \(Q=P_\square H_F\). Para una colección de cocientes
+\(Q(\theta)\), se fija primero una trivialización isométrica
+\(V_Q(\theta):Q\to Q(\theta)\), y análogamente para el dominio.
+Las derivadas de esos mapas se incluyen al diferenciar las expresiones
+transportadas a los espacios fijos. Las fórmulas se aplican en cada
+abierto donde se conserve el rango. Los cambios del producto energético
+requieren diferenciar además ese producto; una métrica lorentziana
+y el producto positivo usado para minimizar conservan aquí sus tipos
+distintos.
+
+\begin{proposition}[Covariancia del mínimo]
+\label{vii:prop:covariancia-minimo}
+Sean \(g_H,g_Q\) unitarios. Bajo
+\[
+ \mathsf C'=g_Q\mathsf C g_H^*,\qquad b'=g_Qb,\qquad \chi'=\chi,
+\]
+se cumple \(y'=g_Qy\), \(f'_{\min}=g_Hf_{\min}\) y \(E'=E\).
+Cuando los cambios de marco dependen del parámetro, el diferencial
+completo conserva esa igualdad. En particular, una variación pura de
+marco tiene \(\delta E=0\).
+\end{proposition}
+
+\begin{proof}
+El Gramiano transformado es \(\mathsf L'=g_Q\mathsf Lg_Q^*\),
+de donde se obtienen las transformaciones de \(y,f_{\min}\) y
+la igualdad de energías. Para una variación pura de marco, en un punto
+con marcos identidad, sean \(A_Q^*=-A_Q\) y \(A_H^*=-A_H\)
+sus generadores. Entonces
+\[
+ \delta\mathsf C=A_Q\mathsf C-\mathsf C A_H,\qquad
+ \delta b=A_Qb,\qquad
+ \delta b-(\delta\mathsf C)f_{\min}=\mathsf C A_Hf_{\min}.
+\]
+Su contribución a \eqref{vii:eq:diferencial-minimo-completo} es
+\(2\chi\operatorname{Re}\langle f_{\min},A_Hf_{\min}\rangle=0\).
+La prueba incluye, así, los términos debidos a los marcos móviles.
+\end{proof}
+
+\subsection{Incidencia transportada y componentes de conexión}
+\label{vii:subsec:incidencia-conexion-minima}
+
+La dependencia de conexión se especifica antes de efectuar la
+contracción. Una realización explícita de la incidencia por bloques
+se obtiene como sigue. Sean \(\mathcal K\) una fibra hermítica común,
+\(F=\{(i,\epsilon):1\leq i\leq3,\ \epsilon=\pm1\}\) y
+\(V=\{-1,1\}^3\). Para cada incidencia \(\nu_i=\epsilon\),
+la realización utilizada declara una ruta \(\gamma_{i,\epsilon,\nu}\)
+desde la fibra del vértice hasta la de la cara, con transporte
+\(U_{i,\epsilon,\nu}\). Las trivializaciones identifican esas fibras
+con \(\mathcal K\). Definimos
+\begin{equation}
+ \begin{split}
+ (\mathsf B_Uf)_{i,\epsilon}
+   &=\sum_{\nu_i=\epsilon}U_{i,\epsilon,\nu}f_\nu,\\
+ \mathsf C_U&=(q_\square\otimes I_{\mathcal K})\mathsf B_U:
+   \bigoplus_{\nu\in V}\mathcal K\longrightarrow Q\otimes\mathcal K,
+ \qquad q_\square=P_\square:H_F\to Q.
+ \end{split}
+ \label{vii:eq:incidencia-transportada-minima}
+\end{equation}
+Esta es una continuación variacional explícita de la incidencia cúbica
+en la representación de rutas declarada. Para transportes identidad,
+\(\mathsf C_U=M\otimes I_{\mathcal K}\) y se recupera
+\eqref{vii:eq:normalizacion-minimo-cubico}, tensorizada con la fibra.
+El Gramiano sigue siendo positivo en un entorno de esa realización,
+pues la positividad definida es una condición abierta. En cada dominio
+de rango completo, el peso y el campo se fijan por
+\eqref{vii:eq:gramiano-extension-minima}. Las rutas que realizan las
+incidencias, sus orientaciones y sus memorias son datos de esa
+realización del transporte APP--TRIT--TPK y acompañan a la construcción.
+
+Si \(\omega=(\omega_j)\) son coordenadas reales de conexión,
+la derivada de \(\mathsf C_U\) se calcula sustituyendo en cada bloque
+\begin{equation}
+ \partial_j U_\gamma
+ =\sum_{k=1}^{N}
+    U_N\cdots U_{k+1}(\partial_jU_k)U_{k-1}\cdots U_1,
+ \qquad U_\gamma=U_N\cdots U_1.
+ \label{vii:eq:derivada-incidencia-rutas}
+\end{equation}
+Los productos vacíos son identidades. La fórmula procede de la regla
+del producto y conserva el lugar de cada operación en la ruta.
+Así, \(\mathsf C_j:=\partial_j\mathsf C_U\) se obtiene de una
+suma finita de matrices conocidas en la realización elegida, seguida
+de la proyección \(q_\square\otimes I\). Si se utiliza un cociente
+móvil, su derivada se incorpora conforme a
+\ref{vii:subsec:marcos-minimo}. La matriz cúbica entera fija corresponde
+al caso \(\mathsf C_j=0\); la respuesta a conexión procede de la
+dependencia de los transportes efectivamente declarada en
+\eqref{vii:eq:incidencia-transportada-minima}.
+
+\begin{theorem}[Componentes variacionales de la extensión mínima]
+\label{vii:thm:componentes-minimo-conexion}
+Para la acción de pantalla
+\(S_{\min}=\mathfrak a_m E\), donde \(\mathfrak a_m\) es su
+normalización en la recta de acción, escribamos
+\[
+ b_j=\partial_jb,\qquad \chi_j=\partial_j\chi,
+ \qquad a_j=\partial_j\mathfrak a_m.
+\]
+Con la convención \(\delta S_{\min}=-\tfrac12\sum_j s_j\delta\omega_j\),
+las componentes son
+\begin{equation}
+ \begin{split}
+ s_j={}&4\mathfrak a_m\chi\operatorname{Re}
+             \langle y,\mathsf C_jf_{\min}-b_j\rangle\\
+      &-2\mathfrak a_m\chi_j\langle b,y\rangle-2a_jE.
+ \end{split}
+ \label{vii:eq:componentes-minimo-conexion}
+\end{equation}
+Para la normalización cúbica, el segundo término equivale a
+\(4\mathfrak a_m E\,\partial_j\ell_m/\ell_m\).
+Si el emparejamiento celular de esta misma acción tiene matriz
+invertible \(\mathsf M_{\rm cel}\), sus coordenadas de corriente
+son \(\sigma=\mathsf M_{\rm cel}^{-1}s\).
+\end{theorem}
+
+\begin{proof}
+La regla del producto da
+\(\partial_jS_{\min}=a_jE+\mathfrak a_m\partial_jE\).
+Sustituir \eqref{vii:eq:diferencial-minimo-completo} y multiplicar
+por \(-2\) prueba \eqref{vii:eq:componentes-minimo-conexion}.
+La derivada de \(\chi_m\) produce la expresión de escala.
+Finalmente, comparar
+\(\delta S_{\min}=-\tfrac12\delta\omega^{\mathsf T}s\)
+con \(-\tfrac12\delta\omega^{\mathsf T}\mathsf M_{\rm cel}\sigma\)
+para toda variación da \(\mathsf M_{\rm cel}\sigma=s\),
+y su inversa determina las coordenadas.
+\end{proof}
+
+La construcción recupera un campo y un peso seleccionados conjuntamente
+por la incidencia, y evalúa su respuesta a las variaciones de la misma
+realización. El dato de frontera \(b\), la colección de rutas, la escala
+\(\ell_m\), la normalización \(\mathfrak a_m\) y el emparejamiento
+celular conservan sus reglas de representación. La interpretación como
+corriente material utiliza esos objetos y la acción completa. La
+respuesta de Cartan y su densidad métrica posterior se componen con
+ella en el dominio de materia correspondiente, conservando cualquier
+dependencia de la corriente respecto de la conexión.

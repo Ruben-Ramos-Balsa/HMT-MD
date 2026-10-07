@@ -1,0 +1,36 @@
+import LatticeFieldLocality
+import LatticeGeneratorLocality
+#print axioms HMT.IV.LatticeFieldLocality.forward
+#print axioms HMT.IV.LatticeFieldLocality.backward
+#print axioms HMT.IV.LatticeFieldLocality.LocalAt
+#print axioms HMT.IV.LatticeFieldLocality.Local
+#print axioms HMT.IV.LatticeFieldLocality.localAt_mono
+#print axioms HMT.IV.LatticeFieldLocality.forward_add_left
+#print axioms HMT.IV.LatticeFieldLocality.backward_add_left
+#print axioms HMT.IV.LatticeFieldLocality.forward_add_right
+#print axioms HMT.IV.LatticeFieldLocality.backward_add_right
+#print axioms HMT.IV.LatticeFieldLocality.forward_smul_left
+#print axioms HMT.IV.LatticeFieldLocality.backward_smul_left
+#print axioms HMT.IV.LatticeFieldLocality.forward_smul_right
+#print axioms HMT.IV.LatticeFieldLocality.backward_smul_right
+#print axioms HMT.IV.LatticeFieldLocality.localAt_add_left
+#print axioms HMT.IV.LatticeFieldLocality.localAt_add_right
+#print axioms HMT.IV.LatticeFieldLocality.localAt_smul_left
+#print axioms HMT.IV.LatticeFieldLocality.localAt_smul_right
+#print axioms HMT.IV.LatticeFieldLocality.local_add_left
+#print axioms HMT.IV.LatticeFieldLocality.local_add_right
+#print axioms HMT.IV.LatticeFieldLocality.local_smul_left
+#print axioms HMT.IV.LatticeFieldLocality.local_smul_right
+#print axioms HMT.IV.LatticeFieldLocality.local_zero_left
+#print axioms HMT.IV.LatticeFieldLocality.local_zero_right
+#print axioms HMT.IV.LatticeFieldLocality.crossing_pow_succ_apply
+#print axioms HMT.IV.LatticeFieldLocality.crossing_pow_swap
+#print axioms HMT.IV.LatticeFieldLocality.localAt_symm
+#print axioms HMT.IV.LatticeFieldLocality.local_symm
+#print axioms HMT.IV.LatticeGeneratorLocality.charged_coefficient
+#print axioms HMT.IV.LatticeGeneratorLocality.heisenberg_coefficient
+#print axioms HMT.IV.LatticeGeneratorLocality.charged_local
+#print axioms HMT.IV.LatticeGeneratorLocality.heisenberg_charged_localAt
+#print axioms HMT.IV.LatticeGeneratorLocality.heisenberg_charged_local
+#print axioms HMT.IV.LatticeGeneratorLocality.heisenberg_localAt
+#print axioms HMT.IV.LatticeGeneratorLocality.heisenberg_local

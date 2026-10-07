@@ -1,0 +1,528 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=24mm,bottom=24mm,left=26mm,right=26mm,headheight=14pt]{geometry}
+\usepackage{fontspec,amsmath,amsthm,unicode-math}
+\usepackage[english]{babel}
+\usepackage{microtype,xcolor,graphicx,tikz,booktabs,array,needspace,fancyhdr}
+\usepackage{longtable,tabularx,enumitem,float,import,xurl,multicol}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,matrix}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{theorem}{theorem}{theorems}\Crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{proposition}{propositions}\Crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{lemma}{lemmas}\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{section}{section}{sections}\Crefname{section}{Section}{Sections}
+\crefname{equation}{equation}{equations}\Crefname{equation}{Equation}{Equations}
+\setmainfont{STIXTwoText-Regular.otf}[BoldFont=STIXTwoText-Bold.otf,ItalicFont=STIXTwoText-Italic.otf,BoldItalicFont=STIXTwoText-BoldItalic.otf]
+\setmathfont{STIXTwoMath-Regular.otf}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{falsifier}[theorem]{Falsification criterion}
+\newtheorem{ablation}[theorem]{Structural necessity test}
+\newtheorem{criterion}[theorem]{Criterion}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{principle}[theorem]{Principle}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\RR}{\mathbb R}\newcommand{\QQ}{\mathbb Q}
+\newcommand{\ZZ}{\mathbb Z}\newcommand{\CC}{\mathbb C}
+\newcommand{\Gr}{\operatorname{Gr}}\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\APP}{\mathrm{APP}}\newcommand{\TPK}{\mathrm{TPK}}
+\newcommand{\TRIT}{\mathrm{TRIT}}\newcommand{\id}{\operatorname{id}}
+\newcommand{\diag}{\operatorname{diag}}\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\FF}{\mathbb F}\newcommand{\Id}{\operatorname{id}}
+\newcommand{\tr}{\operatorname{tr}}\newcommand{\dd}{\mathrm d}
+\newcommand{\Span}{\operatorname{span}}\newcommand{\Cyl}{\operatorname{Cyl}}
+\providecommand{\llbracket}{\lBrack}\providecommand{\rrbracket}{\rBrack}
+\providecommand{\square}{\mdlgwhtsquare}
+\providecommand{\dashrightarrow}{\mathrel{\rightdasharrow}}
+\providecommand{\index}[1]{}
+\newcommand{\HMT}{\mathrm{HMT}}\newcommand{\Tr}{\operatorname{Tr}}\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Cstar}{C^{*}}\newcommand{\R}{\mathbb R}\newcommand{\Z}{\mathbb Z}\newcommand{\I}{\mathrm I}
+\setcounter{tocdepth}{2}
+\setlist{nosep,topsep=4pt}
+\numberwithin{equation}{section}
+\setlength{\parskip}{4pt plus 1pt}\setlength{\parindent}{1em}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\normalsize}{\fontsize{10.5}{13.5}\selectfont}\normalsize
+\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+\AddToHook{cmd/section/before}{\Needspace{10\baselineskip}}
+\AddToHook{cmd/subsection/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/theorem/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/proposition/before}{\Needspace{6\baselineskip}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize Positive Grassmannians and amplituhedra: canonical forms and refinement}
+\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{.2pt}
+\hypersetup{pdftitle={Positive Grassmannians and amplituhedra: canonical forms and refinement},pdfsubject={Lattice duality and the Yang--Mills mass gap in Triadic Modular Holography},pdfauthor={Oumar Haidara Fall; Rubén Ramos Balsa}}
+\makeatletter
+\newcommand{\compactcontents}{%
+  \begingroup
+  \fontsize{9.2}{11.1}\selectfont
+  \setlength{\parskip}{0pt}\setlength{\columnsep}{7mm}
+  \renewcommand{\l@section}{\@dottedtocline{1}{0pt}{1.8em}}
+  \renewcommand{\l@subsection}{\@dottedtocline{2}{1.5em}{2.7em}}
+  \renewcommand{\l@part}[2]{\addpenalty{-\@highpenalty}\addvspace{6pt}%
+    {\bfseries\noindent ##1\nobreak\hfill\nobreak ##2\par}\nobreak}
+  \section*{Contents}
+  \@starttoc{toc}
+  \endgroup}
+\makeatother
+% BEGIN NUCLEO_ADITIVO_20260921_PREAMBULO
+\input{nucleo_ampliado/compatibilidad_editorial.tex}
+% END NUCLEO_ADITIVO_20260921_PREAMBULO
+% Apertura independiente del índice: corrección quirúrgica 20260928.
+\let\HMTIndiceOriginal\tableofcontents
+\renewcommand{\tableofcontents}{\clearpage\begingroup\setlength{\parskip}{0pt}\fontsize{9.2}{10.5}\selectfont\HMTIndiceOriginal\endgroup\clearpage}
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\small Compilation manuscript for academic transfer}\par\vspace{6mm}
+{\LARGE\bfseries Positive Grassmannians and amplituhedra:\\canonical forms and refinement}\par\vspace{3mm}
+{\large Lattice duality and the Yang--Mills mass gap\\in Triadic Modular Holography}\par\vspace{5mm}
+Oumar Haidara Fall \textperiodcentered\ Rubén Ramos Balsa\par
+{\fontsize{8}{10}\selectfont Joint authorship without precedence of contribution\par
+Documentary integration and compilation generated by ChatGPT - Astra.}
+\end{center}
+\begin{abstract}
+Triadic Modular Holography constructs the joint discrete structure
+of the continuum through APP, TRIT and the TPK's transport with memory.
+Compatible cylinder reduction produces the arithmetic realization,
+while the conjugate projection preserves exceptional incidence.
+Within this genealogy, a collection of recoverable positive realizations
+is established. The uniform charge and two nonadic memories determine
+the twelve-coordinate record; its ordered separations produce a
+planar boundary measurement and a Grassmannian representation with
+a marked inverse. Readers that factor through the record are transported
+to this representation and preserved under coordinate changes of the same
+point. Nonadic refinement constructs positive flags and amplituhedral
+points in every admissible finite rank and external dimension.
+In rank one, complete simplicial coverage and cancellation of
+interior residues are obtained in every finite dimension. Forms valued
+in the action line satisfy an exact gluing condition on
+common boundaries. Cell averages preserve a chronological
+measure and decompose moment increments into orthogonal
+details; their limit determines a Jacobi operator whose finite
+compressions have simple spectrum, positive residues and continued-fraction
+resolvents.
+Schur reduction preserves the effective energy of the partition,
+with reconstruction of the detail and a limiting Sobolev realization.
+The record flow also induces a twenty-four-dimensional lattice
+deformation that preserves volume and ternary symmetry,
+and converts parameter inversion into lattice duality and
+theta reciprocity. The elliptic, hyperbolic
+and parabolic Hamiltonians, their symplectic charts, connection terms and
+Legendre transforms are brought together with the corresponding
+material readers. The Yang--Mills development incorporates the common
+measure, the areal--volumetric scale, uniform coercivity, the
+persistent spectral witness and Hamiltonian reconstruction.
+The articulation of these results distinguishes and relates
+Plücker positivity, moment positivity, constitutive positivity
+and spectral positivity through explicit operations on the same
+enriched state.
+The incidence representation preserves all twelve
+coordinates through a weighted isometry with an explicit inverse.
+The hexad--octad transition distinguishes total area from
+sector composition and reconstructs occupations; its purification
+determines an entanglement entropy with a finite modular law.
+The longitudinal composition of marked return determines the
+areal scale and preserves its naturality under inherited refinements;
+canonical forms with an area-operator coefficient transmit
+additivity and boundary residues.
+\par\smallskip\noindent\textbf{Keywords:} positive Grassmannians; planar networks; Plücker coordinates; incidence geometry; Triadic Modular Holography.
+\end{abstract}
+\clearpage
+\compactcontents
+\clearpage
+
+\section{Introduction: genealogy of form and conservation under refinement}
+\label{sec:genealogy}
+\input{sections/introduction_addition.tex}
+\subsection{Arithmetic genealogy and the system of geometric realizations}
+The construction begins with the two arithmetic sheets of APP. For
+\(p,q\in\{1,\ldots,9\}\), each operation preserves a complete division,
+\[
+ p+q=R_\Sigma+9q_\Sigma,\qquad
+ pq=R_\Pi+9q_\Pi.
+\]
+TRIT adds the local regime and orientation. The tritic selector of operative
+phase chooses the operation compatible with that state, while both sheets
+remain in the support. On the enriched state space, the
+Topological Phase Kernel composes selection, transport and update:
+\[
+ U_t=\operatorname{Upd}_t\circ\operatorname{Tra}_t\circ\operatorname{Sel}_t.
+\]
+The record preserves the residues, quotients, carries, sheets, routes,
+boundaries, memory and survival used by each prolongation. The
+nonadic holonomy \(\Gamma_9=U_{t+8}\circ\cdots\circ U_t\) belongs
+to this enriched dynamics. Its reduced memory readout is obtained
+afterwards. Phase return preserves the advancement of the record and thus
+distinguishes states at different depths.
+
+The prolongation
+\[
+ w_6\longrightarrow w_{12}\longrightarrow w_{18}\longrightarrow
+ w_{24}\longrightarrow w_{30}\longrightarrow R_{36}\longrightarrow G_9
+\]
+organizes compatible refinements of the same state. The five
+constructions of the continuum emerge jointly, with their
+spectral, solenoidal, gauge, cohomological and determinantal aspects. Readers
+of this state yield the correlated outputs \(\pi,\varphi,e,\alpha\).
+Their common origin admits an internal evaluation order: the already generated
+regional coordinates act together with the dodecaphasic record in the
+closure readers for \(\alpha\). In this article, Grassmannians,
+polygons and differential forms are subsequent realizations of data
+generated by this chain. Their parameters are fixed before any
+geometric or metrological comparison.
+
+The specific problem is to describe what a positive realization preserves
+and what may vary when its form changes. The same positive list
+admits several mathematical uses: edge weights, interval lengths,
+coefficients of a quadratic form or coordinates of a material reader.
+Each use has its own domain, operation and invariants. The
+term \emph{multimorphology} denotes here the system of these realizations
+with their explicit compatibility maps. An identity between their numbers
+requires less verification than an identity between their operators; the
+following development states and proves each level separately.
+
+The source basis is the article on coinductive generation of the
+constants and the algebraic structure of the electron, together with the
+development of the holographic extreme and mean ratio. Their prior constructions fix
+the record used below. The geometric results in this text begin
+with that finite output and prove its consequences using explicit data. The
+material-transfer propositions additionally declare the
+readers they use. This organization preserves the specific scope of
+each proof.
+
+\clearpage
+\part{Arithmetic construction, enriched state and joint continuum}
+\begingroup
+\sloppy
+\renewcommand{\TRIT}{\{-1,0,+1\}}
+\import{foundation/}{sections/nucleo.tex}
+% BEGIN NUCLEO_ADITIVO_20260921_CENSO
+\clearpage
+\input{nucleo_ampliado/censo_emisor_tpk.tex}
+% END NUCLEO_ADITIVO_20260921_CENSO
+\import{foundation/}{sections/extension.tex}
+\import{foundation/}{sections/continuo_conjunto.tex}
+\import{foundation/}{sections/generacion.tex}
+% BEGIN NUCLEO_ADITIVO_20260921_SELECCION
+\clearpage
+\input{nucleo_ampliado/lectores_cilindros_incidencia.tex}
+\input{nucleo_ampliado/calendario_completo.tex}
+\input{nucleo_ampliado/seleccion_registro_k.tex}
+\clearpage
+% END NUCLEO_ADITIVO_20260921_SELECCION
+\import{foundation/}{sections/registro_k.tex}
+\import{foundation/}{sections/alpha.tex}
+\import{foundation/}{sections/excepcional.tex}
+\import{foundation/}{sections/01_hilbert_nonadico.tex}
+\endgroup
+\clearpage
+\part{Positive geometry, refinement and lattice duality}
+\input{sections/trit_projection.tex}
+\input{sections/incidence_transport.tex}
+
+\section{Dodecaphasic extraction and isotypic projection of the direction}
+\label{sec:register}
+Before evaluating numbers, the readers distinguish dynamical regions.
+The mirror symmetry of the corpus acts on the block
+\(B=(u^\pi,u^e,u^\varphi)\in(\mathbb F_3^6)^3\) by
+\[
+ \mathfrak cB=(u^e,u^\pi,u^\varphi).
+\]
+With \(q=u^\pi+u^e+u^\varphi\),
+\(a=u^\pi+u^e-u^\varphi\) and \(d=u^\pi-u^e\), the formulas
+\[
+ u^\varphi=2(q-a),\quad s=q-u^\varphi,\quad
+ u^\pi=2(s+d),\quad u^e=2(s-d)
+\]
+are componentwise identities in \(\mathbb F_3\). The mirror
+preserves the axis and the aggregate in a fibre and reverses the
+antisymmetric distribution. Nonadic transport evolves the fibre itself.
+The fifth phase has boundary datum \(111111\), residual signature
+\(000\), one local solution and one extension: the marking of
+\(\varphi\) at five identifies the regional axis of that operation.
+In phases six, seven and eight, the regional aggregates are
+\(012100\), \(101001\) and \(112000\), respectively. These data
+belong to the ternary domain; readers of compatible histories
+subsequently produce their real evaluations.
+
+The twelve-window record and the regional blocks thus preserve
+their domains and their connection within the same state. The positive realization
+below uses the resulting record, with its order and scale.
+Transporting the regional mirror to a geometric deformation requires
+first composing its action on that record; a shared genealogy
+alone says less than commutativity of that square. This
+distinction preserves the full regional dynamics when studying
+one of its finite realizations.
+
+The calendar divides the one hundred and eight positions into twelve nonadic windows.
+Terminal extraction has the composition
+\[
+ x_{\rm term}\longmapsto\mathcal R_{12}(x_{\rm term})
+ \longmapsto(b^{90},b^{120},Q)\longmapsto U_{\rm sgn}\longmapsto K.
+\]
+The first two arrows preserve the oriented history in the readers
+of the corpus. To display in full the finite reconstruction used
+in this article, their integer outputs are
+\begin{align*}
+ b^{90}&=(-495,-116,-684,108,601,-90,-173,-88,313,560,-397,461),\\
+ b^{120}&=(-425,-281,-481,671,-255,30,475,-543,680,251,6,-128),
+ \qquad Q=6263.
+\end{align*}
+Fix the cyclic order of twelve positions. Let
+\(B_r=\sum_{j=0}^3 b^{120}_{r+3j}\) and
+\(d_{r,j}=b^{90}_{r+3j}\), for \(r=1,2,3\). Then
+\[
+ s_1=\frac{Q+2B_1+B_2}{3},\quad s_2=s_1-B_1,\quad s_3=s_2-B_2,
+ \qquad
+ U^{(r)}=(s_r,d_{r,1}-d_{r,3},d_{r,0}+d_{r,2},d_{r,0}-d_{r,2}).
+\]
+Evaluation gives
+\[
+ U^{(1)}=(2378,-452,-668,-322),\quad
+ U^{(2)}=(1406,998,-204,-28),\quad
+ U^{(3)}=(2479,-551,-371,-997).
+\]
+The matrix
+\[
+ H_4=\begin{pmatrix}1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1\end{pmatrix},
+ \qquad H_4^2=4I_4,
+\]
+reconstructs each orbit through \(H_4U^{(r)}/4\). Restoring the order
+of the positions yields
+\begin{equation}
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+ \qquad Q=\sum_{j=1}^{12}K_j=6263.
+ \label{eq:K-main}
+\end{equation}
+Every component is positive. Division by three comes from the three
+orbits and division by four from the Hadamard inverse. The additional
+direct check is \((I-S_3)K=b^{90}\),
+\((I-S_4)K=b^{120}\), where \((S_aK)_j=K_{j+a}\) with cyclic indices.
+These identities make the reconstruction reproducible without selecting
+coefficients through a target geometry.
+
+The incidence chart of the corpus realizes the twelve positions as cosets
+of \(A_5/C_5\). If \(\rho\) is that representation and \(\chi_3\) its
+real three-dimensional character, its projector is
+\[
+ P_3=\frac3{60}\sum_{a\in A_5}\chi_3(a^{-1})\rho(a),\qquad
+ P_{11}=I-\frac1{12}\mathbf1\mathbf1^{\mathsf T}.
+\]
+The enumeration and orientation of cosets are preserved in the source of
+this chart. To make the geometric extension directly evaluable,
+its exact output \(u=P_3P_{11}K\) is written with \(r=\sqrt5\):
+\begin{equation}
+\begin{split}
+u=\bigl(&-495/4-233r/10,\quad403/4+169r/10,\\
+&-403/4-169r/10,\quad495/4+233r/10,\\
+&601/4+1031r/10,\quad203/4+211r/5,\\
+&-203/4-211r/5,\quad-601/4-1031r/10,\\
+&313/4+569r/10,\quad162+219r/20,\\
+&-162-219r/20,\quad-313/4-569r/10\bigr).
+\end{split}
+\label{eq:u-main}
+\end{equation}
+Addition and multiplication in \(\QQ(\sqrt5)\) verify that
+\[
+ \mathbf1^{\mathsf T}u=0,\qquad
+ \|u\|^2=\frac{6638585+2275584\sqrt5}{20}>0.
+\]
+In particular, its coordinates are nonconstant. The direction \(u\),
+the full record \(K\) and the projector
+\(P_{10}=P_{11}-uu^{\mathsf T}/\|u\|^2\) preserve different amounts
+of information. This distinction permits using the direction for a
+flow without substituting it for the record used by the action readers.
+
+\input{sections/memory_geometry.tex}
+\input{sections/registro_incidencia_geometria.tex}
+\input{appendices/network_cluster.tex}
+\input{appendices/polygon_amplituhedron.tex}
+\input{sections/higher_rank.tex}
+\input{sections/refinamiento_dimensional_momentos.tex}
+\input{sections/jacobi_spectral.tex}
+\input{appendices/figures.tex}
+\input{appendices/convex_refinement.tex}
+\input{sections/energy_refinement.tex}
+\input{sections/energy_limit.tex}
+\input{sections/nonadic_transport.tex}
+\input{sections/leech_foundations.tex}
+\input{sections/leech_dualidad.tex}
+\input{appendices/mass_bridge.tex}
+\input{sections/lectores_formas_compatibles.tex}
+\input{sections/incidencia_area_entropia.tex}
+\input{appendices/multimorphology_figure.tex}
+
+\clearpage
+\part{Gauge realization, refinement and spectral gap}
+\input{sections/ym_bridge.tex}
+\input{sections/ym_scale.tex}
+\input{sections/ym_construction.tex}
+\input{sections/ym_gauge_object.tex}
+\input{sections/ym_complete.tex}
+\input{sections/hamiltonianos_curvatura.tex}
+
+\section{Discussion: reconstruction, invariants and duality}
+\label{sec:discussion}
+The principal structural result is recoverability of form.
+The uniform charge and the two nonadic memories reconstruct the record
+through an explicit inverse; the positive cone describes exactly
+the domain in which that reconstruction induces strictly positive minors.
+The stability bound quantifies the persistence of this domain. Thus,
+the geometric weights admit an operator-theoretic origin and recovery,
+in addition to their numerical evaluation.
+
+The composition developed here has an explicit sequence. The terminal
+record generates twelve positive weights; their partial sums give thirteen
+ordered points; a planar network realizes their minors; the moment curve
+constructs polygons and polytopes; their triangulations provide coverage
+and forms with oriented residues. Refinement of a fixed cell preserves
+the sum of its forms. Introducing new vertices on the moment
+curve, by contrast, produces another geometry and requires comparing domains.
+
+The algebraic direction of the record distinguishes two operations. Positive
+column rescaling preserves the relevant projective ratios.
+Its normalized action on the intervals instead generates an effective
+deformation, certified by an exact nonzero derivative. This deformation admits
+a convex potential whose Legendre transform is preserved by subdivision
+with inherited direction. Invariance thus has a verifiable mechanism:
+each subcell preserves its predecessor cell's generator and the sum of its weights recovers
+the preceding weight.
+
+Energy refinement provides a second exact conservation law.
+Schur reduction recovers the effective Laplacian and the minimizing
+prolongation separates each configuration into its observed part and a
+reconstructible detail. The detail energies add orthogonally.
+With decreasing meshes and uniformly bounded energy, this sequence
+converges in the declared Sobolev realization. Invariance of the
+canonical form, identity of the convex potential and conservation of
+energy are three distinct compatibility results, proved
+for the specified refinements.
+
+Prolongation to the twelve lattice planes preserves ternary
+symmetry and volume. The decisive result is the reciprocity
+\(\Lambda_s^*=\Lambda_{-s}\), which induces the inversion
+\(\Theta_s(t)=t^{-12}\Theta_{-s}(t^{-1})\). The split realization of
+signature \((24,24)\) preserves integrality, evenness and self-duality throughout
+the flow. In the Euclidean projection, the explicit variation of a
+norm distinguishes deformation from an automorphism of the initial lattice. This
+distinction determines the precise content of the connection with momentum--winding
+duality.
+
+The material realization preserves its own readers. The action
+readout and the mass character receive the record through already constructed
+compositions; congruence preserves positivity and inertia, while the
+metric determines the interpretation of their eigenvalues. These differences
+specify the meaning of multimorphology: several mathematical forms
+arise from a common genealogy and are related by verifiable operations.
+Full identification of higher-rank amplituhedra will require
+coverage and residue proofs for those specific maps. The rank-one result
+proved here establishes a complete case, with rational
+coordinates, triangulation and reproducible checks.
+
+The temporal orientation of TRIT integrates return with memory,
+threshold update and conjugate prolongations. Its elliptic,
+nilpotent and hyperbolic generators provide distinct evolution
+laws; TPK composition preserves the genealogy that
+concatenates them. In particular, the activity of the zero regime is expressed
+by unipotent transport, and the double projection simultaneously preserves
+coordinate convergence and exceptional incidence. The article's geometric
+thesis lies in this articulation: the initial structure
+generates recoverable records, and these support positive
+realizations whose transformations, boundaries and memories can be calculated
+and compared precisely.
+
+The intertwining relation \(B_FM=MB_V\) adds exact transport from the
+modular block to the incidence quotient. In it, multiplicities
+one and three follow from the Gram matrix, and the declared signed form
+is expressed as \(J_L=(7I_Q-\overline B_F)/2\). Vandermonde
+and Hankel matrices, in turn, provide explicit realizations
+\(Y^{(k)}\) for \(2\le k\le9\), with positivity and rank proved
+on the initial partition. Nonadic prolongation subsequently extends
+this construction to every admissible finite pair of rank and external
+dimension, through the node and moment systems developed here.
+These results extend the system of realizations without identifying
+the dimension of a quotient, the rank of a matrix and the number of
+generators of a superalgebra.
+
+In the gauge realization, the areal--volumetric scale precedes the
+Hamiltonian. The product generator preserves all sectors of the
+orthogonal decomposition, while its physical restriction contains a
+witness attaining the first positive level. The refinement
+intertwiners preserve coercivity and this witness. The continuum
+development also brings together the common measure, curvature, Euclidean
+continuity, reflection forms and the reconstructed Hamiltonian. Thus,
+the gap argument is situated alongside the construction that gives it
+a domain and meaning, while Plücker positivity retains its own geometric
+realization. Their articulation requires these explicit transports;
+the term positivity denotes typed properties that the common state
+allows one to compare without substituting one for another.
+
+\clearpage
+\part{Exact verification and enumeration of emissions}
+\input{sections/exact_reproduction.tex}
+\import{foundation/}{libro/censo_firmas_emision.tex}
+\input{sections/conclusions.tex}
+
+\begin{thebibliography}{99}
+\bibitem{hmtI} O. Haidara Fall and R. Ramos Balsa,
+\emph{Coinductive generation of \(\pi,\varphi,e\) at arbitrary depth,
+derivation of the fine-structure constant and algebraic structure of the
+electron}. HMT--MD series, article I, consulted September 2026 edition.
+\bibitem{hmtX} O. Haidara Fall and R. Ramos Balsa,
+\emph{Holographic extreme and mean ratio}. Development of arithmetic--geometric
+coupling, the dodecaphasic record and dimensional direction,
+consulted September 2026 edition.
+\bibitem{hmtII} O. Haidara Fall and R. Ramos Balsa,
+\emph{Structural origin of the Barbero--Immirzi parameter and the
+CKM mixing angles; derivation of the Planck, Boltzmann
+and universal gravitation constants}. HMT--MD series, article II, September
+2026 edition. Relation between action, area, information and entanglement
+entropy.
+\bibitem{hmtVI} O. Haidara Fall and R. Ramos Balsa,
+\emph{Particles, persistence and mass spectrum}. HMT--MD series, article VI,
+consulted September 2026 edition.
+\bibitem{HMT-IV} O. Haidara Fall and R. Ramos Balsa,
+\emph{Moonshine, T-duality and M-theory from the discrete structure of the
+continuum}. HMT--MD series, article IV, consulted September 2026 edition.
+\bibitem{HMT-VIII} O. Haidara Fall and R. Ramos Balsa,
+\emph{Genealogical arithmetic of prime numbers and spectral structure
+of the zeta function}. HMT--MD series, article VIII, consulted September 2026 edition.
+\bibitem{HMT-IX} O. Haidara Fall and R. Ramos Balsa,
+\emph{Resolution of the continuum hypothesis in holographic genealogical
+closure}. HMT--MD series, article IX, consulted September 2026 edition.
+\bibitem{Elkies} N. D. Elkies,
+\emph{Rational lattices and their theta functions}. Arizona Winter School,
+2009, theorem 2.
+\href{https://people.math.harvard.edu/~elkies/aws09.pdf}{Author's notes}.
+\bibitem{ConwaySloane} J. H. Conway and N. J. A. Sloane,
+\emph{Sphere Packings, Lattices and Groups}, third edition, Springer, 1999.
+\href{https://doi.org/10.1007/978-1-4757-6568-7}{DOI: 10.1007/978-1-4757-6568-7}.
+\bibitem{postnikov} A. Postnikov,
+\emph{Total positivity, Grassmannians, and networks}, 2006,
+\href{https://arxiv.org/abs/math/0609764}{arXiv:math/0609764}.
+\bibitem{scott} J. S. Scott,
+\emph{Grassmannians and Cluster Algebras}, 2003,
+\href{https://arxiv.org/abs/math/0311148}{arXiv:math/0311148}.
+\bibitem{amplituhedron} N. Arkani-Hamed and J. Trnka,
+\emph{The Amplituhedron}, 2013,
+\href{https://arxiv.org/abs/1312.2007}{arXiv:1312.2007}.
+\bibitem{positive} N. Arkani-Hamed, Y. Bai and T. Lam,
+\emph{Positive Geometries and Canonical Forms}, 2017,
+\href{https://arxiv.org/abs/1703.04541}{arXiv:1703.04541}.
+\bibitem{HMT-YM} O. Haidara Fall and R. Ramos Balsa,
+\emph{The holographic closure of infinity}, complete 2,249-page edition,
+chapter 99, ``Gauge image and composition towards Yang--Mills'', pp. 1742--1762;
+and \emph{Yang--Mills: common measure, reconstruction and spectral gap},
+specialized monograph, development of the areal--volumetric scale.
+\bibitem{hmtIntegral} O. Haidara Fall and R. Ramos Balsa,
+\emph{The holographic closure of infinity}, complete 2,249-page edition,
+September 2026. Developments of the quadratic regimes, the electromagnetic
+vacuum, the electroweak realization and the spiral
+correspondences of Dimensional Mechanics.
+\input{sections/bibliography_additions.tex}
+\end{thebibliography}
+\end{document}

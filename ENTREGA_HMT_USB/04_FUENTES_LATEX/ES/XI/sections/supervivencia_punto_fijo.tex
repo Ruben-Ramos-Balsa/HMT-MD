@@ -1,0 +1,146 @@
+% BEGIN REV09_SUPERVIVENCIA_PUNTO_FIJO
+\subsection{Supervivencia por poda de prolongaciones}
+\label{corpus9:xi:supervivencia}
+
+La memoria retrospectiva distingue las historias registradas por las
+operaciones APP--TRIT--TPK; la compatibilidad prospectiva organiza sus
+prolongaciones admisibles. Sea \(S\) el espacio de estados completos
+alcanzables mediante esas operaciones. Cada estado conserva hojas, residuos,
+cocientes, orientación, acarreo, memoria y datos de frontera; cuando la
+transición depende de la profundidad, ésta forma parte del estado.
+Sea \(E\subseteq S\times S\) la relación efectiva de prolongación y
+\(A\subseteq S\) el conjunto admisible determinado por la compatibilidad de
+esos registros. Así, la admisibilidad se decide mediante las operaciones y
+las condiciones de frontera que generan la historia.
+
+Para \(X\subseteq S\), definimos
+\begin{equation}
+ \operatorname{Pre}_{E}(X)
+ =\{s\in S:\exists t\in X,\ (s,t)\in E\},
+ \qquad
+ F_{\mathrm{surv}}(X)=A\cap\operatorname{Pre}_{E}(X).
+ \label{corpus9:xi:operador-poda}
+\end{equation}
+La sucesión de poda se obtiene por
+\begin{equation}
+ V_0=A,\qquad
+ V_{n+1}=F_{\mathrm{surv}}(V_n),\qquad
+ V_\infty=\bigcap_{n\geq0}V_n.
+ \label{corpus9:xi:sucesion-poda}
+\end{equation}
+
+\begin{proposition}[Supervivencia y mayor punto fijo]
+\label{corpus9:xi:mayor-punto-fijo}
+El conjunto \(V_n\) consta exactamente de los estados de \(A\) que admiten
+una prolongación de \(n\) pasos cuyos estados pertenecen a \(A\). La
+sucesión \((V_n)\) es decreciente. Si cada estado tiene un número finito
+de sucesores admisibles, entonces
+\[
+ V_\infty=F_{\mathrm{surv}}(V_\infty)
+          =\nu F_{\mathrm{surv}},
+\]
+donde \(\nu F_{\mathrm{surv}}\) denota el mayor punto fijo por inclusión.
+Sus elementos son precisamente los estados que admiten una prolongación
+infinita compatible.
+\end{proposition}
+
+\begin{proof}
+Para \(n=0\), una prolongación de longitud cero consiste en el propio
+estado de \(A\). Si la caracterización vale para \(n\), un estado pertenece
+a \(V_{n+1}\) exactamente cuando pertenece a \(A\) y tiene un sucesor en
+\(V_n\); anteponer esa arista produce una prolongación admisible de
+\(n+1\) pasos. Esta equivalencia prueba la afirmación por inducción.
+Además, \(V_1\subseteq V_0\), y la monotonía de
+\(F_{\mathrm{surv}}\) propaga \(V_{n+1}\subseteq V_n\).
+
+Sea \(s\in V_\infty\), y escribamos
+\(E(s)=\{t\in S:(s,t)\in E\}\). Como \(s\in V_{n+1}\) para todo \(n\),
+los conjuntos \(E(s)\cap V_n\) son no vacíos, finitos y decrecientes.
+Su intersección contiene un elemento \(t\), que pertenece a
+\(V_\infty\) y satisface \((s,t)\in E\). Por tanto,
+\(V_\infty\subseteq F_{\mathrm{surv}}(V_\infty)\).
+Recíprocamente, la monotonía da
+\(F_{\mathrm{surv}}(V_\infty)\subseteq V_{n+1}\) para todo \(n\);
+la imagen también está contenida en \(A=V_0\), de modo que pertenece a
+\(V_\infty\). Esto prueba la igualdad de punto fijo.
+
+Si \(W=F_{\mathrm{surv}}(W)\), entonces \(W\subseteq A=V_0\).
+De \(W\subseteq V_n\) se deduce
+\(W=F_{\mathrm{surv}}(W)\subseteq F_{\mathrm{surv}}(V_n)=V_{n+1}\).
+La inducción implica \(W\subseteq V_\infty\), que prueba la maximalidad.
+Finalmente, el árbol de prolongaciones de un estado de \(V_\infty\)
+es finitamente ramificado y tiene un nivel no vacío a toda profundidad.
+El lema de König proporciona una rama infinita. En sentido inverso, los
+prefijos de cualquier prolongación infinita sitúan su estado inicial
+en todos los \(V_n\).
+\end{proof}
+
+\paragraph{Ramificación y estabilización.}
+La hipótesis de finitud tiene un control explícito. Considérese una raíz
+con una rama terminal distinta de cada longitud entera positiva, con todas
+las ramas admisibles y disjuntas después de la raíz. La raíz admite
+prolongaciones de cualquier longitud finita y pertenece a todos los
+\(V_n\); cada sucesor suyo pertenece a una rama de longitud acotada.
+Por ello la raíz carece de prolongación infinita y de sucesor en
+\(V_\infty\). Este árbol tiene ramificación infinita en la raíz.
+En cambio, si \(A\) es finito, cada inclusión estricta
+\(V_{n+1}\subsetneq V_n\) elimina al menos un estado. La poda alcanza
+un punto fijo después de, como máximo, \(|A|\) eliminaciones estrictas
+de capas. Esta cota pertenece al dominio finito \(A\).
+
+\paragraph{Unicidad de la continuación.}
+Para \(s\in V_\infty\), los sucesores que conservan supervivencia forman
+\[
+ E(s)\cap V_\infty.
+\]
+La selección del próximo estado es única exactamente cuando
+\begin{equation}
+ \#\bigl(E(s)\cap V_\infty\bigr)=1.
+ \label{corpus9:xi:unicidad-sucesor}
+\end{equation}
+Una prolongación infinita es única cuando esta condición se mantiene
+en cada estado de la ruta. En efecto, cada sucesor superviviente tiene
+una prolongación infinita por la proposición anterior; dos sucesores
+distintos producen dos rutas distintas. Cuando el sucesor es único en
+cada paso, los prefijos quedan determinados sucesivamente.
+La pluralidad de sucesores viables expresa multiplicidad de
+prolongaciones dentro del mismo dominio de supervivencia.
+
+\begin{proposition}[Conjugación de las dos direcciones de prolongación]
+\label{corpus9:xi:conjugacion-supervivencia}
+Sea \(C:S\to S\) una involución tal que \(C(A)=A\) y
+\begin{equation}
+ (x,y)\in E\quad\Longleftrightarrow\quad(Cy,Cx)\in E.
+ \label{corpus9:xi:involucion-prolongaciones}
+\end{equation}
+Denotemos por \(V_n^+\) la poda para \(E\) y por \(V_n^-\) la poda
+para \(E^{-1}\), ambas con conjunto inicial \(A\). Entonces
+\[
+ C(V_n^+)=V_n^-\quad(n\geq0),\qquad
+ C(V_\infty^+)=V_\infty^-.
+\]
+\end{proposition}
+
+\begin{proof}
+Si \(s_0,\ldots,s_n\) es una ruta admisible para \(E\), la sucesión
+\(Cs_0,\ldots,Cs_n\) es una ruta admisible para \(E^{-1}\):
+para cada \(j\), la hipótesis convierte
+\((s_j,s_{j+1})\in E\) en \((Cs_{j+1},Cs_j)\in E\).
+Todos sus estados pertenecen a \(A\). La misma operación aplicada otra
+vez recupera la ruta inicial porque \(C^2=I\); por tanto, establece una
+bijección entre las prolongaciones finitas de ambas direcciones.
+La caracterización de \(V_n^\pm\) por rutas da
+\(C(V_n^+)=V_n^-\). Al ser \(C\) biyectiva, conmuta con la
+intersección de estos conjuntos, y se obtiene la igualdad de
+\(V_\infty^\pm\).
+\end{proof}
+
+La involución transporta el conjunto superviviente de una dirección al
+de la dirección conjugada. La prolongabilidad infinita en ambas
+direcciones corresponde a \(V_\infty^+\cap V_\infty^-\); la unicidad
+de una ruta conserva el criterio de
+\eqref{corpus9:xi:unicidad-sucesor}. La retención de una genealogía
+y la restricción de su árbol de continuaciones son dos operaciones
+tipadas sobre los mismos registros. La asignación de una entropía a
+esas lecturas requiere, además, la medida de historias correspondiente.
+% END REV09_SUPERVIVENCIA_PUNTO_FIJO

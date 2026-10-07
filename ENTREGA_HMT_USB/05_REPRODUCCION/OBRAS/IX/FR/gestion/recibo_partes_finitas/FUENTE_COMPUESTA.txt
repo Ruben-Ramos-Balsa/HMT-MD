@@ -1,0 +1,4542 @@
+RESIDENCIA HEREDADA APP
+
+\section{Núcleo formal de la Holografía Modular Triádica}
+\label{sec:nucleo}
+
+La Holografía Modular Triádica, abreviada HMT, comienza con una estructura finita de posiciones y operaciones. El orden de construcción importa: las posiciones reciben evaluaciones aritméticas, las transiciones adquieren una firma ternaria y la dinámica conserva la información necesaria para prolongarlas. Sólo después se forman las realizaciones numéricas. Una constante reconocida al final de este proceso no sustituye a la regla que produjo su región ni a la historia que determina su evaluación.
+
+La denominación \emph{All Possible Paths}, APP, expresa el papel de los caminos sobre el soporte. Se adopta como denominación de la construcción, con una referencia conceptual a la formulación por caminos de la mecánica cuántica; no supone que su ley aritmética sea la integral de caminos de Feynman. El \emph{Topological Phase Kernel}, TPK,\footnote{Los autores dedican asimismo las iniciales TPK a Tan Pengkiang. Esta dedicación es independiente de la definición matemática.} designa la composición de selección, transporte, actualización de memoria y prolongación. Las siglas se mantienen únicamente después de haber definido los objetos que representan.
+
+\subsection{APP: soporte posicional y evaluaciones aritméticas}
+
+Consideremos las nueve marcas interiores de una recta graduada entre cero y diez,
+\[
+ D_9=\{1,2,3,4,5,6,7,8,9\}.
+\]
+Su disposición horizontal y vertical produce las ochenta y una posiciones de \(D_9^2\). Las marcas interiores no deben confundirse con los diez intervalos unitarios de la recta de referencia. Esta disposición fija un alfabeto y dos direcciones; todavía no utiliza una expansión real para decidir una trayectoria.
+
+La identificación cíclica de las posiciones conduce al soporte
+\[
+ X_9=(\ZZ/9\ZZ)^2.
+\]
+La carta de representantes positivos conserva el símbolo nueve para la clase nula. Para todo entero positivo se definen
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9,
+ \qquad n=\rho_9(n)+9q_9(n).
+ \label{eq:residuo-cociente}
+\end{equation}
+La raíz digital positiva es, por tanto, una elección de representante de la clase residual. No conserva por sí sola el entero anterior a la reducción; la coordenada \(q_9\) proporciona precisamente la información que falta.
+
+En cada posición \((i,j)\), la acumulación de \(i\) repetida \(j\) veces produce \(ij\). Las dos evaluaciones enteras y sus proyecciones son
+\[
+ S(i,j)=i+j,\qquad P(i,j)=ij,\qquad
+ \Sigma(i,j)=\rho_9(i+j),\quad \Pi(i,j)=\rho_9(ij).
+\]
+La simetría \((i,j)\mapsto(j,i)\) intercambia las direcciones de acumulación y conserva ambas evaluaciones. Es una propiedad de un único soporte, no una identificación posterior entre dos matrices independientes.
+
+\begin{definition}[Evaluación aritmética levantada]
+La evaluación de APP que conserva las dos hojas es
+\begin{equation}
+ \mathcal A(i,j)=
+ \bigl((R^+_{ij},q^+_{ij}),(R^\times_{ij},q^\times_{ij})\bigr)
+ =\bigl((\rho_9(i+j),q_9(i+j)),(\rho_9(ij),q_9(ij))\bigr).
+ \label{eq:app-levantada}
+\end{equation}
+El término \emph{hoja} indica aquí una evaluación sobre el mismo soporte: aditiva o multiplicativa. Las dos coordenadas de cociente pertenecen al estado aritmético y no se descartan al reducir los residuos.
+\end{definition}
+
+\input{figures/app.tex}
+
+\begin{proposition}[Reconstrucción de las evaluaciones]
+Los dos pares de \eqref{eq:app-levantada} determinan exactamente \(i+j\) e \(ij\). Los residuos aislados no determinan esas evaluaciones enteras ni sus cocientes.
+\end{proposition}
+\begin{proof}
+La primera afirmación es \eqref{eq:residuo-cociente} aplicada a cada hoja. Para la segunda, \(10=1+9\) y \(19=1+2\cdot9\) tienen el mismo residuo y distinto cociente. En el soporte bidimensional, las posiciones \((5,5)\) y \((8,2)\) dan la misma suma y el mismo residuo producto, pero productos \(25=7+18\) y \(16=7+9\). La proyección residual identifica datos que la evaluación levantada distingue.
+\end{proof}
+
+\subsubsection{Grafo de Cayley, topología toroidal y grado de enrollamiento}
+
+Las traslaciones cardinales están dadas, en coordenadas de fila y columna, por
+\[
+ \nu_N=(-1,0),\quad\nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad\nu_O=(0,-1),\qquad T_d(x)=x+\nu_d.
+\]
+La primera coordenada aumenta hacia el sur y la segunda hacia el este. El grafo
+\[
+ \mathscr G_9=\operatorname{Cay}(X_9,\{\nu_N,\nu_E,\nu_S,\nu_O\})
+\]
+es la retícula cíclica bidimensional: tiene ochenta y un vértices y cuatro aristas orientadas salientes por vértice. Es un grafo de Cayley para la estructura \emph{aditiva} del soporte. La multiplicación de residuos tiene divisores de cero y no convierte todas las filas de APP en un grupo multiplicativo.
+
+Una palabra cardinal \(w=d_1\cdots d_r\) y un origen \(x_0\) determinan
+\[
+ x_k=x_0+\sum_{j=1}^k\nu_{d_j}\pmod9.
+\]
+Existen \(81\cdot4^r\) caminos orientados de longitud \(r\), incluidos retornos y retrocesos. Cuando el camino se cierra, su desplazamiento entero previo a la reducción define
+\begin{equation}
+ \operatorname{wind}(w)=\frac19
+ \bigl(\#S(w)-\#N(w),\#E(w)-\#O(w)\bigr)\in\ZZ^2.
+\end{equation}
+La inversión del camino cambia el signo de este vector. El retorno a la misma posición residual no obliga, por tanto, a que el enrollamiento sea nulo. Éste es el primer ejemplo de una diferencia que reaparecerá en el retorno de fase: una coordenada puede cerrarse mientras otra registra una evolución no trivial.
+
+\subsubsection{Cociente de transporte e identidad de cociclo}
+
+Sea \(s_9:\ZZ/9\ZZ\to D_9\) la sección de representantes positivos. El cociente de transporte asociado a la composición aditiva, denominado también \emph{acarreo} en aritmética posicional, es
+\[
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+\]
+El carácter composicional de esta memoria queda expresado por una identidad exacta.
+
+\begin{lemma}[Identidad de cociclo]
+Para \(a,b,c\in\ZZ/9\ZZ\),
+\[
+ c_9(a,b)+c_9(a+b,c)=c_9(b,c)+c_9(a,b+c).
+\]
+\end{lemma}
+\begin{proof}
+Ambas sumas son iguales a
+\[
+ \frac{s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c)}9.
+\]
+La asociatividad de la suma de representantes levantados requiere precisamente este término adicional al componer en el cociente.
+\end{proof}
+
+Con representantes positivos, este cociclo no está normalizado en la identidad: \(c_9(0,a)=1\). Si \(s_0\) toma representantes en \(\{0,\ldots,8\}\), su acarreo normalizado \(c_0\) satisface
+\[
+ c_9(a,b)=c_0(a,b)+\mathbf1_{a=0}+\mathbf1_{b=0}-\mathbf1_{a+b=0}.
+\]
+La diferencia es el cambio de sección; no altera la identidad de cociclo. La descomposición posterior del calendario en fase y ventana utilizará los representantes de cero a ocho.
+
+Los totales de ambas evaluaciones distinguen la contribución visible y la conservada en el cociente:
+\[
+ \sum S=810,\quad\sum P=2025,\quad
+ \sum\Sigma=405,\quad\sum\Pi=459,
+\]
+\[
+ \sum q^+=45,\qquad\sum q^\times=174.
+\]
+De aquí se obtiene
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{eq:defecto-integrado}
+\end{equation}
+La diferencia suma--producto no se agota en el defecto visible \(54\). La identidad conserva también el defecto de cociente \(129\). Suprimirlo cambiaría la aritmética que se transporta, aunque la tabla residual permaneciera idéntica.
+
+\subsubsection{Reducción ternaria y radical multiplicativo}
+
+El anillo \(R=\ZZ/9\ZZ\) tiene grupo de unidades \(\{1,2,4,5,7,8\}\) e ideal máximo
+\[
+ \mathfrak m=(3)=\{0,3,6\},\qquad\mathfrak m^2=0.
+\]
+Toda fila aditiva es una permutación de los nueve representantes. Una fila multiplicativa lo es exactamente cuando su índice es una unidad. Las filas tres y seis contienen tres valores repetidos; la fila nueve contiene únicamente el representante de la clase nula. Por ello el plegamiento multiplicativo ya distingue, antes de cualquier geometría continua, las unidades del sector nilpotente.
+
+La aplicación \(x\mapsto3x\) tiene núcleo e imagen iguales a \(\mathfrak m\). Induce un isomorfismo de espacios vectoriales sobre \(\FF_3\),
+\[
+ R/\mathfrak m\longrightarrow\mathfrak m,\qquad [x]\longmapsto3x,
+\]
+pero no un isomorfismo de anillos. En particular, la secuencia visible \(3,6,9\) admite dos lecturas diferentes: su reducción directa módulo tres es \(0,0,0\), mientras que la extracción del factor tres seguida de la reducción de su coordenada interna da \(1,2,0\). Esta segunda operación conserva una coordenada del ideal; no es la misma proyección que reducir directamente el número original.
+
+\subsubsection{Realización latina de la evaluación aditiva}
+
+La diferencia entre las dos evaluaciones puede expresarse también mediante
+operadores. Sea \((e_r)_{r\in\ZZ/9\ZZ}\) la base ortonormal de \(\CC^9\).
+La asignación \(v_{ab}=e_{a+b}\) produce una base ortonormal en cada fila
+y columna. Los proyectores \(P_{ab}=v_{ab}v_{ab}^{*}\) satisfacen
+\[
+ \sum_bP_{ab}=I_9=\sum_aP_{ab},\qquad P_{ab}^2=P_{ab}.
+\]
+En efecto, cada traslación \(b\mapsto a+b\) permuta los nueve residuos.
+Se obtiene una realización por proyectores de rango uno de un cuadrado
+latino, en la terminología de los cuadrados latinos cuánticos
+\cite{mustovicary,delascuevas2023}. Esta construcción parte de la hoja
+aditiva ya definida y explicita el mapa hacia su representación operatoria.
+
+La evaluación multiplicativa conserva otro contenido: para \(a=3\), los
+vectores \(e_{3b}\) repiten los residuos \(0,3,6\), y
+\[
+ \sum_{b\in\ZZ/9\ZZ}|e_{3b}\rangle\langle e_{3b}|
+ =3\bigl(|e_0\rangle\langle e_0|+|e_3\rangle\langle e_3|
+                    +|e_6\rangle\langle e_6|\bigr).
+\]
+La multiplicidad queda registrada en el operador y caracteriza el radical
+multiplicativo. Por ello el soporte toroidal, la propiedad latina y la
+resolución operatoria de la identidad son propiedades que requieren
+definiciones diferentes. Los cuadrados mágicos cuánticos estudiados por
+De las Cuevas, Drescher y Netzer exigen entradas positivas y sumas de filas
+y columnas iguales a la identidad; su teoría distingue además las
+dilataciones con entradas conmutativas\cite{delascuevas2020}. Esta referencia
+proporciona un lenguaje preciso para comparar realizaciones de APP.
+
+\subsection{TRIT: orientación y regímenes cuadráticos}
+
+\begin{definition}[Firma ternaria y levantamiento local]
+La firma TRIT utiliza la identificación balanceada
+\[
+ \FF_3\longrightarrow\TRIT,\qquad 0\mapsto0,\quad1\mapsto+1,\quad2\mapsto-1.
+\]
+Para \(n\in\ZZ\), su levantamiento conserva \(n=r+3c\), donde \(r\in\TRIT\) y \(c\in\ZZ\). En una transición de amplitud local acotada, los tres estados \((0,-1),(0,0),(0,+1)\) pueden presentar el mismo residuo nulo y distintos acarreos.
+\end{definition}
+
+La firma no reemplaza a la trayectoria. Un cero residual no significa ausencia de información de orientación, fase o cociente. Tampoco introduce por sí solo una magnitud física. Su función es distinguir algebraicamente las clases de transporte que se realizarán a continuación.
+
+\subsubsection{Tres regímenes cuadráticos y una exponencial común}
+
+Una vez obtenida la firma ternaria, su realización cuadrática se define por
+\begin{equation}
+ \mathbb A_\tau=\RR[X]/(X^2+\tau),\qquad \tau\in\TRIT.
+ \label{eq:algebras-trit}
+\end{equation}
+Si \(J_\tau\) es la clase de \(X\), entonces \(J_\tau^2=-\tau I\). La estructura distingue el tipo elíptico \(\tau=+1\), el parabólico \(\tau=0\) y el hiperbólico \(\tau=-1\). La realización real no genera la firma: expresa los tipos que la reducción orientada ya ha producido.
+
+\begin{proposition}[Exponenciación de los tres tipos]
+En cada álgebra \eqref{eq:algebras-trit},
+\begin{equation}
+ \exp(tJ_\tau)=C_\tau(t)I+S_\tau(t)J_\tau,
+\end{equation}
+donde
+\[
+ C_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n}}{(2n)!},\qquad
+ S_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n+1}}{(2n+1)!}.
+\]
+Las tres realizaciones son
+\[
+ \begin{array}{c|c|c}
+ \tau&J_\tau^2&\exp(tJ_\tau)\\\hline
+ +1&-I&\cos t\,I+\sin t\,J_\tau\\
+ 0&0&I+tJ_\tau\\
+ -1&I&\cosh t\,I+\sinh t\,J_\tau.
+ \end{array}
+\]
+\end{proposition}
+\begin{proof}
+Separar los términos pares e impares de la serie exponencial y sustituir \(J_\tau^{2n}=(-\tau)^nI\) y \(J_\tau^{2n+1}=(-\tau)^nJ_\tau\) da las fórmulas. Para \(\tau=0\), todos los términos de grado al menos dos se anulan. En los otros dos casos se recuperan las series trigonométricas o hiperbólicas.
+\end{proof}
+
+La exponencial es común a los tres regímenes: no se asigna exclusivamente a la rama parabólica. Los invariantes
+\[
+ C_\tau(t)^2+\tau S_\tau(t)^2=1
+\]
+se deducen de \(\exp(tJ_\tau)\exp(-tJ_\tau)=I\). El mismo principio algebraico conserva la unidad a través de realizaciones que difieren por su tipo cuadrático.
+
+En el régimen hiperbólico, \(P_\pm=(I\pm J_{-1})/2\) son proyectores complementarios y
+\[
+ \exp(tJ_{-1})=e^tP_++e^{-t}P_-.
+\]
+El crecimiento y la contracción aparecen conjuntamente en dos direcciones propias. En el elíptico, el parámetro describe una rotación; en el parabólico, una traslación nilpotente. La interpretación temporal adoptada por HMT asocia \(+1\) al retorno con memoria, \(0\) al umbral y \(-1\) a la apertura bidireccional. Esta interpretación exige un orden de parametrización; no añade un cuarto tipo algebraico.
+
+\input{sections/trit_desarrollo.tex}
+
+\input{figures/regimenes_trit.tex}
+
+\newpage
+\subsection{TPK: selección, transporte y actualización de memoria}
+
+La dinámica utiliza el selector de fase
+\[
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+Su valor decide qué evaluación opera. El transporte cardinal desplaza el cursor correspondiente; el registro conserva el valor anterior, el nuevo cociente, la orientación y la transición. Por tanto, selección y transporte son funciones distintas: un signo ternario no es un desplazamiento del toro.
+
+Denotaremos por \(\widehat X\) el espacio de estados aritméticos con memoria de trayectoria. Un elemento contiene las posiciones y direcciones de los dos cursores, el modo activo, la firma TRIT, la fase, los residuos y cocientes de ambas evaluaciones, los acarreos, el prefijo construido y los datos de frontera. Cuando se introduce un cilindro de refinamiento, éste forma parte del estado. La notación evita sustituir el objeto por una versión reducida que conserve únicamente el símbolo visible.
+
+\begin{definition}[Actualización del TPK]
+Sean \(\mathsf{Sel}_t\) la selección de modo mediante \(M_{\rm ph}\), \(\mathsf{Tra}_t\) el transporte cardinal levantado y \(\mathsf{Mem}_t\) la actualización de los registros. La transición es
+\begin{equation}
+ \mathcal U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+ \label{eq:actualizacion}
+\end{equation}
+Cada aplicación conserva los campos que no modifica y actualiza los restantes mediante la división euclídea y la concatenación de la trayectoria.
+\end{definition}
+
+La notación \eqref{eq:actualizacion} expresa el orden de composición, no reemplaza las reglas efectivas. La siguiente sección especifica completamente su realización finita de dos cursores. Después, la prolongación no se obtendrá borrando su memoria y repitiendo la primera emisión, sino transportando los prefijos y sus fronteras compatibles. De este modo, APP proporciona las evaluaciones, TRIT distingue sus regímenes y TPK compone su evolución.
+
+
+RESIDENCIA HEREDADA TRIT
+
+\section{Núcleo formal de la Holografía Modular Triádica}
+\label{sec:nucleo}
+
+La Holografía Modular Triádica, abreviada HMT, comienza con una estructura finita de posiciones y operaciones. El orden de construcción importa: las posiciones reciben evaluaciones aritméticas, las transiciones adquieren una firma ternaria y la dinámica conserva la información necesaria para prolongarlas. Sólo después se forman las realizaciones numéricas. Una constante reconocida al final de este proceso no sustituye a la regla que produjo su región ni a la historia que determina su evaluación.
+
+La denominación \emph{All Possible Paths}, APP, expresa el papel de los caminos sobre el soporte. Se adopta como denominación de la construcción, con una referencia conceptual a la formulación por caminos de la mecánica cuántica; no supone que su ley aritmética sea la integral de caminos de Feynman. El \emph{Topological Phase Kernel}, TPK,\footnote{Los autores dedican asimismo las iniciales TPK a Tan Pengkiang. Esta dedicación es independiente de la definición matemática.} designa la composición de selección, transporte, actualización de memoria y prolongación. Las siglas se mantienen únicamente después de haber definido los objetos que representan.
+
+\subsection{APP: soporte posicional y evaluaciones aritméticas}
+
+Consideremos las nueve marcas interiores de una recta graduada entre cero y diez,
+\[
+ D_9=\{1,2,3,4,5,6,7,8,9\}.
+\]
+Su disposición horizontal y vertical produce las ochenta y una posiciones de \(D_9^2\). Las marcas interiores no deben confundirse con los diez intervalos unitarios de la recta de referencia. Esta disposición fija un alfabeto y dos direcciones; todavía no utiliza una expansión real para decidir una trayectoria.
+
+La identificación cíclica de las posiciones conduce al soporte
+\[
+ X_9=(\ZZ/9\ZZ)^2.
+\]
+La carta de representantes positivos conserva el símbolo nueve para la clase nula. Para todo entero positivo se definen
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9,
+ \qquad n=\rho_9(n)+9q_9(n).
+ \label{eq:residuo-cociente}
+\end{equation}
+La raíz digital positiva es, por tanto, una elección de representante de la clase residual. No conserva por sí sola el entero anterior a la reducción; la coordenada \(q_9\) proporciona precisamente la información que falta.
+
+En cada posición \((i,j)\), la acumulación de \(i\) repetida \(j\) veces produce \(ij\). Las dos evaluaciones enteras y sus proyecciones son
+\[
+ S(i,j)=i+j,\qquad P(i,j)=ij,\qquad
+ \Sigma(i,j)=\rho_9(i+j),\quad \Pi(i,j)=\rho_9(ij).
+\]
+La simetría \((i,j)\mapsto(j,i)\) intercambia las direcciones de acumulación y conserva ambas evaluaciones. Es una propiedad de un único soporte, no una identificación posterior entre dos matrices independientes.
+
+\begin{definition}[Evaluación aritmética levantada]
+La evaluación de APP que conserva las dos hojas es
+\begin{equation}
+ \mathcal A(i,j)=
+ \bigl((R^+_{ij},q^+_{ij}),(R^\times_{ij},q^\times_{ij})\bigr)
+ =\bigl((\rho_9(i+j),q_9(i+j)),(\rho_9(ij),q_9(ij))\bigr).
+ \label{eq:app-levantada}
+\end{equation}
+El término \emph{hoja} indica aquí una evaluación sobre el mismo soporte: aditiva o multiplicativa. Las dos coordenadas de cociente pertenecen al estado aritmético y no se descartan al reducir los residuos.
+\end{definition}
+
+\input{figures/app.tex}
+
+\begin{proposition}[Reconstrucción de las evaluaciones]
+Los dos pares de \eqref{eq:app-levantada} determinan exactamente \(i+j\) e \(ij\). Los residuos aislados no determinan esas evaluaciones enteras ni sus cocientes.
+\end{proposition}
+\begin{proof}
+La primera afirmación es \eqref{eq:residuo-cociente} aplicada a cada hoja. Para la segunda, \(10=1+9\) y \(19=1+2\cdot9\) tienen el mismo residuo y distinto cociente. En el soporte bidimensional, las posiciones \((5,5)\) y \((8,2)\) dan la misma suma y el mismo residuo producto, pero productos \(25=7+18\) y \(16=7+9\). La proyección residual identifica datos que la evaluación levantada distingue.
+\end{proof}
+
+\subsubsection{Grafo de Cayley, topología toroidal y grado de enrollamiento}
+
+Las traslaciones cardinales están dadas, en coordenadas de fila y columna, por
+\[
+ \nu_N=(-1,0),\quad\nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad\nu_O=(0,-1),\qquad T_d(x)=x+\nu_d.
+\]
+La primera coordenada aumenta hacia el sur y la segunda hacia el este. El grafo
+\[
+ \mathscr G_9=\operatorname{Cay}(X_9,\{\nu_N,\nu_E,\nu_S,\nu_O\})
+\]
+es la retícula cíclica bidimensional: tiene ochenta y un vértices y cuatro aristas orientadas salientes por vértice. Es un grafo de Cayley para la estructura \emph{aditiva} del soporte. La multiplicación de residuos tiene divisores de cero y no convierte todas las filas de APP en un grupo multiplicativo.
+
+Una palabra cardinal \(w=d_1\cdots d_r\) y un origen \(x_0\) determinan
+\[
+ x_k=x_0+\sum_{j=1}^k\nu_{d_j}\pmod9.
+\]
+Existen \(81\cdot4^r\) caminos orientados de longitud \(r\), incluidos retornos y retrocesos. Cuando el camino se cierra, su desplazamiento entero previo a la reducción define
+\begin{equation}
+ \operatorname{wind}(w)=\frac19
+ \bigl(\#S(w)-\#N(w),\#E(w)-\#O(w)\bigr)\in\ZZ^2.
+\end{equation}
+La inversión del camino cambia el signo de este vector. El retorno a la misma posición residual no obliga, por tanto, a que el enrollamiento sea nulo. Éste es el primer ejemplo de una diferencia que reaparecerá en el retorno de fase: una coordenada puede cerrarse mientras otra registra una evolución no trivial.
+
+\subsubsection{Cociente de transporte e identidad de cociclo}
+
+Sea \(s_9:\ZZ/9\ZZ\to D_9\) la sección de representantes positivos. El cociente de transporte asociado a la composición aditiva, denominado también \emph{acarreo} en aritmética posicional, es
+\[
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+\]
+El carácter composicional de esta memoria queda expresado por una identidad exacta.
+
+\begin{lemma}[Identidad de cociclo]
+Para \(a,b,c\in\ZZ/9\ZZ\),
+\[
+ c_9(a,b)+c_9(a+b,c)=c_9(b,c)+c_9(a,b+c).
+\]
+\end{lemma}
+\begin{proof}
+Ambas sumas son iguales a
+\[
+ \frac{s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c)}9.
+\]
+La asociatividad de la suma de representantes levantados requiere precisamente este término adicional al componer en el cociente.
+\end{proof}
+
+Con representantes positivos, este cociclo no está normalizado en la identidad: \(c_9(0,a)=1\). Si \(s_0\) toma representantes en \(\{0,\ldots,8\}\), su acarreo normalizado \(c_0\) satisface
+\[
+ c_9(a,b)=c_0(a,b)+\mathbf1_{a=0}+\mathbf1_{b=0}-\mathbf1_{a+b=0}.
+\]
+La diferencia es el cambio de sección; no altera la identidad de cociclo. La descomposición posterior del calendario en fase y ventana utilizará los representantes de cero a ocho.
+
+Los totales de ambas evaluaciones distinguen la contribución visible y la conservada en el cociente:
+\[
+ \sum S=810,\quad\sum P=2025,\quad
+ \sum\Sigma=405,\quad\sum\Pi=459,
+\]
+\[
+ \sum q^+=45,\qquad\sum q^\times=174.
+\]
+De aquí se obtiene
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{eq:defecto-integrado}
+\end{equation}
+La diferencia suma--producto no se agota en el defecto visible \(54\). La identidad conserva también el defecto de cociente \(129\). Suprimirlo cambiaría la aritmética que se transporta, aunque la tabla residual permaneciera idéntica.
+
+\subsubsection{Reducción ternaria y radical multiplicativo}
+
+El anillo \(R=\ZZ/9\ZZ\) tiene grupo de unidades \(\{1,2,4,5,7,8\}\) e ideal máximo
+\[
+ \mathfrak m=(3)=\{0,3,6\},\qquad\mathfrak m^2=0.
+\]
+Toda fila aditiva es una permutación de los nueve representantes. Una fila multiplicativa lo es exactamente cuando su índice es una unidad. Las filas tres y seis contienen tres valores repetidos; la fila nueve contiene únicamente el representante de la clase nula. Por ello el plegamiento multiplicativo ya distingue, antes de cualquier geometría continua, las unidades del sector nilpotente.
+
+La aplicación \(x\mapsto3x\) tiene núcleo e imagen iguales a \(\mathfrak m\). Induce un isomorfismo de espacios vectoriales sobre \(\FF_3\),
+\[
+ R/\mathfrak m\longrightarrow\mathfrak m,\qquad [x]\longmapsto3x,
+\]
+pero no un isomorfismo de anillos. En particular, la secuencia visible \(3,6,9\) admite dos lecturas diferentes: su reducción directa módulo tres es \(0,0,0\), mientras que la extracción del factor tres seguida de la reducción de su coordenada interna da \(1,2,0\). Esta segunda operación conserva una coordenada del ideal; no es la misma proyección que reducir directamente el número original.
+
+\subsubsection{Realización latina de la evaluación aditiva}
+
+La diferencia entre las dos evaluaciones puede expresarse también mediante
+operadores. Sea \((e_r)_{r\in\ZZ/9\ZZ}\) la base ortonormal de \(\CC^9\).
+La asignación \(v_{ab}=e_{a+b}\) produce una base ortonormal en cada fila
+y columna. Los proyectores \(P_{ab}=v_{ab}v_{ab}^{*}\) satisfacen
+\[
+ \sum_bP_{ab}=I_9=\sum_aP_{ab},\qquad P_{ab}^2=P_{ab}.
+\]
+En efecto, cada traslación \(b\mapsto a+b\) permuta los nueve residuos.
+Se obtiene una realización por proyectores de rango uno de un cuadrado
+latino, en la terminología de los cuadrados latinos cuánticos
+\cite{mustovicary,delascuevas2023}. Esta construcción parte de la hoja
+aditiva ya definida y explicita el mapa hacia su representación operatoria.
+
+La evaluación multiplicativa conserva otro contenido: para \(a=3\), los
+vectores \(e_{3b}\) repiten los residuos \(0,3,6\), y
+\[
+ \sum_{b\in\ZZ/9\ZZ}|e_{3b}\rangle\langle e_{3b}|
+ =3\bigl(|e_0\rangle\langle e_0|+|e_3\rangle\langle e_3|
+                    +|e_6\rangle\langle e_6|\bigr).
+\]
+La multiplicidad queda registrada en el operador y caracteriza el radical
+multiplicativo. Por ello el soporte toroidal, la propiedad latina y la
+resolución operatoria de la identidad son propiedades que requieren
+definiciones diferentes. Los cuadrados mágicos cuánticos estudiados por
+De las Cuevas, Drescher y Netzer exigen entradas positivas y sumas de filas
+y columnas iguales a la identidad; su teoría distingue además las
+dilataciones con entradas conmutativas\cite{delascuevas2020}. Esta referencia
+proporciona un lenguaje preciso para comparar realizaciones de APP.
+
+\subsection{TRIT: orientación y regímenes cuadráticos}
+
+\begin{definition}[Firma ternaria y levantamiento local]
+La firma TRIT utiliza la identificación balanceada
+\[
+ \FF_3\longrightarrow\TRIT,\qquad 0\mapsto0,\quad1\mapsto+1,\quad2\mapsto-1.
+\]
+Para \(n\in\ZZ\), su levantamiento conserva \(n=r+3c\), donde \(r\in\TRIT\) y \(c\in\ZZ\). En una transición de amplitud local acotada, los tres estados \((0,-1),(0,0),(0,+1)\) pueden presentar el mismo residuo nulo y distintos acarreos.
+\end{definition}
+
+La firma no reemplaza a la trayectoria. Un cero residual no significa ausencia de información de orientación, fase o cociente. Tampoco introduce por sí solo una magnitud física. Su función es distinguir algebraicamente las clases de transporte que se realizarán a continuación.
+
+\subsubsection{Tres regímenes cuadráticos y una exponencial común}
+
+Una vez obtenida la firma ternaria, su realización cuadrática se define por
+\begin{equation}
+ \mathbb A_\tau=\RR[X]/(X^2+\tau),\qquad \tau\in\TRIT.
+ \label{eq:algebras-trit}
+\end{equation}
+Si \(J_\tau\) es la clase de \(X\), entonces \(J_\tau^2=-\tau I\). La estructura distingue el tipo elíptico \(\tau=+1\), el parabólico \(\tau=0\) y el hiperbólico \(\tau=-1\). La realización real no genera la firma: expresa los tipos que la reducción orientada ya ha producido.
+
+\begin{proposition}[Exponenciación de los tres tipos]
+En cada álgebra \eqref{eq:algebras-trit},
+\begin{equation}
+ \exp(tJ_\tau)=C_\tau(t)I+S_\tau(t)J_\tau,
+\end{equation}
+donde
+\[
+ C_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n}}{(2n)!},\qquad
+ S_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n+1}}{(2n+1)!}.
+\]
+Las tres realizaciones son
+\[
+ \begin{array}{c|c|c}
+ \tau&J_\tau^2&\exp(tJ_\tau)\\\hline
+ +1&-I&\cos t\,I+\sin t\,J_\tau\\
+ 0&0&I+tJ_\tau\\
+ -1&I&\cosh t\,I+\sinh t\,J_\tau.
+ \end{array}
+\]
+\end{proposition}
+\begin{proof}
+Separar los términos pares e impares de la serie exponencial y sustituir \(J_\tau^{2n}=(-\tau)^nI\) y \(J_\tau^{2n+1}=(-\tau)^nJ_\tau\) da las fórmulas. Para \(\tau=0\), todos los términos de grado al menos dos se anulan. En los otros dos casos se recuperan las series trigonométricas o hiperbólicas.
+\end{proof}
+
+La exponencial es común a los tres regímenes: no se asigna exclusivamente a la rama parabólica. Los invariantes
+\[
+ C_\tau(t)^2+\tau S_\tau(t)^2=1
+\]
+se deducen de \(\exp(tJ_\tau)\exp(-tJ_\tau)=I\). El mismo principio algebraico conserva la unidad a través de realizaciones que difieren por su tipo cuadrático.
+
+En el régimen hiperbólico, \(P_\pm=(I\pm J_{-1})/2\) son proyectores complementarios y
+\[
+ \exp(tJ_{-1})=e^tP_++e^{-t}P_-.
+\]
+El crecimiento y la contracción aparecen conjuntamente en dos direcciones propias. En el elíptico, el parámetro describe una rotación; en el parabólico, una traslación nilpotente. La interpretación temporal adoptada por HMT asocia \(+1\) al retorno con memoria, \(0\) al umbral y \(-1\) a la apertura bidireccional. Esta interpretación exige un orden de parametrización; no añade un cuarto tipo algebraico.
+
+\input{sections/trit_desarrollo.tex}
+
+\input{figures/regimenes_trit.tex}
+
+\newpage
+\subsection{TPK: selección, transporte y actualización de memoria}
+
+La dinámica utiliza el selector de fase
+\[
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+Su valor decide qué evaluación opera. El transporte cardinal desplaza el cursor correspondiente; el registro conserva el valor anterior, el nuevo cociente, la orientación y la transición. Por tanto, selección y transporte son funciones distintas: un signo ternario no es un desplazamiento del toro.
+
+Denotaremos por \(\widehat X\) el espacio de estados aritméticos con memoria de trayectoria. Un elemento contiene las posiciones y direcciones de los dos cursores, el modo activo, la firma TRIT, la fase, los residuos y cocientes de ambas evaluaciones, los acarreos, el prefijo construido y los datos de frontera. Cuando se introduce un cilindro de refinamiento, éste forma parte del estado. La notación evita sustituir el objeto por una versión reducida que conserve únicamente el símbolo visible.
+
+\begin{definition}[Actualización del TPK]
+Sean \(\mathsf{Sel}_t\) la selección de modo mediante \(M_{\rm ph}\), \(\mathsf{Tra}_t\) el transporte cardinal levantado y \(\mathsf{Mem}_t\) la actualización de los registros. La transición es
+\begin{equation}
+ \mathcal U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+ \label{eq:actualizacion}
+\end{equation}
+Cada aplicación conserva los campos que no modifica y actualiza los restantes mediante la división euclídea y la concatenación de la trayectoria.
+\end{definition}
+
+La notación \eqref{eq:actualizacion} expresa el orden de composición, no reemplaza las reglas efectivas. La siguiente sección especifica completamente su realización finita de dos cursores. Después, la prolongación no se obtendrá borrando su memoria y repitiendo la primera emisión, sino transportando los prefijos y sus fronteras compatibles. De este modo, APP proporciona las evaluaciones, TRIT distingue sus regímenes y TPK compone su evolución.
+
+
+RESIDENCIA HEREDADA TPK
+
+% Unidad U006F. Inventario operatorio completo del Topological Phase Kernel.
+
+\chapter{Inventario operatorio completo y tubería causal del Topological Phase Kernel}
+\label{chap:inventario-operatorio-completo-tpk}
+
+El Topological Phase Kernel no es una reducción módulo tres ni un reloj de
+ciento ocho posiciones. Es una categoría de estados enriquecidos equipada
+con operadores de selección, transporte, lectura, memoria, periodicidad,
+prolongación y publicación. Para impedir que una abreviatura sustituya al
+objeto, cada operador se registra por su tipo y por la información que
+conserva.
+
+\section{Ficha tipada de un operador}
+
+\begin{definition}[Ficha operatoria]
+\label{def:u006f-ficha-operatoria}
+Una realización canónica del TPK es una séxtupla
+\begin{equation}
+ \mathcal O=
+ (D_{\mathcal O},C_{\mathcal O},f_{\mathcal O},
+ I_{\mathcal O},L_{\mathcal O},M_{\mathcal O}),
+ \label{eq:u006f-ficha}
+\end{equation}
+donde:
+\begin{enumerate}
+ \item \(f_{\mathcal O}:D_{\mathcal O}\to C_{\mathcal O}\) es su regla;
+ \item \(I_{\mathcal O}\) es la familia de relaciones conservadas;
+ \item \(L_{\mathcal O}\) declara la información publicada o perdida;
+ \item \(M_{\mathcal O}\) enumera la memoria que permanece en el estado
+ enriquecido.
+\end{enumerate}
+\end{definition}
+
+Dos realizaciones representan el mismo operador sólo cuando existe una
+equivalencia tipada que entrelaza reglas e invariantes. Compartir periodo,
+cardinal o salida visible no basta.
+
+\section{Ocho clases estructurales}
+
+El inventario se particiona en:
+\begin{enumerate}
+ \item[\textbf{C1.}] soportes y estados;
+ \item[\textbf{C2.}] selección interna;
+ \item[\textbf{C3.}] transporte;
+ \item[\textbf{C4.}] lectores y cocientes;
+ \item[\textbf{C5.}] memoria y frontera;
+ \item[\textbf{C6.}] periodicidad y retorno;
+ \item[\textbf{C7.}] prolongación;
+ \item[\textbf{C8.}] salidas.
+\end{enumerate}
+La clase se determina por dominio, codominio y función, no por el nombre de
+una cifra asociada.
+
+\section{Catorce agrupaciones funcionales}
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}p{.20\textwidth}p{.29\textwidth}p{.43\textwidth}@{}}
+\toprule
+Agrupación&Operadores o espacios&Función e invariantes\\
+\midrule
+\endfirsthead
+\toprule
+Agrupación&Operadores o espacios&Función e invariantes\\
+\midrule
+\endhead
+Estado y memoria de ruta&
+\(\mathcal X_{\rm TPK}^{\rm enr}\), \(\mathcal F_q\)&
+Conservan posición, hoja, orientación, residuo, cociente, acarreo, firma,
+frontera, cilindro, prefijo, procedencia y memoria.\\
+
+Selección interna&
+\(M_{\rm ph}:\{1,\ldots,9\}\to\{-1,0,+1\}\)&
+Activa la evaluación aditiva, multiplicativa o el paso de umbral; no mueve
+el estado.\\
+
+Transporte espacial&
+\(T_N,T_E,T_S,T_O,F_{\rm loc},F_{\rm obs}\)&
+Realiza traslaciones cardinales, realimentación de hoja y cronología de dos
+cursores.\\
+
+Lectores modulares&
+\(\rho_9,q_9,\rho_3^{\rm or},c_3,q_{1000},r_{1000}\)&
+Publican fase, orientación y bloque decimal conservando los cocientes de
+levantamiento.\\
+
+Bloque y memoria&
+\(\mathcal K_{27}=F_{\rm obs}^{27}\), \(\mathcal N_{27}\)&
+El primero compone veintisiete transportes; el segundo filtra eventos de
+memoria. Igual índice no implica igual operador.\\
+
+Estado dodecafásico&
+\(\mathcal R_{12},C_{12},\Theta_{108},\Gamma_{108}\)&
+Distingue registro enriquecido, sector, ley cíclica y soporte ordenado.\\
+
+Periodicidad y profundidades&
+\(C_{12}\hookrightarrow C_{108}\twoheadrightarrow C_9\),
+\(w_{108},w_{1080}\)&
+Conserva la extensión no escindida, las palabras de distintas longitudes y
+la memoria vertical.\\
+
+Canales \(90/120\)&
+\(\mathcal F_6,\mathcal F_8,\mathcal I_{6\to8},
+S_{90},S_{120}\)&
+Separa incidencias finitas, colas analíticas y sus normalizaciones.\\
+
+Bidireccionalidad&
+\(P_\pm,\operatorname{rev},\operatorname{Ext}_\pm,
+N_\pm,\beta,C_M\)&
+Realiza intercambio, inversión de ruta, prolongación futura y pasada,
+valencia, balance y conjugación.\\
+
+Emisión y coinducción&
+\(L_0,L_1,R_{36},G_9,\varprojlim\operatorname{Cyl}_m\)&
+Eleva la semilla, abre la frontera y organiza prolongaciones finitas y
+compatibles.\\
+
+Lectores numéricos&
+\(\mathscr C_\pi,\mathscr P_e,F_{\rm av}\)&
+Construyen horquillas racionales, propagación factorial y autoescala de
+Fibonacci.\\
+
+Proyección excepcional&
+\(\Gamma_{A_W}\), peso, soporte proyectivo&
+Transporta la misma emisión a incidencia ternaria sin seleccionar cifras
+arquimedianas.\\
+
+Atlas y realización&
+firma de ruta, atlas \(81/56/13/324\), \(C_M\)&
+Clasifica historias y caracteres antes de aplicar una carta dimensional.\\
+
+Validación finita&
+censos, ablaciones, hashes y pruebas de independencia&
+Comprueba cobertura en la profundidad ejecutada y separa generador,
+verificador y datos de contraste.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+Las ocho clases describen naturaleza matemática; las catorce agrupaciones,
+función de ejecución. Son dos gradaciones del mismo inventario.
+
+\section{Registro nominal de treinta y cuatro entradas}
+
+\begin{equation}
+ \mathfrak O_{\rm TPK}:=(\mathfrak o_1,\ldots,\mathfrak o_{34}).
+ \label{eq:u006f-registro-operadores}
+\end{equation}
+
+\begingroup
+\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}r p{.19\textwidth}p{.28\textwidth}p{.42\textwidth}@{}}
+\toprule
+\#&Símbolo&Dominio y codominio&Regla o función\\
+\midrule
+\endfirsthead
+\toprule
+\#&Símbolo&Dominio y codominio&Regla o función\\
+\midrule
+\endhead
+1&\(\mathcal A_9\)&\((\mathbb Z/9)^2\), matriz y ley interna&
+Célula aritmética aditivo--multiplicativa.\\
+2&\((\rho_9,q_9)\)&\(\mathbb Z_{>0}\to
+\{1,\ldots,9\}\times\mathbb Z_{\geq0}\)&
+División nonádica con representante positivo y cociente.\\
+3&\(\rho_3^{\rm or},c_3\)&\(\mathbb Z\to
+\{-1,0,+1\}\times\mathbb Z\)&
+Levantamiento ternario orientado \(n=\rho_3^{\rm or}(n)+3c_3(n)\).\\
+4&\(\iota_{1000}:=(q_{1000},r_{1000})\)&\(\mathbb Z\to
+\mathbb Z\times\{0,\ldots,999\}\)&
+División euclídea \(N=1000q_{1000}+r_{1000}\).\\
+5&\(T_d\)&\(X_9\to X_9\), \(d\in\{N,E,S,O\}\)&
+Traslación cardinal orientada.\\
+6&\(F_{\rm loc}\)&\(\mathcal Q_{\rm loc}\times
+\mathscr D_{\rm card}\to\mathcal Q_{\rm loc}\)&
+Realimentación local de posición y hoja.\\
+7&\(T_{\min}\)&\(\Omega_{\rm seed}\to\mathcal U_6\)&
+Emisor mínimo de los dos cursores, incluida la firma coordenada.\\
+8&\(G\)&\(\operatorname{im}s_\Sigma\times
+\operatorname{im}s_\Pi\to\{0,\ldots,999\}^6\)&
+Acoplamiento decimal coordenada a coordenada.\\
+9&\(\Psi_6\)&\(\mathcal U_6\to\mathbb F_3^6\)&
+Reducción ternaria del catálogo.\\
+10&\(\mathcal R_3\)&\(\mathcal Q_{\rm loc}\times
+\mathscr D_{\rm card}^3\to\{-1,0,+1\}\)&
+Factor observable local de tres pasos.\\
+11&\(\mathcal K_{27}\)&\(\mathcal Q_{\rm obs}\to\mathcal Q_{\rm obs}\)&
+Composición \(F_{\rm obs}^{27}\).\\
+12&\(\mathcal X_{\rm TPK}^{\rm enr}\)&categoría de estados enriquecidos&
+Conserva todas las coordenadas tipadas del núcleo.\\
+13&\(\mathcal H\)&relación sobre estados enriquecidos&
+Transición Hensel que retiene residuo y cociente.\\
+14&\(\mathcal C_{3,1000}\)&estados cruzados
+\((N,L,D,K,A,B)\)&
+Actualización exacta de cilindros ternario--decimales.\\
+15&\(\Sigma_{\rm B}\)&memorias de frontera \(\to\) firma conjunta&
+Publica la orientación de bloque conservando su ledger.\\
+16&\({\rm EF}\text{--}G_9\)&relación de extensión&
+Filtra extensiones compatibles y organiza la genealogía nonádica.\\
+17&\(\Gamma_9\)&historias enriquecidas \(\longrightarrow\) historias&
+Holonomía de una vuelta de fase con memoria de frontera.\\
+18&\(X_\chi\)&\(\varprojlim_m\operatorname{Surv}^{(\chi)}_m\)&
+Sección global cuando no vaciedad, compatibilidad y unicidad están
+demostradas en toda profundidad.\\
+19&\(\mathcal P_{\rm APP}^{(2)}\)&categoría bivariada de caminos&
+Transporta simultáneamente la evaluación multiplicativa y la acumulación
+aditiva.\\
+20&\(F_{\rm obs}\)&\(\mathcal Q_{\rm obs}\to\mathcal Q_{\rm obs}\)&
+Cronología observable determinista de dos cursores.\\
+21&\(\mathcal A_{42}\)&alfabeto de cuarenta y dos tríadas&
+Soporte decimal ampliado de la emisión finita.\\
+22&\(\operatorname{Ext}_r\)&
+\(\operatorname{Ext}_r\subseteq\mathcal F_q\times\mathcal F_{q'}\)&
+Relación tipada de prolongación de fibras.\\
+23&\(\mathcal K_{\rm ph}\)&\(\mathcal U_6\times C_9\) sobre sí mismo&
+Transferencia de continuaciones compatibles con fase explícita.\\
+24&\((P,H,Q)\)&\(\mathcal X_\times\to\mathcal X_\times\)&
+Avance, media vuelta y cuarto de giro de semillas.\\
+25&\((c_{\rm mode},c_{\rm or})\)&caminos \(\to\mathbb Z^2\)&
+Cociclos de cambio de modo y orientación.\\
+26&\(E_{20}\)&estados finitos \(\to\) veinte bloques&
+Prolongación triádica finita con libro de procedencia.\\
+27&\(\mathcal R_{12}\)&historia enriquecida \(\to\) registro de doce
+sectores&
+Sistema temporal orientado con ruta, firma, acarreo y ledger.\\
+28&\(R_{\rm sgn}\)&estado terminal \(\to U_{12}^{\rm sgn}
+\subseteq\mathbb Z^{12}\)&
+Lector del observable armónico firmado.\\
+29&\(\mathcal H_{12}\)&\(\mathbb Z^{12}\to\mathbb Z^{12}\)&
+Transformación por tres órbitas de paso tres; inversa
+\(\mathcal H_{12}/4\) sobre la imagen pertinente.\\
+30&\(\mathcal E_{\rm dod}=(D_3,D_4,Q)\)&
+\(\mathbb Z^{12}\to\mathbb Z^{25}\)&
+Extractor transversal conjunto de aridades tres y cuatro.\\
+31&\(\mathcal C_\alpha\)&bloques y acarreos \(\to\) bloques&
+Recurrencia dodecafásica de cierre en base mil.\\
+32&\((L_{\rm tick},\chi_{\rm mass})\)&historia enriquecida \(\to\)
+carácter temporal&
+Interfaz dimensional posterior; no participa en el constructor numérico de
+esta obra.\\
+33&\(\mathcal W_\pm\)&retícula bidireccional de índice doce&
+Lectura en ambos sentidos conservando orientación y procedencia.\\
+34&\(\mathcal A_{\rm species}\)&familias de extensión \(\to\) atlas&
+Interfaz de realización posterior, no un cuarto primitivo.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{Tubería causal de actualización}
+
+\begin{definition}[Estado canónico completo]
+\label{def:u006f-esquema-estado}
+Sea
+\[
+ \mathcal E:=
+ \mathbb Z_{\rm quo}\times\mathbb Z_{\rm car}\times
+ \mathsf{Mem}\times\mathsf{Term}\times\mathsf{Cyl}\times
+ \mathsf{Fr}\times\mathsf{Pref}\times\Lambda .
+\]
+El estado enriquecido canónico en el instante \(t\) es
+\begin{equation}
+ x_t=(p_t,m_t,\sigma_t,b_t,r_t;
+ q_t,c_t,\eta_t,s_t,C_t,\partial_t,N_t,\lambda_t)
+ \in
+ X_9\times\{\Sigma,\Pi\}\times\mathsf{TRIT}\times
+ C_{12}\times C_9\times\mathcal E.
+ \label{eq:u006f-esquema-estado}
+\end{equation}
+Las abreviaturas de estado utilizadas en otras unidades son proyecciones de
+esta tupla. En particular, no se omiten el cociente \(q_t\), el acarreo
+\(c_t\), el terminal \(s_t\), el cilindro \(C_t\), la frontera
+\(\partial_t\), el prefijo \(N_t\) ni el libro \(\lambda_t\).
+\end{definition}
+
+Sea \(\rho_t\) la flecha observable determinada por \(x_t\). Las leyes de
+transporte de U005 y la transición \(\mathcal C_{3,1000}\) determinan un
+endomorfismo de memoria. Para
+\(z=(q,c,\eta,s,C,\partial,N,\lambda)\in\mathcal E\), se define
+\begin{align}
+ \mathbf E_t:\mathcal E&\longrightarrow\mathcal E,\notag\\
+ \mathbf E_t(z)&=\bigl(
+ \mathsf H(\rho_t)q,
+ \mathsf C(\rho_t)c+\kappa(\rho_t),
+ \mathsf M(\rho_t)\eta,
+ \mathsf T(\rho_t)s,
+ \mathsf{Cyl}(\rho_t)C,
+ \mathsf{Fr}(\rho_t)\partial,
+ \mathsf{Pref}(\rho_t)N,
+ \Lambda(\rho_t)\lambda
+ \bigr).
+ \label{eq:u006f-actualizacion-memoria}
+\end{align}
+Cada componente publicada en \eqref{eq:u006f-actualizacion-memoria} posee el
+dominio indicado por su fibra; \(\kappa(\rho_t)\) es la cocadena de acarreo.
+
+Definimos tres endomorfismos del producto canónico. Si
+\(\sigma'=M_{\rm ph}(g(t))\) y \(m'=\mu(\sigma',m)\), entonces
+\begin{align}
+ \mathsf{Sel}_t(p,m,\sigma,b,r;e)
+  &:=(p,m',\sigma',b,r;e),\label{eq:u006f-selector-tipado}\\
+ \mathsf{Tra}_t(p,m,\sigma,b,r;e)
+  &:=(T_{d(t)}p,m,\sigma,b,r;e),\label{eq:u006f-transporte-tipado}\\
+ \mathsf{Upd}_t(p,m,\sigma,b,r;e)
+  &:=(p,m,\sigma,b',r';\mathbf E_t(e)),
+ \label{eq:u006f-memoria-tipada}
+\end{align}
+donde \((b',r')\) es el destino de \(\rho_t:(b,r)\to(b',r')\). La tubería
+causal es la composición de mapas, no la composición de un mapa con un valor
+trítico:
+\begin{equation}
+ \boxed{\mathcal U_t:=
+ \mathsf{Upd}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.}
+ \label{eq:u006f-tuberia}
+\end{equation}
+
+\begin{theorem}[Cierre de la tubería]
+\label{thm:u006f-cierre-tuberia}
+La aplicación \(\mathcal U_t\) es un endomorfismo del estado canónico
+completo. Los lectores, prolongaciones y proyecciones se aplican después de
+\(\mathcal U_t\) sólo cuando su dominio ha sido producido.
+\end{theorem}
+
+\begin{proof}
+\(\mathsf{Sel}_t\) cambia únicamente modo y TRIT;
+\(\mathsf{Tra}_t\) cambia únicamente la posición APP; y
+\(\mathsf{Upd}_t\) aplica el producto tipado
+\eqref{eq:u006f-actualizacion-memoria} y la flecha de fase. Los tres
+codominios son el mismo producto de la
+\cref{def:u006f-esquema-estado}; por tanto su composición está definida y
+conserva todas las coordenadas del estado.
+\end{proof}
+
+\section{Reglas de no identificación}
+
+El inventario impone
+\begin{equation}
+ \mathcal S_4\neq D_4\neq\operatorname{sd}_4,
+ \qquad
+ \mathcal R_{12}\neq C_{12}\neq\Theta_{108}\neq\Gamma_{108},
+ \qquad
+ F_{\rm obs}\neq\mathcal K_{\rm ph},
+ \label{eq:u006f-no-identificacion-uno}
+\end{equation}
+y
+\begin{equation}
+ U_{12}^{\rm cat}\neq U_{12}^{\rm sgn},
+ \qquad
+ \mathcal E_{\rm dod}\neq D_{\rm raw}^{90,120}
+ \neq\mathcal K_{6\to8}.
+ \label{eq:u006f-no-identificacion-dos}
+\end{equation}
+Son incompatibilidades de tipo, no meras desigualdades de valor.
+
+\begin{criterion}[Auditoría de completitud operatoria]
+\label{crit:u006f-completitud}
+Una ejecución es operatoriamente completa sólo si:
+\begin{enumerate}
+ \item declara las entradas de \(\mathfrak O_{\rm TPK}\) empleadas;
+ \item registra el dominio y el codominio de cada composición;
+ \item conserva el orden causal de \eqref{eq:u006f-tuberia};
+ \item distingue dinámica, transferencia, lectura, prolongación y salida;
+ \item permite reconstruir desde \(\lambda_t\) cada cambio de bloque y
+ cada acarreo;
+ \item no promueve una comprobación finita a una sección infinita sin
+ probar no vaciedad, compatibilidad y unicidad a toda profundidad.
+\end{enumerate}
+Cualquier símbolo usado sin tipo o cualquier fusión prohibida por
+\eqref{eq:u006f-no-identificacion-uno} y
+\eqref{eq:u006f-no-identificacion-dos} constituye un fallo verificable.
+\end{criterion}
+
+
+RESIDENCIA HEREDADA ESTADO_ENRIQUECIDO
+
+\chapter{Estado común, árbol de prolongaciones y medida genealógica}
+\label{chap:continuo-estado-arbol-medida-comun}
+
+\begin{thesisbox}[title={Un solo estado enriquecido antes de toda discriminación interna}]
+El objeto de este capítulo es el estado finito completo producido por
+\(\APP\), orientado por TRIT y transportado por \(\TPK\).  A partir de él se
+construyen el grupoide de simetrías reversibles, el árbol de todas las
+prolongaciones admisibles, la multisección de historias completas y su medida
+canónica.  No se introduce ningún dominio especializado: el dominio es el
+conjunto total de estados que efectivamente genera el mismo mecanismo
+\(\APP\)--TRIT--\(\TPK\).  Tampoco se selecciona una hoja, una continuación o
+una lectura posterior.
+\end{thesisbox}
+
+\section{Datos finitos producidos por APP}
+\label{sec:continuo-comun-app-finito}
+
+Para cada profundidad \(k\geq0\), denotamos por \(\mathsf A_k\) el conjunto
+finito de prefijos celulares producidos por APP y por
+\begin{equation}
+\label{eq:continuo-comun-app-truncamiento}
+ \rho^{\APP}_{k+1,k}:\mathsf A_{k+1}\longrightarrow\mathsf A_k
+\end{equation}
+el borrado del último refinamiento.  Este borrado conserva el prefijo ya
+construido.  La célula neutra de APP da una prolongación
+\begin{equation}
+\label{eq:continuo-comun-app-degeneracion}
+ \eta^{\APP}_k:\mathsf A_k\longrightarrow\mathsf A_{k+1},
+ \qquad
+ \rho^{\APP}_{k+1,k}\eta^{\APP}_k=I_{\mathsf A_k}.
+\end{equation}
+Escribimos
+\begin{equation}
+\label{eq:continuo-comun-emision-neutra-app}
+ \varepsilon^0_k(a):a\longrightarrow\eta^{\APP}_k(a)
+\end{equation}
+para la emisión que realiza esa prolongación.  Así se mantienen separados su
+destino, \(\eta^{\APP}_k(a)\), y la operación que lo produce,
+\(\varepsilon^0_k(a)\).
+No se interpreta \(\eta^{\APP}_k\) como ausencia de historia: registra un
+refinamiento de longitud uno con emisión neutra y conserva materialmente el
+estado anterior.
+
+Cada \(a\in\mathsf A_k\) porta simultáneamente las dos hojas de APP,
+\begin{equation}
+\label{eq:continuo-comun-dos-hojas}
+ \operatorname{Sh}_k(a)
+ =\bigl(\Sigma_k(a),\Pi_k(a)\bigr)
+ \in\mathsf H_k^{\Sigma}\times\mathsf H_k^{\Pi},
+\end{equation}
+y no un elemento elegido de la pareja.  Para una emisión elemental
+\(\epsilon:a\to a'\), APP produce además dos divisiones euclídeas tipadas,
+\begin{equation}
+\label{eq:continuo-comun-residuo-cociente-app}
+ \delta^{\diamond}(\epsilon)
+ =\operatorname{res}^{\diamond}(\epsilon)
+  +9\operatorname{quo}^{\diamond}(\epsilon),
+ \qquad
+ \operatorname{res}^{\diamond}(\epsilon)\in\{0,\ldots,8\},
+ \quad
+ \operatorname{quo}^{\diamond}(\epsilon)\in\mathbb Z,
+\end{equation}
+donde \(\diamond\in\{\Sigma,\Pi\}\).  La etiqueta \(\diamond\) sólo señala
+qué hoja se está leyendo; ambas divisiones permanecen en el mismo registro.
+
+La fuente y el destino celulares de \(\epsilon\) determinan su frontera
+orientada
+\begin{equation}
+\label{eq:continuo-comun-frontera-elemental}
+ \partial\epsilon:=t(\epsilon)-s(\epsilon).
+\end{equation}
+La emisión neutra satisface
+\begin{equation}
+\label{eq:continuo-comun-neutral-app-datos}
+ \operatorname{res}^{\diamond}(\varepsilon^0_k(a))=0,
+ \qquad
+ \operatorname{quo}^{\diamond}(\varepsilon^0_k(a))=0,
+ \qquad
+ \partial\varepsilon^0_k(a)=0.
+\end{equation}
+
+\begin{definition}[Grafo dirigido de emisiones APP]
+\label{def:continuo-comun-grafo-app}
+Sea \(\mathsf E_k(a)\) el conjunto finito de emisiones APP de longitud uno
+que parten de \(a\in\mathsf A_k\).  Conservamos las emisiones con
+multiplicidad: dos operaciones con el mismo destino pero con distinto
+residuo, cociente o procedencia son elementos diferentes de
+\(\mathsf E_k(a)\).  Por \eqref{eq:continuo-comun-app-degeneracion},
+\begin{equation}
+\label{eq:continuo-comun-out-no-vacio-app}
+ \varepsilon^0_k(a)\in\mathsf E_k(a),
+ \qquad
+ 1\leq \#\mathsf E_k(a)<\infty.
+\end{equation}
+\end{definition}
+
+\section{Levantamiento TRIT: orientación y acarreo genealógico producidos}
+\label{sec:continuo-comun-trit-lift}
+
+La incidencia firmada de una emisión APP es un entero
+\(\Delta(\epsilon)\).  El representante equilibrado módulo tres da de forma
+única
+\begin{equation}
+\label{eq:continuo-comun-trit-euclid}
+ \Delta(\epsilon)
+ =\operatorname{or}(\epsilon)+3\kappa(\epsilon),
+ \qquad
+ \operatorname{or}(\epsilon)\in\{-1,0,+1\},
+ \quad
+ \kappa(\epsilon)\in\mathbb Z.
+\end{equation}
+Así, la orientación y el carry no son condiciones impuestas a una historia:
+son funciones totales del dato APP.
+
+Para hacer visible la composición, sea
+\(\mathsf C_{\epsilon}:\mathsf M_{s(\epsilon)}\to
+\mathsf M_{t(\epsilon)}\) el transporte de memoria inducido por la emisión.
+El carry nativo de una composición cumple
+\begin{equation}
+\label{eq:continuo-comun-cociclo-carry}
+ \kappa(\epsilon_2\epsilon_1)
+ =\kappa(\epsilon_2)
+  +\mathsf C_{\epsilon_2}\kappa(\epsilon_1),
+\end{equation}
+siempre que \(t(\epsilon_1)=s(\epsilon_2)\).  Para la identidad y la emisión
+neutra,
+\begin{equation}
+\label{eq:continuo-comun-carry-unidad}
+ \kappa(I_a)=0,
+ \qquad
+ \kappa(\varepsilon^0_k(a))=0,
+ \qquad
+ \mathsf C_{I_a}=I_{\mathsf M_a}.
+\end{equation}
+
+\begin{lemma}[Asociatividad del ledger de carry]
+\label{lem:continuo-comun-asociatividad-carry}
+Para tres emisiones componibles, la evaluación de
+\(\kappa(\epsilon_3\epsilon_2\epsilon_1)\) no depende del parentizado.
+\end{lemma}
+
+\begin{proof}
+Aplicando dos veces \eqref{eq:continuo-comun-cociclo-carry} al parentizado
+izquierdo se obtiene
+\[
+ \kappa(\epsilon_3)
+ +\mathsf C_{\epsilon_3}\kappa(\epsilon_2)
+ +\mathsf C_{\epsilon_3}\mathsf C_{\epsilon_2}
+  \kappa(\epsilon_1).
+\]
+El parentizado derecho produce la misma expresión porque el transporte de
+memoria es functorial:
+\(\mathsf C_{\epsilon_3\epsilon_2}
+=\mathsf C_{\epsilon_3}\mathsf C_{\epsilon_2}\).
+\end{proof}
+
+La reversión orientada de una emisión reversible se denota
+\(\overline\epsilon\).  TRIT actúa por
+\begin{equation}
+\label{eq:continuo-comun-reversion-trit}
+ \operatorname{or}(\overline\epsilon)
+ =-\operatorname{or}(\epsilon),
+ \qquad
+ \partial\overline\epsilon=-\partial\epsilon,
+ \qquad
+ \mathsf C_{\overline\epsilon}=\mathsf C_\epsilon^{-1}.
+\end{equation}
+El carry inverso queda determinado, no elegido, por
+\begin{equation}
+\label{eq:continuo-comun-carry-inverso}
+ \kappa(\overline\epsilon)
+ =-\mathsf C_\epsilon^{-1}\kappa(\epsilon),
+\end{equation}
+pues \(\kappa(\overline\epsilon\epsilon)=0\).
+
+\section{Transporte TPK de las \(2\) hojas y de la memoria}
+\label{sec:continuo-comun-tpk-transporte}
+
+La cronolog\'ia de TPK forma parte del tipo de cada emisi\'on y no se
+reconstruye a posteriori contando letras. Recuperamos aqu\'i la acci\'on del
+od\'ometro de \cref{def:odometro-9-12,prop:proyeccion-fase-longitud}. Sea
+\begin{equation}
+\label{eq:continuo-comun-ciclo-fase-tpk}
+ C_9:=\mathbb Z/9\mathbb Z,\qquad
+ \widetilde{\mathcal O}_{9}:=\mathbb Z_{\geq0}\times C_9,\qquad
+ \mathcal O_{9,12}:=\mathbb Z/12\mathbb Z\times C_9.
+\end{equation}
+El estado desenrollado de fase y memoria es
+\(\mathsf Q_k=(w_k,r_k)\in\widetilde{\mathcal O}_{9}\); su reducción
+\((w,r)\mapsto([w]_{12},r)\) recupera
+\(\mathcal O_{9,12}\). La semilla canónica del reloj es
+\begin{equation}
+\label{eq:continuo-comun-semilla-fase-tpk}
+ \mathsf Q_0(a_0):=(0,[0]_9)\qquad(a_0\in\mathsf A_0);
+\end{equation}
+las demás elecciones de origen son sus traslaciones coherentes por \(C_9\)
+y no cambian la ley de actualización. Para
+\(\bar r\in\{0,\ldots,8\}\), ponemos
+\begin{equation}
+\label{eq:continuo-comun-carry-fase-tpk}
+ \chi_9(r):=\left\lfloor\frac{\bar r+1}{9}\right\rfloor.
+\end{equation}
+Toda emisión \(\epsilon\) que lleva profundidad \(k\) a profundidad \(k+1\)
+actúa en el odómetro por
+\begin{equation}
+\label{eq:continuo-comun-accion-fase-tpk}
+ \sigma_9(w,r):=(w+\chi_9(r),r+[1]_9),\qquad
+ \mathsf Q_{k+1}(\epsilon_*\widehat x_k)
+ =\sigma_9\mathsf Q_k(\widehat x_k).
+\end{equation}
+Su componente de fase es, por definición tipada,
+\begin{equation}
+\label{eq:continuo-comun-fase-emision-tpk}
+ \operatorname{ph}(\epsilon):r_k\longmapsto r_k+[1]_9,
+ \qquad
+ \operatorname{ph}(\epsilon_n\cdots\epsilon_1):
+ r_k\longmapsto r_k+[n]_9.
+\end{equation}
+Escribimos \(g_k:=r_k\in C_9\) para la fase publicada y
+\(q^{(9)}_k:=w_k\) para la memoria vertical, y
+\(\beta_k:=[w_k]_{12}\) para su reducción dodecafásica. La iteración de
+\eqref{eq:continuo-comun-accion-fase-tpk} es
+\begin{equation}
+\label{eq:continuo-comun-iteracion-fase-tpk}
+ \sigma_9^n(w,r)=
+ \left(w+\left\lfloor\frac{\bar r+n}{9}\right\rfloor,
+       r+[n]_9\right).
+\end{equation}
+En efecto, los sumandos
+\(\chi_9(r),\chi_9(r+[1]_9),\ldots,\chi_9(r+[n-1]_9)\)
+cuentan exactamente los cruces del representante \(8\) al representante
+\(0\), que son
+\(\lfloor(\bar r+n)/9\rfloor\). En particular,
+\begin{equation}
+\label{eq:continuo-comun-retorno-fase-avance-memoria}
+ \sigma_9^9(w,r)=(w+1,r),\qquad
+ g_{k+9}=g_k,\qquad q^{(9)}_{k+9}=q^{(9)}_k+1.
+\end{equation}
+Incluso la emisión neutra de APP realiza
+\(g_k\mapsto g_{k+1}\): es neutra en residuo, cociente, carry y frontera,
+pero registra que ha ocurrido una extensión. La palabra de fase
+\begin{equation}
+\label{eq:continuo-comun-palabra-fase-tpk}
+ \boldsymbol\tau_k^{(N)}:=(g_k,g_{k+1},\ldots,g_N),
+ \qquad g_{j+1}=g_j+[1]_9,
+\end{equation}
+y la memoria \(q^{(9)}\) tipan por objetos distintos el retorno de fase y
+el cambio de estado.
+
+\subsection{Renovación simultánea de la fibra completa}
+\label{sec:continuo-comun-kph}
+
+El odómetro anterior conserva la cronología de cada extensión. La misma
+vuelta nonádica posee además la realización Markov interna, ya construida
+sobre el catálogo APP--TPK, que renueva simultáneamente las dos coordenadas
+de la fibra completa. Es esencial conservar ambas realizaciones y no
+identificar una arista genérica del árbol con una emisión del catálogo sin
+un mapa de tipado.
+
+\begin{proposition}[Realización Markov interna de la conexión nonádica]
+\label{prop:continuo-comun-kph-heredada}
+\label{pII-full:thm:seleccion-novena-fase}
+Sean el dominio de semillas APP, su emisión observable y sus multiplicidades
+\[
+ T_{\min}:\Omega_{\rm seed}\twoheadrightarrow\mathcal U_6,
+ \qquad
+ m(u):=\#T_{\min}^{-1}(u),
+\]
+y la factorización producida por el TPK
+\[
+ \mathcal U_6\simeq\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S_+|=18,\qquad |\mathcal S_\times|=26.
+\]
+Sobre funciones en \(\mathcal U_6\), las dos esperanzas condicionales actúan
+por
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal S_+}f(s',e),
+ \qquad
+ (E_\times f)(s,e)=\frac1{26}
+ \sum_{e'\in\mathcal S_\times}f(s,e').
+\]
+Para
+\[
+ \tau=(+1,-1,0,+1,-1,0,+1,-1,0),
+ \qquad
+ P_{+1}=E_+,\quad P_{-1}=E_\times,\quad P_0=I,
+\]
+la transferencia de catálogo y su elevación a todas las semillas son
+\begin{align}
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr)
+ &=P_{\tau(r)}(u,v),
+ \label{eq:continuo-comun-kph-catalogo}\\
+ L_0(\omega,\omega')&=\mathbf1_{\{\omega=\omega'\}},\nonumber\\
+ L_+(\omega,\omega')
+ &=\frac{E_+(T_{\min}\omega,T_{\min}\omega')}
+         {m(T_{\min}\omega')},\nonumber\\
+ L_\times(\omega,\omega')
+ &=\frac{E_\times(T_{\min}\omega,T_{\min}\omega')}
+         {m(T_{\min}\omega')},\nonumber\\
+ \widehat{\mathcal K}_{\rm ph}
+ \bigl((\omega,r),(\omega',r+1)\bigr)
+ &=L_{\tau(r)}(\omega,\omega').
+ \label{eq:continuo-comun-kph-elevada}
+\end{align}
+Para \(u=T_{\min}\omega\), se cumple fase a fase
+\begin{equation}
+\label{eq:continuo-comun-kph-lumpability}
+ \sum_{\omega':\,T_{\min}\omega'=v}
+ \widehat{\mathcal K}_{\rm ph}
+ \bigl((\omega,r),(\omega',r+1)\bigr)
+ =
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr).
+\end{equation}
+En particular,
+\begin{equation}
+\label{eq:continuo-comun-kph-novena-potencia}
+ \boxed{\;
+ \mathcal K_{\rm ph}^{\,9}\big|_r=E_+E_\times,
+ \qquad
+ (E_+E_\times)(u,v)=\frac1{468}.
+ \;}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+En una fase \(+\) o \(\times\), sumar
+\eqref{eq:continuo-comun-kph-elevada} sobre
+\(T_{\min}^{-1}(v)\) cancela exactamente el denominador \(m(v)\); en una
+fase cero, \(L_0\) proyecta a la identidad. Esto demuestra
+\eqref{eq:continuo-comun-kph-lumpability}. Los operadores \(E_+\),
+\(E_\times\) e \(I\) son idempotentes y conmutan, y cada uno aparece tres
+veces en la palabra nonádica. Por tanto
+\[
+ \prod_{r\in C_9}P_{\tau(r)}
+ =E_+^3E_\times^3I^3=E_+E_\times.
+\]
+La composición renueva primero una coordenada de cardinal \(18\) y después
+la otra de cardinal \(26\), de modo que cada destino recibe
+\(1/(18\cdot26)=1/468\).
+\end{proof}
+
+\begin{remark}[Dos realizaciones internas, sin identificación ficticia]
+\label{rem:continuo-comun-kph-no-identificacion-aristas}
+La transferencia \(\mathcal K_{\rm ph}\) es la realización global del
+catálogo completo y \(\sigma_9\) es la acción cronológica sobre cada estado
+del árbol. No se sustituye una por otra. Una igualdad arista a arista
+requeriría un mapa adicional
+\[
+ \operatorname{Cat}_{k,x}:\operatorname{Out}(x)\longrightarrow\mathcal U_6
+\]
+que verificase la correspondiente identidad de suma sobre fibras. Ese mapa
+no se usa en este volumen. La monodromía completa
+\eqref{eq:continuo-comun-kph-novena-potencia} procede del catálogo
+APP--TPK, mientras la genealogía de cada historia permanece en el árbol y
+su ledger.
+\end{remark}
+
+TPK asigna a cada emisión admisible un transporte tipado de la pareja de
+hojas,
+\begin{equation}
+\label{eq:continuo-comun-transporte-hojas}
+ U_\epsilon:
+ \mathsf H_{s(\epsilon)}^{\Sigma}\times
+ \mathsf H_{s(\epsilon)}^{\Pi}
+ \longrightarrow
+ \mathsf H_{t(\epsilon)}^{\Sigma}\times
+ \mathsf H_{t(\epsilon)}^{\Pi},
+\end{equation}
+con
+\begin{equation}
+\label{eq:continuo-comun-transporte-hojas-funtorial}
+ U_{I_a}=I,
+ \qquad
+ U_{\epsilon_2\epsilon_1}=U_{\epsilon_2}U_{\epsilon_1}.
+\end{equation}
+El codominio de \(U_\epsilon\) sigue siendo la pareja completa.  Ninguna
+operación de este capítulo sustituye
+\((\Sigma,\Pi)\) por una de sus coordenadas.
+
+Sea \(m\in\mathsf M_{s(\epsilon)}\) una memoria acumulada.  La acción TPK
+sobre ella es la transformación afín
+\begin{equation}
+\label{eq:continuo-comun-accion-memoria}
+ \mathsf U_\epsilon(m)
+ :=\mathsf C_\epsilon m+\kappa(\epsilon).
+\end{equation}
+
+\begin{lemma}[Acción TPK sobre memoria]
+\label{lem:continuo-comun-accion-memoria}
+Las transformaciones \(\mathsf U_\epsilon\) satisfacen
+\begin{equation}
+\label{eq:continuo-comun-accion-memoria-composicion}
+ \mathsf U_{I_a}=I,
+ \qquad
+ \mathsf U_{\epsilon_2\epsilon_1}
+ =\mathsf U_{\epsilon_2}\mathsf U_{\epsilon_1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+La identidad se sigue de \eqref{eq:continuo-comun-carry-unidad}.  Para la
+composición,
+\begin{align*}
+ \mathsf U_{\epsilon_2}\mathsf U_{\epsilon_1}(m)
+ &=\mathsf C_{\epsilon_2}
+   \bigl(\mathsf C_{\epsilon_1}m+\kappa(\epsilon_1)\bigr)
+   +\kappa(\epsilon_2)\\
+ &=\mathsf C_{\epsilon_2\epsilon_1}m
+   +\kappa(\epsilon_2)
+   +\mathsf C_{\epsilon_2}\kappa(\epsilon_1)\\
+ &=\mathsf C_{\epsilon_2\epsilon_1}m
+   +\kappa(\epsilon_2\epsilon_1),
+\end{align*}
+donde la última igualdad es
+\eqref{eq:continuo-comun-cociclo-carry}.
+\end{proof}
+
+Una ruta finita es una palabra componible
+\begin{equation}
+\label{eq:continuo-comun-ruta}
+ \gamma=\epsilon_1\epsilon_2\cdots\epsilon_k.
+\end{equation}
+Su frontera, transporte, carry y memoria son
+\begin{align}
+ \partial\gamma
+ &:=\sum_{j=1}^{k}\partial\epsilon_j,
+ \label{eq:continuo-comun-frontera-ruta}\\
+ U_\gamma
+ &:=U_{\epsilon_k}\cdots U_{\epsilon_1},
+ \label{eq:continuo-comun-transporte-ruta}\\
+ \kappa(\gamma)
+ &:=\kappa(\epsilon_k)
+   +\sum_{j=1}^{k-1}
+    \mathsf C_{\epsilon_k}\cdots\mathsf C_{\epsilon_{j+1}}
+    \kappa(\epsilon_j),
+ \label{eq:continuo-comun-carry-ruta}\\
+ m(\gamma;m_0)
+ &:=\mathsf U_{\epsilon_k}\cdots
+       \mathsf U_{\epsilon_1}(m_0).
+ \label{eq:continuo-comun-memoria-ruta}
+\end{align}
+En \eqref{eq:continuo-comun-frontera-ruta}, los extremos interiores se
+cancelan y queda
+\begin{equation}
+\label{eq:continuo-comun-frontera-telescopica}
+ \partial\gamma=t(\epsilon_k)-s(\epsilon_1).
+\end{equation}
+
+\section{El estado común y su dominio total}
+\label{sec:continuo-comun-estado-total}
+
+\begin{definition}[Ledger elemental]
+\label{def:continuo-comun-ledger-elemental}
+Para una emisión que aparece entre dos prefijos enriquecidos consecutivos,
+denotamos por
+\(\mathsf Q^-(\epsilon)=(w^-(\epsilon),r^-(\epsilon))\) el odómetro del
+prefijo fuente y por
+\begin{equation}
+\label{eq:continuo-comun-ledger-fase-extremos}
+ \mathsf Q^+(\epsilon):=\sigma_9\mathsf Q^-(\epsilon)
+ =(w^-(\epsilon)+\chi_9(r^-(\epsilon)),r^-(\epsilon)+[1]_9)
+\end{equation}
+el del prefijo destino. Así no se aplica el odómetro a una célula APP
+desnuda. El registro de la emisión es
+\begin{equation}
+\label{eq:continuo-comun-ledger-elemental}
+ \lambda(\epsilon):=\bigl(
+ s(\epsilon),t(\epsilon),
+ \operatorname{res}^{\Sigma}(\epsilon),
+ \operatorname{quo}^{\Sigma}(\epsilon),
+ \operatorname{res}^{\Pi}(\epsilon),
+ \operatorname{quo}^{\Pi}(\epsilon),
+ \operatorname{or}(\epsilon),
+ \kappa(\epsilon),
+ \partial\epsilon,
+ \mathsf Q^-(\epsilon),\mathsf Q^+(\epsilon)\bigr).
+\end{equation}
+El ledger de \(\gamma\) es la palabra ordenada
+\begin{equation}
+\label{eq:continuo-comun-ledger-ruta}
+ \operatorname{Led}(\gamma)
+ :=\bigl(\lambda(\epsilon_1),\ldots,
+          \lambda(\epsilon_k)\bigr).
+\end{equation}
+Conservar esta palabra, y no sólo su suma, distingue dos historias con la
+misma salida terminal.
+\end{definition}
+
+\subsection{Lector completo del estado TPK}
+\label{sec:continuo-comun-lector-estado-tpk}
+
+La profundidad \(K\) de bloques TPK y la profundidad \(k\) del árbol de
+extensiones son tipos distintos. En esta subsección \(K\) denota
+exclusivamente la profundidad del estado TPK ya generado por el mecanismo
+operatorio; no se identifica con \(k\) ni con una arista genérica.
+
+\begin{definition}[Lector compacto de memoria nonádica]
+\label{def:continuo-comun-lector-compacto-nonadico}
+El estado enriquecido TPK de profundidad \(K\) es
+\begin{equation}
+\label{eq:continuo-comun-estado-tpk-completo}
+ v_K=
+ \bigl(
+ B_K,\boldsymbol\delta_K,\boldsymbol x_K,
+ \boldsymbol{\mathcal C}_K,\Sigma_K,
+ \omega_K,\ell_K,g(K),\Lambda_K
+ \bigr),
+ \qquad
+ B_K=(u_K^\pi,u_K^e,u_K^\varphi).
+\end{equation}
+Su lector compacto no añade coordenadas: las publica desde ese mismo estado,
+\begin{equation}
+\label{eq:continuo-comun-lector-compacto-nonadico}
+ \mathfrak r_9(v_K)
+ :=\bigl(B_K,C_K,p_K,c_K,\Sigma_K,W_K,g(K)\bigr),
+\end{equation}
+donde
+\begin{equation}
+\label{eq:continuo-comun-lector-compacto-componentes}
+\begin{aligned}
+ C_K&:=\boldsymbol{\mathcal C}_K
+      =\bigl(C_K^\chi\bigr)_{\chi\in\{\pi,e,\varphi\}},\\
+ C_K^\chi&:=(N_K^\chi,L_K^\chi,r_K^\chi,
+             D_K^\chi,A_K^\chi,B_K^\chi),\\
+ p_K&:=(B_0,\ldots,B_K),\\
+ c_K&:=(\boldsymbol\delta_K,\boldsymbol x_K,
+       \kappa(\gamma^{\rm TPK}_{0:K})),
+\end{aligned}
+\end{equation}
+y la sombra orientada de Witt se conserva como
+\begin{equation}
+\label{eq:continuo-comun-sombra-witt}
+ W_K:=
+ \bigl((u_K^\chi,u_K^\chi A_W)\bigr)_
+       {\chi\in\{\pi,e,\varphi\}},
+ \qquad
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix},
+ \qquad A_W^2=-I_6.
+\end{equation}
+La ruta \(\gamma^{\rm TPK}_{0:K}\) es la palabra de extensiones codificada
+por \(\Lambda_K\); su prefijo de longitud \(j\) es el que produce
+\(v_j\). La firma es la salida de la primitiva interna explícita
+\begin{equation}
+\label{eq:continuo-comun-primitiva-firma-tpk}
+ \Sigma_B:
+ \mathsf B_{\rm TPK}\times\mathsf C_{\rm TPK}
+ \times\mathbb Z[\mathsf A]\times\Omega_{12}\times\mathsf L_{\rm TPK}
+ \longrightarrow\mathsf S_{\rm TPK},
+ \quad
+ (B,c,\partial\gamma,\omega,\ell)\longmapsto
+ \Sigma_B(B,c,\partial\gamma,\omega,\ell),
+\end{equation}
+con \(\Sigma_B(g\cdot-)=g\cdot\Sigma_B(-)\) para cada simetría TPK. Su
+estructura de partida explícita es
+\((B_K,c_K,\partial\gamma^{\rm TPK}_{0:K},\omega_K,\ell_K)\). No se la reemplaza por una
+firma exterior ni se infiere retrospectivamente desde un lector numérico.
+\end{definition}
+
+La acción del paso \(K\mapsto K+1\) se escribe sin omitir el estado profundo.
+Para cada \(\chi\in\{\pi,e,\varphi\}\),
+\begin{equation}
+\label{eq:continuo-comun-update-hensel-tpk}
+ y_K^\chi=x_K^\chi A_H,\qquad
+ u_{K+1}^\chi=y_K^\chi\bmod3,\qquad
+ x_{K+1}^\chi=\frac{y_K^\chi-u_{K+1}^\chi}{3},
+\end{equation}
+con
+\[
+ A_H=
+ \begin{pmatrix}
+ 2&2&2&1&2&1\\
+ 2&1&2&2&1&1\\
+ 1&0&0&1&0&2\\
+ 0&0&1&1&1&0\\
+ 2&2&2&0&2&1\\
+ 2&1&2&1&0&0
+ \end{pmatrix},
+ \qquad \det A_H=1.
+\]
+Si
+\[
+ \operatorname{ind}_3(u_1,\ldots,u_6)
+ :=\sum_{j=1}^{6}\overline u_j\,3^{6-j}
+ \in\{0,\ldots,728\},
+\]
+la actualización del prefijo y de sus \(729\) subcilindros es
+\begin{align}
+ N_{K+1}^\chi
+ &=729N_K^\chi+\operatorname{ind}_3(u_{K+1}^\chi),
+ &L_{K+1}^\chi&=L_K^\chi+6,
+ \label{eq:continuo-comun-update-cilindro-indice}\\
+ I_{K,u}^\chi
+ &:=
+ \left[
+  \frac{729N_K^\chi+u}{3^{L_K^\chi+6}},
+  \frac{729N_K^\chi+u+1}{3^{L_K^\chi+6}}
+ \right),
+ &0&\leq u<729.
+ \label{eq:continuo-comun-update-cilindro-intervalo}
+\end{align}
+El cilindro decimal y el acarreo asociado se actualizan por los dos casos
+enteros del mismo operador \(\mathcal C_{3,1000}\). Si no se publica una
+nueva tríada decimal,
+\begin{equation}
+\label{eq:continuo-comun-update-cilindro-sin-triada}
+ r_{K+1}^\chi=r_K^\chi,\qquad D_{K+1}^\chi=D_K^\chi,\qquad
+ A_{K+1}^\chi=729A_K^\chi+
+ \operatorname{ind}_3(u_{K+1}^\chi)1000^{r_K^\chi},\qquad
+ B_{K+1}^\chi=A_{K+1}^\chi+1000^{r_K^\chi}.
+\end{equation}
+La primitiva \(\mathcal C_{3,1000}\) produce el dato opción
+\[
+ d_{K+1,\chi}^{\rm dec}\in
+ \{\bot\}\sqcup\{0,\ldots,999\};
+\]
+en el primer caso vale \(d_{K+1,\chi}^{\rm dec}=\bot\). Si aparece una
+tríada, escribimos
+\(d_{K+1,\chi}^{\rm dec}=\delta_{K+1}^\chi\in\{0,\ldots,999\}\) y
+\begin{equation}
+\label{eq:continuo-comun-update-cilindro-con-triada}
+ \begin{aligned}
+ r_{K+1}^\chi&=r_K^\chi+1,\qquad
+ D_{K+1}^\chi=1000D_K^\chi+\delta_{K+1}^\chi,\\
+ A_{K+1}^\chi&=729000A_K^\chi
+ +\operatorname{ind}_3(u_{K+1}^\chi)1000^{r_K^\chi+1}
+ -729\delta_{K+1}^\chi3^{L_K^\chi},\\
+ B_{K+1}^\chi&=A_{K+1}^\chi+1000^{r_K^\chi+1}.
+ \end{aligned}
+\end{equation}
+El registro \(\boldsymbol\delta_{K+1}\) añade esas tríadas y los dos
+cociclos conjuntos
+\begin{equation}
+\label{eq:continuo-comun-update-triadas-carry-conjunto}
+ \begin{gathered}
+ q_{K+1}=(u_{K+1}^\pi+u_{K+1}^e+u_{K+1}^\varphi)\bmod3,
+ \quad
+ c_{K+1}^{\rm joint}=\frac{u_{K+1}^\pi+u_{K+1}^e+u_{K+1}^\varphi-q_{K+1}}3,\\
+ a_{K+1}=(u_{K+1}^\pi+u_{K+1}^e-u_{K+1}^\varphi)\bmod3,
+ \quad
+ h_{K+1}^{\rm joint}=\frac{u_{K+1}^\pi+u_{K+1}^e-u_{K+1}^\varphi-a_{K+1}}3,\\
+ \boldsymbol\delta_{K+1}
+ =\boldsymbol\delta_K\star
+ \bigl((d_{K+1,\chi}^{\rm dec})_\chi,
+       c_{K+1}^{\rm joint},h_{K+1}^{\rm joint}\bigr).
+ \end{gathered}
+\end{equation}
+Así \(C_{K+1}\), \(\boldsymbol\delta_{K+1}\) y
+\(\boldsymbol x_{K+1}\) tienen acciones materiales, no sólo nombres.
+Las demás coordenadas se actualizan simultáneamente por
+\begin{align}
+ p_{K+1}&=p_K\star B_{K+1},
+ \label{eq:continuo-comun-update-prefijo-tpk}\\
+ \kappa(\gamma^{\rm TPK}_{0:K+1})
+ &=\kappa(\varepsilon^{\rm TPK}_{K+1})
+   +\mathsf C_{\varepsilon^{\rm TPK}_{K+1}}
+    \kappa(\gamma^{\rm TPK}_{0:K}),
+ \label{eq:continuo-comun-update-carry-lector-tpk}\\
+ c_{K+1}^{\rm comp}
+ &:=(\boldsymbol\delta_{K+1},\boldsymbol x_{K+1},
+       \kappa(\gamma^{\rm TPK}_{0:K+1})),
+ \label{eq:continuo-comun-update-carry-compacto-tpk}\\
+ \Sigma_{K+1}
+ &=\Sigma_B\bigl(
+ B_{K+1},c_{K+1}^{\rm comp},
+ \partial\gamma^{\rm TPK}_{0:K}
+ +\partial\varepsilon^{\rm TPK}_{K+1},
+ \omega_{K+1},\ell_{K+1}\bigr),
+ \label{eq:continuo-comun-update-firma-tpk}\\
+ W_{K+1}
+ &=\bigl((u_{K+1}^\chi,u_{K+1}^\chi A_W)\bigr)_\chi,
+ &g(K+1)&=g(K)+[1]_9.
+ \label{eq:continuo-comun-update-witt-fase-tpk}
+\end{align}
+Como \(A_H\) es invertible módulo tres y \(A_W^2=-I_6\), las actualizaciones
+residual y de sombra no colapsan bloques distintos. El truncamiento conserva
+las secuencias completas
+\[
+ (B_0,\ldots,B_K),\ (C_0,\ldots,C_K),\
+ (p_0,\ldots,p_K),\ (c_0,\ldots,c_K),\
+ (\Sigma_0,\ldots,\Sigma_K),\ (W_0,\ldots,W_K)
+\]
+y elimina simultáneamente su última entrada. Por ello el lector
+\(\mathfrak r_9\) conmuta con el borrado de un bloque.
+
+\begin{proposition}[Alcance universal y alcance certificado del no reinicio]
+\label{prop:continuo-comun-no-reinicio-alcance}
+En toda vuelta horizontal de nueve pasos se conservan
+\[
+ g(K+9)=g(K),\qquad
+ q_{\rm mem}(K+9)=q_{\rm mem}(K)+1,
+\]
+y el prefijo se prolonga con nueve emisiones, por lo que el estado no se
+reinicia. En la sección conjunta certificada
+\(\chi\in\{\pi,e,\varphi\}\), \(0\leq K<387\), se cumple además
+\begin{equation}
+\label{eq:continuo-comun-no-reinicio-certificado}
+ (p_K,C_K)\neq(p_{K+9},C_{K+9}),\qquad
+ (B_K,\mathbf N_K,W_K)\neq
+ (B_{K+9},\mathbf N_{K+9},W_{K+9}),
+ \qquad
+ \mathbf N_K:=(N_K^\pi,N_K^e,N_K^\varphi).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Las dos identidades universales son la iteración exacta de
+\eqref{eq:continuo-comun-accion-fase-tpk}; el prefijo conserva las nueve
+entradas añadidas por \eqref{eq:continuo-comun-update-prefijo-tpk}. Para la
+sección conjunta, la recurrencia
+\eqref{eq:continuo-comun-update-cilindro-indice} compara los \(387\) pares
+nonádicos de cada uno de los tres canales y produce
+\eqref{eq:continuo-comun-no-reinicio-certificado}; ésta es la afirmación
+certificada en
+\cref{thm:generacion-monodromica-conjunta-rev7}. Finalmente,
+\(u\mapsto(u,uA_W)\) es inyectiva, de modo que el cambio de bloque conserva
+también el cambio de su sombra completa. No se extiende esta última
+desigualdad a una prolongación neutra arbitraria fuera de la sección
+certificada.
+\end{proof}
+
+\begin{definition}[Estado APP--TRIT--TPK de profundidad \(k\)]
+\label{def:continuo-comun-estado}
+Para una ruta \(\gamma=\epsilon_1\cdots\epsilon_k\) que nace en una célula
+APP \(a_0\), el estado enriquecido común es
+\begin{equation}
+\label{eq:continuo-comun-estado}
+ \widehat x_k(\gamma):=\Bigl(
+  a_0,\ldots,a_k;
+  \operatorname{Sh}_0,\ldots,\operatorname{Sh}_k;
+  \mathbf{res}_k,\mathbf{quo}_k;
+  \mathbf{or}_k,\mathbf\kappa_k;
+  \mathsf Q_k;g_k;q^{(9)}_k;\beta_k;m_k;\partial\gamma;\gamma;
+  \operatorname{Led}(\gamma)
+ \Bigr),
+\end{equation}
+donde
+\begin{align*}
+ \mathbf{res}_k
+ &:=\bigl(
+  (\operatorname{res}^{\Sigma}(\epsilon_j),
+   \operatorname{res}^{\Pi}(\epsilon_j))
+  \bigr)_{1\leq j\leq k},\\
+ \mathbf{quo}_k
+ &:=\bigl(
+  (\operatorname{quo}^{\Sigma}(\epsilon_j),
+   \operatorname{quo}^{\Pi}(\epsilon_j))
+  \bigr)_{1\leq j\leq k},\\
+ \mathbf{or}_k
+ &:=\bigl(\operatorname{or}(\epsilon_j)\bigr)_{1\leq j\leq k},
+ \qquad
+ \mathbf\kappa_k
+ :=\bigl(\kappa(\epsilon_j)\bigr)_{1\leq j\leq k},\\
+ m_k&:=m(\gamma;m_0).
+\end{align*}
+Las hojas intermedias se obtienen por
+\(\operatorname{Sh}_{j}=U_{\epsilon_j}\operatorname{Sh}_{j-1}\).
+\end{definition}
+
+La presencia simultánea de la ruta y del ledger impide identificar palabras
+distintas que terminan en la misma célula.  El estado no es una lista de
+cardinales: cada coordenada tiene las ecuaciones de tipo y composición de las
+secciones anteriores.
+
+\begin{definition}[Dominio total de profundidad finita]
+\label{def:continuo-comun-dominio-total}
+Sea
+\begin{equation}
+\label{eq:continuo-comun-dominio-total}
+ \widehat{\mathcal X}^{\rm tot}_k
+ :=\left\{
+  \widehat x_k(\epsilon_1\cdots\epsilon_k):
+  \begin{array}{l}
+   a_0\in\mathsf A_0,\\
+   \epsilon_j\in\mathsf E_{j-1}(a_{j-1}),\\
+   s(\epsilon_j)=a_{j-1},\ t(\epsilon_j)=a_j
+  \end{array}
+ \right\}.
+\end{equation}
+No se añade a \eqref{eq:continuo-comun-dominio-total} ninguna condición de
+una publicación posterior.  Ser un elemento del dominio significa
+exactamente haber sido producido por las acciones totales
+\eqref{eq:continuo-comun-residuo-cociente-app},
+\eqref{eq:continuo-comun-trit-euclid} y
+\eqref{eq:continuo-comun-accion-fase-tpk}--
+\eqref{eq:continuo-comun-accion-memoria}.
+\end{definition}
+
+El truncamiento común borra la última emisión y todas y sólo las entradas del
+ledger que ésta produjo:
+\begin{equation}
+\label{eq:continuo-comun-truncamiento-total}
+ \rho_{k+1,k}:\widehat{\mathcal X}^{\rm tot}_{k+1}
+ \longrightarrow\widehat{\mathcal X}^{\rm tot}_k,
+ \qquad
+ \rho_{k+1,k}\widehat x_{k+1}
+ =\widehat x_k.
+\end{equation}
+Sea \(\varepsilon^0_k(x)\) la emisión neutra
+\eqref{eq:continuo-comun-emision-neutra-app} aplicada al extremo APP de
+\(x\).  La prolongación neutra define
+\begin{equation}
+\label{eq:continuo-comun-seccion-total}
+ \eta_k:\widehat{\mathcal X}^{\rm tot}_k
+ \longrightarrow\widehat{\mathcal X}^{\rm tot}_{k+1},
+ \qquad
+ \eta_k(x):=(\varepsilon^0_k(x))_*x,
+ \qquad
+ \rho_{k+1,k}\eta_k=I.
+\end{equation}
+
+\begin{proposition}[Finitud, no vacuidad y sobreyectividad]
+\label{prop:continuo-comun-total-finito}
+Para todo \(k\), el conjunto
+\(\widehat{\mathcal X}^{\rm tot}_k\) es finito y no vacío, y
+\(\rho_{k+1,k}\) es sobreyectivo.
+\end{proposition}
+
+\begin{proof}
+APP produce un conjunto finito no vacío en profundidad cero.  En cada paso,
+cada estado tiene un conjunto finito de emisiones por
+\eqref{eq:continuo-comun-out-no-vacio-app}; por inducción, sólo hay un número
+finito de palabras de longitud \(k\).  La sucesión de prolongaciones neutras
+produce al menos una palabra de cada longitud.  Finalmente,
+\eqref{eq:continuo-comun-seccion-total} es una inversa por la derecha del
+truncamiento, de modo que éste es sobreyectivo.
+\end{proof}
+
+\section{Grupoide finito de simetrías reversibles}
+\label{sec:continuo-comun-groupoide}
+
+Las operaciones reversibles de APP, TRIT y TPK actúan sobre el estado entero.
+Sea \(\mathsf U\) el grupo de familias coherentes
+\(g=(g_k)_{k\geq0}\) generadas por esas operaciones, donde
+\begin{equation}
+\label{eq:continuo-comun-simetria-coherente}
+ \rho_{k+1,k}g_{k+1}=g_k\rho_{k+1,k},
+ \qquad
+ g_{k+1}\eta_k=\eta_kg_k.
+\end{equation}
+Denotamos por \(\mathsf U_k\) su imagen en
+\(\operatorname{Sym}(\widehat{\mathcal X}^{\rm tot}_k)\).  Esta imagen es
+finita porque actúa sobre un conjunto finito.  La acción de \(g_k\) sobre
+\begin{equation*}
+ \widehat x=(a_{\leq k};\operatorname{Sh}_{\leq k};
+ \mathbf{res},\mathbf{quo};\mathbf{or},\mathbf\kappa;
+ \mathsf Q_k;g_k;q_k^{(9)};\beta_k;m;\partial\gamma;\gamma;
+ \operatorname{Led}(\gamma))
+\end{equation*}
+es
+\begin{equation}
+\label{eq:continuo-comun-accion-reversible}
+\begin{aligned}
+ g_k\cdot\widehat x:=\bigl(&
+ g_k a_{\leq k};
+ U_{g_k}\operatorname{Sh}_{\leq k};
+ \mathbf{res}(g_k\gamma),\mathbf{quo}(g_k\gamma);
+ \mathbf{or}(g_k\gamma),\mathbf\kappa(g_k\gamma);\\
+ &\mathsf Q(g_k\gamma);g(g_k\gamma);q^{(9)}(g_k\gamma);
+ \beta(g_k\gamma);
+ \mathsf U_{g_k}(m);
+ (g_k)_*\partial\gamma;
+ g_k\gamma;
+ \operatorname{Led}(g_k\gamma)\bigr).
+\end{aligned}
+\end{equation}
+Todos los términos del lado derecho se recalculan mediante las reglas APP,
+TRIT y TPK; no se copian como etiquetas independientes.
+
+\begin{definition}[Grupoide de acción común]
+\label{def:continuo-comun-groupoide}
+El grupoide finito de profundidad \(k\) es
+\begin{equation}
+\label{eq:continuo-comun-groupoide}
+ \mathfrak G_k
+ :=\mathsf U_k\ltimes\widehat{\mathcal X}^{\rm tot}_k.
+\end{equation}
+Sus objetos son los estados comunes.  Una flecha
+\((g_k,\widehat x)\) tiene fuente \(\widehat x\), destino
+\(g_k\cdot\widehat x\), identidad \((I,\widehat x)\) e inversa
+\((g_k^{-1},g_k\cdot\widehat x)\).
+\end{definition}
+
+\begin{lemma}[La acción conserva todas las ecuaciones de estado]
+\label{lem:continuo-comun-groupoide-conserva}
+La acción \eqref{eq:continuo-comun-accion-reversible} conserva la pareja de
+hojas, las divisiones APP, la orientación TRIT, el carry, el odómetro de
+fase, la memoria vertical, su reducción dodecafásica, la memoria afín, la
+frontera, la ruta y el ledger, en sus tipos respectivos.  Además,
+\begin{equation}
+\label{eq:continuo-comun-groupoide-accion}
+ I\cdot\widehat x=\widehat x,
+ \qquad
+ (g_{2,k}g_{1,k})\cdot\widehat x
+ =g_{2,k}\cdot(g_{1,k}\cdot\widehat x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Las divisiones APP son únicas, por lo que la acción sobre una emisión
+determina de nuevo sus residuos y cocientes.  La descomposición equilibrada
+\eqref{eq:continuo-comun-trit-euclid} es también única.  La composición del
+carry es asociativa por
+\cref{lem:continuo-comun-asociatividad-carry}; la acción sobre memoria lo es
+por \cref{lem:continuo-comun-accion-memoria}; y la frontera es functorial por
+\eqref{eq:continuo-comun-frontera-telescopica}.  Finalmente, la acción sobre
+la palabra ordenada induce la acción sobre su ledger entrada por entrada.
+La coherencia con el odómetro recalcula \(Q\), \(g\) y \(q^{(9)}\) a partir
+de la ruta transformada y conserva
+\eqref{eq:continuo-comun-accion-fase-tpk}. Estas identidades prueban
+\eqref{eq:continuo-comun-groupoide-accion}.
+\end{proof}
+
+\section{Árbol finito de todas las prolongaciones}
+\label{sec:continuo-comun-arbol}
+
+Para \(x\in\widehat{\mathcal X}^{\rm tot}_k\), sea
+\(\operatorname{Out}(x)\) el conjunto de todas las emisiones TPK admisibles
+de longitud uno desde el extremo de \(x\).  Una emisión pertenece a
+\(\operatorname{Out}(x)\) sólo cuando su acción actualiza conjuntamente todas
+las coordenadas de \eqref{eq:continuo-comun-estado}.  En particular,
+\begin{equation}
+\label{eq:continuo-comun-out-finito}
+ 1\leq d(x):=\#\operatorname{Out}(x)<\infty,
+ \qquad
+ \varepsilon^0_k(x)\in\operatorname{Out}(x).
+\end{equation}
+
+\begin{definition}[Árbol truncado de prolongaciones]
+\label{def:continuo-comun-arbol-finito}
+Dados \(N\geq k\) y
+\(x\in\widehat{\mathcal X}^{\rm tot}_k\), definimos
+\(\mathscr T_{k,N}(x)\) como el árbol enraizado cuyos vértices de altura
+\(j\), \(0\leq j\leq N-k\), son las palabras
+\begin{equation}
+\label{eq:continuo-comun-vertice-arbol}
+ h=(\epsilon_{k+1},\ldots,\epsilon_{k+j}),
+ \qquad
+ \epsilon_{n+1}\in\operatorname{Out}(x_n),
+ \qquad
+ x_{n+1}=(\epsilon_{n+1})_*x_n,
+\end{equation}
+con raíz la palabra vacía.  Una arista añade una emisión al final.  Dos
+palabras que alcanzan el mismo estado terminal siguen siendo vértices
+distintos si sus ledgers difieren.
+\end{definition}
+
+La última condición es esencial: el árbol registra genealogías y no el
+cociente que sólo recuerda el destino.  Su nivel terminal es
+\begin{equation}
+\label{eq:continuo-comun-terminal-finito}
+ \operatorname{Term}_{k,N}(x)
+ :=\{h\in\mathscr T_{k,N}(x):|h|=N-k\}.
+\end{equation}
+Cada \(h\) conserva el estado terminal completo
+\begin{equation}
+\label{eq:continuo-comun-registro-terminal}
+ \operatorname{ter}_{N}(h)
+ :=\bigl(x_N,m_N,\partial(\gamma h),
+          \gamma h,\operatorname{Led}(\gamma h)\bigr).
+\end{equation}
+
+\begin{proposition}[Finitud y no vacuidad a todo horizonte]
+\label{prop:continuo-comun-arbol-finito-no-vacio}
+Para todo \(x\), \(k\) y \(N\geq k\), el árbol
+\(\mathscr T_{k,N}(x)\) es finito y
+\(\operatorname{Term}_{k,N}(x)\neq\varnothing\).
+\end{proposition}
+
+\begin{proof}
+La raíz tiene un número finito y positivo de sucesores por
+\eqref{eq:continuo-comun-out-finito}.  Aplicando el mismo argumento en cada
+nivel se obtiene, por inducción, finitud a todo horizonte finito.  La palabra
+formada por emisiones neutras
+\((\varepsilon^0_k,\varepsilon^0_{k+1},\ldots,
+\varepsilon^0_{N-1})\) es un vértice terminal, por lo que
+el nivel \eqref{eq:continuo-comun-terminal-finito} no es vacío.
+\end{proof}
+
+El borrado de la última emisión define
+\begin{equation}
+\label{eq:continuo-comun-proyeccion-terminal}
+ \pi_{N+1,N}:\operatorname{Term}_{k,N+1}(x)
+ \longrightarrow\operatorname{Term}_{k,N}(x).
+\end{equation}
+
+\begin{lemma}[Sobreyectividad terminal]
+\label{lem:continuo-comun-terminal-sobreyectivo}
+La aplicación \(\pi_{N+1,N}\) es sobreyectiva para todo \(N\geq k\).
+\end{lemma}
+
+\begin{proof}
+Sea \(h\in\operatorname{Term}_{k,N}(x)\), de estado terminal \(v_h\).
+Añadir la emisión \(\varepsilon_N^0(v_h)\) produce
+\(h'\in\operatorname{Term}_{k,N+1}(x)\) y
+\(\pi_{N+1,N}(h')=h\).
+\end{proof}
+
+\section{Conexión nonádica: fase, holonomía y memoria}
+\label{sec:continuo-comun-gamma9-total}
+
+Una palabra de nueve emisiones no se denomina holonomía sólo por tener
+longitud nueve. Primero se conserva la conexión horizontal determinada por
+el funtor de fase. Para \(r\in C_9\), definimos
+\begin{equation}
+\label{eq:continuo-comun-relacion-horizontal-fase}
+ \begin{split}
+ \mathscr R_{r,k}:=\bigl\{
+ (x,\epsilon,\epsilon_*x):\;&
+ x\in\widehat{\mathcal X}^{\rm tot}_k,\quad
+ \epsilon\in\operatorname{Out}(x),\\
+ &\mathsf Q_k(x)=(w,r),\quad
+ \mathsf Q_{k+1}(\epsilon_*x)=\sigma_9(w,r)
+ \bigr\}.
+ \end{split}
+\end{equation}
+La última igualdad no recorta el dominio: es la acción total
+\eqref{eq:continuo-comun-accion-fase-tpk} de toda emisión TPK elemental.
+La conexión transporta simultáneamente hoja, memoria y ledger:
+\begin{equation}
+\label{eq:continuo-comun-conexion-tpk-generador}
+ \nabla_{\rm TPK}(\epsilon):=
+ \bigl(\operatorname{ph}(\epsilon),U_\epsilon,
+       \mathsf U_\epsilon,\lambda(\epsilon)\bigr).
+\end{equation}
+Su composición se calcula mediante
+\eqref{eq:continuo-comun-transporte-hojas-funtorial},
+\eqref{eq:continuo-comun-accion-memoria-composicion} y la concatenación del
+ledger.
+
+El ápice de la vuelta nonádica es ahora el conjunto de lifts horizontales
+fase-compatibles
+\begin{equation}
+\label{eq:continuo-comun-gamma9-apice}
+ \begin{split}
+ \mathsf Z^{\Gamma}_{9,k}:=\coprod_{r\in C_9}\bigl\{
+ (x,\epsilon_1,\ldots,\epsilon_9):\;&x_0=x,\quad
+ x_i=(\epsilon_i)_*x_{i-1},\\
+ &(x_{i-1},\epsilon_i,x_i)
+ \in\mathscr R_{r+i-1,k+i-1},\quad 1\leq i\leq9
+ \bigr\},
+ \end{split}
+\end{equation}
+ donde los subíndices de \(r+i-1\) se leen en \(C_9\). El sumando está
+determinado de forma única por \(r=g_k(x)\), de modo que el coproducto no
+duplica testigos. Los mapas fuente y
+destino son
+\begin{equation}
+\label{eq:continuo-comun-gamma9-span}
+ \widehat{\mathcal X}^{\rm tot}_k
+ \xleftarrow{\ s_{9,k}\ }
+ \mathsf Z^{\Gamma}_{9,k}
+ \xrightarrow{\ t_{9,k}\ }
+ \widehat{\mathcal X}^{\rm tot}_{k+9},
+ \qquad
+ s_{9,k}(x,\boldsymbol\epsilon)=x,\quad
+ t_{9,k}(x,\boldsymbol\epsilon)
+ =(\epsilon_9\cdots\epsilon_1)_*x.
+\end{equation}
+La holonomía relacional es
+\begin{equation}
+\label{eq:continuo-comun-gamma9-relacion}
+ \Gamma_{9,k}:=
+ \{(s_{9,k}z,t_{9,k}z):z\in\mathsf Z^{\Gamma}_{9,k}\}
+ =\operatorname{Hol}_{C_9}(\nabla_{\rm TPK}).
+\end{equation}
+
+\begin{lemma}[El nivel nueve del árbol realiza la holonomía]
+\label{lem:continuo-comun-gamma9-arbol}
+La aplicación que olvida los estados intermedios ya determinados por las
+emisiones induce una biyección
+\begin{equation}
+\label{eq:continuo-comun-gamma9-apice-arbol}
+ \mathsf Z^{\Gamma}_{9,k}
+ \xrightarrow{\ \cong\ }
+ \coprod_{x\in\widehat{\mathcal X}^{\rm tot}_k}
+ \operatorname{Term}_{k,k+9}(x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Cada arista de \(\operatorname{Out}(x_i)\) satisface
+\eqref{eq:continuo-comun-accion-fase-tpk}; por ello una palabra terminal de
+longitud nueve determina los nueve elementos de
+\eqref{eq:continuo-comun-relacion-horizontal-fase}. Recíprocamente, un lift
+horizontal de \eqref{eq:continuo-comun-gamma9-apice} es una palabra
+componible del árbol. Las dos operaciones conservan las emisiones y son
+inversas. Así \eqref{eq:continuo-comun-gamma9-apice-arbol} es un teorema
+derivado de la conexión, no la definición de ésta.
+\end{proof}
+
+\begin{proposition}[Retorno de fase, avance de memoria y no reinicio]
+\label{prop:continuo-comun-gamma9-retorno-memoria}
+Para todo \(z=(x,\epsilon_1,\ldots,\epsilon_9)\) del ápice,
+\begin{align}
+ g(t_{9,k}z)&=g(s_{9,k}z),
+ \label{eq:continuo-comun-gamma9-retorno-fase}\\
+ q^{(9)}(t_{9,k}z)&=q^{(9)}(s_{9,k}z)+1,
+ \label{eq:continuo-comun-gamma9-avance-memoria}\\
+ \operatorname{Led}(t_{9,k}z)
+ &=\operatorname{Led}(s_{9,k}z)\star
+   \bigl(\lambda(\epsilon_1),\ldots,\lambda(\epsilon_9)\bigr).
+ \label{eq:continuo-comun-gamma9-ledger}
+\end{align}
+En particular, la identificación de fase
+\(g(t_{9,k}z)=g(s_{9,k}z)\) no induce una identificación de estados: tras
+transportar ambos registros al mismo tipo de comparación, sus memorias
+verticales difieren en una unidad. Retorna la fase publicada, no el estado
+enriquecido.
+\end{proposition}
+
+\begin{proof}
+Las dos primeras identidades son
+\eqref{eq:continuo-comun-retorno-fase-avance-memoria}. La tercera es la
+definición de concatenación del ledger. Como la memoria vertical difiere en
+una unidad, los estados completos son distintos aunque alguna coordenada
+visible adicional pudiera coincidir.
+\end{proof}
+
+\begin{proposition}[Compresión isométrica de la misma holonomía]
+\label{prop:continuo-comun-gamma9-compresion-isometrica}
+Sea \(U_{\Gamma_9}:\mathcal H_{\rm full}\to\mathcal H_{\rm full}\) una
+realización isométrica de la holonomía anterior y sea
+\(J:\mathcal H_{\rm vis}\to\mathcal H_{\rm full}\) la inclusión isométrica
+del registro visible, con \(E:=J^*\) y \(P:=JE\). Definimos
+\begin{equation}
+\label{eq:continuo-comun-gamma9-compresion-datos}
+ T:=EU_{\Gamma_9}J,\qquad
+ \eta:=(I-P)U_{\Gamma_9}J.
+\end{equation}
+Entonces
+\begin{equation}
+\label{eq:continuo-comun-gamma9-compresion}
+ \boxed{\;
+ U_{\Gamma_9}J=JT+\eta,\qquad
+ I-T^*T=\eta^*\eta.
+ \;}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Insertando \(I=P+(I-P)\) delante de \(U_{\Gamma_9}J\) se obtiene
+\[
+ U_{\Gamma_9}J
+ =JEU_{\Gamma_9}J+(I-P)U_{\Gamma_9}J
+ =JT+\eta.
+\]
+Los dos sumandos pertenecen a subespacios ortogonales. Como
+\(U_{\Gamma_9}\) y \(J\) son isometrías,
+\[
+ I=(U_{\Gamma_9}J)^*(U_{\Gamma_9}J)
+   =T^*T+\eta^*\eta,
+\]
+que es la segunda identidad.
+\end{proof}
+
+\begin{proposition}[Totalidad y equivariancia de la holonomía]
+\label{prop:continuo-comun-gamma9-total-natural}
+El mapa \(s_{9,k}\) es sobreyectivo. Las nueve prolongaciones neutras forman
+la sección
+\begin{equation}
+\label{eq:continuo-comun-gamma9-seccion-neutra}
+ \begin{gathered}
+ x_0:=x,\qquad
+ \varepsilon^0_{k+i}:=\varepsilon^0_{k+i}(x_i),\qquad
+ x_{i+1}:=(\varepsilon^0_{k+i})_*x_i\quad(0\leq i<9),\\
+ \eta^{(9)}_k(x):=
+ (x,\varepsilon^0_k,\ldots,\varepsilon^0_{k+8})
+ \in\mathsf Z^{\Gamma}_{9,k},
+ \qquad s_{9,k}\eta^{(9)}_k=I.
+ \end{gathered}
+\end{equation}
+Toda simetría coherente \(a\) cuya acción en el odómetro satisface
+\(\mathsf Q\,a=\bar a\,\mathsf Q\) y
+\(\bar a\,\sigma_9=\sigma_9\,\bar a\) induce
+\[
+ a^Z(x,\epsilon_1,\ldots,\epsilon_9)
+ :=(a x,a\epsilon_1,\ldots,a\epsilon_9)
+\]
+y verifica
+\begin{equation}
+\label{eq:continuo-comun-gamma9-naturalidad}
+ s_{9,k}a^Z=a_ks_{9,k},
+ \qquad
+ t_{9,k}a^Z=a_{k+9}t_{9,k}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La palabra neutra existe en toda fuente y satisface la acción de fase
+\eqref{eq:continuo-comun-accion-fase-tpk}; esto prueba la sección y la
+sobreyectividad. La condición
+\(\bar a\sigma_9=\sigma_9\bar a\) envía relaciones horizontales a relaciones
+horizontales. Actuar entrada por entrada conserva composición, carry,
+memoria, frontera y ledger; leer el primer o el último estado antes o después
+de actuar da \eqref{eq:continuo-comun-gamma9-naturalidad}.
+\end{proof}
+
+\section{Supervivencia total y multisección completa}
+\label{sec:continuo-comun-supervivencia}
+
+\begin{definition}[Supervivencia producida]
+\label{def:continuo-comun-supervivencia}
+Un estado \(x\in\widehat{\mathcal X}^{\rm tot}_k\) sobrevive cuando
+\begin{equation}
+\label{eq:continuo-comun-supervivencia}
+ \operatorname{Term}_{k,N}(x)\neq\varnothing
+ \qquad\text{para todo }N\geq k.
+\end{equation}
+Denotamos por \(\operatorname{Surv}_k\) el conjunto de tales estados.
+\end{definition}
+
+\begin{theorem}[El dominio total es superviviente]
+\label{thm:continuo-comun-total-superviviente}
+Para toda profundidad,
+\begin{equation}
+\label{eq:continuo-comun-surv-igual-total}
+ \operatorname{Surv}_k=\widehat{\mathcal X}^{\rm tot}_k.
+\end{equation}
+En particular, la supervivencia no define un subconjunto supuesto antes de
+construir el estado.
+\end{theorem}
+
+\begin{proof}
+La inclusión \(\operatorname{Surv}_k\subseteq
+\widehat{\mathcal X}^{\rm tot}_k\) pertenece a la definición.  La inclusión
+opuesta es exactamente la no vacuidad a todo horizonte probada en
+\cref{prop:continuo-comun-arbol-finito-no-vacio}.
+\end{proof}
+
+\begin{definition}[Multisección de prolongaciones completas]
+\label{def:continuo-comun-multiseccion}
+La multisección completa sobre \(x\) es el límite inverso
+\begin{equation}
+\label{eq:continuo-comun-multiseccion}
+ \operatorname{Msect}(x)
+ :=\varprojlim_{N\geq k}
+ \bigl(\operatorname{Term}_{k,N}(x),\pi_{N+1,N}\bigr).
+\end{equation}
+Sus elementos son todas las historias infinitas compatibles que prolongan
+\(x\).  Ninguna de ellas recibe prioridad dentro de
+\eqref{eq:continuo-comun-multiseccion}.
+\end{definition}
+
+\begin{theorem}[No vacuidad material de la multisección]
+\label{thm:continuo-comun-multiseccion-no-vacia}
+Para todo \(x\in\widehat{\mathcal X}^{\rm tot}_k\),
+\begin{equation}
+\label{eq:continuo-comun-multiseccion-no-vacia}
+ \operatorname{Msect}(x)\neq\varnothing.
+\end{equation}
+Además, cada coordenada finita de una historia de
+\(\operatorname{Msect}(x)\) conserva las dos hojas, orientación, carry,
+memoria, frontera, ruta y ledger del estado que prolonga.
+\end{theorem}
+
+\begin{proof}
+Los conjuntos terminales son finitos y no vacíos por
+\cref{prop:continuo-comun-arbol-finito-no-vacio}, y sus aplicaciones de
+enlace son sobreyectivas por
+\cref{lem:continuo-comun-terminal-sobreyectivo}.  Se puede construir un
+elemento compatible recursivamente: se comienza en la raíz y, en cada paso,
+se conserva una prolongación del prefijo anterior.  La prolongación neutra
+garantiza que el proceso nunca se detenga.  La compatibilidad de las
+coordenadas se sigue de que cada arista del árbol actúa mediante la única
+acción de estado definida en
+\eqref{eq:continuo-comun-estado}.
+\end{proof}
+
+\section{Medida canónica generada por el árbol}
+\label{sec:continuo-comun-medida}
+
+La medida no se introduce como un peso exterior sobre las salidas.  Se obtiene
+contando las emisiones admisibles en cada vértice antes de elegir una
+continuación.
+
+\begin{definition}[Peso local y medida de horizonte]
+\label{def:continuo-comun-medida-finita}
+Para \(v\in\widehat{\mathcal X}^{\rm tot}_j\) y
+\(\epsilon\in\operatorname{Out}(v)\), ponemos
+\begin{equation}
+\label{eq:continuo-comun-peso-local}
+ p_v(\epsilon):=\frac{1}{d(v)}\in\mathbb Q_{>0}.
+\end{equation}
+Si
+\(h=(\epsilon_{k+1},\ldots,\epsilon_N)\in
+\operatorname{Term}_{k,N}(x)\) y \(x_j\) es el prefijo que precede a
+\(\epsilon_{j+1}\), definimos
+\begin{equation}
+\label{eq:continuo-comun-medida-horizonte}
+ \mu_{x,N}(h)
+ :=\prod_{j=k}^{N-1}p_{x_j}(\epsilon_{j+1})
+ =\prod_{j=k}^{N-1}\frac{1}{d(x_j)}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Normalización]
+\label{lem:continuo-comun-medida-normalizada}
+Para todo horizonte \(N\geq k\),
+\begin{equation}
+\label{eq:continuo-comun-medida-suma-uno}
+ \sum_{h\in\operatorname{Term}_{k,N}(x)}\mu_{x,N}(h)=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+En altura uno,
+\(\sum_{\epsilon\in\operatorname{Out}(x)}d(x)^{-1}=1\).  Supuesta la
+normalización a altura \(N-k\), cada prefijo terminal \(h\), de estado final
+\(v_h\), aporta en el nivel siguiente
+\[
+ \sum_{\epsilon\in\operatorname{Out}(v_h)}
+ \mu_{x,N}(h)p_{v_h}(\epsilon)
+ =\mu_{x,N}(h).
+\]
+Sumar sobre todos los prefijos prueba la identidad por inducción.
+\end{proof}
+
+\begin{proposition}[Consistencia proyectiva]
+\label{prop:continuo-comun-medida-consistente}
+Las medidas finitas satisfacen
+\begin{equation}
+\label{eq:continuo-comun-medida-pushforward}
+ (\pi_{N+1,N})_*\mu_{x,N+1}=\mu_{x,N}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Para \(h\in\operatorname{Term}_{k,N}(x)\), la masa de su fibra es
+\begin{align*}
+ \sum_{\pi_{N+1,N}(h')=h}\mu_{x,N+1}(h')
+ &=\mu_{x,N}(h)
+   \sum_{\epsilon\in\operatorname{Out}(v_h)}p_{v_h}(\epsilon)\\
+ &=\mu_{x,N}(h).
+\end{align*}
+Ésta es precisamente la igualdad de medidas puntuales que equivale a
+\eqref{eq:continuo-comun-medida-pushforward}.
+\end{proof}
+
+Los cilindros de la multisección son
+\begin{equation}
+\label{eq:continuo-comun-cilindro-msect}
+ [h]_{x,N}
+ :=\{\omega\in\operatorname{Msect}(x):
+       \omega|_N=h\}.
+\end{equation}
+
+\begin{theorem}[Medida canónica de prolongaciones]
+\label{thm:continuo-comun-medida-canonica}
+Existe una única medida de cilindros \(\mu_x\) sobre
+\(\operatorname{Msect}(x)\) tal que
+\begin{equation}
+\label{eq:continuo-comun-medida-cilindro}
+ \mu_x([h]_{x,N})=\mu_{x,N}(h).
+\end{equation}
+Está normalizada, tiene soporte en toda la multisección y se obtiene sólo de
+los conjuntos finitos de prolongaciones APP--TRIT--TPK.
+\end{theorem}
+
+\begin{proof}
+La consistencia de
+\cref{prop:continuo-comun-medida-consistente} hace que
+\eqref{eq:continuo-comun-medida-cilindro} sea independiente del horizonte en
+el que se represente un cilindro.  La normalización procede de
+\cref{lem:continuo-comun-medida-normalizada}.  Dos cilindros o bien son
+disjuntos o bien uno contiene al otro; por tanto, las masas finitas definen
+de manera única una medida aditiva en el álgebra de cilindros.  La
+multisección es un límite de conjuntos finitos discretos y los cilindros
+forman su base compacta; la medida se prolonga de manera única a la
+\(\sigma\)-álgebra generada por ellos.  Finalmente,
+\(p_v(\epsilon)>0\) para toda emisión admisible, de modo que todo cilindro no
+vacío tiene masa positiva y el soporte es la multisección completa.
+\end{proof}
+
+\section{Naturalidad bajo simetrías y truncamientos}
+\label{sec:continuo-comun-naturalidad}
+
+Una familia coherente \(g=(g_j)_{j\geq0}\in\mathsf U\) transporta una
+emisión saliente de profundidad \(j\) mediante
+\begin{equation}
+\label{eq:continuo-comun-accion-out}
+ (g_{j+1},g_j)_*:\operatorname{Out}(x)\longrightarrow
+      \operatorname{Out}(g_j\cdot x),
+ \qquad
+ \epsilon\longmapsto g_{j+1}\epsilon g_j^{-1}.
+\end{equation}
+Las relaciones TPK hacen de \eqref{eq:continuo-comun-accion-out} una biyección
+que conserva multiplicidades.  Actuando en cada entrada se obtiene un
+isomorfismo de árboles
+\begin{equation}
+\label{eq:continuo-comun-isomorfismo-arbol}
+ g_{*,N}:\mathscr T_{k,N}(x)
+ \xrightarrow{\ \cong\ }
+ \mathscr T_{k,N}(g_k\cdot x).
+\end{equation}
+
+\begin{theorem}[Naturalidad del árbol, la multisección y la medida]
+\label{thm:continuo-comun-naturalidad}
+Para toda simetría reversible coherente \(g=(g_j)_{j\geq0}\),
+\begin{align}
+ \pi_{N+1,N}g_{*,N+1}
+ &=g_{*,N}\pi_{N+1,N},
+ \label{eq:continuo-comun-naturalidad-terminal}\\
+ g_*\operatorname{Msect}(x)
+ &=\operatorname{Msect}(g_k\cdot x),
+ \label{eq:continuo-comun-naturalidad-msect}\\
+ (g_{*,N})_*\mu_{x,N}
+ &=\mu_{g_k\cdot x,N},
+ \qquad
+ (g_*)_*\mu_x=\mu_{g_k\cdot x}.
+ \label{eq:continuo-comun-naturalidad-medida}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+La primera igualdad expresa que actuar entrada por entrada y borrar la última
+entrada conmutan.  Al pasar al límite inverso se obtiene
+\eqref{eq:continuo-comun-naturalidad-msect}.  Como
+\eqref{eq:continuo-comun-accion-out} es biyectiva,
+\(d(g_j\cdot v)=d(v)\); por
+\eqref{eq:continuo-comun-medida-horizonte}, una palabra y su imagen tienen el
+mismo peso.  Esto prueba la primera igualdad de medidas de
+\eqref{eq:continuo-comun-naturalidad-medida}.  La segunda se deduce en los
+cilindros mediante \eqref{eq:continuo-comun-medida-cilindro}, y los cilindros
+determinan la medida.
+\end{proof}
+
+Los truncamientos del estado y los del árbol forman asimismo el cuadrado
+\begin{equation}
+\label{eq:continuo-comun-cuadrado-truncamiento}
+\begin{CD}
+ \operatorname{Term}_{k,N+1}(x)
+ @>{\pi_{N+1,N}}>>
+ \operatorname{Term}_{k,N}(x)\\
+ @V{\operatorname{ter}_{N+1}}VV
+ @VV{\operatorname{ter}_{N}}V\\
+ \widehat{\mathcal X}^{\rm tot}_{N+1}
+ @>{\rho_{N+1,N}}>>
+ \widehat{\mathcal X}^{\rm tot}_{N}.
+\end{CD}
+\end{equation}
+La conmutatividad es literal: ambos recorridos borran la última emisión y su
+última entrada de ledger.
+
+\section{Límite inverso \(\widehat\Omega\) de historias completas y estado enriquecido común APP–TRIT–TPK}
+\label{sec:continuo-comun-limite}
+
+Las sobreyecciones \eqref{eq:continuo-comun-truncamiento-total} producen el
+objeto de historias completas
+\begin{equation}
+\label{eq:continuo-comun-omega}
+ \widehat\Omega
+ :=\varprojlim_k
+ \bigl(\widehat{\mathcal X}^{\rm tot}_k,\rho_{k+1,k}\bigr).
+\end{equation}
+Un elemento \(\widehat x=(\widehat x_k)_{k\geq0}\) contiene, en cada
+profundidad, la misma pareja de hojas transportada, las orientaciones y
+acarreos producidos, la memoria acumulada, las fronteras, la ruta y el ledger
+completo.  Su fibra de continuaciones desde cualquier prefijo es
+\(\operatorname{Msect}(\widehat x_k)\), equipada con
+\(\mu_{\widehat x_k}\).
+
+\begin{theorem}[Estado enriquecido común APP--TRIT--TPK]
+\label{thm:continuo-comun-propietario}
+El sistema
+\begin{equation}
+\label{eq:continuo-comun-propietario}
+ \mathfrak C^{\rm gen}:=\Biggl(
+ \begin{aligned}
+ &\{\widehat{\mathcal X}^{\rm tot}_k,\rho_{k+1,k},\eta_k\}_{k\geq0},
+   \widehat\Omega,\{\mathfrak G_k\}_{k\geq0},
+   \{\mathscr T_{k,N}\}_{N\geq k},\\
+ &\operatorname{Msect},\operatorname{Surv},\{\mu_x\},
+   \{\mathfrak r_9(v_K)\}_{K\geq0},
+   \mathcal K_{\rm ph},\widehat{\mathcal K}_{\rm ph},\\
+ &\operatorname{Sh},\operatorname{or},\kappa,
+   \mathsf Q,g,q^{(9)},\beta,m,\partial,\gamma,\operatorname{Led},\\
+ &\{\mathsf Z^\Gamma_{9,k},s_{9,k},t_{9,k},\Gamma_{9,k}\}_{k\geq0}
+ \end{aligned}
+ \Biggr)
+\end{equation}
+está definido para todo estado producido por APP--TRIT--TPK\@.  Es no vacío,
+natural bajo las simetrías reversibles y compatible con refinamiento.  En
+particular:
+\begin{enumerate}
+ \item las dos hojas se transportan juntas;
+ \item orientación y carry se calculan por la división TRIT;
+ \item la memoria obedece la acción afín TPK;
+ \item la fase obedece el odómetro TPK, vuelve tras nueve emisiones y la
+       memoria vertical avanza una unidad;
+ \item la realización Markov de esa vuelta satisface
+       \(\mathcal K_{\rm ph}^9=E_+E_\times\) y renueva uniformemente la
+       fibra completa de \(468=18\cdot26\) emisiones;
+ \item el lector compacto conserva bloque, cilindro, prefijo, carry, firma,
+       sombra de Witt y fase, con sus actualizaciones y truncamientos;
+ \item frontera, ruta y ledger se componen sin borrar los extremos ni el
+       orden de las emisiones;
+ \item todo estado sobrevive y posee una multisección no vacía de
+       prolongaciones completas;
+ \item la medida canónica es proyectiva y tiene soporte en todas esas
+       prolongaciones.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+La totalidad y la finitud proceden de
+\cref{prop:continuo-comun-total-finito}.  Las identidades de hojas, carry y
+memoria están probadas en
+\cref{lem:continuo-comun-asociatividad-carry,lem:continuo-comun-accion-memoria}; la fase, la memoria vertical y la
+holonomía nonádica, incluida su realización de fibra y su lector de estado,
+están probadas en
+\cref{prop:continuo-comun-gamma9-retorno-memoria,prop:continuo-comun-gamma9-total-natural,prop:continuo-comun-kph-heredada,prop:continuo-comun-gamma9-compresion-isometrica,prop:continuo-comun-no-reinicio-alcance}; la frontera conserva sus extremos por
+\eqref{eq:continuo-comun-frontera-telescopica}.  La supervivencia total y la
+no vacuidad de las multisecciones son
+\cref{thm:continuo-comun-total-superviviente,thm:continuo-comun-multiseccion-no-vacia}.  La existencia, consistencia y
+soporte de la medida son
+\cref{prop:continuo-comun-medida-consistente,thm:continuo-comun-medida-canonica}.  Finalmente, la compatibilidad con las
+simetrías y con los truncamientos se demuestra en
+\cref{thm:continuo-comun-naturalidad} y
+\eqref{eq:continuo-comun-cuadrado-truncamiento}.
+\end{proof}
+
+\section{Necesidad estructural y procedencia}
+\label{sec:continuo-comun-falsadores}
+
+\begin{proposition}[Falsadores del estado enriquecido común]
+\label{prop:continuo-comun-falsadores}
+Cualquiera de las operaciones siguientes sustituye
+\(\mathfrak C^{\rm gen}\) por otro objeto y bloquea la transferencia de los
+teoremas anteriores:
+\begin{enumerate}
+ \item elegir \(\Sigma\) o \(\Pi\) y descartar la otra hoja;
+ \item conservar el residuo y borrar el cociente;
+ \item conservar el signo TRIT y borrar su carry;
+ \item reemplazar el ledger ordenado por su valor terminal;
+ \item identificar dos palabras porque alcanzan la misma célula;
+ \item escoger una continuación y sustituir por ella la multisección;
+ \item declarar supervivencia sin exhibir prolongaciones a cada horizonte;
+ \item normalizar uniformemente sólo el último nivel, ignorando los grados de
+       los prefijos y perdiendo la consistencia proyectiva;
+ \item usar una lectura posterior para decidir qué estados entran en
+       \(\widehat{\mathcal X}^{\rm tot}_k\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Los seis primeros puntos eliminan coordenadas o relaciones que aparecen en la
+definición de estado, árbol o multisección.  El séptimo elimina la prueba de
+\cref{thm:continuo-comun-total-superviviente}.  El octavo puede violar
+\eqref{eq:continuo-comun-medida-pushforward} cuando los grados terminales no
+son constantes.  El último cambia el dominio total
+\eqref{eq:continuo-comun-dominio-total} por una selección retrospectiva.
+\end{proof}
+
+Las células APP, la pareja de hojas, el levantamiento TRIT, las extensiones
+TPK, el cociclo de acarreo, la memoria, la frontera, la ruta y la conservación
+del registro constituyen las estructuras de partida. Sobre ellas se reúnen en
+un único dominio el grupoide finito, el árbol de palabras, la multisección y
+la medida local normalizada. Los teoremas de supervivencia total, no vacuidad,
+consistencia y naturalidad certifican esta construcción conjunta.
+
+
+RESIDENCIA HEREDADA ESTRUCTURA_DISCRETA_CONTINUO
+
+\chapter{Operaciones intrínsecas correlativas del mismo continuo}
+\label{chap:pdfv2-operaciones-intrinsecas-correlativas}
+
+\begin{thesisbox}
+Los símbolos \(\mathrm{sp},\mathrm{sol},\mathrm{gau},\mathrm{coh}\) y
+\(\mathrm{det}\) que aparecen en este capítulo marcan cinco operaciones
+correlativas sobre un único estado APP--TRIT--TPK\@. Cada operación recibe
+la misma extensión superviviente, la
+misma orientación, el mismo carry, la misma memoria, la misma frontera y la
+misma ruta. Los apartados siguientes son etapas matemáticas sucesivas de una
+sola construcción y no exposiciones autónomas.
+\end{thesisbox}
+
+\section{Arista generadora y estado genealógico común}
+
+No repetimos aquí el estado, el árbol ni la medida construidos en el capítulo
+anterior. Tomamos
+\(\widehat x=\widehat x_k(\gamma)\in
+\widehat{\mathcal X}^{\rm tot}_k\) de
+\eqref{eq:continuo-comun-estado} y todas sus emisiones admisibles
+\(\alpha\in\operatorname{Out}(\widehat x)\). Si
+\(\widehat y=\alpha_*\widehat x\), escribimos
+\begin{equation}
+\label{eq:pdfv2-cor-hijos-supervivientes}
+ \operatorname{Ch}_k(\widehat x):=
+ \{(\alpha,\alpha_*\widehat x):
+      \alpha\in\operatorname{Out}(\widehat x)\},
+ \qquad
+ d_k(\widehat x):=\#\operatorname{Ch}_k(\widehat x).
+\end{equation}
+La finitud y la no vacuidad de este conjunto son ya
+\eqref{eq:continuo-comun-out-finito}; la supervivencia a todos los horizontes,
+la multisección completa y su medida son
+\cref{thm:continuo-comun-total-superviviente,thm:continuo-comun-multiseccion-no-vacia,thm:continuo-comun-medida-canonica}. No se vuelve a suponer ni a probar una
+segunda no vacuidad.
+
+Cada par \((\alpha,\widehat y)\) de
+\eqref{eq:pdfv2-cor-hijos-supervivientes} conserva el registro único
+\begin{equation}
+\label{eq:pdfv2-cor-registro-extension}
+ \begin{aligned}
+ \mathfrak e_\alpha:=\bigl(&
+ \alpha,\operatorname{Ext}_{\gamma_\alpha};
+ \operatorname{Sh}_{s(\alpha)},\operatorname{Sh}_{t(\alpha)};\\
+ &
+ \operatorname{res}^{\Sigma,\Pi}(\alpha),
+ \operatorname{quo}^{\Sigma,\Pi}(\alpha);\\
+ &\operatorname{or}(\alpha),\kappa(\alpha),\mathsf C_\alpha;
+ \mathsf Q(s(\alpha)),\mathsf Q(t(\alpha)),g(s(\alpha)),g(t(\alpha)),
+ q^{(9)}(s(\alpha)),q^{(9)}(t(\alpha));\\
+ &
+ m(\gamma\alpha;m_0),\partial\alpha,\gamma\alpha,
+ \operatorname{Led}(\gamma\alpha);\\
+ &\{\operatorname{Term}_{k+1,N}(\widehat y)\}_{N\geq k+1},
+ \operatorname{Msect}(\widehat y),\mu_{\widehat y}\bigr).
+ \end{aligned}
+\end{equation}
+Aquí \(\operatorname{Ext}_{\gamma_\alpha}\) nombra la relación completa que
+la emisión admisible ya satisface; no introduce otro filtro. Las operaciones
+posteriores son aplicaciones coordinadas de \(\mathfrak e_\alpha\) y no
+reconstruyen el registro desde sus salidas.
+
+\section{Acciones intrínsecas correlativas sobre el generador común}
+
+Las marcas internas se fijan sin cambiar de fuente:
+\(\mathrm{sp}\) designa transporte y graduación de las dos hojas;
+\(\mathrm{sol}\), incremento firmado, balance y memoria;
+\(\mathrm{gau}\), incidencia y curvatura de carry;
+\(\mathrm{coh}\), puertos, diferencia rectangular y complejo celular; y
+\(\mathrm{det}\), complejo basado, relleno correlativo y línea determinante. Las fórmulas
+siguientes muestran sus acoplamientos sobre el mismo
+\(\mathfrak e_\alpha\); sus acciones comparten literalmente fuente, destino,
+ruta y ledger.
+
+La doble evaluación APP proporciona, sobre el mismo soporte, las etiquetas
+\(\Sigma\) y \(\Pi\). Para una extensión \(\alpha\), sus multiplicidades
+se calculan del ledger completo, sin un contador exterior:
+\begin{equation}
+\label{eq:pdfv2-cor-multiplicidades-hojas}
+ N_\diamond(\alpha):=
+ \sum_{\epsilon\ {\rm en}\ \gamma\alpha}
+ \mathbf1_{\{\operatorname{res}^{\diamond}(\epsilon)\neq0\}},
+ \qquad \diamond\in\{\Sigma,\Pi\}.
+\end{equation}
+Sea además el coeficiente orientado total
+\[
+ \Delta_{\gamma_\alpha}:=
+ \sum_{\epsilon\ {\rm en}\ \gamma\alpha}\operatorname{or}(\epsilon)
+ \in\mathbb Z.
+\]
+La acción firmada es
+\begin{equation}
+\label{eq:pdfv2-cor-b-alpha}
+ b_\alpha:=\Delta_{\gamma_\alpha}
+ \bigl(N_\Sigma(\alpha)-N_\Pi(\alpha)\bigr),
+ \qquad
+ b_\alpha^\pm:=\frac{|b_\alpha|\pm b_\alpha}{2}.
+\end{equation}
+Por construcción,
+\begin{equation}
+\label{eq:pdfv2-cor-b-identidades}
+ b_\alpha=b_\alpha^+-b_\alpha^-,\qquad
+ |b_\alpha|=b_\alpha^++b_\alpha^-,\qquad
+ b_\alpha^+b_\alpha^-=0.
+\end{equation}
+
+El mismo conjunto de extensiones produce simultáneamente los puertos
+\begin{equation}
+\label{eq:pdfv2-cor-puertos-comunes}
+ I_k(\widehat x_k):=
+ \operatorname{Ch}_k(\widehat x_k)\times\{\Sigma\},
+ \qquad
+ J_k(\widehat x_k):=
+ \operatorname{Ch}_k(\widehat x_k)\times\{\Pi\}.
+\end{equation}
+No se supone que una hoja visible contenga más prolongaciones que la otra:
+cada extensión superviviente se evalúa en las dos hojas del mismo soporte.
+Por \eqref{eq:continuo-comun-out-finito}, ambos conjuntos de puertos son no
+vacíos.
+
+Para \(A_N=\mathbb Z/3^N\mathbb Z\), la acción celular sobre generadores es
+\begin{equation}
+\label{eq:pdfv2-cor-kappa-celda}
+ \begin{aligned}
+ \kappa_{k,N}:A_N^{I_k}\oplus A_N^{J_k}
+ &\longrightarrow A_N^{I_k\times J_k},\\
+ \kappa_{k,N}(u,v)_{(\alpha,\Sigma),(\beta,\Pi)}
+ &:=u_{(\alpha,\Sigma)}-v_{(\beta,\Pi)}.
+ \end{aligned}
+\end{equation}
+Elegidos los primeros puertos según el orden TPK, la diferencia rectangular
+\begin{equation}
+\label{eq:pdfv2-cor-delta-celda}
+ \delta(w)_{ij}:=w_{ij}-w_{ij_0}-w_{i_0j}+w_{i_0j_0}
+\end{equation}
+descarga la sucesión escindida
+\begin{equation}
+\label{eq:pdfv2-cor-sucesion-celda}
+ 0\longrightarrow A_N\xrightarrow{\Delta}
+ A_N^{I_k}\oplus A_N^{J_k}
+ \xrightarrow{\kappa_{k,N}}A_N^{I_k\times J_k}
+ \xrightarrow{\delta}A_N^{(|I_k|-1)(|J_k|-1)}
+ \longrightarrow0.
+\end{equation}
+Ésta es una identidad de la misma fibra APP: no añade una celda ajena al
+generador \(\mathfrak e_\alpha\).
+
+La acción celular local usa las dos coordenadas enteras acumuladas por ese
+mismo ledger. Para
+\(\widehat x=\widehat x_k(\gamma)\) y
+\(\widehat y=\alpha_*\widehat x=\widehat x_{k+1}(\gamma\alpha)\), ponemos
+\begin{equation}
+\label{eq:pdfv2-cor-c-v}
+ \begin{aligned}
+ c_{\widehat x}&:=\kappa(\gamma), &
+ c_\alpha:=c_{\widehat y}&:=\kappa(\gamma\alpha),\\
+ v_{\widehat x}&:=\sum_{\epsilon\ {\rm en}\ \gamma}
+                  \operatorname{or}(\epsilon), &
+ v_{\widehat y}&:=\sum_{\epsilon\ {\rm en}\ \gamma\alpha}
+                  \operatorname{or}(\epsilon),\\
+ v_\alpha&:=v_{\widehat y}-v_{\widehat x}
+           =\operatorname{or}(\alpha).&&
+ \end{aligned}
+\end{equation}
+Sobre los generadores \(f,r,e,b,g\) se define
+\begin{equation}
+\label{eq:pdfv2-cor-complejo-local}
+ \partial f=3c_\alpha e+b,\qquad
+ \partial r=0,\qquad
+ \partial e=g,\qquad
+ \partial b=-3c_\alpha g,\qquad
+ \partial g=0.
+\end{equation}
+La cancelación
+\begin{equation}
+\label{eq:pdfv2-cor-dos-cero}
+ \partial^2f=3c_\alpha g-3c_\alpha g=0
+\end{equation}
+es literal y usa el mismo carry con los dos signos impuestos por la
+orientación.
+
+La semilla de incidencia se obtiene del módulo libre de las dos hojas,
+\begin{equation}
+\label{eq:pdfv2-cor-v-tpk}
+ V_{\rm TPK}:=\mathbf F_3e_\Sigma\oplus\mathbf F_3e_\Pi,
+ \qquad
+ \mathscr I:=\mathbf P^1(V_{\rm TPK}),
+ \qquad |\mathscr I|=4,
+\end{equation}
+y de sus pares no ordenados
+\begin{equation}
+\label{eq:pdfv2-cor-incidencias}
+ \mathscr E:=\binom{\mathscr I}{2},
+ \qquad |\mathscr E|=6,
+ \qquad
+ \mathscr B:=\mathscr I\times\{+,-\},
+ \qquad |\mathscr B|=8.
+\end{equation}
+La aplicación de incidencia queda determinada en la base por
+\begin{equation}
+\label{eq:pdfv2-cor-b-incidencia-generadores}
+ B[e_L]=\sum_{L'\neq L}e_{\{L,L'\}},
+ \qquad L\in\mathscr I,
+\end{equation}
+y, por linealidad,
+\begin{equation}
+\label{eq:pdfv2-cor-b-incidencia-coordenadas}
+ (Ba)_{\{L,L'\}}=a_L+a_{L'}.
+\end{equation}
+Si \(s(q)=\sum_{E\in\mathscr E}q_E\), cada \(L\) aparece tres veces y
+\begin{equation}
+\label{eq:pdfv2-cor-sb-cero}
+ s(Ba)=0.
+\end{equation}
+Por tanto la función
+\begin{equation}
+\label{eq:pdfv2-cor-wc}
+ W_c(q):=\mathbf1_{\{s(q)=0\}}-\frac13
+\end{equation}
+satisface \(W_c(q+Ba)=W_c(q)\). Las identidades
+\eqref{eq:pdfv2-cor-v-tpk}--\eqref{eq:pdfv2-cor-wc} son internas y exactas.
+El lift material de \(q\) desde las celdas y los carries comunes se trata en
+la capa de ensamblaje; no se confunde esta identidad de incidencia con la
+construcción de ese lift.
+
+\section{Transporte unitario, polarización y balance sobre la fibra común}
+
+La no vacuidad de \eqref{eq:pdfv2-cor-hijos-supervivientes} permite fijar,
+sin seleccionar una prolongación,
+\begin{equation}
+\label{eq:pdfv2-cor-peso-conteo}
+ p_k(\alpha,\widehat y\mid\widehat x)
+ :=\frac1{d_k(\widehat x)}.
+\end{equation}
+Sea el espacio de las dos hojas del mismo estado
+\begin{equation}
+\label{eq:pdfv2-cor-hilbert-hojas}
+ \mathscr H_k:=
+ \bigoplus_{\widehat x\in\widehat{\mathcal X}^{\rm tot}_k}
+ \bigl(\mathsf H_{\widehat x}^{\Sigma}
+       \oplus\mathsf H_{\widehat x}^{\Pi}\bigr),
+\end{equation}
+y sea \(\iota_{\widehat x}\) la inclusión de la fibra indicada. El transporte
+TPK de \eqref{eq:continuo-comun-transporte-hojas} da la acción exacta
+\begin{equation}
+\label{eq:pdfv2-cor-u-comun}
+ U_k\iota_{\widehat x}v:=
+ \sum_{(\alpha,\widehat y)\in\operatorname{Ch}_k(\widehat x)}
+ p_k(\alpha,\widehat y\mid\widehat x)^{1/2}
+ \iota_{\widehat y}U_\alpha v.
+\end{equation}
+Los hijos de dos padres distintos son disjuntos porque el truncamiento es una
+función. Además, dos testigos \(\alpha\) distintos no colapsan en el mismo
+sumando directo: la ruta completa \(\gamma\), incluido su último paso, es una
+coordenada de \(\widehat y\). En consecuencia, la identidad de Gram es
+\begin{equation}
+\label{eq:pdfv2-cor-u-gram}
+ \left.U_k^*U_k\right|_{\mathsf H_{\widehat x}^{\Sigma}
+       \oplus\mathsf H_{\widehat x}^{\Pi}}
+ =
+ \sum_{(\alpha,\widehat y)\in\operatorname{Ch}_k(\widehat x)}
+ p_k(\alpha,\widehat y\mid\widehat x)\,U_\alpha^*U_\alpha.
+\end{equation}
+Por tanto \(U_k^*U_k=I\) exactamente cuando los transportes de hoja
+\(U_\alpha\) publicados por TPK son isometrías. La normalización de los pesos,
+por sí sola, no puede sustituir esa comprobación.
+Para \(\ell>k\) se conserva la historia completa mediante
+\begin{equation}
+\label{eq:pdfv2-cor-u-iterado}
+ U_{\ell,k}:=U_{\ell-1}\cdots U_k,
+ \qquad U_{k,k}:=I.
+\end{equation}
+
+La graduación actúa sobre las dos coordenadas que ya están presentes en cada
+fibra de \eqref{eq:pdfv2-cor-hilbert-hojas}:
+\begin{equation}
+\label{eq:pdfv2-cor-sigma}
+ \sigma_k\iota_{\widehat x}(v_\Sigma,v_\Pi)
+ :=\iota_{\widehat x}(v_\Sigma,-v_\Pi),
+\qquad
+ P_k:=\frac{I+\sigma_k}{2},\quad
+ Q_k:=\frac{I-\sigma_k}{2}.
+\end{equation}
+El umbral TRIT pertenece a la orientación y al carry de
+\(\widehat x\); no borra ninguna de las dos hojas APP y no requiere un tercer
+caso en \eqref{eq:pdfv2-cor-sigma}.
+
+La parte que conserva hoja y la parte que la cambia son dos componentes del
+mismo \(U_k\):
+\begin{align}
+ A_k&:=P_{k+1}U_kP_k+Q_{k+1}U_kQ_k,
+ \label{eq:pdfv2-cor-a-comun}\\
+ \eta_k&:=Q_{k+1}U_kP_k+P_{k+1}U_kQ_k.
+ \label{eq:pdfv2-cor-eta-comun}
+\end{align}
+Por ortogonalidad de \(P_{k+1}\) y \(Q_{k+1}\),
+\begin{equation}
+\label{eq:pdfv2-cor-balance-hojas}
+ U_k=A_k+\eta_k,\qquad
+ A_k^*A_k+\eta_k^*\eta_k=U_k^*U_k.
+\end{equation}
+El último miembro es \(I\) bajo, y sólo bajo, la condición isométrica
+identificada después de \eqref{eq:pdfv2-cor-u-gram}.
+Esta identidad y el incremento \eqref{eq:pdfv2-cor-b-alpha} no son dos
+transportes: \(A_k,\eta_k\) actúan sobre la base de historias y
+\(b_\alpha\) lee la arista de esa misma base.
+
+\subsection{Polarización firmada, telescopía no autónoma y retorno sin reinicialización}
+No se introduce aquí una rama espectral independiente. Se restringen al
+mismo espacio \(\mathscr H_k\) y al mismo transporte \(U_k\) ya construidos
+las notaciones
+\[
+ \mathcal H_k^{\mathrm{sp}}:=\mathscr H_k,
+ \qquad
+ \Lambda(\gamma_{\widehat x})
+ :=\bigl(\operatorname{or},\operatorname{Carr},\operatorname{Mem},
+          \partial,\gamma\bigr)(\widehat x),
+\]
+y \(\Sigma_{\rm reg}\Lambda(\gamma_{\widehat x})\) designa su familia de
+truncamientos compatibles. De este modo, el lector firmado, el defecto y el
+terminal siguientes son acciones del constructor correlativo común, no una
+selección retrospectiva de historias.
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05a_lector_telescopia_correlativa}
+  \input{incorporaciones/v2_global_20260823/05a_retorno_memoria_correlativa}
+\endgroup
+
+La esperanza condicionada asociada al mismo peso es
+\begin{equation}
+\label{eq:pdfv2-cor-esperanza-comun}
+ (E_kF)(\widehat x):=
+ \sum_{(\alpha,\widehat y)\in\operatorname{Ch}_k(\widehat x)}
+ p_k(\alpha,\widehat y\mid\widehat x)F(\alpha,\widehat y).
+\end{equation}
+Para el incremento fino \(b_f\) se ponen
+\begin{equation}
+\label{eq:pdfv2-cor-kappa-jensen}
+ b_c:=E_kb_f,\qquad
+ \kappa_k^{\rm can}:=\frac{E_k|b_f|-|b_c|}{2}\geq0.
+\end{equation}
+Entonces
+\begin{equation}
+\label{eq:pdfv2-cor-jensen-hojas}
+ E_kb_f^+=b_c^++\kappa_k^{\rm can},\qquad
+ E_kb_f^-=b_c^-+\kappa_k^{\rm can}.
+\end{equation}
+El superíndice \({\rm can}\) distingue este carry de cancelación del carry
+entero \(\kappa_\alpha\); ambos proceden del mismo transporte, pero tienen
+tipos distintos.
+
+Las memorias firmadas no requieren una condición inicial exterior: para
+\(\gamma=(\epsilon_1,\ldots,\epsilon_k)\) se definen por suma del propio
+ledger,
+\begin{equation}
+\label{eq:pdfv2-cor-memorias}
+ \begin{aligned}
+ M_0^\pm&:=0,\\
+ M_k^\pm(\gamma)&:=\sum_{j=1}^k b_{\epsilon_j}^\pm,\\
+ M_{k+1}^\pm(\gamma\alpha)&:=M_k^\pm(\gamma)+b_\alpha^\pm,\\
+ D_k^0&:=M_k^+-M_k^-, &
+ H_k^0&:=M_k^++M_k^-.
+ \end{aligned}
+\end{equation}
+Así, el balance firmado, la memoria total y la polarización
+\(\langle v,\sigma_kv\rangle\) son tres lecturas coordinadas del mismo
+prefijo, no tres estados reconstruidos por separado.
+
+\subsection{Refinamiento nonádico, pérdidas ortogonales y memoria terminal}
+El índice \(j\) del desarrollo siguiente es el nivel del mismo árbol de
+prolongaciones y su registro de trece coordenadas es la restricción del
+registro común de \eqref{eq:pdfv2-cor-registro-extension}. Por tanto se fija
+\(D_{{\rm sol},j}:=D_j^{(13)}\) y no se postula un dominio adicional.
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05b_balance_memoria_correlativa}
+\endgroup
+
+\section{Orientación, acarreo y composición simultánea de trayectorias}
+
+La inversión de la ruta actúa una sola vez sobre
+\(\mathfrak e_\alpha\). Sea
+\(\mathsf J(v_\Sigma,v_\Pi):=(v_\Pi,v_\Sigma)\) el intercambio de hojas,
+y sea \(P_{\rm tr}\) la transposición de matrices de puertos. Sus cinco
+expresiones locales son
+\begin{equation}
+\label{eq:pdfv2-cor-orientacion-cruzada}
+ \begin{gathered}
+ \mathsf J\sigma_k=-\sigma_k\mathsf J,
+ \qquad b_{\bar\alpha}=-b_\alpha,
+ \qquad (b_{\bar\alpha}^+,b_{\bar\alpha}^-)
+       =(b_\alpha^-,b_\alpha^+),\\
+ \vartheta_L(K,\epsilon):=
+ \begin{cases}
+  (L,-\epsilon),&K=L,\\
+  (K,\epsilon),&K\neq L,
+ \end{cases}
+ \qquad
+ \kappa_{J,I}(v,u)=-P_{\rm tr}\kappa_{I,J}(u,v),\\
+ \kappa(\bar\alpha)
+ =-\mathsf C_\alpha^{-1}\kappa(\alpha),
+ \qquad v_{\bar\alpha}=-v_\alpha.
+ \end{gathered}
+\end{equation}
+Aquí \(\mathsf J\) intercambia las dos hojas, \(P_{\rm tr}\) transpone la matriz de
+incidencia y \(\vartheta_L\) intercambia exactamente las dos caras de la
+dirección \(L\), fijando las otras seis. En la base libre de
+\(\mathscr B=\mathscr I\times\{+,-\}\), los ocho vectores son distintos,
+\(\vartheta_L^2=I\) y
+\(\vartheta_L\neq\vartheta_{L'}\) para \(L\neq L'\). La misma orientación
+explica todos los signos de
+\eqref{eq:pdfv2-cor-orientacion-cruzada}.
+
+Para extensiones componibles \(\alpha:x\to y\) y \(\beta:y\to z\), el
+carry nativo satisface
+\begin{equation}
+\label{eq:pdfv2-cor-carry-nativo}
+ \kappa(\beta\alpha)=
+ \kappa(\beta)+\mathsf C(\beta)\kappa(\alpha).
+\end{equation}
+La elevación matricial no se deja como un nombre. En la base ordenada
+\((f,r,e,b,g)\), sea
+\(\widetilde L_N(\alpha)\in\operatorname{Mat}_5(\mathbb Z)\) el
+representante entero centrado de la matriz de
+\(\Psi_\alpha\) de \eqref{eq:pdfv2-cor-psi-generadores} módulo \(3^N\), y
+defínase
+\begin{equation}
+\label{eq:pdfv2-cor-carry-matricial-def}
+ c_N(\beta,\alpha):=
+ \frac{\widetilde L_N(\beta)\widetilde L_N(\alpha)
+       -\widetilde L_N(\beta\alpha)}{3^N}
+ \in\operatorname{Mat}_5(\mathbb Z).
+\end{equation}
+La divisibilidad procede de la igualdad de las dos composiciones módulo
+\(3^N\). Escribiendo \(L_N=[\widetilde L_N]_{3^N}\), los lifts enteros
+satisfacen
+\begin{equation}
+\label{eq:pdfv2-cor-carry-matricial}
+ \widetilde L_N(\beta)\widetilde L_N(\alpha)
+ =\widetilde L_N(\beta\alpha)+3^Nc_N(\beta,\alpha)
+\end{equation}
+y la asociatividad produce el cociclo
+\begin{equation}
+\label{eq:pdfv2-cor-cociclo-matricial}
+ c_N(\delta,\beta\alpha)+\widetilde L_N(\delta)c_N(\beta,\alpha)
+ =c_N(\delta\beta,\alpha)
+  +c_N(\delta,\beta)\widetilde L_N(\alpha).
+\end{equation}
+
+El mismo incremento de carry actúa sobre el complejo local mediante
+\begin{equation}
+\label{eq:pdfv2-cor-psi-generadores}
+ \begin{gathered}
+ \Psi_\alpha(r_x)=r_y,\quad
+ \Psi_\alpha(e_x)=e_y,\quad
+ \Psi_\alpha(g_x)=g_y,\quad
+ \Psi_\alpha(f_x)=f_y,\\
+ \Psi_\alpha(b_x)=b_y+3(c_y-c_x)e_y.
+ \end{gathered}
+\end{equation}
+El cambio de frontera orientada queda en
+\begin{equation}
+\label{eq:pdfv2-cor-k-alpha}
+ K_\alpha:=(v_y-v_x)f_y,
+ \qquad
+ K_{\beta\alpha}=K_\beta+\Psi_\beta K_\alpha.
+\end{equation}
+Las ecuaciones \eqref{eq:pdfv2-cor-carry-nativo},
+\eqref{eq:pdfv2-cor-cociclo-matricial} y
+\eqref{eq:pdfv2-cor-k-alpha} son tres grados del mismo ledger de composición.
+Ninguna autoriza a borrar las otras dos.
+
+\subsection{Nervio de prolongaciones y diagonal de Alexander--Whitney}
+Para una historia del registro común se escribe
+\(A_n:=\mathbf Z/3^n\mathbf Z\) y \(\mathsf T_m(x)\) para la categoría
+finita de \emph{todos} sus prefijos TPK de profundidad \(m\), con los
+morfismos de extensión ya construidos. La diagonal y la counidad que siguen
+se aplican a ese mismo nervio; no definen una quinta rama autónoma.
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05e_aw_nervio_correlativo}
+\endgroup
+
+\section{Incidencia celular y relleno correlativo de una misma trayectoria}
+
+La sucesión \eqref{eq:pdfv2-cor-sucesion-celda} asigna a cada prefijo el
+complejo de dos términos
+\begin{equation}
+\label{eq:pdfv2-cor-cono-celda}
+ C_{k,N}(\widehat x):=
+ \left[A_N^{I_k}\oplus A_N^{J_k}
+ \xrightarrow{\kappa_{k,N}}A_N^{I_k\times J_k}\right].
+\end{equation}
+Un refinamiento actúa en los puertos por truncamiento de la extensión y en
+los coeficientes por \(A_{N'}\twoheadrightarrow A_N\). Cuando
+\(\alpha_u:I_{k'}\to I_k\) y \(\beta_u:J_{k'}\to J_k\) son esos mapas, su
+acción en generadores es
+\begin{equation}
+\label{eq:pdfv2-cor-refinamiento-celda}
+ (p,q)\longmapsto(p\circ\alpha_u,q\circ\beta_u),
+ \qquad
+ w\longmapsto w\circ(\alpha_u\times\beta_u),
+\end{equation}
+y verifica
+\begin{equation}
+\label{eq:pdfv2-cor-refinamiento-cadena}
+ \kappa_{k',N}\Gamma(u)_1=\Gamma(u)_0\kappa_{k,N}.
+\end{equation}
+
+La incidencia no se fabrica etiquetando cuatro copias de una emisión neutra.
+Se genera por la completación celular libre del módulo de las dos hojas que
+ya porta el mismo estado. Para
+\[
+ V_{\widehat x}:=\mathbf F_3e_{\Sigma,\widehat x}
+ \oplus\mathbf F_3e_{\Pi,\widehat x},
+\]
+las cuatro rectas internas son
+\begin{equation}
+\label{eq:pdfv2-cor-cuatro-rectas-tpk}
+ \mathscr I_{\widehat x}:=
+ \{L_0,L_\infty,L_+,L_-\}
+ =\mathbf P^1(V_{\widehat x}),\qquad
+ \begin{aligned}
+ L_0&=\langle e_\Sigma\rangle,&
+ L_\infty&=\langle e_\Pi\rangle,\\
+ L_+&=\langle e_\Sigma+e_\Pi\rangle,&
+ L_-&=\langle e_\Sigma-e_\Pi\rangle.
+ \end{aligned}
+\end{equation}
+Si \(v_L\) es, respectivamente,
+\((1,0)^t,(0,1)^t,(1,1)^t,(1,-1)^t\), la acción de la dirección \(L\)
+sobre los generadores de hoja es el proyector
+\begin{equation}
+\label{eq:pdfv2-cor-proyectores-cuatro-direcciones}
+ P_L:=v_L(v_L^tv_L)^{-1}v_L^t,
+\end{equation}
+es decir, sobre \(\mathbf F_3\),
+\[
+ P_0=\begin{pmatrix}1&0\\0&0\end{pmatrix},\quad
+ P_\infty=\begin{pmatrix}0&0\\0&1\end{pmatrix},\quad
+ P_+=\begin{pmatrix}2&2\\2&2\end{pmatrix},\quad
+ P_-=\begin{pmatrix}2&1\\1&2\end{pmatrix}.
+\]
+El cálculo directo da
+\begin{equation}
+\label{eq:pdfv2-cor-proyectores-no-colapso}
+ P_L^2=P_L,\qquad \operatorname{rk}P_L=1,\qquad
+ \operatorname{Im}P_L=L,\qquad
+ P_L=P_{L'}\Longrightarrow L=L'.
+\end{equation}
+Por tanto las cuatro direcciones son salidas distintas del módulo
+\(V_{\widehat x}\); no son cuatro nombres puestos sobre la misma acción.
+
+\begin{definition}[Completación celular libre de las hojas TPK]
+\label{def:pdfv2-cor-completacion-celular-tpk}
+Sea \(\operatorname{Cell}_{\rm TPK}(\widehat x)\) el complejo libre
+\[
+ C_2(\widehat x)\xrightarrow{\partial_2}
+ C_1(\widehat x)\xrightarrow{\partial_1}C_0(\widehat x)
+\]
+con
+\begin{align*}
+ C_0(\widehat x)
+ &:=
+ \mathbf F_3[v_\star]\oplus
+ \bigoplus_{L\in\mathscr I}\mathbf F_3[v_L]\oplus
+ \bigoplus_{(L,\epsilon)\in\mathscr B}
+       \mathbf F_3[v_{L,\epsilon}]\oplus
+ \bigoplus_{E\in\mathscr E}\mathbf F_3[v_E],\\
+ C_1(\widehat x)
+ &:=
+ \bigoplus_{L\in\mathscr I}\mathbf F_3[u_L]\oplus
+ \bigoplus_{(L,\epsilon)\in\mathscr B}
+       \mathbf F_3[u_{L,\epsilon}]\oplus
+ \bigoplus_{E=\{L,L'\}\in\mathscr E}
+ \bigl(\mathbf F_3[u_{L'\mid L}]
+       \oplus\mathbf F_3[u_{L\mid L'}]\bigr),\\
+ C_2(\widehat x)
+ &:=
+ \bigoplus_{E\in\mathscr E}\mathbf F_3[\omega_E].
+\end{align*}
+Su acción en generadores es
+\begin{align}
+ \partial u_L&=v_L-v_\star,
+ &
+ \partial u_{L'\mid L}&=v_E-v_L,
+ \label{eq:pdfv2-cor-cell-frontera-aristas}\\
+ \partial u_{L,\epsilon}&=v_{L,\epsilon}-v_L,
+ &
+ \partial\omega_{\{L,L'\}}
+ &=u_L+u_{L'\mid L}-u_{L'}-u_{L\mid L'}.
+ \label{eq:pdfv2-cor-cell-frontera-celda}
+\end{align}
+\end{definition}
+
+Los ocho generadores \(v_{L,\epsilon}\) realizan materialmente la pantalla
+\(\mathscr B\). La involución anterior se extiende al complejo por
+\begin{equation}
+\label{eq:pdfv2-cor-pantalla-ocho-generadores}
+ \vartheta_Lv_{K,\epsilon}:=v_{\vartheta_L(K,\epsilon)},\qquad
+ \vartheta_Lu_{K,\epsilon}:=u_{\vartheta_L(K,\epsilon)},
+\end{equation}
+y fija los demás generadores. Por ser libre la base,
+\begin{equation}
+\label{eq:pdfv2-cor-pantalla-ocho-no-colapso}
+ |\{v_{L,\epsilon}:(L,\epsilon)\in\mathscr B\}|=8,\qquad
+ \vartheta_L^2=I,\qquad
+ \vartheta_L\vartheta_{L'}=\vartheta_{L'}\vartheta_L.
+\end{equation}
+Además \(\partial\vartheta_L=\vartheta_L\partial\), pues ambos recorridos
+envían \(u_{L,\epsilon}\) a \(v_{L,-\epsilon}-v_L\) y fijan las fronteras
+restantes.
+
+Las dos palabras
+\[
+ p_{L,L'}:=u_{L'\mid L}u_L,\qquad
+ p_{L',L}:=u_{L\mid L'}u_{L'}
+\]
+son caminos diferentes del complejo libre. Su diferencia es la frontera de
+\(\omega_{\{L,L'\}}\), y
+\begin{equation}
+\label{eq:pdfv2-cor-cell-dos-cero}
+ \partial^2\omega_E
+ =(v_L-v_\star)+(v_E-v_L)
+ -(v_{L'}-v_\star)-(v_E-v_{L'})=0.
+\end{equation}
+La representación de TPK en las hojas se fija por
+\[
+ \varrho(u_L)=P_L,\qquad
+ \varrho(u_{L'\mid L})=P_{L'},\qquad
+ \varrho(p_{L,L'})=P_{L'}P_L.
+\]
+Aunque dos matrices publicadas coincidieran en una especialización, los dos
+caminos no colapsan: siguen siendo generadores libres distintos de
+\(C_1(\widehat x)\), unidos por una 2--celda explícita.
+
+La coordenada completa de incidencia es el grupo de 2--cocadenas
+\begin{equation}
+\label{eq:pdfv2-cor-q-incidencia-total}
+ Q_{\rm inc}(\widehat x):=
+ C^2(\operatorname{Cell}_{\rm TPK}(\widehat x);\mathbf F_3)
+ =\bigoplus_{E\in\mathscr E}\mathbf F_3\omega_E^*
+ \simeq\mathbf F_3^6.
+\end{equation}
+La operación interna devuelve todo \(Q_{\rm inc}(\widehat x)\), no un
+elemento seleccionado. Cada \(q\) tiene expansión única
+\(q=\sum_Eq_E\omega_E^*\). Para
+\(a\in\mathbf F_3^{\mathscr I}\), su cambio de potencial es
+\begin{equation}
+\label{eq:pdfv2-cor-collar-variacion}
+ q\longmapsto q+Ba,\qquad (Ba)_{\{L,L'\}}=a_L+a_{L'}.
+\end{equation}
+Como cada recta pertenece a tres pares,
+\[
+ s(Ba)=3\sum_{L\in\mathscr I}a_L=0,
+\]
+y por ello
+\begin{equation}
+\label{eq:pdfv2-cor-wc-invariante-celular}
+ W_c(q+Ba)=W_c(q)\qquad(q\in Q_{\rm inc}(\widehat x)).
+\end{equation}
+La unidad de la completación sólo ancla el complejo en el estado:
+\begin{equation}
+\label{eq:pdfv2-cor-cell-unidad}
+ \eta^{\rm cell}_{\widehat x}:V_{\widehat x}\longrightarrow
+ V_{\widehat x}\otimes C_0(\operatorname{Cell}_{\rm TPK}(\widehat x)),\qquad
+ e_{\diamond,\widehat x}\longmapsto
+ e_{\diamond,\widehat x}\otimes v_\star,
+\end{equation}
+y marca el origen \(q=0\); no afirma que la órbita de ese origen sea todo
+\(Q_{\rm inc}\).
+
+La construcción es funtorial en el truncamiento común. Si
+\(\tau_{\ell,k}\widehat x_\ell=\widehat x_k\), definimos
+\begin{align*}
+ \tau_V&:V_{\widehat x_\ell}\longrightarrow V_{\widehat x_k},&
+ \tau_Ve_{\diamond,\widehat x_\ell}&=e_{\diamond,\widehat x_k},\\
+ \tau_a&:\mathbf F_3^{\mathscr I_{\widehat x_\ell}}
+          \longrightarrow\mathbf F_3^{\mathscr I_{\widehat x_k}},&
+ (\tau_aa)_{\tau_{\mathscr I}L}&=a_L,\\
+ \tau_Q&:Q_{\rm inc}(\widehat x_\ell)
+          \longrightarrow Q_{\rm inc}(\widehat x_k),&
+ (\tau_Qq)_{\tau_{\mathscr E}E}&=q_E,
+\end{align*}
+donde \(\tau_{\mathscr I}[v]=[\tau_Vv]\) y
+\(\tau_{\mathscr E}\{L,L'\}=\{\tau_{\mathscr I}L,
+\tau_{\mathscr I}L'\}\). El mapa de cadenas
+\(\operatorname{Cell}(\tau):C_\bullet(\widehat x_\ell)
+\to C_\bullet(\widehat x_k)\) actúa en generadores por
+\begin{equation}
+\label{eq:pdfv2-cor-cell-truncamiento-generadores}
+ v_\bullet(\widehat x_\ell)\mapsto v_\bullet(\widehat x_k),\quad
+ u_\bullet(\widehat x_\ell)\mapsto u_\bullet(\widehat x_k),\quad
+ \omega_E(\widehat x_\ell)\mapsto\omega_E(\widehat x_k).
+\end{equation}
+De \eqref{eq:pdfv2-cor-cell-frontera-aristas}--
+\eqref{eq:pdfv2-cor-cell-frontera-celda} se obtiene
+\begin{equation}
+\label{eq:pdfv2-cor-collar-naturalidad}
+\begin{aligned}
+ \operatorname{Cell}(\tau)\partial
+ &=\partial\operatorname{Cell}(\tau),\\
+ \tau_VP_L&=P_{\tau_{\mathscr I}L}\tau_V,\qquad
+ \tau_QB=B\tau_a,\qquad W_c\circ\tau_Q=W_c,\\
+ \operatorname{Cell}(\tau)\vartheta_L
+ &=\vartheta_{\tau_{\mathscr I}L}\operatorname{Cell}(\tau),\\
+ (\tau_V\otimes\operatorname{Cell}_0(\tau))
+ \eta^{\rm cell}_{\widehat x_\ell}
+ &=\eta^{\rm cell}_{\widehat x_k}\tau_V.
+\end{aligned}
+\end{equation}
+Identidad y composición se verifican en cada generador. Así
+\(\operatorname{Cell}_{\rm TPK}\) es la completación celular funtorial de
+la misma fibra APP--TRIT--TPK, no un portador añadido desde una publicación
+posterior.
+
+\subsection{Medida de incidencia, curvatura de acarreo y naturalidad adjunta}
+En el desarrollo siguiente se identifican, exclusivamente como abreviaturas
+de la completación común,
+\[
+ I_{\rm gau}:=\mathscr I_{\widehat x},\qquad
+ \mathscr B_{\rm gau}:=\mathscr B_{\widehat x},\qquad
+ Q_{\rm gau}:=Q_{\rm inc}(\widehat x).
+\]
+Con el promedio uniforme de conteo sobre \(Q_{\rm gau}\), la función
+\(W_c\) de \eqref{eq:pdfv2-cor-wc} satisface
+\begin{equation}
+\label{eq:pdfv2-cor-wc-momentos}
+ \mathbb E_QW_c=0,\qquad
+ \mathbb E_QW_c^2=\frac29,\qquad
+ \mathbb E_QW_c^3=\frac{2}{27}.
+\end{equation}
+Estas identidades son propiedades de la misma celda y del mismo acarreo, no
+datos de una teoría exterior.
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05c_incidencia_curvatura_correlativa}
+\endgroup
+
+La misma regla define su acción sobre una emisión elemental
+\(\alpha:x\to y\). Como \(U_\alpha\) transporta la pareja \emph{ordenada}
+de hojas, su mapa de etiquetas es
+\(\overline U_\alpha e_{\Sigma,x}=e_{\Sigma,y}\) y
+\(\overline U_\alpha e_{\Pi,x}=e_{\Pi,y}\). Su proyectivización
+\(\alpha_{\mathscr I}[v]:=[\overline U_\alpha v]\) actúa en
+\(\mathbf P^1(V_x)\) y, por tanto,
+\begin{equation}
+\label{eq:pdfv2-cor-cell-accion-emision}
+ \begin{gathered}
+ \operatorname{Cell}_{\rm TPK}(\alpha)v_\star(x)=v_\star(y),\qquad
+ \operatorname{Cell}_{\rm TPK}(\alpha)v_L(x)
+   =v_{\alpha_{\mathscr I}L}(y),\\
+ \operatorname{Cell}_{\rm TPK}(\alpha)v_{\{L,L'\}}(x)
+   =v_{\{\alpha_{\mathscr I}L,\alpha_{\mathscr I}L'\}}(y),\qquad
+ \operatorname{Cell}_{\rm TPK}(\alpha)v_{L,\epsilon}(x)
+   =v_{\alpha_{\mathscr I}L,\epsilon}(y),\\
+ \operatorname{Cell}_{\rm TPK}(\alpha)u_L(x)
+   =u_{\alpha_{\mathscr I}L}(y),\qquad
+ \operatorname{Cell}_{\rm TPK}(\alpha)u_{L,\epsilon}(x)
+   =u_{\alpha_{\mathscr I}L,\epsilon}(y),\\
+ \operatorname{Cell}_{\rm TPK}(\alpha)u_{L'\mid L}(x)
+   =u_{\alpha_{\mathscr I}L'\mid\alpha_{\mathscr I}L}(y),\qquad
+ \operatorname{Cell}_{\rm TPK}(\alpha)\omega_{\{L,L'\}}(x)
+   =\omega_{\{\alpha_{\mathscr I}L,
+                 \alpha_{\mathscr I}L'\}}(y).
+ \end{gathered}
+\end{equation}
+En la fibra de hojas y en su pantalla se tiene además
+\begin{equation}
+\label{eq:pdfv2-cor-cell-entrelaza-proyectores-pantalla}
+ \overline U_\alpha P_L=P_{\alpha_{\mathscr I}L}\overline U_\alpha,
+ \qquad
+ \operatorname{Cell}_{\rm TPK}(\alpha)\vartheta_L
+ =\vartheta_{\alpha_{\mathscr I}L}
+  \operatorname{Cell}_{\rm TPK}(\alpha).
+\end{equation}
+Las fórmulas de frontera dan
+\begin{equation}
+\label{eq:pdfv2-cor-cell-accion-emision-natural}
+ \partial\operatorname{Cell}_{\rm TPK}(\alpha)
+ =\operatorname{Cell}_{\rm TPK}(\alpha)\partial,\qquad
+ \operatorname{Cell}_{\rm TPK}(\beta\alpha)
+ =\operatorname{Cell}_{\rm TPK}(\beta)
+  \operatorname{Cell}_{\rm TPK}(\alpha).
+\end{equation}
+Así el mapa de complejos usado en el registro terminal es la acción libre
+inducida por la misma emisión, no un símbolo añadido.
+
+\subsection{Módulo de rutas, totalización y cono del retorno nonádico}
+Sea \(J_d(x)\) la categoría completa de prefijos de profundidad \(d\) del
+árbol común, \(\operatorname{Term}_d(x)\) su conjunto terminal y
+\(\Gamma_{d,N}(\nu):=C_{d,N}(\nu)\) el complejo celular de
+\eqref{eq:pdfv2-cor-cono-celda}. El módulo, la totalización y el cono que
+siguen conservan simultáneamente todas las continuaciones; no seleccionan
+una historia ni separan una construcción cohomológica del continuo común.
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05d_totalizacion_cohomologica_correlativa}
+\endgroup
+
+El complejo local \eqref{eq:pdfv2-cor-complejo-local} y el vértice
+\(y_\alpha\), extremo de esa misma extensión en el nervio, forman el pullback
+aumentado. En él se definen
+\begin{equation}
+\label{eq:pdfv2-cor-zpm-h}
+ \mathbf1_\alpha=(r,[y_\alpha]),\qquad
+ z_-(\alpha)=(r,[y_\alpha]),
+\end{equation}
+\begin{equation}
+\label{eq:pdfv2-cor-zplus-h}
+ z_+(\alpha)=
+ (r+3c_\alpha v_\alpha e+v_\alpha b,[y_\alpha]),
+ \qquad
+ h_*(\alpha)=(-v_\alpha f,0).
+\end{equation}
+La acción en generadores da, sin una existencia abstracta adicional,
+\begin{equation}
+\label{eq:pdfv2-cor-filler}
+ \partial z_-=\partial z_+=0,\qquad
+ \partial h_*=z_--z_+.
+\end{equation}
+El relleno correlativo, la celda y el collar conservan el mismo
+\((\alpha,\operatorname{or}(\alpha),\kappa(\alpha),\partial\alpha,
+\gamma\alpha,m(\gamma\alpha;m_0))\); sólo aplican lectores internos distintos
+al registro común.
+
+Para el mismo complejo finito basado se define, sin pedir balance ni
+aciclicidad, la línea determinante total
+\begin{equation}
+\label{eq:pdfv2-cor-linea-determinante-total}
+ \operatorname{Det}(C_{k,N}):=
+ \bigotimes_q
+ \left(\bigwedge^{\rm top}C_{k,N,q}\right)^{(-1)^q}.
+\end{equation}
+El refinamiento induce el morfismo determinantal del mapa de complejos y
+transporta a la vez los módulos de homología, las formas normales de Smith y
+las páginas de Bockstein como campos del registro. Ni la existencia de
+\eqref{eq:pdfv2-cor-linea-determinante-total} ni su transporte exige que la
+homología se anule. Si el cono del refinamiento es contractible y orientado,
+el morfismo se trivializa canónicamente; en el caso general se conserva el
+cono y no se lo sustituye por un isomorfismo ficticio.
+
+\subsection{Forma normal de Smith del operador terminal y descomposición primaria de su conúcleo}
+Para cada prefijo \(y\), el acarreo no orientado y el coeficiente orientado
+de frontera del registro común admiten los levantamientos
+\begin{equation}
+\label{eq:detint-c-v-lifts}
+ \widetilde c_y,\widetilde v_y\in\mathbf Z,\qquad
+ c_{y,n}:=\widetilde c_y\bmod3^n,\qquad
+ v_{y,n}:=\widetilde v_y\bmod3^n.
+\end{equation}
+La salida determinantal no es una entrada ni una rama separada: es el sector
+producido por la misma reducción terminal cuando se verifican las condiciones
+tipadas
+\begin{equation}
+\label{eq:detint-dominio}
+\begin{split}
+ \mathcal C_{\rm cont}^{\rm det}:=\bigl\{x\in\mathcal C_{\rm cont}^{\rm disc}:{}&
+ x\text{ sobrevive a toda profundidad};\\
+ &\widehat P_x^{\rm red}\text{ es finito y basado};\\
+ &\chi(\widehat P_x^{\rm red})=0;\\
+ &H_*(\widehat P_x^{\rm red}\otimes_{\mathbf Z_3}K_3)=0;\\
+ &\text{la reducción produce un bloque cuadrado estable bajo refinamiento}
+ \bigr\}.
+\end{split}
+\end{equation}
+\begingroup
+  \let\section\subsection
+  \input{incorporaciones/v2_global_20260823/05e_smith_bockstein_correlativo}
+\endgroup
+
+\section{Naturalidad del ensamblaje y compatibilidad bajo refinamiento}
+
+Antes de formar el registro de horizonte, hacemos explícita la acción total
+de las cinco operaciones aquí desarrolladas sobre \emph{la misma} arista
+\(\mathfrak e_\alpha\). Si \(P_x,Q_x\) denotan las restricciones de
+\eqref{eq:pdfv2-cor-sigma} a la fibra de \(x=s(\alpha)\), y análogamente en
+\(y=t(\alpha)\), ponemos primero
+\begin{equation}
+\label{eq:pdfv2-cor-a-eta-emision}
+ A_\alpha:=P_yU_\alpha P_x+Q_yU_\alpha Q_x,
+ \qquad
+ \eta_\alpha:=Q_yU_\alpha P_x+P_yU_\alpha Q_x.
+\end{equation}
+Las cinco lecturas son familias dependientes indexadas por la propia
+\(\mathfrak e_\alpha\). El índice fija fuente, destino, ruta y ledger, pero
+no se vuelve a copiar dentro del valor. Sus tipos son los registros
+dependientes
+\(\operatorname{LedgerEntry}:=\operatorname{cod}(\lambda)\) y
+\begin{align*}
+ \mathsf Y_{\rm sp}[\alpha]&:=
+ \operatorname{Rec}[U:\mathsf H_x\to\mathsf H_y;
+ \sigma_x\in\operatorname{End}\mathsf H_x;
+ \sigma_y\in\operatorname{End}\mathsf H_y;A,\eta:\mathsf H_x\to\mathsf H_y],\\
+ \mathsf Y_{\rm sol}[\alpha]&:=
+ \operatorname{Rec}[b,b^+,b^-\in\operatorname{LedgerEntry};
+ \operatorname{upd}:\mathsf{Mem}_x\to\mathsf{Mem}_y],\\
+ \mathsf Y_{\rm gau}[\alpha]&:=
+ \mathcal P_{\rm fin}\operatorname{Rec}[
+ \operatorname{Cell}(\alpha);q\in Q_{\rm inc}(y);B;W_c(q)],\\
+ \mathsf Y_{\rm coh}[\alpha]&:=
+ \operatorname{Rec}[I_y,J_y,\kappa_{y,N},\delta_y,C_{y,N};
+ F_\alpha:C_{y,N}\to C_{x,N}],\\
+ \mathsf Y_{\rm det}[\alpha]&:=
+ \operatorname{Rec}[\Psi_\alpha,K_\alpha,\mathbf1_\alpha,z_\pm,h_*;
+ \operatorname{Det},H_*,\operatorname{Smith},\operatorname{Boc}].
+\end{align*}
+Por tanto el juicio común es
+\[
+ \mathfrak e_\alpha:\operatorname{Ext}_k\ \vdash\
+ \mathcal O_\bullet(\mathfrak e_\alpha)
+ \in\mathsf Y_\bullet[\alpha],
+ \qquad
+ \bullet\in\{\mathrm{sp,sol,gau,coh,det}\}.
+\]
+\begin{align}
+ \mathcal O_{\rm sp}(\mathfrak e_\alpha)
+ &:=
+ \bigl(U_\alpha,\sigma_x,\sigma_y,
+ A_\alpha,\eta_\alpha\bigr),
+ \label{eq:pdfv2-cor-accion-sp}\\
+ \mathcal O_{\rm sol}(\mathfrak e_\alpha)
+ &:=
+ \bigl(b_\alpha,b_\alpha^+,b_\alpha^-;\,
+ (M^+,M^-,D,H)\mapsto
+ (M^++b_\alpha^+,M^-+b_\alpha^-,
+  D+b_\alpha,H+|b_\alpha|)\bigr),
+ \label{eq:pdfv2-cor-accion-sol}\\
+ \mathcal O_{\rm gau}(\mathfrak e_\alpha)
+ &:=
+ \left\{
+ \bigl(\operatorname{Cell}_{\rm TPK}(\alpha),
+ q,B,W_c(q)\bigr):
+ q\in Q_{\rm inc}(y)
+ \right\},
+ \label{eq:pdfv2-cor-accion-gau}\\
+ \mathcal O_{\rm coh}(\mathfrak e_\alpha)
+ &:=
+ \bigl(I_y,J_y,\kappa_{y,N},\delta_y,C_{y,N},
+ F_\alpha:C_{y,N}\longrightarrow C_{x,N}\bigr),
+ \label{eq:pdfv2-cor-accion-coh}\\
+ \mathcal O_{\rm det}(\mathfrak e_\alpha)
+ &:=
+ \bigl(\Psi_\alpha,K_\alpha,\mathbf1_\alpha,z_\pm(\alpha),
+ h_*(\alpha),\operatorname{Det}(C_{y,N}),H_*(C_{y,N}),
+ \operatorname{Smith}(C_{y,N}),\operatorname{Boc}(C_{y,N})\bigr).
+ \label{eq:pdfv2-cor-accion-det}
+\end{align}
+
+La lectura arquimediana interna es la primera componente de esta acción
+simultánea; no introduce todavía ninguna forma clásica:
+\begin{equation}
+\label{pII-full:eq:continuo-lector-arquimediano}
+ \mathcal L_{\rm arq}^{\rm int}(\mathfrak e_\alpha)
+ :=\mathcal O_{\rm sp}(\mathfrak e_\alpha).
+\end{equation}
+Para cualquier valor de esas familias, incluido cada elemento de la
+multisección \(\mathcal O_{\rm gau}\), su soporte es el índice dependiente
+\begin{equation}
+\label{eq:pdfv2-cor-soporte-dependiente}
+ \begin{aligned}
+ \mathsf B_\alpha&:=
+ \{(s(\alpha),t(\alpha),\gamma\alpha,
+          \operatorname{Led}(\gamma\alpha))\},\\
+ \operatorname{supp}_\alpha:\mathsf Y_\bullet[\alpha]&\longrightarrow
+ \mathsf B_\alpha,\qquad
+ o\longmapsto(s(\alpha),t(\alpha),\gamma\alpha,
+          \operatorname{Led}(\gamma\alpha)).
+ \end{aligned}
+\end{equation}
+Por tanto quedan tipados, sin una proyección que recupere la arista,
+\begin{equation}
+\label{eq:pdfv2-cor-soporte-cinco-lecturas}
+ \begin{gathered}
+ s_\alpha(\mathcal O_\bullet):=s(\alpha),\qquad
+ t_\alpha(\mathcal O_\bullet):=t(\alpha),\\
+ \gamma_\alpha(\mathcal O_\bullet):=\gamma\alpha,
+ \qquad
+ \operatorname{Led}_\alpha(\mathcal O_\bullet)
+ :=\operatorname{Led}(\gamma\alpha).
+ \end{gathered}
+\end{equation}
+Aquí \(\operatorname{Cell}_{\rm TPK}(\alpha)\) es el mapa de complejos
+\eqref{eq:pdfv2-cor-cell-accion-emision} inducido por el transporte de la
+misma fibra de hojas, y \(F_\alpha\) es
+\eqref{eq:pdfv2-cor-refinamiento-celda} para esa extensión. En particular,
+\(\mathcal O_{\rm gau}\) conserva la multisección completa de \(q\)'s; no
+elige el origen ni una órbita.
+
+Las cinco fórmulas anteriores constituyen una sola acción dependiente
+\begin{equation}
+\label{eq:pdfv2-cor-accion-unica-dependiente}
+ \mathcal O(\mathfrak e_\alpha)
+ :=\left\langle
+ \mathcal O_{\rm sp},\mathcal O_{\rm sol},\mathcal O_{\rm gau},
+ \mathcal O_{\rm coh},\mathcal O_{\rm det};
+ \operatorname{Cpl}_\alpha
+ \right\rangle,
+\end{equation}
+donde \(\operatorname{Cpl}_\alpha\) es el certificado formado por las
+identidades
+\begin{equation}
+\label{eq:pdfv2-cor-acoplamientos-unicos}
+ \begin{gathered}
+ \operatorname{supp}_\alpha(\mathcal O_{\rm sp})
+ =\operatorname{supp}_\alpha(\mathcal O_{\rm sol})
+ =\operatorname{supp}_\alpha(\mathcal O_{\rm gau})
+ =\operatorname{supp}_\alpha(\mathcal O_{\rm coh})
+ =\operatorname{supp}_\alpha(\mathcal O_{\rm det}),\\
+ \mathsf Q(t(\alpha))=\sigma_9\mathsf Q(s(\alpha)),\quad
+ g(t(\alpha))=g(s(\alpha))+[1]_9,\quad
+ q^{(9)}(t(\alpha))=q^{(9)}(s(\alpha))+\chi_9(g(s(\alpha))),\\
+ A_\alpha^*A_\alpha+\eta_\alpha^*\eta_\alpha=U_\alpha^*U_\alpha,\qquad
+ (M^+,M^-,D,H)'=(M^++b_\alpha^+,M^-+b_\alpha^-,
+ D+b_\alpha,H+|b_\alpha|),\\
+ Q_{\rm inc}=C^2(\operatorname{Cell}_{\rm TPK};\mathbf F_3),\qquad
+ sB=0,\qquad W_c(q+Ba)=W_c(q),\\
+ C_{y,N}\text{ es el mismo complejo en }
+ \mathcal O_{\rm coh}\text{ y }\mathcal O_{\rm det},\qquad
+ \partial h_*=z_--z_+,\qquad
+ K_{\beta\alpha}=K_\beta+\Psi_\beta K_\alpha.
+ \end{gathered}
+\end{equation}
+\Needspace{18\baselineskip}
+El símbolo \(\bullet\) recorre las cinco lecturas de
+\eqref{eq:pdfv2-cor-accion-unica-dependiente}; todas conservan la misma
+fuente, destino, ruta y ledger.
+
+Reunimos, sin separar el estado, las operaciones construidas hasta aquí:
+\begin{equation}
+\label{eq:pdfv2-cor-constructor-unico}
+ \begin{aligned}
+ \mathfrak D_{k,N}(\widehat x)
+ &:=\bigl(\{\mathfrak e_\alpha\}_\alpha;\\
+ &\quad U_k,\sigma_k,P_k,Q_k,A_k,\eta_k;\\
+ &\quad b_\alpha,b_\alpha^\pm,M_k^\pm,D_k^0,H_k^0,
+ \kappa_k^{\rm can};\\
+ &\quad V_{\rm TPK},\mathscr I,\mathscr E,\mathscr B,B;\\
+ &\quad \operatorname{Cell}_{\rm TPK}(\widehat x),Q_{\rm inc}(\widehat x),W_c;\\
+ &\quad I_k,J_k,\kappa_{k,N},\delta,C_{k,N};\\
+ &\quad c_\alpha,v_\alpha,\Psi_\alpha,K_\alpha,
+ \mathbf1_\alpha,z_\pm(\alpha),h_*(\alpha);\\
+ &\quad
+ \operatorname{Det}(C_{k,N}),H_*(C_{k,N}),
+ \operatorname{Smith}(C_{k,N}),\operatorname{Boc}(C_{k,N});\\
+ &\quad \{\mathcal O(\mathfrak e_\alpha)\}_\alpha
+ \bigr).
+ \end{aligned}
+\end{equation}
+El punto y coma sólo separa niveles de lectura de una misma tupla dependiente;
+no define estructuras independientes. El estado de entrada no se guarda como
+primera coordenada ni se recupera mediante una proyección. Cada operación se
+demuestra por su acción en los generadores \(\mathfrak e_\alpha\), que
+conservan el mismo soporte, la misma ruta y el mismo ledger.
+
+Para \(\ell\geq k\) y \(N'\geq N\), el transporte se define componente a
+componente por truncación de historias, reducción de coeficientes y
+precomposición de puertos. La afirmación de naturalidad que debe probarse es
+una sola:
+\begin{equation}
+\label{eq:pdfv2-cor-naturalidad-unica}
+ u_{(\ell,N'),(k,N)}\mathfrak D_{\ell,N'}(\widehat x_\ell)
+ =\mathfrak D_{k,N}(\tau_{\ell,k}\widehat x_\ell).
+\end{equation}
+La naturalidad se formula sobre la historia generada, no fingiendo que una
+arista fina aislada deba seguir siendo arista después de truncar sus dos
+extremos. Para
+\(\gamma=(\varepsilon_1,\ldots,\varepsilon_\ell)\), definimos
+\[
+ \mathsf E_{\leq\ell}(\gamma)
+ :=(\mathfrak e_{\varepsilon_i})_{1\leq i\leq\ell},
+ \qquad
+ \mathcal O_{\leq\ell}(\gamma)
+ :=(\mathcal O(\mathfrak e_{\varepsilon_i}))_{1\leq i\leq\ell}.
+\]
+Los dos transportes son los mapas de prefijo explícitos
+\begin{align}
+ u^{\mathfrak e}_{\ell,k}:
+ \mathsf E_{\leq\ell}(\gamma)&\longrightarrow
+ \mathsf E_{\leq k}(\gamma),&
+ (\mathfrak e_{\varepsilon_i})_{i\leq\ell}
+ &\longmapsto(\mathfrak e_{\varepsilon_i})_{i\leq k},
+ \label{eq:pdfv2-cor-transporte-arista}\\
+ u^{\mathcal O}_{\ell,k}:
+ \mathcal O_{\leq\ell}(\gamma)&\longrightarrow
+ \mathcal O_{\leq k}(\gamma),&
+ (\mathcal O(\mathfrak e_{\varepsilon_i}))_{i\leq\ell}
+ &\longmapsto
+ (\mathcal O(\mathfrak e_{\varepsilon_i}))_{i\leq k}.
+ \label{eq:pdfv2-cor-transporte-accion}
+\end{align}
+En cada entrada conservada, la componente \(\mathrm{sp}\) entrelaza
+\(U,\sigma,P,Q,A,\eta\); la componente \(\mathrm{sol}\) aplica la esperanza
+condicional a \(b,b^\pm,\kappa\); la componente \(\mathrm{gau}\) aplica
+\(\operatorname{Cell}(\tau)\oplus\tau_Q\); la componente \(\mathrm{coh}\)
+precompone los puertos con \(F\); y la componente \(\mathrm{det}\) aplica
+\(\Psi,K,H_*,\operatorname{Smith},\operatorname{Boc}\) al mismo mapa de
+complejos. El prefijo actúa simultáneamente sobre esas cinco componentes.
+Sus componentes ya descargadas son
+\begin{equation}
+\label{eq:pdfv2-cor-naturalidad-componentes}
+ \begin{gathered}
+ U_{m,k}=U_{m,\ell}U_{\ell,k}\quad(m\geq\ell\geq k),\qquad
+ E_kb_f^\pm=b_c^\pm+\kappa_k^{\rm can},\\
+ r_{N',N}\kappa_{k,N'}=
+ \kappa_{k,N}(r_{N',N}\oplus r_{N',N}),\\
+ \Psi_\beta\Psi_\alpha=\Psi_{\beta\alpha},
+ \qquad K_{\beta\alpha}=K_\beta+\Psi_\beta K_\alpha,\\
+ u^{\mathcal O}_{\ell,k}\mathcal O_{\leq\ell}(\gamma)
+ =\mathcal O_{\leq k}(\gamma)
+ =\operatorname{map}(\mathcal O)\bigl(u^{\mathfrak e}_{\ell,k}
+                    \mathsf E_{\leq\ell}(\gamma)\bigr).
+ \end{gathered}
+\end{equation}
+La primera igualdad usa la multiplicación de los pesos condicionales sobre el mismo
+sistema de cilindros comunes; las restantes son las fórmulas explícitas
+anteriores. Ninguna proyección visible
+puede usarse para reconstruir o seleccionar \(\widehat x\).
+
+Para completar el último componente, denotemos por
+\(F_{(\ell,N'),(k,N)}:C_{\ell,N'}\to C_{k,N}\) el mapa de complejos de
+\eqref{eq:pdfv2-cor-refinamiento-celda}. Su cono se conserva como parte de la
+transición. La functorialidad de homología y de la sucesión de Bockstein da
+\begin{equation}
+\label{eq:pdfv2-cor-naturalidad-homologia-bockstein}
+ H_*(F_{m,k})=H_*(F_{\ell,k})H_*(F_{m,\ell}),
+ \qquad
+ \operatorname{Boc}(F_{m,k})
+ =\operatorname{Boc}(F_{\ell,k})
+  \operatorname{Boc}(F_{m,\ell}).
+\end{equation}
+La línea determinante se transporta mediante la identidad del triángulo
+exacto
+\begin{equation}
+\label{eq:pdfv2-cor-naturalidad-determinante}
+ \operatorname{Det}(C_{k,N})
+ \simeq
+ \operatorname{Det}(C_{\ell,N'})\otimes
+ \operatorname{Det}\!\left(\operatorname{Cone}
+ F_{(\ell,N'),(k,N)}\right).
+\end{equation}
+Esta fórmula registra también los refinamientos que añaden homología. La
+lectura de Smith se conserva sin fingir invariancia: a cada transición se le
+asigna el certificado total
+\begin{equation}
+\label{eq:pdfv2-cor-transicion-smith}
+ \mathcal S(F):=
+ \bigl(\operatorname{Smith}(C_{\ell,N'}),
+       \operatorname{Smith}(C_{k,N}),
+       \operatorname{Smith}(\operatorname{Cone}F)\bigr),
+\end{equation}
+que determina literalmente qué sumandos se conservan, nacen o mueren.
+
+La acción de una simetría coherente \(g\) en el árbol común induce
+isometrías de permutación \(\widetilde g_k\) en
+\(\mathscr H_k\). La biyección de hijos y la conservación de los pesos de
+\eqref{eq:continuo-comun-naturalidad-medida} prueban en los vectores básicos
+\begin{equation}
+\label{eq:pdfv2-cor-naturalidad-transporte-hojas}
+ \widetilde g_{k+1}U_k=U_k\widetilde g_k,
+ \qquad
+ \widetilde g_k\sigma_k=\sigma_k\widetilde g_k,
+ \qquad
+ \widetilde g_kP_k=P_k\widetilde g_k,
+ \qquad
+ \widetilde g_kQ_k=Q_k\widetilde g_k.
+\end{equation}
+
+\begin{theorem}[Totalidad y naturalidad del constructor correlativo]
+\label{thm:pdfv2-cor-totalidad-naturalidad}
+Para todo estado total de \eqref{eq:continuo-comun-estado}, todo horizonte
+finito y todo nivel de coeficientes, la expresión
+\eqref{eq:pdfv2-cor-constructor-unico} está definida. Sus cinco
+características son operaciones simultáneas sobre el mismo registro de
+extensión y satisfacen la única identidad
+\eqref{eq:pdfv2-cor-naturalidad-unica}. El collar, el complejo y la línea
+determinante permanecen no vacíos aun cuando sus lectores posteriores no
+sean acíclicos ni invertibles.
+\end{theorem}
+
+\begin{proof}
+La no vacuidad del árbol y de sus puertos es
+\cref{prop:continuo-comun-arbol-finito-no-vacio}; la medida y la expectativa
+son totales por \cref{thm:continuo-comun-medida-canonica}. Las fórmulas
+  \eqref{eq:pdfv2-cor-u-comun}--\eqref{eq:pdfv2-cor-memorias} definen transporte,
+polaridad, balance y memoria para todos los generadores. Las cuatro
+  direcciones de \eqref{eq:pdfv2-cor-cuatro-rectas-tpk} son distintas por
+  \eqref{eq:pdfv2-cor-proyectores-no-colapso}; la completación celular
+  \cref{def:pdfv2-cor-completacion-celular-tpk} contiene sus dos órdenes de
+  camino y seis celdas, mientras
+  \eqref{eq:pdfv2-cor-collar-naturalidad} prueba su naturalidad. La
+sucesión celular es exacta por \eqref{eq:pdfv2-cor-sucesion-celda}, el
+complejo local cumple \(\partial^2=0\) y el relleno correlativo es explícito por
+\eqref{eq:pdfv2-cor-filler}. Toda construcción finita basada posee la línea
+\eqref{eq:pdfv2-cor-linea-determinante-total}; homología, Bockstein y el
+certificado de Smith se transportan por
+\eqref{eq:pdfv2-cor-naturalidad-homologia-bockstein}--
+\eqref{eq:pdfv2-cor-transicion-smith}. Finalmente, las identidades se
+verifican en cada generador \(\mathfrak e_\alpha\) mediante
+\eqref{eq:pdfv2-cor-naturalidad-componentes},
+\eqref{eq:pdfv2-cor-collar-naturalidad} y
+\eqref{eq:pdfv2-cor-naturalidad-transporte-hojas}; por linealidad y por la
+composición functorial de rutas se obtiene
+\eqref{eq:pdfv2-cor-naturalidad-unica} para el registro entero.
+\end{proof}
+
+\section{Separación causal de las identidades, deducciones y realizaciones del constructor correlativo}
+
+\paragraph{No vacuidad e identidades exactas del constructor correlativo}
+La no vacuidad importada de \eqref{eq:continuo-comun-out-finito} y las
+identidades
+\eqref{eq:pdfv2-cor-b-identidades},
+\eqref{eq:pdfv2-cor-sucesion-celda},
+\eqref{eq:pdfv2-cor-sb-cero},
+\eqref{eq:pdfv2-cor-u-gram},
+\eqref{eq:pdfv2-cor-balance-hojas},
+\eqref{eq:pdfv2-cor-jensen-hojas},
+\eqref{eq:pdfv2-cor-dos-cero},
+\eqref{eq:pdfv2-cor-cociclo-matricial} y
+\eqref{eq:pdfv2-cor-filler} se deducen de las definiciones y de las relaciones
+APP--TRIT--TPK exhibidas. Su estatuto es
+\texttt{EXACTO\_INTERNO}.
+
+\paragraph{Hipótesis de partida para la isometría de \(U_k\), la sucesión celular y la composición \(\Psi/K\)}
+La construcción de \(U_k\) usa como estructura de partida la finitud de las
+fibras, la supervivencia a todo horizonte, el truncamiento funcional y los
+transportes de las dos hojas ya producidos por TPK\@. La igualdad
+\(U_k^*U_k=I\) exige además verificar \(U_\alpha^*U_\alpha=I\) para cada
+emisión; sin esa verificación permanece la identidad de Gram
+\eqref{eq:pdfv2-cor-u-gram}, que sí es incondicional. La sucesión celular usa
+los dos puertos APP ordenados. La composición \(\Psi/K\) usa carry entero,
+orientación y frontera. Bajo esas premisas enumeradas, las conclusiones
+indicadas son afirmativas.
+
+\paragraph{Datos adicionales para realizaciones isométricas, retractos balanceados y trivialización de la línea determinante}
+El constructor interno queda completo con el Gram positivo de
+\eqref{eq:pdfv2-cor-u-gram}, el espacio total \(Q_{\rm inc}\), la sucesión
+celular y la línea determinante con su cono de transición. Una publicación
+especializada puede exigir datos adicionales: la isometría de cada
+\(U_\alpha\), una identificación numérica concreta del defecto APP, un
+retracto balanceado y acíclico o la trivialización de una línea
+determinante. Esos datos son entrelazadores del codominio publicado; no
+forman parte del dominio ni de la existencia de
+\(\mathfrak D_{k,N}\). Su ausencia impide exclusivamente la promoción que
+los mencione.
+
+\begin{criterion}[Falsadores de la correlación intrínseca]
+\label{crit:pdfv2-cor-falsadores}
+La construcción conjunta falla en el primer nivel en que ocurra cualquiera de
+los hechos siguientes:
+\begin{enumerate}
+ \item una operación usa una extensión, orientación, carry, memoria, frontera
+ o ruta diferente de la registrada en \(\mathfrak e_\alpha\);
+ \item se escoge un hijo de
+ \(\operatorname{Ch}_k(\widehat x_k)\) y se eliminan los restantes;
+ \item el peso de \eqref{eq:pdfv2-cor-peso-conteo} no suma uno, falla
+ \eqref{eq:pdfv2-cor-u-gram}, o se declara \(U_k^*U_k=I\) sin probar
+ \(U_\alpha^*U_\alpha=I\) para toda emisión;
+ \item se identifica \(\kappa_k^{\rm can}\) con el carry entero
+ \(\kappa_\alpha\);
+ \item falla \(sB=0\), se contrae
+ \(Q_{\rm inc}(\widehat x)\) a su origen, se altera la acción
+ \(q\mapsto q+Ba\), o se identifican los dos órdenes de camino antes de
+ aplicar el lector;
+ \item un refinamiento rompe
+ \eqref{eq:pdfv2-cor-refinamiento-cadena} o el cociclo
+ \eqref{eq:pdfv2-cor-cociclo-matricial};
+ \item falla \(\partial^2=0\), \(z_\pm\) no son ciclos o
+ \(\partial h_*\neq z_--z_+\);
+ \item se afirma un escalar determinantal no nulo sin el retracto, el
+ balance y la aciclicidad exigidos por esa publicación;
+ \item se presenta cualquiera de las cinco operaciones como un objeto
+ separado del constructor \(\mathfrak D_{k,N}\).
+\end{enumerate}
+En todos esos casos el diagnóstico es: \emph{objeto común sustituido;
+conclusión no transferible}.
+\end{criterion}
+
+
+RESIDENCIA FOCAL HMT_OUTPUT
+
+# Producto nativo, factorización e irreducibilidad
+
+Primera redacción del Artículo VIII. Este capítulo desarrolla el sector aritmético
+de formas normales. El núcleo formal común y la construcción del continuo lo
+precederán en el artículo. Procedencia: resultado recuperado del propietario
+`10_producto_nativo_body.tex`; reorganización expositiva, no atribución de prioridad nueva.
+
+## 1. La información necesaria para multiplicar
+
+La selección de los números primos requiere haber construido una multiplicación.
+En Holografía Modular Triádica, esa operación debe exponerse a partir de las dos
+hojas de APP, conservando tanto la coordenada residual como su cociente. El residuo
+por sí solo permite reconocer una clase de congruencia. La pareja residuo–cociente
+permite reconstruir el resultado entero de la operación local. Esta distinción
+determina qué información debe transportarse al componer las celdas.
+
+Sea $D_9=\{1,\ldots,9\}$. Para cada par $(a,b)\in D_9^2$, las hojas aditiva y
+multiplicativa se escriben
+
+\[
+a+b=R_+(a,b)+9Q_+(a,b),\qquad
+ab=R_\times(a,b)+9Q_\times(a,b),
+\]
+
+con $R_+,R_\times\in D_9$. La elección del representante positivo fija de manera
+única los cuatro datos. En particular, un resultado divisible por nueve tiene
+residuo representado por $9$, y su cociente es una unidad menor que el de la
+división euclídea con resto cero. Se trata de una convención exacta de representación,
+que debe mantenerse a lo largo de toda la construcción.
+
+Por ejemplo,
+
+\[
+2\cdot5=1+9\cdot1,\qquad 9\cdot9=9+9\cdot8.
+\]
+
+El primer resultado conserva la información que distingue $10$ de $1$; el
+segundo conserva la que distingue $81$ de $9$. Si se omite el cociente en uno
+de estos pasos, una multiplicación posterior actúa sobre otro objeto. La memoria
+aritmética no es aquí una interpretación añadida al algoritmo: interviene en la
+reconstrucción de su resultado.
+
+Las dos hojas se acoplan incluso durante una multiplicación. El producto de dos
+dígitos genera una pareja $(R_\times,Q_\times)$; cuando el cociente procedente
+de una posición anterior se incorpora a la posición actual, se necesita de nuevo
+la hoja aditiva. La operación global compone ambas hojas.
+
+### Proposición 1. Compatibilidad local de los cocientes
+
+Los cocientes satisfacen las identidades necesarias para asociar y distribuir
+las operaciones sin alterar el entero reconstruido. Por ejemplo, para la suma,
+
+\[
+Q_+(a,b)+Q_+\bigl(R_+(a,b),c\bigr)
+=Q_+(b,c)+Q_+\bigl(a,R_+(b,c)\bigr).
+\]
+
+Para el producto,
+
+\[
+Q_\times\bigl(R_\times(a,b),c\bigr)+cQ_\times(a,b)
+=Q_\times\bigl(a,R_\times(b,c)\bigr)+aQ_\times(b,c).
+\]
+
+**Demostración.** Al sustituir las dos descomposiciones de $a+b+c$, los residuos
+finales son el mismo representante positivo de su clase módulo nueve. Restarlos
+y dividir entre nueve da la primera igualdad. Para $abc$, se aplica el mismo
+argumento a
+
+\[
+\bigl(R_\times(a,b)+9Q_\times(a,b)\bigr)c
+=a\bigl(R_\times(b,c)+9Q_\times(b,c)\bigr).
+\]
+
+La identidad distributiva se obtiene reconstruyendo $a(b+c)=ab+ac$ con las dos
+hojas. En los tres casos, la unicidad de la representación residual determina
+exactamente el cociente que debe acompañarla. ∎
+
+Estas identidades permiten organizar el registro de operaciones: dos
+parentizaciones producen el mismo entero sin obligar a identificar sus historias
+de ejecución. La igualdad del resultado y la identidad de la historia son
+afirmaciones diferentes.
+
+## 2. Palabras nonádicas y forma normal
+
+La extensión a enteros arbitrariamente grandes utiliza secuencias finitas de
+dígitos de $D_9$. Se adopta la orientación desde la posición de menor peso a la
+de mayor peso. Para $u=(u_0,\ldots,u_{r-1})$, sea
+
+\[
+\operatorname{ev}_9(u)=\sum_{j=0}^{r-1}u_j9^j.
+\]
+
+La secuencia vacía representa cero. En esta numeración biyectiva, el símbolo $9$
+continúa siendo un dígito; no se convierte en un cero sin cociente.
+
+### Proposición 2. Existencia y unicidad de la forma normal
+
+La evaluación anterior es una biyección entre las palabras finitas sobre $D_9$,
+incluida la palabra vacía, y los enteros no negativos.
+
+**Demostración.** Si $n>0$, defínase
+
+\[
+d(n)=1+((n-1)\bmod9),\qquad q(n)=\frac{n-d(n)}9.
+\]
+
+Entonces $d(n)\in D_9$, $q(n)\ge0$ y $q(n)<n$. La iteración termina en cero
+y produce una palabra cuya evaluación es $n$. Para la unicidad, el primer
+dígito de cualquier palabra que evalúe a $n$ debe representar la clase de $n$
+módulo nueve dentro de $D_9$; por tanto, debe ser $d(n)$. Retirarlo y dividir
+entre nueve reduce la cuestión a $q(n)$. La inducción prueba la unicidad. ∎
+
+Algunas formas normales son
+
+\[
+9\leftrightarrow(9),\quad
+10\leftrightarrow(1,1),\quad
+81\leftrightarrow(9,8),\quad
+1000\leftrightarrow(1,3,3,1).
+\]
+
+La escritura se verifica directamente: $1000=1+3\cdot9+3\cdot9^2+9^3$.
+Esta última igualdad no identifica por sí sola la palabra de un entero con
+la completación cúbica de un dominio geométrico. Las dos apariciones de $1000$
+tienen objetos y operaciones diferentes; una identificación requeriría su mapa.
+
+La forma normal es una coordenada aritmética. El estado del TPK conserva además
+orientación, hoja, ruta, frontera y memoria de transporte. Cuando diferentes
+historias producen una misma forma normal, la aplicación de evaluación reúne
+sus valores, pero no establece una biyección entre esas historias. El desarrollo
+del artículo debe conservar ambos niveles y el mapa que los relaciona.
+
+## 3. Construcción del producto sin evaluar previamente los operandos
+
+La suma de palabras se realiza posición por posición. Si en una posición hay dos
+dígitos, se consulta la hoja aditiva. Si sólo hay uno, se conserva ese dígito. El
+cociente que llega de la posición anterior se incorpora mediante otra consulta
+aditiva, y se suman los cocientes de ambas consultas. Si
+\(a+b=r+9q\) y \(r+c=r'+9q'\), se transporta \(q+q'\). Por ejemplo,
+\(9+9+1=1+9\cdot2\). El cociente entrante está entre cero y dos; cuando
+es cero no se consulta una celda adicional. Una posición
+ausente no es una celda de APP que contenga el dígito cero.
+
+La multiplicación por un dígito $d\in D_9$ actúa de manera análoga: en cada
+posición se aplica primero la hoja multiplicativa al dígito de la palabra y a
+$d$; después se incorpora el cociente pendiente mediante la hoja aditiva. El
+nuevo cociente es la suma del cociente del producto local y el de esa consulta
+aditiva, y está entre cero y nueve. El procedimiento termina añadiendo, cuando
+no sea nulo, el cociente final.
+
+Denotemos estas operaciones por $u\boxplus v$ y $d\odot u$. Si
+$v=(v_0,\ldots,v_{m-1})$, el producto nativo se construye mediante la recurrencia
+
+\[
+a_m=\varnothing,\qquad
+a_j=(9\odot a_{j+1})\boxplus(v_j\odot u),
+\quad j=m-1,\ldots,0,
+\]
+
+y se define $u\boxtimes v=a_0$. Cada operación del miembro derecho utiliza las
+dos hojas locales ya definidas. La evaluación de la palabra no interviene como
+instrucción para calcular el producto.
+
+### Teorema 3. Exactitud del producto nativo
+
+Para todas las palabras finitas $u,v$,
+
+\[
+\operatorname{ev}_9(u\boxtimes v)
+=\operatorname{ev}_9(u)\operatorname{ev}_9(v).
+\]
+
+**Demostración.** Las identidades de reconstrucción de las celdas prueban, por
+inducción sobre las posiciones, que
+
+\[
+\operatorname{ev}_9(u\boxplus v)
+=\operatorname{ev}_9(u)+\operatorname{ev}_9(v),\qquad
+\operatorname{ev}_9(d\odot u)=d\operatorname{ev}_9(u).
+\]
+
+Durante la recurrencia del producto se conserva el invariante
+
+\[
+\operatorname{ev}_9(a_j)
+=\operatorname{ev}_9(u)\sum_{k=j}^{m-1}v_k9^{k-j}.
+\]
+
+El caso $j=m$ es inmediato. Si vale para $j+1$, multiplicar por nueve y añadir
+$v_j\operatorname{ev}_9(u)$ produce el caso $j$. Para $j=0$ se obtiene la
+igualdad anunciada. ∎
+
+### Corolario 4. Estructura multiplicativa de las formas normales
+
+Las palabras no vacías, con el producto $\boxtimes$, forman un monoide
+conmutativo cuya unidad es $(1)$. Al añadir la palabra vacía, ésta es absorbente.
+
+**Demostración.** La evaluación es multiplicativa por el teorema y es inyectiva
+por la proposición 2. La asociatividad, la conmutatividad y la identidad se
+verifican después de evaluar y se recuperan por inyectividad. ∎
+
+La prueba permite reconocer la multiplicación ordinaria en la operación
+construida. El orden lógico es importante: primero se define el transductor de
+celdas y se demuestra su invariante; después se identifica su realización entera.
+
+## 4. Aperturas multiplicativas y selección de irreducibles
+
+Una vez construido el producto, la factorización puede definirse como su fibra.
+Para cada palabra no vacía $w$, sea
+
+\[
+\operatorname{Fac}(w)=\{(u,v):u\boxtimes v=w\}.
+\]
+
+Esta fibra es finita. En efecto, si $n=\operatorname{ev}_9(w)$, la exactitud
+implica $\operatorname{ev}_9(u)\operatorname{ev}_9(v)=n$, con ambos factores
+positivos y no mayores que $n$. La finitud justifica la suma algebraica
+
+\[
+\Delta e_w=\sum_{(u,v)\in\operatorname{Fac}(w)}e_u\otimes e_v.
+\]
+
+El orden en el par de factores se conserva. Para $n=12$, por ejemplo, las
+evaluaciones de la fibra son
+
+\[
+(1,12),(2,6),(3,4),(4,3),(6,2),(12,1).
+\]
+
+El coproducto reducido elimina las dos descomposiciones que contienen la unidad,
+para $w\ne(1)$:
+
+\[
+\widetilde\Delta e_w
+=\sum_{\substack{u\boxtimes v=w\\u\ne(1),\ v\ne(1)}}e_u\otimes e_v.
+\]
+
+Se fija $\widetilde\Delta e_{(1)}=0$. Esta convención permite tratar la unidad
+separadamente, sin confundirla con un irreducible.
+
+### Definición 5. Irreducible nativo
+
+Una palabra $w\ne(1)$ es multiplicativamente irreducible si
+$\widetilde\Delta e_w=0$.
+
+La definición no recibe una tabla de primos ni utiliza un período decimal.
+Pregunta si la operación ya construida admite una apertura no trivial.
+
+### Teorema 6. Reconocimiento de los primos
+
+La evaluación establece una biyección entre los irreducibles nativos y los
+números primos positivos.
+
+**Demostración.** Si $w=u\boxtimes v$ con factores distintos de la unidad,
+su evaluación es el producto de dos enteros mayores que uno; por tanto, no es
+primo. Recíprocamente, si $\operatorname{ev}_9(w)=ab$, con $a,b>1$, sus
+formas normales $u,v$ satisfacen
+
+\[
+\operatorname{ev}_9(u\boxtimes v)=ab=\operatorname{ev}_9(w).
+\]
+
+La inyectividad da $u\boxtimes v=w$, de modo que $w$ no es irreducible.
+La biyección de las formas normales completa la prueba. ∎
+
+Este resultado identifica una propiedad de la operación con la propiedad de su
+realización entera. Los valores de los primos aparecen al evaluar los objetos
+seleccionados, después de haber definido el producto y sus fibras.
+
+### Proposición 7. Coasociatividad
+
+Sobre el espacio algebraico generado por las palabras positivas,
+
+\[
+(\Delta\otimes I)\Delta=(I\otimes\Delta)\Delta.
+\]
+
+**Demostración.** Ambos miembros enumeran, con coeficiente uno, los triples
+ordenados $(u,v,z)$ cuyo producto es $w$. La asociatividad del producto
+identifica las dos parentizaciones y todas las sumas son finitas. ∎
+
+## 5. Realización operatoria del selector
+
+En \(\mathcal H=\ell^2(\mathcal W_9^+)\), con base ortonormal
+\(\{e_w\}\), el coproducto se define
+primero sobre combinaciones finitas. Los soportes de $\Delta e_w$ y
+$\Delta e_{w'}$ son disjuntos si $w\ne w'$: un par ordenado tiene un único
+producto. Por tanto,
+
+\[
+\|\Delta e_w\|^2=|\operatorname{Fac}(w)|,
+\qquad
+\|\widetilde\Delta e_w\|^2=r(w),
+\]
+
+donde $r(w)$ cuenta las aperturas ordenadas no triviales.
+
+El cierre de $\widetilde\Delta$ tiene dominio
+
+\[
+\left\{x=\sum_wx_we_w\in\mathcal H:\sum_wr(w)|x_w|^2<\infty\right\}.
+\]
+
+Su operador positivo asociado es diagonal:
+
+\[
+A_{\mathrm{irr}}=\overline{\widetilde\Delta}^{\,*}\overline{\widetilde\Delta},
+\qquad A_{\mathrm{irr}}e_w=r(w)e_w.
+\]
+
+Su dominio maximal es
+\[
+\operatorname{Dom}(A_{\mathrm{irr}})
+=\left\{x\in\mathcal H:\sum_wr(w)^2|x_w|^2<\infty\right\}.
+\]
+
+El proyector sobre los irreducibles es entonces
+
+\[
+P_{\mathrm{irr}}=(I-P_{(1)})\mathbf1_{\{0\}}(A_{\mathrm{irr}}).
+\]
+
+La fórmula incorpora dos exclusiones diferentes: el núcleo elimina todas las
+palabras que poseen una apertura no trivial, y $I-P_{(1)}$ retira la unidad.
+La positividad procede de una norma cuadrada y tiene aquí un significado
+determinado: cuenta descomposiciones. Todavía no es una afirmación sobre la
+positividad de otra forma, como la forma completada de Weil.
+
+## 6. Lectura normalizada del prefijo TPK y conservación de la genealogía
+
+La forma normal admite una composición explícita con el prefijo entero
+producido por el TPK. Denótese por
+\(\beta_9=\operatorname{ev}_9^{-1}\) el normalizador de la proposición 2.
+Aquí \(K\) es la profundidad de bloques del estado TPK, distinta de la
+longitud \(k\) de una historia elemental del árbol de emisiones. La
+construcción se aplica a una coordenada regional del estado de bloques;
+el mismo cálculo sirve para cada una de las tres coordenadas con su
+registro propio.
+
+Para el vector fila profundo \(x_K\in\mathbb Z^6\), el paso entero
+del TPK utiliza la matriz
+\[
+A_H=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix}
+\]
+y produce
+\[
+y_K=x_KA_H,\qquad
+u_{K+1}=y_K\bmod3,\qquad
+x_{K+1}=\frac{y_K-u_{K+1}}3.
+\]
+El bloque \(u_{K+1}\in\mathbb F_3^6\), con representantes
+\(\overline u_j\in\{0,1,2\}\), tiene índice
+\[
+I(u_{K+1})=\sum_{j=1}^{6}\overline u_j3^{6-j},
+\qquad 0\leq I(u_{K+1})<729.
+\]
+El lector cilíndrico actualiza el prefijo mediante
+\[
+N_{K+1}=729N_K+I(u_{K+1}).
+\]
+La matriz \(A_H\) pertenece a la actualización del núcleo TPK. En la
+composición siguiente no se reemplaza por una regla aritmética externa:
+el bloque y su índice llegan del paso que acaba de ejecutarse.
+
+### Proposición 8. Compatibilidad del prefijo nativo y su forma normal
+
+Si \(w_K=\beta_9(N_K)\), entonces
+\[
+w_{K+1}
+=\bigl(\beta_9(729)\boxtimes w_K\bigr)
+\boxplus\beta_9(I(u_{K+1})).
+\]
+El truncamiento tipado de esta lectura es
+\[
+\varrho(w)=
+\beta_9\!\left(
+\left\lfloor\frac{\operatorname{ev}_9(w)}{729}\right\rfloor
+\right);
+\qquad \varrho(w_{K+1})=w_K.
+\]
+
+**Demostración.** Las compatibilidades de la suma y el producto de
+palabras demuestran que la evaluación del miembro derecho es
+\[
+729\operatorname{ev}_9(w_K)+I(u_{K+1})
+=729N_K+I(u_{K+1})=N_{K+1}.
+\]
+La unicidad de la forma normal da la primera igualdad. Como el índice
+del bloque está entre cero y \(728\), el cociente entero de
+\(N_{K+1}\) entre \(729\) es \(N_K\). Aplicar \(\beta_9\) prueba
+la identidad de truncamiento. ∎
+
+El truncamiento no consiste en borrar tres dígitos de una palabra
+biyectiva. Por ejemplo,
+\(\beta_9(729)=(9,8,8)\), mientras que el cociente entero de \(729\)
+entre \(729\) es uno; borrar sus tres dígitos produciría la palabra
+vacía. La regla \(\varrho\) conserva la convención de residuo y
+cociente que define la numeración.
+
+La proposición normaliza un prefijo ya generado y conserva su
+compatibilidad bajo refinamiento. Su aplicación al estado mantiene,
+en el registro original, el bloque \(u_{K+1}\), el cociente profundo
+\(x_{K+1}\), los acarreos de la carta decimal, la fase y la ruta.
+No afirma que \(w_K\) reconstruya por sí solo esas coordenadas ni que
+cualquier palabra sea publicada por una sección regional fijada.
+La igualdad de formas normales se refiere al prefijo numérico; la
+identidad de las historias se decide en el estado completo.
+
+El registro que acompaña al producto contiene las consultas de ambas hojas y sus
+residuos y cocientes. Permite explicar por qué una salida se obtuvo y reproducir
+la operación. El resultado del transductor no agota, sin embargo, el estado de
+una prolongación del TPK: una forma normal puede ser alcanzada por historias
+diferentes.
+
+Por ello, la integración con la dinámica conserva el sentido de cada mapa:
+el estado TPK publica su prefijo y éste admite la lectura normalizada que
+acaba de construirse. La compatibilidad de un producto sobre historias
+requiere además especificar su dominio, su transporte y su supervivencia.
+No exige invertir una lectura numérica que no individualiza la historia.
+La identidad de valores no reemplaza ese cuadrado de compatibilidad;
+cada aplicación debe acompañarse de la operación concreta y de la
+información que conserva.
+
+El punto de partida de la aritmética ya está especificado: dos operaciones
+locales, una forma normal, un transductor global, sus fibras y un selector. La
+extensión espectral debe utilizar esos resultados sin cambiar retrospectivamente
+su origen.
+
+## 7. Correspondencia con la implementación conservada
+
+El código `a9_native.py` implementa las operaciones en este orden:
+
+1. Celdas locales de suma y producto.
+2. Codificación biyectiva nonádica y evaluación separada.
+3. Suma de palabras y multiplicación por un dígito.
+4. Recurrencia del producto de palabras.
+5. Enumeración de fibras del producto.
+6. Selección de irreducibles por ausencia de apertura no trivial.
+
+El comprobador usa la multiplicación entera y una prueba convencional de
+primalidad después de generar las salidas. Esas operaciones contrastan la
+implementación; no se incorporan al cuerpo del productor de palabras. Los
+controles que suprimen un cociente o alteran una celda documentan qué dependencia
+se rompe. Sus resultados se presentarán con el tamaño de la ventana comprobada,
+separados de las demostraciones generales anteriores.
+
+
+RESIDENCIA FOCAL CONVENTIONAL
+
+# Partes finitas, regularización y lectores residuales
+
+El funcional construido a partir de los modos enteros admite operaciones que
+conservan aspectos distintos de su estructura. Evaluarlo en un punto de
+convergencia, extraer el término regular que acompaña a un polo y derivar su
+continuación meromorfa son tres operaciones precisas. Esta distinción organiza
+las constantes de este capítulo y su relación con las del capítulo de momentos.
+
+El antecedente aritmético es la publicación de las formas normales obtenidas
+con las dos hojas de APP. Su evaluación identifica una vez cada entero positivo;
+el operador de numeración actúa sobre la base correspondiente por
+\[
+Qe_n=ne_n,\qquad
+\operatorname{Dom}Q=\left\{u:\sum_{n\geq1}n^2|u_n|^2<\infty\right\}.
+\]
+La lectura espectral posterior es
+\[
+Z(s)=\operatorname{Tr}(Q^{-s})=\sum_{n\geq1}n^{-s},\qquad \Re s>1.
+\]
+El capítulo de la forma completada demuestra su coincidencia con el funcional
+theta–Mellin y su continuación. Aquí se reúne un procedimiento de evaluación
+con restos controlados. La memoria de la historia permanece en el estado fuente;
+la traza es una lectura de los modos publicados, no una reconstrucción de toda
+esa historia a partir de una constante escalar.
+
+## 1. Una fórmula de continuación con resto explícito
+
+Defínanse los números de Bernoulli mediante la identidad formal
+\[
+\frac{t}{e^t-1}=\sum_{j\geq0}B_j\frac{t^j}{j!}.
+\]
+Sus coeficientes se calculan sin una tabla numérica:
+\[
+B_0=1,\qquad
+B_m=-\frac1{m+1}\sum_{j=0}^{m-1}\binom{m+1}{j}B_j.
+\]
+En particular, \(B_1=-1/2\). Escribamos
+\((s)_r=s(s+1)\cdots(s+r-1)\), con \((s)_0=1\), y denotemos
+por \(B_m(x)=\sum_{j=0}^m\binom mjB_jx^{m-j}\) el polinomio
+correspondiente. Su periodización es
+\(\widetilde B_{2p}(x)=B_{2p}(\{x\})\). Para \(N,p\geq1\), la
+sumación de Euler–Maclaurin da
+\[
+\begin{aligned}
+Z(s)={}&\sum_{n=1}^N n^{-s}+\frac{N^{1-s}}{s-1}-\frac1{2N^s}\\
+&+\sum_{k=1}^p\frac{B_{2k}}{(2k)!}(s)_{2k-1}N^{1-s-2k}
++R_{N,p}(s),
+\end{aligned}
+\]
+con
+\[
+R_{N,p}(s)=-\frac{(s)_{2p}}{(2p)!}
+\int_N^\infty\widetilde B_{2p}(x)x^{-s-2p}\,dx.
+\]
+
+### Proposición 1. Dominio y cota del resto
+
+La integral del resto es holomorfa en \(\Re s>1-2p\). Si
+\(\sigma=\Re s>1-2p\), entonces
+\[
+|R_{N,p}(s)|\leq
+\frac{|B_{2p}|\,|(s)_{2p}|}{(2p)!}
+\frac{N^{1-\sigma-2p}}{\sigma+2p-1}.
+\]
+La fórmula anterior prolonga \(Z\) a ese semiplano, con su polo simple
+en \(s=1\), y es compatible con la continuación theta–Mellin.
+
+**Demostración.** La fórmula de sumación se obtiene integrando por partes
+sucesivamente en cada intervalo unitario y usando
+\(B_j'(x)=jB_{j-1}(x)\) y las igualdades de los extremos para los
+polinomios de grado distinto de uno. Al aplicarla a \(x^{-s}\) sobre
+\([N,M]\), las derivadas proporcionan los factores \((s)_r\).
+En \(\Re s>1\), el paso \(M\to\infty\) elimina los extremos superiores
+y produce exactamente la identidad y el signo del resto escritos arriba.
+
+Para controlar éste se usa
+\[
+|B_{2p}(t)|\leq |B_{2p}|,\qquad 0\leq t\leq1.
+\]
+Una prueba de esta desigualdad es la serie de Fourier absolutamente
+convergente
+\[
+B_{2p}(t)=(-1)^{p+1}\frac{2(2p)!}{(2\pi)^{2p}}
+\sum_{m\geq1}\frac{\cos(2\pi mt)}{m^{2p}}.
+\]
+El máximo de la cota por valores absolutos se alcanza en \(t=0\).
+Esta identidad se deduce de los coeficientes de Fourier por integración
+por partes de los propios polinomios; el factor \(\pi\) sólo expresa
+la convención de Fourier de esta prueba y no entra numéricamente en el
+evaluador racional que se empleará después. La comparación con
+\(x^{-\sigma-2p}\) demuestra la cota del resto. Sobre compactos del
+semiplano, también domina sus derivadas en \(s\), que añaden potencias
+de \(\log x\); por tanto, la integral es holomorfa allí. La identidad
+en el semiplano de convergencia y la unicidad de la continuación prueban
+la compatibilidad anunciada. ∎
+
+El orden \(p\) y el horizonte \(N\) son parámetros de cálculo y control
+del error. No seleccionan una constante distinta: las expresiones con
+distintos \(N,p\) representan el mismo funcional en sus dominios comunes.
+Tampoco es necesario que una serie asintótica converja al aumentar
+indefinidamente \(p\) con \(N\) fijo. Cada par finito viene acompañado
+por su propia cota demostrada.
+
+## 2. Euler–Mascheroni como parte finita del mismo funcional
+
+La parte finita en el polo se define por
+\[
+\gamma_0=\lim_{s\to1}\left(Z(s)-\frac1{s-1}\right).
+\]
+Al poner \(s=1+z\), el término singular satisface
+\[
+\frac{N^{-z}}z=\frac1z-\log N+O(z).
+\]
+La proposición anterior permite tomar la parte finita término a término.
+
+### Teorema 2. Intervalo explícito para la parte finita
+
+Sean
+\[
+G_{N,p}=H_N-\log N-\frac1{2N}
++\sum_{k=1}^p\frac{B_{2k}}{2kN^{2k}},
+\qquad H_N=\sum_{n=1}^N\frac1n.
+\]
+Entonces
+\[
+|\gamma_0-G_{N,p}|\leq\frac{|B_{2p}|}{2pN^{2p}}.
+\]
+Además,
+\[
+\gamma_0=\lim_{N\to\infty}(H_N-\log N).
+\]
+
+**Demostración.** En \(s=1\), se tiene
+\((1)_{2k-1}=(2k-1)!\); por eso cada término de Bernoulli se
+convierte en \(B_{2k}/(2kN^{2k})\). La cota de la proposición 1
+evaluada en ese punto es \(|B_{2p}|/(2pN^{2p})\).
+Con \(p=1\), todos los términos que separan \(G_{N,1}\) de
+\(H_N-\log N\), y también el resto, tienden a cero. Esto demuestra
+el límite. Ésta es la identificación posterior con la constante de
+Euler–Mascheroni. ∎
+
+Así queda incorporado el antecedente de \(\gamma_0\) que utiliza la
+fórmula de Meissel–Mertens. El número no se recibe como una cifra
+independiente para corregir la suma sobre irreducibles: es una operación
+especificada sobre la misma función de partición entera.
+
+El logaritmo utilizado en el cálculo admite también un intervalo racional.
+Para \(x\geq1\), sea \(z=(x-1)/(x+1)\). La serie integrada de una
+progresión geométrica da
+\[
+\log x=2\sum_{j=0}^{M-1}\frac{z^{2j+1}}{2j+1}+r_M(x),
+\quad
+0\leq r_M(x)\leq
+\frac{2z^{2M+1}}{(2M+1)(1-z^2)}.
+\]
+La desigualdad resulta al sustituir los denominadores de la cola por
+\(2M+1\) y sumar la progresión geométrica. Se reduce primero
+\(x=2^a y\), con \(1\leq y<2\), y se evalúan \(a\log2+\log y\).
+De este modo el argumento de las series está a lo sumo en \(1/3\).
+Para \(0<x<1\) se utiliza \(\log x=-\log(1/x)\), invirtiendo los
+extremos del intervalo.
+
+## 3. Apéry y la evaluación negativa regularizada
+
+Para un entero \(r\geq2\), la especialización de la proposición 1 produce
+un centro racional
+\[
+Z_{N,p}^{[r]}=
+\sum_{n=1}^N\frac1{n^r}+\frac1{(r-1)N^{r-1}}-\frac1{2N^r}
++\sum_{k=1}^p\frac{B_{2k}(r)_{2k-1}}{(2k)!N^{r+2k-1}}
+\]
+y la cota completamente racional
+\[
+\left|Z(r)-Z_{N,p}^{[r]}\right|
+\leq\frac{|B_{2p}|(r)_{2p-1}}{(2p)!N^{r+2p-1}}.
+\]
+La simplificación usa \((r)_{2p}/(r+2p-1)=(r)_{2p-1}\).
+En \(r=3\) se obtiene la constante de Apéry. El procedimiento determina
+su valor con cotas; la irracionalidad de esa constante es una afirmación
+matemática distinta de esta evaluación.
+
+En el lado negativo, la misma continuación admite una evaluación exacta,
+sin una aproximación decimal ni un parámetro de ajuste.
+
+### Teorema 3. Evaluación regularizada en menos uno
+
+La continuación del funcional de los modos enteros satisface
+\[
+Z(-1)=-\frac1{12}.
+\]
+
+**Demostración.** En la fórmula de la proposición 1 se toma \(p=2\),
+de modo que \(s=-1\) pertenece al interior del semiplano de validez.
+El factor \((s)_4\) se anula en ese punto; la integral que lo acompaña
+es holomorfa allí, por lo que el resto vale cero. También se anula
+\((s)_3\), que multiplica el término con \(B_4\). Sólo queda
+\[
+Z(-1)=\sum_{n=1}^N n-\frac{N^2}{2}-\frac N2-\frac{B_2}{2}.
+\]
+Como la acumulación aditiva da
+\(\sum_{n=1}^N n=N(N+1)/2\) y la recurrencia de Bernoulli da
+\(B_2=1/6\), el resultado es \(-1/12\), independientemente de
+\(N\). ∎
+
+El objeto evaluado es la continuación del funcional, no el límite ordinario
+de las sumas parciales positivas, que crecen sin cota. La distinción conserva
+la operación que hace aparecer el valor: el término de Bernoulli permanece
+después de cancelar los términos polinómicos de frontera. Por eso la
+regularización tiene aquí una estructura y una genealogía, además de un valor.
+
+## 4. Coeficientes de Laurent y conservación de las tres clases
+
+Escribamos
+\[
+Z(1+z)-\frac1z=\sum_{n\geq0}a_nz^n,
+\qquad \gamma_n=(-1)^nn!a_n.
+\]
+La función regular de la izquierda es holomorfa alrededor de cero. Para
+un círculo contenido en su dominio de holomorfía, Cauchy determina
+\[
+a_n=\frac1{2\pi i}\int_{|z|=\rho}
+\frac{Z(1+z)-1/z}{z^{n+1}}\,dz.
+\]
+La fórmula de continuación con resto permite controlar esa extracción:
+una cota uniforme \(\varepsilon\) del error sobre el círculo produce
+una cota \(\varepsilon\rho^{-n}\) para el coeficiente. Esto justifica
+un procedimiento a orden arbitrario; no convierte la coincidencia de dos
+cuadraturas finitas en una cota de error.
+
+La lectura residual mantiene las tres clases del operador entero:
+\[
+Q_re_n=\mathbf1_{n\equiv r\ (3)}e_n,\qquad
+Z_r(s)=\operatorname{Tr}(Q^{-s}Q_r),\quad r=0,1,2.
+\]
+Estas proyecciones tienen dominio común en el semiplano de convergencia.
+Su suma es la identidad; la diferencia de las clases 1 y 2 conserva la
+orientación del carácter módulo tres. Se tiene
+\[
+Z=Z_0+Z_1+Z_2,\qquad Z_0(s)=3^{-s}Z(s),\qquad
+L_{-3}(s)=Z_1(s)-Z_2(s).
+\]
+La última serie tiene coeficientes periódicos \((1,-1,0)\) y media
+cero. Agrupar por períodos permite su continuación cerca de \(s=1\).
+Cada \(Z_r\) tiene residuo \(1/3\) en ese punto.
+
+Sean
+\[
+Z_r(1+z)-\frac1{3z}=\sum_{n\geq0}c_{r,n}z^n,
+\qquad \lambda=\log3.
+\]
+La comparación de coeficientes da
+\[
+a_n=c_{0,n}+c_{1,n}+c_{2,n},\qquad
+\frac{L_{-3}^{(n)}(1)}{n!}=c_{1,n}-c_{2,n},
+\]
+\[
+c_{0,n}=\frac13\left[
+\frac{(-\lambda)^{n+1}}{(n+1)!}
++\sum_{k=0}^na_k\frac{(-\lambda)^{n-k}}{(n-k)!}\right].
+\]
+La tercera identidad procede de multiplicar la serie completa, incluido
+su polo, por \(3^{-1}e^{-\lambda z}\). La suma y la diferencia recuperan
+los otros dos coeficientes de manera única. Las tres lecturas conservan,
+respectivamente, la agregación, la orientación y el cambio de escala.
+
+En orden cero puede completarse la evaluación sin recibir un decimal
+de \(L_{-3}(1)\). En efecto,
+\[
+L_{-3}(1)=\sum_{m\geq0}\left(\frac1{3m+1}-\frac1{3m+2}\right)
+=\int_0^1\frac{1-x}{1-x^3}\,dx
+=\int_0^1\frac{dx}{1+x+x^2}.
+\]
+Se completa el cuadrado en el denominador y se evalúa la primitiva:
+\[
+L_{-3}(1)=\frac2{\sqrt3}
+\left[\arctan\frac{2x+1}{\sqrt3}\right]_0^1
+=\frac{\pi}{3\sqrt3}.
+\]
+La coordenada \(\pi\) es la publicación regional previa de HMT; esta
+identidad es una evaluación analítica posterior de un lector de clases,
+no un procedimiento para seleccionar retroactivamente esa coordenada.
+Por tanto, con \(C_r=c_{r,0}\),
+\[
+C_0=\frac{\gamma_0-\log3}{3},\qquad
+C_{1,2}=\frac{\gamma_0}{3}+\frac{\log3}{6}
+\mathbin{\pm}\frac{\pi}{6\sqrt3}.
+\]
+Se recuperan las identidades
+\[
+C_0+C_1+C_2=\gamma_0,\qquad
+C_1-C_2=L_{-3}(1),\qquad C_1+C_2-2C_0=\log3.
+\]
+
+## 5. Publicación exacta y alcance del certificado
+
+El programa `partes_finitas_exactas.py` conserva el orden siguiente:
+sucesión de palabras mediante la hoja aditiva; evaluación de los modos
+enteros; construcción racional de Bernoulli; aplicación de la fórmula
+del funcional; incorporación del resto; publicación decimal dirigida.
+La multiplicación nativa permanece disponible en el mismo paquete y su
+compatibilidad se demuestra en el capítulo del producto. El cálculo
+analítico sobre los modos publicados no modifica sus reglas.
+
+Con \(N=81\), \(p=8\) y 120 términos para cada serie del logaritmo,
+se obtienen los intervalos
+\[
+\begin{aligned}
+0.577215664901532860606512090082273204041535
+&<\gamma_0\\
+&<0.577215664901532860606512090082531387279784,
+\end{aligned}
+\]
+\[
+\begin{aligned}
+1.202056903159594285399738161511447311355829
+&<Z(3)\\
+&<1.202056903159594285399738161511452663119342.
+\end{aligned}
+\]
+Los extremos decimales son redondeos hacia fuera de fracciones exactas.
+El programa conserva también la anchura racional de cada intervalo y
+recupera \(-1/12\) exactamente. Ninguna cifra de comparación aparece
+en el productor. El comprobador separado abre los valores de referencia
+después de obtener las salidas; ese contraste comprueba la ejecución y
+no sustituye las cotas demostradas.
+
+Este capítulo cierra dentro de su dominio las partes finitas y
+evaluaciones que acaba de definir. No utiliza una suposición sobre la
+localización de los ceros ni sobre la positividad de la forma de Weil.
+La prolongación hacia el problema espectral conserva las obligaciones
+propias de sus operadores: una evaluación regularizada no proporciona
+por sí sola la identidad de frontera de otro funcional.
+
+Procedencia: desarrollo recuperado de los funcionales triádicos y de la
+red coordinada de lectores. La reunión de la prueba de Euler–Maclaurin,
+sus cotas racionales y su programa es una formalización y un certificado
+adicional de esta edición; no se atribuye prioridad histórica nueva a
+esas identidades analíticas.

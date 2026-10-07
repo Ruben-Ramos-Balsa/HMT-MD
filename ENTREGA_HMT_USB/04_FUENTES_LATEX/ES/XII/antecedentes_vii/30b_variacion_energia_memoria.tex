@@ -1,0 +1,318 @@
+% Artículo VII. Desarrollo aditivo, revisión 04, 10-09-2026.
+% ARQUITECTURA_AUTORAL_PREEXISTENTE: transporte enriquecido, energía
+% D_9^* W D_9 y compatibilidad por refinamiento, propietario S01,
+% 02_dinamica_tres_hojas.tex, líneas 221--250.
+% FORMALIZACION_NUEVA / CERTIFICADO_NUEVO: diferencial explícito de ese
+% funcional, representante antihermítico, composición e inversión ponderada.
+% Las variaciones pertenecen al espacio de realizaciones unitarias del
+% transporte. No se presume que toda variación continua sea una ruta TPK.
+% Su realización como corriente material de espín se trata por separado.
+% \mathsf W_m es el peso energético; W de la sección anterior es soldadura.
+
+\section{Respuesta variacional de la energía de memoria}
+\label{vii:sec:variacion-memoria}
+
+El transporte de una ruta identifica las fibras de sus extremos y conserva
+la orientación y la memoria que intervienen en esa identificación. La energía
+asociada compara el campo final con el campo inicial transportado. Su
+diferencial cuantifica cómo responde esa comparación a una variación del
+transporte. Esta sección obtiene la respuesta directamente del funcional
+discreto y desarrolla su composición, covariancia e inversión.
+
+\subsection{Funcional discreto y espacio de variaciones}
+\label{vii:subsec:funcional-memoria}
+
+En un nivel finito \(m\), sean \(\mathcal V_m\) los vértices de la
+representación de rutas y \(\mathcal E_m^+\) una orientación de cada arista.
+Cada vértice lleva una fibra hermítica finito-dimensional \(H_v\).
+Definimos
+\[
+ \mathcal H_m=\bigoplus_{v\in\mathcal V_m}H_v,\qquad
+ \mathcal K_m=\bigoplus_{a\in\mathcal E_m^+}H_{t(a)}.
+\]
+El producto hermítico es antilineal en la primera variable.
+Para \(U_a:H_{s(a)}\to H_{t(a)}\) unitario, el operador de diferencias es
+\begin{equation}
+ (D_mf)_a=f_{t(a)}-U_af_{s(a)},\qquad
+ E_m(f,U)=\langle D_mf,\mathsf W_mD_mf\rangle,\qquad
+ \mathsf W_m=\mathsf W_m^*>0.
+ \label{vii:eq:energia-memoria-discreta}
+\end{equation}
+Es la energía del término \(D_m^*\mathsf W_mD_m\) del generador discreto.
+El peso \(\mathsf W_m\) puede acoplar distintas aristas. El operador \(W\)
+de la soldadura de la sección~\ref{vii:sec:pantalla-respuesta} y este peso
+energético tienen dominios y funciones diferentes.
+
+El transporte \(U\) es una representación del estado enriquecido. El campo
+\(f\) y el peso \(\mathsf W_m\) permanecen explícitos como argumentos
+del funcional; cada aplicación material conserva las reglas que los
+determinan. Se consideran colecciones diferenciables de las realizaciones
+unitarias del transporte,
+\[
+ \dot U_a=A_aU_a,\qquad A_a^*=-A_a.
+\]
+Las variaciones físicamente utilizadas forman el subespacio que conserve
+las condiciones de la realización correspondiente. El diferencial se
+calcula primero en el espacio tangente unitario y después se restringe
+a ese subespacio.
+
+\begin{proposition}[Covector de respuesta al transporte]
+\label{vii:prop:covector-memoria}
+Escribamos
+\[
+ v_a=U_af_{s(a)},\qquad r=D_mf,\qquad q=\mathsf W_mr.
+\]
+A campo y peso fijos, el diferencial de la energía es
+\begin{equation}
+ \mathfrak j_m(A)=-2\operatorname{Re}
+       \sum_{a\in\mathcal E_m^+}\langle q_a,A_av_a\rangle .
+ \label{vii:eq:covector-memoria}
+\end{equation}
+Su representante para el producto real de Hilbert--Schmidt es
+\begin{equation}
+ \mathcal J_a=v_aq_a^*-q_av_a^*,\qquad
+ \mathcal J_a^*=-\mathcal J_a,\qquad
+ \mathfrak j_m(A)=
+ \sum_a\operatorname{Re}\operatorname{Tr}(\mathcal J_a^*A_a).
+ \label{vii:eq:representante-corriente-discreta}
+\end{equation}
+Para variaciones simultáneas de campo, transporte y peso se tiene
+\begin{equation}
+ \dot E_m=
+ 2\operatorname{Re}\sum_a
+ \left\langle q_a,\dot f_{t(a)}-U_a\dot f_{s(a)}-A_av_a\right\rangle
+ +\langle r,\dot{\mathsf W}_mr\rangle .
+ \label{vii:eq:variacion-completa-memoria}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La actualización de primer orden, escrita en el álgebra de números
+duales con \(\epsilon^2=0\), da
+\[
+ r+\epsilon\dot r,\qquad
+ \dot r_a=\dot f_{t(a)}-U_a\dot f_{s(a)}-A_av_a.
+\]
+El coeficiente de \(\epsilon\) en la energía es
+\[
+ \langle\dot r,\mathsf W_mr\rangle+
+ \langle r,\mathsf W_m\dot r\rangle+
+ \langle r,\dot{\mathsf W}_mr\rangle.
+\]
+La autoadjunción del peso produce
+\eqref{vii:eq:variacion-completa-memoria}. Al fijar campo y peso queda
+\eqref{vii:eq:covector-memoria}. Además,
+\[
+ \operatorname{Tr}(\mathcal J_a^*A_a)
+ =v_a^*A_aq_a-q_a^*A_av_a.
+\]
+La antihermiticidad de \(A_a\) implica
+\(v_a^*A_aq_a=-\overline{q_a^*A_av_a}\), de donde se obtiene
+el representante anunciado.
+\end{proof}
+
+Así queda evaluada la respuesta: en cada arista se transporta el campo,
+se calcula su diferencia con el campo final y se aplica el peso energético.
+El producto antisimetrizado de esos dos vectores determina
+\(\mathcal J_a\in\mathfrak u(H_{t(a)})\). Este operador representa,
+mediante el producto real de Hilbert--Schmidt, el covector de respuesta
+sobre las variaciones unitarias de la fibra de destino.
+
+\subsection{Composición y transporte de la respuesta}
+\label{vii:subsec:composicion-respuesta}
+
+\begin{proposition}[Regla de composición sobre una ruta]
+\label{vii:prop:composicion-respuesta}
+Para una ruta formada por \(N\) transportes, sea
+\(U_\gamma=U_N\cdots U_1\) y
+\(B_k=U_N\cdots U_{k+1}\), con \(B_N=I\).
+Si \(\dot U_k=A_kU_k\), entonces
+\begin{equation}
+ \dot U_\gamma U_\gamma^{-1}
+ =\sum_{k=1}^N B_kA_kB_k^{-1}.
+ \label{vii:eq:variacion-transporte-compuesto}
+\end{equation}
+Por tanto, un representante \(\mathcal J_\gamma\) en la fibra final
+induce en el factor \(k\) la contribución
+\(B_k^*\mathcal J_\gamma B_k\). Cuando un factor pertenece a varias
+rutas del funcional, sus contribuciones se suman con las incidencias
+que éste utiliza.
+\end{proposition}
+
+\begin{proof}
+La regla del producto da
+\[
+ \dot U_\gamma=\sum_k
+ U_N\cdots U_{k+1}A_kU_k\cdots U_1.
+\]
+Multiplicar por \(U_\gamma^{-1}\) elimina los factores a la derecha
+de \(A_k\) y produce \eqref{vii:eq:variacion-transporte-compuesto}.
+Por unitariedad y ciclicidad de la traza,
+\[
+ \operatorname{Re}\operatorname{Tr}
+   (\mathcal J_\gamma^*B_kA_kB_k^{-1})
+ =\operatorname{Re}\operatorname{Tr}
+   ((B_k^*\mathcal J_\gamma B_k)^*A_k).
+\]
+La linealidad del diferencial demuestra la suma de contribuciones.
+\end{proof}
+
+Esta fórmula conserva la posición de cada operación dentro de la ruta.
+El transporte posterior a una incidencia determina cómo se representa
+su contribución en la fibra final; la respuesta local se recupera
+transportándola a la fibra de esa incidencia.
+
+\begin{proposition}[Covariancia bajo cambios unitarios de marco]
+\label{vii:prop:covariancia-corriente-memoria}
+Sean \(g_v\) cambios unitarios de marco, independientes del parámetro
+de variación, y \(G_{\mathcal E}=\bigoplus_a g_{t(a)}\).
+Bajo las transformaciones
+\[
+ f'_v=g_vf_v,\quad U'_a=g_{t(a)}U_ag_{s(a)}^{-1},\quad
+ \mathsf W'_m=G_{\mathcal E}\mathsf W_mG_{\mathcal E}^{-1},\quad
+ A'_a=g_{t(a)}A_ag_{t(a)}^{-1},
+\]
+se tiene
+\begin{equation}
+ \mathcal J'_a=g_{t(a)}\mathcal J_ag_{t(a)}^{-1},
+ \qquad \mathfrak j'_m(A')=\mathfrak j_m(A).
+ \label{vii:eq:covariancia-respuesta}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Se obtiene \(r'=G_{\mathcal E}r\), \(q'=G_{\mathcal E}q\) y
+\(v'_a=g_{t(a)}v_a\). La sustitución en
+\eqref{vii:eq:representante-corriente-discreta} demuestra la primera
+identidad. La invariancia del producto hermítico, o la ciclicidad de
+la traza, demuestra la segunda.
+\end{proof}
+
+Cuando los cambios de marco dependan del parámetro, sus derivadas
+actúan también sobre el campo y el peso. La expresión covariante
+correspondiente es entonces el diferencial completo
+\eqref{vii:eq:variacion-completa-memoria}.
+
+\subsection{Inversión orientada y transporte del peso}
+\label{vii:subsec:inversion-respuesta}
+
+La inversión puede verse explícitamente en el caso de una energía
+local por arista, \(\mathsf W_m=\bigoplus_a W_a\).
+Para \(a:s\to t\), su inversa lleva
+\[
+ U_{\bar a}=U_a^{-1},\qquad
+ r_{\bar a}=-U_a^{-1}r_a,\qquad
+ W_{\bar a}=U_a^{-1}W_aU_a.
+\]
+Estas reglas conservan exactamente la energía de la arista.
+
+\begin{proposition}[Compatibilidad diferencial con la inversión]
+\label{vii:prop:inversion-respuesta}
+Si \(W_a\) y los campos de ambos extremos permanecen fijos, entonces
+\[
+ A_{\bar a}=-U_a^{-1}A_aU_a,\qquad
+ \dot W_{\bar a}=U_a^{-1}[W_a,A_a]U_a.
+\]
+La variación completa de la energía de la arista invertida coincide con
+la original. En particular, si \([W_a,A_a]=0\), el covector parcial
+de transporte satisface
+\begin{equation}
+ \mathfrak j_{\bar a}(U_a^{-1}A_aU_a)
+ =-\mathfrak j_a(A_a).
+ \label{vii:eq:imparidad-transporte}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La derivada de \(U_a^{-1}\) es \(-U_a^{-1}A_a\), de donde resultan
+las dos fórmulas. Escribiendo \(v_a=U_af_s\) y \(f_t=r_a+v_a\),
+la parte debida exclusivamente al transporte invertido vale
+\[
+ \mathfrak j_{\bar a}(A_{\bar a})
+ =-2\operatorname{Re}\langle r_a,W_aA_af_t\rangle
+ =\mathfrak j_a(A_a)
+   -2\operatorname{Re}\langle r_a,W_aA_ar_a\rangle.
+\]
+La variación del peso aporta
+\[
+ \langle r_{\bar a},\dot W_{\bar a}r_{\bar a}\rangle
+ =\langle r_a,[W_a,A_a]r_a\rangle
+ =2\operatorname{Re}\langle r_a,W_aA_ar_a\rangle.
+\]
+Ambos términos se compensan. Si el conmutador es nulo, esa contribución
+desaparece; la linealidad en \(A_a\) da
+\eqref{vii:eq:imparidad-transporte}.
+\end{proof}
+
+La energía se suma sobre una orientación por arista. Una suma sobre ambas
+orientaciones lleva el factor \(1/2\). Esta convención conserva el mismo
+funcional y, por tanto, la misma respuesta.
+
+\subsection{Compatibilidad con el refinamiento}
+\label{vii:subsec:refinamiento-respuesta}
+
+\begin{theorem}[Transporte del diferencial por refinamiento]
+\label{vii:thm:refinamiento-respuesta}
+Sean \(J_m:\mathcal H_m\to\mathcal H_{m+1}\) y
+\(K_m:\mathcal K_m\to\mathcal K_{m+1}\) aplicaciones fijas.
+Para una colección \(C^1\), supongamos las identidades de refinamiento
+\begin{equation}
+ D_{m+1}(t)J_m=K_mD_m(t),\qquad
+ K_m^*\mathsf W_{m+1}(t)K_m=\mathsf W_m(t).
+ \label{vii:eq:familia-refinamiento-memoria}
+\end{equation}
+Entonces \(E_{m+1}(J_mf)=E_m(f)\).
+Los covectores de transporte coinciden sobre las variaciones enlazadas
+por la primera identidad. Cuando varían los pesos, sus contribuciones
+al diferencial también coinciden.
+\end{theorem}
+
+\begin{proof}
+Por sustitución,
+\[
+ \langle D_{m+1}J_mf,\mathsf W_{m+1}D_{m+1}J_mf\rangle
+ =\langle D_mf,K_m^*\mathsf W_{m+1}K_mD_mf\rangle=E_m(f).
+\]
+Diferenciando la primera identidad de
+\eqref{vii:eq:familia-refinamiento-memoria}, se obtiene
+\(\dot D_{m+1}J_m=K_m\dot D_m\). Por consiguiente,
+\[
+ 2\operatorname{Re}
+ \langle D_{m+1}J_mf,\mathsf W_{m+1}\dot D_{m+1}J_mf\rangle
+ =2\operatorname{Re}\langle D_mf,\mathsf W_m\dot D_mf\rangle.
+\]
+La derivada de la segunda identidad es
+\(K_m^*\dot{\mathsf W}_{m+1}K_m=\dot{\mathsf W}_m\), que demuestra
+la coincidencia de los términos de variación del peso.
+\end{proof}
+
+El enunciado utiliza la compatibilidad de la colección de transportes.
+Si \(J_m\) depende del parámetro, la regla de la cadena conserva
+también el término
+\[
+ 2\operatorname{Re}
+ \langle D_{m+1}J_mf,\mathsf W_{m+1}D_{m+1}\dot J_mf\rangle.
+\]
+La naturalidad obtenida transporta conjuntamente el funcional, sus
+incidencias y su diferencial.
+
+\subsection{Realización material de la respuesta}
+\label{vii:subsec:realizacion-respuesta-discreta}
+
+El resultado de esta sección es el covector explícito
+\(\mathfrak j_m\), con su representante \(\mathcal J_a\).
+La realización material compone ese covector con la variación del
+transporte inducida por la conexión y con la normalización de la acción.
+Si \(\mathcal L_m\) denota ese mapa diferencial, el covector sobre
+variaciones de conexión es \(\mathcal L_m^*\mathfrak j_m\).
+La regla de composición
+\eqref{vii:eq:variacion-transporte-compuesto} evalúa su parte
+correspondiente a productos finitos de transportes.
+
+En la sección~\ref{vii:sec:corriente-respuesta-cartan}, la corriente
+\(\sigma_{IJ}\) es una tres-forma definida por la variación de la acción
+material. La identificación entre ambas realizaciones conserva el campo,
+la representación, el peso, la normalización dimensional y el paso al
+límite utilizados por esa acción. Estos datos permiten evaluar la
+contracción que interviene en la densidad torsional. El desarrollo
+presente aporta el diferencial discreto que se compone en ese cálculo.

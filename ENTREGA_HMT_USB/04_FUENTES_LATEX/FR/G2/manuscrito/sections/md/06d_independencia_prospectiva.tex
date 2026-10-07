@@ -1,0 +1,311 @@
+\chapter{Invariance causale des interfaces par rapport aux références externes}
+\label{chap:independencia-prospectiva}
+\index{indépendance prospective}\index{graphe causal}
+\index{protocolo ciego}\index{tours!complétude reconstructive}
+
+\section{Critère d'indépendance causale par rapport aux références externes : graphe dirigé acyclique et fixation préalable de la sortie}
+\label{sec:definiciones-independencia-prospectiva}
+
+Soient \(\mathsf P\) les primitives internes, \(\mathsf R\) les règles,
+lecteurs, calibres et normalisations déclarés, \(G\) un générateur,
+\(o=G(\mathsf P,\mathsf R)\) sa sortie et \(y\) une référence externe.
+
+\begin{definition}[Interface prospectivement indépendante]
+\label{def:interfaz-prospectivamente-independiente}
+L'interface est prospectivement indépendante de \(y\) si :
+\begin{enumerate}
+ \item \(y\notin\operatorname{Anc}(o)\);
+ \item \(\mathsf P,\mathsf R,G\) et les contrôles négatifs sont figés avant
+ l'ouverture de \(y\) ;
+ \item l'exécution n'a accès ni directement ni indirectement à \(y\) ;
+ \item \(o\) et sa trace sont scellés avant le calcul d'une comparaison
+ \(\operatorname{cmp}(o,y)\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Indépendance de la sélection]
+\label{def:independencia-seleccion}
+Le caractère aveugle de chaque exécution ne suffit pas si, après avoir produit des candidats
+\(G_j(\mathsf P,\mathsf R_j)\), on publie
+\[
+ j_\ast(y)=\arg\min_j
+ \operatorname{cmp}\!\left(G_j(\mathsf P,\mathsf R_j),y\right).
+\]
+L'indépendance de la sélection interdit que cette opération détermine la sortie
+publiée.
+\end{definition}
+
+\begin{definition}[Prédiction multivaluée]
+\label{def:prediccion-multivaluada}
+Si les descripteurs physiques non métrologiques et les restrictions internes
+admettent plusieurs multisections, la sortie prospective est l'ensemble complet
+\[
+ \widehat{\mathfrak R}(d)
+ =\{\mathcal M:\mathcal M\text{ satisfait toutes les contraintes
+ préinscrites pour }d\}.
+\]
+La non-unicité est une sortie de la procédure. Choisir ensuite un élément
+par proximité d'une grandeur est interdit.
+\end{definition}
+
+\section{Théorème de non-interférence}
+\label{sec:teorema-no-interferencia}
+
+\begin{definition}[Graphe causal dirigé acyclique fidèle et complet]
+\label{def:dag-fiel-completo}
+Un graphe dirigé acyclique \(D\) est fidèle si chaque nœud représente la même
+fonction et les mêmes entrées que la construction citée. Il est complet pour
+une sortie si toute dépendance causalement pertinente apparaît comme arête ou
+racine déclarée. La fidélité et la complétude sont des hypothèses sémantiques ;
+l'acyclicité de l'ensemble de données ne les démontre pas.
+\end{definition}
+
+\begin{theorem}[Indépendance prospective conditionnée par le graphe causal]
+\label{thm:no-interferencia-prospectiva}
+Soit un système déterministe d'équations structurelles représenté par un
+graphe dirigé acyclique fini \(D\), fidèle et complet pour \(o\). Si
+\(y\notin\operatorname{Anc}_D(o)\), toutes les racines ancestrales de \(o\)
+restent figées et l'exécution n'a pas d'accès caché à \(y\), alors
+pour tous \(y_0,y_1\),
+\[
+ o_{\operatorname{do}(y=y_0)}
+ =o_{\operatorname{do}(y=y_1)}.
+\]
+\end{theorem}
+
+\begin{proof}
+On ordonne topologiquement les antécédents de \(o\). Leurs racines sont internes
+et restent fixes. Par induction sur l'ordre, chaque nœud reçoit les mêmes
+arguments sous les deux interventions et, par déterminisme, renvoie la même
+valeur. L'égalité se propage jusqu'à \(o\). L'empreinte cryptographique ne crée pas
+l'indépendance ; elle rend seulement détectable une modification ultérieure.
+\end{proof}
+
+\begin{corollary}[Permutation de la comparaison externe]
+\label{cor:permutacion-comparacion-externa}
+Si les noms, les lignes ou les valeurs externes sont permutés après le scellement, la
+sortie interne ne change pas, bien que son score puisse changer :
+\[
+ o_{\operatorname{do}(y=\sigma y_0)}
+ =o_{\operatorname{do}(y=y_0)},\qquad
+ \operatorname{cmp}(o,\sigma y_0)
+ \ne\operatorname{cmp}(o,y_0).
+\]
+\end{corollary}
+
+\begin{proposition}[Séparation des branches calibrées]
+\label{prop:separacion-ramas-calibradas}
+Si une référence externe est intervenue dans une sélection historique, la
+dépendance ne contamine pas les objets internes qui ne descendent pas de cette
+sélection. La branche peut être isolée et soumise à un nouveau protocole prospectif
+sans modifier le noyau.
+\end{proposition}
+
+\begin{proof}
+Être un antécédent est une propriété locale du graphe. Les branches
+\[
+ Z_0\longrightarrow p=5\longrightarrow\text{échelle électronique},
+\qquad
+ \{\text{masses}\}\longrightarrow\{\text{signatures calibrées}\}
+ \longrightarrow\text{table}
+\]
+restent hors du sous-graphe protégé. Les tours, le caractère formel,
+l'atlas et le centre \((5,5)\) ne reçoivent pas d'arêtes de ces références.
+\end{proof}
+
+\section{Invariance contrefactuelle sur le graphe causal dirigé et portée de la conclusion}
+\label{sec:certificado-independencia-prospectiva}
+
+Le graphe causal publié contient \(71\) nœuds, \(89\) arêtes,
+\(16\) interfaces et
+\(29\) sorties protégées. La vérification causale établit l'acyclicité, les décomptes,
+les voies déclarées, l'existence des sources enregistrées, l'absence de
+références externes parmi les antécédents consignés et l'invariance
+contrefactuelle du modèle symbolique. Le résultat est
+\[
+ \#\{\text{prédécesseurs externes de sorties protégées}\}=0.
+\]
+Le certificat ne démontre pas à lui seul qu'aucune arête ne manque et n'audite pas
+toutes les lectures de données de chaque programme scientifique. Sa force est donc
+\textsc{démontré avec une structure de départ explicite} : la conclusion
+s'obtient sur le graphe dirigé acyclique expressément déclaré et reste
+conditionnée par sa fidélité et sa complétude.
+
+Le remplacement simultané des références CODATA, Planck,
+Barbero--Immirzi, CKM, masses, gravité et cristal temporel peut modifier les
+comparaisons et les branches calibrées. Il ne modifie pas, dans le graphe déclaré,
+le catalogue de \(468\) émissions, les cinq régions de \(\pi\), la
+génération coinductive corrélée, \(\alpha_{12}\), \(C^\ast\), la décade \(-34\), les tours,
+l'atlas, le centre électronique, la double projection ni le corridor
+exceptionnel.
+
+\section{Essai multivalué sans accès à la valeur cible et critère d'identification}
+\label{sec:protocolo-ciego-multivaluado}
+
+\begin{algorithm}[Attribution future sans grandeurs]
+\label{alg:asignacion-futura-sin-magnitudes}
+L'interface physique s'exécute en quatre phases irréversibles :
+\begin{enumerate}
+ \item \emph{Gel} : on scelle l'autorité, l'atlas, les involutions,
+ les restrictions, le code, la priorité et les contrôles négatifs.
+ \item \emph{Entrée autorisée} : seuls sont reçus le secteur, la génération, la charge,
+ la couleur, la conjugaison, le spin/la statistique, la composition et le type métrologique ;
+ les masses, les signatures raffinées, les résidus, les angles et les unités sont exclus.
+ \item \emph{Sortie} : toutes les multisections compatibles sont énumérées ; pour
+ chaque extension de chaque multisection, on calcule la voie observable, le registre,
+ la signature, \(\chi_{\rm form}\), la spécialisation et l'observable. Dans les objets
+ composés, on raccorde d'abord les extensions et les registres. On scelle le
+ multiensemble complet.
+ \item \emph{Ouverture} : un dépositaire distinct ouvre les grandeurs et calcule
+ les résidus, les incertitudes et les covariances sans modifier aucun candidat.
+\end{enumerate}
+\end{algorithm}
+
+La multisection enrichie, et non une extension ponctuelle sélectionnée
+rétrospectivement, est la sortie de l'appariement physique. L'évaluation
+ultérieure peut être effectuée fibre par fibre. L'algorithme précédent est une
+spécification réfutable ; il n'est pas présenté comme une prédiction multiensemble déjà
+exécutée.
+
+\begin{criterion}[Échec du protocole en aveugle]
+\label{crit:fallo-protocolo-ciego}
+Le protocole échoue si le code peut lire une grandeur, si une signature
+historique calibrée réapparaît comme entrée, si un candidat est écarté après
+ouverture de la référence, si une masse positive est confondue avec une masse exactement nulle
+ou si le multiensemble scellé change lorsque le catalogue externe est permuté.
+\end{criterion}
+
+\section{Caractère formel et complétude reconstructive}
+\label{sec:completitud-reconstructiva-torres}
+
+Pour \(v=(n_A,s_C,k,b_{120},b_{\zeta})\in\ZZ^5\), le caractère formel
+antérieur à toute spécialisation est
+\[
+ \chi_{\rm form}(v;x_A,x_C,x_\Delta,x_{120},x_{270})
+ =\exp\!\left(
+ n_Ax_A+s_Cx_C+kx_\Delta
+ +b_{120}x_{120}+b_{\zeta}x_{270}\right).
+\]
+La spécialisation déclarée
+\[
+ \Theta_0
+ =\left(A_{\rm rad},\frac{C^\ast_{\rm rad}}6,
+ \Dfour,s_{120},\zeta_{270}\right),
+ \qquad \zeta_{270}=135\Delta_4^2,
+\]
+produit
+\(\chi_0(v)
+=\chi_{\rm form}(v;\Theta_0)\).
+La signature brute, le caractère formel, sa spécialisation centrale, le
+raffinement global \(\eta\in\mathcal E_{\mathfrak S}\) et un tableau
+calibré sont cinq objets différents.
+
+\begin{theorem}[Complétude reconstructive positive]
+\label{thm:completitud-reconstructiva-positiva}
+Soit
+\[
+ \mathcal N=\langle90,120\rangle_{>0}
+\]
+et soit \((n_j)_{j\ge1}\) son énumération croissante. Étant donnés
+\(0<q_+<q_-<1\), définissons
+\[
+ a_j=q_-^{n_j}-q_+^{n_j}>0.
+\]
+Alors \(a_j\to0\) et \(\sum_ja_j<\infty\). Une règle déterministe étant fixée
+pour départager les demi-entiers, pour tout \(r\in\RR\), la récurrence
+\[
+ r_0=r,\qquad
+ \nu_j=\operatorname{nint}\!\left(\frac{r_{j-1}}{a_j}\right),\qquad
+ r_j=r_{j-1}-\nu_ja_j
+\]
+satisfait
+\[
+ |r_j|\leq\frac{a_j}{2}\longrightarrow0,\qquad
+ r=\sum_{j\ge1}\nu_ja_j,\qquad
+ \sum_{j\ge1}|\nu_ja_j|<\infty.
+\]
+Ainsi, tout \(R>0\), avec \(r=\log R\), est représenté exactement dans la
+complétion par
+\(\exp(\sum_j\nu_ja_j)\).
+\end{theorem}
+
+\begin{proof}
+Les indices de \(\mathcal N\) sont \(90,120\) et tous les multiples de \(30\)
+à partir de \(180\). Par conséquent,
+\[
+ \sum_{n\in\mathcal N}q_-^n
+ =q_-^{90}+q_-^{120}
+ +\frac{q_-^{180}}{1-q_-^{30}}<\infty.
+\]
+Comme \(0<a_j<q_-^{n_j}\), la suite est sommable et converge vers zéro. La
+définition de l'entier le plus proche implique
+\(|r_j|\le a_j/2\). Par télescopage,
+\(\sum_{i=1}^{N}\nu_ia_i=r-r_N\to r\). Pour \(j\ge2\),
+\[
+ |\nu_ja_j|=|r_{j-1}-r_j|
+ \le\frac{a_{j-1}+a_j}{2},
+\]
+et la sommabilité de \((a_j)\) prouve la convergence absolue.
+\end{proof}
+
+Le théorème est une complétude du dictionnaire sur \(\RR_{>0}\). Si les
+coefficients \(\nu_j\) sont obtenus à partir du résidu d'une masse connue, leur utilisation
+est une \textsc{reconstruction calibrée} ; elle ne fournit pas la sélection
+prospective. Elle ne représente pas non plus une masse exactement nulle. Le photon, le gluon ou un
+éventuel mode de spin deux exigent une protection exacte par symétrie dans la
+représentation physique.
+
+\Needspace{34\baselineskip}
+\section{Protocoles prospectifs d'invariance pour les familles de constantes}
+\label{sec:protocolos-prospectivos-especificos}
+
+\begin{description}
+ \item[Barbero--Immirzi.] On fige \(S_{90},S_{120}\), les poids
+ \((12,-1)\) et leur normalisation avant d'ouvrir une référence physique.
+ L'évaluation de \(\Gamma_{6\to8}\) est aveugle à cette référence,
+ mais l'unicité préalable des séries et des poids et l'opérateur d'entrelacement avec l'opérateur
+ d'aire sont des problèmes distincts.
+ \item[CKM et CP.] On scelle les quatre équations, leurs coefficients et la
+ convention angulaire ; on publie simultanément les quatre paramètres,
+ \(|V|\) et \(J\). La confrontation utilise une covariance fixée à l'avance.
+ \item[Constitutives.] Les identités adimensionnelles précèdent
+ \(Z_{\rm ref}\) et \(c_{\rm ref}\). Le changement de carte transforme la
+ réalisation, non les identités, et ne crée pas quatre prédictions
+ indépendantes.
+ \item[Gravité et inertie.] Les rapports
+ \(G_{\rm tor}/I_{\rm tor}=1\) et
+ \(G_{\rm av}/I_{\rm av}=\pi/\varphi^2\) appartiennent à des couches différentes.
+ Leur interprétation physique exige un morphisme et une confrontation prospective ; un
+ phénomène cosmologique ne sélectionne pas le rapport.
+\end{description}
+
+\section{Stratification probatoire : identités internes, déductions, reconstructions calibrées et interfaces soumises à une fermeture mathématique}
+\label{sec:cinco-niveles-independencia}
+
+\begin{table}[htbp]
+\centering
+\caption{Niveaux que l'indépendance causale ne permet pas de confondre.}
+\label{tab:cinco-niveles-independencia}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}YL{0.27\textwidth}@{}}
+\toprule
+Niveau & Exemple & Énoncé autorisé\\
+\midrule
+Générateur interne certifié&
+Régions, \(\alpha_{12}\), \(C^\ast\), \(-34\), atlas&
+Sortie obtenue dans le domaine déclaré.\\
+Évaluation conditionnée en aveugle&
+\(\Gamma_{6\to8}\), CKM fixé, \(\chi_0(v)\)&
+Ne consulte pas la cible, mais dépend de la fonctionnelle ou de la signature.\\
+Protocole en aveugle non exécuté&
+Spécification multivaluée&
+Il existe une procédure réfutable ; non une sortie scellée.\\
+Reconstruction calibrée&
+Signatures historiques et raffinement à partir de \(r=\log R\)&
+Évaluation exacte conditionnée par une référence.\\
+Interface physique en attente&
+Particule--antiparticule, aire, masse nulle, gravité&
+Domaine défini ; représentation ou confrontation manquante.\\
+\bottomrule
+\end{tabularx}
+\end{table}

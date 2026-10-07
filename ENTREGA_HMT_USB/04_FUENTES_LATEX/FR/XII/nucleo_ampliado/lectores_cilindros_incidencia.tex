@@ -1,0 +1,626 @@
+% Ampliación demostrativa DF003--DF007. No modifica la fuente integral.
+% Propietario común de los archivos Lean citados en estos comentarios:
+% output/PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/.
+% Residencia causal de la primera sección: después de los lectores regionales
+% coinductivos y antes de emplear sus registros como entrada de la selección K.
+% Residencia causal de la segunda sección: después de la construcción marcada
+% Paley--Witt--Golay--Leech y antes de la reconstrucción de la estructura VOA.
+% Los dos cortes expositivos conservan el mismo origen APP--TRIT--TPK.
+
+\section[Génération régionale et raffinement]{Compatibilité intégrale de la génération régionale, du raffinement cylindrique et de l'incidence}
+\label{act21:sec:df-lectores-cilindros}
+
+La prolongation régionale produit des suites ordonnées de blocs, ainsi que
+leurs profondeurs de lecture. La projection archimédienne et l'incidence
+ternaire se calculent sur ces mêmes suites. Le lien entre ces deux
+réalisations peut s'exprimer entièrement par des opérations entières :
+sélection par intervalles rationnels, division euclidienne, élévation de six
+trits, lecture de retenue et transformation de Witt. Cette formulation permet
+de suivre chaque coefficient depuis son bloc générateur jusqu'à son emploi ultérieur.
+
+La construction utilise les trois lecteurs régionaux déjà obtenus de l'état APP--TRIT--TPK. Nous les désignerons par les indices \(c\in\{\mathrm P,\mathrm E,\mathrm F\}\), correspondant respectivement aux régions de clôture, de propagation et d'auto-échelle. Leur réalisation réelle s'écrira \(v_c\). Les identifications ultérieures \(v_{\mathrm P}=\pi_{\mathrm{HMT}}\), \(v_{\mathrm E}=e_{\mathrm{HMT}}\) et \(v_{\mathrm F}=\varphi_{\mathrm{HMT}}\) conservent cet ordre causal. L'opération qui émet un bloc inspecte les intervalles rationnels du lecteur régional ; la valeur réelle intervient dans la démonstration de correction de cette opération.
+
+\subsection{Émission positionnelle par séparation rationnelle de cellules}
+\label{act21:subsec:df-emision-racional}
+
+% Fuente: lean/biblioteca/RegionalPublicationComposition.lean,
+% produced_brackets, eventual_publication, joint_eventual_publication,
+% search_terminates, stopped_cell_correct, publications_compatible.
+
+Pour chaque région, on dispose de deux suites rationnelles
+\(\ell_c(j),u_c(j)\), construites par son lecteur, qui satisfont
+\[
+ \ell_c(j)\leq v_c\leq u_c(j).
+\]
+La propriété de séparation des cellules démontrée pour ces lecteurs affirme
+que, pour chaque entier \(s>0\), il existe \(J\) tel que, pour tout \(j\geq J\),
+\begin{equation}
+ \lfloor s\ell_c(j)\rfloor
+ =\lceil su_c(j)\rceil-1
+ =\lfloor sv_c\rfloor.
+ \label{act21:eq:df-separacion-celdas}
+\end{equation}
+L'évitement des frontières rationnelles par les valeurs régionales est l'hypothèse des théorèmes précédents qui garantit cette séparation. Ici, on emploie sa conclusion opérationnelle, avec les lecteurs et les intervalles qui la produisent.
+
+\begin{definition}[Indice de séparation et préfixe émis]
+Pour \(s>0\), soit
+\[
+ j_c(s)=\min\{j\in\mathbb N:
+ \lfloor s\ell_c(j)\rfloor=\lceil su_c(j)\rceil-1\}.
+\]
+Pour une base entière \(b\geq2\) et une profondeur \(n\geq0\), on définit
+\begin{equation}
+ P_c(b,n)=\lfloor b^n\ell_c(j_c(b^n))\rfloor.
+ \label{act21:eq:df-publicacion-prefijo}
+\end{equation}
+Le préfixe contient la partie entière et les premières \(n\) positions en base \(b\) ; par conséquent, \(P_c(b,0)\) est la partie entière régionale.
+\end{definition}
+
+\begin{theorem}[Terminaison et correction de l'émission]
+\label{act21:thm:df-emision-correcta}
+L'indice \(j_c(s)\) existe pour tout \(s>0\). Les préfixes émis satisfont
+\begin{equation}
+ P_c(b,n)=\lfloor b^n v_c\rfloor,
+ \qquad
+ P_c(b,n)\leq b^n v_c<P_c(b,n)+1.
+ \label{act21:eq:df-prefijo-correcto}
+\end{equation}
+Pour chaque échelle \(s\) il est possible en outre de choisir un unique indice de suffisance \(J(s)\) valide simultanément pour les trois régions.
+\end{theorem}
+
+\begin{proof}
+L'égalité à partir d'un certain rang de \eqref{act21:eq:df-separacion-celdas} rend non vide
+l'ensemble qui définit \(j_c(s)\). Son minimum existe par le bon ordre de
+\(\mathbb N\). À tout indice où l'égalité se produit, la borne
+inférieure rationnelle fournit
+\(\lfloor s\ell_c(j)\rfloor\leq\lfloor sv_c\rfloor\).
+La borne supérieure, jointe à l'évitement d'une frontière de cellule, donne
+\(\lfloor sv_c\rfloor\leq\lceil su_c(j)\rceil-1\).
+Les deux extrémités entières coïncidant, l'entier intermédiaire coïncide avec
+elles. Cela démontre \eqref{act21:eq:df-prefijo-correcto}. Pour l'affirmation
+conjointe, il suffit de prendre le maximum des trois indices de suffisance obtenus
+pour la même échelle. L'indice conjoint contrôle simultanément les trois
+émissions, tandis que chaque région conserve ses propres intervalles.
+\end{proof}
+
+\begin{proposition}[Compatibilité exacte des préfixes]
+\label{act21:prop:df-prefijos-compatibles}
+Pour \(n,m\geq0\),
+\begin{equation}
+ \left\lfloor\frac{P_c(b,n+m)}{b^m}\right\rfloor=P_c(b,n).
+ \label{act21:eq:df-truncamiento}
+\end{equation}
+En particulier, le bloc suivant
+\(d_c(b,n)=P_c(b,n+1)\bmod b\) satisfait
+\begin{equation}
+ P_c(b,n+1)=bP_c(b,n)+d_c(b,n),\qquad 0\leq d_c(b,n)<b.
+ \label{act21:eq:df-paso-posicional}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Écrivons \(b^n v_c=N+\theta\), avec
+\(N=P_c(b,n)\) et \(0\leq\theta<1\). Alors
+\(P_c(b,n+m)=b^mN+\lfloor b^m\theta\rfloor\), et le second terme
+appartient à \(\{0,\ldots,b^m-1\}\). La division euclidienne par \(b^m\)
+récupère \(N\). La spécialisation \(m=1\) produit
+\eqref{act21:eq:df-paso-posicional} et sa borne résiduelle.
+\end{proof}
+
+\subsection{Blocs régionaux de six trits à profondeur arbitraire}
+\label{act21:subsec:df-bloques-arbitrarios}
+
+% Fuente: deltas/integracion/JointRegionalFrontier.lean,
+% publish_base729_eq_base3, generated_block_from_longer_prefix,
+% generated_block_eq_finite, generated_signature_eq_finite.
+
+L'égalité entière \(729=3^6\) détermine le regroupement de six positions ternaires en un bloc. Pour \(t\geq0\), nous définissons
+\begin{equation}
+ u_c(t)=P_c(729,t+1)\bmod729,
+ \qquad
+ B_{c,j}(t)=
+ \left\lfloor\frac{u_c(t)}{3^{5-j}}\right\rfloor\bmod3,
+ \quad 0\leq j<6.
+ \label{act21:eq:df-bloque-y-banda}
+\end{equation}
+Ainsi, \(B_c(t)\) est un mot ordonné de six trits et
+\begin{equation}
+ u_c(t)=\sum_{j=0}^{5}B_{c,j}(t)3^{5-j}.
+ \label{act21:eq:df-elevacion-banda}
+\end{equation}
+Le mot et son élévation entière sont deux représentations mutuellement récupérables du même bloc émis.
+
+\begin{theorem}[Stabilité d'extraction à toute profondeur]
+\label{act21:thm:df-bloque-estable}
+On vérifie, pour tout \(n\),
+\[
+ P_c(729,n)=P_c(3,6n).
+\]
+Si \(t<n\), alors
+\begin{equation}
+ u_c(t)=
+ \left\lfloor\frac{P_c(729,n)}{729^{n-t-1}}\right\rfloor\bmod729.
+ \label{act21:eq:df-bloque-prefijo-largo}
+\end{equation}
+En conséquence, toute extension du préfixe préserve tous les
+blocs précédemment émis et toutes les signatures calculées dessus.
+\end{theorem}
+
+\begin{proof}
+La première égalité résulte de ce que les deux préfixes se séparent à la même
+échelle, \(729^n=3^{6n}\), et du
+théorème~\ref{act21:thm:df-emision-correcta}. Pour la seconde, nous appliquons
+\eqref{act21:eq:df-truncamiento} aux profondeurs \(n\) et \(t+1\), puis
+nous prenons le résidu modulo \(729\). L'extraction ternaire de
+\eqref{act21:eq:df-bloque-y-banda} est déterministe. Toute fonction explicite
+de ces dix-huit coordonnées conserve, par conséquent, le même résultat en
+étendant le préfixe.
+\end{proof}
+
+La construction est quantifiée sur \(t\in\mathbb N\). Une table qui
+matérialise cent blocs constitue une évaluation finie de cette
+construction ; la formule \eqref{act21:eq:df-bloque-prefijo-largo} détermine
+exactement sa compatibilité avec toute extension ultérieure.
+
+\begin{example}[Premier bloc conjoint]
+L'évaluation des lecteurs régionaux sélectionnés donne les mots
+\[
+ B_{\mathrm P}(0)=010211,\qquad
+ B_{\mathrm E}(0)=201101,\qquad
+ B_{\mathrm F}(0)=121200.
+\]
+Leur élévation par \eqref{act21:eq:df-elevacion-banda} produit
+\[
+ u_{\mathrm P}(0)=103,\qquad
+ u_{\mathrm E}(0)=523,\qquad
+ u_{\mathrm F}(0)=450.
+\]
+Par exemple,
+\(201101_3=2\cdot243+27+9+1=523\).
+Les six positions, y compris les zéros initiaux, sont conservées dans la
+représentation en bande. Le zéro initial de \(010211\) possède une position
+définie, bien que l'écriture décimale de \(103\) en soit dépourvue.
+\end{example}
+
+\subsection{Registres de transition et reconstruction des élévations linéaires}
+\label{act21:subsec:df-registros-transicion}
+
+% Fuentes: deltas/integracion/RegionalTransitionRecords.lean y
+% GeneratedTransitionRecords.lean; lean/biblioteca/TPKLifts.lean.
+% Los enlaces reconstruidos son R(0)->R(1) y R(2)->R(3).
+
+Sur \(\mathbb F_3\), nous réunissons deux émissions consécutives de chaque région dans la matrice
+\begin{equation}
+ R(t)=
+ \begin{pmatrix}
+ B_{\mathrm P}(t)\\ B_{\mathrm P}(t+1)\\
+ B_{\mathrm E}(t)\\ B_{\mathrm E}(t+1)\\
+ B_{\mathrm F}(t)\\ B_{\mathrm F}(t+1)
+ \end{pmatrix}.
+ \label{act21:eq:df-registro-matricial}
+\end{equation}
+Cette définition fixe à la fois l'ordre régional et l'ordre temporel. Les
+quatre premiers registres sont
+\[
+ X_0=R(0),\quad Y_0=R(1),\quad X_1=R(2),\quad Y_1=R(3).
+\]
+Ses valeurs, obtenues par extraction des préfixes régionaux, sont
+\begin{align*}
+ X_0&=\begin{pmatrix}
+0&1&0&2&1&1\\0&1&2&2&2&2\\2&0&1&1&0&1\\
+1&2&1&2&2&1\\1&2&1&2&0&0\\1&1&2&2&0&2
+\end{pmatrix},&
+ Y_0&=\begin{pmatrix}
+0&1&2&2&2&2\\0&1&0&2&1&1\\1&2&1&2&2&1\\
+1&0&2&0&1&1\\1&1&2&2&0&2\\1&2&1&0&2&0
+\end{pmatrix},\\[1ex]
+ X_1&=\begin{pmatrix}
+0&1&0&2&1&1\\0&0&2&1&1&1\\1&0&2&0&1&1\\
+0&1&2&2&2&2\\1&2&1&0&2&0\\0&1&0&2&1&0
+\end{pmatrix},&
+ Y_1&=\begin{pmatrix}
+0&0&2&1&1&1\\1&1&0&2&2&1\\0&1&2&2&2&2\\
+1&0&2&0&1&1\\0&1&0&2&1&0\\0&1&0&2&0&0
+\end{pmatrix}.
+\end{align*}
+
+\begin{theorem}[Reconstruction unique des deux liens initiaux]
+\label{act21:thm:df-elevaciones-reconstruidas}
+Les équations \(X_0L_0=Y_0\) et \(X_1L_1=Y_1\) ont, chacune, une
+unique solution dans \(M_6(\mathbb F_3)\). Ces solutions sont
+\begin{align*}
+ L_0&=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},&
+ L_1&=\begin{pmatrix}
+2&1&2&0&2&2\\1&2&1&1&2&0\\1&2&1&1&1&2\\
+0&1&0&0&2&1\\2&0&2&1&0&1\\0&2&2&2&1&1
+\end{pmatrix}.
+\end{align*}
+Les deux matrices sont inversibles.
+\end{theorem}
+
+\begin{proof}
+Les matrices
+\begin{align*}
+ A_0&=\begin{pmatrix}
+1&1&2&0&1&2\\0&0&1&0&0&1\\2&1&2&1&0&1\\
+0&2&0&1&0&2\\2&1&1&0&2&2\\2&1&1&1&1&2
+\end{pmatrix},&
+ A_1&=\begin{pmatrix}
+1&0&1&2&0&0\\0&0&1&1&2&2\\0&1&2&0&1&1\\
+1&1&0&2&0&0\\1&1&2&1&1&2\\1&0&0&0&0&2
+\end{pmatrix}
+\end{align*}
+satisfont \(A_iX_i=X_iA_i=I\), par multiplication dans \(\mathbb F_3\).
+Par conséquent, les solutions sont imposées par \(L_i=A_iY_i\) ; la
+multiplication produit les deux matrices montrées. Leurs inverses sont
+\begin{align*}
+ L_0^{-1}&=\begin{pmatrix}
+1&2&0&2&0&2\\2&0&2&2&0&0\\2&1&2&0&2&0\\
+1&0&0&0&2&0\\0&2&1&1&2&0\\2&2&2&2&2&2
+\end{pmatrix},&
+ L_1^{-1}&=\begin{pmatrix}
+2&0&2&1&2&1\\2&1&0&0&2&0\\2&0&2&2&0&2\\
+2&0&0&1&1&0\\1&1&1&1&1&0\\2&0&1&2&2&0
+\end{pmatrix}.
+\end{align*}
+La vérification bilatérale \(L_iL_i^{-1}=L_i^{-1}L_i=I\) démontre la
+récupération exacte de chaque mot transformé. Tous les produits
+utilisent des résidus \(0,1,2\), avec leur interprétation en \(\mathbb F_3\).
+\end{proof}
+
+La lecture causale de ce résultat est précise : les émissions régionales produisent \(R(t)\) ; les registres \(R(0),\ldots,R(3)\) déterminent les deux élévations précédentes ; leurs inverses récupèrent les mots transformés.  
+La continuité pour tout \(t\) appartient aux lecteurs coinductifs et au théorème ~\ref{act21:thm:df-bloque-estable}. La reconstruction matricielle démontrée ici a pour domaine les deux liens spécifiés dans son énoncé.
+
+\subsection{Raffinement simultané dans les bases ternaire et décimale}
+\label{act21:subsec:df-cilindros-mixtos}
+
+% Fuente: deltas/integracion/RegionalCylinderTransition.lean.
+
+Une émission ternaire de six trits et une émission décimale de trois chiffres
+constituent deux lectures de bases différentes. Pour conserver leur relation, on
+enregistre l'état
+\[
+ s=(n,k,N,D),
+\]
+où \(N\) est un préfixe de profondeur \(n\) en base \(729\), et \(D\) est
+un préfixe de profondeur \(k\) en base \(1000\). Leurs cylindres
+archimédiens sont
+\begin{equation}
+ I_{729}(s)=\left[\frac{N}{729^n},\frac{N+1}{729^n}\right),\qquad
+ I_{1000}(s)=\left[\frac{D}{1000^k},\frac{D+1}{1000^k}\right).
+ \label{act21:eq:df-cilindros}
+\end{equation}
+L'extrémité supérieure semi-ouverte attribue chaque valeur à une unique cellule d'une base et d'une profondeur données.
+
+\begin{definition}[Défauts entiers de compatibilité]
+On définit
+\begin{align}
+ A(s)&=N1000^k-D729^n,\label{act21:eq:df-defecto-inferior}\\
+ B(s)&=(N+1)1000^k-D729^n=A(s)+1000^k.
+ \label{act21:eq:df-defecto-superior}
+\end{align}
+L'état est compatible lorsque
+\begin{equation}
+ A(s)<729^n,\qquad B(s)>0.
+ \label{act21:eq:df-compatibilidad}
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Critère entier d'intersection]
+Les cylindres de \eqref{act21:eq:df-cilindros} ont une intersection non vide si et
+seulement si \eqref{act21:eq:df-compatibilidad} est vérifiée.
+\end{lemma}
+
+\begin{proof}
+Deux intervalles semi-ouverts \([a,b)\) et \([c,d)\), avec \(a<b\) et
+\(c<d\), se coupent exactement lorsque \(a<d\) et \(c<b\). En appliquant cette
+condition à \eqref{act21:eq:df-cilindros} et en multipliant par les dénominateurs
+positifs, nous obtenons
+\(N1000^k<(D+1)729^n\) et
+\(D729^n<(N+1)1000^k\). Ce sont les deux inégalités de
+\eqref{act21:eq:df-compatibilidad}.
+\end{proof}
+
+\begin{definition}[Mise à jour des profondeurs et des préfixes]
+Pour \(0\leq u<729\) et \(0\leq d<1000\), nous définissons
+\begin{align*}
+ T_u(n,k,N,D)&=(n+1,k,729N+u,D),\\
+ T_{u,d}(n,k,N,D)&=(n+1,k+1,729N+u,1000D+d).
+\end{align*}
+La première opération raffine uniquement le cylindre ternaire. La seconde  
+raffine les deux lectures et conserve les deux profondeurs dans l'état.
+\end{definition}
+
+\begin{proposition}[Récurrences exactes de frontière]
+\label{act21:prop:df-rec-frontera}
+Les mises à jour précédentes satisfont
+\begin{align}
+ A(T_u s)&=729A(s)+u1000^k,\label{act21:eq:df-rec-ternaria}\\
+ A(T_{u,d}s)&=729000A(s)+u1000^{k+1}-d729^{n+1}.
+ \label{act21:eq:df-rec-conjunta}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Pour la première identité,
+\[
+ (729N+u)1000^k-D729^{n+1}
+ =729(N1000^k-D729^n)+u1000^k.
+\]
+Pour la seconde,
+\begin{align*}
+ &(729N+u)1000^{k+1}-(1000D+d)729^{n+1}\\
+ &\qquad=729000(N1000^k-D729^n)
+      +u1000^{k+1}-d729^{n+1}.
+\end{align*}
+Les deux sont des identités entières antérieures à toute approximation réelle.
+\end{proof}
+
+\begin{theorem}[Raffinement des cylindres régionaux générés]
+\label{act21:thm:df-refinamiento-generado}
+Soit
+\[
+ s_c(n,k)=(n,k,P_c(729,n),P_c(1000,k)).
+\]
+Alors \(s_c(n,k)\) est compatible quels que soient \(n,k\). De plus,
+\begin{align*}
+ T_{u_c(n)}s_c(n,k)&=s_c(n+1,k),\\
+ T_{u_c(n),d_c(1000,k)}s_c(n,k)&=s_c(n+1,k+1).
+\end{align*}
+La division euclidienne des préfixes raffinés récupère exactement les
+préfixes précédents. Pour tout \(a,b\geq0\),
+\[
+ \frac{P_c(729,n+a)-P_c(729,n+a)\bmod729^a}{729^a}
+ =P_c(729,n),
+\]
+et l'identité analogue est vérifiée en base \(1000\).
+\end{theorem}
+
+\begin{proof}
+Le théorème~\ref{act21:thm:df-emision-correcta} place \(v_c\) simultanément dans
+les deux intervalles \eqref{act21:eq:df-cilindros} ; le critère d'intersection donne
+la compatibilité. Les identités de mise à jour sont
+\eqref{act21:eq:df-paso-posicional} dans chaque base. La récupération s'obtient à partir de
+\eqref{act21:eq:df-truncamiento}. Par conséquent, la récurrence du défaut et la
+récupération du préfixe sont des conséquences d'une même mise à jour.
+\end{proof}
+
+\begin{example}[Premier couple de cylindres régionaux]
+Pour \(n=k=1\), l'évaluation des trois régions donne
+\[
+\begin{array}{c|rr|rr}
+ c&N&D&A&B\\\hline
+ \mathrm P&2290&3141&211&1211\\
+ \mathrm E&1981&2718&-422&578\\
+ \mathrm F&1179&1618&-522&478
+\end{array}
+\]
+Dans les trois lignes \(A<729\) et \(B>0\). La première colonne de préfixes
+se décompose comme \(2290=3\cdot729+103\),
+\(1981=2\cdot729+523\) et \(1179=729+450\) : réapparaissent exactement les
+blocs de six trits déjà émis. Les signes différents de \(A\) expriment
+la position relative des deux extrémités inférieures, sans altérer la
+appartenance commune de la valeur régionale.
+\end{example}
+
+\subsection{Sélection du bloc suivant par le lecteur régional}
+
+La compatibilité de deux intervalles exprime une relation entre lectures. La détermination du bloc suivant utilise en outre l'intervalle rationnel produit par la région. Cette opération peut se formuler sans éliminer l'histoire de profondeur.
+
+\begin{definition}[Admissibilité de la prolongation régionale]
+\(c,n\) étant fixés, soient \(s=729^{n+1}\) et \(j=j_c(s)\). Un résidu
+\(u\in\{0,\ldots,728\}\) est admissible lorsque
+\begin{equation}
+ \lfloor s\ell_c(j)\rfloor
+ \leq729P_c(729,n)+u
+ \leq\lceil su_c(j)\rceil-1.
+ \label{act21:eq:df-admisibilidad}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Unicité de la prolongation compatible avec le lecteur]
+\label{act21:thm:df-prolongacion-unica}
+La condition \eqref{act21:eq:df-admisibilidad} est équivalente à \(u=u_c(n)\).
+Par conséquent, il existe exactement une prolongation admissible de chaque région
+à chaque profondeur.
+\end{theorem}
+
+\begin{proof}
+À l'indice de séparation, les deux extrémités entières de
+\eqref{act21:eq:df-admisibilidad} coïncident avec \(P_c(729,n+1)\).
+La condition est ainsi équivalente à
+\(729P_c(729,n)+u=P_c(729,n+1)\).
+Par \eqref{act21:eq:df-paso-posicional}, le côté droit est
+\(729P_c(729,n)+u_c(n)\). L'annulation du terme commun donne l'égalité des résidus. Réciproquement, cette égalité satisfait la condition.
+\end{proof}
+
+La dépendance effective de cette sélection reste complètement déterminée :
+région sélectionnée, lecteur rationnel, profondeur, indice de séparation,
+préfixe antérieur et résidu suivant. Le défaut \(A\) résume une relation
+de frontière ; l'état \((n,k,N,D)\) et les intervalles régionaux conservent
+les données employées par la mise à jour.
+
+\subsection{Signature ternaire, retenue, incidence de Witt et horloge de lecture}
+\label{act21:subsec:df-firma-conjunta}
+
+% Fuentes: lean/regional/N69RegionalSignature.lean,
+% deltas/integracion/JointRegionalFrontier.lean y JointCylinderSignature.lean.
+
+Une profondeur \(t\) étant fixée, écrivons \(B_{c,j}=B_{c,j}(t)\). Pour chaque colonne \(j\), on calcule les entiers et les résidus suivants :
+\begin{align}
+ S_j&=B_{\mathrm P,j}+B_{\mathrm E,j}+B_{\mathrm F,j},
+ &q_j&=S_j\bmod3,
+ &c_j&=\left\lfloor S_j/3\right\rfloor,
+ \label{act21:eq:df-firma-qc}\\
+ a_j&=(B_{\mathrm P,j}+B_{\mathrm E,j}-B_{\mathrm F,j})\bmod3,
+ &w_j&=\sum_c\mathbf1_{B_{c,j}\ne0},
+ &\bar w_j&=w_j\bmod3.
+ \label{act21:eq:df-firma-axial}
+\end{align}
+Le résidu de l'expression axiale est pris dans les entiers. Une implémentation
+avec des naturels le calcule comme
+\((B_{\mathrm P,j}+B_{\mathrm E,j}+3-B_{\mathrm F,j})\bmod3\), qui le conserve
+exactement.
+
+La matrice d'incidence ternaire utilisée par le lecteur est
+\begin{equation}
+ W=\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&2&2\\
+1&1&0&2&1&2\\
+1&1&2&0&2&1\\
+1&2&1&2&0&1\\
+1&2&2&1&1&0
+\end{pmatrix}.
+\label{act21:eq:df-matriz-witt}
+\end{equation}
+Pour chaque région, deux charges résiduelles sont conservées :
+\begin{equation}
+ v_c^{\mathrm{res}}=\sum_j B_{c,j}\bmod3,
+ \qquad
+ v_c^{\mathrm W}=\sum_j(B_cW)_j\bmod3.
+ \label{act21:eq:df-cargas-residuales}
+\end{equation}
+La signature complète du lecteur est
+\(\mathcal S(B)=(q,a,c,w,\bar w,v^{\mathrm{res}},v^{\mathrm W})\).
+Sa structure conserve séparément le reste de colonne, la retenue, le
+contraste axial, le poids de support et les deux lectures de charge.
+
+\begin{theorem}[Récupération exacte et bornes de la signature]
+\label{act21:thm:df-recuperacion-firma}
+Pour chaque colonne et chaque région, on a
+\begin{align}
+ S_j&=q_j+3c_j,&0\leq q_j,a_j&<3,&0\leq c_j&\leq2,
+ \label{act21:eq:df-recuperacion-total}\\
+ B_{\mathrm F,j}&=2(q_j+3-a_j)\bmod3,&0\leq w_j&\leq3,
+ &0\leq\bar w_j&<3.
+ \label{act21:eq:df-recuperacion-eje}
+\end{align}
+De plus,
+\begin{equation}
+ v_c^{\mathrm W}
+ =\left(\sum_j\bigl((B_cW)_j\bmod3\bigr)\right)\bmod3.
+ \label{act21:eq:df-witt-reduccion}
+\end{equation}
+Les récupérations énoncées déterminent le total de chaque colonne et sa
+coordonnée d'auto-échelle ; le registre régional conserve en outre
+les trois bandes ordonnées.
+\end{theorem}
+
+\begin{proof}
+L'identité \eqref{act21:eq:df-recuperacion-total} est la division euclidienne de
+\(S_j\) par \(3\). Chaque terme de \(S_j\) est entre \(0\) et \(2\),
+de telle sorte que \(0\leq S_j\leq6\) et \(c_j\leq2\). En \(\mathbb F_3\),
+la soustraction des deux congruences qui définissent \(q_j\) et \(a_j\) donne
+\(q_j-a_j=2B_{\mathrm F,j}\). Comme l'inverse de \(2\) est \(2\), on
+obtient \eqref{act21:eq:df-recuperacion-eje} ; le terme \(3\) permet
+d'écrire celle-ci avec des nombres naturels. Les bornes de \(w_j\) résultent de sommer trois
+indicateurs. Enfin, réduire une somme entière modulo \(3\) équivaut
+à réduire chaque terme et à réduire à nouveau la somme, ce qui prouve
+\eqref{act21:eq:df-witt-reduccion}.
+\end{proof}
+
+\begin{example}[Signature du premier bloc conjoint]
+Les trois bandes initiales produisent
+\begin{align*}
+ q&=(0,0,2,2,1,2),&a&=(1,2,0,1,1,2),\\
+ c&=(1,1,0,1,0,0),&w&=(2,2,2,3,1,2),\\
+ v^{\mathrm{res}}&=(2,2,0),&v^{\mathrm W}&=(2,1,1).
+\end{align*}
+La quatrième colonne a un total \(2+1+2=5\) ; sa signature enregistre \(q_3=2\) et \(c_3=1\), par conséquent \(q_3+3c_3=5\).
+La récupération axiale donne \(2(2+3-1)\bmod3=2\), précisément la coordonnée d'auto-échelle.
+Les images de Witt, réduites composante par composante, sont
+\[
+ (2,0,2,1,1,2),\qquad
+ (0,0,0,2,0,2),\qquad
+ (2,1,1,2,1,0).
+\]
+Sa somme résiduelle par ligne produit les trois charges \((2,1,1)\).
+\end{example}
+
+\begin{definition}[Horloge entière de lecture décimale]
+L'indice de transition \(t\) et la profondeur décimale de représentation sont
+reliés par
+\begin{equation}
+ \kappa(t)=\max\{k\in\mathbb N:1000^k\leq3^{6(t+1)}\}.
+ \label{act21:eq:df-reloj}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Caractérisation et monotonie de l'horloge]
+\label{act21:prop:df-reloj}
+L'entier \(\kappa(t)\) est déterminé de manière univoque par
+\begin{equation}
+ 1000^{\kappa(t)}\leq729^{t+1}<1000^{\kappa(t)+1}.
+ \label{act21:eq:df-reloj-cotas}
+\end{equation}
+La fonction \(\kappa\) est monotone et satisfait
+\(\kappa(20)=\kappa(21)=20\).
+\end{proposition}
+
+\begin{proof}
+Les puissances de \(1000\) sont strictement croissantes et non bornées ;
+il existe donc un unique intervalle de puissances consécutives qui
+contient \(729^{t+1}\). La monotonie de cette dernière expression démontre
+celle de \(\kappa\). Les deux évaluations finales sont les comparaisons
+entières
+\[
+ 1000^{20}\leq729^{21}<1000^{21},\qquad
+ 1000^{20}\leq729^{22}<1000^{21}.
+\]
+Ces comparaisons s'effectuent avec des puissances entières exactes.
+\end{proof}
+
+L'égalité de profondeur décimale en deux transitions distinctes explique la nécessité de conserver les deux indices : l'horloge de lecture peut rester constante tandis que la bande ternaire avance et que sa signature est mise à jour. L'information chronologique se trouve dans le registre ordonné des transitions.
+
+\subsection{Théorème de composition du bloc, du cylindre et de la signature}
+
+\begin{theorem}[Compatibilité conjointe des lectures régionales]
+\label{act21:thm:df-composicion-conjunta}
+Pour chaque profondeur \(n\), il existe un unique triplet de blocs
+\((u_{\mathrm P},u_{\mathrm E},u_{\mathrm F})\) qui satisfait
+l'admissibilité régionale \eqref{act21:eq:df-admisibilidad} dans les trois régions.
+Ce triplet est \((u_{\mathrm P}(n),u_{\mathrm E}(n),u_{\mathrm F}(n))\).
+Simultanément :
+\begin{enumerate}
+\item chaque bloc met à jour son cylindre par les récurrences
+\eqref{act21:eq:df-rec-ternaria} et \eqref{act21:eq:df-rec-conjunta} ;
+\item ses six trits produisent la signature
+\(\mathcal S(B_{\mathrm P}(n),B_{\mathrm E}(n),B_{\mathrm F}(n))\);
+\item les totaux de colonne se retrouvent comme \(q+3c\), et les charges de Witt sont obtenues à partir des mêmes bandes par
+\eqref{act21:eq:df-witt-reduccion} ;
+\item tout préfixe de plus grande profondeur renvoie exactement ces
+blocs, cylindres tronqués et signatures.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Nous appliquons le théorème ~\ref{act21:thm:df-prolongacion-unica} à chacun des trois
+indices régionaux. L'unicité coordonnée par coordonnée donne l'unicité
+conjointe. Nous substituons ces mêmes résidus dans les opérations
+\(T_u,T_{u,d}\), ce qui permet d'appliquer le
+théorème ~\ref{act21:thm:df-refinamiento-generado}. L'application déterministe de
+\eqref{act21:eq:df-bloque-y-banda} produit les bandes utilisées par
+\eqref{act21:eq:df-firma-qc}--\eqref{act21:eq:df-cargas-residuales}. Les identités
+de récupération sont celles du théorème ~\ref{act21:thm:df-recuperacion-firma}.
+Finalement, le théorème ~\ref{act21:thm:df-bloque-estable} et le troncage de
+chaque base démontrent la stabilité à plus grande profondeur. À chaque étape, on a conservé l'identité du bloc émis ; aucune des deux
+lectures ne requiert de sélectionner un autre bloc.
+\end{proof}
+
+La conclusion est une compatibilité opérationnelle entre la contraction
+cylindrique et la conservation de l'incidence. Les deux utilisent le même
+registre généré, maintiennent les profondeurs et admettent la récupération
+entière. Ce résultat est la forme explicite du lien
+\[
+ \text{bloc régional émis}
+ \longrightarrow
+ \begin{cases}
+ \text{cylindre et frontière entière},\\
+ \text{bande, signature, retenue et charge de Witt}.
+ \end{cases}
+\]
+Le développement ultérieur de l'incidence et des champs emploie la deuxième lecture, conservant l'origine commune avec la première.

@@ -1,0 +1,691 @@
+% Recuperación y articulación de los propietarios documentados en
+% PROCEDENCIA_OBSERVADOR_RESPUESTA.md. Originales conservados íntegros.
+% Antecedentes de integración: núcleo APP--TRIT--TPK, realización del
+% transporte de borde, lectores areal/volumétrico y reloj energético.
+% Las condiciones de representación se enuncian antes de cada uso.
+
+\section{Observador, memoria y respuesta relacional}
+\label{vii:sec:observador-respuesta}
+
+La operación de lectura actúa sobre el transporte que publica el estado
+enriquecido APP--TRIT--TPK. Su dominio conserva ruta, hoja, orientación,
+acarreo y memoria; el resultado accesible al observador es una aplicación
+de ese dominio. Esta distinción permite describir conjuntamente tres
+operaciones: la elección de un representante orientado del transporte,
+la inscripción de su registro en un aparato y la respuesta local inducida
+por la frontera global. Cada operación transmite una información distinta.
+La construcción siguiente especifica sus mapas y las condiciones que
+permiten componerlos.
+
+\subsection{Transporte de borde y lectura intrínseca}
+\label{vii:sec:observador-ciclo}
+
+La publicación finita del transporte proporciona un ciclo orientado
+\(C_n\), con \(n\geq1\), vértices \(0,\ldots,n-1\) y aristas
+\(e_j:j\longrightarrow j+1\pmod n\). Fijamos la realización reticular
+\(L\) del registro, su espacio vectorial
+\(W=L\otimes_{\mathbb Z}\mathbb R\), un producto interno positivo y
+el representante primitivo no nulo \(v\in L\) de la clase residual
+distinguida, en la cámara declarada. Las hojas suma y producto de APP
+aportan las polarizaciones del transporte; la orientación del TRIT y la
+actualización del TPK preceden a esta publicación lineal. El ciclo,
+la realización reticular y la clase residual son los datos que esta
+sección recibe del transporte construido anteriormente.
+
+Una \(0\)-cocadena es una función sobre los vértices con valores en
+\(W\); una \(1\)-cocadena asigna un vector a cada arista orientada.
+El coborde actúa por
+\[
+ (d\Phi)(e_j)=\Phi(j+1)-\Phi(j).
+\]
+Denotamos por \(\mathbf1_E\) la cocadena escalar constante en las
+aristas. Para un transporte \(\omega\in C^1(C_n;W)\), su publicación
+acumulada \(\Gamma_\omega\) se obtiene por sumas parciales e
+interpolación afín; su defecto de cierre es
+\begin{equation}
+ B(\omega)=\Gamma_\omega(1)-\Gamma_\omega(0)
+ =\sum_{j=0}^{n-1}\omega(e_j).
+ \label{vii:eq:observador-defecto}
+\end{equation}
+
+\begin{theorem}[Descomposición exacta y modo armónico del ciclo]
+\label{vii:thm:observador-descomposicion}
+Todo transporte tiene una única descomposición
+\[
+ \omega=d\Phi+u\mathbf1_E,\qquad \Phi(0)=0,
+ \qquad u=\frac1n\sum_j\omega(e_j).
+\]
+En particular, \(B(d\Phi)=0\) y \(B(\omega)=nu\).
+\end{theorem}
+
+\begin{proof}
+Sea \(y_j=\omega(e_j)-u\). La suma de los \(y_j\) es cero.
+Definimos \(\Phi(k)=\sum_{j=0}^{k-1}y_j\); el valor para \(k=n\)
+coincide con \(\Phi(0)=0\), de modo que la función está bien definida
+en el ciclo, incluida su arista final. Se cumple \(d\Phi(e_j)=y_j\).
+Si \(d\Phi+u\mathbf1_E=d\Psi+w\mathbf1_E\), la suma de aristas da
+\(nu=nw\). Entonces \(d(\Phi-\Psi)=0\); la conectividad del ciclo
+y la normalización en el vértice inicial implican \(\Phi=\Psi\).
+La identidad \(\sum_j(\Phi(j+1)-\Phi(j))=0\) prueba directamente
+la cancelación telescópica.
+\end{proof}
+
+\begin{definition}[Transporte admisible y lectura normalizada]
+\label{vii:def:observador-admisible}
+El transporte es admisible cuando su modo armónico pertenece a
+\(\mathbb Rv\). Sobre el espacio \(\mathcal T_{\rm adm}\) de esos
+transportes definimos la lectura global y su densidad por fase:
+\begin{equation}
+ \mathfrak a_v(\omega)
+ =\frac{\langle B(\omega),v\rangle}{\langle v,v\rangle},
+ \qquad
+ \mu_v(\omega)=\frac{\mathfrak a_v(\omega)}n.
+ \label{vii:eq:observador-lectura}
+\end{equation}
+Se tiene \(B(\omega)=\mathfrak a_v(\omega)v\).
+\end{definition}
+
+\begin{theorem}[Determinación de la lectura intrínseca]
+\label{vii:thm:observador-unicidad}
+El cociente
+\(\mathcal T_{\rm adm}/dC^0(C_n;W)\) es unidimensional, generado
+por la clase de \(v\mathbf1_E\). La aplicación \(\mu_v\) es el
+único funcional lineal sobre \(\mathcal T_{\rm adm}\) que satisface
+\[
+ F(\omega+d\Phi)=F(\omega),\qquad F(v\mathbf1_E)=1.
+\]
+\end{theorem}
+
+\begin{proof}
+La descomposición anterior escribe cada transporte admisible como
+\(d\Phi+\lambda v\mathbf1_E\). Su clase módulo cocadenas exactas
+queda determinada por \(\lambda\). La clase de \(v\mathbf1_E\)
+es no nula porque su suma es \(nv\neq0\). Por linealidad e
+invariancia, todo funcional de las características indicadas vale
+\(F(\omega)=\lambda F(v\mathbf1_E)=\lambda\). La fórmula
+\eqref{vii:eq:observador-lectura} da precisamente \(\mu_v=\lambda\).
+La lectura global es \(\mathfrak a_v=n\mu_v\).
+\end{proof}
+
+\begin{definition}[Observador de borde]
+\label{vii:def:observador-borde}
+Fijada la polarización del transporte publicado, un observador de borde
+es un par \(\mathcal O=(\varepsilon,\Psi)\), donde
+\(\varepsilon\in\{+1,-1\}\) y \(\Psi\in C^0(C_n;W)\).
+Su acción de lectura es
+\begin{equation}
+ \omega^{\mathcal O}=\varepsilon\omega+d\Psi.
+ \label{vii:eq:observador-accion}
+\end{equation}
+El signo fija la orientación y la cocadena fija la trivialización.
+Dos elecciones de polarización se comparan mediante su transporte
+publicado; la relación \eqref{vii:eq:observador-accion} describe
+exactamente los representantes que difieren por orientación y coborde.
+\end{definition}
+
+\begin{proposition}[Covarianza de la lectura]
+\label{vii:prop:observador-covarianza}
+La acción conserva la admisibilidad y verifica
+\[
+ B(\omega^{\mathcal O})=\varepsilon B(\omega),\quad
+ \mathfrak a_v(\omega^{\mathcal O})=\varepsilon\mathfrak a_v(\omega),
+ \quad \mu_v(\omega^{\mathcal O})=\varepsilon\mu_v(\omega).
+\]
+Las trivializaciones con igual orientación publican el mismo cierre.
+\end{proposition}
+
+\begin{proof}
+La suma del coborde \(d\Psi\) es cero. Por tanto, el modo armónico
+se transforma en \(\varepsilon u\), que sigue perteneciendo a
+\(\mathbb Rv\), y el defecto se transforma en \(\varepsilon B\).
+Las dos igualdades escalares se obtienen por la proyección normalizada.
+\end{proof}
+
+La unidad de esta lectura es el representante residual \(v\), con su
+normalización interna. La libertad de trivialización actúa sobre el
+representante de la cocadena; la información de cierre reside en su
+clase. La descripción permite comparar observadores manteniendo
+separados el transporte genealógico, su publicación lineal y el escalar
+que evalúa la clase residual.
+
+\subsection{Identidad de borde e interior celular}
+\label{vii:sec:observador-stokes}
+
+Sea \(K\) un complejo celular finito orientado de dimensión dos,
+provisto de una \(2\)-cadena fundamental \(c_K\) tal que
+\(\partial c_K=[C_n]\). Esta condición expresa que las incidencias
+interiores se cancelan con sus multiplicidades y orientaciones.
+Sea \(\Omega\in C^1(K;W)\) una extensión de \(\omega\) y
+\(F_\Omega=d\Omega\) su curvatura discreta aditiva.
+
+\begin{theorem}[Identidad holográfica celular de la lectura]
+\label{vii:thm:observador-stokes}
+Con los datos anteriores,
+\begin{equation}
+ B(\omega)=\langle\Omega,\partial c_K\rangle
+          =\langle d\Omega,c_K\rangle,
+ \qquad
+ \mathfrak a_v(\omega)
+ =\frac{\langle\langle d\Omega,c_K\rangle,v\rangle}
+        {\langle v,v\rangle}.
+ \label{vii:eq:observador-stokes}
+\end{equation}
+En particular, \(F_\Omega=0\) implica \(\mathfrak a_v(\omega)=0\).
+Si el cierre es no nulo, toda extensión del transporte en ese complejo
+tiene curvatura discreta no nula.
+\end{theorem}
+
+\begin{proof}
+El emparejamiento entre cadenas y cocadenas satisface
+\(\langle d\Omega,c_K\rangle=\langle\Omega,\partial c_K\rangle\).
+Al expandirlo, cada arista interior aparece con la suma de los números
+de incidencia de las celdas contiguas; la condición sobre
+\(\partial c_K\) deja exactamente el ciclo orientado de borde.
+La restricción de \(\Omega\) a ese ciclo es \(\omega\), cuya suma
+es \(B(\omega)\). La proyección sobre \(v\) da la segunda fórmula
+y la implicación de planitud.
+\end{proof}
+
+La igualdad compara dos evaluaciones de la misma cocadena extendida:
+el defecto acumulado del borde y el coborde integrado sobre el interior.
+Su curvatura toma valores en \(W\) y usa el coborde celular aditivo.
+La realización por una conexión geométrica conserva, adicionalmente,
+su propio espacio de coeficientes y su ley de transporte.
+
+\subsection{Inscripción isométrica del registro en el aparato}
+\label{vii:sec:observador-aparato}
+
+Sea \(\mathfrak M_n\) un conjunto finito no vacío de registros
+publicados a nivel \(n\), con resultado, ruta, acarreo, hoja y memoria.
+Su espacio de registros es
+\(\mathcal H_n=\ell^2(\mathfrak M_n)\), con base \(|m\rangle\).
+La actualización visible \(F_n\) tiene un levantamiento de registro
+\[
+ \widehat F_n(m)=(F_n(m),m).
+\]
+Tomamos como registros del nivel siguiente un conjunto que contiene esas
+parejas. La segunda coordenada conserva el antecedente y hace inyectivo
+el levantamiento. Esta construcción especifica la memoria retenida por
+la inscripción, también cuando la actualización visible reúne valores.
+
+En un espacio finito de aparato \(\mathcal K_{A,n}\), fijamos una
+familia ortonormal \((|a_m\rangle)_{m\in\mathfrak M_n}\) y definimos
+\[
+ \iota_n:\mathcal H_n\longrightarrow\mathcal K_{A,n},
+ \quad \iota_n|m\rangle=|a_m\rangle,
+ \qquad
+ V_n:\mathcal H_n\longrightarrow\mathcal H_{n+1},
+ \quad V_n|m\rangle=|\widehat F_n(m)\rangle.
+\]
+Sea \(\mathcal P_n=\iota_n\mathcal H_n\) el subespacio de puntero.
+
+\begin{theorem}[Compatibilidad entre actualización e inscripción]
+\label{vii:thm:observador-entrelazador}
+Los mapas \(\iota_n\) y \(V_n\) son isometrías. Existe una única
+isometría \(W_n^0:\mathcal P_n\longrightarrow\mathcal K_{A,n+1}\)
+que verifica
+\begin{equation}
+ W_n^0\iota_n=\iota_{n+1}V_n.
+ \label{vii:eq:observador-cuadrado}
+\end{equation}
+Si \(\dim\mathcal K_{A,n+1}\geq\dim\mathcal K_{A,n}\),
+se prolonga a una isometría de todo \(\mathcal K_{A,n}\).
+Mediante complementos auxiliares que igualen las dimensiones, se obtiene
+una prolongación unitaria entre los espacios ampliados.
+\end{theorem}
+
+\begin{proof}
+Las imágenes de las bases por \(\iota_n\) son ortonormales; las
+imágenes por \(V_n\) también lo son por la inyectividad de
+\(\widehat F_n\). Para \(z=\iota_n\psi\) definimos
+\(W_n^0z=\iota_{n+1}V_n\psi\). La representación de \(z\) es única,
+y los tres mapas conservan su norma. La fórmula determina el mapa en
+una base de \(\mathcal P_n\) y prueba el cuadrado.
+Si la dimensión de llegada es suficiente, el complemento ortogonal de
+\(W_n^0\mathcal P_n\) contiene una familia ortonormal del tamaño de
+\(\mathcal P_n^\perp\); enviando una base de este último a aquella
+se construye la prolongación. Finalmente se amplían ambos espacios a
+una misma dimensión y se completan las dos familias prescritas a bases
+ortonormales. La aplicación entre esas bases es unitaria.
+\end{proof}
+
+Cuando el registro incluye rótulos de un instrumento finito, esta misma
+inscripción realiza su ambiente: si los operadores
+\(K_{y,a}:\mathcal H_S\to\mathcal H'_S\) satisfacen
+\(\sum_{y,a}K_{y,a}^*K_{y,a}=I\), la aplicación
+\[
+ V_{\rm inst}\psi=\sum_{y,a}K_{y,a}\psi\otimes|y,a\rangle
+\]
+es isométrica, pues su norma al cuadrado es
+\(\sum_{y,a}\langle\psi,K_{y,a}^*K_{y,a}\psi\rangle=\|\psi\|^2\).
+La inscripción \(\iota\) transporta cada rótulo al puntero que le
+corresponde. El modelo fija así el registro de la premedición; un
+dispositivo material requiere además su interacción y su calibración.
+
+\input{antecedentes_vii/80b_salida_y_condicionamiento.tex}
+
+\subsection{Álgebra accesible y complemento del puntero}
+\label{vii:sec:observador-expectativa}
+
+Definimos \(P_m=|a_m\rangle\langle a_m|\),
+\(P=\sum_mP_m\) y \(P_\perp=I-P\). El álgebra del subespacio de
+puntero es \(P\mathcal B(\mathcal K_{A,n})P\), cuya unidad es \(P\).
+En ella, el lector diagonal es
+\[
+ \mathcal D_P(A)=\sum_mP_mAP_m.
+\]
+
+\begin{proposition}[Expectativa del registro y extensión unital]
+\label{vii:prop:observador-pinzamiento}
+La aplicación \(\mathcal D_P\) es una expectativa condicional
+completamente positiva, preservadora de traza e idempotente sobre el
+álgebra del puntero, con \(\mathcal D_P(P)=P\). Su imagen es
+\(\bigoplus_m\mathbb CP_m\).
+Sobre el álgebra del aparato completo, la aplicación
+\begin{equation}
+ \mathcal E_P(A)=\sum_mP_mAP_m+P_\perp AP_\perp
+ \label{vii:eq:observador-complemento}
+\end{equation}
+es una expectativa condicional unital, completamente positiva y
+preservadora de traza. Su imagen es
+\[
+ \left(\bigoplus_m\mathbb CP_m\right)
+ \oplus\mathcal B(\mathcal P_n^\perp).
+\]
+Ambas aplicaciones son proyecciones ortogonales para el producto de
+Hilbert--Schmidt. Sus espectros están contenidos en \(\{0,1\}\).
+Cuando existen componentes eliminadas, la separación entre el
+subespacio fijo y el núcleo es uno.
+\end{proposition}
+
+\begin{proof}
+Los proyectores \(P_m\) son mutuamente ortogonales. En el aparato
+completo, la familia que añade \(P_\perp\) suma \(I\). Cada sumando
+\(A\mapsto P_mAP_m\) es completamente positivo: tras cualquier
+ampliación matricial actúa por congruencia con \(I\otimes P_m\).
+Lo mismo ocurre para \(P_\perp\). La suma conserva esa propiedad.
+La ciclicidad de la traza y la suma de los proyectores prueban la
+preservación de traza en cada dominio. La ortogonalidad anula los
+términos cruzados al iterar el mapa, por lo que es idempotente.
+Sus elementos fijos son precisamente los bloques anunciados y la
+aplicación es bimodular respecto de esa subálgebra.
+Además,
+\(\operatorname{Tr}(A^*P_mBP_m)
+ =\operatorname{Tr}((P_mAP_m)^*B)\),
+de donde resulta la autoadjunción para Hilbert--Schmidt. Una proyección
+autoadjunta tiene únicamente los valores espectrales cero y uno cuando
+ambos subespacios son no nulos. Si sólo queda el subespacio fijo,
+la aplicación es la identidad.
+\end{proof}
+
+La suma \(\sum_mP_mAP_m\), aplicada sin el complemento a todo el
+aparato, envía \(I\) a \(P\). Su unidad natural pertenece al álgebra
+del puntero. La fórmula \eqref{vii:eq:observador-complemento} conserva
+también el bloque auxiliar; una resolución ortonormal de ese bloque
+proporciona, cuando se desea, la diagonalización del aparato entero.
+
+Si \(U\) es una transformación unitaria del aparato y
+\(P'_m=UP_mU^*\), entonces
+\[
+ \mathcal E_{P'}(UAU^*)=U\mathcal E_P(A)U^*.
+\]
+La igualdad se obtiene sustituyendo cada proyector en la suma.
+Asimismo, para \(A\in\mathcal B(\mathcal P_n)\), el cuadrado
+\eqref{vii:eq:observador-cuadrado} implica
+\[
+ \mathcal D_{P_{n+1}}(W_n^0A(W_n^0)^*)
+ =W_n^0\mathcal D_{P_n}(A)(W_n^0)^*.
+\]
+En efecto, cada unidad matricial \(|a_m\rangle\langle a_{m'}|\)
+se transporta a la unidad correspondiente a los registros distintos
+\(\widehat F_n(m),\widehat F_n(m')\); el lector diagonal conserva
+exactamente los términos con \(m=m'\).
+
+\subsection{Factorización de la respuesta por la frontera efectiva}
+\label{vii:sec:observador-factorizacion}
+
+Sea \(\mathcal X_\infty^{\rm enr}\) el dominio de estados compatibles
+enriquecidos y sea
+\(b:\mathcal X_\infty^{\rm enr}\longrightarrow B_\infty\) su traza
+global de frontera. Denotamos por \(B_{\rm ef}=\operatorname{im}b\)
+la frontera efectivamente publicada. Para un espacio de respuestas
+\(\mathcal V_v\), consideramos
+\(I_v:\mathcal X_\infty^{\rm enr}\longrightarrow\mathcal V_v\).
+
+\begin{theorem}[Criterio de respuesta relacional]
+\label{vii:thm:observador-factorizacion}
+Existe una única aplicación \(\overline I_v:B_{\rm ef}\to\mathcal V_v\)
+tal que \(I_v=\overline I_v\circ b\) si y sólo si
+\begin{equation}
+ b(x)=b(x')\quad\Longrightarrow\quad I_v(x)=I_v(x').
+ \label{vii:eq:observador-fibra}
+\end{equation}
+La unicidad se extiende a todo \(B_\infty\) cuando \(b\) es
+sobreyectiva.
+\end{theorem}
+
+\begin{proof}
+Una composición por \(b\) es constante en cada fibra. Recíprocamente,
+para \(\beta\in B_{\rm ef}\), se define
+\(\overline I_v(\beta)=I_v(x)\) con \(b(x)=\beta\).
+La condición \eqref{vii:eq:observador-fibra} garantiza independencia
+del representante; todo valor de \(\overline I_v\) queda determinado
+por algún estado de esa fibra. Si \(b\) es sobreyectiva,
+\(B_{\rm ef}=B_\infty\). En otro caso, la ecuación de composición
+determina únicamente los valores sobre \(B_{\rm ef}\).
+\end{proof}
+
+Este criterio es conjuntista. Para una factorización continua, se
+conservan además las topologías y la condición de aplicación cociente
+de \(b:\mathcal X_\infty^{\rm enr}\to B_{\rm ef}\); con ella, la
+continuidad de \(I_v\) equivale a la de su factor. Esta precisión
+separa la determinación de una lectura de sus propiedades de regularidad.
+
+Sea \(\ell_v:\mathcal X_\infty^{\rm enr}\to\mathcal L_v\) la
+restricción accesible a una vecindad local. El carácter global efectivo
+se verifica mediante dos estados que satisfagan
+\begin{equation}
+ \ell_v(x)=\ell_v(x'),\qquad I_v(x)\neq I_v(x').
+ \label{vii:eq:observador-testigo-global}
+\end{equation}
+Si \(I_v\) factoriza por \(b\), estos dos estados tienen fronteras
+distintas. Además, la respuesta no puede escribirse como función de
+\(\ell_v\), pues esa función asignaría el mismo valor a ambos estados.
+La diferencia de fronteras adquiere así un efecto operatorio comprobable.
+
+\subsection{Pesos de ambivalencia y respuesta autoinercial}
+\label{vii:sec:observador-ambivalencia}
+
+Para la fórmula general consideramos lectores positivos
+\(A_\partial,V_\partial\) y un lector energético \(Q\)
+definidos sobre el dominio efectivo de frontera declarado.
+A continuación se explicita una realización sobre
+\(B_{\rm av}\subseteq B_{\rm ef}\). La memoria permanece como coordenada
+\(\mathsf M_\partial(\beta)\) de la frontera. La bisagra de
+ambivalencia proporciona las dos orientaciones
+\[
+ r_{\rm av}=\frac{\pi_{\rm HMT}}{\varphi_{\rm HMT}^2},\qquad
+ r_{\rm av}^{J}=\frac{\varphi_{\rm HMT}}{\pi_{\rm HMT}^2}.
+\]
+El superíndice \(J\) expresa intercambio del par generador.
+\paragraph{Realización normalizada de los lectores de frontera.}
+La incidencia modal APP--TRIT--TPK, desarrollada en la construcción
+regional, proporciona el envolvente de caminos de matriz
+\[
+ F_{\rm av}=\begin{pmatrix}0&1\\1&1\end{pmatrix}.
+\]
+El vector positivo \(v=(1,\varphi_{\rm HMT})^{\mathsf T}\)
+satisface \(F_{\rm av}v=\varphi_{\rm HMT}v\). Su transición
+normalizada y sus pesos estacionarios son
+\begin{equation}
+ P_{ij}=\frac{(F_{\rm av})_{ij}v_j}{\varphi_{\rm HMT}v_i},
+ \qquad
+ P=\begin{pmatrix}0&1\\
+ \varphi_{\rm HMT}^{-2}&\varphi_{\rm HMT}^{-1}\end{pmatrix},
+ \qquad
+ (\mu_{\rm ar},\mu_{\rm vol})
+ =\frac{(1,\varphi_{\rm HMT}^{2})}{1+\varphi_{\rm HMT}^{2}}.
+ \label{vii:eq:lectores-parry}
+\end{equation}
+Las filas de \(P\) suman uno por
+\(\varphi^{-2}+\varphi^{-1}=1\); la ecuación estacionaria
+\(\mu_{\rm ar}=\mu_{\rm vol}\varphi^{-2}\), junto con la
+normalización, determina los pesos escritos. Esta medida de Parry
+pondera los caminos del envolvente; la frecuencia cronológica
+\((1/3,2/3)\) cuenta los instantes del calendario modal y conserva
+su función distinta.
+
+La realización de amplitud común de memoria se define sobre el sector
+\(\mathcal X_{\rm av}\subset\mathcal X_\infty^{\rm enr}\) en el que
+los lectores de las dos hojas tienen la factorización
+\begin{equation}
+ \mathcal L_{\rm vol}(x)=\mu_{\rm vol}\mathcal M(x),\qquad
+ \mathcal L_{\rm ar}(x)=\pi_{\rm HMT}\mu_{\rm ar}\mathcal M(x),
+ \qquad \mathcal M(x)>0.
+ \label{vii:eq:lectores-amplitud-comun}
+\end{equation}
+Ambos valores pertenecen a la misma recta positiva de amplitud de
+memoria. La publicación areal lleva la marca regional
+\(\pi_{\rm HMT}\) del retorno. La lectura adimensional se obtiene
+dividiendo ambas secciones por \(\mathcal L_{\rm vol}(x)\).
+De este modo las sumas de los pesos se efectúan entre magnitudes del
+mismo tipo; una eventual realización como áreas y volúmenes físicos
+se compone después con sus respectivos transductores dimensionales.
+
+\begin{proposition}[Descenso de los lectores normalizados y del reloj energético]
+\label{vii:prop:lectores-frontera-explicitos}
+Sobre \(B_{\rm av}=b(\mathcal X_{\rm av})\), las reglas
+\begin{equation}
+ A_\partial(b(x))
+ =\frac{\mathcal L_{\rm ar}(x)}{\mathcal L_{\rm vol}(x)}
+ =r_{\rm av},\qquad V_\partial(b(x))=1
+ \label{vii:eq:lectores-normalizados}
+\end{equation}
+definen dos lectores positivos independientes del representante.
+Fijada una orientación \(a\) de la sección de acción, la energía de
+decisión de \eqref{v:ant:eq:ii-kb-aut-energia} determina sobre estados
+\begin{equation}
+ q_a(x)=\frac{h_a(x)}{108t_0(x)}
+       =\frac{\hbar_a(x)}{t_P(x)}\in\mathcal L_E^+,
+ \qquad t_P=\frac{54}{\pi_{\rm HMT}}t_0.
+ \label{vii:eq:lector-q-accion}
+\end{equation}
+Escribimos
+\[
+ b_{\rm av}:=b|_{\mathcal X_{\rm av}}:
+ \mathcal X_{\rm av}\longrightarrow B_{\rm av}.
+\]
+Existe un único lector \(Q:B_{\rm av}\to\mathcal L_E^+\) tal que
+\(q_a|_{\mathcal X_{\rm av}}=Q\circ b_{\rm av}\)
+si y sólo si, para cualesquiera \(x,x'\in\mathcal X_{\rm av}\),
+\begin{equation}
+ b(x)=b(x')\ \Longrightarrow\
+ \frac{h_a(x)}{t_0(x)}=\frac{h_a(x')}{t_0(x')}.
+ \label{vii:eq:descenso-reloj}
+\end{equation}
+En particular, una carta de acción y duración fijas satisface esta
+condición y publica \(Q=h_a/(108t_0)\).
+\end{proposition}
+\begin{proof}
+El cociente de \eqref{vii:eq:lectores-amplitud-comun} cancela la
+amplitud común y vale
+\(\pi_{\rm HMT}\mu_{\rm ar}/\mu_{\rm vol}
+=\pi_{\rm HMT}/\varphi_{\rm HMT}^2\).
+El resultado es el mismo para todos los representantes de una fibra
+de \(b_{\rm av}\) dentro de \(\mathcal X_{\rm av}\) y es positivo.
+Dividir ambos lectores por el mismo factor positivo
+conserva los cocientes ponderados en los que intervienen.
+Para el reloj, el criterio de factorización del
+teorema~\ref{vii:thm:observador-factorizacion}, aplicado a \(q_a\),
+equivale exactamente a \eqref{vii:eq:descenso-reloj}. Las secciones
+fijas lo satisfacen; también lo satisfacen secciones variables cuyo
+cociente descienda por \(b_{\rm av}\). La unicidad resulta de la definición
+de \(B_{\rm av}\) como imagen efectiva.
+\end{proof}
+
+El valor del lector \(Q\) pertenece a la recta de energía
+\(\mathcal L_E=\mathcal L_{\rm act}\otimes\mathcal L_T^*\).
+Con \(E_1,E_2\) en esa misma recta,
+\(E_1E_2/Q^2\) es adimensional e independiente de la base energética
+positiva. El símbolo \(Q\) de esta sección designa exclusivamente
+esa energía de reloj; la cantidad de calor de la realización de
+Landauer pertenece al balance térmico correspondiente.
+La factorización de amplitud común especifica una realización
+concreta de los lectores generales. Cada otro dominio conserva sus
+aplicaciones de frontera y su propia comprobación del descenso.
+La memoria completa sigue en la historia enriquecida y en su
+publicación de frontera, aunque se cancele en el cociente normalizado.
+
+
+Definimos
+\[
+ w_A(\beta)=
+ \frac{A_\partial(\beta)r_{\rm av}}
+ {A_\partial(\beta)r_{\rm av}+V_\partial(\beta)r_{\rm av}^{J}},
+ \qquad w_V(\beta)=1-w_A(\beta).
+\]
+En la realización \eqref{vii:eq:lectores-normalizados}, los pesos
+admiten la evaluación exacta
+\begin{equation}
+ w_A=\frac{r_{\rm av}^{\,2}}{r_{\rm av}^{\,2}+r_{\rm av}^{J}}
+     =\frac{\pi_{\rm HMT}^{4}}
+            {\pi_{\rm HMT}^{4}+\varphi_{\rm HMT}^{5}},\qquad
+ w_V=\frac{\varphi_{\rm HMT}^{5}}
+            {\pi_{\rm HMT}^{4}+\varphi_{\rm HMT}^{5}}.
+ \label{vii:eq:pesos-amplitud-comun}
+\end{equation}
+La sustitución conserva los dos factores de la definición: el lector
+areal normalizado y su ponderación posterior por \(r_{\rm av}\).
+La generación y el marcado regional del retorno se realizan una vez.
+Multiplicar numerador
+y denominador por \(\varphi_{\rm HMT}^4\pi_{\rm HMT}^2\)
+da la última expresión. Estos pesos permanecen constantes en el
+sector de amplitud común. Con proyectores y energías fijos, una
+variación de la respuesta puede proceder del lector \(Q\);
+el testigo de dependencia global requiere además los estados con
+igual restricción local y distinta respuesta de
+\eqref{vii:eq:observador-testigo-global}.
+
+
+Sean \(P_A,P_V\) proyecciones ortogonales complementarias de un
+espacio de respuesta \(\mathcal H_v\), y sean \(E_1,E_2>0\)
+dos energías internas fijadas para la comparación. La respuesta es
+\begin{equation}
+ \overline I_v(\beta)=\frac{E_1E_2}{Q(\beta)^2}
+       \bigl(w_A(\beta)P_A+w_V(\beta)P_V\bigr),
+ \qquad I_v=\overline I_v\circ b.
+ \label{vii:eq:observador-respuesta-ponderada}
+\end{equation}
+También se admiten energías que sean lectores explícitos de
+\(\beta\); en ese caso se conservan como tales en la fórmula.
+
+\begin{proposition}[Positividad y covarianza de la respuesta]
+\label{vii:prop:observador-respuesta-positiva}
+La respuesta \eqref{vii:eq:observador-respuesta-ponderada} es
+autoadjunta, positiva definida y constante en las fibras de \(b\).
+Sus valores propios en los sectores no nulos son
+\[
+ \lambda_A=E_1E_2Q^{-2}w_A,\qquad
+ \lambda_V=E_1E_2Q^{-2}w_V.
+\]
+El intercambio completo
+\((A_\partial,r_{\rm av},P_A)
+ \leftrightarrow(V_\partial,r_{\rm av}^{J},P_V)\)
+permuta los dos sumandos y conserva el operador. Un transporte
+unitario del espacio de respuesta conjuga ese operador y conserva
+su espectro con multiplicidades.
+\end{proposition}
+
+\begin{proof}
+La positividad de los lectores da \(0<w_A,w_V<1\). Para
+\(z=z_A+z_V\), con \(z_A=P_Az\), \(z_V=P_Vz\),
+\[
+ \langle z,\overline I_vz\rangle
+ =\frac{E_1E_2}{Q^2}
+   (w_A\|z_A\|^2+w_V\|z_V\|^2)>0
+\]
+si \(z\neq0\). La descomposición ortogonal prueba las expresiones
+espectrales. La dependencia exclusiva de \(\beta\) da constancia
+en las fibras y la factorización. El intercambio de las ternas
+intercambia numeradores, pesos y proyectores a la vez, por lo que
+conserva la suma. Para un transporte unitario \(U\), la sustitución
+\(P_A\mapsto UP_AU^*\), \(P_V\mapsto UP_VU^*\) produce
+\(U\overline I_vU^*\), con el mismo espectro.
+\end{proof}
+
+Un intercambio implementado dentro de un mismo espacio por una unitaria
+que envíe \(P_A\) a \(P_V\) requiere que ambos sectores tengan
+igual dimensión. El intercambio de las dos ternas como rótulos de la
+fórmula es válido con las dimensiones propias de cada sector.
+
+La condición \eqref{vii:eq:observador-testigo-global} exige comparar
+las respuestas. Por ejemplo, multiplicar simultáneamente
+\(A_\partial,V_\partial\) por un mismo factor positivo conserva
+ambos pesos; si también se conservan \(E_1,E_2,Q\), la respuesta
+permanece idéntica. En cambio, con iguales pesos y energías, sustituir
+\(Q\) por \(qQ\), \(q>0\), multiplica la respuesta por \(q^{-2}\).
+Si dos estados con igual restricción local realizan ese cambio con
+\(q\neq1\), proporcionan el testigo global. Estas son condiciones
+operatorias de separación; la existencia de los estados se comprueba
+en el dominio de frontera que se esté realizando.
+
+\subsection{Conexión del estado conjunto y aceleración publicada}
+\label{vii:sec:observador-autoinercia}
+
+En una realización diferenciable del estado conjunto
+\(\Gamma=(x,\mathcal O,m)\), sean \(N\) su espacio de realización,
+\(\nabla^{\rm tot}\) su conexión y \(\pi_S:N\to N_S\) una
+proyección diferenciable hacia el subsistema, dotado de conexión
+\(\nabla^S\). La conexión y la proyección conservan la procedencia
+de los transportes y lectores que realizan. El marco observado se
+obtiene mediante
+\[
+ \mathfrak F_{\mathcal O}(\Gamma)
+ =\operatorname{Res}_{\mathcal O}(\Gamma,\nabla^{\rm tot}).
+\]
+Para una trayectoria dos veces diferenciable \(\Gamma(t)\),
+escribimos \(\gamma_S=\pi_S\circ\Gamma\).
+
+\begin{definition}[Autoinercia y defecto de proyección]
+\label{vii:def:observador-autoinercia}
+Una trayectoria es autoinercial respecto de la conexión declarada
+cuando \(\nabla^{\rm tot}_{\dot\Gamma}\dot\Gamma=0\).
+El defecto de su proyección es
+\begin{equation}
+ \mathcal K_{\pi_S}(\dot\Gamma,\dot\Gamma)
+ =\nabla^S_{\dot\gamma_S}\dot\gamma_S
+  -d\pi_S\bigl(\nabla^{\rm tot}_{\dot\Gamma}\dot\Gamma\bigr).
+ \label{vii:eq:observador-defecto-proyeccion}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Aceleración del subsistema]
+\label{vii:prop:observador-aceleracion}
+Para una trayectoria autoinercial,
+\[
+ a_S=\nabla^S_{\dot\gamma_S}\dot\gamma_S
+     =\mathcal K_{\pi_S}(\dot\Gamma,\dot\Gamma).
+\]
+En coordenadas \(x^B\) de \(N\) y \(y^a\) de \(N_S\), el
+defecto es cuadrático en la velocidad, con componentes
+\begin{equation}
+ (\mathcal K_{\pi_S})^a{}_{BC}
+ =\partial_B\partial_C\pi_S^a
+  +(\Gamma^S)^a{}_{bc}\,
+        \partial_B\pi_S^b\partial_C\pi_S^c
+  -\partial_D\pi_S^a(\Gamma^{\rm tot})^D{}_{BC}.
+ \label{vii:eq:observador-defecto-coordenadas}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La regla de la cadena da
+\(\ddot\gamma_S^a=\partial_B\pi_S^a\ddot\Gamma^B
+ +\partial_B\partial_C\pi_S^a\dot\Gamma^B\dot\Gamma^C\).
+Sumando la contribución de \(\nabla^S\) y restando la imagen de
+la aceleración total, los términos que contienen \(\ddot\Gamma\)
+se cancelan. Los restantes son
+\eqref{vii:eq:observador-defecto-coordenadas} contraídos con
+\(\dot\Gamma^B\dot\Gamma^C\). Al anularse la aceleración total
+resulta la igualdad anunciada.
+\end{proof}
+
+La respuesta geométrica factoriza por \(b\) cuando la conexión,
+la proyección y el dato cinemático utilizado en la evaluación se
+determinan por \(\beta=b(x)\), o cuando esos datos cinemáticos se
+mantienen fijados en la comparación. Con esas condiciones,
+\eqref{vii:eq:observador-defecto-coordenadas} da el mismo resultado
+para cualesquiera representantes de una fibra; el
+teorema~\ref{vii:thm:observador-factorizacion} construye su factor
+único sobre \(B_{\rm ef}\). Si varía el dato cinemático, éste
+forma parte del dominio de la respuesta que se compara.
+
+La formulación autoinercial describe una trayectoria geodésica del
+estado conjunto y una aceleración efectiva de su subsistema debida
+al defecto de proyección. La realización gravitatoria identifica
+después esa conexión, el marco y la respuesta con sus observables
+físicos. La covarianza del observador, la inscripción de memoria y
+la factorización por la frontera conservan así funciones complementarias:
+la primera determina la clase de lectura, la segunda retiene la
+genealogía y la tercera especifica la dependencia relacional de la
+respuesta.

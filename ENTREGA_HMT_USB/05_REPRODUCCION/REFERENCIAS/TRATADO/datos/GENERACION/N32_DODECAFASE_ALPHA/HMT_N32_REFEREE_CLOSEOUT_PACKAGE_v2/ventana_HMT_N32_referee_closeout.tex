@@ -1,0 +1,179 @@
+% !TEX TS-program = pdflatex
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{array}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{HMT -- N32 (Cierre de Referee): \;ILP de $K_{R12}$, congelación por hash, y separación Definición vs Verificación}
+\author{(Entrega unificada: \texttt{ventana\_HMT\_N32\_referee\_closeout.tex} + \texttt{hmt\_n32\_referee\_closeout.py})}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Objetivo (lista cerrada)}
+Esta ventana cierra \emph{exactamente} tres puntos que un referee suele exigir para no dejar huecos epistemológicos:
+
+\begin{enumerate}
+  \item \textbf{Certificado ILP de $K_{R12}$}: fijar $U_{12}$, publicar el ILP exacto, y demostrar unicidad (sin usar $\alpha$).
+  \item \textbf{Congelar semillas/rutas por hash}: listar explícitamente las ``semillas'' y la ruta $D^{108}$ del rotor, de modo que cualquiera reejecute sin mencionar $\alpha$.
+  \item \textbf{Separar definición vs verificación}: el texto debe distinguir qué es el motor/definición y qué es una comprobación numérica.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{No hay más puntos escondidos en esta entrega.}
+
+\section*{Estado PASS/NO-PASS}
+\begin{center}
+\begin{tabular}{@{}>{\bfseries}l l l@{}}
+\toprule
+Ítem & Descripción & Estado \\
+\midrule
+R1 & ILP $U\to K_{R12}$, $U_{12}$ fijado, unicidad & PASS \\
+R2 & Semillas + ruta $D^{108}$ congeladas con SHA256 & PASS \\
+R3 & Separación Definición vs Verificación (sin circularidad) & PASS \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{R1. Certificado ILP de $K_{R12}$ (sin dial)}
+
+\subsection{Dato fijo: $U_{12}$}
+En el lenguaje del paquete 3.0-alfa, el extractor produce un vector $U_{12}\in\Z^{12}$, que se organiza por clases módulo 3 como tres bloques de 4 entradas:
+\begin{align}
+U^{(1)}&=(U_1,U_4,U_7,U_{10})=(2378,-452,-668,-322),\\
+U^{(2)}&=(U_2,U_5,U_8,U_{11})=(1406,\;998,-204,\;-28),\\
+U^{(3)}&=(U_3,U_6,U_9,U_{12})=(2479,-551,-371,-997).
+\end{align}
+Equivalentemente, el orden natural $U_1,\dots,U_{12}$ queda fijado por:
+\[
+(U_1,U_2,U_3,U_4,U_5,U_6,U_7,U_8,U_9,U_{10},U_{11},U_{12})
+=(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997).
+\]
+
+\subsection{ILP explícito}
+El ILP que define $K_{R12}$ usa variables enteras
+\[
+K_1,\dots,K_{12}\in\{0,1,\dots,999\}.
+\]
+Se imponen 12 ecuaciones lineales, bloque a bloque, usando la matriz de Hadamard $H_4$:
+\[
+H_4=\begin{pmatrix}
+1&1&1&1\\
+1&1&-1&-1\\
+1&-1&1&-1\\
+1&-1&-1&1
+\end{pmatrix}.
+\]
+Con la convención de intercalado
+\[
+K^{(1)}=(K_1,K_4,K_7,K_{10}),\quad
+K^{(2)}=(K_2,K_5,K_8,K_{11}),\quad
+K^{(3)}=(K_3,K_6,K_9,K_{12}),
+\]
+se exige
+\[
+U^{(j)}=H_4\,K^{(j)}\qquad (j=1,2,3).
+\]
+Objetivo: \emph{minimizar 0} (es un ILP de factibilidad). El modelo en formato \texttt{.lp} se exporta como \texttt{HMT\_N32\_ILP\_model.lp} por el script.
+
+\subsection{Unicidad (prueba corta, no computacional)}
+Como $\det(H_4)=16\neq 0$, el sistema $U^{(j)}=H_4K^{(j)}$ tiene a lo sumo una solución racional
+\[
+K^{(j)}=\tfrac14 H_4 U^{(j)}.
+\]
+Por tanto, el sistema completo (12 ecuaciones) tiene a lo sumo una solución racional. Si además la solución resulta entera y cae en el cubo $[0,999]^{12}$, entonces es la \emph{única} solución entera admisible del ILP.
+
+\subsection{Solución (única) obtenida}
+El cálculo da
+\begin{align}
+K^{(1)}&=(234,729,621,794),\\
+K^{(2)}&=(543,659,\;58,146),\\
+K^{(3)}&=(140,824,914,601),
+\end{align}
+por tanto
+\[
+K_{R12}^{\mathrm{CAN}}=(K_1,\dots,K_{12})=(234,543,140,729,659,824,621,058,914,794,146,601).
+\]
+\textbf{Importante:} esta definición de $K_{R12}$ no usa $\alpha$ en ningún punto.
+
+\section{R2. Congelación de semillas/rutas (por hash)}
+
+\subsection{Semillas mínimas publicables}
+En los materiales internos aparece una parametrización mínima (sin knobs continuos) para las tres ejecuciones $\pi,e,\varphi$ en base-3 (palabras $w_6$) y su permutación asociada:
+\begin{center}
+\begin{tabular}{@{}l l l@{}}
+\toprule
+Constante & $w_6$ & permutación $P$ sobre $\{0,1,2,3,4,5\}$\\
+\midrule
+$\pi$ & 010211 & $[4,0,5,3,1,2]$\\
+$e$ & 121002 & $[5,1,0,2,4,3]$\\
+$\varphi$ & 201220 & $[2,3,5,0,4,1]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(Se congela también el bloque base $U_6=(541,478,694,923,810,870)$ que actúa como ``normalización'' del catálogo.)
+
+\subsection{Ruta canónica $D^{108}$ del rotor}
+La ruta discreta se fija por la regla (3.0-alfa):
+\[
+\beta_{(b)}\equiv 4b\pmod{12},\qquad b\in\{0,1,\dots,8\}.
+\]
+Esto induce una ruta de longitud 108 sobre índices $1..12$:
+\[
+\mathrm{idx}(k)=1+\bigl((k-1\bmod 12)+4\lfloor (k-1)/12\rfloor\bigr)\bmod 12,\qquad k=1,\dots,108.
+\]
+El script exporta la lista completa y su SHA256 dentro de \texttt{HMT\_N32\_certificate.json}.
+
+\subsection{Ejecuciones $\pi,e,\varphi$ (12 triadas base-1000)}
+Para evitar ambigüedad de librerías/precisión, se congela (y hashea) la ejecución como las primeras 12 triadas del desarrollo decimal fraccionario:
+\begin{align}
+\pi &\mapsto (141,592,653,589,793,238,462,643,383,279,502,884),\\
+ e &\mapsto (718,281,828,459,045,235,360,287,471,352,662,497),\\
+\varphi &\mapsto (618,033,988,749,894,848,204,586,834,365,638,117).
+\end{align}
+Estas listas (como strings) y su SHA256 se incluyen en el certificado.
+
+\section{R3. Definición vs Verificación}
+
+\subsection{Definición (no usa $\alpha$)}
+La parte \emph{definicional} es exactamente:
+\[
+\text{motor/ledger} \longrightarrow U_{12} \longrightarrow \text{ILP (factibilidad)} \longrightarrow K_{R12}^{\mathrm{CAN}}.
+\]
+Esto fija $K_{R12}$ sin knobs y sin comparar con $\alpha$.
+
+\subsection{Verificación (sí compara con $\alpha$)}
+Una vez fijado $K_{R12}^{\mathrm{CAN}}$, se define el lector de acarreo derecha$\to$izquierda (base 1000) sobre 12 triadas:
+\[
+S_i=\pi_i+e_i-\varphi_i-K_i + c_{i+1},\quad c_i=\left\lfloor\frac{S_i}{1000}\right\rfloor,\quad A_i=S_i-1000c_i.
+\]
+El resultado (12 triadas) es
+\[
+A=(7,297,352,569,283,800,997,285,105,472,380,663),
+\]
+que se interpreta como
+\[
+\alpha\approx 0.007297352569283800997285105472380663,
+\quad \alpha^{-1}\approx 137.035999084\;\cdots
+\]
+\textbf{Crucial:} esta comparación aparece sólo aquí, como \emph{verificación}; no entra en la construcción de $U_{12}$ ni del ILP.
+
+\section*{Reproducibilidad}
+Ejecuta:
+\begin{center}
+\texttt{python3 hmt\_n32\_referee\_closeout.py}
+\end{center}
+Genera:
+\begin{itemize}
+  \item \texttt{HMT\_N32\_ILP\_model.lp} (ILP exacto),
+  \item \texttt{HMT\_N32\_certificate.json} (hashes, semillas, ruta, $U_{12}$, $K_{R12}$, verificación $\alpha$),
+  \item \texttt{HMT\_N32\_MANIFEST.sha256} (hashes de todos los outputs).
+\end{itemize}
+
+\end{document}

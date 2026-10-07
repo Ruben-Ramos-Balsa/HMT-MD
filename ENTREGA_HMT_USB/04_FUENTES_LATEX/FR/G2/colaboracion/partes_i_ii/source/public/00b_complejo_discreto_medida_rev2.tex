@@ -1,0 +1,709 @@
+\section{Calcul discret de la mesure sur la limite projective : différences, cocycle de retenue, ultramétrique, reconstruction de \texorpdfstring{\(\mathbb R\)}{R} et désintégration généalogique}
+\label{sec:complejo-discreto-medida-rev2}
+\index{mesure!complexe discret}
+\index{chemin!intégration}
+\index{retenue!cocycle}
+
+La distinction entre compter et mesurer admet une formulation opératoire. Compter
+assigne un cardinal à une collection de marques. Mesurer évalue des relations
+entre marques au moyen d'une règle locale, les intègre le long d'un chemin et
+conserve la carte dans laquelle le résultat est publié. L'unité minimale de ce
+processus est une différence ; sa composition produit une longueur, une circulation et,
+lorsqu'une réduction modulaire intervient, une retenue. Cette architecture situe la
+mesure avant sa coordonnée réelle : le scalaire publié est la contraction d'un
+calcul qui possède un domaine, une orientation et une mémoire.
+
+\subsection{Marques et opérateur de différences}
+
+Soit \(P_n\) le chemin aux sommets ordonnés
+\(V(P_n)=\{v_0,\ldots,v_{n-1}\}\) et aux arêtes orientées
+\(e_j=(v_{j-1},v_j)\), \(1\leq j\leq n-1\). Pour un anneau commutatif
+\(A\), nous définissons
+\[
+ C^0(P_n;A)=A^{V(P_n)},
+ \qquad
+ C^1(P_n;A)=A^{E(P_n)},
+\]
+et l'opérateur de différences
+\begin{equation}
+ d:C^0(P_n;A)\longrightarrow C^1(P_n;A),
+ \qquad
+ (df)(e_j)=f(v_j)-f(v_{j-1}).
+ \label{eq:diferencia-cero-uno-rev2}
+\end{equation}
+
+\begin{theorem}[Rang de l'opérateur de différences sur un chemin]
+\label{thm:rango-diferencias-camino-rev2}
+Si \(A\) est un corps, alors
+\[
+ \ker d=A\mathbf 1,
+ \qquad
+ \operatorname{rank}d=n-1.
+\]
+Par conséquent, \(n\) marques reliées déterminent \(n-1\) différences
+indépendantes et un unique mode constant.
+\end{theorem}
+
+\begin{proof}
+L'égalité \(df=0\) implique successivement
+\(f(v_0)=f(v_1)=\cdots=f(v_{n-1})\), de sorte que le noyau est formé des
+fonctions constantes et a pour dimension un. Le théorème du
+rang donne \(\operatorname{rank}d=n-1\). De manière équivalente, toute
+assignation \((a_1,\ldots,a_{n-1})\) aux arêtes s'intègre de manière unique
+une fois \(f(v_0)\) fixé :
+\[
+ f(v_k)=f(v_0)+\sum_{j=1}^{k}a_j.
+\]
+\end{proof}
+
+Le mode constant exprime la liberté de choisir une origine. Les différences
+contiennent l'information relationnelle ; la marque initiale fournit la section
+qui reconstruit les positions. Dans la cellule inaugurale de HMT, neuf marques
+ordonnées produisent huit différences intérieures. La clôture périodique ajoute la
+neuvième arête et transforme le chemin en cycle ; la complétion bidimensionnelle
+de ces intervalles sera réalisée de manière exacte dans la construction d'APP.
+
+\subsection{Longueur positive et intégrale orientée}
+
+Deux évaluations d'une route doivent rester séparées. Une métrique discrète
+est une cochaîne positive
+\[
+ \ell:E(P_n)\longrightarrow\mathbb R_{>0}.
+\]
+Pour un chemin non orienté \(|\gamma|\), sa longueur est
+\begin{equation}
+ L_\ell(\gamma)=\sum_{e\in|\gamma|}m_\gamma(e)\,\ell(e),
+ \label{eq:longitud-positiva-camino-rev2}
+\end{equation}
+où \(m_\gamma(e)\) compte les traversées de l'arête. Une cochaîne
+orientée \(\omega\in C^1(P_n;A)\), en revanche, s'intègre avec un signe :
+\begin{equation}
+ \int_\gamma\omega
+ :=\sum_{k=1}^{r}\varepsilon_k\omega(e_{i_k}),
+ \qquad \varepsilon_k\in\{-1,+1\}.
+ \label{eq:integral-cocadena-camino-rev2}
+\end{equation}
+La longueur somme le coût géométrique ; l'intégrale orientée somme le transport. La
+première est invariante par inversion de la route et la seconde change de signe.
+
+\begin{proposition}[Théorème fondamental discret]
+\label{prop:teorema-fundamental-discreto-rev2}
+Pour \(f\in C^0(P_n;A)\) et toute route orientée \(\gamma:a\to b\),
+\[
+ \int_\gamma df=f(b)-f(a).
+\]
+En particulier, l'intégrale d'une cochaîne exacte sur un cycle est nulle.
+\end{proposition}
+
+\begin{proof}
+La somme des différences consécutives est télescopique. Chaque sommet intérieur
+apparaît une fois avec un signe positif et une fois avec un signe négatif ; seules
+les extrémités subsistent.
+\end{proof}
+
+La proposition distingue deux niveaux de clôture. Le groupe
+\(H_1(C_n;\mathbb Z)\cong\mathbb Z\) fournit le support topologique du
+tour ; une holonomie requiert en outre un transport. Si
+\(T:\operatorname{Path}(C_n)\to\mathcal C\) est un foncteur vers une catégorie
+d'automorphismes, l'holonomie d'un cycle \(\gamma\) est
+\begin{equation}
+ \operatorname{Hol}_T(\gamma)=T(e_r)\cdots T(e_1).
+ \label{eq:holonomia-transporte-ciclo-rev2}
+\end{equation}
+Le cycle apporte la classe de parcours ; \(T\) apporte la connexion discrète qui
+transforme cette classe en un endomorphisme. Cette distinction sera essentielle lorsque
+le retour visible retrouvera la phase et que le transport conservera un état de
+frontière différent.
+
+\subsection{Retenue comme cocycle de composition}
+
+La réduction modulaire publie une classe et une section choisit des représentants.
+Soit \(Q=\mathbb Z/9\mathbb Z\) et soit
+\(s_0:Q\to\{0,\ldots,8\}\subset\mathbb Z\) la section résiduelle ordinaire.
+Nous définissons
+\begin{equation}
+ \kappa_9(a,b)
+ :=\frac{s_0(a)+s_0(b)-s_0(a+b)}{9}\in\mathbb Z.
+ \label{eq:cociclo-acarreo-nonadico-rev2}
+\end{equation}
+Alors
+\[
+ s_0(a)+s_0(b)=s_0(a+b)+9\kappa_9(a,b).
+\]
+
+\begin{proposition}[Identité cocyclique de la retenue]
+\label{prop:acarreo-dos-cociclo-rev2}
+L’application \(\kappa_9:Q\times Q\to\mathbb Z\) vérifie
+\begin{equation}
+ \kappa_9(a,b)+\kappa_9(a+b,c)
+ =\kappa_9(b,c)+\kappa_9(a,b+c).
+ \label{eq:identidad-dos-cociclo-rev2}
+\end{equation}
+C'est donc un \(2\)-cocycle normalisé associé à la section choisie.
+\end{proposition}
+
+\begin{proof}
+On développe les deux membres au moyen de
+\eqref{eq:cociclo-acarreo-nonadico-rev2}. Après multiplication par neuf, les deux
+sont égaux à
+\[
+ s_0(a)+s_0(b)+s_0(c)-s_0(a+b+c).
+\]
+La normalisation s'obtient à partir de \(s_0(0)=0\).
+\end{proof}
+
+L'identité cocyclique exprime l'associativité du relèvement : regrouper d'abord
+\((a+b)+c\) ou \(a+(b+c)\) produit la même classe visible et la même retenue
+totale. Dans une catégorie de routes, la même structure prend la forme
+\[
+ \widetilde g\,\widetilde h
+ =\kappa(g,h)\,\widetilde{gh},
+\]
+où \(\widetilde g,\widetilde h\) sont des transports enrichis qui relèvent des
+morphismes visibles. La retenue est ainsi un défaut de composition parfaitement
+contrôlé avant de recevoir une quelconque interprétation géométrique comme
+courbure ou torsion.
+
+\subsection{Compatibilité des cartes nonadique, ternaire et de complétion décimale en base \texorpdfstring{\(10^3\)}{10^3}}
+\label{subsec:compatibilidad-lectores-9-3-1000-rev3}
+
+Les lecteurs résiduels qui interviennent dans TPK ne sont pas des noms différents d'
+une même opération. Soient
+\[
+ R_9:=\mathbb Z/9\mathbb Z,
+ \qquad
+ r_9:\mathbb Z\longrightarrow R_9,
+ \qquad
+ r_3:\mathbb Z\longrightarrow\mathbb F_3
+\]
+les réductions canoniques, et soit
+\[
+ \pi_3:R_9\longrightarrow\mathbb F_3,
+ \qquad \pi_3(\overline n)=n\bmod3.
+\]
+Le carré des réductions commute :
+\begin{equation}
+\begin{CD}
+ \mathbb Z @>{r_9}>> R_9\\
+ @V{r_3}VV @VV{\pi_3}V\\
+ \mathbb F_3 @= \mathbb F_3 .
+\end{CD}
+\qquad
+ r_3=\pi_3\circ r_9.
+\label{eq:diagrama-reducciones-9-3-rev3}
+\end{equation}
+La section positive
+\[
+ s_+:R_9\longrightarrow\{1,\ldots,9\},
+ \qquad
+ s_+(\overline0)=9,
+ \qquad
+ s_+(\overline k)=k\quad(1\le k\le8),
+\]
+produit, pour \(n>0\), la racine numérique positive
+\[
+ \operatorname{dr}_9^+(n)=s_+(r_9(n)).
+\]
+Cette section n'est pas un homomorphisme : elle publie la classe nulle par \(9\) et
+oublie le quotient. La section résiduelle \(s_0(\overline0)=0\) publie cette
+même classe par \(0\). Par conséquent, le changement visible \(9\mapsto0\) est un
+changement de section, et l'égalité
+\[
+ 9=s_0(\overline0)+9\cdot1
+\]
+conserve comme quotient la retenue \(1\). Le successeur topologique du cycle
+positif est, en revanche, \(9\mapsto1\), avec
+\[
+ 10=s_+(\overline1)+9\cdot1.
+\]
+Ainsi se séparent la clôture \(P_9\to C_9\), le changement de carte et l'incrément
+de mémoire ; aucun des trois ne se substitue aux deux autres.
+
+La coordonnée du radical appartient à un autre diagramme. Pour
+\(\mathfrak m=(3)\subset R_9\), l'application
+\[
+ \iota_{\mathfrak m}:\mathbb F_3\longrightarrow\mathfrak m,
+ \qquad \overline a\longmapsto3a,
+\]
+est un isomorphisme d'espaces vectoriels sur \(\mathbb F_3\), d'inverse
+\begin{equation}
+ \eta_{\mathfrak m}:\mathfrak m\longrightarrow\mathbb F_3,
+ \qquad
+ \eta_{\mathfrak m}(3a)=a\bmod3.
+ \label{eq:coordenada-radical-compatibilidad-rev3}
+\end{equation}
+Ce n'est pas un isomorphisme d'anneaux. Elle ne coïncide pas non plus avec la réduction directe :
+pour \(3a\in\mathfrak m\), on a \(\pi_3(3a)=0\), tandis que
+\(\eta_{\mathfrak m}(3a)=a\bmod3\). La première lecture publie la classe
+résiduelle ; la seconde publie la coordonnée interne du radical.
+
+Enfin, soient \(u_j\in\{0,\ldots,999\}\) et
+\[
+ D_N=1000D_{N-1}+u_N,
+ \qquad D_0=0,
+\]
+la concaténation de blocs en base \(10^3\). Comme \(10^3\equiv1\pmod9\),
+\begin{equation}
+ r_9(D_N)=r_9\!\left(\sum_{j=1}^{N}u_j\right),
+ \qquad
+ r_3(D_N)=r_3\!\left(\sum_{j=1}^{N}u_j\right).
+ \label{eq:compatibilidad-base-mil-reducciones-rev3}
+\end{equation}
+La base \(10^3\) conserve l'ordre des blocs ; les réductions ne conservent que
+leur classe accumulée. La racine numérique ajoute une section positive ; la coordonnée
+radicale retrouve une direction interne de \((3)\). Cette hiérarchie fixe quelle
+information chaque lecteur publie et quel quotient, ordre ou carte la
+mémoire TPK doit retenir pour reconstruire l'antécédent.
+
+\subsection{Système gradué de mesure et registre non contracté}
+
+Les trois niveaux précédents s'organisent en un système gradué :
+\[
+ \boxed{
+ \begin{array}{ccl}
+ \text{degré }0&:&\text{valeurs ou états sur des marques},\\
+ \text{degré }1&:&\text{différences et transports sur les arêtes},\\
+ \text{degré }2&:&\text{cocycles de composition et de retenue}.
+ \end{array}}
+\]
+Les degrés zéro et un forment le complexe cellulaire
+\(C^0\xrightarrow d C^1\) ; le degré deux vit dans le complexe du nerf de la
+catégorie des chemins. Leur réunion constitue le \emph{complexe discret de
+mesure} : une structure organisatrice qui conserve la différence entre
+géométrie cellulaire et mémoire catégorielle.
+
+Pour une route enrichie
+\(\Gamma=(x_0\xrightarrow{e_1}x_1\to\cdots\xrightarrow{e_r}x_r)\), le
+registre est l'intégrale non contractée
+\begin{equation}
+ \Lambda(\Gamma)
+ =\bigl((x_{k-1},e_k,x_k),\omega_k,\kappa_k,\sigma_k,b_k,m_k\bigr)_{k=1}^{r},
+ \label{eq:ledger-integral-no-contraida-rev2}
+\end{equation}
+où \(\omega_k\) est la lecture locale, \(\kappa_k\) la retenue, \(\sigma_k\)
+l'orientation ou signature partielle, \(b_k\) la donnée de frontière et \(m_k\) la
+mémoire conservée. Un observable est une application typée
+\[
+ \mathcal O=F_{\mathcal O}\circ\Lambda.
+\]
+L'évaluation peut publier une somme, une classe résiduelle, une signature ou un
+scalaire sans transformer ces sorties en états complets. La concaténation des
+routes concatène les registres et ajoute le cocycle à la frontière commune ; le
+registre non contracté conserve donc exactement l'information nécessaire pour recomposer l'
+histoire qu'une coordonnée isolée contracte.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small,align=center},
+  object/.style={draw,rounded corners=2pt,inner sep=5pt,text width=3.00cm,
+                 minimum height=1.25cm},
+  arrow/.style={->,semithick},
+  maplabel/.style={font=\footnotesize,fill=white,inner sep=1.5pt}
+]
+\node[object] (marks) at (0,0)
+  {marques et états\\\(C^0\)};
+\node[object] (edges) at (5.25,0)
+  {différences et transport\\\(C^1\)};
+\node[object] (paths) at (10.50,0)
+  {chemins et cycles\\intégration et holonomie};
+\node[object] (memory) at (0,-2.35)
+  {cocycle de composition\\retenue et frontière};
+\node[object] (section) at (5.25,-2.35)
+  {registre non contracté\\section compatible};
+\node[object] (outputs) at (10.50,-2.35)
+  {évaluations typées\\valeur, signature ou symétrie};
+\draw[arrow] (marks) -- node[maplabel,above]{\(d\)} (edges);
+\draw[arrow] (edges) -- node[maplabel,above]{\(\int_\gamma\)} (paths);
+\draw[arrow] (paths) -- node[maplabel,right]{transporte TPK} (outputs);
+\draw[arrow] (memory) -- node[maplabel,above]{composition} (section);
+\draw[arrow] (section) -- node[maplabel,above]{contraction} (outputs);
+\draw[arrow] (edges) -- node[maplabel,left]{défaut de relèvement} (memory);
+\draw[arrow] (paths) -- node[maplabel,right]{histoire} (section);
+\end{tikzpicture}
+\caption{Architecture du complexe discret de mesure. L'opérateur de
+différences, l'intégrale de chemins et le cocycle de composition occupent des
+domaines distincts ; le TPK les réunit dans une section compatible avant qu'
+un lecteur ne publie une valeur ou une symétrie.}
+\label{fig:complejo-discreto-medida-rev3}
+\end{figure}
+
+\subsection{Reconstruction du continu à partir du système projectif de cylindres compatibles}
+
+Le prolongement à une profondeur arbitraire se formule au moyen d'un système
+projectif. Soient \(S_n\) des ensembles finis non vides de préfixes enrichis et
+\(r_{n+1,n}:S_{n+1}\to S_n\) des applications de restriction surjectives. Leur
+espace de sections compatibles est
+\[
+ \Omega_\infty=\varprojlim_n S_n
+ =\{(x_n)_n:r_{n+1,n}(x_{n+1})=x_n\}.
+\]
+Chaque \(S_n\) est muni de la topologie discrète et \(\Omega_\infty\) de la
+topologie de sous-espace du produit.
+
+\subsection{Cylindres, ultramétrique et retour archimédien avec conservation de la mémoire}
+
+Pour \(a\in S_n\), le cylindre de préfixe \(a\) est
+\begin{equation}
+ [a]_n:=\{x\in\Omega_\infty:x_n=a\}.
+ \label{eq:cilindro-genealogico-rev3}
+\end{equation}
+Deux cylindres d'un même niveau sont disjoints, et chaque cylindre de niveau
+\(n+1\) est contenu dans le cylindre de sa restriction. Cette base d'
+ouverts et fermés publie la profondeur partagée par deux sections sans
+contracter leur mémoire en une coordonnée réelle.
+
+Pour \(x\neq y\), soit
+\[
+ N(x,y):=\min\{n\geq0:x_n\neq y_n\}.
+\]
+Fijado \(0<\vartheta<1\), definimos
+\begin{equation}
+ d_\vartheta(x,y):=\vartheta^{N(x,y)},
+ \qquad d_\vartheta(x,x):=0.
+ \label{eq:ultrametrica-genealogica-rev3}
+\end{equation}
+
+\begin{proposition}[Ultramétrique de première divergence]
+\label{prop:ultrametrica-genealogica-rev3}
+La fonction \(d_\vartheta\) est une ultramétrique et ses boules sont précisément
+les cylindres, avec le réajustement d'indice correspondant au niveau initial :
+\[
+ d_\vartheta(x,z)
+ \leq
+ \max\{d_\vartheta(x,y),d_\vartheta(y,z)\}.
+\]
+Par conséquent, deux sections qui publient la même valeur peuvent rester à
+distance positive lorsque divergent leur feuillet, leur retenue, leur frontière ou leur
+histoire de prolongement.
+\end{proposition}
+
+\begin{proof}
+Si \(x\) et \(y\) coïncident jusqu'au niveau \(n\), ainsi que \(y\) et \(z\),
+alors \(x\) et \(z\) coïncident jusqu'à ce niveau. La première divergence du
+premier et du troisième état ne se produit donc pas avant le minimum des
+deux autres. Comme \(0<\vartheta<1\), élever \(\vartheta\) à ces
+exposants produit l'inégalité forte. La description des boules découle
+directement de la fixation d'un préfixe commun.
+\end{proof}
+
+\begin{theorem}[Compacité et complétude de l'espace généalogique]
+\label{thm:compacidad-ultrametrica-genealogica-rev3}
+Si chaque \(S_n\) est fini et si les applications de liaison sont surjectives, alors
+\(\Omega_\infty\), muni de \(d_\vartheta\), est non vide, compact et complet.
+Si de plus
+\begin{equation}
+ \forall x\in\Omega_\infty\ \forall n\ \exists y\neq x:
+ y_n=x_n,
+ \label{eq:perfeccion-genealogica-rev3}
+\end{equation}
+il ne possède aucun point isolé. Dans ce régime, c'est un compact métrisable,
+de dimension zéro et parfait ; par la caractérisation classique, il est homéomorphe
+à l'espace de Cantor.
+\end{theorem}
+
+\begin{proof}
+La surjectivité et la ramification finie fournissent une section par le
+lemme de König. Le produit des ensembles finis discrets est compact, et
+les équations \(r_{n+1,n}(x_{n+1})=x_n\) définissent un sous-espace fermé. La
+topologie induite coïncide avec la topologie des cylindres et, par la
+\cref{prop:ultrametrica-genealogica-rev3}, avec celle de
+\(d_\vartheta\). Tout espace métrique compact est complet. La condition
+\eqref{eq:perfeccion-genealogica-rev3} garantit que chaque cylindre contient
+une section distincte de son centre, de sorte qu'aucun singleton n'est ouvert.
+\end{proof}
+
+La périodicité visible et le retour de l'état appartiennent à des applications
+distinctes. Soient \(p:E\twoheadrightarrow B\) une projection, \(T:E\to E\) un
+transport enrichi et \(f:B\to B\) l'évolution publiée, avec
+\(p\circ T=f\circ p\). Si \(f^9=I_B\), alors
+\begin{equation}
+ p\circ T^9=p,
+ \label{eq:retorno-visible-fibra-rev3}
+\end{equation}
+de sorte que \(T^9\) préserve chaque fibre de \(p\), sans nécessairement être
+l'identité sur celle-ci. Dans la coordonnée nonadique
+\[
+ (q,r)\longmapsto
+ \begin{cases}
+  (q,r+1),&r<9,\\
+  (q+1,1),&r=9,
+ \end{cases}
+\]
+un tour retrouve la position et augmente la hauteur. Dans la périodicité
+CT108, neuf itérations font avancer d'une phase dodécaphasique et cent huit
+retrouvent la position et la phase ; l'état enrichi peut encore conserver
+des feuillets, des frontières, des orientations et des généalogies différents. C'est la distinction
+formelle entre retour de phase et retour d'état.
+
+\begin{theorem}[Reconstruction de la valeur par sections compatibles]
+\label{thm:reconstruccion-continuo-secciones-rev2}
+L'espace \(\Omega_\infty\) est non vide et compact. Supposons qu'à chaque
+préfixe \(x_n\in S_n\) soit assigné un intervalle compact
+\(I_n(x_n)\subset\mathbb R\) de sorte que, pour toute section
+\(x=(x_n)_n\),
+\[
+ I_{n+1}(x_{n+1})\subseteq I_n(x_n),
+ \qquad
+ \operatorname{diam}I_n(x_n)\longrightarrow0.
+\]
+Alors il existe une unique valeur
+\begin{equation}
+ \operatorname{ev}_{\mathbb R}(x)
+ \in\bigcap_{n\geq0}I_n(x_n).
+ \label{eq:evaluacion-seccion-continua-rev2}
+\end{equation}
+Si les assignations d'intervalles sont localement constantes à chaque niveau, l'
+évaluation \(\operatorname{ev}_{\mathbb R}:\Omega_\infty\to\mathbb R\) est
+continue.
+\end{theorem}
+
+\begin{proof}
+La surjectivité permet de construire par récurrence des préfixes compatibles ; la
+compacité des ensembles finis et la propriété d'intersection finie donnent
+une section globale. Le produit \(\prod_nS_n\) est compact et
+\(\Omega_\infty\) est fermé, car chaque équation de compatibilité définit un
+fermé. Pour une section fixée, les intervalles sont compacts, emboîtés et de
+diamètre tendant vers zéro ; le théorème des intervalles emboîtés fournit un
+unique point commun. Étant donné \(\varepsilon>0\), on choisit un niveau dont l'intervalle
+a un diamètre inférieur à \(\varepsilon\). Les sections qui partagent ce
+préfixe ont leurs évaluations dans le même intervalle, ce qui prouve la
+continuité.
+\end{proof}
+
+La droite réelle apparaît ainsi comme codomaine d'une contraction. Deux sections
+peuvent partager une valeur et conserver des registres différents ; la relation
+\[
+ x\sim_{\mathbb R}y
+ \quad\Longleftrightarrow\quad
+ \operatorname{ev}_{\mathbb R}(x)=\operatorname{ev}_{\mathbb R}(y)
+\]
+forme le quotient archimédien. La généalogie demeure dans
+\(\Omega_\infty\), tandis que la coordonnée vit dans son image réelle. Le problème
+du continu reçoit donc une réponse constructive dans le domaine
+couvert par les systèmes de préfixes déclarés : la continuité de l'
+évaluation et la mémoire de la section sont des propriétés coordonnées, non des
+descriptions rivales.
+
+\subsection{Couverture cohérente et reconstruction du quotient archimédien}
+
+L'évaluation précédente assigne une valeur à chaque section. Pour démontrer que l'
+espace visible est entièrement reconstruit, il faut en outre que le
+raffinement ne perde aucun point. Soit \(K\subset\mathbb R\) compact et supposons
+que les intervalles du théorème précédent satisfassent
+\begin{align}
+ K&=\bigcup_{a\in S_0} I_0(a),
+ \label{eq:cobertura-inicial-continuo-rev3}\\
+ I_n(a)&=\bigcup_{\substack{b\in S_{n+1}\\r_{n+1,n}(b)=a}}I_{n+1}(b)
+ \qquad(a\in S_n).
+ \label{eq:cobertura-hijos-continuo-rev3}
+\end{align}
+Ces identités définissent une \emph{couverture cohérente} : chaque compact
+visible se décompose exactement en les compacts de ses prolongements.
+
+\begin{theorem}[Reconstruction généalogique d'un compact]
+\label{thm:cociente-genealogico-compacto-rev3}
+Supposons que :
+\begin{enumerate}
+\item les ensembles \(S_n\) sont finis et non vides, et les applications de liaison
+      \(r_{n+1,n}\) sont surjectives ;
+\item les intervalles sont compacts non vides, emboîtés et uniformément
+      contractants ;
+\item les conditions
+      \eqref{eq:cobertura-inicial-continuo-rev3} et
+      \eqref{eq:cobertura-hijos-continuo-rev3} sont satisfaites.
+\end{enumerate}
+Alors \(\operatorname{ev}_{\mathbb R}(\Omega_\infty)=K\), et l'application
+induite
+\begin{equation}
+ \overline{\operatorname{ev}}_{\mathbb R}:
+ \Omega_\infty/\!\sim_{\mathbb R}\xrightarrow{\ \cong\ }K
+ \label{eq:homeomorfismo-cociente-continuo-rev3}
+\end{equation}
+est un homéomorphisme. La fibre au-dessus de \(y\in K\) est l'ensemble complet des
+sections compatibles qui publient cette même valeur.
+\end{theorem}
+
+\begin{proof}
+La compacité et la continuité proviennent du
+\cref{thm:reconstruccion-continuo-secciones-rev2}. \(y\in K\) étant fixé, soit
+\[
+ T_n(y):=\{a\in S_n:y\in I_n(a)\}.
+\]
+La couverture cohérente rend tous les \(T_n(y)\) non vides et relie chaque
+état à un prolongement. L'arbre obtenu est à ramification finie et
+possède des sommets à toute profondeur ; par le lemme de la branche infinie, il admet une
+chaîne compatible \((x_n)_n\). Le point \(y\) appartient à tous les
+\(I_n(x_n)\), et la contraction impose
+\(\operatorname{ev}_{\mathbb R}(x)=y\). Par conséquent, l'évaluation est
+surjective. L'application du quotient est continue et bijective ; comme son
+domaine est compact et que \(K\) est séparé, c'est un homéomorphisme.
+\end{proof}
+
+Le théorème distingue deux affirmations. La contraction produit une valeur unique
+pour chaque généalogie ; la couverture cohérente démontre que toutes les valeurs
+du compact apparaissent. Une vérification à profondeur finie certifie les
+niveaux examinés, mais ne remplace aucune de ces hypothèses infinies.
+
+\begin{proposition}[Atlas généalogique de la droite réelle]
+\label{prop:atlas-genealogico-recta-real-rev3}
+Pour chaque \(m\geq1\), soit \(K_m=[-m,m]\) et supposons donné un système qui
+satisfait le \cref{thm:cociente-genealogico-compacto-rev3}, avec des
+inclusions fermées
+\[
+ \jmath_m:\Omega_\infty^{(m)}\hookrightarrow\Omega_\infty^{(m+1)}
+\]
+qui entrelacent les évaluations et l'inclusion
+\(K_m\hookrightarrow K_{m+1}\). Alors le quotient archimédien de la
+colimite stricte des sections est
+\[
+ \varinjlim_m K_m=\bigcup_{m\geq1}[-m,m]=\mathbb R,
+\]
+muni de sa topologie usuelle, tandis que les fibres de la colimite conservent les
+généalogies de chaque valeur.
+\end{proposition}
+
+\begin{proof}
+Chaque morceau possède le quotient \(K_m\) par
+\eqref{eq:homeomorfismo-cociente-continuo-rev3}. Les inclusions déclarées
+rendent ces quotients compatibles. La topologie finale de l'exhaustion par
+intervalles compacts coïncide avec la topologie usuelle de \(\mathbb R\) : un
+ensemble est ouvert exactement lorsque son intersection avec chaque \(K_m\) est
+ouverte dans \(K_m\).
+\end{proof}
+
+\subsection{Descente algébrique des opérations}
+
+Reconstruire l'espace visible ne suffit pas à reconstruire son algèbre. Soit
+\(\star\) une opération partielle continue sur \(\Omega_\infty\), de domaine
+\(D_\star\) saturé par les fibres de
+\(\operatorname{ev}_{\mathbb R}\times\operatorname{ev}_{\mathbb R}\).
+
+\begin{theorem}[Critère de descente par fibres]
+\label{thm:descenso-operaciones-continuo-rev3}
+Il existe une opération visible \(\overline\star\) qui satisfait
+\[
+ \operatorname{ev}_{\mathbb R}(x\star y)
+ =\operatorname{ev}_{\mathbb R}(x)\,\overline\star\,
+  \operatorname{ev}_{\mathbb R}(y)
+\]
+si et seulement si la valeur du membre de gauche est constante lorsqu'on remplace
+\(x\) ou \(y\) par tout autre représentant de leurs fibres respectives.
+Si deux opérations continues descendues coïncident avec la somme et le produit
+sur des sous-ensembles denses de leurs domaines visibles, elles coïncident avec eux sur tout
+le domaine.
+\end{theorem}
+
+\begin{proof}
+La constance sur les fibres est exactement la propriété universelle du
+quotient : elle permet de définir \(\overline\star\) indépendamment du représentant,
+et elle est nécessaire pour que cette définition ait un sens. La dernière affirmation
+découle de la continuité et de la densité.
+\end{proof}
+
+APP conserve la donnée requise pour aborder cette descente : les feuillets somme et
+produit agissent sur le même support, mais gardent des quotients, des retenues et des
+fibres différents. L'opération visible peut descendre bien que la mémoire de
+ses représentants demeure distincte.
+
+\subsection{Mesure projective et conservation de l'unité}
+
+La topologie des cylindres organise la proximité et la troncature ; une théorie des
+chemins requiert en outre des poids. Soit \(\mu_n\) une probabilité sur \(S_n\).
+La famille est projectivement cohérente lorsque
+\begin{equation}
+ \mu_n(a)=
+ \sum_{\substack{b\in S_{n+1}\\r_{n+1,n}(b)=a}}\mu_{n+1}(b).
+ \label{eq:consistencia-medida-cilindrica-rev3}
+\end{equation}
+L'égalité exprime la conservation locale de l'unité : le poids d'une
+histoire tronquée est la somme des poids de tous ses prolongements.
+
+\begin{theorem}[Mesure généalogique sur la limite projective]
+\label{thm:medida-genealogica-limite-rev3}
+Toute famille de probabilités finies qui satisfait
+\eqref{eq:consistencia-medida-cilindrica-rev3} détermine une unique
+probabilité borélienne \(\mu_\infty\) sur \(\Omega_\infty\) telle que
+\begin{equation}
+ \mu_\infty([a]_n)=\mu_n(a)
+ \label{eq:medida-cilindro-rev3}
+\end{equation}
+pour tout cylindre de préfixe \(a\in S_n\).
+\end{theorem}
+
+\begin{proof}
+Les unions finies de cylindres forment une algèbre. Chacune peut
+être raffinée en une union disjointe à un même niveau, et
+\eqref{eq:consistencia-medida-cilindrica-rev3} démontre que la somme de ses
+poids ne dépend pas du niveau choisi. On obtient ainsi une prémesure. Comme les
+cylindres sont ouverts et fermés et que \(\Omega_\infty\) est compact, une
+suite décroissante d'éléments de l'algèbre d'intersection vide atteint
+déjà le vide à un certain niveau. La prémesure est donc continue au vide
+et s'étend de manière unique à la \(\sigma\)-algèbre borélienne.
+\end{proof}
+
+L'évaluation transporte cette mesure vers le compact visible,
+\begin{equation}
+ \nu=(\operatorname{ev}_{\mathbb R})_*\mu_\infty,
+ \qquad
+ \nu(B)=\mu_\infty\bigl(\operatorname{ev}_{\mathbb R}^{-1}(B)\bigr).
+ \label{eq:pushforward-medida-visible-rev3}
+\end{equation}
+La probabilité visible agrège les généalogies d'une même fibre sans
+les effacer de l'espace total.
+
+\begin{proposition}[Désintégration par valeurs et multiplicité généalogique]
+\label{prop:desintegracion-valores-genealogicos-rev3}
+Si \(K\) est un espace borélien standard, il existe, pour \(\nu\)-presque tout
+\(y\in K\), une probabilité conditionnelle \(\mu_y\) portée par
+\[
+ \mathfrak G_y:=\operatorname{ev}_{\mathbb R}^{-1}(y)
+\]
+telle que, pour toute fonction intégrable \(F\),
+\begin{equation}
+ \int_{\Omega_\infty}F\,\mathrm d\mu_\infty
+ =\int_K
+   \left(\int_{\mathfrak G_y}F\,\mathrm d\mu_y\right)
+   \mathrm d\nu(y).
+ \label{eq:desintegracion-fibras-visibles-rev3}
+\end{equation}
+Ainsi, la coordonnée visible et la distribution des histoires qui la réalisent
+sont des données typées distinctes : un observable qui se factorise par
+\(\operatorname{ev}_{\mathbb R}\) ne lit que \(\nu\), tandis qu'un lecteur de
+mémoire peut distinguer les mesures \(\mu_y\) au sein d'une même fibre.
+\end{proposition}
+
+\begin{proposition}[Conditionnement compatible des cylindres]
+\label{prop:condicionamiento-cilindrico-compatible-rev3}
+Soit \(A\subseteq\Omega_\infty\) une union de cylindres de niveau \(m\), avec
+\(\mu_\infty(A)>0\). Pour tout \(n\geq m\), la distribution conditionnelle
+sur \(S_n\) s'obtient en supprimant les états dont la troncature n'
+appartient pas à \(A\) et en renormalisant les poids restants. Les distributions
+obtenues satisfont toujours la cohérence projective
+\eqref{eq:consistencia-medida-cilindrica-rev3}.
+\end{proposition}
+
+\begin{proof}
+C'est la règle de Bayes sur les ensembles finis de niveau \(n\). La somme des
+poids conditionnels des prolongements coïncide avec le poids conditionnel du
+parent parce que l'intersection avec \(A\) se distribue sur l'union disjointe de
+ses prolongements. Le conditionnement élimine les futurs incompatibles et
+redistribue l'unité entre les survivants ; il ne crée pas de nouvelles histoires et n'
+efface pas de l'espace total celles restées en dehors de l'événement lu.
+\end{proof}
+
+Cette séparation fournit la base exacte permettant de distinguer la préparation,
+la lecture, le conditionnement et l'histoire dans la réalisation quantique.
+
+\begin{statusbox}[title={Force mathématique et fonction architecturale}]
+Le rang \(n-1\), le théorème fondamental discret, l'identité cocyclique de la
+retenue, les théorèmes de reconstruction et la mesure projective sont des résultats
+exacts dans les domaines déclarés. Leur application HMT utilise comme structure de départ les états,
+les restrictions, les intervalles et les transports construits par APP--TRIT--TPK. Le
+complexe discret de mesure est une formalisation organisatrice : il n'identifie pas
+le cocycle catégoriel de degré deux à une cellule géométrique tant que l'
+application correspondante n'est pas fournie. Cette séparation permet au langage
+commun de gouverner ensuite l'holonomie, la somme sur les chemins et la transition du
+nombre à la particule sans anticiper leurs réalisations physiques.
+\end{statusbox}

@@ -1,0 +1,445 @@
+\section{Núcleos genealógicos de caminos: composición finita, realización unitaria y límite cilíndrico}
+\label{sec:integral-genealogica-caminos-rev2}
+\index{Feynman!integral genealógica de caminos}
+\index{camino!categoría enriquecida}
+\index{integral!cilíndrica}
+
+La composición matricial que se demuestra en esta sección establece exactamente que cada entrada de
+\(U^R\) es la suma de los pesos ordenados de las rutas de longitud \(R\).
+El paso siguiente conserva la información que una ruta visible no expresa y
+organiza los refinamientos finitos en un espacio compacto de genealogías. De
+este modo se distinguen tres resultados: la identidad combinatoria finita, la
+integral cilíndrica sobre el límite de caminos y la realización de esa
+integral como propagador de un sistema físico concreto.
+
+\subsection{Categoría de rutas y peso functorial}
+
+Sea \(\mathsf P_{\rm TPK}\) la categoría libre generada por las transiciones
+admisibles del TPK. Sus objetos son estados enriquecidos de frontera y sus
+morfismos son secuencias composables de transiciones. La composición es la
+concatenación y el camino vacío es la identidad. Sea \(\mathsf P_X\)
+la categoría de rutas visibles obtenida al aplicar el lector a los
+objetos y transiciones; sus composiciones son las concatenaciones visibles.
+La aplicación
+\[
+ q_{\rm vis}:\mathsf P_{\rm TPK}\longrightarrow\mathsf P_X
+\]
+expresa la ruta observable y conserva en su fibra las diferencias de hoja,
+orientación, acarreo, bloque, frontera y memoria.
+
+\begin{definition}[Peso genealógico]
+\label{def:peso-genealogico-caminos-rev2}
+Sea \(\mathcal B\) un álgebra real normada, posiblemente no conmutativa, y
+sea \(\mathbf B_{\mathcal B}\) la categoría de un solo objeto \(\ast\) cuyo
+monoide de endomorfismos es
+\(\operatorname{End}(\ast)=(\mathcal B,\cdot,1)\). Un peso genealógico es un funtor
+\[
+ W:\mathsf P_{\rm TPK}\longrightarrow\mathbf B_{\mathcal B}
+\]
+tal que
+\[
+ W(\operatorname{id}_x)=1,
+ \qquad
+ W(\gamma_2\circ\gamma_1)=W(\gamma_2)W(\gamma_1).
+\]
+El orden del producto coincide con el orden causal de la ruta.
+\end{definition}
+
+Para estados enriquecidos \(\widetilde i,\widetilde f\), el kernel a
+profundidad \(R\) es
+\begin{equation}
+ \mathcal K_R(\widetilde f,\widetilde i)
+ =\sum_{\substack{
+   \gamma\in\mathsf P_{\rm TPK}(\widetilde i,\widetilde f)\\
+   |\gamma|=R}}
+ W(\gamma).
+ \label{eq:kernel-genealogico-finito-rev2}
+\end{equation}
+Dos rutas con la misma palabra visible permanecen como sumandos diferentes
+cuando pertenecen a fibras genealógicas distintas.
+
+\begin{proposition}[Composición por corte enriquecido]
+\label{prop:composicion-kernel-enriquecido-rev2}
+Si toda ruta de longitud \(R+S\) posee un corte único después de \(R\)
+transiciones, entonces
+\[
+ \mathcal K_{R+S}(\widetilde f,\widetilde i)
+ =\sum_{\widetilde x}
+ \mathcal K_S(\widetilde f,\widetilde x)
+ \mathcal K_R(\widetilde x,\widetilde i).
+\]
+La fórmula conserva el orden causal de los factores cuando \(\mathcal B\) no
+es conmutativa.
+\end{proposition}
+
+\begin{proof}
+Se particiona el conjunto de rutas completas por el estado enriquecido
+\(\widetilde x\) alcanzado en el corte. La factorización functorial del peso
+convierte la suma sobre cada clase en el producto de los kernels parciales.
+La unicidad del corte garantiza que cada ruta aparece exactamente una vez.
+\end{proof}
+
+\subsection{Construcción de la fase interna mediante el carácter real de acción sobre rutas genealógicas}
+
+Sea \((E,J_E)\) un espacio euclídeo real provisto de un endomorfismo
+ortogonal \(J_E\) tal que \(J_E^2=-I\). Si
+\(\mathcal A_*:\mathsf P_{\rm TPK}\to\mathbb R\) es aditiva por
+concatenación, la fase
+\begin{equation}
+ \Phi_J(\gamma)
+ :=\exp[-J_E\mathcal A_*(\gamma)]
+ =\cos\mathcal A_*(\gamma)\,I
+  -\sin\mathcal A_*(\gamma)\,J_E
+ \label{eq:fase-interna-caminos-rev2}
+\end{equation}
+es multiplicativa. Fijemos una sección positiva no nula
+\(\hbar_{\rm int}\) de la línea de acción \(\mathcal L_S\)
+construida anteriormente; puede utilizarse la sección
+\(\hbar_{\rm ret}\) del perfil declarado.
+Para una acción dimensional
+\(S_{\rm int}(\gamma)=\hbar_{\rm int}\mathcal A_*(\gamma)\), esta
+expresión realiza internamente la fase
+\(\exp[-J_E\,S_{\rm int}(\gamma)/\hbar_{\rm int}]\). El símbolo escalar
+\(\mathrm i\) aparece únicamente al elegir una coordenatización compleja para el par
+\((E,J_E)\).
+
+\begin{proposition}[Functor de fase]
+\label{prop:fase-interna-functor-rev2}
+La aplicación \(\Phi_J\) satisface
+\[
+ \Phi_J(\operatorname{id}_x)=I,
+ \qquad
+ \Phi_J(\gamma_2\circ\gamma_1)
+ =\Phi_J(\gamma_2)\Phi_J(\gamma_1).
+\]
+\end{proposition}
+
+\begin{proof}
+La acción del camino vacío es cero. Para rutas composables, la aditividad de
+\(\mathcal A_*\) y la conmutación de los múltiplos de un mismo endomorfismo
+\(J_E\) permiten separar la exponencial del valor sumado.
+\end{proof}
+
+\subsection{Realización unitaria sobre el registro cronológico
+\texorpdfstring{\(27\times27\)}{27 x 27}}
+\label{sec:realizacion-unitaria-registro-27-rev3}
+\index{registro cronológico!realización unitaria}
+\index{Fourier!bloques del registro cronológico}
+\index{Hamiltoniano!efectivo}
+
+Antes de pasar al límite cilíndrico, un núcleo finito admite una realización
+unitaria explícita. Sea
+\[
+ \mathbb T_{27}^{\,2}:=(\mathbb Z/27\mathbb Z)^2,
+ \qquad
+ \mathcal D:=\{\mathrm N,\mathrm S,\mathrm E,\mathrm W\},
+\]
+y considérese el espacio real
+\[
+ \mathcal H_{27}^{\mathbb R,\mathrm{reg}}
+ :=\ell^2(\mathbb T_{27}^{\,2};\mathbb R)
+   \otimes\mathbb R^{\mathcal D}\otimes E.
+\]
+El endomorfismo \(J_E\) se extiende como la identidad sobre los factores de
+posición y dirección, y se conserva para esa extensión la misma notación.
+
+En la base ordenada
+\((\mathrm N,\mathrm S,\mathrm E,\mathrm W)\), el mezclador direccional es
+\begin{equation}
+ C_4:=\frac12
+ \begin{pmatrix}
+  1&1&1&1\\
+  1&1&-1&-1\\
+  1&-1&1&-1\\
+  1&-1&-1&1
+ \end{pmatrix},
+ \qquad C_4^{\mathsf T}C_4=I_4.
+ \label{eq:mezclador-walsh-registro-27-rev3}
+\end{equation}
+Aquí \(C_4\) designa exclusivamente el mezclador de Walsh--Hadamard sobre la
+fibra direccional; cuando actúa en
+\(\mathcal H_{27}^{\mathbb R,\mathrm{reg}}\) se entiende
+\(C_4\otimes I_E\).
+
+Fíjese una coordenatización traslacional en la que la acción de una arista elemental
+\(\gamma_d\) dependa sólo de su dirección:
+\[
+ s_d:=S_{\rm int}(\gamma_d)\in\mathcal L_S,
+ \qquad
+ a_d:=\frac{s_d}{\hbar_{\rm int}}\in\mathbb R.
+\]
+El operador real diagonal de fase es
+\[
+ D_J:=\operatorname{diag}
+ \left(
+  e^{-J_Ea_{\mathrm N}},
+  e^{-J_Ea_{\mathrm S}},
+  e^{-J_Ea_{\mathrm E}},
+  e^{-J_Ea_{\mathrm W}}
+ \right).
+\]
+El desplazamiento condicionado transporta cada componente en su dirección:
+\begin{align*}
+ (S\psi)(x,y,\mathrm N)&=\psi(x,y-1,\mathrm N),&
+ (S\psi)(x,y,\mathrm S)&=\psi(x,y+1,\mathrm S),\\
+ (S\psi)(x,y,\mathrm E)&=\psi(x-1,y,\mathrm E),&
+ (S\psi)(x,y,\mathrm W)&=\psi(x+1,y,\mathrm W),
+\end{align*}
+con todas las coordenadas tomadas módulo \(27\). El paso elemental y su
+composición de doce pasos son
+\begin{equation}
+ U_{\rm micro}:=S D_J C_4,
+ \qquad
+ U_{12}^{\mathrm{reg}}:=U_{\rm micro}^{12}.
+ \label{eq:paso-unitario-registro-27-rev3}
+\end{equation}
+El superíndice \(\mathrm{reg}\) conserva el tipo: este operador actúa sobre
+el toro direccional \(27\times27\) y no se identifica con los demás objetos
+dodecafásicos de la construcción ni con el endomorfismo temporal de orden \(108\).
+
+\begin{proposition}[Unitariedad y suma exacta de caminos en el registro]
+\label{prop:unitariedad-suma-registro-27-rev3}
+El operador \(U_{\rm micro}\) es ortogonal sobre la realificación y unitario
+en la coordenatización compleja determinada por \(J_E\). En particular,
+\(U_{12}^{\mathrm{reg}}\) es unitario. Si
+\(\Xi:=\mathbb T_{27}^{\,2}\times\mathcal D\), entonces, para todo
+\(n\geq0\) y \(\xi_i,\xi_f\in\Xi\),
+\[
+ \bigl(U_{\rm micro}^{n}\bigr)_{\xi_f,\xi_i}
+ =
+ \sum_{\substack{\gamma:\xi_i\to\xi_f\\|\gamma|=n}}
+ W_{U_{\rm micro}}(\gamma),
+\]
+donde, para \(\gamma=(\xi_0,\ldots,\xi_n)\),
+\[
+ W_{U_{\rm micro}}(\gamma)
+ :=
+ (U_{\rm micro})_{\xi_n,\xi_{n-1}}
+ \cdots
+ (U_{\rm micro})_{\xi_1,\xi_0}.
+\]
+La suma recorre exactamente los caminos permitidos por los bloques no nulos
+del operador.
+\end{proposition}
+
+\begin{proof}
+Como \(J_E\) es ortogonal y \(J_E^2=-I\), se tiene
+\(J_E^{\mathsf T}=-J_E\). Por tanto, cada bloque
+\(e^{-J_Ea_d}\) es una rotación ortogonal y \(D_J\) es ortogonal.
+El operador \(S\) permuta una base ortonormal y
+\eqref{eq:mezclador-walsh-registro-27-rev3} demuestra que \(C_4\) es
+ortogonal. En consecuencia,
+\[
+ U_{\rm micro}^{\mathsf T}U_{\rm micro}
+ =C_4^{\mathsf T}D_J^{\mathsf T}S^{\mathsf T}
+   S D_JC_4
+ =I.
+\]
+Los tres factores conmutan con la extensión de \(J_E\); así,
+\(U_{\rm micro}\) es complejo lineal en la coordenatización
+\(J_E\leftrightarrow\mathrm i\), y su ortogonalidad real equivale a
+unitariedad. Toda potencia, en particular
+\(U_{12}^{\mathrm{reg}}\), conserva esa propiedad.
+
+Para \(n\geq1\), la multiplicación por bloques da
+\[
+ \bigl(U_{\rm micro}^{n}\bigr)_{\xi_f,\xi_i}
+ =
+ \sum_{\xi_1,\ldots,\xi_{n-1}}
+ (U_{\rm micro})_{\xi_f,\xi_{n-1}}
+ \cdots
+ (U_{\rm micro})_{\xi_1,\xi_i}.
+\]
+Cada elección de estados intermedios determina un camino de longitud \(n\),
+y cada camino determina un único producto ordenado. Para \(n=0\), el único
+término es el camino vacío y su peso es la identidad.
+\end{proof}
+
+La invariancia por traslaciones descompone el problema en bloques de cuatro
+componentes direccionales, tensorizados con \(E\). Para
+\[
+ k_x=\frac{2\pi a}{27},
+ \qquad
+ k_y=\frac{2\pi b}{27},
+ \qquad 0\leq a,b<27,
+\]
+adoptamos la convención de Fourier realificada
+\[
+ \chi_{a,b}(x,y)
+ :=\exp[-J_E(k_xx+k_yy)].
+\]
+La sustitución directa en el desplazamiento condicionado produce
+\[
+ S(k_x,k_y)
+ =\operatorname{diag}
+ \bigl(
+  e^{J_Ek_y},e^{-J_Ek_y},
+  e^{J_Ek_x},e^{-J_Ek_x}
+ \bigr),
+\]
+y, como \(D_J\) y \(C_4\) no dependen de la posición,
+\begin{equation}
+ \begin{aligned}
+ U_{\rm micro}(k_x,k_y)
+   &=S(k_x,k_y)D_JC_4,\\
+ U_{12}^{\mathrm{reg}}(k_x,k_y)
+   &=U_{\rm micro}(k_x,k_y)^{12}.
+ \end{aligned}
+ \label{eq:bloques-fourier-registro-27-rev3}
+\end{equation}
+Por consiguiente,
+\[
+ \operatorname{Spec}U_{12}^{\mathrm{reg}}
+ =
+ \bigcup_{a,b=0}^{26}
+ \operatorname{Spec}
+ U_{12}^{\mathrm{reg}}
+ \left(\frac{2\pi a}{27},\frac{2\pi b}{27}\right).
+\]
+La potencia matricial enumera caminos y la descomposición de Fourier expresa
+las cuasienergías de la misma dinámica finita.
+
+Fijada una duración elemental \(\delta t>0\), sea
+\(\Delta t_{12}:=12\,\delta t\). En cada bloque unitario elíjase una rama
+espectral \(\mathfrak b\) del logaritmo. El operador
+\(\operatorname{Log}_{\mathfrak b}U_{12}^{\mathrm{reg}}(k_x,k_y)\) es
+anti-autoadjunto y conmuta con \(J_E\). Se define
+\begin{equation}
+ \begin{aligned}
+ H_{\rm eff}(k_x,k_y)
+ &:=
+ \frac{\hbar_{\rm int}}{\Delta t_{12}}\,
+ J_E\,
+ \operatorname{Log}_{\mathfrak b}
+ U_{12}^{\mathrm{reg}}(k_x,k_y),\\
+ U_{12}^{\mathrm{reg}}(k_x,k_y)
+ &=
+ \exp\!\left[
+  -\frac{J_E\Delta t_{12}}{\hbar_{\rm int}}\,
+  H_{\rm eff}(k_x,k_y)
+ \right].
+ \end{aligned}
+ \label{eq:hamiltoniano-efectivo-registro-27-rev3}
+\end{equation}
+La primera línea es autoadjunta en la coordenatización compleja. La segunda se sigue de
+\(-J_E^2=I\) y demuestra que la exponencial recupera exactamente el
+propagador. La rama \(\mathfrak b\) fija la zona de cuasienergía.
+
+Esta realización construye un propagador finito, su suma exacta de caminos y
+su generador efectivo. Su identificación con un Hamiltoniano físico continuo
+requiere todavía verificar las hipótesis de representación, acción y límite
+que se enuncian a continuación.
+
+\subsection{Límite cilíndrico sobre el espacio de genealogías}
+
+Fijados los extremos, sean \(\mathcal P_n\) conjuntos finitos de caminos a
+resolución \(n\), con aplicaciones de restricción sobreyectivas. El espacio
+\[
+ \Omega^{\rm path}_{fi}:=\varprojlim_n\mathcal P_n
+\]
+es compacto y totalmente disconexo. Una colección compatible de medidas
+probabilísticas \(\mu_n\) sobre los cilindros determina una medida de Borel
+\(\mu\) en \(\Omega^{\rm path}_{fi}\).
+
+Sea \(\Pi_n\) la partición en cilindros de nivel \(n\). Para
+\(C\in\Pi_n\), elíjanse un representante \(\gamma_C\), una acción aproximada
+\(S_n(C)\) y el peso \(\mu_n(C)\). Para
+\(F:\Omega^{\rm path}_{fi}\to\operatorname{End}(E)\), definimos
+\begin{equation}
+ \mathcal I_n(F)
+ :=\sum_{C\in\Pi_n}\mu_n(C)F(\gamma_C)
+ \exp\!\left[-J_E\frac{S_n(C)}{\hbar_{\rm int}}\right].
+ \label{eq:integral-cilindrica-aproximante-rev2}
+\end{equation}
+
+\begin{theorem}[Integral genealógica de caminos]
+\label{thm:integral-genealogica-caminos-rev2}
+Supóngase que:
+\begin{enumerate}
+ \item las medidas cilíndricas \(\mu_n\) son proyectivamente compatibles;
+ \item \(F\) es continua y acotada;
+ \item existe una acción continua
+ \(S:\Omega^{\rm path}_{fi}\to\mathcal L_S\) para la cual
+ \[
+  \max_{C\in\Pi_n}\sup_{\gamma\in C}
+  \left\|\frac{S_n(C)-S(\gamma)}{\hbar_{\rm int}}\right\|
+  \longrightarrow0;
+ \]
+ \item la malla de \(\Pi_n\) tiende a cero.
+\end{enumerate}
+Entonces \(\mathcal I_n(F)\) converge en norma de operador, el límite es
+independiente de los representantes y define la integral de Bochner
+\begin{equation}
+ \int_{\Omega^{\rm path}_{fi}}
+ F(\gamma)
+ \exp\!\left[-J_E\frac{S(\gamma)}{\hbar_{\rm int}}\right]
+ \mathrm d\mu(\gamma).
+ \label{eq:integral-genealogica-caminos-rev2}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La compatibilidad de las medidas finitas construye \(\mu\) sobre el álgebra
+de cilindros y, por extensión, sobre la sigma-álgebra de Borel. La función
+\[
+ G(\gamma)=F(\gamma)
+ \exp[-J_E\,S(\gamma)/\hbar_{\rm int}]
+\]
+es continua sobre un compacto y, por tanto, uniformemente continua y
+acotada. La ortogonalidad de \(J_E\) proporciona la estimación
+\[
+ \|e^{-J_E a}-e^{-J_E b}\|\leq |a-b|.
+\]
+La aproximación uniforme de la acción y la contracción de la malla hacen
+converger las sumas cilíndricas a la integral de Bochner de \(G\)
+\cite{Bochner1955}.
+\end{proof}
+
+El teorema construye una integral rigurosa sobre el espacio compacto de
+genealogías. Su realización como integral oscilatoria de Feynman para un
+Hamiltoniano concreto se obtiene cuando los kernels finitos, la acción y la
+medida de cilindros satisfacen estas hipótesis de convergencia. La expansión
+matricial finita, la integral genealógica y el propagador físico quedan así
+relacionados por morfismos explícitos, sin identificarse por abreviación.
+
+\subsection{Valor expresado y memoria de la fibra}
+
+Sea
+\(\operatorname{Val}_{\rm path}:\Omega^{\rm path}_{fi}\to\mathcal Y_{\rm val}\subset\mathbb R\)
+un lector de caminos Borel-medible, donde \(\mathcal Y_{\rm val}\) lleva su estructura
+boreliana estándar, y sea
+\(\nu=(\operatorname{Val}_{\rm path})_*\mu\). Para toda función que
+factoriza por el valor, \(F=\widehat F\circ\operatorname{Val}_{\rm path}\),
+se cumple
+\[
+ \int_{\Omega^{\rm path}_{fi}}F\,\mathrm d\mu
+ =\int_{\mathcal Y_{\rm val}}\widehat F(x)\,\mathrm d\nu(x).
+\]
+Como \(\Omega^{\rm path}_{fi}\) es compacto metrizable y \(\mu\) es una
+probabilidad de Borel, existe una colección de probabilidades condicionales
+regulares \((\mu_x)_{x\in\mathcal Y_{\rm val}}\), definida para \(\nu\)-casi todo \(x\). Para
+un integrando genealógico general, la desintegración de \(\mu\) adopta la forma
+\begin{equation}
+ \int_{\Omega^{\rm path}_{fi}}G(\gamma)\,\mathrm d\mu(\gamma)
+ =\int_{\mathcal Y_{\rm val}}\left[
+   \int_{\operatorname{Val}_{\rm path}^{-1}(x)}
+   G(\gamma)\,\mathrm d\mu_x(\gamma)
+  \right]\mathrm d\nu(x).
+ \label{eq:desintegracion-genealogica-caminos-rev2}
+\end{equation}
+La integral interior conserva las historias distintas que expresan la misma
+coordenada. Este es el enlace preciso entre la suma sobre todos los caminos,
+la evaluación real y la tesis según la cual el continuo es una proyección de
+un dominio genealógico más rico.
+
+\paragraph{Dominio de la integral genealógica de caminos: compacidad cilíndrica, consistencia proyectiva, convergencia de núcleos y desintegración sobre fibras}
+La expansión finita, la realización unitaria sobre
+\(\mathbb T_{27}^{\,2}\) y su reducción de Fourier son exactas en sus dominios
+finitos. La construcción de \(H_{\rm eff}\) es
+exacta una vez declaradas la estructura compleja, la acción elemental
+traslacional, la duración y la rama espectral; no selecciona por sí sola un
+Hamiltoniano físico continuo. La categoría enriquecida de rutas y la fase
+interna preceden al ensamblaje cilíndrico. El
+\cref{thm:integral-genealogica-caminos-rev2} es exacto bajo las cuatro
+premisas declaradas. La realización de un modelo cuántico continuo concreto
+requiere verificar esas premisas para su acción y su Hamiltoniano.

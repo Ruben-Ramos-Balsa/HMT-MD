@@ -1,0 +1,379 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.72em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{observacion}[teorema]{Observación}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\APP}{\mathrm{APP}}
+\newcommand{\TPK}{\mathrm{TPK}}
+\newcommand{\SUtwelve}{\mathrm{SU}\text{-}12}
+\newcommand{\dr}{\mathrm{dr}_9}
+\title{\bfseries N32 --- Descomposición icosaédrica del borde SU--12 y APP dimensional\\
+\large Proyectores $A_5$, vectores $K_{R12}/\alpha/\pi/e/\varphi$ y escalera cúbica de triadas}
+\author{HMT 3.0 --- ventana técnica autocontenida}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Propósito de N32}
+Esta ventana tiene dos objetivos complementarios. El primero es formalizar el borde de doce fases como una representación de $A_5$ sobre doce puntos, equivalente a la acción del grupo icosaédrico sobre los doce vértices del icosaedro. El segundo es desarrollar la intuición de la APP dimensional: pasar de la APP bidimensional a cubos y, más en general, a hipercubos de triadas, donde el paquete decimal base--1000 se separa de forma natural en un bulk triádico y una corona de borde.
+
+La tesis que se pone a prueba es doble:
+\[
+\boxed{\C^{12}\simeq 1\oplus3\oplus3'\oplus5,\qquad 4\text{ ausente}.}
+\]
+\[
+\boxed{10^3=9^3+(10^3-9^3)=729+271,\qquad 196884=54(3645+1).}
+\]
+La primera identidad no habla de decimales ni de aproximaciones: es teoría de representaciones finita. La segunda identidad no es una analogía visual: se deriva de la APP cúbica y de la lectura digital $\dr$.
+
+El objetivo no es afirmar todavía que la APP cúbica genere infinitamente los decimales de $\pi,e,\varphi$. El objetivo correcto de esta entrega es más preciso: establecer el espacio dimensional y los operadores de proyección que cualquier dinámica infinita posterior deberá respetar. En otras palabras: N32 fija el marco algebraico donde la generación de triadas puede vivir.
+
+\section{El borde SU--12 como representación de $A_5$}
+El grupo de rotaciones del icosaedro es isomorfo a $A_5$. La acción natural sobre los doce vértices del icosaedro puede modelarse algebraicamente como la acción de $A_5$ sobre los cosets $A_5/C_5$, donde $C_5$ es un subgrupo cíclico generado por una rotación de orden cinco. Como $|A_5|=60$ y $|C_5|=5$, el espacio de cosets tiene dimensión $12$.
+
+Sea $\rho_{12}$ la representación por permutación sobre estos doce cosets y sea $\chi_{12}$ su carácter. Geométricamente, la identidad fija doce vértices; una rotación de orden cinco fija los dos vértices del eje; las rotaciones de orden dos y tres no fijan vértices. Por tanto, con clases ordenadas como $1A,5A,5B,3A,2A$:
+\[
+\chi_{12}=(12,2,2,0,0).
+\]
+La tabla de caracteres real de $A_5$ es:
+\[
+\begin{array}{c|ccccc}
+ & 1A & 5A & 5B & 3A & 2A\\
+\hline
+1 & 1&1&1&1&1\\
+3 & 3&\varphi&1-\varphi&0&-1\\
+3'&3&1-\varphi&\varphi&0&-1\\
+4&4&-1&-1&1&0\\
+5&5&0&0&-1&1
+\end{array}
+\]
+con $\varphi=(1+\sqrt5)/2$.
+
+\begin{teorema}[descomposición del borde de doce fases]
+La representación de $A_5$ sobre los doce vértices del icosaedro se descompone como
+\[
+\boxed{\rho_{12}\simeq 1\oplus3\oplus3'\oplus5.}
+\]
+En particular, la irrep de dimensión $4$ no aparece.
+\end{teorema}
+
+\begin{proof}
+El producto interno de caracteres se calcula por clases:
+\[
+\langle\chi_{12},\chi\rangle=\frac1{60}\sum_C |C|\,\chi_{12}(C)\chi(C).
+\]
+Sustituyendo la tabla anterior se obtiene multiplicidad $1$ para $1,3,3',5$ y multiplicidad $0$ para $4$. El script adjunto confirma el resultado construyendo explícitamente $A_5$, los cosets $A_5/C_5$, las matrices de permutación y los proyectores centrales.\end{proof}
+
+\section{Proyectores centrales y ausencia del bloque 4}
+Para cada irrep $\rho$ de $A_5$, el proyector central en la representación de doce puntos se calcula por
+\[
+P_\rho=\frac{d_\rho}{|A_5|}\sum_{g\in A_5}\chi_\rho(g^{-1})\rho_{12}(g).
+\]
+Los proyectores satisfacen
+\[
+P_\rho^2=P_\rho,\qquad P_\rho P_\sigma=0\quad(\rho\neq\sigma),\qquad \sum_\rho P_\rho=I.
+\]
+El cálculo certifica:
+\[
+\operatorname{rank}(P_1,P_3,P_{3'},P_4,P_5)=(1,3,3,0,5).
+\]
+
+Esta ausencia del $4$ es una regla de selección. En particular, impide una lectura ingenua del tipo ``$90=3\cdot30$ y $120=4\cdot30$, luego el 120 es la irrep $4$''. Esa lectura no es correcta en el borde icosaédrico de doce fases: el bloque $4$ no está. Por tanto, el papel del $90/120$ de Barbero debe leerse en otra capa, por ejemplo como transición hexada visible a octada ambiente:
+\[
+90=6\binom62,\qquad 120=8\binom62.
+\]
+
+\section{Lectura HMT de los bloques $1,3,3',5$}
+El bloque $1$ es el modo constante: media, observador, referencia global, componente homogénea del borde.
+
+El par $3\oplus3'$ es el lugar natural de la doble orientación. Aquí viven de forma plausible las lecturas two--way: $q_+/q_-$, sección/anti--sección, adelanto/retardo, hoja y contra-hoja. Además, los valores áureos $\varphi$ y $1-\varphi$ aparecen precisamente en los caracteres de las dos irreps tridimensionales sobre clases de orden cinco. Esto sugiere una frase importante:
+\[
+\boxed{\varphi\text{ no vive primariamente en el bloque }5;\quad \varphi\text{ aparece como tensión }3\leftrightarrow3'.}
+\]
+El bloque $5$ sostiene el cierre pentagonal. Es el espacio donde la geometría del cinco, Klein, nivel cinco, RR--5 y el cierre $5\to6$ se vuelven visibles, pero el contenido dorado fino aparece al comparar $3$ y $3'$.
+
+\section{Proyección de vectores HMT}
+Una vez construidos los proyectores, cualquier vector de doce componentes del corpus puede descomponerse:
+\[
+v=P_1v+P_3v+P_{3'}v+P_5v.
+\]
+Esto permite medir dónde vive la energía de un objeto de borde. Para no confundir la media con estructura, se proyectan también los vectores centrados $v-\bar v\mathbf 1$.
+
+Los vectores utilizados en esta entrega son:
+\[
+K_{R12}=(234,543,140,729,659,824,621,58,914,794,146,601),
+\]
+\[
+\alpha=(007,297,352,569,283,800,997,285,105,472,380,663),
+\]
+\[
+\pi=(141,592,653,589,793,238,462,643,383,279,502,884),
+\]
+\[
+e=(718,281,828,459,045,235,360,287,471,352,662,497),
+\]
+\[
+\varphi=(618,033,988,749,894,848,204,586,834,365,638,117).
+\]
+También se proyectan las semillas $w_6(\pi),w_6(e),w_6(\varphi)$ dobladas como $w_6\Vert w_6$.
+
+\input{hmt_n32_results.tex}
+
+\section{Interpretación de la tabla de proyecciones}
+El resultado más visible es que el vector de $\alpha$, tras quitar la media, cae mayoritariamente en el bloque $5$ con aproximadamente $61.81\%$ de energía centrada, y luego en $3'$ con aproximadamente $31.18\%$. Esto sugiere que la palabra de $\alpha$ contiene una componente fuerte de cierre pentagonal, pero no es puramente pentagonal: conserva una escisión de orientación.
+
+El corrector $K_{R12}$, en cambio, tiene una componente centrada dominante en $3$ y una componente importante en $5$. Esta diferencia entre $K_{R12}$ y $\alpha$ es interesante: el corrector parece tener más carácter de orientación/canal, mientras que la salida $\alpha$ muestra un cierre más fuerte en el bloque pentagonal.
+
+La palabra de $\varphi$ cae mayoritariamente en $3'$; esto encaja muy bien con la lectura teórica anterior: $\varphi$ no es simplemente ``el bloque 5'', sino la asimetría dorada de los dos bloques tridimensionales. En cambio, $e$ muestra una fuerte mezcla $5+3$, y $\pi$ está más repartida entre $5,3',3$.
+
+Estas observaciones no son todavía una teoría completa de las constantes, pero sí son un nuevo instrumento. La pregunta deja de ser ``¿este vector se parece a una constante?'' y pasa a ser ``¿qué composición isotypic tiene este vector dentro del borde icosaédrico?''.
+
+\section{APP dimensional y cubo de triadas}
+Pasamos ahora a la intuición dimensional. Una triada decimal $abc$ puede verse como un punto del cubo
+\[
+C_3=\{0,1,\ldots,9\}^3.
+\]
+Su valor decimal es $100a+10b+c$. Módulo $9$ se tiene
+\[
+100a+10b+c\equiv a+b+c\pmod9,
+\]
+porque $100\equiv10\equiv1\pmod9$. Por tanto, empaquetar por base $1000$ y leer por raíz digital no son operaciones contradictorias: una empaqueta y la otra lee la estructura interna.
+
+El subcubo activo es
+\[
+B_3=\{1,\ldots,9\}^3,
+\]
+con
+\[
+|B_3|=9^3=729.
+\]
+La corona decimal, donde al menos una coordenada es cero, tiene tamaño
+\[
+10^3-9^3=271.
+\]
+Así queda explicado geométricamente:
+\[
+\boxed{1000=729+271.}
+\]
+El $729$ es el bulk triádico activo. El $271$ es la corona cero o borde multiplicativo del cubo decimal.
+
+\section{Lectores aditivo y productivo en dimensión $d$}
+Para $B_d=\{1,\ldots,9\}^d$ definimos
+\[
+R_{+,d}(x_1,\ldots,x_d)=\dr(x_1+\cdots+x_d),
+\]
+\[
+R_{\times,d}(x_1,\ldots,x_d)=\dr(x_1\cdots x_d).
+\]
+El lector aditivo es uniforme por simetría de residuos y da
+\[
+S_{+,d}=45\,9^{d-1}.
+\]
+Para el lector multiplicativo, la distribución módulo $9$ se calcula separando unidades, múltiplos de $3$ y cero. El resultado cerrado es
+\[
+S_{\times,d}=9^{d+1}-9(d+3)6^{d-1}.
+\]
+En dimensión $2$ se recupera
+\[
+S_{+,2}=405,
+\qquad
+S_{\times,2}=459,
+\qquad
+\Delta_{2D}=54.
+\]
+En dimensión $3$ se obtiene
+\[
+S_{+,3}=3645.
+\]
+Por tanto:
+\[
+\boxed{196884=54(3645+1).}
+\]
+Esta identidad conecta el defecto bidimensional de APP con el bulk aditivo cúbico. Es una de las razones por las que la APP tridimensional debe tomarse en serio como puerta hacia la aritmética de $J$.
+
+\section{Doce triadas y aumento dimensional}
+Una palabra de doce triadas equivale a $36$ dígitos decimales, por tanto a un punto de $\{0,\ldots,9\}^{36}$. El bulk activo tiene tamaño $9^{36}$ y el contenedor completo $10^{36}$. La fracción activa es
+\[
+\left(\frac9{10}\right)^{36}\approx 0.0225284.
+\]
+Esto significa que en dimensiones altas la corona decimal domina. Esta observación encaja con la intuición física de borde: al crecer la dimensión de lectura, la zona de borde/corona ya no es marginal sino dominante.
+
+En este sentido, la generación infinita de triadas no puede venir sólo del cubo estático; debe venir de un mapa de transición sobre estos cubos o de un operador de transferencia sobre el ledger. Pero la APP dimensional muestra cuál es el espacio natural donde ese mapa debe vivir.
+
+\section{Kill-switches de N32}
+Esta ventana tiene varios falsadores internos:
+\begin{enumerate}
+\item Si la acción de $A_5$ sobre los doce puntos no da rango $(1,3,3,0,5)$, la lectura icosaédrica del borde falla.
+\item Si $P_4\neq0$, la regla de selección contra el bloque $4$ falla.
+\item Si los proyectores no son idempotentes ni ortogonales, la descomposición no es válida.
+\item Si en APP dimensional no se obtiene $S_{+,3}=3645$, entonces el ancla $196884=54(3645+1)$ no sale.
+\item Si se intenta convertir esta estructura en generación infinita de decimales sin un mapa de transición, se comete sobre-afirmación. N32 fija espacio y proyectores; la dinámica infinita exige otro módulo.
+\end{enumerate}
+
+\section*{Conclusión HMT}
+N32 aporta dos herramientas nuevas. Primero, el borde de doce fases se descompone en bloques irreducibles $1,3,3',5$ con ausencia estricta del $4$. Esto permite proyectar cualquier vector de doce eventos del corpus y estudiar su contenido de centro, orientación dorada y cierre pentagonal.
+
+Segundo, la APP dimensional muestra que una triada decimal es naturalmente un punto del cubo $10^3$, cuyo bulk activo es $9^3=729$ y cuya corona es $271$. En ese cubo, el lector aditivo recupera $S_{+,3}=3645$, y junto con el defecto bidimensional $54$ produce el ancla $196884$.
+
+La frase final de N32 es:
+\[
+\boxed{\text{El borde HMT tiene dos geometrías compatibles: la icosaédrica }1\oplus3\oplus3'\oplus5\text{ y la dimensional triádica }10^3=729+271.}
+\]
+La primera organiza las doce fases. La segunda organiza las triadas decimales. La generación infinita de constantes, si existe, debe ser un flujo entre estas dos estructuras.
+
+
+\appendix
+\section{Apéndice A: derivación completa de la fórmula multiplicativa}
+En el cubo activo $B_d=\{1,\ldots,9\}^d$ cada coordenada aporta un residuo módulo $9$. Hay tres tipos de residuos: la clase cero, que corresponde al dígito $9$; las seis unidades $1,2,4,5,7,8$; y los dos divisores de cero no nulos $3,6$.
+
+Para calcular $S_{\times,d}$ no enumeramos $9^d$ puntos. Se separan los casos:
+\begin{enumerate}
+\item Si todas las coordenadas son unidades, hay $6^d$ productos y se distribuyen uniformemente entre las seis unidades. Por tanto, cada unidad aparece $6^{d-1}$ veces.
+\item Si exactamente una coordenada pertenece a $\{3,6\}$ y las demás son unidades, el producto cae en $\{3,6\}$. Hay $d\cdot2\cdot6^{d-1}$ casos, distribuidos por simetría en dos clases, luego cada una aparece $d6^{d-1}$ veces.
+\item Todos los casos restantes producen residuo cero: o aparece un dígito $9$, o aparecen al menos dos factores divisibles por $3$.
+\end{enumerate}
+Así, el número de productos con residuo cero es
+\[
+9^d-6^d-2d6^{d-1}.
+\]
+El valor digital de residuo cero es $9$, la suma de las seis unidades es $1+2+4+5+7+8=27$, y la suma de $3$ y $6$ es $9$. Por tanto:
+\[
+S_{\times,d}=9(9^d-6^d-2d6^{d-1})+27\cdot6^{d-1}+9d6^{d-1}.
+\]
+Simplificando:
+\[
+\boxed{S_{\times,d}=9^{d+1}-9(d+3)6^{d-1}.}
+\]
+Esta fórmula explica por qué la dimensión $d=3$ no es un accidente: el lector aditivo da $3645$ y, al combinarlo con el defecto bidimensional $54$, aparece $196884$.
+
+\section{Apéndice B: doce triadas como dimensión 36}
+Una palabra de doce triadas es una palabra de treinta y seis dígitos decimales. El contenedor total es $10^{36}$, mientras que el bulk sin ceros es $9^{36}$. La fracción activa es:
+\[
+\left(\frac{9}{10}\right)^{36}\simeq 0.0225283995.
+\]
+Esto significa que, en una palabra de doce triadas, la corona de borde ya no es una pequeña corrección. Es casi todo el contenedor decimal. Esta observación se relaciona con la intuición física de borde: al aumentar la dimensión del lector, la zona de frontera domina. El fenómeno es análogo al hecho geométrico de que, en dimensiones altas, la masa de una medida puede concentrarse en capas finas cercanas al borde.
+
+Esta idea no demuestra aún una generación infinita de $\pi,e,\varphi$. Pero sí dice dónde debe ocurrir esa generación: en un flujo que atraviesa sucesivos contenedores $10^{3r}$, con lectura interna módulo $9$ y control de corona. En lenguaje HMT, ese flujo debe ser proporcionado por $\APP/\TPK/\kappa27/\SUtwelve$, no por la APP cúbica estática aislada.
+
+\section{Apéndice C: significado de las proyecciones de $K_{R12}$ y $\alpha$}
+El vector $K_{R12}$ funciona como corrector/costura. El hecho de que su energía centrada caiga mayoritariamente en el bloque $3$ y de forma secundaria en el bloque $5$ sugiere que es más un objeto de orientación y canal que un puro objeto pentagonal. En cambio, el vector de $\alpha$ cae mayoritariamente en el bloque $5$, con una contribución considerable en $3'$. Esta diferencia es informativa: el corrector parece organizar el flujo y la salida $\alpha$ parece cerrar el borde.
+
+La interpretación compatible con HMT es:
+\[
+K_{R12}=\text{objeto de costura/rueda},\qquad \alpha=\text{lectura cerrada del borde}.
+\]
+No se debe sobreinterpretar esta tabla como demostración completa de la derivación de $\alpha$. Lo que sí proporciona es una nueva prueba de estructura: si el borde de doce fases tiene simetría icosaédrica, entonces $K_{R12}$ y $\alpha$ no son vectores amorfos; tienen perfiles isotypic distintos. Esa diferencia puede ser usada como nuevo kill-switch contra máscaras arbitrarias.
+
+\section{Apéndice D: conexión con Barbero y la ausencia del 4}
+La ausencia del bloque $4$ obliga a separar dos capas que en una lectura rápida podían mezclarse. La capa icosaédrica del borde $12$ contiene $1,3,3',5$. La capa $90/120$ de Barbero no debe identificarse como $3/4$ irreducible. En cambio, su lectura por hexadas y octadas es más coherente:
+\[
+90=6\binom62,
+\qquad
+120=8\binom62.
+\]
+Esta distinción es importante para evitar sesgos de confirmación. Si se fuerza una lectura ``$120=4$'', se contradice la representación del borde de 12 vértices. Si se lee como transición $W_{12}\to W_{24}$, el $120$ no es la irrep ausente, sino el ambiente octádico que aparece al ampliar el cierre.
+
+\section{Apéndice E: qué falta para una generación infinita}
+La APP dimensional establece tres hechos fuertes:
+\begin{enumerate}
+\item las triadas decimales viven naturalmente en $10^3$;
+\item la raíz digital módulo $9$ es la lectura interna compatible con base $1000$;
+\item el bulk/corona $729/271$ aparece como descomposición geométrica exacta.
+\end{enumerate}
+Pero una generación infinita de constantes exige un mapa de transición. Formalmente haría falta un operador
+\[
+F_r:C_{3r}\to C_{3(r+1)}
+\]
+o, más discretamente, un operador sobre estados de ledger que produzca la siguiente triada a partir de la anterior y del sector $\kappa27$. La pregunta fuerte no es si todas las triadas están en $10^3$; eso es trivial. La pregunta fuerte es si el flujo HMT selecciona la trayectoria correcta sin comparar contra la constante al final.
+
+Por tanto, N32 no reclama la generación infinita. Reclama el marco dimensional donde esa generación debe ser buscada. El siguiente cierre, si se decide abordarlo, no debería ser ``buscar dígitos'' sino construir el operador de transición y demostrar que reproduce semillas $w_6,w_{18},w_{30},\ldots$ sin usar las constantes como target.
+
+\section{Apéndice F: checklist de no circularidad de N32}
+\begin{itemize}
+\item La descomposición $1\oplus3\oplus3'\oplus5$ no usa $\alpha$, ni $\pi$, ni $e$, ni $\varphi$ como entrada; usa sólo el grupo $A_5$ y su acción sobre $A_5/C_5$.
+\item La ausencia de $4$ no se impone; se calcula por rango de proyector.
+\item La identidad $196884=54(3645+1)$ no usa la teoría de Monster; se calcula desde APP 2D y APP 3D.
+\item Las proyecciones de vectores HMT no prueban por sí solas su origen; sólo clasifican su contenido respecto del borde icosaédrico.
+\item La generación infinita de constantes queda explícitamente fuera de lo probado en N32 hasta que exista un mapa dinámico de transición.
+\end{itemize}
+
+
+\section{Apéndice G: proyectores centrales por sumas de clase}
+Sea $K_C$ la suma formal de todos los elementos de una clase de conjugación $C$ actuando por la representación de doce puntos. En el orden de clases $1A,5A,5B,3A,2A$, los proyectores centrales pueden escribirse de forma condensada como:
+\[
+P_1=\frac1{60}(K_{1A}+K_{5A}+K_{5B}+K_{3A}+K_{2A}),
+\]
+cuando $K_C$ se entiende como suma de elementos de la clase completa. Más explícitamente, los tamaños de clase están incorporados dentro de cada $K_C$.
+Para las representaciones tridimensionales:
+\[
+P_3=\frac3{60}\left(3K_{1A}+\varphi K_{5A}+(1-\varphi)K_{5B}-K_{2A}\right),
+\]
+\[
+P_{3'}=\frac3{60}\left(3K_{1A}+(1-\varphi)K_{5A}+\varphi K_{5B}-K_{2A}\right).
+\]
+Para la representación de dimensión cinco:
+\[
+P_5=\frac5{60}\left(5K_{1A}-K_{3A}+K_{2A}\right).
+\]
+Y para la representación de dimensión cuatro:
+\[
+P_4=\frac4{60}\left(4K_{1A}-K_{5A}-K_{5B}+K_{3A}\right).
+\]
+La acción sobre los doce vértices verifica que este último proyector es la matriz nula. Esto no significa que la irrep $4$ no exista en $A_5$; significa que esta acción concreta de $A_5$ sobre doce vértices no la ve.
+
+\section{Apéndice H: tabla dimensional extendida}
+La siguiente tabla resume la escalera dimensional calculada por el script. La dimensión $d=3$ corresponde a una triada. La dimensión $d=36$ corresponde a doce triadas.
+\[
+\begin{array}{r|r|r|r}
+ d & 9^d & 10^d-9^d & (9/10)^d\\
+\hline
+ 1 & 9 & 1 & 0.9000000000\\
+ 2 & 81 & 19 & 0.8100000000\\
+ 3 & 729 & 271 & 0.7290000000\\
+ 6 & 531441 & 468559 & 0.5314410000\\
+ 9 & 387420489 & 612579511 & 0.3874204890\\
+ 12 & 282429536481 & 717570463519 & 0.2824295365\\
+ 18 & 150094635296999121 & 849905364703000879 & 0.1500946353\\
+ 24 & 79766443076872509863361 & 920233556923127490136639 & 0.0797664431\\
+ 30 & 42391158275216203514294433201 & 957608841724783796485705566799 & 0.0423911583\\
+ 36 & 22528399544939174411840147874772641 & 977471600455060825588159852125227359 & 0.0225283995
+\end{array}
+\]
+La columna final muestra cómo el bulk activo pierde proporción en el contenedor decimal al crecer la dimensión. Esta pérdida no debe leerse como fallo: en una teoría de borde, precisamente significa que las condiciones de cierre se vuelven dominantes.
+
+\section{Apéndice I: interpretación de la corona como borde de medición}
+En dimensión tres, la corona $271$ es el conjunto de triadas con al menos un cero. En dimensión treinta y seis, la corona es casi todo el contenedor. Si la lectura decimal es la lectura instrumental, entonces la aparición masiva de la corona en dimensiones altas sugiere que la medición no es un añadido externo, sino una condición de borde inevitable.
+
+Esto conecta con la formulación HMT de Feynman: una amplitud no es sólo una suma finita de caminos cerrados en abstracto, sino una suma finita de caminos con proyector de entrada y de salida. El borde/corona es el lugar donde la trayectoria se hace lectura. En esa interpretación, la APP dimensional no genera por sí sola el valor observado, pero sí fija el espacio donde la observación puede cerrar una sección.
+
+\section{Apéndice J: hacia una búsqueda inversa de rutas de $\pi,e,\varphi$}
+Una estrategia de ingeniería inversa que no incurre automáticamente en circularidad consistiría en tomar las triadas de $\pi,e,\varphi$ sólo como salida de validación, no como criterio de construcción. Para cada triada $abc$ se calcula su punto $(a,b,c)$, su clase de bulk/corona, sus lecturas $R_+$ y $R_\times$, y su sector módulo $3$. Luego se busca si existe un operador de transición $F$ derivado del ledger tal que
+\[
+F(abc)_n=(abc)_{n+1}
+\]
+para un tramo inicial no utilizado en el ajuste. Un test honesto exigiría entrenar o fijar $F$ con una constante y validar con otra, o fijar $F$ sin constantes y validar con las tres.
+
+Esto puede hacerse de forma computacional, pero no debe confundirse con N32. N32 demuestra que el espacio de triadas y sus invariantes están bien definidos; el operador generador de rutas es otro cierre.
+
+\section{Apéndice K: lectura final de N32}
+N32 da dos lecturas compatibles del mismo borde. La lectura icosaédrica separa el borde de doce fases en modo constante, dos orientaciones doradas y cierre pentagonal. La lectura dimensional separa una triada decimal en bulk activo y corona de borde. Si ambas lecturas se acoplan, entonces una constante de doce triadas no es sólo una lista de dígitos: es una trayectoria en un espacio de borde con simetría icosaédrica y raíz digital interna.
+
+Esta es la razón por la que N32 pertenece al núcleo HMT 3.0: no añade una fórmula de constante, sino un mecanismo para clasificar y eventualmente generar palabras de borde.
+
+\end{document}

@@ -1,0 +1,656 @@
+{
+  "units": [
+    {
+      "id": "COMUN_LEAN_I_V",
+      "destination_root": "05_REPRODUCCION/COMUN/LEAN_I_V",
+      "kind": "SEALED_COMMON",
+      "entrypoints": [
+        "reproducir.py",
+        "REGISTRO_UNIFICADO.json"
+      ],
+      "commands": [
+        {
+          "command": "python3 -I -S reproducir.py --verify-only --report-dir /RUTA_NUEVA/integridad",
+          "purpose": "file_integrity",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "command": "python3 -I -S reproducir.py --article all --from-sources --portable-toolchain --lean /RUTA/lean --mathlib-root /RUTA/mathlib4 --report-dir /RUTA_NUEVA/resultados",
+          "purpose": "Lean_source_reproduction",
+          "requirements": "Lean 4.21.0; Mathlib 308445d7985027f538e281e18df29ca16ede2ba3; new external result directory"
+        }
+      ]
+    },
+    {
+      "id": "COMUN_CERTIFICADOS_K",
+      "destination_root": "05_REPRODUCCION/COMUN/CERTIFICADOS_K",
+      "kind": "SEALED_COMMON",
+      "entrypoints": [
+        "lectura_conjunta/reproducir_lectura_conjunta.py",
+        "lectura_conjunta/reproducir_deltas.py",
+        "lectura_conjunta/reproducir.py"
+      ],
+      "commands": [
+        {
+          "cwd": "lectura_conjunta",
+          "command": "python3 -I -S reproducir_lectura_conjunta.py --plan",
+          "purpose": "dependency_plan",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "cwd": "lectura_conjunta",
+          "command": "python3 -I -S reproducir_lectura_conjunta.py --mathlib /RUTA/mathlib4 --lean /RUTA/lean",
+          "purpose": "Lean_reproduction",
+          "requirements": "Lean 4.21.0; Mathlib 308445d7985027f538e281e18df29ca16ede2ba3"
+        }
+      ]
+    },
+    {
+      "id": "COMUN_MEMORIA_COMPATIBILIDAD",
+      "destination_root": "05_REPRODUCCION/COMUN/MEMORIA_COMPATIBILIDAD",
+      "kind": "DECLARED_COMMON",
+      "entrypoints": [
+        "reproducir_prefijo_e_portable.py",
+        "fuentes_ley9/verificar_hibridacion.py",
+        "fuentes_ley9/verificar_compatibilidad_holonomia.py",
+        "fuentes_ley9/verificar_composicion_constantes.py"
+      ],
+      "commands": [
+        {
+          "command": "python3 -I -S reproducir_prefijo_e_portable.py",
+          "purpose": "preserved_focal_check",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "command": "python3 -I -S fuentes_ley9/verificar_hibridacion.py",
+          "purpose": "preserved_focal_check",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "command": "python3 -I -S fuentes_ley9/verificar_compatibilidad_holonomia.py",
+          "purpose": "preserved_focal_check",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "command": "python3 -I -S fuentes_ley9/verificar_composicion_constantes.py",
+          "purpose": "preserved_focal_check",
+          "requirements": "Python 3 standard library"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_II_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/II/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_III_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/III/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_IV_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/IV/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_V_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/V/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_VI_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/VI/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIa_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIa/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIII_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIII/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_IX_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/IX/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": ".",
+          "command": "python3 ampliacion/expediente/reproducir_controles.py --centro-borde --output /RUTA_NUEVA/doble_circulo",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3.9+; mpmath==1.3.0"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_memoria_555555.py --receipt /RUTA_NUEVA/MEMORIA.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_vacancias.py --receipt /RUTA_NUEVA/VACANCIAS.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_X_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/X/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_XI_ES",
+      "destination_root": "05_REPRODUCCION/OBRAS/XI/ES",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_II_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/II/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_III_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/III/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_IV_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/IV/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_V_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/V/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_VI_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/VI/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIa_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIa/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIII_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIII/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_IX_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/IX/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": ".",
+          "command": "python3 ampliacion/expediente/reproducir_controles.py --centro-borde --output /RUTA_NUEVA/doble_circulo",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3.9+; mpmath==1.3.0"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_memoria_555555.py --receipt /RUTA_NUEVA/MEMORIA.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_vacancias.py --receipt /RUTA_NUEVA/VACANCIAS.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_XI_EN",
+      "destination_root": "05_REPRODUCCION/OBRAS/XI/EN",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_II_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/II/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_III_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/III/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_IV_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/IV/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_V_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/V/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_VI_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/VI/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIa_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIa/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_VIII_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/VIII/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": "formalizacion_lean",
+          "command": "lake build",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Lean 4.21.0 core and Std"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_IX_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/IX/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": [
+        {
+          "cwd": ".",
+          "command": "python3 ampliacion/expediente/reproducir_controles.py --centro-borde --output /RUTA_NUEVA/doble_circulo",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3.9+; mpmath==1.3.0"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_memoria_555555.py --receipt /RUTA_NUEVA/MEMORIA.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        },
+        {
+          "cwd": ".",
+          "command": "python3 -I -S ampliacion/verificar_vacancias.py --receipt /RUTA_NUEVA/VACANCIAS.json",
+          "purpose": "preserved_reproduction_entry",
+          "requirements": "Python 3 standard library"
+        }
+      ]
+    },
+    {
+      "id": "VIGENTE_X_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/X/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "VIGENTE_XI_FR",
+      "destination_root": "05_REPRODUCCION/OBRAS/XI/FR",
+      "kind": "CURRENT_TECHNICAL_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "ADYACENTE_AMPLIACIONES_V_XII_ES_EN_procedencia",
+      "destination_root": "05_REPRODUCCION/ADYACENTES/AMPLIACIONES_V_XII_ES_EN/procedencia",
+      "kind": "DECLARED_ADJACENT_SCIENCE_OR_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "ADYACENTE_MONOGRAFIAS_FR_figuras_fr",
+      "destination_root": "05_REPRODUCCION/ADYACENTES/MONOGRAFIAS_FR/figuras_fr",
+      "kind": "DECLARED_ADJACENT_SCIENCE_OR_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "ADYACENTE_VII_Y_CRISTAL_ES_EN_FR_inserciones",
+      "destination_root": "05_REPRODUCCION/ADYACENTES/VII_Y_CRISTAL_ES_EN_FR/inserciones",
+      "kind": "DECLARED_ADJACENT_SCIENCE_OR_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "ADYACENTE_VII_Y_CRISTAL_ES_EN_FR_adyacentes_PAQUETE_INSERCION_FEIGENBAUM_HMT_20260930",
+      "destination_root": "05_REPRODUCCION/ADYACENTES/VII_Y_CRISTAL_ES_EN_FR/adyacentes/PAQUETE_INSERCION_FEIGENBAUM_HMT_20260930",
+      "kind": "DECLARED_ADJACENT_SCIENCE_OR_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "ADYACENTE_VII_Y_CRISTAL_ES_EN_FR_adyacentes_PREPARACION_VII_UNIFICACION_AUTONOMA_20260930",
+      "destination_root": "05_REPRODUCCION/ADYACENTES/VII_Y_CRISTAL_ES_EN_FR/adyacentes/PREPARACION_VII_UNIFICACION_AUTONOMA_20260930",
+      "kind": "DECLARED_ADJACENT_SCIENCE_OR_SOURCE",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "REFERENCIA_RESERVORIO",
+      "destination_root": "05_REPRODUCCION/REFERENCIAS/RESERVORIO",
+      "kind": "DECLARED_COMMON",
+      "entrypoints": [
+        "GUIA_RESERVORIO.md",
+        "INDICE_EQUIVALENCIAS.md"
+      ],
+      "commands": []
+    },
+    {
+      "id": "REFERENCIA_TRATADO",
+      "destination_root": "05_REPRODUCCION/REFERENCIAS/TRATADO",
+      "kind": "DECLARED_COMMON",
+      "entrypoints": [
+        "README.md"
+      ],
+      "commands": []
+    },
+    {
+      "id": "REFERENCIA_CORPUS_PRUEBAS",
+      "destination_root": "05_REPRODUCCION/REFERENCIAS/CORPUS",
+      "kind": "DECLARED_COMMON",
+      "entrypoints": [
+        "03_PRUEBAS/README_VALIDACION_CARACTERES.md",
+        "03_PRUEBAS/verificar_generacion_infinita_nonadica.py"
+      ],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_65015e6f5f83",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_REF/corpus",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_7e5602226cf0",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_REF/tratado",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_4a3e4daaa47a",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/f01",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_2af84578f73d",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/f02",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_b7ba9d754524",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/f03",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_078c80eaedd8",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/f04",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_9d456a803835",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/ii06",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_9c67ab4e6b8f",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/02_ARTICULOS/IV/EN",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_7b9d8e3db8b1",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/iii_vii",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_89c73c05b0f1",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/03_COMPLEMENTOS/04_RELACIONES_CONSTANTES/ARCHIVOS",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_f40cf7f05215",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/viii",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_88b10f4d8e5c",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/rev09",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_e96888a87af0",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/02_ARTICULOS/V/EN",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_1abffdc38d63",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/vi_catalogo",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_7e2fcb55470b",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/v_vi",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_561e8b01fe9a",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/03_COMPLEMENTOS/05_NARRATIVA_REVISION_20260923",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_c3916eeecebf",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/contratos",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "DEPENDENCIA_41c5181a7f0c",
+      "destination_root": "05_REPRODUCCION/DEPENDENCIAS/D_ACT/ix",
+      "kind": "STATIC_REFERENCED_LEGACY_DEPENDENCY",
+      "entrypoints": [],
+      "commands": []
+    },
+    {
+      "id": "RECIPROCIDAD_XII",
+      "destination_root": "05_REPRODUCCION/RECUPERADOS/XII_RECIPROCIDAD",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_FUENTES_LEAN.txt",
+        "FlujoReciproco.lean",
+        "RadioKlein.lean"
+      ],
+      "commands": []
+    },
+    {
+      "id": "COMPARACIONES_II",
+      "destination_root": "05_REPRODUCCION/RECUPERADOS/II_COMPARACIONES",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_COMPARACIONES.txt",
+        "verificar_comparaciones_II.py"
+      ],
+      "commands": []
+    },
+    {
+      "id": "TABLAS_APP_G2",
+      "destination_root": "05_REPRODUCCION/RECUPERADOS/G2_APP",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_TABLAS_APP.txt"
+      ],
+      "commands": []
+    },
+    {
+      "id": "GENERADORES_PORTABLES",
+      "destination_root": "05_REPRODUCCION/COMUN",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_GENERADORES.txt",
+        "reproducir_generadores_portable.py"
+      ],
+      "commands": []
+    },
+    {
+      "id": "CONTROLES_VI_IIIA",
+      "destination_root": "05_REPRODUCCION",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_CONTROLES_FOCALES_VI_III.txt"
+      ],
+      "commands": []
+    },
+    {
+      "id": "CONTROLES_IV",
+      "destination_root": "05_REPRODUCCION",
+      "kind": "DOCUMENTED_SCIENTIFIC_DEPENDENCY",
+      "entrypoints": [
+        "LEER_CONTROLES_FOCALES_IV.txt"
+      ],
+      "commands": []
+    }
+  ],
+  "scope": "Programs, data, existing formal proofs and recorded certificates preserved in their selected relative layouts. Scientific computations have not been rerun during packaging.",
+  "correspondence_by_work": "05_REPRODUCCION/MAPA_CIENTIFICO_POR_OBRA.json",
+  "updated_reproduction_instructions": "05_REPRODUCCION/LEER_DEPENDENCIAS.txt"
+}

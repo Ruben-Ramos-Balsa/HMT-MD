@@ -1,0 +1,371 @@
+% Corte mecánico íntegro: parte_i.tex:420--528 + parte_ii.tex:1--321
+% (la línea 322 del propietario es un separador vacío).
+% Residencia material del ensamblaje sucesor de 102 capítulos.
+% Residencia causal: capítulo 8; no sustituye al propietario Γ_9.
+\chapter{TPK : sélection, transport, actualisation et retour}
+
+\section{La transition typée}
+
+Le TPK n'est pas un conteneur nominal. La fonction de phase et son vecteur tabulé sont respectivement
+\[
+ M_{\ph}:\mathcal D_9\longrightarrow\{+1,-1,0\},
+ \qquad
+ m_{\ph}:=\bigl(M_{\ph}(1),\ldots,M_{\ph}(9)\bigr)^{\mathsf T}.
+\]
+Ils ne sont pas du même type d'objet et aucun d'eux n'agit par composition directe sur l'état. Pour \(x\in X_{\TPK}^{\enr}\), nous définissons
+\[
+ \operatorname{Tra}_t(y,d):=\operatorname{Lift}(T_d)(y),
+ \qquad
+ \operatorname{Upd}_t:=\operatorname{Rec}_t\circ\operatorname{Mem}_t.
+\]
+La transition élémentaire s'écrit alors
+\begin{equation}
+ U_t(x)=\operatorname{Upd}_t\!\left(
+ \operatorname{Tra}_t\!\left(
+ \operatorname{Sel}_t\!\left(x,M_{\ph}(g(t))\right),d(t)
+ \right)\right),
+ \qquad
+ U_t:X_{\TPK}^{\enr}\longrightarrow X_{\TPK}^{\enr}.
+ \label{espiral:eq:transicion-tpk-tipada}
+\end{equation}
+Le sélecteur \(\operatorname{Sel}_t\) lit la valeur scalaire du régime tritique et choisit le feuillet additif, multiplicatif ou de seuil ; \(\operatorname{Tra}_t(\,\cdot\,,d(t))=\operatorname{Lift}(T_{d(t)})\) applique la direction cardinale ; \(\operatorname{Mem}_t\) actualise le résidu, le quotient, la retenue, la signature, le cylindre, le bord et la mémoire ; et \(\operatorname{Rec}_t\) effectue le retour typé. L'écriture abrégée \(\mathrm{Upd}_t\circ\mathrm{Tra}_t\circ\mathrm{Sel}_t\) désigne cette même composition et non un second moteur.
+
+La fibre enrichie minimale peut être représentée comme
+\[
+ \mathcal F_q=O_q\times H_q\times C_q\times S_q\times B_q\times\Lambda_q,
+\]
+avec orientation/feuillet, relèvement, retenue, signature, bord et registre. Le détail de chaque facteur dépend de l'emplacement, mais la règle d'intégrité est stable : une coordonnée ne peut être éliminée si elle modifie une continuation.
+
+\section{Holonomie nonadique}
+
+Pour un bloc compatible de neuf étapes,
+\begin{equation}
+ \Gamma_{9,K}=U_{K+8}\circ\cdots\circ U_K.
+ \label{espiral:eq:gamma9-def}
+\end{equation}
+La phase satisfait
+\[
+ g(K+9)=g(K),
+\]
+mais l'état enrichi ne revient pas en général :
+\[
+ \Gamma_{9,K}(x_K)\neq x_K.
+\]
+En particulier,
+\[
+ q_{\mem}(\Gamma_9x)=q_{\mem}(x)+1,
+ \qquad B_{K+9}\neq B_K\quad\text{en général}.
+\]
+
+\begin{theorem}[Retour de phase avec avancée de mémoire]
+L'holonomie \(\Gamma_9\) ferme la coordonnée de phase et transporte l'état à une nouvelle profondeur. Par conséquent, le retour de phase n'est pas un retour d'état.
+\end{theorem}
+\begin{proof}
+La fermeture de phase est la périodicité de \(g\). L'actualisation du registre inclut l'accroissement de profondeur et le transport du bord. Si l'état revenait, toutes les coordonnées devraient coïncider, ce qui contredirait \(q_{\mem}\mapsto q_{\mem}+1\). Ainsi, seule la phase revient.
+\end{proof}
+
+\section{Composition de la retenue}
+
+Soit \(\mathcal K_{\Carr}\) le module de retenue et soient \(H,Y:\mathscr P_{\TPK}^{\enr}\to\operatorname{End}(\mathcal K_{\Carr})\) les actions droite et gauche induites, respectivement, par le préfixe conservé et par le feuillet actif d'une voie. Nous considérons \(\mathcal K_{\Carr}\) comme un bimodule et écrivons \(kH(\gamma)\) et \(Y(\gamma)k\) pour ces actions. L'application \(\Carr:\mathscr P_{\TPK}^{\enr}\to\mathcal K_{\Carr}\) attribue à chaque voie sa retenue totale.
+
+Pour des voies composables \(\gamma_1,\gamma_2\), la retenue satisfait
+\begin{equation}
+ \Carr(\gamma_2\gamma_1)
+ =\Carr(\gamma_2)H(\gamma_1)
+ +Y(\gamma_2)\Carr(\gamma_1).
+ \label{espiral:eq:cociclo-carry}
+\end{equation}
+Cette loi montre ce que signifie conserver la mémoire : non pas maintenir une quantité constante, mais conserver sa règle exacte d'actualisation. La mémoire accumulée est dynamique et traçable.
+
+\section{Calendrier dodécaphasique et non-scindement}
+
+Le calendrier interne s'organise au moyen de
+\[
+ 0\longrightarrow C_{12}\longrightarrow C_{108}
+ \longrightarrow C_9\longrightarrow0.
+\]
+L'extension conserve la différence entre un tour visible et l'état relevé. Dans la réalisation \(C_{108}\simeq C_{27}\times C_4\), la partie \(C_{27}\to C_9\) ne se scinde pas : les relèvements du générateur sont d'ordre \(27\), non d'ordre divisant \(9\). Le facteur \(C_4\) apporte le quart de tour ; le noyau ternaire apporte le relèvement. La combinaison n'est pas une étiquette temporelle externe, mais l'architecture de retour du TPK.
+
+\section{Postériorité du quotient de Markov comme publication de mémoire réduite}
+
+Prendre la moyenne d'une dynamique enrichie peut produire un opérateur de mémoire réduite \(K_{\ph}\). Cet opérateur est utile pour étudier le transfert, la stationnarité et le spectre, mais ne génère pas \(\Gamma_9\). La dépendance est
+\[
+ U_t\longrightarrow\Gamma_9\longrightarrow K_{\ph}.
+\]
+L'inverser effacerait le feuillet, le préfixe, le bord et la retenue. Dans cette publication, le lecteur radial est construit sur les histoires enrichies, jamais sur le quotient de Markov.
+
+\part{Géométrie hélicoïdale exacte de la mémoire nonadique}
+
+\chapter{Hélice nonadique de phase et de profondeur}
+
+\section{Relèvement de la phase nonadique au revêtement phase--mémoire}
+
+Soit
+\[
+ \operatorname{Rep}_9=\{0,1,\ldots,8\},
+ \qquad \widetilde\Theta=\operatorname{Rep}_9\times\Z.
+\]
+On définit
+\begin{equation}
+ \widetilde\Gamma_9(r,n)=(r,n+1),
+ \qquad
+ \Pi(r,n)=[r+9n]_{108}.
+ \label{espiral:eq:cobertura-helice}
+\end{equation}
+La première coordonnée enregistre la phase visible et la seconde la profondeur. On a
+\[
+ \Pi(r,n+12)=\Pi(r,n),
+ \qquad
+ \widetilde\Gamma_9^{12}(r,n)=(r,n+12).
+\]
+La transformation de revêtement
+\[
+ \tau_{12}(r,n)=(r,n+12)
+\]
+agit librement. Chaque fibre de \(\Pi\) est une orbite de cette action.
+
+\begin{definition}[Hélice nonadique]
+L'hélice nonadique est le système relevé
+\[
+ (\widetilde\Theta,\widetilde\Gamma_9,\Pi)
+\]
+avec la phase \(r\bmod9\), le calendrier \(\Pi(r,n)\) et la mémoire profonde \(n\).
+\end{definition}
+
+\begin{theorem}[Phase périodique et mémoire non périodique]
+La projection de l'hélice est périodique d'ordre \(12\) sur le calendrier \(C_{108}\), tandis que l'état relevé distingue toutes les profondeurs \(n+12k\), \(k\in\Z\).
+\end{theorem}
+\begin{proof}
+L'égalité \(\Pi(r,n)=\Pi(r',n')\) impose \(r=r'\) et \(n-n'\in12\Z\). La projection identifie donc exactement les orbites de \(\tau_{12}\), mais la seconde coordonnée du relèvement reste entière et distingue leurs éléments.
+\end{proof}
+
+\section{Immersion géométrique normalisée}
+
+Pour \(N\ge1\), soit
+\[
+ z_N=q_9(N)+\frac{\rho_9(N)-1}{9}.
+\]
+L'immersion
+\begin{equation}
+ H_9(N)=\bigl(\cos(2\pi z_N),\sin(2\pi z_N),z_N\bigr)
+ \label{espiral:eq:inmersion-helice-nonadica}
+\end{equation}
+satisfait
+\[
+ z_{N+9}=z_N+1,
+ \qquad
+ H_9(N+9)=H_9(N)+(0,0,1).
+\]
+La projection sur les deux premières coordonnées revient ; la troisième conserve le tour. La figure n'est pas imposée à l'arithmétique : c'est une immersion de la décomposition exacte \(N=9q_9(N)+\rho_9(N)\).
+
+Pour la courbe continue
+\[
+ h(z)=(\cos2\pi z,\sin2\pi z,z),
+\]
+on a
+\[
+ h'(z)=(-2\pi\sin2\pi z,2\pi\cos2\pi z,1),
+\]
+\[
+ h''(z)=(-4\pi^2\cos2\pi z,-4\pi^2\sin2\pi z,0).
+\]
+Sa courbure et sa torsion sont constantes :
+\begin{equation}
+ \kappa_h=\frac{4\pi^2}{4\pi^2+1},
+ \qquad
+ \mathcal T_h=\frac{2\pi}{4\pi^2+1}.
+ \label{espiral:eq:frenet-helice-normalizada}
+\end{equation}
+
+\begin{proof}[Calcul de \cref{espiral:eq:frenet-helice-normalizada}]
+La norme de \(h'\) est \(\sqrt{4\pi^2+1}\) et \(\|h'\times h''\|=4\pi^2\sqrt{4\pi^2+1}\). Par conséquent
+\[
+ \kappa_h=\frac{\|h'\times h''\|}{\|h'\|^3}
+ =\frac{4\pi^2}{4\pi^2+1}.
+\]
+De plus, avec \(h'''=(8\pi^3\sin2\pi z,-8\pi^3\cos2\pi z,0)\),
+\[
+ \mathcal T_h=
+ \frac{\det(h',h'',h''')}{\|h'\times h''\|^2}
+ =\frac{2\pi}{4\pi^2+1}.
+\]
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x={(1cm,0cm)},y={(.30cm,.12cm)},z={(0cm,.68cm)},scale=.82]
+ \draw[->,HMTGray] (0,0,0)--(0,0,7.2) node[above] {profondeur};
+ \foreach \k in {0,...,4}{
+   \draw[HMTLine] (0,0,{1.4*\k}) ellipse (1.55 and .48);
+ }
+ \draw[HMTBlue,very thick,domain=0:1440,samples=260,smooth,variable=\t]
+   plot ({1.55*cos(\t)},{1.55*sin(\t)},{\t/210});
+ \foreach \j in {0,...,35}{
+   \fill[HMTRed] ({1.55*cos(40*\j)},{1.55*sin(40*\j)},{40*\j/210}) circle (1.1pt);
+ }
+ \node[HMTGray,font=\small\sffamily,right] at (1.7,0,3.3) {$9$ marques par tour};
+\end{tikzpicture}
+\caption{Hélice nonadique : les anneaux sont des sections de niveau ; la courbe conserve l'avancée de mémoire.}
+\label{espiral:fig:helice-nonadica-analitica}
+\end{figure}
+
+\section{Cercles emboîtés et cylindres}
+
+Une section \(n=\text{constante}\) produit un cercle. Une famille de sections de rayon constant produit un cylindre. Si le rayon dépend de la profondeur, la même structure produit une suspension hélicoïdale radiale. Par conséquent :
+\[
+ \text{orbite}\longleftrightarrow\text{feuillet hélicoïdal},
+\]
+\[
+ \text{section de niveau}\longleftrightarrow\text{cercle},
+\qquad
+ \text{famille de sections}\longleftrightarrow\text{cylindre}.
+\]
+C'est une traduction géométrique du système relevé, non une substitution du registre par un dessin.
+
+\chapter{Suspension dynamique du système affine enrichi}
+
+\section{Holonomie dépendant de l'état}
+
+Soit \(U_{\APP}\) un module radial et associons à chaque bloc nonadique un endomorphisme affine
+\[
+ H_9(x):u\longmapsto\Lambda_9(x)u+C_9(x).
+\]
+Lorsque l'holonomie dépend de l'état de départ, nous définissons \(F(x,u)=(\Gamma_9x,H_9(x)u)\). Si \(F\) est continue, sa suspension est le quotient de recollement
+\begin{equation}
+ \mathfrak S_{\TPK}^{\rad}
+ =\frac{X_{\TPK}^{\enr}\times U_{\APP}\times[0,1]}
+ {(x,u,1)\sim(\Gamma_9x,H_9(x)u,0)}.
+ \label{espiral:eq:suspension-skew}
+\end{equation}
+Si \(F\) est un homéomorphisme ---ce qui exige, outre l'inversibilité des parties linéaires, la réversibilité continue de \(\Gamma_9\) et de sa dépendance en \(x\)--- on obtient une suspension bidirectionnelle. Dans le monoïde général, le même quotient ne code que l'évolution vers l'avant ; il n'est pas identifié à un télescope et aucune inversion globale n'est présupposée.
+
+\begin{definition}[Suspension hélicoïdale radiale]
+La suspension \cref{espiral:eq:suspension-skew}, munie d'une coordonnée angulaire de phase et d'une évaluation radiale ultérieure, est appelée \emph{suspension hélicoïdale radiale}. Le terme \emph{hélice générale} est réservé aux cas qui satisfont une condition différentielle de Lancret.
+\end{definition}
+
+\section{Feuillets orbitaux et couture de l'espace de suspension}
+
+L'orbite du produit semi-direct est
+\[
+ (x_0,u_0),
+ (\Gamma_9x_0,H_9(x_0)u_0),
+ (\Gamma_9^2x_0,H_9(\Gamma_9x_0)H_9(x_0)u_0),\ldots.
+\]
+La couture conserve l'ordre des facteurs. Remplacer toute l'orbite par le produit final empêcherait de tronquer l'histoire et de reconstruire ses préfixes. Le feuillet hélicoïdal est donc une orbite avec registre, non une courbe isolée.
+
+\section{Cas stationnaire affine}
+
+Si \(H_9(x)=H=(\Lambda,C)\) est constant,
+\[
+ u_{n+1}=\Lambda u_n+C.
+\]
+L'itération interne exacte, valable pour tout endomorphisme \(\Lambda\), est
+\begin{equation}
+ u_n=\Lambda^n u_0+\sum_{k=0}^{n-1}\Lambda^kC.
+ \label{espiral:eq:orbita-afin-estacionaria-general}
+\end{equation}
+Si \(I-\Lambda\) est inversible dans le module radial, il existe le point fixe
+\[
+ u_*=(I-\Lambda)^{-1}C,
+\]
+et
+\begin{equation}
+ u_n-u_*=\Lambda^n(u_0-u_*).
+ \label{espiral:eq:orbita-afin-estacionaria}
+\end{equation}
+Dans le secteur translationnel \(\Lambda=I\),
+\[
+ u_n=u_0+nC.
+\]
+Ce n'est qu'après avoir choisi un caractère scalaire positif \(\chi:U_{\APP}\to\R\), avec \(\chi\Lambda=\lambda\chi\), que l'on obtient les formules numériques \(u_*=C/(1-\lambda)\) pour \(\lambda\neq1\) et les puissances réelles de \(\lambda\) utilisées dans l'interpolation continue. On ne divise pas un endomorphisme abstrait par \(1-\Lambda\).
+Ces deux possibilités anticipent la séparation entre une famille d'auto-échelle et une famille translationnelle. Aucune ne sélectionne à elle seule une spirale connue ; la courbe apparaît après l'application de \(\exp_p\) et de la coordonnée angulaire.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,node distance=9mm and 14mm,
+ s/.style={draw=HMTNavy,fill=white,minimum width=21mm,minimum height=9mm,font=\small\sffamily}]
+\node[s] (x0) {\((x_0,u_0)\)};
+\node[s,right=of x0] (x1) {\((x_1,u_1)\)};
+\node[s,right=of x1] (x2) {\((x_2,u_2)\)};
+\node[right=7mm of x2] (dots) {$\cdots$};
+\draw[->,HMTBlue,thick] (x0)--node[above,font=\scriptsize] {$\Gamma_9,H_9(x_0)$} (x1);
+\draw[->,HMTBlue,thick] (x1)--node[above,font=\scriptsize] {$\Gamma_9,H_9(x_1)$} (x2);
+\draw[->,HMTBlue,thick] (x2)--(dots);
+\draw[HMTRed,dashed,rounded corners] ([xshift=-3mm,yshift=-4mm]x0.south west) rectangle ([xshift=3mm,yshift=4mm]x2.north east);
+\node[below=7mm of x1,HMTGray,font=\small\sffamily] {chaque préfixe demeure accessible};
+\end{tikzpicture}
+\caption{La suspension conserve la séquence des facteurs, non la seule holonomie finale.}
+\label{espiral:fig:skew-ledger}
+\end{figure}
+
+\chapter{Involution bidirectionnelle et feuillets conjugués}
+
+\section{Inversion des voies}
+
+Soit \(\mathscr P_{\TPK}^{\times}\) le sous-groupoïde des voies réversibles. Si la représentation radiale satisfait
+\[
+ h_{e^\dagger}=h_e^{-1},
+\]
+alors, pour \(\gamma=e_n\cdots e_1\),
+\[
+ H_{C_{\mathrm{rev}}\gamma}
+ =h_{e_1}^{-1}\cdots h_{e_n}^{-1}
+ =(h_{e_n}\cdots h_{e_1})^{-1}
+ =H_\gamma^{-1}.
+\]
+
+\begin{theorem}[Conjugaison de l'ascension et de la descente]
+Dans le secteur réversible, l'involution des voies échange les feuillets d'ascension et de descente et inverse l'holonomie affine.
+\end{theorem}
+
+Sur le revêtement hélicoïdal, soit
+\[
+ \iota(r,n)=(r,-n).
+\]
+Alors
+\begin{equation}
+ \iota\widetilde\Gamma_9\iota
+ =\widetilde\Gamma_9^{-1}.
+ \label{espiral:eq:involucion-helice}
+\end{equation}
+L'égalité s'obtient directement :
+\[
+ (r,n)\xmapsto{\iota}(r,-n)
+ \xmapsto{\widetilde\Gamma_9}(r,-n+1)
+ \xmapsto{\iota}(r,n-1).
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x={(1cm,0cm)},y={(.30cm,.12cm)},z={(0cm,.58cm)},scale=.72]
+ \draw[->,HMTGray] (0,0,-4.8)--(0,0,4.8) node[above] {mémoire};
+ \draw[HMTBlue,very thick,domain=0:900,samples=180,smooth,variable=\t]
+   plot ({1.25*cos(\t)},{1.25*sin(\t)},{\t/190});
+ \draw[HMTRed,very thick,domain=0:900,samples=180,smooth,variable=\t]
+   plot ({1.25*cos(-\t)},{1.25*sin(-\t)},{-\t/190});
+ \fill[HMTNavy] (1.25,0,0) circle (1.5pt);
+ \node[right,HMTBlue,font=\small\sffamily] at (1.5,0,3.4) {ascension};
+ \node[right,HMTRed,font=\small\sffamily] at (1.5,0,-3.4) {descente};
+\end{tikzpicture}
+\caption{Feuillets conjugués produits par l'inversion de voie.}
+\label{espiral:fig:hojas-conjugadas}
+\end{figure}
+
+\section{Miroir des constantes et axe fixe}
+
+L'involution sur la fibre des constantes
+\[
+ \mathfrak c(u^\pi,u^e,u^\varphi)
+ =(u^e,u^\pi,u^\varphi)
+\]
+échange les branches \(\pi/e\) et fixe l'axe \(\varphi\). Elle conserve aussi \(u^\pi+u^e\). Cette involution et l'inversion des voies sont des objets distincts : la première agit sur une fibre de publication ; la seconde agit sur le groupoïde des chemins. Aucune conjugaison globale \(\mathfrak c\Gamma_9\mathfrak c=\Gamma_9^{-1}\) n'est affirmée sans construire l'opérateur d'entrelacement correspondant.
+
+Cette distinction protège la thèse positive. Le miroir \(\pi/e\), l'axe \(\varphi\) et la bidirectionnalité sont présents ; ce qui n'est pas permis, c'est de les identifier par une égalité d'opérateurs non typée.
+
+\section{Cercles emboîtés comme coupes des feuillets}
+
+Soit \(r_n>0\) l'échelle de la section \(n\). La famille
+\[
+ C_n=\{(r_n\cos\theta,r_n\sin\theta,n):0\le\theta<2\pi\}
+\]
+produit des cercles emboîtés lorsque \(r_n\) varie et des cylindres lorsqu'on regroupe des sections de rayon commun. L'union des \(C_n\) le long d'une voie TPK est la trace discrète d'un feuillet hélicoïdal. L'involution \(n\mapsto-n\) produit le feuillet conjugué.

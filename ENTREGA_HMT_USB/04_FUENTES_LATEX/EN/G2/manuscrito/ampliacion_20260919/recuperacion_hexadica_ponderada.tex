@@ -1,0 +1,253 @@
+% K31-30, JC-003 y P01 del inventario REV05.
+% Residencia: después de la derivación del registro K y de la incidencia Witt;
+% antes de utilizar la lectura ponderada para la recuperación del registro.
+% Propietarios: output/IMPLEMENTACION_K_SEMILLAS_INCIDENCIA_20260918/
+% WeightedIncidenceRecovery.lean (íntegro) y
+% COMPOSICION_GENERATIVA_Y_RECUPERACION_K.tex:257--306.
+% Codificador: PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/
+% lean/biblioteca/CoxeterNeighbor.lean:322--343;
+% lean/biblioteca/SectorIncidenceData.lean:27--33.
+% Estatuto: RESULTADO_RECUPERADO, explicitación íntegra de las matrices que
+% la exposición anterior remitía al código. La prueba Lean es la ya existente.
+
+\section[Recovery through hexadic incidences]{Complete recovery of the register through weighted hexadic incidences}
+\label{rh:sec:recuperacion}
+
+The generated dodecaphasic register preserves twelve ordered components and
+a phase origin. Paley--Witt incidence provides an additional
+reading of that register: each hexadic support combines six of its
+components through a sum weighted by the incidence itself. The
+reconstruction developed here receives the values of these sums
+from the same register. Its purpose is to prove that the readings preserve
+all the components and to exhibit the inverse operator with explicit
+rational coefficients.
+
+\subsection{Incidence encoder and twelve explicit witnesses}
+
+In the incidence coordinate system already fixed, let
+\[
+A_W=\begin{pmatrix}
+0&1&1&1&1&1\\1&0&1&2&2&1\\1&1&0&1&2&2\\
+1&2&1&0&1&2\\1&2&2&1&0&1\\1&1&2&2&1&0
+\end{pmatrix}\in M_6(\mathbb F_3).
+\]
+For $w\in\mathbb F_3^6$, the encoder is
+$\operatorname{Enc}(w)=(w,wA_W)\in\mathbb F_3^{12}$ and its support
+is
+\[
+H(w)=\{j\in\{1,\ldots,12\}:\operatorname{Enc}(w)_j\ne0\}.
+\]
+Choosing a position uses indices from one to twelve;
+implementations with zero-based indices are transported through
+$j\mapsto j+1$.
+
+The following twelve witnesses belong to the domain of the encoder:
+\[
+\begin{array}{c|c@{\qquad}c|c}
+i&w^{(i)}&i&w^{(i)}\\\hline
+1&112210&7&122020\\
+2&122101&8&112002\\
+3&121200&9&111001\\
+4&111100&10&110122\\
+5&121012&11&101221\\
+6&111020&12&011111.
+\end{array}
+\]
+Define $H_i=H(w^{(i)})$ and
+$B_{ij}=\mathbf1_{\{j\in H_i\}}$. Evaluating the encoder gives
+\begingroup\small\setlength{\arraycolsep}{3pt}
+\setcounter{MaxMatrixCols}{12}
+\begin{equation}
+B=\begin{pmatrix}
+1&1&1&1&1&0&0&0&0&0&0&1\\
+1&1&1&1&0&1&0&0&0&0&1&0\\
+1&1&1&1&0&0&1&0&1&0&0&0\\
+1&1&1&1&0&0&0&1&0&1&0&0\\
+1&1&1&0&1&1&0&0&0&1&0&0\\
+1&1&1&0&1&0&1&0&0&0&1&0\\
+1&1&1&0&1&0&0&1&1&0&0&0\\
+1&1&1&0&0&1&1&1&0&0&0&0\\
+1&1&1&0&0&1&0&0&1&0&0&1\\
+1&1&0&1&1&1&0&0&1&0&0&0\\
+1&0&1&1&1&1&0&1&0&0&0&0\\
+0&1&1&1&1&1&1&0&0&0&0&0
+\end{pmatrix}.
+\label{rh:eq:incidencia}
+\end{equation}
+\endgroup
+Each row contains six entries equal to one. Consequently, each
+$H_i$ is a hexad of the image of the encoder, and the matrix $B$ is
+constructed from those supports.
+
+\subsection{Rational inverse and uniqueness of recovery}
+
+Let the integer matrix be
+\begingroup\small\setlength{\arraycolsep}{3pt}
+\setcounter{MaxMatrixCols}{12}
+\begin{equation}
+M=\begin{pmatrix}
+7&1&8&-7&7&-1&-4&8&-7&3&3&-15\\
+7&7&-4&-1&1&-7&8&8&-7&3&-15&3\\
+1&7&8&-7&7&-7&8&-4&-1&-15&3&3\\
+1&1&2&5&-5&-1&-4&-4&-1&3&3&3\\
+1&-5&-4&-1&1&5&2&-4&-1&3&3&3\\
+-5&1&-4&-1&1&-1&-4&2&5&3&3&3\\
+-5&-11&2&5&-5&11&-10&2&5&3&3&3\\
+-5&-5&-10&11&-11&5&2&2&5&3&3&3\\
+-11&-5&2&5&-5&5&2&-10&11&3&3&3\\
+-11&-11&-4&17&1&11&-10&-10&11&3&3&3\\
+-11&1&-10&11&-11&17&-4&-10&11&3&3&3\\
+1&-11&-10&11&-11&11&-10&-4&17&3&3&3
+\end{pmatrix}.
+\label{rh:eq:inversa-entera}
+\end{equation}
+\endgroup
+
+\begin{theorem}[Exact recovery from twelve hexadic readings]
+\label{rh:thm:doce}
+For $v\in\mathbb Q^{12}$, let
+\[
+\operatorname{Read}(v)=Bv,
+\qquad
+\operatorname{Rec}(y)=\frac1{18}My.
+\]
+We verify
+\[
+\operatorname{Rec}(\operatorname{Read}(v))=v,
+\qquad
+\operatorname{Read}(\operatorname{Rec}(y))=y.
+\]
+Therefore every $y\in\mathbb Q^{12}$ admits a unique register
+$v\in\mathbb Q^{12}$ with $\operatorname{Read}(v)=y$.
+\end{theorem}
+\begin{proof}
+Integer multiplication of the matrices
+\eqref{rh:eq:incidencia} and \eqref{rh:eq:inversa-entera} gives
+$MB=BM=18I_{12}$. Each diagonal entry results from a scalar
+product equal to eighteen and each off-diagonal entry results
+from a zero scalar product. Dividing by eighteen gives
+the two inverse identities.
+
+In particular,
+$\operatorname{Rec}(\operatorname{Read}(v))=(MB/18)v=v$ and
+$\operatorname{Read}(\operatorname{Rec}(y))=(BM/18)y=y$.
+The second identity proves existence through
+$v=\operatorname{Rec}(y)$. If $Bu=Bv$, applying $M/18$ to both
+sides gives $u=v$, which proves uniqueness.
+\end{proof}
+
+The check of $B$ from the encoder and the two exact
+multiplications are formalized in the theorems
+\texttt{incidence\_from\_encoder}, \texttt{inverse\_left} and
+\texttt{inverse\_right}. The composition identities correspond
+to \texttt{recover\_read} and \texttt{read\_recover}.
+Their mathematical content is found entirely in the matrices and
+in the preceding proof; the formal certificate records the verification
+of those same operations.
+
+\begin{corollary}[Separation by all weighted incidences]
+If $u,v\in\mathbb Q^{12}$ satisfy
+\[
+\sum_{j\in H(w)}u_j=\sum_{j\in H(w)}v_j
+\]
+for every $w\in\mathbb F_3^6$ whose encoded support has six
+positions, then $u=v$.
+\end{corollary}
+\begin{proof}
+The hypothesis applies in particular to the twelve displayed witnesses.
+By the definition of $B$, their twelve equalities constitute $Bu=Bv$.
+Theorem~\ref{rh:thm:doce} allows both inputs to be recovered and
+concludes $u=v$.
+\end{proof}
+
+\begin{example}[Recovery of a peripheral component]
+For the canonical vector $v=e_{12}$, the only nonzero readings are
+the first and the ninth:
+\[
+y=Be_{12}=(1,0,0,0,0,0,0,0,1,0,0,0)^{\mathsf T}.
+\]
+The sum of the first and ninth columns of $M$ is $18e_{12}$.
+Consequently, $My/18=e_{12}$. The two hexadic sums distinguish
+this position in the joint reading because the remaining components
+cancel exactly in the recovery operator.
+\end{example}
+
+\subsection{Symmetric recovery operator on the one hundred and thirty-two hexads}
+
+The Steiner system $S(5,6,12)$ already produced by incidence
+contains $132$ hexads. Denote their set by $\mathcal H$ and
+define
+\[
+\mathcal I:\mathbb Q^{12}\longrightarrow\mathbb Q^{\mathcal H},
+\qquad
+(\mathcal I v)_H=\sum_{j\in H}v_j.
+\]
+This reader has redundancy: it preserves the twelve components through
+$132$ sums, whereas the preceding theorem provides a basis of
+twelve of these sums.
+
+\begin{theorem}[Inverse on the image of the complete reader]
+\label{rh:thm:steiner}
+We have
+\[
+\mathcal I^{\mathsf T}\mathcal I=36I_{12}+30J_{12},
+\]
+where $J_{12}$ has all its entries equal to one. For
+$y=\mathcal I v$, the register is recovered through
+\begin{equation}
+396v_i=11\sum_{H\ni i}y_H-5\sum_{H\in\mathcal H}y_H,
+\qquad i=1,\ldots,12.
+\label{rh:eq:recuperador}
+\end{equation}
+\end{theorem}
+\begin{proof}
+The property $S(5,6,12)$ implies that each position belongs to
+$\binom{11}{4}/\binom{5}{4}=66$ hexads. Each pair of distinct
+positions belongs to $\binom{10}{3}/\binom{4}{3}=30$ hexads.
+Therefore, the product of the transposed incidence matrix with
+itself has diagonal $66$ and off-diagonal entries $30$, which
+is $36I+30J$.
+
+Let $S=\sum_jv_j$. The two preceding counts give
+\[
+\sum_{H\ni i}y_H=66v_i+30\sum_{j\ne i}v_j=36v_i+30S,
+\qquad
+\sum_Hy_H=66S.
+\]
+Multiplying the first equality by eleven and subtracting five times the
+second eliminates $S$ and produces $396v_i$. This proves
+\eqref{rh:eq:recuperador} for every reading belonging to the
+image of $\mathcal I$.
+\end{proof}
+
+\begin{corollary}[Uniform and transverse components]
+On $\mathbb R^{12}$, the complete reader has singular value
+$\sqrt{396}$ in the uniform direction and singular value $6$ in its
+orthogonal complement. Its inverse operator on the image has operator
+norm $1/6$.
+\end{corollary}
+\begin{proof}
+The matrix $J$ acts by twelve on $\mathbb R\mathbf1$ and by zero
+on $\mathbf1^\perp$. The eigenvalues of $36I+30J$ are therefore
+$396$ and $36$. The singular values are their positive
+roots; the largest singular value of the inverse operator is the reciprocal
+of the smallest of them.
+\end{proof}
+
+\subsection{Composition with the generated register}
+
+Applying these identities to the integer dodecaphasic register $K$, already
+produced with its order and origin, the readings $BK$ or $\mathcal I K$
+allow its twelve components to be recovered exactly. The subsequent positional
+interpretation takes that same register in base one thousand; the
+Hadamard operators, differences and hexadic readers are
+recoverable realizations of a common provenance.
+
+The system of twelve rational coordinates admits any input
+$y\in\mathbb Q^{12}$ and reconstructs it as a unique rational
+register. The subdomain corresponding to generated HMT registers
+additionally preserves its conditions of integrality, triad
+width, origin, selection and boundary. For the redundant system of
+$132$ readings, the inverse acts on the image of $\mathcal I$.
+These specifications type the recovered content without modifying the
+antecedent generation of the register.

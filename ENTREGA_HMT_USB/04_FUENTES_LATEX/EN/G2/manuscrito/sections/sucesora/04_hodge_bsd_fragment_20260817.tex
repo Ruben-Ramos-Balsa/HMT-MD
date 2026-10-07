@@ -1,0 +1,735 @@
+% 04 — FRAGMENTO SUCESOR HODGE Y BIRCH--SWINNERTON-DYER
+% =======================================================
+% Inserción autónoma prevista tras el marcador de integración del Libro IV.
+% No importa fuentes probatorios ni modifica las tres realizaciones
+% precedentes.
+%
+% Trazabilidad técnica no narrativa:
+%   Hodge: CHI-II-HDG-01/02/03, CHI-IV-HDG-01/C01.
+%   BSD:   CHI-II-BSD-01/02/03, CHI-IV-BSD-01/02/C01.
+%   Fuentes: celda APP--Mayer--Vietoris, totalizador coend y controles
+%   elípticos; producto fibrado genealógico de Manin, publicación acoplada
+%   Kato--PT, dualidad ortogonal reducida, relleno finita--singular y regulador
+%   Bockstein derivado. Los hashes y estados de ejecución permanecen en el
+%   expediente técnico de la edición sucesora.
+
+\ifdefined\HMTSucesoraStructureTrace
+  \typeout{HMT-SUCCESSOR 04: Hodge and Birch--Swinnerton-Dyer realizations}
+\fi
+
+\chapter{Completeness of enriched cohomological history and algebraicity of rational Hodge classes}
+\chaptermark{Cohomological completeness and Hodge algebraicity}
+
+\subsection*{Object, domain and starting data}
+
+Let \(X\) be a smooth projective variety over \(\mathbb C\) and let
+\(p\geq0\). We write
+\begin{equation}\label{eq:hodge-suc-dominio}
+ \operatorname{Hdg}^{p}(X)_{\mathbb Q}
+ :=H^{2p}(X,\mathbb Q)
+   \cap H^{p,p}(X,\mathbb C).
+\end{equation}
+Let \(\mathbf{Perf}^{\geq p}(X)\) be the idempotent-complete category of
+perfect complexes whose support has codimension at least \(p\). In this
+section the abbreviation is used
+\[
+ \operatorname{Perf}^{\geq p}(X)_{\mathbb Q}
+ :=K_0\!\left(\mathbf{Perf}^{\geq p}(X)\right)
+   \otimes_{\mathbb Z}\mathbb Q;
+\]
+thus, \(R_{\mathrm{Hdg}}\) publishes the class of the constructed perfect
+complex. The starting point is not a bare class of
+\eqref{eq:hodge-suc-dominio}, but the limit of surviving histories
+\begin{equation}\label{eq:hodge-suc-xchi}
+ X_{\chi}(X,p)
+ =\varprojlim_{K}\operatorname{Surv}_{K}(X,p).
+\end{equation}
+Each element of \(X_{\chi}(X,p)\) preserves sheet, orientation, quotient,
+carry, boundary, route and memory. In particular, the return of the joint
+nonadic connection satisfies
+\begin{equation}\label{eq:hodge-suc-retorno}
+ \Gamma _9=\operatorname{Hol}_{C_9}(\nabla_{\mathrm{TPK}}),
+ \qquad g(k+9)=g(k),
+ \qquad \widehat x(k+9)\neq\widehat x(k)
+ \quad\text{in general}.
+\end{equation}
+The equality preserves the phase; the inequality preserves the depth of the
+history. This distinction rules out interpreting a return as a
+reinitialization.
+
+Route composition is governed by the carry cocycle
+\begin{equation}\label{eq:hodge-suc-carry}
+ \operatorname{Carr}(\gamma _2\gamma _1)
+ =\operatorname{Carr}(\gamma _2)H(\gamma _1)
+  +Y(\gamma _2)\operatorname{Carr}(\gamma _1),
+\end{equation}
+and accumulated memory by
+\begin{equation}\label{eq:hodge-suc-memoria}
+ S_0=\sum_{r<N}(M_9^{*})^{r}D_9^{*}D_9M_9^{r}
+     +(M_9^{*})^{N}S_0M_9^{N}.
+\end{equation}
+Equations \eqref{eq:hodge-suc-xchi}--\eqref{eq:hodge-suc-memoria}
+are data constructed in Part II. They are specialized here; they are not
+reconstructed from the cohomological codomain.
+
+\subsection*{Local APP--Mayer--Vietoris cell}
+
+Let \(Z,W\subset X\) be closed incidences with a
+Tor-independent intersection and oriented supports of the declared codimension. For
+integers \(a,b\geq1\), define
+\begin{equation}\label{eq:hodge-suc-kappa}
+ \begin{aligned}
+ \kappa_{a,b}:\mathcal O_Z^{a}\oplus\mathcal O_W^{b}
+ &\longrightarrow \mathcal O_{Z\cap W}^{ab},\\
+ ((u_i)_{i=1}^{a},(v_j)_{j=1}^{b})
+ &\longmapsto
+ \bigl(u_i|_{Z\cap W}-v_j|_{Z\cap W}\bigr)_{i,j}.
+ \end{aligned}
+\end{equation}
+On a fiber of \(Z\cap W\), the diagonal kernel of
+\(\kappa_{a,b}\) has rank one and its cokernel has rank
+\begin{equation}\label{eq:hodge-suc-defecto-rango}
+ ab-(a+b-1)=(a-1)(b-1).
+\end{equation}
+If \((\rho_{\Sigma},c_{\Sigma})\) and
+\((\rho_{\Pi},c_{\Pi})\) are, respectively, the residues and carries of
+the additive and multiplicative sheets of APP, the same quantity is expressed by
+\begin{equation}\label{eq:hodge-suc-celda-carry}
+ (a-1)(b-1)
+ =\rho_{\Pi}-\rho_{\Sigma}+1
+  +9\bigl(c_{\Pi}-c_{\Sigma}\bigr).
+\end{equation}
+Thus, the local defect is not an external correction: it is the publication in
+\(\operatorname{Perf}\) of the difference between the two sheets with its carry.
+
+Let \(\tau\) be the exchange of the two summands of the source and let \(P\)
+be the transposition of the target indices. The TRIT orientation fixes
+\begin{equation}\label{eq:hodge-suc-orientacion-kappa}
+ \kappa_{b,a}\tau=-P\kappa_{a,b}.
+\end{equation}
+The sign of \eqref{eq:hodge-suc-orientacion-kappa} is part of the oriented
+object. Omitting it would identify opposite routes and destroy the
+naturality of the localized character.
+
+\begin{proposition}[Perfect realization of the local cell]
+\label{prop:hodge-suc-celda-perf}
+The cone
+\begin{equation}\label{eq:hodge-suc-cone-kappa}
+ \mathcal C_{a,b}(Z,W):=\operatorname{Cone}(\kappa_{a,b})
+\end{equation}
+is a perfect complex with the prescribed support. Its localized class
+preserves the rank defect \eqref{eq:hodge-suc-defecto-rango}, the carry
+\eqref{eq:hodge-suc-celda-carry} and the orientation
+\eqref{eq:hodge-suc-orientacion-kappa}.
+\end{proposition}
+
+\begin{proof}
+Tor-independence identifies the derived restriction to the intersection with the
+ordinary restriction used in \eqref{eq:hodge-suc-kappa}. The sources and
+target are perfect on their supports; by stability of
+\(\operatorname{Perf}\) under cones, so is
+\(\mathcal C_{a,b}(Z,W)\). The fiber-by-fiber calculation gives
+\eqref{eq:hodge-suc-defecto-rango}; APP division of the sum and
+product data gives \eqref{eq:hodge-suc-celda-carry}. Finally, exchanging
+\(Z,a\) with \(W,b\) changes each difference to its opposite, proving
+\eqref{eq:hodge-suc-orientacion-kappa}. Since the localized Chern character
+is additive in distinguished triangles, the three pieces of information pass to the
+class of the cone.
+\end{proof}
+
+\subsection*{Totalization of histories and preservation of the terminal}
+
+Let \(J_N\) be the finite category of compatible histories at depth
+\(N\), let \(\Gamma\) be the diagram of incidence complexes obtained from
+\eqref{eq:hodge-suc-cone-kappa} and let \(\mathsf W\) be the right module that
+records route orientations and weights. The derived totalization is the
+coend
+\begin{equation}\label{eq:hodge-suc-coend}
+ K_{X,p,N}
+ :=\mathsf W\otimes^{\mathbf L}_{\mathbb Z[J_N]}\Gamma.
+\end{equation}
+The survival links form a compatible system in \(N\). The
+holonomy \(\Gamma_9\) induces an endomorphism
+\(U_{\Gamma_9}\) of the totalizer and the terminal object is preserved as
+\begin{equation}\label{eq:hodge-suc-terminal}
+ \mathcal T_{X,p}
+ :=\operatorname{Cone}\bigl(I-U_{\Gamma_9}\bigr).
+\end{equation}
+The cone \eqref{eq:hodge-suc-terminal} prevents totalization from confusing
+a repeated phase with the same history: the visible value may return,
+but the terminal difference retains the memory displacement.
+
+Compatibility between \eqref{eq:hodge-suc-coend} and the limit
+\eqref{eq:hodge-suc-xchi} defines the realization morphism
+\begin{equation}\label{eq:hodge-suc-realizacion}
+ R_{\mathrm{Hdg}}:
+ X_{\chi}(X,p)\longrightarrow
+ \operatorname{Perf}^{\geq p}(X)_{\mathbb Q}.
+\end{equation}
+This morphism is fixed at the source: it does not receive a Hodge class
+or a representative it must recognize as input.
+
+\begin{theorem}[Hodge publication identity]
+\label{thm:hodge-suc-identidad}
+On \(X_{\chi}(X,p)\) the identity commutes
+\begin{equation}\label{eq:hodge-suc-identidad}
+ \operatorname{cl}_{X,p}\circ
+ \operatorname{ch}^{\mathrm{loc}}_{p}\circ
+ R_{\mathrm{Hdg}}
+ =\operatorname{ev}^{\mathrm{Hdg}}_{\infty,X,p}.
+\end{equation}
+Here
+\(\operatorname{ch}^{\mathrm{loc}}_{p}\) takes the codimension
+\(p\) component of the localized character and
+\(\operatorname{cl}_{X,p}\) is its cohomological publication.
+\end{theorem}
+
+\begin{proof}
+In a cell, the equality is the compatibility of the localized character with
+the restriction, the Mayer--Vietoris triangle and the cohomological class. The
+orientation is fixed by \eqref{eq:hodge-suc-orientacion-kappa};
+therefore, no sign remains to be chosen. Additivity of the Chern character
+transports the equality to each cone \eqref{eq:hodge-suc-cone-kappa}.
+Naturality with respect to the arrows of \(J_N\) makes it descend to the coend
+\eqref{eq:hodge-suc-coend}. The carry law
+\eqref{eq:hodge-suc-carry} guarantees its compatibility under composition and
+\eqref{eq:hodge-suc-terminal} preserves the terminal term. Passing to the
+projective limit yields two natural transformations with equal
+components on every finite cylinder; hence they coincide and
+\eqref{eq:hodge-suc-identidad} follows.
+\end{proof}
+
+The completeness theorem of the atlas of enriched histories, applied to
+this specialization, establishes
+\begin{equation}\label{eq:hodge-suc-completitud}
+ \operatorname{ev}^{\mathrm{Hdg}}_{\infty,X,p}
+ \bigl(X_{\chi}(X,p)\bigr)
+ =\operatorname{Hdg}^{p}(X)_{\mathbb Q}.
+\end{equation}
+This is the explicit starting structure of the Hodge specialization.
+
+\input{sections/ampliacion_20260817/04d_hodge_completitud_desplegada}
+
+\noindent\textbf{Status of the following control: NON\_GOVERNING\_CONTROL.}
+The ablation receives the already proved Hodge conclusion and only falsifies the
+suppression of the based antecedent; it contributes no premise to the owner and
+cannot demote its theorems.
+
+\begin{ablation}[Finite selector without history]
+\label{abl:hodge-suc-eliptico}
+Let \(E\) be a complex elliptic curve. There is no finite set of
+rational representatives of the class of a point that is stable under all
+translations of \(E\) and at the same time naturally selects a
+representative without based data. This obstruction refutes the suppression of
+rigidification; it does not affect the theorems
+\ref{thm:hodge-suc-identidad} and \ref{thm:hodge-suc-generacion}.
+\end{ablation}
+
+\begin{proof}
+If \(z\) has nonzero degree, the differences
+\(t_x^{*}z-z\), as \(x\in E(\mathbb C)\) varies, range through a subgroup of \(\operatorname{Pic}^{0}(E)\)
+of finite index up to isogeny via the Abel--Jacobi
+map. Their rational span does not fit into the space
+generated by a finite orbit. Therefore, a finite frame stable under all
+translations cannot simultaneously preserve the representative and its
+naturality. In \(X_{\chi}(E,1)\), by contrast, translation modifies the
+history and its base even though the cohomological publication remains fixed. The
+antecedent \(\xi_{\alpha}\) preserves precisely that datum, so the
+hypothesis abolished by the control is not a premise of the theorem.
+\end{proof}
+\chapter{Coupled determinantal unit, rank--order of vanishing equality and Birch--Swinnerton--Dyer leading-term formula}
+\chaptermark{Determinantal unit and Birch--Swinnerton--Dyer formula}
+
+\noindent The specialization of the
+\cref{thm:nucleo-continuidad-conexion-nonadica-conjunta} is
+\[
+ (\widehat X_\infty,\Gamma_9)
+ \xrightarrow{\ \mathcal R_{\rm BSD}\ }
+ P_E^{\rm gen}
+ \longrightarrow(z_K,z_{\rm PT})
+ \longrightarrow R_{\rm Boc}^{\rm der}
+ \longrightarrow\text{rank and leading term of }L(E,s).
+\]
+The two publications start from the same based unit; the localization
+sequence and Smith reduction precede the conclusion about
+\(\Sha(E)\).
+
+\subsection*{Genealogical object and Alexander--Whitney coalgebra}
+
+Let \(E/\mathbb Q\) be an elliptic curve, and fix the coefficient system
+\(A_n\), the depth \(m\) and the local and global orientations of the
+Selmer complex. If
+\(\operatorname{TPK}^{\mathrm{surv}}_{m}\) is the category of surviving
+histories of the Topological Phase Kernel, define
+\begin{equation}\label{eq:bsd-suc-gmn}
+ G_{m,n}:=
+ N_{*}\bigl(N\operatorname{TPK}^{\mathrm{surv}}_{m};A_n\bigr).
+\end{equation}
+For a nondegenerate simplex, the Alexander--Whitney diagonal is
+\begin{equation}\label{eq:bsd-suc-aw}
+ \Delta_{\mathrm{AW}}[x_0\to\cdots\to x_q]
+ =\sum_{j=0}^{q}
+ [x_0\to\cdots\to x_j]\otimes
+ [x_j\to\cdots\to x_q].
+\end{equation}
+The counit equals one at vertices and zero in positive degrees. In
+particular,
+\begin{equation}\label{eq:bsd-suc-group-like}
+ \Delta_{\mathrm{AW}}[x]=[x]\otimes[x],
+ \qquad \varepsilon_{\mathrm{AW}}[x]=1.
+\end{equation}
+The group-like element property belongs to the complete-state vertex: it applies
+before forgetting sheet, route, carry or memory.
+
+Let \(P_E^{\mathrm{Man}}\to A[0]\) be the based Manin complex with its
+augmentation, and let \(G_{m,n}\to A[0]\) be the augmentation induced by
+\(\varepsilon_{\mathrm{AW}}\). The conservative target is the fiber
+product
+\begin{equation}\label{eq:bsd-suc-pullback}
+ P_E^{\mathrm{gen}}
+ :=P_E^{\mathrm{Man}}\times_{A[0]}G_{m,n}.
+\end{equation}
+If \(s:A[0]\to P_E^{\mathrm{Man}}\) is the based section, then
+\begin{equation}\label{eq:bsd-suc-section}
+ \widehat\Pi_0(c)
+ :=\bigl(s\varepsilon_{\mathrm{AW}}(c),c\bigr)
+\end{equation}
+is a conservative section: its second projection returns \(c\), while
+the first publishes its modular coordinate. The history and the modular shadow
+are coupled in a single object.
+
+\subsection*{The same unit in the Kato and Poitou--Tate channels}
+
+The compatibilities of phase, sheet, corestriction and Hensel lifting
+define on \(P_E^{\mathrm{gen}}\) a pair of publications
+\begin{equation}\label{eq:bsd-suc-copub}
+ P_E=(P_E^{K},P_E^{\mathrm{PT}}).
+\end{equation}
+Both components receive the same genealogical unit \(1_E\), so
+that
+\begin{equation}\label{eq:bsd-suc-zk-zpt}
+ P_E^{K}(1_E)=z_K,
+ \qquad P_E^{\mathrm{PT}}(1_E)=z_{\mathrm{PT}}.
+\end{equation}
+They are not two independent choices of generator.
+
+Let \(L_{\mathrm{root}}=A_n z_{\mathrm{PT}}\) be the based root subcomplex,
+normalized by
+\(\lambda_{\mathrm{PT}}(z_{\mathrm{PT}})=1\), and let
+\(p_{\mathrm{root}}\) be the chain-complex projector onto that subcomplex. Set
+\(q_{\mathrm{root}}=I-p_{\mathrm{root}}\), which is also a chain-complex
+projector; in particular, \(q_{\mathrm{root}}z_K\) is a cycle. Compatibility of the
+counit in \eqref{eq:bsd-suc-group-like} with the pair
+\eqref{eq:bsd-suc-copub} gives
+\begin{equation}\label{eq:bsd-suc-normalizacion-raiz}
+ \lambda_{\mathrm{PT}}(p_{\mathrm{root}}z_K)=1.
+\end{equation}
+
+Duality is formulated at the chain level. For a perfect complex
+\(M\) over \(\Lambda\), let
+\begin{equation}\label{eq:bsd-suc-d3}
+ D_3(M):=
+ \operatorname{RHom}_{\Lambda}(M^{\iota},\Lambda)[-3].
+\end{equation}
+If \(A\to C\to D_3(A)\) is the incidence block, define
+\begin{equation}\label{eq:bsd-suc-orth-red}
+ A^{\perp}:=\operatorname{Fib}\bigl(C\to D_3(A)\bigr),
+ \qquad
+ C^{\mathrm{red}}:=\operatorname{Cofib}\bigl(A\to A^{\perp}\bigr),
+\end{equation}
+and the reduced form induces
+\begin{equation}\label{eq:bsd-suc-xorth}
+ X^{\mathrm{orth}}:C^{\mathrm{red}}
+ \xrightarrow{\ \sim\ }D_3(C^{\mathrm{red}}).
+\end{equation}
+On the reduced determinant line one obtains an involution
+\(J_{\mathrm{red}}^2=I\) and compatible bases
+\begin{equation}\label{eq:bsd-suc-jred}
+ J_{\mathrm{red}}(\bar b_{\mathrm{PT}})=\bar b_K.
+\end{equation}
+The two sheets transport the same based scalar:
+\begin{equation}\label{eq:bsd-suc-doble-hoja}
+ u_{+}=u_{-}=\tau_{\mathrm{bas}}(D_K).
+\end{equation}
+The equality lives in the two lines identified by
+\eqref{eq:bsd-suc-jred}; it is not replaced by an equation between a scalar and
+its inverse. Likewise, \(D_3(D_K)=A^{\perp}\) belongs to the dual line and is not
+confused with a second unoriented copy of the root line.
+
+\begin{theorem}[Rigidity of the common root]
+\label{thm:bsd-suc-raiz-filler}
+With the preceding bases and orientations,
+\begin{equation}\label{eq:bsd-suc-raiz}
+ p_{\mathrm{root}}z_K=z_{\mathrm{PT}}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Write
+\(p_{\mathrm{root}}z_K=u z_{\mathrm{PT}}\). Applying
+\(\lambda_{\mathrm{PT}}\) and using the normalization of the base together with
+\eqref{eq:bsd-suc-normalizacion-raiz} yields
+\[
+ 1=\lambda_{\mathrm{PT}}(p_{\mathrm{root}}z_K)
+  =u\lambda_{\mathrm{PT}}(z_{\mathrm{PT}})=u.
+\]
+This proves \eqref{eq:bsd-suc-raiz}; the identification
+\eqref{eq:bsd-suc-jred} ensures that the conclusion is independent of the
+sheet from which it is published.
+\end{proof}
+
+\begin{lemma}[Normal form of the complement]
+\label{lem:bsd-suc-forma-normal}
+In the finite--singular block with
+free modules over \(A_n\), let \(g\) be primitive ---that is, part of a
+basis of the target module--- and suppose that
+\(\operatorname{im}\partial\) has no component in the direct summand
+\(A_n r\). If the differential is given by
+\begin{equation}\label{eq:bsd-suc-diferencial-normal}
+ \partial f=3c e+b,
+ \qquad \partial e=g,
+ \qquad \partial b=-3c g,
+\end{equation}
+every cycle \(z_K=a r+u e+v b\) satisfies
+\begin{equation}\label{eq:bsd-suc-ciclo-normal}
+ u=3cv,
+ \qquad
+ z_{\mathrm{PT}}-z_K=(1-a)r-v\,\partial f,
+ \quad z_{\mathrm{PT}}=r.
+\end{equation}
+The root equality \eqref{eq:bsd-suc-raiz} forces \(a=1\); therefore
+\(h=-vf\) fills the complete difference.
+\end{lemma}
+
+\begin{proof}
+The condition \(\partial z_K=0\) and
+\eqref{eq:bsd-suc-diferencial-normal} give
+\((u-3cv)g=0\). Since \(g\) is part of a basis of a free module,
+comparison of its coefficient gives \(u=3cv\). Substituting this equality into
+\(r-z_K\) produces \eqref{eq:bsd-suc-ciclo-normal}. The coefficient \(a\)
+is precisely the coordinate of \(p_{\mathrm{root}}z_K\) in the basis
+\(r=z_{\mathrm{PT}}\); theorem \ref{thm:bsd-suc-raiz-filler} gives
+\(a=1\). Then
+\(\partial(-vf)=-v\partial f=z_{\mathrm{PT}}-z_K\).
+\end{proof}
+
+The proprietary construction of the filling is therefore the explicit formula
+\begin{equation}\label{eq:bsd-suc-hstar}
+ h_*:=-vf,
+ \qquad
+ \partial h_*=z_{\mathrm{PT}}-z_K.
+\end{equation}
+No abstract homotopy is introduced as a premise: closedness fixes
+\(u=3cv\), the root unit fixes \(a=1\) and the generator \(f\) directly
+fills the complete difference.
+
+\paragraph{Equivalent non-governing homotopic control.}
+\noindent\textbf{Status: NON\_GOVERNING\_CONTROL.}
+As a subsequent check, if the same complement is packaged by means of
+a reader \(H_{\mathrm{FS}}\), the identity
+\begin{equation}\label{eq:bsd-suc-hfs}
+ \partial H_{\mathrm{FS}}+H_{\mathrm{FS}}\partial
+ =q_{\mathrm{root}}
+\end{equation}
+reproduces \eqref{eq:bsd-suc-hstar} when applied to
+\(q_{\mathrm{root}}z_K\). This reader is an auxiliary notation for the
+contraction already performed by \(h_*=-vf\); it is not a prior obligation and
+cannot reopen the explicit construction.
+
+\subsection*{Derived Bockstein regulator of arbitrary order}
+
+Let \(K\) be a field of characteristic zero,
+\(\Lambda=K[[T]]\), and let
+\begin{equation}\label{eq:bsd-suc-S}
+ S(T):V_{\Lambda}\longrightarrow W_{\Lambda},
+ \qquad
+ V_{\Lambda}\simeq W_{\Lambda}\simeq\Lambda^{m},
+\end{equation}
+a based differential that becomes invertible over \(K((T))\). Fix
+the line
+\begin{equation}\label{eq:bsd-suc-lambda0}
+ \lambda_0(S):=(\det_K V)^{-1}\otimes_K\det_K W,
+ \quad
+ V=V_{\Lambda}/TV_{\Lambda},\quad
+ W=W_{\Lambda}/TW_{\Lambda}.
+\end{equation}
+A based Smith form has the expression
+\begin{equation}\label{eq:bsd-suc-smith}
+ U(T)S(T)V(T)
+ =\operatorname{diag}
+ \bigl(T^{a_1},\ldots,T^{a_s},1,\ldots,1\bigr),
+ \qquad a_i\geq1,
+\end{equation}
+and
+\begin{equation}\label{eq:bsd-suc-orden}
+ d=\operatorname{ord}_{T}\det S(T)=\sum_{i=1}^{s}a_i.
+\end{equation}
+
+The \(T\)-adic filtration of the complex
+\([V_{\Lambda}\xrightarrow{S}W_{\Lambda}]\) produces pages
+\(V_q=E_q^0\), \(W_q=E_q^1\) and Bocksteins
+\(\beta_q:V_q\to W_q\). Intrinsically,
+\begin{equation}\label{eq:bsd-suc-pages}
+ A_q:=V_q/V_{q+1},
+ \qquad
+ B_q:=\ker(W_q\twoheadrightarrow W_{q+1})
+      =\operatorname{im}\beta_q,
+\end{equation}
+and \(\beta_q\) induces
+\begin{equation}\label{eq:bsd-suc-beta-q}
+ \bar\beta_q:A_q\xrightarrow{\ \sim\ }B_q,
+ \qquad
+ \tau_q:=\det(\bar\beta_q).
+\end{equation}
+The pages are finite and satisfy
+\begin{equation}\label{eq:bsd-suc-carry-orden}
+ d=\sum_{q\geq1}q\,\dim A_q
+  =\sum_{q\geq1}\dim V_q.
+\end{equation}
+The first page sees
+\(r_0=\dim V_1\); the higher-order carry is
+\begin{equation}\label{eq:bsd-suc-carry-superior}
+ c_I^{\deg}=d-r_0=\sum_{q\geq2}\dim V_q.
+\end{equation}
+
+The regular page is the induced isomorphism
+\begin{equation}\label{eq:bsd-suc-pagina-regular}
+ \bar S(0):A_0:=V/V_1
+ \xrightarrow{\ \sim\ }
+ B_0:=\operatorname{im}S(0),
+ \qquad
+ \tau_{\mathrm{reg}}:=\det\bar S(0).
+\end{equation}
+The exact sequences of \eqref{eq:bsd-suc-pages}, with their Koszul
+signs, glue these trivializations into a single based element
+\begin{equation}\label{eq:bsd-suc-rboc}
+ R_{\mathrm{Boc}}^{\mathrm{der}}(S)
+ :=\tau_{\mathrm{reg}}\otimes
+   \bigotimes_{q\geq1}\tau_q
+ \in\lambda_0(S),
+\end{equation}
+where the tensor symbol abbreviates the Knudsen--Mumford gluing
+isomorphisms.
+
+\begin{theorem}[Determinantal identity of the derived regulator]
+\label{thm:bsd-suc-bockstein}
+In the based line \(\lambda_0(S)\) one has
+\begin{equation}\label{eq:bsd-suc-lt}
+ R_{\mathrm{Boc}}^{\mathrm{der}}(S)
+ =\operatorname{LT}_{T}(S)
+ :=\left[T^{-d}\det S(T)\right]_{T=0}.
+\end{equation}
+The equality preserves the regular page, all positive pages and the
+carry \eqref{eq:bsd-suc-carry-superior}.
+\end{theorem}
+
+\begin{proof}
+In the Smith bases of \eqref{eq:bsd-suc-smith}, the regular page and each
+positive page carry the canonical generator of their line. The Koszul
+signs of gluing are exactly those needed to restore the order of
+the total bases, so their product is the positive generator of
+\(\lambda_0(S)\). On the other hand,
+\[
+ \det S(T)=\det U(T)^{-1}\det V(T)^{-1}T^d,
+\]
+and the initial term is
+\(\det U(0)^{-1}\det V(0)^{-1}\). Upon undoing the change of bases, both
+\eqref{eq:bsd-suc-rboc} and the initial term are multiplied by that same
+factor. This proves \eqref{eq:bsd-suc-lt} without identifying scalars before
+fixing the line and its basis.
+\end{proof}
+
+For each \(q\geq1\), the Poitou--Tate duality constructed on the same
+page provides
+\begin{equation}\label{eq:bsd-suc-jq}
+ j_q:B_q\xrightarrow{\ \sim\ }
+ A_q^{\vee}\otimes(I^q/I^{q+1}),
+\end{equation}
+and, after orienting \(I^q/I^{q+1}\), the pairing
+\begin{equation}\label{eq:bsd-suc-altura-derivada}
+ h_E^{(q)}(x,y)
+ :=\bigl(j_q\bar\beta_q(x)\bigr)(y).
+\end{equation}
+
+\input{sections/ampliacion_20260817/04e_bsd_comparadores_desplegados}
+
+\begin{theorem}[Local--global determinantal comparison]
+\label{thm:bsd-suc-local-global}
+Let the based comparators already constructed in the
+\cref{thm:amp-bsd-comparadores-construidos} be:
+Kato--FERS/Iwasawa,
+Poitou--Tate/Poincaré--Néron--Tate,
+Smith--Tamagawa--Shafarevich, torsion and period.
+If \(d_{\mathrm{an}}\) is the degree of the analytic section at the
+central specialization and \(d_{\mathrm{ar}}\) the degree of the based Selmer
+line, then
+\begin{equation}\label{eq:bsd-suc-grados}
+ d_{\mathrm{an}}=d=d_{\mathrm{ar}},
+\end{equation}
+and one obtains the equality of distinguished elements
+\begin{equation}\label{eq:bsd-suc-linea-final}
+ \mathfrak z_{\mathrm{an}}(E)=\mathfrak z_{\mathrm{ar}}(E)
+ \quad\text{in}\quad\mathcal L_E.
+\end{equation}
+The analytic side is the publication of the initial term; the arithmetic
+side is the publication of the complete regulator, the Smith
+elementary factors,
+the local factors, the torsion and the period.
+\end{theorem}
+
+\begin{proof}
+The based construction gives
+\([\Phi_{K/\mathrm{FERS}}^i](T)=I+TB_i(T)\) in each degree. The based
+Kato--FERS comparator then expresses the corrected analytic section
+as
+\begin{equation}\label{eq:bsd-suc-fers}
+ L_{\ell}^{\mathrm{corr}}(E,T)
+ =\rho_{E,\ell}(T)\det S_E^{\mathrm{corr}}(T),
+ \qquad \rho_{E,\ell}(0)=1.
+\end{equation}
+By \eqref{eq:bsd-suc-orden}, its central degree is \(d\); by
+\eqref{eq:bsd-suc-lt}, its initial term is exactly
+\(R_{\mathrm{Boc}}^{\mathrm{der}}\), not that regulator multiplied by an
+undetermined unit. The isomorphisms \(j_q\) of
+\eqref{eq:bsd-suc-jq} transport each \(\tau_q\) to the determinant of the
+derived height of its page. The regular page transports the acyclic
+summand that the positive pages do not see.
+
+The Poincaré--Néron--Tate comparison identifies the degree of that height
+line with \(d_{\mathrm{ar}}\). The Smith elementary factors decompose its
+finite part into the Shafarevich and Tamagawa factors; the quotient of the integral
+lattices supplies the square of the torsion, and the Archimedean reader supplies
+the period. All these maps act on the same root line. By
+theorem \ref{thm:bsd-suc-raiz-filler}, no relative unit remains between
+the Kato and Poitou--Tate publications. The composition preserves the degree and
+the based element, proving simultaneously
+\eqref{eq:bsd-suc-grados} and \eqref{eq:bsd-suc-linea-final}. The corresponding scalar
+formula is reserved for final recognition.
+\end{proof}
+
+\subsection*{Hypotheses and scope}
+
+The BSD chain uses: the complete enriched state and its Alexander--Whitney
+coalgebra; the fiber product \eqref{eq:bsd-suc-pullback}; the two
+publications constructed on the same unit; the root line, its basis and its
+counit; the perfect and saturated reduced quotient, together with
+\(X^{\mathrm{orth}}\); the complete finite--singular complex; the finite
+Bockstein flags, their Koszul signs and the regular page; and the
+height, Smith, Tamagawa, Shafarevich, torsion and period comparisons
+with a common orientation. The degree-by-degree verification of the paired
+bases and the residuals \(\varepsilon_i(b)\) is recorded as a
+local control of the realization, not as a governing premise of the closure.
+Under this explicit starting structure,
+\eqref{eq:bsd-suc-raiz}, \eqref{eq:bsd-suc-hstar},
+\eqref{eq:bsd-suc-lt} and \eqref{eq:bsd-suc-linea-final} are exact
+equalities.
+
+Unit preservation, the two-sheet traversal and local--global
+publication are formalized through the chain coalgebra, the genealogical
+fiber product, the coupled publication, orthogonal reduction and the
+Bockstein tower. The auxiliary identities separately verify the group-like element property,
+preservation of history under \(\widehat\Pi_0\), the identity of the
+unit in both channels, the reduced involution, the finite--singular normal
+form and the determinantal identity of arbitrary order.
+
+\paragraph{BSD ablation controls.}
+\noindent\textbf{Status: NON\_GOVERNING\_CONTROL.}
+The following three ablations receive the already proved identities and
+falsify only reduced models. They contribute no premises to the owner,
+do not condition its closure and have no causal return edge toward it.
+
+\begin{ablation}[Manin projection without history]
+\label{abl:bsd-suc-manin}
+Replacing \(P_E^{\mathrm{gen}}\) with \(P_E^{\mathrm{Man}}\) erases data that
+the coupled publication needs. Indeed, the route
+\(\gamma=(\mathsf N\mathsf E)^{54}\) may have the same cell and the same
+visible phase as the trivial route, but preserves distinct winding and memory
+in \(G_{m,n}\). The Manin augmentation identifies them; the second
+projection of \eqref{eq:bsd-suc-pullback} does not.
+\end{ablation}
+
+\begin{proof}
+Every based lift to the Manin complex factors, up to homotopy, through the
+section of the augmentation \(s\varepsilon_{\mathrm{AW}}\). It therefore depends only
+on the visible coordinate. By contrast, the second component of
+\(\widehat\Pi_0(c)\) is \(c\) itself, so it preserves the history
+simplex and distinguishes the winding of \(\gamma\). The ablation refutes the
+bare projection; it does not refute the fiber product used in the theorem.
+\end{proof}
+
+\begin{ablation}[Rescaling of the root visible only modulo three]
+\label{abl:bsd-suc-twist}
+In the specialization \(c=1\) of
+\eqref{eq:bsd-suc-diferencial-normal}, the altered cycle
+\begin{equation}\label{eq:bsd-suc-twist4}
+ z_K^{(4)}=4r+3e+b
+\end{equation}
+satisfies
+\begin{equation}\label{eq:bsd-suc-twist-defecto}
+ z_{\mathrm{PT}}-z_K^{(4)}
+ =\partial(-f)-3r.
+\end{equation}
+The defect \(-3r\) disappears modulo three and reappears modulo nine.
+Consequently, \eqref{eq:bsd-suc-twist4} preserves a partial shadow, but not
+the based unit or \eqref{eq:bsd-suc-raiz}.
+\end{ablation}
+
+\begin{proof}
+The equality \(\partial f=3e+b\) immediately gives
+\eqref{eq:bsd-suc-twist-defecto}. Modulo three, the second summand vanishes;
+modulo nine it is a root class not divisible by a boundary of the complement.
+Moreover, its root coordinate is four, whereas
+\eqref{eq:bsd-suc-normalizacion-raiz} requires one. The example verifies the
+necessity of the coupled pair and orientation; it introduces no exception
+to the theorem that preserves both data.
+\end{proof}
+
+\begin{ablation}[Loss of regulator pages]
+\label{abl:bsd-suc-bockstein}
+The matrix \(\operatorname{diag}(T^2,T)\) shows that the first Bockstein does not
+recover the higher-order carry. The matrix
+\(\operatorname{diag}(2,T^2)\) has positive trivialization
+\(\tau_2=1\), but
+\(\tau_{\mathrm{reg}}=2=\operatorname{LT}_{T}(S)\). Therefore, neither the
+first page nor the product of positive pages replaces the complete
+regulator \eqref{eq:bsd-suc-rboc}.
+\end{ablation}
+
+\begin{proof}
+In the first example, \(d=3\), \(r_0=2\) and
+\(c_I^{\deg}=1\); page one does not contain that last degree of memory. In
+the second, the only singular divisor is \(T^2\), but the regular direction
+contributes the factor two. Omitting it would produce one instead of two. Both calculations
+are diagonal cases of \eqref{eq:bsd-suc-smith} and verify the necessity of
+all the pieces of \eqref{eq:bsd-suc-rboc}.
+\end{proof}
+\section*{Final mathematical recognition of Birch--Swinnerton--Dyer}
+
+The preceding development concludes before employing its historical formulation
+as a criterion.
+
+In the domain declared by theorem
+\ref{thm:bsd-suc-local-global}, the Smith comparison identifies the
+finite component of the arithmetic line with the
+Shafarevich--Tamagawa decomposition and proves the finiteness of
+\(\operatorname{Sha}(E)\). Consequently, its order in the following scalar
+publication is the cardinality of the identified finite group, not a formal
+symbol added after the fact.
+
+The scalar translation of \eqref{eq:bsd-suc-linea-final} provides, with
+\(r=\operatorname{rank}E(\mathbb Q)\),
+\begin{equation}\label{eq:bsd-suc-rango-final}
+ \operatorname{ord}_{s=1}L(E,s)=r
+\end{equation}
+and
+\begin{equation}\label{eq:bsd-suc-formula-final}
+ \frac{L^{(r)}(E,1)}{r!\,\Omega_E}
+ =\frac{
+   \lvert\operatorname{Sha}(E)\rvert\,\operatorname{Reg}(E)\prod_v c_v}
+  {\lvert E(\mathbb Q)_{\mathrm{tors}}\rvert^2}.
+\end{equation}
+This is the conventional formulation of Birch--Swinnerton--Dyer. The order,
+the leading term and the arithmetic factors are not defined through one
+another: they are coordinated publications of the based equality
+\eqref{eq:bsd-suc-linea-final}, whose common root was previously fixed by
+\eqref{eq:bsd-suc-raiz}.

@@ -1,0 +1,167 @@
+\subsubsection{Refinamiento del módulo y conservación de los dos lectores}
+\label{mg03:refinamiento}
+
+La identidad \eqref{eq:defecto-integrado} conserva el defecto entero
+\(1215\) mediante el residuo \(54\) y el cociente \(129\). Su
+generalización requiere declarar por separado el módulo de lectura,
+el tamaño del soporte y el número de coordenadas. Estas tres operaciones
+producen leyes de conteo distintas a partir de las mismas hojas APP.
+
+Para \(N\geq2\), fijamos el representante positivo
+\[
+ \rho_N(s)=1+((s-1)\bmod N)\in\{1,\ldots,N\},
+ \qquad s=\rho_N(s)+NQ_N(s),\quad Q_N(s)\in\mathbb Z.
+\]
+Sobre \(\{1,\ldots,N\}^2\), las lecturas plenas son
+\(\rho_N(i+j)\) y \(\rho_N(ij)\). Sus sumas se denotan
+\(S_+^{\mathrm{full}}(N)\) y \(S_\times^{\mathrm{full}}(N)\).
+
+\begin{proposition}[Ley del defecto para un módulo entero]
+Para todo \(N\geq2\),
+\begin{align}
+ S_+^{\mathrm{full}}(N)&=\frac{N^2(N+1)}2,
+ \label{mg03:suma-plena}\\
+ S_\times^{\mathrm{full}}(N)&=
+ \frac N2\left(N^2+\sum_{i=1}^{N}\gcd(i,N)\right),
+ \label{mg03:producto-pleno}\\
+ \Delta_N^{\mathrm{full}}&=
+ \frac N2\left(\sum_{i=1}^{N}\gcd(i,N)-N\right).
+ \label{mg03:defecto-pleno}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+En una fila aditiva, la traslación por \(i\) permuta las \(N\)
+clases y sus representantes positivos. La suma por fila es
+\(N(N+1)/2\), lo que demuestra \eqref{mg03:suma-plena}.
+Para una fila multiplicativa, sea \(g=\gcd(i,N)\). La imagen de
+\(j\mapsto ij\pmod N\) contiene las \(N/g\) clases múltiplos de
+\(g\), y cada una tiene \(g\) preimágenes. Los representantes
+positivos son \(g,2g,\ldots,N\), cuya suma es
+\[
+ g\frac{(N/g)(N/g+1)}2=\frac{N(N+g)}{2g}.
+\]
+La multiplicidad \(g\) da \(N(N+g)/2\) por fila. Al sumar sobre
+\(i\) se obtiene \eqref{mg03:producto-pleno}; su diferencia con
+\eqref{mg03:suma-plena} produce \eqref{mg03:defecto-pleno}.
+\end{proof}
+
+\begin{corollary}[Módulos primo-potencia]
+Si \(N=p^m\), con \(p\) primo y \(m\geq1\), entonces
+\begin{equation}
+ \sum_{i=1}^{p^m}\gcd(i,p^m)
+ =p^m+m(p-1)p^{m-1},\qquad
+ \Delta_{p^m}^{\mathrm{full}}
+ =\frac{m(p-1)}2p^{2m-1}.
+ \label{mg03:primo-potencia}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Para cada \(0\leq k<m\), hay
+\(p^{m-k}-p^{m-k-1}\) índices de valoración \(p\)-ádica
+exactamente \(k\). Su máximo divisor común con \(p^m\) vale
+\(p^k\), y la contribución de ese estrato es
+\((p-1)p^{m-1}\). Los \(m\) estratos aportan
+\(m(p-1)p^{m-1}\), mientras que el índice \(i=p^m\) aporta
+\(p^m\). La sustitución en \eqref{mg03:defecto-pleno} da la
+segunda fórmula.
+\end{proof}
+
+La especialización triádica es
+\(\Delta_{3^m}^{\mathrm{full}}=m3^{2m-1}\). Los primeros módulos
+muestran simultáneamente las dos sumas y su diferencia:
+\[
+\begin{array}{c|r|r|r}
+ N&S_+^{\mathrm{full}}&S_\times^{\mathrm{full}}&\Delta_N^{\mathrm{full}}\\\hline
+ 3&18&21&3\\
+ 9&405&459&54\\
+ 27&10206&10935&729\\
+ 81&269001&277749&8748
+\end{array}
+\]
+
+El refinamiento periódico mantiene, en cambio, \(\rho_9\) y amplía
+el soporte a \(\{1,\ldots,9r\}^2\), con \(r\geq1\) entero. Cada par de residuos módulo
+nueve tiene \(r^2\) representantes en ese soporte, tanto para la
+suma como para el producto. Por consiguiente,
+\begin{equation}
+ S_+^{\mathrm{per}}(9r;9)=r^2\,405,\quad
+ S_\times^{\mathrm{per}}(9r;9)=r^2\,459,\quad
+ \Delta^{\mathrm{per}}(9r;9)=r^2\,54.
+ \label{mg03:periodico}
+\end{equation}
+Para \(r=3\), las sumas valen \(3645\) y \(4131\), y el defecto
+vale \(486\). La lectura plena en \(27\) produce \(729\) porque
+actualiza tanto el módulo como sus representantes; la lectura periódica
+produce \(486\) porque conserva el módulo nueve y multiplica sus
+incidencias por nueve. En ambas lecturas, las divisiones
+\(i+j=R^++NQ^+\), \(ij=R^\times+NQ^\times\), con el módulo
+efectivamente empleado, mantienen la identidad entera por celda y su
+suma. Así queda fijado el dato que debe acompañar a cada defecto.
+
+\subsubsection{Variación dimensional con módulo nueve fijo}
+\label{mg03:dimension}
+
+Una segunda extensión mantiene el módulo y aumenta el número de
+factores. Para \(d\geq1\), sean
+\[
+ \mathcal A_d=\{1,\ldots,9\}^d,\qquad
+ \Sigma_d(x)=\rho_9\!\left(\sum_{j=1}^d x_j\right),\qquad
+ \Pi_d(x)=\rho_9\!\left(\prod_{j=1}^d x_j\right).
+\]
+
+\begin{proposition}[Conteo dimensional de acumulación y producto]
+Las sumas de ambos lectores sobre \(\mathcal A_d\) son
+\begin{equation}
+ S_{+,d}=45\,9^{d-1},\qquad
+ S_{\times,d}=9^{d+1}-9(d+3)6^{d-1}.
+ \label{mg03:ley-dimensional}
+\end{equation}
+Por tanto,
+\begin{equation}
+ \frac{S_{\times,d}-S_{+,d}}{9^d}
+ =4-(d+3)\left(\frac23\right)^{d-1}
+ \longrightarrow4.
+ \label{mg03:limite-dimensional}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fijadas las primeras \(d-1\) coordenadas, la última recorre una vez
+todos los residuos de la suma. Cada representante positivo aparece
+\(9^{d-1}\) veces, y su suma es \(45\); esto prueba la fórmula
+aditiva.
+
+Para el producto, se distinguen las unidades
+\(U=\{1,2,4,5,7,8\}\), los múltiplos de tres de valoración uno
+\(T=\{3,6\}\), y el representante nulo \(9\). Las \(6^d\)
+palabras con todos sus factores en \(U\) distribuyen sus productos
+uniformemente entre las seis unidades: al fijar \(d-1\) factores,
+el último actúa por una permutación del grupo. Su contribución es
+\(27\,6^{d-1}\).
+
+Las palabras con exactamente un factor en \(T\) y los demás en
+\(U\) son \(2d6^{d-1}\). Para cada posición del factor singular y
+cada elección de las unidades restantes, las dos elecciones \(3,6\)
+producen una vez cada uno de los residuos \(3,6\). La contribución
+es \(9d6^{d-1}\). Las palabras restantes contienen un factor
+\(9\), o al menos dos factores en \(T\), y su producto tiene
+representante \(9\). Su número es
+\(9^d-6^d-2d6^{d-1}\). En consecuencia,
+\[
+ S_{\times,d}=27\,6^{d-1}+9d6^{d-1}
+ +9\bigl(9^d-6^d-2d6^{d-1}\bigr),
+\]
+que se simplifica a \eqref{mg03:ley-dimensional}. La división por
+\(9^d\), seguida de la resta de la media aditiva \(5\), da
+\eqref{mg03:limite-dimensional}; el término
+\((d+3)(2/3)^{d-1}\) tiende a cero.
+\end{proof}
+
+En dimensión dos reaparecen \(S_{+,2}=405\),
+\(S_{\times,2}=459\) y el defecto total \(54\). El límite
+\(4\) pertenece al defecto medio bajo aumento de dimensión. El
+defecto total, el cociente conservado y la media dimensional son
+lectores especificados de la aritmética APP; TRIT y TPK transportan
+posteriormente esos datos con su orientación, módulo y residencia.

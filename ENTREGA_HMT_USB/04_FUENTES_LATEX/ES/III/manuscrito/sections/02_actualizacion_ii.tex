@@ -1,0 +1,84 @@
+\section{Actualización dodecafásica y memoria expresada}
+\label{sec:eta}
+Sea $d_t$ el código entero de dirección conservado por una traza TPK.
+Este código y la dirección cardinal del cursor son coordenadas distintas.
+Las doce ventanas
+$E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$, dividen los 108 pasos del registro.
+La orientación es
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+El evento de una ventana es la salida
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{eq:events}
+\end{equation}
+La notación $a_m$ evita confundir este evento con el número de Euler.
+El registro fuente conserva además la orientación TRIT, la firma,
+el acarreo y el segmento de historia correspondiente (véase \ref{sec:k-registro}).
+
+\begin{proposition}[Incremento producido por el transporte]
+Sea $\mathbf e_m$ la base de $\R^{12}$ y
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. Si
+$z_{m+1}=z_m+a_m\mathbf e_m$ y $y_m=S^{-m}z_m$, entonces
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{eq:eta}
+\end{equation}
+Después de una vuelta completa,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplicar la actualización de $z_m$ por $S^{-(m+1)}$ da
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+Al iterar, el coeficiente del evento $a_m$ es
+$S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Como $S^{12}=I$,
+se obtiene \eqref{eq:cycle}.
+\end{proof}
+
+Por tanto, $\eta_m$ no es una fuerza libre elegida para imponer una
+conservación: es una representación del evento TPK. La igualdad de fase
+después de una vuelta no cancela los eventos acumulados. Este lector
+conserva los recuentos, mientras el registro completo conserva además su
+orden y procedencia. Se distingue $\eta_m$, incremento vectorial, de
+$\eta_{\rm ret}$, mantisa escalar de acción, y de $\eta_{\rm el}$,
+parámetro de forma que se introducirá en la sección~\ref{sec:ellipse}.
+
+\subsection{Balance cuadrático}
+Definimos
+\[
+\nabla_3=I-S^3,\quad \nabla_4=I-S^4,\quad
+B=\nabla_3^{\mathsf T}\nabla_3+\nabla_4^{\mathsf T}\nabla_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+Los lectores orientados del registro firmado cumplen
+$(D_jz)_m=z_m-z_{m+j}$; con la convención
+$S\mathbf e_m=\mathbf e_{m+1}$, se tiene
+$D_j=I-S^{-j}=\nabla_j^{\mathsf T}$. Ambos sentidos producen la misma
+forma cuadrática $B$, pues las potencias de $S$ conmutan.
+Se cumplen $S^{\mathsf T}BS=B$ y $B_{00}=4$. Sustituyendo
+\eqref{eq:eta} se deduce exactamente
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\label{mem:balance}
+\end{equation}
+Asimismo, la carga $q(y)=\sum_jy_j$ satisface
+$q(y_{m+1})-q(y_m)=a_m$.
+La prueba es la expansión del polinomio cuadrático tras retirar la
+permutación $S^{-1}$. Ningún valor metrológico entra en ese cálculo.
+La forma $\mathcal M$ mide este registro; su interpretación como una
+energía física determinada requeriría el lector dimensional correspondiente.
+
+\input{manuscrito/sections/02_memoria_ii.tex}
+
+\input{sections/ii_sello_y_lectura.tex}

@@ -1,0 +1,438 @@
+% Propietario recuperado íntegro: observador, automedida y Stokes holográfico finito.
+% Notación propia del propietario original, preservada localmente para su consumo modular.
+\providecommand{\X}{\mathcal X}
+\providecommand{\Acal}{\mathfrak a}
+\providecommand{\bd}{\partial}
+\providecommand{\oneE}{\mathbf 1_E}
+
+\section{Fundamentos algebraicos del cosido de fase y de la automedida}
+
+\begin{definition}[Geometría de cosido de fase]
+Una \emph{geometría de cosido de fase} es un sistema
+\[
+\X=(X,\oplus,\otimes,\tau,C_n,L,\mathfrak c,v),
+\]
+donde (X) es un soporte local finito; \(\oplus\) y \(\otimes\) son sus
+dos leyes internas de transporte; \(\tau:X\to D\) es la aplicación residual;
+\(C_n\) es un ciclo orientado; \(L\) es un retículo cuyo espacio real
+\(W=L\otimes_{\mathbb Z}\mathbb R\) lleva un producto interno positivo;
+\(\mathfrak c\in\mathbb P(D^n)\) es una clase residual distinguida no
+trivial; y \(v\in L\) es su representante primitivo en la cámara fijada.
+Un transporte \(\omega\in C^1(C_n;W)\) es \emph{admisible} cuando el modo
+armónico de su descomposición pertenece a la recta
+\(\mathbb Rv\subset W\).
+\end{definition}
+
+\begin{theorem}[Descomposición exacta--armónica sobre un ciclo]
+\label{thm:hodge-cycle}
+Para toda (1)-cocadena \(\omega\in C^1(C_n;W)\) existe una descomposición
+única
+\[
+  \omega=d\Phi+u\oneE,
+\]
+con \(\Phi\in C^0(C_n;W)\), normalizada por \(\Phi(0)=0\), y \(u\in W\).
+\end{theorem}
+
+\begin{proof}
+Si \(e_0,\ldots,e_{n-1}\) son las aristas orientadas del ciclo, se define
+\[
+ u=\frac1n\sum_{j=0}^{n-1}\omega(e_j),
+ \qquad y_j=\omega(e_j)-u.
+\]
+Entonces \(\sum_jy_j=0\). Las sumas parciales
+\(\Phi(k)=\sum_{j=0}^{k-1}y_j\), con \(\Phi(0)=0\), determinan una
+(0)-cocadena bien definida y verifican \(d\Phi(e_j)=y_j\), incluida la
+arista final. Para la unicidad, de
+\(d\Phi+u\oneE=d\Psi+w\oneE\) se obtiene, tras sumar sobre el ciclo,
+\(n(w-u)=0\); por tanto \(u=w\), y la normalización elimina la constante
+restante de \(\Phi-\Psi\).
+\end{proof}
+
+\begin{definition}[Defecto de costura]
+El levantamiento continuo a trozos \(\Gamma_\omega:[0,1]\to W\) se fija por
+\[
+ \Gamma_\omega\!\left(\frac{j+1}{n}\right)
+ -\Gamma_\omega\!\left(\frac jn\right)=\omega(e_j).
+\]
+Su defecto de costura es
+\[
+ \bd\Gamma_\omega
+ =\Gamma_\omega(1)-\Gamma_\omega(0)
+ =\sum_{j=0}^{n-1}\omega(e_j).
+\]
+\end{definition}
+
+\begin{proposition}[Anulación telescópica del término exacto]
+\label{prop:exact-vanish}
+Para toda (0)-cocadena \(\Phi\) se cumple
+\[
+ \sum_{j=0}^{n-1}(d\Phi)(e_j)=0.
+\]
+En consecuencia, el defecto de costura depende exclusivamente del modo
+armónico \(u\oneE\) de la descomposición del
+\cref{thm:hodge-cycle}.
+\end{proposition}
+
+\begin{proof}
+La suma de \(\Phi(j+1)-\Phi(j)\) telescopa sobre el ciclo. Así, si
+\(\omega=d\Phi+u\oneE\), entonces
+\(\bd\Gamma_\omega=nu\).
+\end{proof}
+
+\begin{theorem}[Teorema universal de cosido]
+\label{thm:universal-sewing}
+Sea \(\X\) una geometría de cosido de fase y sea \(\omega\) un transporte
+admisible. Existe un único escalar real \(\Acal_\X(\omega)\) tal que
+\[
+ \bd\Gamma_\omega=\Acal_\X(\omega)v,
+ \qquad
+ \Acal_\X(\omega)
+ =\frac{\langle\bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}.
+\]
+\end{theorem}
+
+\begin{proof}
+Por el \cref{thm:hodge-cycle}, \(\omega=d\Phi+u\oneE\), con \(u\) único.
+La admisibilidad proporciona un único \(\lambda\in\mathbb R\) con
+\(u=\lambda v\). La \cref{prop:exact-vanish} da
+\(\bd\Gamma_\omega=n\lambda v\); basta definir
+\(\Acal_\X(\omega)=n\lambda\) y proyectar ortogonalmente sobre
+\(\mathbb Rv\).
+\end{proof}
+
+\section{Estado conjunto observador--observable, automedida intrínseca e identidad holográfica de Stokes}\label{sec:observer-holo}
+
+Esta sección hace explícitas tres afirmaciones que en el resto del manuscrito aparecían
+sólo en forma narrativa. La primera es que el \emph{observador} no introduce el invariante,
+sino que selecciona una polarización, una trivialización y una orientación de lectura.
+La segunda es que la \emph{auto-medida} no es una metáfora, sino el único funcional lineal
+normalizado compatible con el modo residual de borde. La tercera es que el llamado
+\emph{principio holográfico} admite, en este marco finito, una formulación exacta mediante
+Stokes discreto: el mismo escalar puede leerse en el borde como defecto de costura o en el
+\emph{bulk} como curvatura total proyectada.
+
+Desde el punto de vista histórico, estas tres piezas permiten reescribir la noción clásica de
+medida. En metrología estándar, una medida es trazable cuando puede relacionarse con una referencia
+mediante una cadena documentada e ininterrumpida de comparaciones; y, desde 2019, el SI se define
+por valores fijados de constantes de la naturaleza \cite{NISTTraceability2023,BIPMSI2019}.
+El marco presente no niega ese esquema: lo desplaza hacia un nivel anterior, en el que la
+"unidad" ya no es primero patrón externo, sino modo residual interno. La medida deja entonces de
+ser comparación con un artefacto y pasa a ser lectura de un cierre propio.
+
+\subsection{El observador como polarización, trivialización y orientación}
+
+La interpretación geométrica más estable del problema del observador es la siguiente. El soporte
+local posee al menos dos polarizaciones internas, una aditiva y otra multiplicativa. En el lenguaje
+estándar de la cinemática cuántica finita, ambas polarizaciones generan una extensión de
+Weyl--Heisenberg en la que la fase central registra el orden de los transportes
+\cite{Tolar2014,Vourdas2006}. El observador no añade nueva dinámica al sistema; selecciona un
+representante de la misma clase de transporte.
+
+\begin{definition}[Observador de borde]
+Sea $\X=(X,\oplus,\otimes,\tau,C_n,L,\mathfrak c,v)$ una geometría de cosido de fase y sea
+$\omega\in C^1(C_n;W)$ un transporte admisible. Un \emph{observador de borde} es un par
+\[
+\mathcal O=(\varepsilon,\Phi),
+\qquad
+\varepsilon\in\{+1,-1\},
+\qquad
+\Phi\in C^0(C_n;W),
+\]
+que actúa sobre $\omega$ por
+\[
+\omega^{\mathcal O}:=\varepsilon\,\omega+d\Phi.
+\]
+El signo $\varepsilon$ codifica la orientación de lectura y la $0$-cochain $\Phi$ codifica la
+trivialización o elección de gauge.
+\end{definition}
+
+\begin{remark}
+En el nivel local, la elección entre lector aditivo y lector multiplicativo debe entenderse como una
+polarización del mismo soporte de fase. En el nivel global de borde, esa elección queda absorbida en
+la clase de la $1$-cochain observada. La parte geométricamente relevante es, por tanto, la clase de
+cohomología y no el representante particular.
+\end{remark}
+
+\begin{proposition}[Covarianza del observador]\label{prop:observer-covariance}
+Para todo transporte admisible $\omega$ y todo observador de borde
+$\mathcal O=(\varepsilon,\Phi)$ se tiene
+\[
+\Acal_\X(\omega^{\mathcal O})=\varepsilon\,\Acal_\X(\omega).
+\]
+En particular, la auto-medida es invariante bajo cambio de trivialización y sólo cambia de signo al
+invertir la orientación.
+\end{proposition}
+
+\begin{proof}
+Usando la definición de defecto de costura y la linealidad, se obtiene
+\[
+\bd\Gamma_{\omega^{\mathcal O}}
+=
+\sum_{e\in C_n}\bigl(\varepsilon\,\omega(e)+(d\Phi)(e)\bigr)
+=
+\varepsilon\sum_{e\in C_n}\omega(e)+\sum_{e\in C_n}(d\Phi)(e).
+\]
+La suma del término exacto telescopa y vale $0$ por la
+Proposición~\ref{prop:exact-vanish}. Luego
+\[
+\bd\Gamma_{\omega^{\mathcal O}}=\varepsilon\,\bd\Gamma_\omega.
+\]
+Proyectando sobre la recta residual $\R v$ mediante la fórmula del
+Teorema~\ref{thm:universal-sewing}, se concluye
+\[
+\Acal_\X(\omega^{\mathcal O})
+=
+\frac{\langle \bd\Gamma_{\omega^{\mathcal O}},v\rangle}{\langle v,v\rangle}
+=
+\varepsilon\,\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}
+=
+\varepsilon\,\Acal_\X(\omega).
+\]
+\end{proof}
+
+\begin{corollary}[El observador no crea el invariante]\label{cor:observer-does-not-create}
+Dos observadores de borde que difieran sólo por gauge miden el mismo escalar de cierre. Por tanto,
+el observador fija una lectura, pero no fabrica el modo residual.
+\end{corollary}
+
+\begin{remark}
+Esta proposición resuelve el problema del observador en el nivel exacto en que el presente marco
+puede resolverlo. El observador no desaparece, pero su papel cambia: no introduce el patrón, sino
+que selecciona una polarización y una orientación para un invariante ya generado por la propia
+estructura. En este sentido, la teoría es \emph{covariante respecto del observador}.
+\end{remark}
+
+\subsection{Unicidad del funcional intrínseco de automedida}
+
+El paso siguiente consiste en formalizar la idea de que el sistema se mide a sí mismo. Para ello hay
+que distinguir entre la densidad local del modo armónico y la magnitud global de cierre del borde.
+
+\begin{definition}[Densidad de auto-medida y cierre global]
+Sea $\omega$ un transporte admisible sobre $C_n$. Definimos la \emph{densidad de auto-medida}
+por
+\[
+\mu_\X(\omega):=\frac{1}{n}\,\Acal_\X(\omega)
+=\frac{1}{n}\,\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}.
+\]
+Equivalentemente, si
+\[
+\omega=d\Phi+u\oneE
+\qquad\text{con }u\in\R v,
+\]
+entonces $u=\mu_\X(\omega)\,v$.
+Llamaremos \emph{cierre global} al escalar
+\[
+\Acal_\X(\omega)=n\,\mu_\X(\omega).
+\]
+\end{definition}
+
+\begin{lemma}[Cociente unidimensional de transportes admisibles]\label{lem:one-dimensional-quotient}
+Sea $\mathcal T_{\mathrm{adm}}\subset C^1(C_n;W)$ el subespacio de transportes admisibles. Entonces
+el cociente
+\[
+\mathcal T_{\mathrm{adm}}/dC^0(C_n;W)
+\]
+es un espacio vectorial real de dimensión $1$, canónicamente generado por la clase de
+$\,v\oneE$.
+\end{lemma}
+
+\begin{proof}
+Por el Teorema~\ref{thm:hodge-cycle}, todo $\omega\in\mathcal T_{\mathrm{adm}}$ se escribe de forma
+única como
+\[
+\omega=d\Phi+u\oneE.
+\]
+La admisibilidad impone $u\in\R v$, de modo que la clase de $\omega$ módulo exactos queda
+completamente determinada por el escalar real $\lambda$ tal que $u=\lambda v$. En consecuencia,
+el cociente es isomorfo a $\R v$, y por tanto unidimensional.
+\end{proof}
+
+\begin{theorem}[Unicidad de la auto-medida]\label{thm:uniqueness-self-measurement}
+Sea $F:\mathcal T_{\mathrm{adm}}\to\R$ un funcional lineal tal que:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F(\omega+d\Phi)=F(\omega)$ para toda $\Phi\in C^0(C_n;W)$;
+\item $F(v\oneE)=1$.
+\end{enumerate}
+Entonces
+\[
+F=\mu_\X.
+\]
+En particular, la auto-medida es el \emph{único} funcional lineal normalizado compatible con el modo
+residual distinguido.
+\end{theorem}
+
+\begin{proof}
+Por el Lema~\ref{lem:one-dimensional-quotient}, el cociente
+$\mathcal T_{\mathrm{adm}}/dC^0(C_n;W)$ es unidimensional y está generado por la clase de
+$v\oneE$. Toda aplicación lineal invariante por gauge factoriza por dicho cociente y queda
+completamente determinada por su valor sobre el generador. La normalización
+$F(v\oneE)=1$ fija entonces unívocamente el funcional. Por definición,
+\[
+\mu_\X(v\oneE)=\frac1n\frac{\langle nv,v\rangle}{\langle v,v\rangle}=1,
+\]
+y además $\mu_\X$ es lineal e invariante por gauge. Luego $F=\mu_\X$.
+\end{proof}
+
+\begin{corollary}[Auto-medida en el caso HMT]\label{cor:self-measurement-hmt}
+En la especialización dodecafásica fuerte, donde $n=12$ y $v=v_\alpha$, se tiene
+\[
+\mu_{\mathrm{HMT}}(\omega)=\frac{\alpha}{12},
+\qquad
+\Acal_{\mathrm{HMT}}(\omega)=\alpha.
+\]
+Así, el número $\alpha$ es el cierre global del borde y $\alpha/12$ es la densidad elemental de
+auto-medida por fase.
+\end{corollary}
+
+\begin{remark}
+Esta formulación cambia el significado de ``unidad''. En la metrología clásica, la unidad es una
+referencia externa a la que un resultado se vincula mediante una cadena de calibraciones
+\cite{NISTTraceability2023,BIPMSI2019}. Aquí la normalización proviene del propio sistema: el
+vector $v$ no se importa desde fuera, sino que se genera internamente como lift mínimo de la clase
+residual distinguida. En ese sentido preciso, la unidad es una \emph{auto-medida}.
+\end{remark}
+
+\subsection{Principio holográfico finito: borde, \emph{bulk} y Stokes discreto}
+
+Lo que en el prólogo aparecía como intuición holográfica admite ahora una forma exacta. El hecho
+crucial es que el mismo escalar puede leerse de dos maneras: como holonomía de borde o como
+curvatura total proyectada del \emph{bulk}. Esto no identifica la teoría con la holografía
+cuántico-gravitatoria de 't Hooft o Susskind \cite{tHooft1993,Susskind1995}; sí produce, en cambio,
+un análogo finito y literal de reducción al borde.
+
+\begin{definition}[\emph{Bulk} finito con borde cíclico]
+Un \emph{bulk} finito con borde cíclico es un complejo celular orientado de dimensión $2$
+\[
+K=K^{(0)}\cup K^{(1)}\cup K^{(2)}
+\]
+cuya frontera orientada satisface
+\[
+\partial K\cong C_n.
+\]
+Dada una $1$-cochain $\Omega\in C^1(K;W)$, llamaremos \emph{curvatura discreta} a la
+$2$-cochain
+\[
+F_\Omega:=d\Omega\in C^2(K;W).
+\]
+Si $\Omega\vert_{\partial K}=\omega$, diremos que $\Omega$ es una \emph{extensión de bulk} del
+transporte de borde $\omega$.
+\end{definition}
+
+\begin{theorem}[Stokes discreto proyectado]\label{thm:discrete-stokes-projected}
+Sea $K$ un bulk finito con frontera $\partial K\cong C_n$, y sea $\Omega\in C^1(K;W)$ una
+extensión de bulk de un transporte admisible $\omega$ sobre la frontera. Entonces
+\[
+\bd\Gamma_\omega
+=
+\sum_{e\subset \partial K}\Omega(e)
+=
+\sum_{f\in K^{(2)}}F_\Omega(f).
+\]
+En particular,
+\[
+\Acal_\X(\omega)
+=
+\frac{\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v\right\rangle}{\langle v,v\rangle}.
+\]
+\end{theorem}
+
+\begin{proof}
+La primera igualdad es simplemente la definición de defecto de costura aplicada a la restricción de
+$\Omega$ a la frontera. La segunda es la fórmula de Stokes discreto para cochains: la suma orientada
+sobre la frontera de un complejo coincide con la suma, sobre todas las $2$-celdas, del coborde
+orientado de la $1$-cochain. Es decir,
+\[
+\sum_{e\subset \partial K}\Omega(e)=\sum_{f\in K^{(2)}}(d\Omega)(f)=\sum_{f\in K^{(2)}}F_\Omega(f).
+\]
+Proyectando sobre la recta residual $\R v$ y usando el
+Teorema~\ref{thm:universal-sewing}, se obtiene la fórmula final.
+\end{proof}
+
+\begin{corollary}[Obstrucción de \emph{bulk} plano]\label{cor:no-flat-bulk}
+Si un transporte de borde admisible $\omega$ admite una extensión de bulk plana,
+esto es, una $\Omega$ con $F_\Omega=0$, entonces
+\[
+\Acal_\X(\omega)=0.
+\]
+Equivalentemente, si $\Acal_\X(\omega)\neq 0$, toda extensión de bulk del borde debe portar
+curvatura discreta no nula.
+\end{corollary}
+
+\begin{proof}
+Es una consecuencia inmediata del Teorema~\ref{thm:discrete-stokes-projected}. Si
+$F_\Omega=0$, entonces la suma proyectada de curvaturas vale $0$, y por tanto
+$\Acal_\X(\omega)=0$.
+\end{proof}
+
+\begin{corollary}[Lectura holográfica finita]\label{cor:finite-holography}
+El invariante de cierre puede leerse indistintamente como observable de borde o como curvatura
+integrada del \emph{bulk}:
+\[
+\Acal_\X(\omega)
+=
+\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}
+=
+\frac{\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v\right\rangle}{\langle v,v\rangle}.
+\]
+En este sentido preciso, el sistema satisface un principio holográfico finito.
+\end{corollary}
+
+\begin{remark}
+El corolario anterior es la forma más literal y más fuerte del principio holográfico que el manuscrito
+puede sostener con pruebas internas. No afirma una dualidad gravitatoria completa. Afirma algo más
+modesto y exacto: el escalar físico-matemático relevante del sistema \emph{factoriza por el borde} y,
+si se extiende a un \emph{bulk}, coincide con la curvatura total proyectada de ese \emph{bulk}.
+Cuando $\Acal_\X(\omega)=\alpha$, la igualdad dice que $\alpha$ es simultáneamente una holonomía
+de borde y una curvatura integrada.
+\end{remark}
+
+\begin{corollary}[Consecuencia geométrica para HMT]\label{cor:hmt-bulk-curvature}
+En el caso HMT fuerte, todo relleno de bulk del ciclo dodecafásico que extienda el transporte de
+borde canónico debe satisfacer
+\[
+\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v_\alpha\right\rangle
+=
+\alpha\,\langle v_\alpha,v_\alpha\rangle
+=
+54\alpha.
+\]
+En particular, el borde HMT no admite relleno plano; su \emph{bulk} porta necesariamente curvatura
+total proyectada no nula.
+\end{corollary}
+
+\begin{proof}
+Basta aplicar el Corolario~\ref{cor:finite-holography} con $v=v_\alpha$ y usar que
+$\langle v_\alpha,v_\alpha\rangle=54$.
+\end{proof}
+
+
+
+\begin{remark}[Sobre la geometría del \emph{bulk}]
+El Teorema~\ref{thm:discrete-stokes-projected} no identifica por sí solo la geometría métrica del
+\emph{bulk}; sí impone una condición negativa muy fuerte: cuando $\Acal_\X(\omega)\neq 0$, el
+relleno no puede ser exacta o discretamente plano. Si, además, se busca una completación global
+compatible con la lectura modular del borde, el candidato natural deja de ser el disco euclídeo y pasa
+a ser un \emph{bulk} de tipo modular. En la teoría clásica, las funciones modulares viven en el
+semiplano superior $\mathbb H$ y el invariante de Klein $J(\tau)$ clasifica el toro complejo global
+\cite{DLMFModular}. El resultado presente no demuestra todavía esa identificación, pero sí justifica
+por qué la intuición de un \emph{bulk} no euclídeo es matemáticamente razonable.
+\end{remark}
+
+\subsection{Consecuencias estructurales de la polarización, la automedida y la identidad discreta de Stokes}
+
+Las tres piezas anteriores permiten fijar, con un grado de precisión que antes sólo se esbozaba,
+la interpretación de observador, auto-medida y holografía.
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item El \textbf{observador} es una elección de polarización, orientación y gauge. Cambia la lectura,
+pero no el modo residual, salvo por el signo asociado a la orientación.
+\item La \textbf{auto-medida} es el único funcional lineal normalizado sobre el espacio admisible de
+transportes. No necesita patrón externo porque su normalización proviene del lift mínimo interno.
+\item El \textbf{principio holográfico} adquiere una forma exacta: el escalar relevante puede leerse
+íntegramente en el borde o íntegramente como curvatura total proyectada del bulk.
+\end{enumerate}
+
+Esta triple identificación permite reformular la tesis central del manuscrito de manera más fuerte:
+no sólo $\alpha$ es un invariante archimedeano de borde, sino que, dentro del marco finito
+considerado aquí, $\alpha$ es el primer escalar que una célula autoinercial de fase produce al
+medirse a sí misma y al proyectar toda su curvatura efectiva sobre el modo residual distinguido.

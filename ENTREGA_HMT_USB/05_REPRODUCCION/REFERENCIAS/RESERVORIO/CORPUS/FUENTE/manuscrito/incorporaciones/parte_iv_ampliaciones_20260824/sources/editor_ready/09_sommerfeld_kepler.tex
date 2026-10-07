@@ -1,0 +1,270 @@
+\chapter{Límite central, órbitas de Kepler y holonomía de Sommerfeld}
+\label{chap:limite-central-kepler-sommerfeld}
+\index{Kepler, órbita de}\index{Sommerfeld, cuantización de}
+\index{Levi-Civita, cubierta de}\index{Möbius, holonomía de}
+
+Este capítulo distingue cuatro estratos que la terminología física puede
+superponer indebidamente: la cancelación exacta de flujos interiores en un
+grafo; la realización continua de un campo central; la dinámica kepleriana
+que resulta del potencial inverso; y la condición semiclásica de fase sobre
+una banda con holonomía. La primera es combinatoria. Las tres restantes
+requieren, sucesivamente, una carta métrica, un lagrangiano y una línea de
+fase semiclásica.
+
+\section{Gauss discreto y descenso inverso al área}
+\label{sec:gauss-discreto-limite-central}
+
+Sea \(G=(V,E)\) un grafo finito no orientado, sea
+\(\vec E:=\{(x,y),(y,x):\{x,y\}\in E\}\) su conjunto de arcos y sea
+\(F:\vec E\to\mathbb R\) una \(1\)-co\-cadena antisimétrica,
+\(F(y,x)=-F(x,y)\). Definimos
+\[
+ \operatorname{div}F(x)
+ :=\sum_{y:\{x,y\}\in E}F(x,y).
+\]
+Para \(S\subseteq V\), el flujo
+\(\operatorname{Flux}_{\partial S}F\) es la suma orientada sobre las aristas
+con un extremo en \(S\) y el otro en \(V\setminus S\).
+
+\begin{theorem}[Teorema de Gauss en grafos]
+\label{thm:gauss-grafo-hmt-md}
+Para todo \(S\subseteq V\),
+\[
+ \sum_{x\in S}\operatorname{div}F(x)
+ =\operatorname{Flux}_{\partial S}F.
+ \tag{K1}\label{eq:gauss-grafo-hmt-md}
+\]
+\end{theorem}
+
+\begin{proof}
+Cada arista con ambos extremos en \(S\) aparece dos veces con orientaciones
+opuestas y se cancela. Sólo permanecen las aristas que atraviesan la cadena
+de borde.
+\end{proof}
+
+En la red cúbica, para \(R\in\mathbb Z_{\geq0}\),
+\[
+ C_R:=\{x\in\mathbb Z^3:\|x\|_\infty\leq R\},
+\]
+el número de enlaces salientes es
+\[
+ |\partial C_R|=6(2R+1)^2.
+\]
+Si una fuente posee flujo total \(Q\) y se impone uniformidad media sobre el
+cascarón, el flujo por enlace vale
+\[
+ E_R=\frac{Q}{6(2R+1)^2}.
+\]
+Al definir \(r_{\rm eff}\) mediante
+\[
+ 4\pi r_{\rm eff}^2=6(2R+1)^2,
+\]
+se obtiene la identidad exacta
+\[
+ E_R=\frac{Q}{4\pi r_{\rm eff}^2}.
+ \tag{K2}\label{eq:inverso-area-cascaron}
+\]
+El paso desde \eqref{eq:gauss-grafo-hmt-md} a
+\eqref{eq:inverso-area-cascaron} usa la hipótesis adicional de isotropía
+media. Identificar \(Q\) con una fuente gravitatoria o eléctrica requiere,
+además, el transductor dimensional correspondiente.
+
+\section{Lagrangiano central y cónicas de Kepler}
+\label{sec:lagrangiano-central-kepler}
+
+Sea \(\mu>0\) una masa reducida y
+\(\mathcal K>0\) un acoplamiento del tipo producto de energía y longitud,
+\([\mathcal K]=\mathsf E\,\mathsf L\). En la hoja
+euclídea continua consideremos
+\[
+ L_{\rm Kep}(\mathbf r,\dot{\mathbf r})
+ =\frac{\mu}{2}\|\dot{\mathbf r}\|^2+\frac{\mathcal K}{r},
+ \qquad
+ H_{\rm Kep}(\mathbf r,\mathbf p)
+ =\frac{\|\mathbf p\|^2}{2\mu}-\frac{\mathcal K}{r},
+ \tag{K3}\label{eq:lagrangiano-hamiltoniano-kepler}
+\]
+donde \(r=\|\mathbf r\|>0\) y
+\(\mathbf p=\mu\dot{\mathbf r}\). La ecuación de Euler--Lagrange es
+\[
+ \mu\ddot{\mathbf r}
+ =-\frac{\mathcal K}{r^3}\mathbf r.
+ \tag{K4}\label{eq:ecuacion-central-kepler}
+\]
+El momento angular específico
+\(\mathbf h=\mathbf r\times\dot{\mathbf r}\) es constante; si
+\(\mathbf h\ne0\), la trayectoria permanece en el plano ortogonal a
+\(\mathbf h\).
+
+\begin{proposition}[Cónica kepleriana]
+\label{prop:conica-kepleriana-hmt-md}
+Sea \(h=\|\mathbf h\|\). Toda solución no radial de
+\eqref{eq:ecuacion-central-kepler} satisface
+\[
+ r(\phi)
+ =\frac{p}{1+e\cos(\phi-\phi_0)},
+ \qquad
+ p=\frac{\mu h^2}{\mathcal K}.
+ \tag{K5}\label{eq:conica-kepleriana}
+\]
+Para energía negativa, \(0\leq e<1\) y la órbita es elíptica.
+\end{proposition}
+
+\begin{proof}
+Con \(u=1/r\), la ecuación de Binet adopta la forma
+\[
+ u''(\phi)+u(\phi)=\frac{\mathcal K}{\mu h^2}.
+\]
+Su solución general es
+\[
+ u=\frac{\mathcal K}{\mu h^2}
+ \bigl(1+e\cos(\phi-\phi_0)\bigr).
+\]
+Invertir \(u\) da \eqref{eq:conica-kepleriana}; la condición de ligadura
+equivale a \(e<1\).
+\end{proof}
+
+La velocidad areolar es
+\[
+ \frac{\mathrm dA}{\mathrm dt}=\frac h2.
+ \tag{K6}\label{eq:segunda-ley-kepler}
+\]
+Para una elipse de semieje mayor \(a\), integrar
+\eqref{eq:segunda-ley-kepler} durante un periodo produce
+\[
+ A_{\rm ell}=\pi ab,
+ \qquad
+ b=a\sqrt{1-e^2},
+ \qquad
+ p=a(1-e^2)=\frac{\mu h^2}{\mathcal K}.
+\]
+Por tanto,
+\(T=2A_{\rm ell}/h\), y al eliminar \(b\), \(p\) y \(h\) se obtiene
+\[
+ T^2=\frac{4\pi^2\mu}{\mathcal K}\,a^3.
+ \tag{K7}\label{eq:tercera-ley-kepler}
+\]
+En el problema gravitatorio de prueba,
+\(\mathcal K=G M\mu\), y
+\eqref{eq:tercera-ley-kepler} se reduce a
+\(T^2=4\pi^2a^3/(GM)\) \cite{Kepler1609,Newton1687}.
+
+El teorema de Gauss del grafo es exacto. Bajo isotropía y distancia
+declaradas, el flujo produce el campo inverso al área; el límite continuo
+transporta después ese campo al lagrangiano central y a las órbitas
+keplerianas escritas arriba.
+
+\section{Cubierta de Levi--Civita y banda de Möbius}
+\label{sec:levi-civita-mobius-kepler}
+
+En el plano complejo sin el origen, la aplicación de Levi--Civita
+\[
+ q=z^2
+ \tag{K8}\label{eq:cubierta-levi-civita}
+\]
+es una doble cubierta. Una vuelta de \(q\) alrededor del origen intercambia
+los dos levantamientos \(z\) y \(-z\); hacen falta dos vueltas para cerrar el
+levantamiento. Es
+un testigo exacto de memoria \(\mathbb Z_2\). No es, sin embargo, una banda
+de Möbius: la regularización completa del problema de Kepler exige también
+reparametrizar el tiempo y transformar los momentos.
+
+Sea ahora \(\gamma:S^1\hookrightarrow\mathbb R^2\) un embedding cuya imagen
+es una órbita elíptica, y fijemos \(\varepsilon>0\). Definimos
+\[
+ M_\gamma
+ :=([0,2\pi]\times[-\varepsilon,\varepsilon])/
+ \bigl((0,u)\sim(2\pi,-u)\bigr).
+ \tag{K9}\label{eq:banda-mobius-orbita}
+\]
+
+\begin{theorem}[Periodo orientado de la banda orbital]
+\label{thm:periodo-orientado-banda-orbital}
+\(M_\gamma\) es una banda de Möbius cuyo núcleo es \(\gamma\). Una sección
+de la línea de signo posee holonomía
+\[
+ \mathcal H(\gamma)=-I,
+ \qquad
+ \mathcal H(\gamma^2)=I.
+ \tag{K10}\label{eq:holonomia-banda-orbital}
+\]
+Por tanto, su retorno como sección orientada requiere dos vueltas.
+\end{theorem}
+
+\begin{proof}
+La identificación de las fibras extremas mediante \(u\mapsto-u\) es la
+construcción estándar de la banda de Möbius. La holonomía de una vuelta es
+la involución de la fibra; su cuadrado es la identidad.
+\end{proof}
+
+La cubierta \eqref{eq:cubierta-levi-civita} y la banda
+\eqref{eq:banda-mobius-orbita} comparten una monodromía de orden dos, pero no
+son objetos isomorfos. Esta distinción impide deducir una orientación de
+partícula--antipartícula a partir de la regularización de Levi--Civita sin un
+mapa adicional.
+
+\section{Condición semiclásica de Sommerfeld con holonomía}
+\label{sec:sommerfeld-holonomia-banda}
+
+Sea
+\[
+ J_\gamma:=\oint_\gamma\mathbf p\cdot\mathrm d\mathbf q
+\]
+la acción de un ciclo y supóngase que el transporte semiclásico aporta la
+fase \(\exp(\mathrm iJ_\gamma/\hbar_{\rm int})\). Si la línea real asociada
+posee holonomía \(\varepsilon_\gamma\in\{+1,-1\}\), la condición de cierre de
+la sección complejificada es
+\[
+ \varepsilon_\gamma
+ \exp\!\left(\frac{\mathrm iJ_\gamma}{\hbar_{\rm int}}\right)=1.
+ \tag{K11}\label{eq:cierre-fase-holonomia-sommerfeld}
+\]
+
+\begin{proposition}[Desplazamiento de media unidad por holonomía de signo]
+\label{prop:desplazamiento-sommerfeld-holonomia}
+Bajo las hipótesis anteriores,
+\[
+ \begin{array}{lll}
+ \varepsilon_\gamma=+1
+ &\Longrightarrow&
+ J_\gamma=2\pi\hbar_{\rm int}n,\\[1mm]
+ \varepsilon_\gamma=-1
+ &\Longrightarrow&
+ J_\gamma=2\pi\hbar_{\rm int}\left(n+\dfrac12\right),
+ \end{array}
+ \qquad n\in\mathbb Z.
+ \tag{K12}\label{eq:cuantizacion-sommerfeld-holonomia}
+\]
+\end{proposition}
+
+\begin{proof}
+La \cref{eq:cierre-fase-holonomia-sommerfeld} exige una fase igual a uno en
+el sector trivial e igual a menos uno en el sector de signo. Sus argumentos
+difieren, respectivamente, de un múltiplo entero o semientero de \(2\pi\).
+\end{proof}
+
+La proposición es una consecuencia exacta de la fase y de la holonomía
+declaradas; no selecciona por sí sola el Hamiltoniano de Coulomb, un número
+cuántico físico ni un espectro atómico \cite{Sommerfeld1916}. En una
+cuantización EBK deben añadirse los índices de Maslov de los ciclos
+correspondientes, sin contar dos veces el desplazamiento topológico.
+
+Relativamente al lector de orientación, las dos hojas locales pueden
+representar las rutas \(\gamma\) y \(\gamma^\vee\) y enlazarse con las
+dos orientaciones del entrelazamiento bicapa definido en
+\cref{def:entropia-bicapa-rev6}. Esta correspondencia no identifica
+esas rutas con funciones de Green avanzadas o retardadas ni afirma que la
+entropía cause la cónica kepleriana: la órbita procede de
+\eqref{eq:ecuacion-central-kepler}; la entropía mide, después de una
+completación de Hilbert, la correlación entre hojas.
+
+\begin{criterion}[Límite Kepler--Sommerfeld]
+\label{crit:limite-kepler-sommerfeld}
+La realización queda refutada o indebidamente tipada si se obtiene una ley
+inversa al cuadrado sin declarar isotropía; si
+\(\mathcal K\) o \(G\) se introducen como escalares sin recta dimensional;
+si la cubierta \(q=z^2\) se identifica con una banda de Möbius; si
+\eqref{eq:cuantizacion-sommerfeld-holonomia} se publica como espectro exacto
+sin Hamiltoniano, ciclos e índices de Maslov; o si se atribuye
+entrelazamiento a una mera inversión determinista de ruta.
+\end{criterion}

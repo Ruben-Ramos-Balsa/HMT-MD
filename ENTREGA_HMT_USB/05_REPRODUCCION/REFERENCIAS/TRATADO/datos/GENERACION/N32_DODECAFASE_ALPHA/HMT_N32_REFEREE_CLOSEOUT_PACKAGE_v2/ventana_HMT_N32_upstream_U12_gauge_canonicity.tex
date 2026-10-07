@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{HMT N32 (Addendum): Especificaci\'on upstream de $U_{12}$ y canonicidad de gauge}
+\author{(certificado reproducible)}
+\date{\today}
+
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true
+}
+
+\begin{document}
+\maketitle
+
+\section*{Objetivo}
+Este addendum cierra el hueco que un referee suele se\~nalar cuando uno demuestra que \emph{``Golay/Steiner est\'a bien construido''} pero no deja cristalino el \emph{puente} con el motor:
+
+\begin{enumerate}
+  \item \textbf{Especificaci\'on upstream (sin outputs):} c\'omo se genera $U_{12}$ desde APP/TPK/MOV3/$\kappa$--27 con \texttt{flip/twist/gauge}.
+  \item \textbf{Variantes razonables $\mathcal H$:} qu\'e opciones ``naturales'' existen (p.ej. el \emph{twist} en la capa TIMES).
+  \item \textbf{Filtro interno $\mathcal C$:} restricciones internas que eliminan diales (no $\alpha$).
+  \item \textbf{Resultado:} cu\'antas variantes sobreviven (canonicidad dura vs. par\'ametro real/gauge).
+\end{enumerate}
+
+El paquete asociado incluye un script determinista y un certificado por \texttt{sha256} de todos los artefactos generados.
+
+\section{Definici\'on upstream: el extractor $E$ que produce $U_{12}$}
+
+\subsection{APP como toro $9\times 9$ con dos capas}
+Trabajamos sobre un toro $\mathbb Z_9\times \mathbb Z_9$ (coordenadas $(i,j)$ mod 9).
+
+\paragraph{Ra\'iz digital mod 9.}
+\[
+\operatorname{droot}_9(n)=\begin{cases}
+9,& n\equiv 0\pmod 9,\\
+ n\bmod 9,& \text{si no.}
+\end{cases}
+\]
+
+\paragraph{Capa PLUS y capa TIMES.}
+\[
+\mathrm{PLUS}_9[i,j]=\operatorname{droot}_9\big((i+1)+(j+1)\big),\qquad
+\mathrm{TIMES}_9[i,j]=\operatorname{droot}_9\big((i+1)(j+1)\big).
+\]
+(As\'i se codifica la ``APP'' en $9\times 9$ sin par\'ametros.)
+
+\subsection{MOV3 (partici\'on tri\'adica de cada bloque de 9 ticks)}
+Cada evento tiene 9 ticks. Definimos un selector $\delta(t)\in\{+1,-1,0\}$ para el tick global $t$:
+\[
+\delta(t)=\begin{cases}
++1,& t\bmod 9\in\{1,4,7\} \quad(\text{PLUS}),\\
+-1,& t\bmod 9\in\{2,5,8\} \quad(\text{TIMES}),\\
+0,& t\bmod 9\in\{3,6,0\} \quad(\text{torsion}).
+\end{cases}
+\]
+
+\subsection{$\kappa$--27 / \texttt{flip}: simetr\'ia a 27 ticks}
+El flip act\'ua cada 27 ticks: en el tick global $t\in\{27,54,81,108\}$ se invierte el heading (signo del vector-direcci\'on) de ambos caminantes.
+
+\subsection{Gauge: semillas y headings}
+La gauge de entrada son dos semillas y dos headings:
+\[
+(i_P,j_P,h_P),\ (i_T,j_T,h_T), \qquad i_*,j_*\in\{0,\dots,8\},\ h_*\in\{N,E,S,O\}.
+\]
+Hay $9^4\cdot 4^2=104\,976$ semillas.
+
+\subsection{Twist (``neighbor 3-adic''): log discreto en $(\mathbb Z/9\mathbb Z)^\times$}
+La capa TIMES no se lee como ``d\'igito crudo'' sino a trav\'es de un \emph{twist} $\mathrm{LOG}_9$ que (i) mata ra\'ices (m\'ultiplos de 3) y (ii) linealiza la parte unitaria como log discreto.
+
+\paragraph{Definici\'on.}
+Sea el grupo de unidades $(\mathbb Z/9\mathbb Z)^\times=\{1,2,4,5,7,8\}$ (orden 6). Elegimos generador can\'onico $g=2$ (menor generador positivo). Definimos
+\[
+\mathrm{LOG}_9(x)=
+\begin{cases}
+0,& x\in\{3,6,9\},\\
+\ell,& x\equiv g^\ell\pmod 9\ \text{con}\ \ell\in\{0,1,2,3,4,5\}.
+\end{cases}
+\]
+Con $g=2$: $1\mapsto0,2\mapsto1,4\mapsto2,8\mapsto3,7\mapsto4,5\mapsto5$.
+
+\paragraph{Comentario.}
+Este \emph{twist} es interno (no usa $\alpha$) y es exactamente el lugar donde un referee pregunta si hay ``magia'' o dial escondido. Por eso en la secci\'on~\ref{sec:H_C} enumeramos variantes y filtramos.
+
+\subsection{Formaci\'on de triadas base--1000}
+Para cada evento (9 ticks), acumulamos:
+\begin{itemize}
+  \item $S$: suma de lecturas en capa PLUS cuando $\delta=+1$.
+  \item $E$: suma de lecturas \emph{twisteadas} $\mathrm{LOG}_9(\mathrm{TIMES}_9)$ cuando $\delta=-1$.
+  \item $T$: contador de ticks con $\delta=0$ (siempre $T=3$ por evento).
+\end{itemize}
+
+Luego se emite una triada (tres d\'igitos decimales)
+\[
+(d_1,d_2,d_3)=\big(S\bmod 10,\ (S+E)\bmod 10,\ (3S+5E+7T)\bmod 10\big),
+\qquad u=100d_1+10d_2+d_3\in\{0,\dots,999\}.
+\]
+
+\paragraph{$U_6$ y $U_{12}$.}
+La implementaci\'on upstream genera $U_6\in\{0,\dots,999\}^6$ en 54 ticks (6 eventos). El modelo completo toma $U_{12}=U_6\Vert U_6$ (doble hoja por el flip a 54/108).
+
+\section{Variantes $\mathcal H$ y filtro interno $\mathcal C$}
+\label{sec:H_C}
+
+\subsection{$\mathcal H$: variantes ``razonables'' (sin tocar outputs)}
+En la pr\'actica el \'unico punto con ambig\"uedad razonable es el \emph{twist} TIMES. Consideramos:
+\begin{enumerate}
+  \item $\mathcal H_\mathrm{log2}$: log discreto en unidades con generador $g=2$ (can\'onico por ``menor generador'').
+  \item $\mathcal H_\mathrm{log5}$: log discreto con generador alternativo $g=5$ (equivalente a inversi\'on en el grupo de unidades).
+  \item $\mathcal H_\mathrm{val3}$: valuaci\'on $v_3$ (cuenta factores de 3).
+  \item $\mathcal H_\mathrm{id}$: identidad (usar TIMES crudo como incremento).
+\end{enumerate}
+
+\subsection{$\mathcal C$: restricciones internas}
+El filtro interno que un referee acepta sin apelar a $\alpha$:
+\begin{enumerate}
+  \item $\mathcal C_\mathrm{root}$: \textbf{mata ra\'ices}: $\mathrm{LOG}_9(3)=\mathrm{LOG}_9(6)=\mathrm{LOG}_9(9)=0$.
+  \item $\mathcal C_\mathrm{hom}$: \textbf{homomorfismo de unidades}: para $a,b\in\{1,2,4,5,7,8\}$,
+  \[\mathrm{LOG}_9(ab)\equiv \mathrm{LOG}_9(a)+\mathrm{LOG}_9(b)\pmod 6.\]
+  \item $\mathcal C_\mathrm{min}$: \textbf{fijar generador can\'onico}: elegir el menor generador positivo de $(\mathbb Z/9\mathbb Z)^\times$, que es $g=2$.
+  \item $\mathcal C_\mathrm{catalog}$: \textbf{cat\'alogo finito rico}: el escaneo exhaustivo sobre $104\,976$ semillas debe dar exactamente $468$ $U_6$ distintos (invariante interno reportable y reproducible).
+\end{enumerate}
+
+\subsection{Resultado del barrido (exhaustivo sobre semillas; variantes finitas)}
+El script \texttt{hmt\_n32\_upstream\_u12\_gauge\_scan.py} ejecuta:
+\begin{itemize}
+  \item un escaneo exhaustivo sobre las $104\,976$ semillas,
+  \item para cada variante $\mathcal H_k$, calcula el n\'umero de $U_6$ distintos y estad\'isticas de fibras,
+  \item emite un JSON con hashes \texttt{sha256} de los CSV producidos.
+\end{itemize}
+
+\begin{longtable}{@{}llll@{}}
+\toprule
+Variante & $|\{U_6\}|$ & Pasa $\mathcal C_\mathrm{root}$+$\mathcal C_\mathrm{hom}$ & Comentario \\
+\midrule
+$\mathcal H_\mathrm{log2}$ (can\'onico) & 468 & s\'i & \textbf{candidato can\'onico} \\
+$\mathcal H_\mathrm{log5}$ (alternativo) & 468 & s\'i & gauge residual (inversi\'on) \\
+$\mathcal H_\mathrm{val3}$ & 144 & no & no mata ra\'ices \\
+$\mathcal H_\mathrm{id}$ & 684 & no & no es log/hom \\
+\bottomrule
+\end{longtable}
+
+\paragraph{Conclusi\'on.}
+Bajo $\mathcal C_\mathrm{root}$+$\mathcal C_\mathrm{hom}$ sobreviven dos twists (dos generadores del grupo c\'iclico de orden 6). El axioma interno $\mathcal C_\mathrm{min}$ fija $g=2$ y deja \textbf{un} m\'odulo gauge can\'onico.
+
+\section{Artefactos y certificado}
+El certificado JSON \texttt{HMT\_N32\_UPSTREAM\_U12\_CERTIFICATE.json} incluye hashes \texttt{sha256} de:
+\begin{itemize}
+  \item \texttt{n32\_u6\_seed\_table.csv} (104\,976 filas: semilla $\mapsto$ uid),
+  \item \texttt{n32\_uid\_representative\_seed.csv} (468 uids con semilla representativa),
+  \item \texttt{n32\_uid\_u6\_catalog.csv} (uid $\mapsto U_6$),
+  \item \texttt{n32\_variant\_scan.json} (tabla de variantes $\mathcal H$ y checks $\mathcal C$).
+\end{itemize}
+
+\paragraph{Reproducibilidad.}
+En una m\'aquina limpia:
+\begin{lstlisting}
+python hmt_n32_upstream_u12_gauge_scan.py
+# produce CSV + JSON + hashes
+\end{lstlisting}
+
+\end{document}

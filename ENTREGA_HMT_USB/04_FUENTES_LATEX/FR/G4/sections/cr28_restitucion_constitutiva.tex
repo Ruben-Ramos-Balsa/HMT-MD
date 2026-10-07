@@ -1,0 +1,377 @@
+% BEGIN CR28_CONSTITUTIVE_INVERSE
+\section{Récupération fonctionnelle, composition et moment de Catalan}
+\label{cr28:sec:restitucion-constitutiva}
+
+La réponse des incidences \(90/120\) conserve plus d'information qu'une valeur scalaire isolée. Dans la même notation que \eqref{eq:three-four-completion}, écrivons
+\[
+ f(s)=\frac{1+s+s^2}{1+s+s^2+s^3},\qquad
+ \mathcal D=s\,\frac{d}{ds},\qquad
+ \mathcal V=f(T^{30}).
+\]
+Les marques \(P_\pm\) maintiennent l'orientation des canaux. Le transport angulaire est l'antécédent de la réponse ; sa reconstruction fonctionnelle retrouve cette représentation sans remplacer l'archive de mémoire dont elle provient.
+
+\begin{theorem}[Inversion de la réponse constitutive]
+\label{cr28:thm:inversion-constitutiva} La fonction \(f\) est une bijection décroissante de \((0,1)\) sur \((3/4,1)\). Son inverse \(\psi\) associe à \(r\) l'unique racine \(s\in(0,1)\) de
+\begin{equation}
+ r s^3+(r-1)(1+s+s^2)=0.
+ \label{cr28:eq:cubic}
+\end{equation}
+Les deux réponses étiquetées \(r_\pm\) déterminent
+\begin{equation}
+ s_\pm=\psi(r_\pm),\quad q_\pm=s_\pm^{1/30},\quad
+ x=-\frac12\log(q_+q_-),\quad
+ y=\frac12\log\frac{q_-}{q_+}.
+ \label{cr28:eq:angular-recovery}
+\end{equation}
+Pour l'opérateur complet \(S=\mathcal V^2\), positif et de spectre dans \((9/16,1)\), le calcul fonctionnel fournit
+\begin{equation}
+ T=\bigl[\psi(S^{1/2})\bigr]^{1/30},\qquad
+ \det T=\det\bigl[\psi(S^{1/2})\bigr]^{1/30}.
+ \label{cr28:eq:operator-recovery}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La dérivée négative de \eqref{eq:vacuum-monotonic34} et les limites \(f(0^+)=1,\ f(1^-)=3/4\) prouvent la bijection. Multiplier \(f(s)=r\) par son dénominateur positif donne \eqref{cr28:eq:cubic}. La racine positive d'ordre \(30\) retrouve \(q_\pm\) ; la somme et la différence de \(\log q_\pm=-x\mp y\) donnent les deux coordonnées angulaires. Par positivité, \(S^{1/2}=\mathcal V\). Appliquer \(\psi\) à chaque projecteur spectral retrouve \(T^{30}\) et la racine positive donne \(T\). Le calcul de son déterminant conclut.
+\end{proof}
+
+Cette récupération de l'opérateur complet ne s'étend pas à un déterminant isolé. En effet,
+\[
+ T_1=\operatorname{diag}(1/5,1/3),\qquad
+ T_2=\operatorname{diag}(1/6,2/5)
+\]
+ont pour déterminant \(1/15\), mais possèdent des spectres distincts dans la même chambre contractive. L'injectivité démontrée implique \(f(T_1^{30})^2\ne f(T_2^{30})^2\). Les deux canaux et leurs marques préservent la récupération ; leur réduction à un produit perd de l'information.
+% END CR28_CONSTITUTIVE_INVERSE
+
+% BEGIN CR28_TRANSPORT_COMPOSITION
+% Recuperación expositiva de INTERRELACIONES_ESTRUCTURALES_VACIO.md, §§6--8.
+% Insertar después de la inversión cúbica y antes de las coordenadas logarítmicas.
+\subsection{Composition transportée des réponses constitutives}
+\label{cr28:comp-sec}
+
+Le transport angulaire et les incidences $90$ et $120$ proviennent de la
+même structure APP--TRIT--TPK : les feuillets conservent les évaluations et
+leurs retenues ; le régime tritique conserve l’orientation ; le calendrier
+TPK transporte la phase et la mémoire jusqu’aux canaux angulaires. La réponse
+constitutive applique à ces canaux la fonction $f$ de
+\eqref{eq:vacuum-monotonic34}. Son inversion permet d’exprimer, dans les coordonnées
+de réponse, la composition des transports du même repère. On conserve
+ainsi l’ordre constructif : transport, composition et évaluation spectrale.
+L’opération obtenue agit sur cette représentation de l’état enrichi ;
+son inverse retrouve les canaux, tandis que l’histoire complète de mémoire
+demeure dans la structure de provenance.
+
+Soient $s=q^{30}$ et $\psi=f^{-1}$. L’exposant $30$ est le plus grand commun
+diviseur des incidences $90$ et $120$. L’inversion cubique détermine
+$\psi:(3/4,1)\longrightarrow(0,1)$. En adjoignant la réponse de frontière
+$f(1)=3/4$, nous étendons la bijection à
+\[
+ \psi:D\longrightarrow(0,1],\qquad D=[3/4,1).
+\]
+Sur cette frontière, on utilise la fonction rationnelle $f$ ; le quotient
+$(1-q^{90})/(1-q^{120})$ y a une singularité éliminable.
+
+\begin{proposition}[Monoïde des réponses et coordonnée additive]
+\label{cr28:comp-monoid}
+L’opération
+\begin{equation}
+ r\odot t=f\bigl(\psi(r)\psi(t)\bigr),\qquad r,t\in D,
+ \label{cr28:comp-law}
+\end{equation}
+fait de $D$ un monoïde commutatif et simplifiable d’élément neutre $3/4$.
+L’application
+\begin{equation}
+ \ell(r)=-\frac1{30}\log\psi(r)
+ \label{cr28:comp-character}
+\end{equation}
+est un isomorphisme de ce monoïde avec $(\mathbb R_{\geq0},+)$.
+L’intervalle $(3/4,1)$ est stable par $\odot$ ; le neutre appartient à
+l’extension de frontière. Le seul élément inversible dans $D$
+est le neutre.
+\end{proposition}
+\begin{proof}
+Le produit de deux éléments de $(0,1]$ appartient au même intervalle et
+\[
+ \psi(r\odot t)=\psi(r)\psi(t).
+\]
+Pour trois réponses, les deux ordres d’association ont pour image
+$\psi(r)\psi(t)\psi(u)$ ; l’injectivité de $\psi$ prouve
+l’associativité. La commutativité provient du produit scalaire. Si
+$r\odot t=r\odot u$, la positivité de $\psi(r)$ permet de simplifier et
+d’obtenir $\psi(t)=\psi(u)$, donc $t=u$. Le paramètre $1$ correspond à
+$3/4$ et fournit l’identité. Le logarithme transforme le produit en
+somme, et son image dans $(0,1]$ prouve que $\ell$ est une bijection sur
+$\mathbb R_{\geq0}$. En particulier, pour la réponse d’un canal $q$,
+$\ell(r)=-\log q$. Si les deux paramètres sont strictement inférieurs à
+$1$, leur produit l’est aussi. Enfin, deux nombres de $(0,1]$
+ont pour produit $1$ uniquement s’ils sont tous deux $1$.
+\end{proof}
+
+\begin{proposition}[Simplification admissible et prolongement inverse]
+\label{cr28:comp-inverse}
+Pour $r,u\in D$, l’équation $r\odot t=u$ a une solution $t\in D$
+exactement lorsque $u\geq r$. Cette solution est unique et donnée par
+\begin{equation}
+ t=f\!\left(\frac{\psi(u)}{\psi(r)}\right).
+ \label{cr28:comp-cancellation}
+\end{equation}
+La même fonction $f$ est une bijection de $(0,\infty)$ sur $(0,1)$.
+Avec cette extension de $\psi$, la loi~\eqref{cr28:comp-law} transporte le
+groupe multiplicatif des paramètres positifs sur l’intervalle $(0,1)$.
+L’inversion du groupe satisfait
+\begin{equation}
+ r^{\ominus}=\psi(r)r,\qquad
+ r\odot r^{\ominus}=\frac34.
+ \label{cr28:comp-group-inverse}
+\end{equation}
+\end{proposition}
+\begin{proof}
+L’équation équivaut à
+$\psi(t)=\psi(u)/\psi(r)$. Ce quotient appartient à $(0,1]$
+exactement lorsque $\psi(u)\leq\psi(r)$, ce qui, par monotonie décroissante,
+équivaut à $u\geq r$. La bijection prouve l’existence et l’unicité.
+La dérivée de \eqref{eq:vacuum-monotonic34} est négative pour tout $s>0$ ;
+les limites de $f$ en $0$ et à l’infini sont $1$ et $0$, respectivement.
+Cela établit la bijection étendue. En multipliant le numérateur et le
+dénominateur par $s^3$, on obtient
+\[
+ f(s^{-1})=\frac{s^3+s^2+s}{s^3+s^2+s+1}=s f(s).
+\]
+L’inverse multiplicatif de $s=\psi(r)$ a donc pour réponse
+$\psi(r)r$. Sa composition avec $r$ correspond au paramètre $1$.
+\end{proof}
+
+Le prolongement à $s>1$, ou de manière équivalente à $q>1$, est l’extension
+algébrique du lecteur. Le secteur physique contractant du chapitre conserve
+son domaine déclaré. La coordonnée $\ell$ se prolonge en un isomorphisme
+avec $(\mathbb R,+)$ et change de signe sous l’inversion du groupe.
+
+\subsubsection{Réalisation opératorielle dans un repère de feuillets commun}
+
+\begin{proposition}[Composition avec projecteurs marqués]
+\label{cr28:comp-operator}
+Soient $\mathcal R=\mathcal R^*$, $\mathcal R^2=I$ et
+$P_\pm=(I\pm\mathcal R)/2$. Pour $j=a,b$, soient
+\[
+ T_j=q_{j,+}P_++q_{j,-}P_-,\qquad
+ \mathcal V_j=f(T_j^{30}),\qquad 0<q_{j,\pm}<1.
+\]
+La composition $T_{a\circ b}=T_aT_b$ satisfait
+\begin{equation}
+ \mathcal V_{a\circ b}
+ =f\bigl(\psi(\mathcal V_a)\psi(\mathcal V_b)\bigr).
+ \label{cr28:comp-operator-law}
+\end{equation}
+Ses deux réponses sont $r_{a,\pm}\odot r_{b,\pm}$. Si
+$T_j=\exp[-(x_jI+y_j\mathcal R)]$ avec $x_j>|y_j|$, alors
+\begin{equation}
+ T_aT_b=
+ \exp[-((x_a+x_b)I+(y_a+y_b)\mathcal R)],
+ \label{cr28:comp-angular-addition}
+\end{equation}
+y $x_a+x_b>|y_a+y_b|$.
+\end{proposition}
+\begin{proof}
+L’orthogonalité $P_+P_-=0$ donne
+\[
+ T_aT_b=q_{a,+}q_{b,+}P_++q_{a,-}q_{b,-}P_-.
+\]
+En particulier, $T_a$ et $T_b$ commutent. Le calcul fonctionnel dans ces
+projecteurs fournit
+$\psi(\mathcal V_j)=T_j^{30}$ et
+$(T_aT_b)^{30}=T_a^{30}T_b^{30}$ ; appliquer $f$ prouve
+\eqref{cr28:comp-operator-law}. Pour toute fonction $g$ définie sur les
+deux valeurs propres, on a, plus explicitement,
+\[
+ P_\pm g(T_j)=g(q_{j,\pm})P_\pm.
+\]
+Comme $q_{j,\pm}=\exp[-(x_j\pm y_j)]$, leurs produits prouvent
+\eqref{cr28:comp-angular-addition}. L’inégalité triangulaire conclut
+$x_a+x_b>|y_a|+|y_b|\geq|y_a+y_b|$.
+\end{proof}
+
+Les coordonnées retrouvées peuvent s’écrire directement comme
+\[
+ x=\frac{\ell(r_+)+\ell(r_-)}2,\qquad
+ y=\frac{\ell(r_+)-\ell(r_-)}2.
+\]
+La composition additionne ces paires. L’échange simultané de feuillets
+permute les deux canaux de chaque transport, agit comme
+$(x,y)\mapsto(x,-y)$ et est un automorphisme de la loi composante par
+composante. L’inversion des deux transports dans l’extension algébrique
+agit comme $(x,y)\mapsto(-x,-y)$. Les deux involutions commutent et
+conservent des fonctions distinctes : l’une échange les marques d’orientation ;
+l’autre inverse le transport.
+
+Pour représenter l’échange par conjugaison, on utilise un
+opérateur $L$ satisfaisant $L\mathcal R L^{-1}=-\mathcal R$. Dans la
+représentation
+\[
+ \mathcal R=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+ L=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+la multiplication directe donne $LP_\pm L^{-1}=P_\mp$ et, par conséquent,
+$LT_jL^{-1}=q_{j,-}P_++q_{j,+}P_-$. La conjugaison par
+$\mathcal R$ conserve ses propres projecteurs. Une trace qui réunit les
+canaux ne remplace pas non plus les projecteurs dans cette identité fonctionnelle :
+l’information de leurs étiquettes intervient dans la composition.
+
+L’hypothèse de repère commun est substantielle. Par exemple, les opérateurs
+positifs définis
+\[
+ A_0=\begin{pmatrix}1/2&0\\0&1/3\end{pmatrix},\qquad
+ B_0=\begin{pmatrix}1/2&1/6\\1/6&1/2\end{pmatrix}
+\]
+ont des valeurs propres positives, mais
+\[
+ A_0B_0=\begin{pmatrix}1/4&1/12\\1/18&1/6\end{pmatrix}
+\]
+n’est pas autoadjoint. La proposition spécifie la composition des
+transports dans les projecteurs communs ; son domaine ne comprend pas un mélange
+arbitraire de milieux matériels. La réalisation d’une concaténation de
+chemins HMT conserve en outre ses données de mémoire : la fermeture algébrique du
+cône de paramètres décrit la représentation et ne sélectionne pas à elle seule
+de nouveaux chemins primaires.
+
+\subsubsection{Produit de canaux et composition de transports}
+
+La vitesse normalisée d’un état reste déterminée par
+\[
+ \widehat c=(r_+r_-)^{-1}.
+\]
+Ici, le produit ordinaire réunit les deux réponses de ce même état.
+La loi $\odot$ évalue une autre opération : la composition de deux transports
+dans chaque feuillet. Le calcul exact suivant distingue leurs arguments :
+\begin{equation}
+ f(1/2)=\frac{14}{15},\qquad
+ \frac{14}{15}\odot\frac{14}{15}=f(1/4)=\frac{84}{85}
+ \ne\frac{196}{225}=\left(\frac{14}{15}\right)^2.
+ \label{cr28:comp-rational-example}
+\end{equation}
+Les fractions de cet exemple sont des paramètres algébriques de vérification.
+L’expression de $\widehat c$ et les identités constitutives précédentes
+restent inchangées. Le contenu ajouté est une loi explicite pour
+transporter la composition et retrouver sa coordonnée angulaire additive.
+
+% END CR28_TRANSPORT_COMPOSITION
+
+% BEGIN CR28_CATALAN_RECOVERY
+\subsection{Restitution fonctionnelle du moment orienté}
+\label{cr28:sec:catalan-recovery}
+
+La relation différentielle~\eqref{cr28:eq:catalan-problem} admet une inverse qui conserve le système complet des moments. Son domaine est la fonction constitutive produite par les secteurs du cycle, avec l'orientation de~\eqref{eq:vacuum-angular-channels}. Les incidences $90=3\cdot30$ et $120=4\cdot30$ fixent cette fonction avant son évaluation dans les canaux $s_\pm=q_\pm^{30}$. La condition à l'origine correspond à la disparition du moment lorsque son argument contractif s'annule. Cette condition détermine également les constantes d'intégration.
+
+\begin{theorem}[Restitution intégrale et unicité]
+\label{cr28:thm:catalan-recovery}
+Soit $f(s)=(1-s^3)/(1-s^4)$, pour $0<s<1$, la réponse
+de~\eqref{eq:three-four-completion}, et soit $\mathcal D=s\,d/ds$.
+Il existe une unique fonction $F\in C^2((0,1))$ qui satisfait
+\begin{equation}
+ \mathcal D^2F(s)=\frac{s(1+s)}{1+s+s^2}f(s),
+ \qquad \lim_{s\downarrow0}F(s)=0.
+ \label{cr28:eq:catalan-problem}
+\end{equation}
+Elle est donnée par
+\begin{align}
+ F(s)&=\int_0^s\log\frac{s}{t}\,
+          \frac{1+t}{1+t+t^2}f(t)\,dt
+       =\int_0^s\frac{\log(s/t)}{1+t^2}\,dt
+       =\mathcal C_2(s),
+ \label{cr28:eq:catalan-integral}\\
+ f(s)&=\frac{1+s+s^2}{s(1+s)}\mathcal D^2F(s).
+ \label{cr28:eq:catalan-inverse}
+\end{align}
+L’extension continue à $s=1$ retrouve $F(1)=G_{\rm Cat}$.
+\end{theorem}
+\begin{proof}
+La factorisation $1+t+t^2+t^3=(1+t)(1+t^2)$ donne
+\[
+ \frac{1+t}{1+t+t^2}f(t)=\frac1{1+t^2}.
+\]
+L’intégrande de~\eqref{cr28:eq:catalan-integral} est
+intégrable en zéro, parce que
+\[
+ 0\leq F(s)\leq\int_0^s\log(s/t)\,dt=s.
+\]
+Par conséquent, $F(s)\to0$. La différentiation sur l’intervalle ouvert,
+d’abord sur un intervalle tronqué, puis par convergence dominée,
+produit
+\[
+ \mathcal DF(s)=\int_0^s\frac{dt}{1+t^2},
+ \qquad \mathcal D^2F(s)=\frac{s}{1+s^2}
+     =\frac{s(1+s)}{1+s+s^2}f(s).
+\]
+En particulier, $F$ est de classe $C^2$ et satisfait l’équation.
+Si $F_1,F_2$ sont deux solutions, la différence $H=F_1-F_2$
+satisfait $\mathcal D^2H=0$. Au moyen de $z=\log s$, on obtient
+$d^2H(e^z)/dz^2=0$, donc $H(s)=a\log s+b$.
+L’existence de la limite nulle lorsque $s\downarrow0$ impose d’abord
+$a=0$, puis $b=0$. La condition sur $F$ détermine donc
+la solution et également la limite $\mathcal DF(s)\to0$.
+
+Pour $s<1$, le développement géométrique de $(1+t^2)^{-1}$ et
+l’intégrabilité absolue de ses termes pondérés permettent d’intégrer :
+\[
+ \int_0^s t^{2k}\log(s/t)\,dt
+     =\frac{s^{2k+1}}{(2k+1)^2},\qquad
+ F(s)=\sum_{k\geq0}\frac{(-1)^ks^{2k+1}}{(2k+1)^2}.
+\]
+La série représente le système intégral~\eqref{cr28:eq:catalan-integral}. La convergence absolue et uniforme de cette dernière série sur $[0,1]$ autorise le passage à l'extrémité $s=1$. Dans l'intégrale, la majoration intégrable $\log(1/t)$ l'autorise également, en prolongeant l'intégrande par zéro pour $t>s$. Enfin, isoler $f$ dans l'équation différentielle donne \eqref{cr28:eq:catalan-inverse}, avec des dénominateurs positifs sur $(0,1)$.
+\end{proof}
+
+La limite du moment et celle de sa dérivée seconde sont prises
+dans leurs classes de convergence respectives. En particulier,
+\[
+ \lim_{s\uparrow1}\mathcal D^2\mathcal C_2(s)=\frac12
+\]
+est la limite radiale d’Abel de la série dérivée. L’évaluation
+de $\mathcal C_2(1)$ utilise directement sa série absolument
+convergente. Cette distinction conserve le même opérateur de profondeur
+à l’intérieur et dans sa lecture de frontière.
+
+\subsection{Compatibilité de la restitution avec les canaux et la vitesse}
+\label{cr28:sec:channels-velocity}
+
+Le théorème restitue une fonction à partir d'une autre fonction préalablement construite. L'inversion cubique~\eqref{cr28:eq:cubic} agit en revanche sur les évaluations $r_\pm$ : elle retrouve les arguments $s_\pm$ dans ce système fixé. La composition des deux opérations conserve l'orientation du quart de tour, les étiquettes $P_\pm$ et les incidences du transport. Ainsi, $G_{\rm Cat}=\mathcal C_2(1)$ est la lecture à l'extrémité d'un objet fonctionnel qui participe aussi aux réponses intérieures $r_\pm=f(s_\pm)$.
+
+Pour $\mathcal V_m=\mathcal V\otimes I_{9^m}$ et
+$\tau_m=\operatorname{Tr}/(2\cdot9^m)$, la lecture de vitesse
+maintient exactement la normalisation de
+\eqref{eq:vacuum-traces} :
+\begin{equation}
+ \exp[-2\tau_m(\log\mathcal V_m)]
+   =\frac1{r_+r_-}
+   =(\det\mathcal V)^{-1}=\widehat c.
+ \label{cr28:eq:velocity-normalized}
+\end{equation}
+En effet, chaque valeur propre $r_\pm$ se répète $9^m$ fois, de sorte
+que $2\tau_m(\log\mathcal V_m)=\log r_++\log r_-$.
+L’identité utilise le déterminant de la réalisation à deux feuillets
+et la trace normalisée de son amplification. Les sections
+dimensionnelles déjà fixées donnent alors
+\[
+ c_{\rm int}=c_{\rm vac}=\widehat c\,u_C,
+ \qquad \ell_0=c_{\rm vac}t_0,
+\]
+avec le même état, le même système de coordonnées et la même durée élémentaire que~\eqref{cr28:eq:same-velocity}. La restitution fonctionnelle conserve cette section de vitesse lorsqu'elle la compose avec l'action et la longueur ; la multiplicité spectrale est absorbée par la normalisation déclarée.
+
+% END CR28_CATALAN_RECOVERY
+
+% BEGIN CR28_CONSTITUTIVE_RADIAL_LINK
+\subsection{Une même section constitutive dans l'action, la longueur et la gravité}
+\label{cr28:sec:constitutive-radial} Les relations \eqref{eq:vacuum-sections} et la restitution précédente maintiennent une unique section de vitesse :
+\begin{equation}
+ c_{\rm int}=c_{\rm vac}=\widehat c\,u_C,\qquad
+ \ell_0=c_{\rm int}t_0,\qquad
+ c_{\rm int}=(\mu_{\rm vac}\varepsilon_{\rm vac})^{-1/2}.
+ \label{cr28:eq:same-velocity}
+\end{equation}
+La dernière égalité est une identité de sections dans des bases dimensionnelles compatibles. La démonstration radiale du \cref{g26:sec:rigidez-radial-es} construit d'abord \(L=(5759/23040)\alpha^{16}L_*\), puis détermine
+\begin{equation}
+ G_{\rm ret}=\frac{c_{\rm int}^3L^2}{\hbar_{\rm ret}}
+ =\frac{L^2}
+ {\hbar_{\rm ret}(\mu_{\rm vac}\varepsilon_{\rm vac})^{3/2}}.
+ \label{cr28:eq:constitutive-gravity}
+\end{equation}
+La seconde expression résulte de la substitution de l'identité constitutive dans la première ; elle n'introduit aucun nouvel étalonnage des deux canaux. En coordonnées, si \(c_{\rm int}=c_*\widehat c\), alors \(G_{\rm ret}=c_*^3\widehat c^{\,3}L^2/\hbar_{\rm ret}\). Le facteur de propagation n'intervient qu'une seule fois. La récupération de Catalan, le transport composé et la réponse radiale conservent ainsi la même origine angulaire, ses marques et sa normalisation.
+% END CR28_CONSTITUTIVE_RADIAL_LINK
+

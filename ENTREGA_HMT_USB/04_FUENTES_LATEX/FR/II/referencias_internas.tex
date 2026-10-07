@@ -1,0 +1,38 @@
+% Rendering-only remapping of inherited private bibliographic keys.
+% The shared scientific sources remain byte-identical to article I.
+\newcommand{\HMTSetCite}[2]{\expandafter\def\csname HMTcite@#1\endcsname{#2}}
+\HMTSetCite{hmtintegral}{développement et portée dans les sections~\ref{sec:k-registro} et~\ref{subsec:alpha-publicaciones-completas}}
+\HMTSetCite{hmtholonomia}{sections~\ref{hist:seccion}, \ref{mono-ampl:conexion} et~\ref{subsec:alpha-via-b}}
+\HMTSetCite{hmtedicionintegral}{section~\ref{sec:ii-dualidad-t}}
+\HMTSetCite{registro}{sections~\ref{subsec:k-registro-integral} et~\ref{sec:sello}}
+\HMTSetCite{precedencia}{section~\ref{sec:barbero}, équation~\eqref{eq:gamma}}
+\HMTSetCite{area}{section~\ref{sec:area}, équation~\eqref{eq:recover}}
+\HMTSetCite{ckm}{lecteur~\eqref{eq:ii-ckm-map} et portée de la section~\ref{sec:ii-propagacion-angular}}
+\HMTSetCite{elipse}{section~\ref{sec:ellipse} et proposition~\ref{prop:ii-t-radio}}
+\HMTSetCite{autodual}{section~\ref{sec:gravity}}
+\HMTSetCite{termica}{équation~\eqref{eq:thermalclock} et section~\ref{sec:ii-boltzmann}}
+\HMTSetCite{holst}{action~\eqref{eq:holst} et variation adjacente}
+\HMTSetCite{cpt}{équations~\eqref{eq:ii-discrete-route-action} et~\eqref{eq:ii-cp-square}}
+\HMTSetCite{mezcla}{section~\ref{sec:ii-propagacion-angular}, équations~\eqref{eq:ii-jarlskog} et~\eqref{eq:ii-cross-gram}}
+\HMTSetCite{pmnsespectral}{équations~\eqref{eq:ii-neutrino-compression}--\eqref{eq:ii-pmns-double-class}}
+\HMTSetCite{informacion}{sections~\ref{sec:ii-memoria-lectura} et~\ref{sec:ii-informacion-supervivencia}}
+\NewCommandCopy\HMTPublicCite\cite
+\ExplSyntaxOn
+\clist_new:N \l__hmt_cites_clist
+\int_new:N \l__hmt_cite_index_int
+\RenewDocumentCommand \cite { o m }
+ {
+  \group_begin:
+  \clist_set:Nn \l__hmt_cites_clist {#2}
+  \int_zero:N \l__hmt_cite_index_int
+  \clist_map_inline:Nn \l__hmt_cites_clist
+   {
+    \int_incr:N \l__hmt_cite_index_int
+    \int_compare:nNnT {\l__hmt_cite_index_int} > {1} {;~}
+    \cs_if_exist:cTF {HMTcite@##1}
+     { [\use:c {HMTcite@##1}\IfNoValueF{#1}{,~#1}] }
+     { \IfNoValueTF{#1}{\HMTPublicCite{##1}}{\HMTPublicCite[#1]{##1}} }
+   }
+  \group_end:
+ }
+\ExplSyntaxOff

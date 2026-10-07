@@ -1,0 +1,48 @@
+\begin{tikzpicture}[font=\scriptsize,cell/.style={minimum width=4.2mm,minimum height=4.2mm,inner sep=0pt,draw=hmtgray!35}]
+  \begin{scope}[xshift=0cm]
+    \node[font=\bfseries\scriptsize,hmtblue,align=center] at (1.72,.92)
+      {matriz aritmética APP\\[-.5mm]\(\Pi(i,j)=\dr(ij)\)};
+    \foreach \i in {1,...,9}{
+      \node[font=\bfseries] at (-.35,{-(\i-1)*.43}) {\i};
+      \foreach \j in {1,...,9}{
+        \pgfmathtruncatemacro{\v}{mod(\i*\j-1,9)+1}
+        \pgfmathtruncatemacro{\border}{(\i==9)||(\j==9)}
+        \pgfmathtruncatemacro{\rad}{(mod(\i,3)==0)||(mod(\j,3)==0)}
+        \ifnum\border=1
+          \node[cell,fill=hmtlightblue,text=hmtblue,font=\bfseries] at ({(\j-1)*.43},{-(\i-1)*.43}) {\v};
+        \else
+          \ifnum\rad=1
+            \node[cell,fill=hmtlightviolet] at ({(\j-1)*.43},{-(\i-1)*.43}) {\v};
+          \else
+            \node[cell,fill=white] at ({(\j-1)*.43},{-(\i-1)*.43}) {\v};
+          \fi
+        \fi
+      }
+    }
+    \foreach \j in {1,...,9}{\node[font=\bfseries] at ({(\j-1)*.43},.38) {\j};}
+    \draw[hmtgold,very thick,rounded corners=1pt] (1.075,-1.075) rectangle (1.935,-1.935);
+    \draw[hmtblue,very thick] (3.72,.22)--(3.72,-3.72)--(-.22,-3.72);
+    \node[hmtblue,anchor=north] at (1.75,-4.02) {subconjunto coordenado de la clase nula};
+  \end{scope}
+
+  \begin{scope}[xshift=5.25cm]
+    \node[draw=hmtblue,rounded corners=2pt,fill=hmtlightblue,
+      text width=6.25cm,align=left,inner sep=8pt] at (2.9,-1.35) {%
+      \textbf{Ley interna de acumulación}\par\smallskip
+      \[
+        \Pi(i,j)=\dr(\underbrace{i+\cdots+i}_{j\ {\rm sumandos}})
+        =\dr(ij).
+      \]
+      La suma genera las filas multiplicativas y, en la dirección
+      transversal, las columnas. El observable
+      \(\Sigma(i,j)=\dr(i+j)\) conserva esa ley elemental para comparar
+      ambas lecturas sobre el mismo punto.};
+    \node[draw=hmtgold,rounded corners=2pt,fill=hmtlightgold,
+      text width=6.25cm,align=center,inner sep=8pt] at (2.9,-3.65) {%
+      \(\displaystyle
+      \AAPP=(X_9,\GraphAPP,\Pi;\Sigma,
+      \operatorname{Path}(\GraphAPP))\)\par
+      una sola APP, una matriz principal, una ley aditiva interna y cuatro
+      direcciones orientadas \(N,E,S,O\).};
+  \end{scope}
+\end{tikzpicture}

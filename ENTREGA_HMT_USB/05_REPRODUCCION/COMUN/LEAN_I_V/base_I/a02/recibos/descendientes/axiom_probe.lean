@@ -1,0 +1,222 @@
+import LatticeTwistedCorrectedStateField
+import LatticeTwistedNormalDerivative
+import LatticeTwistedRawChargeField
+import LatticeTwistedRawStateField
+import LatticeTwistedNormalParity
+import LatticeTwistedRawStateParity
+import LatticeTwistedStateField
+import LatticeTwistedNormalArgumentScalar
+import LatticeTwistedRawArgument
+import LatticeTwistedStateDescent
+import LatticeTwistedPositiveStateDescent
+import LatticeTwistedNormalTerms
+import LatticeTwistedNormalBounds
+import LatticeTwistedNormalCommutation
+import LatticeTwistedNormalLinear
+import LatticeTwistedWordCoherence
+import LatticeTwistedNormalVacuum
+import LatticeTwistedNormalConformalBridge
+import LatticeTwistedRawConformal
+import LatticeTwistedStateConformal
+import LatticeTwistedCorrectionInverse
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.FieldAssignment
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.stateTerm
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.stateTerm_zero_of_correction_zero
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.stateTerm_finite
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedCoefficient
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedCoefficient_eq_sum
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.field_has_bound
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedField
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedField_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedAssignment
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedAssignment_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedCoefficient_pure_charge
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedAssignment_pure_charge
+#print axioms HMT.IV.LatticeTwistedCorrectedStateField.correctedAssignment_vacuum
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.dividedFactor
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.dividedFactor_zero
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.dividedFactor_succ
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeCoefficient
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeCoefficient_at_exponent
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeCoefficient_succ
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeField
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeField_coefficient
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.creationTerm
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.annihilationTerm
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.creationTerm_eq_derivative
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.annihilationTerm_eq_derivative
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.creationTerm_finite
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.annihilationTerm_finite
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.normalCoefficient
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.normalCoefficient_apply
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.normalCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeNormalField
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.derivativeNormalField_coefficient
+#print axioms HMT.IV.LatticeTwistedNormalDerivative.normalCoefficient_zero
+#print axioms HMT.IV.LatticeTwistedRawChargeField.normScalar_eq_pair_zpow
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_bounded_pole
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeField
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeField_coefficient
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_basis
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_zero_charge
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeField_zero_charge
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_ground
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_ground_leading
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_ground_below
+#print axioms HMT.IV.LatticeTwistedRawChargeField.norm_shift_parity
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeCoefficient_neg_charge
+#print axioms HMT.IV.LatticeTwistedRawChargeField.theta_rawChargeCoefficient
+#print axioms HMT.IV.LatticeTwistedRawChargeField.symmetrizedCoefficient
+#print axioms HMT.IV.LatticeTwistedRawChargeField.symmetrizedCoefficient_even
+#print axioms HMT.IV.LatticeTwistedRawChargeField.symmetrizedCoefficient_odd
+#print axioms HMT.IV.LatticeTwistedRawChargeField.chargeField_inclusion_even_raw
+#print axioms HMT.IV.LatticeTwistedRawChargeField.chargeField_inclusion_symmetrized
+#print axioms HMT.IV.LatticeTwistedRawChargeField.rawChargeField_even_intertwines
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawDescendantField
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawDescendantField_nil
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawDescendantField_cons
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_basis
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_pure_charge
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_ground_state
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_vacuum
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_vacuum_coefficient
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_laurent_bound
+#print axioms HMT.IV.LatticeTwistedRawStateField.wordForOccupation_single
+#print axioms HMT.IV.LatticeTwistedRawStateField.rawStateField_one_oscillator
+#print axioms HMT.IV.LatticeTwistedNormalParity.theta_derivativeCoefficient
+#print axioms HMT.IV.LatticeTwistedNormalParity.derivativeCoefficient_even
+#print axioms HMT.IV.LatticeTwistedNormalParity.derivativeField_even
+#print axioms HMT.IV.LatticeTwistedNormalParity.theta_creationTerm
+#print axioms HMT.IV.LatticeTwistedNormalParity.theta_annihilationTerm
+#print axioms HMT.IV.LatticeTwistedNormalParity.theta_derivativeNormalField
+#print axioms HMT.IV.LatticeTwistedNormalParity.theta_derivativeNormalField_comp
+#print axioms HMT.IV.LatticeTwistedNormalParity.paritySign_odd_translate
+#print axioms HMT.IV.LatticeTwistedNormalParity.negArgument_creationTerm
+#print axioms HMT.IV.LatticeTwistedNormalParity.negArgument_annihilationTerm
+#print axioms HMT.IV.LatticeTwistedNormalParity.negArgument_derivativeNormalField
+#print axioms HMT.IV.LatticeTwistedRawStateParity.theta_rawDescendantField
+#print axioms HMT.IV.LatticeTwistedRawStateParity.theta_carrierBasis_word
+#print axioms HMT.IV.LatticeTwistedRawStateParity.theta_rawStateField_apply
+#print axioms HMT.IV.LatticeTwistedRawStateParity.theta_rawStateField_intertwines
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_coefficient
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_pure_charge
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_vacuum
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_vacuum_coefficient
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_laurent_bound
+#print axioms HMT.IV.LatticeTwistedStateField.corrected_terms_apply_finite
+#print axioms HMT.IV.LatticeTwistedStateField.twistedStateField_coefficient_apply
+#print axioms HMT.IV.LatticeTwistedStateField.theta_twistedStateField_apply
+#print axioms HMT.IV.LatticeTwistedStateField.theta_twistedStateField_intertwines
+#print axioms HMT.IV.LatticeTwistedStateField.twistedCoefficient_mem_positive
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateCoefficient
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateCoefficient_coe
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateField
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateField_coefficient
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateAssignment
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateField_intertwines_inclusion
+#print axioms HMT.IV.LatticeTwistedStateField.positiveStateField_vacuum_coefficient
+#print axioms HMT.IV.LatticeTwistedNormalArgumentScalar.negArgument_creationTerm_scalar
+#print axioms HMT.IV.LatticeTwistedNormalArgumentScalar.negArgument_annihilationTerm_scalar
+#print axioms HMT.IV.LatticeTwistedNormalArgumentScalar.negArgument_derivativeNormalField_scalar
+#print axioms HMT.IV.LatticeTwistedRawArgument.negArgument_rawDescendantField
+#print axioms HMT.IV.LatticeTwistedRawArgument.theta_source_rawStateField
+#print axioms HMT.IV.LatticeTwistedRawArgument.rawStateField_even_source_odd_zero
+#print axioms HMT.IV.LatticeTwistedStateDescent.paritySign_even_translate
+#print axioms HMT.IV.LatticeTwistedStateDescent.theta_source_correctedAssignment
+#print axioms HMT.IV.LatticeTwistedStateDescent.correctedAssignment_even_source_odd_zero
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedCoefficient
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedField
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedField_coefficient
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedField_odd_discarded_zero
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedAssignment
+#print axioms HMT.IV.LatticeTwistedStateDescent.descendedAssignment_vacuum_coefficient
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescendedCoefficient
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescendedCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescendedField
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescendedField_coefficient
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescendedAssignment
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescent_intertwines_inclusion
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveState_odd_coefficients_zero
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescent_vacuum_coefficient
+#print axioms HMT.IV.LatticeTwistedPositiveStateDescent.positiveDescent_evenExponentialState
+#print axioms HMT.IV.LatticeTwistedNormalTerms.creator
+#print axioms HMT.IV.LatticeTwistedNormalTerms.annihilator
+#print axioms HMT.IV.LatticeTwistedNormalTerms.creators_commute
+#print axioms HMT.IV.LatticeTwistedNormalTerms.annihilators_commute
+#print axioms HMT.IV.LatticeTwistedNormalTerms.annihilators_bounded
+#print axioms HMT.IV.LatticeTwistedNormalTerms.creationTerm_apply
+#print axioms HMT.IV.LatticeTwistedNormalTerms.annihilationTerm_apply
+#print axioms HMT.IV.LatticeTwistedNormalTerms.cc
+#print axioms HMT.IV.LatticeTwistedNormalTerms.ca
+#print axioms HMT.IV.LatticeTwistedNormalTerms.ac
+#print axioms HMT.IV.LatticeTwistedNormalTerms.aa
+#print axioms HMT.IV.LatticeTwistedNormalTerms.cc_swap
+#print axioms HMT.IV.LatticeTwistedNormalTerms.ca_swap
+#print axioms HMT.IV.LatticeTwistedNormalTerms.ac_swap
+#print axioms HMT.IV.LatticeTwistedNormalTerms.aa_swap
+#print axioms HMT.IV.LatticeTwistedNormalBounds.cc_rectangle
+#print axioms HMT.IV.LatticeTwistedNormalBounds.ca_rectangle
+#print axioms HMT.IV.LatticeTwistedNormalBounds.ac_rectangle
+#print axioms HMT.IV.LatticeTwistedNormalBounds.aa_rectangle
+#print axioms HMT.IV.LatticeTwistedNormalCommutation.creationTerm_normalField
+#print axioms HMT.IV.LatticeTwistedNormalCommutation.annihilationTerm_normalField
+#print axioms HMT.IV.LatticeTwistedNormalCommutation.normalCoefficient_four_terms
+#print axioms HMT.IV.LatticeTwistedNormalCommutation.normalCoefficient_commute
+#print axioms HMT.IV.LatticeTwistedNormalCommutation.derivativeNormalField_commute
+#print axioms HMT.IV.LatticeTwistedNormalLinear.normalCoefficient_add
+#print axioms HMT.IV.LatticeTwistedNormalLinear.normalCoefficient_smul
+#print axioms HMT.IV.LatticeTwistedNormalLinear.derivativeNormalField_add
+#print axioms HMT.IV.LatticeTwistedNormalLinear.derivativeNormalField_smul
+#print axioms HMT.IV.LatticeTwistedNormalLinear.derivativeNormalFieldLinear
+#print axioms HMT.IV.LatticeTwistedNormalLinear.derivativeNormalField_zero
+#print axioms HMT.IV.LatticeTwistedWordCoherence.rawDescendantField_perm
+#print axioms HMT.IV.LatticeTwistedWordCoherence.rawStateField_stateForWord
+#print axioms HMT.IV.LatticeTwistedWordCoherence.rawDescendantField_eq_of_occupation
+#print axioms HMT.IV.LatticeTwistedWordCoherence.rawStateField_create_intertwines
+#print axioms HMT.IV.LatticeTwistedWordCoherence.rawStateField_create
+#print axioms HMT.IV.LatticeTwistedNormalVacuum.creationTerm_zero_charge
+#print axioms HMT.IV.LatticeTwistedNormalVacuum.annihilationTerm_zero_charge
+#print axioms HMT.IV.LatticeTwistedNormalVacuum.normalCoefficient_zero_charge_at_mode
+#print axioms HMT.IV.LatticeTwistedNormalVacuum.normalCoefficient_zero_charge
+#print axioms HMT.IV.LatticeTwistedNormalVacuum.derivativeNormalField_zero_charge
+#print axioms HMT.IV.LatticeTwistedNormalConformalBridge.creationTerm_eq_tensor
+#print axioms HMT.IV.LatticeTwistedNormalConformalBridge.annihilationTerm_eq_tensor
+#print axioms HMT.IV.LatticeTwistedNormalConformalBridge.normalCoefficient_eq_halfNormalMode_tensor
+#print axioms HMT.IV.LatticeTwistedNormalConformalBridge.normalField_coefficient_eq_halfNormalMode_tensor
+#print axioms HMT.IV.LatticeTwistedNormalConformalBridge.gram_contracted_normalCoefficient_eq_quadraticMode_tensor
+#print axioms HMT.IV.LatticeTwistedRawConformal.derivativeField_zero
+#print axioms HMT.IV.LatticeTwistedRawConformal.derivativeNormalField_zero_order
+#print axioms HMT.IV.LatticeTwistedRawConformal.rawStateField_conformalState
+#print axioms HMT.IV.LatticeTwistedRawConformal.rawStateField_conformalState_coefficient
+#print axioms HMT.IV.LatticeTwistedStateConformal.twistedStateField_conformalState_correction
+#print axioms HMT.IV.LatticeTwistedStateConformal.twistedStateField_conformalState_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.expCoeff_fin_zero
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correctionSeries_constant
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correctionExponential
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrectionCoefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrectionExponential
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correctionExponential_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrectionExponential_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correctionExponential_mul_inverse
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrectionExponential_mul
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correction_inverse_convolution
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverse_correction_convolution
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.correctionUnit
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrectionCoefficient_zero
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.negativeCorrectionPower_lowersEnergy
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrection_lowersEnergy
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrection_basis_cutoff
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrection_polynomial_on_state
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.negativeCorrectionPower_parity
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrection_parity
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.inverseCorrection_mem_parity
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.evenInverseCorrectionCoefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.evenInverseCorrection_coefficient
+#print axioms HMT.IV.LatticeTwistedCorrectionInverse.evenInverseCorrection_polynomial_on_state

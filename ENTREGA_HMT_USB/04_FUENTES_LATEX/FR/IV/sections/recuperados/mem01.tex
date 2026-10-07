@@ -1,0 +1,38 @@
+\subsection{Corrélation cyclique et conservation de l'ordre de la route}
+\label{sec:rec27-memoria}
+
+L'archive \eqref{act21:tpk:archivo} conserve la concaténation ordonnée des échantillons. L'exemple suivant précise une information d'ordre que deux lecteurs distincts extraient d'un mot de douze positions, en conservant le domaine de chaque lecture.
+
+Soit $\tau=(\tau_1,\ldots,\tau_{12})\in\{-1,0,1\}^{12}$ un mot
+ordonné, dont les indices sont interprétés modulo $12$. Nous définissons
+\[
+\begin{aligned}
+ G_a&=\{a,a+4,a+8\}\quad(1\leq a\leq4),\\
+ \nu_{120}(\tau)&=\sum_{a=1}^4\operatorname{sgn}
+ \left(\sum_{m\in G_a}\tau_m\right),\\
+ \nu_{270}(\tau)&=\sum_{m=1}^{12}\tau_m\tau_{m+3}.
+\end{aligned}
+\]
+L'histogramme marginal est $p_j(\tau)=\#\{m:\tau_m=j\}/12$ pour
+$j\in\{-1,0,1\}$ et son entropie est
+$H(\tau)=-\sum_j p_j(\tau)\log p_j(\tau)$, avec $0\log0=0$.
+
+\begin{proposition}[Information d'ordre distincte de la distribution marginale]
+Il existe des mots ayant un histogramme identique et une corrélation différente
+$\nu_{270}$, même en maintenant la même valeur de $\nu_{120}$.
+\end{proposition}
+\begin{proof}
+Considérons
+\[
+ \tau^{(a)}=(1,1,0,0,0,0,0,0,0,0,0,0),\qquad
+ \tau^{(b)}=(1,0,0,1,0,0,0,0,0,0,0,0).
+\]
+Toutes deux ont $p_1=1/6$, $p_0=5/6$ et $p_{-1}=0$, de sorte que leurs
+entropies marginales coïncident. Dans chaque cas, deux des ensembles $G_a$
+contiennent une unité et les deux autres uniquement des zéros : $\nu_{120}=2$.
+Dans $\tau^{(a)}$, aucune paire d'unités n'a une séparation cyclique de trois,
+tandis que dans $\tau^{(b)}$, seul le terme $m=1$ contribue.
+Par conséquent, $\nu_{270}(\tau^{(a)})=0$ et $\nu_{270}(\tau^{(b)})=1$.
+\end{proof}
+
+Cette séparation identifie l'information conservée par le registre ordonné : les incidences entre positions, en plus des fréquences des symboles. Un état réduit qui ne retient que l'histogramme attribue la même sortie aux deux mots et perd cette corrélation. L'entropie marginale, l'incertitude entre bases et l'entropie d'intrication ont des objets de définition distincts ; leur articulation exige de conserver respectivement la distribution, la transformation de base et l'état avec sa partition.

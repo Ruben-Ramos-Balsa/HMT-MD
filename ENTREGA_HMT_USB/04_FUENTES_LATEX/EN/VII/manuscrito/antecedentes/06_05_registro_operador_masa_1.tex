@@ -1,0 +1,312 @@
+\section{From the trajectory record to the mass operator}
+\label{vi:sec:operador-masa}
+
+The construction distinguishes two operations. First, the dynamics produces
+a trajectory record. Then a functional extracts integer
+coordinates and evaluates them through the internal constants already obtained.
+Preserving that order explains how mass can be a magnitude of
+persistence without exhausting its structure.
+
+\subsection{Chronological reading and oriented events}
+
+Let \(d_1,\ldots,d_{108}\) be the digital reading of an enriched route.
+In the stated chart, the action support is \(\{1,3,5,7\}\), and
+\[
+ n_A=\#\{t:d_t\in\{1,3,5,7\}\}.
+\]
+The \(12\) events of the \(9\)-step blocks are also preserved:
+\[
+ e_m=\sigma_m\#\{t:9m+1\le t\le9m+9,\ d_t\in\{2,4,6,8\}\},
+ \quad 0\le m<12,
+\]
+where \(\sigma=(+,+,+,-,-,-,+,+,+,-,-,-)\). The support of this
+extractor is an explicit part of the reading chart; its function must
+not be confused with the ternary phase selector of TPK.
+
+The distribution of events matters even when their sums
+coincide. To see this, introduce
+\[
+ p_i=e_i+e_{i+6},\quad a_i=e_i-e_{i+6},\quad
+ s_C=\sum_{i=0}^{5}p_i,\quad M_i=p_i-p_5\ (0\le i<5).
+\]
+
+\begin{proposition}[Integral reconstruction of events]
+\label{vi:prop:eventos}
+The transformation
+\[
+(e_0,\ldots,e_{11})\mapsto(s_C,M_0,\ldots,M_4,a_0,\ldots,a_5)
+\]
+is injective on \(\mathbb Z^{12}\). Its image is characterised by
+\[
+ s_C-\sum_{i=0}^4M_i\equiv0\pmod6,
+ \qquad p_i\equiv a_i\pmod2\quad(0\le i<6),
+\]
+where \(p_5=(s_C-\sum M_i)/6\) and \(p_i=p_5+M_i\) for \(i<5\).
+\end{proposition}
+\begin{proof}
+Adding the six expressions for \(p_i\) gives
+\(s_C=6p_5+\sum_{i<5}M_i\). This recovers the \(p_i\), and then
+\[
+ e_i=\frac{p_i+a_i}{2},\qquad
+ e_{i+6}=\frac{p_i-a_i}{2}.
+\]
+The congruences are necessary for these quantities to be integers and
+sufficient for the formulas to define an integral preimage. Substitution
+into the forward transformation recovers every coordinate.
+\end{proof}
+
+The decomposition \(12=1+5+6\) thus acquires an operational meaning:
+the total, differences, and orientations recover the events.
+Division by \(6\) belongs to this reconstruction. When the character
+uses \(s_C/6\), \(s_C\) remains the integer sum; a coordinate already
+divided is not divided a second time.
+
+\subsection{Torsional memory and signature}
+
+For every occurrence of \(9\), the reading preserves its predecessor.
+Define, with cyclic indices,
+\[
+ j_2(d)=\begin{cases}0,&d=9,\\1,&d\in\{2,4,6,8\},\\-1,&d\in\{1,3,5,7\},\end{cases}
+ \quad z_t=\mathbf1_{\{d_t=9\}}j_2(d_{t-1}).
+\]
+Then
+\[
+ T_z=\sum_{t=1}^{108}z_t,\quad
+ C_z=\sum_{t\in\{27,54,81,108\}}z_t,\quad
+ k_{\Delta_4}=T_z-2C_z.
+\]
+The first sum preserves accumulated memory, and the second distinguishes
+corona closures. Removing the predecessors before evaluating these
+expressions changes the object being read.
+
+With \(\tau_m=\operatorname{sgn}(e_m)\), the remaining coordinates are
+\[
+ b_{120}=\sum_{a=0}^{3}\operatorname{sgn}(e_a+e_{a+4}+e_{a+8}),
+ \qquad b_{\zeta}=\sum_{m=0}^{11}\tau_m\tau_{m+3},
+\]
+where the second index is modulo \(12\). The signature obtained is
+\[
+ L_{\mathrm{tick}}(\gamma)
+ =\sigma(\gamma)=(n_A,s_C,k_{\Delta_4},b_{120},b_{\zeta})\in\mathbb Z^5.
+\]
+This map is deterministic in the stated chart. The signs and
+correlations explain why composition must take place on the
+record before extracting the \(5\) integers: adding signatures does not,
+in general, represent the composition of two histories.
+
+\subsection{Character and internal specialisation}
+
+Let \(X=(X_A,X_C,X_4,X_{120},X_{270})\). The formal character is
+\[
+ \chi(\sigma;X)=\exp\!\left(n_AX_A+s_CX_C+k_{\Delta_4}X_4+
+ b_{120}X_{120}+b_{\zeta}X_{270}\right).
+\]
+For each \(X\), it satisfies
+\(\chi(\sigma+\sigma';X)=\chi(\sigma;X)\chi(\sigma';X)\)
+because the exponent is linear in the signature. This is a law on signatures; it
+does not assert that the extractor is additive on routes without preserving the interface.
+
+Specialisation uses the internal coordinates constructed previously:
+\[
+ X_A=A_{\mathrm{rad}},\quad X_C=C^*_{\mathrm{rad}}/6,
+ \quad X_4=\Delta_4,\quad X_{120}=s_{120},\quad
+ X_{270}=\zeta_{270}:=135\Delta_4^2.
+\]
+The character is dimensionless and positive. Its effect is a homothety on
+the mass line. The exponential form determines how the
+coefficients act; their provenance is fixed by the preceding records and
+constructions.
+
+\subsection{Bilayer hierarchy and preservation of the two genealogies}
+
+Write \(x=A_{\mathrm{rad}}\), \(y=C^*_{\mathrm{rad}}\). In the
+chamber \(x>y>0\), the channels are
+\[
+ q_+=e^{-x-y},\qquad q_-=e^{-x+y},\qquad0<q_+<q_-<1.
+\]
+For an involution \(R\), with \(P_\pm=(I\pm R)/2\), the
+two-channel operator is
+\[
+ T=q_+P_++q_-P_-.
+\]
+Its scalar and oriented moments are expressed as
+\[
+ c_n=q_-^n+q_+^n,\qquad s_n=q_-^n-q_+^n.
+\]
+Multiplying these expressions proves
+\[
+ c_n^2-s_n^2=4e^{-2nx},\quad
+ c_{m+n}=\frac{c_mc_n+s_ms_n}{2},\quad
+ s_{m+n}=\frac{s_mc_n+c_ms_n}{2}.
+\]
+Both sequences satisfy
+\[
+ X_{n+2}=c_1X_{n+1}-e^{-2x}X_n,\qquad X\in\{c,s\}.
+\]
+These relations show that the heights share the same operator.
+A different collection of moments is not defined for every species.
+
+\begin{proposition}[Semigroup of heights]
+\[
+ \langle90,120\rangle=\{90,120\}\cup\{30r:r\ge6\}.
+\]
+\end{proposition}
+\begin{proof}
+After division by \(30\), it suffices to study \(\langle3,4\rangle\).
+The integers \(6,7,8\) are \(3+3,3+4,4+4\); adding \(3\) produces
+every subsequent integer. Below \(6\), the only positive
+elements are \(3,4\).
+\end{proof}
+
+The heights \(360=4\cdot90=3\cdot120\) illustrate the distinction between
+equality of evaluation and memory of composition. The algebraic quotient
+identifies the two exponents; the record preserves whether transport
+used four stages of one type or three of the other.
+
+The refined specialisation has exponent
+\[
+ \log\chi_{\mathrm{ref}}=n_Ax+\frac{s_C}{6}y+k_{\Delta_4}\Delta_4
+ +b_{\zeta}\zeta_{270}+\sum_{h\in\langle90,120\rangle}N_hs_h,
+ \qquad N_h=\eta_h+b_{120}\mathbf1_{\{h=120\}}.
+\]
+The pair \((\eta_{120},b_{120})\) is preserved even though evaluation uses
+its sum. \(s_{270}\) and \(\zeta_{270}\) also remain
+separate: the former is a bilayer moment, the latter a
+quadratic expression of refinement.
+
+\begin{proposition}[Convergence of the refined evaluation]
+If \(\sum_h|N_hs_h|<\infty\), the refined character defines a finite
+positive scalar, and its truncated evaluations converge to it.
+\end{proposition}
+\begin{proof}
+The assumption gives absolute convergence of the exponent. Continuity of the
+exponential permits passage to the limit; the exponential of a finite real number is
+strictly positive.
+\end{proof}
+
+Convergence evaluates a sequence of coefficients already specified.
+Selection of those coefficients by the route is a distinct operation
+and must accompany every evaluation attributed to a species.
+
+The notation \(\chi_{\mathrm{full}}\) retained in some sector
+evaluation formulas denotes this same character
+\(\chi_{\mathrm{ref}}\), with the same arguments and coefficients.
+The change of symbol adds no further specialisation or tower.
+
+\subsection{Displacement and autocorrelation readers}
+
+The same route admits two readings of the return:
+\[
+ K_D=\left(D_{27}+D_{36},D_1,\frac{D_4-D_3}{2}\right),\qquad
+ K_\Omega=(\Omega,54,P_6).
+\]
+The first map preserves displacement defects; the second, return
+memory and autocorrelation. In the complete census of \(324\) orientations
+there are \(14\) profiles of the first, \(9\) of the second, and \(40\) joint
+pairs. The \(18\) coincidences have value \((80,54,6)\).
+Equality of the two operators throughout the atlas is not inferred from this.
+
+For the electronic route, the displacements are
+\[
+ (D_1,D_3,D_4,D_{27},D_{36})=(54,56,68,48,32).
+\]
+Substitution produces \(K_D=(80,54,6)\), coinciding with
+\(K_\Omega\). Its exponent is
+\[
+ \kappa_e=80-54\alpha+6\Delta_4.
+\]
+The electronic trajectory is constructed in
+\eqref{vi:dep:trayectoria-electron}; its displacement and
+autocorrelation readers are evaluated, respectively, in
+\eqref{vi:dep:KD} and \eqref{vi:dep:KOmega}. The coincidence
+\(K_D=K_\Omega=(80,54,6)\) belongs to the beta-closure theorem in
+Subsection~\ref{vi:dep:beta}. Here that central exception is preserved, and the
+operation is extended to the atlas fibres.
+
+\subsection{Operator on a fibre and dimensional section}
+
+Let \(\mathscr H_M\) be the finite Hilbert space with orthonormal basis
+\((e_\gamma)\) labelled by the routes of a multisection. For
+\(r\in\{D,\Omega\}\), define the return operator by
+\(B_M^re_\gamma=\kappa_\gamma^re_\gamma\), with real exponents;
+it is therefore self-adjoint. Let \(M_M^{(0)}\) be the positive basal operator,
+whose connection with the character is fixed below.
+The dimensionless ratio of the
+action sections is \(R_{\mathrm{act}}>0\). Define
+\[
+ M_M^{\beta,r}=R_{\mathrm{act}}^{B_M^r/2}
+ M_M^{(0)}R_{\mathrm{act}}^{B_M^r/2}.
+\]
+
+\begin{proposition}[Positivity and scalar restriction]
+The operator \(M_M^{\beta,r}\) is positive. If both operators are
+diagonal in the route basis, each basal value \(m_\gamma^{(0)}\)
+is transformed into
+\[
+ m_\gamma^\beta=m_\gamma^{(0)}R_{\mathrm{act}}^{\kappa_\gamma}.
+\]
+\end{proposition}
+\begin{proof}
+Let \(S=R_{\mathrm{act}}^{B_M^r/2}\), self-adjoint and invertible.
+For every \(v\),
+\(\langle v,SM_M^{(0)}Sv\rangle=\langle Sv,M_M^{(0)}Sv\rangle\ge0\).
+In the diagonal basis, the two factors \(S\) multiply each value
+by \(R_{\mathrm{act}}^{\kappa_\gamma/2}\); their product gives the formula.
+\end{proof}
+
+The absolute mass section is obtained from action and the clock:
+\[
+ \omega_0=\frac{2\pi}{108t_0},\qquad
+m_{\mathrm{clk}}=\hbar_{\mathrm{ret}}\omega_0c_{\mathrm{int}}^{-2}.
+\]
+In the chart normalised relative to the electron, the preceding basal operator is
+\[
+ M_M^{(0)}e_\gamma
+ =m_e^{(0)}\,
+   \chi_{\mathrm{ref}}(\sigma_\gamma-\sigma_e,
+                       \eta_\gamma-\eta_e)e_\gamma.
+\]
+Here \(m_e^{(0)}\) is the realisation of the basal electronic
+coordinate, with its prefactor, refinement, and dimensional basis.
+If \(E_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_E\), then
+\[
+ m_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_Ec_{\mathrm{int}}^{-2}
+ =b_e\,m_{\mathrm{clk}},\qquad
+ b_e=\varepsilon_e^{(0)}\frac{\mathcal U_E}{E_{\mathrm{clk}}}.
+\]
+In the chart \(\mathcal U_E=E_{\mathrm{clk}}\), we obtain
+\(b_e=\varepsilon_e^{(0)}\); in another chart, the stated ratio
+of bases is retained. If the tower coordinates are already
+relative to the electron, a second subtraction of \(\eta_e\) is omitted.
+This equality links the operator to the signature of each route and explicitly
+preserves electronic normalisation. A different choice of
+reference section must also transport that normalisation.
+The scale of the reduced Planck constant belongs to this dimensional
+construction. The character and return factor subsequently act as
+scalars. The electron preserves its structure: it is not identified with the
+chronological quantum \(m_{\mathrm{clk}}\).
+
+For two routes in the same absolute chart,
+\[
+ \frac{m_Y^\beta}{m_X^\beta}
+ =\chi_{\mathrm{ref}}(\sigma_Y-\sigma_X,\eta_Y-\eta_X)
+ R_{\mathrm{act}}^{\kappa_Y-\kappa_X}.
+\]
+The common dimensional section cancels. The difference of the return
+exponents does not cancel unless it is zero. This identity preserves the
+distinction between the absolute scale and the relative structure of a collection.
+
+\subsection{The null propagation sector}
+
+The exponential takes strictly positive values. The null chart is
+constructed before that character, in the split realisation
+\[
+ \mathcal A_{\mathrm{sp}}=\mathbb R[R]/(R^2-1),\quad
+ z=r_+P_++r_-P_-,\quad N(z)=r_+r_-.
+\]
+The directions \(\mathbb RP_+\) and \(\mathbb RP_-\) have zero
+norm. Propagation transported in one of them belongs to that sector;
+the bilayer material reading uses the coupling of both. In this way,
+the photon and the gluonic sector retain their place in the theory even though
+they do not form a row of the positive character. The realisation of their
+representations is presented alongside the corresponding sectors.

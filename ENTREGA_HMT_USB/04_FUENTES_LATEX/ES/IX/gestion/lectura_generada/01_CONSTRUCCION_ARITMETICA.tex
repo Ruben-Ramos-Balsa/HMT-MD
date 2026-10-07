@@ -1,0 +1,286 @@
+\section{Producto nativo, factorización e irreducibilidad}
+\label{lectura:manuscrito-01}
+Este capítulo desarrolla el sector aritmético de formas normales sobre el núcleo común y la construcción correlativa del continuo de la sección~\ref{lectura:manuscrito-05}. La operación local se prolonga a palabras, sus fibras distinguen los irreducibles y la evaluación permite reconocer los primos. El desarrollo recupera el producto nativo del corpus; la procedencia documental se reúne en el apéndice~\ref{ap:procedencia-reproduccion}.
+
+\subsection{La información necesaria para multiplicar}
+La selección de los números primos requiere haber construido una multiplicación. En Holografía Modular Triádica, esa operación debe exponerse a partir de las dos hojas de APP, conservando tanto la coordenada residual como su cociente. El residuo por sí solo permite reconocer una clase de congruencia. La pareja residuo–cociente permite reconstruir el resultado entero de la operación local. Esta distinción determina qué información debe transportarse al componer las celdas.
+
+Sea $D_9=\{1,\ldots,9\}$. Para cada par $(a,b)\in D_9^2$, las hojas aditiva y multiplicativa se escriben
+
+\[
+a+b=R_+(a,b)+9Q_+(a,b),\qquad
+ab=R_\times(a,b)+9Q_\times(a,b),
+\]
+con $R_+,R_\times\in D_9$. La elección del representante positivo fija de manera única los cuatro datos. En particular, un resultado divisible por nueve tiene residuo representado por $9$, y su cociente es una unidad menor que el de la división euclídea con resto cero. Se trata de una convención exacta de representación, que debe mantenerse a lo largo de toda la construcción.
+
+Por ejemplo,
+
+\[
+2\cdot5=1+9\cdot1,\qquad 9\cdot9=9+9\cdot8.
+\]
+El primer resultado conserva la información que distingue $10$ de $1$; el segundo conserva la que distingue $81$ de $9$. Si se omite el cociente en uno de estos pasos, una multiplicación posterior actúa sobre otro objeto. La memoria aritmética no es aquí una interpretación añadida al algoritmo: interviene en la reconstrucción de su resultado.
+
+Las dos hojas se acoplan incluso durante una multiplicación. El producto de dos dígitos genera una pareja $(R_\times,Q_\times)$; cuando el cociente procedente de una posición anterior se incorpora a la posición actual, se necesita de nuevo la hoja aditiva. La operación global compone ambas hojas.
+
+\HMTresultado{Proposición}{Compatibilidad local de los cocientes}{rz-num-01-1}
+Los cocientes satisfacen las identidades necesarias para asociar y distribuir las operaciones sin alterar el entero reconstruido. Por ejemplo, para la suma,
+
+\[
+Q_+(a,b)+Q_+\bigl(R_+(a,b),c\bigr)
+=Q_+(b,c)+Q_+\bigl(a,R_+(b,c)\bigr).
+\]
+Para el producto,
+
+\[
+Q_\times\bigl(R_\times(a,b),c\bigr)+cQ_\times(a,b)
+=Q_\times\bigl(a,R_\times(b,c)\bigr)+aQ_\times(b,c).
+\]
+\textbf{Demostración.} Al sustituir las dos descomposiciones de $a+b+c$, los residuos finales son el mismo representante positivo de su clase módulo nueve. Restarlos y dividir entre nueve da la primera igualdad. Para $abc$, se aplica el mismo argumento a
+
+\[
+\bigl(R_\times(a,b)+9Q_\times(a,b)\bigr)c
+=a\bigl(R_\times(b,c)+9Q_\times(b,c)\bigr).
+\]
+La identidad distributiva se obtiene reconstruyendo $a(b+c)=ab+ac$ con las dos hojas. En los tres casos, la unicidad de la representación residual determina exactamente el cociente que debe acompañarla. \hfill\(\square\)
+
+Estas identidades permiten organizar el registro de operaciones: dos parentizaciones producen el mismo entero sin obligar a identificar sus historias de ejecución. La igualdad del resultado y la identidad de la historia son afirmaciones diferentes.
+
+\subsection{Palabras nonádicas y forma normal}
+La extensión a enteros arbitrariamente grandes utiliza secuencias finitas de dígitos de $D_9$. Se adopta la orientación desde la posición de menor peso a la de mayor peso. Para $u=(u_0,\ldots,u_{r-1})$, sea
+
+\[
+\operatorname{ev}_9(u)=\sum_{j=0}^{r-1}u_j9^j.
+\]
+La secuencia vacía representa cero. En esta numeración biyectiva, el símbolo $9$ continúa siendo un dígito; no se convierte en un cero sin cociente.
+
+\HMTresultado{Proposición}{Existencia y unicidad de la forma normal}{rz-num-01-2}
+La evaluación anterior es una biyección entre las palabras finitas sobre $D_9$, incluida la palabra vacía, y los enteros no negativos.
+
+\textbf{Demostración.} Si $n>0$, defínase
+
+\[
+d(n)=1+((n-1)\bmod9),\qquad q(n)=\frac{n-d(n)}9.
+\]
+Entonces $d(n)\in D_9$, $q(n)\ge0$ y $q(n)<n$. La iteración termina en cero y produce una palabra cuya evaluación es $n$. Para la unicidad, el primer dígito de cualquier palabra que evalúe a $n$ debe representar la clase de $n$ módulo nueve dentro de $D_9$; por tanto, debe ser $d(n)$. Retirarlo y dividir entre nueve reduce la cuestión a $q(n)$. La inducción prueba la unicidad. \hfill\(\square\)
+
+Algunas formas normales son
+
+\[
+9\leftrightarrow(9),\quad
+10\leftrightarrow(1,1),\quad
+81\leftrightarrow(9,8),\quad
+1000\leftrightarrow(1,3,3,1).
+\]
+La escritura se verifica directamente: $1000=1+3\cdot9+3\cdot9^2+9^3$. Esta última igualdad no identifica por sí sola la palabra de un entero con la completación cúbica de un dominio geométrico. Las dos apariciones de $1000$ tienen objetos y operaciones diferentes; una identificación requeriría su mapa.
+
+La forma normal es una coordenada aritmética. El estado del TPK conserva además orientación, hoja, ruta, frontera y memoria de transporte. Cuando diferentes historias producen una misma forma normal, la aplicación de evaluación reúne sus valores, pero no establece una biyección entre esas historias. El desarrollo del artículo debe conservar ambos niveles y el mapa que los relaciona.
+
+\subsection{Construcción del producto sin evaluar previamente los operandos}
+La suma de palabras se realiza posición por posición. Si en una posición hay dos dígitos, se consulta la hoja aditiva. Si sólo hay uno, se conserva ese dígito. El cociente que llega de la posición anterior se incorpora mediante otra consulta aditiva, y se suman los cocientes de ambas consultas. Si \(a+b=r+9q\) y \(r+c=r'+9q'\), se transporta \(q+q'\). Por ejemplo, \(9+9+1=1+9\cdot2\). El cociente entrante está entre cero y dos; cuando es cero no se consulta una celda adicional. Una posición ausente no es una celda de APP que contenga el dígito cero.
+
+La multiplicación por un dígito $d\in D_9$ actúa de manera análoga: en cada posición se aplica primero la hoja multiplicativa al dígito de la palabra y a $d$; después se incorpora el cociente pendiente mediante la hoja aditiva. El nuevo cociente es la suma del cociente del producto local y el de esa consulta aditiva, y está entre cero y nueve. El procedimiento termina añadiendo, cuando no sea nulo, el cociente final.
+
+Denotemos estas operaciones por $u\boxplus v$ y $d\odot u$. Si $v=(v_0,\ldots,v_{m-1})$, el producto nativo se construye mediante la recurrencia
+
+\[
+a_m=\varnothing,\qquad
+a_j=(9\odot a_{j+1})\boxplus(v_j\odot u),
+\quad j=m-1,\ldots,0,
+\]
+y se define $u\boxtimes v=a_0$. Cada operación del miembro derecho utiliza las dos hojas locales ya definidas. La evaluación de la palabra no interviene como instrucción para calcular el producto.
+
+\HMTresultado{Teorema}{Exactitud del producto nativo}{rz-num-01-3}
+Para todas las palabras finitas $u,v$,
+
+\[
+\operatorname{ev}_9(u\boxtimes v)
+=\operatorname{ev}_9(u)\operatorname{ev}_9(v).
+\]
+\textbf{Demostración.} Las identidades de reconstrucción de las celdas prueban, por inducción sobre las posiciones, que
+
+\[
+\operatorname{ev}_9(u\boxplus v)
+=\operatorname{ev}_9(u)+\operatorname{ev}_9(v),\qquad
+\operatorname{ev}_9(d\odot u)=d\operatorname{ev}_9(u).
+\]
+Durante la recurrencia del producto se conserva el invariante
+
+\[
+\operatorname{ev}_9(a_j)
+=\operatorname{ev}_9(u)\sum_{k=j}^{m-1}v_k9^{k-j}.
+\]
+El caso $j=m$ es inmediato. Si vale para $j+1$, multiplicar por nueve y añadir $v_j\operatorname{ev}_9(u)$ produce el caso $j$. Para $j=0$ se obtiene la igualdad anunciada. \hfill\(\square\)
+
+\HMTresultado{Corolario}{Estructura multiplicativa de las formas normales}{rz-num-01-4}
+Las palabras no vacías, con el producto $\boxtimes$, forman un monoide conmutativo cuya unidad es $(1)$. Al añadir la palabra vacía, ésta es absorbente.
+
+\textbf{Demostración.} La evaluación es multiplicativa por el teorema y es inyectiva por la proposición~\ref{rz-num-01-2}. La asociatividad, la conmutatividad y la identidad se verifican después de evaluar y se recuperan por inyectividad. \hfill\(\square\)
+
+La prueba permite reconocer la multiplicación ordinaria en la operación construida. El orden lógico es importante: primero se define el transductor de celdas y se demuestra su invariante; después se identifica su realización entera.
+
+\subsection{Aperturas multiplicativas y selección de irreducibles}
+Una vez construido el producto, la factorización puede definirse como su fibra. Para cada palabra no vacía $w$, sea
+
+\[
+\operatorname{Fac}(w)=\{(u,v):u\boxtimes v=w\}.
+\]
+Esta fibra es finita. En efecto, si $n=\operatorname{ev}_9(w)$, la exactitud implica $\operatorname{ev}_9(u)\operatorname{ev}_9(v)=n$, con ambos factores positivos y no mayores que $n$. La finitud justifica la suma algebraica
+
+\[
+\Delta e_w=\sum_{(u,v)\in\operatorname{Fac}(w)}e_u\otimes e_v.
+\]
+El orden en el par de factores se conserva. Para $n=12$, por ejemplo, las evaluaciones de la fibra son
+
+\[
+(1,12),(2,6),(3,4),(4,3),(6,2),(12,1).
+\]
+El coproducto reducido elimina las dos descomposiciones que contienen la unidad, para $w\ne(1)$:
+
+\[
+\widetilde\Delta e_w
+=\sum_{\substack{u\boxtimes v=w\\u\ne(1),\ v\ne(1)}}e_u\otimes e_v.
+\]
+Se fija $\widetilde\Delta e_{(1)}=0$. Esta convención permite tratar la unidad separadamente, sin confundirla con un irreducible.
+
+\HMTresultado{Definición}{Irreducible nativo}{rz-num-01-5}
+Una palabra $w\ne(1)$ es multiplicativamente irreducible si $\widetilde\Delta e_w=0$.
+
+La definición no recibe una tabla de primos ni utiliza un período decimal. Pregunta si la operación ya construida admite una apertura no trivial.
+
+\HMTresultado{Teorema}{Reconocimiento de los primos}{rz-num-01-6}
+La evaluación establece una biyección entre los irreducibles nativos y los números primos positivos.
+
+\textbf{Demostración.} Si $w=u\boxtimes v$ con factores distintos de la unidad, su evaluación es el producto de dos enteros mayores que uno; por tanto, no es primo. Recíprocamente, si $\operatorname{ev}_9(w)=ab$, con $a,b>1$, sus formas normales $u,v$ satisfacen
+
+\[
+\operatorname{ev}_9(u\boxtimes v)=ab=\operatorname{ev}_9(w).
+\]
+La inyectividad da $u\boxtimes v=w$, de modo que $w$ no es irreducible. La biyección de las formas normales completa la prueba. \hfill\(\square\)
+
+Este resultado identifica una propiedad de la operación con la propiedad de su realización entera. Los valores de los primos aparecen al evaluar los objetos seleccionados, después de haber definido el producto y sus fibras.
+
+\HMTresultado{Proposición}{Coasociatividad}{rz-num-01-7}
+Sobre el espacio algebraico generado por las palabras positivas,
+
+\[
+(\Delta\otimes I)\Delta=(I\otimes\Delta)\Delta.
+\]
+\textbf{Demostración.} Ambos miembros enumeran, con coeficiente uno, los triples ordenados $(u,v,z)$ cuyo producto es $w$. La asociatividad del producto identifica las dos parentizaciones y todas las sumas son finitas. \hfill\(\square\)
+
+\subsection{Realización operatoria del selector}
+En \(\mathcal H=\ell^2(\mathcal W_9^+)\), con base ortonormal \(\{e_w\}\), el coproducto se define primero sobre combinaciones finitas. Los soportes de $\Delta e_w$ y $\Delta e_{w'}$ son disjuntos si $w\ne w'$: un par ordenado tiene un único producto. Por tanto,
+
+\[
+\|\Delta e_w\|^2=|\operatorname{Fac}(w)|,
+\qquad
+\|\widetilde\Delta e_w\|^2=r(w),
+\]
+donde $r(w)$ cuenta las aperturas ordenadas no triviales.
+
+El cierre de $\widetilde\Delta$ tiene dominio
+
+\[
+\left\{x=\sum_wx_we_w\in\mathcal H:\sum_wr(w)|x_w|^2<\infty\right\}.
+\]
+Su operador positivo asociado es diagonal:
+
+\[
+A_{\mathrm{irr}}=\overline{\widetilde\Delta}^{\,*}\overline{\widetilde\Delta},
+\qquad A_{\mathrm{irr}}e_w=r(w)e_w.
+\]
+Su dominio maximal es
+
+\[
+\operatorname{Dom}(A_{\mathrm{irr}})
+=\left\{x\in\mathcal H:\sum_wr(w)^2|x_w|^2<\infty\right\}.
+\]
+El proyector sobre los irreducibles es entonces
+
+\[
+P_{\mathrm{irr}}=(I-P_{(1)})\mathbf1_{\{0\}}(A_{\mathrm{irr}}).
+\]
+La fórmula incorpora dos exclusiones diferentes: el núcleo elimina todas las palabras que poseen una apertura no trivial, y $I-P_{(1)}$ retira la unidad. La positividad procede de una norma cuadrada y tiene aquí un significado determinado: cuenta descomposiciones. Todavía no es una afirmación sobre la positividad de otra forma, como la forma completada de Weil.
+
+\subsection{Lectura normalizada del prefijo TPK y conservación de la genealogía}
+La forma normal admite una composición explícita con el prefijo entero producido por el TPK. Denótese por \(\beta_9=\operatorname{ev}_9^{-1}\) el normalizador de la proposición~\ref{rz-num-01-2}. Aquí \(K\) es la profundidad de bloques del estado TPK, distinta de la longitud \(k\) de una historia elemental del árbol de emisiones. La construcción se aplica a una coordenada regional del estado de bloques; el mismo cálculo sirve para cada una de las tres coordenadas con su registro propio.
+
+Para el vector fila profundo \(x_K\in\mathbb Z^6\), el paso entero del TPK utiliza la matriz
+
+\[
+A_H=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix}
+\]
+y produce
+
+\[
+y_K=x_KA_H,\qquad
+u_{K+1}=y_K\bmod3,\qquad
+x_{K+1}=\frac{y_K-u_{K+1}}3.
+\]
+El bloque \(u_{K+1}\in\mathbb F_3^6\), con representantes \(\overline u_j\in\{0,1,2\}\), tiene índice
+
+\[
+I(u_{K+1})=\sum_{j=1}^{6}\overline u_j3^{6-j},
+\qquad 0\leq I(u_{K+1})<729.
+\]
+El lector cilíndrico actualiza el prefijo mediante
+
+\[
+N_{K+1}=729N_K+I(u_{K+1}).
+\]
+La matriz \(A_H\) pertenece a la actualización del núcleo TPK. En la composición siguiente no se reemplaza por una regla aritmética externa: el bloque y su índice llegan del paso que acaba de ejecutarse.
+
+\HMTresultado{Proposición}{Compatibilidad del prefijo nativo y su forma normal}{rz-num-01-8}
+Si \(w_K=\beta_9(N_K)\), entonces
+
+\[
+w_{K+1}
+=\bigl(\beta_9(729)\boxtimes w_K\bigr)
+\boxplus\beta_9(I(u_{K+1})).
+\]
+El truncamiento tipado de esta lectura es
+
+\[
+\varrho(w)=
+\beta_9\!\left(
+\left\lfloor\frac{\operatorname{ev}_9(w)}{729}\right\rfloor
+\right);
+\qquad \varrho(w_{K+1})=w_K.
+\]
+\textbf{Demostración.} Las compatibilidades de la suma y el producto de palabras demuestran que la evaluación del miembro derecho es
+
+\[
+729\operatorname{ev}_9(w_K)+I(u_{K+1})
+=729N_K+I(u_{K+1})=N_{K+1}.
+\]
+La unicidad de la forma normal da la primera igualdad. Como el índice del bloque está entre cero y \(728\), el cociente entero de \(N_{K+1}\) entre \(729\) es \(N_K\). Aplicar \(\beta_9\) prueba la identidad de truncamiento. \hfill\(\square\)
+
+El truncamiento no consiste en borrar tres dígitos de una palabra biyectiva. Por ejemplo, \(\beta_9(729)=(9,8,8)\), mientras que el cociente entero de \(729\) entre \(729\) es uno; borrar sus tres dígitos produciría la palabra vacía. La regla \(\varrho\) conserva la convención de residuo y cociente que define la numeración.
+
+La proposición normaliza un prefijo ya generado y conserva su compatibilidad bajo refinamiento. Su aplicación al estado mantiene, en el registro original, el bloque \(u_{K+1}\), el cociente profundo \(x_{K+1}\), los acarreos de la coordenatización decimal, la fase y la ruta. No afirma que \(w_K\) reconstruya por sí solo esas coordenadas ni que cualquier palabra sea expresada por una sección regional fijada. La igualdad de formas normales se refiere al prefijo numérico; la identidad de las historias se decide en el estado completo.
+
+El registro que acompaña al producto contiene las consultas de ambas hojas y sus residuos y cocientes. Permite explicar por qué una salida se obtuvo y reproducir la operación. El resultado del transductor no agota, sin embargo, el estado de una prolongación del TPK: una forma normal puede ser alcanzada por historias diferentes.
+
+Por ello, la integración con la dinámica conserva el sentido de cada mapa: el estado TPK expresa su prefijo y éste admite la lectura normalizada que acaba de construirse. La compatibilidad de un producto sobre historias requiere además especificar su dominio, su transporte y su supervivencia. No exige invertir una lectura numérica que no individualiza la historia. La identidad de valores no reemplaza ese cuadrado de compatibilidad; cada aplicación debe acompañarse de la operación concreta y de la información que conserva.
+
+El punto de partida de la aritmética ya está especificado: dos operaciones locales, una forma normal, un transductor global, sus fibras y un selector. La extensión espectral debe utilizar esos resultados sin cambiar retrospectivamente su origen.
+
+\subsection{Correspondencia con la implementación conservada}
+El código \texttt{a9\_\allowbreak{}native.\allowbreak{}py} implementa las operaciones en este orden:
+
+\begin{enumerate}
+\item Celdas locales de suma y producto.
+\item Codificación biyectiva nonádica y evaluación separada.
+\item Suma de palabras y multiplicación por un dígito.
+\item Recurrencia del producto de palabras.
+\item Enumeración de fibras del producto.
+\item Selección de irreducibles por ausencia de apertura no trivial.
+\end{enumerate}
+El comprobador usa la multiplicación entera y una prueba convencional de primalidad después de generar las salidas. Esas operaciones contrastan la implementación; no se incorporan al cuerpo del productor de palabras. Los controles que suprimen un cociente o alteran una celda documentan qué dependencia se rompe. Los recibos de reproducción declaran el tamaño de la ventana comprobada; ese alcance computacional se mantiene separado de las demostraciones generales anteriores.

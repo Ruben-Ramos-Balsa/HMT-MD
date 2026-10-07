@@ -1,0 +1,95 @@
+\subsubsection{Decimal alphabet and check-digit congruence of the emitter}
+\label{sec:rec27-codigo}
+
+Retain the emission law \eqref{act21:tpk:bloque-decimal},
+with the APP readings and observable \(\ell_9\) of
+\eqref{act21:tpk:logaritmo}, the cursors of
+Section~\ref{act21:tpk:operaciones}, and the six-window calendar of
+Section~\ref{act21:tpk:emision}. The accumulators are \(S_m,E_m,Z_m\),
+with \(Z_m=3\), and the output digits are denoted
+\(d_{m,1},d_{m,2},d_{m,3}\).
+Proposition~\ref{act21:tpk:recuperacion-firmas} already recovers both
+residual signatures. Combining this recovery with the actual accumulator
+images determines the following alphabet.
+
+\begin{proposition}[Check-digit congruence for the third digit]
+Every emitted block satisfies
+\[
+ d_{m,3}=[5d_{m,2}-2d_{m,1}+1]_{10}.
+\]
+\end{proposition}
+\begin{proof}
+The inverse in Proposition~\ref{act21:tpk:recuperacion-firmas}
+gives \([E_m]_{10}=[d_{m,2}-d_{m,1}]_{10}\). Substituting
+$E_m\equiv d_{m,2}-d_{m,1}\pmod{10}$ and $Z_m=3$ into the third digit gives
+$3d_{m,1}+5(d_{m,2}-d_{m,1})+21\equiv5d_{m,2}-2d_{m,1}+1\pmod{10}$.
+\end{proof}
+
+\begin{proposition}[Decimal alphabet of forty-two blocks]
+The per-window image of the emitter consists exactly of the blocks
+\[
+\begin{array}{c|rrrrrrr}
+[E_m]_{10}&\multicolumn{7}{c}{U_m}\\ \hline
+0&114&227&443&556&669&885&998\\
+1&129&232&458&561&674&890&903\\
+3&149&252&478&581&694&810&923\\
+5&169&272&498&501&614&830&943\\
+7&189&292&418&521&634&850&963\\
+9&109&212&438&541&654&870&983
+\end{array}
+\]
+\end{proposition}
+\begin{proof}
+A cardinal trajectory reads three consecutive terms of the additive cycle
+\[
+ (2,3,4,5,6,7,8,9,1).
+\]
+Their sums are
+$(9,12,15,18,21,24,18,12,6)$; reversing direction preserves the set of sums.
+Hence
+\[
+ \operatorname{Im}S_m=\{6,9,12,15,18,21,24\},\qquad
+ \operatorname{Im}[S_m]_{10}=\{1,2,4,5,6,8,9\}.
+\]
+In the multiplicative channel, a fixed factor divisible by three contributes
+zero. For invertible factors, the cyclic sums of three readings are
+\[
+\begin{array}{c|c}
+\text{fixed factor}&\text{possible sums}\\\hline
+1,8&\{1,3,7,9\}\\
+2,7&\{3,5,9\}\\
+4,5&\{1,5,7\}
+\end{array}
+\]
+Thus $\operatorname{Im}E_m=\{0,1,3,5,7,9\}$.
+Attainability can already be verified in the first window: every cursor in
+the following two tables has direction $E$.
+\[
+\begin{array}{c|rrrrrrr}
+S_1&6&9&12&15&18&21&24\\\hline
+(i_+,j_+)&(0,8)&(0,0)&(0,1)&(0,2)&(0,3)&(0,4)&(0,5)
+\end{array}
+\]
+\[
+\begin{array}{c|rrrrrr}
+E_1&0&1&3&5&7&9\\\hline
+(i_\times,j_\times)&(2,0)&(0,0)&(0,1)&(1,1)&(0,2)&(0,4)
+\end{array}
+\]
+Independence of the two cursors realizes every one of the $7\cdot6$ pairs.
+The first two digits recover the residual pair, so their 42 images are
+distinct. The check-digit congruence fixes the third digit and yields
+exactly the stated table.
+\end{proof}
+
+The decimal block therefore preserves both residual signatures through an
+injective encoding and a check digit. This result describes the finite
+emitter alphabet; continuation of the regional readings additionally retains
+the phase, orientation and memory conditions of the enriched state.
+
+The per-window image therefore has \(42\) blocks. Compatible concatenation
+of six windows preserves the census of \(468\) emissions in
+Proposition~\ref{act21:tpk:468}, whose ternary reduction yields
+\(243\) words within the \(729\)-word ambient space. Each cardinality
+counts the object of its stage and retains the provenance of the same
+emitter.

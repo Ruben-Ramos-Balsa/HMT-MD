@@ -1,0 +1,462 @@
+% FORMALIZACION_REUNIDA. Desarrollo ampliado de las tres composiciones de
+% EXPLORACION_AMBIVALENCIA_ESPEJO_DIAGONAL_20260918, con dependencias de X.
+% Las coordenadas pi, phi, e, alpha y el registro K son salidas generadas.
+% Este capítulo define lectores posteriores y no altera el generador TPK.
+\chapter{Holonomie nonadique, réciprocité et récupération des lecteurs géométriques}
+\label{hrr:capitulo}
+
+La connexion nonadique, l’incidence aréale--volumétrique et la réciprocité radiale interviennent dans différentes réalisations du même état enrichi. La connexion conserve la suite orientée des neuf phases et prolonge la mémoire au retour. L’incidence enregistre les transitions entre deux modes de lecture. La réciprocité radiale échange les deux orientations d’une forme géométrique d’aire fixée. Leur composition s’exprime par trois résultats précis : l’invariance d’un quotient de marques à toute profondeur, la factorisation d’une déformation de déterminant un et la reconstruction de l’anisotropie à partir d’une longueur normalisée et de son orientation.
+
+L’ordre de construction demeure
+\[
+ \begin{gathered}
+ \mathrm{APP}\longrightarrow\mathrm{TRIT}\longrightarrow\mathrm{TPK}
+ \longrightarrow\text{état enrichi},\\
+ \text{état enrichi}
+ \longrightarrow\text{structure discrète conjointe du continu},\\
+ \text{structure discrète conjointe du continu}
+ \longrightarrow\text{lecteurs ici composés}.
+ \end{gathered}
+\]
+Les coordonnées \(\pi,\varphi,e,\alpha\) et le registre \(K\) apparaissant dans les formules sont les sorties de la génération régionale précédente. Le calendrier tritique détermine déjà les couples consécutifs des modes additif et multiplicatif. Le langage des matrices, des fonctions hyperboliques et des mineurs extérieurs explicite ensuite les réalisations de cette structure engendrée.
+
+\section{Incidence modale et marques régionales sur les retours finis}
+\label{hrr:incidencia}
+
+\subsection{Énumération des retours entre feuillets}
+
+Le bloc temporel \((+,-,0)\) induit la suite modale \((\Sigma,\Pi,\Pi)\). Ses couples consécutifs, y compris la liaison de retour, sont \((\Sigma,\Pi)\), \((\Pi,\Pi)\) et \((\Pi,\Sigma)\). L’incidence primitive, dans l’ordre aréal--volumétrique, est donc
+\begin{equation}
+ F_{\mathrm{av}}=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.
+ \label{hrr:incidencia-matriz}
+\end{equation}
+Cette matrice enregistre les couples du calendrier. L’enveloppe symbolique à mémoire un qu’elle détermine conserve cette incidence ; les restrictions supplémentaires de phase, d’orientation et de registre demeurent dans l’état TPK. On distingue ainsi le dénombrement de l’enveloppe de la survie d’une trajectoire enrichie complète.
+
+Soient \(f_0=0\), \(f_1=1\) et \(f_{n+1}=f_n+f_{n-1}\) pour \(n\geq1\). Ces entiers expriment ici les dénombrements produits par les puissances de l’incidence. L’identification conventionnelle de cette suite demeure postérieure à la construction du calendrier.
+
+\begin{proposition}[Puissances de l’incidence et retours diagonaux]
+\label{hrr:potencias}
+Pour tout \(n\geq1\),
+\begin{equation}
+ F_{\mathrm{av}}^n=
+ \begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix}.
+ \label{hrr:potencias-formula}
+\end{equation}
+En particulier, les retours de longueur \(n\) aux feuillets aréal et volumétrique ont respectivement pour multiplicités \(f_{n-1}\) et \(f_{n+1}\).
+\end{proposition}
+\begin{proof}
+Pour \(n=1\), la formule est la définition de \(F_{\mathrm{av}}\), puisque \(f_2=1\). En la supposant valable pour \(n\), la multiplication à droite fournit
+\[
+ \begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix}
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}
+ =\begin{pmatrix}f_n&f_{n-1}+f_n\\
+ f_{n+1}&f_n+f_{n+1}\end{pmatrix}
+ =\begin{pmatrix}f_n&f_{n+1}\\f_{n+1}&f_{n+2}\end{pmatrix}.
+\]
+La récurrence démontre l’identité. Pour une matrice d’incidence à entrées zéro ou un, la règle de multiplication additionne les suites de transitions compatibles entre deux positions. Par récurrence sur la longueur, l’entrée \((i,j)\) de la puissance compte les suites de longueur \(n\) allant de \(i\) à \(j\). Les deux entrées diagonales comptent les retours déclarés.
+\end{proof}
+
+\subsection{Marquage régional du support de retour}
+
+Soient \(e_{\mathrm{ar}}=(1,0)^{\mathsf T}\) et \(e_{\mathrm{vol}}=(0,1)^{\mathsf T}\). Pour une coordonnée positive \(c\), produite avant cette évaluation, définissons le lecteur de marque
+\[
+ D_c=c\,e_{\mathrm{ar}}e_{\mathrm{ar}}^{\mathsf T}
+       +e_{\mathrm{vol}}e_{\mathrm{vol}}^{\mathsf T}
+     =\operatorname{diag}(c,1).
+\]
+La diagonalité conserve les deux feuillets ; l’entrée volumétrique exprime sa normalisation unitaire. La marque aréale \(c\) est appliquée une seule fois, après le dénombrement des retours. Son évaluation est
+\begin{equation}
+ \Theta_{c,n}=
+ \frac{\langle e_{\mathrm{ar}},D_c F_{\mathrm{av}}^n
+ e_{\mathrm{ar}}\rangle}
+ {\langle e_{\mathrm{vol}},F_{\mathrm{av}}^n
+ e_{\mathrm{vol}}\rangle}
+ =c\,\frac{f_{n-1}}{f_{n+1}},\qquad n\geq1.
+ \label{hrr:marca}
+\end{equation}
+Le choix \(c=\pi\) coïncide avec le lecteur de frontière du retour aréal--volumétrique. Le choix \(c=e\) définit le lecteur ultérieur complémentaire considéré dans ce chapitre. Dans les deux cas, on utilise le même support de retours et la coordonnée régionale déjà engendrée.
+
+\begin{theorem}[Quotient de marques indépendant de la profondeur]
+\label{hrr:cociente} Pour toutes marques positives \(c,d\) et tout \(n\geq2\),
+\begin{equation}
+ \frac{\Theta_{c,n}}{\Theta_{d,n}}=\frac cd.
+ \label{hrr:cociente-exacto}
+\end{equation}
+En particulier,
+\begin{equation}
+ \frac{\Theta_{\pi,n}}{\Theta_{e,n}}=\frac\pi e,
+ \qquad
+ \lim_{n\to\infty}\Theta_{\pi,n}=\frac\pi{\varphi^2},
+ \qquad
+ \lim_{n\to\infty}\Theta_{e,n}=\frac e{\varphi^2}.
+ \label{hrr:pi-e-phi}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La récurrence implique \(f_j>0\) pour \(j\geq1\). Pour \(n\geq2\), le quotient \(r_n=f_{n-1}/f_{n+1}\) est positif. Par \eqref{hrr:marca}, les deux évaluations sont \(cr_n\) et \(dr_n\), si bien que leur division annule exactement le même facteur de retour. L’identification précédente de la coordonnée régionale d’auto-échelle au rapport stable de cette incidence donne \(r_n\to\varphi^{-2}\). La multiplication par les marques constantes \(\pi\) et \(e\) fournit les deux limites. En revanche, le quotient fini possède déjà sa valeur exacte avant le passage à la limite.
+\end{proof}
+
+La première longueur a \(f_0=0\) : les deux évaluations s’annulent et leur quotient sort du domaine de \eqref{hrr:cociente-exacto}. La restriction \(n\geq2\) exprime une propriété du dénombrement et évite d’étendre une simplification à un dénominateur nul.
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\(n\)&2&3&4&5&6\\\hline
+\(r_n\)&\(1/2\)&\(1/3\)&\(2/5\)&\(3/8\)&\(5/13\)\\
+\(\Theta_{\pi,n}\)&\(\pi/2\)&\(\pi/3\)&\(2\pi/5\)&\(3\pi/8\)&\(5\pi/13\)\\
+\(\Theta_{e,n}\)&\(e/2\)&\(e/3\)&\(2e/5\)&\(3e/8\)&\(5e/13\)
+\end{tabular}
+\end{center}
+Le tableau présente deux faits simultanés : chaque lecteur change avec la profondeur, tandis que leur comparaison demeure fixe. L’invariance correspond à une relation entre lecteurs et non à l’immobilité de l’état qui porte la lecture.
+
+\subsection{Borne exacte de convergence vers le rapport stable}
+
+La correspondance déjà établie de la coordonnée engendrée \(\varphi\) avec la valeur propre positive de \(F_{\mathrm{av}}\) fournit \(\varphi^2=\varphi+1\) et \(\varphi>1\). On peut quantifier la limite sans introduire de développement décimal cible.
+
+\begin{proposition}[Erreur du quotient de retours]
+\label{hrr:error-retorno} En posant \(q=-\varphi^{-2}\), pour \(n\geq1\) on a
+\begin{align}
+ r_n&=\varphi^{-2}\frac{1-q^{n-1}}{1-q^{n+1}},
+ \label{hrr:rn-exacto}\\
+ r_n-\varphi^{-2}
+ &=\varphi^{-2}
+ \frac{q^{n-1}(q^2-1)}{1-q^{n+1}}.
+ \label{hrr:rn-error}
+\end{align}
+En particulier,
+\begin{equation}
+ |r_n-\varphi^{-2}|
+ \leq\varphi^{-2}
+ \frac{|q|^{n-1}(1-q^2)}{1-|q|^{n+1}}.
+ \label{hrr:rn-cota}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Soit \(\psi=-\varphi^{-1}\). De \(\varphi^2=\varphi+1\) découle \(\psi^2=\psi+1\). La suite \(b_n=(\varphi^n-\psi^n)/(\varphi-\psi)\) satisfait \(b_0=0\), \(b_1=1\) et la même récurrence que \(f_n\). La récurrence donne \(b_n=f_n\). En divisant l’expression de \(f_{n-1}\) par celle de \(f_{n+1}\) et en utilisant \(\psi/\varphi=q\), on obtient \eqref{hrr:rn-exacto}. La soustraction de la limite produit \eqref{hrr:rn-error}. Enfin, \(|q|<1\), \(1-q^2>0\) et \(|1-q^{n+1}|\geq1-|q|^{n+1}>0\) donnent la borne.
+\end{proof}
+
+Cette formule constitue une lecture exacte de la vitesse de convergence de l’incidence déjà engendrée. Les marques reçoivent l’erreur multipliée par \(c\), mais leur quotient conserve l’annulation exacte du théorème~\ref{hrr:cociente}.
+
+\section{Composition multiplicative du flot de couplage}
+\label{hrr:flujo}
+
+\subsection{Direction engendrée et élimination de la composante uniforme}
+
+Le registre dodécaphasique \(K\), avec son marquage, produit la direction
+\[
+ u_K=P_3P_{11}K,\qquad u_K\neq0,\qquad
+ \langle u_K,\mathbf1\rangle=0.
+\]
+Les projecteurs sont les opérateurs déjà construits dans la réalisation correspondante du registre. Dans cette section, on fixe leur résultat et l’on écrit
+\[
+ v=\frac{u_K}{\|u_K\|},\qquad
+ H_K=\operatorname{diag}(v_1,\ldots,v_{12}).
+\]
+Alors \(\sum_i v_i=0\), \(\sum_i v_i^2=1\) et \(\operatorname{tr}H_K=0\). Pour une marque positive \(r\) et un paramètre réel \(t\), définissons
+\begin{equation}
+ g_{K,r}(t)=\exp\bigl(t\log(r)H_K\bigr)
+ =\operatorname{diag}\bigl(r^{tv_1},\ldots,r^{tv_{12}}\bigr).
+ \label{hrr:g-definicion}
+\end{equation}
+La direction provient du registre ; la marque détermine l’échelle logarithmique de la déformation. Le paramètre \(t\) paramètre ce flot géométrique. L’identification à une horloge physique requiert la réalisation temporelle correspondante.
+
+\begin{theorem}[Homomorphisme de marques et conservation du déterminant]
+\label{hrr:homomorfismo} Pour \(a,b>0\) et \(s,t\in\mathbb R\),
+\begin{align}
+ g_{K,ab}(t)&=g_{K,a}(t)g_{K,b}(t),
+ \label{hrr:producto}\\
+ g_{K,a/b}(t)&=g_{K,a}(t)g_{K,b}(t)^{-1},
+ \label{hrr:cociente-flujo}\\
+ g_{K,r}(s+t)&=g_{K,r}(s)g_{K,r}(t),
+ \label{hrr:grupo-t}\\
+ \det g_{K,r}(t)&=1.
+ \label{hrr:determinante}
+\end{align}
+De plus, \(g_{K,r}(t)^{-1}=g_{K,r}(-t)=g_{K,r^{-1}}(t)\).
+\end{theorem}
+\begin{proof}
+Toutes les matrices sont diagonales. L’entrée \(i\) de la première égalité est \((ab)^{tv_i}=a^{tv_i}b^{tv_i}\), puisque \(\log(ab)=\log a+\log b\) pour des bases positives. Chaque entrée est strictement positive, donc la matrice est inversible, et la substitution \(b\mapsto b^{-1}\) démontre la deuxième égalité. La troisième découle de \(r^{(s+t)v_i}=r^{sv_i}r^{tv_i}\). Le déterminant est le produit des douze entrées :
+\[
+ \prod_{i=1}^{12}r^{tv_i}
+ =r^{t\sum_i v_i}=r^0=1.
+\]
+La formule de l’inverse consiste de nouveau à inverser chaque entrée.
+\end{proof}
+
+\begin{corollary}[Composition de l’ambivalence et du miroir régional]
+\label{hrr:composicion}
+Pour tout \(n\geq2\),
+\begin{equation}
+ g_{K,\Theta_{\pi,n}}(t)
+ g_{K,\Theta_{e,n}}(t)^{-1}
+ =g_{K,\pi/e}(t).
+ \label{hrr:composicion-finita}
+\end{equation}
+À la limite stable,
+\begin{equation}
+ g_{K,\pi/\varphi^2}(t)
+ =g_{K,\pi/e}(t)\,g_{K,e/\varphi^2}(t).
+ \label{hrr:composicion-limite}
+\end{equation}
+\end{corollary}
+\begin{proof}
+Les deux marques finies sont positives pour \(n\geq2\). En appliquant \eqref{hrr:cociente-flujo} et \eqref{hrr:cociente-exacto}, leur quotient matriciel est le flot de la marque \(\pi/e\). Pour la seconde égalité, il suffit d’utiliser \((\pi/e)(e/\varphi^2)=\pi/\varphi^2\) dans \eqref{hrr:producto}. Elle s’obtient aussi comme limite de l’identité finie, car l’exponentielle et le logarithme sont continus sur le domaine des bases positives.
+\end{proof}
+
+L’égalité compare des déformations de même direction \(u_K\). L’échange spéculaire interne des canaux régionaux conserve son propre domaine sur l’état enrichi ; le rapport \(\pi/e\) en est la lecture scalaire ultérieure. L’opérateur d’holonomie \(\Gamma_9\) continue d’agir sur la phase et la mémoire. Ces domaines déterminent le sens de la composition et préservent le registre accompagnant le retour.
+
+\subsection{Transport des mineurs et invariants extérieurs}
+
+Soit \(X\) une matrice réelle de rang \(k\) à douze colonnes, et \(\Delta_I(X)\) le mineur de colonnes indiqué par un ensemble \(I\) de \(k\) indices. L’action à droite de \(g_{K,r}(t)\) multiplie la colonne \(i\) par \(r^{tv_i}\).
+
+\begin{proposition}[Signes, strates et invariants de quotients]
+\label{hrr:plucker}
+On a
+\begin{equation}
+ \Delta_I\bigl(Xg_{K,r}(t)\bigr)
+ =r^{t\sum_{i\in I}v_i}\Delta_I(X).
+ \label{hrr:plucker-formula}
+\end{equation}
+Les signes et la configuration d’annulation de tous les mineurs sont conservés. Si \(I,J,P,Q\) satisfont \(\mathbf1_I+\mathbf1_J=\mathbf1_P+\mathbf1_Q\), alors, là où \(\Delta_P(X)\Delta_Q(X)\neq0\), le quotient
+\begin{equation}
+ \frac{\Delta_I\Delta_J}{\Delta_P\Delta_Q}
+ \label{hrr:cociente-menores}
+\end{equation}
+est invariant sous le flot.
+\end{proposition}
+\begin{proof}
+La multilinéarité du déterminant multiplie le mineur par le produit des facteurs de ses colonnes, ce qui démontre \eqref{hrr:plucker-formula}. Ce produit est positif et conserve donc le signe et la nullité du mineur. Dans \eqref{hrr:cociente-menores}, l’exposant total est
+\[
+ t\sum_{i=1}^{12}
+ (\mathbf1_I(i)+\mathbf1_J(i)-\mathbf1_P(i)-\mathbf1_Q(i))v_i=0.
+\]
+Le dénominateur demeure non nul et l’annulation est exacte.
+\end{proof}
+
+Pour \(k=2\), une application concrète est
+\[
+ \frac{\Delta_{12}\Delta_{34}}{\Delta_{13}\Delta_{24}}.
+\]
+Chacun des quatre indices apparaît une fois au numérateur et une fois au dénominateur. Dans une configuration où les mineurs du dénominateur sont non nuls, cette quantité demeure fixe, même si chaque mineur individuel change. La conservation extérieure possède ainsi des observables explicites, en plus du déterminant global.
+
+\subsection{Relèvement réticulaire et dualité}
+
+La réalisation réticulaire marquée du chapitre précédent utilise la somme orthogonale de douze plans. Écrivons
+\[
+ G_{K,r}(t)=\bigoplus_{i=1}^{12}r^{tv_i}I_2.
+\]
+Si \(\Lambda\) est le réseau euclidien autodual de référence déjà obtenu, définissons \(\Lambda_{r,t}=G_{K,r}(t)\Lambda\).
+
+\begin{proposition}[Covolume et réciprocité des réseaux déformés]
+\label{hrr:redes} Le covolume de \(\Lambda_{r,t}\) coïncide avec celui de \(\Lambda\), et
+\begin{equation}
+ \Lambda_{r,t}^{*}=\Lambda_{r,-t}.
+ \label{hrr:red-dual}
+\end{equation}
+La factorisation \eqref{hrr:composicion-limite} se relève à ces opérateurs de dimension vingt-quatre.
+\end{proposition}
+\begin{proof}
+Chaque rayon apparaît deux fois dans le déterminant. Par conséquent,
+\[
+ \det G_{K,r}(t)=\prod_i r^{2tv_i}=1.
+\]
+Le changement linéaire multiplie le covolume par la valeur absolue du déterminant et le conserve donc. Pour tout opérateur inversible \(G\), la condition \(y\in(G\Lambda)^*\) équivaut à \(\langle y,Gx\rangle\in\mathbb Z\) pour tout \(x\in\Lambda\). Elle équivaut à \(G^{\mathsf T}y\in\Lambda^*\), d’où \((G\Lambda)^*=G^{-\mathsf T}\Lambda^*\). Ici, \(\Lambda^*=\Lambda\), \(G\) est diagonal positif et \(G^{-\mathsf T}=G_{K,r}(-t)\), ce qui démontre \eqref{hrr:red-dual}. La factorisation se vérifie sur chaque bloc de dimension deux exactement comme dans \eqref{hrr:producto}.
+\end{proof}
+
+Cette conclusion conserve le covolume et relie la déformation à son dual. L’intégralité des produits scalaires et la parité des normes sont des propriétés supplémentaires d’un réseau. La réciprocité spectrale thêta--Mellin utilise précisément la dualité démontrée, avec la sommabilité gaussienne et la formule de Poisson développées dans leur propre chapitre.
+
+\section{Diagonale normalisée et restitution de l’orientation radiale}
+\label{hrr:diagonal}
+
+\subsection{Séparation de l’échelle et de la forme}
+
+La carte radiale antécédente part des coordonnées angulaires engendrées \(A>0\) et \(C^*\), dans le domaine \(|C^*|<A\). Définissons
+\[
+ \xi=\frac{C^*}{A},\qquad
+ \eta=\operatorname{artanh}\xi.
+\]
+La variable \(\eta\) désigne l’anisotropie de la forme. Son sens diffère de celui de la mantisse de retour \(\eta_{\mathrm{ret}}\) intervenant dans la section d’action.
+
+Soit \(s>0\) l’échelle aréale produite par cette section. Dans la réalisation de l’ellipse d’action, \(s=2\hbar\). Les demi-axes positifs sont
+\begin{equation}
+ a=\sqrt{s}\,e^{\eta/2},\qquad
+ b=\sqrt{s}\,e^{-\eta/2},\qquad ab=s.
+ \label{hrr:semiejes}
+\end{equation}
+La réciprocité échange \(a\) et \(b\). Sa coordonnée radiale est \(R_*=\sqrt{b/a}=e^{-\eta/2}\). La longueur considérée ci-dessous est la diagonale du rectangle de côtés \(a,b\) :
+\[
+ d=\sqrt{a^2+b^2},\qquad D=\frac{d}{\sqrt{ab}}.
+\]
+La normalisation élimine l’échelle aréale et conserve la forme du rectangle à l’échange de ses côtés près.
+
+\begin{theorem}[Diagonale, anisotropie et réciprocité]
+\label{hrr:diagonal-teorema} Dans le domaine précédent,
+\begin{equation}
+ D^2=2\cosh\eta=R_*^2+R_*^{-2},
+ \qquad
+ D=\frac{\sqrt2}{(1-\xi^2)^{1/4}}.
+ \label{hrr:diagonal-formula}
+\end{equation}
+On a \(D\geq\sqrt2\), et les propositions suivantes sont équivalentes
+\[
+ D=\sqrt2,\qquad \eta=0,\qquad \xi=0,\qquad R_*=1,
+ \qquad a=b.
+\]
+Pour \(D>\sqrt2\), la donnée supplémentaire \(\varepsilon=\operatorname{sgn}\eta\in\{-1,+1\}\) détermine de manière unique
+\begin{align}
+ \eta&=\varepsilon\operatorname{arcosh}(D^2/2),
+ \label{hrr:eta-recuperada}\\
+ \xi&=\varepsilon\sqrt{1-4/D^4},
+ \label{hrr:xi-recuperada}\\
+ R_*&=\exp\!\left[-\frac{\varepsilon}{2}
+                   \operatorname{arcosh}(D^2/2)\right].
+ \label{hrr:radio-recuperado}
+\end{align}
+\end{theorem}
+\begin{proof}
+En divisant \(a^2+b^2\) par \(ab=s\) dans \eqref{hrr:semiejes}, on obtient
+\[
+ D^2=e^{\eta}+e^{-\eta}=2\cosh\eta.
+\]
+Comme \(R_*^2=e^{-\eta}\), la somme est aussi \(R_*^2+R_*^{-2}\). De \(\xi=\tanh\eta\) et \(1-\tanh^2\eta=\cosh^{-2}\eta\), avec \(\cosh\eta>0\), on obtient \(\cosh\eta=(1-\xi^2)^{-1/2}\). La racine positive fournit la seconde formule de \eqref{hrr:diagonal-formula}.
+
+L’inégalité \(\cosh\eta\geq1\), avec égalité uniquement pour \(\eta=0\), démontre la borne et ses équivalences par les définitions. Pour \(D>\sqrt2\), \(\cosh\) détermine \(|\eta|=\operatorname{arcosh}(D^2/2)\), et l’orientation \(\varepsilon\) en détermine le signe. De plus,
+\[
+ \xi^2=1-\cosh^{-2}\eta=1-\frac4{D^4}.
+\]
+La monotonie de \(\tanh\) implique \(\operatorname{sgn}\xi=\operatorname{sgn}\eta\), d’où \eqref{hrr:xi-recuperada}. La substitution de \eqref{hrr:eta-recuperada} dans \(R_*=e^{-\eta/2}\) démontre la dernière formule. Chaque étape est univoque dans le domaine indiqué.
+\end{proof}
+
+\begin{corollary}[Récupération exacte des demi-axes]
+\label{hrr:semiejes-recuperacion} Les données \((s,D,\varepsilon)\), avec \(s>0\) et \(D>\sqrt2\), restituent les demi-axes ordonnés par
+\begin{equation}
+ a^2=\frac{s}{2}\left(D^2+\varepsilon\sqrt{D^4-4}\right),
+ \qquad
+ b^2=\frac{s}{2}\left(D^2-\varepsilon\sqrt{D^4-4}\right).
+ \label{hrr:semiejes-radicales}
+\end{equation}
+Si \(D=\sqrt2\), la récupération est \(a=b=\sqrt{s}\).
+\end{corollary}
+\begin{proof}
+Les équations \(a^2+b^2=sD^2\) et \(a^2b^2=s^2\) déterminent \(a^2,b^2\) comme racines positives de \(z^2-sD^2z+s^2=0\). Ses racines sont les deux quantités \(s(D^2\pm\sqrt{D^4-4})/2\). Le signe de \(a-b\) coïncide avec celui de \(\eta\), si bien que \(\varepsilon\) assigne chaque racine à son demi-axe. Les racines sont positives parce que \(D^2>\sqrt{D^4-4}\). Le cas d’égalité produit une racine double \(s\).
+\end{proof}
+
+\subsection{Exemple exact de deux réalisations réciproques}
+
+Prenons une forme d’essai avec \(\xi=3/5\). Cet exemple vérifie le lecteur géométrique ; l’assignation concrète d’une section HMT s’obtient à partir de ses propres coordonnées engendrées. On calcule
+\[
+ \eta=\operatorname{artanh}(3/5)=\log2,\qquad
+ R_*=\frac1{\sqrt2},\qquad
+ D^2=2+\frac12=\frac52.
+\]
+Pour l’échelle \(s\), les demi-axes sont \(a=\sqrt{2s}\) et \(b=\sqrt{s/2}\). La forme réciproque possède \(\xi=-3/5\), \(\eta=-\log2\), \(R_*=\sqrt2\) et les demi-axes échangés. Toutes deux ont la même diagonale normalisée \(D=\sqrt{5/2}\) et le même produit \(ab=s\). La donnée d’orientation distingue exactement ces deux réalisations.
+
+La diagonale représente donc une intensité d’anisotropie. Le registre orienté permet de reconstruire la forme ordonnée. L’échelle aréale restitue, quant à elle, sa taille. Cette séparation précise la donnée conservée par chaque lecteur et celle apportée par l’archive.
+
+\subsection{Cartes de Poincaré et de Klein}
+
+La carte de Poincaré du diamètre radial et sa carte de Klein sont
+\begin{equation}
+ w=\frac{R_*^2-1}{R_*^2+1}
+   =-\tanh(\eta/2),\qquad
+ x_{\mathrm K}=\frac{2w}{1+w^2}=-\tanh\eta=-\xi.
+ \label{hrr:cartas}
+\end{equation}
+Les domaines \(R_*>0\), \(-1<w<1\) et \(-1<x_{\mathrm K}<1\) se correspondent par ces applications.
+
+\begin{proposition}[Réciprocité radiale dans les deux cartes]
+\label{hrr:reciprocidad-cartas} L’inversion \(R_*\mapsto R_*^{-1}\) agit par
+\[
+ \eta\mapsto-\eta,\qquad w\mapsto-w,
+ \qquad x_{\mathrm K}\mapsto-x_{\mathrm K}.
+\]
+La diagonale et l’échelle aréale demeurent invariantes. Le couple \((D,\varepsilon)\) récupère les deux coordonnées de disque au moyen de \eqref{hrr:eta-recuperada} et de \eqref{hrr:cartas}.
+\end{proposition}
+\begin{proof}
+L’identité \(R_*=e^{-\eta/2}\) transforme l’inversion en changement de signe de \(\eta\). Les deux fonctions hyperboliques de \eqref{hrr:cartas} sont impaires et changent donc de signe. La formule \(D^2=R_*^2+R_*^{-2}\) est invariante et le produit des demi-axes demeure \(s\). Les formules inverses du théorème~\ref{hrr:diagonal-teorema} achèvent la récupération.
+\end{proof}
+
+Dans l’exemple \(\xi=3/5\), on obtient \(w=-1/3\) et \(x_{\mathrm K}=-3/5\). La forme réciproque possède \(w=1/3\) et \(x_{\mathrm K}=3/5\). La coïncidence de la diagonale accompagne ainsi deux positions opposées sur le même diamètre.
+
+\subsection{Inversion radiale et réflexion dans la carte complexe}
+
+Le rayon positif intervient aussi dans la carte complexe de réciprocité. Pour \(r>0\) et un argument \(\theta\), soit
+\[
+ z=re^{i\theta},\qquad s(r,\theta)=\frac1{1-z},
+ \qquad z\neq1.
+\]
+Le domaine exclut uniquement le pôle de cette carte. L’inversion radiale conserve \(\theta\) et remplace \(r\) par \(r^{-1}\).
+
+\begin{proposition}[Réflexion par rapport à la droite de partie réelle médiane]
+\label{hrr:reflexion-compleja} Dans le domaine précédent,
+\begin{align}
+ s(r^{-1},\theta)&=1-\overline{s(r,\theta)},
+ \label{hrr:reflexion}\\
+ \operatorname{Re}s(r,\theta)-\frac12
+ &=\frac{1-r^2}{2|1-re^{i\theta}|^2}.
+ \label{hrr:reflexion-parte-real}
+\end{align}
+Le cercle \(r=1\), hormis le pôle, se transforme donc en la droite \(\operatorname{Re}s=1/2\). L’inversion radiale se réalise comme réflexion par rapport à cette droite verticale.
+\end{proposition}
+\begin{proof}
+Le conjugué de \(s(r,\theta)\) est \((1-re^{-i\theta})^{-1}\). Par calcul direct,
+\[
+ 1-\frac1{1-re^{-i\theta}}
+ =\frac{-re^{-i\theta}}{1-re^{-i\theta}}
+ =\frac1{1-r^{-1}e^{i\theta}},
+\]
+ce qui démontre \eqref{hrr:reflexion}. Pour la seconde identité, on multiplie le numérateur et le dénominateur de \(s\) par \(1-re^{-i\theta}\). Sa partie réelle est
+\[
+ \frac{1-r\cos\theta}{1-2r\cos\theta+r^2}.
+\]
+En soustrayant \(1/2\), le numérateur se réduit à \((1-r^2)/2\). Le dénominateur est positif sur le domaine. On en déduit que \(\operatorname{Re}s=1/2\) équivaut à \(r=1\). Enfin, si \(s=x+iy\), alors \(1-\overline s=(1-x)+iy\), ce qui est exactement la réflexion par rapport à la droite verticale indiquée.
+\end{proof}
+
+Pour \(\theta=\pi\), les rayons \(r=2\) et \(r=1/2\) produisent respectivement \(s=1/3\) et \(s=2/3\). Le point \(r=1\) produit \(s=1/2\). Cet exemple rend la réciprocité visible au moyen de trois valeurs rationnelles de la carte.
+
+La transformation démontrée appartient à la géométrie de la carte complexe. Son application à un opérateur spectral exige de conserver l’opérateur et son domaine, en plus de cette carte. De même, la carte radiale \(R_*\) conserve la section angulaire qui l’engendre. L’égalité d’une opération d’inversion dans deux réalisations fournit la correspondance écrite ; l’identification de leurs objets antécédents est maintenue par les transports déjà construits.
+
+\section{Récupération du flot et compatibilité des lecteurs}
+\label{hrr:archivo}
+
+L’application de ces lecteurs à une direction de flot exige de conserver la direction engendrée, en plus de ses valeurs scalaires. L’archive réduite précédemment construite possède des opérateurs \(M\) et \(L\) avec \(LM=P_{11}\). Si \(m=MK\), alors
+\begin{equation}
+ u_K=P_3Lm.
+ \label{hrr:archivo-direccion}
+\end{equation}
+Cette égalité maintient l’action de chaque opérateur et permet de composer la récupération avec le flot.
+
+\begin{proposition}[Reconstruction du flot à partir de l’archive réduite]
+\label{hrr:archivo-flujo} Avec les opérateurs et le marquage précédents, l’archive \(m\) et une marque positive \(r\) déterminent
+\[
+ g_{K,r}(t)=
+ \operatorname{diag}\left(
+ r^{\,t(P_3Lm)_1/\|P_3Lm\|},\ldots,
+ r^{\,t(P_3Lm)_{12}/\|P_3Lm\|}\right).
+\]
+Toutes les identités de composition de \eqref{hrr:producto}--\eqref{hrr:determinante} sont conservées.
+\end{proposition}
+\begin{proof}
+De \(m=MK\) et \(LM=P_{11}\) découle \(P_3Lm=P_3LMK=P_3P_{11}K=u_K\). La direction est non nulle par la propriété déjà démontrée du registre engendré. La normalisation récupère exactement \(v\), et sa substitution dans \eqref{hrr:g-definicion} restitue chaque entrée du flot. Les identités dépendent uniquement de cette direction et de la positivité des marques ; elles demeurent donc valables.
+\end{proof}
+
+L’identité d’archive récupère la direction de la déformation. Les lecteurs régionaux apportent leurs marques. Le lecteur diagonal de la forme radiale conserve son anisotropie absolue, et le registre orienté récupère le signe. On obtient une composition dans laquelle l’invariance et la réversibilité sont assignées à des données explicites :
+\[
+ \begin{gathered}
+ \text{retours de feuillet}
+ \longrightarrow(\Theta_{\pi,n},\Theta_{e,n})
+ \longrightarrow\pi/e,\\
+ \text{archive de }K\longrightarrow u_K
+ \longrightarrow g_{K,r}(t)
+ \longrightarrow\text{covolume et mineurs transportés},\\
+ (s,D,\varepsilon)\longrightarrow(a,b)
+ \longleftrightarrow(R_*,w,x_{\mathrm K}).
+ \end{gathered}
+\]
+La première ligne distingue le support commun de deux marques. La seconde exprime la fonction opératoire du registre. La troisième précise l’information géométrique nécessaire à l’inversion. L’état enrichi conserve la phase, les tours, les retenues et les incidences permettant de composer ces lecteurs au sein de leur généalogie.
+
+\section{Réalisation temporelle et domaine d’interprétation physique}
+
+L’holonomie nonadique conserve son action sur la phase et la mémoire ; le retour de phase incrémente le registre des tours. Les dénombrements de l’enveloppe modale et les rapports de marques sont évalués sur des réalisations ultérieures. La réciprocité radiale agit sur une carte de forme et son orientation. L’articulation démontrée réunit ces opérations par des lecteurs compatibles, en conservant la distinction entre leurs paramètres.
+
+La relation \(\pi/\varphi^2\) intervient comme rapport marqué de retours et comme échelle du flot conservatif. Le rapport \(\pi/e\) intervient comme quotient de marques sur le même support. Tous deux satisfont la factorisation exacte \eqref{hrr:composicion-limite}. Leur intervention dans une réalisation gravitationnelle ou cosmologique conserve les conditions du lecteur physique correspondant : identification de l’horloge, grandeurs dimensionnelles, réponse de frontière et domaine géométrique. Le résultat de ce chapitre relève de la composition mathématique des lecteurs engendrés. Leurs applications physiques utilisent ensuite la réalisation qui leur correspond.

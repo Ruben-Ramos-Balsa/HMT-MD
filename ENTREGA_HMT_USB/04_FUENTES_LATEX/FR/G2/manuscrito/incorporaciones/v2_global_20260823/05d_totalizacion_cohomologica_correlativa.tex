@@ -1,0 +1,810 @@
+% Extracción quirúrgica del propietario V2 05d: líneas 286--512.
+% El resto permanece en este archivo como procedencia, pero no se publica.
+\iffalse
+% Macroestructura de coherencia estrictamente interna del continuo discreto.
+% No usa geometrías, clases ni conclusiones clásicas.
+
+\chapter{Macrostructure interne de cellules, cohérence et complétude}
+\label{chap:pdfv2-coh-interna}
+
+\begin{statusbox}
+L'unique entrée de ce chapitre est la structure discrète du continu. La
+branche \(\mathrm{coh}\) se construit sur les anneaux
+\(A_N=\mathbb Z/3^N\mathbb Z\), les cellules APP, leurs histoires et leurs
+terminaux. Sa chaîne non ablative est
+\[
+ \mathcal C_{\rm cont}^{\rm disc}
+ \supset\mathcal C_{\rm cont}^{\rm coh}
+ \xrightarrow{\operatorname{Res}_{\rm coh}}
+ \mathcal G_{\rm coh}
+ \xrightarrow{\operatorname{pr}_{X,{\rm coh}}}
+ X_{\chi,{\rm coh}}
+ \xrightarrow{\mathcal A_{\rm coh}}
+ \mathfrak M_{\rm coh}
+ \xrightarrow{\mathcal P_{\rm coh}}
+ \mathcal C_{\rm coh}^{\rm HMT}.
+\]
+Aucun objet classique n'apparaît en entrée ni en sortie. Chaque image
+conserve littéralement son histoire génératrice.
+\end{statusbox}
+
+\section{Domaine typé et séparation des indices}
+\label{sec:pdfv2-coh-domain}
+
+Pour ne pas identifier profondeur et précision, on utilise l'ensemble dirigé
+\begin{equation}\label{eq:pdfv2-coh-lambda}
+ \Lambda:=\mathbb N_{\rm prof}\times\mathbb N_{\rm prec},
+ \qquad
+ \lambda=(d,N),
+ \qquad
+ A_N:=\mathbb Z/3^N\mathbb Z.
+\end{equation}
+Si \(\lambda\leq\lambda'=(d',N')\), la transition
+\begin{equation}\label{eq:pdfv2-coh-rho-lambda}
+ \rho_{\lambda',\lambda}:
+ \mathcal C_{{\rm cont},\lambda'}^{\rm disc}
+ \longrightarrow
+ \mathcal C_{{\rm cont},\lambda}^{\rm disc}
+\end{equation}
+tronque l'histoire après la profondeur \(d\) et réduit les coefficients par
+\(A_{N'}\twoheadrightarrow A_N\), en conservant feuillet, orientation, résidu,
+quotient, retenue, mémoire, frontière, chemin, survie et terminal.
+
+La sous-structure \(\mathcal C_{\rm cont}^{\rm coh}\) se compose des histoires
+\(x\in\mathcal C_{\rm cont}^{\rm disc}\) qui satisfont, à tout niveau :
+\begin{enumerate}
+ \item le préfixe de \(x\) porte les cellules orientées et basées définies dans
+       la section suivante ;
+ \item chaque raffinement induit une application du complexe de la cellule ;
+ \item troncature, réduction des coefficients, orientation et extension
+       nonadique commutent ;
+ \item les multisections d'extension survivante sont non vides à toute
+       profondeur ;
+ \item le retour nonadique conserve la différence terminale entre l'histoire
+       et sa continuation.
+\end{enumerate}
+Ces conditions définissent le domaine de la branche. Elles ne sont pas attribuées à une
+histoire arbitraire sans être vérifiées.
+
+\section{Cellule APP sur \texorpdfstring{\(A_N\)}{AN}}
+\label{sec:pdfv2-coh-cell}
+
+Une cellule orientée est
+\[
+ \nu=(h_\nu,I_\nu,J_\nu,\epsilon_\nu),
+\]
+où \(h_\nu\) est une histoire finie, \(I_\nu,J_\nu\) sont des ensembles
+ordonnés non vides de ports,
+\[
+ a_\nu:=|I_\nu|\geq1,
+ \qquad
+ b_\nu:=|J_\nu|\geq1,
+\]
+et \(\epsilon_\nu\in\{+1,-1\}\) est son orientation.
+
+On définit
+\begin{equation}\label{eq:pdfv2-coh-kappa}
+ \begin{aligned}
+ \kappa_{\nu,N}:
+ A_N^{I_\nu}\oplus A_N^{J_\nu}
+ &\longrightarrow A_N^{I_\nu\times J_\nu},\\
+ \kappa_{\nu,N}(u,v)_{ij}&:=u_i-v_j.
+ \end{aligned}
+\end{equation}
+Les ports de base \(i_0\in I_\nu\), \(j_0\in J_\nu\) étant choisis, soit
+\begin{equation}\label{eq:pdfv2-coh-delta}
+ \begin{aligned}
+ \delta_{\nu,N}:A_N^{I_\nu\times J_\nu}
+ &\longrightarrow
+ A_N^{(I_\nu\setminus i_0)\times(J_\nu\setminus j_0)},\\
+ \delta_{\nu,N}(w)_{ij}
+ &:={}
+ w_{ij}-w_{i j_0}-w_{i_0j}+w_{i_0j_0}.
+ \end{aligned}
+\end{equation}
+
+\begin{proposition}[Suite exacte de la cellule]
+\label{prop:pdfv2-coh-cell-exact}
+Pour toute cellule \(\nu\) et toute précision \(N\), la suite
+\begin{equation}\label{eq:pdfv2-coh-exact-sequence}
+ 0\longrightarrow A_N
+ \xrightarrow{\ \Delta\ }
+ A_N^{I_\nu}\oplus A_N^{J_\nu}
+ \xrightarrow{\ \kappa_{\nu,N}\ }
+ A_N^{I_\nu\times J_\nu}
+ \xrightarrow{\ \delta_{\nu,N}\ }
+ A_N^{(a_\nu-1)(b_\nu-1)}
+ \longrightarrow0,
+\end{equation}
+où
+\[
+ \Delta(t)=\bigl((t)_{i\in I_\nu},(t)_{j\in J_\nu}\bigr),
+\]
+est exacte et scindée sur \(A_N\).
+\end{proposition}
+
+\begin{proof}
+Si \(\kappa_{\nu,N}(u,v)=0\), alors \(u_i=v_j\) pour tout \(i,j\),
+de sorte que \((u,v)\) est diagonale. Ainsi,
+\(\ker\kappa_{\nu,N}=\operatorname{im}\Delta\). La substitution directe donne
+\(\delta_{\nu,N}\kappa_{\nu,N}=0\).
+
+Si \(\delta_{\nu,N}(w)=0\), posons
+\[
+ u_i=w_{i j_0},
+ \qquad
+ v_j=w_{i_0j_0}-w_{i_0j}.
+\]
+Alors
+\[
+ u_i-v_j=w_{i j_0}+w_{i_0j}-w_{i_0j_0}=w_{ij},
+\]
+de sorte que \(\ker\delta_{\nu,N}=\operatorname{im}\kappa_{\nu,N}\). Pour
+prouver la surjectivité de \(\delta_{\nu,N}\), on annule la ligne et la
+colonne de base et l'on place arbitrairement les coordonnées souhaitées aux
+positions restantes. Ces mêmes formules fournissent des scindements.
+\end{proof}
+
+La cellule complexe, aux degrés \(1\to0\), est le cône homologique de
+\(\kappa_{\nu,N}\) avec la convention qui place sa source au degré \(1\) :
+\begin{equation}\label{eq:pdfv2-coh-cell-complex}
+ C_{\nu,N}:=\operatorname{Cone}(\kappa_{\nu,N})
+ :=\left[
+ A_N^{I_\nu}\oplus A_N^{J_\nu}
+ \xrightarrow{\ \kappa_{\nu,N}\ }
+ A_N^{I_\nu\times J_\nu}
+ \right].
+\end{equation}
+La proposition précédente donne
+\begin{equation}\label{eq:pdfv2-coh-cell-homology}
+ H_1(C_{\nu,N})\simeq A_N,
+ \qquad
+ H_0(C_{\nu,N})\simeq A_N^{(a_\nu-1)(b_\nu-1)}.
+\end{equation}
+Le défaut de cellule est ainsi construit, non ajouté comme un cardinal sans
+application.
+
+\section{Orientation et retenue de la cellule}
+\label{sec:pdfv2-coh-orientation-carry}
+
+Soient
+\[
+ \tau_1(u,v)=(v,u),
+ \qquad
+ P(w)_{ji}=w_{ij}.
+\]
+L'échange orienté est l'application de complexes
+\begin{equation}\label{eq:pdfv2-coh-theta}
+ \Theta_{\nu,N}:=(\tau_1,-P):
+ C_{a_\nu,b_\nu,N}\longrightarrow C_{b_\nu,a_\nu,N},
+\end{equation}
+parce que
+\begin{equation}\label{eq:pdfv2-coh-orientation}
+ \kappa_{b_\nu,a_\nu,N}\tau_1
+ =-P\kappa_{a_\nu,b_\nu,N}.
+\end{equation}
+En outre,
+\(\Theta_{\nu^{\rm op},N}\Theta_{\nu,N}=I\). Le chemin opposé ne
+s'identifie pas à l'original : il change le signe de degré zéro et conserve l'acte
+d'inversion.
+
+Pour \(r\in A_N\), soit
+\(\langle r\rangle_N\in\{0,\ldots,3^N-1\}\) son représentant canonique.
+L'emprunt/retenue local est
+\begin{equation}\label{eq:pdfv2-coh-beta}
+ \beta_N(r,s):=
+ \frac{\langle r-s\rangle_N-\langle r\rangle_N+\langle s\rangle_N}
+ {3^N}\in\{0,1\}.
+\end{equation}
+Ainsi,
+\begin{equation}\label{eq:pdfv2-coh-carry-cell}
+ \langle u_i-v_j\rangle_N
+ =\langle u_i\rangle_N-\langle v_j\rangle_N
+  +3^N\beta_N(u_i,v_j).
+\end{equation}
+La matrice
+\[
+ \operatorname{Carr}_{\nu,N}(u,v)
+ :=\bigl(\beta_N(u_i,v_j)\bigr)_{ij}
+\]
+est conservé avec \(\kappa_{\nu,N}(u,v)\) : résidu et retenue sont deux
+coordonnées distinctes.
+
+Lorsque les tailles des ports proviennent des deux feuillets APP, l'admissibilité
+de la cellule inclut l'identité entière
+\begin{equation}\label{eq:pdfv2-coh-app-defect}
+ (a_\nu-1)(b_\nu-1)
+ =\rho_{\Pi,\nu}-\rho_{\Sigma,\nu}+1
+  +9(c_{\Pi,\nu}-c_{\Sigma,\nu}).
+\end{equation}
+L'égalité est exigée uniquement pour une cellule ayant cette généalogie ; elle n'est pas affirmée
+pour des entiers dépourvus de feuillets APP.
+
+Si \(L_N(u)\) est le relèvement entier canonique de la matrice d'une flèche
+\(u\), on définit la retenue de composition par
+\begin{equation}\label{eq:pdfv2-coh-carry-composition}
+ L_N(v)L_N(u)=L_N(vu)+3^N c_N(v,u).
+\end{equation}
+L'associativité de trois flèches donne le cocycle exact
+\begin{equation}\label{eq:pdfv2-coh-carry-cocycle}
+ c_N(w,vu)+L_N(w)c_N(v,u)
+ =c_N(wv,u)+c_N(w,v)L_N(u).
+\end{equation}
+
+\section{Catégorie d'histoires et foncteur cellulaire}
+\label{sec:pdfv2-coh-category}
+
+Pour un préfixe \(x_{\leq d}\), soit \(J_d(x)\) la catégorie finie dont les
+objets sont toutes ses cellules \(\nu\). Ses flèches sont engendrées par :
+\begin{enumerate}
+ \item des raffinements \(u:\nu\to\nu'\) avec des applications surjectives de
+       ports
+       \[
+        \alpha_u:I_{\nu'}\twoheadrightarrow I_\nu,
+        \qquad
+        \beta_u:J_{\nu'}\twoheadrightarrow J_\nu;
+       \]
+ \item les échanges d'orientation \(\Theta_\nu\) ;
+ \item les extensions nonadiques \(\Gamma_9\nu\) ;
+ \item l'identité et la composition, soumises aux relations de frontière,
+       de chemin, d'orientation et de retenue de l'histoire.
+\end{enumerate}
+La finitude se rapporte au préfixe ; le système de tous les préfixes n'est pas
+déclaré fini.
+
+Le foncteur cellulaire est
+\begin{equation}\label{eq:pdfv2-coh-gamma-functor}
+ \Gamma_{d,N}:J_d(x)\longrightarrow
+ \operatorname{Ch}^{[0,1]}(A_N),
+ \qquad
+ \Gamma_{d,N}(\nu)=C_{\nu,N}.
+\end{equation}
+Pour une flèche de raffinement \(u:\nu\to\nu'\), il agit par
+\begin{align}
+ \Gamma_{d,N}(u)_1(p,q)
+ &:=(p\circ\alpha_u,q\circ\beta_u),
+ \label{eq:pdfv2-coh-gamma-one}\\
+ \Gamma_{d,N}(u)_0(w)
+ &:=w\circ(\alpha_u\times\beta_u).
+ \label{eq:pdfv2-coh-gamma-zero}
+\end{align}
+On vérifie coordonnée par coordonnée
+\begin{equation}\label{eq:pdfv2-coh-gamma-chain-map}
+ \kappa_{\nu',N}\Gamma_{d,N}(u)_1
+ =\Gamma_{d,N}(u)_0\kappa_{\nu,N}.
+\end{equation}
+Sur une inversion d'orientation, il agit par
+\(\Theta_{\nu,N}\), et sur les compositions, il agit par composition, en gardant
+séparément \(c_N(v,u)\).
+
+La réduction \(r_{N+1,N}:A_{N+1}\twoheadrightarrow A_N\) satisfait
+\begin{equation}\label{eq:pdfv2-coh-kappa-reduction}
+ r_{N+1,N}^{I\times J}\kappa_{\nu,N+1}
+ =\kappa_{\nu,N}
+  \bigl(r_{N+1,N}^{I}\oplus r_{N+1,N}^{J}\bigr).
+\end{equation}
+Par conséquent, le diagramme des cellules est naturel simultanément en histoire et en
+précision.
+
+\fi
+\section{Module des chemins, totalisation cellulaire et terminal nonadique}
+\label{sec:pdfv2-coh-route-module}
+
+Soit \(\operatorname{Term}_d(x)\) l'ensemble des terminaux de mémoire du
+préfixe. Pour \(\nu\in J_d(x)\), définissons
+\begin{equation}\label{eq:pdfv2-coh-w-module}
+ W_{d,N}(\nu):=
+ A_N\bigl[
+ \operatorname{Path}_{J_d(x)}(\nu,\operatorname{Term}_d(x))
+ \bigr].
+\end{equation}
+C'est le module libre sur tous les chemins terminaux ; il n'en sélectionne aucun. Si
+\(u:\nu\to\nu'\), l'action contravariante est
+\begin{equation}\label{eq:pdfv2-coh-w-action}
+ W_{d,N}(u):W_{d,N}(\nu')\longrightarrow W_{d,N}(\nu),
+ \qquad
+ [\lambda]\longmapsto[\lambda\circ u].
+\end{equation}
+Chaque générateur conserve orientation, retenue, frontière, chemin et mémoire.
+
+\section{Complexe bar bilatéral et totalisation de la bichaîne}
+\label{sec:pdfv2-coh-bar}
+
+Pour \(q\geq0\) et \(r\in\{0,1\}\), soit
+\begin{equation}\label{eq:pdfv2-coh-bar-bigraded}
+ B_{q,r}^{d,N}(x):=
+ \bigoplus_{\nu_0\xrightarrow{u_1}\cdots\xrightarrow{u_q}\nu_q}
+ W_{d,N}(\nu_q)\otimes_{A_N}\Gamma_{d,N}(\nu_0)_r.
+\end{equation}
+La différentielle bar est définie sans abréviation par
+\begin{align}
+ d_{\rm bar}(w;u_1,\ldots,u_q;c)
+ :={}&(w;u_2,\ldots,u_q;\Gamma(u_1)c)
+ \nonumber\\
+ &+\sum_{i=1}^{q-1}(-1)^i
+ (w;u_1,\ldots,u_{i+1}u_i,\ldots,u_q;c)
+ \nonumber\\
+ &+(-1)^q
+ (W(u_q)w;u_1,\ldots,u_{q-1};c).
+ \label{eq:pdfv2-coh-bar-differential}
+\end{align}
+Pour \(q=1\), c'est exactement la relation
+\begin{equation}\label{eq:pdfv2-coh-coend-relation}
+ d_{\rm bar}(w;u;c)
+ =w\otimes\Gamma(u)c-W(u)w\otimes c.
+\end{equation}
+On identifie ainsi une incidence transportée à la même incidence écrite
+dans la carte raffinée ; la relation ne reste pas cachée sous le nom du
+totalisateur.
+
+Le complexe total est
+\begin{equation}\label{eq:pdfv2-coh-total-complex}
+ K_{d,N}(x):=\operatorname{Tot}B_{\bullet,\bullet}^{d,N}(x),
+ \qquad
+ D_{\rm tot}:=d_{\rm bar}+(-1)^q\partial_\Gamma
+ \quad\text{sur }B_{q,r}^{d,N}.
+\end{equation}
+La fonctorialité de \(W\) et \(\Gamma\), avec
+\(\partial_\Gamma^2=0\), donne
+\begin{equation}\label{eq:pdfv2-coh-total-square-zero}
+ D_{\rm tot}^2=0.
+\end{equation}
+En notation compacte, mais désormais établie par
+\eqref{eq:pdfv2-coh-bar-bigraded}--
+\eqref{eq:pdfv2-coh-bar-differential},
+\begin{equation}\label{eq:pdfv2-coh-derived-coend}
+ K_{d,N}(x)
+ \simeq
+ W_{d,N}\otimes^{\mathbf L}_{A_N[J_d(x)]}\Gamma_{d,N}.
+\end{equation}
+
+\section{Colimite de profondeur et terminal nonadique}
+\label{sec:pdfv2-coh-terminal}
+
+Les préfixes forment la colimite
+\begin{equation}\label{eq:pdfv2-coh-k-infinity}
+ K_{\infty,N}(x):=\varinjlim_d K_{d,N}(x).
+\end{equation}
+L'extension de neuf phases fait passer de la profondeur \(d\) à la profondeur \(d+9\).
+Ce n'est qu'après la formation de \eqref{eq:pdfv2-coh-k-infinity} qu'elle induit un
+endomorphisme bien typé
+\begin{equation}\label{eq:pdfv2-coh-u-gamma9}
+ U_{\Gamma_9,N}:K_{\infty,N}(x)
+ \longrightarrow K_{\infty,N}(x).
+\end{equation}
+Le terminal est
+\begin{equation}\label{eq:pdfv2-coh-terminal-cone}
+ \mathcal T_{{\rm coh},N}(x)
+ :=\operatorname{Cone}\bigl(I-U_{\Gamma_9,N}\bigr).
+\end{equation}
+Avec la convention homologique
+\[
+ \operatorname{Cone}(f)_q
+ =K_{\infty,N,q-1}\oplus K_{\infty,N,q},
+\]
+sa différentielle est
+\begin{equation}\label{eq:pdfv2-coh-cone-differential}
+ \partial_{\rm Cone}(a,b)
+ =\bigl(-\partial_Ka,\partial_Kb+f(a)\bigr).
+\end{equation}
+
+Bien que la phase visible de \(h\) et \(\Gamma_9h\) coïncide, les générateurs
+\([h]\) et \([\Gamma_9h]\) sont différents parce que leurs ledgers et leurs profondeurs
+sont différents. Le terminal conserve
+\begin{equation}\label{eq:pdfv2-coh-terminal-difference}
+ (I-U_{\Gamma_9,N})[h]=[h]-[\Gamma_9h].
+\end{equation}
+Les réductions de précision commutent avec le terminal :
+\begin{equation}\label{eq:pdfv2-coh-u-reduction}
+ r_{N+1,N}U_{\Gamma_9,N+1}
+ =U_{\Gamma_9,N}r_{N+1,N}.
+\end{equation}
+
+\section{Lecteur cohomologique terminal : cycle d'incidence et classe dans \(H_0(\operatorname{Cone}(I-U_{\Gamma_9,N}))\)}
+\label{sec:pdfv2-coh-reader}
+
+Chaque cellule de \(x_{\leq d}\) porte un vecteur d'incidence
+\[
+ \omega_{\nu,N}(x)
+ \in A_N^{I_\nu\times J_\nu}=C_{\nu,N,0}
+\]
+et le chemin terminal complet \(\lambda_{\nu,x}\). Le cycle brut est
+\begin{equation}\label{eq:pdfv2-coh-z-cycle}
+ z_{d,N}(x):=
+ \sum_{\nu\in\operatorname{Cell}_d(x)}
+ \epsilon_\nu[\lambda_{\nu,x}]
+ \otimes\omega_{\nu,N}(x)
+ \in B_{0,0}^{d,N}(x).
+\end{equation}
+Comme le complexe total est homologique non négatif,
+\begin{equation}\label{eq:pdfv2-coh-z-closed}
+ D_{\rm tot}z_{d,N}(x)=0.
+\end{equation}
+On conserve aussi bien le cycle que sa classe
+\[
+ [z_{d,N}(x)]\in H_0(K_{d,N}(x)).
+\]
+Après son inclusion dans \(K_{\infty,N}\), sa classe terminale est
+\[
+ [(0,z_{d,N}(x))]
+ \in H_0(\mathcal T_{{\rm coh},N}(x)).
+\]
+Le lecteur complet est
+\begin{equation}\label{eq:pdfv2-coh-reader-full}
+ \mathcal L_{{\rm coh},d,N}(x)
+ :=\bigl(
+ z_{d,N}(x),[z_{d,N}(x)],
+ U_{\Gamma_9,N}z_{d,N}(x),
+ [(0,z_{d,N}(x))]
+ \bigr).
+\end{equation}
+On ne publie pas uniquement une classe quotient : le représentant, le
+chemin qui l'a produit, sa continuation et le terminal subsistent.
+
+\section{Fibres survivantes et corrections sans sélecteur}
+\label{sec:pdfv2-coh-surviving-fibers}
+
+Soit \(\mathscr S_\lambda^{\rm coh}\) le \(A_N\)-module libre engendré par les
+histoires finies admissibles au niveau \(\lambda=(d,N)\). Le lecteur se
+prolonge linéairement à
+\begin{equation}\label{eq:pdfv2-coh-e-lambda}
+ e_\lambda:\mathscr S_\lambda^{\rm coh}
+ \longrightarrow\mathscr O_\lambda^{\rm coh},
+ \qquad
+ \mathscr O_\lambda^{\rm coh}
+ :=H_0(K_{d,N})\oplus H_0(\mathcal T_{{\rm coh},N}).
+\end{equation}
+Le codomaine survivant est
+\begin{equation}\label{eq:pdfv2-coh-surviving-output}
+ \mathscr O_\infty^{\rm surv}
+ :=\operatorname{Im}\!\left(
+ e_\infty:\mathcal C_{\rm cont}^{\rm coh}
+ \longrightarrow\varprojlim_\lambda\mathscr O_\lambda^{\rm coh}
+ \right).
+\end{equation}
+Pour \(a=(a_\lambda)_\lambda\in\mathscr O_\infty^{\rm surv}\), on définit
+\begin{equation}\label{eq:pdfv2-coh-fiber}
+ \mathscr F_\lambda(a):=
+ \left\{s_\lambda\in\mathscr S_\lambda^{\rm coh}:
+ \begin{array}{l}
+ e_\lambda(s_\lambda)=a_\lambda,\\
+ \exists y\in\mathcal C_{\rm cont}^{\rm coh}\text{ avec }
+ y|_\lambda=s_\lambda\text{ et }e_\infty(y)=a
+ \end{array}
+ \right\}.
+\end{equation}
+Ces fibres sont non vides par la définition du codomaine survivant. Si
+\(\lambda'\geq\lambda\), la restriction est surjective :
+\begin{equation}\label{eq:pdfv2-coh-fiber-surjection}
+ \rho_{\lambda',\lambda}:\mathscr F_{\lambda'}(a)
+ \twoheadrightarrow\mathscr F_\lambda(a).
+\end{equation}
+En effet, une histoire complète qui témoigne de
+\(s_\lambda\in\mathscr F_\lambda(a)\) fournit par troncature un
+antécédent à tout niveau ultérieur. Cet antécédent n'est pas choisi comme
+partie de l'objet.
+
+La multisection complète est
+\begin{equation}\label{eq:pdfv2-coh-extension-multisection}
+ \Sigma_{\lambda',\lambda}^{\rm coh}(s_\lambda;a)
+ :=\{s_{\lambda'}\in\mathscr F_{\lambda'}(a):
+ \rho_{\lambda',\lambda}s_{\lambda'}=s_\lambda\}.
+\end{equation}
+Pour un prolongement provisoire \(\widetilde s_{\lambda'}\), soit
+\begin{equation}\label{eq:pdfv2-coh-discrepancy}
+ \delta_{\lambda'}:=
+ a_{\lambda'}-e_{\lambda'}(\widetilde s_{\lambda'}).
+\end{equation}
+La relation de toutes les corrections est
+\begin{equation}\label{eq:pdfv2-coh-correction-relation}
+ \operatorname{Corr}_{\lambda',\lambda}
+ (\widetilde s_{\lambda'},\delta_{\lambda'})
+ :=\left\{\eta\in\mathscr S_{\lambda'}^{\rm coh}:
+ \begin{array}{l}
+ \rho_{\lambda',\lambda}\eta=0,\\
+ e_{\lambda'}(\eta)=\delta_{\lambda'},\\
+ \eta\text{ est supportée sur de nouvelles cellules},\\
+ \eta\text{ respecte l’orientation, la retenue, la mémoire et le terminal}
+ \end{array}
+ \right\}.
+\end{equation}
+Si deux relèvements sont comparables, leur différence
+\(\eta=s_{\lambda'}-\widetilde s_{\lambda'}\) appartient à cette relation
+exactement lorsqu'elle satisfait les quatre conditions précédentes. On n'affirme pas
+que \eqref{eq:pdfv2-coh-correction-relation} soit non vide pour un
+écart arbitraire : la non-vacuité déterminante est celle de
+\eqref{eq:pdfv2-coh-extension-multisection} sur le domaine survivant.
+
+\iffalse
+\section{Les treize coordonnées de la restriction}
+\label{sec:pdfv2-coh-thirteen}
+
+Pour \(x_\lambda\in\mathcal C_{{\rm cont},\lambda}^{\rm coh}\), soit
+\begin{equation}\label{eq:pdfv2-coh-d-package}
+ \begin{aligned}
+ D_{{\rm coh},\lambda}(x_\lambda):=\bigl(&
+ \mathcal F_{{\rm coh},\lambda},
+ \operatorname{Ext}_{\Gamma,{\rm coh},\lambda},
+ \operatorname{Rel}_{{\rm coh},\lambda},
+ \mathcal N_{{\rm coh},\lambda},
+ \operatorname{or}_{{\rm coh},\lambda},
+ \operatorname{Carr}_{{\rm coh},\lambda},
+ \operatorname{Mem}_{{\rm coh},\lambda},\\
+ &\partial_{{\rm coh},\lambda},
+ \gamma_{{\rm coh},\lambda},
+ \operatorname{Msect}_{{\rm coh},\lambda},
+ \operatorname{Surv}_{{\rm coh},\lambda},
+ \operatorname{Term}_{{\rm coh},\lambda},
+ \mathcal L_{{\rm coh},\lambda}\bigr).
+ \end{aligned}
+\end{equation}
+Ses coordonnées sont :
+\begin{enumerate}
+ \item \(\mathcal F_{{\rm coh},\lambda}\) : tous les modules
+       \(A_N^{I_\nu}\), \(A_N^{J_\nu}\),
+       \(A_N^{I_\nu\times J_\nu}\), les complexes \(C_{\nu,N}\), les
+       modules \(W_{d,N}(\nu)\) et \(\mathscr S_\lambda^{\rm coh}\).
+ \item \(\operatorname{Ext}_{\Gamma,{\rm coh},\lambda}\) : toutes les applications
+       \(\Gamma(u)\), les réductions de coefficients, les troncatures, les extensions
+       \(\Gamma_9\) et les relations \(\Sigma_{\lambda',\lambda}\).
+ \item \(\operatorname{Rel}_{{\rm coh},\lambda}\) :
+       \(\kappa\), \(\delta\), la suite exacte, les faces bar, la
+       relation de cofin, l'orientation et les lois de composition.
+ \item \(\mathcal N_{{\rm coh},\lambda}\):
+       \[
+       (d,N,3^N,a_\nu,b_\nu,(a_\nu-1)(b_\nu-1),
+       \rho_{\Sigma,\nu},\rho_{\Pi,\nu},c_{\Sigma,\nu},c_{\Pi,\nu}).
+       \]
+ \item \(\operatorname{or}_{{\rm coh},\lambda}\) : les signes
+       \(\epsilon_\nu\), les ordres des ports et les applications
+       \(\Theta_{\nu,N}\).
+ \item \(\operatorname{Carr}_{{\rm coh},\lambda}\) : les matrices
+       \(\beta_N\), les cocycles \(c_N(v,u)\), les résidus et les quotients,
+       conservés séparément.
+ \item \(\operatorname{Mem}_{{\rm coh},\lambda}\) : le ledger hérité et le
+       mot ordonné des raffinements, retenues, corrections et avancées
+       \(\Gamma_9\), non seulement leur valeur agrégée.
+ \item \(\partial_{{\rm coh},\lambda}\) :
+       \(\kappa_{\nu,N}\), \(D_{\rm tot}\),
+       \(\partial_{\rm Cone}\) et les frontières des cellules.
+ \item \(\gamma_{{\rm coh},\lambda}\) : toutes les chaînes composables
+       \(\nu_0\to\cdots\to\nu_q\) et leurs continuations terminales.
+ \item \(\operatorname{Msect}_{{\rm coh},\lambda}\) : toutes les cellules,
+       les chemins terminaux, les extensions \(\Sigma\) et les corrections
+       \(\operatorname{Corr}\), sans sélecteur.
+ \item \(\operatorname{Surv}_{{\rm coh},\lambda}\) : le système des fibres
+       \(\mathscr F_\lambda(a)\) et des restrictions surjectives.
+ \item \(\operatorname{Term}_{{\rm coh},\lambda}\) :
+       \(\operatorname{Cone}(I-U_{\Gamma_9,N})\), avec \(z\), \(Uz\)
+       et leur différence.
+ \item \(\mathcal L_{{\rm coh},\lambda}\) :
+       \((z,[z],Uz,[(0,z)])\) et toutes ses compatibilités de réduction.
+\end{enumerate}
+
+Pour \(\lambda'\geq\lambda\), le transport coordonné satisfait
+\begin{equation}\label{eq:pdfv2-coh-d-naturality}
+ u_{\lambda',\lambda}^{\rm coh}
+ D_{{\rm coh},\lambda'}(x_{\lambda'})
+ =D_{{\rm coh},\lambda}
+  (\rho_{\lambda',\lambda}x_{\lambda'}).
+\end{equation}
+
+\section{Graphe de restriction et objet dépendant}
+\label{sec:pdfv2-coh-graphs}
+
+La restriction totale est le graphe
+\begin{equation}\label{eq:pdfv2-coh-g-graph}
+ \mathcal G_{\rm coh}:=\operatorname{Graph}(D_{\rm coh}),
+ \qquad
+ \operatorname{Res}_{\rm coh}(x):=(x,D_{\rm coh}x).
+\end{equation}
+Ainsi,
+\begin{equation}\label{eq:pdfv2-coh-res-inverse}
+ \pi_1\operatorname{Res}_{\rm coh}=I,
+ \qquad
+ \operatorname{Res}_{\rm coh}\pi_1=I_{\mathcal G_{\rm coh}}.
+\end{equation}
+
+L'extracteur complet est
+\begin{equation}\label{eq:pdfv2-coh-chi}
+ \chi_{\rm coh}(x):=
+ \bigl(
+ \{C_{\nu,N}\},
+ \{z_\lambda,[z_\lambda]\},
+ \{\mathscr F_\lambda(e_\infty x)\},
+ \{\Sigma_{\lambda',\lambda}\},
+ \{\operatorname{Corr}_{\lambda',\lambda}\}
+ \bigr).
+\end{equation}
+On définit
+\begin{equation}\label{eq:pdfv2-coh-xchi}
+ X_{\chi,{\rm coh}}
+ :=\{(\chi_{\rm coh}(x),x,D_{\rm coh}x):
+ x\in\mathcal C_{\rm cont}^{\rm coh}\}
+\end{equation}
+et
+\begin{equation}\label{eq:pdfv2-coh-prx}
+ \operatorname{pr}_{X,{\rm coh}}(x,D_{\rm coh}x)
+ :=(\chi_{\rm coh}(x),x,D_{\rm coh}x).
+\end{equation}
+La projection sur \((x,D_{\rm coh}x)\) est inverse sur cet objet
+dépendant.
+
+\section{Assembleur et publicateur internes}
+\label{sec:pdfv2-coh-assembler-publisher}
+
+L'espace ambiant \(\mathscr M_{\rm coh}^{\rm amb}\) se compose de systèmes
+compatibles de suites exactes de cellules, de catégories, de foncteurs, de modules de
+chemins, de totalisateurs, de terminaux, de lecteurs, de fibres et de multisections.
+L'assembleur brut est
+\begin{equation}\label{eq:pdfv2-coh-assembler}
+ \begin{aligned}
+ a_{\rm coh}:X_{\chi,{\rm coh}}&\longrightarrow
+ \mathscr M_{\rm coh}^{\rm amb},\\
+ a_{\rm coh}(\chi(x),x,Dx)
+ &:={}
+ \bigl(
+ \{C_{\nu,N},\kappa_{\nu,N},\delta_{\nu,N}\},
+ \{J_d,\Gamma,W,K\},\\
+ &\hspace{31mm}
+ \{U_{\Gamma_9,N},\mathcal T_N\},
+ \{e_\lambda,\mathscr F_\lambda,\Sigma,\operatorname{Corr}\}
+ \bigr)_x.
+ \end{aligned}
+\end{equation}
+La macrostructure est un autre graphe :
+\begin{equation}\label{eq:pdfv2-coh-macro-graph}
+ \mathfrak M_{\rm coh}:=\operatorname{Graph}(a_{\rm coh}),
+ \qquad
+ \mathcal A_{\rm coh}(z):=(z,a_{\rm coh}z).
+\end{equation}
+
+Soit \(\mathscr Y_{\rm coh}^{\rm int}\) le type de certificats qui contient
+\begin{equation}\label{eq:pdfv2-coh-certificate-list}
+ \begin{gathered}
+ \text{la sucesión exacta \eqref{eq:pdfv2-coh-exact-sequence}},\\
+ \kappa_{b,a}\tau=-P\kappa_{a,b},
+ \qquad D_{\rm tot}^2=0,
+ \qquad\partial_{\rm Cone}^2=0,\\
+ rU_{\Gamma_9}=U_{\Gamma_9}r,
+ \qquad
+ e_\lambda\rho_{\lambda',\lambda}
+ =r_{\lambda',\lambda}e_{\lambda'},\\
+ \rho_{\lambda',\lambda}:\mathscr F_{\lambda'}(a)
+ \twoheadrightarrow\mathscr F_\lambda(a),
+ \qquad
+ \Sigma_{\lambda',\lambda}(s_\lambda;a)\neq\varnothing,
+ \end{gathered}
+\end{equation}
+avec les cycles bruts, leurs classes et leurs terminaux. Le publicateur
+\begin{equation}\label{eq:pdfv2-coh-publisher}
+ p_{\rm coh}^{\rm raw}:\mathfrak M_{\rm coh}
+ \longrightarrow\mathscr Y_{\rm coh}^{\rm int}
+\end{equation}
+produit ce certificat sans supprimer la macrostructure. Enfin,
+\begin{equation}\label{eq:pdfv2-coh-output-graph}
+ \mathcal C_{\rm coh}^{\rm HMT}
+ :=\operatorname{Graph}(p_{\rm coh}^{\rm raw}),
+ \qquad
+ \mathcal P_{\rm coh}(m):=(m,p_{\rm coh}^{\rm raw}m).
+\end{equation}
+
+\section{Théorème interne de génération cohérente}
+\label{sec:pdfv2-coh-theorem}
+
+\begin{theorem}[Génération interne de la macrostructure de cohérence]
+\label{thm:pdfv2-coh-internal-generation}
+Sur le domaine explicite \(\mathcal C_{\rm cont}^{\rm coh}\), la chaîne
+\[
+ \mathcal C_{\rm cont}^{\rm coh}
+ \xrightarrow{\operatorname{Res}_{\rm coh}}
+ \mathcal G_{\rm coh}
+ \xrightarrow{\operatorname{pr}_{X,{\rm coh}}}
+ X_{\chi,{\rm coh}}
+ \xrightarrow{\mathcal A_{\rm coh}}
+ \mathfrak M_{\rm coh}
+ \xrightarrow{\mathcal P_{\rm coh}}
+ \mathcal C_{\rm coh}^{\rm HMT}
+\]
+construit naturellement les cellules, leurs cônes, le diagramme d'histoires, le
+bar bilatéral, la totalisation, le terminal nonadique et les fibres
+survivantes. Elle conserve les treize coordonnées et toutes les corrections comme
+multisections. Chaque étape admet, sur son image, une projection qui récupère
+l'étape précédente.
+\end{theorem}
+
+\begin{proof}
+La \cref{prop:pdfv2-coh-cell-exact} construit chaque cellule sur \(A_N\), avec
+noyau diagonal et défaut \((a_\nu-1)(b_\nu-1)\). L'identité
+\eqref{eq:pdfv2-coh-orientation} fait de l'échange orienté une application de
+complexes involutive. Les formules
+\eqref{eq:pdfv2-coh-gamma-one}--\eqref{eq:pdfv2-coh-gamma-zero} prouvent que
+chaque raffinement est une application de complexes, tandis que
+\eqref{eq:pdfv2-coh-kappa-reduction} prouve la compatibilité en précision.
+
+La précomposition des chemins rend \(W\) contravariant. Les identités
+fonctorielles de \(W\) et \(\Gamma\) impliquent
+\(d_{\rm bar}^2=0\) ; leur commutation avec la différentielle cellulaire donne
+\(D_{\rm tot}^2=0\). Ainsi, \(K_{d,N}\) est construit par les formules bar,
+non par une invocation nominale du cofin.
+
+L'extension \(\Gamma_9\) augmente la profondeur. Elle n'induit donc
+l'endomorphisme \(U_{\Gamma_9,N}\) qu'après le passage à la colimite
+\(K_{\infty,N}\). Le cône
+\(\operatorname{Cone}(I-U_{\Gamma_9,N})\) conserve alors la différence
+\([h]-[\Gamma_9h]\) et n'identifie pas la répétition de phase à la répétition
+d'état.
+
+Le cycle \(z_{d,N}(x)\) se forme avec toutes les cellules, tous les signes, chemins et
+incidences de l'histoire. Troncature et réduction commutent avec le lecteur. Si
+\(s_\lambda\in\mathscr F_\lambda(a)\), l'histoire complète qui apparaît dans
+la définition même de la fibre fournit un antécédent à tout niveau
+\(\lambda'\geq\lambda\) ; cela prouve la surjectivité
+\eqref{eq:pdfv2-coh-fiber-surjection}. L'objet conserve l'ensemble entier
+\(\Sigma_{\lambda',\lambda}\), non un choix. Les différences entre
+relèvements sont enregistrées par
+\eqref{eq:pdfv2-coh-correction-relation}, avec support, orientation, retenue,
+mémoire et terminal explicites.
+
+Enfin, \(\mathcal G_{\rm coh}\), \(\mathfrak M_{\rm coh}\) et
+\(\mathcal C_{\rm coh}^{\rm HMT}\) sont des graphes, tandis que
+\(X_{\chi,{\rm coh}}\) conserve comme coordonnées \(x\) et \(D_{\rm coh}x\).
+La première projection de chaque objet récupère le précédent. Par conséquent, la
+composition complète ne remplace pas l'histoire par une classe, la multisection par un
+sélecteur ni le terminal par la phase visible.
+\end{proof}
+
+\section{Provenance probatoire et falsificateurs}
+\label{sec:pdfv2-coh-provenance-falsifiers}
+
+\paragraph{Résultat récupéré.}
+Appartiennent à l'architecture déjà construite la cellule \(\kappa_{a,b}\), son
+noyau diagonal et son défaut, l'orientation
+\(\kappa_{b,a}\tau=-P\kappa_{a,b}\), la retenue APP, le cône de la cellule, la
+catégorie d'histoires, la totalisation par cofin, l'action \(\Gamma_9\), le
+terminal \(\operatorname{Cone}(I-U_{\Gamma_9})\) et l'architecture
+d'extension survivante.
+
+\paragraph{Formalisation nouvelle.}
+Sont des formalisations explicites la suite exacte
+\eqref{eq:pdfv2-coh-exact-sequence} sur \(A_N\), la séparation entre
+profondeur et précision, les faces complètes du bar, la formation du
+terminal seulement après la colimite, la mise en paquet des treize coordonnées,
+les corrections comme relation sans sélecteur et les quatre objets dépendants
+ou graphes qui empêchent la perte de généalogie.
+
+\begin{criterion}[Falsificateurs internes de la branche \(\mathrm{coh}\)]
+\label{crit:pdfv2-coh-falsifiers}
+La construction échoue si l'un quelconque des faits suivants se produit :
+\begin{enumerate}
+ \item la suite
+       \eqref{eq:pdfv2-coh-exact-sequence} n'est pas exacte ;
+ \item \(\kappa_{b,a}\tau=-P\kappa_{a,b}\) échoue ;
+ \item un raffinement ne satisfait pas
+       \(\kappa_{\nu'}\Gamma(u)_1=\Gamma(u)_0\kappa_\nu\) ;
+ \item la retenue de composition ne satisfait pas
+       \eqref{eq:pdfv2-coh-carry-cocycle} ;
+ \item \(D_{\rm tot}^2\neq0\);
+ \item la réduction, le lecteur ou le terminal ne commutent pas avec \(U_{\Gamma_9}\) ;
+ \item on forme \(\operatorname{Cone}(I-U_{\Gamma_9})\) en identifiant d'abord
+       les profondeurs \(d\) et \(d+9\) ;
+ \item une fibre déclarée survivante est vide ou une restriction n'est pas
+       surjective ;
+ \item on remplace \(\Sigma_{\lambda',\lambda}\) par un unique
+       relèvement ;
+ \item on publie seulement \([z]\) et l'on supprime \(z\), le chemin, la retenue, la mémoire ou
+       le terminal ;
+ \item l'une quelconque des treize coordonnées est omise.
+\end{enumerate}
+Dans le dernier cas, le diagnostic contraignant est : \emph{objet substitué ;
+conclusion non transférable}.
+\end{criterion}
+
+\begin{warningbox}
+Ce chapitre conclut uniquement la construction interne de
+\(\mathcal C_{\rm coh}^{\rm HMT}\). Il n'introduit pas d'espace classique, de
+classe classique ni de publication classique. Tout entrelaceur ultérieur
+appartient à un autre document et ne gouverne pas l'existence de cette
+macrostructure.
+\end{warningbox}
+\fi

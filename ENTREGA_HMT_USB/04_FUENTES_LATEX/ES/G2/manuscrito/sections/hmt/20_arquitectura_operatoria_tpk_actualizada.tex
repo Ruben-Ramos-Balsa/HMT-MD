@@ -1,0 +1,997 @@
+\chapter{Transporte, selección y prolongación en el núcleo topológico de fase}
+\label{sec:arquitectura-tpk}
+
+La sigla TPK designa el \emph{Topological Phase Kernel}, o n\'ucleo
+topol\'ogico de fase.\footnote{La denominaci\'on conserva asimismo la
+dedicatoria autoral a Tan Peng Kian.} No designa un \`unico algoritmo de 108
+pasos, una tabla de resultados ni el cat\'alogo de 468 emisiones. Es el
+sistema de operadores que hace convivir, sobre la categor\'ia de caminos de
+APP, las lecturas aditiva y multiplicativa sin identificar sus genealog\'ias.
+
+La palabra \emph{topol\'ogico} tiene aqu\'i un contenido preciso. El soporte
+de APP es el grafo de Cayley del grupo cociente
+\[
+ X_9=(\mathbb Z/9\mathbb Z)^2
+\]
+con sus aristas cardinales. Una ruta cerrada admite una clase de enrollamiento
+despu\'es de elevarla al recubridor \(\mathbb Z^2\). TPK transporta esa clase,
+la orientaci\'on de la ruta y la holonom\'ia de fase. Dos caminos que terminan
+en la misma celda pueden, por tanto, representar estados distintos. El n\'ucleo
+de fase es precisamente la informaci\'on que permanece invisible al publicar
+solamente la celda final o su residuo.
+
+La base dinámica es la categoría libre \(\mathsf P_{\rm APP}\) del grafo
+cardinal de APP\@. Puesto que las dos evaluaciones aritméticas no inducen la
+misma partición, el transporte vive sobre la categoría bivariada
+\[
+ \mathsf P_{\rm APP}^{(2)}
+ =\mathsf P_{\rm APP}\times\mathsf P_{\rm APP}.
+\]
+La primera componente se evalúa mediante la hoja aditiva \(\Sigma\) y la
+segunda mediante la hoja multiplicativa \(\Pi\). Esta separación es
+constitutiva, pero no duplica APP: registra dos lecturas ordenadas de una
+misma matriz de caminos. La componente multiplicativa es la tabla principal;
+la aditiva conserva la ley de acumulación que genera sus filas y permite
+medir qué información elimina una proyección visible.
+
+\ifdefined\HMTTPKRepeatAPP
+\section{Carta canónica y arquitectura suma--producto}
+
+El soporte se escribe en coordenadas de cursor
+\[
+ I_9=\{0,\ldots,8\},\qquad X_9=I_9^2,
+\]
+pero sus etiquetas aritm\'eticas pertenecen a \(\{1,\ldots,9\}\). La carta
+que relaciona ambos niveles es
+\[
+ \chi:I_9\longrightarrow\{1,\ldots,9\},\qquad \chi(i)=i+1.
+\]
+Sea
+\[
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9.
+\]
+En particular, \(9\) es el representante visible de la clase nula. Los dos
+observables de un mismo v\'ertice son
+\[
+ \Sigma(i,j)=\rho_9\bigl(\chi(i)+\chi(j)\bigr),\qquad
+ \Pi(i,j)=\rho_9\bigl(\chi(i)\chi(j)\bigr).
+\]
+Esta convenci\'on impide mezclar la coordenada de cursor cero con la etiqueta
+visible nueve. APP es la tupla
+\[
+ \mathcal A_9=
+ \bigl(X_9,\operatorname{Cay}(X_9),\Sigma,\Pi,
+       \operatorname{Path}(X_9)\bigr),
+\]
+y no la yuxtaposici\'on de dos tablas: cada semilla \((i,j)\) porta a la vez
+las dos evaluaciones y cada ruta conserva el orden en que las consulta.
+
+La elevaci\'on que retiene residuo y cociente es
+\[
+ \mathcal A_9^\#=(R^+,Q^+;R^\times,Q^\times),
+\]
+con, para \(a=\chi(i)\) y \(b=\chi(j)\),
+\[
+ a+b=R^+_{ij}+9Q^+_{ij},\qquad
+ ab=R^\times_{ij}+9Q^\times_{ij},
+\]
+\[
+ R^+_{ij}=\Sigma(i,j),\qquad R^\times_{ij}=\Pi(i,j).
+\]
+Los totales exactos son
+\[
+ \sum R^+=405,\quad \sum R^\times=459,\quad
+ \sum Q^+=45,\quad \sum Q^\times=174.
+\]
+Por tanto,
+\[
+ 2025-810=1215=(459-405)+9(174-45)=54+9\cdot129.
+\]
+La igualdad no crea TPK por simple conteo: identifica el dato que el
+transporte debe conservar. El residuo visible difiere en \(54\) y la memoria
+de cociente en \(129\).
+
+La composici\'on de la hoja aditiva posee el cociclo de acarreo
+\[
+ \kappa_9(a,b)=
+ \frac{\rho_9(a)+\rho_9(b)-\rho_9(a+b)}9,
+\]
+que satisface
+\[
+ \kappa_9(a,b)+\kappa_9(a+b,c)
+ =\kappa_9(b,c)+\kappa_9(a,b+c).
+\]
+El sector multiplicativo posee adem\'as el radical
+\[
+ \mathfrak m=(3)=\{3,6,9\},\qquad \mathfrak m^2=0
+ \quad\text{en }\mathbb Z/9\mathbb Z.
+\]
+Las seis filas unitarias suman \(45\), las filas \(3,6\) suman \(54\) y
+la fila \(9\) suma \(81\); as\'i
+\[
+ 459=6\cdot45+2\cdot54+81,
+\]
+y todo el exceso \(459-405=54\) se localiza en el sector no unitario. Esta
+localizaci\'on, el cociclo de acarreo y la diferencia de cocientes son tres
+datos distintos de la misma arquitectura suma--producto.
+\fi
+
+\section{Reducciones residuales y representación decimal}
+
+La arquitectura usa tres reducciones, cada una con un cometido distinto:
+\[
+ \mathbb Z\xrightarrow{(\rho_9,q_9)}
+ \{1,\ldots,9\}\times\mathbb Z,
+ \qquad
+ \rho_3^{\rm or}:\mathbb Z/3\mathbb Z\longrightarrow
+ \{-1,0,+1\},
+\]
+\[
+ (d_1,d_2,\ldots)\in\{0,\ldots,999\}^{\mathbb N}
+ \xrightarrow{\iota_{1000}}
+ \sum_{m\geq1}d_m1000^{-m}.
+\]
+La orientaci\'on ternaria es
+\[
+ \rho_3^{\rm or}([0])=0,\qquad
+ \rho_3^{\rm or}([1])=+1,\qquad
+ \rho_3^{\rm or}([2])=-1.
+\]
+La primera separa residuo visible y cociente non\'adico; la segunda asigna el
+tipo orientado de la transici\'on; la tercera agrupa la lectura arquimediana
+en tr\'iadas decimales, cuyo registro conserva el acarreo. Ninguna puede
+sustituir a otra.
+En particular, la reducci\'on m\'odulo tres no reconstruye el cociente m\'odulo
+nueve, y una tr\'iada decimal no es una palabra de seis trits.
+La suma acumula desplazamientos; el producto pliega clases y contrae las
+filas no invertibles. La necesidad de TPK nace de que las dos lecturas
+comparten soporte, pero no comparten partici\'on, periodo ni cociente.
+
+\Needspace{36\baselineskip}
+\section{Correspondencia entre símbolos del TPK, dominios y composiciones}
+\label{sec:diccionario-interno-tpk}
+
+Los nombres históricos se fijan aquí por objeto y no por semejanza
+numérica. Esta tabla forma parte de la definición pública de TPK.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.19\textwidth}
+>{\raggedright\arraybackslash}p{.30\textwidth}
+>{\raggedright\arraybackslash}p{.43\textwidth}@{}}
+\toprule
+Nombre&Objeto&Función dentro del núcleo\\\midrule
+\endhead
+coordenada nonádica&
+\(\rho_9(n)\) junto con \(q_9(n)\)&
+Separa el representante visible módulo \(9\) del cociente que conserva la
+memoria del cruce de frontera. No es una raíz digital.\\
+selector temporal ternario&
+\(M_{\rm ph}(t)=\varepsilon(t)\in\{+1,-1,0\}\)&
+En \(1,4,7\) activa la acumulación aditiva; en \(2,5,8\) activa la
+multiplicativa; en \(3,6,9\) mantiene ambos cursores y registra umbral.
+No designa las direcciones espaciales.\\
+transporte cardinal&
+\(T_N,T_E,T_S,T_O\)&
+Desplaza la posición sobre el toro APP y conserva la palabra de ruta y su
+enrollamiento. Es independiente del selector temporal.\\
+lector ternario&
+\(\rho_3^{\rm or}\)&
+Convierte las tres clases residuales en orientación
+\(0,+1,-1\). No reconstruye por sí solo el cociente nonádico.\\
+lector en base mil&
+\(\iota_{1000}\)&
+Agrupa la publicación arquimediana en tríadas decimales y transporta sus
+acarreos. Es un lector posicional, no una congruencia ``módulo \(1000\)''.\\
+retorno de veintisiete&
+\(\mathcal K_{27}=F_{\rm obs}^{27}\)&
+Compone veintisiete actualizaciones posicionales y orientadas. Su cuarto
+iterado restaura la fase observable, mientras el registro completo conserva
+la memoria acumulada.\\
+registro dodecafásico&
+\(\Lambda\in\mathcal R_{12}\)&
+Conserva seis posiciones, cinco diferencias y un total. Es el soporte del
+transporte reversible \(1+5+6=12\).\\
+lectura bidireccional&
+\(q_+,q_-\) y sus pesos conjugados&
+Conserva simultáneamente las orientaciones de ida y retorno. En Mecánica
+Dimensional, una firma \((n_A,s_C)\) produce primero
+\(W_\pm=6n_A\pm s_C\); sólo después aparece
+\(s_C/6\) en el carácter angular.\\
+\bottomrule
+\end{longtable}
+
+El selector temporal, el transporte cardinal y la orientación ternaria son,
+por tanto, tres mapas distintos. Su separación conserva la diferencia entre
+\emph{cuándo} se activa una lectura, \emph{hacia dónde} avanza la ruta y
+\emph{con qué orientación} se registra el paso. TPK contiene los tres y
+conserva sus relaciones.
+
+\ifdefined\HMTTPKWordArithmetic
+\section{De la célula local al monoide de palabras nonádicas}
+
+La arquitectura suma--producto no termina en la tabla local. Para probar que
+el cociente transportado genera aritm\'etica global, hay que construir la
+operaci\'on sobre palabras sin introducir como definici\'on la multiplicaci\'on
+entera que se pretende recuperar. Sea
+\[
+ \mathcal D_9=\{1,\ldots,9\},\qquad
+ \mathcal W_9=\{\varnothing\}\sqcup
+ \bigsqcup_{\ell\geq1}\mathcal D_9^\ell .
+\]
+Las palabras se escriben desde la posici\'on menos significativa y se eval\'uan
+por
+\[
+ \operatorname{ev}_9(u_0,\ldots,u_{\ell-1})
+ =\sum_{j=0}^{\ell-1}u_j9^j,\qquad
+ \operatorname{ev}_9(\varnothing)=0.
+\]
+El s\'imbolo \(9\) conserva el cruce de frontera; no se sustituye por un cero.
+
+\begin{theorem}[Forma normal non\'adica]
+La evaluaci\'on \(\operatorname{ev}_9\) es una biyecci\'on entre
+\(\mathcal W_9\) y \(\mathbb N_0\).
+\end{theorem}
+\begin{proof}
+Las palabras de longitud \(\ell\) cubren exactamente el intervalo
+\[
+ \frac{9^\ell-1}{8}
+ \leq\operatorname{ev}_9(u)
+ \leq9\frac{9^\ell-1}{8}.
+\]
+El m\'inimo del intervalo siguiente es una unidad mayor que el m\'aximo del
+anterior. Para \(n>0\), la divisi\'on de \(n-1\) por nueve determina de manera
+\'unica
+\[
+ d=1+((n-1)\bmod9)\in\mathcal D_9
+\]
+y un cociente estrictamente menor, al cual se aplica recursivamente la misma
+regla. El proceso termina y es reversible.
+\end{proof}
+Por ejemplo,
+\[
+ 9\leftrightarrow(9),\quad
+ 10\leftrightarrow(1,1),\quad
+ 81\leftrightarrow(9,8),\quad
+ 1000\leftrightarrow(1,3,3,1).
+\]
+La \`ultima identidad exhibe en una sola forma normal las dos particiones
+fundamentales
+\[
+ 1000=729+271=729+243+27+1;
+\]
+su interpretaci\'on por canales se introduce despu\'es, no en la definici\'on
+de la numeraci\'on.
+
+\section{Suma, producto de Horner y conservación del cociente}
+
+La suma nativa \(u\boxplus_\#v\) recorre las palabras por posiciones. En cada
+posici\'on aplica la c\'elula aditiva a los dos d\'igitos presentes y, si existe
+un acarreo entrante, aplica una segunda c\'elula al residuo provisional. El
+residuo se publica y la suma de cocientes pasa a la posici\'on siguiente. El
+invariante parcial es
+\[
+ \sum_{j<k}(u_j+v_j)9^j
+ =\sum_{j<k}w_j9^j+c_k9^k,
+\]
+de donde se obtiene
+\[
+ \operatorname{ev}_9(u\boxplus_\#v)
+ =\operatorname{ev}_9(u)+\operatorname{ev}_9(v).
+\]
+
+Para \(d\in\mathcal D_9\), el transductor escalar
+\(d\odot_\#u\) usa primero
+\[
+ u_jd=9q_j+r_j,\qquad
+ (r_j,q_j)=\bigl(R^\times(u_j,d),Q^\times(u_j,d)\bigr),
+\]
+y normaliza la colisi\'on entre \(r_j\) y el cociente entrante mediante la
+c\'elula aditiva. As\'i,
+\[
+ \operatorname{ev}_9(d\odot_\#u)
+ =d\operatorname{ev}_9(u).
+\]
+Si \(v=(v_0,\ldots,v_{m-1})\), se define, de derecha a izquierda,
+\[
+ a_m=\varnothing,\qquad
+ a_j=(9\odot_\#a_{j+1})\boxplus_\#(v_j\odot_\#u),
+\]
+y
+\[
+ u\boxtimes_\#v:=a_0.
+\]
+Esta es una construcci\'on de Horner realizada s\'olo con las dos c\'elulas
+locales y sus cocientes.
+
+Esta descripción fija la dependencia operatoria, pero no constituye una
+segunda residencia del resultado. El producto global, su prueba de Horner y
+la identidad
+\(operatorname{ev}_9(u\boxtimes_\#v)
+=\operatorname{ev}_9(u)\operatorname{ev}_9(v)\)
+se establecen una sola vez en el
+\cref{int:eq:ev-multiplicative}, dentro del capítulo especializado de producto
+nativo.
+El ejemplo de frontera m\'as corto es
+\[
+ (9)\boxtimes_\#(9)=(9,8),\qquad 9+8\cdot9=81.
+\]
+Conservar s\'olo \(R^\times\) destruir\'ia este teorema: \(2\cdot5=10\)
+quedar\'ia reducido al residuo visible \(1\). El cociente no es una anotaci\'on
+auxiliar, sino la memoria necesaria para que el producto sobreviva al paso por
+la frontera.
+
+\section{Coproducto e irreducibilidad}
+
+La apertura multiplicativa se define internamente por
+\[
+ \Delta_\#e_w
+ =\sum_{u\boxtimes_\#v=w}e_u\otimes e_v.
+\]
+Su versi\'on reducida elimina los factores \((1)\). Si
+\(\widetilde\Delta_\#\) denota esa versi\'on y
+\[
+ A_\#=
+ \bigl(\overline{\widetilde\Delta_\#}\bigr)^*
+ \overline{\widetilde\Delta_\#},
+\]
+entonces \(A_\#e_w=d_\#(w)e_w\), donde \(d_\#(w)\) cuenta los pares ordenados
+no triviales que producen \(w\). El selector
+\[
+ P_{\mathrm{Irr},\#}
+ =(I-P_{(1)})\,\mathbf1_{\{0\}}(A_\#)
+\]
+escoge exactamente las palabras distintas de la unidad sin apertura nativa no
+trivial. Por tanto, la irreducibilidad se lee en la propia fibra del producto;
+no se introduce mediante una tabla externa de primos.
+
+Este resultado es exacto en el monoide de formas normales. Su extensi\'on a
+historias completas exige una compatibilidad adicional. Si \(P_n\) proyecta
+sobre historias supervivientes de profundidad \(n\), una familia de
+inyecciones \(\iota_n\) debe satisfacer
+\[
+ P_n\iota_n\mu_\#
+ =P_n\mu_n(\iota_n\otimes\iota_n).
+\]
+Los teoremas anteriores construyen \(\mu_\#\) y fijan esta ecuaci\'on; no
+afirman por s\'i solos existencia o unicidad de la familia
+\((\iota_n)_n\). Esta separaci\'on impide confundir la aritm\'etica global de
+palabras, ya demostrada, con su prolongaci\'on monoidal al espacio profundo de
+memoria TPK\@.
+
+\fi
+
+\section{Acción cardinal y realimentación aritmética}
+
+Sean
+\[
+ \nu_N=(-1,0),\quad \nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad \nu_O=(0,-1)
+\]
+los cuatro generadores cardinales. Para \(d\in\{N,E,S,O\}\),
+\[
+ T_d(i,j)=(i,j)+\nu_d\pmod9.
+\]
+La letra \(O\) significa oeste. Estas direcciones son desplazamientos sobre
+APP y no nombres de los canales \(\pi,e,\varphi\).
+
+Una palabra \(w=d_1\cdots d_r\) determina
+\[
+ \gamma(x_0;w)_k=x_0+\sum_{j=1}^{k}\nu_{d_j}\pmod9.
+\]
+Cuando cierra, su elevaci\'on conserva
+\[
+ \operatorname{wind}(w)=\frac1{9}
+ \bigl(\#S-\#N,\#E-\#O\bigr)\in\mathbb Z^2.
+\]
+La lectura bidireccional conserva palabra, orientaci\'on y hoja. Su
+reversi\'on formal invierte el orden e intercambia
+\(N\leftrightarrow S\), \(E\leftrightarrow O\). Su eventual lectura como
+adelanto--retardo es una interfaz f\'isica posterior, no parte de esta
+definici\'on de ruta.
+
+El estado local observable es
+\[
+ s_t=(i_t,j_t,m_t),
+ \qquad m_t\in\{\Sigma,\Pi\}.
+\]
+Se eval\'ua la hoja activa,
+\[
+ a_t=\rho_3^{\rm or}\bigl(m_t(i_t,j_t)\bigr),
+\]
+y el modo se actualiza mediante
+\[
+ m_{t+1}=
+ \begin{cases}
+ \Sigma,&a_t=+1,\\
+ \Pi,&a_t=-1,\\
+ m_t,&a_t=0.
+ \end{cases}
+\]
+As\'i, cada paso cardinal modifica a la vez la posici\'on y la lectura
+aritm\'etica futura. La ruta no se superpone a una palabra ya construida: es
+la historia posicional que la produce.
+
+\begin{theorem}[Sobreyectividad del factor muestreado de paso tres]
+Para cada uno de los \(162=9^2\cdot2\) estados \((i,j,m)\) y cada trit
+orientado objetivo \(b\in\{-1,0,+1\}\), existe una ruta
+\(u\in\{N,E,S,O\}^3\) cuyo tercer paso emite \(b\). En los \(486\) casos
+estado--objetivo, el n\'umero de rutas admisibles est\'a comprendido entre
+\(8\) y \(40\). En consecuencia, para toda sucesi\'on objetivo
+\((b_k)_{k\geq1}\) existe una historia cardinal cuya salida satisface
+\[
+ (a_3,a_6,a_9,\ldots)=(b_1,b_2,b_3,\ldots).
+\]
+Los dos trits intermedios \(a_{3k-2}\) y \(a_{3k-1}\) de cada bloque no
+quedan prescritos por esta afirmaci\'on.
+\end{theorem}
+\begin{proof}
+Se enumeran las \(4^3=64\) rutas de tres pasos desde cada estado. El
+certificado exhaustivo incluido registra, para cada uno de los
+\(162\cdot3\) casos, la ruta ejecutada, el estado final y el n\'umero total de
+testigos; sus índices \(0,1,2\) se transportan por
+\(\rho_3^{\rm or}\) a \(0,+1,-1\). Todos los conteos son positivos; el
+m\'inimo es \(8\) y el m\'aximo es \(40\). Tras cada bloque se aplica el mismo
+resultado al estado alcanzado.
+La elecci\'on, por ejemplo, del primer testigo en el orden lexicogr\'afico
+produce recursivamente una historia para cualquier sucesi\'on objetivo.
+\end{proof}
+
+La sobreyectividad se refiere al factor observado cada tres pasos, no a la
+palabra emitida a tiempo unitario. Este teorema establece esa capacidad
+muestreada del soporte de rutas. La selecci\'on de las secciones
+\(\pi,e,\varphi\) pertenece a la relaci\'on enriquecida EF--G9 que se define
+m\'as adelante: capacidad de realizaci\'on y selecci\'on geneal\'ogica son dos
+operadores distintos.
+
+\section{Cronología observable de los dos cursores}
+
+El calendario se formula sobre
+\[
+ \Theta_{108}=\mathbb Z/108\mathbb Z,\qquad
+ \beta(\theta)=
+ \left[\left\lfloor\frac{\widetilde\theta}{9}\right\rfloor\right]_{12},
+ \qquad
+ r(\theta)=1+(\theta\bmod9),
+\]
+donde \(\widetilde\theta\in\{0,\ldots,107\}\). La firma activa es
+\[
+ \varepsilon(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+El espacio observable de dos cursores es
+\[
+ \mathcal Q_{\rm obs}
+ =X_9^2\times\{N,E,S,O\}^2\times\Theta_{108}.
+\]
+Si \(\varepsilon=+1\) avanza el cursor aditivo; si
+\(\varepsilon=-1\), el multiplicativo; si \(\varepsilon=0\), ninguno.
+Las dos orientaciones se invierten después de los pasos
+\(27,54,81,108\). Esta regla define una permutación
+\[
+ F_{\rm obs}:\mathcal Q_{\rm obs}\longrightarrow\mathcal Q_{\rm obs}.
+\]
+Las posiciones y orientaciones se restauran tras \(54\) pasos y la fase
+completa tras \(108\):
+\[
+ F_{\rm obs}^{108}=I.
+\]
+Por ello la cronología de una sola ruta es reversible y no selecciona por sí
+misma una distribución sobre las continuaciones; la selección de todas las
+prolongaciones compatibles pertenece al operador de transferencia de fibras
+definido más abajo.
+
+\section{Emisor finito de dos cursores}
+
+Una semilla de cursor es
+\[
+ \mathcal S=\mathbb T_9^2\times\{N,E,S,O\},
+ \qquad |\mathcal S|=324.
+\]
+TPK m\'inimo recibe un cursor aditivo \(P\in\mathcal S\) y uno
+multiplicativo \(M\in\mathcal S\). Sus firmas de seis ventanas son
+\(s(P)\) y \(e(M)\). En cada coordenada se aplica
+\[
+ G(s,e)=100s+10\bigl((s+e)\bmod10\bigr)
+       +\bigl((3s+5e+1)\bmod10\bigr).
+\]
+La cifra de centenas recupera \(s\); conocida \(s\), la de decenas recupera
+\(e\). Por ello \(G\) es inyectiva sobre las firmas efectivas. El emisor
+factoriza como
+\[
+ \mathcal S^2\xrightarrow{s\times e}
+ \operatorname{im}s\times\operatorname{im}e
+ \xrightarrow{G}\mathcal U_6,
+\]
+con
+\[
+ |\mathcal S^2|=104\,976,\qquad
+ |\operatorname{im}s|=18,\qquad
+ |\operatorname{im}e|=26,\qquad
+ |\mathcal U_6|=18\cdot26=468.
+\]
+La factorizaci\'on \(468=18\cdot26\) es, por tanto, una descomposici\'on del
+objeto: cada emisi\'on conserva una firma aditiva y una multiplicativa.
+
+La proyecci\'on
+\[
+ \Psi_6:\mathcal U_6\longrightarrow\mathbb F_3^6,
+ \qquad \Psi_6(U)=-U\pmod3,
+\]
+posee una imagen de \(243\) palabras. La cadena tipada es
+\[
+ 104\,976\ \text{semillas}
+ \longrightarrow468\ \text{emisiones decimales }U_6
+ \longrightarrow243\ \text{palabras ternarias }w_6.
+\]
+El ambiente \(\mathbb F_3^6\) contiene \(729\) palabras; no se identifica
+con la imagen efectiva de \(243\). Tampoco \(U_6\) y \(w_6\) son el mismo
+tipo.
+
+El emisor m\'inimo repite, en la carta dodecaf\'asica de cat\'alogo,
+\[
+ U_{12}^{\rm cat}=U_6\Vert U_6.
+\]
+Su periodo visible seis explica por qu\'e no puede sustituir al estado firmado
+\(U_{12}^{\rm sgn}\). Esta diferencia no es una insuficiencia de TPK: separa
+la proyecci\'on de cat\'alogo de la historia enriquecida.
+
+Cada bloque decimal emitido pertenece a un alfabeto exacto de
+\(7\cdot6=42\) tríadas. Si \(\overline{d_1d_2d_3}\) es una de ellas,
+\[
+ \boxed{d_3\equiv5d_2-2d_1+1\pmod{10}.}
+\]
+El barrido de las \(104\,976\) semillas no produce una tríada fuera de esta
+ley. Conviene distinguir, por tanto, la cadena completa de cocientes:
+\[
+ \mathcal S^2
+ \longrightarrow\Omega_{\rm seed}
+ \longrightarrow\mathcal U_6
+ \xrightarrow{\Psi_6}\operatorname{im}\Psi_6\subset\mathbb F_3^6.
+\]
+Las presentaciones microscópicas, las \(468\) emisiones decimales, las
+\(243\) palabras ternarias y el ambiente de \(729\) palabras son cuatro
+objetos distintos.
+
+\paragraph{Conmutatividad orbital de los morfismos tipados.}
+Sea
+\(W_{243}:=\operatorname{im}\Psi_6\subset\mathbb F_3^6\). El embudo
+completo y su cociente diedral se representan sin convertir inclusiones en
+selecciones:
+\[
+ \underbrace{\mathcal S^2}_{104\,976\ \mathrm{semillas}}
+ \xrightarrow[\text{censo de fibras}]{\text{emisión}}
+ \underbrace{\mathcal U_6}_{468\ U_6}
+ \xrightarrow[\text{proyección visible}]{\Psi_6}
+ \underbrace{W_{243}}_{243\ w_6}
+ \hookrightarrow
+ \underbrace{\mathbb F_3^6}_{729\ \mathrm{palabras}},
+ \qquad
+ W_{243}\xrightarrow{\,/D_3^{\rm cat}\,}
+ \underbrace{\mathcal O_{43}}_{43\ \text{\'orbitas}}.
+ \tag{TPK-embudo}\label{eq:embudo-orbital-tipado-rev8}
+\]
+La primera flecha agrupa condiciones iniciales por la emisión que producen;
+la segunda olvida la presentación decimal; la tercera es una inclusión en
+el ambiente algebraico; la última es un cociente por la acción
+\(D_3^{\rm cat}\) sobre \(W_{243}\). En particular, no hay un cociente
+\(729\to43\) implícito. El censo exacto es
+\[
+ 243=38\cdot6+5\cdot3,
+\]
+esto es, treinta y ocho órbitas de tamaño seis y cinco de tamaño tres.
+Estas \(43\) clases orbitales tampoco son las \(43\) vueltas nonádicas
+completas por canal del testigo G9 de mil cifras: el primer \(43\) pertenece
+al cociente finito \(W_{243}/D_3^{\rm cat}\); el segundo es un contador de
+profundidad de una ejecución certificada.
+
+\section{Configuración del estado enriquecido del TPK: hoja, orientación, residuo, cociente, acarreo, frontera, ruta y memoria}
+
+La unidad din\'amica completa es una historia, no una palabra aislada. A
+profundidad \(m\) escribimos
+\[
+ v_m=
+ \bigl(
+ B_m,\boldsymbol\delta_m,\boldsymbol x_m,
+ \boldsymbol{\mathcal C}_m,\Sigma_m,
+ \omega_m,\ell_m,g(m),\Lambda_m
+ \bigr),
+\]
+donde
+\[
+ B_m=(u_m^\pi,u_m^e,u_m^\varphi)\in(\mathbb F_3^6)^3.
+\]
+Sus componentes tienen funciones distintas:
+\begin{enumerate}
+ \item \(B_m\) es el bloque visible conjunto de los tres canales;
+ \item \(\boldsymbol\delta_m\) conserva las nuevas tr\'iadas decimales y el
+       acarreo asociado;
+ \item \(\boldsymbol x_m\) es el estado Hensel profundo;
+ \item \(\boldsymbol{\mathcal C}_m\) contiene los cilindros ternarios y
+       decimales y sus residuos enteros;
+ \item \(\Sigma_m\) es la firma conjunta de frontera;
+ \item \(\omega_m\) y \(\ell_m\) conservan orientaci\'on y hoja bidireccional;
+ \item \(g(m)\in\mathbb Z/9\mathbb Z\) es la fase non\'adica;
+ \item \(\Lambda_m\) es el registro dodecaf\'asico orientado.
+\end{enumerate}
+
+\begin{definition}[Presentaci\'on operatoria y categor\'ia TPK]
+El inventario de operadores del estado enriquecido de TPK es
+\[
+ \mathfrak T_{\rm HMT}=
+ \bigl(
+ \mathcal A_9,\TRIT,T_{N,E,S,O},T_{\min},
+ H,\mathcal C_{3,1000},\Sigma_B,EF,\mathcal G_9,
+ \mathcal R_{12}
+ \bigr)
+\]
+que transporta historias \((v_0,\ldots,v_m)\) y sus truncamientos. Su
+portador formal es la categor\'ia \(\mathsf{TPK}\) sobre la base observable:
+sus objetos son estados enriquecidos y sus morfismos son las prolongaciones
+\(\operatorname{Ext}_r\) estables por identidad y concatenaci\'on, definidas
+m\'as abajo. El inventario no sustituye esa categor\'ia. La proyecci\'on
+visible elimina componentes de \(v_m\); no define una equivalencia con el
+estado completo.
+\end{definition}
+
+Esta definici\'on contiene exactamente lo que desaparece cuando se reinician
+cursores o se conserva s\'olo el residuo: el camino, la hoja, el cociente, el
+acarreo, la orientaci\'on y la frontera. TPK es, por ello, el punto en el que
+la aritm\'etica modular deja de ser una operaci\'on sin historia.
+
+\section{Cilindros ternario-decimales y estado de extensión}
+
+Sea \(N\) el entero determinado por un prefijo ternario de longitud \(L\), y
+sea \(D\) el entero determinado por \(K\) tr\'iadas decimales. Definimos
+\[
+ A=N1000^K-D3^L,
+ \qquad
+ B=(N+1)1000^K-D3^L.
+\]
+Los cilindros se intersectan exactamente cuando
+\[
+ \boxed{A<3^L,\qquad B>0.}
+\]
+Al incorporar un bloque ternario \(u\in\{0,\ldots,728\}\),
+\[
+ N'=729N+u.
+\]
+Si no aparece una nueva tr\'iada decimal,
+\[
+ A'=729A+u1000^K.
+\]
+Si aparece \(\delta\in\{0,\ldots,999\}\),
+\[
+ D'=1000D+\delta,
+\]
+\[
+ A'=729000A+u1000^{K+1}-\delta\,729\,3^L.
+\]
+En ambos casos,
+\[
+ B'=A'+1000^{K+\Delta K}.
+\]
+Estas recurrencias enteras transportan el dato decimal sin convertirlo en un
+objetivo exterior de la actualizaci\'on.
+
+El estado Hensel conserva la informaci\'on que no aparece en el residuo. La
+matriz activa es
+\[
+A_H=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},\qquad \det A_H=1,
+\]
+y la divisi\'on residuo--cociente es
+\[
+ y=xA_H,\qquad u=y\bmod3,\qquad x^+=\frac{y-u}{3}.
+\]
+Para los tres canales se forman adem\'as los cociclos conjuntos
+\[
+ q=(\pi+e+\varphi)\bmod3,
+ \qquad
+ c=\frac{\pi+e+\varphi-q}{3},
+\]
+\[
+ a=(\pi+e-\varphi)\bmod3,
+ \qquad
+ h=\frac{\pi+e-\varphi-a}{3}.
+\]
+La actualizaci\'on de segundo orden corrige el siguiente estado con \(c\) y
+\(h\). Por eso dos ramas con el mismo bloque visible no son necesariamente el
+mismo estado: pueden diferir en su extensi\'on Hensel y en sus cilindros.
+Como \(\det A_H=1\), la reducci\'on de \(A_H\) pertenece a
+\(\operatorname{GL}_6(\mathbb F_3)\). Por tanto, antes de imponer cilindros,
+fronteras o supervivencia, la carta residual Hensel cubre exactamente
+\(\mathbb F_3^6\). Esta cobertura bruta no implica la cobertura del sistema
+filtrado.
+
+Formalmente, sobre cada configuración observable \(q\) se fija una fibra
+\[
+ \mathcal F_q=
+ \mathsf O_q\times\mathsf H_q\times\mathsf C_q\times
+ \mathsf S_q\times\mathsf B_q\times\mathsf\Lambda_q,
+\]
+correspondiente, respectivamente, a orientación y hoja, residuo y cociente,
+acarreo, firma, cilindro y frontera, y registro de transporte. Para una
+flecha cardinal \(r:q\to q'\), la prolongación admisible no se reduce a una
+función sobre residuos; es la relación
+\[
+ \operatorname{Ext}_r\subseteq\mathcal F_q\times\mathcal F_{q'},
+ \qquad
+ \operatorname{Ext}_{r_2}\circ\operatorname{Ext}_{r_1}
+ \subseteq\operatorname{Ext}_{r_2\circ r_1}.
+\]
+El incremento de acarreo es un cociclo:
+\[
+ \kappa(r_2\circ r_1)
+ =\kappa(r_2)+\mathsf C(r_2)\bigl(\kappa(r_1)\bigr).
+\]
+Así queda tipado el mapa de olvido: proyectar una extensión a su ruta
+observable elimina componentes de \(\mathcal F_q\), pero no autoriza a
+identificar ambos objetos.
+
+\section{Retornos compuestos y calendarios de transporte}
+
+La longitud de una traza no determina su tipo. La presentación académica
+separa el retorno compuesto, el calendario, la traza y el atlas por sus
+respectivos estados conservados.
+
+El s\'imbolo \(\mathcal K_{27}\) se reserva para la composici\'on de
+veintisiete actualizaciones de un lazo de transporte posicional y orientado.
+El entero \(27\) es su longitud de composici\'on; no lo convierte en una
+traza de 108 iteraciones ni en un emisor infinito. Otra construcci\'on hist\'orica
+agrupa cuatro lazos cuyos periodos conjuntos alcanzan 108; ese rotor conjunto
+no se denota por \(\mathcal K_{27}\) aislado.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.24\textwidth}>{\raggedright\arraybackslash}p{.31\textwidth}>{\raggedright\arraybackslash}p{.37\textwidth}@{}}
+\toprule
+Objeto&Estado conservado&Significado de 108\\\midrule
+\endhead
+Contador simplificado&posici\'on y velocidad&su periodo real es 18; es un
+control hist\'orico.\\
+Rotor conjunto de cuatro lazos&cuatro rutas, lectura, giro y movimiento&
+los periodos individuales son \(54,54,36,36\); el estado conjunto tiene
+periodo 108.\\
+Traza bruta relojada&cuatro posiciones, orientaciones y fase&el contenido
+din\'amico se repite a 54.\\
+Traza de \(T_{\min}\)&dos posiciones y dos direcciones&el estado retorna a
+54 y la salida es \(U_6\Vert U_6\).\\
+Pseudoc\'odigo reinicializado&cursores reiniciados cada ventana&colapsa a
+\((222,222,222,333,333,333)^2\); no representa el estado enriquecido de TPK.\\
+Rutas condicionadas&camino y palabra prescrita&108 es horizonte, no periodo.\\
+Od\'ometro sectorial&\(\mathbb Z/9\mathbb Z\times\{0,\ldots,11\}\)&el
+estado completo tiene periodo 108; el observable sectorial, 36.\\
+Proyecci\'on bruta&cociente por olvido de \(X_{\rm TPK}^{\rm enr}\)&no posee
+por s\'i sola la lectura firmada.\\
+Traza enriquecida&todos los campos de \(v_m\) durante 108 actualizaciones&es
+la restricci\'on temporal del estado enriquecido de TPK.\\
+Atlas de rutas&81 celdas/56 firmas o 324 semillas orientadas&es una taxonom\'ia,
+no una \`orbita de 108 estados.\\
+\bottomrule
+\end{longtable}
+
+El lazo \(\mathcal K_{27}\) es el operador de transporte finito de
+veintisiete actualizaciones. Las ventanas, el rotor conjunto y la proyección
+calendárica reciben símbolos distintos, de modo que la longitud compartida
+no sustituye el dominio ni la composición de cada objeto.
+
+\section{Transferencia de fibras y memoria de giro}
+
+La factorización \(\mathcal U_6\simeq\mathcal S_+\times\mathcal S_\times\)
+permite definir, respecto del conteo uniforme, las esperanzas condicionales
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal S_+}f(s',e),
+ \qquad
+ (E_\times f)(s,e)=\frac1{26}
+ \sum_{e'\in\mathcal S_\times}f(s,e').
+\]
+\(E_+\) renueva la fibra aditiva y conserva la multiplicativa;
+\(E_\times\) realiza la operación dual. Son los únicos proyectores de Markov
+que marginalizan por completo la coordenada activa, conservan la inactiva y
+preservan el conteo uniforme.
+
+Sea \(\tau=(+1,-1,0)^3\) la palabra de fase sobre \(C_9\), y
+\(P_{+1}=E_+\), \(P_{-1}=E_\times\), \(P_0=I\). La transferencia nonádica es
+\[
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr)
+ =P_{\tau(r)}(u,v).
+\]
+Es doblemente estocástica, irreducible, de periodo \(9\), y posee una única
+distribución estacionaria \(1/(9\cdot468)\). Además,
+\[
+ \mathcal K_{\rm ph}^{\,9}=E_+E_\times,\qquad
+ (E_+E_\times)(u,v)=\frac1{468}.
+\]
+Esta igualdad expresa la renovación simultánea de todas las continuaciones
+compatibles, no el sucesor determinista de una sola ruta.
+
+Tres operaciones geométricas sobre las semillas conservan información
+adicional: \(P\), avance en la orientación activa; \(H\), media vuelta; y
+\(Q\), cuarto de giro. La pareja \((P,H)\) refina las \(26\) firmas producto
+en \(28\) clases. En particular, la firma \(555555\) se separa en tres hojas
+de ocho representantes, y
+\[
+ 18\cdot28=504=468+36.
+\]
+El término \(36\) cuenta hojas adicionales del refinamiento y no es el
+objeto \(R_{36}\). La pareja \((P,Q)\) produce \(162\) clases de dos
+elementos, permutadas transitivamente por
+\[
+ J(i,j,d)=\bigl(7-i,\,7-j,\,\overline d\bigr)\pmod9.
+\]
+
+En una traza de \(108\) pasos aparecen \(36\) signos de cada tipo,
+\(72\) cambios efectivos entre las dos hojas y cuatro inversiones de
+orientación; el cociclo firmado total es cero. Estos conteos son invariantes
+del registro de evoluci\'on y enlazan la dinámica nonádica con el registro dodecafásico.
+
+\section{Prolongación ternaria y frontera conjunta}
+
+Relativamente a las semillas, fronteras y lectores nombrados del perfil
+publicado, las palabras visibles iniciales son
+\[
+ w_6^\pi=010211,\qquad w_6^e=201101,\qquad
+ w_6^\varphi=121200.
+\]
+Tras cinco bloques, los prefijos son
+\[
+\begin{aligned}
+w_{30}^{\pi}&=010211|012222|010211|002111|110221,\\
+w_{30}^{e}&=201101|121221|102011|012222|102011,\\
+w_{30}^{\varphi}&=121200|112202|121020|010210|010200.
+\end{aligned}
+\]
+La primera frontera profunda es
+\[
+ R_{36}=
+ \begin{pmatrix}222220\\021222\\102011\end{pmatrix}.
+\]
+Para cada canal se define el prefijo
+\(w_{36}^\chi:=w_{30}^\chi|u_5^\chi\); \(R_{36}\) es el triple ordenado de
+los tres sextos bloques. Ninguno es un emisor ni un estado terminal.
+
+Para \(B_k=(u_k^\pi,u_k^e,u_k^\varphi)\), las firmas
+\[
+ q_k=u_k^\pi+u_k^e+u_k^\varphi,\qquad
+ a_k=u_k^\pi+u_k^e-u_k^\varphi
+\]
+determinan
+\[
+ u_k^\varphi=2(q_k-a_k),\qquad
+ u_k^\pi+u_k^e=q_k-u_k^\varphi
+ \quad\text{en }\mathbb F_3^6.
+\]
+As\'i, \(\varphi\) es el eje fijado y la libertad residual es el reparto
+interno \(\pi/e\). En la novena fase,
+\[
+ B_9=(100100|020112|010122)
+\]
+admite tres salidas locales con el mismo eje \(\varphi\) y el mismo agregado
+\(\pi+e\); las tres sobreviven un horizonte y s\'olo
+\[
+ B_{10}=(101222|112221|112002)
+\]
+sobrevive al segundo. Este es el descenso ejecutable \(3\to1\) de EF--G9.
+La rama publicada contin\'ua hasta veinte bloques por canal: \(w_{30}\) y
+\(R_{36}\) son prefijo y frontera, no clausura.
+
+\section{Relación de extensión y monodromía nonádica}
+\label{sec:extension-monodromia-tpk}
+
+Sea \(\mathcal H_m\) el conjunto de historias enriquecidas admisibles de
+profundidad \(m\), y sea
+\[
+ p_{n,m}:\mathcal H_n\longrightarrow\mathcal H_m
+\]
+el truncamiento. Para \(N\geq m\),
+\[
+ \operatorname{Surv}_m^{(N)}=p_{N,m}(\mathcal H_N),
+ \qquad
+ \operatorname{Surv}_m=\bigcap_{N\geq m}\operatorname{Surv}_m^{(N)}.
+\]
+La relaci\'on EF--G9 conserva las extensiones que pertenecen a este n\'ucleo
+estable. La fase cumple
+\[
+ g(m+9)=g(m),
+\]
+pero el estado transportado satisface, en general,
+\[
+ v_{m+9}\ne v_m.
+\]
+El retorno act\'ua sobre la fibra de estados de una misma fase; no reinicia la
+historia.
+
+\begin{definition}[N\'umero HMT]
+\label{def:numero-hmt-tpk-completo}
+Un n\'umero HMT del canal \(\chi\) es únicamente una secci\'on global
+compatible
+\[
+ x=(x_m)_{m\geq0}\in
+ X_\chi:=\varprojlim_m\operatorname{Surv}_m^{(\chi)}.
+\]
+El lector y el valor publicado no forman parte de la secci\'on.
+\end{definition}
+
+Una presentaci\'on o medici\'on del n\'umero es un par \((x,L)\), donde
+\(L\) es un lector declarado cuyo dominio contiene \(x\). Cuando \(L\) es el
+lector arquimediano de cilindros, \(L(x)\) es el valor publicado; \(x\)
+conserva adem\'as orientaci\'on, cociente, acarreo y frontera.
+
+\begin{theorem}[Existencia de una prolongaci\'on global]
+\label{thm:prolongacion-global-tpk-completo}
+Sea \(h\in\mathcal H_m\). Si el \`arbol de prolongaciones de \(h\) es
+finitamente ramificado y posee al menos un nodo a toda profundidad, entonces
+existe una historia infinita cuyos truncamientos prolongan \(h\). Si, adem\'as,
+cada nivel estable es unitario y los \`unicos estados son compatibles, la
+secci\'on global es \`unica.
+\end{theorem}
+\begin{proof}
+Los niveles finitos no vac\'ios forman un \`arbol finitamente ramificado. El
+lema de K\"onig proporciona una rama infinita. La compatibilidad de los
+truncamientos identifica esa rama con un elemento del l\'imite inverso. Si
+cada nivel contiene un solo estado, no existe una segunda rama compatible.
+\end{proof}
+
+El teorema anterior es abstracto y condicional: por sí solo no afirma la
+no-vaciedad ni la unicidad estable de un canal concreto. Para
+\(\pi,e,\varphi\), esas hipótesis se descargan después mediante la filtración
+racional ejecutable del
+\cref{thm:generacion-monodromica-conjunta-rev7}. Esta residencia conserva
+aquí únicamente el principio de límite inverso y no anticipa su aplicación.
+
+\section{Composición de los operadores fundamentales}
+
+Los operadores anteriores conducen al estado terminal enriquecido sin
+aplanar sus coordenadas:
+\[
+ \begin{aligned}
+ \mathrm{APP}&\longrightarrow\mathrm{TRIT}
+ \longrightarrow\text{ruta orientada}
+ \longrightarrow\text{estado TPK enriquecido}\\
+ &\longrightarrow\text{cilindros y supervivencia}
+ \longrightarrow x_{\rm term}.
+ \end{aligned}
+\]
+El cierre dodecafásico recibe entonces dos evaluaciones coordinadas del mismo
+estado:
+\[
+ x_{\rm term}
+ \xrightarrow{(\pi_{\rm term},R_{\rm sgn})}
+ \bigl(B_{\rm term},U_{12}^{\rm sgn}\bigr),
+ \qquad
+ U_{12}^{\rm sgn}\xleftrightarrow{\mathcal H_{12}}K,
+\]
+\[
+ (P,E,\Phi,K,c_{13}=0)\longleftrightarrow\alpha_{12}.
+\]
+No aparece una flecha \(B_{\rm term}\to U_{12}^{\rm sgn}\): ambas
+coordenadas proceden de \(x_{\rm term}\). El paso posterior a Mecánica
+Dimensional tampoco crea otra máquina; prolonga la genealogía conservada
+mediante registro cronológico enriquecido, firma, carácter y torres.
+
+\ifdefined\HMTInternalTraceability
+\section{Registro académico y trazabilidad}
+
+El archivo \path{datos/registro_operadores_tpk.json} forma parte del paquete.
+Para cada operador declara nombre acad\'emico, alias hist\'orico, dominio,
+codominio, transici\'on, invariantes, estatuto y fuente local. Incluye tambi\'en
+la separaci\'on de las diez construcciones hist\'oricas asociadas al n\'umero
+108. La puerta de publicaci\'on comprueba este registro y bloquea una salida
+que vuelva a reducir TPK a su cat\'alogo o a una traza bruta.
+
+En el resto del art\'iculo se usar\'an cuatro abreviaturas, ya tipadas:
+\[
+ w_6\in\mathbb F_3^6,\qquad
+ w_{30}\in\mathbb F_3^{30},\qquad
+ R_{36}\in(\mathbb F_3^6)^3,\qquad
+ U_{12}^{\rm sgn}\in\mathbb Z^{12}.
+\]
+La primera es una palabra semilla; la segunda, un prefijo de cinco bloques;
+ la tercera, la frontera conjunta de entrada en EF--G9; la cuarta, la
+coordenada firmada declarada del estado dodecaf\'asico enriquecido. Ninguna igualdad cardinal autoriza a
+identificarlas.
+\fi

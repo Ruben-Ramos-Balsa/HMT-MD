@@ -1,0 +1,142 @@
+% FORMALIZACION_NUEVA of the pre-existing homogeneous realization.
+% Priority of the integrated formula: historical provenance pending comparison.
+% Preserves the equation and domain of the bounce chapter; does not select s_0.
+\section{Explicit homogeneous solution and causal completeness}
+\label{vii:sec:solucion-homogenea}
+Determining the amplitude permits a complete realization of the bounce
+to be developed in addition to the local argument. The spatially flat
+chart of \eqref{vii:eq:dinamica-homogenea} is retained, in units
+\(c=1\), with \(\rho_0,s_0,G>0\), and the material sector is specialized
+to dust, \(w=0\), with \(\Lambda_{\mathrm{eff}}=0\).
+The coefficient \(s_0\) is obtained from the material state in the
+corresponding realization; the following integration uses this
+coefficient and preserves its domain.
+
+\begin{theorem}[Exact integration of the dust bounce]
+\label{vii:thm:rebote-polvo}
+Set
+\[
+ a_{\rm b}^3=\frac{s_0}{\rho_0},\qquad
+ \tau^2=\frac{s_0}{6\pi G\rho_0^2},\qquad u=t-t_{\rm b}.
+\]
+The solution of the homogeneous system with
+\(a(t_{\rm b})=a_{\rm b}\) and \(H(t_{\rm b})=0\) is, for every
+\(t\in\mathbb R\),
+\begin{equation}
+ a(t)=a_{\rm b}\left(1+\frac{u^2}{\tau^2}\right)^{1/3},
+ \qquad H(t)=\frac{2u}{3(\tau^2+u^2)},\qquad
+ \dot H(t)=\frac{2(\tau^2-u^2)}{3(\tau^2+u^2)^2}.
+ \label{vii:eq:solucion-polvo}
+\end{equation}
+It has a unique minimum at \(t_{\rm b}\); it is contracting before
+and expanding afterwards. The evolution is smooth and satisfies
+\(a(t)\geq a_{\rm b}>0\).
+\end{theorem}
+\begin{proof}
+Let \(y=a^3\). The Friedmann equation gives
+\[
+ \dot y^{\,2}=24\pi G(\rho_0y-s_0).
+\]
+The function \(y=s_0/\rho_0+6\pi G\rho_0u^2\) satisfies this
+identity and the initial conditions. Its derivatives give the
+three expressions in \eqref{vii:eq:solucion-polvo}. To verify the
+evolution equation as well, write
+\[
+ \rho_{\rm b}=\frac{\rho_0^2}{s_0},\qquad
+ x=\frac{u}{\tau}.
+\]
+Then
+\[
+ \rho_{\rm m}=\frac{\rho_{\rm b}}{1+x^2},\qquad
+ \rho_{\rm s}=\frac{\rho_{\rm b}}{(1+x^2)^2},\qquad
+ 4\pi G\rho_{\rm b}=\frac{2}{3\tau^2}.
+\]
+Substitution into \(\dot H=-4\pi G(\rho_{\rm m}-2\rho_{\rm s})\)
+gives exactly the third formula. Thus the complete system
+\((\dot a,\dot H)\) is satisfied, and its vector field is smooth
+for \(a>0\). Local uniqueness, prolonged along the explicit
+solution, determines the evolution from these initial conditions.
+The denominator is positive for every \(t\), and the statements
+about the minimum and sign follow from \(H\).
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.45cm,y=1.15cm,>=Latex]
+\draw[->] (-3.25,0)--(3.3,0) node[right] {\(\displaystyle u/\tau\)};
+\draw[->] (0,0)--(0,2.8) node[above] {\(\displaystyle a/a_{\rm b}\)};
+\draw[densely dashed,gray] (-3.1,1)--(3.1,1);
+\draw[very thick,ink,domain=-3:3,samples=121,smooth]
+ plot (\x,{(1+\x*\x)^(1/3)});
+\fill[accent] (0,1) circle (1.6pt);
+\node[anchor=north east] at (-.08,.98) {\(1\)};
+\node[ink] at (-2,2.65) {Contraction};
+\node[ink] at (2,2.65) {Expansion};
+\foreach \t in {-3,-2,-1,1,2,3}
+{\draw (\t,.045)--(\t,-.045) node[below] {\(\t\)};}
+\end{tikzpicture}
+\caption{Dimensionless profile of the proved solution:
+\(a/a_{\rm b}=(1+(u/\tau)^2)^{1/3}\).
+The parameters \(a_{\rm b}\) and \(\tau\) are calculated from
+\(\rho_0,s_0,G\); the diagram represents the entire rescaled collection.}
+\label{vii:fig:rebote-polvo}
+\end{figure}
+
+\subsection{Finite curvature and extension of geodesics}
+The metric realized in this chart is
+\(g=-dt^2+a(t)^2\,d\mathbf x^2\) on
+\(\mathbb R\times\mathbb R^3\). With the convention in which
+the flat-model scalar curvature is \(R=6(\dot H+2H^2)\), the solution gives
+\[
+ R(t)=\frac{4\tau^2+\frac43u^2}{(\tau^2+u^2)^2}.
+\]
+In particular, \(R(t_{\rm b})=4/\tau^2\) is finite.
+In an orthonormal frame, the Riemann components depend on
+\(H^2\) and \(\dot H+H^2\), which are bounded functions on
+\(\mathbb R\). The same holds for polynomial contractions of
+these components; for example,
+\[
+ R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}
+ =12\bigl[(\dot H+H^2)^2+H^4\bigr].
+\]
+
+\begin{proposition}[Completeness of causal geodesics]
+\label{vii:prop:completitud-causal-polvo}
+The preceding metric realization is geodesically complete
+for the timelike and null geodesics of its Levi--Civita
+connection, in both directions.
+\end{proposition}
+\begin{proof}
+Spatial translations provide the constants
+\(p_i=a^2\,dx^i/d\lambda\). Causal normalization gives
+\[
+ \left|\frac{dt}{d\lambda}\right|
+ =\sqrt{\epsilon+\frac{|\mathbf p|^2}{a(t)^2}},
+ \qquad \epsilon=1\ \text{in the timelike case},\quad
+ \epsilon=0\ \text{in the null case}.
+\]
+A nonconstant null geodesic has \(|\mathbf p|>0\).
+Since \(a\geq a_{\rm b}\), in the timelike case
+\[
+ \left|\frac{d\lambda}{dt}\right|
+ \geq\left(1+\frac{|\mathbf p|^2}{a_{\rm b}^2}\right)^{-1/2}>0,
+\]
+and in the null case
+\(\left|d\lambda/dt\right|=a/|\mathbf p|
+ \geq a_{\rm b}/|\mathbf p|>0\).
+Thus reaching \(t=\pm\infty\) requires infinite affine length.
+On a compact time interval, \(a\) and its derivatives are
+smooth and \(a\) is bounded away from zero. The explicit equations
+above and \(dx^i/d\lambda=p_i/a^2\) allow the geodesic to be
+continued through its finite endpoints. Both possibilities
+for prolongation are covered.
+\end{proof}
+
+The completeness result belongs to this homogeneous dust realization,
+with its conditions on space, matter and amplitude. Local persistence
+under threshold perturbations preserves the bounds of
+Theorem~\ref{vii:thm:persistencia}; this local property and global
+completeness of the explicit solution are distinct conclusions.
+The minimum scale follows from the relation between material density
+and torsional response. Memory thus enters a verifiable geometric
+evolution, with a regular realization of contraction and expansion.

@@ -1,0 +1,90 @@
+\section{Dodecaphasic update and observable memory}
+\label{sec:eta}
+Let $d_t$ be the integer direction code preserved by a TPK trace.
+This code and the cursor's cardinal direction are distinct coordinates.
+The twelve windows
+$E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$, divide the record's 108 steps.
+The orientation is
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+The event of a window is the output
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{eq:events}
+\end{equation}
+The notation $a_m$ avoids confusing this event with Euler's number.
+The source record also preserves TRIT orientation, signature,
+carry, and the corresponding history segment \cite{registro}.
+
+\begin{proposition}[Increment produced by transport]
+Let $\mathbf e_m$ be the basis of $\R^{12}$ and
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. If
+$\mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_m$ and $y_m=S^{-m}\mathbf z_m$, then
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{eq:eta}
+\end{equation}
+After one complete turn,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplying the update of $\mathbf z_m$ by $S^{-(m+1)}$ gives
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+Upon iteration, the coefficient of event $a_m$ is
+$S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Since $S^{12}=I$,
+one obtains \eqref{eq:cycle}.
+\end{proof}
+
+Boldface here identifies the accumulated vector
+\(\mathbf z_m\in\R^{12}\), whereas the incidence block
+\(z_m\) of \eqref{eq:registro-bloque-incidencial} is an integer between
+\(0\) and \(999\). The moving frame \(y_m\) transports the first object;
+the decimal coding of the second retains its own definition.
+
+Thus $\eta_m$ is not a free force chosen to impose a
+conservation law: it is the vector expression of the TPK event. Equality of phase
+after one turn does not cancel accumulated events. This reader
+preserves counts, while the full record also preserves their
+order and provenance. The vector increment $\eta_m$ is distinguished from
+$\eta_{\rm ret}$, the scalar action mantissa, and $\eta_{\rm el}$,
+the shape parameter to be introduced in section~\ref{sec:ellipse}.
+
+\subsection{Quadratic balance}
+Define
+\[
+\nabla_3=I-S^3,\quad \nabla_4=I-S^4,\quad
+B=\nabla_3^{\mathsf T}\nabla_3+\nabla_4^{\mathsf T}\nabla_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+The oriented readers of the signed record satisfy
+$(D_jz)_m=z_m-z_{m+j}$; with the convention
+$S\mathbf e_m=\mathbf e_{m+1}$, one has
+$D_j=I-S^{-j}=\nabla_j^{\mathsf T}$. Both directions produce the same
+quadratic form $B$, since powers of $S$ commute.
+We have $S^{\mathsf T}BS=B$ and $B_{00}=4$. Substituting
+\eqref{eq:eta} yields exactly
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\label{ii:mem:balance}
+\end{equation}
+Likewise, the charge $q(y)=\sum_jy_j$ satisfies
+$q(y_{m+1})-q(y_m)=a_m$.
+The proof is expansion of the quadratic polynomial after removing
+the permutation $S^{-1}$. No metrological value enters that calculation.
+The form $\mathcal M$ measures this record; its interpretation as a
+specific physical energy would require the corresponding dimensional reader.
+
+\input{sections/03b_memoria_resolvente.tex}
+
+\input{sections/ii_sello_y_lectura.tex}

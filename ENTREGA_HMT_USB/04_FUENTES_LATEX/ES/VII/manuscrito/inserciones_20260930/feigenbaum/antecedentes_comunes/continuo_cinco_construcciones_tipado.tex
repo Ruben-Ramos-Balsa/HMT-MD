@@ -1,0 +1,330 @@
+% Propietario reproducido por unidad demostrativa; véase PROPIETARIOS_CONTINUO_UNIVERSO.json.
+% Origen: XI ES CUMPLIMIENTO_EDITORIAL_20260928, sections/continuo_cinco_construcciones_tipado.tex:1--327.
+% Cuerpos y pruebas conservados; sólo namespace, rutas y remisiones contextuales declaradas.
+\subsection{Emergencia conjunta de las cinco construcciones}
+\label{hmtfg:base:sec:cinco-construcciones-continuo-ch}
+
+Para \(0\leq k\leq N\), sea
+\[
+ \rho_{N,k}:=\rho_k\circ\rho_{k+1}\circ\cdots\circ\rho_{N-1},
+ \qquad \rho_{k,k}:=\operatorname{id}_{H_k},
+\]
+y, para una historia superviviente \(\zeta\in H_k\), defínase
+\[
+ \operatorname{Desc}_{k,N}(\zeta)
+ :=\{x\in H_N:\rho_{N,k}(x)=\zeta\}.
+\]
+El árbol finito \(\mathscr T_{k,N}(\zeta)\) tiene como vértices
+\[
+ \coprod_{j=k}^{N}\{y\in H_j:\rho_{j,k}(y)=\zeta\}
+\]
+y como aristas únicamente las prolongaciones TPK
+\(a:y\to z\) con \(z\in\rho_j^{-1}(y)\). Por tanto, ni sus vértices ni
+sus prolongaciones proceden de un árbol auxiliar.
+
+Para \(x\in\operatorname{Desc}_{k,N}(\zeta)\), la rama marcada
+\(\lambda_{\zeta,x}\) es la sucesión
+\[
+ \zeta=x_k\longrightarrow x_{k+1}\longrightarrow\cdots
+ \longrightarrow x_N=x
+\]
+determinada por los truncamientos de \(x\). El registro base común es
+\[
+\begin{aligned}
+ \mathscr R_{k,N}(\zeta;x):=
+ \bigl(&\mathscr T_{k,N}(\zeta),\lambda_{\zeta,x};\\
+ &\bigl(\varepsilon_a,s_a,o_a,
+   (\delta_{\diamond,a},r_{\diamond,a},q_{\diamond,a})
+       _{\diamond\in\{\Sigma,\Pi\}},
+   \operatorname{Carr}_a,C_a,t_a,\operatorname{Fr}_a,
+   \operatorname{Ruta}_a,\operatorname{Mem}_a,
+   \operatorname{Surv}_a\bigr)_a;\\
+ &\operatorname{src},\operatorname{tgt},\circ,
+   (\rho_j)_{k\leq j<N}\bigr),
+\end{aligned}
+\tag{C1}
+\label{hmtfg:base:eq:base-comun-registros}
+\]
+donde
+\[
+ U_a(m_0)=C_am_0+t_a,
+ \qquad
+ \delta_{\diamond,a}=r_{\diamond,a}+9q_{\diamond,a}.
+\]
+El símbolo \(m_0\) de esta fórmula es una coordenada de memoria; no es la
+profundidad modular \(m\) utilizada más abajo. El espacio base verdadero es
+\[
+ \mathfrak R_{k,N}(\zeta)
+ :=\{\mathscr R_{k,N}(\zeta;x):
+       x\in\operatorname{Desc}_{k,N}(\zeta)\}.
+\]
+La rama marcada no es una entrada añadida: es la sucesión de aristas
+efectivamente producidas que termina en \(x\). El resto del registro conserva
+simultáneamente las fibras laterales del árbol; por ello la marca no sustituye
+la ramificación por una trayectoria aislada.
+
+\Needspace{15\baselineskip}
+Póngase \(R_m:=\mathbb Z/3^m\mathbb Z\), y sea
+\(V_j(\zeta):=\operatorname{Desc}_{k,j}(\zeta)\). El transporte, los
+proyectores de hoja y el residuo terminal se restringen al subárbol mediante
+\[
+ \mathcal U_j^\zeta:=
+ \mathcal U_j\!\upharpoonright_{\ell^2(V_j(\zeta),\mu_j)},
+ \qquad P_j^\zeta:=P_j\!\upharpoonright_{V_j(\zeta)},
+ \qquad Q_j^\zeta:=I-P_j^\zeta,
+\]
+\[
+ A_j^\zeta:=P_{j+1}^\zeta\mathcal U_j^\zeta P_j^\zeta
+             +Q_{j+1}^\zeta\mathcal U_j^\zeta Q_j^\zeta,
+ \qquad
+ \eta_j^\zeta:=Q_{j+1}^\zeta\mathcal U_j^\zeta P_j^\zeta
+             +P_{j+1}^\zeta\mathcal U_j^\zeta Q_j^\zeta.
+\]
+Para \(k\leq n\leq N\), sean
+\[
+ F_{k,k}^\zeta:=I,
+ \qquad
+ F_{k,n}^\zeta:=A_{n-1}^\zeta\cdots A_k^\zeta,
+ \qquad
+ T_{k,n}^\zeta:=(F_{k,n}^\zeta)^*F_{k,n}^\zeta.
+\]
+Los puertos propios del mismo subárbol son
+\[
+ \mathscr P_j^\Sigma(\zeta):=
+ \{(y,\Sigma):y\in V_j(\zeta)\},
+ \qquad
+ \mathscr P_j^\Pi(\zeta):=
+ \{(y,\Pi):y\in V_j(\zeta)\};
+\]
+denotamos por \(B_j^\zeta,\kappa_j^\zeta,\delta_j^\zeta\) las restricciones
+de la incidencia y del complejo rectangular a esos puertos, y por
+\(L_j^\zeta\) la precomposición inducida por la supresión de prefijos.
+
+Para definir sin abreviaturas el lector de caminos, sea
+\[
+ W_\ell^\zeta(y):=
+ R_m[\operatorname{Path}_{\mathscr T_{k,\ell}(\zeta)}
+          (y,\operatorname{Term}_\ell)]
+\]
+y póngase
+\[
+ \mathscr D_{q,r;k,\ell}^{(m)}[\mathscr R]
+ :=\bigoplus_{y_0\to\cdots\to y_q\ \text{en}\
+                  \mathscr T_{k,\ell}(\zeta)}
+ W_\ell^\zeta(y_q)\otimes_{R_m}
+ \bigl(\Gamma_r(y_0)\otimes_{\mathbb Z}R_m\bigr),
+ \qquad
+ \operatorname{Tot}_d\mathscr D
+ :=\bigoplus_{q+r=d}\mathscr D_{q,r;k,\ell}^{(m)}[\mathscr R].
+\]
+Las fórmulas ya demostradas producen, sobre cada
+\(\mathscr R\in\mathfrak R_{k,N}(\zeta)\), los cinco objetos
+\[
+\begin{aligned}
+ \mathcal F_{\rm sp}[\mathscr R]
+ &:=(\ell^2(V_j(\zeta),\mu_j),
+       \mathcal U_j^\zeta,A_j^\zeta,\eta_j^\zeta,
+       T_{k,j}^\zeta)_{k\leq j\leq N},\\
+ \mathcal F_{\rm sol}[\mathscr R]
+ &:=(b,\kappa_{\rm can},C_\alpha,\kappa_\alpha)
+      _{\alpha\subset\mathscr T_{k,N}(\zeta)},\\
+ \mathcal F_{\rm gau}^{(m)}[\mathscr R]
+ &:=(\mathscr P_j^\Sigma(\zeta),\mathscr P_j^\Pi(\zeta),
+       B_j^\zeta,\kappa_j^\zeta,\delta_j^\zeta;R_m)_{k\leq j\leq N},\\
+ \mathcal F_{\rm coh}^{(m)}[\mathscr R]
+ &:=(\Gamma_y\otimes R_m,\partial,\Psi_\alpha,H_\bullet)
+      _{y,\alpha\subset\mathscr T_{k,N}(\zeta)},\\
+ \mathcal F_{\rm det}^{(m)}[\mathscr R]
+ &:=(\operatorname{Det}(\operatorname{Tot}
+       \mathscr D_{\bullet,\bullet;k,\ell}^{(m)}[\mathscr R]))
+       _{k\leq\ell\leq N}.
+\end{aligned}
+\tag{C2}
+\label{hmtfg:base:eq:cinco-lectores-comunes}
+\]
+Aquí \(\mathscr D_{\bullet,\bullet;k,\ell}^{(m)}[\mathscr R]\) es el
+bicomplejo normalizado
+de caminos y memoria de las secciones anteriores, restringido al subárbol de
+horizonte \(\ell\) y reducido sobre \(R_m\). El último lector conserva la
+colección ordenada de líneas determinantales hasta el horizonte \(N\); de este
+modo, su truncamiento es una proyección canónica y no presupone una
+factorización determinantal inexistente. La ley \(\mu\) es la ley canónica
+del censo, y los puertos se fijan mediante la rama lexicográficamente mínima
+del orden APP. Por tanto, ninguno de los cinco lectores recibe una ponderación
+o un puerto externos.
+
+Para
+\(T\in\mathfrak T:=\{{\rm sp},{\rm sol},{\rm gau},{\rm coh},{\rm det}\}\),
+defínase el espacio total tipado
+\[
+ \widetilde{\mathcal F}_{T;k,N}^{(m)}(\zeta)
+ :=\coprod_{\mathscr R\in\mathfrak R_{k,N}(\zeta)}
+   \{\mathcal F_T^{(m)}[\mathscr R]\}_{\mathscr R},
+ \qquad
+ p_T:\widetilde{\mathcal F}_{T;k,N}^{(m)}(\zeta)
+      \longrightarrow\mathfrak R_{k,N}(\zeta),
+\]
+donde
+\(\mathcal F_{\rm sp}^{(m)}:=\mathcal F_{\rm sp}\) y
+\(\mathcal F_{\rm sol}^{(m)}:=\mathcal F_{\rm sol}\); es decir, el
+superíndice \(m\) es inerte para esos dos lectores.
+La proyección \(p_T\) olvida únicamente la estructura del lector y conserva
+su registro fuente. El producto fibrado correcto es
+\[
+\begin{aligned}
+ \mathcal J_{k,N}^{(m)}(\zeta):={}&
+ \widetilde{\mathcal F}_{\rm sp;k,N}^{(m)}(\zeta)
+ \mathop{\times}_{\mathfrak R_{k,N}(\zeta)}
+ \widetilde{\mathcal F}_{\rm sol;k,N}^{(m)}(\zeta)
+ \mathop{\times}_{\mathfrak R_{k,N}(\zeta)}
+ \widetilde{\mathcal F}_{\rm gau;k,N}^{(m)}(\zeta)\\
+ &\mathop{\times}_{\mathfrak R_{k,N}(\zeta)}
+ \widetilde{\mathcal F}_{\rm coh;k,N}^{(m)}(\zeta)
+ \mathop{\times}_{\mathfrak R_{k,N}(\zeta)}
+ \widetilde{\mathcal F}_{\rm det;k,N}^{(m)}(\zeta).
+\end{aligned}
+\tag{C3}
+\label{hmtfg:base:eq:constructor-correlativo}
+\]
+La igualdad de las cinco proyecciones obliga a conservar el mismo árbol, las
+mismas aristas, la misma rama producida y el mismo registro. Para cada
+\(\mathscr R\) las cinco construcciones determinan el elemento
+\[
+ s_{k,N}^{(m)}(\mathscr R)
+ :=(\mathcal F_T^{(m)}[\mathscr R])_{T\in\mathfrak T}
+ \in\mathcal J_{k,N}^{(m)}(\zeta).
+\]
+La existencia de este elemento procede de las operaciones de
+\eqref{hmtfg:base:eq:cinco-lectores-comunes}, no de la
+notación del producto fibrado.
+
+La supresión de la última capa induce
+\[
+ \operatorname{res}^{\mathfrak R}_{N+1,N}
+ \bigl(\mathscr R_{k,N+1}(\zeta;x)\bigr)
+ :=\mathscr R_{k,N}(\zeta;\rho_N(x)).
+\]
+La restricción de cada operador a los generadores retenidos define
+\[
+ r^m_{N+1,N}:\mathcal J_{k,N+1}^{(m)}(\zeta)
+ \longrightarrow\mathcal J_{k,N}^{(m)}(\zeta).
+\]
+En el lector determinantal, \(r^m_{N+1,N}\) suprime únicamente la última
+coordenada de la colección de líneas de
+\eqref{hmtfg:base:eq:cinco-lectores-comunes}. La reducción
+\(R_{m+1}\twoheadrightarrow R_m\) define, por cambio de base,
+\[
+ q^N_{m+1,m}:\mathcal J_{k,N}^{(m+1)}(\zeta)
+ \longrightarrow\mathcal J_{k,N}^{(m)}(\zeta).
+\]
+Sobre cada generador se cumplen
+\[
+\begin{gathered}
+ r^m_{N+1,N}q^{N+1}_{m+1,m}
+ =q^N_{m+1,m}r^{m+1}_{N+1,N},\\
+ \partial\Psi_\alpha=\Psi_\alpha\partial,
+ \qquad L_j^\zeta\kappa_j^\zeta
+       =\kappa_{j+1}^\zeta L_j^\zeta,
+ \qquad L_j^\zeta\delta_j^\zeta
+       =\delta_{j+1}^\zeta L_j^\zeta,
+\end{gathered}
+\tag{C4}
+\label{hmtfg:base:eq:naturalidad-D}
+\]
+y las composiciones de los mapas \(r\) y \(q\) satisfacen las identidades
+functoriales. La primera igualdad se verifica porque borrar la última capa y
+reducir los coeficientes actúan sobre coordenadas distintas. Las otras tres
+son las identidades de naturalidad probadas anteriormente. Se obtiene un único
+prosistema en \((N,m)\), no cinco límites yuxtapuestos.
+
+En la raíz se define
+\[
+ \mathfrak J_{N,\bullet}^{(m)}:=\mathcal J_{0,N}^{(m)}(\ast).
+\tag{C5}
+\label{hmtfg:base:eq:fibras-conjuntas-horizonte}
+\]
+La estructura discreta conjunta del continuo es el límite de esos objetos
+correlativos:
+\[
+ \boxed{
+ \mathcal C_{\rm cont}^{\rm disc}
+ :=\varprojlim_{\substack{N\geq1\\m\geq1}}
+   \bigl(\mathfrak J_{N,\bullet}^{(m)},
+         r^m_{N+1,N},q^N_{m+1,m}\bigr).}
+\tag{C6}
+\label{hmtfg:base:eq:continuo-discreto}
+\]
+Ésta es una definición por el prosistema generado por el árbol completo; no es
+la imagen ni el grafo de una aplicación que retenga el estado de entrada como
+primera coordenada.
+
+Los registros poseen una marca terminal producida. Sus proyecciones compatibles
+inducen
+\[
+ \Pi:\mathcal C_{\rm cont}^{\rm disc}\longrightarrow H_\infty^{\rm enr}.
+\]
+Recíprocamente, una historia completa determina, por sus prefijos ya emitidos,
+las secciones compatibles \(s_{0,N}^{(m)}\). Así se obtiene, después de haber
+definido el continuo,
+\[
+ \operatorname{Gen}_{\rm cont}:H_\infty^{\rm enr}
+ \longrightarrow\mathcal C_{\rm cont}^{\rm disc},
+ \qquad
+ \Pi\circ\operatorname{Gen}_{\rm cont}
+ =\operatorname{id}_{H_\infty^{\rm enr}}.
+\tag{C7}
+\label{hmtfg:base:eq:seccion-historias-continuo}
+\]
+Esta sección demuestra recuperabilidad; no se usa para definir
+\(\mathcal C_{\rm cont}^{\rm disc}\).
+
+\begin{theorem}[Emergencia correlativa de las cinco construcciones]
+\label{hmtfg:base:thm:correlacion-cinco}
+Para toda historia superviviente \(\zeta\in H_k\), todo \(N>k\), todo
+\(m\geq1\) y todo \(\mathscr R\in\mathfrak R_{k,N}(\zeta)\), las cinco
+construcciones de \eqref{hmtfg:base:eq:cinco-lectores-comunes} están definidas sobre el
+mismo registro, y \eqref{hmtfg:base:eq:constructor-correlativo} contiene
+\(s_{k,N}^{(m)}(\mathscr R)\). Sus truncamientos, reducciones modulares y
+transportes satisfacen \eqref{hmtfg:base:eq:naturalidad-D}. Además,
+\(\mathcal C_{\rm cont}^{\rm disc}\neq\varnothing\), la aplicación \(\Pi\)
+es sobreyectiva y queda escindida por \(\operatorname{Gen}_{\rm cont}\). Las
+cinco componentes son aspectos inseparables del mismo continuo, no cinco
+dominios ni cinco aplicaciones independientes.
+\end{theorem}
+
+\begin{proof}
+La supervivencia que define \(H_k\) y la ley de prolongación TPK dan
+\(\rho_k^{-1}(\zeta)\neq\varnothing\) para cada vértice. Como las fibras son
+finitas, el lema de Kőnig produce \(H_\infty^{\rm enr}\neq\varnothing\).
+
+Fijado un registro \(\mathscr R\), el transporte de historias y hojas produce
+\(\mathcal F_{\rm sp}[\mathscr R]\); la composición afín y el defecto exacto
+de cancelación producen \(\mathcal F_{\rm sol}[\mathscr R]\); las incidencias
+y la secuencia rectangular producen \(\mathcal F_{\rm gau}^{(m)}[\mathscr R]\);
+el complejo de memoria y su transporte producen
+\(\mathcal F_{\rm coh}^{(m)}[\mathscr R]\); y las líneas del ensamblaje
+normalizado de caminos producen \(\mathcal F_{\rm det}^{(m)}[\mathscr R]\).
+Cada construcción actúa sobre las mismas aristas generadas, no sobre un
+subdominio supuesto ni sobre el ambiente abstracto de \(729\) palabras.
+
+Las compatibilidades afín, de transporte, de incidencia y de memoria prueban
+\eqref{hmtfg:base:eq:naturalidad-D}. Truncar la colección determinantal de
+\eqref{hmtfg:base:eq:cinco-lectores-comunes} conmuta por
+definición con \(r\); su cambio de base conmuta con \(q\). Las secciones
+\(s_{0,N}^{(m)}\) son compatibles, de modo que producen
+\(\operatorname{Gen}_{\rm cont}\). La identidad
+\eqref{hmtfg:base:eq:seccion-historias-continuo} prueba a la vez la no
+vacuidad del límite, la sobreyectividad de \(\Pi\) y la recuperabilidad de cada
+historia sin introducirla como coordenada de definición.
+
+La fibra, la relación, el número, la orientación, el acarreo, la memoria, la
+frontera y la ruta permanecen en el registro común; la multisección, los
+terminales y los lectores lineal y probabilístico permanecen en las cinco
+construcciones correlativas. Por ello el paso al límite conserva la clausura de
+dependencias y no disgrega el continuo.
+\end{proof}
+
+El reconocimiento ulterior del único continuo construido mediante lenguaje
+espectral, solenoidal, de calibre, cohomológico o determinantal pertenece a la
+comparación convencional posterior. No selecciona sus estados ni interviene en
+su generación APP--TRIT--TPK.

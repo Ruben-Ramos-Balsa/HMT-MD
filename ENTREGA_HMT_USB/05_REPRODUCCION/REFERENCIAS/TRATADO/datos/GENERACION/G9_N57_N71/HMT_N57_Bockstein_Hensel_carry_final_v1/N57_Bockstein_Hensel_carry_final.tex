@@ -1,0 +1,244 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{observacion}[teorema]{Observación}
+\title{\bfseries N57 --- Cierre Bockstein--Hensel del carry\\
+\large \(P_m\) degradado, carry como ley, y blanco final APP/TPK}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N57 cierra la pieza que había quedado amarilla en N56: los carries \(c_t,h_t\). El resultado es que no hay una palabra externa adicional que derivar para el margen; el carry es el cociclo Bockstein--Hensel inducido por la sección de dígitos \(\mathbb F_3\to\{0,1,2\}\subset\mathbb Z\). Se demuestra localmente en las \(27\) columnas posibles, se verifica la identidad de cociclo, se prueba que \(c,h\) son las obstrucciones no afines, y se confirma el caso terminal \(q=122120,\ c=000110\). El blanco final queda reducido a otro problema: derivar los estados de canal \(x_t^\chi,u_t^\chi\) desde APP/TPK.
+\end{abstract}
+
+\section{Cociclo local}
+
+Para una columna:
+\[
+(p,e,f)\in\{0,1,2\}^3,
+\]
+definimos:
+\[
+q=(p+e+f)\bmod3,
+\qquad
+c=\frac{p+e+f-q}{3}.
+\]
+Para el canal firmado:
+\[
+\sigma=(1,1,-1),
+\]
+\[
+a=(p+e-f)\bmod3,
+\qquad
+h=\frac{p+e-f-a}{3}.
+\]
+Con:
+\[
+\kappa(x,y)=\frac{x+y-((x+y)\bmod3)}{3},
+\]
+\[
+\beta(x,y)=\frac{x-y-((x-y)\bmod3)}{3},
+\]
+y \(r=(p+e)\bmod3\), se obtiene:
+\[
+\boxed{
+c=\kappa(p,e)+\kappa(r,f)
+}
+\]
+\[
+\boxed{
+h=\kappa(p,e)+\beta(r,f).
+}
+\]
+No hay parámetro libre.
+
+\section{Identidad de cociclo}
+
+La función \(\kappa\) satisface:
+\[
+\kappa(x,y)+\kappa((x+y)\bmod3,z)
+=
+\kappa(y,z)+\kappa(x,(y+z)\bmod3).
+\]
+La auditoría en las \(27\) ternas pasa:
+\[
+\boxed{
+\delta\kappa=0.
+}
+\]
+Esto es la forma local del Bockstein de la secuencia:
+\[
+0\to\mathbb Z\xrightarrow{\times3}\mathbb Z\to\mathbb F_3\to0.
+\]
+
+\section{Tabla universal}
+
+\[
+\begin{array}{ccc|rrrr}
+p&e&f&q&c&a&h\\
+\hline
+0&0&0&0&0&0&0\\
+0&0&1&1&0&2&-1\\
+0&0&2&2&0&1&-1\\
+0&1&0&1&0&1&0\\
+0&1&1&2&0&0&0\\
+0&1&2&0&1&2&-1\\
+0&2&0&2&0&2&0\\
+0&2&1&0&1&1&0\\
+0&2&2&1&1&0&0\\
+1&0&0&1&0&1&0\\
+1&0&1&2&0&0&0\\
+1&0&2&0&1&2&-1\\
+1&1&0&2&0&2&0\\
+1&1&1&0&1&1&0\\
+1&1&2&1&1&0&0\\
+1&2&0&0&1&0&1\\
+1&2&1&1&1&2&0\\
+1&2&2&2&1&1&0\\
+2&0&0&2&0&2&0\\
+2&0&1&0&1&1&0\\
+2&0&2&1&1&0&0\\
+2&1&0&0&1&0&1\\
+2&1&1&1&1&2&0\\
+2&1&2&2&1&1&0\\
+2&2&0&1&1&1&1\\
+2&2&1&2&1&0&1\\
+2&2&2&0&2&2&0\\
+\end{array}
+\]
+
+\section{No linealidad necesaria}
+
+Tomando como diseño afín:
+\[
+1,\ p,\ e,\ f,
+\]
+se obtiene:
+\[
+q,a\text{ son afines sobre }\mathbb F_3.
+\]
+Pero:
+\[
+\boxed{
+c,h\text{ no son afines.}
+}
+\]
+Los tests de rango dan:
+\[
+\operatorname{rank}(A)=4,
+\qquad
+\operatorname{rank}(A|c)=5,
+\qquad
+\operatorname{rank}(A|h)=5.
+\]
+Por tanto:
+\[
+\boxed{
+c,h=\text{obstrucción no lineal a la superposición de canales.}
+}
+\]
+
+\section{Polinomios sobre \(\mathbb F_3\)}
+
+La representación polinómica única sobre \(\mathbb F_3\) da:
+\[
+c\equiv 2ef + 2ef^2 + 2e^2f + 2pf + 2pf^2 + 2pe + pef + 2pe^2 + 2p^2f + 2p^2e\pmod3,
+\]
+\[
+h\equiv 2f^2 + ef + 2ef^2 + e^2f + pf + 2pf^2 + 2pe + 2pef + 2pe^2 + p^2f + 2p^2e\pmod3.
+\]
+Esto muestra explícitamente que el carry es función algebraica interna, no dato externo.
+
+\section{Ecuación Hensel global}
+
+Para cada canal:
+\[
+y_t^\chi=x_t^\chi A,
+\qquad
+u_t^\chi=y_t^\chi\bmod3,
+\qquad
+x_{t+1}^\chi=\frac{y_t^\chi-u_t^\chi}{3}.
+\]
+Entonces:
+\[
+q_t=(u_t^\pi+u_t^e+u_t^\varphi)\bmod3,
+\]
+\[
+c_t=\frac{u_t^\pi+u_t^e+u_t^\varphi-q_t}{3},
+\]
+\[
+\boxed{
+X_{t+1}^+
+=
+\frac{X_t^+A-q_t}{3}-c_t.
+}
+\]
+Y para \(\alpha\):
+\[
+a_t=(u_t^\pi+u_t^e-u_t^\varphi)\bmod3,
+\]
+\[
+h_t=\frac{u_t^\pi+u_t^e-u_t^\varphi-a_t}{3},
+\]
+\[
+\boxed{
+X_{t+1}^\sigma
+=
+\frac{X_t^\sigma A-a_t}{3}-h_t.
+}
+\]
+
+\section{Terminal}
+
+Para los bloques:
+\[
+021020,\quad001220,\quad100210,
+\]
+la auditoría local da:
+\[
+q=122120,
+\qquad
+c=000110.
+\]
+Además:
+\[
+r=221=2(1,1,-1).
+\]
+Esto coincide con el cierre terminal reportado.
+
+\section{Dictamen}
+
+\[
+\boxed{
+P_m\text{ no es primitivo.}
+}
+\]
+\[
+\boxed{
+c_t,h_t\text{ quedan derivados como cociclos Bockstein--Hensel.}
+}
+\]
+\[
+\boxed{
+\text{la superposición sin carry falla porque }c,h\text{ son obstrucciones no afines.}
+}
+\]
+\[
+\boxed{
+\text{el blanco final ya no es carry: es APP/TPK}\to x_t^\chi,u_t^\chi.
+}
+\]
+\end{document}

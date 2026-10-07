@@ -1,0 +1,536 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.62em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{observacion}[teorema]{Observación}
+\newcommand{\dr}{\operatorname{dr}_9}
+\newcommand{\APP}{\mathrm{APP}}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Tr}{\operatorname{tr}}
+\newcommand{\Span}{\operatorname{span}}
+\title{\bfseries El núcleo aritmético de APP\\
+\large Radical $3$--$6$--$9$, compresión holográfica, bloque central y elevación ángulo--contraángulo}
+\author{Ventana técnica HMT}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Se estudia la hoja multiplicativa de la célula APP de orden nueve como tabla regular del anillo local $\Z/9\Z$. La red formada por las filas y columnas $3,6,9$ se identifica con el ideal maximal nilpotente $(3)$, cuyo cuadrado es cero. Al reagrupar la tabla por clases módulo tres, la matriz $9\times9$ se comprime exactamente en una matriz $3\times3$ de medias enteras y firma lorentziana. El bloque central $\bigl(\begin{smallmatrix}7&2\\2&7\end{smallmatrix}\bigr)$ se descompone en canales two-way de autovalores $9$ y $5$, y sus lecturas decimales $72,27,77,22$ codifican invariantes globales de la red radical: $45$, $54$, $55$ y $99$. Se formula finalmente la elevación física canónica $7I+2R\mapsto AI+C^\ast R$, que produce los canales $A\pm C^\ast$ y los exponentes $q_\pm$ de Mecánica Dimensional.
+\end{abstract}
+
+\section{La hoja multiplicativa como objeto algebraico}
+
+Sea
+\[
+R=\Z/9\Z,
+\]
+y representemos el residuo cero por el dígito $9$. Definimos
+\[
+\dr(n)=1+((n-1)\bmod 9)\in\{1,\dots,9\}.
+\]
+La hoja multiplicativa de APP es la matriz
+\[
+M=(M_{ij})_{1\le i,j\le9},\qquad M_{ij}=\dr(ij).
+\]
+Explícitamente,
+\[
+M=
+\begin{pmatrix}
+1&2&3&4&5&6&7&8&9\\
+2&4&6&8&1&3&5&7&9\\
+3&6&9&3&6&9&3&6&9\\
+4&8&3&7&2&6&1&5&9\\
+5&1&6&2&7&3&8&4&9\\
+6&3&9&6&3&9&6&3&9\\
+7&5&3&1&8&6&4&2&9\\
+8&7&6&5&4&3&2&1&9\\
+9&9&9&9&9&9&9&9&9
+\end{pmatrix}.
+\]
+
+El anillo $R$ posee grupo de unidades
+\[
+U=R^\times=\{1,2,4,5,7,8\}
+\]
+y único ideal maximal
+\[
+\mathfrak m=(3)=\{0,3,6\},
+\]
+que en la notación digital es $\{9,3,6\}$. Además,
+\[
+\mathfrak m^2=0.
+\]
+Esta igualdad expresa que todo producto de dos elementos de la red $3$--$6$--$9$ colapsa en el cero del anillo, representado por $9$.
+
+\begin{teorema}[Esqueleto radical 3--6--9]
+La red formada por las filas y columnas $3,6,9$ es un subobjeto canónico e invariante de APP. Satisface
+\[
+R\mathfrak m\subseteq\mathfrak m,
+\qquad
+\mathfrak m R\subseteq\mathfrak m,
+\qquad
+\mathfrak m^2=0.
+\]
+Por tanto, separa la dinámica reversible de las unidades de la dinámica nilpotente de cierre.
+\end{teorema}
+
+\section{Tres atlas canónicos de la misma matriz}
+
+La matriz $M$ admite tres ordenaciones especialmente informativas.
+
+\subsection*{Atlas decimal}
+El orden $1,2,\dots,9$ conserva las semillas visibles, los pares centrales $4,5$ y las lecturas decimales $72,27,77,22$.
+
+\subsection*{Atlas cíclico de unidades}
+Ordenando las unidades como potencias del generador $2$,
+\[
+1,2,4,8,7,5,
+\]
+el bloque $U\times U$ se convierte en la tabla circulante del grupo cíclico $C_6$:
+\[
+\begin{pmatrix}
+1&2&4&8&7&5\\
+2&4&8&7&5&1\\
+4&8&7&5&1&2\\
+8&7&5&1&2&4\\
+7&5&1&2&4&8\\
+5&1&2&4&8&7
+\end{pmatrix}.
+\]
+Así, las seis filas reversibles son traslaciones cíclicas de una misma órbita.
+
+\subsection*{Atlas Hensel por clases módulo tres}
+Definimos
+\[
+C_1=\{1,4,7\},\qquad
+C_2=\{2,5,8\},\qquad
+C_0=\{3,6,9\}.
+\]
+El conjunto $C_0$ es el ideal nilpotente, mientras $C_1$ y $C_2$ son las dos clases de unidades del cociente $R/\mathfrak m\cong\F_3$.
+
+\section{Compresión holográfica $9\times9\to3\times3$}
+
+Particionamos $M$ en nueve bloques $3\times3$ según $C_1,C_2,C_0$. Sea $S_\times$ la matriz de sumas de bloque. Un cálculo exacto da
+\[
+\boxed{
+S_\times=
+\begin{pmatrix}
+36&45&54\\
+45&36&54\\
+54&54&81
+\end{pmatrix}.}
+\]
+Cada bloque contiene nueve entradas, por lo que su matriz de medias es
+\[
+\boxed{
+Q_\times=\frac1{9}S_\times=
+\begin{pmatrix}
+4&5&6\\
+5&4&6\\
+6&6&9
+\end{pmatrix}.}
+\]
+
+\begin{teorema}[Compresión exacta de APP]
+La matriz $Q_\times$ conserva la estructura de clases módulo tres, el total de la hoja y la separación entre canales unitarios y nilpotentes. En particular,
+\[
+\sum_{a,b}(Q_\times)_{ab}=51,
+\qquad
+\sum_{i,j}M_{ij}=9\cdot51=459.
+\]
+Además,
+\[
+\Tr(Q_\times)=17,
+\qquad
+459=27\cdot17.
+\]
+\end{teorema}
+
+La hoja aditiva, tomando $A_{ij}=\dr(i+j-1)$, produce de modo análogo
+\[
+Q_+=
+\begin{pmatrix}
+4&5&6\\
+5&6&4\\
+6&4&5
+\end{pmatrix},
+\]
+con
+\[
+\sum Q_+=45,
+\qquad
+\Tr(Q_+)=15,
+\qquad
+\sum_{i,j}A_{ij}=27\cdot15=405.
+\]
+Por tanto,
+\[
+Q_\times-Q_+=
+\begin{pmatrix}
+0&0&0\\
+0&-2&2\\
+0&2&4
+\end{pmatrix},
+\]
+y se obtiene la jerarquía exacta
+\[
+\boxed{
+\Tr(Q_\times-Q_+)=2,
+\quad
+\sum(Q_\times-Q_+)=6,
+\quad
+459-405=27\cdot2=54.}
+\]
+El defecto global $54$ es una amplificación triádica del defecto comprimido $2$.
+
+\begin{teorema}[Localización del defecto APP]
+Las seis filas unitarias de $M$ son permutaciones de $1,\dots,9$ y suman $45$. Las filas $3$ y $6$ suman $54$, mientras la fila $9$ suma $81$. Por tanto,
+\[
+\Delta_{\APP}
+=2(54-45)+(81-45)=54.
+\]
+Todo el defecto aditivo--multiplicativo se concentra en el sector no unitario $\mathfrak m$.
+\end{teorema}
+
+\section{Firma lorentziana y operador de Pell}
+
+La forma $Q_\times$ posee determinante y espectro
+\[
+\det Q_\times=-9,
+\]
+\[
+\operatorname{Spec}(Q_\times)
+=
+\{-1,\,9-6\sqrt2,\,9+6\sqrt2\}.
+\]
+Por tanto tiene firma $(2,1)$.
+
+Sea
+\[
+v_-=(1,-1,0),\qquad
+v_+=(1,1,0),\qquad
+v_0=(0,0,1).
+\]
+Entonces
+\[
+Q_\times v_-=-v_-.
+\]
+En el subespacio $\Span\{v_+,v_0\}$, la matriz de $Q_\times$ es
+\[
+\begin{pmatrix}
+9&6\\
+12&9
+\end{pmatrix}
+=3
+\begin{pmatrix}
+3&2\\
+4&3
+\end{pmatrix}.
+\]
+La matriz
+\[
+H_2=
+\begin{pmatrix}
+3&2\\
+4&3
+\end{pmatrix}
+\]
+pertenece a $SL(2,\Z)$ y tiene autovalores
+\[
+3\pm2\sqrt2=(1\pm\sqrt2)^2.
+\]
+
+\begin{corolario}[Geometría interna del cociente trítico]
+La compresión de APP contiene un canal contraorientado de autovalor $-1$ y un canal hiperbólico de Pell gobernado por la unidad $3+2\sqrt2$. La firma lorentziana surge de la propia aritmética módulo nueve.
+\end{corolario}
+
+\section{El bloque central $7,2;2,7$}
+
+Las posiciones centrales $4,5$ son opuestas módulo nueve. Su bloque multiplicativo es
+\[
+\boxed{
+B=
+\begin{pmatrix}
+7&2\\
+2&7
+\end{pmatrix}.}
+\]
+Sea
+\[
+R=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\qquad R^2=I.
+\]
+Entonces
+\[
+B=7I+2R.
+\]
+Con los proyectores
+\[
+P_+=\frac{I+R}{2},
+\qquad
+P_-=\frac{I-R}{2},
+\]
+se obtiene
+\[
+\boxed{B=9P_+ +5P_-.}
+\]
+Los dos canales propios son, por tanto, el cierre nonádico $9$ y el canal pentádico $5$.
+
+Además,
+\[
+\det B=45,
+\qquad
+\Tr B=14,
+\qquad
+\sum B_{ij}=18.
+\]
+La normalización por $\sqrt{45}$ produce
+\[
+\frac{B}{\sqrt{45}}=
+\exp(\eta_0R),
+\qquad
+\eta_0=\operatorname{artanh}\frac27
+=\frac12\log\frac95.
+\]
+
+\section{Lecturas decimales y doble partición de $99$}
+
+La lectura por filas produce
+\[
+72,\qquad27.
+\]
+La lectura por diagonales produce
+\[
+77,\qquad22.
+\]
+Estas cuatro cantidades satisfacen
+\[
+\boxed{72+27=77+22=99,}
+\]
+\[
+\boxed{72-27=45=\det B,}
+\]
+\[
+\boxed{77-22=55=\Delta_{\APP}+1,}
+\]
+\[
+\boxed{99=45+54.}
+\]
+Además,
+\[
+72=8\cdot9,
+\qquad
+27=3\cdot9,
+\]
+por lo que
+\[
+99=(8+3)\cdot9=11\cdot9.
+\]
+Y
+\[
+77=7\cdot11,
+\qquad
+22=2\cdot11,
+\]
+por lo que
+\[
+99=(7+2)\cdot11=9\cdot11.
+\]
+
+\begin{teorema}[Doble partición del núcleo]
+El bloque central codifica dos particiones duales del mismo cierre $99$:
+\[
+11=8+3
+\quad\text{en la lectura por filas},
+\]
+\[
+9=7+2
+\quad\text{en la lectura diagonal}.
+\]
+La primera separa sector interno octádico y sector triádico; la segunda separa los dos coeficientes del operador two-way.
+\end{teorema}
+
+La proyección
+\[
+\frac{22}{7}
+\]
+es la lectura racional clásica de $\pi$ asociada al mismo bloque. Debe distinguirse de los invariantes matriciales: es una proyección decimal canónica del atlas natural.
+
+\section{Teorema local--global de la red radical}
+
+La unión de las filas y columnas $3,6,9$ tiene suma total
+\[
+297.
+\]
+Su núcleo $C_0\times C_0$ contiene nueve entradas iguales a $9$ y suma
+\[
+81=3\cdot27.
+\]
+Los cuatro brazos restantes suman
+\[
+216=8\cdot27.
+\]
+Por tanto,
+\[
+\boxed{297=216+81=(8+3)\cdot27=11\cdot27.}
+\]
+Pero las lecturas centrales satisfacen
+\[
+72=8\cdot9,
+\qquad
+27=3\cdot9.
+\]
+Luego
+\[
+\boxed{3\cdot72=216,\qquad 3\cdot27=81,\qquad3\cdot99=297.}
+\]
+
+\begin{teorema}[Holograma central de la red $3$--$6$--$9$]
+La lectura por filas del bloque central es una compresión exacta, a escala tres, de la descomposición global de la red radical:
+\[
+72\longleftrightarrow216\quad\text{(brazos)},
+\]
+\[
+27\longleftrightarrow81\quad\text{(núcleo)},
+\]
+\[
+99\longleftrightarrow297\quad\text{(red completa)}.
+\]
+El núcleo local $7,2;2,7$ contiene así la contabilidad global de la red $3,6,9$.
+\end{teorema}
+
+La parte complementaria $U\times U$ suma
+\[
+162=6\cdot27,
+\]
+y por tanto
+\[
+459=(11+6)\cdot27=17\cdot27.
+\]
+
+\section{Del bloque central al ángulo y contraángulo}
+
+La interfaz angular de Mecánica Dimensional conserva el álgebra two-way $\Span\{I,R\}$. El levantamiento físico es
+\[
+\boxed{
+B=7I+2R
+\quad\longmapsto\quad
+B_{A,C^\ast}=AI+C^\ast R.}
+\]
+Aquí
+\[
+A=1000\alpha,
+\qquad
+C^\ast=2(\bar\hbar+\alpha).
+\]
+La descomposición espectral es
+\[
+\boxed{
+B_{A,C^\ast}
+=(A+C^\ast)P_+
++(A-C^\ast)P_- .}
+\]
+Por tanto, los canales físicos son
+\[
+\lambda_+=A+C^\ast,
+\qquad
+\lambda_-=A-C^\ast.
+\]
+Los canales analíticos del corpus son
+\[
+\boxed{
+q_\pm=
+\exp\left[-\frac{\pi}{180}(A\pm C^\ast)\right].}
+\]
+El producto y el cociente reconstruyen exactamente las coordenadas comunes y diferenciales:
+\[
+\boxed{
+A=-\frac{90}{\pi}\log(q_+q_-),}
+\]
+\[
+\boxed{
+C^\ast=\frac{90}{\pi}\log\frac{q_-}{q_+}.}
+\]
+La conjugación de hoja actúa como
+\[
+C^\ast\mapsto-C^\ast,
+\qquad
+q_+\leftrightarrow q_-.
+\]
+
+El operador físico normalizado es
+\[
+\frac{B_{A,C^\ast}}{\sqrt{A^2-(C^\ast)^2}}
+=
+\exp\bigl(\eta_{A,C^\ast}R\bigr),
+\]
+con
+\[
+\eta_{A,C^\ast}
+=
+\operatorname{artanh}\frac{C^\ast}{A}
+=
+\frac12\log\frac{A+C^\ast}{A-C^\ast}.
+\]
+Así, la estructura hiperbólica del bloque entero se conserva en su elevación física.
+
+\section{Del canal local al residuo dodecafásico}
+
+El bloque central local y el bloque unitario comprimido son
+\[
+B=\begin{pmatrix}7&2\\2&7\end{pmatrix}
+=9P_+ +5P_-,
+\]
+\[
+C=\begin{pmatrix}4&5\\5&4\end{pmatrix}
+=9P_+ -P_-.
+\]
+Por tanto,
+\[
+\boxed{B-C=6P_-.}
+\]
+La compresión conserva el canal común $9$ y desplaza exclusivamente el canal contraorientado en seis unidades:
+\[
+5\longmapsto-1.
+\]
+Si la rueda dodecafásica normaliza el canal contraorientado por doce fases, aparece el residuo
+\[
+\boxed{-\frac1{12}.}
+\]
+Esta igualdad identifica el menos un doceavo como sombra dodecafásica del autovalor contraorientado $-1$ del núcleo comprimido.
+
+\section{Conclusión}
+
+La hoja multiplicativa APP es simultáneamente:
+\begin{itemize}
+\item la tabla regular del anillo local $\Z/9\Z$;
+\item una dinámica reversible sobre el grupo cíclico de seis unidades;
+\item una extensión nilpotente gobernada por la red $3,6,9$;
+\item una forma comprimida de firma lorentziana;
+\item un operador central two-way con canales $9$ y $5$;
+\item un atlas decimal que produce $72,27,77,22$ y $22/7$;
+\item el esqueleto algebraico de la interfaz física $A,C^\ast$.
+\end{itemize}
+
+La red radical y el bloque central están unidos por identidades exactas de escala. La matriz $9\times9$ no contiene una colección desordenada de productos: contiene tres atlas de una misma aritmética compactada. El atlas decimal revela semillas; el atlas cíclico revela órbitas; el atlas Hensel revela radical, firma y memoria. Esta pluralidad controlada de lecturas constituye una formulación precisa de aritmética holográfica.
+
+\end{document}

@@ -1,0 +1,366 @@
+% Fragmento de inserción; se incluye desde la raíz de este paquete editorial.
+% Las fuentes completas y los cortes materiales constan en ANTECEDENTES_Y_DEPENDENCIAS.md.
+% Procedencia: XI REV11 ES, sections/nucleo.tex, tpk_desarrollo_integrado.tex,
+% ch_tres_vueltas_ext.tex, ch_elevacion_catalogal.tex, ch_cierre_cardinal.tex,
+% ch_descenso_por_fibras.tex; perfil integral public_final/feigenbaum/c37_feigenbaum.tex;
+% Grassmannianos REV07 ES, sections/jacobi_spectral.tex;
+% TRANSVERSALIDAD_Y_ESCALADO_LOCAL_FEIGENBAUM.md, sección 14.
+% Ampliación expositiva de demostraciones existentes; no introduce resultados nuevos.
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\FF}{\mathbb F}
+\providecommand{\APP}{\mathrm{APP}}
+\providecommand{\TPK}{\mathrm{TPK}}
+\providecommand{\TRIT}{\{-1,0,+1\}}
+
+\section{Antécédents operatoriels de la famille de criticité}
+\label{hmtfg:antecedentes-operatorios}
+
+La famille de criticité est construite à partir d’une lecture du calendrier TPK. Les deux feuilles arithmétiques, l’orientation tritique et le transport avec mémoire déterminent d’abord les états et leurs prolongements. La lecture ordonnée du continu permet ensuite d’évaluer des fonctions analytiques, de comparer des paramètres et de sélectionner des racines. Ce développement conserve l’état généalogique et ses deux lectures : la carte archimédienne fournit l’espace d’évaluation, tandis que la lecture d’incidence conserve les relations de frontière. La structure discrète conjointe du continu maintient ses cinq constructions consubstantielles. La présente exposition utilise son lecteur ordonné et conserve l’antécédent commun dont il provient.
+
+\subsection{Cellules arithmétiques, orientation et transport}
+\label{hmtfg:app-trit-transporte}
+
+% XI REV11, sections/nucleo.tex: definiciones de APP y TRIT;
+% tpk_desarrollo_integrado.tex:22--165, transporte levantado y calendario.
+Soient \(D_9=\{1,\ldots,9\}\) et \(X_9=(\ZZ/9\ZZ)^2\). Pour
+\(n\in\ZZ\), la division avec représentant positif est
+\[
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9,\qquad
+ n=\rho_9(n)+9q_9(n).
+\]
+La cellule APP associée à \((p,q)\in D_9^2\) est
+\[
+ a_{p,q}=(p,q;R^\Sigma,q^\Sigma,R^\Pi,q^\Pi),
+ \quad
+ p+q=R^\Sigma+9q^\Sigma,\qquad
+ pq=R^\Pi+9q^\Pi.
+\]
+Les deux couples \((R^\Sigma,q^\Sigma)\) et \((R^\Pi,q^\Pi)\) conservent respectivement l’évaluation additive et l’évaluation multiplicative. La formule de division reconstruit les deux évaluations avant toute réduction ultérieure. La sélection d’une feuille active est enregistrée dans une coordonnée de l’état et conserve la cellule complète.
+
+Le représentant tritique équilibré \(r_3(n)\in\{-1,0,+1\}\) satisfait
+\(n\equiv r_3(n)\pmod3\). Sa retenue est
+\[
+ \chi(a,b)=\frac{a+b-r_3(a+b)}3,\qquad
+ a,b\in\{-1,0,+1\}.
+\]
+L’égalité
+\[
+ \chi(a,b)+\chi(r_3(a+b),c)
+ =\chi(b,c)+\chi(a,r_3(b+c))
+\]
+s’obtient en écrivant les deux membres sous la forme
+\((a+b+c-r_3(a+b+c))/3\). Cette identité conserve la retenue lors du regroupement d’une somme tritique. Le sélecteur opératoire est
+\[
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+La valeur \(+1\) active la feuille additive, la valeur \(-1\) la feuille multiplicative, et la valeur \(0\) conserve la position des deux curseurs pendant l’événement neutre. Les trois événements appartiennent à la chronologie complète et sont enregistrés dans la route.
+
+Soient \(\mathcal D=\{N,E,S,O\}\), avec les vecteurs
+\(\nu_N=(-1,0)\), \(\nu_E=(0,1)\), \(\nu_S=(1,0)\) et
+\(\nu_O=(0,-1)\), et \(\Theta_{108}=\ZZ/108\ZZ\). La configuration observable est
+\[
+ q=(x_+,d_+,x_\times,d_\times,\theta)
+ \in\mathcal Q_{\rm obs}=(X_9\times\mathcal D)^2\times\Theta_{108}.
+\]
+Pour le représentant \(\bar\theta\in\{0,\ldots,107\}\), on définit
+\[
+ r(\theta)=1+(\bar\theta\bmod9),\qquad
+ \beta(\theta)=\left[\left\lfloor\frac{\bar\theta}{9}\right\rfloor\right]_{12},
+\]
+\[
+ a_+(\theta)=\mathbf1_{\{1,4,7\}}(r(\theta)),\qquad
+ a_\times(\theta)=\mathbf1_{\{2,5,8\}}(r(\theta)).
+\]
+La transition des positions est
+\[
+ x_+'=x_++a_+(\theta)\nu_{d_+},\qquad
+ x_\times'=x_\times+a_\times(\theta)\nu_{d_\times}.
+\]
+L’involution \(\jmath\) échange \(N,S\) et \(E,O\). Avec
+\[
+ h(\theta)=\mathbf1_{\{0,27,54,81\}}\bigl((\bar\theta+1)\bmod108\bigr),
+\]
+l’opérateur observable complet est fixé par
+\[
+ F_{\rm obs}(q)=
+ (x_+',\jmath^{h(\theta)}d_+,x_\times',
+   \jmath^{h(\theta)}d_\times,\theta+1).
+\]
+
+\begin{proposition}[Conservation du transport relevé et retour observable]
+\label{hmtfg:transporte-calendario}
+Le transport conserve le déplacement entier au moyen du registre des franchissements de frontière. L’opérateur \(F_{\rm obs}\) est inversible et satisfait
+\(F_{\rm obs}^{108}=I\).
+\end{proposition}
+\begin{proof}
+Soit \(s:X_9\to D_9^2\) la section des représentants positifs. Pour
+\(x'=x+a\nu_d\), \(a\in\{0,1\}\), on définit
+\[
+ b_d(x,a)=\frac{s(x)+a\nu_d-s(x')}{9}\in\ZZ^2.
+\]
+Si \(z'=z+b_d(x,a)\), alors
+\[
+ s(x')+9z'=s(x)+9z+a\nu_d.
+\]
+La somme de cette égalité le long d’une route donne
+\[
+ s(x_n)+9z_n=s(x_0)+9z_0+\sum_{t=0}^{n-1}a_t\nu_{d_t}.
+\]
+La partition de la somme conserve l’identité par concaténation. Pour inverser \(F_{\rm obs}\), on soustrait d’abord une unité à la phase ; cette phase détermine l’inversion des directions et le curseur déplacé. On récupère les directions précédentes et on soustrait le vecteur correspondant. Chaque bloc de \(27\) pas contient neuf activations de chaque curseur. Le bloc suivant inverse les directions et annule leurs déplacements entiers. En \(54\) pas, les positions et les directions sont rétablies ; en \(108\), la coordonnée du calendrier est également rétablie.
+\end{proof}
+
+L’état complet conserve, outre cette configuration, les deux évaluations arithmétiques, les retenues, l’orientation, la trajectoire, le préfixe, le cylindre compatible, sa frontière, le degré de mémoire et le registre de survie. Son actualisation se factorise sous la forme
+\[
+ U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+\]
+L’holonomie \(\Gamma_9\) compose neuf transitions complètes. Le retour de phase et l’avancement de mémoire sont des coordonnées différentes de cette composition. La construction suivante fixe les transitions et leur actualisation champ par champ.
+
+% Recuperación íntegra del propietario de 855 líneas, con etiquetas prefijadas.
+\input{inserciones_20260930/feigenbaum/00a_transiciones_nonadicas.tex}
+
+\subsection{Raffinement des cylindres et lecture ordonnée}
+\label{hmtfg:refinamiento-ordenado}
+
+% XI REV11, ch_elevacion_catalogal.tex: bloques de 54 aristas, beta_blk,
+% partición efectiva de 729 subcilindros; ch_cierre_cardinal.tex:375--497.
+Pour \(\mathbf b=(b_1,\ldots,b_6)\in\FF_3^6\), soit
+\(\upsilon:\FF_3\to\{-1,0,+1\}\) le représentant équilibré. Les trois prolongements construits arête par arête définissent
+\[
+ \Gamma^{[54]}_{\mathbf b,k}
+ =\gamma_{\upsilon(b_6),k+45}\circ\cdots\circ
+   \gamma_{\upsilon(b_1),k}.
+\]
+En partant de \(Y_0=\{x_\star\}\), on pose
+\[
+ Y_{N+1}
+ =\{\Gamma^{[54]}_{\mathbf b,1+54N}(x):
+          x\in Y_N,\ \mathbf b\in\FF_3^6\}.
+\]
+La troncature \(\rho^{\rm blk}_{N+1,N}\) supprime les cinquante-quatre dernières arêtes, en récupérant l’état antérieur au moyen du registre de transition.
+
+\begin{proposition}[Codage effectif des blocs de prolongement]
+\label{hmtfg:bloques-729}
+La lecture des six couples tritiques de chaque bloc définit des bijections
+\[
+ \beta_N:Y_N\xrightarrow{\ \cong\ }(\FF_3^6)^N
+\]
+qui commutent avec la troncature. Chaque état de \(Y_N\) possède exactement \(729\) prolongements de bloc dans \(Y_{N+1}\).
+\end{proposition}
+\begin{proof}
+À chaque tour, le registre conserve le couple tritique et sa retenue. Les trois couples produisent les trois sorties distinctes \(\chi(\varepsilon,\varepsilon)=\varepsilon\), et le registre permet de récupérer la branche utilisée, y compris celle de retenue nulle. Les six concaténations produisent donc tous les mots de \(\FF_3^6\). Deux mots différents se distinguent au premier couple enregistré où ils diffèrent. La récupération du préfixe prouve la compatibilité avec la troncature. Par récurrence sur \(N\), chaque mot de longueur \(N\) possède un unique état antécédent ; le mot suivant peut être n’importe laquelle des \(3^6=729\) possibilités.
+\end{proof}
+
+Soit \(\Omega_{\Gamma}^{\rm cal}=\varprojlim_NY_N\). Les bijections précédentes induisent
+\[
+ \Omega_{\Gamma}^{\rm cal}\cong(\FF_3^6)^{\mathbb N}.
+\]
+La correspondance et son inverse sont continues : chaque coordonnée finie dépend d’un préfixe fini. Les cylindres sont ouverts et fermés. Chaque cylindre de profondeur \(N\) se partitionne en ses \(729\) sous-cylindres de profondeur \(N+1\) ; chacun contient un prolongement infini, obtenu, par exemple, en poursuivant par la branche nulle dans tous les blocs ultérieurs.
+
+% Antecedentes efectivos del continuo conjunto y del universo interno.
+% Se imprimen en ambos destinos; la etiqueta de universo no reemplaza su regla.
+\input{inserciones_20260930/feigenbaum/00b_continuo_universo.tex}
+
+\subsection{Lecture ordonnée des cylindres de bloc}
+\label{hmtfg:publicacion-cilindros-bloque}
+
+Pour le représentant \([b]_3\in\{0,1,2\}\), on fixe
+\[
+ \nu(\mathbf b)=\sum_{i=1}^6[b_i]_3\,3^{6-i}\in\{0,\ldots,728\}.
+\]
+Dans la complétion ordonnée HMT, un préfixe
+\(s=(m;\mathbf b_0,\ldots,\mathbf b_{N-1})\), \(m\in\ZZ\), détermine
+\[
+ a_N(s)=m+\sum_{j=0}^{N-1}\nu(\mathbf b_j)\,729^{-j-1},\qquad
+ I_N(s)=[a_N(s),a_N(s)+729^{-N})_{\rm HMT}.
+\]
+La retenue conserve le raccord entre les deux représentants d’une frontière. Si \(C_N(s)=\overline{I_N(s)}\), les relations précédentes donnent
+\[
+ I_N(s)=\bigsqcup_{\mathbf b\in\FF_3^6}I_{N+1}(s;\mathbf b),
+ \qquad \operatorname{diam}C_N(s)=729^{-N}\longrightarrow0.
+\]
+
+\begin{proposition}[Couverture de la lecture archimédienne]
+\label{hmtfg:cobertura-arquimediana}
+L'application
+\[
+ P_{\rm ar}:\ZZ\times\Omega_\Gamma^{\rm cal}
+       \longrightarrow\mathbb R_{\rm HMT},\qquad
+ \{P_{\rm ar}(m,\xi)\}
+    =\bigcap_N C_N(m;\beta_N(\rho_{\infty,N}\xi))
+\]
+est bien définie, est surjective et détermine
+\[
+ (\ZZ\times\Omega_\Gamma^{\rm cal})/\!\sim_{P_{\rm ar}}
+       \ \cong\ \mathbb R_{\rm HMT}.
+\]
+\end{proposition}
+\begin{proof}
+Les extrémités gauches forment une suite de Cauchy dans la complétion HMT, puisque les intervalles sont emboîtés et que leurs diamètres tendent vers zéro. Leur limite appartient à tous les intervalles fermés et est unique. Pour tout élément de la complétion, on choisit d’abord l’intervalle entier qui le contient, puis l’unique sous-intervalle semi-ouvert de chaque partition qui le contient. La proposition précédente réalise chacun de ces choix par un prolongement TPK effectif. Les préfixes compatibles définissent \(\xi\), dont la lecture est l’élément choisi. Aux frontières, la retenue identifie les écritures équivalentes après leur construction. Le quotient par égalité de lecture est, par définition et surjectivité, en bijection avec la complétion.
+\end{proof}
+
+La construction est également effectuée dans l’univers généalogique interne \(\mathfrak G=\mathfrak G_{\rm HMT}(h,m_\infty)\). Ici, \(h\) code les règles operatorielles et \(m_\infty\) l’histoire compatible ; l’univers s’obtient par clôture transitive initiale, définissabilité à chaque successeur et réunion aux stades limites :
+\[
+ G_0=\operatorname{TC}\{\omega,u_{h,m},h,m_\infty\},\qquad
+ G_{\beta+1}=\operatorname{Def}_{\Sigma_{\rm HMT}}(G_\beta),\qquad
+ G_\lambda=\bigcup_{\beta<\lambda}G_\beta .
+\]
+Les relations de \(\Sigma_{\rm HMT}\) sont celles des opérations déjà construites et de leurs codes. Le domaine interne est donc maintenu dans toutes les affirmations de couverture. Notons \(\mathbb R_{\rm HMT}^{\mathfrak G}\) sa complétion et \(\mathbb R^{\mathfrak G}\) la réalisation ordonnée au sein du même univers.
+
+\begin{proposition}[Carte ordonnée interne]
+\label{hmtfg:carta-interna}
+Il existe un unique isomorphisme de corps ordonnés archimédiens complets
+\[
+ \iota:\mathbb R_{\rm HMT}^{\mathfrak G}
+             \xrightarrow{\ \cong\ }\mathbb R^{\mathfrak G}
+\]
+qui fixe l’unité. Il conserve les extrémités rationnelles, les racines carrées positives et les limites de suites convergentes.
+\end{proposition}
+\begin{proof}
+L’unité fixe les entiers et les rationnels. À chaque élément de la complétion HMT est associée la coupure des rationnels qui lui sont inférieurs ; la complétude de la réalisation ordonnée fournit l’unique élément ayant cette coupure. La densité rationnelle prouve l’injectivité et la conservation stricte de l’ordre. Le même procédé en sens inverse prouve la surjectivité. Les approximations rationnelles par excès et par défaut conservent la somme et le produit, et donc la structure de corps. L’élément positif dont le carré est \(a>0\) est transporté vers l’élément positif dont le carré est \(\iota(a)\). Si une suite converge, pour chaque tolérance rationnelle positive ses derniers termes sont dans le voisinage rationnel de la limite ; la conservation de l’ordre transporte cette condition. Toutes ces opérations s’effectuent dans \(\mathfrak G\). L’unicité découle de la conservation des coupures rationnelles.
+\end{proof}
+
+\subsection{Descente par les fibres et conservation du sélecteur}
+\label{hmtfg:descenso-selector}
+
+% XI REV11, ch_descenso_por_fibras.tex:10--39; prueba completa pertinente.
+\begin{proposition}[Critère de descente d’une opération]
+\label{hmtfg:criterio-descenso}
+Soient \(q:\Omega\twoheadrightarrow J\) et
+\(\star:D\subseteq\Omega^2\to\Omega\), avec \(D\) saturé par les fibres de \(q\times q\). Il existe une unique opération \(\bar\star\) sur \((q\times q)(D)\) telle que
+\[
+ q(x\star y)=q(x)\,\bar\star\,q(y)
+\]
+si et seulement si
+\[
+ q(x)=q(x'),\quad q(y)=q(y')
+ \ \Longrightarrow\ q(x\star y)=q(x'\star y')
+\]
+pour les couples du domaine.
+\end{proposition}
+\begin{proof}
+Si \(\bar\star\) existe, les deux résultats sont l’évaluation du même couple d’arguments. Réciproquement, on choisit des antécédents des arguments visibles et on définit le résultat comme la lecture de leur opération. La saturation fixe le domaine ; la condition sur les fibres rend le résultat indépendant des antécédents choisis. La surjectivité prouve l’unicité.
+\end{proof}
+
+Dans une application au moyen de \(P_{\rm ar}\), ce critère identifie la condition précise permettant de transporter une opération depuis les états complets jusqu’à leur lecture. Dans la carte \(\iota\), la structure de corps et les limites satisfont déjà cette condition. Le profil analytique est ensuite construit à partir du calendrier, et cette compatibilité est utilisée pour transporter son itération et ses racines.
+
+\subsection{Lecture dodécaphasique et normalisation quadratique}
+\label{hmtfg:perfil-dodecafasico}
+
+Le profil, ses phases et sa normalisation sont ceux déjà construits en \eqref{mab:rm:eq:critical-phase-reader}--\eqref{mab:rm:eq:chaos-profile}. Sa forme fermée et ses moments sont démontrés en \eqref{mab:rm:eq:chaos-closed} et \eqref{mab:rm:eq:chaos-moments24}. La somme finie de cosinus détermine le prolongement aux singularités apparentes en chaque zéro du dénominateur de la forme fermée. Le moment angulaire conserve des représentants réels orientés : les modifier modulo $2\pi$ change le moment. Le lecteur et son secteur uniforme constituent la structure de départ explicite de cette réalisation.
+
+\subsection{Transport des itérées, des racines et des minima}
+\label{hmtfg:transporte-raices}
+
+% Reunión existente: TRANSVERSALIDAD_Y_ESCALADO_LOCAL_FEIGENBAUM.md, sección 14.1.
+Dans \(\mathbb R_{\rm HMT}^{\mathfrak G}\), la série convergente
+\[
+ \cos_{\rm HMT}(t)=\sum_{j=0}^{\infty}
+                   \frac{(-1)^j t^{2j}}{(2j)!}
+\]
+définit la réalisation analytique correspondante. Soient
+\[
+ u_{\rm HMT}(x)=\frac1{12}\sum_{m=1}^{12}
+  \left[1-\cos_{\rm HMT}
+   \left(\frac{2(3m-1)x}{\sqrt{899}_{\rm HMT}}\right)\right],
+ \qquad F_a(x)=1-a\,u_{\rm HMT}(x),
+\]
+\[
+ S_n^{\rm HMT}(a)=F_a^{\,2^n}(0),\qquad
+ S_n(\lambda)=f_\lambda^{\,2^n}(0).
+\]
+
+\begin{proposition}[Conjugaison ordonnée de la famille et du sélecteur de racines]
+\label{hmtfg:conjugacion-selector}
+Pour les arguments internes des expressions précédentes,
+\[
+ \iota\circ F_a=f_{\iota(a)}\circ\iota,\qquad
+ \iota(S_n^{\rm HMT}(a))=S_n(\iota(a)).
+\]
+La carte transporte exactement les conditions de retour, de période exacte et d’ordre des paramètres. Si un ensemble de racines admissibles possède un minimum, l’image de ce minimum est le minimum de l’ensemble image.
+\end{proposition}
+\begin{proof}
+La carte fixe les rationnels, transporte la racine carrée positive et conserve les limites des sommes partielles du cosinus. Ainsi, \(\iota(u_{\rm HMT}(x))=u_0(\iota(x))\). La compatibilité avec la somme et le produit prouve la première égalité ; la récurrence sur le nombre d’itérations prouve la seconde. Une racine se caractérise par l’égalité à zéro, conservée dans les deux sens. La période exacte \(2^n\) ajoute les inégalités \(F_a^{2^j}(0)\ne0\), \(0\le j<n\), également conservées par l’injectivité de \(\iota\). Si l’on exige que le paramètre dépasse un centre précédent, cette inégalité est transportée par conservation de l’ordre. Enfin, \(a\le b\) pour tout \(b\) de l’ensemble équivaut à \(\iota(a)\le\iota(b)\) pour tout élément de son image. La surjectivité sur les ensembles ainsi définis complète l’affirmation relative au minimum.
+\end{proof}
+
+Le domaine de ce transport est le continu interne indiqué. L’existence de chaque minimum et son identification à une branche dynamique précise sont des résultats de la construction de criticité qui suit ; la carte conserve ces propriétés lorsqu’elles ont été établies.
+
+\subsection{Représentation spectrale finie du lecteur uniforme}
+\label{hmtfg:jacobi-finito}
+
+% Grassmannianos REV07, sections/jacobi_spectral.tex:35--136,
+% mecanismo de Hankel, Gram--Schmidt, recurrencia y representación espectral.
+% Especialización atómica ya reunida en la sección 14.2 del desarrollo Feigenbaum.
+Les fréquences au carré du profil définissent la mesure positive
+\[
+ s_m=k_m^2=\frac{4(3m-1)^2}{899},\qquad
+ \nu_0=\frac1{12}\sum_{m=1}^{12}\delta_{s_m},\qquad
+ M_r=\int s^r\,d\nu_0(s).
+\]
+Ses douze nœuds sont distincts et positifs. Pour \(1\le r\le12\), la matrice de Hankel \(H_r=(M_{i+j})_{0\le i,j<r}\) est définie positive. En effet, pour \(p\) de degré inférieur à \(r\),
+\[
+ \mathbf p^{\mathsf T}H_r\mathbf p
+   =\frac1{12}\sum_{m=1}^{12}p(s_m)^2>0
+\]
+sauf si \(p=0\), car un polynôme de degré au plus onze qui s’annule en douze nœuds distincts est nul. Au degré douze apparaît le polynôme \(\prod_m(s-s_m)\), de norme nulle pour cette mesure. La représentation spectrale correspondante est de dimension douze.
+
+Soient \(p_0,\ldots,p_{11}\) les polynômes orthogonaux moniques,
+\(h_j=\int p_j^2\,d\nu_0>0\) et
+\(\psi_j=p_j/\sqrt{h_j}\). Comme \(\nu_0\) est une probabilité,
+\(\psi_0=1\). La multiplication par \(s\) dans \(L^2(\nu_0)\) est autoadjointe et possède une matrice tridiagonale \(J_{12}\) dans cette base.
+
+\begin{proposition}[Récurrence et entrelacement spectral exacts]
+\label{hmtfg:jacobi-entrelazamiento}
+Avec
+\[
+ a_j=\frac{\int s p_j(s)^2\,d\nu_0(s)}{h_j},\qquad
+ \beta_j=\frac{h_j}{h_{j-1}}>0\quad(1\le j\le11),
+\]
+la matrice \(J_{12}\) a pour diagonale \(a_j\) et pour sous-diagonale
+\(\sqrt{\beta_j}\). Si
+\[
+ Q_{mj}=\frac{\psi_j(s_m)}{\sqrt{12}}
+ \quad(1\le m\le12,\ 0\le j\le11),\qquad
+ D=\operatorname{diag}(s_1,\ldots,s_{12}),
+\]
+alors
+\[
+ Q^{\mathsf T}Q=I,\qquad DQ=QJ_{12},\qquad
+ J_{12}=Q^{\mathsf T}DQ,
+\]
+et le profil satisfait
+\begin{equation}
+ u_0(x)=e_0^{\mathsf T}
+          \bigl[I-\cos(x\sqrt{J_{12}})\bigr]e_0.
+ \label{hmtfg:perfil-espectral}
+\end{equation}
+\end{proposition}
+\begin{proof}
+La positivité des systèmes de Hankel fournit de manière unique les polynômes orthogonaux moniques. En développant \(s p_j\) dans la base orthogonale, les coefficients de \(p_i\), \(i\le j-2\), s’annulent car
+\(\langle sp_j,p_i\rangle=\langle p_j,sp_i\rangle=0\).
+Le coefficient de \(p_{j+1}\) est un par monicité, celui de \(p_j\) est \(a_j\) et celui de \(p_{j-1}\) est \(h_j/h_{j-1}\). Au dernier degré, la même égalité s’entend dans \(L^2(\nu_0)\), où le polynôme monique de degré douze qui s’annule aux nœuds représente le vecteur nul. La normalisation donne la sous-diagonale positive indiquée.
+
+L’orthonormalité équivaut à \(Q^{\mathsf T}Q=I\). L’égalité de récurrence à chaque nœud donne \(DQ=QJ_{12}\). Comme \(Q\) est carrée, on a également \(QQ^{\mathsf T}=I\), et l’on obtient la diagonalisation de \(J_{12}\). Ses valeurs propres positives permettent de définir sa racine carrée positive. Pour toute fonction définie en ces douze nœuds,
+\[
+ e_0^{\mathsf T}\Phi(J_{12})e_0
+   =\frac1{12}\sum_{m=1}^{12}\Phi(s_m),
+\]
+car \(Qe_0=(1,\ldots,1)^{\mathsf T}/\sqrt{12}\).
+Le choix \(\Phi(s)=1-\cos(x\sqrt{s})\) prouve
+\eqref{hmtfg:perfil-espectral}.
+\end{proof}
+
+La représentation conserve exactement la fonctionnelle uniforme, ses moments et son profil. Ses premiers coefficients sont
+\[
+ a_0=M_1=2,\qquad
+ \beta_1=M_2-M_1^2=\frac{2493348}{808201}.
+\]
+La généalogie complète demeure dans l’état TPK dont provient le lecteur ; \(J_{12}\) représente sa lecture spectrale particulière. La construction de Gram--Schmidt et la récurrence de Jacobi s’appliquent à cette mesure atomique, avec leur terminaison en dimension douze.
+
+La chaîne operatorielle utilisée dans les sections suivantes est ainsi fixée : les cellules APP et l’orientation TRIT alimentent la transition TPK ; ses prolongements produisent les cylindres et leur lecture ordonnée ; les douze fenêtres orientées et la fonctionnelle uniforme produisent \(u_0\) ; la famille \(f_\lambda\) détermine les retours et les racines ; la carte interne conserve l’ordre de leurs sélecteurs. La réalisation spectrale décrit le même profil au moyen d’une matrice autoadjointe finie et d’un vecteur cyclique.

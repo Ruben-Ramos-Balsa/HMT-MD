@@ -1,0 +1,92 @@
+% Resultado de máxima entropía recuperado del propietario de incidencia.
+% Se desarrolla aquí su prueba variacional para hacerla local al artículo.
+% No se atribuye novedad al resultado ni a su formulación convencional.
+\subsection{Distribución estacionaria y caracterización variacional}
+\label{v:subsec:parry-explicita}
+
+Sea \(X_{\rm av}\) el espacio de sucesiones bilaterales sobre
+\(\{\mathrm{ar},\mathrm{vol}\}\) cuyos pares consecutivos tienen
+incidencia positiva en \(F_{\rm av}\). Es el envolvente de memoria uno
+del calendario de modos: conserva sus pares admisibles, mientras permite
+todas las concatenaciones compatibles con esos pares. Su medida
+estacionaria pondera ese espacio de historias; la frecuencia cronológica
+de la órbita \((\Sigma,\Pi,\Pi)\) sigue siendo, por separado,
+\((1/3,2/3)\).
+
+\begin{proposition}[Caracterización explícita de la medida de máxima entropía]
+\label{v:prop:parry-explicita}
+Con \(r=(1,\varphi)\), la matriz estocástica y su distribución
+estacionaria son
+\begin{equation}
+ P_{ij}=\frac{(F_{\rm av})_{ij}r_j}{\varphi r_i},\qquad
+ P=\begin{pmatrix}0&1\\\varphi^{-2}&\varphi^{-1}\end{pmatrix},
+ \qquad
+ \pi_{\rm av}=\frac{(1,\varphi^2)}{1+\varphi^2}.
+ \label{v:eq:parry-transicion-estacionaria}
+\end{equation}
+La medida estacionaria de Markov \(\mu\) determinada por estos datos
+tiene, para cada cilindro admisible de \(n\) transiciones,
+\begin{equation}
+ \mu[i_0\ldots i_n]
+ =\frac{r_{i_0}r_{i_n}}{(1+\varphi^2)\varphi^n}.
+ \label{v:eq:parry-cilindros}
+\end{equation}
+Es la única medida estacionaria sobre \(X_{\rm av}\) con tasa de
+entropía máxima, y esa tasa es \(\log\varphi\).
+\end{proposition}
+
+\begin{proof}
+La identidad \(\varphi^2=\varphi+1\) implica
+\(\varphi^{-2}+\varphi^{-1}=1\), por lo que las filas de \(P\)
+suman uno. La sustitución directa verifica
+\(\pi_{\rm av}P=\pi_{\rm av}\). Las dos transiciones cruzadas
+tienen probabilidad positiva; la cadena es irreducible, y la retención
+en \(\mathrm{vol}\) la hace aperiódica. La distribución estacionaria
+se obtiene también resolviendo las dos ecuaciones lineales y la
+normalización, que dan la solución única impresa. La multiplicación de
+\(\pi_{i_0}\prod_{k=0}^{n-1}P_{i_k i_{k+1}}\) cancela los factores
+intermedios \(r_{i_k}\) y demuestra \eqref{v:eq:parry-cilindros}.
+
+Para la maximalidad, sea \(\nu\) cualquier medida estacionaria
+sobre \(X_{\rm av}\) y sea
+\(q(j\mid\mathcal P)\) la distribución condicional de \(X_1\)
+dado el pasado completo \(\mathcal P=(\ldots,X_{-1},X_0)\).
+Su soporte está contenido en el de la fila \(P_{X_0,\cdot}\).
+Para distribuciones finitas, la divergencia relativa
+\(D(q\Vert p)=\sum_jq_j\log(q_j/p_j)\) es no negativa, y se
+anula exactamente cuando \(q=p\). Esta propiedad se obtiene de
+la concavidad del logaritmo, con la convención \(0\log0=0\).
+En los pares admisibles,
+\[
+ \log P_{ij}=\log r_j-\log r_i-\log\varphi.
+\]
+La estacionariedad cancela la esperanza de
+\(\log r_{X_1}-\log r_{X_0}\). Por tanto,
+\begin{equation}
+ h(\nu)=H_\nu(X_1\mid\mathcal P)
+ =\log\varphi-
+ \mathbb E_\nu D\!\left(q(\cdot\mid\mathcal P)
+                  \Vert P_{X_0,\cdot}\right)
+ \leq\log\varphi.
+ \label{v:eq:parry-deficit-entropia}
+\end{equation}
+La identidad entre tasa y entropía condicional del pasado se obtiene
+mediante la regla de la cadena sobre bloques finitos y el límite
+decreciente de sus entropías condicionales; el alfabeto finito garantiza
+que todas ellas estén acotadas entre cero y \(\log2\).
+
+La medida \(\mu\) construida es de Markov con transición \(P\),
+de modo que el término de divergencia se anula y
+\(h(\mu)=\log\varphi\). Si otra medida estacionaria alcanza
+esa tasa, la divergencia se anula casi seguramente: su distribución
+condicional del futuro depende sólo de \(X_0\) y coincide con \(P\).
+Es, por tanto, la misma cadena estacionaria, cuya distribución inicial
+única es \(\pi_{\rm av}\). Esto demuestra la unicidad.
+\end{proof}
+
+La fórmula \eqref{v:eq:parry-deficit-entropia} precisa qué se maximiza:
+la entropía por transición del envolvente simbólico declarado. La razón
+\(\mu_{\rm ar}/\mu_{\rm vol}=\varphi^{-2}\) procede de sus pesos
+estacionarios. La órbita cronológica periódica posee tasa de entropía
+nula y mantiene su propio reparto temporal; ambos objetos permanecen
+definidos con sus respectivos dominios.

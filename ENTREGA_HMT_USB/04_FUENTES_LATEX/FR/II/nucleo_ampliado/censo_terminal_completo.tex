@@ -1,0 +1,272 @@
+\subsection{Recensement complet des cylindres et sélection de la frontière terminale}
+\label{act21:censo:terminal-completo}
+
+La lecture terminale utilise conjointement deux informations : la compatibilité des cylindres régionaux et un profil d'incidence avec des canaux et des positions étiquetés. Dans cette section, on construit les catalogues complets, on énumère leurs triplets et on démontre l'effet de chaque condition du lecteur. Le point de départ est constitué des sorties régionales déjà produites dans la section~\ref{sec:generacion}, et non de valeurs introduites pour définir le transport APP--TRIT--TPK. La réduction à une matrice appartient à une lecture ultérieure de ces sorties et conserve l'ordre des trois canaux.
+
+Le résultat est un théorème de recensement à structure de départ explicite.
+Le profil de Gram, des poids, des distances et des marges est déclaré comme donnée du
+lecteur terminal. L'exhaustivité de l'énumération démontre ce que sélectionne
+ce profil sur les catalogues fixés ; elle ne démontre pas, à elle seule, que le
+profil soit une loi universelle ni qu'il puisse être reconstruit à partir du seul triplet
+qui le satisfait finalement. Cette séparation permet d'intégrer la preuve
+finie complète sans inverser sa généalogie.
+
+\subsubsection{Des sorties régionales aux catalogues ternaires}
+
+Soient \(x_\pi,x_e,x_\varphi\in[0,1)\) les parties fractionnaires des
+trois coordonnées régionales déjà construites. On utilise leurs cylindres
+exprimés à mille positions décimales,
+\[
+ J_\chi^{(1000)}=
+ \left[\frac{d_\chi}{10^{1000}},
+       \frac{d_\chi+1}{10^{1000}}\right),
+ \qquad \chi\in\{\pi,e,\varphi\}.
+\]
+Les entiers \(d_\chi\) sont des lectures finies de sortie. La longueur mille
+est suffisante pour les entiers qui suivent, comme on le vérifie par les
+deux bornes de chaque intervalle ; ce n'est pas une profondeur supposée infinie.
+Définissons
+\begin{equation}
+ p=30,\quad r=1050,\quad L=p+r=1080,\quad k=171,
+ \qquad D=3^L,\quad Q=1000^k,
+ \label{act21:censo:parametros}
+\end{equation}
+et
+\[
+ P_\chi=\lfloor3^{30}x_\chi\rfloor,\qquad
+ T_\chi=\lfloor Qx_\chi\rfloor.
+\]
+Ici, \(k\) compte des triades décimales et ne désigne pas le registre dodécaphasique \(K\). On a \(1000^{171}\leq3^{1080}<1000^{172}\).
+
+\begin{lemma}[Extraction stable d'un entier]
+\label{act21:censo:estabilidad}
+Pour \(d,m,h\in\mathbb Z\), avec \(m,h>0\), la valeur de
+\(\lfloor mx\rfloor\) est constante en \([d/h,(d+1)/h)\) si et seulement si
+\begin{equation}
+ \left\lfloor\frac{md}{h}\right\rfloor
+ =\left\lfloor\frac{m(d+1)-1}{h}\right\rfloor.
+ \label{act21:censo:prueba-estabilidad}
+\end{equation}
+Lorsqu'elle est satisfaite, chacun des deux membres donne cette valeur.
+\end{lemma}
+\begin{proof}
+Le minimum de \(mx\) est atteint à l'extrémité gauche. Son supremum
+est \(m(d+1)/h\) et n'est pas atteint. Le plus grand entier que peut prendre
+\(\lfloor mx\rfloor\) est
+\(\lceil m(d+1)/h\rceil-1\), égal au second membre car
+le numérateur et le dénominateur sont des entiers. L'égalité des extrémités
+de l'intervalle de valeurs prouve l'affirmation.
+\end{proof}
+
+La preuve de stabilité se vérifie sur les trois canaux pour
+\(m=3^{30},Q,3^{1080}\). Le dernier choix sera utilisé uniquement
+pour une comparaison ultérieure, pas pour sélectionner le profil. Les
+premières trente positions récupérées sont précisément les cinq
+étapes de six trits du transport régional :
+\begin{center}\small
+\begin{tabular}{@{}c l r@{}}\toprule
+Canal&Préfixe de trente trits&\(P_\chi\)\\\midrule
+\(\pi\)&\texttt{010211012222010211002111110221}&29152671743887\\
+\(e\)&\texttt{201101121221102011012222102011}&147887858824447\\
+\(\varphi\)&\texttt{121200112202121020010210010200}&127247717616687\\\bottomrule
+\end{tabular}
+\end{center}
+La coïncidence conserve la prolongation déjà construite ; la lecture décimale
+n'est pas utilisée pour remplacer rétroactivement ses matrices de transport.
+
+Un canal étant fixé, une queue de \(r\) trits se représente par
+\(0\leq R<3^r\). Son cylindre et le cylindre des \(k\) premières
+triades sont
+\begin{equation}
+ I_{\chi,R}=\left[\frac{P_\chi3^r+R}{D},
+                       \frac{P_\chi3^r+R+1}{D}\right),\qquad
+ J_{\chi,T}=\left[\frac{T_\chi}{Q},\frac{T_\chi+1}{Q}\right).
+ \label{act21:censo:dos-cilindros}
+\end{equation}
+Le catalogue inclut toutes les queues pour lesquelles ces deux cylindres
+ont une intersection non vide.
+
+\begin{proposition}[Catalogue par intersection exacte]
+\label{act21:censo:catalogos}
+Les queues compatibles sont les entiers de l'intervalle \([a_\chi,b_\chi]\),
+avec
+\begin{align}
+ a_\chi&=\max\left(0,
+       \left\lfloor\frac{T_\chi D}{Q}\right\rfloor-P_\chi3^r\right),
+       \label{act21:censo:extremo-a}\\
+ b_\chi&=\min\left(3^r-1,
+       \left\lfloor\frac{(T_\chi+1)D-1}{Q}\right\rfloor-P_\chi3^r\right).
+       \label{act21:censo:extremo-b}
+\end{align}
+Pour les cylindres régionaux fixés, les troncatures n'interviennent pas et l'on obtient
+\begin{equation}
+\begin{array}{c|r|r|r}
+ \chi&a_\chi\bmod729&b_\chi\bmod729&b_\chi-a_\chi+1\\\hline
+ \pi&67&262&196\\
+ e&584&51&197\\
+ \varphi&117&312&196
+\end{array}
+\label{act21:censo:tabla-catalogos}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Écrivons \(N=P_\chi3^r+R\). Deux intervalles semi-ouverts de
+\eqref{act21:censo:dos-cilindros} se coupent exactement lorsque
+\[
+ NQ<(T_\chi+1)D,\qquad (N+1)Q>T_\chi D.
+\]
+La deuxième inégalité est équivalente à  
+\(N\geq\lfloor T_\chi D/Q\rfloor\) ; la première, à  
+\(N\leq\lfloor((T_\chi+1)D-1)/Q\rfloor\). Soustraire  
+\(P_\chi3^r\) et conserver \(0\leq R<3^r\) prouve les formules.  
+L'évaluation par divisions entières des \(T_\chi\) extraits par  
+\eqref{act21:censo:prueba-estabilidad} donne le tableau. Comme \(r\geq6\),  
+\(P_\chi3^r\equiv0\pmod{729}\), de sorte que le reste de la première  
+extrémité s'obtient également directement de  
+\(\lfloor T_\chi D/Q\rfloor\bmod729\).
+\end{proof}
+
+Les six derniers trits d'une queue forment le mot
+\(\nu_6(R\bmod729)\), où \(\nu_6\) est l'écriture ternaire
+de longueur six, y compris ses zéros initiaux. D'après le tableau, chaque
+catalogue possède moins de \(729\) éléments consécutifs, de sorte que
+cette réduction y est injective. Ainsi, les trois catalogues de frontière
+sont entièrement décrits, sans choisir les triplets finaux :
+\begin{equation}
+ \begin{split}
+ \mathcal B_\pi&=\{\nu_6(67+i):0\leq i<196\},\\
+ \mathcal B_e&=\{\nu_6((584+j)\bmod729):0\leq j<197\},\\
+ \mathcal B_\varphi&=\{\nu_6(117+\ell):0\leq\ell<196\}.
+ \end{split}
+ \label{act21:censo:fronteras-explicitas}
+\end{equation}
+Exiger que l'extrémité gauche de \(I_{\chi,R}\) appartienne à
+\(J_{\chi,T}\) serait une autre condition : elle perdrait le premier cylindre
+qui coupe la frontière et donnerait \(195,196,195\). Le recensement utilise l'intersection des cylindres complets, conformément à sa définition.
+
+\subsubsection{Profil déclaré et indicateurs de compatibilité}
+
+Pour \(u,v\in\mathbb F_3^6\), soient
+\(g(u,v)=\sum u_iv_i\in\mathbb F_3\),
+\(n(u)=g(u,u)\), \(w(u)=\#\{i:u_i\ne0\}\) et
+\(h(u,v)=\#\{i:u_i\ne v_i\}\). Les deux dernières fonctions prennent
+des valeurs entières ; les deux premières, des valeurs dans \(\mathbb F_3\).
+Le profil local du lecteur, en ordre \((\pi,e,\varphi)\), est
+\begin{equation}
+ \begin{split}
+ (g_{\pi e},g_{\pi\varphi},g_{e\varphi})&=(2,2,0),\qquad
+ (n_\pi,n_e,n_\varphi)=(0,0,0),\\
+ (w_\pi,w_e,w_\varphi)&=(3,3,3),\qquad
+ (h_{\pi e},h_{\pi\varphi},h_{e\varphi})=(2,5,3).
+ \end{split}
+ \label{act21:censo:perfil-local}
+\end{equation}
+Les mots sont ordonnés comme dans \eqref{act21:censo:fronteras-explicitas}.
+Nous utiliserons \([E]\in\{0,1\}\) pour l'indicateur d'une condition \(E\).
+Pour chaque paire de canaux \(\chi,\psi\), la matrice rectangulaire
+\(A_{\chi\psi}\) a l'entrée \([g(u,v)=g_{\chi\psi}]\).
+La matrice \(A^{h}_{\chi\psi}\) multiplie cette entrée par
+\([h(u,v)=h_{\chi\psi}]\). Soient \(D_\chi^n\) la matrice diagonale
+de \([n(u)=0]\), et \(D_\chi^{nw}\) celle de
+\([n(u)=0][w(u)=3]\).
+
+\Needspace{18\baselineskip}
+\begin{samepage}
+\begin{theorem}[Énumération exhaustive par sommes finies]
+\label{act21:censo:teorema-conteo}
+Le produit des trois catalogues contient \(7\,567\,952\) triplets.
+Les conditions successives de \eqref{act21:censo:perfil-local} laissent
+\begin{equation}
+ 7\,567\,952\longrightarrow275\,794\longrightarrow6235
+ \longrightarrow3127\longrightarrow331.
+ \label{act21:censo:cadena-local}
+\end{equation}
+Ces quatre comptages sont, respectivement,
+\begin{align}
+ N_g&=\operatorname{tr}(A_{\pi e}A_{e\varphi}A_{\varphi\pi}),
+ \nonumber\\
+ N_{gn}&=\operatorname{tr}(D_\pi^n A_{\pi e}
+             D_e^n A_{e\varphi}D_\varphi^n A_{\varphi\pi}),
+ \nonumber\\
+ N_{gnw}&=\operatorname{tr}(D_\pi^{nw} A_{\pi e}
+             D_e^{nw} A_{e\varphi}D_\varphi^{nw} A_{\varphi\pi}),
+ \nonumber\\
+ N_{gnwh}&=\operatorname{tr}(D_\pi^{nw} A^h_{\pi e}
+             D_e^{nw} A^h_{e\varphi}D_\varphi^{nw} A^h_{\varphi\pi}).
+ \label{act21:censo:trazas}
+\end{align}
+Tous les produits et traces de cette formule sont calculés dans les entiers,  
+non dans le corps de trois éléments.
+\end{theorem}
+\end{samepage}
+\begin{proof}
+La taille du produit est \(196\cdot197\cdot196\). En développant
+une trace de \eqref{act21:censo:trazas}, ses indices parcourent exactement un
+triplet de mots. Le terme vaut un s'il satisfait toutes les conditions
+représentées et zéro sinon. Chaque triplet est compté une fois.
+Les matrices diagonales ajoutent les conditions individuelles ; les facteurs
+rectangulaires ajoutent les conditions par paires. Cela démontre que les
+traces sont précisément les cardinaux annoncés.
+
+Pour expliciter son évaluation, une fois fixés les indices \(i,j\) des deux premiers canaux, on forme les ensembles d'indices \(\ell\) du troisième qui satisfont chaque condition par paires. On intersecte leurs indicateurs, on ajoute les indicateurs individuels pertinents et on additionne leur cardinal. La somme finale parcourt \(0\leq i<196\), \(0\leq j<197\). La substitution des mots de \eqref{act21:censo:fronteras-explicitas} et du profil \eqref{act21:censo:perfil-local} donne, dans cet ordre, \(275794,6235,3127,331\). Le supplément enregistre les quatre contributions de chacun des \(196\) indices \(i\) et les \(331\) triplets complets ; son programme évalue ces sommes avec des indicateurs binaires exacts et vérifie scalairement chaque survivant. Aucun échantillon ni aucune tolérance n'intervient.
+\end{proof}
+
+\subsubsection{Incidence étiquetée et charge d'orientation}
+
+Pour un triplet survivant, soit \(B\in\mathbb F_3^{3\times6}\) sa
+matrice de lignes ordonnées. Le second profil exige
+\begin{equation}
+ \operatorname{rank}_{\mathbb F_3}B=3,\qquad
+ w_{\mathrm{col}}(B)=(1,1,2,2,3,0),\qquad
+ q_{\partial}(B)=(1,2,2,1,2,0),
+ \label{act21:censo:perfil-columnas}
+\end{equation}
+où \(w_{\mathrm{col}}\) compte les éléments non nuls de chaque
+colonne et \(q_{\partial}\) additionne ses entrées modulo trois. Il s'agit d'un profil
+de colonnes étiquetées ; les permuter sans transporter le profil définit un autre
+lecteur. Notons \(\mathcal F\) l'ensemble des \(331\) triplets
+du théorème précédent.
+
+\begin{proposition}[Réduction du recensement au couple terminal]
+\label{act21:censo:dos-matrices}
+Les sommes d'indicateurs sur \(\mathcal F\), en exigeant successivement
+le rang, les poids de colonne et les sommes de colonne, sont
+\begin{equation}
+ \sum_{B\in\mathcal F}[\operatorname{rank}B=3]=331,
+ \qquad N_{\mathrm{rango,pesos}}=18,
+ \qquad N_{\mathrm{rango,pesos,sumas}}=2.
+ \label{act21:censo:conteo-columnas}
+\end{equation}
+Avec des indices de catalogue commençant à un, les deux triplets finaux sont
+\((120,197,157)\) et \((129,197,148)\), et leurs matrices sont
+\[
+ B_0=\begin{pmatrix}0&2&0&2&2&0\\0&0&1&2&2&0\\1&0&1&0&1&0\end{pmatrix},
+ \qquad
+ B_1=\begin{pmatrix}0&2&1&0&2&0\\0&0&1&2&2&0\\1&0&0&2&1&0\end{pmatrix}.
+\]
+\end{proposition}
+\begin{proof}
+Dans chaque triplet de l'ensemble déjà énuméré, on calcule le rang par élimination en \(\mathbb F_3\), on compte les éléments non nuls des six colonnes et on les additionne modulo trois. Les produits des indicateurs de \eqref{act21:censo:perfil-columnas} donnent \eqref{act21:censo:conteo-columnas}.
+La substitution des deux indices finaux en
+\eqref{act21:censo:fronteras-explicitas} donne les matrices exposées. La liste
+complète des survivants et les filtres exacts du supplément permettent
+de reproduire l'élimination sans supposer ces deux matrices comme domaine.
+\end{proof}
+
+L'orientation \(\sigma=(1,1,-1)=(1,1,2)\in\mathbb F_3^3\)
+sélectionne la droite
+\(\langle\sigma\rangle=\{(0,0,0),(1,1,2),(2,2,1)\}\).
+Les charges des lignes de \(B_0,B_1\) sont \((0,2,0)\) et \((2,2,1)\) ;
+seule la seconde appartient à cette droite. On retrouve ainsi la dernière étape
+du sélecteur de la section~\ref{act21:censo:dos-matrices}, désormais précédée de
+la construction et de l'énumération de son domaine complet. La lecture stable
+de \(\lfloor3^{1080}x_\chi\rfloor\), effectuée après les filtres,
+donne les frontières \texttt{021020}, \texttt{001220}, \texttt{100210},
+avec les mêmes rangs \((129,197,148)\). Cette comparaison ultérieure ne définit
+pas le profil et ne participe pas aux sommes d'indicatrices.
+
+\subsubsection{Information conservée et portée du résultat}
+
+Le procédé conserve le préfixe de trente trits, la queue compatible, l'ordre régional, la position de chaque trit et l'orientation. La réduction modulo \(729\) conserve ici l'identité de chaque candidat car l'intervalle des queues a une longueur inférieure à \(729\) ; cette injectivité n'est pas affirmée pour une histoire arbitraire. Le recensement de \(331\) démontre également que le profil local isolé ne sélectionne pas une seule matrice : les marges étiquetées et la charge apportent des conditions effectives supplémentaires.
+
+On a donc récupéré une énumération finie intégrale et son sélecteur sur des cylindres de sortie, avec un profil de lecture explicite. La construction du registre signé utilise en outre son lecteur de mémoire et ses canaux, comme cela est spécifié ci-dessous ; la matrice visible ne se confond pas avec ce registre par égalité du nombre de composants. Ce compte ne démontre pas non plus l'universalité du profil, ne génère pas à nouveau les coordonnées régionales et ne décide pas d'une affirmation sur alpha ou sur le continu complet.

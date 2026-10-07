@@ -1,0 +1,250 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/VIII/spanish_source/gestion/lectura_generada/04_PARTES_FINITAS_Y_LECTORES_RESIDUALES.tex
+\section{Partes finitas, regularización y lectores residuales}
+\label{viii:lectura:manuscrito-04}
+El funcional construido a partir de los modos enteros admite operaciones que conservan aspectos distintos de su estructura. Evaluarlo en un punto de convergencia, extraer el término regular que acompaña a un polo y derivar su continuación meromorfa son tres operaciones precisas. Esta distinción organiza las constantes de este capítulo y su relación con las del capítulo de momentos.
+
+El antecedente aritmético es la publicación de las formas normales obtenidas con las dos hojas de APP. Su evaluación identifica una vez cada entero positivo; el operador de numeración actúa sobre la base correspondiente por
+
+\[
+Qe_n=ne_n,\qquad
+\operatorname{Dom}Q=\left\{u:\sum_{n\geq1}n^2|u_n|^2<\infty\right\}.
+\]
+La lectura espectral posterior es
+
+\[
+Z(s)=\operatorname{Tr}(Q^{-s})=\sum_{n\geq1}n^{-s},\qquad \Re s>1.
+\]
+El capítulo de la forma completada demuestra su coincidencia con el funcional theta–Mellin y su continuación. Aquí se reúne un procedimiento de evaluación con restos controlados. La memoria de la historia permanece en el estado fuente; la traza es una lectura de los modos publicados, no una reconstrucción de toda esa historia a partir de una constante escalar.
+
+\subsection{Una fórmula de continuación con resto explícito}
+Defínanse los números de Bernoulli mediante la identidad formal
+
+\[
+\frac{t}{e^t-1}=\sum_{j\geq0}B_j\frac{t^j}{j!}.
+\]
+Sus coeficientes se calculan sin una tabla numérica:
+
+\[
+B_0=1,\qquad
+B_m=-\frac1{m+1}\sum_{j=0}^{m-1}\binom{m+1}{j}B_j.
+\]
+En particular, \(B_1=-1/2\). Escribamos \((s)_r=s(s+1)\cdots(s+r-1)\), con \((s)_0=1\), y denotemos por \(B_m(x)=\sum_{j=0}^m\binom mjB_jx^{m-j}\) el polinomio correspondiente. Su periodización es \(\widetilde B_{2p}(x)=B_{2p}(\{x\})\). Para \(N,p\geq1\), la sumación de Euler–Maclaurin da
+
+\[
+\begin{aligned}
+Z(s)={}&\sum_{n=1}^N n^{-s}+\frac{N^{1-s}}{s-1}-\frac1{2N^s}\\
+&+\sum_{k=1}^p\frac{B_{2k}}{(2k)!}(s)_{2k-1}N^{1-s-2k}
++R_{N,p}(s),
+\end{aligned}
+\]
+con
+
+\[
+R_{N,p}(s)=-\frac{(s)_{2p}}{(2p)!}
+\int_N^\infty\widetilde B_{2p}(x)x^{-s-2p}\,dx.
+\]
+\HMTresultado{Proposición}{Dominio y cota del resto}{rz-num-04-1}
+La integral del resto es holomorfa en \(\Re s>1-2p\). Si \(\sigma=\Re s>1-2p\), entonces
+
+\[
+|R_{N,p}(s)|\leq
+\frac{|B_{2p}|\,|(s)_{2p}|}{(2p)!}
+\frac{N^{1-\sigma-2p}}{\sigma+2p-1}.
+\]
+La fórmula anterior prolonga \(Z\) a ese semiplano, con su polo simple en \(s=1\), y es compatible con la continuación theta–Mellin.
+
+\textbf{Demostración.} La fórmula de sumación se obtiene integrando por partes sucesivamente en cada intervalo unitario y usando \(B_j'(x)=jB_{j-1}(x)\) y las igualdades de los extremos para los polinomios de grado distinto de uno. Al aplicarla a \(x^{-s}\) sobre \([N,M]\), las derivadas proporcionan los factores \((s)_r\). En \(\Re s>1\), el paso \(M\to\infty\) elimina los extremos superiores y produce exactamente la identidad y el signo del resto escritos arriba.
+
+Para controlar éste se usa
+
+\[
+|B_{2p}(t)|\leq |B_{2p}|,\qquad 0\leq t\leq1.
+\]
+Una prueba de esta desigualdad es la serie de Fourier absolutamente convergente
+
+\[
+B_{2p}(t)=(-1)^{p+1}\frac{2(2p)!}{(2\pi)^{2p}}
+\sum_{m\geq1}\frac{\cos(2\pi mt)}{m^{2p}}.
+\]
+El máximo de la cota por valores absolutos se alcanza en \(t=0\). Esta identidad se deduce de los coeficientes de Fourier por integración por partes de los propios polinomios; el factor \(\pi\) sólo expresa la convención de Fourier de esta prueba y no entra numéricamente en el evaluador racional que se empleará después. La comparación con \(x^{-\sigma-2p}\) demuestra la cota del resto. Sobre compactos del semiplano, también domina sus derivadas en \(s\), que añaden potencias de \(\log x\); por tanto, la integral es holomorfa allí. La identidad en el semiplano de convergencia y la unicidad de la continuación prueban la compatibilidad anunciada. \hfill\(\square\)
+
+El orden \(p\) y el horizonte \(N\) son parámetros de cálculo y control del error. No seleccionan una constante distinta: las expresiones con distintos \(N,p\) representan el mismo funcional en sus dominios comunes. Tampoco es necesario que una serie asintótica converja al aumentar indefinidamente \(p\) con \(N\) fijo. Cada par finito viene acompañado por su propia cota demostrada.
+
+\subsection{Euler–Mascheroni como parte finita del mismo funcional}
+La parte finita en el polo se define por
+
+\[
+\gamma_0=\lim_{s\to1}\left(Z(s)-\frac1{s-1}\right).
+\]
+Al poner \(s=1+z\), el término singular satisface
+
+\[
+\frac{N^{-z}}z=\frac1z-\log N+O(z).
+\]
+La proposición anterior permite tomar la parte finita término a término.
+
+\HMTresultado{Teorema}{Intervalo explícito para la parte finita}{rz-num-04-2}
+Sean
+
+\[
+G_{N,p}=H_N-\log N-\frac1{2N}
++\sum_{k=1}^p\frac{B_{2k}}{2kN^{2k}},
+\qquad H_N=\sum_{n=1}^N\frac1n.
+\]
+Entonces
+
+\[
+|\gamma_0-G_{N,p}|\leq\frac{|B_{2p}|}{2pN^{2p}}.
+\]
+Además,
+
+\[
+\gamma_0=\lim_{N\to\infty}(H_N-\log N).
+\]
+\textbf{Demostración.} En \(s=1\), se tiene \((1)_{2k-1}=(2k-1)!\); por eso cada término de Bernoulli se convierte en \(B_{2k}/(2kN^{2k})\). La cota de la proposición~\ref{viii:rz-num-04-1} evaluada en ese punto es \(|B_{2p}|/(2pN^{2p})\). Con \(p=1\), todos los términos que separan \(G_{N,1}\) de \(H_N-\log N\), y también el resto, tienden a cero. Esto demuestra el límite. Ésta es la identificación posterior con la constante de Euler–Mascheroni. \hfill\(\square\)
+
+Así queda incorporado el antecedente de \(\gamma_0\) que utiliza la fórmula de Meissel–Mertens. El número no se recibe como una cifra independiente para corregir la suma sobre irreducibles: es una operación especificada sobre la misma función de partición entera.
+
+El logaritmo utilizado en el cálculo admite también un intervalo racional. Para \(x\geq1\), sea \(z=(x-1)/(x+1)\). La serie integrada de una progresión geométrica da
+
+\[
+\log x=2\sum_{j=0}^{M-1}\frac{z^{2j+1}}{2j+1}+r_M(x),
+\quad
+0\leq r_M(x)\leq
+\frac{2z^{2M+1}}{(2M+1)(1-z^2)}.
+\]
+La desigualdad resulta al sustituir los denominadores de la cola por \(2M+1\) y sumar la progresión geométrica. Se reduce primero \(x=2^a y\), con \(1\leq y<2\), y se evalúan \(a\log2+\log y\). De este modo el argumento de las series está a lo sumo en \(1/3\). Para \(0<x<1\) se utiliza \(\log x=-\log(1/x)\), invirtiendo los extremos del intervalo.
+
+\subsection{Apéry y la evaluación negativa regularizada}
+Para un entero \(r\geq2\), la especialización de la proposición~\ref{viii:rz-num-04-1} produce un centro racional
+
+\[
+Z_{N,p}^{[r]}=
+\sum_{n=1}^N\frac1{n^r}+\frac1{(r-1)N^{r-1}}-\frac1{2N^r}
++\sum_{k=1}^p\frac{B_{2k}(r)_{2k-1}}{(2k)!N^{r+2k-1}}
+\]
+y la cota completamente racional
+
+\[
+\left|Z(r)-Z_{N,p}^{[r]}\right|
+\leq\frac{|B_{2p}|(r)_{2p-1}}{(2p)!N^{r+2p-1}}.
+\]
+La simplificación usa \((r)_{2p}/(r+2p-1)=(r)_{2p-1}\). En \(r=3\) se obtiene la constante de Apéry. El procedimiento determina su valor con cotas; la irracionalidad de esa constante es una afirmación matemática distinta de esta evaluación.
+
+En el lado negativo, la misma continuación admite una evaluación exacta, sin una aproximación decimal ni un parámetro de ajuste.
+
+\HMTresultado{Teorema}{Evaluación regularizada en menos uno}{rz-num-04-3}
+La continuación del funcional de los modos enteros satisface
+
+\[
+Z(-1)=-\frac1{12}.
+\]
+\textbf{Demostración.} En la fórmula de la proposición~\ref{viii:rz-num-04-1} se toma \(p=2\), de modo que \(s=-1\) pertenece al interior del semiplano de validez. El factor \((s)_4\) se anula en ese punto; la integral que lo acompaña es holomorfa allí, por lo que el resto vale cero. También se anula \((s)_3\), que multiplica el término con \(B_4\). Sólo queda
+
+\[
+Z(-1)=\sum_{n=1}^N n-\frac{N^2}{2}-\frac N2-\frac{B_2}{2}.
+\]
+Como la acumulación aditiva da \(\sum_{n=1}^N n=N(N+1)/2\) y la recurrencia de Bernoulli da \(B_2=1/6\), el resultado es \(-1/12\), independientemente de \(N\). \hfill\(\square\)
+
+El objeto evaluado es la continuación del funcional, no el límite ordinario de las sumas parciales positivas, que crecen sin cota. La distinción conserva la operación que hace aparecer el valor: el término de Bernoulli permanece después de cancelar los términos polinómicos de frontera. Por eso la regularización tiene aquí una estructura y una genealogía, además de un valor.
+
+\subsection{Coeficientes de Laurent y conservación de las tres clases}
+Escribamos
+
+\[
+Z(1+z)-\frac1z=\sum_{n\geq0}a_nz^n,
+\qquad \gamma_n=(-1)^nn!a_n.
+\]
+La función regular de la izquierda es holomorfa alrededor de cero. Para un círculo contenido en su dominio de holomorfía, Cauchy determina
+
+\[
+a_n=\frac1{2\pi i}\int_{|z|=\rho}
+\frac{Z(1+z)-1/z}{z^{n+1}}\,dz.
+\]
+La fórmula de continuación con resto permite controlar esa extracción: una cota uniforme \(\varepsilon\) del error sobre el círculo produce una cota \(\varepsilon\rho^{-n}\) para el coeficiente. Esto justifica un procedimiento a orden arbitrario; no convierte la coincidencia de dos cuadraturas finitas en una cota de error.
+
+La lectura residual mantiene las tres clases del operador entero:
+
+\[
+Q_re_n=\mathbf1_{n\equiv r\ (3)}e_n,\qquad
+Z_r(s)=\operatorname{Tr}(Q^{-s}Q_r),\quad r=0,1,2.
+\]
+Estas proyecciones tienen dominio común en el semiplano de convergencia. Su suma es la identidad; la diferencia de las clases 1 y 2 conserva la orientación del carácter módulo tres. Se tiene
+
+\[
+Z=Z_0+Z_1+Z_2,\qquad Z_0(s)=3^{-s}Z(s),\qquad
+L_{-3}(s)=Z_1(s)-Z_2(s).
+\]
+La última serie tiene coeficientes periódicos \((1,-1,0)\) y media cero. Agrupar por períodos permite su continuación cerca de \(s=1\). Cada \(Z_r\) tiene residuo \(1/3\) en ese punto.
+
+Sean
+
+\[
+Z_r(1+z)-\frac1{3z}=\sum_{n\geq0}c_{r,n}z^n,
+\qquad \lambda=\log3.
+\]
+La comparación de coeficientes da
+
+\[
+a_n=c_{0,n}+c_{1,n}+c_{2,n},\qquad
+\frac{L_{-3}^{(n)}(1)}{n!}=c_{1,n}-c_{2,n},
+\]
+\[
+c_{0,n}=\frac13\left[
+\frac{(-\lambda)^{n+1}}{(n+1)!}
++\sum_{k=0}^na_k\frac{(-\lambda)^{n-k}}{(n-k)!}\right].
+\]
+La tercera identidad procede de multiplicar la serie completa, incluido su polo, por \(3^{-1}e^{-\lambda z}\). La suma y la diferencia recuperan los otros dos coeficientes de manera única. Las tres lecturas conservan, respectivamente, la agregación, la orientación y el cambio de escala.
+
+En orden cero puede completarse la evaluación sin recibir un decimal de \(L_{-3}(1)\). En efecto,
+
+\[
+L_{-3}(1)=\sum_{m\geq0}\left(\frac1{3m+1}-\frac1{3m+2}\right)
+=\int_0^1\frac{1-x}{1-x^3}\,dx
+=\int_0^1\frac{dx}{1+x+x^2}.
+\]
+Se completa el cuadrado en el denominador y se evalúa la primitiva:
+
+\[
+L_{-3}(1)=\frac2{\sqrt3}
+\left[\arctan\frac{2x+1}{\sqrt3}\right]_0^1
+=\frac{\pi}{3\sqrt3}.
+\]
+La coordenada \(\pi\) es la publicación regional previa de HMT; esta identidad es una evaluación analítica posterior de un lector de clases, no un procedimiento para seleccionar retroactivamente esa coordenada. Por tanto, con \(C_r=c_{r,0}\),
+
+\[
+C_0=\frac{\gamma_0-\log3}{3},\qquad
+C_{1,2}=\frac{\gamma_0}{3}+\frac{\log3}{6}
+\mathbin{\pm}\frac{\pi}{6\sqrt3}.
+\]
+Se recuperan las identidades
+
+\[
+C_0+C_1+C_2=\gamma_0,\qquad
+C_1-C_2=L_{-3}(1),\qquad C_1+C_2-2C_0=\log3.
+\]
+\clearpage
+\subsection{Evaluación exacta y alcance de la certificación}
+El programa \texttt{partes\_\allowbreak{}finitas\_\allowbreak{}exactas.\allowbreak{}py} conserva el orden siguiente: sucesión de palabras mediante la hoja aditiva; evaluación de los modos enteros; construcción racional de Bernoulli; aplicación de la fórmula del funcional; incorporación del resto; publicación decimal dirigida. La multiplicación nativa permanece disponible en el mismo paquete y su compatibilidad se demuestra en el capítulo del producto. El cálculo analítico sobre los modos publicados no modifica sus reglas.
+
+Con \(N=81\), \(p=8\) y 120 términos para cada serie del logaritmo, se obtienen los intervalos
+
+\[
+\begin{gathered}
+0.577215664901532860606512090082273204041535\\
+<\gamma_0<\\
+0.577215664901532860606512090082531387279784,
+\end{gathered}
+\]
+\[
+\begin{gathered}
+1.202056903159594285399738161511447311355829\\
+<Z(3)<\\
+1.202056903159594285399738161511452663119342.
+\end{gathered}
+\]
+Los extremos decimales son redondeos hacia fuera de fracciones exactas. El programa conserva también la anchura racional de cada intervalo y recupera \(-1/12\) exactamente. Ninguna cifra de comparación aparece en el productor. El comprobador separado abre los valores de referencia después de obtener las salidas; ese contraste comprueba la ejecución y no sustituye las cotas demostradas.
+
+Este capítulo cierra dentro de su dominio las partes finitas y evaluaciones que acaba de definir. No utiliza una suposición sobre la localización de los ceros ni sobre la positividad de la forma de Weil. La prolongación hacia el problema espectral conserva las obligaciones propias de sus operadores: una evaluación regularizada no proporciona por sí sola la identidad de frontera de otro funcional.
+
+Procedencia: desarrollo recuperado de los funcionales triádicos y de la red coordinada de lectores. La reunión de la prueba de Euler–Maclaurin, sus cotas racionales y su programa es una formalización y un certificado adicional de esta edición; no se atribuye prioridad histórica nueva a esas identidades analíticas.

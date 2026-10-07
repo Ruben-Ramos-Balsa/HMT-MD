@@ -1,0 +1,516 @@
+\chapter{Algèbres quadratiques d'ordre \(9\)}
+\label{chap:algebras-cuadraticas-orden-nueve}
+\index{algèbre quadratique}
+\index{corps fini \(\mathbb F_9\)}
+
+L'identité \(A_W^2=-I_6\), obtenue dans la section précédente par réduction
+de la matrice de conférence de Paley, contient davantage d'information qu'une
+orthogonalité modulaire. Elle détermine une extension des scalaires de degré deux,
+transforme l'espace ternaire de dimension six en un espace de dimension
+trois sur le corps à neuf éléments et permet d'écrire le code de
+Golay ternaire comme le graphe d'une unité quadratique. Cette section développe
+ces conséquences et les distingue de l'arithmétique de caractéristique neuf
+utilisée par la branche de Hensel.
+
+\section{Structure de \texorpdfstring{\(\mathbb F_9\)}{F9} induite par Paley}
+
+Le polynôme \(X^2+1\) n'a pas de racines dans \(\mathbb F_3\) : ses valeurs en
+\(0,1,2\) sont \(1,2,2\). Il est donc irréductible, et le quotient
+\[
+ \mathbb F_9
+ :=\mathbb F_3[\iota]/(\iota^2+1)
+\]
+est un corps à neuf éléments.
+
+\begin{theorem}[Structure quadratique induite par \(A_W\)]
+\label{thm:f9-tres-desde-paley}
+Soit \(V=\mathbb F_3^6\), écrit au moyen de vecteurs lignes, et soit
+\(J(v)=vA_W\). La règle
+\[
+ (a+b\iota)v:=av+bJ(v),
+ \qquad a,b\in\mathbb F_3,
+\]
+fait de \(V\) un espace vectoriel de dimension trois sur
+\(\mathbb F_9\). Dans les coordonnées fixées par la construction de Paley,
+\[
+ \mathbb F_3^6\cong\mathbb F_9^3.
+\]
+\end{theorem}
+
+\begin{proof}
+L'égalité \(J^2=-I\) fait que l'évaluation
+\(\mathbb F_3[X]\to\operatorname{End}_{\mathbb F_3}(V)\), \(X\mapsto J\),
+s'annule sur l'idéal \((X^2+1)\). L'action se factorise donc par
+le corps \(\mathbb F_9\). Comme
+\([\,\mathbb F_9:\mathbb F_3\,]=2\) et
+\(\dim_{\mathbb F_3}V=6\), on obtient
+\(\dim_{\mathbb F_9}V=3\).
+\end{proof}
+
+L'isomorphisme dépend du système de coordonnées qui fixe \(A_W\). L'énoncé
+ne se déduit pas du seul cardinal \(3^6=9^3\) : la matrice exhibe la
+multiplication par tous les scalaires \(a+b\iota\) et fournit donc
+la structure linéaire complète.
+
+\section{Le code ternaire comme graphe isotrope}
+
+L'application génératrice du code est
+\[
+ c(q)=(q,qA_W).
+\]
+Après identification de \(J\) à la multiplication par \(\iota\), son image
+admet l'écriture
+\[
+ C_W=\{(q,\iota q):q\in\mathbb F_9^3\},
+\]
+où les deux composantes sont considérées, par restriction des scalaires, comme des
+vecteurs de \(\mathbb F_3^6\).
+
+\begin{proposition}[Maximalité isotrope]
+\label{prop:golay-grafo-isotropico}
+Par rapport à la forme bilinéaire standard de \(\mathbb F_3^{12}\), le
+sous-espace \(C_W\) est totalement isotrope et maximal parmi les sous-espaces
+totalement isotropes.
+\end{proposition}
+
+\begin{proof}
+La matrice génératrice \(G=(I_6\mid A_W)\) satisfait
+\[
+ GG^{\mathsf T}=I_6+A_WA_W^{\mathsf T}=I_6+2I_6=0.
+\]
+L'espace engendré est donc totalement isotrope. Il est de
+dimension six, la moitié de la dimension de l'espace ambiant non dégénéré,
+et est donc maximal ; en fait, il coïncide avec son dual orthogonal.
+\end{proof}
+
+La racine de \(-I\) apparaît ainsi comme une transformation finie d'incidence.
+On n'introduit pas le corps complexe analytique dans le système : on obtient une
+structure quadratique sur \(\mathbb F_3\), suffisante pour organiser la
+polarité, le code et ses deux espaces propres après extension des
+scalaires.
+
+\section{Caractéristique \(9\) et caractéristique \(3\)}
+
+Deux ensembles de \(729\) états interviennent dans la construction :
+\[
+ (\mathbb Z/9\mathbb Z)^3
+ \qquad\text{et}\qquad
+ \mathbb F_9^3.
+\]
+Ils ne sont isomorphes ni comme groupes additifs ni comme anneaux. Le premier est de
+caractéristique neuf et contient des éléments d'ordre neuf ; le second est de
+caractéristique trois et tout son groupe additif est d'exposant trois.
+
+Pour \(a,b\in\mathbb F_3\), en choisissant des représentants
+\(\widetilde a,\widetilde b\in\{0,1,2\}\), soit
+\[
+ \beta(a,b)=\widetilde a+3\widetilde b\pmod 9.
+\]
+L'application en coordonnées induite par \(\beta\) est une bijection
+ensembliste entre \(\mathbb F_3^6\) et \((\mathbb Z/9\mathbb Z)^3\), mais ne
+respecte pas l'addition. En effet, si
+\[
+ \kappa(a,c)
+ :=\left\lfloor
+ \frac{\widetilde a+\widetilde c}{3}
+ \right\rfloor,
+\]
+alors
+\[
+ \beta(a,b)+\beta(c,d)
+ =\beta\bigl(a+c,\ b+d+\kappa(a,c)\bigr),
+\]
+avec les coordonnées du second membre réduites modulo trois. Par exemple,
+\[
+ \beta(2,0)+\beta(2,0)=\beta(1,1),
+\]
+tandis que la somme en coordonnées dans \(\mathbb F_3^2\) donnerait \((1,0)\). La
+seconde coordonnée de \(\beta(1,1)\) conserve le quotient de la division
+euclidienne ; ce terme est précisément la donnée qui disparaît lors de la
+réduction composante par composante.
+
+Cette distinction type les deux lectures du cardinal \(729\). La réalisation
+\((\mathbb Z/9\mathbb Z)^3\) conserve le reste et le quotient ; la réalisation
+\(\mathbb F_9^3\) transforme chaque paire ternaire en un scalaire d'une extension
+quadratique. L'une prolonge l'arithmétique avec mémoire de division ; l'autre
+organise l'incidence exceptionnelle.
+
+\begin{proposition}[Deux lectures typées du même support ternaire]
+\label{prop:dos-lecturas-tipadas-729}
+Une fois fixées la section ensembliste utilisée dans \(\beta\), la base, la
+polarisation et l'opérateur \(J\) du
+\cref{thm:f9-tres-desde-paley}, il existe le diagramme de bijections ensemblistes
+\[
+\boxed{
+(\mathbb Z/9\mathbb Z)^3
+\xleftarrow{\;\beta^{\times3}\;}
+\mathbb F_3^6
+\xrightarrow{\;\iota_J\;}
+\mathbb F_9^3.}
+\]
+La flèche de gauche transporte la somme nonadique tordue par le cocycle de
+retenue \(\kappa\) ; la flèche de droite transporte la structure linéaire sur
+\(\mathbb F_9\) déterminée par \(J^2=-I\). Les deux flèches partagent le
+support en coordonnées \(\mathbb F_3^6\), mais n'identifient pas leurs lois
+algébriques.
+\end{proposition}
+
+\begin{proof}
+La formule
+\[
+ \beta(a,b)+\beta(c,d)
+ =\beta\bigl(a+c,b+d+\kappa(a,c)\bigr)
+\]
+prouve que \(\beta^{\times3}\) est une bijection avec somme tordue et n'est pas
+un isomorphisme à partir de la somme composante par composante de
+\(\mathbb F_3^6\). Par le \cref{thm:f9-tres-desde-paley}, le choix de
+\(J\) transforme ce même espace ternaire de dimension six en un espace
+de dimension trois sur
+\(\mathbb F_3[J]\cong\mathbb F_9\), ce qui définit \(\iota_J\).
+\end{proof}
+
+La proposition est une synthèse démontrée avec une structure de départ
+explicite. Elle n'affirme pas une identification canonique entre
+\((\mathbb Z/9\mathbb Z)^3\) et \(\mathbb F_9^3\) : le premier contient des
+éléments additifs d'ordre neuf, tandis que le second possède un exposant
+additif trois. Le cocycle mesure précisément l'information qui serait perdue en
+confondant les deux lois.
+
+\section{Classification des algèbres quadratiques}
+
+Sur un corps de caractéristique différente de deux, une algèbre quadratique
+unitaire se classe selon le type de son polynôme de définition. Sur
+\(\mathbb F_3\), on peut choisir les trois représentants
+\[
+ \mathcal Q_{\mathrm e}
+ =\mathbb F_3[t]/(t^2+1)\cong\mathbb F_9,
+\]
+\[
+ \mathcal Q_{\mathrm n}
+ =\mathbb F_3[\varepsilon]/(\varepsilon^2),
+ \qquad
+ \mathcal Q_{\mathrm s}
+ =\mathbb F_3[r]/(r^2-1)
+ \cong\mathbb F_3\times\mathbb F_3.
+\]
+
+\begin{theorem}[Classification des algèbres quadratiques sur \(\mathbb F_3\)]
+\label{thm:clasificacion-cuadratica-nonadica}
+Les relations
+\[
+ J^2=-I,\qquad N^2=0,\qquad R^2=I
+\]
+définissent des actions de
+\(\mathcal Q_{\mathrm e}\), \(\mathcal Q_{\mathrm n}\) et
+\(\mathcal Q_{\mathrm s}\), respectivement. Ces trois algèbres possèdent
+neuf éléments et sont deux à deux non isomorphes : la première est un corps ; la
+deuxième contient des nilpotents non nuls ; la troisième contient des idempotents non
+triviaux.
+\end{theorem}
+
+\begin{proof}
+Chaque relation fait se factoriser l'évaluation de
+\(\mathbb F_3[t]\) par l'idéal correspondant. L'irréductibilité de
+\(t^2+1\) prouve que \(\mathcal Q_{\mathrm e}\) est un corps. Dans
+\(\mathcal Q_{\mathrm n}\), la classe \(\varepsilon\) est non nulle et satisfait
+\(\varepsilon^2=0\). Dans \(\mathcal Q_{\mathrm s}\), comme \(2^{-1}=2\) dans
+\(\mathbb F_3\), les éléments
+\[
+ e_+=2(1+r),\qquad e_-=2(1-r)
+\]
+sont des idempotents orthogonaux non triviaux dont la somme est l'unité. Être un corps,
+posséder un nilpotent non nul et posséder des idempotents non triviaux sont des
+propriétés invariantes par isomorphisme.
+\end{proof}
+
+Dans trois copies de la représentation régulière de dimension deux, on obtient
+trois actions de dimension six sur \(\mathbb F_3\). La relation
+\(J^2=-I\) correspond à la polarité de Paley ; la relation \(N^2=0\)
+décrit la linéarisation d'une extension avec quotient ; la relation
+\(R^2=I\) sépare deux termes au moyen des idempotents \(e_\pm\). Cette
+classification fournit le cadre algébrique fini dans lequel les
+structures elliptique, non réduite et scindée se distinguent sans faire appel à une
+géométrie continue.
+
+La construction ne remplace pas \(\mathbb C\) : le corps \(\mathbb F_9\) ne
+possède ni la topologie, ni la complétude, ni la structure analytique complexe. Le
+résultat exact est autre : une racine carrée de \(-I\) et l'extension
+des scalaires correspondante émergent de la matrice d'incidence déjà construite
+au sein du système ternaire.
+
+\section{Source quadratique entière et spécialisations finie et réelle}
+\label{sec:fuente-cuadratica-integral-rev3}
+
+La racine finie et la racine opératorielle réelle se coordonnent au moyen d'une
+présentation entière commune. Soit
+\begin{equation}
+ \mathcal Q_{\mathbb Z}
+ :=\mathbb Z[u]/(u^2+1).
+ \label{eq:fuente-cuadratica-integral-rev3}
+\end{equation}
+Ses changements de base sont
+\[
+ \mathcal Q_{\mathbb Z}\otimes_{\mathbb Z}\mathbb F_3
+ \cong\mathbb F_3[u]/(u^2+1)
+ \cong\mathbb F_9,
+\]
+et
+\[
+ \mathcal Q_{\mathbb Z}\otimes_{\mathbb Z}\mathbb R
+ \cong\mathbb R[u]/(u^2+1).
+\]
+
+\begin{theorem}[Deux réalisations d'une présentation quadratique entière]
+\label{thm:dos-realizaciones-fuente-cuadratica-rev3}
+La représentation finie \(u\mapsto A_W\) sur
+\(\mathbb F_3^6\) et la représentation réelle \(u\mapsto J_{\mathrm e}\) sur
+\(V_{\mathrm e}\), construite dans le
+\cref{thm:tres-generadores-concretos-trit}, réalisent, après leurs
+changements de base respectifs, la même relation entière
+\[
+ u^2+1=0.
+\]
+\end{theorem}
+
+\begin{proof}
+L'égalité \(A_W^2+I_6=0\) fait se factoriser l'évaluation
+\(\mathbb F_3[u]\to\operatorname{End}_{\mathbb F_3}(\mathbb F_3^6)\) par
+\((u^2+1)\). De même, \(J_{\mathrm e}^2+I=0\) fait se factoriser
+\(\mathbb R[u]\to\operatorname{End}_{\mathbb R}(V_{\mathrm e})\). Les deux
+représentations proviennent de spécialisations de
+\(\mathcal Q_{\mathbb Z}\) ; il n'existe et n'est utilisé aucun homomorphisme unitaire
+\(\mathbb F_9\to\mathbb R\).
+\end{proof}
+
+La source commune coordonne des relations, elle n'identifie pas des modules de
+caractéristiques distinctes. La branche finie conserve l'incidence ; la branche réelle
+incorpore la structure analytique nécessaire à l'exponentielle opératorielle.
+
+\section{\(3\) générateurs concrets des régimes TRIT}
+\label{sec:tres-generadores-concretos-trit}
+\index{TRIT!générateurs concrets}
+\index{générateur elliptique}
+\index{générateur parabolique}
+\index{générateur hyperbolique}
+
+Le \cref{chap:trit-algebras} fixe les trois types quadratiques abstraits
+\(J^2=-I\), \(J^2=0\) et \(J^2=I\), tandis que le
+\cref{thm:clasificacion-cuadratica-nonadica} fournit leurs modèles finis
+sur \(\mathbb F_3\). Ces objets ne doivent pas être confondus avec les
+réalisations réelles suivantes. On fixe ici trois espaces réels et trois
+opérateurs concrets, chacun obtenu à partir de son antécédent causal déclaré.
+
+Soit
+\[
+V_{\mathrm e}=A_2\otimes_{\mathbb Z}\mathbb R,
+\qquad
+V_{\mathrm p}=\mathbb R^2,
+\qquad
+V_{\mathrm h}=\mathbb R^2.
+\]
+Sur \(V_{\mathrm e}\) agit le Coxeter \(C\) de la
+\cref{prop:coxeter-a2-primario}. Sur \(V_{\mathrm p}\), on fixe
+\[
+N=
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix}.
+\]
+Enfin, le \cref{thm:descenso-necesario-fav} construit
+\[
+F_{\rm av}=
+\begin{pmatrix}
+0&1\\
+1&1
+\end{pmatrix},
+\qquad
+A:=F_{\rm av}^{\,2}=
+\begin{pmatrix}
+1&1\\
+1&2
+\end{pmatrix}
+\]
+sur \(V_{\mathrm h}\).
+
+\begin{theorem}[Trois réalisations concrètes des régimes TRIT]
+\label{thm:tres-generadores-concretos-trit}
+Définissons
+\[
+J_{\mathrm e}:=\frac{2C+I}{\sqrt3},
+\qquad
+J_{\mathrm p}:=N,
+\qquad
+J_{\mathrm h}:=\frac{2A-3I}{\sqrt5}.
+\]
+Alors
+\[
+J_{\mathrm e}^{\,2}=-I_{V_{\mathrm e}},
+\qquad
+J_{\mathrm p}^{\,2}=0,
+\qquad
+J_{\mathrm h}^{\,2}=I_{V_{\mathrm h}}.
+\]
+Par conséquent, pour \(t\in\mathbb R\),
+\[
+\exp(tJ_{\mathrm e})
+=\cos t\,I+\sin t\,J_{\mathrm e},
+\qquad
+\exp(tJ_{\mathrm p})
+=I+tJ_{\mathrm p},
+\]
+\[
+\exp(tJ_{\mathrm h})
+=\cosh t\,I+\sinh t\,J_{\mathrm h}.
+\]
+
+De plus, dans la branche elliptique,
+\[
+C=-\frac12I+\frac{\sqrt3}{2}J_{\mathrm e},
+\]
+et, pour \(n\in\mathbb Z\),
+\[
+C^n=
+\cos\!\left(\frac{2\pi n}{3}\right)I
++\sin\!\left(\frac{2\pi n}{3}\right)J_{\mathrm e}.
+\]
+Dans la branche hyperbolique, la forme
+\[
+G=
+\begin{pmatrix}
+2&1\\
+1&-2
+\end{pmatrix}
+\]
+a pour signature \((1,1)\) et satisfait
+\[
+A^{\mathsf T}GA=G,\qquad
+\det A=1,\qquad
+\operatorname{tr}A=3.
+\]
+Si
+\[
+\eta:=\operatorname{arcosh}\frac32=2\log\varphi,
+\]
+alors
+\[
+A=\cosh(\eta)I+\sinh(\eta)J_{\mathrm h},
+\qquad
+A^n=\cosh(n\eta)I+\sinh(n\eta)J_{\mathrm h}.
+\]
+\end{theorem}
+
+\begin{proof}
+Le polynôme caractéristique du Coxeter est \(X^2+X+1\) ; par
+Cayley--Hamilton,
+\[
+C^2+C+I=0.
+\]
+D'où,
+\[
+(2C+I)^2=4C^2+4C+I=-3I,
+\]
+et donc \(J_{\mathrm e}^2=-I\). L'identité pour \(C^n\) découle de
+\(C=-\frac12I+\frac{\sqrt3}{2}J_{\mathrm e}\).
+
+La multiplication directe donne \(N^2=0\). La série exponentielle se
+tronque donc exactement :
+\[
+\exp(tN)=I+tN.
+\]
+
+Pour la troisième branche,
+\[
+A^{\mathsf T}GA=G,\qquad
+\det G=-5<0,
+\]
+de sorte que \(G\) est non dégénérée et possède la signature \((1,1)\). De même,
+\[
+(2A-3I)^2=5I,
+\]
+d'où \(J_{\mathrm h}^2=I\). Comme
+\[
+\cosh(2\log\varphi)=\frac32,
+\qquad
+\sinh(2\log\varphi)=\frac{\sqrt5}{2},
+\]
+on obtient
+\[
+A=\frac32I+\frac{\sqrt5}{2}J_{\mathrm h}
+=\cosh(\eta)I+\sinh(\eta)J_{\mathrm h}.
+\]
+La formule pour \(A^n\) résulte de la loi exponentielle. Les trois expressions
+générales s'obtiennent, dans chaque cas, en séparant dans la série exponentielle les
+puissances paires et impaires.
+\end{proof}
+
+\begin{corollary}[Équation d'Euler étendue par le paramètre tritique]
+\label{cor:euler-extendida-trit-fibonacci}
+Pour \(\tau\in\{+1,0,-1\}\), soit \(J_\tau\) l'un des générateurs
+précédents, normalisé par
+\[
+ J_\tau^2=-\tau I.
+\]
+Définissons les fonctions de la famille quadratique
+\[
+ C_\tau(t)=
+ \begin{cases}
+  \cos t,&\tau=+1,\\
+  1,&\tau=0,\\
+  \cosh t,&\tau=-1,
+ \end{cases}
+ \qquad
+ S_\tau(t)=
+ \begin{cases}
+  \sin t,&\tau=+1,\\
+  t,&\tau=0,\\
+  \sinh t,&\tau=-1.
+ \end{cases}
+\]
+Alors les trois branches satisfont une unique identité exponentielle :
+\begin{equation}
+ \boxed{\exp(tJ_\tau)=C_\tau(t)I+S_\tau(t)J_\tau.}
+ \label{eq:euler-extendida-trit-fibonacci}
+\end{equation}
+En particulier,
+\[
+ \exp(\pi J_{+1})+I=0,
+ \qquad
+ \exp(J_0)=I+J_0,
+ \qquad
+ \exp\!\bigl(2\log\varphi\,J_{-1}\bigr)=F_{\rm av}^{\,2}.
+\]
+La première égalité est la fermeture matricielle d'Euler ; la deuxième réalise le
+transport parabolique de seuil ; la troisième incorpore l'auto-échelle de
+Fibonacci au moyen des valeurs propres \(\varphi\) et \(-\varphi^{-1}\).
+\end{corollary}
+
+\begin{proof}
+L'identité \eqref{eq:euler-extendida-trit-fibonacci} s'obtient en séparant
+les puissances paires et impaires de la série exponentielle et en utilisant
+\(J_\tau^2=-\tau I\). Les trois spécialisations découlent de
+\(J_{+1}^2=-I\), de \(J_0^2=0\) et de l'égalité déjà démontrée
+\(F_{\rm av}^{\,2}=\exp(2\log\varphi\,J_{-1})\).
+\end{proof}
+
+\paragraph{\(3\) réalisations exactes des régimes quadratiques du TRIT}
+Les branches elliptique, parabolique et hyperbolique réalisent, respectivement, le
+Coxeter interne de \(A_2\), le générateur nilpotent et l'incidence
+\(F_{\rm av}\) induite par le calendrier TPK. Les identités matricielles
+sont exactes dans les espaces et calibres déclarés.
+
+\paragraph{Conditions de réalisation des \(3\) régimes quadratiques du TRIT et obstructions de non-dégénérescence algébrique}
+Le type TRIT isolé organise les trois possibilités quadratiques, mais ne
+sélectionne pas à lui seul les opérateurs \(C\), \(N\) et \(F_{\rm av}\) : la
+sélection utilise, respectivement, le Coxeter d'APP, le modèle nilpotent
+de transport et la descente des modes de TPK. L'apparition de \(\pi\) dans la
+formule spectrale elliptique appartient à l'écriture analytique du cycle et
+ne remplace pas la génération régionale de \(\pi_{\rm HMT}\). L'identité
+\(A^{\mathsf T}GA=G\) construit une transformation de Lorentz exacte en
+dimension \(1+1\) ; elle n'identifie pas à elle seule cet écran à
+l'espace-temps physique \(3+1\). Un échec de
+\[
+(2C+I)^2=-3I,\qquad N^2=0,\qquad
+(2A-3I)^2=5I,\qquad A^{\mathsf T}GA=G
+\]
+réfuterait la réalisation correspondante.

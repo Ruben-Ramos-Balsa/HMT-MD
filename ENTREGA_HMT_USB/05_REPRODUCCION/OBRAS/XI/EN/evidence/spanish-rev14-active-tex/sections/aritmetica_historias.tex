@@ -1,0 +1,241 @@
+% Incorporación al final de extension.tex; no contiene una sección principal.
+% Procedencia: RESULTADO_RECUPERADO; explicitación sectorial de las hipótesis.
+% Fuentes leídas: monografía Doble proyección holográfica (cantera editorial),
+% manuscrito/local/01_tesis_recuperada.tex y
+% manuscrito/generated/algebra_holonomica.tex, especialmente §§1--7 y 21.
+% Definición rectora de número: manuscrito/flattened/main_autosuficiente.tex,
+% secciones que comienzan en líneas 22137 y 23000 de la cantera de 775 páginas.
+% No se adopta su presentación global como prueba de todas las flechas TPK.
+
+\subsection{El número como sección compatible y el valor como lectura}
+\label{hist:seccion}
+
+La distinción entre estado y observación permite precisar qué objeto se
+prolonga cuando aumenta la resolución. A profundidad \(n\), sea \(X_n\)
+el conjunto de estados admisibles producidos por APP--TRIT--TPK. Sus datos
+incluyen posición, hojas suma y producto, residuos y cocientes, régimen,
+orientación, acarreo, fase, ruta, frontera, memoria y supervivencia. No son
+coordenadas independientes: las evaluaciones aritméticas y los transportes
+anteriores imponen sus relaciones. Una prolongación conserva esas relaciones
+en cada antecedente, aunque añada nuevos pasos y nuevos datos de memoria.
+Éste es el sentido de la aritmética de historias que se desarrolla de forma
+autosuficiente en este artículo.
+
+Sean \(r_{m,n}:X_m\to X_n\), para \(m\geq n\), las restricciones de
+profundidad, con \(r_{n,n}=\operatorname{id}\) y
+\(r_{\ell,n}=r_{m,n}\circ r_{\ell,m}\). Cada restricción conserva el
+prefijo y la información ya determinada en él.
+
+\begin{definition}[Sección numérica compatible]
+Un número HMT es una historia compatible del sistema de estados:
+\begin{equation}
+ x=(x_n)_{n\geq0}\in X_\infty:=\varprojlim_n X_n,
+ \qquad r_{m,n}(x_m)=x_n.
+ \label{hist:limite-inverso}
+\end{equation}
+Un lector es una operación adicional sobre un dominio especificado de estas
+historias. Una cifra es una observación finita; un valor escalar es una
+evaluación del lector. El par formado por la sección y su lector constituye
+una presentación leída, no una redefinición de la identidad de la sección.
+\end{definition}
+
+En el dominio arquimediano \(X_\infty^{\mathrm{Arch}}\), el lector asocia
+a cada prefijo un cilindro cerrado, conserva su encajamiento y hace tender
+su diámetro a cero. Así determina
+\begin{equation}
+ \operatorname{ev}_{\mathbb R}:X_\infty^{\mathrm{Arch}}\longrightarrow
+ \mathbb R,\qquad
+ \{\operatorname{ev}_{\mathbb R}(x)\}=\bigcap_n I_n(x).
+ \label{hist:evaluacion}
+\end{equation}
+La construcción concreta de estos cilindros y la decisión de sus fronteras
+se desarrollan en la sección~\ref{sec:generacion}. La definición
+\eqref{hist:limite-inverso} no afirma por sí sola que la imagen de
+\eqref{hist:evaluacion} sea toda la recta: una afirmación de cobertura
+requiere su propio teorema. Tampoco una igualdad de valores establece, sin
+un resultado de inyectividad, la igualdad de sus historias. Esta separación
+permite hablar de precisión como profundidad conservando la diferencia
+entre el antecedente aritmético y su realización escalar.
+
+\subsection{Composición de historias y multiplicador de memoria}
+\label{hist:algebra}
+
+Fijemos un sector de estados a profundidad \(n\) y una categoría
+\(\mathcal C\) cuyas flechas sean sus historias admisibles. La composición
+se escribe \(vu=v\circ u\): primero se recorre \(u\) y después \(v\).
+Los pasos elementales proceden de la selección, el transporte y la
+actualización del TPK. Una fibra trítica local admite la escritura
+\(\mathbb R[J_x]/(J_x^2+\tau(x)1_x)\), donde
+\(\tau(x)\in\{+1,0,-1\}\). El régimen y la orientación pertenecen al
+estado que se transporta; una transición entre regímenes no equivale a
+identificar sus álgebras cuadráticas.
+
+La siguiente formulación precisa un sector algebraico de esa composición.
+Para cada objeto \(x\), se da un álgebra real asociativa unitaria \(A_x\),
+que puede ser no conmutativa. Para cada \(u:x\to y\), se da un
+homomorfismo unital \(\rho_u:A_x\to A_y\). Suponemos una acción estricta:
+\begin{equation}
+ \rho_{\operatorname{id}_x}=\operatorname{id}_{A_x},\qquad
+ \rho_v\rho_u=\rho_{vu}.
+ \label{hist:accion-estricta}
+\end{equation}
+Para cada pareja componible \(u:x\to y\), \(v:y\to z\), fijamos un
+multiplicador central invertible
+\(\Omega(v,u)\in Z(A_z)^\times\). Se exige la normalización
+\(\Omega(\operatorname{id}_y,u)=\Omega(u,\operatorname{id}_x)=1_y\)
+y, para cada triple componible, la identidad
+\begin{equation}
+ \rho_w\bigl(\Omega(v,u)\bigr)\Omega(w,vu)
+   =\Omega(w,v)\Omega(wv,u).
+ \label{hist:cociclo}
+\end{equation}
+Son hipótesis explícitas sobre los transportes y sus coeficientes, no una
+consecuencia de llamar holonómica a la dinámica. Al aplicar esta presentación
+a un sector TPK deben identificarse sus \(\rho_u\) y \(\Omega(v,u)\).
+Las transiciones expresadas mediante bimódulos requieren conservar esa
+estructura y no quedan reemplazadas por \eqref{hist:accion-estricta}.
+
+El espacio de sumas finitas
+\[
+ \mathcal H(\mathcal C,A,\rho,\Omega)
+   =\bigoplus_{u\in\operatorname{Mor}(\mathcal C)} A_{t(u)}T_u
+\]
+recibe el producto bilineal
+\begin{equation}
+ (aT_v)(bT_u)=a\rho_v(b)\Omega(v,u)T_{vu},
+ \label{hist:producto}
+\end{equation}
+si las flechas son componibles, y cero en otro caso. Aquí \(t(u)\)
+designa el estado terminal. La suma reúne historias con coeficientes; el
+producto concatena historias conservando el multiplicador del registro.
+
+\begin{proposition}[Asociatividad sectorial con multiplicador central]
+Bajo \eqref{hist:accion-estricta} y \eqref{hist:cociclo}, el producto
+\eqref{hist:producto} es asociativo. Si el conjunto de objetos es finito,
+su unidad es \(\sum_x1_xT_{\operatorname{id}_x}\).
+\end{proposition}
+\begin{proof}
+Para \(u:x\to y\), \(v:y\to z\), \(w:z\to t\), sean
+\(a\in A_y\), \(b\in A_z\), \(c\in A_t\). Los dos coeficientes
+de \(T_{wvu}\) son
+\begin{align*}
+ ((cT_w)(bT_v))(aT_u):\quad&
+ c\rho_w(b)\Omega(w,v)\rho_{wv}(a)\Omega(wv,u),\\
+ (cT_w)((bT_v)(aT_u)):\quad&
+ c\rho_w(b)\rho_w\rho_v(a)\rho_w(\Omega(v,u))\Omega(w,vu).
+\end{align*}
+La acción estricta iguala \(\rho_w\rho_v(a)\) con \(\rho_{wv}(a)\).
+La centralidad de \(\Omega(w,v)\) permite desplazarlo a la derecha de
+ese factor; \eqref{hist:cociclo} iguala entonces los productos restantes.
+No se permutan los coeficientes \(a,b,c\). Si el triple no es componible,
+ambas parentizaciones son cero por sus estados iniciales y terminales.
+La bilinealidad concluye la prueba. Las identidades locales y la
+normalización de \(\Omega\) verifican la unidad indicada.
+\end{proof}
+
+El acarreo del calendario proporciona un ejemplo efectivo. En la categoría
+de un objeto y flechas \(C_9\), tomemos coeficientes
+\(A=\mathbb R[z,z^{-1}]\), acción identidad y
+\[
+ \Omega(b,a)=z^{c_0(a,b)},\qquad
+ c_0(a,b)=\left\lfloor\frac{a+b}{9}\right\rfloor,
+ \quad 0\leq a,b<9.
+\]
+Las dos sumas de acarreos de un triple son
+\(\lfloor(a+b+c)/9\rfloor\); por ello se cumple
+\eqref{hist:cociclo}. La variable formal \(z\) registra la vuelta sin
+asignarle un valor numérico. Imponer después \(z^{12}=1\) recupera el
+registro dodecafásico del calendario \eqref{eq:extension108}; conservar
+\(z\) sin esa relación distingue vueltas sucesivas. El ejemplo realiza
+la memoria de este calendario, sin identificarla con la totalidad de la
+memoria TPK.
+
+\subsection{Doble varianza del refinamiento y conservación de la unidad}
+\label{hist:doble-varianza}
+
+Al restringir estados se prolongan observables en sentido contrario.
+Consideremos las álgebras de funciones, con producto puntual,
+\(D_n=\operatorname{Fun}(X_n,\mathbb R)\). La precomposición define
+\begin{equation}
+ r_{m,n}^*:D_n\longrightarrow D_m,
+ \qquad r_{m,n}^*f=f\circ r_{m,n}.
+ \label{hist:precomposicion}
+\end{equation}
+Son morfismos unitales; son además inyectivos cuando las restricciones
+correspondientes son sobreyectivas. El límite directo
+\(D_{\mathrm{cyl}}=\varinjlim_n(D_n,r_{n+1,n}^*)\) reúne las
+observaciones de profundidad finita. No se identifica aquí este álgebra
+con toda el álgebra de rutas: prolongar los operadores de transporte exige
+también sus compatibilidades con el refinamiento.
+
+\begin{lemma}[Unidad y naturalidad de la evaluación]
+Si \(e_x\) es el indicador de \(x\in X_n\), se cumple
+\begin{equation}
+ r_{m,n}^*e_x=\sum_{y:\,r_{m,n}(y)=x}e_y,
+ \qquad r_{m,n}^*1_n=1_m,
+ \label{hist:unidad}
+\end{equation}
+y, para todo \(f\in D_n\), \(y\in X_m\),
+\[
+ \langle r_{m,n}^*f,y\rangle=\langle f,r_{m,n}y\rangle.
+\]
+Cada sección \(x\in X_\infty\) determina una evaluación bien definida
+\(D_{\mathrm{cyl}}\to\mathbb R\), dada por \([f]\mapsto f(x_n)\)
+para \(f\in D_n\).
+\end{lemma}
+\begin{proof}
+Las fibras de \(r_{m,n}\) forman una partición de \(X_m\). Sus
+indicadores son ortogonales y suman \(1_m\), lo que prueba
+\eqref{hist:unidad}. La naturalidad es la definición de precomposición.
+Finalmente, \((r_{m,n}^*f)(x_m)=f(x_n)\), de modo que dos representantes
+compatibles dan la misma evaluación en el límite directo.
+\end{proof}
+
+La unidad global es la función constante uno sobre todas las posibilidades;
+la sección individual selecciona una historia compatible. Conservar la
+primera no significa inmovilizar la segunda. El refinamiento puede aumentar
+la cantidad de extensiones y la profundidad de cada historia manteniendo
+la unidad y todas las evaluaciones de sus antecedentes.
+
+\subsection{Retorno de fase, representación de Weyl y dos lecturas}
+\label{hist:puente-lecturas}
+
+La ley \eqref{eq:holonomia-memoria} adquiere una realización operatoria
+en la suspensión bilateral que se construirá en la
+sección~\ref{sec:generacion}. Allí \(T\) es el avance de un paso,
+\(V_9\) observa la fase nonádica, \(W_\delta\) la fase de rotación y
+\(D_M\) el grado de memoria. Escribiendo
+\(\widehat\Gamma_9=T^9\) para la vuelta en esta representación,
+las relaciones de Weyl \eqref{eq:weyl-relojes} implican, sobre vectores
+de soporte finito,
+\begin{equation}
+ \begin{aligned}
+ V_9\widehat\Gamma_9&=\widehat\Gamma_9V_9,\qquad
+ W_\delta\widehat\Gamma_9=e^{2\pi i9\delta}
+     \widehat\Gamma_9W_\delta,\\
+ [D_M,\widehat\Gamma_9]&=\widehat\Gamma_9.
+ \end{aligned}
+ \label{hist:tres-retornos}
+\end{equation}
+La primera igualdad sigue de \(\zeta_9^9=1\); la segunda, de nueve
+aplicaciones de la covariancia de \(W_\delta\); la tercera expresa
+el incremento unitario de memoria. La fase finita retorna, mientras la
+rotación irracional y la memoria distinguen el estado siguiente. Los
+caracteres y el parámetro \(\delta\) se realizan después desde la
+construcción numérica allí especificada: no seleccionan retrospectivamente
+las semillas. Esta representación describe observables y traslaciones de
+la suspensión; no reemplaza todas las coordenadas ni todos los operadores
+del TPK.
+
+La doble lectura prolonga la misma distinción entre historia y observable.
+En su dominio arquimediano se aplica \eqref{hist:evaluacion}; en el
+dominio incidencial enriquecido, los mapas \(Q_n\) de la
+sección~\ref{exc:doble-lectura} conservan las palabras y los marcos de
+frontera. La igualdad allí demostrada
+\(r_{n,m}Q_n=Q_mp_{n,m}\) determina su prolongación \(Q_\infty\).
+Sobre el dominio común de ambas lecturas pueden considerarse conjuntamente
+\(\operatorname{ev}_{\mathbb R}(x)\) y \(Q_\infty(x)\): la
+primera retiene el valor; la segunda, la incidencia transportada que su
+codominio conserva. La sección antecede a ambas. Esta articulación permite
+pasar de la aritmética de historias a las constantes y a la lectura
+excepcional sin convertir sus realizaciones en nuevos datos iniciales.

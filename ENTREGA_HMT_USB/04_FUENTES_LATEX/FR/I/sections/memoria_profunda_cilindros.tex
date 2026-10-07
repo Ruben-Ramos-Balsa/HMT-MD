@@ -1,0 +1,93 @@
+\subsection{Mémoire profonde et compatibilité des cylindres}
+\label{memprof:seccion}
+
+Le prolongement compare des états qui conservent simultanément restes,
+quotients et frontières. Dans la coordinatisation linéaire à six coordonnées du registre,
+nous prenons le représentant entier de \(L_0\) dont les entrées ont été indiquées :
+\[
+ A_H=\begin{pmatrix}
+ 2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+ 0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+ \end{pmatrix},\qquad\det A_H=1.
+\]
+Le choix de ce représentant fait partie de la coordinatisation : la réduction
+modulo trois conserve \(L_0\), tandis que le représentant entier fixe
+l'opération sur les quotients profonds. Avec des vecteurs-lignes, on obtient
+\begin{equation}
+ \begin{aligned}
+ \mathsf{Div}_H:\mathbb Z^6&\longrightarrow
+       \{0,1,2\}^6\times\mathbb Z^6,\\
+ x_H&\longmapsto(u_H,x_H^+),\\
+ y_H&=x_HA_H,\qquad u_H=[y_H]_3,\qquad
+ x_H^+=(y_H-u_H)/3 .
+ \end{aligned}
+ \label{memprof:division}
+\end{equation}
+La paire \((u_H,x_H^+)\) conserve \(y_H=u_H+3x_H^+\). Puisque \(A_H\) est unimodulaire, son inverse est entière et
+\begin{equation}
+ x_H=(u_H+3x_H^+)A_H^{-1}.
+ \label{memprof:inversa}
+\end{equation}
+Cette identité récupère la coordonnée profonde à partir de son résidu et de son quotient. Les autres champs de l'état conservent leurs propres registres. L'orientation ternaire est lue ensuite au moyen de \(0\mapsto0,\ 1\mapsto+1,\ 2\mapsto-1\), en conservant le résidu \(u_H\in\{0,1,2\}^6\) et le quotient de \eqref{memprof:division}.
+
+La coordinatisation cylindrique relie un préfixe ternaire de longueur \(L\),
+d'indice entier \(N\), à \(k_{\mathrm{dec}}\) triades décimales,
+d'indice \(D\). Les cylindres semi-ouverts correspondants sont
+\[
+ I_3(N,L)=\left[\frac N{3^L},\frac{N+1}{3^L}\right),\qquad
+ I_{1000}(D,k_{\mathrm{dec}})
+ =\left[\frac D{1000^{k_{\mathrm{dec}}}},
+         \frac{D+1}{1000^{k_{\mathrm{dec}}}}\right).
+\]
+Nous définissons les entiers de frontière
+\[
+ a_{\mathrm{cyl}}=N1000^{k_{\mathrm{dec}}}-D3^L,\qquad
+ b_{\mathrm{cyl}}=(N+1)1000^{k_{\mathrm{dec}}}-D3^L.
+\]
+Pour un bloc de six résidus, nous fixons son codage entier
+\[
+ \nu(u_H)=\sum_{j=1}^6(u_H)_j3^{6-j}
+ \in\{0,\ldots,728\}.
+\]
+
+\begin{lemma}[Mise à jour entière des cylindres compatibles]
+\label{memprof:cilindros}
+Les cylindres précédents ont une intersection non vide si et seulement si
+\(a_{\mathrm{cyl}}<3^L\) et \(b_{\mathrm{cyl}}>0\).
+En ajoutant un bloc ternaire d'indice
+\(\nu\in\{0,\ldots,728\}\), on a \(N'=729N+\nu\) et
+\(L'=L+6\). Pour \(\Delta k_{\mathrm{dec}}\in\{0,1\}\),
+les frontières sont mises à jour par
+\[
+ \begin{array}{ll}
+ \Delta k_{\mathrm{dec}}=0:
+   &a_{\mathrm{cyl}}'=729a_{\mathrm{cyl}}+\nu1000^{k_{\mathrm{dec}}},\\[2pt]
+ \Delta k_{\mathrm{dec}}=1:
+   &D'=1000D+\delta,\\
+   &a_{\mathrm{cyl}}'=729000a_{\mathrm{cyl}}
+      +\nu1000^{k_{\mathrm{dec}}+1}-\delta\,729\,3^L ,
+ \end{array}
+\]
+où \(\delta\in\{0,\ldots,999\}\) est la triade du prolongement
+compatible. Dans les deux cas,
+\[
+ b_{\mathrm{cyl}}'=a_{\mathrm{cyl}}'
+          +1000^{k_{\mathrm{dec}}+\Delta k_{\mathrm{dec}}}.
+\]
+\end{lemma}
+\begin{proof}
+Deux intervalles semi-ouverts s'intersectent précisément lorsque chaque extrémité gauche est inférieure à l'extrémité droite de l'autre. Multiplier ces deux inégalités par \(3^L1000^{k_{\mathrm{dec}}}\) donne \(a_{\mathrm{cyl}}<3^L\) et \(b_{\mathrm{cyl}}>0\). La substitution de \(N'\), \(L'\) et \(D'\) dans
+\[
+ a_{\mathrm{cyl}}'
+ =N'1000^{k_{\mathrm{dec}}+\Delta k_{\mathrm{dec}}}-D'3^{L'}
+\]
+produit les deux récurrences. Soustraire les définitions de
+\(b_{\mathrm{cyl}}'\) et \(a_{\mathrm{cyl}}'\) donne la dernière identité.
+\end{proof}
+
+Ces opérations agissent sur des préfixes entiers et leurs restrictions
+compatibles. La lecture archimédienne apparaît lorsqu'on évalue le système de
+cylindres résultant. Le domaine de prolongement incorpore en outre
+l'orientation, la retenue, la signature conjointe et les données de frontière de l'état
+\(\widehat X\) de \eqref{eq:actualizacion} ; la comparaison des intervalles
+est une composante de cette compatibilité conjointe.

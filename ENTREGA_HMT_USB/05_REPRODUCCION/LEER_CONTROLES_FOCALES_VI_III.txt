@@ -1,0 +1,67 @@
+CONTROLES FOCALES VI/VIa Y III — ENTRADAS CONSERVADAS
+
+Esta guía separa los controles científicos de los sellados de ediciones
+históricas. No registra una ejecución nueva, no certifica toda la obra y no
+modifica los recibos originales. Las ediciones de lectura vigentes permanecen
+en 04_FUENTES_LATEX y en los PDF finales.
+
+Requisito: Python 3 con biblioteca estándar. En Windows puede usarse `py -3`
+en lugar de `python3`. Trabaje siempre sobre una copia escribible del paquete;
+algunos controles generan recibos. No utilice Python con -O.
+
+VI / VIa (ES, EN o FR)
+----------------------
+Desde 05_REPRODUCCION/RECUPERADOS/VI_FOCAL/VI_ES, o la correspondiente
+raíz VI_EN, VI_FR, VIa_ES, VIa_EN o VIa_FR:
+
+  python3 -I -S -B technical/verificar_paquete_portable_vi.py --skip-source-audit
+
+La opción ya existe en el programa original. Ejecuta seis controles solicitados:
+apéndices del catálogo, construcciones finitas, partícula/Möbius/Kepler,
+Fock/Pauli, dependencias09 e historias15, y coteja las seis huellas del núcleo.
+El estado de éxito que ese programa contempla en esta modalidad es PARCIAL,
+no el de los siete controles. No debe cambiarse por una etiqueta de cierre
+global. El control omitido es verificar_fuentes_vi.py --check, una auditoría
+editorial del corte de fuentes, no una prueba matemática.
+
+Se omite ese auditor porque su snapshot histórico y el recibo actual de
+apendices_catalogo_control.json piden huellas distintas para algunas salidas
+de apéndices. Los recibos se conservan sin corregirlos o regenerarlos. La
+recuperación coloca las seis fuentes del núcleo, las seis secciones leídas
+por los verificadores y las tres salidas exactas declaradas por el recibo
+del generador. Las siete entradas catalogo_*.json ya coinciden con sus huellas.
+La cápsula copia sin cambios los seis programas y el launcher actual. No
+sobrescribe ninguna fuente en OBRAS ni mezcla su sección11 vigente con la
+salida exacta exigida por el control de catálogo. Los recibos de referencia
+históricos siguen en OBRAS/VI/idioma/technical o OBRAS/VIa/idioma/technical.
+La sección09 es la propietaria española vigente (misma SHA que su fuente de
+lectura actual); sus huellas históricas difieren. El verificador registra su
+huella, no exige la antigua. No se transfiere a esta copia el PASS de un recibo
+anterior. Las otras cinco secciones conservan los bytes del control archivado.
+Las fuentes auxiliares recuperadas son propietarios de estos controles;
+no sustituyen la edición trilingüe vigente ni sus resultados posteriores.
+
+III (ES, EN o FR)
+-----------------
+Desde 05_REPRODUCCION/OBRAS/III/ES/technical/reproducibilidad, o idioma deseado:
+
+  python3 -I -S -B verificar_nucleo_finito.py --receipt NUCLEO_FINITO_NUEVA_EJECUCION.json
+  python3 -I -S -B originales/BORRADOR_02/04_DESARROLLO/verificar_confluencia_espectral.py
+
+El primer programa escribe únicamente el recibo solicitado; el segundo
+publica JSON por la salida estándar. Use un nombre nuevo para cada ejecución.
+Estos son los dos controles científicos llamados por reproducir.py, invocados
+directamente sin su gate documental de PDF antiguo. No equivalen a ejecutar
+reproducir.py ni a obtener su PASS de integridad documental.
+
+Sus fuentes TeX/Markdown y catálogo JSON están presentes y conservan las
+huellas del manifiesto focal. El único objeto ausente de ese manifiesto y de
+SELLADO.json es el PDF sustituido ACCION_GEOMETRIA_BARBERO_BORRADOR_02.pdf.
+No se vuelve a incluir ese PDF ni se falsea su sellado. Los programas focales
+no lo leen. Tampoco se requieren --seal, --check-sources, --check-article-copies
+ni una compilación del manuscrito para los dos comandos anteriores.
+
+Alcance: inventario de archivos, correspondencias y caminos de ejecución
+establecidos mediante lectura del código y cotejo SHA256. Los controles no
+se han ejecutado durante esta integración. Los resultados nuevos que genere
+el receptor deben valorarse con el alcance y límites originales de cada uno.

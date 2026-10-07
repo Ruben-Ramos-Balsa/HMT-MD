@@ -1,0 +1,101 @@
+% Corte mecánico íntegro: parte_ii.tex:323--419.
+% Residencia material del ensamblaje sucesor de 102 capítulos.
+% Residencia causal: capítulo 46.
+
+\chapter{Spectral Pell screw and logarithmic suspension}
+
+\section{Screw law}
+
+The corpus contains the exact identity
+\begin{equation}
+ V^{-1}\mathscr S V=(2+\sqrt3)\ii\,\mathscr S.
+ \label{espiral:eq:tornillo-pell}
+\end{equation}
+Let \(\varepsilon=2+\sqrt3\). The orbit transversal
+\[
+ z_n=z_0(\varepsilon\ii)^n
+\]
+satisfies
+\[
+ r_n=r_0\varepsilon^n,
+ \qquad
+ \theta_n=\theta_0+\frac{\pi n}{2}.
+\]
+Eliminando \(n\),
+\begin{equation}
+ r(\theta)=r_0
+ \exp\!\left[
+ \frac{2\log(2+\sqrt3)}{\pi}
+ (\theta-\theta_0)
+ \right].
+ \label{espiral:eq:espiral-log-pell}
+\end{equation}
+The logarithmic spiral is an output of the operator: its equation was not chosen
+to fit \(\varepsilon\) afterward.
+
+\begin{proof}[Derivation of \cref{espiral:eq:espiral-log-pell}]
+From \(\theta_n-\theta_0=n\pi/2\) it follows that
+\(n=2(\theta_n-\theta_0)/\pi\). Substituting into
+\(r_n=r_0\varepsilon^n\),
+\[
+ r_n=r_0\exp\left(
+ \frac{2\log\varepsilon}{\pi}(\theta_n-\theta_0)
+ \right).
+\]
+Continuous interpolation is the indicated equation.
+\end{proof}
+
+\section{Conjugate contraction involution}
+
+The bilateral extension \(n\in\Z\) produces
+\[
+ n\to+\infty:\ r_n\to\infty,
+ \qquad
+ n\to-\infty:\ r_n\to0.
+\]
+The inversion \(n\mapsto-n\) interchanges expansion and contraction. Since
+\(\varepsilon^{-1}=2-\sqrt3\), both branches belong to the same Pell unit.
+They are not two independent spirals, but two orientations of the same
+spectral screw.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.82]
+ \draw[->,HMTGray] (-5.1,0)--(5.1,0) node[right] {$x$};
+ \draw[->,HMTGray] (0,-3.1)--(0,3.1) node[above] {$y$};
+ \draw[HMTBlue,very thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(\t))},{.27*exp(.22*\t)*sin(deg(\t))});
+ \draw[HMTRed,thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(-\t))},{.27*exp(.22*\t)*sin(deg(-\t))});
+ \foreach \k in {-4,-3,...,4}{
+   \pgfmathsetmacro{\ang}{1.57079632679*\k}
+   \fill[HMTNavy]
+     ({.27*exp(.22*\ang)*cos(deg(\ang))},
+      {.27*exp(.22*\ang)*sin(deg(\ang))}) circle (.8pt);
+ }
+ \node[HMTBlue,font=\small\sffamily] at (3.5,2.4) {expansion};
+ \node[HMTRed,font=\small\sffamily] at (3.5,-2.4) {conjugate orientation};
+\end{tikzpicture}
+\caption{Transverse projection of the Pell screw. The marks represent quarter turns.}
+\label{espiral:fig:tornillo-pell}
+\end{figure}
+
+\section{Scale covariance and energy conservation}
+
+The dilation \(\varepsilon\) must not be interpreted as gratuitous growth
+of the energetic amplitude of a wave in vacuum. Its coherent realization
+acts on the spatial or spectral scale:
+\[
+ (r,\varphi,\lambda)
+ \longmapsto
+ (\varepsilon r,\varphi+\pi/2,\varepsilon\lambda).
+\]
+This distinction will be essential in the electromagnetic realization of
+\cref{espiral:chap:realizacion-em}.
+
+\begin{resultbox}[title={Exact compatibility between the Pell spectral screw and the phase--memory suspension}]
+The minimal phase--memory lift is a circular helix. The spectral screw
+combines a quarter-turn and a Pell dilation; its projection is a logarithmic
+spiral. Both arise from the HMT ledger, but they are neither the same
+periodicity nor obtained from one another by forgetting types.
+\end{resultbox}

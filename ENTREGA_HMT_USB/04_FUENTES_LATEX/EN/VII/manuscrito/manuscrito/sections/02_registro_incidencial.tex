@@ -1,0 +1,382 @@
+% Propuesta separada; no modifica el bloque común del artículo I.
+% Procedencia: artículo II, revisión 05, registro_incidencias.tex y
+% registro_imagen_integral.tex; aclaraciones de índices de revisiones 06/07.
+% Inserción prevista inmediatamente antes de subsec:k-terminal.
+\subsection{Evaluation of incidences and determination of the transverse coordinates}
+\label{iii:r25:incidencias}
+
+The dodecaphasic register preserves a history of visits and oriented
+traces. Its transverse coordinates are obtained through a composition
+of operations: arithmetic evaluation of the visits, counting by windows,
+decimal normalization, and cyclic differences.
+Reconstructing the register from those differences is another operation,
+whose existence and uniqueness will be proved below.
+This separation makes it possible to specify both the data used by the
+extractor and the information it transmits to the harmonic readout.
+
+Let $\mathscr L$ be an incidence register produced by the selection,
+transport, and updating of an APP--TRIT--TPK history.
+Each visit preserves its route, APP position, sheet, time,
+multiplicity, and boundary class; each trace preserves its members,
+orientation, multiplicity, and length in the unit declared by its
+readout. The windows are
+\[
+ E_m=\{9(m-1)+1,\ldots,9m\},\qquad 1\leq m\leq12.
+\]
+Evaluation of the sum or product sheet determines the integer
+$n(v)$ of each visit and its positive division
+\[
+ n(v)=r(v)+9q(v),\qquad 1\leq r(v)\leq9.
+\]
+The residue is calculated from that evaluation. The boundary class of
+a visit with residue $9$ is preserved by
+$\epsilon_\partial(v)=1$ on the corona and $-1$ in the interior.
+
+The incidence presentation of the register uses the three counts
+\begin{align}
+ A_m&=\sum_{v\in E_m}w(v)
+       \mathbf1_{\{1,3,5,7\}}(r(v)),\label{iii:r25:recuento-a}\\
+ C_m&=\sum_{j\geq0}
+       \bigl(\nu^-_{120,m}(j)-\nu^+_{120,m}(j)\bigr),
+       \label{iii:r25:recuento-c}\\
+ V_m&=\sum_{v\in E_m}w(v)
+       \mathbf1_{\{9\}}(r(v))\epsilon_\partial(v).
+       \label{iii:r25:recuento-v}
+\end{align}
+Here $w(v)$ is the incidence multiplicity and
+$\nu^\pm_{120,m}(j)$ counts the oriented traces of the indicated
+channel with reduced length $120(1+3j)$, according to the enumeration
+of the register.
+The collection of traces and its multiplicity are data of the evaluation,
+together with their corresponding production rule. The integer sum requires
+finite support or a construction that determines its meaning.
+The reduced length of a trace and the number of times in the
+window are differently typed quantities; the readout unit specifies
+their relationship. The symbols $A_m,C_m,V_m$ here denote
+integer counts, distinct from the angular pair and the constitutive operator.
+
+Let $[x]_{10}\in\{0,\ldots,9\}$ be the Euclidean representative.
+Normalization also preserves the quotient in
+\[
+ x=[x]_{10}+10\lfloor x/10\rfloor.
+\]
+The block is formed as
+\begin{equation}
+ z_m=100[A_m]_{10}+10[C_m]_{10}+[V_m]_{10},
+ \qquad 0\leq z_m\leq999.
+ \label{iii:r25:bloque}
+\end{equation}
+With cyclic indices modulo $12$, let
+\[
+ (D_a z)_m=z_m-z_{m+a},\qquad a\in\{3,4\},
+ \qquad Q(z)=\sum_{m=1}^{12}z_m.
+\]
+The incidence composition is expressed by
+\begin{equation}
+ \mathcal E_{\rm cnt}(\mathscr L)
+ =\mathcal D(z):=(D_3z,D_4z,Q(z))\in\mathbb Z^{25}.
+ \label{iii:r25:composicion}
+\end{equation}
+Its arguments are the visits and traces with their counting rules.
+The evaluation does not receive $K$, $U$, $\alpha$, or the expected
+transverse coordinates. To identify it with
+$\mathcal E_{108}^{90,120}$, the composition with the actual
+collection and incidences of the terminal state is also preserved. The
+invertibility of $\mathcal D$ determines a subsequent reconstruction;
+by itself, it does not select that collection of incidences.
+
+\begin{proposition}[Residual information determined by the extractor]
+\label{iii:r25:residuos}
+Let $N,N'\in\mathbb Z^{12\times3}$ be two count registers,
+ordered by $(A,C,V)$. For the operations
+\eqref{iii:r25:bloque}--\eqref{iii:r25:composicion},
+\[
+ \mathcal E_{\rm cnt}(N)=\mathcal E_{\rm cnt}(N')
+ \quad\Longleftrightarrow\quad N-N'\in10\mathbb Z^{36}.
+\]
+The $36$ sectoral residues determine exactly the output of
+$25$ coordinates. The quotients and provenance constitute
+additional information in the register.
+\end{proposition}
+\begin{proof}
+Equality modulo $10$ produces the same blocks and the same
+transverse coordinates. Conversely, equality of the
+coordinates gives $D_3(z-z')=D_4(z-z')=0$. Steps $3$ and $4$
+generate the cycle of length $12$, so $z-z'$ is constant.
+Equality of $Q$ makes that constant zero. The expansion of each integer
+from $0$ to $999$ into three decimal digits is unique; hence
+the three residues of each window are recovered.
+\end{proof}
+
+The proposition is valid on the entire indicated integer domain. It
+does not postulate that the $36$ classes are independent on the subset
+of admissible registers produced by TPK.
+
+\subsection{Integral image and inversion of the transverse coordinates}
+\label{iii:r25:imagen-seccion}
+
+To express the inversion, the blocks are reindexed by
+$i\in\mathbb Z/12\mathbb Z$, from $0$ to $11$. Let
+$(Sz)_i=z_{i+1}$, $D_3=I-S^3$, and $D_4=I-S^4$.
+Given an integer triple $(b,c,q)$, define
+\begin{equation}
+ w_i=c_i-b_{i+1},\qquad
+ P_0=0,\quad P_i=\sum_{j=0}^{i-1}w_j\ (1\leq i\leq12),
+ \qquad T(w)=\sum_{i=0}^{11}P_i.
+ \label{iii:r25:incrementos}
+\end{equation}
+
+\begin{theorem}[Characterization of the integral image]
+\label{iii:r25:imagen}
+A triple $(b,c,q)\in\mathbb Z^{25}$ belongs to
+$\operatorname{im}\mathcal D$ if and only if
+\begin{align}
+ b_i&=w_i+w_{i+1}+w_{i+2},\qquad 0\leq i<12,
+       \label{iii:r25:relaciones}\\
+ \sum_{i=0}^{11}w_i&=0,\label{iii:r25:cierre}\\
+ q+T(w)&\equiv0\pmod {12}.\label{iii:r25:congruencia}
+\end{align}
+Its unique integer preimage is
+\begin{equation}
+ z_i=\frac{q+T(w)}{12}-P_i,\qquad0\leq i<12.
+ \label{iii:r25:inversa}
+\end{equation}
+The twelve relations \eqref{iii:r25:relaciones} and relation
+\eqref{iii:r25:cierre} are linearly independent over
+$\mathbb Q$.
+\end{theorem}
+\begin{proof}
+For an output of $\mathcal D$,
+\[
+ c_i-b_{i+1}
+ =(z_i-z_{i+4})-(z_{i+1}-z_{i+4})=z_i-z_{i+1}.
+\]
+Three consecutive increments sum to $b_i$, and their total
+cyclic sum is zero. Moreover, $P_i=z_0-z_i$, whence
+$q=12z_0-T(w)$. This gives the conditions and the inverse formula.
+Conversely, the congruence makes the coordinates of
+\eqref{iii:r25:inversa} integers, and closure allows them to be
+extended cyclically. Their adjacent differences are $w_i$, so $D_3z=b$
+and
+\[
+ (D_4z)_i=w_i+w_{i+1}+w_{i+2}+w_{i+3}
+ =w_i+b_{i+1}=c_i.
+\]
+Summation gives $Q(z)=q$. The formula also determines uniqueness.
+Finally, the invertible integer change
+$(b,c)\mapsto(b,w=c-Sb)$ transforms the first twelve relations
+into $b=(I+S+S^2)w$: each solves for a different coordinate of
+$b$. Closure $\sum_iw_i=0$ adds an independent relation.
+\end{proof}
+
+The rational image has dimension $12$. The integral condition adds
+the congruence of order $12$ in \eqref{iii:r25:congruencia}.
+The eleven increments $w_0,\ldots,w_{10}$ and the charge $q$ are
+sufficient coordinates, with $w_{11}=-\sum_{i=0}^{10}w_i$.
+The $25$ coordinates preserve those $12$ degrees of freedom
+through $13$ linear relations. If the triple also comes from
+\eqref{iii:r25:bloque}, the inverse belongs to
+$\{0,\ldots,999\}^{12}$ and recovers its three residues per window.
+
+\subsubsection{Agreement with the harmonic transform}
+
+The transform $\mathcal H_{12}$ acts through $H_4$ on the
+orbits $(r,r+3,r+6,r+9)$, $r=0,1,2$, where
+\[
+ H_4=\begin{pmatrix}
+ 1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1
+ \end{pmatrix},\qquad H_4^2=4I_4.
+\]
+For a compatible triple, let
+\[
+ B_r=\sum_{j=0}^3c_{r+3j},\qquad
+ a_0=\frac{q+2B_0+B_1}{3},\quad
+ a_1=a_0-B_0,\quad a_2=a_1-B_1.
+\]
+The harmonic readout has blocks
+\[
+ (\Pi_H(b,c,q))^{(r)}
+ =(a_r,b_{r+3}-b_{r+9},b_r+b_{r+6},b_r-b_{r+6}).
+\]
+
+\begin{proposition}[Agreement of reconstructions]
+\label{iii:r25:hadamard}
+On $\operatorname{im}\mathcal D$,
+\[
+ \Pi_H\mathcal D=\mathcal H_{12},\qquad
+ \mathcal D^{-1}=\tfrac14\mathcal H_{12}\Pi_H.
+\]
+The image of $\Pi_H$ restricted to that domain is
+\[
+ \mathcal L_H=
+ \{u\in\mathbb Z^{12}:\mathcal H_{12}u\equiv0\pmod4\}.
+\]
+\end{proposition}
+\begin{proof}
+For $z=\mathcal D^{-1}(b,c,q)$, let
+$h_r=\sum_{j=0}^3z_{r+3j}$. Shifting by four positions
+takes each orbit to the next; therefore $B_r=h_r-h_{r+1}$.
+The identity $q=h_0+h_1+h_2$ gives $a_r=h_r$.
+Within an orbit, write $(x_0,x_1,x_2,x_3)$ for its coordinates
+and $d_j=x_j-x_{j+1}$. Then
+\[
+ \begin{aligned}
+ d_1-d_3&=x_0+x_1-x_2-x_3,\\
+ d_0+d_2&=x_0-x_1+x_2-x_3,\\
+ d_0-d_2&=x_0-x_1-x_2+x_3.
+ \end{aligned}
+\]
+These are the remaining three rows of $H_4x$. Inversion and the
+integral characterization follow from $\mathcal H_{12}^2=4I$.
+\end{proof}
+
+The harmonic congruence condition controls the output of $\Pi_H$;
+membership of the channels in $\operatorname{im}\mathcal D$
+also requires \eqref{iii:r25:relaciones}--\eqref{iii:r25:congruencia}.
+An exact negative control is obtained by taking $b=0$, $q=0$, and
+$c=e_0-e_3$. The three orbital sums of $c$ vanish, so
+$\Pi_H(b,c,q)=0$, but the image relations fail.
+The harmonic readout does not replace the compatibility check
+for the channels.
+
+\subsection{Conjugation, covariance, and memory of the incidence register}
+\label{iii:r25:transporte}
+
+Let $\rho(m)=13-m$. If incidence conjugation reverses the
+order of the windows, preserves the arithmetic and boundary classes
+of the visits, and interchanges the trace channels, then
+\[
+ (A_m^\dagger,C_m^\dagger,V_m^\dagger)
+ =(A_{\rho(m)},-C_{\rho(m)},V_{\rho(m)}).
+\]
+With $c_m=[C_m]_{10}$, decimal normalization gives
+\begin{equation}
+ z_m^\dagger=z_{\rho(m)}
+ +100\mathbf1_{\{c_{\rho(m)}\ne0\}}-20c_{\rho(m)}.
+ \label{iii:r25:conjugacion}
+\end{equation}
+Indeed, $[-C]_{10}=0$ if $[C]_{10}=0$, and is
+$10-[C]_{10}$ otherwise. The channel negation is
+applied before reconstructing the decimal block.
+
+Application to a specific involution also preserves the
+window endpoints. For a route
+$\gamma=(x_0,\ldots,x_n)$ read before advancement,
+\begin{equation}
+ \sum_{k=0}^{n-1}f(x_{n-k})
+ =\sum_{k=0}^{n-1}f(x_k)+f(x_n)-f(x_0).
+ \label{iii:r25:extremos}
+\end{equation}
+Both sums contain the same interior terms; the difference
+is the final endpoint minus the initial one. On closed routes this
+correction vanishes. On open windows it is incorporated before
+reduction modulo $10$.
+
+\begin{proposition}[Consequence of a periodic reduction]
+\label{iii:r25:periodo}
+If the observable of a fixed collection of routes satisfies
+$o(t+54)=o(t)$, its multiplicities are preserved under that return,
+and the same local readout acts on windows of nine times,
+then
+\[
+ (A,C,V)_{m+6}=(A,C,V)_m,\qquad z_{m+6}=z_m.
+\]
+\end{proposition}
+\begin{proof}
+Translation $t\mapsto t+54$ takes each window bijectively
+to the one six positions later and preserves each counted incidence
+and its multiplicity. Equality is transmitted to the counts
+and their decimal normalizations.
+\end{proof}
+
+A presentation with twelve distinct blocks therefore preserves
+information that does not factor through that observable of period $54$:
+incidence selection, orientation, endpoints, multiplicity, or
+memory. The proposition delimits the effect of that reduction; it does
+not assign period $54$ to the complete history.
+
+\subsubsection{Determination on orbits and accumulation of events}
+
+Fixing only $Q(z)=q$ leaves an affine class of the lattice
+\[
+ \mathcal Z_0=\{v\in\mathbb Z^{12}:\sum_i v_i=0\}
+ =\bigoplus_{i=0}^{10}\mathbb Z(e_i-e_{11}).
+\]
+For example, $100\mathbf1+e_0$ and $100\mathbf1+e_1$ have
+charge $1201$ and satisfy the image checks through their
+respective channels. They are witnesses to the compatibility equations,
+without any assertion that they belong to HMT terminal histories.
+
+\begin{proposition}[Cyclic covariance]
+\label{iii:r25:covariancia}
+Let $\rho$ be the window translation of a register $R$, of
+minimal period $p\mid12$, and let $S$ be the translation of its
+coordinates. A covariant readout on that orbit is determined
+by $z\in\operatorname{Fix}(S^p)$. The condition $Q(z)=q$
+admits integer solutions if and only if $12/p$ divides $q$;
+when they exist, they form an affine class of rank $p-1$.
+\end{proposition}
+\begin{proof}
+The rule $F(\rho^jR)=S^jz$ is well defined exactly when
+$S^pz=z$. These vectors consist of $12/p$ repetitions of a block of
+length $p$, and their charge is $\frac{12}{p}\sum_{i=0}^{p-1}z_i$.
+The formula proves the divisibility and rank. Covariance of
+the channels follows from $D_aS=SD_a$ and $QS=Q$.
+\end{proof}
+
+In the harmonic chart, the corresponding action is
+$\widehat S_H=\mathcal H_{12}S\mathcal H_{12}/4$.
+If the origin is marked, the action also transports that mark.
+The period of the orbit indicated here is not identified with that of
+the enriched history. For an initial readout $F_{108}$ already
+defined, naturality under truncation is expressed by
+$F_N=F_{108}\circ\tau_{N,108}$; this identity preserves the
+initial evaluation without selecting its production rule.
+
+\begin{proposition}[Additive composition of incidence contributions]
+\label{iii:r25:eventos}
+Suppose that the initial state and each event $a_t$ produce,
+through previously fixed rules on the register, contributions
+$(\delta w_t,\delta q_t)$ such that
+\[
+ \sum_i\delta w_{t,i}=0,
+ \qquad \delta q_t+T(\delta w_t)\equiv0\pmod {12}.
+\]
+With compatible initial conditions $(w^{(0)},q^{(0)})$,
+updating by summation determines a unique register at each stage.
+Its increment is
+\[
+ \delta z_{t,i}=
+ \frac{\delta q_t+T(\delta w_t)}{12}-P_i(\delta w_t).
+\]
+The construction respects the concatenation of segments and preserves
+the readout of a prefix under subsequent extensions.
+\end{proposition}
+\begin{proof}
+The compatibility conditions are preserved by summation, and the
+inverse \eqref{iii:r25:inversa} is additive in $(w,q)$.
+Induction fixes each state. Summation over concatenated segments
+is the sum of their contributions; a prefix receives the same
+summands before and after extension.
+\end{proof}
+
+This proposition gives a sufficient criterion for additive
+accumulation, not a requirement that every TPK readout be linear.
+When events are transported by nontrivial actions, their
+contributions are expressed in the terminal chart through the
+corresponding affine cocycle. In both cases, the event rules and the
+initial state preserve their incidence provenance.
+
+The preceding development determines the passage
+\[
+ \mathscr L\longmapsto(A,C,V)\longmapsto z
+ \longmapsto(D_3z,D_4z,Q(z))\longmapsto\mathcal H_{12}z
+\]
+with the conditions of each map. Its domain differs from the
+regional register in Appendix~\ref{iii:nucleo-finito}: there, the
+equations $X_aL_a=Y_a$ determine the lifts from
+ternary transitions. Here, the incidences of visits and traces
+determine integer blocks and their channels. The uniqueness of one
+reconstruction does not replace the production of the register used
+by the other. Both preserve their primitives, operations, and proofs
+in the APP--TRIT--TPK chain.

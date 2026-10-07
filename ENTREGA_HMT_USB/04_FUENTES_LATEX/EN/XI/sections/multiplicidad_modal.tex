@@ -1,0 +1,243 @@
+% BEGIN REV09_MULTIPLICIDAD_MODAL
+\subsubsection{Multiplicity and recovery of modal itineraries}
+\label{corpus9:modal:multiplicidad}
+
+The incidence \(F_{\mathrm{av}}\), constructed by the tritic calendar
+in the preceding development, acts here on its envelope of modal
+walks. Write
+\[
+ F=F_{\mathrm{av}}=\begin{pmatrix}0&1\\1&1\end{pmatrix},
+ \qquad 0=\Sigma,\quad 1=\Pi.
+\]
+The self-scaling coordinate \(\varphi\) and the positive ray
+\(r=(1,\varphi)\) are the outputs already obtained from this
+incidence. They determine the multiplicity of the scalar reading
+and support a reversible representation of each itinerary.
+
+Consider the set of finite directed walks
+\(\gamma=(x_0,\ldots,x_n)\) of \(F\). Their endpoints and lengths
+are distinguished, repetitions are allowed, and trivial walks are
+included. This domain is the modal envelope; the complete TPK
+state additionally retains the records of its enriched history.
+The multiplicative character takes the form
+\begin{equation}
+ \chi(\gamma)=\varphi^n\frac{r_{x_0}}{r_{x_n}}
+             =\varphi^{k(\gamma)},\qquad
+ r=(1,\varphi),\quad k(\gamma)=n+x_0-x_n.
+ \label{corpus9:modal:caracter}
+\end{equation}
+The transitions \(\Sigma\to\Pi\), \(\Pi\to\Pi\), and
+\(\Pi\to\Sigma\) increment \(k\) by \(0\), \(1\), and \(2\),
+respectively. The first step modifies the path while preserving
+its character. In particular, both \((1,1)\) and \((0,1,1)\)
+produce \(\varphi\) under this reading.
+
+\begin{proposition}[Multiplicity of the self-scaling reading]
+\label{corpus9:modal:conteo}
+Let \(\mathcal F_k=\{\gamma:k(\gamma)=k\}\) and
+\(N_k=|\mathcal F_k|\). Then
+\begin{equation}
+ N_0=3,\qquad
+ N_k=2\operatorname{tr}(F^k)
+     =2\bigl(\varphi^k+(-\varphi^{-1})^k\bigr)
+     \quad(k\geq1),
+ \label{corpus9:modal:multiplicidad-exacta}
+\end{equation}
+and
+\[
+ \lim_{k\to\infty}N_k^{1/k}=\varphi.
+\]
+\end{proposition}
+
+\begin{proof}
+Given endpoints \(i,j\in\{0,1\}\), the length is determined by
+\(n=k-i+j\). The number of walks with those endpoints is
+\((F^n)_{ij}\). For \(k\geq1\), summing the four sectors gives
+\[
+ N_k=\operatorname{tr}(F^k)
+      +(F^{k+1})_{01}+(F^{k-1})_{10}.
+\]
+The identity \(F^2=F+I\) implies by induction that, for \(n\geq1\),
+\[
+ F^n=\begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix},
+ \qquad f_0=0,\quad f_1=1,\quad f_{n+1}=f_n+f_{n-1}.
+\]
+For \(k\geq2\), the two off-diagonal terms are
+\(f_{k+1}+f_{k-1}=\operatorname{tr}(F^k)\); for \(k=1\),
+their sum is \(1+0=1=\operatorname{tr}(F)\), using \(F^0=I\).
+For \(k=0\), the only walks are \((0)\), \((1)\), and \((0,1)\).
+The eigenvalues of \(F\) are \(\varphi\) and \(-\varphi^{-1}\),
+so its trace gives the closed formula. Finally,
+\[
+ N_k=2\varphi^k\bigl(1+(-\varphi^{-2})^k\bigr),
+\]
+and the factor in parentheses tends to one; taking \(k\)-th roots
+yields the limit.
+\end{proof}
+
+Self-scaling thus coincides with the exponential growth rate
+of the finite modal genealogies that the scalar character
+makes indistinguishable.
+
+\paragraph{Refinement by the composition of returns.}
+Let \(b(\gamma)\) count the edges \(\Pi\to\Sigma\), and let
+\(c(\gamma)\) count the edges \(\Pi\to\Pi\). The increments in
+\eqref{corpus9:modal:caracter} give \(k=2b+c\).
+For formal indeterminates \(z,t\), the graded incidence
+\[
+ M(z,t)=\begin{pmatrix}0&1\\tz^2&z\end{pmatrix}
+\]
+records exponent and returns jointly. Its only degree-zero edge
+is \(\Sigma\to\Pi\), and there is no degree-zero cycle.
+Each coefficient therefore counts a finite set of walks.
+If \(N_{k,b}\) denotes their multiplicity with values \(k,b\),
+the sum over all lengths satisfies
+\begin{equation}
+ \sum_{k,b\geq0}N_{k,b}z^kt^b
+ =\mathbf1^{\mathsf T}(I-M(z,t))^{-1}\mathbf1
+ =\frac{3-z+tz^2}{1-z-tz^2},
+ \qquad \mathbf1=(1,1)^{\mathsf T}.
+ \label{corpus9:modal:serie-graduada}
+\end{equation}
+Indeed, entry \(ij\) of \(M^n\) counts walks of length \(n\)
+with those endpoints and their weights. Coefficientwise formal
+summation yields \((I-M)^{-1}\). The determinant of \(I-M\)
+is \(1-z-tz^2\), and the sum of the four entries of its adjugate
+is \(3-z+tz^2\).
+
+For \(k\geq1\) and \(0\leq b\leq\lfloor k/2\rfloor\), this gives
+\begin{equation}
+ N_{k,b}=\frac{2k}{k-b}\binom{k-b}{b}.
+ \label{corpus9:modal:conteo-retornos}
+\end{equation}
+To prove this, the expansion
+\[
+ (1-z-tz^2)^{-1}=\sum_{m\geq0}(z+tz^2)^m
+\]
+gives coefficient \(\binom{k-b}{b}\) at \(z^kt^b\).
+Multiplication by the numerator of
+\eqref{corpus9:modal:serie-graduada} produces
+\[
+ 3\binom{k-b}{b}-\binom{k-b-1}{b}
+   +\binom{k-b-1}{b-1}
+ =2\binom{k-b}{b}+2\binom{k-b-1}{b-1}.
+\]
+Coefficients outside their range are taken to be zero.
+For \(b\geq1\), the identity
+\(\binom{k-b-1}{b-1}=\frac{b}{k-b}\binom{k-b}{b}\)
+yields \eqref{corpus9:modal:conteo-retornos}; for \(b=0\),
+both sides equal two. The constant term is treated separately:
+\(N_{0,0}=3\). For \(k=4\), there are fourteen walks, distributed
+as \(2\), \(8\), and \(4\) according to whether they contain zero,
+one, or two returns. The same character therefore admits distinct
+internal compositions.
+
+\begin{proposition}[Reversible recovery and transport of codes]
+\label{corpus9:modal:recuperador}
+Each walk in the modal envelope admits a code
+\[
+ \mathcal C(\gamma)=(k,a),\qquad 0\leq a<N_k,
+\]
+with a decoding map \(\mathcal D\) such that
+\[
+ \mathcal D\mathcal C=\mathrm{id},\qquad
+ \mathcal C\mathcal D=\mathrm{id}.
+\]
+If \(A_v(\gamma)=\gamma v\) prolongs a walk by an admissible edge
+and \(T\) removes the last state of a positive-length walk,
+their representations
+\[
+ \mathcal E_v=\mathcal C A_v\mathcal D,\qquad
+ \widehat T=\mathcal C T\mathcal D
+\]
+satisfy, on their respective domains,
+\begin{equation}
+ \widehat T\mathcal E_v=\mathrm{id},\qquad
+ k(A_v\gamma)-k(\gamma)=1+x_n-v.
+ \label{corpus9:modal:transporte-codigos}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For each \(k\), the nonempty sectors are ordered by \((n,i,j)\)
+and, within each sector, walks are ordered lexicographically by
+their states. The number of length-\(m\) continuations from
+\(v\) to \(j\) is \((F^m)_{vj}\). Traversing a walk, one sums
+the sizes of preceding sectors and, at each position, the sizes
+of the continuations lexicographically preceding the chosen one.
+The result is its zero-based index \(a\).
+
+To invert this process, the size of each preceding sector is
+subtracted from the index until the unique containing sector is
+identified. At each position, the same procedure is applied
+to continuation sizes. These sets form a disjoint and exhaustive
+partition of the starting sector. At length zero, the only walk
+of a nonempty sector is its vertex. Assuming recovery of
+continuations of length \(m-1\), the index intervals of each first
+successor uniquely identify that successor and the remaining
+index of its continuation. Induction on \(m\) proves that the
+procedures are inverse, both on walks and on the indices
+\(0,\ldots,N_k-1\).
+
+Lexicographic order serializes the existing path; the operations
+generating the path precede this serialization.
+Since \(T A_v=\mathrm{id}\), the two inverse identities give
+\[
+ \widehat T\mathcal E_v
+ =\mathcal C T\mathcal D\mathcal C A_v\mathcal D
+ =\mathcal C T A_v\mathcal D
+ =\mathrm{id}.
+\]
+Finally, the exponent definition gives
+\[
+ k(A_v\gamma)=(n+1)+x_0-v,\qquad
+ k(\gamma)=n+x_0-x_n,
+\]
+whose difference is the second identity.
+\end{proof}
+
+\paragraph{Distinguishing capacity with a known exponent.}
+With \(k\) known, an injective fixed-length binary representation
+of length \(\ell\) requires \(2^\ell\geq N_k\), by the
+pigeonhole principle. Consequently,
+\(\ell\geq\lceil\log_2N_k\rceil\).
+The preceding index \(a\) attains this length through its binary
+representation, padded with leading zeros where necessary.
+This minimum concerns transmitting the index with \(k\) known;
+transmitting \(k\) and delimiting variable-length codes have
+their own costs. Moreover,
+\[
+ \lim_{k\to\infty}\frac{\log_2N_k}{k}=\log_2\varphi.
+\]
+The equality measures the combinatorial capacity to distinguish
+paths in the modal envelope.
+
+\paragraph{Fiber information under an explicit distribution.}
+For fixed \(k\), let \(R_k\) be a walk chosen uniformly from
+\(\mathcal F_k\). We use natural logarithms and
+\(H(R_k)=-\sum_{\gamma\in\mathcal F_k}p_\gamma\log p_\gamma\),
+with \(p_\gamma=1/N_k\). All these walks have character
+\(\varphi^k\), so
+\[
+ H(R_k\mid\chi(R_k))=\log N_k,\qquad
+ H(R_k\mid\mathcal C(R_k))=0.
+\]
+The first equality follows because the reading is constant on
+the fiber; the second follows from the unique decoding already
+proved. In particular, \(\log N_k/k\to\log\varphi\).
+
+For \(k=4\), the character leaves an uncertainty of \(\log14\)
+nats. The three classes \(B=b(R_4)\) have probabilities
+\(2/14\), \(8/14\), and \(4/14\). Conditional on each class,
+the distribution remains uniform on its \(2\), \(8\), or \(4\)
+elements, respectively. By the definition of conditional entropy,
+\[
+ H(R_4\mid B)
+ =\frac2{14}\log2+\frac8{14}\log8+\frac4{14}\log4.
+\]
+The index within the class, together with \(B\), uniquely recovers
+the walk. These values pertain to the declared uniform distribution
+on the modal fiber. The measure on the complete space of histories,
+the temporal realization of \(k\), and any thermal reading retain
+their respective domains and transducers.
+% END REV09_MULTIPLICIDAD_MODAL

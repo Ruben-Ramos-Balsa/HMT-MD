@@ -1,0 +1,71 @@
+% Figura acumulativa; destino figures/monodromia_regional_ampliacion.tex.
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,font=\small,
+  flow/.style={->,line width=.55pt},
+  ann/.style={align=center,font=\footnotesize}]
+\node[font=\bfseries] at (6.9,9.2)
+  {Joint nonadic connection and regional coordinates};
+\begin{scope}[shift={(3.4,6.8)}]
+ \foreach \k in {1,...,9}{
+  \pgfmathsetmacro{\ang}{90-40*(\k-1)}
+  \coordinate (p\k) at (\ang:1.52);
+  \fill (p\k) circle (1.4pt);
+  \node[fill=white,inner sep=1.1pt,font=\footnotesize]
+    at (\ang:1.83) {\(\k\)};
+ }
+ \foreach \k in {1,...,8}{
+  \pgfmathtruncatemacro{\next}{\k+1}
+  \draw[flow,shorten >=3pt,shorten <=3pt] (p\k)--(p\next);
+ }
+ \draw[flow,shorten >=3pt,shorten <=3pt] (p9)--(p1);
+ \node[ann] at (0,.1) {\(g_k\in C_9\)\\\(\Gamma_{9,k}\)};
+ \node[ann] at (0,-2.23) {One turn: \(g\mapsto g\), \(m\mapsto m+1\)};
+\end{scope}
+\node[ann,text width=5.25cm] at (10.1,7.75)
+ {\(B_k=(u_k^\pi,u_k^e,u_k^\varphi)\)\\
+ regional block in a fibre};
+\node at (8.55,6.5) {\(u^\pi\)};
+\node at (11.65,6.5) {\(u^e\)};
+\draw[<->,line width=.65pt] (8.95,6.5)--node[above]{\(\mathfrak c\)}(11.25,6.5);
+\draw[densely dashed,gray] (10.1,5.72)--(10.1,7.23);
+\node[fill=white,inner sep=2pt] at (10.1,5.6){\(u^\varphi\)};
+\node[ann] at (10.1,4.6)
+ {Axis \(u^\varphi\) and aggregate \(u^\pi+u^e\)\\
+ invariant under \(\mathfrak c\)};
+\draw[flow] (5.45,6.8)--(7.25,6.8);
+\draw[gray!60,line width=.3pt] (.55,4.02)--(13.25,4.02);
+\node[ann,text width=12cm] (hist) at (6.9,3.47)
+ {Compatible history: prefixes, cylinders, orientation, quotients,
+ incidence frames, and memory};
+\coordinate (fork) at (6.9,2.85);
+\draw[flow] (hist.south)--(fork);
+\draw[flow] (fork)--(3.6,2.2);
+\draw[flow] (fork)--(10.3,2.2);
+\node[ann,text width=5.6cm] at (3.6,1.65)
+ {Archimedean realization\\
+ \(I_{n+1}\subseteq I_n,\quad |I_n|=729^{-n}\)\\
+ limit of the regional prefixes};
+\node[ann,text width=5.6cm] at (10.3,1.65)
+ {Incidence realization\\
+ \(r_{n,m}Q_n=Q_mp_{n,m}\)\\
+ encoded words and compatible frames};
+\node[ann,text width=5.6cm] at (3.6,.42)
+ {\(\pi,\varphi,e\); dodecaphasic determination of \(\alpha\)};
+\node[ann,text width=5.6cm] at (10.3,.42)
+ {Witt--Golay--Leech--\(V^\natural\)\\
+ automorphisms of the exceptional realization};
+\draw[flow] (3.6,1.03)--(3.6,.78);
+\draw[flow] (10.3,1.03)--(10.3,.78);
+\end{tikzpicture}
+\caption{\fontsize{9}{11}\selectfont Nine phases of a connection and two realizations of the compatible
+history. The cycle represents the phase; each turn increments the counter.
+The regional diagram represents the involution \(\mathfrak c\), which
+interchanges closure and propagation and fixes the self-scale axis in a fibre.
+This invariance does not require the axis to remain constant during transport.
+The two lower maps use the same prefix: one determines
+its numerical limit, and the other preserves words and incidence frames. The
+maps of this second realization are specified in Section
+\ref{exc:doble-lectura}; the exceptional route is developed afterwards.}
+\label{mono-ampl:fig-regional}
+\end{figure}

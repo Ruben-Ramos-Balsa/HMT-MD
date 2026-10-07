@@ -1,0 +1,343 @@
+% Ampliación acumulativa del TRIT; se inserta antes de la figura de regímenes.
+% No sustituye ni elimina el desarrollo precedente.
+\subsubsection{Balanced division and composition of lifts}
+\label{trit-ampl-div-balanceada}
+
+Ternary reduction makes it possible to express an integer APP evaluation in a
+visible coordinate and a prolongation coordinate. Its function is not
+merely to abbreviate the writing of an integer: it provides a composition
+rule determining how the quotient changes when evaluations are added or
+multiplied. The balanced choice also makes explicit
+the compatibility of that rule with sign reversal.
+
+\begin{definition}[Balanced ternary coordinates]
+\label{trit-ampl-def-coordenadas}
+For \(n\in\mathbb Z\), let
+\[
+ q_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3q_3(n).
+\]
+The map
+\[
+ \mathcal B:\mathbb Z\longrightarrow\TRIT\times\mathbb Z,\qquad
+ n\longmapsto(r_3(n),q_3(n))
+\]
+is called the balanced ternary decomposition. Its inverse is
+\(\mathcal L(r,c)=r+3c\).
+\end{definition}
+
+Indeed, \(r_3(n)\in\{-1,0,+1\}\). If two pairs represent the same integer,
+\(r+3c=s+3d\), then \(r-s\) is a multiple of \(3\) lying in the interval
+\([-2,2]\); necessarily \(r=s\) and \(c=d\). The representation is therefore
+unique. Division can be repeated on \(q_3(n)\), so that each level
+preserves the datum needed to reconstruct the preceding one. The quotient is not a
+perturbation of the residue: it constitutes its complementary coordinate.
+
+The signature obtained from an evaluation \(F\), with \(F=S\) or \(F=P\) in APP,
+is \(r_3\circ F\). When reduction acts on the phase cursor, the same
+balanced section produces the classes \(\{1,4,7\}\), \(\{2,5,8\}\), and
+\(\{3,6,9\}\), with values \(+1,-1,0\). The TPK selector defined
+next uses these classes to determine the operational mode.
+Reading an evaluation and selecting a mode thus have the same
+ternary reduction, but different domains and functions.
+
+\Needspace{16\baselineskip}
+\begin{proposition}[Arithmetic of balanced pairs]
+\label{trit-ampl-prop-aritmetica}
+Let \(n=r+3c\) and \(m=s+3d\), with \(r,s\in\TRIT\). Define
+\[
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+Integer operations are transported to pairs by
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r_3(r+s),c+d+\chi(r,s)\bigr),
+ \label{trit-ampl-eq-suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr).
+ \label{trit-ampl-eq-producto}
+\end{align}
+The map \(\mathcal L\) preserves both operations.
+\end{proposition}
+\begin{proof}
+The equality \(r+s=r_3(r+s)+3\chi(r,s)\) gives
+\[
+ n+m=r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+On the other hand,
+\[
+ nm=rs+3(rd+sc+3cd).
+\]
+Since the product of two balanced representatives again belongs to
+\(\{-1,0,+1\}\), it requires no additional residue reduction. Uniqueness
+of the decomposition proves both formulas.
+\end{proof}
+
+For example, \(2=(-1)+3\) and \(4=1+3\). Their sum and product are reconstructed
+as
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+The resulting evaluations are \(6\) and \(8\). Adding quotients suffices
+in this additive example; the product involves the cross terms
+\(rd\), \(sc\), and \(3cd\). The discrepancy between the two operations
+also resides in the prolongation coordinate, not only in the residue.
+
+The term \(\chi\) is a cocycle of the balanced section. If
+\(r\oplus s=r_3(r+s)\), it satisfies
+\[
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\]
+Both sides represent the quotient of the same sum of three integers.
+This identity guarantees that regrouping the operations does not change the
+reconstructed evaluation. At the same time, projection onto the first
+component removes that accounting: \(1+1=-1+3\), whereas the residue
+readout retains only \(-1\). The discarded information is
+determined, in this case, by \(\chi(1,1)=1\).
+
+The relation to modulus \(9\) preserves a second discrete scale.
+The map
+\[
+ \beta:\TRIT\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad (r,\bar c)\longmapsto r+3c\pmod9
+\]
+is well-defined and bijective. Changing the representative of \(\bar c\)
+adds a multiple of \(9\); conversely, equality of images first fixes
+\(r\) by reduction modulo \(3\), and then \(\bar c\). The addition
+transported by this bijection contains the term
+\(\chi(r,s)\) from \eqref{trit-ampl-eq-suma}, now reduced modulo \(3\).
+Thus the two ternary levels are not composed by independent
+coordinate addition: normalizing the first level modifies
+the second.
+
+In particular, the classes \(3\), \(6\), and \(0\) in
+\(\mathbb Z/9\mathbb Z\) have first component \(0\), but second
+components \(1\), \(2\), and \(0\), respectively. The distinction already observed
+between direct reduction and extraction of the ideal coordinate appears
+as a property of \(\beta\). Preserving that coordinate prevents the
+zero-residue sector from being artificially turned into a single position.
+The modulus \(1000\), used later to organize decimal blocks,
+serves another positional-representation function; its quotient is preserved
+through the corresponding division. A change of base preserves the integer
+when it retains residue and quotient, whereas agreement of residues
+in different bases does not by itself identify their transport states.
+
+\Needspace{11\baselineskip}
+\subsubsection{Reversal, residue class, and nonvisible coordinates}
+\label{trit-ampl-inversion}
+
+Additive inversion lifts unambiguously:
+\[
+ \mathcal B(-n)=(-r_3(n),-q_3(n)).
+\]
+In particular, \(3\), \(0\), and \(-3\) have coordinates
+\((0,1)\), \((0,0)\), and \((0,-1)\). They share a zero signature but represent
+different evaluations. In a transition restricted to a quotient of
+maximum magnitude \(1\), they are the three possibilities in the visible fiber over
+zero; in a general integer lift, that fiber contains all pairs
+\((0,c)\), with \(c\in\mathbb Z\).
+
+The quotient coordinate recovers the evaluated integer, but does not by
+itself recover the trajectory that produced it. Two APP paths may share
+evaluation, residue, and quotient while differing in orientation, mode sequence, or
+winding. Thus the decomposition \(\mathcal B\) is integrated into the
+transport state instead of replacing it. The arithmetic memory of a
+division and the memory of a trajectory are related coordinates, not
+synonyms.
+
+For a signature sequence of length \(n\), oriented reversal is
+\[
+ C_{\rm rev}(\tau_1,\ldots,\tau_n)
+   =(-\tau_n,\ldots,-\tau_1).
+\]
+Applying it twice restores the sequence. The operation reverses the order of
+positions and the sign of each signature; it preserves the length and the
+zero positions in reverse order. In the adopted parametrization,
+it interchanges return with memory, associated with \(+1\), and bidirectional
+opening, associated with \(-1\), while maintaining the threshold \(0\). Transport
+of the remaining trajectory data is specified through the
+corresponding TPK involution.
+
+This signature reversal must be distinguished from conjugation within a
+quadratic algebra. The former may change the type \(\tau\); the latter,
+constructed next, acts within the type already fixed. The
+distinction prevents attributing to sign reversal an algebraic
+equivalence between different regimes.
+
+\subsubsection{Quadratic product, conjugation, and algebraic norm}
+\label{trit-ampl-norma}
+
+An element of \(\mathbb A_\tau\) has a unique expression \(aI+bJ_\tau\).
+The relation \(J_\tau^2=-\tau I\) determines its product:
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+   =(ac-\tau bd)I+(ad+bc)J_\tau.
+ \label{trit-ampl-producto-cuadratico}
+\end{equation}
+This is a real realization of the type already selected. The coordinates
+\(a,b\) are not APP residues, and the product
+\eqref{trit-ampl-producto-cuadratico} does not replace
+\eqref{trit-ampl-eq-producto}; it expresses another operation in the declared
+quadratic codomain.
+
+\begin{definition}[Conjugation and algebraic norm]
+\label{trit-ampl-def-norma}
+Conjugation of type \(\tau\) and its algebraic norm are
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+\end{definition}
+
+\begin{proposition}[Multiplicativity and invertibility]
+\label{trit-ampl-prop-norma}
+For \(z,w\in\mathbb A_\tau\),
+\[
+ z\bar z=N_\tau(z)I,\qquad
+ N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+Moreover, \(z\) is invertible if and only if \(N_\tau(z)\ne0\), in which case
+\[
+ z^{-1}=\frac{\bar z}{N_\tau(z)}.
+\]
+\end{proposition}
+\begin{proof}
+The product of \(aI+bJ_\tau\) and \(aI-bJ_\tau\) is
+\((a^2+\tau b^2)I\). Conjugation is multiplicative and the algebra is
+commutative, so
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). If the norm is nonzero, the
+stated formula provides the inverse. Conversely, if \(zw=I\),
+multiplicativity implies \(N_\tau(z)N_\tau(w)=1\).
+\end{proof}
+
+The quadratic form \(N_\tau\) is positive definite only in the elliptic type.
+For \(\tau=0\), it equals \(a^2\), and the element \(J_0\) is nonzero although its
+square and norm are zero. For \(\tau=-1\), it equals \(a^2-b^2\); the
+nonzero elements \(I+J_{-1}\) and \(I-J_{-1}\) have zero norm and their
+product vanishes. The algebraic norm here is a multiplicative quadratic
+form: it does not presuppose a positive vector-space norm.
+
+All three types can be faithfully realized by
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}.
+\]
+The determinant of this matrix is \(N_\tau(aI+bJ_\tau)\). Thus
+the complex structure, the dual-number structure, and the split-real
+structure are represented by the same matrix expression.
+Each preserves its law and zero divisors. The form of signature
+\((1,1)\) in the last case has a Lorentzian interpretation in dimension
+\(1+1\); identifying a physical metric additionally requires a specific space,
+field, and transport rule.
+
+\subsubsection{Multiplicative conservation and composition of evolutions}
+\label{trit-ampl-evoluciones}
+
+The exponential already obtained belongs to the set of norm-one elements:
+\[
+ N_\tau\bigl(\exp(tJ_\tau)\bigr)=1.
+\]
+This conservation persists under composition of parameters. Indeed, all
+factors are functions of the same generator, and
+\[
+ \exp(tJ_\tau)\exp(sJ_\tau)=\exp((t+s)J_\tau).
+\]
+Comparing the two components yields the addition laws
+\begin{align}
+ C_\tau(t+s)&=C_\tau(t)C_\tau(s)-\tau S_\tau(t)S_\tau(s),\\
+ S_\tau(t+s)&=S_\tau(t)C_\tau(s)+C_\tau(t)S_\tau(s).
+\end{align}
+Conjugation changes \(t\) to \(-t\) and coincides with inversion within
+this subgroup. It does not change \(\tau\): it reverses an evolution in the chosen
+regime.
+
+In the elliptic type, the preserved form is \(a^2+b^2\), and the exponential
+trajectory traverses the norm-one circle. In the hyperbolic type, the
+eigen-coordinates are \(u=a+b\), \(v=a-b\), with \(uv=N_{-1}(z)\).
+The exponential gives
+\[
+ (u,v)=(e^t,e^{-t}),\qquad uv=1.
+\]
+Growth of one coordinate is accompanied by contraction of the other.
+Conservation expresses a relation between the two coordinates; it does not assert
+that each remains constant.
+
+In the parabolic type,
+\[
+ (I+tJ_0)(I+sJ_0)=I+(t+s)J_0,\qquad
+ (I+tJ_0)^{-1}=I-tJ_0.
+\]
+Evolution does not stop because \(J_0^2=0\). Nilpotence eliminates
+terms of order at least two, but preserves the linear term
+transporting the parameter. The visible symbol \(0\), the
+zero element of the algebra, and the nonzero generator \(J_0\) are distinct. This distinction
+is necessary to describe the threshold without identifying it with the absence of
+a state or dynamics.
+
+\begin{proposition}[Composition of affine coordinates]
+\label{trit-ampl-prop-pendientes}
+In the chart where the scalar component is nonzero, represent a
+direction by \(I+uJ_\tau\). If \(1-\tau uv\ne0\), the direction of its
+product with \(I+vJ_\tau\) has coordinate
+\[
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\]
+\end{proposition}
+\begin{proof}
+We have
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+   =(1-\tau uv)I+(u+v)J_\tau.
+\]
+Dividing by the scalar component gives the stated expression.
+\end{proof}
+
+The affine chart preserves the ratio between components, not the scalar factor
+divided out. When \(1-\tau uv=0\), the product must be examined before
+changing charts: it may have a defined direction with zero scalar
+component, or be the zero element in the presence of zero divisors. The composition
+law still belongs to the complete algebra; a coordinate singularity
+does not automatically amount to a singularity of the object.
+This formula will reappear in the elliptic regional readout. Its use requires
+retaining the denominator and, where applicable, the normalization factor.
+
+\subsubsection{Transport of type and subsequent realizations}
+\label{trit-ampl-puentes}
+
+The algebras \(\mathbb A_{+1}\), \(\mathbb A_0\), and
+\(\mathbb A_{-1}\) are not isomorphic as unital real algebras.
+The first is a field; the second contains a nonzero nilpotent; the
+third has nontrivial idempotents and is isomorphic to
+\(\mathbb R\times\mathbb R\). Thus the signature change organizing a
+route cannot be interpreted as an undifferentiated isomorphism between the
+three realizations. The TPK preserves the regime index, domains, and
+effective operator acting at each transition.
+
+In the electron chapter, the pair of projections of the APP sheets
+produces a normalized commutator whose square is \(-I\). The same block
+contains an involution squaring to \(I\) and two nilpotent directions. The
+joint realization will be proved on that concrete pair of projections;
+the preceding classification explains why the three quadratic relations
+can appear in the same matrix algebra without being identified with one another.
+
+In the exceptional prolongation, the Paley matrix reduced modulo \(3\)
+satisfies \(A_W^2=-I_6\). The relation equips the ternary space with a
+structure of dimension \(3\) over \(\mathbb F_9\). Its link to a real
+operator root is expressed through the integral presentation
+\[
+ \mathbb Z[u]/(u^2+1).
+\]
+Base changes to \(\mathbb F_3\) and \(\mathbb R\) produce
+representations of the same relation. Each preserves its characteristic,
+dimension, and incidence information. The development of the
+respective operators establishes the link, not equality of their
+cardinalities.
+
+Preservation of norm one therefore describes the quadratic
+realizations of evolutions. Preservation of quotients, orientation, and
+trajectory belongs to the transported arithmetic state. Both properties
+enter the construction, with different functions: one determines the
+identities of the representations; the other makes it possible to compose, reconstruct, and
+prolong the operations giving rise to them.

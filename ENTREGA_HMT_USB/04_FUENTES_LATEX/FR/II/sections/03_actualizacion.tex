@@ -1,0 +1,86 @@
+\section{Mise à jour dodécaphasique et mémoire observable}
+\label{sec:eta}
+Soit $d_t$ le code entier de direction conservé par une trace TPK. Ce code et la direction cardinale du curseur sont des coordonnées distinctes. Les douze fenêtres $E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$, divisent les 108 pas du registre. L'orientation est
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+L'événement d'une fenêtre est le résultat
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{eq:events}
+\end{equation}
+La notation $a_m$ évite de confondre cet événement avec le nombre d’Euler.
+Le registre source conserve en outre l’orientation TRIT, la signature,
+la retenue et le segment d’histoire correspondant \cite{registro}.
+
+\begin{proposition}[Accroissement produit par le transport]
+Soit $\mathbf e_m$ la base de $\R^{12}$ et
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. Si
+$\mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_m$ et $y_m=S^{-m}\mathbf z_m$, alors
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{eq:eta}
+\end{equation}
+Après un tour complet,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplier la mise à jour de $\mathbf z_m$ par $S^{-(m+1)}$ donne
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+En itérant, le coefficient de l’événement $a_m$ est
+$S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Comme $S^{12}=I$,
+on obtient \eqref{eq:cycle}.
+\end{proof}
+
+Le gras identifie ici le vecteur accumulé
+\(\mathbf z_m\in\R^{12}\), tandis que le bloc d’incidence
+\(z_m\) de \eqref{eq:registro-bloque-incidencial} est un entier entre
+\(0\) et \(999\). Le repère mobile \(y_m\) transporte le premier objet ;
+le codage décimal du second conserve sa définition propre.
+
+Par conséquent, $\eta_m$ n’est pas une force libre choisie pour imposer une
+conservation : c’est l’expression vectorielle de l’événement TPK. L’égalité de phase
+après un tour n’annule pas les événements accumulés. Ce lecteur
+conserve les dénombrements, tandis que le registre complet conserve en outre leur
+ordre et leur provenance. On distingue $\eta_m$, accroissement vectoriel, de
+$\eta_{\rm ret}$, mantisse scalaire d’action, et de $\eta_{\rm el}$,
+paramètre de forme qui sera introduit dans la section~\ref{sec:ellipse}.
+
+\subsection{Bilan quadratique}
+On définit
+\[
+\nabla_3=I-S^3,\quad \nabla_4=I-S^4,\quad
+B=\nabla_3^{\mathsf T}\nabla_3+\nabla_4^{\mathsf T}\nabla_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+Les lecteurs orientés du registre signé satisfont
+$(D_jz)_m=z_m-z_{m+j}$ ; avec la convention
+$S\mathbf e_m=\mathbf e_{m+1}$, on a
+$D_j=I-S^{-j}=\nabla_j^{\mathsf T}$. Les deux sens produisent la même
+forme quadratique $B$, car les puissances de $S$ commutent.
+On a $S^{\mathsf T}BS=B$ et $B_{00}=4$. En substituant
+\eqref{eq:eta}, on déduit exactement
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\label{ii:mem:balance}
+\end{equation}
+De même, la charge $q(y)=\sum_jy_j$ satisfait
+$q(y_{m+1})-q(y_m)=a_m$.
+La preuve est le développement du polynôme quadratique après retrait de la
+permutation $S^{-1}$. Aucune valeur métrologique n’entre dans ce calcul.
+La forme $\mathcal M$ mesure ce registre ; son interprétation comme une
+énergie physique déterminée nécessiterait le lecteur dimensionnel correspondant.
+
+\input{sections/03b_memoria_resolvente.tex}
+
+\input{sections/ii_sello_y_lectura.tex}

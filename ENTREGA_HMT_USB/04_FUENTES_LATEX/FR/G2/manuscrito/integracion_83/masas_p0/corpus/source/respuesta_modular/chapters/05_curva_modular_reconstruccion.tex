@@ -1,0 +1,449 @@
+\chapter{Inversion constitutive et courbe modulaire chargée}
+\label{rm:chap:curva-modular-reconstruccion}
+
+\section{La complétion spectrale de \(3\) à \(4\)}
+
+L’opérateur de vide du \cref{rm:ch:vacuum} s’obtient en appliquant à l’opérateur angulaire la fonction
+\begin{equation}
+ F(q):=\frac{1-q^{90}}{1-q^{120}},
+ \qquad 0<q<1.
+ \label{rm:eq:curve-Fq}
+\end{equation}
+La factorisation des deux canaux par le mode élémentaire \(30\),
+\begin{equation}
+ 90=3\cdot30,
+ \qquad
+ 120=4\cdot30,
+ \label{rm:eq:curve-90-120}
+\end{equation}
+permet d’introduire \(s=q^{30}\) et d’écrire
+\begin{equation}
+ F(q)=f(s),
+ \qquad
+ f(s):=\frac{1+s+s^2}{1+s+s^2+s^3}.
+ \label{rm:eq:curve-fs}
+\end{equation}
+Le numérateur contient trois stades consécutifs du mode, et le dénominateur intègre le quatrième. Le défaut de complétion est
+\begin{equation}
+ 1-f(s)=\frac{s^3}{1+s+s^2+s^3}>0.
+ \label{rm:eq:curve-completion-defect}
+\end{equation}
+Ainsi, la quatrième étape est enregistrée comme mémoire positive dans la réponse.
+
+\begin{theorem}[Bijectivité de la réponse \(3\to4\)]
+\label{rm:thm:curve-F-bijection} La fonction \(F\) est un difféomorphisme analytique décroissant
+\begin{equation}
+ \boxed{F:(0,1)\xrightarrow{\;\sim\;}(3/4,1).}
+ \label{rm:eq:curve-F-range}
+\end{equation}
+Pour chaque \(r\in(3/4,1)\), la valeur \(q=F^{-1}(r)\) s’obtient comme \(q=s^{1/30}\), où \(s\in(0,1)\) est la racine \emph{unique} de
+\begin{equation}
+ r s^3+(r-1)(1+s+s^2)=0.
+ \label{rm:eq:curve-inverse-cubic}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La dérivée par rapport à \(s\) est
+\begin{equation}
+ f'(s)
+ =-\frac{s^2(3+2s+s^2)}{(1+s+s^2+s^3)^2}<0
+ \qquad(0<s<1).
+ \label{rm:eq:curve-f-derivative}
+\end{equation}
+Comme \(\dd s/\dd q=30q^{29}>0\), on a également \(F'(q)<0\). Les limites sont
+\[
+ \lim_{q\to0^+}F(q)=1,
+ \qquad
+ \lim_{q\to1^-}F(q)=\frac{90}{120}=\frac34.
+\]
+La continuité et la monotonie stricte prouvent la bijectivité ; la dérivée ne s’annule pas sur l’intervalle, de sorte que le théorème d’inversion locale prouve l’analyticité. Multiplier \(r=(1+s+s^2)/(1+s+s^2+s^3)\) par le dénominateur produit \cref{rm:eq:curve-inverse-cubic} ; l’unicité de sa racine dans \((0,1)\) équivaut à l’injectivité déjà démontrée.
+\end{proof}
+
+L’inverseur \cref{rm:eq:curve-inverse-cubic} fournit une procédure numérique intrinsèque. Une dichotomie sur \((0,1)\) conserve l’intervalle et certifie chaque chiffre ; une méthode de Newton peut l’accélérer en utilisant \cref{rm:eq:curve-f-derivative}. L’évaluation décimale intervient après la fixation de l’équation et de son unique racine.
+
+\section{Reconstruction exacte de l’état angulaire à partir du vide}
+
+Soient
+\begin{equation}
+ T=q_+P_++q_-P_-,
+ \qquad
+ \mathcal V=F(T)=r_+P_++r_-P_-,
+ \qquad
+ r_\pm=F(q_\pm).
+ \label{rm:eq:curve-T-V}
+\end{equation}
+Les deux grandeurs constitutives adimensionnelles sont attribuées aux feuillets au moyen de
+\begin{equation}
+ \widehat\varepsilon=r_+^2,
+ \qquad
+ \widehat\mu=r_-^2.
+ \label{rm:eq:curve-mu-epsilon}
+\end{equation}
+
+\begin{theorem}[Reconstruction constitutive réversible]
+\label{rm:thm:curve-vacuum-tomography} La réponse constitutive complète détermine l’antécédent angulaire. Dans la base spectrale étiquetée,
+\begin{align}
+ \boxed{q_+=F^{-1}(\sqrt{\widehat\varepsilon}),}
+ &\qquad
+ \boxed{q_-=F^{-1}(\sqrt{\widehat\mu}),}
+ \label{rm:eq:curve-recover-qpm}\\
+ \boxed{D_A=q_+q_-}
+ &=F^{-1}(\sqrt{\widehat\varepsilon})
+   F^{-1}(\sqrt{\widehat\mu}),
+ \label{rm:eq:curve-recover-DA}\\
+ \boxed{A_{\rm rad}=-\frac12\log D_A,}
+ &\qquad
+ \boxed{C^*_{\rm rad}=\frac12\log\frac{q_-}{q_+}.}
+ \label{rm:eq:curve-recover-A-C}
+\end{align}
+Si l’on connaît l’opérateur \(\mathcal V\) plutôt que ses deux valeurs propres étiquetées, la reconstruction prend la forme du calcul fonctionnel
+\begin{equation}
+ \boxed{T=F^{-1}(\mathcal V).}
+ \label{rm:eq:curve-functional-inverse}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Les valeurs propres de \(\mathcal V\) appartiennent à \((3/4,1)\) et la racine positive de chaque grandeur constitutive est \(r_\pm\). Le \cref{rm:thm:curve-F-bijection} fournit un unique \(q_\pm\) pour chaque feuillet. Les formules de \(D_A,A_{\rm rad},C^*_{\rm rad}\) sont les inverses de \cref{rm:eq:modular-determinant-ratio}. Pour la forme opératorielle, le théorème spectral applique la fonction continue \(F^{-1}\) au spectre de \(\mathcal V\).
+\end{proof}
+
+Lorsque seuls les deux nombres \((\widehat\mu,\widehat\varepsilon)\) sont conservés, leur attribution aux feuillets fait partie des données typées. L’opérateur \(\mathcal V\) contient en outre ses projecteurs spectraux et reconstruit la représentation complète. Cette distinction sépare la reconstruction du spectre du choix d’une base.
+
+Les autres lectures sont récupérées simultanément :
+\begin{equation}
+ \widehat Z=\frac{r_-}{r_+}
+ =\sqrt{\frac{\widehat\mu}{\widehat\varepsilon}},
+ \qquad
+ \widehat c=\frac1{r_-r_+}
+ =\frac1{\sqrt{\widehat\mu\widehat\varepsilon}}.
+ \label{rm:eq:curve-recover-Z-c}
+\end{equation}
+Le produit des feuillets exprime la propagation commune ; le quotient exprime l’orientation constitutive. Sous \(C^*\mapsto-C^*\), les deux grandeurs constitutives s’échangent, \(\widehat Z\) s’inverse et \(\widehat c\) demeure fixe.
+
+\begin{corollary}[Contrôle croisé électrofaible]
+\label{rm:cor:curve-weak-control} Dans l’interface angulaire où \((m_W^{\angle}/m_Z^{\angle})^2=D_A\), la reconstruction du vide implique
+\begin{equation}
+ \boxed{
+ \sin^2\theta_W^{\rm OS,HMT}
+ =1-F^{-1}(\sqrt{\widehat\varepsilon})
+      F^{-1}(\sqrt{\widehat\mu}).}
+ \label{rm:eq:curve-weak-from-vacuum}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Le \cref{rm:thm:curve-vacuum-tomography} reconstruit \(D_A\). L’interface angulaire déclarée définit \(\sin^2\theta_W^{\rm OS}=1-(m_W/m_Z)^2=1-D_A\).
+\end{proof}
+
+L’équation \cref{rm:eq:curve-weak-from-vacuum} est un contrôle entre lectures apparentées. La généalogie causale continue de partir de \(T\) : le vide applique \(F(T)\) et le lecteur électrofaible applique \(\det T\). L’inversibilité de \(F\) permet de comparer les deux sorties sans faire de l’une le fondement de l’autre.
+
+\section{La courbe modulaire chargée}
+
+L’identité
+\begin{equation}
+ D_A=\exp\!\left(-\frac{100\pi}{9}\alpha_{\HMT}\right)
+ \label{rm:eq:curve-D-alpha}
+\end{equation}
+suggère d’utiliser le déterminant comme coordonnée globale de la famille. Pour \(D\in(0,1)\), nous définissons
+\begin{equation}
+ \boxed{
+ Q(D):=-\frac9{25}\log D,}
+ \qquad
+ a(D):=\frac{Q(D)}{4\pi}
+ =-\frac9{100\pi}\log D.
+ \label{rm:eq:curve-Q-a}
+\end{equation}
+Au point HMT, \(a(D_A)=\alpha_{\HMT}\) et
+\begin{equation}
+ \boxed{Q(D_A)=4\pi\alpha_{\HMT}=:e_g^2.}
+ \label{rm:eq:curve-Q-gauge}
+\end{equation}
+Le symbole \(Q(D)\) désigne ici le couplage chargé adimensionnel ; il se distingue de toute section dimensionnelle de charge ou d’énergie.
+
+Pour rendre le lecteur régional autonome, nous introduisons le caractère quintique
+\begin{equation}
+ \begin{aligned}
+ H_5(a):={}&\frac12\sqrt{\frac{1000a}{\varphi_{\HMT}}}-a
+ +\frac9{16}a^2-\frac59a^3
+ +\frac7{48}a^4-\frac1{54}a^5,
+ \end{aligned}
+ \label{rm:eq:curve-H5}
+\end{equation}
+le germe régional
+\begin{equation}
+ \mathcal C_\pi(a,D)
+ :=169a^6+\frac{Da^7}{1-Da},
+ \label{rm:eq:curve-Cpi}
+\end{equation}
+et la phase orientée
+\begin{equation}
+ y(D):=\frac{\pi}{90}\bigl(H_5(a(D))+a(D)\bigr)
+ -\mathcal C_\pi(a(D),D).
+ \label{rm:eq:curve-yD}
+\end{equation}
+Le sélecteur \(169\), le terme fini de degré six et le prolongement géométrique de degré sept conservent leur provenance régionale. La condition \(0<Da(D)<1\) garantit la convergence du germe.
+
+Nous définissons le quotient orienté
+\begin{equation}
+ \varrho_{\rm or}(D):=\ee^{2y(D)}
+ \label{rm:eq:curve-rho-or}
+\end{equation}
+et l’intervalle admissible
+\begin{equation}
+ \mathcal I_{\rm mod}:=
+ \left\{D\in(0,1):
+ 0<Da(D)<1,
+ \ |y(D)|<-\frac12\log D
+ \right\}.
+ \label{rm:eq:curve-domain}
+\end{equation}
+La seconde inégalité assure que les deux canaux reconstruits sont des contractions strictes.
+
+\begin{definition}[Courbe modulaire chargée]
+\label{rm:def:charged-modular-curve} La courbe modulaire chargée est l’application
+\begin{equation}
+ \Gamma_{\rm ch}:\mathcal I_{\rm mod}\longrightarrow(0,1)\times\R_{>0},
+ \qquad
+ \boxed{\Gamma_{\rm ch}(D)=\bigl(D,\varrho_{\rm or}(D)\bigr).}
+ \label{rm:eq:curve-Gamma}
+\end{equation}
+Sur celle-ci,
+\begin{equation}
+ q_-(D)=\sqrt{D\varrho_{\rm or}(D)},
+ \qquad
+ q_+(D)=\sqrt{\frac{D}{\varrho_{\rm or}(D)}}.
+ \label{rm:eq:curve-qD}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Rang fonctionnel un]
+\label{rm:thm:curve-rank-one} La courbe \(\Gamma_{\rm ch}\) est une immersion analytique de rang un. L’espace générique des contractions positives bicouches requiert deux coordonnées indépendantes \((D,\varrho_{\rm or})\) ; le lecteur HMT restreint cet espace au graphe \(\varrho_{\rm or}=\varrho_{\rm or}(D)\). De plus,
+\begin{equation}
+ A_{\rm rad}(D)=-\frac12\log D
+ =\frac{50\pi}{9}a(D),
+ \qquad
+ C^*_{\rm rad}(D)=y(D).
+ \label{rm:eq:curve-A-C-D}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Les fonctions de \cref{rm:eq:curve-Q-a,rm:eq:curve-H5,rm:eq:curve-Cpi,rm:eq:curve-yD} sont analytiques sur \(\mathcal I_{\rm mod}\). La première composante de \(\Gamma_{\rm ch}'(D)\) vaut un ; la dérivée ne s’annule donc jamais et son rang est un. Les identités \cref{rm:eq:curve-A-C-D} découlent directement des définitions. Enfin, le produit et le quotient de \cref{rm:eq:curve-qD} sont respectivement \(D\) et \(\varrho_{\rm or}(D)\).
+\end{proof}
+
+La famille résolvante du chapitre précédent se restreint à la même courbe :
+\begin{equation}
+ \mathfrak M_D(z)
+ :=Q(D)^{-1}\bigl(zI-T(D)\bigr)^{-1},
+ \qquad
+ T(D)=q_+(D)P_++q_-(D)P_-.
+ \label{rm:eq:curve-resolvent-D}
+\end{equation}
+Au point \(D_A\), l’égalité \(Q(D_A)=4\pi\mathfrak A_\beta\) identifie \(\mathfrak M_D\) à \(\mathfrak M_\beta\). Le couplage, l’intensité, l’orientation et le vide sont ainsi coordonnés par une même variable généalogique, tandis que leurs fonctions de lecture demeurent typées.
+
+\section{Confluence entre vide, Higgs et impédance}
+
+Le lecteur du vide produit le long de la courbe
+\begin{align}
+ \widehat\mu(D)&=F(q_-(D))^2,
+ &\widehat\varepsilon(D)&=F(q_+(D))^2,
+ \label{rm:eq:curve-vacuum-D}\\
+ \widehat Z(D)&=\frac{F(q_-(D))}{F(q_+(D))},
+ &\widehat c(D)&=\frac1{F(q_-(D))F(q_+(D))}.
+ \label{rm:eq:curve-Z-c-D}
+\end{align}
+Par l’injectivité de \(F\), chacune des paires complètes d’opérateurs reconstruit \((D,\varrho_{\rm or})\).
+
+Le parcours angulaire du Higgs contient l’orientation au moyen de
+\begin{equation}
+ \frac{m_H^{\angle}}{m_W^{\angle}}
+ =\exp\!\left(3A_{\rm rad}+\frac53C^*_{\rm rad}\right).
+ \label{rm:eq:curve-HW-ratio}
+\end{equation}
+Dans l’interface à l’ordre des arbres avec \(m_H^2=2\lambda_Hv^2\) et \(m_W^2=g^2v^2/4\), cette identité équivaut à
+\begin{equation}
+ \lambda_H
+ =\frac{Q(D)}{8(1-D)}D^{-3}
+  \varrho_{\rm or}(D)^{5/3}.
+ \label{rm:eq:curve-lambda-H}
+\end{equation}
+Par conséquent, le scalaire
+\begin{equation}
+ \Xi_H(D,\lambda_H)
+ :=\frac{8(1-D)D^3\lambda_H}{Q(D)}
+ \label{rm:eq:curve-Xi-H}
+\end{equation}
+satisfait
+\begin{equation}
+ \boxed{
+ \Xi_H=\varrho_{\rm or}^{5/3},
+ \qquad
+ \varrho_{\rm or}=\Xi_H^{3/5}.}
+ \label{rm:eq:curve-Higgs-rho}
+\end{equation}
+
+\begin{corollary}[Reconstruction Higgs--impédance]
+\label{rm:cor:curve-Higgs-impedance} Sous l’interface à l’ordre des arbres déclarée et pour \(\Xi_H>0\),
+\begin{equation}
+ \boxed{
+ \widehat Z
+ =\frac{
+ F\!\left(\sqrt D\,\Xi_H^{3/10}\right)}
+ {F\!\left(\sqrt D\,\Xi_H^{-3/10}\right)}.}
+ \label{rm:eq:curve-Higgs-Z}
+\end{equation}
+Le même quotient orienté se reconstruit par trois voies :
+\begin{equation}
+ \varrho_{\rm or}^{\rm HMT}(D)
+ =\frac{F^{-1}(\sqrt{\widehat\mu})}
+        {F^{-1}(\sqrt{\widehat\varepsilon})}
+ =\Xi_H(D,\lambda_H)^{3/5}.
+ \label{rm:eq:curve-triple-confluence}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+L’équation \cref{rm:eq:curve-Higgs-rho} donne \(q_-=\sqrt D\,\Xi_H^{3/10}\) et \(q_+=\sqrt D\,\Xi_H^{-3/10}\). Leur substitution dans \(\widehat Z=F(q_-)/F(q_+)\) prouve \cref{rm:eq:curve-Higgs-Z}. La seconde égalité de \cref{rm:eq:curve-triple-confluence} est \cref{rm:eq:curve-Higgs-rho} ; la première provient du \cref{rm:thm:curve-vacuum-tomography}.
+\end{proof}
+
+La substitution de \(\lambda_H\) obtenue à partir de \cref{rm:eq:curve-lambda-H} transforme \cref{rm:eq:curve-triple-confluence} en une identité algébrique de cohérence. Une détermination de \(\lambda_H\) par un lecteur indépendant transforme la même équation en un test croisé réfutable de l’orientation. Cette séparation évite d’attribuer une indépendance probatoire à une simple inversion de l’équation initiale.
+
+La répartition de jauge prend également une forme entièrement déterminée par \(D\) :
+\begin{equation}
+ g^2=\frac{Q(D)}{1-D},
+ \qquad
+ g'^2=\frac{Q(D)}D,
+ \qquad
+ \boxed{
+ \frac1{g^2}+\frac1{g'^2}=\frac1{Q(D)}
+ =-\frac{25}{9\log D}.}
+ \label{rm:eq:curve-gauge-harmonic}
+\end{equation}
+Le couplage total \(Q(D)\) se répartit entre les deux secteurs de jauge, et la somme harmonique récupère exactement le macro-objet chargé.
+
+\section{Raccordement de sections causales compatible avec l’orientation et les données de frontière}
+
+Il convient de distinguer le couplage \(Q(D)\) de l’énergie de Planck, que nous noterons \(\mathcal Q_P=E_P\). La paire de Planck définit une vitesse interne
+\begin{equation}
+ c_{\rm int}:=\frac{\mathcal Q_P\ell_P}{\hbar},
+ \label{rm:eq:curve-c-int}
+\end{equation}
+tandis que l’opérateur constitutif définit
+\begin{equation}
+ c_{\rm vac}:=\frac1{\sqrt{\mu_{\rm vac}\varepsilon_{\rm vac}}}.
+ \label{rm:eq:curve-c-vac}
+\end{equation}
+Les deux expressions appartiennent à des droites causales typées. Un morphisme de couture
+\begin{equation}
+ J_C:L_C^{\rm vac}\longrightarrow L_C^{\rm grav}
+ \label{rm:eq:curve-JC}
+\end{equation}
+permet de les comparer, et son défaut adimensionnel est
+\begin{equation}
+ \boxed{
+ \Xi_c
+ :=\frac{\mathcal Q_P\ell_P}{\hbar}
+   \sqrt{\mu_{\rm vac}\varepsilon_{\rm vac}}
+ =\frac{c_{\rm int}}{c_{\rm vac}}.}
+ \label{rm:eq:curve-Xi-c}
+\end{equation}
+
+\begin{criterion}[Couture causale] \label{rm:crit:curve-causal-seam} Le vide électromagnétique et la réalisation gravitationnelle expriment une même section causale exactement lorsque
+\begin{equation}
+ \boxed{\Xi_c=1,}
+ \qquad
+ J_C(c_{\rm vac})=c_{\rm int}.
+ \label{rm:eq:curve-Xi-one}
+\end{equation}
+\end{criterion}
+
+Une fois cette couture satisfaite, l’identité CT108 \(
+G=(54/\pi)^2c^5t_0^2/\hbar
+\) s’exprime entièrement au moyen du produit constitutif :
+\begin{equation}
+ \boxed{
+ G=\left(\frac{54}{\pi}\right)^2
+ \frac{t_0^2}
+ {\hbar(\mu_{\rm vac}\varepsilon_{\rm vac})^{5/2}}.}
+ \label{rm:eq:curve-G-from-vacuum}
+\end{equation}
+La gravité emploie le produit pair des feuillets ; l’impédance et la charge emploient le quotient orienté
+\begin{equation}
+ Z_{\rm vac}^2=\frac{\mu_{\rm vac}}{\varepsilon_{\rm vac}}.
+ \label{rm:eq:curve-Z-oriented}
+\end{equation}
+La paire produit--quotient répartit donc la causalité et l’orientation sans dissocier l’antécédent spectral.
+
+\section{Reconstruction stable dans la tour UHF}
+
+Soit \(\tau_m=\tau_2\otimes\tau_{9^m}\) la trace normalisée de \(\mathcal A_m=M_2\otimes M_{9^m}\), et soient
+\begin{equation}
+ T_m=T\otimes I_{9^m},
+ \qquad
+ \mathcal V_m=F(T_m)=\mathcal V\otimes I_{9^m}.
+ \label{rm:eq:curve-UHF-TV}
+\end{equation}
+L’inversion fonctionnelle commute avec le raffinement :
+\begin{equation}
+ F^{-1}(\mathcal V_m)=T_m,
+ \qquad
+ E_m(\mathcal V_{m+1})=\mathcal V_m,
+ \qquad
+ E_m(T_{m+1})=T_m.
+ \label{rm:eq:curve-UHF-inversion}
+\end{equation}
+
+Le déterminant matriciel ordinaire de \(T_m\) est \(D_A^{9^m}\). L’invariant compatible avec le raffinement est le déterminant logarithmique normalisé
+\begin{equation}
+ \boxed{
+ \mathfrak d_m(T_m)
+ :=\exp\!\left(2\tau_m(\log T_m)\right)=D_A.}
+ \label{rm:eq:curve-normalized-determinant}
+\end{equation}
+L’orientation possède le prolongement tout aussi stable
+\begin{equation}
+ \boxed{
+ \mathfrak r_m(T_m,R_m)
+ :=\exp\!\left(-2\tau_m(R_m\log T_m)\right)
+ =\varrho_{\rm or},}
+ \qquad
+ R_m=R\otimes I_{9^m}.
+ \label{rm:eq:curve-normalized-orientation}
+\end{equation}
+
+\begin{proposition}[Stabilité de la reconstruction à toute profondeur]
+\label{rm:prop:curve-UHF-tomography} Pour tout \(m\), la paire
+\begin{equation}
+ \left(
+ \mathfrak d_m(F^{-1}(\mathcal V_m)),
+ \mathfrak r_m(F^{-1}(\mathcal V_m),R_m)
+ \right)
+ \label{rm:eq:curve-UHF-pair}
+\end{equation}
+est égale à \((D_A,\varrho_{\rm or})\). Elle reconstruit donc les mêmes coordonnées \(A_{\rm rad}\) et \(C^*_{\rm rad}\) à tous les niveaux et dans la limite UHF.
+\end{proposition}
+
+\begin{proof}
+Comme \(\log T_m=(\log T)\otimes I_{9^m}\), la trace normalisée élimine le facteur d’amplification. De plus,
+\[
+ \tau_2(\log T)=\frac12(\log q_++\log q_-)=\frac12\log D_A
+\]
+et
+\[
+ \tau_2(R\log T)=-y=-\frac12\log\varrho_{\rm or}.
+\]
+Les équations \cref{rm:eq:curve-normalized-determinant,rm:eq:curve-normalized-orientation} s’obtiennent par exponentiation. L’inversion fonctionnelle de \cref{rm:eq:curve-UHF-inversion} complète la reconstruction.
+\end{proof}
+
+Cette formulation montre que la complétion \(3\to4\) conserve sa capacité de reconstruction à toute profondeur. Les cylindres nonadiques augmentent la résolution de l’état ; le déterminant normalisé, l’orientation, la réponse et la courbe modulaire demeurent naturels relativement aux espérances.
+
+\section{Séparation entre identités quantiques internes, interfaces physiques et obstructions de la reconstruction}
+
+\begin{proofstatusbox}
+La monotonie et la bijectivité de \(F\), l’inversion opératorielle, la reconstruction \((q_+,q_-,D_A,C^*)\), le rang un de \(\Gamma_{\rm ch}\), l’identité harmonique de jauge et la stabilité UHF sont des résultats exacts. La courbe modulaire chargée formalise une architecture préexistante de l’auteur avec une structure initiale explicite : clôture de \(\alpha_{\HMT}\), sélecteur régional \(169\), caractère \(H_5\), germe \(\mathcal C_\pi\) et orientation. L’égalité Higgs--impédance est exacte dans l’interface à l’ordre des arbres ; elle ne constitue un test indépendant que lorsque \(\lambda_H\) provient d’un lecteur distinct. La condition \(\Xi_c=1\) et l’équation gravitationnelle ultérieure sont une interface physique typée dont la promotion exige le morphisme \(J_C\).
+\end{proofstatusbox}
+
+\begin{falsifierbox}
+La reconstruction est réfutée si \(F'(q)\) change de signe dans \((0,1)\), si l’équation cubique admet deux racines dans cet intervalle, si \(F^{-1}(\mathcal V)\) ne récupère pas \(T\), ou si les grandeurs constitutives reconstruisent un produit différent de \(D_A\). La courbe est réfutée si \(Q(D_A)\ne4\pi\alpha_{\HMT}\), si sa dérivée perd son rang, si \(q_\pm(D)\) quitte \((0,1)\) dans le domaine déclaré, ou si les trois reconstructions de \(\varrho_{\rm or}\) dans \cref{rm:eq:curve-triple-confluence} diffèrent sous une même normalisation. La couture causale est réfutée par \(\Xi_c\ne1\) après application du morphisme de droites. Dans la tour, utiliser le déterminant ordinaire comme s’il était invariant produirait \(D_A^{9^m}\) ; le contrôle correct exige \cref{rm:eq:curve-normalized-determinant}.
+\end{falsifierbox}

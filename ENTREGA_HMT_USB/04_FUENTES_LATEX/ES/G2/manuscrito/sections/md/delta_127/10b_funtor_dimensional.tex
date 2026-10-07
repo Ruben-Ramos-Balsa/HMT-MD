@@ -1,0 +1,763 @@
+% Extensión aditiva. Canon leído: CURRENT.json rev. 2026-07-22.2.
+% Autores del proyecto: Oumar Haidara Fall y Rubén Ramos Balsa.
+
+\chapter{Rectas de magnitud y realización dimensional del núcleo HMT}
+\label{chap:funtor-dimensional-hmt}
+
+La transición desde HMT hacia Mecánica Dimensional no consiste en adjuntar
+un símbolo de unidad a un número real. El núcleo aritmético produce
+caracteres, cociclos, razones y órdenes de una carta decimal. Una magnitud
+física, en cambio, es un elemento de una recta provista de tipo dimensional.
+La distinción es estructural: un cambio de unidades modifica las coordenadas
+de una magnitud, pero no la magnitud misma. Esta sección construye, por una
+parte, la retícula ambiental requerida para realizar independientemente
+masa, longitud, duración y carga, y determina que su rango mínimo es cuatro.
+Por otra parte, construye un funtor monoidal de trayectorias con firma que
+toma valores en una porción de esa retícula. La minimalidad de la retícula no
+se atribuye al funtor.
+
+La construcción tiene dos consecuencias. En primer lugar, permite realizar
+en una retícula común la acción, la duración, la longitud, la carga y la masa
+sin introducir el Sistema Internacional en las fórmulas generadoras; la
+asignación de carga a estados requiere, además, un carácter entero
+específico. En segundo lugar, demuestra exactamente qué parte de una escala
+absoluta no puede proceder de escalares adimensionales. Esta imposibilidad no
+afecta a las razones, a los caracteres de masa ni a las identidades
+constitutivas; fija el tipo matemático correcto de sus salidas.
+La distinción entre dimensión, coordenada numérica y elección de unidad es la
+de la teoría clásica del análisis dimensional \cite{Buckingham1914,Bridgman1931};
+la estructura de rectas que sigue hace explícita esa distinción en el dominio
+HMT\@.
+
+\section{Retícula de dimensiones y rectas orientadas}
+
+Sea
+\[
+ \Lambda_{\rm D}
+ =\mathbb Z\langle \mathbf M,\mathbf L,\mathbf T,\mathbf Q\rangle
+ \cong\mathbb Z^4
+\]
+la retícula de dimensiones, escrita en términos de masa, longitud, duración
+y carga. Para
+\(d=(d_M,d_L,d_T,d_Q)\in\Lambda_{\rm D}\), denotamos por
+\(\mathcal L_d\) una recta real orientada y por
+\(\mathcal L_d^+\) su semirrecta positiva. El producto tensorial realiza la
+suma de dimensiones,
+\[
+ \mathcal L_d\otimes\mathcal L_e\simeq\mathcal L_{d+e},
+ \qquad
+ \mathcal L_d^\vee\simeq\mathcal L_{-d}.
+\]
+La colección de estas rectas, con isomorfismos positivos y producto
+tensorial, forma un grupoide de Picard simétrico. Un escalar adimensional es
+un elemento de \(\mathcal L_0\simeq\mathbb R\); una magnitud de dimensión
+\(d\) es un elemento de \(\mathcal L_d\).
+
+Introducimos cuatro dimensiones adaptadas a HMT:
+\[
+ \mathbf S=\mathbf M+2\mathbf L-\mathbf T,
+ \qquad
+ \mathbf C=\mathbf L-\mathbf T,
+ \qquad
+ \mathbf T=\mathbf T,
+ \qquad
+ \mathbf Q=\mathbf Q.
+\]
+Representan, respectivamente, acción, velocidad, duración y carga. En la
+base \((\mathbf M,\mathbf L,\mathbf T,\mathbf Q)\), sus columnas forman la
+matriz
+\[
+ B_{\rm D}=
+ \begin{pmatrix}
+ 1&0&0&0\\
+ 2&1&0&0\\
+ -1&-1&1&0\\
+ 0&0&0&1
+ \end{pmatrix}.
+\]
+
+\begin{theorem}[Base dimensional adaptada a HMT]
+\label{thm:base-dimensional-hmt}
+Las dimensiones
+\[
+ \mathbf S,\qquad\mathbf C,\qquad\mathbf T,\qquad\mathbf Q
+\]
+constituyen una base unimodular de
+\(\Lambda_{\rm D}\). En particular, toda dimensión mecánica,
+electromagnética o gravitatoria generada por
+\((\mathbf M,\mathbf L,\mathbf T,\mathbf Q)\) posee una expresión única con
+exponentes enteros en las cuatro rectas
+\(\mathcal L_S,\mathcal L_C,\mathcal L_T,\mathcal L_Q\).
+\end{theorem}
+
+\begin{proof}
+La matriz \(B_{\rm D}\) es triangular por bloques y
+\(\det B_{\rm D}=1\). Por ello pertenece a
+\(\operatorname{GL}_4(\mathbb Z)\). Su inversa integral proporciona
+\[
+ \mathbf L=\mathbf C+\mathbf T,
+ \qquad
+ \mathbf M=\mathbf S-2\mathbf C-\mathbf T.
+\]
+Las cuatro dimensiones originales se recuperan, por tanto, de forma única.
+\end{proof}
+
+Entre las identidades que utilizaremos se encuentran
+\begin{align}
+ \mathbf E&=\mathbf S-\mathbf T,
+ &\mathbf Z&=\mathbf S-2\mathbf Q,\label{eq:dim-EZ}\\
+ \boldsymbol\mu&=\mathbf S-\mathbf C-2\mathbf Q,
+ &\boldsymbol\varepsilon&=-\mathbf S-\mathbf C+2\mathbf Q,
+ \label{eq:dim-mueps}\\
+ \mathbf G&=-\mathbf S+5\mathbf C+2\mathbf T,
+ &\boldsymbol\kappa&=-\mathbf S+\mathbf C+2\mathbf T,
+ \label{eq:dim-Gkappa}\\
+ \boldsymbol\Lambda&=-2\mathbf C-2\mathbf T.
+ \label{eq:dim-Lambda}
+\end{align}
+Aquí \(\mathbf E\) es energía, \(\mathbf Z\) impedancia,
+\(\boldsymbol\mu\) permeabilidad, \(\boldsymbol\varepsilon\)
+permitividad, \(\mathbf G\) la dimensión de la constante gravitatoria,
+\(\boldsymbol\kappa=\mathbf G-4\mathbf C\), y
+\(\boldsymbol\Lambda=-2\mathbf L\).
+
+\section{Grupo de reescala y teorema de imposibilidad}
+
+El grupo de cambios de base de unidades es
+\[
+ \mathcal G_{\rm D}
+ :=\operatorname{Hom}(\Lambda_{\rm D},\mathbb R_{>0})
+ \cong(\mathbb R_{>0})^4.
+\]
+Para \(g\in\mathcal G_{\rm D}\) y \(d\in\Lambda_{\rm D}\), escribimos
+\(g^d\) para el carácter correspondiente. Si \(u_d\) es una base positiva
+de \(\mathcal L_d\), el cambio de carta
+\(u_d\mapsto g^d u_d\) transforma la coordenada de una magnitud fija según
+\[
+ x\,u_d=(g^{-d}x)(g^du_d).
+\]
+La magnitud no cambia; cambia su representación numérica.
+
+\begin{theorem}[Imposibilidad de una escala absoluta desde datos
+adimensionales]
+\label{thm:no-go-dimensional-rango-cuatro}
+Sea \(X\) un espacio sobre el que \(\mathcal G_{\rm D}\) actúa
+trivialmente y sea \(d\ne0\). Toda aplicación
+\(F:X\to\mathcal L_d\) que sea natural respecto de todos los cambios de
+unidades y que no reciba una base dimensional adicional es idénticamente
+nula. En cambio, todo cociente de dos secciones no nulas de una misma recta,
+y todo producto cuya dimensión total sea cero, es invariante por
+\(\mathcal G_{\rm D}\).
+\end{theorem}
+
+\begin{proof}
+La naturalidad y la acción trivial sobre \(X\) implican
+\[
+ F(x)=F(gx)=g^dF(x)
+ \qquad(g\in\mathcal G_{\rm D}).
+\]
+Como \(d\ne0\), existe \(g\) con \(g^d\ne1\); de aquí
+\((g^d-1)F(x)=0\), luego \(F(x)=0\). Para dos secciones de dimensión
+\(d\), los factores \(g^d\) se cancelan en el cociente. La misma cancelación
+ocurre en cualquier monomio de dimensión total cero.
+\end{proof}
+
+El teorema no establece que una teoría discreta sea incapaz de construir una
+escala interna. Establece que esa escala debe aparecer como una sección de
+una recta o, equivalentemente, que la teoría debe extender su dominio por el
+torsor de marcos dimensionales. Es precisamente esta extensión la que define
+la Mecánica Dimensional.
+
+\begin{corollary}[Rango mínimo]
+Todo sistema de rectas que permita realizar independientemente masa,
+longitud, duración y carga posee rango de escala al menos cuatro. La base
+\((\mathbf S,\mathbf C,\mathbf T,\mathbf Q)\) alcanza la cota; por tanto es
+mínima.
+\end{corollary}
+
+\begin{proof}
+Las cuatro dimensiones originales son linealmente independientes en
+\(\Lambda_{\rm D}\). Tres generadores no pueden abarcar una retícula de
+rango cuatro. El \cref{thm:base-dimensional-hmt} da cuatro generadores que
+sí la abarcan.
+\end{proof}
+
+\section{Espacio dimensional interno: grados, cartas y operadores de transducción HMT–MD}
+
+Un marco interno HMT--MD es una cuaterna de bases positivas
+\[
+ \mathfrak u=(u_S,u_C,u_T,u_Q)
+ \in\operatorname{Fr}_{\rm D},
+\]
+donde \(\operatorname{Fr}_{\rm D}\) es un torsor principal de
+\(\mathcal G_{\rm D}\). Las bases derivadas se definen tensorialmente:
+\begin{align*}
+ u_L&=u_Cu_T,&
+ u_M&=u_Su_C^{-2}u_T^{-1},&
+ u_E&=u_Su_T^{-1},\\
+ u_Z&=u_Su_Q^{-2},&
+ u_\mu&=u_Su_C^{-1}u_Q^{-2},&
+ u_\varepsilon&=u_S^{-1}u_C^{-1}u_Q^2,\\
+ u_G&=u_S^{-1}u_C^5u_T^2,&
+ u_\kappa&=u_S^{-1}u_Cu_T^2,&
+ u_\Lambda&=u_C^{-2}u_T^{-2}.
+\end{align*}
+La yuxtaposición denota aquí producto tensorial de bases. Una carta externa
+es otro marco \(\mathfrak u_{\rm ext}\) junto con un isomorfismo positivo
+entre ambos sistemas de rectas. Nada obliga a que esa carta sea SI; la
+elección de SI pertenece a la publicación metrológica de una magnitud.
+
+\subsection{Recta de acción}
+
+El lector determinantal local parte de
+\[
+ G_H=\operatorname{coker}(H_4),
+ \qquad |G_H|=16,
+ \qquad \Sigma_H=\varphi\alpha_{\rm HMT}^{16},
+\]
+y demuestra
+\[
+ 10^{-34}<\Sigma_H<10^{-33},
+ \qquad \operatorname{ord}_{10}(\Sigma_H)=-34.
+\]
+La realización regional posterior al retorno proporciona la coordenada
+angular adimensional
+\[
+ \etaRet
+ =\frac{\Cdeg}{2}-\alpha_{\angle,{\rm deg}}
+ =1.0545718169150390611336905847242997\ldots.
+\]
+Definimos la sección interna de acción reducida por
+\begin{equation}
+ \hbar_{\rm int}
+ :=\etaRet\,10^{-34}u_S,
+ \qquad
+ h_{\rm int}:=2\pi\hbar_{\rm int}.
+ \label{eq:accion-interna}
+\end{equation}
+El exponente es una salida del lector; \(u_S\) es la base de una recta.
+La composición es covariante bajo \(\mathcal G_{\rm D}\) y no contiene una
+identificación con \(\mathrm{J\,s}\).
+
+\subsection{Periodicidad de aristas de ruta y velocidad constitutiva resultante}
+
+Sea \(\mathsf P_{\rm TPK}\) la categoría libre de trayectorias del grafo de
+estados enriquecidos. La graduación por longitud
+\[
+ \tau(\gamma)=|\gamma|,
+ \qquad
+ \tau(\gamma\eta)=\tau(\gamma)+\tau(\eta)
+\]
+define el reloj combinatorio del protocolo. Su realización es
+\[
+ T_{\rm int}(\gamma)=\tau(\gamma)u_T.
+\]
+Esta duración cuenta transiciones del grafo fijado. Una subdivisión del grafo
+define otro reloj y debe acompañarse de su morfismo de refinamiento.
+
+Los canales \(q_\pm\) generan las funciones simétrica y antisimétrica
+\[
+ \mathcal E=
+ \log\!\bigl[(1-q_+^{90})(1-q_-^{90})\bigr]
+ -\log\!\bigl[(1-q_+^{120})(1-q_-^{120})\bigr],
+\]
+\[
+ \mathcal B=
+ \log\!\frac{1-q_-^{90}}{1-q_+^{90}}
+ -\log\!\frac{1-q_-^{120}}{1-q_+^{120}}.
+\]
+Éstas determinan
+los coeficientes positivos
+\[
+ \widehat c=e^{-\mathcal E},
+ \qquad \widehat Z=e^{\mathcal B}.
+\]
+Sus realizaciones internas son
+\begin{equation}
+ c_{\rm int}=\widehat c\,u_C,
+ \qquad Z_{\rm int}=\widehat Z\,u_Z.
+ \label{eq:cZ-internos}
+\end{equation}
+Para un canal constante a lo largo de una trayectoria se obtiene la longitud
+\begin{equation}
+ L_{\rm int}(\gamma)
+ =\widehat c\,|\gamma|\,u_L.
+ \label{eq:longitud-ruta}
+\end{equation}
+Si el canal depende de la arista, la fórmula covariante es la suma
+\(\sum_{e\in\gamma}\widehat c(e)u_L\); su aditividad por concatenación se
+conserva.
+
+\subsection{Escala elemental de carga y carácter condicional}
+
+Puesto que \(u_Z=u_Su_Q^{-2}\), el cociente
+\(h_{\rm int}/Z_{\rm int}\) pertenece a \(\mathcal L_Q^{\otimes2}\).
+La orientación positiva de las rectas selecciona una única raíz positiva.
+Definimos
+\begin{equation}
+ e_{\rm int}
+ :=\left(\frac{2\alpha_{\rm HMT}h_{\rm int}}
+ {Z_{\rm int}}\right)^{1/2}\in\mathcal L_Q^+.
+ \label{eq:carga-interna}
+\end{equation}
+
+\begin{proposition}[Clausura interna de la relación de estructura fina]
+La sección \eqref{eq:carga-interna} es la única sección positiva que
+satisface
+\[
+ \alpha_{\rm HMT}
+ =\frac{Z_{\rm int}e_{\rm int}^{\,2}}{2h_{\rm int}}.
+\]
+La igualdad es invariante bajo el grupo completo de reescala.
+\end{proposition}
+
+\begin{proof}
+La existencia resulta de la positividad de
+\(\alpha_{\rm HMT},h_{\rm int},Z_{\rm int}\). Una recta real orientada
+posee una sola raíz positiva de una sección positiva de su cuadrado. La
+dimensión del miembro derecho es
+\(\mathbf Z+2\mathbf Q-\mathbf S=0\), de modo que todos los factores de
+reescala se cancelan.
+\end{proof}
+
+Esta proposición no cuenta como una segunda determinación independiente de
+\(\alpha\): realiza, dentro del sistema de rectas, la compatibilidad
+constitutiva entre acción, impedancia y una escala elemental de carga. No
+construye una carga sobre los estados. Para ello se necesita además un
+carácter entero
+\[
+ n_Q:\operatorname{Ob}(\mathsf P_{\rm TPK}^{\rm sig})\longrightarrow
+ \mathbb Z;
+ \qquad
+ Q(x)=n_Q(x)e_{\rm int}.
+\]
+La existencia y la selección de \(n_Q\) son hipótesis adicionales. En
+particular, \(n_Q\) no es una componente del funtor de trayectorias que se
+construye a continuación. La escala elemental y la clasificación de estados
+son mapas distintos.
+
+\section{Funtor monoidal de trayectorias con firma}
+
+Sea \(\mathsf P_{\rm TPK}^{\rm sig}\) la categoría de trayectorias
+enriquecidas decoradas por una coordenada de firma
+\(v_x\in\mathbb Z^5\) en cada objeto. Para
+\(\gamma:x\to y\), ponemos
+\[
+ \Delta v(\gamma)=v_y-v_x.
+\]
+La composición satisface
+\(\Delta v(\gamma\eta)=\Delta v(\gamma)+\Delta v(\eta)\).
+Sea
+\[
+ \chi_{\rm mass}(v)=\exp\langle\lambda_{\rm mass},v\rangle
+\]
+el carácter positivo de masa. Sobre el cociente de rutas fijamos la ley de
+acción determinada por cinco datos: la traza normalizada de las emisiones
+distintas, un cociclo positivo y aditivo, el defecto de cambio
+\(\Delta_4P_3\), la capacidad residual \(\lambda=1-\delta\) y la suma local
+de los costes de arista. En esta ley,
+\[
+ \mathcal A_*(\gamma)
+ =N_{\rm giro}(\gamma)+\lambda_*N_{\rm hoja}(\gamma),
+ \qquad
+ \lambda_*=1-\frac5{468}-\frac3{11}\Delta_4.
+\]
+El argumento siguiente sólo requiere la aditividad; también se aplica al
+funcional \(I_\lambda\) con cualquier \(\lambda>0\).
+
+Consideremos el monoide
+\[
+ \mathfrak M_{\rm D}
+ =\mathbb N\times\mathbb R_{\ge0}\times
+  \mathbb R_{\ge0}\times\mathbb R_{>0}
+\]
+con producto
+\[
+ (t,\ell,s,r)\odot(t',\ell',s',r')
+ =(t+t',\ell+\ell',s+s',rr').
+\]
+
+\begin{theorem}[Funtor monoidal de trayectorias con firma]
+\label{thm:funtor-dimensional-minimo}
+La aplicación
+\[
+ \mathfrak D_{\rm HMT}(\gamma)
+ =\bigl(
+ |\gamma|,
+ \widehat c|\gamma|,
+ \mathcal A_*(\gamma),
+ \chi_{\rm mass}(\Delta v(\gamma))
+ \bigr)
+\]
+define un funtor monoidal
+\[
+ \mathfrak D_{\rm HMT}:
+ \mathsf P_{\rm TPK}^{\rm sig}\longrightarrow\mathfrak M_{\rm D}.
+\]
+Después de elegir un marco interno, sus tres componentes aditivas se realizan
+como
+\[
+ T_{\rm int}(\gamma)=|\gamma|u_T,
+ \quad
+ L_{\rm int}(\gamma)=\widehat c|\gamma|u_L,
+ \quad
+ S_{\rm int}(\gamma)=\mathcal A_*(\gamma)\hbar_{\rm int},
+\]
+y la cuarta transporta razones adimensionales de masa. El funtor no contiene
+una coordenada de carga ni genera la retícula dimensional ambiental.
+\end{theorem}
+
+\begin{proof}
+La longitud de una trayectoria, el número de giros y el número de cambios de
+hoja son aditivos bajo concatenación compatible. Por hipótesis,
+\(\mathcal A_*\) es aditiva. La diferencia de firmas es aditiva y el carácter
+de masa transforma sumas en productos. Cada componente respeta, por tanto,
+la ley \(\odot\), y la ruta vacía se envía a
+\((0,0,0,1)\). La realización lineal conserva las sumas porque multiplica
+por secciones fijas de las rectas correspondientes.
+\end{proof}
+
+\begin{remark}[Retícula ambiental y alcance del funtor]
+El corolario de rango mínimo se refiere a un sistema capaz de variar
+independientemente masa, longitud, duración y carga. El funtor anterior
+realiza duración, longitud y acción, y transporta una razón de masa; no usa
+\(u_Q\) ni demuestra una cota de rango. La posterior asignación de cargas
+permanece condicionada a la existencia de \(n_Q\). En la retícula dimensional,
+los tipos de sus componentes son
+\[
+ \mathbf T,\qquad \mathbf L=\mathbf C+\mathbf T,\qquad
+ \mathbf S,\qquad \mathbf0,
+\]
+por lo que su imagen dimensional está contenida en
+\(\langle\mathbf S,\mathbf C,\mathbf T\rangle_{\mathbb Z}\), de rango tres.
+El reescalado \(u_Q\mapsto\lambda u_Q\), con las otras bases fijas, deja
+invariantes todas las componentes del funtor; éste no realiza fielmente la
+cuarta dirección ambiental.
+\end{remark}
+
+Si a cada objeto se le asigna la sección electrónica bidireccional como
+origen de la carta de masa,
+\[
+ m(x)=m_e^{\beta}\chi_{\rm mass}(v_x-v_e),
+\]
+entonces todo morfismo \(\gamma:x\to y\) satisface exactamente
+\[
+ \frac{m(y)}{m(x)}
+ =\chi_{\rm mass}(\Delta v(\gamma)).
+\]
+El teorema cierra la propagación dimensional una vez dada la firma. No cambia
+el estatuto del mapa anterior que asocia una especie a una trayectoria y a
+su firma.
+
+\section{Etapa basal y clausura bidireccional de la escala electrónica}
+
+El invariante electrónico vigente es el escalar positivo
+\[
+ \mathfrak e_0=
+ \frac{\sqrt3}{4}
+ \left(e^{\varphi/\pi^2}-22\alpha_{\rm HMT}^3\right)
+ (1+15\Delta_4).
+\]
+Su valor numérico es
+\(0.510998922488066\ldots\). Ésta es la etapa basal de la genealogía, no su
+salida rectora. En el marco dimensional interno define una sección de energía
+y una sección de masa relacionadas por la velocidad:
+\begin{equation}
+ E_e^{\rm int}=\mathfrak e_0u_E,
+ \qquad
+ m_e^{\rm int}=\frac{E_e^{\rm int}}{c_{\rm int}^{2}}
+ =\mathfrak e_0\widehat c^{-2}u_M.
+ \label{eq:electron-line-valued}
+\end{equation}
+La ruta central y sus dos lectores bidireccionales determinan, sin consultar
+la masa externa,
+\[
+ \kappa_e=80-54\alpha_{\rm HMT}+6\Delta_4,
+ \qquad R_{\rm act}=\frac{H_5}{\etaRet}.
+\]
+La sección electrónica vigente es, por tanto,
+\begin{equation}
+ \begin{aligned}
+ E_e^{\beta}&=E_e^{(0)}R_{\rm act}^{\kappa_e},
+ &m_e^{\beta}&=\frac{E_e^{\beta}}{c_{\rm int}^{2}},\\
+ E_e^\beta
+ &=0.5109989506900008086082571648\ldots\ {\rm MeV},
+ &u_E&=1\,{\rm MeV}.
+ \end{aligned}
+ \label{eq:electron-line-valued-beta}
+\end{equation}
+Así, la fórmula basal conserva su función derivativa y la clausura
+bidireccional gobierna toda propagación posterior por caracteres y torres.
+En una carta de unidades naturales en la que la coordenada de
+\(c_{\rm int}\) se fija en uno, ambas coordenadas numéricas coinciden; sus
+rectas no se identifican silenciosamente.
+
+\begin{proposition}[Separación tipada de la base energética y el cuanto de reloj]
+\label{prop:no-identificacion-base-reloj-rev8}
+Escribamos \(t_0=\tau_0u_T\), con \(\tau_0>0\), y definamos
+\[
+ \varepsilon_{\rm clk}
+ :=\hbar_{\rm int}\frac{2\pi}{108t_0},
+ \qquad
+ \kappa_{\rm clk}(\tau_0)
+ :=\frac{2\pi\etaRet\,10^{-34}}{108\tau_0}.
+\]
+Entonces
+\[
+ \varepsilon_{\rm clk}=\kappa_{\rm clk}(\tau_0)u_E,
+ \qquad
+ m_0:=\frac{\varepsilon_{\rm clk}}{c_{\rm int}^2}
+ =\kappa_{\rm clk}(\tau_0)\widehat c^{-2}u_M,
+\]
+y la sección electrónica vigente satisface
+\[
+ E_e^{\rm int}
+ =\frac{\mathfrak e_0}{\kappa_{\rm clk}(\tau_0)}
+  \varepsilon_{\rm clk}.
+\]
+Por tanto, \(E_e^{\rm int}=\mathfrak e_0\varepsilon_{\rm clk}\) si y sólo si
+\(\kappa_{\rm clk}(\tau_0)=1\). Adoptar \(\varepsilon_{\rm clk}\) como base
+manteniendo la misma coordenada \(\mathfrak e_0\) es una nueva elección de
+marco; no constituye una corrección del invariante electrónico ni se sigue
+de la periodicidad de orden 108. En particular, la normalización usada más
+adelante, \(t_0=u_T\), fija \(\tau_0=1\), no
+\(\kappa_{\rm clk}=1\).
+\end{proposition}
+
+\begin{proof}
+Se sustituyen
+\(\hbar_{\rm int}=\etaRet\,10^{-34}u_S\),
+\(t_0=\tau_0u_T\), \(u_E=u_Su_T^{-1}\) y
+\(c_{\rm int}=\widehat c,u_C\). La última identidad resulta al comparar
+con \cref{eq:electron-line-valued}. Todas las igualdades se producen entre
+secciones de la misma recta; ninguna consulta una unidad o masa externa.
+\end{proof}
+
+\begin{proposition}[Propagación de la escala de masa]
+Para cada firma declarada \(v\in\mathbb Z^5\),
+\[
+ m_v^{\rm int}:=m_e^{\rm int}\chi_{\rm mass}(v)
+ \]
+es una sección positiva de \(\mathcal L_M\), y
+\[
+ \frac{m_{v+w}^{\rm int}}{m_v^{\rm int}}
+ =\chi_{\rm mass}(w).
+\]
+La construcción es covariante bajo reescala y no requiere una unidad externa
+de energía o masa.
+\end{proposition}
+
+\begin{proof}
+El carácter es adimensional y positivo, por lo que no modifica la recta de
+\(m_e^{\rm int}\). La identidad de cocientes es la multiplicatividad de
+\(\chi_{\rm mass}\). Bajo un cambio de marco, numerador y denominador
+adquieren el mismo peso \(\mathbf M\), que se cancela.
+\end{proof}
+
+Una carta metrológica posterior puede enviar \(u_E\) a una base de energía y
+\(u_M\) a la base coherente obtenida al dividir por la velocidad patrón al
+cuadrado. Sólo esa carta autoriza expresar la sección mediante un nombre de
+unidad externo.
+
+\section{Constitutivas como isomorfismos entre rectas}
+
+Las funciones internas satisfacen
+\[
+ \widehat\mu=e^{\mathcal B+\mathcal E},
+ \qquad
+ \widehat\varepsilon=e^{-\mathcal B+\mathcal E},
+ \qquad
+ \widehat Z=e^{\mathcal B},
+ \qquad
+ \widehat c=e^{-\mathcal E}.
+\]
+Definimos las secciones
+\[
+ \mu_{\rm int}=\widehat\mu u_\mu,
+ \qquad
+ \varepsilon_{\rm int}=\widehat\varepsilon u_\varepsilon.
+\]
+
+\begin{theorem}[Constitutivas lineales covariantes]
+En el grupoide de rectas orientadas se cumplen las identidades exactas
+\[
+ \sqrt{\frac{\mu_{\rm int}}{\varepsilon_{\rm int}}}
+ =Z_{\rm int},
+ \qquad
+ \frac1{\sqrt{\mu_{\rm int}\varepsilon_{\rm int}}}
+ =c_{\rm int}.
+\]
+Las cuatro secciones dependen de dos caracteres adimensionales y de las dos
+rectas \(\mathcal L_Z,\mathcal L_C\); no constituyen cuatro escalas
+independientes.
+\end{theorem}
+
+\begin{proof}
+En coeficientes,
+\(\widehat\mu/\widehat\varepsilon=\widehat Z^2\) y
+\(\widehat\mu\widehat\varepsilon=\widehat c^{-2}\). En dimensiones,
+\[
+ \boldsymbol\mu-\boldsymbol\varepsilon=2\mathbf Z,
+ \qquad
+ \boldsymbol\mu+\boldsymbol\varepsilon=-2\mathbf C.
+\]
+Las raíces positivas son, por ello, secciones de las rectas correctas y las
+identidades son covariantes.
+\end{proof}
+
+\section{Escala de Cartan y homogeneidad de la acción gravitatoria}
+
+La duración elemental \(t_0=u_T\) y la velocidad constitutiva determinan la
+longitud de una transición,
+\[
+ \ell_0=c_{\rm int}t_0=\widehat c\,u_L.
+\]
+Esta sección permite homogeneizar la conexión afín de Cartan:
+\[
+ \mathcal A_{\ell_0}
+ =\begin{pmatrix}
+ \omega^I{}_J&\ell_0^{-1}e^I\\
+ 0&0
+ \end{pmatrix},
+ \qquad
+ \mathcal F_{\ell_0}
+ =\begin{pmatrix}
+ F^I{}_J&\ell_0^{-1}T_{\rm tor}^I\\
+ 0&0
+ \end{pmatrix}.
+\]
+El cociente \(e/\ell_0\) es adimensional; curvatura y torsión permanecen en
+bloques distintos del mismo transporte.
+
+La dimensión de \(G\) no añade un quinto generador, pues
+\(\mathbf G=-\mathbf S+5\mathbf C+2\mathbf T\). Para todo parámetro
+adimensional positivo \(\theta_G\), definimos la familia covariante
+\begin{equation}
+ G_{\rm int}(\theta_G)
+ :=\theta_G\frac{c_{\rm int}^{5}t_0^2}{\hbar_{\rm int}}
+ \in\mathcal L_G^+.
+ \label{eq:G-interno}
+\end{equation}
+La elección \(\theta_G=1\) es la normalización interna de Planck asociada a
+una transición elemental. Satisface por construcción
+\[
+ \ell_0^2=\frac{\hbar_{\rm int}G_{\rm int}(1)}
+ {c_{\rm int}^{3}}.
+\]
+Esta normalización de referencia no es el selector circular ni el selector
+holonómico de la sección física de \(G\).
+El parámetro \(\theta_G\) hace visible la libertad que no fijan las
+identidades dimensionales. Una dinámica TPK que produzca un carácter
+gravitatorio deberá determinarlo antes de cualquier carta externa.
+
+Sea
+\[
+ \kappa_{\rm int}=\frac{8\pi G_{\rm int}}{c_{\rm int}^{4}}.
+\]
+En el funcional siguiente, \(M\) es una variedad lisa orientada de
+dimensión cuatro y \(\gamma\in\mathbb R\setminus\{0\}\). Si \(M\) tiene
+borde, se imponen variaciones de soporte compacto en el interior o un
+término de borde con condiciones que anulen la variación fronteriza. Una
+acción de materia espinorial presupone, además, una estructura de espín
+compatible.
+Si la co-tétrada \(e^I\) toma valores en \(\mathcal L_L\) y la curvatura
+\(F^{IJ}\) es una dos-forma sin dimensión después de integrar la conexión,
+entonces
+\(\int\Sigma_{IJ}\wedge F^{IJ}\) tiene dimensión \(2\mathbf L\).
+
+\begin{theorem}[Homogeneidad de la acción Palatini--Cartan--Holst]
+\label{thm:homogeneidad-pch}
+Con unidades explícitas, el funcional gravitatorio de dimensión acción es
+\[
+ \boxed{
+ S_{\rm PCH}
+ =\frac1{2\kappa_{\rm int}c_{\rm int}}
+ \int\Sigma_{IJ}\wedge
+ \left(\star F^{IJ}+\gamma^{-1}F^{IJ}\right)
+ -\frac1{\kappa_{\rm int}c_{\rm int}}
+ \int\Lambda_{\rm int}\operatorname{vol}_e
+ +S_{\rm m}.}
+ \]
+Ambos términos geométricos pertenecen a \(\mathcal L_S\). La escritura con
+\(1/(2\kappa)\) sin el factor \(c^{-1}\) pertenece a una convención
+\(c=1\) o tiene dimensión \(\mathbf S+\mathbf C\), no dimensión acción.
+\end{theorem}
+
+\begin{proof}
+De \eqref{eq:dim-Gkappa},
+\(\boldsymbol\kappa=-\mathbf S+\mathbf C+2\mathbf T\). Además,
+\(2\mathbf L=2\mathbf C+2\mathbf T\). Por tanto,
+\[
+ -\boldsymbol\kappa-\mathbf C+2\mathbf L
+ =\mathbf S.
+\]
+El término cosmológico posee la misma dimensión porque
+\(\boldsymbol\Lambda+4\mathbf L=2\mathbf L\). Si se omite
+\(-\mathbf C\), el resultado es \(\mathbf S+\mathbf C\).
+\end{proof}
+
+La ecuación de Cartan--Holst conserva entonces su contenido variacional
+siempre que la corriente de espín se defina con la normalización coherente
+con este funcional. La realización dinámica todavía debe proporcionar un
+morfismo desde las holonomías TPK hacia \((e,\omega,\Psi)\); el presente
+sección construye el codominio dimensional exacto y elimina la ambigüedad de
+las unidades en ese morfismo.
+
+\section{Universalidad de la realización dimensional}
+
+Reunimos los resultados. Sea \(\mathcal X_{\rm HMT}\) el dominio de estados
+enriquecidos y sean datos adimensionales sobre él:
+\[
+ \alpha_{\rm HMT},\quad \Adeg,\quad\Cdeg,\quad
+ \widehat c,\widehat Z,\quad
+ \mathcal A_*,\quad\chi_{\rm mass},\quad\mathfrak e_0,
+\]
+construidos en los capítulos anteriores sobre sus dominios declarados.
+Consideremos el dominio extendido
+\[
+ \mathcal X_{\rm MD}
+ :=\mathcal X_{\rm HMT}\times\operatorname{Fr}_{\rm D}.
+\]
+
+\begin{theorem}[Extensión dimensional universal]
+\label{thm:extension-dimensional-universal}
+Existe una única extensión tensorial, positiva y
+\(\mathcal G_{\rm D}\)-equivariante que:
+\begin{enumerate}
+ \item realiza el reloj de aristas en \(\mathcal L_T\);
+ \item realiza \(\widehat c\) y \(\widehat Z\) en
+       \(\mathcal L_C\) y \(\mathcal L_Z\);
+ \item realiza el índice determinantal y la componente posterior al retorno
+       en \(\mathcal L_S\);
+ \item satisface las relaciones exactas entre impedancia, velocidad de
+       propagación, permeabilidad y permitividad;
+ \item satisface la relación interna de estructura fina con escala elemental
+       de carga positiva y, si se proporciona un carácter \(n_Q\), realiza
+       condicionalmente \(Q(x)=n_Q(x)e_{\rm int}\);
+ \item transporta el carácter de masa en \(\mathcal L_M\).
+\end{enumerate}
+Todas las demás rectas de la retícula se obtienen por productos tensoriales y
+duales. Dos realizaciones difieren exactamente por un único elemento de
+\(\mathcal G_{\rm D}\).
+\end{theorem}
+
+\begin{proof}
+El \cref{thm:base-dimensional-hmt} identifica
+\((\mathbf S,\mathbf C,\mathbf T,\mathbf Q)\) con una base libre de la
+retícula. Una aplicación monoidal sobre una categoría libre queda determinada
+por su valor en los generadores. La positividad fija las raíces que aparecen
+en carga y constitutivas. Las identidades ya demostradas garantizan que las
+definiciones no dependen de una presentación alternativa de una dimensión.
+La acción simplemente transitiva de \(\mathcal G_{\rm D}\) sobre los marcos
+prueba la última afirmación.
+\end{proof}
+
+La conclusión matemática es precisa. HMT fija la genealogía de los
+coeficientes internos y Mecánica Dimensional los realiza en una retícula
+ambiental mínima de rango cuatro cuando masa, longitud, duración y carga han
+de variar independientemente. El funtor monoidal de trayectorias con firma
+ocupa una parte de esa retícula y no hereda, por ello, una afirmación de
+minimalidad. Las razones y las ecuaciones homogéneas son independientes de
+toda carta. Una publicación en segundos, julios, culombios o
+electronvoltios es la composición posterior con un marco externo; no altera
+ninguno de los teoremas internos ni puede sustituirlos.

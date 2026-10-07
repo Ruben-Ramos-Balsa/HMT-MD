@@ -1,0 +1,264 @@
+\section{Genealogical moments, Jacobi operators, and spectral residues}
+\label{sec:jacobi-generated}
+
+The calendar-induced measure provides a link between cell geometry and
+a positive spectral realization. This link uses the entire marked
+partition: each of its twelve intervals preserves the same chronological
+mass, whereas its length comes from the corresponding register
+coordinate. The density exactly compensates for that length.
+Consequently, the spatial distribution of the measure retains the
+anisotropy of the register even though the distribution among windows
+is uniform.
+
+Let \(K_j>0\), \(Q=\sum_{j=1}^{12}K_j\), \(d_j=K_j/Q\), and
+\(t_j=\sum_{i\leq j}d_i\), with \(t_0=0\). The probability measure
+used in this section is
+\[
+ \dd\mu_K(t)=\sum_{j=1}^{12}
+ \frac{\mathbf1_{[t_{j-1},t_j]}(t)}{12d_j}\,\dd t.
+\]
+Shared endpoints have measure zero. Its moments are rational for
+every integer register:
+\begin{equation}
+ m_r=\int_0^1t^r\,\dd\mu_K(t)
+ =\frac1{12(r+1)}\sum_{j=1}^{12}
+   \frac{t_j^{r+1}-t_{j-1}^{r+1}}{d_j},\qquad r\geq0.
+ \label{eq:jacobi-moments}
+\end{equation}
+The equality \(m_0=1\) expresses conservation of total mass. For
+each \(n\geq1\), the Hankel matrix \(H_n=(m_{a+b})_{0\leq a,b<n}\)
+is positive definite: its quadratic form is the integral of the square
+of a nonzero polynomial over an interval where the density is positive.
+This observation allows passage from moments to an operator without
+choosing a target spectrum.
+
+\begin{theorem}[Tridiagonal recurrence determined by the partition]
+\label{thm:jacobi-recurrence}
+There is a unique sequence of monic polynomials \(p_n\), of degree
+\(n\), orthogonal for \(\mu_K\). If
+\[
+ h_n=\int p_n^2\,\dd\mu_K>0,\qquad
+ a_n=\frac{\int t p_n^2\,\dd\mu_K}{h_n},\qquad
+ \beta_n=\frac{h_n}{h_{n-1}}>0\quad(n\geq1),
+\]
+then \(p_0=1\), \(p_1=t-a_0\), and
+\begin{equation}
+ p_{n+1}(t)=(t-a_n)p_n(t)-\beta_np_{n-1}(t),\qquad n\geq1.
+ \label{eq:jacobi-recurrence}
+\end{equation}
+All coefficients \(a_n,\beta_n\) are rational for the stated integer
+register. In the orthonormal basis \(\psi_n=p_n/\sqrt{h_n}\),
+the compression of multiplication by \(t\) to polynomials of degree
+less than \(n\) has the symmetric matrix
+\[
+ J_n=\begin{pmatrix}
+ a_0&\sqrt{\beta_1}&&0\\
+ \sqrt{\beta_1}&a_1&\ddots&\\
+ &\ddots&\ddots&\sqrt{\beta_{n-1}}\\
+ 0&&\sqrt{\beta_{n-1}}&a_{n-1}
+ \end{pmatrix}.
+\]
+\end{theorem}
+\begin{proof}
+Positivity of \(H_n\) guarantees that the linear system imposing
+orthogonality on a monic polynomial has a unique solution. Since its
+coefficients are rational moments, the solution is rational. Expand
+\(tp_n\) in the monic basis through degree \(n+1\). For
+\(j\leq n-2\), symmetry of the inner product gives
+\(\langle tp_n,p_j\rangle=\langle p_n,tp_j\rangle=0\).
+Only the terms of degrees \(n+1,n,n-1\) remain. Their coefficients
+are, respectively, \(1,a_n,h_n/h_{n-1}\), proving the recurrence.
+Normalization by \(\sqrt{h_n}\) turns the two adjacent coefficients
+into \(\sqrt{\beta_n}\).
+\end{proof}
+
+For the register expressed in Section~\ref{sec:register}, the first
+diagonal entry and the square of the first coupling are
+\[
+ a_0=m_1=\frac{71195}{150312},\qquad
+ \beta_1=m_2-m_1^2=\frac{2206226167}{22593697344}.
+\]
+The first equality calculates the center of mass of the chronological
+partition; the second calculates its dispersion and determines the
+first link of the tridiagonal matrix. Both numbers are obtained by
+integrating the generated lengths, and their structural meaning
+precedes any decimal evaluation.
+
+\begin{theorem}[Simple spectrum, quadrature, and positive residues]
+\label{thm:jacobi-residues}
+The eigenvalues \(\lambda_1<\cdots<\lambda_n\) of \(J_n\) are
+simple and belong to \((0,1)\). There are unique weights \(w_i>0\),
+summing to one, such that
+\begin{equation}
+ \int f(t)\,\dd\mu_K(t)=\sum_{i=1}^{n}w_i f(\lambda_i)
+ \qquad(\deg f\leq2n-1).
+ \label{eq:jacobi-quadrature}
+\end{equation}
+The resolvent observed at the unit constant \(e_0\) satisfies
+\begin{equation}
+ g_n(z)=\langle e_0,(zI-J_n)^{-1}e_0\rangle
+       =\sum_{i=1}^{n}\frac{w_i}{z-\lambda_i}
+       =\cfrac1{z-a_0-\cfrac{\beta_1}{z-a_1-
+          \cfrac{\beta_2}{\ddots-\cfrac{\beta_{n-1}}{z-a_{n-1}}}}}.
+ \label{eq:jacobi-resolvent}
+\end{equation}
+In particular, its poles and residues are obtained from the register
+through the operations of taking moments, orthogonalization, and
+compression.
+\end{theorem}
+\begin{proof}
+For any nonzero polynomial \(p\) of degree less than \(n\),
+\[
+ 0<\int_0^1 t|p(t)|^2\,\dd\mu_K(t)
+   <\int_0^1 |p(t)|^2\,\dd\mu_K(t).
+\]
+
+The variational characterization places the spectrum of \(J_n\) in
+\((0,1)\). Each subdiagonal entry is positive. The eigenvector
+equations recursively determine all its coordinates from the first;
+if that coordinate vanished, the entire vector would vanish. Every
+eigenspace therefore has dimension one. Symmetry of the matrix gives
+orthogonal diagonalization and simplicity of the spectrum. For unit
+eigenvectors \(v_i\), set \(w_i=|\langle e_0,v_i\rangle|^2>0\).
+Completeness of the eigenbasis gives \(\sum_iw_i=1\) and the first
+expression for the resolvent.
+
+By expansion of the determinant, the tridiagonal recurrence shows that
+\(\det(tI-J_n)=p_n(t)\). For \(\deg f\leq2n-1\), Euclidean
+division writes \(f=qp_n+r\), with \(\deg q,\deg r<n\).
+Orthogonality makes the integral of \(qp_n\) vanish, and its
+evaluation at the \(\lambda_i\) also vanishes. For \(r\) of degree
+less than \(n\), successive multiplications of the constant by \(t\)
+remain within the polynomial space up to the required degree; hence
+\(\int r\,\dd\mu_K=\langle e_0,r(J_n)e_0\rangle\).
+The spectral resolution proves the quadrature formula. Its uniqueness
+follows from invertibility of the Vandermonde matrix evaluated at the
+distinct roots. Finally, the Schur complement of the first row and
+column of \(zI-J_n\), iterated over the trailing submatrices,
+produces the continued fraction.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex, node distance=8mm and 8mm,
+ every node/.style={font=\small}, box/.style={draw,rounded corners=1pt,
+ text width=37mm,minimum height=13mm,align=center}]
+\node[box] (k) {Marked register\\\(K,Q\)};
+\node[box,right=of k] (m) {Chronological measure\\\(\mu_K\)};
+\node[box,right=of m] (h) {Positive moments\\\(H_n\)};
+\node[box,below=of h] (j) {Tridiagonal operator\\\(J_n\)};
+\node[box,left=of j] (g) {Resolvent\\\(g_n(z)\)};
+\node[box,left=of g] (w) {Poles and residues\\\(\lambda_i,w_i>0\)};
+\draw[->] (k)--(m);\draw[->] (m)--(h);\draw[->] (h)--(j);
+\draw[->] (j)--(g);\draw[->] (g)--(w);
+\end{tikzpicture}
+\caption{Spectral realization of the HMT partition. Cell geometry
+determines the measure; positivity of its moments produces the operator
+and the positive residues of its resolvent.}
+\label{fig:jacobi-generated}
+\end{figure}
+
+The resolvent formula provides a spectral reading of spatial memory.
+The positive weights describe how much the constant coordinate observes
+of each mode; the poles are the algebraic frequencies of the compressed
+multiplication operator. Moments of increasing order recover successive
+details of the measure, and the continued-fraction coefficients preserve
+this information through a local three-term recurrence. The classical
+appearance of a Jacobi matrix is recognized after its coefficients have
+been constructed from the HMT cells. The causal chain is fixed by
+\[
+ K\longmapsto(d,t)\longmapsto\mu_K\longmapsto(m_r)_{r\geq0}
+ \longmapsto\bigl((a_n)_{n\geq0},(\beta_n)_{n\geq1}\bigr)
+ \longmapsto(J_n,g_n).
+\]
+
+\begin{proposition}[Dimension and refinement compatibility]
+\label{prop:jacobi-refinement}
+The matrices \(J_n\) are compatible principal compressions of the
+same bounded multiplication by \(t\) on \(L^2(\mu_K)\). Their
+spectral measures \(\sum_iw_i\delta_{\lambda_i}\) converge weakly
+to \(\mu_K\). If each nonadic subinterval is represented by its
+midpoint and its mass \(1/(12\cdot9^r)\), the resulting atomic
+measure \(\mu_{K,r}\) approximates the moments of \(\mu_K\).
+For a fixed degree \(n\), construction from these moments recovers
+the coefficients \(a_j,\beta_j\) of the same matrix as refinement
+tends to infinite depth.
+\end{proposition}
+\begin{proof}
+Orthogonalization of the complete sequence uses the same formulas as
+\(n\) increases, so each principal block remains fixed. Quadrature
+exactly reproduces any polynomial once \(2n-1\) exceeds its degree.
+Uniform approximation of continuous functions on \([0,1]\) by
+polynomials, together with total mass one, proves weak convergence.
+The midpoint sums converge on each of the twelve intervals with its
+constant density, and thus approximate all moments. In fixed dimension,
+the orthogonalization coefficients are rational functions of finitely
+many moments, with denominators formed from positive Gram determinants.
+Convergence of these moments and positivity of the limit ensure
+convergence of the coefficients.
+\end{proof}
+
+\begin{falsifier}
+A zero length invalidates the stated density and can destroy the rank
+of the moments. Replacing the fixed measure by unnormalized counts on
+different meshes changes the operator. The residues of \(g_n\) are
+spectral weights of the resolvent, whereas the residues of a canonical
+form are defined on geometric divisors: identifying these notions
+requires specifying the form and the corresponding map. Likewise,
+\(J_n\) is dimensionless; identifying it with a physical Hamiltonian
+requires the representation and the action and clock scale used by
+that sector.
+\end{falsifier}
+
+\begin{theorem}[Faithfulness of the marked spectral realization]
+\label{thm:jacobi-marked-faithfulness}
+The infinite Jacobi operator \(J\), together with its unit cyclic
+vector \(e_0\) and charge \(Q\), determines the register \(K\).
+Two realizations of this type are unitarily equivalent through a map
+preserving the marked vector and charge if and only if their registers
+agree. The spectrum as a set, by contrast, is \([0,1]\) for every
+positive register in the domain.
+\end{theorem}
+\begin{proof}
+Polynomials are dense in \(L^2(\mu_K)\): first approximate continuous
+functions and then use their density for the finite measure.
+The constructed orthonormal basis defines a unitary map taking
+\(e_n\) to \(\psi_n\). Under this map, \(J\) is multiplication
+by \(t\), a bounded self-adjoint operator, and \(e_0\) represents
+the constant function one. Therefore,
+\[
+ \langle e_0,J^re_0\rangle=m_r\qquad(r\geq0).
+\]
+These moments determine the measure: two measures with the same
+moments agree on polynomials, then on continuous functions by uniform
+approximation, and finally as Borel measures. Its distribution
+\(F(t)=\mu_K([0,t])\) is continuous and strictly increasing.
+Each initial interval has mass \(1/12\), so
+\[
+ t_j=F^{-1}(j/12),\qquad
+ K_j=Q\bigl(F^{-1}(j/12)-F^{-1}((j-1)/12)\bigr).
+\]
+A unitary equivalence preserving \(e_0\) preserves the moments and
+therefore the register. The converse follows from the unique
+construction.
+
+For the last statement, the density of \(\mu_K\) is positive on
+every subinterval. Each \(\lambda\in[0,1]\) admits unit-norm
+functions concentrated on progressively smaller intervals around
+\(\lambda\), on which the norm of \((J-\lambda I)f\) tends
+to zero. Thus the entire interval belongs to the spectrum. Outside
+it, multiplication by \(1/(t-\lambda)\) is bounded and defines
+the resolvent. This proves equality of the spectrum.
+\end{proof}
+
+The theorem distinguishes the extent of the spectrum from the
+information it preserves relative to a marked observation. The same
+spectral interval admits the different distributions of the collection;
+the measure observed from the unit recovers the original separations.
+The link with the Grassmannian representation is now reversible:
+marked minors reconstruct \(K\), the register constructs
+\((J,e_0,Q)\), and its moments and quantiles recover the same
+register. Every reader factoring through \((K,\xi)\) therefore
+has a marked spectral expression once the remaining coordinates
+\(\xi\) are preserved. The spectral realization contains structure,
+in addition to pole positions or eigenvalues.

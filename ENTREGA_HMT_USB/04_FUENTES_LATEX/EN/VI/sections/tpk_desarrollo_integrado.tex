@@ -1,0 +1,534 @@
+% Expository recovery from the TPK kernel's source owners.
+% Provenance and preservation controls are documented in technical/TPK_INTEGRACION.md.
+% This file expands the TPK section; it does not replace extension.tex or generacion.tex.
+
+\subsubsection{Dynamic state, observables, and operational dependencies}
+\label{tpk-int:estado}
+
+The Topological Phase Kernel organizes the evolution of the two APP sheets
+with the orientation determined by TRIT. Its definition comprises the state
+on which it acts, the transition rules, and the relations that make
+prolongations compatible. Equation \eqref{eq:actualizacion} acquires operational
+content when the coordinates received and modified by each factor are specified.
+Position belongs to the toroidal support; phase belongs to the calendar;
+orientation determines transport; quotients record the arithmetic evaluation
+before reduction. These coordinates are related through the transition and
+retain different mathematical functions.
+
+The observable projection of a state is
+\begin{equation}
+ q=(x_+,d_+,x_\times,d_\times,\theta)
+ \in\mathcal Q_{\rm obs}
+ :=(X_9\times\mathcal D)^2\times\Theta_{108},
+ \qquad \mathcal D=\{N,E,S,O\},\quad
+ \Theta_{108}=\ZZ/108\ZZ.
+ \label{tpk-int:qobs}
+\end{equation}
+The subscripts distinguish the additive and multiplicative cursors. The
+fibers of complete states over \(q\) preserve the ordered trajectory, the
+integer evaluations of both sheets, their residues and quotients, and the
+orientation and boundary records. A precision prolongation adds the prefix
+and the compatible cylinder. Thus two states with the same projection
+\(q\) may retain different records.
+
+Operational dependencies have three levels. At the local level, the selector
+activates a sheet, transport changes its position, and the update computes
+the new arithmetic coordinates. At the trajectory level, these transitions
+compose and retain the records of preceding steps. At the refinement level,
+extension relations determine which continuation preserves the predecessor's
+prefix, signature, and boundary. The finite calendar describes the phase
+of these operations; holonomy describes their composition on the history.
+
+\subsubsection{Tritic selection and lifted cardinal transport}
+\label{tpk-int:seleccion}
+
+Let \(\bar\theta\in\{0,\ldots,107\}\) be the calendar representative.
+The operating phase and the dodecaphase sector are
+\begin{equation}
+ r(\theta)=1+(\bar\theta\bmod9),\qquad
+ \beta(\theta)=\left[\left\lfloor\frac{\bar\theta}{9}\right\rfloor\right]_{12}.
+ \label{tpk-int:fase}
+\end{equation}
+The previously defined selector may be written \(\varepsilon_9=M_{\rm ph}\).
+Its value vector in the ordered chart of \(D_9\) is
+\[
+ m_{\rm ph}=(1,-1,0,1,-1,0,1,-1,0).
+\]
+The function \(M_{\rm ph}:D_9\to\TRIT\) and this vector are two
+presentations of the same selector, with their respective domains.
+
+Define the activation indicators
+\[
+ a_+(\theta)=\mathbf1_{\{1,4,7\}}(r(\theta)),\qquad
+ a_\times(\theta)=\mathbf1_{\{2,5,8\}}(r(\theta)).
+\]
+Cursor transport is then
+\begin{equation}
+ x_+'=x_++a_+(\theta)\nu_{d_+},\qquad
+ x_\times'=x_\times+a_\times(\theta)\nu_{d_\times}
+ \quad\text{in }X_9.
+ \label{tpk-int:cursores}
+\end{equation}
+In phases \(3,6,9\), both positions remain unchanged; the neutral event
+forms part of the chronology and its record. Cardinal directions determine
+the vectors \(\nu_d\), whereas the phase signature determines which
+vector is applied.
+
+The integer lift preserves boundary crossing. If
+\(s:X_9\to D_9^2\) chooses positive representatives and
+\(x'=x+a\nu_d\), with \(a\in\{0,1\}\), define
+\begin{equation}
+ b_d(x,a)=\frac{s(x)+a\nu_d-s(x')}{9}\in\ZZ^2.
+ \label{tpk-int:borde}
+\end{equation}
+Divisibility by \(9\) follows from equality in \(X_9\).
+If \(z\in\ZZ^2\) records previous crossings, the update is
+\(z'=z+b_d(x,a)\). Thus
+\[
+ s(x')+9z'=s(x)+9z+a\nu_d.
+\]
+The integer transport data remain reconstructible after the position
+has been reduced on the torus.
+
+\begin{proposition}[Conservation of lifted displacement]
+\label{tpk-int:prop-desplazamiento}
+For a cardinal trajectory of \(n\) steps, with activation indicators
+\(a_t\),
+\[
+ s(x_n)+9z_n=s(x_0)+9z_0+
+ \sum_{t=0}^{n-1}a_t\nu_{d_t}.
+\]
+The same equality is preserved under concatenation of two compatible trajectories.
+\end{proposition}
+\begin{proof}
+The one-step identity is \eqref{tpk-int:borde}. Summing it over the
+\(n\) steps cancels the intermediate coordinates. Splitting the summation
+interval into two segments produces exactly the concatenation law.
+For a closed trajectory, the difference \(z_n-z_0\) is the previously
+defined winding number.
+\end{proof}
+
+The same principle governs APP evaluations. If a sheet takes the integer
+value \(N_t\), its record simultaneously preserves
+\(N_t=R_t+9q_t\). The difference between two steps satisfies
+\[
+ N_{t+1}-N_t=(R_{t+1}-R_t)+9(q_{t+1}-q_t).
+\]
+Spatial-crossing memory \(z_t\) and arithmetic quotient \(q_t\)
+have different definitions; preserving them jointly maintains the
+geometric and arithmetic provenance of every transition.
+
+\subsubsection{Two-cursor chronology and composite returns}
+\label{tpk-int:cronologia}
+
+The cardinal involution \(\jmath\) interchanges \(N\) with \(S\) and
+\(E\) with \(O\). After applying \eqref{tpk-int:cursores}, both
+directions are reversed at the end of a block of \(27\) steps.
+Writing
+\[
+ h(\theta)=\mathbf1_{\{0,27,54,81\}}
+             ((\bar\theta+1)\bmod108),
+\]
+the complete rule on the observable projection is
+\begin{equation}
+ F_{\rm obs}(q)=
+ \bigl(x_+',\jmath^{h(\theta)}d_+,
+       x_\times',\jmath^{h(\theta)}d_\times,
+       \theta+1\bigr).
+ \label{tpk-int:fobs}
+\end{equation}
+The reading that forms the emission uses the positions before transport,
+according to the explicit recurrence in Section~\ref{sec:extension}.
+The observable update and emission therefore compose in a fixed order.
+
+\begin{proposition}[Reversibility and period of the observable calendar]
+\label{tpk-int:periodo}
+The map \(F_{\rm obs}\) is a permutation of
+\(\mathcal Q_{\rm obs}\) and satisfies \(F_{\rm obs}^{108}=I\).
+Within a block of \(54\) steps, positions and directions are restored;
+the coordinate in \(\Theta_{108}\) advances by \(54\).
+\end{proposition}
+\begin{proof}
+Given the final state, the preceding phase is first recovered by subtracting
+one in \(\Theta_{108}\). That phase determines whether directions were
+reversed and which cursor moved. Applying the corresponding involution
+and subtracting the cardinal vector uniquely recovers the initial state.
+
+Each interval of \(27\) steps contains nine activations of each cursor.
+The following block preserves the activations and reverses the directions,
+so the integer displacements cancel over \(54\) steps. The rule has
+period \(54\) in its position and orientation increments; the same
+cancellation holds for any calendar origin. After \(108\) steps,
+\(\theta\) is also restored.
+\end{proof}
+
+We reserve
+\[
+ \mathcal K_{27}=F_{\rm obs}^{27}:
+ \mathcal Q_{\rm obs}\longrightarrow\mathcal Q_{\rm obs}
+\]
+for the iterate of \(27\) transitions. Its fourth iterate is the
+identity on the observable state defined in \eqref{tpk-int:qobs}.
+Projecting history onto the calendar makes this finite check possible.
+The trajectory record, its evaluations, and the new prefixes remain in
+the dynamic state on which \(\mathcal U_t\) acts; observable equality
+does not reinitialize them.
+
+\subsubsection{Affine memory transport and composition of states}
+\label{tpk-int:memoria}
+
+The observable projection admits fibers of arithmetic and geometric data.
+Over a configuration \(q\), we write a state in the form
+\[
+ x=(q,o,h,c,\sigma,C,b,\lambda).
+\]
+Here \(o\) preserves orientation and sheet; \(h\), residues and
+quotients; \(c\), additive transport memory; \(\sigma\), the boundary
+signature; \(C\), the precision cylinder; \(b\), its boundary label;
+and \(\lambda\), the recorded trajectory. The signature is determined
+by a map
+\[
+ \operatorname{Sig}_q:
+ \mathsf H_q\times\mathsf C_q\times\mathsf{Hist}_q
+ \longrightarrow\mathsf S_q,
+ \qquad \sigma=\operatorname{Sig}_q(h,c,\lambda).
+\]
+The symbols \(\mathsf H_q,\mathsf C_q,\mathsf{Hist}_q\), and
+\(\mathsf S_q\) denote, respectively, the sets of residue--quotient
+data, the abelian transport-memory group, the recorded trajectories,
+and the boundary signatures. Realizations of this signature are specified
+component by component in the regional and terminal constructions.
+This dependence prevents treating the signature as a free parameter
+once the data producing it are fixed.
+
+The elementary residue--quotient chart is explicit. For
+\(n\in\ZZ\), let
+\[
+ r=1+((n-1)\bmod9),\qquad u=\frac{n-r}{9}.
+\]
+Then \(n=r+9u\), with \(r\in D_9\) and \(u\in\ZZ\).
+Uniqueness follows because two representatives in \(D_9\) congruent
+modulo \(9\) are equal. This chart supplies local integer reconstruction.
+The precision towers additionally incorporate the truncation maps and
+cylinders developed in \ref{sec:extension} and \ref{sec:generacion}.
+
+Let \(\gamma:q\to q'\) be an observable trajectory. Fiber transport
+is expressed through maps
+\[
+ \mathsf H(\gamma):\mathsf H_q\to\mathsf H_{q'},\qquad
+ \mathsf C(\gamma):\mathsf C_q\to\mathsf C_{q'},\qquad
+ \mathsf{Hist}(\gamma):\mathsf{Hist}_q\to\mathsf{Hist}_{q'}.
+\]
+The maps respect identities and composition, and
+\(\mathsf C(\gamma)\) is an abelian-group homomorphism.
+The increment \(k_{\rm tr}(\gamma)\in\mathsf C_{q'}\) satisfies
+\begin{equation}
+ \begin{split}
+ k_{\rm tr}(\operatorname{id}_q)&=0,\\
+ k_{\rm tr}(\gamma_2\circ\gamma_1)
+ &=k_{\rm tr}(\gamma_2)+
+   \mathsf C(\gamma_2)k_{\rm tr}(\gamma_1).
+ \end{split}
+ \label{tpk-int:cociclo}
+\end{equation}
+Here \(k_{\rm tr}\) denotes the transport cocycle;
+the rational coordinate \(\kappa\) of record \(K\) retains
+its notation in the dodecaphase-closure chapter.
+
+Transportable coordinates are updated by
+\begin{equation}
+ \begin{aligned}
+ h'&=\mathsf H(\gamma)h,&
+ c'&=\mathsf C(\gamma)c+k_{\rm tr}(\gamma),\\
+ \lambda'&=\gamma\circ\lambda,&
+ \sigma'&=\operatorname{Sig}_{q'}(h',c',\lambda').
+ \end{aligned}
+ \label{tpk-int:accion-memoria}
+\end{equation}
+The second equation is an affine action: the linear term transports
+previous memory and the cocycle adds the increment produced by the
+trajectory. In the spatial-crossing realization for each cursor separately,
+\(\mathsf C(\gamma)=I\) and \(k_{\rm tr}(\gamma)\) is the sum
+of the vectors in \eqref{tpk-int:borde}. This concrete instance connects
+the abstract law with the cardinal operations already defined.
+
+\begin{proposition}[Compatibility of the update with concatenation]
+\label{tpk-int:composicion-memoria}
+Updating by \eqref{tpk-int:accion-memoria} along
+\(\gamma_1\), followed by updating along \(\gamma_2\),
+coincides with updating along \(\gamma_2\circ\gamma_1\).
+\end{proposition}
+\begin{proof}
+For the affine coordinate, two updates give
+\[
+ c''=\mathsf C(\gamma_2)\mathsf C(\gamma_1)c
+       +\mathsf C(\gamma_2)k_{\rm tr}(\gamma_1)
+       +k_{\rm tr}(\gamma_2).
+\]
+Functoriality of \(\mathsf C\) and
+\eqref{tpk-int:cociclo} turn this expression into
+\(\mathsf C(\gamma_2\circ\gamma_1)c+
+k_{\rm tr}(\gamma_2\circ\gamma_1)\).
+The statement for \(h\) follows from composition of
+\(\mathsf H\), and that for \(\lambda\) from associativity
+of trajectories. The final signature agrees because it is evaluated
+on the same three reconstructed coordinates.
+\end{proof}
+
+The cylinder and its boundary complete this law through the relations
+\(\operatorname{Ext}_\gamma\), defined in
+\ref{tpk-int:bidireccionalidad}. Their elements determine which of
+the preceding updates preserve an admissible prolongation.
+States, together with the triples \((\gamma,x,x')\) admitted by
+these relations, form a category over observable trajectories:
+\[
+ (\gamma_2,x',x'')\circ(\gamma_1,x,x')
+     =(\gamma_2\circ\gamma_1,x,x'').
+\]
+The identity of \(x\) is \((\operatorname{id}_q,x,x)\).
+Composition preserves arithmetic transport and boundary prolongability
+simultaneously. This is the structure in which returns with memory
+and successive refinements take place.
+
+\subsubsection{Dodecaphase record, phase, and accumulated memory}
+\label{tpk-int:dodecafase}
+
+The \(108\) transitions are distributed over the ordered windows
+\[
+ E_m=\{9m-8,\ldots,9m\},\qquad 1\leq m\leq12.
+\]
+The record preserves the phase origin, orientation, and data
+produced during each window. Its map is
+\[
+ \mathcal R_{12}(x)=
+ \bigl((E_m,\tau_m,\sigma_m,\kappa_m,\Lambda_m)\bigr)_{m=1}^{12},
+\]
+where \(\tau_m\) is the window's subroute, \(\sigma_m\) its
+orientation, \(\kappa_m\) the integer boundary increment, and
+\(\Lambda_m\) the local incidence record. We adopt the chart
+developed in \ref{subsec:k-registro-integral}; its window indices
+correspond to \(m=\beta+1\).
+The domain comprises compatible TPK histories, and the codomain
+their oriented temporal records. Composition of segments and their
+increments is governed by \eqref{tpk-int:accion-memoria}.
+By contrast, the group \(C_{12}\) describes translation of the
+window index; \(\Theta_{108}\) preserves the step calendar.
+This distinction specifies what is transformed and what is observed
+when a cycle is completed.
+
+In coordinates \(\theta=9b+r\), with \(0\leq r<9\), advancing
+\(9\) steps preserves \(r\) and increases \(b\) by one.
+Addition of phases introduces the quotient
+\[
+ c_0(r,r')=\left\lfloor\frac{r+r'}9\right\rfloor,
+\]
+whose cocycle identity ensures associativity of composition.
+The finite calendar preserves \([b]_{12}\); a record of turns
+preserves \(b\in\ZZ\), or \(b\in\mathbb N_0\) for a
+history with fixed origin. Section~\ref{sec:extension} proves
+the nonsplit exact sequence \eqref{eq:extension108}. Its function
+is to describe the relation between these coordinates before they
+are used to construct the signed state.
+
+The signed record receives phase and memory data through the
+composition developed in Section~\ref{sec:k-registro}:
+\begin{equation}
+ R_{\rm sgn}=\Pi_H\circ\mathcal E_{108}^{90,120}
+                         \circ\mathcal R_{12}.
+ \label{tpk-int:registro-causal}
+\end{equation}
+Its domain is the terminal state with memory; its output belongs
+to \(\ZZ^{12}\). The reversible transformation between this signed
+state and \(K\), together with the rational reading of \(K\),
+is proved in the corresponding chapter. Record operations precede
+these transformations. Reconstructing a record from its cyclic
+differences verifies its recoverability; its dynamic provenance
+must be preserved through the events that produced it.
+
+For the encoded trace \((d_t)\) retained by the record,
+the event reader counts codes \(\{2,4,6,8\}\) in each window
+with orientation \((+,+,+,-,-,-,+,+,+,-,-,-)\).
+These codes and the cardinal symbols of \(\mathcal D\)
+are different record coordinates. Chapter~\ref{sec:k-registro}
+develops this reader, the integral decomposition \(1+5+6\),
+the congruences characterizing its image, and its exact inverse.
+The inversion proof establishes which data this chart preserves;
+the definition of \(\mathcal R_{12}\) specifies the oriented
+history on which it acts.
+
+\subsubsection{Phase incidence and internal channel construction}
+\label{tpk-int:incidencia}
+
+The selector determines three subsets of \(D_9\):
+\[
+ H_+=\{1,4,7\},\qquad H_-=\{2,5,8\},\qquad H_0=\{3,6,9\}.
+\]
+Let \(H_{\rm act}=H_+\sqcup H_-\) be the set of active phases
+and \(O_{\rm ph}=D_9\setminus\{9\}\) the chart preceding
+the marked return. Denote by \(P_2(H_{\rm act})\) the set of
+unordered pairs of active phases. Internal incidence is given by
+\begin{equation}
+ \mathcal F^{\rm ph}_6=H_{\rm act}\times P_2(H_{\rm act}),\qquad
+ \mathcal F^{\rm ph}_8=O_{\rm ph}\times P_2(H_{\rm act}),\qquad
+ \Theta_{\rm ph}=D_9\times P_2(H_{\rm act}).
+ \label{tpk-int:fases90120}
+\end{equation}
+The indices describe the number of positions in the first component.
+The construction uses the phases and calendar origin already fixed;
+subsequent exceptional realizations will transport these incidences
+to their own domains.
+
+\begin{proposition}[Cardinalities and oriented phase incidence]
+\label{tpk-int:cardinales}
+The sets in \eqref{tpk-int:fases90120} have cardinalities
+\(90,120,135\), respectively. If
+\[
+ \partial_{\rm ph}=\Theta_{\rm ph}\times\{-1,+1\},\qquad
+ E_{\rm ph}=\partial_{\rm ph}\sqcup\{\infty\},\qquad
+ L_{\rm ph}=H_0\times P_2(H_{\rm act}),
+\]
+then
+\[
+ |\partial_{\rm ph}|=270,\quad |E_{\rm ph}|=271,\quad
+ |L_{\rm ph}|=45,\quad
+ |\partial_{\rm ph}\sqcup L_{\rm ph}|=315.
+\]
+Simultaneously translating the phase origin and marked return preserves
+all these cardinalities and inclusions.
+\end{proposition}
+\begin{proof}
+There are six active phases, so
+\(|P_2(H_{\rm act})|=\binom62=15\). Multiplying by
+\(6,8,9\) gives \(90,120,135\). Orientation doubles \(135\);
+the return mark adds one element; the three neutral phases give
+\(3\cdot15=45\). A calendar translation transports each factor
+by a bijection and carries the marked point to its image. Products
+and disjoint unions thus preserve the incidence.
+\end{proof}
+
+Here the cardinality \(271\) has a phase-incidence realization.
+The cubic completion in Section~\ref{sec:extension} has its own
+construction of the corona \(1000-729\). The correspondence
+between the two realizations must preserve the maps and marks
+identifying them, in addition to their cardinality. Likewise,
+the selector \(\varepsilon_9\), the incidence \((90,120)\),
+and the extractor \(\mathcal E_{108}^{90,120}\) retain the
+domains and operations just distinguished.
+
+\subsubsection{Trajectory reversal and conjugate prolongations}
+\label{tpk-int:bidireccionalidad}
+
+Bidirectionality begins with an operation on trajectories before scalar
+values are assigned to them. For
+\(\gamma=(x_0;d_1,\ldots,d_n)\), with endpoint \(x_n\), define
+\[
+ \operatorname{rev}\gamma
+   =(x_n;\jmath d_n,\ldots,\jmath d_1).
+\]
+The reversed trajectory starts at the endpoint of the original.
+Composition satisfies
+\[
+ \operatorname{rev}^2\gamma=\gamma,\qquad
+ \operatorname{rev}(\gamma_2\circ\gamma_1)
+   =\operatorname{rev}\gamma_1\circ\operatorname{rev}\gamma_2,
+\]
+and integer displacement changes sign. These identities follow by
+reversing the order of steps and replacing each cardinal vector
+with its opposite. For a loop, it follows that
+\(\operatorname{wind}(\operatorname{rev}\gamma)
+=-\operatorname{wind}(\gamma)\).
+
+On records, reversal also requires transporting the order of components
+and the orientation of events. Route reversal and signature conjugation
+are distinguishable operations: their composition is specified when
+applied to a concrete record. In particular, the regional involution
+interchanging closure and propagation components preserves the self-scaling
+axis; its formula is given in Section~\ref{mono-ampl:regiones}.
+This regional operation acts on a different domain from cardinal
+trajectory reversal.
+
+Extensions over a route \(r:q\to q'\) are expressed by
+relations between fibers of compatible states. If \(\mathcal F_q\)
+denotes the fiber of complete states over \(q\), we require
+\[
+ \operatorname{Ext}_r\subseteq\mathcal F_q\times\mathcal F_{q'},
+ \qquad \Delta_{\mathcal F_q}\subseteq
+        \operatorname{Ext}_{\operatorname{id}_q},
+\]
+\[
+ \operatorname{Ext}_{r_2}\circ\operatorname{Ext}_{r_1}
+       \subseteq\operatorname{Ext}_{r_2\circ r_1}.
+\]
+Their composition preserves the evaluations of both sheets, orientation,
+quotients, prefix, and boundary. Route reversal does not by itself imply
+that every extension relation is a bijection. Conjugate prolongation
+is defined on the domain where transport of these data satisfies
+the corresponding compatibilities.
+
+\subsubsection{Nonadic holonomy and continuity of refinement}
+\label{tpk-int:holonomia}
+
+A phase turn composes transitions on the state with memory:
+\begin{equation}
+ \Gamma_{9,k}=\mathcal U_{k+8}\circ\cdots\circ\mathcal U_k.
+ \label{tpk-int:gamma}
+\end{equation}
+On an individualized history, this functional composition realizes
+the holonomy relation; on the full domain we retain
+\(\Gamma_{9,k}\subseteq\widehat X_k\times\widehat X_{k+9}\),
+with the admissible prolongations developed later.
+The cyclic base has nine phases, while the fiber preserves trajectory,
+quotients, and boundary. Monodromy is the action of one turn of this
+base on the fibers; holonomy \(\Gamma_{9,k}\) expresses its
+realization through the effective TPK transitions.
+
+If \(g\) observes phase and \(M\) the number of retained turns,
+\[
+ g(\Gamma_{9,k}x)=g(x),\qquad M(\Gamma_{9,k}x)=M(x)+1.
+\]
+The first identity expresses phase closure and the second identifies
+the new temporal depth. Coinductive prolongation also preserves its
+cylinders and prefixes. Restrictions between depths compose an inverse
+system; a compatible section gathers its antecedents without replacing
+them by the latest observation. This arithmetic of histories and its
+unity are developed in \ref{hist:seccion}--\ref{hist:doble-varianza};
+the regions and their readers are constructed in Section~\ref{sec:generacion}.
+
+Phase transfer on emissions already constructed has a different domain.
+Let \(\mathcal A_+\) and \(\mathcal A_\times\) be the
+additive and multiplicative signature alphabets, with cardinalities
+\(18\) and \(26\). Their product identifies the catalog \(\mathcal U_6\).
+For \(f:\mathcal A_+\times\mathcal A_\times\to\RR\),
+the sheet averages are
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal A_+}f(s',e),\qquad
+ (E_\times f)(s,e)=\frac1{26}\sum_{e'\in\mathcal A_\times}f(s,e').
+\]
+These emissions and their cardinalities are constructed through the
+recurrence in Section~\ref{sec:extension}. Once they have been obtained,
+the transfer operator is defined on
+\(\mathcal U_6\times C_9\) by
+\[
+ P_+=E_+,\quad P_-=E_\times,\quad P_0=I,\qquad
+ \mathcal K_{\rm ph}((u,r),(v,r+1))=P_{M_{\rm ph}(r)}(u,v),
+\]
+with zero weight for all other phase transitions. The index
+\(r\) uses the positive representative of the cyclic class.
+The phase order \((+1,-1,0)^3\) then produces the renewal
+\[
+ \mathcal K_{\rm ph}^{9}\big|_r=E_+E_\times.
+\]
+Indeed, both averages are idempotent, commute, and average different
+factors; their composition assigns weight \(1/(18\cdot26)=1/468\)
+to each emission. This equality characterizes a subsequent transfer
+observable. History transport remains given by \eqref{tpk-int:gamma},
+with its memory and boundary.
+
+The resulting hierarchy establishes the function of the following chapters.
+Finite emission constructs the domain and regions; extension relations
+preserve their prefixes; the nonadic connection prolongs them; the
+dodecaphase record determines the data entering \(K\) and the
+closure of \(\alpha\). Numerical and incidence realizations receive
+this preceding structure. This order allows every consequence to be
+presented in its own chapter while preserving, from the formal kernel
+onwards, the objects that make it possible.

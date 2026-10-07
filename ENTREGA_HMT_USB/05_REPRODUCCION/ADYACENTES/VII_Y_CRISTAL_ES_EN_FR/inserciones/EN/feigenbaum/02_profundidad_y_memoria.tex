@@ -1,0 +1,311 @@
+% Fragmento integrable. Preambulo anfitrion: amsmath, amssymb, longtable, hyperref.
+\section{Nonadic depth and persistence of the itinerary}
+\label{hmtfg:fragmento:profundidad-nonadica-y-persistencia-del-itinerario}
+
+\subsection{Outer growth and inner resolution}
+\label{hmtfg:prolongacion:2}
+
+The refinement law of article XI, with integer base \(B\ge2\), is
+\[
+L_c(x,y)=(Bx-c,By+c),\qquad 0\le c<B.
+\]
+For a word \(c_1\ldots c_m\), its record is
+\[
+C_m=\sum_{j=1}^m c_jB^{m-j},\qquad
+(x_m,y_m)=(B^mx_0-C_m,B^my_0+C_m).
+\]
+The outer sum is \(B^mM_0\), with \(M_0=x_0+y_0\). The normalized reading of the record belongs to the cylinder
+\[
+I_m(C_m)=\left[\frac{C_m}{B^m},\frac{C_m+1}{B^m}\right],
+\qquad \operatorname{diam}I_m=B^{-m}.
+\]
+The integer pair and the scale recover the quotients, remainders and leading zeros of the word. Endpoints with two expansions retain their boundary mark. Support growth and readout refinement are thus coordinated without identifying distinct histories solely by their limit image.
+
+The composition is exact:
+\[
+L_D^{[b]}\circ L_C^{[a]}=L_{B^bC+D}^{[a+b]}.
+\]
+By associativity, grouping a history of eighteen events into nine blocks of two or two blocks of nine produces the same record. At return level \(2^N\), the common horizon is \(9\,2^N\). The proof is an equality of composition on the same ordered history; it retains its carries and its recoverable subblocks.
+
+The restriction of states and the prolongation of their readers are expressed through the following limits:
+\[
+X_\infty=\varprojlim X_m,\qquad
+r^*a=a\circ r,\qquad
+r^*e_x=\sum_{r(y)=x}e_y,
+\qquad \mathfrak H_{\rm cyl}=\varinjlim\mathfrak H_m.
+\]
+States restrict; readers extend. Pullback preserves products, the unit and idempotents. An exactly compatible family induces a reader on the direct limit. Approximants that are compatible only up to an error additionally require a convergence estimate in their completion. The next section provides that estimate for the critical return.
+
+\subsubsection{Capacity and vacancies of the record}
+
+The capacity reader of XI compares blocks of \(729\) and \(1000\) possibilities. With \(\rho=\log_{1000}729=\log_{10}9\), it retains
+\[
+\mathcal C_k=\lfloor(k+1)\rho\rfloor,\qquad
+\mathcal C_k-\mathcal C_{k-1}=1-z_k,
+\]
+\[
+\mathcal C_b-\mathcal C_a+\sum_{k=a+1}^b z_k=b-a,
+\qquad T_{\rm cap}(a)=\lceil a/\rho\rceil-1\quad(a\ge1).
+\]
+Each vacancy records a transition during which capacity is maintained; chronological length is conserved in the balance. Capacity phase and chronological phase are distinct readers.
+
+To store a prefix of \(m\) base-nine digits, a sufficient decimal capacity is
+\[
+a(m)=\left\lceil\frac{m\rho}{3}\right\rceil.
+\]
+The quotient and remainder allow the integer \(C_m\) to be converted between bases, keeping the depth \(m\) separate. The following hold
+\[
+9^m\le1000^{a(m)}\le729^{T_{\rm cap}(a(m))+1}.
+\]
+These inequalities are also decided by integer powers, without rounding logarithms. The readout budget of the next section is thus translated into record capacity while preserving units. This count sizes the storage; the survival rules additionally determine which native histories are admissible.
+
+
+\subsection{Explicit depth budget for each return}
+\label{hmtfg:prolongacion:3}
+
+\textbf{Theorem.} With \(|\eta|\le1/40\) fixed, normalize
+\[
+t=\lambda u_\eta(1)/2\in[0,1],\qquad z=(x+1)/2,
+\]
+\[
+F_{t,\eta}(z)=1-t\frac{u_\eta(2z-1)}{u_\eta(1)},\qquad z\in[0,1].
+\]
+For every integer \(q\ge1\) and two parameters \(t,s\),
+\[
+\left|F_{t,\eta}^{q}(1/2)-F_{s,\eta}^{q}(1/2)\right|
+\le S_q|t-s|,
+\qquad S_q=\sum_{j=0}^{q-1}(6\sqrt2)^j<9^q.
+\]
+Consequently, a base-nine parameter cylinder of depth \(m=2^N+r\) encloses the readout of return \(q=2^N\) in an interval of diameter less than \(9^{-r}\).
+
+\textbf{Proof.} The function \((1-\cos v)/v^2\) decreases for \(0<v<\pi\): the sign of its derivative is that of \(v\sin v-2(1-\cos v)\), which is negative because \(\tan(v/2)>v/2\). By the second moment,
+\[
+u_\eta(1)\ge\frac{1-\cos3}{9}\sum_jw_jk_j^2
+=\frac{2(1-\cos3)}9>\frac13.
+\]
+The last inequality is verified, for example, by bounding \(\cos3\) by its alternating Taylor sum through degree eight, which is less than \(-1/2\). Moreover, Cauchy–Schwarz gives \(|u_\eta'(x)|\le\sqrt2\) on the real line. It follows that
+\[
+\operatorname{Lip}_zF_{t,\eta}\le6\sqrt2<9,\qquad
+\operatorname{Lip}_tF_{t,\eta}\le1.
+\]
+If \(d_j\) is the difference between the two orbits, then \(d_0=0\) and \(d_{j+1}\le6\sqrt2\,d_j+|t-s|\). Induction proves the geometric sum. For \(|t-s|\le9^{-m}\), the diameter is less than \(9^{q-m}\). Substituting \(q=2^N\) and \(m=q+r\) completes the proof. \(\square\)
+
+The bound controls parameter uncertainty with \(\eta\) fixed. An implementation separately adds and propagates cosine-evaluation and rounding errors; the preceding rational certificate provides these operations. The bound is sufficient and conservative, with a cost that grows with the horizon.
+
+\textbf{Limit reader.} Realize \(t\) from \((x_0,y_0)=(1,0)\), \(B=9\), so that
+\[
+(x_m,y_m)=(9^m-C_m,C_m),\qquad t_m=C_m/9^m.
+\]
+The readers \(E_{q,m}=F_{t_m,\eta}^{q}(1/2)\), brought to a common level, satisfy
+\[
+\|E_{q,m+a}-r^*E_{q,m}\|_\infty\le S_q9^{-m}.
+\]
+They converge uniformly to a continuous reader \(E_q\) in the completion of the cylinder algebra. The set-theoretic version
+\[
+J_{q,m}(C)=\{F_{t,\eta}^{q}(1/2):t\in I_m(C)\}
+\]
+is exactly nested and its diameters tend to zero. This result gives the passage to the limit of the \textbf{fixed-horizon readout}, with depth control at any requested horizon.
+
+
+\subsection{Doubling word and nonadic reader of chronology}
+\label{hmtfg:prolongacion:4}
+
+The eight itineraries certified in the preceding work obey
+\[
+W_1=+,\qquad W_{n+1}=W_n\,(-1)^n\,W_n.
+\]
+Its unique prefix continuation is
+\[
+\tau_j=(-1)^{v_2(j)},\qquad j\ge1;
+\qquad \tau_{2j}=-\tau_j,\quad\tau_{2j+1}=+.
+\]
+The proof uses \(v_2(2^n+r)=v_2(r)\) for \(0<r<2^n\). It is a recurrence at every depth, and agreement with the eight computed returns constitutes its finite check in the family.
+
+In the parity-lexicographic order of a map with a critical maximum, the orientation factor preceding position \(k\) is \(\prod_{j<k}(-\tau_j)\). The word \(\tau\) is strictly greater than any of its positive shifts. Indeed, the first disagreement with an odd shift occurs at \(k=1\) or \(2\); an even shift halves the comparison and doubles \(k\). The first disagreement is therefore at \(k=2^r\). There
+\[
+\prod_{j<2^r}(-\tau_j)=(-1)^r=\tau_{2^r},
+\]
+and the oriented difference with the opposite sign is positive. This argument also proves aperiodicity.
+
+The chronological record retains
+\[
+K=\rho_9(K)+9q_9(K).
+\]
+Its dyadic reader is
+\[
+\ell_n(B_K)=[\rho_9(K)+9q_9(K)]_{2^n}=[K]_{2^n}.
+\]
+On the chart of histories in which \(\Gamma_9 B_K=B_{K+9}\),
+\[
+\ell_n(\Gamma_9B_K)=\ell_n(B_K)+9\pmod{2^n},\qquad
+\pi_{n+1,n}\ell_{n+1}=\ell_n.
+\]
+Since nine is odd, advancement by nine visits the \(2^n\) positions. Its conjugacy with unit advancement is \(j\mapsto9j\). For \(0<j<2^n\),
+\[
+v_2(9j\bmod2^n)=v_2(j),
+\]
+so that nonadic resampling also preserves the oriented word in each certified cycle.
+
+This reader uses remainder \textbf{and} quotient. The phases of \(K=1\) and \(K=10\) agree modulo nine, while their dyadic signs are opposite. Memory distinguishes the two histories. The arithmetic property of resampling holds for every odd multiplier; the HMT calendar fixes the choice of nine here.
+
+
+\subsection{Compatible bilateral memory at infinite depth}
+\label{hmtfg:prolongacion:5}
+
+Let \(\mathcal H_n=\ell^2(\mathbb Z/2^n\mathbb Z)\),
+\[
+C_ne_j=e_{j+1},\qquad
+J_ne_j=(e_j+e_{j+2^n})/\sqrt2.
+\]
+A check on the basis gives \(J_n^*J_n=I\) and \(C_{n+1}J_n=J_nC_n\), including the boundary terms.
+
+Article XI provides the projectors
+\[
+P_0=\frac19\begin{pmatrix}8&-\sqrt8\\-\sqrt8&1\end{pmatrix},\qquad
+P_1=\frac19\begin{pmatrix}1&\sqrt8\\\sqrt8&8\end{pmatrix}.
+\]
+They are orthogonal and complementary. Therefore
+\[
+\mathbb U_n=P_0\otimes I+P_1\otimes C_n
+=\begin{pmatrix}T_n&D_n\\D_n&R_n\end{pmatrix}
+\]
+is unitary, with
+\[
+T_n=(8I+C_n)/9,\quad D_n=\sqrt8(C_n-I)/9,\quad R_n=(I+8C_n)/9.
+\]
+The naturality already proved implies
+\[
+\mathbb U_{n+1}(I_2\otimes J_n)=(I_2\otimes J_n)\mathbb U_n,
+\quad \mathbb U_n^a=P_0\otimes I+P_1\otimes C_n^a
+\quad(a\in\mathbb Z).
+\]
+The Hilbert limit is identified with \(L^2(\mathbb Z_2,\mu_{\rm Haar})\), taking \(e_j^{(n)}\) to \(2^{n/2}\mathbf1_{j+2^n\mathbb Z_2}\). The identities extend by density and boundedness. For every vector \(v\) and every integer time \(a\),
+\[
+\boxed{\|T_{\infty,a}v\|^2+\|D_{\infty,a}v\|^2=\|v\|^2,}
+\]
+\[
+\boxed{v=T_{\infty,a}^*(T_{\infty,a}v)+D_{\infty,a}^*(D_{\infty,a}v).}
+\]
+Here \(T_{\infty,a}=(8I+C_\infty^a)/9\). Bilateral composition preserves the archive between steps; composing only \(T_n\) describes a different operation.
+
+The permutation \(S_ne_j=e_{9j\bmod2^n}\) satisfies
+\[
+S_{n+1}J_n=J_nS_n,\qquad S_nC_nS_n^{-1}=C_n^9.
+\]
+Thus one obtains in the limit
+\[
+S_\infty C_\infty S_\infty^{-1}=C_\infty^9,
+\quad (I_2\otimes S_\infty)\mathbb U_\infty
+(I_2\otimes S_\infty^{-1})=\mathbb U_\infty^9.
+\]
+The temporal representation is faithful: \(C_\infty^a=C_\infty^b\) forces \(2^n\mid a-b\) for every \(n\), whence \(a=b\). Particular preparations may preserve temporal symmetries. The operator identity preserves this distinction.
+
+The projective point \(([K]_{2^n})_n\) and a vector of \(L^2\) have different types: a point history induces a Dirac measure, whereas normalizable amplitudes belong to the Hilbert space. The result constructs an equivariant reader of chronology; the remaining native coordinates of the TPK accompany the complete record.
+
+
+\subsection{Existence and separation of asymptotic obligations}
+\label{hmtfg:prolongacion:6}
+
+\subsubsection{Realization of the infinite word throughout the strip}
+\label{hmtfg:prolongacion:6.1}
+
+\textbf{Existence theorem.} For each \(|\eta|\le1/40\) there exists at least one
+\[
+\lambda_\infty(\eta)\in
+\left[\frac1{2u_\eta(1)},\frac2{u_\eta(1)}\right]
+\]
+such that
+\[
+\boxed{\operatorname{sign}f_{\lambda_\infty(\eta),\eta}^{j}(0)
+=(-1)^{v_2(j)}\quad\text{for every }j\ge1.}
+\]
+The conclusion realizes the infinite doubling itinerary within the fixed family. The existence quantifier remains separate from a unique selection and from the law of distances between superstable parameters.
+
+\textbf{Proof.} We fix \(\eta\). We write \(K_\lambda\) for the sign word of the critical orbit; when it first returns to zero, the word ends at that zero. We use the unimodal order with a maximum, whose factor before comparing symbol \(j\) is the product of the signs \(-K_i\), \(i<j\).
+
+At the left endpoint the image of the entire interval is in \([1/2,1]\); hence \(K_-=+++\cdots\). At the right endpoint the orbit is \(0\mapsto1\mapsto-1\mapsto-1\), whence \(K_+=+---\cdots\). Comparing the second and third symbols, respectively, gives
+\[
+K_-<\tau<K_+.
+\]
+
+If \(K_{\lambda_0}\) is infinite and distinct from \(\tau\), the first difference occurs at a finite position. Continuity of the corresponding iterates makes the side of the comparison locally constant. It remains to examine a superstable parameter of first period \(p\), with word \(W0\), where \(|W|=p-1\).
+
+For \(\lambda\) near \(\lambda_0\), let \(g_\lambda=f_{\lambda,\eta}^p\) and \(a=g_\lambda(0)\). We have \(g_\lambda'(0)=0\), and a uniform local bound on the second derivative gives
+\[
+g_\lambda(x)=a+O(x^2).
+\]
+For \(|a|\) sufficiently small and nonzero, \(g_\lambda\) maps \([-2|a|,2|a|]\) into \([a-|a|/2,a+|a|/2]\). The returns retain the sign of \(a\), and the \(p-1\) intermediate positions retain \(W\). The neighboring words are therefore \((W+)^\infty\) or \((W-)^\infty\); parameters with \(a=0\) retain \(W0\).
+
+If \(\tau\) differs from \(W\) before position \(p\), that difference fixes the same side for all three words. If it shares \(W\), put
+\[
+s=\tau_p,\qquad e=\prod_{j<p}(-\tau_j),\qquad A=Ws.
+\]
+The sign of the comparison of \(\tau\) with \(W0\) and with \((W,-s)^\infty\) is \(es\). To compare it with \(A^\infty\), let \(q\) be the first position at which \(\tau_{p+q}\ne\tau_q\). It exists by aperiodicity. Up to position \(p+q-1\), both words agree, and the orientation sign factors as \(O_pO_{q-1}\), with \(O_p=-es\). The strict maximality already proved gives
+\[
+O_{q-1}(\tau_q-\tau_{p+q})>0.
+\]
+Consequently, the comparison of \(\tau\) with \(A^\infty\) has sign \(-O_p=es\). The three local possibilities lie on the same side of \(\tau\).
+
+If no parameter realized \(\tau\), the sets \(\{\lambda:K_\lambda<\tau\}\) and \(\{\lambda:K_\lambda>\tau\}\) would be open, disjoint, nonempty and would cover the parameter interval. Connectedness of the interval excludes that partition. The stated parameter therefore exists. \(\square\)
+
+This itinerary-continuity argument applies after the HMT generator and its analytic family have been fixed; its hypotheses are verified directly here. The construction preserves the infinite word without introducing a parameter of the quadratic family or the universal value as an input.
+
+\subsubsection{Margins preventing loss of the itinerary when taking limits}
+\label{hmtfg:prolongacion:6.2}
+
+Write \(c_p=f_{\lambda,\eta}^p(0)\). A sufficient uniform rational bound is
+\[
+|f'|,|f''|\le16,\qquad
+B_p:=16^p\frac{16^p-1}{15}\ge\|(f^p)''\|_{[-1,1]}.
+\]
+Indeed, \(1-\cos v\ge v^2/2-v^4/24\ge v^2/8\) for \(|v|\le3\), so that \(u_\eta(1)\ge1/4\), \(\lambda\le8\) and both derivatives are bounded by \(16\), using the moments. The chain rule proves the bound \(B_p\) by induction.
+
+The word \(\tau\) satisfies \(\tau_{2p}=-\tau_p\) for every \(p\). For any of its realizations, \(c_{2p}\) and \(c_p\) have opposite signs. Since \((f^p)'(0)=0\), Taylor gives
+\[
+|c_{2p}-c_p|\le\tfrac12B_p|c_p|^2.
+\]
+The left-hand side is greater than \(|c_p|\), and therefore
+\[
+\boxed{|c_p|>2/B_p>0.}
+\]
+For each fixed horizon there is thus a uniform margin preventing a sequence of realizations from losing its sign upon convergence. In the compact coordinates \((\eta,b)\), \(b=\lambda u_\eta(1)\in[1/2,2]\), the set of realizations of \(\tau\) is closed and compact, and its projection onto the entire \(\eta\) strip is surjective.
+
+The same argument applies to a prefix tree: if all prefixes of \(\tau\) are realized, a subsequence in the compact set preserves every sign, because sufficiently long prefixes simultaneously include positions \(p\) and \(2p\). The existence theorem now provides the nonemptiness that this argument requires.
+
+\subsubsection{Invariant return intervals at every level}
+\label{hmtfg:prolongacion:6.3}
+
+\textbf{Nested returns theorem.} For any of the realizations of the existence theorem in section \ref{hmtfg:prolongacion:6.1}, let \(c_j=f^j(0)\) and
+\[
+J_n=\operatorname{conv}\{c_{2^n},c_{2^{n+1}}\},\qquad n\ge1.
+\]
+Then \(0\in\operatorname{int}J_n\), \(J_{n+1}\subset J_n\),
+\[
+f^{2^n}(J_n)=J_n,
+\]
+and the \(2^n\) images \(J_n,f(J_n),\ldots,f^{2^n-1}(J_n)\) are disjoint. The normalized returns are unimodal with a maximum, with critical value one and the same word \(\tau\). These intervals are invariant return cores; a normalization requiring periodic endpoints may enlarge the core to the corresponding maximal restrictive interval and must specify that step.
+
+\textbf{Proof of the first return.} Let \(F\) be a unimodal map with a maximum, with \(F(0)=1\) and word \(\tau\), and \(d_j=F^j(0)\). Its first signs are \(+,-,+,+,+,-,+\). The interval \(I=[d_2,1]\) is invariant: \(F(d_2)=d_3>0\), \(F(1)=d_2<0\), and the maximum is one. Put \(J=[d_2,d_4]\). Since \(F\) decreases on positive arguments and
+\[
+F(d_3)=d_4>0> d_6=F(d_5),
+\]
+we have \(d_3<d_5\), and therefore \(F(J)=[d_3,1]\).
+
+Moreover, \(d_3>d_4\). To check this, \(F^2\) is strictly increasing between the two positive points \(d_3,d_4\), because their images \(d_4,d_5\) are positive. Its values are \(F^2(d_3)=d_5>0>d_6=F^2(d_4)\), which forces that order. Thus \(J\) and \(F(J)\) are separated by an open interval, and
+\[
+F^2(J)=F([d_3,1])=[d_2,d_4]=J.
+\]
+The map \(F^2|_J\) has a unique critical minimum: the image \(F(J)\) remains positive. The conjugacy \(h(x)=d_2x\) reverses orientation and normalizes the return as a maximum with value one. Its itinerary is
+\[
+\operatorname{sign}\frac{d_{2j}}{d_2}
+=-\tau_{2j}=\tau_j.
+\]
+The same argument can be repeated at any depth.
+
+\textbf{Inductive disjointness.} Suppose the \(p=2^n\) images of the parent \(J_n\) are disjoint, and let \(g=f^p\). The first return applied to the normalized map produces \(B=J_{n+1}\), \(A=g(B)\), with \(A\cap B=\varnothing\), \(g(B)=A\), \(g(A)=B\). For \(0\le j<p\), an intersection of \(f^j(A)\) and \(f^j(B)\) would, upon applying \(f^{p-j}\), produce an intersection of \(B\) and \(A\). Those two images are therefore disjoint. Images corresponding to distinct \(j\) belong to disjoint images of the parent. This proves the \(2p\) disjoint images and the return \(f^{2p}(B)=B\). The endpoint formula results from composing the normalizations \(x\mapsto c_{2^n}x\). \(\square\)
+
+The compact sets
+\[
+\Lambda_n=\bigcup_{0\le j<2^n}f^j(J_n)
+\]
+are nonempty and nested. Their intersection \(\Lambda_\infty\) has a continuous reader onto the dyadic odometer: each point is assigned the label of the unique component it occupies at each level. Every compatible sequence of labels has a preimage by compactness, and advancement by \(f\) adds one to the labels. This map is a surjective semiconjugacy. Promoting it to a pointwise conjugacy requires proving that the component diameters tend to zero; that metric promotion remains separate.

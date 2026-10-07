@@ -1,0 +1,189 @@
+\section{Development of the formal kernel: initial conditions, geometry, and refinement}
+\label{sec:extension}
+
+The eighty-one-position support does not coincide with the domain of initial conditions for the dynamics. An initial condition must also specify an orientation, and the additive and multiplicative sheets have independent cursors. This distinction allows exhaustive reconstruction of the emission without selecting a numerical region in advance.
+
+\subsection{Initial states and the emission recurrence}
+
+For enumeration we use indices \(I_9=\{0,\ldots,8\}\), related to positive labels by \(i\mapsto i+1\). Let
+\[
+ \mathcal S=I_9^2\times\{N,E,S,O\},\qquad
+ \Omega_{\rm seed}=\mathcal S_+\times\mathcal S_\times.
+\]
+Each initial condition \(\omega=(s_+,s_\times)\) determines two positions and two directions. The domain comprises all ordered pairs, so
+\begin{equation}
+ |\mathcal S|=324,\qquad |\Omega_{\rm seed}|=324^2=104\,976.
+ \label{eq:semillas}
+\end{equation}
+The independent annex enumerates all these conditions; the body presents the law transforming them. The rows of an emission table are fibers of this initial-condition domain.
+
+The finite realization uses six windows of nine transitions. At each instant \(t\), the phase signature is \(M_{\rm ph}(1+((t-1)\bmod9))\). If its value is \(+1\), the positive residue \(\Sigma(i+1,j+1)=\rho_9(i+j+2)\) of the first cursor is read and that cursor is then moved; if its value is \(-1\), the positive residue \(\Pi(i+1,j+1)=\rho_9((i+1)(j+1))\) of the second cursor is read and the second cursor is then moved. Zero increments the neutral counter. At the end of transitions twenty-seven and fifty-four, cardinal orientations are reversed. Integer evaluations and their quotients are retained in the record, but the emitter uses the residue readings specified here.
+
+In the unit sector, the multiplicative reader uses the base-two discrete logarithm in \((\ZZ/9\ZZ)^\times\):
+\[
+ \ell_9(1)=0,\quad\ell_9(2)=1,\quad\ell_9(4)=2,\quad
+ \ell_9(8)=3,\quad\ell_9(7)=4,\quad\ell_9(5)=5.
+\]
+For finite emission it is extended by zero to the non-unit sector. This extension is an observable, not an identification of the elements \(3,6,9\) with the multiplicative identity. The sheet and its membership in the radical sector remain in the trajectory record.
+
+Let \(S_m\) be the sum of the three positive additive residues \(\Sigma\) in window \(m\), \(E_m\) the sum of the three discrete exponents of the multiplicative residues \(\Pi\), and \(Z_m=3\) the number of neutral events. Thus \(S_m\) does not sum the integer evaluations \(S=i+j\), whose quotients remain in the record. With \([a]_{10}\in\{0,\ldots,9\}\), the decimal emission rule is
+\begin{align}
+ d_{m,1}&=[S_m]_{10},\notag\\
+ d_{m,2}&=[S_m+E_m]_{10},\notag\\
+ d_{m,3}&=[3S_m+5E_m+7Z_m]_{10},\notag\\
+ U_m&=100d_{m,1}+10d_{m,2}+d_{m,3}.
+ \label{eq:emisor-seis}
+\end{align}
+The integer coefficients and calendar of this recurrence are explicit parts of the declared emission law. Values of \(\pi,\varphi,e\) or \(\alpha\) are not received. Distinguishing an emission rule from a constant recognized from its output prevents the genealogy from being hidden in a decimal table.
+
+If \(s_m=[S_m]_{10}\) and \(e_m=[E_m]_{10}\), the same rule is written
+\begin{equation}
+ U_m=100s_m+10[s_m+e_m]_{10}+[3s_m+5e_m+1]_{10}.
+ \label{eq:acoplamiento}
+\end{equation}
+The final one is the residue of \(7Z_m=21\) modulo ten. The oriented ternary reduction of the catalog adopts the convention
+\begin{equation}
+ \Psi(U_1,\ldots,U_6)=([-U_1]_3,\ldots,[-U_6]_3).
+ \label{eq:psi-catalogo}
+\end{equation}
+The sign of this chart is explicit: changing it modifies the words and requires transport of subsequent orientations. The balanced identification of each component of \(\FF_3\) with TRIT is performed after \eqref{eq:psi-catalogo}.
+
+\begin{proposition}[Injective factorization of emission]
+The word \(U=(U_1,\ldots,U_6)\) determines both signatures \(s=(s_1,\ldots,s_6)\) and \(e=(e_1,\ldots,e_6)\). The emission image has \(18\cdot26=468\) elements. The ternary projection has \(243\) distinct values in the ambient set of \(729\) words.
+\end{proposition}
+\begin{proof}
+The hundreds digit of \(U_m\) recovers \(s_m\). If \(b_m\) is its tens digit, then \(e_m=[b_m-s_m]_{10}\). The units digit checks the third congruence of \eqref{eq:acoplamiento}. Hence coupling is injective on the signature product.
+
+Enumerating the \(324\) conditions for one cursor through the preceding recurrence produces eighteen additive signatures, each with eighteen preimages, and twenty-six multiplicative signatures, of which twenty-four have eight preimages, one has twenty-four, and one has one hundred and eight. The annex preserves these signatures and their initial conditions, allowing the finite enumeration to be repeated without a reference numerical catalog. Injectivity of the coupling gives \(18\cdot26\) emissions and multiplicities
+\[
+ \underbrace{432}_{18\cdot24}\text{ fibers of }144,
+ \qquad18\text{ fibers of }432,
+ \qquad18\text{ fibers of }1944.
+\]
+The sum is \(432\cdot144+18\cdot432+18\cdot1944=104\,976\). Applying \eqref{eq:psi-catalogo} to the \(468\) emissions produces exactly \(243\) words. This last number is the cardinality of the image, not of the space \(\FF_3^6\).
+\end{proof}
+
+This factorization explains the difference between finite exhaustiveness and unlimited depth. Domain \eqref{eq:semillas} is complete for the declared support and emitter; it does not contain every prefix of every prolongation in advance. Depth belongs to the system of compatible extensions constructed over those conditions.
+
+\subsection{Calendar closure and memory advance}
+
+The calendar of one hundred and eight transitions consists of twelve nonadic windows. Its group structure is more precise than an informal product of two periods:
+\begin{equation}
+ 0\longrightarrow C_{12}\xrightarrow{\iota}C_{108}
+ \xrightarrow{p}C_9\longrightarrow0,
+ \quad\iota([b])=[9b],\quad p([t])=[t]_9.
+ \label{eq:extension108}
+\end{equation}
+If \(t=9b+r\) with \(0\le r<9\), adding two phases produces the carry
+\[
+ (b,r)+(b',r')=
+ \left(b+b'+\left\lfloor\frac{r+r'}9\right\rfloor,\ [r+r']_9\right),
+\]
+where the first coordinate is reduced modulo twelve. Composition preserves the term linking the two coordinates.
+
+\begin{proposition}[Nonsplitting of the calendar]
+Sequence \eqref{eq:extension108} is exact and admits no section that is a group homomorphism.
+\end{proposition}
+\begin{proof}
+The kernel of reduction modulo nine is the subgroup of multiples of nine, the image of \(\iota\). If the extension split, commutativity would give \(C_{108}\cong C_{12}\times C_9\). The first group has exponent \(108\), whereas the second has exponent \(\operatorname{lcm}(12,9)=36\), a contradiction.
+\end{proof}
+
+Nine transitions restore the nonadic phase and advance one window; one hundred and eight restore the finite calendar. Neither fact requires erasing the trajectory or restoring a prolongation prefix. Nonadic holonomy \(\Gamma_9\) denotes transport through one turn on states with memory, so that
+\begin{equation}
+ g(\Gamma_9x)=g(x),\qquad M(\Gamma_9x)=M(x)+1.
+ \label{eq:holonomia-memoria}
+\end{equation}
+Phase equality and memory increment are compatible and constitute two observations of the same transport.
+
+\input{sections/temporalidad_trit.tex}
+
+The monodromic representation of this return is developed in
+Section~\ref{mono-ampl:conexion}. There, the holonomy of the state
+is distinguished from its representation on phase and counter. The
+symbolic suspension in Section~\ref{mono-ampl:cristal} defines the
+aperiodic time-crystal model, and Section~\ref{mono-ampl:euler}
+composes this temporality with the three Euler realizations.
+
+\subsection{Observable compression and orthogonal conservation}
+
+An isometric realization provides a quantitative expression of what a reduced observation loses. Let \(U:\mathcal H\to\mathcal H\) be an isometric realization of transport through one turn, \(U^*U=I\), and \(J:\mathcal H_{\rm vis}\to\mathcal H\) an isometric inclusion. Define
+\[
+ T=J^*UJ,\qquad D=(I-JJ^*)UJ.
+\]
+Then
+\begin{equation}
+ UJ=JT+D,\qquad J^*D=0,\qquad I-T^*T=D^*D.
+ \label{eq:conservacion-ortogonal}
+\end{equation}
+The last equality follows by taking the adjoint product of the first and using orthogonality. Contraction of the visible component does not by itself constitute destruction of information in the total state.
+
+\begin{proposition}[Finite-horizon conservation]
+If \(I-T^*T=D^*D\), then, for every \(n\ge1\),
+\begin{equation}
+ I=\sum_{r=0}^{n-1}T^{*r}D^*DT^r+T^{*n}T^n.
+ \label{eq:telescopia}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplying \(D^*D=I-T^*T\) by \(T^{*r}\) and \(T^r\), then summing, produces a telescoping sum. The interior terms cancel, leaving \(I-T^{*n}T^n\).
+\end{proof}
+
+The final summand preserves the terminal state. Removing it before justifying a limit would alter the equality. This distinction is the operational content of conservation of unity under compression: the norm is distributed among the visible component, memory, and terminal, rather than being replaced by a single residue.
+
+\subsection{Local development: commutation, Lorentzian signature, and discrete curvature}
+
+The adjacent diagonal block with equal diagonals modulo nine is unique. Indeed,
+\[
+ k^2\equiv(k+1)^2\pmod9\quad\Longleftrightarrow\quad2k+1\equiv0\pmod9
+\]
+gives \(k=4\). Its visible matrix is
+\[
+ B_c=\begin{pmatrix}7&2\\2&7\end{pmatrix}=7I+2R,
+ \quad R=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad R^2=I.
+\]
+With \(P_\pm=(I\pm R)/2\), one obtains \(B_c=9P_++5P_-\). The unity of stochastic normalization and conservation of an indefinite form are two realizations of this block:
+\[
+ \frac{B_c}{9}=P_++\frac59P_-,\qquad
+ \frac{B_c}{\sqrt{45}}=\exp(\eta R),\quad\eta=\frac12\log\frac95.
+\]
+For \(Q=\operatorname{diag}(1,-1)\), the second matrix satisfies \(B_c^{\mathsf T}QB_c=45Q\). This yields a local realization in \(SO^+(1,1)\); no prior introduction of four-dimensional spacetime is required to prove it.
+
+Uniform averaging over the classes \(C_1=\{1,4,7\}\), \(C_2=\{2,5,8\}\), and \(C_0=\{3,6,9\}\) gives
+\[
+ M_\Pi=\begin{pmatrix}4&5&6\\5&4&6\\6&6&9\end{pmatrix},\quad
+ M_\Sigma=\begin{pmatrix}5&6&4\\6&4&5\\4&5&6\end{pmatrix}.
+\]
+The characteristic polynomial of \(M_\Pi\) is
+\[
+ (\lambda+1)((\lambda-9)^2-72),
+\]
+so its quadratic form has signature \((2,1)\). The local spectral gap \(9-5=4\), the coefficient \(2\), the aggregate difference \(51-45=6\), and the integrated defect \(9\cdot6=54\) describe different levels of the same arithmetic comparison. They are not interchangeable indices of a single operator.
+
+Discrete curvature can be described directly before this spectral realization. In residues, let \(S(x,y)=x+y\), \(P(x,y)=xy\), and let \(\Delta_x,\Delta_y\) be forward differences. Link variables are differences of potentials, \(A_x^T=\Delta_xT\), \(A_y^T=\Delta_yT\), and we set
+\[
+ F(T_x,T_y)=\Delta_x\Delta_yT_y-\Delta_y\Delta_xT_x.
+\]
+Since \(\Delta_xS=\Delta_yS=1\), \(\Delta_xP=y\), and \(\Delta_yP=x\),
+\begin{equation}
+ F(S,S)=F(P,P)=0,\qquad F(S,P)=+1,\quad F(P,S)=-1\pmod9.
+\end{equation}
+Sum and product, taken separately, induce flat connections; their ordered mixture changes the sign of plaquette curvature. Summing over a rectangle of sides \(a,b\) cancels interior edges, and the oriented boundary sum equals \(\pm ab\) modulo nine. An exact relation thus appears between composition order and boundary orientation.
+
+\subsection{Cubic completion and two notions of boundary}
+
+Expanding the cubic support of side nine to that of side ten admits an exact positional stratification:
+\begin{equation}
+ 10^3=9^3+3\cdot9^2+3\cdot9+1=729+243+27+1.
+ \label{eq:cubo}
+\end{equation}
+The first term corresponds to three interior coordinates; the second to one new coordinate; the third to two; and the last to the vertex with three new coordinates. The expansion corona contains \(271\) positions. By contrast, the internal boundary of the discrete cube of side nine contains \(9^3-7^3=386\). The difference between these counts is a difference of domain, not a conflict of values.
+
+Dividing \eqref{eq:cubo} by \(1000\) gives a normalized partition of unity. Cube incidence distinguishes six faces, twelve edges, and eight vertices. The subsequent connection to Steiner hexads and octads requires the corresponding combinatorial maps; cube cardinalities do not replace them. Here this completion supplies the relation between bases \(729\) and \(1000\);
+its electronic application is treated in Article I of the series.
+Exceptional prolongation is developed here in Section~\ref{exc:seccion},
+after regional generation and the dodecaphase record.
+
+\input{sections/revision_emrh.tex}
+
+\input{sections/geometria_modular.tex}
+\input{sections/aritmetica_historias.tex}

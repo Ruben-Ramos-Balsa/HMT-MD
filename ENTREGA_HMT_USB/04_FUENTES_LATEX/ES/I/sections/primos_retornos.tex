@@ -1,0 +1,191 @@
+% Recuperación del producto nativo y su selector, no incorporación de RH.
+\subsection{Irreducibilidad multiplicativa y períodos de retorno}
+\label{primos-retornos}
+
+La distinción entre estructura, evaluación y fase aparece también en el
+sector multiplicativo. El producto local de APP contiene tanto el residuo
+como el cociente; su iteración permite construir formas normales y
+factorizaciones antes de examinar sus períodos decimales. Este desarrollo
+sitúa la expresión \emph{modo primo} en un dominio preciso y relaciona la
+irreducibilidad con las operaciones ya definidas, no con una coincidencia
+aislada de períodos.
+
+Sea
+\[
+ \mathcal W_9=\{\varnothing\}\sqcup
+ \bigsqcup_{\ell\geq1}\{1,\ldots,9\}^{\ell}.
+\]
+Las secuencias se ordenan desde el dígito menos significativo. La evaluación
+\(\operatorname{ev}_9(u)=\sum_j u_j9^j\), con
+\(\operatorname{ev}_9(\varnothing)=0\), es biyectiva sobre los enteros no
+negativos: para un entero positivo, la división de \(n-1\) por \(9\)
+determina de manera única el primer dígito y la continuación. Esta es la
+numeración nonádica biyectiva; conserva el representante \(9\) de la
+frontera.
+
+La suma \(\boxplus_\#\) se obtiene aplicando la hoja aditiva de APP a los
+dígitos de cada posición y propagando sus cocientes. Si sólo hay un dígito,
+éste constituye el residuo provisional; un cociente entrante no nulo se
+normaliza mediante una segunda operación aditiva. La suma de los
+cocientes se transporta a la posición siguiente. Para multiplicar una
+secuencia por un dígito \(d\), la celda multiplicativa produce
+\(u_jd=9q_j+r_j\), y el cociente entrante \(c_j\) se incorpora mediante
+\[
+ (w_j,c_{j+1})=
+ \begin{cases}
+ (r_j,q_j),&c_j=0,\\
+ \bigl(R^+(r_j,c_j),q_j+q^+(r_j,c_j)\bigr),&c_j>0.
+ \end{cases}
+\]
+Se comienza con \(c_0=0\) y se incorpora el cociente final cuando es no
+nulo. Durante la suma, \(c_j\leq2\); durante el producto por un dígito,
+\(c_j\leq9\). Las operaciones locales reciben así argumentos dentro
+de su dominio. Denotemos por \(d\odot_\#u\) este segundo procedimiento,
+con \(d\odot_\#\varnothing=\varnothing\).
+
+Para \(v=(v_0,\ldots,v_{m-1})\), el producto completo se construye por
+la recurrencia
+\[
+ a_m=\varnothing,\qquad
+ a_j=(9\odot_\#a_{j+1})\boxplus_\#(v_j\odot_\#u),
+ \qquad u\boxtimes_\#v=a_0.
+\]
+La regla compone las dos hojas locales. Su evaluación verifica
+\begin{equation}
+ \operatorname{ev}_9(u\boxtimes_\#v)
+   =\operatorname{ev}_9(u)\operatorname{ev}_9(v).
+ \label{eq:primos-entrelazamiento}
+\end{equation}
+En efecto, cada transición conserva la suma parcial más el cociente
+pendiente ponderado por la potencia de \(9\). La recurrencia da entonces
+\(\operatorname{ev}_9(a_j)=9\operatorname{ev}_9(a_{j+1})+
+v_j\operatorname{ev}_9(u)\), cuya iteración prueba
+\eqref{eq:primos-entrelazamiento}. La unicidad de la forma normal transporta
+asociatividad y conmutatividad al producto construido; su unidad es \((1)\).
+
+\begin{definition}[Coproducto multiplicativo reducido]
+Sobre el espacio vectorial de soporte finito generado por las formas
+normales no vacías se define
+\[
+ \widetilde\Delta_\# e_w
+ =\sum_{\substack{u\boxtimes_\#v=w\\u,v\ne(1)}}e_u\otimes e_v.
+\]
+Una forma normal no unitaria es irreducible cuando su imagen por
+\(\widetilde\Delta_\#\) es nula.
+\end{definition}
+
+Las fibras de factorización son finitas por
+\eqref{eq:primos-entrelazamiento}. En la completación
+\(\mathcal H_\#=\ell^2(\mathcal W_9\setminus\{\varnothing\})\),
+las imágenes de formas distintas tienen soportes disjuntos. Si
+\(d_\#(w)\) cuenta las factorizaciones ordenadas no unitarias, el dominio
+de la clausura es
+\[
+ \operatorname{Dom}(\overline{\widetilde\Delta_\#})
+ =\left\{x\in\mathcal H_\#:
+       \sum_w d_\#(w)|x_w|^2<\infty\right\}.
+\]
+En efecto, la norma cuadrada de la imagen es esa suma ponderada. Por ello,
+el operador
+\[
+ A_\#=(\overline{\widetilde\Delta_\#})^*
+                  \overline{\widetilde\Delta_\#}
+\]
+es diagonal, positivo y autoadjunto: su valor propio en \(e_w\) es el
+número de factorizaciones ordenadas no unitarias de \(w\). La proyección
+\[
+ P_{\rm irr}=(I-|e_{(1)}\rangle\langle e_{(1)}|)
+                    \mathbf1_{\{0\}}(A_\#)
+\]
+selecciona exactamente las formas irreducibles. Mediante la evaluación
+multiplicativa, éstas corresponden a los primos ordinarios. La selección
+depende de la estructura de factorización, y mantiene separado el estado
+unitario.
+
+Para un valor \(n\geq2\) coprimo con \(10\), la división decimal induce la
+permutación de residuos \(r\mapsto10r\pmod n\). El retorno del residuo
+\(1\) tiene período
+\[
+ \tau_n=\operatorname{ord}_n(10).
+\]
+Si \(n=\prod_p p^{a_p}\), el teorema chino de los restos da
+\[
+ \tau_n=\operatorname{mcm}_{p^{a_p}\parallel n}
+                    \operatorname{ord}_{p^{a_p}}(10).
+\]
+El retorno compuesto sincroniza los retornos de las potencias primas.
+Para un primo \(p\notin\{2,3,5\}\), se tiene
+\[
+ \tau_p\mid p-1,\qquad
+ M_p=\frac{10^{\tau_p}-1}{p}\in\mathbb N,
+ \qquad M_p\equiv0\pmod9.
+\]
+La última congruencia expresa el cierre nonádico de la repetición decimal:
+\(10^{\tau_p}-1\) es múltiplo de \(9\) y \(p\) es invertible módulo
+\(9\). La misma congruencia vale para cualquier \(n\) coprimo con
+\(90\). En particular, \(7,13,77,91,143\) tienen período decimal \(6\),
+aunque sólo los dos primeros son irreducibles. El coproducto y el período
+registran, por tanto, propiedades diferentes de un mismo valor construido.
+
+Esta diferenciación precisa la relación con el refinamiento aperiódico.
+La secuencia de vacancias determina los incrementos del índice de
+capacidad; la factorización determina los modos multiplicativos; la
+división decimal determina sus tiempos de retorno. El representante
+nonádico conserva el cierre de fase, mientras que el cociente y la
+factorización conservan información que ese cierre no distingue. El
+enlace con las construcciones espectrales del tratado reside en esos
+operadores y sus entrelazamientos. La demostración de sus resultados
+analíticos posteriores mantiene su desarrollo propio; no se sustituye por
+la periodicidad de una observación residual.
+
+\subsubsection{Discrepancia de vacancias y lecturas de Dirichlet}
+
+El vínculo admite también una expresión analítica exacta. Se conserva la
+misma codificación \(z_n=z_n(0)\), para \(n\geq1\), y se consideran
+dos observables posteriores: la serie sobre todos los índices y el
+producto sobre los índices seleccionados por irreducibilidad. Para
+\(\operatorname{Re}s>1\),
+\[
+ Z_{\rm vac}^{+}(s)=\sum_{n\geq1}\frac{z_n}{n^s},\qquad
+ Z_{\rm vac}^{\times}(s)=\prod_p(1-p^{-s})^{-z_p}.
+\]
+Ambos convergen absolutamente en ese semiplano. Su factor común es la
+densidad \(\delta\), pero sus discrepancias son diferentes.
+
+\Needspace{21\baselineskip}
+\begin{proposition}[Separación de la densidad de vacancias]
+Se tiene
+\[
+ Z_{\rm vac}^{+}(s)=\delta\zeta(s)+H_{\rm vac}(s),
+ \qquad H_{\rm vac}\in\mathcal O(\operatorname{Re}s>0).
+\]
+En \(\operatorname{Re}s>1\), con logaritmos definidos por las series
+absolutamente convergentes de Euler,
+\[
+ Z_{\rm vac}^{\times}(s)=\zeta(s)^\delta G_{\rm vac}(s),\qquad
+ \log G_{\rm vac}(s)=
+ \sum_p(z_p-\delta)\log(1-p^{-s})^{-1}.
+\]
+\end{proposition}
+\begin{proof}
+Las sumas parciales centradas satisfacen
+\[
+ A_N:=\sum_{n=1}^N(z_n-\delta)
+ =\lfloor(N+1)\delta\rfloor-N\delta,\qquad |A_N|<1.
+\]
+La sumación de Abel representa el término centrado por
+\(s\int_1^\infty A_{\lfloor x\rfloor}x^{-s-1}\,dx\). La integral
+converge localmente de manera uniforme en \(\operatorname{Re}s>0\),
+lo que prueba la holomorfía. La segunda identidad resulta de separar
+\(z_p=\delta+(z_p-\delta)\) en el logaritmo del producto, dentro de
+su dominio de convergencia absoluta.
+\end{proof}
+
+La descomposición hace visible qué añade la lectura sobre primos: examina
+la misma sucesión de vacancias sobre un subconjunto determinado por la
+factorización. El control de la discrepancia sobre todos los enteros da
+la primera prolongación holomorfa; el segundo observable conserva una
+discrepancia propia sobre primos. Son dos aplicaciones de la misma
+estructura discreta, con dominios analíticos expresos. Esta articulación
+explica su pertinencia en el núcleo aritmético sin trasladar a este
+artículo la demostración de los resultados terminales del tratado.

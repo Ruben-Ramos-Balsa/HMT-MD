@@ -1,0 +1,526 @@
+\chapter{Algèbre généalogique de chemins et représentation de Feynman}
+\label{chap:integral-genealogica}
+
+La formulation de Feynman attribue à chaque histoire possible une amplitude et somme
+ces amplitudes pour obtenir le propagateur. En HMT, le mot \emph{histoire}
+possède un contenu antérieur à l'amplitude : un chemin conserve position, feuillet,
+orientation, phase, retenue, frontière, mémoire et condition de survie. La
+somme de chemins ne s'ajoute pas de l'extérieur à ce système. Elle apparaît lorsqu'on représente
+linéairement sa catégorie de chemins
+\cite{Feynman1948,FeynmanHibbs1965}.
+
+Le développement possède trois niveaux mathématiques liés. Le développement d'une
+puissance matricielle comme somme finie de chemins est déjà démontré en mécanique
+dimensionnelle. Le ledger \(27\times27\) fournit une réalisation unitaire
+avec shift, mélangeur et phase, diagonalisable par Fourier. La famille de sommes
+finies admet ensuite une limite cylindrique lorsque la mesure, l'action et le
+raffinement satisfont les hypothèses du théorème de convergence. Ainsi se trouvent
+réunies l'identité combinatoire, sa réalisation spectrale et son extension
+fonctionnelle.
+
+\section{La catégorie enrichie de chemins}
+
+Soit \(X\) un ensemble fini d'états observables et soit
+\(\mathsf P_{\TPK}\) la catégorie libre engendrée par les transitions
+admissibles du TPK. Notons
+\(\widetilde X=\operatorname{Ob}(\mathsf P_{\TPK})\). Ses objets sont des états
+enrichis de frontière. Un morphisme
+\(\gamma:\widetilde x\to\widetilde y\) est une séquence composable de
+transitions enrichies.
+La composition est la concaténation et l'identité est le chemin vide.
+
+La projection visible
+\[
+ q_{\rm vis}:\mathsf P_{\TPK}\longrightarrow \mathsf P_X
+\]
+oublie une partie de la fibre. Deux morphismes différents peuvent avoir le même
+mot observable. Cette non-fidélité est essentielle : une somme qui agrégerait prématurément
+sur \(\mathsf P_X\) perdrait précisément l'information capable de
+distinguer des futurs incompatibles.
+
+\begin{definition}[Poids généalogique]
+Soit \(\mathcal B\) une algèbre réelle normée, non nécessairement commutative, et
+soit \(B(\mathcal B,\cdot,1)\) la catégorie à un objet dont le monoïde
+d'endomorphismes est \((\mathcal B,\cdot,1)\). Un poids généalogique est un foncteur
+\[
+ W:\mathsf P_{\TPK}\longrightarrow B(\mathcal B,\cdot,1)
+\]
+qui satisfait
+\[
+ W(\id_x)=1_{\mathcal B},\qquad
+ W(\gamma_2\circ\gamma_1)=W(\gamma_2)W(\gamma_1).
+\]
+L'ordre du produit suit l'ordre causal du chemin.
+\end{definition}
+
+Le poids peut contenir un transport de fibre, une pénalisation positive, une
+action, un caractère du ledger ou plusieurs de ces facteurs. La définition ne
+confond pas ces fonctions : chaque composante conserve son domaine et sa règle de
+composition.
+
+\section{La somme finie exacte}
+
+Soit \(E_x\) la fibre linéaire sur \(x\in X\) et
+\(\mathcal H_X=\bigoplus_{x\in X}E_x\). Soit
+\(U=(U_{yx})_{x,y\in X}\) l'opérateur global par blocs, avec
+\(U_{yx}:E_x\to E_y\). Nous interprétons \(U_{yx}\) comme le transport élémentaire
+de \(x\) à \(y\). Pour un chemin visible
+\(\gamma=(x_0,x_1,\ldots,x_R)\), nous définissons
+\[
+ W_U(\gamma)=U_{x_Rx_{R-1}}\cdots U_{x_1x_0}.
+\]
+
+\begin{theorem}[Développement fini de chemins]
+\label{thm:suma-finita-caminos}
+Pour tout \(R\geq 1\),
+\begin{equation}
+ (U^R)_{fi}
+ =\sum_{\substack{\gamma:i\to f\\|\gamma|=R}}W_U(\gamma).
+ \label{eq:suma-finita-caminos}
+\end{equation}
+Si l'opérateur global \(U:\mathcal H_X\to\mathcal H_X\) est orthogonal ---ou
+unitaire après le choix d'une carte complexe---, l'évolution
+\(\psi_R=U^R\psi_0\) conserve la norme.
+\end{theorem}
+
+\begin{proof}
+L'entrée \((f,i)\) du produit \(U^R\) est
+\[
+ \sum_{x_1,\ldots,x_{R-1}}
+ U_{fx_{R-1}}U_{x_{R-1}x_{R-2}}\cdots U_{x_1i}.
+\]
+Chaque choix d'indices intermédiaires détermine un unique chemin de longueur
+\(R\), et chaque chemin détermine un unique monôme ordonné. La conservation de la
+norme est une conséquence immédiate de \((U^R)^{\mathsf T}U^R=I\), ou de sa version
+unitaire.
+\end{proof}
+
+La formule \eqref{eq:suma-finita-caminos} est l'identité combinatoire qui
+sous-tend la somme d'histoires. Son contenu HMT apparaît lorsqu'on raffine chaque
+chemin visible par les fibres de \(q_{\rm vis}\) :
+\begin{equation}
+ \mathcal K_R(\widetilde f,\widetilde i)
+ =\sum_{\substack{\gamma\in
+        \mathsf P_{\TPK}(\widetilde i,\widetilde f)\\|\gamma|=R}}
+ W(\gamma).
+ \label{eq:kernel-genealogico-finito}
+\end{equation}
+Dans cette somme, deux chemins publiés avec les mêmes extrémités restent des termes
+distincts tant qu'ils diffèrent par leur généalogie.
+
+\section{Réalisation unitaire sur le registre généalogique \(27\times27\)}
+
+La source historique développe une marche quantique sur le tore
+\[
+ \Lambda_{27}=(\ZZ/27\ZZ)^2
+\]
+avec quatre orientations cardinales
+\(\mathcal D=\{N,S,E,W\}\). Son espace réel de phase est
+\[
+ \mathcal H_{27}^{\RR}
+ =\ell^2(\Lambda_{27})\otimes\RR^4\otimes E,
+\]
+où \((E,J_E)\) réalise intérieurement la structure complexe. Le mélangeur
+de directions est la matrice de Walsh--Hadamard
+\[
+ C_4=\frac12
+ \begin{pmatrix}
+ 1&1&1&1\\
+ 1&1&-1&-1\\
+ 1&-1&1&-1\\
+ 1&-1&-1&1
+ \end{pmatrix},
+ \qquad C_4^{\mathsf T}C_4=I_4.
+\]
+Une action élémentaire orientée \(s_d\in\mathcal L_S\) définit la porte
+réelle de phase
+\[
+ D_J=\operatorname{diag}
+ \left(
+  e^{-J_Es_N/\hbar_{\rm int}},
+  e^{-J_Es_S/\hbar_{\rm int}},
+  e^{-J_Es_E/\hbar_{\rm int}},
+  e^{-J_Es_W/\hbar_{\rm int}}
+ \right).
+\]
+Le shift conditionné transporte chaque composante dans sa direction :
+\begin{align*}
+ (S\psi)(x,y,N)&=\psi(x,y-1,N),&
+ (S\psi)(x,y,S)&=\psi(x,y+1,S),\\
+ (S\psi)(x,y,E)&=\psi(x-1,y,E),&
+ (S\psi)(x,y,W)&=\psi(x+1,y,W),
+\end{align*}
+avec des coordonnées modulo \(27\). Le pas élémentaire et la composition
+dodécaphasique sont
+\begin{equation}
+ U_{\rm micro}=S D_J C_4,
+ \qquad
+ U_{12}=U_{\rm micro}^{12}.
+ \label{eq:unitario-ledger-27}
+\end{equation}
+
+\begin{proposition}[Unitarité et somme exacte dans le ledger]
+L'opérateur \(U_{\rm micro}\) est orthogonal sur la réalification et unitaire
+dans la carte complexe. Pour tout \(n\), chaque entrée de
+\(U_{\rm micro}^n\) est la somme ordonnée des poids de tous les chemins de
+\(n\) pas qui relient ses états extrêmes.
+\end{proposition}
+
+\begin{proof}
+Le shift est une permutation, \(C_4\) est orthogonal et chaque bloc
+\(e^{-J_Es_d/\hbar_{\rm int}}\) est une rotation. Leur produit est orthogonal.
+La deuxième affirmation est le
+\cref{thm:suma-finita-caminos} appliqué à la matrice par blocs
+\(U_{\rm micro}\).
+\end{proof}
+
+La symétrie translationnelle réduit le problème spectral à des blocs de taille
+quatre. Pour
+\[
+ k_x=\frac{2\pi m}{27},\qquad
+ k_y=\frac{2\pi n}{27},
+ \qquad 0\le m,n<27,
+\]
+le shift se diagonalise comme
+\[
+ S(k_x,k_y)=\operatorname{diag}
+ \bigl(e^{J_Ek_y},e^{-J_Ek_y},e^{J_Ek_x},e^{-J_Ek_x}\bigr),
+\]
+et
+\begin{equation}
+ U_{\rm micro}(k_x,k_y)=S(k_x,k_y)D_JC_4,
+ \qquad
+ U_{12}(k_x,k_y)=U_{\rm micro}(k_x,k_y)^{12}.
+ \label{eq:bloque-fourier-ledger-27}
+\end{equation}
+Le spectre global est l'union des spectres des \(27^2\) blocs.
+L'expression combine deux représentations de la même dynamique : la puissance
+matricielle énumère les chemins et la transformée de Fourier publie les
+quasi-énergies.
+
+Dans chaque bloc unitaire, on peut choisir un logarithme spectral et définir
+\[
+ H_{\rm eff}(k_x,k_y)
+ =\frac{\hbar_{\rm int}}{J_E\,\Delta t}
+   \log U_{12}(k_x,k_y),
+\]
+compris au moyen du calcul fonctionnel dans la carte complexe ou sa réalification.
+Le choix de branche fixe la zone de quasi-énergie. Le Hamiltonien effectif
+émerge ainsi du propagateur déjà construit ; son exponentielle restitue
+\(U_{12}\) dans chaque mode.
+
+\section{Caractère réel d'action}
+
+Soit \(\mathcal A_*:\mathsf P_{\TPK}\to\RR_{\geq0}\) le cocycle additif
+d'action de la source HMT--MD. La jauge est
+\[
+ \lambda_*
+ =1-\frac5{468}-\frac3{11}\Delta_4
+ =0.9892859130191415\ldots\in(0,1).
+\]
+La clause locale \(\mathsf H_{\rm loc}\) attribue un coût unitaire à une rotation,
+un coût \(\lambda_*\) à un changement de feuillet et additionne les deux lorsqu'ils se produisent sur la
+même arête. Sous cette clause,
+\[
+ \mathcal A_*(\gamma)
+ =\#\operatorname{turns}(\gamma)
+  +\lambda_*\#\operatorname{sheet\mbox{-}switches}(\gamma),
+\qquad
+ \mathcal A_*(\gamma_2\circ\gamma_1)
+ =\mathcal A_*(\gamma_2)+\mathcal A_*(\gamma_1).
+\]
+L'action dimensionnelle associée est
+\[
+ S_{\rm int}(\gamma)=\hbar_{\rm int}\mathcal A_*(\gamma).
+\]
+
+Dans le module de phase réelle \((E,J_E)\) du chapitre précédent, avec \(E\) un
+espace euclidien réel de dimension finie, nous définissons
+\begin{equation}
+ \Phi_J(\gamma)
+ :=\exp\!\left(-J_E\frac{S_{\rm int}(\gamma)}{\hbar_{\rm int}}\right)
+ =\cos\mathcal A_*(\gamma)\,I
+  -\sin\mathcal A_*(\gamma)\,J_E.
+ \label{eq:caracter-real-accion}
+\end{equation}
+
+\begin{proposition}[Multiplicativité de la phase interne]
+\label{prop:multiplicatividad-fase-interna}
+L'application \(\Phi_J\) est un foncteur de \(\mathsf P_{\TPK}\) vers le groupe
+orthogonal engendré par \(J_E\) :
+\[
+ \Phi_J(\id_x)=I,
+ \qquad
+ \Phi_J(\gamma_2\circ\gamma_1)
+ =\Phi_J(\gamma_2)\Phi_J(\gamma_1).
+\]
+\end{proposition}
+
+\begin{proof}
+La première égalité utilise \(\mathcal A_*(\id_x)=0\). Pour la deuxième,
+l'additivité de \(\mathcal A_*\) et la commutation des multiples du même
+endomorphisme \(J_E\) donnent
+\[
+ e^{-J_E(\mathcal A_*(\gamma_2)+\mathcal A_*(\gamma_1))}
+ =e^{-J_E\mathcal A_*(\gamma_2)}
+  e^{-J_E\mathcal A_*(\gamma_1)}.
+\]
+\end{proof}
+
+Soit maintenant \(T(e)\in\End(E)\) le transport borné de fibre d'une arête et
+supposons
+qu'il préserve \(J_E\). Le poids
+\[
+ W_J(\gamma)
+ =\prod_{e\in\gamma}^{\longleftarrow}
+   T(e)\exp\!\left(-J_E\frac{s(e)}{\hbar_{\rm int}}\right)
+\]
+réalise entièrement sur \(E\) la convention hamiltonienne
+\(\exp(-iS_H[\gamma]/\hbar)\). La convention lagrangienne habituelle de Feynman
+\(\exp(+iS_L[\gamma]/\hbar)\) s'obtient en prenant \(S_L=-S_H\), ou,
+de manière équivalente, en introduisant une orientation
+\(\varepsilon\in\{-1,+1\}\) dans
+\(\exp(\varepsilon J_ES/\hbar_{\rm int})\). Le symbole scalaire \(i\) est la
+carte complexe de l'opération algébrique réalisée par \(J_E\). Le coût
+positif \(\mathcal A_*\) devient une action physique lorsqu'on applique l'application de
+réalisation correspondante.
+
+\section{Composition de propagateurs sur des chemins concaténés et loi des amplitudes}
+
+La généalogie conserve la loi de composition qui rend le noyau dynamique.
+
+\begin{proposition}[Convolution et coupure temporelle]
+\label{prop:chapman-kolmogorov-genealogico}
+Supposons que \(\widetilde X\) est fini ; plus généralement, que la famille de
+produits suivante est absolument sommable. Si tout chemin de longueur
+\(R+S\) possède une unique coupure après \(R\) pas, alors
+\begin{equation}
+ \mathcal K_{R+S}(\widetilde f,\widetilde i)
+ =\sum_{\widetilde x\in\widetilde X}
+   \mathcal K_S(\widetilde f,\widetilde x)
+   \mathcal K_R(\widetilde x,\widetilde i).
+ \label{eq:convolucion-kernel}
+\end{equation}
+L'identité reste valable avec des poids non commutatifs si l'on conserve
+l'ordre causal des facteurs.
+\end{proposition}
+
+\begin{proof}
+Nous partitionnons l'ensemble des chemins selon l'état enrichi
+\(\widetilde x\) atteint à la coupure.
+La factorisation fonctorielle du poids transforme la somme sur les chemins complets
+en produit des deux sommes partielles, avec le segment postérieur à
+gauche.
+\end{proof}
+
+La coupure sur l'état visible ne serait valable que si le poids et la composition
+descendaient fidèlement par \(q_{\rm vis}\). En présence de mémoire, deux
+tronçons ayant le même visible peuvent appartenir à des fibres incompatibles ; c'est pourquoi
+la convolution s'effectue sur \(\widetilde X\).
+
+Cette équation distingue la somme de chemins d'une collection de coïncidences
+numériques. Le propagateur possède un semi-groupe, des extrémités, une composition et une loi de
+raffinement.
+
+\section{Limite cylindrique du système fini et construction de l'intégrale correspondante}
+
+Une intégrale fonctionnelle exige de contrôler l'espace des chemins et son
+raffinement. Pour des extrémités enrichies \(\widetilde i,\widetilde f\), soient
+\(\mathcal P_n(\widetilde i,\widetilde f)\) les ensembles finis de chemins
+admissibles à la résolution \(n\), avec des restrictions surjectives, et définissons
+\[
+ \Omega_{fi}^{\rm path}
+ :=\varprojlim_n\mathcal P_n(\widetilde i,\widetilde f).
+\]
+C'est l'espace compact des généalogies de chemins ayant ces données de frontière.
+Soit \(\{\Pi_n\}_{n\geq0}\) une suite de partitions cylindriques de
+\(\Omega_{fi}^{\rm path}\), où \(\Pi_{n+1}\) raffine \(\Pi_n\). Pour chaque
+cylindre \(C\in\Pi_n\), choisissons un représentant
+\(\gamma_C\), un poids projectif \(\mu_n(C)\) et une action approchée
+\(S_n(C)\).
+
+Nous définissons l'opérateur simple
+\begin{equation}
+ \mathcal I_n(F)
+ :=\sum_{C\in\Pi_n}
+   \mu_n(C)
+   F(\gamma_C)
+   \exp\!\left(-J_E\frac{S_n(C)}{\hbar_{\rm int}}\right).
+ \label{eq:integral-cilindrica-n}
+\end{equation}
+
+\begin{theorem}[Limite généalogique d'intégrales cylindriques]
+\label{thm:integral-cilindrica-limite}
+Supposons que :
+\begin{enumerate}
+ \item les masses cylindriques sont projectivement compatibles ;
+ \item \(F:\Omega_{fi}^{\rm path}\to\End(E)\) est continue et bornée ;
+ \item il existe une fonction continue
+       \(S:\Omega_{fi}^{\rm path}\to\mathcal L_S\) telle que
+       \[
+        \max_{C\in\Pi_n}\sup_{\gamma\in C}
+        \left\|
+          \frac{S_n(C)-S(\gamma)}{\hbar_{\rm int}}
+        \right\|\longrightarrow0;
+       \]
+ \item le pas des partitions,
+       \(\operatorname{mesh}(\Pi_n)
+        =\max_{C\in\Pi_n}\diam_{d_\vartheta}C\),
+       tend vers zéro.
+\end{enumerate}
+Comme \(E\) est de dimension finie, \(\End(E)\), muni de la norme
+d'opérateur, est un espace de Banach ; l'intégrale qui suit est donc une
+intégrale de Bochner bien définie \cite{Bochner1955}.
+Alors \(\mathcal I_n(F)\) converge en norme d'opérateur et sa limite ne
+dépend pas des représentants. Nous écrivons
+\begin{equation}
+ \int_{\Omega_{fi}^{\rm path}}
+ F(\gamma)
+ \exp\!\left(-J_E\frac{S(\gamma)}{\hbar_{\rm int}}\right)
+ \dd\mu(\gamma)
+ :=\lim_{n\to\infty}\mathcal I_n(F).
+ \label{eq:integral-genealogica}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La compatibilité projective construit la mesure de cylindres \(\mu\). La
+fonction
+\[
+ G(\gamma)=F(\gamma)
+ \exp\!\left(-J_E S(\gamma)/\hbar_{\rm int}\right)
+\]
+est continue sur le compact \(\Omega_{fi}^{\rm path}\), donc uniformément
+continue et bornée. Soit
+\[
+ G_n(C)=F(\gamma_C)
+ \exp\!\left(-J_E S_n(C)/\hbar_{\rm int}\right).
+\]
+Comme \(J_E\) est une structure orthogonale,
+\[
+ \|e^{-J_Ea}-e^{-J_Eb}\|\leq |a-b|.
+\]
+La troisième hypothèse implique que
+\(G_n(C)-G(\gamma_C)\) tend uniformément vers zéro. La quatrième hypothèse et la
+continuité uniforme de \(G\) font des sommes avec \(G(\gamma_C)\) des
+sommes de Riemann convergentes et indépendantes des représentants. La
+limite coïncide avec l'intégrale de Bochner de \(G\) par rapport à \(\mu\).
+Plus précisément, si
+\[
+ \epsilon_n
+ =\max_{C\in\Pi_n}\sup_{\gamma\in C}
+   \left\|
+    \frac{S_n(C)-S(\gamma)}{\hbar_{\rm int}}
+   \right\|,
+\]
+alors
+\[
+ \left\|\mathcal I_n(F)-\int G\,\dd\mu\right\|
+ \leq
+ \omega_F\!\bigl(\operatorname{mesh}(\Pi_n)\bigr)
+ +\|F\|_\infty\epsilon_n,
+\]
+car l'intégrale se décompose sur les cylindres et la masse totale vaut un.
+Les deux termes tendent vers zéro par hypothèse.
+\end{proof}
+
+\begin{corollary}[Convergence d'une famille de noyaux discrets]
+\label{cor:convergencia-kernels-discretos}
+Outre les hypothèses du
+\cref{thm:integral-cilindrica-limite}, supposons qu'il existe une suite
+cofinale de profondeurs \(R_n\) et des fonctions simples \(F_{fi,n}\) telles que
+\[
+ \mathcal K_{R_n}(\widetilde f,\widetilde i)
+ =\mathcal I_n(F_{fi,n}),
+ \qquad
+ F_{fi,n}\longrightarrow F_{fi}
+\]
+uniformément. Alors les noyaux
+\(\mathcal K_{R_n}(\widetilde f,\widetilde i)\) convergent vers l'intégrale
+généalogique de \(F_{fi}\).
+\end{corollary}
+
+\begin{proof}
+La différence entre \(\mathcal I_n(F_{fi,n})\) et
+\(\mathcal I_n(F_{fi})\) est majorée par
+\(\|F_{fi,n}-F_{fi}\|_\infty\), car \(\mu_n\) a une masse totale égale à un et la
+phase est orthogonale. Le deuxième terme converge par le
+\cref{thm:integral-cilindrica-limite}.
+\end{proof}
+
+Le théorème produit une intégrale rigoureuse sur l'espace généalogique
+compact. Le corollaire explicite le pont qui identifie chaque noyau
+matriciel à une somme cylindrique normalisée. L'intégrale oscillatoire de
+Feynman en temps réel apparaît lorsqu'on choisit
+une représentation physique et un raffinement dont l'action discrète approche
+l'action du système. Cette identification exige de démontrer la convergence du
+propagateur correspondant ; elle n'est pas accordée par la simple existence de
+\(\mu\).
+
+\section{Intégrale visible et intégrale conditionnée par la mémoire}
+
+Un lecteur réel de chemins
+\(\Val_{\rm path}:\Omega_{fi}^{\rm path}\to K\subset\RR\) induit la mesure
+visible \(\nu=(\Val_{\rm path})_*\mu\). Pour une fonction qui se factorise par la
+valeur, \(F=\widehat F\circ\Val_{\rm path}\),
+\[
+ \int_{\Omega_{fi}^{\rm path}}F\,\dd\mu
+ =\int_K\widehat F(x)\,\dd\nu(x).
+\]
+Cependant, la phase ou le transport peuvent ne pas se factoriser par
+\(\Val_{\rm path}\). La
+désintégration de \(\mu\) sur les fibres de la valeur exprime la différence :
+\begin{equation}
+ \int_{\Omega_{fi}^{\rm path}}G(\gamma)\,\dd\mu(\gamma)
+ =\int_K
+   \left[
+    \int_{\Val_{\rm path}^{-1}(x)}G(\gamma)\,\dd\mu_x(\gamma)
+   \right]\dd\nu(x).
+ \label{eq:desintegracion-caminos}
+\end{equation}
+L'intégrale intérieure conserve les histoires qui publient la même coordonnée.
+C'est la forme mathématique de l'intégration par rapport aux valeurs sans réduire le
+nombre à son chiffre.
+
+\section{Action, interférence et persistance}
+
+La somme généalogique conserve simultanément trois opérations :
+\[
+ \text{admissibilité de route}
+ \quad\longrightarrow\quad
+ \text{poids/action}
+ \quad\longrightarrow\quad
+ \text{interférence dans la représentation}.
+\]
+La première appartient au TPK et à sa loi de survie. La deuxième appartient
+au cocycle et au transport dimensionnel. La troisième appartient au module de
+phase et au lecteur physique. Aucune grandeur observée ne sélectionne
+rétrospectivement le chemin qui la produit.
+
+\begin{resultbox}
+La somme finie de Feynman s'obtient comme représentation linéaire exacte de la
+catégorie enrichie de chemins. La structure complexe peut être réalisée par un
+endomorphisme réel \(J_E^2=-I\). Sous compatibilité des mesures, contraction des
+cylindres et convergence uniforme des actions, les sommes cylindriques définissent
+une intégrale généalogique. Les noyaux finis y convergent lorsqu'ils
+satisfont, en outre, le pont du
+\cref{cor:convergencia-kernels-discretos}.
+\end{resultbox}
+
+\begin{statusbox}
+Le développement matriciel fini, le cocycle d'action et les réalisations réelles
+de la structure complexe sont des résultats récupérés. Leur assemblage dans
+\eqref{eq:caracter-real-accion} et \eqref{eq:kernel-genealogico-finito} est une
+nouvelle formalisation exacte. Le théorème \ref{thm:integral-cilindrica-limite} est
+exact sous ses prémisses. L'équivalence avec un modèle quantique continu
+concret exige de vérifier ces prémisses pour le Hamiltonien et l'action de
+ce modèle.
+\end{statusbox}
+
+Les prémisses du théorème identifient exactement la structure qui passe du
+ledger fini à l'espace fonctionnel : compatibilité projective des poids,
+contraction du pas, convergence uniforme de l'action et correspondance
+entre noyaux et sommes cylindriques. Dans la réalisation
+\eqref{eq:unitario-ledger-27}, la composition et l'unitarité sont des identités
+algébriques ; en raffinant le ledger, les autres prémisses déterminent la
+convergence vers le propagateur continu choisi.

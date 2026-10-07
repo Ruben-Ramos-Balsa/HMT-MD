@@ -1,0 +1,554 @@
+\section{TRIT : orientation ternaire, retenue et représentation quadratique}
+\label{trit:capitulo}
+
+La construction d'APP conserve conjointement la position, les évaluations
+additive et multiplicative et leurs décompositions nonadiques. Sur ces données
+agit maintenant la réduction ternaire orientée. Sa fonction est double : distinguer
+les trois classes opératoires d'une évaluation et conserver la coordonnée entière
+qui permet de la restituer. Cette distinction intervient ensuite dans la sélection
+de phase du noyau topologique de phase, appelé TPK d'après ses initiales en
+anglais, \emph{Topological Phase Kernel}.
+
+Le terme \emph{trit} désigne une unité ternaire. Dans la convention équilibrée
+de HMT, ses valeurs sont \(-1,0,+1\). Le même alphabet admet des fonctions
+différentes selon le domaine : lecture d'une évaluation arithmétique, sélection
+d'un mode opératoire ou indice d'une réalisation quadratique. Chaque fonction
+est définie avec son domaine et avec l'information qu'elle conserve.
+
+Le développement commence dans les évaluations entières d'APP. Les réalisations
+quadratiques apparaissent ensuite comme des représentations du type tritique déjà
+déterminé. La construction concrète de leurs générateurs et l'extension
+d'Euler sont développées au chapitre~\ref{eul:capitulo}, après l'introduction
+du calendrier et de la sélection des modes du TPK.
+
+\subsection{Réduction ternaire équilibrée des évaluations d'APP}
+\label{trit:reduccion}
+
+À une position \((i,j)\), avec \(i,j\in\{1,\ldots,9\}\), les évaluations
+entières sont \(S(i,j)=i+j\) et \(P(i,j)=ij\). Chacune conserve son reste
+positif modulo neuf et son quotient. La réduction ternaire s'applique à
+l'évaluation correspondante et produit un autre couple de coordonnées.
+
+\begin{definicion}[Décomposition ternaire orientée]
+\label{trit:def:balanceada}
+Soient
+\[
+ \mathcal T=\{-1,0,+1\},\qquad
+ c_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3c_3(n),\quad n\in\mathbb Z.
+\]
+L'application de décomposition et celle de restitution sont
+\[
+ \mathcal B_3:\mathbb Z\longrightarrow\mathcal T\times\mathbb Z,
+ \qquad \mathcal B_3(n)=(r_3(n),c_3(n)),
+\]
+\[
+ \mathcal L_3:\mathcal T\times\mathbb Z\longrightarrow\mathbb Z,
+ \qquad \mathcal L_3(r,c)=r+3c.
+\]
+La première composante est le représentant ternaire équilibré ; la seconde
+est le quotient de prolongement.
+\end{definicion}
+
+\begin{proposicion}[Restitution exacte et unicité]
+\label{trit:prop:restitucion}
+Les applications \(\mathcal B_3\) et \(\mathcal L_3\) sont inverses.
+En particulier, pour tout entier \(n\),
+\[
+ n=r_3(n)+3c_3(n),\qquad r_3(n)\in\mathcal T,
+\]
+et cette expression est unique.
+\end{proposicion}
+\begin{proof}
+Si \(c=\lfloor(n+1)/3\rfloor\), alors
+\(3c\le n+1<3c+3\). Par conséquent, \(-1\le n-3c<2\), et l'entier
+\(r=n-3c\) appartient à \(\mathcal T\). Si
+\(r+3c=s+3d\), avec \(r,s\in\mathcal T\), l'entier \(r-s\) est un multiple
+de trois et se situe entre \(-2\) et \(2\). Ainsi, \(r=s\) et \(c=d\).
+Enfin, pour tout couple \((r,c)\),
+\(\lfloor(r+3c+1)/3\rfloor=c\), puisque \(0\le r+1\le2\).
+Cela démontre les deux compositions inverses.
+\end{proof}
+
+La section orientée du quotient \(\mathbb Z/3\mathbb Z\) est fixée par
+\[
+ [0]_3\longmapsto0,\qquad [1]_3\longmapsto+1,
+ \qquad [2]_3\longmapsto-1.
+\]
+Le remplacement de \(2\) par \(-1\) s'accompagne du quotient nécessaire :
+\(2=-1+3\). L'évaluation entière demeure récupérable dans le couple.
+
+\begin{tablacompleta}
+\caption{Décomposition équilibrée des neuf positions d'une droite APP.}
+\label{trit:tabla:nueve}
+\begin{tabular}{c*{9}{r}}
+\toprule
+\(n\)&1&2&3&4&5&6&7&8&9\\
+\midrule
+\(r_3(n)\)&1&$-1$&0&1&$-1$&0&1&$-1$&0\\
+\(c_3(n)\)&0&1&1&1&2&2&2&3&3\\
+\bottomrule
+\end{tabular}
+\notatabla{La coïncidence des représentants ternaires conserve trois
+positions distinctes dans chaque classe ; leurs quotients restituent les entiers.}
+\end{tablacompleta}
+
+Par exemple, en \((i,j)=(5,5)\), la somme vaut \(10\) et le produit vaut
+\(25\). Les deux lectures ternaires donnent \(+1\), tandis que leurs
+décompositions complètes sont
+\[
+ \mathcal B_3(10)=(1,3),\qquad
+ \mathcal B_3(25)=(1,8).
+\]
+La signature commune identifie un type résiduel ; le feuillet et le quotient distinguent
+les deux évaluations. L'état d'APP conserve en outre la position qui les
+a produites.
+
+\subsubsection{Compatibilité entre les modules neuf et trois}
+
+Écrivons la décomposition nonadique d'une évaluation sous la forme
+\[
+ n=R_9(n)+9q_9(n),\qquad R_9(n)\in\{1,\ldots,9\}.
+\]
+En réduisant son représentant positif de manière ternaire, on obtient
+\[
+ R_9(n)=r_3(R_9(n))+3c_3(R_9(n)).
+\]
+En substituant,
+\begin{equation}
+ r_3(n)=r_3(R_9(n)),\qquad
+ c_3(n)=c_3(R_9(n))+3q_9(n).
+\label{trit:eq:compatibilidad39}
+\end{equation}
+L'unicité de la décomposition équilibrée démontre les deux identités.
+La réduction visible modulo trois peut être effectuée sur le reste
+nonadique, tandis que la reconstruction complète transporte également le
+quotient précédent.
+
+Dans le produit \(5\cdot5=25\), la décomposition nonadique est
+\(25=7+9\cdot2\). Comme \(7=1+3\cdot2\), la formule précédente donne
+\(25=1+3(2+3\cdot2)=1+3\cdot8\). Les deux ordres de lecture restituent
+le même entier parce que les quotients se composent de manière explicite.
+
+\subsection{Arithmétique des états ternaires avec retenue}
+\label{trit:aritmetica}
+
+La conservation des couples permet de transporter les opérations d'APP dans
+les coordonnées équilibrées. Le transport détermine la retenue additive et
+les termes croisés du produit.
+
+\begin{definicion}[Retenue additive équilibrée]
+Pour \(r,s\in\mathcal T\), soient
+\[
+ r\oplus s=r_3(r+s),\qquad
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+L'entier \(\chi(r,s)\) est la retenue produite en normalisant la somme des
+deux représentants.
+\end{definicion}
+
+\begin{tablacompleta}
+\caption{Retenue additive de la section ternaire équilibrée.}
+\begin{tabular}{c|rrr}
+\toprule
+\(\chi(r,s)\)&\(s=-1\)&\(s=0\)&\(s=+1\)\\
+\midrule
+\(r=-1\)&$-1$&0&0\\
+\(r=0\)&0&0&0\\
+\(r=+1\)&0&0&1\\
+\bottomrule
+\end{tabular}
+\notatabla{Les deux extrémités codent
+\(-1-1=1-3\) et \(1+1=-1+3\).}
+\end{tablacompleta}
+
+\begin{proposicion}[Opérations récupérables]
+\label{trit:prop:operaciones}
+Si \(n=r+3c\) et \(m=s+3d\), avec \(r,s\in\mathcal T\), alors
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r\oplus s,c+d+\chi(r,s)\bigr),
+ \label{trit:eq:suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr)
+ \label{trit:eq:producto}
+\end{align}
+sont, respectivement, les décompositions de \(n+m\) et de \(nm\).
+\end{proposicion}
+\begin{proof}
+La somme se décompose sous la forme
+\[
+ n+m=r+s+3(c+d)
+     =r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+Dans le produit,
+\[
+ nm=(r+3c)(s+3d)=rs+3(rd+sc+3cd).
+\]
+L'entier \(rs\) appartient à \(\mathcal T\). Les deux expressions sont
+normalisées ; l'unicité de la proposition~\ref{trit:prop:restitucion}
+identifie leurs composantes.
+\end{proof}
+
+Ces lois distinguent l'accumulation et la multiplication dans le registre.
+La somme agrège les quotients et ajoute la retenue résiduelle. Le produit
+combine également chaque représentant avec le quotient de l'autre évaluation.
+Ce contenu arithmétique est maintenu lorsque les opérations sont incorporées
+à une transition du TPK.
+
+\begin{ejemplo}[Somme et produit de deux évaluations]
+De \(2=-1+3\) et de \(4=1+3\), il résulte
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+La restitution produit \(6\) et \(8\), respectivement. Dans la seconde
+opération, le quotient est \((-1)\cdot1+1\cdot1+3\cdot1\cdot1=3\).
+\end{ejemplo}
+
+\begin{proposicion}[Identité de cocycle et associativité]
+\label{trit:prop:cociclo}
+Pour \(r,s,t\in\mathcal T\),
+\begin{equation}
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\label{trit:eq:cociclo}
+\end{equation}
+Les opérations \(\boxplus\) et \(\boxtimes\), avec leurs éléments
+neutres et leurs inverses additifs transportés par \(\mathcal B_3\), font
+de \(\mathcal T\times\mathbb Z\) un anneau isomorphe à \(\mathbb Z\).
+\end{proposicion}
+\begin{proof}
+En normalisant \((r+s)+t\), le quotient total est le premier membre de
+\eqref{trit:eq:cociclo} ; en normalisant \(r+(s+t)\), il est le second.
+Les représentants finaux coïncident parce qu'ils représentent la même classe
+modulo trois. L'unicité de la décomposition complète impose que
+les quotients coïncident également. Par la proposition~\ref{trit:prop:operaciones},
+\(\mathcal L_3\) est une bijection qui conserve la somme et le produit. Elle transporte
+donc l'associativité, la distributivité et la commutativité des
+opérations entières. Ses éléments neutres sont \((0,0)\) et \((1,0)\).
+\end{proof}
+
+La preuve de cocycle exprime une compatibilité concrète du registre :
+la normalisation peut être effectuée par étapes sans changer l'évaluation
+finale. Si l'on s'intéresse à la séquence des opérations, le registre conserve
+en outre l'ordre des normalisations effectuées.
+
+\subsection{Raffinement ternaire et récupération à profondeur arbitraire}
+\label{trit:refinamiento}
+
+La décomposition est itérée sur le quotient. Étant donné \(n_0\in\mathbb Z\),
+définissons récursivement
+\[
+ r_k=r_3(n_k),\qquad n_{k+1}=c_3(n_k),\qquad k\ge0.
+\]
+Chaque transition satisfait \(n_k=r_k+3n_{k+1}\). La composition de ces
+égalités produit une restitution à toute profondeur fixée à l'avance.
+
+\begin{proposicion}[Restitution d'une troncature]
+\label{trit:prop:profundidad}
+Pour tout \(N\ge1\),
+\begin{equation}
+ n_0=\sum_{k=0}^{N-1}3^kr_k+3^Nn_N.
+\label{trit:eq:restitucionN}
+\end{equation}
+La suite \((r_0,\ldots,r_{N-1})\), avec le quotient terminal
+\(n_N\), détermine exactement \(n_0\).
+\end{proposicion}
+\begin{proof}
+Pour \(N=1\), l'identité est la décomposition initiale. Si elle vaut pour
+\(N\), on substitue \(n_N=r_N+3n_{N+1}\) dans le dernier terme et on
+obtient la formule pour \(N+1\). La restitution reconstruit également les
+quotients intermédiaires, en commençant par \(n_N\) et en appliquant
+\(n_k=r_k+3n_{k+1}\) dans l'ordre inverse.
+\end{proof}
+
+\begin{ejemplo}[Une retenue qui traverse trois niveaux]
+L'évaluation \(26\) donne successivement
+\[
+ 26=-1+3\cdot9,\qquad 9=0+3\cdot3,
+ \qquad 3=0+3\cdot1,\qquad1=1+3\cdot0.
+\]
+Ses représentants, ordonnés par puissances croissantes, sont
+\((-1,0,0,1)\). La restitution est \(26=-1+27\). Le symbole zéro des
+niveaux intermédiaires conserve une position et un quotient déterminé.
+\end{ejemplo}
+
+\begin{proposicion}[Terminaison pour un entier fixé]
+L'itération du quotient équilibré atteint zéro pour tout entier
+initial. Une fois les zéros finaux supprimés, le développement ternaire
+équilibré fini d'un entier est unique.
+\end{proposicion}
+\begin{proof}
+Pour \(|n|\ge2\),
+\( |c_3(n)|\le(|n|+1)/3<|n|\).
+Pour \(n\in\{-1,0,1\}\), le quotient est nul. La valeur absolue
+décroît strictement tant qu'elle vaut au moins deux, de sorte que
+l'itération se termine. Si deux développements représentent le même entier,
+leur réduction modulo trois fixe le même premier représentant ; en le soustrayant
+et en divisant par trois, on répète l'argument pour toutes les positions.
+\end{proof}
+
+Ce résultat concerne l'arithmétique d'un entier fixé. Dans les
+prolongements du TPK, la longueur du registre augmente et de
+nouvelles évaluations peuvent être générées. La profondeur y correspond à une suite
+compatible d'états, dont la construction requiert les règles de
+survie. La formule~\eqref{trit:eq:restitucionN} fournit le mécanisme
+local de restitution que ces prolongements doivent conserver.
+
+\subsection{Deux coordonnées ternaires d'une classe nonadique}
+\label{trit:nonadico}
+
+La réduction de \(\mathbb Z/9\mathbb Z\) modulo trois a trois éléments
+dans chaque fibre. La coordonnée supplémentaire peut s'écrire comme un quotient
+ternaire résiduel.
+
+\begin{proposicion}[Coordonnées nonadiques avec somme à retenue]
+\label{trit:prop:beta}
+L'application
+\[
+ \beta:\mathcal T\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad \beta(r,\bar c)=[r+3c]_9
+\]
+est une bijection d'ensembles. La somme et le produit nonadiques prennent la
+forme
+\begin{align}
+ \beta(r,\bar c)+\beta(s,\bar d)
+ &=\beta\bigl(r\oplus s,\overline{c+d+\chi(r,s)}\bigr),
+ \label{trit:eq:beta-suma}\\
+ \beta(r,\bar c)\beta(s,\bar d)
+ &=\beta\bigl(rs,\overline{rd+sc}\bigr).
+ \label{trit:eq:beta-producto}
+\end{align}
+\end{proposicion}
+\begin{proof}
+Remplacer \(c\) par \(c+3k\) modifie \(r+3c\) de \(9k\), de sorte que
+l'application est bien définie. Si deux images coïncident, la réduction
+modulo trois fixe le même \(r\). La différence restante, divisée par
+trois, fixe la même classe \(\bar c\). L'injectivité entre deux ensembles
+de neuf éléments prouve la bijection. Les opérations proviennent de
+\eqref{trit:eq:suma} et de \eqref{trit:eq:producto} ; le terme \(3cd\) du
+quotient multiplicatif s'annule lorsqu'on le réduit modulo trois.
+\end{proof}
+
+La retenue établit la loi de composition entre les deux niveaux. Par
+exemple,
+\[
+ \beta(1,0)+\beta(1,0)=\beta(-1,1).
+\]
+La seconde coordonnée enregistre le pas effectué par la somme entière avant
+sa lecture résiduelle. En particulier, \(\mathbb Z/9\mathbb Z\) a des
+éléments d'ordre neuf, tandis que le groupe additif de
+\(\mathbb F_3^2\) est d'exposant trois. La bijection précédente conserve
+la somme au moyen de la loi explicite à retenue.
+
+Les trois positions \(3,6,9\) d'APP s'écrivent
+\[
+ [3]_9=\beta(0,1),\qquad
+ [6]_9=\beta(0,2),\qquad
+ [9]_9=\beta(0,0).
+\]
+Sur l'idéal \(3\mathbb Z/9\mathbb Z\), l'extraction de la seconde
+coordonnée est
+\[
+ [3c]_9\longmapsto[c]_3.
+\]
+C'est une bijection additive avec \(\mathbb F_3\). Elle se distingue de la
+réduction directe modulo trois, qui attribue zéro aux trois éléments.
+De plus, le produit de deux éléments de cet idéal est nul modulo neuf.
+Sa structure multiplicative conserve ainsi une fonction différente de la
+multiplication du corps \(\mathbb F_3\).
+
+\subsubsection{La fibre de six positions ternaires}
+
+Un mot orienté de longueur six appartient à \(\mathcal T^6\),
+avec \(3^6=729\) possibilités. Le choix des représentants induit une
+bijection avec \(\mathbb F_3^6\). En regroupant les positions deux par deux et en
+appliquant \(\beta\), on obtient également une bijection ensembliste avec
+\((\mathbb Z/9\mathbb Z)^3\). La loi transportée utilise la retenue
+de chaque paire.
+
+Le recensement des mots effectivement émis par le TPK est réalisé après
+la construction de son émetteur et de sa chronologie. La fibre ambiante de \(729\)
+éléments fixe la capacité en coordonnées ; l'ensemble des émissions et son image
+ternaire sont déterminés par les règles opératoires. Cette séparation permet de
+conserver, dans le recensement ultérieur, tant les multiplicités que les
+registres distincts qui partagent un mot visible.
+
+\subsection{Involution orientée et mémoire de transport}
+\label{trit:involucion}
+
+\begin{proposicion}[Compatibilité avec l'inversion de signe]
+Pour tout \(n\in\mathbb Z\),
+\[
+ \mathcal B_3(-n)=(-r_3(n),-c_3(n)).
+\]
+\end{proposicion}
+\begin{proof}
+De \(n=r+3c\), on déduit \(-n=(-r)+3(-c)\). Comme \(-r\in\mathcal T\),
+l'unicité de la décomposition démontre l'affirmation.
+\end{proof}
+
+Pour une suite de signatures de longueur \(m\), on définit
+\[
+ \mathcal C_{\rm rev}(\tau_1,\ldots,\tau_m)
+ =(-\tau_m,\ldots,-\tau_1).
+\]
+La seconde application restitue l'ordre et les signes initiaux, de sorte
+que \(\mathcal C_{\rm rev}^{2}=\operatorname{id}\). Dans une séquence
+de couples, la même règle transporte simultanément
+\((r_k,c_k)\mapsto(-r_{m+1-k},-c_{m+1-k})\). La longueur et chaque
+évaluation restituable sont déterminées.
+
+La mémoire de division et la mémoire de transport remplissent des fonctions
+distinctes. Le couple \((r_3(n),c_3(n))\) reconstruit une évaluation entière.
+La reconstruction d'une trajectoire nécessite en outre la position initiale,
+les orientations, la séquence des modes et les franchissements de frontière. Deux parcours
+peuvent atteindre la même évaluation et conserver des registres de transport
+différents. L'état enrichi intègre les deux ordres d'information.
+
+Dans l'interprétation temporelle adoptée par HMT, \(+1\) correspond au
+retour avec mémoire, \(0\) au seuil présent et \(-1\) à l'ouverture de
+prolongements conjugués. Cette attribution fixe un lecteur de régime.
+L'évolution effective requiert la transition du TPK sur les registres
+complets ; ses itérations déterminent quelle phase revient et quelle mémoire
+augmente.
+
+\subsection{Algèbres quadratiques des trois régimes}
+\label{trit:cuadraticas}
+
+L'indice tritique possède une réalisation algébrique au moyen d'une relation
+quadratique. Sa formulation entière précède le choix du corps des
+scalaires et permet de séparer l'information discrète des réalisations
+analytiques ultérieures.
+
+\begin{definicion}[Algèbre quadratique de type tritique]
+Pour \(\tau\in\mathcal T\), on définit
+\[
+ \mathcal Q_{\tau,\mathbb Z}=\mathbb Z[u]/(u^2+\tau).
+\]
+Pour un anneau commutatif \(A\), sa réalisation par changement de scalaires est
+\[
+ \mathcal Q_{\tau,A}=A[u]/(u^2+\tau).
+\]
+La classe de \(u\), notée \(J_\tau\), satisfait
+\(J_\tau^2=-\tau I\).
+\end{definicion}
+
+La division par le polynôme unitaire \(u^2+\tau\) fournit une expression
+unique \(aI+bJ_\tau\). Le produit est calculé en réduisant uniquement le
+terme quadratique :
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+ =(ac-\tau bd)I+(ad+bc)J_\tau.
+\label{trit:eq:producto-cuadratico}
+\end{equation}
+Cette multiplication représente le régime quadratique. L'arithmétique des
+couples équilibrés conserve, quant à elle, les entiers et leurs quotients
+au moyen de \eqref{trit:eq:suma} et de \eqref{trit:eq:producto}.
+
+\subsubsection{Réalisations à neuf éléments}
+
+Sur \(\mathbb F_3\), les trois algèbres ont neuf éléments et admettent
+la classification suivante :
+\[
+ \mathcal Q_{+1,\mathbb F_3}\cong\mathbb F_9,\qquad
+ \mathcal Q_{0,\mathbb F_3}=\mathbb F_3[\varepsilon]/(\varepsilon^2),
+ \qquad
+ \mathcal Q_{-1,\mathbb F_3}\cong\mathbb F_3\times\mathbb F_3.
+\]
+
+\begin{proposicion}[Distinction des trois types finis]
+\label{trit:prop:tres-tipos}
+La première algèbre est un corps ; la deuxième contient un nilpotent non
+nul ; la troisième possède deux idempotents orthogonaux non triviaux dont la
+somme est l'unité. Les trois sont deux à deux non isomorphes.
+\end{proposicion}
+\begin{proof}
+Le polynôme \(u^2+1\) prend les valeurs \(1,2,2\) dans \(0,1,2\) ;
+il est donc irréductible sur \(\mathbb F_3\). Son quotient est un
+corps de degré deux. Dans le deuxième cas, la classe \(\varepsilon\) est
+non nulle et satisfait \(\varepsilon^2=0\). Dans le troisième,
+\(u^2-1=(u-1)(u+1)\), avec des facteurs premiers entre eux. L'évaluation
+\(a+bu\mapsto(a+b,a-b)\) est un isomorphisme vers
+\(\mathbb F_3\times\mathbb F_3\). Les éléments
+\(2(1+u)\) et \(2(1-u)\) sont ses deux idempotents coordonnés.
+Ces propriétés algébriques distinguent les trois types.
+\end{proof}
+
+Dans le développement de l'incidence exceptionnelle, un opérateur ternaire
+concrètement construit satisfaisant \(A_W^2=-I\) induit l'action de
+\(\mathbb F_9\) sur son espace. Si cet espace est \(\mathbb F_3^6\),
+la dimension sur \(\mathbb F_9\) est trois : l'action est définie par
+\((a+b\iota)v=av+bA_Wv\). L'opérateur fixe la multiplication par
+l'unité quadratique. La construction de Paley correspondante fournit cet
+opérateur à sa place causale ; la présente classification établit le
+contenu de la relation qu'il devra satisfaire.
+
+\subsubsection{Conjugaison, norme algébrique et inverse}
+
+Dans la réalisation réelle, la conjugaison et la norme algébrique sont
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+
+\begin{proposicion}[Norme multiplicative et restitution inverse]
+\label{trit:prop:norma}
+Pour \(z,w\in\mathcal Q_{\tau,\mathbb R}\),
+\[
+ z\bar z=N_\tau(z)I,
+ \qquad N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+Un élément \(z\) est inversible exactement lorsque \(N_\tau(z)\ne0\) ;
+dans ce cas, \(z^{-1}=\bar z/N_\tau(z)\).
+\end{proposicion}
+\begin{proof}
+Le produit \eqref{trit:eq:producto-cuadratico} donne
+\((aI+bJ_\tau)(aI-bJ_\tau)=(a^2+\tau b^2)I\).
+La conjugaison est multiplicative et l'algèbre est commutative, donc
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). Si la norme est non nulle,
+la formule présente un inverse. Si \(zw=I\), la multiplicativité donne
+\(N_\tau(z)N_\tau(w)=1\), ce qui impose \(N_\tau(z)\ne0\).
+\end{proof}
+
+La représentation matricielle
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}
+\]
+est fidèle et a pour déterminant \(a^2+\tau b^2\). Pour \(\tau=+1\), la
+forme est définie positive. Pour \(\tau=0\), elle dépend uniquement de
+\(a\), tandis que \(J_0\) conserve une composante linéaire non nulle. Pour
+\(\tau=-1\), la forme a pour signature \((1,1)\) ; les directions
+\(I\pm J_{-1}\) sont des diviseurs de zéro.
+
+En particulier, le mot \emph{norme} désigne ici une forme quadratique
+multiplicative. Les normes positives d'espaces de Hilbert, utilisées
+dans d'autres réalisations de l'état, conservent leur propre définition.
+
+\subsubsection{Composition des rapports entre coordonnées}
+
+Une direction de composante scalaire non nulle est représentée par
+\(I+uJ_\tau\). La multiplication produit
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+ =(1-\tau uv)I+(u+v)J_\tau.
+\]
+Lorsque \(1-\tau uv\ne0\), le rapport entre les composantes du produit est
+\begin{equation}
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\label{trit:eq:razones}
+\end{equation}
+Le facteur scalaire \(1-\tau uv\) fait partie du produit complet.
+Si seul le rapport est conservé, ce facteur doit être enregistré lorsqu'il
+intervient dans une reconstruction ultérieure. Si le dénominateur s'annule,
+le produit est examiné dans ses deux composantes : il peut représenter une
+direction de composante scalaire nulle ou l'élément nul.
+
+La classification quadratique prépare ainsi une lecture précise des trois
+régimes. La sélection d'un régime conserve son indice, l'arithmétique
+conserve ses retenues et le transport conserve la séquence orientée.
+Le TPK compose ces données au moyen d'opérateurs explicites. Sur cette
+composition seront construits les générateurs concrets et la conservation
+des formes qui articule l'extension d'Euler.

@@ -1,0 +1,129 @@
+\section{Weight flow, information geometry and Legendre duality}
+\label{sec:convex-refinement}
+
+Interval deformation admits an exact variational
+description. Let \(d_j=K_j/Q>0\), \(\sum_jd_j=1\), and let \(u_j\) be the
+coordinates of the direction \eqref{eq:u-main}. For \(s\in\RR\),
+define
+\begin{equation}
+ Z(s)=\sum_{j=1}^{12}d_j e^{su_j},\qquad
+ \psi(s)=\log Z(s),\qquad
+ d_j(s)=\frac{d_j e^{su_j}}{Z(s)}.
+ \label{eq:convex-partition}
+\end{equation}
+All exponential arguments are dimensionless. The parameter
+\(s\) is the coordinate of this geometric deformation. Assigning
+a physical duration belongs to a declared temporal reader.
+
+\begin{theorem}[Strict convexity and dual coordinate]
+The function \(\psi\) is analytic and strictly convex on \(\RR\).
+If \(u_- =\min_j u_j\) and \(u_+=\max_j u_j\), the map
+\(v=\psi'(s)\) is a diffeomorphism from \(\RR\) onto \((u_-,u_+)\).
+For each \(v\) in that interval there is a unique coordinate \(s(v)\), and
+\[
+ \psi^*(v)=s(v)v-\psi(s(v)),\qquad
+ (\psi^*)'(v)=s(v),\qquad
+ (\psi^*)''(v)=\frac1{\psi''(s(v))}>0.
+\]
+\end{theorem}
+\begin{proof}
+The finite sums allow termwise differentiation. This gives
+\begin{align}
+ \psi'(s)&=\sum_jd_j(s)u_j=:\overline u(s),\notag\\
+ \psi''(s)&=\sum_jd_j(s)(u_j-\overline u(s))^2.
+ \label{eq:variance}
+\end{align}
+The weights are strictly positive and the \(u_j\) are not all equal;
+the variance is therefore strictly positive. As \(s\) tends to
+\(+\infty\), dividing numerator and denominator of \(\psi'\) by
+\(e^{su_+}\) shows that only indices with \(u_j=u_+\) survive.
+Thus \(\psi'(s)\to u_+\). The argument with \(u_-\) gives the opposite
+limit. Monotonicity and the inverse function theorem provide
+smooth bijectivity. The function \(sv-\psi(s)\) has its unique maximum
+at \(s(v)\); differentiating the maximum value proves the two dual
+identities.
+\end{proof}
+
+The evolution of each interval is
+\begin{equation}
+ \dot d_j(s)=d_j(s)\bigl(u_j-\overline u(s)\bigr).
+ \label{eq:replicator}
+\end{equation}
+The derivatives sum to zero. Total length therefore remains
+one while the internal lengths are redistributed. This conservation
+of global scale allows the change in cross-ratios to be attributed to a
+deformation of positions rather than a common dilation.
+
+On the open simplex of weights, the metric
+\(g_d(\xi,\zeta)=\sum_j\xi_j\zeta_j/d_j\), on tangent vectors
+of sum zero, is positive. The linear function
+\(F(d)=\sum_jd_ju_j\) has, with respect to this metric, exactly the
+field in \eqref{eq:replicator} as its gradient, since
+\[
+ g_d\bigl(d_j(u_j-\overline u),\xi\bigr)
+ =\sum_j(u_j-\overline u)\xi_j=\sum_ju_j\xi_j=dF(\xi).
+\]
+Consequently \(dF/ds=\psi''(s)>0\) along the flow. The
+ascending character corresponds to this specific function and metric.
+
+\begin{theorem}[Variational invariance under inherited subdivision]
+For each interval \(j\), let \(r_{j,c}>0\),
+\(\sum_c r_{j,c}=1\), be the relative weights of a fixed subdivision.
+Assign to the subintervals
+\[
+ d_{j,c}=r_{j,c}d_j,\qquad u_{j,c}=u_j.
+\]
+The partition function, its logarithm, all its derivatives and the Legendre
+transform agree exactly with those of the predecessor partition.
+Furthermore, the flow commutes with summation over subintervals:
+\[
+ \sum_c d_{j,c}(s)=d_j(s),\qquad
+ d_{j,c}(s)=r_{j,c}d_j(s).
+\]
+\end{theorem}
+\begin{proof}
+Grouping the finite sum gives
+\[
+ Z_{\rm ref}(s)=\sum_{j,c}r_{j,c}d_j e^{su_j}
+ =\sum_j d_j e^{su_j}=Z(s).
+\]
+All conclusions follow from this identity and from dividing each
+weight by the same \(Z(s)\). The same argument holds after any
+finite number of subdivisions. For a countable subdivision, the sum of
+positive terms converges to the same value when grouped by predecessor intervals.
+\end{proof}
+
+The inherited-direction hypothesis has verifiable content. If an
+interval with direction \(a\) is divided into two halves with directions
+\(a+b\) and \(a-b\), its contribution changes from
+\(d e^{sa}\) to \(d e^{sa}\cosh(sb)\). For \(b\ne0\), equality
+of partition functions fails even though the total weight at \(s=0\) is
+the same. Geometric and variational conservation thus requires preserving
+the relevant directional information as well. The proved identity
+applies to inherited subdivision; its transport to a TPK update
+that changes those directions is determined by composing the reader of that
+update.
+
+There is a regular Hamiltonian formulation of the dual coordinate. In the
+cotangent plane with coordinates \((q,p)\), take
+\(H(q,p)=\psi(p)\). The equations are
+\(\dot q=\psi'(p)\), \(\dot p=0\). For velocities
+\(\dot q\in(u_-,u_+)\), the Legendre transform gives
+\[
+ L(q,\dot q)=\psi^*(\dot q),\qquad
+ \frac{\partial^2L}{\partial\dot q^2}>0.
+\]
+This system variationally realizes the potential of the interval flow.
+Its equation \(\dot p=0\) shows that Hamiltonian time differs
+from the parameter \(s\) traversing the collection \eqref{eq:convex-partition}.
+Evaluation of \(H\) and \(L\) is preserved under the subdivision of the
+theorem, because \(\psi\) and \(\psi^*\) remain identical.
+
+In turn, any flow \(\dot d=F(d)\) admits, in a local chart
+of the simplex, a cotangent lift with
+\(\mathscr H(d,p)=p\cdot F(d)\). This second construction reproduces
+the flow \eqref{eq:replicator} itself on its base, but its Hessian with respect
+to \(p\) is zero. The two realizations answer different questions:
+one produces a regular convex duality and the other transports dynamics
+on a given base. This distinction preserves the meaning of Hamiltonian and
+Lagrangian when comparing this geometry with the physical readers of the corpus.

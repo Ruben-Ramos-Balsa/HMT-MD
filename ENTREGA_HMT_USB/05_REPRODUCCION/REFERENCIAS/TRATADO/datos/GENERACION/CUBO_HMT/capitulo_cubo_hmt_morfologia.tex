@@ -1,0 +1,655 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.15cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable,enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.62em}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{lema}[teorema]{Lema}
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definición}
+\theoremstyle{remark}
+\newtheorem{observacion}[teorema]{Observación}
+\newtheorem{conjetura}[teorema]{Conjetura}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\APP}{\operatorname{APP}}
+\newcommand{\dr}{\operatorname{dr}_9}
+\newcommand{\HMT}{\mathrm{HMT}}
+\newcommand{\WH}{W_{12}}
+\newcommand{\WO}{W_{24}}
+\newcommand{\Leech}{\Lambda_{\mathrm{Leech}}}
+\newcommand{\Vnat}{V^{\natural}}
+\newcommand{\Monster}{\mathbb M}
+\newcommand{\TRIT}{\{-1,0,+1\}}
+\newcommand{\Rread}{\mathcal R_{1000}}
+
+\title{\bfseries CUBO--HMT: la célula cúbico--Hensel--Witt\\
+\large APP como carta facial, corona 271, cierre Witt y morfología modular triádica}
+\author{Capítulo técnico-narrativo de trabajo}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Se propone una formalización morfológica del núcleo de la Holografía Modular Triádica. La fibra trítica fundamental \(U_6=\F_3^6\) se interpreta, mediante un codificador Hensel, como una célula cúbica discreta de lado 9 y volumen \(9^3=729\). La APP \(9\times9\) deja de ser una tabla plana y pasa a ser una carta facial o proyección bidimensional de dicha célula. La corona \(271=10^3-9^3\) se interpreta como capa de crecimiento de la caja archimedeana de lado 10, y también como \(271=5\cdot54+1\), cinco barridos del defecto APP más un cierre. La duplicación \(U_6\to U_{12}\), la dualidad de Witt, el código ternario de Golay, \(W_{12}\), \(W_{24}\), Leech y Moonshine se organizan como proyecciones de un macro-objeto discreto. La tesis del capítulo es que HMT no es sólo una aritmética de constantes: es una morfología discreta del continuo, una célula cúbico--Hensel--Witt que admite lecturas reales, modulares y físicas.
+\end{abstract}
+
+\tableofcontents
+
+\section{Tesis del capítulo}
+
+La APP fue durante mucho tiempo la primera imagen: una matriz \(9\times9\), una cuadrícula donde suma y producto se cruzan por raíz digital. Pero la lectura que ahora emerge es más alta: APP no es toda la célula. APP es una carta, una cara, una proyección bidimensional de una célula más profunda.
+
+La célula es:
+\[
+U_6=\F_3^6.
+\]
+
+Su tamaño es:
+\[
+|U_6|=3^6=729.
+\]
+
+Y como:
+\[
+3^6=(3^2)^3=9^3,
+\]
+se puede leer como una célula cúbica de lado 9. La APP \(9\times9\) es entonces una carta facial de ese cubo. La HMT nace cuando dejamos de confundir la cara con el volumen.
+
+La tesis central de este capítulo es:
+\[
+\boxed{
+U_6=\F_3^6\text{ es la fibra trítica fundamental; mediante un código Hensel se lee como una célula cúbica }9^3.
+}
+\]
+
+Y:
+\[
+\boxed{
+\APP\;9\times9\text{ es una carta de borde de la célula cúbica }U_6.
+}
+\]
+
+Esta idea no sustituye los desarrollos anteriores sobre \(\alpha\), Witt, Golay o Moonshine; los ordena. Permite ver una morfología:
+\[
+\boxed{
+\text{cara APP}\to \text{cubo }U_6\to \text{borde }U_{12}\to W_{12}\to W_{24}\to \text{Moonshine}\to \text{lectura real}.
+}
+\]
+
+\section{La distinción crucial: \(\F_3^2\) no es \(\Z/9\Z\)}
+
+La igualdad de tamaños
+\[
+|\F_3^2|=9=|\Z/9\Z|
+\]
+puede inducir a una identificación demasiado rápida. Como conjuntos finitos se pueden poner en biyección, pero como estructuras algebraicas no son lo mismo.
+
+\(\F_3^2\) es un espacio vectorial sobre \(\F_3\). Todos sus elementos no nulos tienen orden 3 bajo la suma. En cambio, \(\Z/9\Z\) tiene elementos de orden 9 y distingue unidades, no-unidades y el cero módulo 9. Esa diferencia es exactamente la que APP explota.
+
+En \(\Z/9\Z\) hay unidades:
+\[
+\{1,2,4,5,7,8\},
+\]
+no-unidades:
+\[
+\{3,6\},
+\]
+y el cero representado por 9. Esta estratificación reversible/singular no existe del mismo modo en \(\F_3^2\). Por tanto, la lectura cúbica no debe escribirse como una identidad algebraica ingenua, sino como una transducción.
+
+\begin{definicion}[Codificador Hensel elemental]
+Definimos
+\[
+\beta:\F_3^2\longrightarrow \Z/9\Z,
+\qquad
+\beta(a,b)=a+3b\pmod9.
+\]
+Agrupando los seis trits en tres pares, obtenemos
+\[
+\beta^3:\F_3^6\longrightarrow(\Z/9\Z)^3.
+\]
+\end{definicion}
+
+Este mapa es el puente que permite leer una fibra trítica de seis coordenadas como un cubo de tres coordenadas de nueve estados. No es una igualdad inocente; es una operación Hensel de compactación.
+
+\begin{observacion}[Por qué esto importa]
+El paso \(\F_3^2\to\Z/9\Z\) es el lugar donde aparece el carry, el pliegue \(3\to9\), la distinción entre trit y raíz digital, y la posibilidad de que una coordenada se vuelva operador. Es una puerta técnica, no una convención de notación.
+\end{observacion}
+
+\section{La célula cúbica \(9^3=729\)}
+
+Mediante \(\beta^3\), un elemento de \(U_6\) puede agruparse en tres coordenadas:
+\[
+(t_1,t_2),(t_3,t_4),(t_5,t_6)
+\longmapsto
+(X,Y,Z)\in(\Z/9\Z)^3.
+\]
+
+Así:
+\[
+\boxed{
+U_6=\F_3^6\xrightarrow{\beta^3}(\Z/9\Z)^3.
+}
+\]
+
+La lectura geométrica es:
+\[
+\boxed{
+729=3^6=9^3.
+}
+\]
+
+Pero las dos expresiones no dicen lo mismo. \(3^6\) subraya la fibra trítica; \(9^3\) subraya la célula cúbica. La HMT vive en la coincidencia controlada de ambas lecturas.
+
+\begin{proposicion}[Doble lectura de \(729\)]
+El número \(729\) tiene al menos dos lecturas estructurales en HMT:
+\[
+729=|\F_3^6|,
+\]
+como número de palabras de seis trits, y
+\[
+729=9^3,
+\]
+como volumen de una célula cúbica de lado 9.
+\end{proposicion}
+
+\begin{observacion}
+Esta doble lectura explica por qué \(729\) aparece tanto como tamaño del código ternario, como cuerpo triádico de la caja \(1000\), como sector fijo de la conjugación \(C_M=-\operatorname{rev}\), y como escala interna de lectura. No es un número decorativo; es el cuerpo de la célula.
+\end{observacion}
+
+\section{APP como carta facial}
+
+La APP \(9\times9\) se obtiene leyendo dos coordenadas del cubo:
+\[
+(X,Y)\in(\Z/9\Z)^2.
+\]
+
+Sobre esa carta se definen dos hojas:
+\[
+\APP_+(X,Y)=\dr(X+Y-1),
+\]
+\[
+\APP_\times(X,Y)=\dr(XY).
+\]
+
+La palabra ``cara'' puede usarse de forma geométrica, pero con cuidado. Una cara estricta del cubo fijaría, por ejemplo, \(Z=0\) o \(Z=8\). La APP, tal como se usa en HMT, es más general: es una carta bidimensional de lectura, una proyección que toma dos coordenadas y olvida o fija la tercera según el protocolo.
+
+\[
+\boxed{
+\APP\;9\times9=\text{carta bidimensional de una célula }9^3.
+}
+\]
+
+Esto explica por qué la APP parecía contener demasiada información para ser una tabla plana. La tabla era una sombra de un objeto cúbico.
+
+\section{Las seis caras y los seis trits}
+
+Un cubo tiene seis caras orientadas:
+\[
+X^-,X^+,Y^-,Y^+,Z^-,Z^+.
+\]
+
+La fibra \(U_6\) tiene seis trits:
+\[
+t_1,t_2,t_3,t_4,t_5,t_6.
+\]
+
+No conviene identificar ambas listas de manera directa. La forma rigurosa es:
+\[
+(t_1,t_2),(t_3,t_4),(t_5,t_6)
+\longrightarrow
+X,Y,Z
+\longrightarrow
+X^\pm,Y^\pm,Z^\pm.
+\]
+
+Entonces el seis aparece en tres registros distintos:
+\[
+6=\text{seis trits},
+\]
+\[
+6=\text{seis caras orientadas de la célula cúbica},
+\]
+\[
+6=\text{tamaño de una hexada de }W_{12}.
+\]
+
+\begin{observacion}[Convergencia del seis]
+El seis no es accidental. Es simultáneamente longitud de la fibra trítica, número de orientaciones faciales del cubo, y tamaño de la clausura hexádica de Witt. Por eso \(U_6\) puede llamarse prehexada cúbica.
+\end{observacion}
+
+Una fórmula compacta sería:
+\[
+\boxed{
+U_6\text{ es simultáneamente fibra trítica, célula cúbica y prehexada.}
+}
+\]
+
+\section{La APP como simetría generadora}
+
+La APP no es una tabla. Es el primer plano donde una coordenada se vuelve operación. En una geometría cartesiana ordinaria, \(X\) e \(Y\) son posiciones pasivas. En APP, los valores de los ejes son también operadores:
+\[
+(i,j)\mapsto i+j-1,
+\]
+\[
+(i,j)\mapsto ij.
+\]
+
+La reversión ordinal
+\[
+\rho(i)=10-i
+\]
+produce la identidad:
+\[
+\boxed{
+\APP_\times(\rho(i),\rho(j))-\APP_\times(i,j)\equiv-\APP_+(i,j)\pmod9.
+}
+\]
+
+Con la suma cruda \(\Sigma(i,j)=\dr(i+j)\), la forma equivalente es:
+\[
+\APP_\times(\rho(i),\rho(j))-\APP_\times(i,j)
+\equiv 1-\Sigma(i,j)\pmod9.
+\]
+
+Esta identidad es fundacional:
+\[
+\boxed{
+\text{al invertir la hoja multiplicativa, aparece como defecto la hoja aditiva.}
+}
+\]
+
+La suma y el producto son dos hojas de un mismo plano, no dos tablas yuxtapuestas. La APP es la primera simetría generadora del sistema porque produce un defecto medible al cambiar de lectura.
+
+El defecto total es:
+\[
+S_\times(9)-S_+(9)=459-405=54.
+\]
+
+Y ese \(54\) reaparece como energía trítica de reversión, como primer coeficiente positivo de \(t(q)\), y como semilla de \(196884\).
+
+\section{La corona cúbica: \(271=10^3-9^3\)}
+
+La lectura \(1000=729+271\) se vuelve geométrica al escribir:
+\[
+1000=10^3,
+\]
+\[
+729=9^3.
+\]
+
+Entonces:
+\[
+\boxed{
+271=1000-729=10^3-9^3.
+}
+\]
+
+Por diferencia de cubos:
+\[
+10^3-9^3=(10-9)(10^2+10\cdot9+9^2)=100+90+81=271.
+\]
+
+Como crecimiento de un cubo de lado 9 a un cubo de lado 10:
+\[
+10^3-9^3=3\cdot9^2+3\cdot9+1.
+\]
+
+Por tanto:
+\[
+\boxed{
+271=3\cdot9^2+3\cdot9+1.
+}
+\]
+
+Lectura:
+\[
+3\cdot9^2=\text{nuevas caras principales},
+\]
+\[
+3\cdot9=\text{nuevas aristas},
+\]
+\[
+1=\text{esquina terminal o vértice de cierre}.
+\]
+
+Así:
+\[
+\boxed{
+271=\text{capa cúbica de crecimiento }9\to10.
+}
+\]
+
+Y:
+\[
+270=271-1
+\]
+es la corona sin esquina de cierre:
+\[
+\boxed{
+270=\text{capa proyectiva sin vértice final}.
+}
+\]
+
+La lectura narrativa queda:
+\[
+\boxed{
+729=\text{cuerpo};\quad 271=\text{piel};\quad 1000=\text{unidad cúbica completa}.
+}
+\]
+
+\section{La corona pentádica: \(271=5\cdot54+1\)}
+
+La misma corona admite una segunda lectura:
+\[
+271=5\cdot54+1.
+\]
+
+El \(54\) es el defecto APP. Entonces \(271\) puede verse como cinco barridos del defecto más un cierre.
+
+\[
+\boxed{
+271=\text{cinco barridos de defecto }54 + \text{cierre}.
+}
+\]
+
+Esta lectura conecta con el papel del 5 en Steiner:
+\[
+5\to6,
+\]
+con la estrella de \(\pi\), con el módulo pentádico de \(\varphi\), y con Rogers--Ramanujan/RR--5. No demuestra por sí sola la estrella, pero muestra que la corona cúbica posee también una estructura pentádica exacta.
+
+\begin{observacion}[Dos lecturas compatibles de la corona]
+La corona \(271\) tiene una lectura cúbica:
+\[
+271=3\cdot9^2+3\cdot9+1,
+\]
+y una lectura pentádica:
+\[
+271=5\cdot54+1.
+\]
+La primera describe crecimiento espacial de la célula. La segunda describe barridos de defecto. En HMT ambas son compatibles y funcionales.
+\end{observacion}
+
+\section{Euler holográfico extendido, \(\varphi\) y RR--5}
+
+La columna Euler--HMT ya conectaba:
+\[
+-\frac1{12}\to q^{-1/12}\to t(q)\to54\to196884.
+\]
+
+La morfología cúbica añade otra rama:
+\[
+54\to271=5\cdot54+1\to \varphi/RR5.
+\]
+
+La razón es que el 5 no aparece como adorno. Es el número de completado en Steiner, el módulo pentádico de la autoescala áurea, y el nivel clásico de Rogers--Ramanujan. Así, \(\varphi\) puede leerse como estabilizador pentádico de la corona.
+
+\[
+\boxed{
+\varphi=\text{autoescala del componente pentádico de la corona}.}
+\]
+
+Y:
+\[
+\boxed{
+RR--5=\text{lectura modular del componente pentádico}.}
+\]
+
+Esta rama no sustituye la rama Moonshine. La complementa. Una vía va hacia el Monstruo por \(54\to196884\); otra abre el componente pentádico por \(54\to271\to\varphi\).
+
+\section{Duplicación: \(U_6\to U_{12}\)}
+
+El paso siguiente es duplicar la fibra:
+\[
+U_6\longrightarrow U_{12}.
+\]
+
+La forma pobre sería \(U_{12}=U_6\Vert U_6\). La forma fuerte es:
+\[
+q\longmapsto(q\mid qA_W),
+\]
+donde \(A_W\) es una dualidad Witt/Golay.
+
+Así:
+\[
+C_W=\{(q,qA_W):q\in\F_3^6\}
+\]
+produce un código ternario de longitud 12. Cuando satisface las propiedades correctas, es el Golay ternario extendido:
+\[
+[12,6,6]_3.
+\]
+
+Su enumerador es:
+\[
+1+264y^6+440y^9+24y^{12}.
+\]
+
+Los soportes de peso 6 producen las 132 hexadas del diseño:
+\[
+W_{12}=S(5,6,12).
+\]
+
+La cadena morfológica queda:
+\[
+\boxed{
+U_6\text{ cúbico}\to U_{12}\text{ dual}\to C_W\to W_{12}.
+}
+\]
+
+\section{Hexadas, octadas y lift ambiental}
+
+Una hexada es un bloque de seis puntos en \(W_{12}=S(5,6,12)\). No es un hexágono. Su propiedad esencial es:
+\[
+\boxed{
+\text{todo conjunto de 5 puntos determina una única hexada de 6.}
+}
+\]
+
+Una octada es un bloque de ocho puntos en \(W_{24}=S(5,8,24)\):
+\[
+\boxed{
+\text{todo conjunto de 5 puntos determina una única octada de 8.}
+}
+\]
+
+La lectura HMT es:
+\[
+\boxed{
+\text{hexada}=\text{cierre visible};\qquad \text{octada}=\text{lift ambiental}.
+}
+\]
+
+Así:
+\[
+W_{12}\to W_{24}
+\]
+es el paso de la clausura visible al ambiente octádico.
+
+\section{La cadena modular completa}
+
+La salida modular se escribe:
+\[
+\boxed{
+U_6\to U_{12}\to C_W\to W_{12}\to W_{24}\to\Leech\to\Vnat\to\Monster.
+}
+\]
+
+APP no es la simetría del Monstruo. APP es el motor local. La simetría monstruosa aparece al completar modularmente la geometría de borde.
+
+\[
+\boxed{
+\Monster=\text{simetría de la completación modular del borde}.}
+\]
+
+Esto permite formular la doble salida central:
+\[
+\boxed{
+\text{lectura archimedeana}\to\alpha;
+\qquad
+\text{lectura modular}\to\Monster.
+}
+\]
+
+\section{El macro-objeto HMT}
+
+Con todo lo anterior, proponemos el macro-objeto:
+\[
+\boxed{
+\mathcal X_{\rm HMT}=(U_6,\beta,\partial_{\rm APP},A_W,C_W,W_{12},W_{24},\Rread).
+}
+\]
+
+Sus componentes son:
+\begin{itemize}[leftmargin=2em]
+\item \(U_6=\F_3^6\): fibra trítica fundamental.
+\item \(\beta:\F_3^2\to\Z/9\Z\): codificador Hensel.
+\item \(\beta^3:U_6\to(\Z/9)^3\): lectura cúbica.
+\item \(\partial_{\rm APP}\): atlas de cartas APP.
+\item \(A_W\): dualidad Witt/Golay.
+\item \(C_W=\{(q,qA_W)\}\): código ternario.
+\item \(W_{12}\): geometría de hexadas.
+\item \(W_{24}\): envolvente octádica.
+\item \(\Rread\): lectura archimedeana por caja \(1000=729+271\).
+\end{itemize}
+
+Las tres proyecciones principales son:
+\[
+\pi_{\mathbb R}(\mathcal X_{\rm HMT})=\text{constantes reales},
+\]
+\[
+\pi_{\rm mod}(\mathcal X_{\rm HMT})=W_{12}\to W_{24}\to\Leech\to\Vnat\to\Monster,
+\]
+\[
+\pi_{\rm phys}(\mathcal X_{\rm HMT})=\text{partículas, masas, mezclas, constitutivas}.
+\]
+
+La frase compacta:
+\[
+\boxed{
+\text{un mismo objeto HMT se lee como número, simetría o partícula según la proyección.}
+}
+\]
+
+\section{¿Es esto un Calabi--Yau, una Kaluza--Klein o algo parecido?}
+
+La comparación con Calabi--Yau o Kaluza--Klein es útil como analogía, pero no debe hacerse literalmente.
+
+Un espacio de Kaluza--Klein compactifica dimensiones adicionales continuas para que campos gauge aparezcan desde la geometría. Un Calabi--Yau es una variedad compleja con propiedades especiales de curvatura y holonomía. HMT, en cambio, no parte de una variedad suave. Parte de una célula finita con atlas de lecturas, frontera combinatoria, códigos y lifts modulares.
+
+Por tanto, la formulación prudente es:
+\[
+\boxed{
+\mathcal X_{\rm HMT}\text{ no es un Calabi--Yau ordinario; es una compactificación finita de lecturas.}
+}
+\]
+
+O:
+\[
+\boxed{
+\text{HMT propone una compactificación aritmético-combinatoria, no una variedad suave primaria.}
+}
+\]
+
+La analogía es real en el sentido funcional: ambas teorías intentan explicar fenómenos físicos como proyecciones de una geometría interna. La diferencia es que HMT sustituye la geometría continua compacta por una morfología finita:
+\[
+\text{cubo }9^3+\text{APP}+\text{Witt}+\text{Golay}+\text{Moonshine}.
+\]
+
+Si hubiera que buscar un macroobjeto conocido, yo miraría más cerca de:
+\begin{itemize}[leftmargin=2em]
+\item complejos cúbicos finitos;
+\item geometrías de incidencia;
+\item esquemas o lifts tipo Hensel;
+\item códigos autoduales;
+\item diseños de Witt;
+\item operads/funtores de proyecciones;
+\item geometrías finitas con atlas de cartas;
+\item compactificaciones discretas de bordes.
+\end{itemize}
+
+La palabra técnica provisional podría ser:
+\[
+\boxed{
+\text{célula cúbico--Hensel--Witt}.
+}
+\]
+
+\section{Campos matemáticos atravesados}
+
+\begin{longtable}{@{}p{3.2cm}p{4.1cm}p{6.4cm}@{}}
+\toprule
+Campo & Objeto HMT & Función \\
+\midrule
+Álgebra finita & \(\F_3^6\) & Fibra trítica fundamental \\
+Hensel / aritmética modular & \(\beta:\F_3^2\to\Z/9\Z\) & Conversión de pares de trits en coordenadas de nueve estados \\
+Geometría discreta & \(9^3=729\) & Célula cúbica de estados \\
+Semigrupos / raíz digital & APP & Carta suma/producto de la célula \\
+Aritmética de defectos & \(54\) & Energía suma/producto \\
+Combinatoria cúbica & \(271=10^3-9^3\) & Corona archimedeana de crecimiento \\
+Códigos lineales & \(C_W\subset\F_3^{12}\) & Duplicación visible/dual \\
+Golay ternario & \([12,6,6]_3\) & Código excepcional \\
+Diseños finitos & \(W_{12}=S(5,6,12)\) & Hexadas de cierre visible \\
+Mathieu/Witt grande & \(W_{24}=S(5,8,24)\) & Octadas de ambiente \\
+Retículos & \(\Leech\) & Completación sin raíces \\
+VOA/Moonshine & \(\Vnat,\Monster\) & Simetría modular extrema \\
+Lectura real & \(\Rread\) & Constantes archimedeanas \\
+Física HMT & bandas/secciones & Partículas, masas, mezclas, constitutivas \\
+\bottomrule
+\end{longtable}
+
+\section{Relación con la nueva definición de número}
+
+En esta morfología, un número estructural no es sólo un valor real. Es una región con varias proyecciones:
+\[
+\text{valor real},
+\quad
+\text{soporte finito},
+\quad
+\text{posición de incidencia},
+\quad
+\text{función dinámica},
+\quad
+\text{simetría},
+\quad
+\text{lift modular}.
+\]
+
+Así, \(\alpha\) no es sólo un decimal. Es una lectura real de un corte de Witt. \(\pi\) no es sólo una razón circular; es un plano de clausura. \(e\) no es sólo propagación exponencial; es un modo de transmisión. \(\varphi\) no es sólo una raíz cuadrática; es el estabilizador pentádico de la corona.
+
+\[
+\boxed{
+\text{en HMT, el valor es una sombra; la función es el objeto.}
+}
+\]
+
+\section{Conclusión}
+
+La intuición del cubo no es una imagen secundaria. Es una clave morfológica. APP fue la primera cara visible; la célula completa era \(U_6\). La caja \(1000\) no es sólo decimal; es el crecimiento \(9^3\to10^3\). La corona \(271\) no es resto; es piel cúbica y barrido pentádico. El paso \(U_6\to U_{12}\to W_{12}\) no es concatenación; es clausura dual Witt. El lift \(W_{12}\to W_{24}\to\Leech\to\Monster\) no es adorno; es la completación modular.
+
+La frase final del capítulo podría ser:
+\[
+\boxed{
+\text{HMT no es una aritmética de constantes; es una morfología discreta del continuo.}
+}
+\]
+
+O, en forma más compacta:
+\[
+\boxed{
+\text{cara}\to\text{cubo}\to\text{borde}\to\text{Witt}\to\text{Moonshine}\to\text{valor real}.
+}
+\]
+
+\end{document}

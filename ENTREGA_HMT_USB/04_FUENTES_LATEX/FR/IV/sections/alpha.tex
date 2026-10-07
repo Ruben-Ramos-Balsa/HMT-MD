@@ -1,0 +1,483 @@
+\section{Dérivation de la constante de structure fine}
+\label{sec:alpha}
+
+La constante de structure fine reçoit dans ce développement une détermination arithmétique qui réunit les trois coordonnées régionales et le registre intégral dodécaphasique. L'opération combine ses blocs avec orientation fixée et transporte les quotients de la normalisation positionnelle. Le paramètre résultant exprime la compatibilité de cette différence orientée avec la prolongation des cylindres. Sa valeur et les données d'incidence utilisées dans sa construction resteront liées pendant le développement exceptionnel.
+
+L’ordre interne est important. Les coordonnées \(\pi\),
+\(e\) et \(\varphi\), déjà construites dans la section~\ref{sec:generacion}, sont des coordonnées
+préalables du même état arithmétique avec mémoire de trajectoire, et peuvent légitimement agir comme
+entrées d’un lecteur ultérieur. Ce ne sont pas des constantes conventionnelles
+injectées pour sélectionner alpha. La génération corrélée des quatre coordonnées partage une origine et une
+compatibilité coinductive communes, sans que cela impose d’évaluer leurs quatre
+composantes en un seul pas.
+
+Les deux voies expriment des fonctions mathématiques différentes du même paramètre.
+La première réalise une clôture entière par division euclidienne en base
+\(1000\). La seconde étudie l’équilibre analytique des vacances au moyen
+de la résolvante \(E_{21/22}\) et de ses prolongements gradués. Une voie
+détermine des blocs et des quotients ; l’autre détermine une racine par une
+équation et un domaine d’unicité. Leur identification est formulée ensuite
+dans les cylindres communs à toute profondeur. L’exposé distingue
+ces trois résultats : construction positionnelle, détermination analytique
+et compatibilité des deux.
+
+\subsection{Première voie : détermination positionnelle par clôture entière}
+\subsubsection{Domaine et orientation de la clôture entière}
+\label{subsec:alpha-dominio}
+
+Soient \(P_j,E_j,\Phi_j\in\{0,\ldots,999\}\) les blocs canoniques des
+trois coordonnées régionales, et prolongeons le registre dodécaphasique par
+\[
+ K_j=K_{1+((j-1)\bmod12)}.
+\]
+L'orientation du canal est \((1,1,-1)\). La contribution du registre dodécaphasique se soustrait selon la clôture dodécaphasique déjà typée. Pour \(B=1000\), l'opération locale distingue le bilan signé
+\[
+ Z_j:=P_j+E_j-\Phi_j-K_j
+\]
+de la somme qui incorpore le quotient entrant. La normalisation est
+\begin{equation}
+ s_j=Z_j+c_{j+1},\qquad
+ A_j=s_j-B\left\lfloor\frac{s_j}{B}\right\rfloor,
+ \qquad c_j=\left\lfloor\frac{s_j}{B}\right\rfloor.
+ \label{eq:alpha-recurrencia}
+\end{equation}
+Ainsi, \(A_j\in\{0,\ldots,B-1\}\), même lorsque \(s_j\) est
+négatif. La retenue qui entre depuis la droite appartient au domaine de
+l'opération ; elle ne peut pas être omise car le tableau s'imprime de gauche
+à droite.
+
+\begin{definition}[Clôture de profondeur finie]
+\label{def:alpha-finita}
+Pour une profondeur \(N\) et une frontière entière \(t\), l'application
+\(\mathcal C_N\) reçoit
+\((P_{1:N},E_{1:N},\Phi_{1:N},K_{1:N},c_{N+1}=t)\) et applique
+\eqref{eq:alpha-recurrencia} dans l'ordre \(N,N-1,\ldots,1\). Sa sortie
+est la paire de mots
+\[
+ (A_{1:N},c_{1:N+1}).
+\]
+\end{definition}
+
+La division euclidienne ne possède pas un choix de signe résiduel : le reste se
+fixe en \(\{0,\ldots,999\}\) et le quotient reste déterminé. Par
+exemple, \(-431=569-1000\) et \(-1200=800-2\cdot1000\). Les
+retenues négatives de la clôture ne sont pas des anomalies ; elles sont l'information
+entière nécessaire pour maintenir l'égalité orientée.
+
+\subsubsection{Fenêtre dodécaphasique et conditions de retenue}
+\label{subsec:alpha-ventana}
+
+Les douze premières triades obtenues sont
+\begin{align*}
+ P={}&(141,592,653,589,793,238,462,643,383,279,502,884),\\
+ E={}&(718,281,828,459,045,235,360,287,471,352,662,497),\\
+ \Phi={}&(618,033,988,749,894,848,204,586,834,365,638,117).
+\end{align*}
+Dans le canal de fermeture, les cinq régions qui déterminent la coordonnée \(P\) conservent leurs antécédents distincts. Partager cette lecture ne les identifie pas en tant que régions ou en tant qu'histoires.
+
+Avec frontière \(c_{13}=0\), la récurrence produit le tableau suivant.
+Chaque entrée est montrée, la retenue entrante, le total avant normalisation,
+le bloc obtenu et la retenue sortante. Le tableau est un calcul entier
+reproductible, non une liste de blocs sélectionnés par leur ressemblance avec
+un objectif.
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{r|rrrr|rr|rr}
+\hline
+\(j\)&\(P_j\)&\(E_j\)&\(\Phi_j\)&\(K_j\)&\(c_{j+1}\)&\(s_j\)&\(A_j\)&\(c_j\)\\
+\hline
+1&141&718&618&234&0&7&007&0\\
+2&592&281&033&543&0&297&297&0\\
+3&653&828&988&140&\(-1\)&352&352&0\\
+4&589&459&749&729&\(-1\)&\(-431\)&569&\(-1\)\\
+5&793&045&894&659&\(-2\)&\(-717\)&283&\(-1\)\\
+6&238&235&848&824&\(-1\)&\(-1200\)&800&\(-2\)\\
+7&462&360&204&621&0&\(-3\)&997&\(-1\)\\
+8&643&287&586&058&\(-1\)&285&285&0\\
+9&383&471&834&914&\(-1\)&\(-895\)&105&\(-1\)\\
+10&279&352&365&794&0&\(-528\)&472&\(-1\)\\
+11&502&662&638&146&0&380&380&0\\
+12&884&497&117&601&0&663&663&0\\
+\hline
+\end{tabular}
+\caption{Clôture initiale avec frontière droite nulle. La dépendance se propage de la dernière ligne à la première.}
+\label{tab:alpha-ventana}
+\end{table}
+
+Le mot des retenues est
+\[
+ (c_1,\ldots,c_{13})=(0,0,0,-1,-1,-2,-1,0,-1,-1,0,0,0),
+\]
+et la lecture de la fenêtre est le rationnel
+\begin{equation}
+ \alpha_{12}^{(0)}
+ =\frac{7297352569283800997285105472380663}{10^{36}}
+ =0.007297352569283800997285105472380663.
+ \label{eq:alpha-ventana-cero}
+\end{equation}
+L'exposant rappelle la frontière choisie. Cette fenêtre est exacte dans son
+domaine fini ; on ne l'identifie pas d'emblée à la troncature de la
+section infinie. La différence entre les deux lectures deviendra visible lors du
+transport de la retenue de la queue lointaine.
+
+\subsubsection{Télescopage et réversibilité dans une fibre de frontière}
+\label{subsec:alpha-telescopia}
+
+La forme locale de l'égalité est
+\begin{equation}
+ P_j+E_j-\Phi_j-K_j-A_j=Bc_j-c_{j+1}.
+ \label{eq:alpha-identidad-local}
+\end{equation}
+Le terme de retenue est un lien entre des positions contiguës. Si on le supprime coordonnée par coordonnée, on obtient une égalité fausse. Seule une évaluation qui conserve ses extrémités permet de le télescoper.
+
+\begin{proposition}[Identité entière de profondeur arbitraire]
+\label{prop:alpha-telescopia}
+Pour \(\iota_N(z)=\sum_{j=1}^{N}z_jB^{N-j}\), toute exécution de
+\(\mathcal C_N\) satisfait
+\begin{equation}
+ \iota_N(P)+\iota_N(E)-\iota_N(\Phi)-\iota_N(K)-\iota_N(A)
+ =B^Nc_1-c_{N+1}.
+ \label{eq:alpha-telescopia}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Multiplier \eqref{eq:alpha-identidad-local} par \(B^{N-j}\) et ajouter  
+produit du côté droit
+\[
+ \sum_{j=1}^{N}(Bc_j-c_{j+1})B^{N-j}=B^Nc_1-c_{N+1}.
+\]
+Chaque retenue intérieure apparaît deux fois avec un signe opposé ; seuls les deux extrêmes survivent.
+\end{proof}
+
+Pour le tableau ~\ref{tab:alpha-ventana}, les deux extrémités sont nulles. Si
+\(p_{12},e_{12},f_{12}\) sont les trois sommes fractionnaires tronquées,
+\[
+ \alpha_{12}^{(0)}=p_{12}+e_{12}-f_{12}-\kappa_{36}.
+\]
+La constante du registre dodécaphasique qui apparaît est \(\kappa_{36}\), non
+\(\kappa_{\mathrm{per}}\). Le domaine de cette identité contient
+des troncatures et une frontière finie ; sa forme n'autorise pas à effacer les deux
+conditions en passant à la section complète.
+
+L'inversion locale est aussi exacte :
+\[
+ K_j=P_j+E_j-\Phi_j+c_{j+1}-A_j-Bc_j.
+\]
+Étant donnés \(P,E,\Phi\), les blocs \(A\) et les retenues complètes,  
+on restaure le registre dodécaphasique. La concaténation restaure en outre
+\[
+ \iota_N(K)=\iota_N(P)+\iota_N(E)-\iota_N(\Phi)-\iota_N(A)
+             -B^Nc_1+c_{N+1}.
+\]
+Cette réversibilité est une propriété de la fibre avec données et frontières fixes. Elle ne doit pas devenir une nouvelle recette causale qui commence par alpha et fabrique ensuite le registre. La direction de construction reste encore registre signé, registre dodécaphasique, clôture et sortie.
+
+% BEGIN R27_MG05_CONTROLES
+\input{sections/recuperados/mg05_controles.tex}
+% END R27_MG05_CONTROLES
+
+\subsubsection{Prolongation et normalisation canonique de la section complète}
+\label{subsec:alpha-completa}
+
+La prolongation conserve le registre dodécaphasique périodique et reçoit les suites
+régionales complètes. Soient
+\[
+ p=\sum_{j\geq1}P_jB^{-j},\qquad
+ e_0=\sum_{j\geq1}E_jB^{-j},\qquad
+ f=\sum_{j\geq1}\Phi_jB^{-j}.
+\]
+Chaque série est une réalisation du caractère interne correspondant.  
+Les parties entières déjà obtenues sont 3, 2 et 1, de sorte que  
+\(p=\pi-3\), \(e_0=e-2\) et  
+\(f=\varphi-1\).
+
+\begin{proposition}[Existence et unicité de la normalisation complète]
+\label{prop:alpha-normalizacion}
+La série
+\begin{equation}
+ y=p+e_0-f-\kappa_{\mathrm{per}}
+   =\sum_{j\geq1}(P_j+E_j-\Phi_j-K_j)B^{-j}
+ \label{eq:alpha-serie}
+\end{equation}
+converge absolument. Dans le domaine des blocs obtenus,
+\(0<y<10^{-2}\). Il existe une unique expansion canonique \((A_j)\) de
+\(y\), sans queue finalement constante 999, et une unique suite entière
+bornée \((c_j)\) qui satisfait \eqref{eq:alpha-identidad-local} avec
+\(c_1=0\). Ces retenues appartiennent à l'ensemble invariant
+\(\mathcal C=\{-2,-1,0,1,2\}\).
+\end{proposition}
+
+\begin{proof}
+Les coefficients de la série sont bornés par \(2(B-1)\) en module,  
+de sorte qu'elle est dominée par une série géométrique. Si  
+\(Z_j=P_j+E_j-\Phi_j-K_j\) et  
+\(R_j(Z)=\sum_{r\geq0}Z_{j+r}B^{-r-1}\), chaque queue est la différence  
+de deux sommes de deux queues canoniques et appartient à \((-2,2)\).  
+Le premier coefficient est  
+\(Z_1=141+718-618-234=7\) ; par conséquent  
+\(y=(7+R_2(Z))/1000\in(0.005,0.009)\).
+
+Soit \((A_j)\) l'expansion canonique de \(y\). Définissons
+\[
+ c_j=R_j(Z)-R_j(A).
+\]
+En multipliant l'égalité des deux séries par \(B^{j-1}\) et en séparant
+ses premiers \(j-1\) termes on obtient
+\[
+ c_j=\sum_{r=1}^{j-1}(A_r-Z_r)B^{j-1-r}\in\mathbb Z,
+\]
+et \(c_1=0\). De plus, \(R_j(A)\in[0,1)\), donc
+\(-3<c_j<2\), ce qui inclut toutes les retenues dans \(\mathcal C\).
+Les identités de déplacement des queues donnent
+\(Bc_j=Z_j-A_j+c_{j+1}\), qui est la récurrence requise.
+
+Réciproquement, toute solution bornée à sortie canonique et
+\(c_1=0\) se télescope à la limite en la même série \(y\). Le développement
+canonique est unique et, une fois fixé, la formule des queues détermine
+toutes les retenues. Enfin, si l'on applique une exécution finie avec
+\(c_{j+1}\in\mathcal C\), on a \(-2000\leq s_j\leq2000\),
+de sorte que son quotient euclidien appartient de nouveau à \(\mathcal C\).
+\end{proof}
+
+La proposition explicite la normalisation du lecteur ultérieur : elle ne remplace pas la génération des trois suites par une série conventionnelle introduite comme donnée. Une fois ces suites produites par l'état coinductif, leur combinaison et la frontière de la normalisation sont déterminées sans consulter alpha.
+
+Le procédé fini de normalisation propage les cinq
+bords de \(\mathcal C\) et ne conserve que le préfixe commun à
+tous. Si deux profondeurs ont coalescé avant un bord,
+la récurrence déterministe de droite à gauche donne les mêmes blocs
+à sa gauche. C’est la compatibilité avec la troncature. On ne
+choisit pas un bord parce qu’il donne des chiffres favorables, et on ne déduit pas la
+compatibilité à toute profondeur de l’observation d’une longue exécution.
+
+La comparaison initiale montre pourquoi cette précaution importe. Dans
+la prolongation stabilisée on obtient \(c_{13}^{\infty}=-1\), tandis
+que la fenêtre isolée imposait \(c_{13}=0\). Ainsi,
+\[
+ 884+497-117-601-1=662
+\]
+dans le dernier bloc du premier tour. Les onze premières triades ne
+changent pas, mais la prolongation commence
+\[
+ (007,297,352,569,283,800,997,285,105,472,380,662,999,\ldots).
+\]
+Une apparition du bloc 999 ne viole pas la convention canonique : ce
+qui est exclu est une queue qui soit finalement constante 999. La fenêtre
+à frontière nulle se termine en 663 ; le troncage de la section complète
+se termine en 662. Les deux affirmations décrivent des opérations différentes
+et exactes. Elles ne doivent pas être fusionnées en une seule notation de projection.
+
+\subsubsection{Définition opérationnelle et équation additive complète}
+\label{subsec:alpha-definicion}
+
+\begin{definition}[Coordonnée alpha de la clôture]
+\label{def:alpha-operativa}
+La voie entière détermine la coordonnée
+\begin{equation}
+ \alpha_A=\sum_{j\geq1}A_jB^{-j}
+ =p+e_0-f-\kappa_{\mathrm{per}},
+ \label{eq:alpha-via-a}
+\end{equation}
+où \((A_j,c_j)\) est la normalisation canonique compatible de
+\eqref{eq:alpha-recurrencia}. Dans la réalisation scalaire des
+coordonnées HMT,
+\begin{equation}
+ \boxed{\alpha_A=
+ \pi+e-\varphi
+ -4-\kappa_{\mathrm{per}}.}
+ \label{eq:alpha-identidad-completa}
+\end{equation}
+\end{definition}
+
+L'entier quatre n'est pas calibré : il est
+\(3+2-1\), combinaison des parties entières des trois coordonnées.
+La base mille provient de la coordinatisation cubique et la période douze du registre dodécaphasique. Les
+signes sont ceux du canal orienté et de la clôture, et la frontière distante est
+celle qu'impose la section compatible. Telles sont les origines effectives des
+coefficients de l'équation.
+
+À ce niveau, on peut décrire alpha comme la coordonnée scalaire du défaut de fermeture entre les trois réalisations régionales et le retour rationnel dodécaphasique, calculé avec une retenue compatible. Le terme \emph{défaut} désigne une différence algébrique déterminée, et non une perte arbitraire ni une imperfection du système. Cette description ne supprime pas la généalogie : sans les régions, le registre signé, l'orientation et la loi de retenue, l'égalité scalaire ne serait pas une exposition suffisante de la construction.
+
+Il faut également maintenir séparés trois objets que la notation d'alpha peut accompagner dans des lecteurs ultérieurs : \(A\) est un mot de blocs ; le support négatif de pré-retenue s'obtient à partir du signe des totaux avant normalisation ; et un vecteur radial exceptionnel appartient à un codomaine d'incidence. Aucun d'eux n'est interchangeable avec la valeur réelle \(\alpha_A\).
+
+\input{sections/revision_alpha_notacion.tex}
+\input{sections/revision_alpha_frontera.tex}
+
+\input{sections/alpha_dependencias.tex}
+
+\subsection{Seconde voie : détermination analytique au moyen des vacances}
+\subsubsection{Invariants du transport et résolvante graduée}
+\label{subsec:alpha-via-b}
+
+La voie analytique reçoit des invariants de l'état orienté, et non la sortie
+\(\alpha_A\). Sa troncature d'ordre six est
+\begin{equation}
+ P_6(x)=2\pi x-\frac74x^2
+ +\frac{x^3}{2\pi}
+ +\frac{x^4}{20}-\frac{2x^5}{21}-\frac{x^6}{46},
+ \label{eq:alpha-p6}
+\end{equation}
+et la condition de vacance utilise
+\[
+ \delta=\log_{10}\frac{10}{9}.
+\]
+Le rapport \(10/9\) compare la coordinatisation décimale aux neuf positions
+APP de la construction nonadique. Son logarithme appartient à cette lecture
+ultérieure de compactification ; ce n'est pas une valeur cible d'alpha.
+
+La généalogie des coefficients doit être conservée complète, mais avec sa
+force logique exacte. Les développements récents réunissent une signature marquée
+de l'état. La matrice de synchronisation et le recensement associé sont
+\[
+ D_{\mathrm{syn}}=\begin{pmatrix}85&112\\41&52\end{pmatrix},
+ \qquad N_9=43.
+\]
+De son déterminant on extrait
+\[
+ a=-\frac{\det D_{\mathrm{syn}}}{N_9}
+   =\frac{172}{43}=4.
+\]
+L'horloge induite sur les trous courts a un spectre secondaire \(\{6,7\}\) ; son extrémité supérieure donne \(b=7\). La cardinalité tritique \(m=3\) détermine
+\[
+ t_*=mb=21,\qquad k_*=mb-1=20.
+\]
+La lecture de vacance dans la coordinatisation en base mille donne
+\[
+ v_-=\lfloor1000\delta\rfloor=45,\qquad
+ v_+=\lceil1000\delta\rceil=46.
+\]
+Ces entiers sont des antécédents typés de l'évaluation de la troncature. Ils ne sont obtenus ni à partir de sa racine ni à partir d'une approximation métrologique de celle-ci.
+
+La branche inférieure coïncide en outre avec le déterminant du bloc APP
+\[
+ B_c=\begin{pmatrix}7&2\\2&7\end{pmatrix},\qquad\det B_c=45.
+\]
+Le rang transversal du registre du chapitre précédent donne
+\(r_{\mathrm{dod}}=11\), et la demi-couronne de phase fournit
+\(f_{\mathrm{ph}}=8\binom62=120\). En particulier,
+\(45r_{\mathrm{dod}}=495\).
+
+Avec \(\omega=2\pi\), la signature
+\[
+ \mathcal I_9=(\omega,m,a,b,k_*,t_*,v_-,v_+,f_{\mathrm{ph}},r_{\mathrm{dod}})
+\]
+alimente le lecteur gradué
+\begin{align}
+ \mathfrak E_9(\mathcal I_9)(x)
+ ={}&\omega x-\frac ba x^2+\omega^{-1}x^3
+ +\frac{x^4}{k_*}-\frac{2x^5}{t_*}-\frac{x^6}{v_+}\notag\\
+ &-\frac{x^7}{f_{\mathrm{ph}}}+\frac{x^8}{v_-}
+ +\frac{2x^9}{v_-r_{\mathrm{dod}}}.
+ \label{eq:alpha-firma-coeficientes}
+\end{align}
+La substitution restitue les coefficients de \(P_6\) et de sa
+prolongation d'ordre neuf. Le couple \(45/46\) traverse la séparation
+entre les deux : la branche supérieure occupe le degré six et la branche inférieure réapparaît
+aux degrés huit et neuf.
+
+La factorisation de \eqref{eq:alpha-firma-coeficientes} est formulée
+pour un état qui conserve l’origine, l’ordre des canaux et l’orientation. La
+naturalité par rapport aux morphismes qui préservent ces données n’équivaut pas à
+l’unicité parmi les lecteurs qui ne conservent pas ces données. Le résultat
+identifie le lecteur associé à l’état typé et la factorisation de ses
+coefficients ; son domaine de naturalité est constitué des morphismes
+qui préservent l’origine, l’ordre des canaux et l’orientation.
+
+\subsubsection{Résolvante nilpotente aux degrés \(7\), \(8\) et \(9\)}
+\label{subsec:alpha-resolvente}
+
+La première prolongation admet une construction opératoire finie
+spécialement explicite. Sur l'espace à base \(e_7,e_8,e_9\),
+soit
+\[
+ Ne_7=-\frac83e_8,\qquad Ne_8=\frac2{11}e_9,\qquad Ne_9=0,
+ \qquad v_7=-\frac1{120}e_7.
+\]
+Le symbole \(N\) désigne ici un opérateur nilpotent, et non une profondeur de troncature. Son domaine et sa graduation sont fixés avant d'évaluer le polynôme en un nombre.
+
+\begin{lemma}[Prolongement nilpotent exact]
+\label{lem:alpha-resolvente}
+On vérifie \(N^3=0\) et
+\[
+ (I-N)^{-1}v_7
+ =-\frac{e_7}{120}+\frac{e_8}{45}+\frac{2e_9}{495}.
+\]
+L'évaluation \(e_n\mapsto x^n\) produit
+\begin{equation}
+ T_{7:9}(x)=-\frac{x^7}{120}+\frac{x^8}{45}+\frac{2x^9}{495}.
+ \label{eq:alpha-t79}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+L'opérateur augmente le degré et s'annule sur le dernier vecteur de la base,
+de sorte que son cube est nul. L'inverse est la résolvante finie
+\(I+N+N^2\). De plus,
+\[
+ Nv_7=\frac1{45}e_8,\qquad N^2v_7=\frac2{495}e_9.
+\]
+Additionner les trois termes et évaluer donne la formule.
+\end{proof}
+
+Ici, les dénominateurs 120, 45 et 495 ne sont pas des ajustements décimaux : ils proviennent de la demi-couronne, du déterminant APP et de son produit par le rang dodécaphasique. Les transferts \(-8/3\) et \(2/11\), ainsi que le signe et le degré du germe, appartiennent au lecteur typé. Conserver seulement la symétrie du cycle et remplacer cet opérateur par un autre opérateur symétrique ne conserve pas nécessairement les coefficients.
+
+\subsubsection{Racine de multiplicité un de la troncature d'ordre neuf}
+\label{subsec:alpha-jet}
+
+Définissons
+\[
+ P_9=P_6+T_{7:9},\qquad E_{21/22}^{(9)}(x)=P_9(x)-\delta,
+ \qquad I_\alpha=(0,10^{-2}).
+\]
+Cet opérateur fini a un résultat propre d'existence et d'unicité.
+
+\begin{proposition}[Racine de multiplicité un de la troncature]
+\label{prop:alpha-raiz-jet}
+L’opérateur \(E_{21/22}^{(9)}\) a une unique racine
+\(\xi_9\) dans \(I_\alpha\), et cette racine est simple. L’évaluation rationnelle dirigée fournit l’isolement
+\begin{equation}
+ \frac{729735256928380099}{10^{20}}
+ <\xi_9<\frac{729735256928380100}{10^{20}}.
+ \label{eq:alpha-intervalo-jet}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Les bornes des coordonnées internes
+\(3.14<\pi<3.15\) et
+\(0.045<\delta<0.046\) sont suffisantes pour l'existence. En zéro,
+\(E_{21/22}^{(9)}(0)=-\delta<0\). En \(10^{-2}\), la contribution
+linéaire moins les termes négatifs est supérieure à \(0.0626\), donc la
+valeur de l'opérateur est positive.
+
+Pour \(0\leq x\leq10^{-2}\), en éliminant les termes positifs de
+la dérivée on obtient
+\[
+ (E_{21/22}^{(9)})'(x)
+ \geq2\pi-\frac72\cdot10^{-2}
+ -\frac{10}{21}\cdot10^{-8}-\frac6{46}\cdot10^{-10}
+ -\frac7{120}\cdot10^{-12}>6.24.
+\]
+La continuité donne l’existence ; la borne sur la dérivée donne l’unicité et
+la simplicité. L’intervalle plus étroit
+\eqref{eq:alpha-intervalo-jet} provient d’évaluations rationnelles dirigées de signes opposés. Pour les rendre
+explicites, on emploie, pour \(t>0\) et \(z=(t-1)/(t+1)\),
+\[
+ \log t=2\sum_{j=0}^{m-1}\frac{z^{2j+1}}{2j+1}+R_m,
+ \qquad |R_m|\leq\frac{2|z|^{2m+1}}{(2m+1)(1-z^2)}.
+\]
+On applique cela avec \(t=10/9\) et \(t=10\), \(m=520\), et on divise
+le premier intervalle par le second pour borner \(\delta\). L’intervalle
+engendré de \(\pi\) est transporté par les opérations rationnelles de
+\(P_9\) ; l’évaluation aux deux extrémités de
+\eqref{eq:alpha-intervalo-jet} donne, respectivement, un signe négatif et
+positif. Le supplément exécutable reproduit ces opérations exactes.
+La preuve d’existence et d’unicité n’utilise pas cet intervalle comme donnée
+pour sélectionner les coefficients.
+\end{proof}
+
+Le résultat concerne \(\xi_9\). Il n'autorise pas à écrire \(\xi_9=\alpha_A\) comme une égalité exacte de nombres complets. La racine d'une troncature peut partager un préfixe avec la racine de l'opérateur prolongé et différer à une position ultérieure. La simplicité permet de contrôler le déplacement de la racine sous perturbations ; elle n'annule pas ces perturbations.
+
+\input{sections/alpha_dos_vias_cierre_vigente.tex}

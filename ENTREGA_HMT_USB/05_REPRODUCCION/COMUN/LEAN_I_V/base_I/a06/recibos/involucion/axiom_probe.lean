@@ -1,0 +1,32 @@
+import LatticeStateFieldParity
+import LatticeEvenVertexFields
+#print axioms HMT.IV.LatticeStateFieldParity.theta_create
+#print axioms HMT.IV.LatticeStateFieldParity.theta_annihilate_carrier
+#print axioms HMT.IV.LatticeStateFieldParity.theta_zeroMode
+#print axioms HMT.IV.LatticeStateFieldParity.theta_hmode
+#print axioms HMT.IV.LatticeStateFieldParity.theta_creationTerm
+#print axioms HMT.IV.LatticeStateFieldParity.theta_annihilationTerm
+#print axioms HMT.IV.LatticeStateFieldParity.theta_normalField
+#print axioms HMT.IV.LatticeStateFieldParity.theta_descendantState
+#print axioms HMT.IV.LatticeStateFieldParity.theta_descendantField
+#print axioms HMT.IV.LatticeStateFieldParity.theta_stateField_apply
+#print axioms HMT.IV.LatticeStateFieldParity.theta_stateField_intertwines
+#print axioms HMT.IV.LatticeStateFieldParity.theta_stateField_conjugates
+#print axioms HMT.IV.LatticeEvenVertexFields.paritySpace
+#print axioms HMT.IV.LatticeEvenVertexFields.mem_paritySpace
+#print axioms HMT.IV.LatticeEvenVertexFields.evenSpace
+#print axioms HMT.IV.LatticeEvenVertexFields.mem_evenSpace
+#print axioms HMT.IV.LatticeEvenVertexFields.evenProjector_mem
+#print axioms HMT.IV.LatticeEvenVertexFields.evenProjector_eq_self
+#print axioms HMT.IV.LatticeEvenVertexFields.evenSpace_eq_range
+#print axioms HMT.IV.LatticeEvenVertexFields.stateField_coefficient_parity
+#print axioms HMT.IV.LatticeEvenVertexFields.stateField_coefficient_mem_parity
+#print axioms HMT.IV.LatticeEvenVertexFields.stateField_coefficient_even
+#print axioms HMT.IV.LatticeEvenVertexFields.vacuum_mem_evenSpace
+#print axioms HMT.IV.LatticeEvenVertexFields.evenVacuum
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient_coe
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient_vacuum
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient_creates
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient_negative_vacuum
+#print axioms HMT.IV.LatticeEvenVertexFields.evenCoefficient_laurent_bound

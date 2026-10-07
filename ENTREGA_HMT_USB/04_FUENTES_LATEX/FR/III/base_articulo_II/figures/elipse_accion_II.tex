@@ -1,0 +1,58 @@
+% Geometría calculada, no coordenadas focales elegidas a ojo.
+% Caso algebraico de ilustración xi=1/3; no evaluación de las constantes HMT.
+\begingroup
+\pgfmathsetmacro{\elXi}{1/3}
+\pgfmathsetmacro{\elEta}{0.5*ln((1+\elXi)/(1-\elXi))}
+\pgfmathsetmacro{\elA}{exp(\elEta/2)}
+\pgfmathsetmacro{\elB}{exp(-\elEta/2)}
+\pgfmathsetmacro{\elF}{sqrt(\elA*\elA-\elB*\elB)}
+\pgfmathsetmacro{\elTheta}{30}
+\pgfmathsetmacro{\elX}{\elA*cos(\elTheta)}
+\pgfmathsetmacro{\elY}{\elB*sin(\elTheta)}
+\pgfmathsetmacro{\elPolar}{atan(\elY/\elX)}
+\begin{tikzpicture}[x=2.18cm,y=2.18cm,font=\small,
+ every node/.style={inner sep=2pt},>=Stealth]
+ \begin{scope}
+  \node[font=\bfseries] at (0,1.38) {Forme et orientation};
+  \fill[accent!12] (0,0)--(\elA,0)
+    plot[domain=0:30,samples=50] ({\elA*cos(\x)},{\elB*sin(\x)})--cycle;
+  \draw[ink,thick] (0,0) ellipse[x radius=\elA,y radius=\elB];
+  \draw[->,black!55] (-1.42,0)--(1.48,0) node[right]{\(u\)};
+  \draw[->,black!55] (0,-1.05)--(0,1.08) node[above]{\(v\)};
+  \draw[accent,thick,-{Stealth}] (\elA,0)
+    plot[domain=0:30,samples=50] ({\elA*cos(\x)},{\elB*sin(\x)});
+  \draw[accent,thick] (0,0)--(\elX,\elY);
+  \node[below left,font=\scriptsize] at (0,0) {\(O\)};
+  \draw[accent] (.35,0) arc[start angle=0,end angle=\elPolar,radius=.35];
+  \node[accent] at (.47,.065) {\(\phi\)};
+  \fill[accent] (\elX,\elY) circle[radius=1.4pt];
+  \node[above right] at (\elX,\elY) {\(X(\theta)\)};
+  \node[accent,align=center,font=\scriptsize] at (1.26,.18) {\(\theta=\pi/6\)};
+  \draw[dashed,black!45] (-\elF,0)--(\elX,\elY);
+  \draw[dashed,black!45] (\elF,0)--(\elX,\elY);
+  \fill[ink] (-\elF,0) circle[radius=1.5pt] node[below]{\(F_-\)};
+  \fill[ink] (\elF,0) circle[radius=1.5pt] node[below]{\(F_+\)};
+  \draw[<->,black!60] (-\elA,-1.04)--(0,-1.04)
+    node[midway,below,font=\scriptsize]{\(a_S/\sqrt{2\hbar}\)};
+  \draw[<->,black!60] (-1.32,0)--(-1.32,\elB)
+    node[midway,left,font=\scriptsize]{\(\frac{b_S}{\sqrt{2\hbar}}\)};
+  \node[align=center,font=\scriptsize] at (0,-1.55)
+    {\(\rho_{\partial}(\phi)/\sqrt{2\hbar}=|OX|\)\\
+     \(f_S^2=a_S^2-b_S^2\), \quad aire totale \(h\)};
+ \end{scope}
+ \begin{scope}[shift={(3.65,0)}]
+  \node[font=\bfseries] at (0,1.38) {Forme réciproque};
+  \draw[densely dashed,black!25] (0,0) ellipse[x radius=\elA,y radius=\elB];
+  \draw[ink,thick] (0,0) ellipse[x radius=\elB,y radius=\elA];
+  \draw[->,black!55] (-1.28,0)--(1.38,0) node[right]{\(u\)};
+  \draw[->,black!55] (0,-1.30)--(0,1.26) node[right]{\(v\)};
+  \fill[ink] (0,\elF) circle[radius=1.5pt] node[right]{\(F'_+\)};
+  \fill[ink] (0,-\elF) circle[radius=1.5pt] node[right]{\(F'_-\)};
+  \node[align=center,font=\scriptsize] at (0,-1.55)
+    {\(\eta\mapsto-\eta\), \quad \(a_S\leftrightarrow b_S\)\\
+     \(R_{\rm el}\mapsto R_{\rm el}^{-1}\), \quad \(a_Sb_S=2\hbar\)};
+ \end{scope}
+ \draw[->,accent,thick] (1.60,.80)--(2.17,.80)
+   node[midway,above,font=\scriptsize]{échange};
+\end{tikzpicture}
+\endgroup

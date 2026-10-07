@@ -1,0 +1,521 @@
+% Unidad U015. Acoplamiento de horquillas racionales, refinamiento TPK y
+% certificación a profundidad arbitraria.
+
+\label{gfp:b:chap:precision-arbitraria-constantes}
+
+This unit has the status of subsequent certification. The prefixes and their
+compatible extensions come from the internal relation
+\(\operatorname{Ext}\), coinductive survival and the APP--TRIT--TPK
+transition laws. The rational brackets that follow do not choose
+among the \(729\) elements of a fiber: they locate in the Archimedean chart
+the already generated extension and certify its precision at arbitrary depth.
+
+\section{Typed separation of the \(4\) indices of nonadic prolongation}
+
+Four parameters of different kinds enter each character \(\chi\in\{\pi,e,\varphi\}\):
+\begin{enumerate}
+ \item \(n\), order of the rational analytic bracket;
+ \item \(K\), refinement level of the Topological Phase Kernel;
+ \item \(L_K=6K\), ternary length of the published prefix;
+ \item \(M\), the requested number of decimal positions.
+\end{enumerate}
+Neither \(n=K\), \(n=L_K\), \(K=M\) nor a fixed proportionality
+between them is postulated. The coupling is constructed through interval inclusions
+decided by integer arithmetic.
+
+The integer parts are
+\[
+ m_\pi=3,
+ \qquad
+ m_e=2,
+ \qquad
+ m_\varphi=1,
+\]
+and the fractional characters are
+\[
+ \rho_\pi=\pi-3,
+ \qquad
+ \rho_e=e-2,
+ \qquad
+ \rho_\varphi=\varphi-1.
+\]
+The three families of semiopen forks are written
+\[
+ J_{\chi,n}=[\ell_{\chi,n},h_{\chi,n}).
+\]
+Their endpoints are rational, contain \(\rho_\chi\) and satisfy
+\[
+ \ell_{\chi,n}\nearrow\rho_\chi,
+ \qquad
+ h_{\chi,n}\searrow\rho_\chi,
+ \qquad
+ h_{\chi,n}-\ell_{\chi,n}\longrightarrow0.
+\]
+For \(\pi\), the endpoints come from the alternating sums of Machin’s
+identity proved in \cref{gfp:b:chap:biografia-pi-autonoma}; for \(e\),
+from the factorial sums and their rational remainder in
+\cref{gfp:b:chap:biografia-completa-e}; for \(\varphi\), from the Fibonacci
+and Cassini quotients in \cref{gfp:b:chap:biografia-completa-phi}.
+
+\section{Ternary cylinders and the immediate ambient fibre}
+
+A ternary prefix of length \(L_K=6K\) is represented by an integer
+\(N_K\) with
+\[
+ 0\leq N_K<3^{L_K}.
+\]
+His semi-open cylinder is
+\begin{equation}
+ C(N_K,L_K)=
+ \left[
+ \frac{N_K}{3^{L_K}},
+ \frac{N_K+1}{3^{L_K}}
+ \right).
+ \label{gfp:b:eq:cilindro-nivel-K}
+\end{equation}
+The next emission adds six trits. The immediate ambient fiber contains
+\(3^6=729\) elements, indexed by \(u\in\{0,\ldots,728\}\):
+\begin{equation}
+ C_{K,u}=
+ \left[
+ \frac{729N_K+u}{3^{L_K+6}},
+ \frac{729N_K+u+1}{3^{L_K+6}}
+ \right).
+ \label{gfp:b:eq:729-subcilindros}
+\end{equation}
+The \(C_{K,u}\) are disjoint and
+\[
+ C(N_K,L_K)=\bigsqcup_{u=0}^{728}C_{K,u}.
+\]
+The number \(729\) counts coordinates of this ambient fiber; it does not count
+seeds, distinct emissions, orbits, or surviving states.
+
+\subsection{Cross comparison of numerators and denominators in the rational interval}
+
+Let \(J=[\ell,h)\subset C(N_K,L_K)\), with
+\(\ell,h\in\mathbb Q\). Escribimos \(S_K=3^{L_K+6}\) and define
+\begin{align}
+ j_{\min}(J,K)
+ &=\max\!\left(729N_K,\left\lfloor S_K\ell\right\rfloor\right),
+ \label{gfp:b:eq:jmin-diagonal}\\
+ j_{\max}(J,K)
+ &=\min\!\left(729N_K+728,\left\lceil S_Kh\right\rceil-1\right).
+ \label{gfp:b:eq:jmax-diagonal}
+\end{align}
+
+\begin{lemma}[Unitary localization criterion]
+\label{gfp:b:lem:criterio-localizacion-unitaria}
+The bracket \(J\) is contained in a unique element of the fiber
+\eqref{gfp:b:eq:729-subcilindros} if and only if
+\begin{equation}
+ \boxed{j_{\min}(J,K)=j_{\max}(J,K).}
+ \label{gfp:b:eq:jmin-igual-jmax}
+\end{equation}
+In that case, if \(j\) is the common value,
+\[
+ u=j-729N_K,
+ \qquad
+ N_{K+1}=j.
+\]
+\end{lemma}
+
+\begin{proof}
+The integers \(j\) whose elementary intervals of length \(S_K^{-1}\)
+intersect \(J\) form the integer interval
+\[
+ \left[
+ \lfloor S_K\ell\rfloor,
+ \lceil S_Kh\rceil-1
+ \right]\cap
+ [729N_K,729N_K+728].
+\]
+This contains exactly one element if and only if its endpoints coincide.
+The equality identifies the numerator of the subcylinder and, by truncating its last
+six trits, \(N_K\) is recovered.
+\end{proof}
+
+\section{Minimal diagonal certification}
+
+Generation does not fix the same analytic order for all
+levels in advance. Once the compatible extension has been produced, the order of the
+bracket is increased only until it is certified uniquely.
+
+\begin{definition}[Diagonal certification recurrence]
+\label{gfp:b:def:recurrencia-diagonal-constantes}
+Given a family of compatible cylinders fixed by \(\operatorname{Ext}\),
+\(C(N_K,L_K)\), whose publication contains \(\rho_\chi\), an initial order
+\(n_\chi(K_0-1)\geq1\) is chosen and we recursively define
+\begin{equation}
+ n_\chi(K)=
+ \min\left\{
+ n\geq n_\chi(K-1):
+ j_{\min}(J_{\chi,n},K)=j_{\max}(J_{\chi,n},K)
+ \right\},
+ \label{gfp:b:eq:nchi-K-minimo}
+\end{equation}
+and we verify
+\begin{equation}
+ N_{\chi,K+1}
+ =j_{\min}(J_{\chi,n_\chi(K)},K).
+ \label{gfp:b:eq:Nchi-K-mas-uno}
+\end{equation}
+The set
+\[
+ \Delta_\chi=
+ \{(n_\chi(K),K):K\geq K_0\}
+\]
+is the analytic--nonadic diagonal of the character \(\chi\).
+\end{definition}
+
+\begin{theorem}[Existence and uniqueness of the certification diagonal]
+\label{gfp:b:thm:existencia-unicidad-diagonal}
+For \(\chi\in\{\pi,e,\varphi\}\), the recurrence
+\eqref{gfp:b:eq:nchi-K-minimo} is defined at every finite level. The index
+\(n_\chi(K)\) and the coordinate \(N_{\chi,K+1}\) are unique.
+\end{theorem}
+
+\begin{proof}
+Suppose the cylindrical extension of level \(K\) containing
+\(\rho_\chi\) has been generated internally. Since \(\rho_\chi\) is irrational, it belongs to no
+ternary boundary \(3^{-L}\mathbb Z\). It therefore lies in the interior of a
+unique subcylinder \(C_{K,u_*}\), at a positive distance from both endpoints.
+The brackets \(J_{\chi,n}\) contain \(\rho_\chi\) and their diameter
+tends to zero; hence there exists an \(n\) for which the bracket is
+contained in \(C_{K,u_*}\). The set over which the minimum is taken in
+\eqref{gfp:b:eq:nchi-K-minimo} is nonempty and, by the well-ordering of
+\(\mathbb N\), has a least element.
+\cref{gfp:b:lem:criterio-localizacion-unitaria} proves that the bracket
+locates it uniquely and that the located numerator agrees with the one already
+generated. Induction on \(K\) completes the argument.
+\end{proof}
+
+\begin{corollary}[Absence of decimal parameters]
+The diagonal is computed using sums, products, powers, Euclidean divisions,
+floors and ceilings of integers. It receives no decimal digit of \(\pi\), \(e\) or
+\(\varphi\) as certification data.
+\end{corollary}
+
+\section{Compatibility with the joint nonadic connection}
+
+Let \(\widehat x_{\chi,K}\) be the enriched state of channel \(\chi\) at
+the level \(K\). Its coordinates include the prefix, the cylinder, the phase,
+the quotient, the carry, the unbounded vertical memory, the terminal term,
+and the provenance register. The residual phase is
+\[
+ g_0(K)=[K]_9\in\mathbb Z/9\mathbb Z,
+\]
+while the public label is
+\[
+ g(K)=1+((K-1)\bmod9)\in\{1,\ldots,9\}.
+\]
+The vertical memory \(q_{\rm mem}(K)\in\mathbb Z_{\geq0}\) is not reduced
+modulo \(12\); only its dodecaphasic projection is
+\[
+ \beta(K)=q_{\rm mem}(K)\bmod12
+\]
+does so.
+
+For each \(K\), let
+\[
+ \Gamma_{9,K}:\widehat X_K\longrightarrow\widehat X_{K+9}
+\]
+the holonomy of a phase loop. Then
+\[
+ g_0(K+9)=g_0(K),
+ \qquad
+ q_{\rm mem}(K+9)=q_{\rm mem}(K)+1,
+ \qquad
+ \beta(K+9)=\beta(K)+1\pmod{12}.
+\]
+
+\begin{theorem}[Phase return with genealogical conservation]
+\label{gfp:b:thm:retorno-fase-conservacion-genealogica}
+Phase equality does not reset the state:
+\[
+ g_0(K+9)=g_0(K),
+ \qquad
+ \widehat x_{\chi,K+9}\ne\widehat x_{\chi,K}.
+\]
+The depths \(27\), \(54\), and \(108\) are the typed compositions
+\begin{align*}
+ \Gamma_{27,K}
+ &=\Gamma_{9,K+18}\circ\Gamma_{9,K+9}\circ\Gamma_{9,K},\\
+ \Gamma_{54,K}
+ &=\Gamma_{9,K+45}\circ\cdots\circ\Gamma_{9,K},\\
+ \Gamma_{108,K}
+ &=\Gamma_{9,K+99}\circ\cdots\circ\Gamma_{9,K}.
+\end{align*}
+In no case are they restarts of the prefix, the carry, the terminal, or the memory.
+\end{theorem}
+
+\begin{proof}
+The first coordinate is computed in \(\mathbb Z/9\mathbb Z\), whereas
+\(q_{\rm mem}\) belongs to an unbounded monoid. Each application of
+\(\Gamma_{9,K}\) adds one unit of memory, six blocks per intermediate
+level, and the corresponding cocycle composition. Hence the phase
+may coincide while the enriched state does not. The depth formulas
+display the indices of each map and prevent composition as though all
+were endomorphisms of the same space.
+\end{proof}
+
+\subsection{Nonadic compression, Archimedean evaluation, and terminal term of the cylinder}
+
+The operational realization of a loop satisfies
+\begin{equation}
+ U_\Gamma J=JT+\eta,
+ \qquad
+ J^*\eta=0,
+ \qquad
+ I-T^*T=\eta^*\eta.
+ \label{gfp:b:eq:compresion-expresion-precision}
+\end{equation}
+The visible strict contraction is reserved for
+\[
+ M_9=\frac59V_9;
+\]
+is not identified with the compression operator \(T\). Telescoping at
+depth \(L\) preserves the terminal term:
+\begin{equation}
+ S_0=
+ \sum_{r=0}^{L-1}M_9^{*r}D_9^*D_9M_9^r
+ +M_9^{*L}S_0M_9^L.
+ \label{gfp:b:eq:telescopia-terminal-precision}
+\end{equation}
+Omitting the last summand before proving its disappearance would erase
+boundary information and would turn phase return into a false
+restart.
+
+\section{Inverse system of compatible histories}
+
+Let \(\mathcal H_K^\chi\) be the set of admissible enriched histories
+of channel \(\chi\) at depth \(K\), and let
+\[
+ p_{N,K}:\mathcal H_N^\chi\longrightarrow\mathcal H_K^\chi
+ \qquad(N\geq K)
+\]
+the truncation. We define
+\[
+ \operatorname{Surv}_K^{(N)}(\chi)
+ =p_{N,K}(\mathcal H_N^\chi)
+\]
+and
+\begin{equation}
+ \operatorname{Surv}_K(\chi)
+ =\bigcap_{N\geq K}\operatorname{Surv}_K^{(N)}(\chi).
+ \label{gfp:b:eq:supervivencia-todas-profundidades}
+\end{equation}
+The coinductive object is
+\begin{equation}
+ X_\chi=
+ \varprojlim_K
+ \bigl(\operatorname{Surv}_K(\chi),p_{K+1,K}\bigr).
+ \label{gfp:b:eq:limite-inverso-caracteres}
+\end{equation}
+
+\begin{theorem}[Section compatible under enhanced extendibility]
+\label{gfp:b:thm:seccion-compatible-caracteres}
+Suppose further that, over each generated numerical subcylinder, the
+relation \(\operatorname{Ext}\) is nonempty, single-valued and compatible with the
+truncations. Then \(\operatorname{Ext}\) and survival produce a family
+\[
+ x_\chi=(\widehat x_{\chi,K})_{K\geq K_0}
+\]
+which satisfies
+\[
+ p_{K+1,K}(\widehat x_{\chi,K+1})
+ =\widehat x_{\chi,K}.
+\]
+Therefore, \(x_\chi\in X_\chi\).
+\end{theorem}
+
+\begin{proof}
+The subcylinder of level \(K+1\) has numerator
+\(N_{\chi,K+1}=729N_{\chi,K}+u\). Truncation removes its last six
+trits and recovers \(N_{\chi,K}\). The other coordinates are obtained through the
+functorial laws of carry, memory, terminal and phase. The single-valuedness
+hypothesis for \(\operatorname{Ext}\) fixes the subcylinder and the enriched
+extension; the local uniqueness of
+\cref{gfp:b:lem:criterio-localizacion-unitaria} subsequently certifies its
+Archimedean localization, and the compatibility of \(\operatorname{Ext}\)
+provides truncation equality.
+\end{proof}
+
+\section{Decimal cells and prescribed precision}
+
+For \(M\geq1\) and \(q\in\{0,\ldots,10^M-1\}\), let
+\[
+ D_{M,q}=
+ \left[
+ \frac{q}{10^M},
+ \frac{q+1}{10^M}
+ \right).
+\]
+A bracket \(J=[\ell,h)\) is contained in a unique decimal cell if
+and only if
+\begin{equation}
+ \boxed{
+ \left\lfloor10^M\ell\right\rfloor
+ =\left\lceil10^Mh\right\rceil-1=q.}
+ \label{gfp:b:eq:criterio-celda-decimal}
+\end{equation}
+
+\begin{definition}[Minimum level of decimal certification]
+For \(\chi\in\{\pi,e,\varphi\}\), we defines \(K_\chi(M)\) as the least
+level for which there exist an analytic order \(n\) and an integer \(q\) such
+that
+\begin{enumerate}
+ \item \(J_{\chi,n}\) satisfies
+       \eqref{gfp:b:eq:criterio-celda-decimal};
+ \item \(J_{\chi,n}\) is contained in the cylinder generated by
+       state \(\widehat x_{\chi,K}\);
+ \item the transition to the next level satisfies
+       \eqref{gfp:b:eq:jmin-igual-jmax}.
+\end{enumerate}
+The pair \((K,n)\) is minimized lexicographically.
+\end{definition}
+
+\begin{theorem}[Certification of coinductive outputs to arbitrary decimal precision]
+\label{gfp:b:thm:precision-decimal-arbitraria}
+For each \(\chi\in\{\pi,e,\varphi\}\) and each \(M\geq1\), there exists
+\(K_\chi(M)<\infty\). The generated section determines a unique decimal prefix
+of \(M\) positions, and the bracket recognizes and certifies that prefix. If
+\(M'<M\), the prefix of order \(M\) truncates to the one of
+order \(M'\), and the corresponding cells are nested.
+\end{theorem}
+
+\begin{proof}
+The three characters are irrational: \(\varphi\) is irrational by its quadratic
+polynomial with nonsquare discriminant; the irrationality of \(e\) and
+\(\pi\) is taken from their classical characterization theorems, subsequent to
+the finite construction. Thus none belongs to a rational decimal or
+ternary boundary. For a fixed \(M\), the distance from the character to the finite
+set of relevant decimal boundaries is positive. The rational
+brackets contract their diameter until they lie in a unique decimal cell.
+\cref{gfp:b:thm:existencia-unicidad-diagonal} couples that bracket to a
+TPK cylinder and a unique extension. The lexicographic minimum exists by
+well-ordering. Compatibility of the section proves nesting as
+\(M\) increases.
+\end{proof}
+
+\begin{corollary}[Real uniqueness]
+The nested cells have diameters \(10^{-M}\to0\). Their intersection is
+a singleton, identified by the preceding characterizations with
+\(\pi\), \(e\) or \(\varphi\), respectively.
+\end{corollary}
+
+\section{Equivalence of \(2\) finite realizations of the uniform law}
+
+The witnesses of \(1,000\) and \(10,000\) positions do not define the
+characters or limit the prolongation. They are executions of the same uniform
+recurrence at two different depths.
+
+\begin{table}[htbp]
+\centering
+\caption{Exact dimensions of certified runs, by channel.}
+\label{gfp:b:tab:dimensiones-ejecuciones-1000-10000}
+\begin{tabular}{lrr}
+\toprule
+Counted object & \(1,000\) positions & \(10,000\) positions\\
+\midrule
+Partitions exhaustive of the fiber ambient & 396 & 3501\\
+Trits transportados & 2376 & 21006\\
+Pairs of equal phase \((K,K+9)\) & 387 & 3492\\
+Complete nonadic turns & 43 & 388\\
+Elements examined by partition & 729 & 729\\
+Compatible extensions preserved by partition & 1 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Para \(10,000\) posiciones,
+\[
+ B=3501=389\cdot9,
+ \qquad
+ 6B=21006,
+ \qquad
+ 3^{6B}>10^{10000}.
+\]
+The first \(396\) blocks of the long run coincide with the
+run of \(1,000\) positions. In each of the \(3492\) pairs of
+equal phase, the phase coordinate is preserved and the prefix, depth,
+cylinder, and memory are extended. The certificate also records any
+repetitions of local projections without conflating them with the return of
+the complete state.
+
+\section{Separation between generation and verification}
+
+\begin{definition}[Structural generator]
+The generator receives the finite catalog, \(L_0,L_1\), the initial state, the
+connection laws and the internal relation \(\operatorname{Ext}\). At each level, it:
+\begin{enumerate}
+ \item enumerates the \(729\) elements of the ambient fiber;
+ \item applies \(\operatorname{Ext}\) and retains the unique compatible extension;
+ \item updates phase, quotient, carry, memory, and terminal;
+ \item writes the ternary block, the selection receipt, and the genealogical record.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Subsequent verifier]
+The verifier receives the generator’s closed outputs and the three families
+of rational brackets; it computes \(j_{\min}\) and \(j_{\max}\), certifies their
+equality with the already produced extension, reconstructs the
+partitions, checks the truncation squares, the pairs
+\((K,K+9)\), the partition sums
+\[
+ \operatorname{killed}_{\mathrm{izq}}+1+\operatorname{killed}_{\mathrm{der}}=729,
+\]
+the content identities and, finally, the match with reference expansions.
+\end{definition}
+
+\begin{theorem}[Isolation of the target data]
+\label{gfp:b:thm:aislamiento-datos-objetivo-precision}
+Reference decimal expansions and metrological data are not
+involved in selecting a compatible extension. The comparison is
+performed after the three prefixes have been written.
+\end{theorem}
+
+\begin{proof}
+The mathematical input to each generative decision consists of the finite
+catalog, \(L_0,L_1\), the inherited state and the internal relation
+\(\operatorname{Ext}\). Rational endpoints, powers of \(3\), floors and
+ceilings belong to the subsequent verifier. The generator finishes before
+the latter opens the brackets or decimal controls. The direction of data
+flow is
+\[
+ \text{structure}\longrightarrow
+ \text{prefixes and ledgers}\longrightarrow
+ \text{subsequent verification};
+\]
+there is no arrow in the opposite direction.
+\end{proof}
+
+\section{Finite realization of the certificate of arbitrary precision accuracy}
+
+A material realization of the procedure produces, for each of the three characters, a prefix of \(10^4\) positions. This finite truncation is a posterior control of the construction and does not intervene in the choice of cylinders, carries, or compatible extensions. The proved proposition retains arbitrary scope in \(M\); the precision \(10^4\) certifies a concrete execution but does not limit the coinductive generator.
+
+\section{Differentiated obstructions to generation and its certification at arbitrary precision}
+
+\begin{remark}[Certified and validity control: Refutation of arbitrary precision generation]
+Failures of orbit, extension, truncation or return refute generation;
+failures of bracket, order or decimal control refute the corresponding
+analytic certificate; and a discrepancy between the two refutes the
+joint identification of the published output. With this separation of types,
+the complete claim is refuted if:
+\begin{enumerate}
+ \item any of the indices \(n,K,L_K,M\) are identified without a
+       linking theorem;
+ \item a bracket ceases to contain its character or does not contract its diameter;
+ \item a stage satisfies \(j_{\min}\ne j_{\max}\) after the order
+       declared to be minimal;
+ \item an extension does not truncate to the cylinder of the previous level;
+ \item the phase return resets the prefix, carry, terminal or memory;
+ \item the terminal term in
+       \eqref{gfp:b:eq:telescopia-terminal-precision} is omitted without proving that it vanishes;
+ \item the first \(396\) blocks of the long execution differ from the
+       short execution;
+ \item a decimal or metrological control is read before the output is closed;
+ \item a certified digit differs from the material output of the generator;
+ \item the proof depends on the requested precision being \(1,000\) or
+       \(10,000\), rather than an arbitrary \(M\).
+\end{enumerate}
+\end{remark}

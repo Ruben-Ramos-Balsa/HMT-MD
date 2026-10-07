@@ -1,0 +1,121 @@
+% FORMALIZACION_NUEVA de la justificación del límite utilizado en
+% 70_radiacion_termica.tex. No introduce un generador de constantes.
+\subsection{Limite thermodynamique des sommes d’occupation}
+\label{v:subsec:limite-termodinamico}
+
+La densité radiale précédente peut être obtenue comme limite effective des
+sommes de la réalisation périodique. L’estimation doit conserver le mode
+constant fixé et contrôler uniformément aussi bien l’origine que la queue
+spectrale. Les représentations d’action et de calendrier restent antérieures
+à cette opération de réalisation.
+
+\begin{lemma}[Convergence des trois observables thermiques]
+\label{v:lem:limite-termodinamico}
+Soient \(a,b>0\), \(L>0\), \(\Delta=2\pi/L\) et
+\[
+ F_N(r)=\frac{1}{e^{ar}-1},\qquad
+ F_E(r)=\frac{br}{e^{ar}-1},\qquad
+ F_Z(r)=-\log(1-e^{-ar})\quad(r>0).
+\]
+Pour chacune de ces fonctions, on a
+\begin{equation}
+ \lim_{L\to\infty}\frac{2}{L^3}
+ \sum_{\nu\in\mathbb Z^3\setminus\{0\}}
+ F\!\left(\frac{2\pi}{L}|\nu|\right)
+ =\frac{1}{\pi^2}\int_0^\infty r^2F(r)\,dr.
+ \label{v:eq:limite-modos-discretos}
+\end{equation}
+Les sommes et l’intégrale sont finies. La spécialisation
+\(a=\beta\hbar c\), \(b=\hbar c\) fournit, respectivement,
+les densités de nombre, d’énergie d’excitation et du logarithme de la fonction
+de partition des modes transversaux.
+\end{lemma}
+
+\begin{proof}
+Les trois fonctions sont continues et positives dans \((0,\infty)\).
+Il existe des constantes \(C_0,C_1,d>0\), dépendant de \(a,b\) mais
+indépendantes de \(\Delta\), telles que
+\begin{equation}
+ F(r)\leq\frac{C_0}{r}\quad(0<r\leq1),\qquad
+ F(r)\leq C_1e^{-dr}\quad(r\geq1).
+ \label{v:eq:envolventes-termicas}
+\end{equation}
+En effet, \(e^{ar}-1\geq ar\) contrôle \(F_N\) et \(F_E\)
+près de l’origine ; en outre,
+\(F_Z(r)=\log(1+F_N(r))\leq F_N(r)\leq1/(ar)\).
+Pour \(r\geq1\), l’inégalité
+\(-\log(1-y)\leq y/(1-y)\), avec \(y=e^{-ar}\), donne la borne
+exponentielle de \(F_Z\). Les deux autres découlent de
+\((e^{ar}-1)^{-1}\leq e^{-ar}/(1-e^{-a})\), en absorbant le facteur
+\(r\) de \(F_E\) dans une exponentielle de taux inférieur. Ces bornes
+prouvent déjà l’intégrabilité de \(r^2F(r)\).
+
+Pour les sommes discrètes, nous regroupons les points entiers selon
+\(m=\|\nu\|_\infty\geq1\). Chaque couche contient exactement
+\[
+ (2m+1)^3-(2m-1)^3=24m^2+2
+\]
+points et satisfait \(m\leq|\nu|\leq\sqrt3m\).
+Fixons \(0<\delta\leq1\) et \(0<\Delta\leq1\).
+Si \(\delta<\Delta\), il n’y a pas de points avec
+\(0<\Delta|\nu|\leq\delta\). Sinon, en posant
+\(N=\lfloor\delta/\Delta\rfloor\), la première borne de
+\eqref{v:eq:envolventes-termicas} permet d’écrire
+\begin{align*}
+ \Delta^3\!\sum_{0<\Delta|\nu|\leq\delta}F(\Delta|\nu|)
+ &\leq C_0\Delta^2\sum_{m=1}^{N}\frac{24m^2+2}{m}\\
+ &\leq26C_0\Delta^2\sum_{m=1}^{N}m
+ \leq26C_0\delta^2.
+\end{align*}
+Dans la deuxième ligne, on a utilisé \(m^{-1}\leq m\) puis
+\(N(N+1)/2\leq N^2\) pour \(N\geq1\).
+La contribution intégrale du même voisinage est aussi d’ordre
+\(\delta^2\), car
+\(\int_0^\delta r^2F(r)\,dr\leq C_0\delta^2/2\).
+
+Pour \(R\geq1\), tout point avec \(\Delta|\nu|>R\) appartient
+à une couche \(m>R/(\sqrt3\Delta)\). La seconde borne de
+\eqref{v:eq:envolventes-termicas} donne
+\begin{align*}
+ \Delta^3\!\sum_{\Delta|\nu|>R}F(\Delta|\nu|)
+ &\leq C_1e^{-dR/(2\sqrt3)}
+ \Delta^3\sum_{m\geq1}(24m^2+2)e^{-d\Delta m/2}\\
+ &\leq C_2e^{-dR/(2\sqrt3)},
+\end{align*}
+où \(C_2\) ne dépend pas de \(0<\Delta\leq1\). Pour vérifier
+cette uniformité, on prend \(q=e^{-d\Delta/2}\) et on utilise
+\[
+ \sum_{m\geq1}q^m=\frac{q}{1-q},\qquad
+ \sum_{m\geq1}m^2q^m=\frac{q(1+q)}{(1-q)^3}.
+\]
+La première identité provient de la série géométrique et la seconde de
+l’application à deux reprises de \(q\,d/dq\), opération valable dans \(|q|<1\).
+En outre,
+\(1-e^{-d\Delta/2}\geq\Delta(1-e^{-d/2})\) par concavité.
+Le facteur \(\Delta^3\) compense donc les dénominateurs des
+deux expressions. La queue intégrale tend elle aussi vers zéro par la
+borne exponentielle. Pour chaque \(\Delta>0\), ces mêmes estimations
+prouvent la convergence de la somme infinie.
+
+Dans la couronne compacte \(\delta\leq|k|\leq R\), la fonction
+\(F(|k|)\) est continue et bornée. Les sommes de Riemann de maille
+\(\Delta\) convergent vers son intégrale ; les deux sphères du bord
+sont de mesure nulle. On fait d’abord \(\Delta\to0\), ensuite
+\(\delta\to0\) et enfin \(R\to\infty\), en utilisant les bornes
+uniformes précédentes. Il en résulte
+\[
+ \Delta^3\sum_{\nu\ne0}F(\Delta|\nu|)
+ \longrightarrow \int_{\mathbb R^3}F(|k|)\,d^3k
+ =4\pi\int_0^\infty r^2F(r)\,dr.
+\]
+Comme \(2/L^3=2\Delta^3/(2\pi)^3\), le coefficient radial final
+est \(2\cdot4\pi/(2\pi)^3=1/\pi^2\), ce qui démontre
+\eqref{v:eq:limite-modos-discretos}.
+\end{proof}
+
+Le contrôle de l’origine est effectué sur des excitations d’énergie positive.
+Le mode constant reste fixé avant de former la fonction de partition :
+son élimination ultérieure d’une intégrale ne remplacerait pas cette condition de
+la représentation finie. La preuve établit le passage à la limite de la
+réalisation déclarée et conserve la distinction entre cette réalisation et
+la construction préalable de ses paramètres d’action et de calendrier.

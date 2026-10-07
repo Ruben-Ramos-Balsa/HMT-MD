@@ -1,0 +1,311 @@
+\chapter{Invariancia causal de las interfaces respecto de referencias externas}
+\label{chap:independencia-prospectiva}
+\index{independencia prospectiva}\index{grafo causal}
+\index{protocolo ciego}\index{torres!completitud reconstructiva}
+
+\section{Criterio de independencia causal respecto de referencias externas: grafo dirigido acíclico y fijación previa de la salida}
+\label{sec:definiciones-independencia-prospectiva}
+
+Sean \(\mathsf P\) las primitivas internas, \(\mathsf R\) las reglas,
+lectores, calibres y normalizaciones declarados, \(G\) un generador,
+\(o=G(\mathsf P,\mathsf R)\) su salida y \(y\) una referencia externa.
+
+\begin{definition}[Interfaz prospectivamente independiente]
+\label{def:interfaz-prospectivamente-independiente}
+La interfaz es prospectivamente independiente de \(y\) si:
+\begin{enumerate}
+ \item \(y\notin\operatorname{Anc}(o)\);
+ \item \(\mathsf P,\mathsf R,G\) y los controles negativos se congelan antes
+ de abrir \(y\);
+ \item la ejecución no tiene acceso directo ni indirecto a \(y\);
+ \item \(o\) y su traza se sellan antes de calcular una comparación
+ \(\operatorname{cmp}(o,y)\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Independencia de selección]
+\label{def:independencia-seleccion}
+La ceguera de cada ejecución no basta si, tras producir candidatos
+\(G_j(\mathsf P,\mathsf R_j)\), se publica
+\[
+ j_\ast(y)=\arg\min_j
+ \operatorname{cmp}\!\left(G_j(\mathsf P,\mathsf R_j),y\right).
+\]
+La independencia de selección prohíbe que esta operación determine la salida
+publicada.
+\end{definition}
+
+\begin{definition}[Predicción multivaluada]
+\label{def:prediccion-multivaluada}
+Si los descriptores físicos no metrológicos y las restricciones internas
+admiten varias multisecciones, la salida prospectiva es el conjunto completo
+\[
+ \widehat{\mathfrak R}(d)
+ =\{\mathcal M:\mathcal M\text{ satisface todas las restricciones
+ preinscritas para }d\}.
+\]
+La no unicidad es una salida del procedimiento. Elegir después un elemento
+por proximidad a una magnitud está prohibido.
+\end{definition}
+
+\section{Teorema de no interferencia}
+\label{sec:teorema-no-interferencia}
+
+\begin{definition}[Grafo causal dirigido acíclico fiel y completo]
+\label{def:dag-fiel-completo}
+Un grafo dirigido acíclico \(D\) es fiel si cada nodo representa la misma
+función y las mismas entradas que la construcción citada. Es completo para
+una salida si toda dependencia causalmente pertinente aparece como arista o
+raíz declarada. Fidelidad y completitud son hipótesis semánticas; la
+aciclicidad del conjunto de datos no las demuestra.
+\end{definition}
+
+\begin{theorem}[Independencia prospectiva condicionada al grafo causal]
+\label{thm:no-interferencia-prospectiva}
+Sea un sistema determinista de ecuaciones estructurales representado por un
+grafo dirigido acíclico finito \(D\), fiel y completo para \(o\). Si
+\(y\notin\operatorname{Anc}_D(o)\), todas las raíces ancestrales de \(o\)
+permanecen congeladas y la ejecución no tiene acceso oculto a \(y\), entonces
+para cualesquiera \(y_0,y_1\),
+\[
+ o_{\operatorname{do}(y=y_0)}
+ =o_{\operatorname{do}(y=y_1)}.
+\]
+\end{theorem}
+
+\begin{proof}
+Se ordenan topológicamente los antecesores de \(o\). Sus raíces son internas
+y permanecen fijas. Por inducción sobre el orden, cada nodo recibe los mismos
+argumentos bajo ambas intervenciones y, por determinismo, devuelve el mismo
+valor. La igualdad se propaga hasta \(o\). El resumen criptográfico no crea
+la independencia; sólo hace detectable una alteración posterior.
+\end{proof}
+
+\begin{corollary}[Permutación de la comparación externa]
+\label{cor:permutacion-comparacion-externa}
+Si se permutan nombres, filas o valores externos después del sellado, la
+salida interna no cambia, aunque pueda cambiar su puntuación:
+\[
+ o_{\operatorname{do}(y=\sigma y_0)}
+ =o_{\operatorname{do}(y=y_0)},\qquad
+ \operatorname{cmp}(o,\sigma y_0)
+ \ne\operatorname{cmp}(o,y_0).
+\]
+\end{corollary}
+
+\begin{proposition}[Separación de ramas calibradas]
+\label{prop:separacion-ramas-calibradas}
+Si una referencia externa intervino en una selección histórica, la
+dependencia no contamina los objetos internos que no descienden de esa
+selección. La rama puede aislarse y someterse a un protocolo prospectivo
+nuevo sin modificar el núcleo.
+\end{proposition}
+
+\begin{proof}
+Ser antecesor es una propiedad local del grafo. Las ramas
+\[
+ Z_0\longrightarrow p=5\longrightarrow\text{escala electrónica},
+\qquad
+ \{\text{masas}\}\longrightarrow\{\text{firmas calibradas}\}
+ \longrightarrow\text{tabla}
+\]
+quedan fuera del subgrafo protegido. Las torres, el carácter formal, el
+atlas y el centro \((5,5)\) no reciben aristas desde esas referencias.
+\end{proof}
+
+\section{Invariancia contrafactual sobre el grafo causal dirigido y alcance de la conclusión}
+\label{sec:certificado-independencia-prospectiva}
+
+El grafo causal publicado contiene \(71\) nodos, \(89\) aristas,
+\(16\) interfaces y
+\(29\) salidas protegidas. La comprobación causal establece aciclicidad, recuentos,
+rutas declaradas, existencia de las fuentes registradas, ausencia de
+referencias externas entre los antecesores consignados e invariancia
+contrafactual del modelo simbólico. El resultado es
+\[
+ \#\{\text{antecesores externos de salidas protegidas}\}=0.
+\]
+El certificado no demuestra por sí solo que no falte una arista ni audita
+todas las lecturas de datos de cada programa científico. Su fuerza es, por
+tanto, \textsc{demostrado con estructura de partida explícita}: la conclusión
+se obtiene sobre el grafo dirigido acíclico expresamente declarado y queda
+condicionada a su fidelidad y completitud.
+
+La sustitución simultánea de las referencias CODATA, Planck,
+Barbero--Immirzi, CKM, masas, gravedad y cristal temporal puede alterar las
+comparaciones y las ramas calibradas. No altera, dentro del grafo declarado,
+el catálogo de \(468\) emisiones, las cinco regiones de \(\pi\), la
+generación coinductiva correlacionada, \(\alpha_{12}\), \(C^\ast\), la década \(-34\), las torres,
+el atlas, el centro electrónico, la doble proyección ni el corredor
+excepcional.
+
+\section{Ensayo multivaluado sin acceso al valor objetivo y criterio de identificación}
+\label{sec:protocolo-ciego-multivaluado}
+
+\begin{algorithm}[Asignación futura sin magnitudes]
+\label{alg:asignacion-futura-sin-magnitudes}
+La interfaz física se ejecuta en cuatro fases irreversibles:
+\begin{enumerate}
+ \item \emph{Congelación}: se sellan autoridad, atlas, involuciones,
+ restricciones, código, prioridad y controles negativos.
+ \item \emph{Entrada permitida}: sólo se reciben sector, generación, carga,
+ color, conjugación, espín/estadística, composición y tipo metrológico; se
+ excluyen masas, firmas refinadas, residuos, ángulos y unidades.
+ \item \emph{Salida}: se enumeran todas las multisecciones compatibles; para
+ cada extensión de cada multisección se calculan ruta observable, registro,
+ firma, \(\chi_{\rm form}\), especialización y observable. En objetos
+ compuestos se empalman primero las extensiones y los registros. Se sella el
+ multiconjunto completo.
+ \item \emph{Apertura}: un custodio distinto abre las magnitudes y calcula
+ residuos, incertidumbres y covarianzas sin modificar candidato alguno.
+\end{enumerate}
+\end{algorithm}
+
+La multisección enriquecida, y no una extensión puntual seleccionada
+retrospectivamente, es la salida del emparejamiento físico. La evaluación
+posterior puede ejecutarse fibra a fibra. El algoritmo precedente es una
+especificación falsable; no se presenta como una predicción multiconjunto ya
+ejecutada.
+
+\begin{criterion}[Fallo del protocolo ciego]
+\label{crit:fallo-protocolo-ciego}
+El protocolo falla si el código puede leer una magnitud, si una firma
+histórica calibrada reaparece como entrada, si se descarta un candidato tras
+abrir la referencia, si se confunde masa positiva con masa exactamente nula
+o si el multiconjunto sellado cambia al permutar el catálogo externo.
+\end{criterion}
+
+\section{Carácter formal y completitud reconstructiva}
+\label{sec:completitud-reconstructiva-torres}
+
+Para \(v=(n_A,s_C,k,b_{120},b_{\zeta})\in\ZZ^5\), el carácter formal
+anterior a toda especialización es
+\[
+ \chi_{\rm form}(v;x_A,x_C,x_\Delta,x_{120},x_{270})
+ =\exp\!\left(
+ n_Ax_A+s_Cx_C+kx_\Delta
+ +b_{120}x_{120}+b_{\zeta}x_{270}\right).
+\]
+La especialización declarada
+\[
+ \Theta_0
+ =\left(A_{\rm rad},\frac{C^\ast_{\rm rad}}6,
+ \Dfour,s_{120},\zeta_{270}\right),
+ \qquad \zeta_{270}=135\Delta_4^2,
+\]
+produce
+\(\chi_0(v)
+=\chi_{\rm form}(v;\Theta_0)\).
+La firma cruda, el carácter formal, su especialización central, el
+refinamiento global \(\eta\in\mathcal E_{\mathfrak S}\) y una tabla
+calibrada son cinco objetos diferentes.
+
+\begin{theorem}[Completitud reconstructiva positiva]
+\label{thm:completitud-reconstructiva-positiva}
+Sea
+\[
+ \mathcal N=\langle90,120\rangle_{>0}
+\]
+y sea \((n_j)_{j\ge1}\) su enumeración creciente. Dados
+\(0<q_+<q_-<1\), definamos
+\[
+ a_j=q_-^{n_j}-q_+^{n_j}>0.
+\]
+Entonces \(a_j\to0\) y \(\sum_ja_j<\infty\). Fijada una regla determinista
+para resolver empates de semienteros, para todo \(r\in\RR\) la recurrencia
+\[
+ r_0=r,\qquad
+ \nu_j=\operatorname{nint}\!\left(\frac{r_{j-1}}{a_j}\right),\qquad
+ r_j=r_{j-1}-\nu_ja_j
+\]
+satisface
+\[
+ |r_j|\leq\frac{a_j}{2}\longrightarrow0,\qquad
+ r=\sum_{j\ge1}\nu_ja_j,\qquad
+ \sum_{j\ge1}|\nu_ja_j|<\infty.
+\]
+Por tanto, todo \(R>0\), con \(r=\log R\), se representa exactamente en la
+completación por
+\(\exp(\sum_j\nu_ja_j)\).
+\end{theorem}
+
+\begin{proof}
+Los índices de \(\mathcal N\) son \(90,120\) y todos los múltiplos de \(30\)
+desde \(180\). En consecuencia,
+\[
+ \sum_{n\in\mathcal N}q_-^n
+ =q_-^{90}+q_-^{120}
+ +\frac{q_-^{180}}{1-q_-^{30}}<\infty.
+\]
+Como \(0<a_j<q_-^{n_j}\), la sucesión es sumable y converge a cero. La
+definición de entero más próximo implica
+\(|r_j|\le a_j/2\). Por telescopado,
+\(\sum_{i=1}^{N}\nu_ia_i=r-r_N\to r\). Para \(j\ge2\),
+\[
+ |\nu_ja_j|=|r_{j-1}-r_j|
+ \le\frac{a_{j-1}+a_j}{2},
+\]
+y la sumabilidad de \((a_j)\) prueba la convergencia absoluta.
+\end{proof}
+
+El teorema es una completitud del diccionario sobre \(\RR_{>0}\). Si los
+coeficientes \(\nu_j\) se obtienen del residuo de una masa conocida, su uso
+es \textsc{reconstrucción calibrada}; no proporciona la selección
+prospectiva. Tampoco representa masa exactamente nula. Fotón, gluón o un
+eventual modo de espín dos requieren protección exacta por simetría en la
+representación física.
+
+\Needspace{34\baselineskip}
+\section{Protocolos prospectivos de invariancia para las familias de constantes}
+\label{sec:protocolos-prospectivos-especificos}
+
+\begin{description}
+ \item[Barbero--Immirzi.] Se congelan \(S_{90},S_{120}\), los pesos
+ \((12,-1)\) y su normalización antes de abrir una referencia física. La
+ evaluación de \(\Gamma_{6\to8}\) es ciega respecto de esa referencia,
+ pero la unicidad previa de series y pesos y el entrelazador con el operador
+ de área son problemas distintos.
+ \item[CKM y CP.] Se sellan las cuatro ecuaciones, sus coeficientes y la
+ convención angular; se publican simultáneamente los cuatro parámetros,
+ \(|V|\) y \(J\). El contraste usa una covarianza fijada de antemano.
+ \item[Constitutivas.] Las identidades adimensionales preceden a
+ \(Z_{\rm ref}\) y \(c_{\rm ref}\). El cambio de carta transforma la
+ realización, no las identidades, y no crea cuatro predicciones
+ independientes.
+ \item[Gravedad e inercia.] Las razones
+ \(G_{\rm tor}/I_{\rm tor}=1\) y
+ \(G_{\rm av}/I_{\rm av}=\pi/\varphi^2\) pertenecen a capas diferentes.
+ Su interpretación física exige un morfismo y un contraste prospectivo; un
+ fenómeno cosmológico no selecciona la razón.
+\end{description}
+
+\section{Estratificación probatoria: identidades internas, deducciones, reconstrucciones calibradas e interfaces sometidas a cierre matemático}
+\label{sec:cinco-niveles-independencia}
+
+\begin{table}[htbp]
+\centering
+\caption{Niveles que la independencia causal no permite colapsar.}
+\label{tab:cinco-niveles-independencia}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}YL{0.27\textwidth}@{}}
+\toprule
+Nivel & Ejemplo & Afirmación permitida\\
+\midrule
+Generador interno certificado&
+Regiones, \(\alpha_{12}\), \(C^\ast\), \(-34\), atlas&
+Salida obtenida en el dominio declarado.\\
+Evaluación condicionada ciega&
+\(\Gamma_{6\to8}\), CKM fijado, \(\chi_0(v)\)&
+No consulta el blanco, pero depende del funcional o firma.\\
+Protocolo ciego no ejecutado&
+Especificación multivaluada&
+Existe un procedimiento falsable; no una salida sellada.\\
+Reconstrucción calibrada&
+Firmas históricas y refinamiento desde \(r=\log R\)&
+Evaluación exacta condicionada a una referencia.\\
+Interfaz física pendiente&
+Partícula--antipartícula, área, masa nula, gravedad&
+Dominio definido; falta representación o contraste.\\
+\bottomrule
+\end{tabularx}
+\end{table}

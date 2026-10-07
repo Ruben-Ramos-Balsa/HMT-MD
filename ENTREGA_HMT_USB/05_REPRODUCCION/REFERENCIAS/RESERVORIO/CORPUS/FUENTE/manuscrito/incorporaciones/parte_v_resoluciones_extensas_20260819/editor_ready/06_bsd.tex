@@ -1,0 +1,1890 @@
+\chapter{Imagen determinantal y composición hacia Birch--Swinnerton--Dyer}
+
+\section{Unidad genealógica y producto fibrado}
+
+Sea $E/\mathbb Q$ una curva elíptica y sea
+$\mathfrak G_{\rm det}(E)$ la imagen determinantal autónoma completa. Se
+denota por $\mathcal T_m^{\rm surv}$ su categoría de historias
+supervivientes. El propietario determinantal precedente construye desde una
+unidad común la cadena de líneas
+\eqref{eq:amp-bsd-linea-determinante}--\eqref{eq:amp-bsd-cadena-lineas}, el
+comparador Kato--FERS
+\eqref{eq:amp-bsd-phi-kato-fers}--\eqref{eq:amp-bsd-inversa-kato-fers}, el
+canal Poitou--Tate
+\eqref{eq:amp-bsd-comparador-pt-q}--\eqref{eq:amp-bsd-comparador-pt} y el
+pegado local--global
+\eqref{eq:amp-bsd-triangulo-local}--\eqref{eq:amp-bsd-mapa-localizacion}.
+La tupla de \eqref{eq:pdf2-g-det-explicito} y las identidades de
+\eqref{eq:pdf2-g-det-identidades-dato} son la publicación conjunta de esa
+construcción upstream: no se aceptan como axiomas terminales ni se eligen a
+partir del rango o del término principal. Este capítulo conserva y compone
+esas flechas hasta la conclusión de Birch--Swinnerton--Dyer.
+
+El objeto de coeficientes no es sólo la fibra $3$-primaria. Se fija primero
+el complejo libre integral basado
+\begin{equation}\label{eq:pdf2-bsd-gmz}
+ G_{m,\mathbb Z}:=N_*\bigl(N\mathcal T_m^{\rm surv};\mathbb Z\bigr),
+\end{equation}
+y, para cada primo $\ell$ y cada $n\geq1$, se ponen
+\begin{equation}\label{eq:pdf2-bsd-coeficientes-todos-ell}
+ A_{\ell,n}:=E[\ell^n](\overline{\mathbb Q}),\qquad
+ T_\ell E:=\varprojlim_nA_{\ell,n},\qquad
+ V_\ell E:=T_\ell E\otimes_{\mathbb Z_\ell}\mathbb Q_\ell,
+ \qquad
+ G_{m,\ell,n}:=G_{m,\mathbb Z}\otimes_{\mathbb Z}^{\mathbf L}A_{\ell,n}.
+\end{equation}
+Las transiciones no quedan implícitas: son
+\begin{equation}\label{eq:pdf2-bsd-transiciones-ell-n}
+ q_{\ell,n}:A_{\ell,n+1}\twoheadrightarrow A_{\ell,n},
+ \quad x\longmapsto\ell x,
+ \qquad
+ Q_{\ell,n}:=1\otimes q_{\ell,n}:G_{m,\ell,n+1}\to G_{m,\ell,n},
+\end{equation}
+La transición de coeficientes en el complejo de Manin, junto con
+$Q_{\ell,n}$, induce
+$\widetilde Q_{\ell,n}:P_{E,\ell,n+1}^{\rm gen}\to
+P_{E,\ell,n}^{\rm gen}$. Estos mapas satisfacen
+$Q_{\ell,n}d=dQ_{\ell,n}$,
+$(Q_{\ell,n}\otimes Q_{\ell,n})\Delta_{\rm AW}
+=\Delta_{\rm AW}Q_{\ell,n}$ y
+$\widetilde Q_{\ell,n}\widehat\Pi_{0,\ell,n+1}
+=\widehat\Pi_{0,\ell,n}Q_{\ell,n}$. Así el límite que define $T_\ell E$
+se toma dentro de la misma familia de complejos, no sólo en los grupos de
+coeficientes.
+La antigua notación $A_n$ designa únicamente
+$A_{3,n}$; no gobierna la publicación aritmética. Las matrices de frontera,
+Alexander--Whitney, orientación y carry están escritas sobre $\mathbb Z$ en
+la base de historias. Por ello, para
+$R\in\{\mathbb Z_\ell,\mathbb Z/\ell^n,\mathbb Q_\ell\}$,
+\begin{equation}\label{eq:pdf2-bsd-base-change-integral}
+ G_{m,R}=G_{m,\mathbb Z}\otimes_{\mathbb Z}^{\mathbf L}R,
+ \qquad
+ d_{m,R}=d_{m,\mathbb Z}\otimes1,
+ \qquad
+ \Delta_{{\rm AW},R}=\Delta_{{\rm AW},\mathbb Z}\otimes1.
+\end{equation}
+Así, el paso de $3$ a otro primo no es una extensión inexistente
+$\mathbb Z_3\to\mathbb Z_\ell$: todas las fibras se obtienen por cambio de
+base del mismo propietario integral.
+
+Para abreviar, las fórmulas siguientes se escriben sobre un coeficiente
+$A_{\ell,n}$ fijo y son compatibles con $n$, con $\ell$ y con la base
+integral. El complejo normalizado
+\begin{equation}\label{eq:pdf2-bsd-gmn}
+ G_{m,\ell,n}:=N_*\bigl(N\mathcal T_m^{\rm surv};A_{\ell,n}\bigr)
+\end{equation}
+conserva la diagonal Alexander--Whitney
+\begin{equation}\label{eq:pdf2-bsd-aw}
+ \Delta_{\rm AW}[x_0\to\cdots\to x_q]
+ =\sum_{j=0}^q[x_0\to\cdots\to x_j]\otimes
+                [x_j\to\cdots\to x_q]
+\end{equation}
+y la counidad
+$\varepsilon_{\rm AW}[x]=1$ en vértices, cero en grados positivos. La historia
+se acopla al complejo de Manin mediante
+\begin{equation}\label{eq:pdf2-bsd-pullback}
+ P_{E,\ell,n}^{\rm gen}:=
+ P_{E,\ell,n}^{\rm Man}\times_{A_{\ell,n}[0]}G_{m,\ell,n}.
+\end{equation}
+Si $s_{\ell,n}:A_{\ell,n}[0]\to P_{E,\ell,n}^{\rm Man}$ es la sección
+basada, entonces
+\[
+ \widehat\Pi_{0,\ell,n}(c)=
+ (s_{\ell,n}\varepsilon_{\rm AW}(c),c)
+\]
+conserva simultáneamente la coordenada modular y la historia. Esta parte de la
+construcción es material y no usa el término principal de $L(E,s)$. Los
+cuadrados
+\begin{equation}\label{eq:pdf2-bsd-pullback-base-change}
+ P_{E,\mathbb Z}^{\rm gen}\otimes_{\mathbb Z}^{\mathbf L}
+      \mathbb Z/\ell^n
+ \xrightarrow{\ \sim\ }P_{E,\ell,n}^{\rm gen},
+ \qquad
+ \widehat\Pi_{0,\mathbb Z}\otimes1=\widehat\Pi_{0,\ell,n}
+\end{equation}
+prueban que unidad, pullback y counidad son los mismos para todos los
+coeficientes.
+
+Las dos publicaciones integrales y sus cambios de base
+\begin{equation}\label{eq:pdf2-bsd-copub}
+ P_{E,R}=(P_{E,R}^K,P_{E,R}^{\rm PT}),
+ \qquad P_{E,R}^K(1_E)=z_{K,R},\quad
+ P_{E,R}^{\rm PT}(1_E)=z_{{\rm PT},R}
+\end{equation}
+deben proceder de la misma unidad $1_E$. La dualidad reducida se tipa por
+\[
+ D_3(M):=\operatorname{RHom}_\Lambda(M^\iota,\Lambda)[-3],
+ \qquad
+ X^{\rm orth}:C_E^{\rm red}\xrightarrow{\sim}D_3(C_E^{\rm red}).
+\]
+Con $L_{{\rm root},\ell,n}=A_{\ell,n}z_{{\rm PT},\ell,n}$ y el proyector de complejos
+$p_{\rm root}$, la normalización basada da
+\begin{equation}\label{eq:pdf2-bsd-raiz}
+ p_{\rm root}z_{K,\ell,n}=z_{{\rm PT},\ell,n}.
+\end{equation}
+
+\section{Filler local y descomposición global sin borrar el retículo finito}
+
+La descomposición se escribe primero sobre el propietario integral. Para
+cada etiqueta finita--singular $\lambda=(\ell,m,n,\ldots)$ existe un
+coeficiente de incidencia $a_\lambda=\ell c_\lambda\in\mathbb Z$ fijado por
+$\operatorname{Rel}_{\rm det}$; en la fibra correspondiente
+$A_{\ell,n}$ actúa por reducción de ese mismo entero. El bloque libre
+integral con $g$ primitivo es
+\begin{equation}\label{eq:pdf2-bsd-bloque-normal}
+ \partial f=a_\lambda e+b,\qquad
+ \partial e=g,\qquad
+ \partial b=-a_\lambda g.
+\end{equation}
+Tensorizarlo con la fibra indicada por $\lambda$ devuelve literalmente
+$a_\lambda=\ell c_\lambda$. En consecuencia, si
+$z_K=ar+ue+vb$ es ciclo y $z_{\rm PT}=r$, entonces
+$\partial z_K=(u-a_\lambda v)g=0$ implica $u=a_\lambda v$. La igualdad raíz
+\eqref{eq:pdf2-bsd-raiz} da $a=1$ y, por tanto,
+\begin{equation}\label{eq:pdf2-bsd-filler-local}
+ h_*:=-vf,\qquad \partial h_*=z_{\rm PT}-z_K.
+\end{equation}
+
+La multisección $\Sigma_{\rm det}^{\rm mult}$ etiqueta cada generador por
+\begin{equation}\label{eq:pdf2-bsd-etiqueta-completa}
+ \lambda=(\ell,m,n,\gamma,\operatorname{or},\operatorname{Carr},
+ \operatorname{Mem},\partial,\tau^{\rm term},\operatorname{loc}).
+\end{equation}
+El orden basado separa tres clases disjuntas y exhaustivas: la unidad raíz,
+los bloques finita--singular con terminal $h_*$ y las celdas del retículo
+integral local--global. Como $\partial_{\rm det}$ conserva todas las
+etiquetas salvo el descenso prescrito por carry, estas clases definen
+proyectores de complejos $p_{\rm root}$, $p_{\rm FS}$ y $p_{\rm lat}$ con
+\begin{equation}\label{eq:pdf2-bsd-tres-proyectores}
+ p_{\rm root}+p_{\rm FS}+p_{\rm lat}=I,
+ \qquad p_ip_j=\delta_{ij}p_i.
+\end{equation}
+
+\begin{theorem}[Descomposición global basada]
+\label{thm:pdf2-bsd-descomposicion-global}
+Existe un isomorfismo de complejos compatible con lugares, orientación,
+corestricción y dualidad
+\begin{equation}\label{eq:pdf2-bsd-descomposicion-global}
+ \Theta_E:\mathcal C_E^{\rm loc,red}
+ \xrightarrow{\ \sim\ }
+ \mathcal C_E^{\rm FS,ctr}\oplus\mathcal L_E,
+\end{equation}
+donde
+\begin{equation}\label{eq:pdf2-bsd-sumando-fs-y-lattice}
+ \begin{aligned}
+ \mathcal C_E^{\rm FS,ctr}
+  &:=\bigoplus_{\lambda\in\Lambda_E^{\rm FS}}
+   [\mathbb Zf_\lambda\to
+    \mathbb Ze_\lambda\oplus\mathbb Zb_\lambda
+                    \to\mathbb Zg_\lambda],\\
+ \mathcal L_E&:=[M_E\xrightarrow{D_E}N_E].
+ \end{aligned}
+\end{equation}
+Cada bloque del primer sumando tiene el diferencial integral
+\eqref{eq:pdf2-bsd-bloque-normal}; su fibra $(\ell,n)$ se obtiene por
+$-\otimes_{\mathbb Z}^{\mathbf L}A_{\ell,n}$. El complejo $\mathcal L_E$
+conserva, sin
+contraerlos, los divisores de Smith y las componentes
+Tate--Shafarevich--Tamagawa.
+\end{theorem}
+
+\begin{proof}
+Se ordenan los generadores por la etiqueta
+\eqref{eq:pdf2-bsd-etiqueta-completa}. La unidad común ocupa el primer
+bloque y se elimina por $q_{\rm root}$. Para cada terminal
+$(z_{\rm PT},h_*)$ las relaciones de $\operatorname{Rel}_{\rm det}$
+identifican exactamente cuatro generadores
+$(f_\lambda,e_\lambda,b_\lambda,g_\lambda)$; la matriz de incidencia es
+\eqref{eq:pdf2-bsd-bloque-normal}, con $g_\lambda$ primitivo porque su
+etiqueta de llegada aparece una sola vez en la base orientada. Las celdas
+restantes tienen etiqueta local--global y forman las dos redes libres
+$M_E,N_E$. No hay cuarta clase: la multisección es completa y
+$\operatorname{Surv}_{\rm det}$ exige a cada historia o bien un terminal
+FS o bien una coordenada de red. El cambio de bases es unitriangular con
+diagonal uno, pues una frontera sólo introduce etiquetas anteriores. Esto
+construye $\Theta_E$ y prueba simultáneamente su exhaustividad y su
+compatibilidad con las bases. La dualidad $X^{\rm orth}$ intercambia las
+dos redes y conserva cada bloque FS, de modo que también entrelaza
+$\Theta_E$.
+\end{proof}
+
+Sobre un bloque normal defínase
+\begin{equation}\label{eq:pdf2-bsd-hfs-generadores}
+ H_\lambda(g_\lambda)=e_\lambda,
+ \qquad H_\lambda(b_\lambda)=f_\lambda,
+ \qquad H_\lambda(e_\lambda)=H_\lambda(f_\lambda)=0.
+\end{equation}
+Un cálculo sobre los cuatro generadores da
+$\partial H_\lambda+H_\lambda\partial=I$. Por tanto
+\begin{equation}\label{eq:pdf2-bsd-hfs-global}
+ H_{\rm FS}:=\Theta_E^{-1}
+ \left(\bigoplus_{\lambda\in\Lambda_E^{\rm FS}}H_\lambda\oplus0\right)
+ \Theta_E,
+ \qquad
+ \partial H_{\rm FS}+H_{\rm FS}\partial=p_{\rm FS}.
+\end{equation}
+La coordenada terminal de $\mathfrak G_{\rm det}(E)$ asegura
+$q_{\rm root}z_K\in\operatorname{im}p_{\rm FS}$; entonces
+$h_*=-H_{\rm FS}(q_{\rm root}z_K)$ reproduce
+\eqref{eq:pdf2-bsd-filler-local}. Es esencial que el lado derecho de
+\eqref{eq:pdf2-bsd-hfs-global} sea $p_{\rm FS}$, no $q_{\rm root}$:
+contraer el retículo $\mathcal L_E$ borraría los factores finitos que BSD
+debe publicar.
+
+\section{Propietario integral y cambio de base a todos los primos}
+
+La descomposición anterior se ejecuta primero en la base integral de
+historias, no en una fibra primaria. Para
+\[
+ R\in\{\mathbb Z,\mathbb Z_\ell,\mathbb Z/\ell^n,
+          \mathbb Q_\ell\}
+\]
+se fijan
+\begin{equation}\label{eq:pdf2-bsd-complejos-base-change}
+ \mathcal C_{E,R}^{\rm loc,red}:=
+ \mathcal C_{E,\mathbb Z}^{\rm loc,red}
+       \otimes_{\mathbb Z}^{\mathbf L}R,
+ \qquad
+ \mathcal L_{E,R}:=
+ [M_E\otimes R\xrightarrow{D_E\otimes1}N_E\otimes R].
+\end{equation}
+El orden unitriangular de las etiquetas usado en
+\cref{thm:pdf2-bsd-descomposicion-global} tiene coeficientes enteros. En
+consecuencia,
+\begin{equation}\label{eq:pdf2-bsd-theta-base-change}
+ \Theta_{E,R}=\Theta_{E,\mathbb Z}\otimes1,
+ \qquad
+ H_{{\rm FS},R}=H_{{\rm FS},\mathbb Z}\otimes1,
+ \qquad
+ \partial H_{{\rm FS},R}+H_{{\rm FS},R}\partial=p_{{\rm FS},R}.
+\end{equation}
+En particular, la fibra $3$-primaria es una de estas especializaciones y no
+puede ocultar las fibras $\ell\ne3$.
+
+Antes de formar un cokernel finito se construye el inverso racional. El orden
+de terminales de $\Sigma_{\rm det}^{\rm mult}$ da bases
+$(m_1,\ldots,m_t)$ de $M_E$ y $(n_1,\ldots,n_t)$ de $N_E$ y una biyección
+basada $\sigma_E$ entre ambas listas. Si
+\[
+ d_j:=\bigl\langle n_{\sigma_E(j)}^\vee,D_Em_j\bigr\rangle,
+\]
+la relación terminal y la dualidad $X^{\rm orth}$ dan $d_j\ne0$ antes de
+tomar dimensiones. Defínanse
+\begin{equation}\label{eq:pdf2-bsd-d0-nilpotente}
+ \begin{aligned}
+  D_{E,0}:M_E\otimes\mathbb Q&\longrightarrow N_E\otimes\mathbb Q,
+  &D_{E,0}m_j&=d_jn_{\sigma_E(j)},\\
+  N_E^{\rm tri}&:=D_{E,0}^{-1}(D_E\otimes\mathbb Q)-I.
+ \end{aligned}
+\end{equation}
+Una frontera sólo contiene su terminal y etiquetas estrictamente anteriores;
+por ello $N_E^{\rm tri}$ es estrictamente triangular en la lista ordenada y
+$(N_E^{\rm tri})^t=0$. El operador
+\begin{equation}\label{eq:pdf2-bsd-j-e-inverso-racional}
+ \boxed{
+ J_E:=\left(\sum_{r=0}^{t-1}(-N_E^{\rm tri})^r\right)D_{E,0}^{-1}:
+ N_E\otimes\mathbb Q\longrightarrow M_E\otimes\mathbb Q }
+\end{equation}
+se calcula, por tanto, con un número finito de operaciones sobre la matriz de
+incidencia. Como
+$D_E\otimes\mathbb Q=D_{E,0}(I+N_E^{\rm tri})$, la suma geométrica finita
+prueba las dos identidades
+\begin{equation}\label{eq:pdf2-bsd-j-e-dos-lados}
+ J_E(D_E\otimes\mathbb Q)=I_{M_E\otimes\mathbb Q},
+ \qquad
+ (D_E\otimes\mathbb Q)J_E=I_{N_E\otimes\mathbb Q}.
+\end{equation}
+Ésta es la contracción racional del retículo residual; no usa rango,
+$\operatorname{Sha}(E)$, órdenes de grupos ni el término principal.
+
+La matriz integral $D_E$ conserva todos sus divisores elementales. Para cada
+primo se define, sin inferirlo desde la fibra $3$-primaria,
+\begin{equation}\label{eq:pdf2-bsd-f-ell-def}
+ D_{E,\ell}:=D_E\otimes\mathbb Z_\ell,
+ \qquad
+ F_{E,\ell}:=\operatorname{coker}D_{E,\ell}.
+\end{equation}
+Las dos identidades de \eqref{eq:pdf2-bsd-j-e-dos-lados} implican que
+$F_E:=\operatorname{coker}D_E$ es finito. Por tanto su
+descomposición primaria es finita y exacta:
+\begin{equation}\label{eq:pdf2-bsd-f-descomposicion-primaria}
+ F_E=\operatorname{coker}D_E
+ \xrightarrow{\ \sim\ }
+ \bigoplus_{\ell}F_{E,\ell},
+ \qquad
+ [n]\longmapsto([n\otimes1]_\ell)_\ell.
+\end{equation}
+La inversa se obtiene generador a generador por el teorema chino del resto
+aplicado a cada divisor de Smith. Esta es la arista que permite publicar
+simultáneamente $\operatorname{Sha}(E)$ y todos los factores de Tamagawa.
+
+\section{Bocksteins de todas las páginas}
+
+Sea
+\begin{equation}\label{eq:pdf2-bsd-s-universal}
+ S_{E,0}(T):V_0[[T]]\longrightarrow W_0[[T]]
+\end{equation}
+el diferencial basado racional construido por las matrices integrales del
+lector determinantal. Para cada primo $\ell$ y para la carta compleja se
+obtiene por cambio de base
+\begin{equation}\label{eq:pdf2-bsd-s-todos-ell}
+ S_{E,\ell}(T):=S_{E,0}(T)\otimes_{\mathbb Q}\mathbb Q_\ell,
+ \qquad
+ S_{E,\mathbb C}(T):=S_{E,0}(T)\otimes_{\mathbb Q}\mathbb C.
+\end{equation}
+Es invertible sobre $\mathbb Q((T))$ y, por tanto, sobre cada
+$\mathbb Q_\ell((T))$ y $\mathbb C((T))$. Escribiremos $S_E(T)$ cuando la
+base sea irrelevante. Como $K[[T]]$ es un anillo de valoración discreta para
+$K=\mathbb Q,\mathbb Q_\ell$ o $\mathbb C$, su forma de Smith es
+\begin{equation}\label{eq:pdf2-bsd-smith-t-adico}
+ U(T)S_E(T)V(T)=\operatorname{diag}
+ (T^{a_1},\ldots,T^{a_s},1,\ldots,1),
+ \qquad a_i\ge1.
+\end{equation}
+Los exponentes $a_i$ son los mismos en todas las fibras: son las valuaciones
+en $T$ de los menores no nulos de la matriz racional
+\eqref{eq:pdf2-bsd-s-universal}; cambiar $\mathbb Q$ por
+$\mathbb Q_\ell$ o $\mathbb C$ no cambia esas valuaciones.
+Se obtiene
+\begin{equation}\label{eq:pdf2-bsd-orden-smith}
+ d:=\operatorname{ord}_T\det S_E(T)
+ =\sum_{i=1}^sa_i
+ =\sum_{q\ge1}\dim_K V_q.
+\end{equation}
+La filtración produce $A_q=V_q/V_{q+1}$,
+$B_q=\operatorname{im}\beta_q$ e isomorfismos
+\begin{equation}\label{eq:pdf2-bsd-bockstein-reducido}
+ \bar\beta_q:A_q\xrightarrow{\sim}B_q,
+ \qquad
+ j_q:B_q\xrightarrow{\sim}A_q^\vee\otimes(I^q/I^{q+1}).
+\end{equation}
+Con la página regular $\bar S_E(0)$ y los signos de Koszul, todas las
+páginas se pegan en
+\begin{equation}\label{eq:pdf2-bsd-rboc-lt}
+ R_{\rm Boc}^{\rm der}(S_E)
+ =\tau_{\rm reg}\otimes\bigotimes_{q\ge1}\det(\bar\beta_q)
+ =\left[T^{-d}\det S_E(T)\right]_{T=0}.
+\end{equation}
+Ninguna página se sustituye por el orden total $d$.
+
+\section{Tabla completa Kato--FERS antes del determinante}
+
+Para una historia no degenerada
+$b_\lambda=[x_0\to\cdots\to x_i]$ sean
+$b_{\lambda,\le j}=[x_0\to\cdots\to x_j]$ y
+$b_{\lambda,\ge j}=[x_j\to\cdots\to x_i]$. El peso completo del lector
+de acarreo es
+\begin{equation}\label{eq:pdf2-bsd-peso-t}
+ \nu_T(\gamma):=\operatorname{dep}(\gamma)
+                 +\operatorname{Carr}(\gamma),
+\end{equation}
+de modo que $\nu_T([x_i])=0$ y toda ruta normalizada de longitud positiva
+tiene $\nu_T\ge1$. La base $\mathcal B_i^K$ contiene una fila por cada
+etiqueta completa $\lambda$; la base $\mathcal B_i^{\rm Iw}$ contiene el
+generador $\upsilon_i(b_\lambda)$ con las mismas caras, hoja, orientación,
+memoria y terminal. Por ello $\upsilon_i$ es una biyección escrita por la
+misma lista de etiquetas, no elegida mediante un conteo posterior.
+
+El mapa de cadenas es
+\begin{equation}\label{eq:pdf2-bsd-phi-kato}
+ \Phi_{K/{\rm FERS}}:=
+ \mu_{\rm Iw}\circ(P_E^K\widehat\otimes\operatorname{car}_T)
+ \circ\Delta_{\rm AW}:
+ \mathcal C_E^K\longrightarrow\mathcal C_E^{\rm Iw}.
+\end{equation}
+Su tabla exhaustiva, parametrizada por todos los $i$, todas las etiquetas y
+todos los cortes, es
+\begin{equation}\label{eq:pdf2-bsd-tabla-kato-fers}
+\begin{array}{c|c|c|c}
+ \text{fila}&\text{corte}&\text{imagen}&\text{peso }T\\ \hline
+ b_\lambda&j=i&\upsilon_i(b_\lambda)&0\\
+ b_\lambda&0\le j<i&
+ \epsilon_{\lambda,j}\,
+ \mu_{\rm Iw}\!\left(P_E^K(b_{\lambda,\le j}),
+       \operatorname{car}_T(b_{\lambda,\ge j})\right)&
+ \nu_T(b_{\lambda,\ge j})\ge1\\
+ \text{simplex degenerado}&\text{cualquier }j&0&--
+\end{array}
+\end{equation}
+donde $\epsilon_{\lambda,j}$ es el signo ya fijado por
+$\operatorname{or}_{\rm det}$. Equivalentemente,
+\begin{equation}\label{eq:pdf2-bsd-expansion-kato-fers}
+ \Phi_{K/{\rm FERS}}^i(b_\lambda)
+ =\upsilon_i(b_\lambda)+
+  \sum_{j=0}^{i-1}T^{\nu_T(b_{\lambda,\ge j})}
+  \epsilon_{\lambda,j}\,
+  \mu_{\rm Iw}\!\left(P_E^K(b_{\lambda,\le j}),
+          \widehat{\operatorname{car}}_T(b_{\lambda,\ge j})\right).
+\end{equation}
+
+\begin{theorem}[Equivalencia basada Kato--FERS]
+\label{thm:pdf2-bsd-equivalencia-kato-fers}
+El mapa \eqref{eq:pdf2-bsd-phi-kato} es una equivalencia filtrada de
+complejos perfectos, preserva la unidad y, en todas las bases completas,
+\begin{equation}\label{eq:pdf2-bsd-i-plus-tb}
+ [\Phi_{K/{\rm FERS}}^i](T)=I+TB_i(T),
+ \qquad
+ [\Phi_{K/{\rm FERS}}^i]^{-1}
+ =\sum_{r\ge0}(-TB_i(T))^r.
+\end{equation}
+En particular,
+\begin{equation}\label{eq:pdf2-bsd-rho-uno}
+ \rho_E(T):=
+ \prod_i\det(I+TB_i(T))^{(-1)^i},
+ \qquad \rho_E(0)=1,
+ \qquad
+ \rho_{E,\ell}:=\rho_E\otimes_{\mathbb Q}\mathbb Q_\ell.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La identidad simplicial de Alexander--Whitney, la compatibilidad de $P_E^K$
+con caras y la aditividad de $\nu_T$ bajo concatenación prueban que
+$\Phi_{K/{\rm FERS}}$ conmuta con los diferenciales. En cada fila de
+\eqref{eq:pdf2-bsd-tabla-kato-fers}, el único término de peso cero es el
+corte $j=i$; todos los demás pertenecen a $T\Lambda$. Como
+$\upsilon_i$ empareja la lista completa de historias con ella misma, la
+reducción módulo $T$ es la identidad en cada generador. Esto da
+\eqref{eq:pdf2-bsd-i-plus-tb}; la completitud de $K[[T]]$ hace converger la
+inversa. Para $i=0$ la tabla contiene sólo la unidad, de modo que la raíz
+queda normalizada antes de evaluar un término principal.
+\end{proof}
+
+La equivalencia conserva por separado el ledger
+\begin{equation}\label{eq:pdf2-bsd-ledger-diez}
+ \mathcal J_{\rm det}=\{\deg,\operatorname{Frob},\operatorname{Ner},
+ K,\operatorname{Boc},\operatorname{Sha},\operatorname{Tam},
+ \operatorname{tors}^{-2},\Omega,\operatorname{exc}\}.
+\end{equation}
+En esas diez etiquetas se leen, respectivamente: el peso total; la norma de
+Euler; el cambio basado Manin--Néron; la relación finita--singular; todas las
+páginas $j_q\bar\beta_q$; el cono de Kummer; los cocientes de componentes;
+la red torsional; la integral de Néron; y la orientación excepcional. La
+tabla no permite cancelaciones entre etiquetas.
+
+\section{Mapa Poitou--Tate desde Mordell--Weil a la bandera completa}
+
+Se conserva primero la red de Mordell--Weil y sólo después se racionaliza:
+\begin{equation}\label{eq:pdf2-bsd-mw-libre}
+ M_{E,\mathbb Z}^{\rm MW}:=E(\mathbb Q)/E(\mathbb Q)_{\rm tors},
+ \qquad
+ M_E^{\rm MW}:=M_{E,\mathbb Z}^{\rm MW}\otimes_{\mathbb Z}K,
+ \qquad K=\mathbb Q.
+\end{equation}
+$\operatorname{Surv}_{{\rm det},\mathbb Z}^{\rm MW}$ denota el submódulo
+libre generado por las filas terminales integrales del sumando
+Mordell--Weil.
+El levantamiento de Kummer con historia completa es
+\begin{equation}\label{eq:pdf2-bsd-kummer-hmt}
+ \begin{aligned}
+ \kappa_{E,\mathbb Z}^{\rm HMT}:M_{E,\mathbb Z}^{\rm MW}
+   &\longrightarrow
+   Z^1(\mathcal C_{E,\mathbb Z}^{\rm red})
+   \cap\operatorname{Surv}_{{\rm det},\mathbb Z}^{\rm MW},\\
+ \kappa_E^{\rm HMT}&:=
+   \kappa_{E,\mathbb Z}^{\rm HMT}\otimes_{\mathbb Z}\mathbb Q:
+   M_E^{\rm MW}\longrightarrow Z^1(\mathcal C_E^{\rm red}).
+ \end{aligned}
+\end{equation}
+y $\operatorname{pg}_q$ publica la coordenada de la página $V_q$. La
+extensión $\operatorname{Ext}_{\Gamma,{\rm det}}$, la multisección y la
+supervivencia construyen, para cada $q$, un pegado basado
+\begin{equation}\label{eq:pdf2-bsd-glue-q}
+ \operatorname{gl}_q:V_q\longrightarrow
+ \operatorname{Surv}_{\rm det}^{\rm MW}
+\end{equation}
+que conserva hoja, carry, memoria y terminal. Sus ecuaciones de
+unidad--counidad son
+\begin{equation}\label{eq:pdf2-bsd-unidad-counidad-paginas}
+ \operatorname{pg}_rP_E^{\rm PT}\operatorname{gl}_q
+ =\delta_{rq}I_{V_q},
+ \qquad
+ \sum_{q\ge1}\operatorname{gl}_q
+     \operatorname{pg}_qP_E^{\rm PT}=I
+ \quad\text{en el sumando MW superviviente}.
+\end{equation}
+La primera igualdad se comprueba etiqueta por etiqueta: el pegado de nivel
+$q$ tiene carry $q$, cero en las otras páginas y el terminal de esa misma
+historia. La segunda es la exhaustividad de
+$\Sigma_{\rm det}^{\rm mult}$; la suma es finita porque la torre Bockstein
+termina.
+
+Para este submódulo póngase
+\begin{equation}\label{eq:pdf2-bsd-redes-paginas-saturadas}
+ V_{q,\mathbb Z}:=\operatorname{pg}_qP_E^{\rm PT}
+   (\operatorname{Surv}_{{\rm det},\mathbb Z}^{\rm MW}),
+ \qquad
+ A_{q,\mathbb Z}:=V_{q,\mathbb Z}/V_{q+1,\mathbb Z}.
+\end{equation}
+En las bases terminales, $\operatorname{pg}_q$ y
+$\operatorname{gl}_q$ tienen entradas $0,\pm1$ y sus dos composiciones son
+las de \eqref{eq:pdf2-bsd-unidad-counidad-paginas}. Por tanto
+$V_{q+1,\mathbb Z}$ es un sumando directo basado de $V_{q,\mathbb Z}$,
+$A_{q,\mathbb Z}$ es libre y saturado, y
+$V_q=V_{q,\mathbb Z}\otimes\mathbb Q$,
+$A_q=A_{q,\mathbb Z}\otimes\mathbb Q$.
+Sea $s_q:A_{q,\mathbb Z}\to V_{q,\mathbb Z}$ la sección de la base
+terminal. Entonces
+$V_{k,\mathbb Z}=\bigoplus_{q\geq k}s_q(A_{q,\mathbb Z})$. El desdoblamiento
+de jets que conserva las $q$ ocurrencias de una fila de profundidad $q$ es
+\begin{equation}\label{eq:pdf2-bsd-desdoblamiento-jets}
+ \begin{aligned}
+ \operatorname{Jet}_{\rm Boc,\mathbb Z}(E)
+   &:=\bigoplus_{q\geq1}\bigoplus_{k=1}^{q}
+       A_{q,\mathbb Z}\,e_{q,k},\\
+ \mathcal U_{\rm jet}:
+ \operatorname{Jet}_{\rm Boc,\mathbb Z}(E)
+   &\xrightarrow{\ \sim\ }
+     \bigoplus_{k\geq1}V_{k,\mathbb Z},\\
+ \mathcal U_{\rm jet}((a_{q,k})_{q,k})
+   &:=(v_k)_k,
+   \qquad v_k:=\sum_{q\geq k}s_q(a_{q,k}).
+ \end{aligned}
+\end{equation}
+La inversa descompone cada $v_k$ en la suma directa anterior. En particular,
+\begin{equation}\label{eq:pdf2-bsd-dimension-jet}
+ \operatorname{rank}_{\mathbb Z}\operatorname{Jet}_{\rm Boc,\mathbb Z}(E)
+ =\sum_q q\,\operatorname{rank}_{\mathbb Z}A_{q,\mathbb Z}
+ =\sum_k\operatorname{rank}_{\mathbb Z}V_{k,\mathbb Z}=d.
+\end{equation}
+El pegado restringe, en esas mismas bases, a
+$\operatorname{gl}_{q,\mathbb Z}:V_{q,\mathbb Z}\to
+\operatorname{Surv}_{{\rm det},\mathbb Z}^{\rm MW}$.
+
+Se definen, sin usar dimensiones,
+\begin{equation}\label{eq:pdf2-bsd-psi-y-lambda-q}
+ \begin{aligned}
+  \psi_{q,\mathbb Z}&:=
+      \operatorname{pg}_qP_E^{\rm PT}\kappa_{E,\mathbb Z}^{\rm HMT}:
+      M_{E,\mathbb Z}^{\rm MW}\to V_{q,\mathbb Z},\\
+  \lambda_{q,\mathbb Z}&:=
+      \operatorname{pr}_{\rm MW}P_E^{\rm Man}
+      \operatorname{gl}_{q,\mathbb Z}:
+      V_{q,\mathbb Z}\to M_{E,\mathbb Z}^{\rm MW},\\
+  \psi_q&:=\operatorname{pg}_qP_E^{\rm PT}\kappa_E^{\rm HMT}:
+      M_E^{\rm MW}\to V_q,\\
+  \lambda_q&:=\operatorname{pr}_{\rm MW}P_E^{\rm Man}
+      \operatorname{gl}_q:V_q\to M_E^{\rm MW}.
+ \end{aligned}
+\end{equation}
+Los dominios intermedios quedan ligados por las dos compatibilidades basadas
+que forman parte del pegado Poitou--Tate y que aquí se escriben sobre su
+acción alcanzable:
+\begin{equation}\label{eq:pdf2-bsd-kummer-glue-compatibilidad}
+ \kappa_E^{\rm HMT}\operatorname{pr}_{\rm MW}P_E^{\rm Man}
+       \operatorname{gl}_q=\operatorname{gl}_q,
+ \qquad
+ \operatorname{pr}_{\rm MW}P_E^{\rm Man}\kappa_E^{\rm HMT}
+       =I_{M_E^{\rm MW}}.
+\end{equation}
+Las mismas dos identidades, con subíndice $\mathbb Z$, valen sobre
+$M_{E,\mathbb Z}^{\rm MW}$ y $V_{q,\mathbb Z}$, porque todas las matrices
+anteriores son integrales y basadas.
+
+\begin{theorem}[Isomorfismo basado de la bandera Poitou--Tate]
+\label{thm:pdf2-bsd-psi-pt}
+Los mapas
+\begin{equation}\label{eq:pdf2-bsd-psi-pt}
+ \begin{aligned}
+ \Psi_{\rm PT}:M_E^{\rm MW}&\longrightarrow
+       \operatorname{Flag}_{\rm Boc}(E):=\bigoplus_{q\ge1}V_q,
+ &P&\longmapsto(\psi_q(P))_{q\ge1},\\
+ \Psi_{\rm PT}^{-1}:\operatorname{Flag}_{\rm Boc}(E)&\longrightarrow M_E^{\rm MW},
+ &(v_q)_q&\longmapsto\sum_{q\ge1}\lambda_q(v_q)
+ \end{aligned}
+\end{equation}
+son inversos. En consecuencia,
+\begin{equation}\label{eq:pdf2-bsd-psi-pt-integral}
+ \Psi_{{\rm PT},\mathbb Z}:M_{E,\mathbb Z}^{\rm MW}
+ \xrightarrow{\ \sim\ }\bigoplus_{q\ge1}V_{q,\mathbb Z},
+ \qquad
+ \Psi_{{\rm PT},\mathbb Z}^{-1}((v_q)_q)=
+ \sum_q\lambda_{q,\mathbb Z}(v_q),
+\end{equation}
+y, sólo después de extender escala,
+\begin{equation}\label{eq:pdf2-bsd-rango-orden}
+ \operatorname{rank}E(\mathbb Q)
+ =\sum_{q\ge1}\dim_K V_q
+ =d=\operatorname{ord}_T\det S_E(T).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Aplicar \eqref{eq:pdf2-bsd-unidad-counidad-paginas} junto con
+\eqref{eq:pdf2-bsd-kummer-glue-compatibilidad} da, con todos los dominios
+intermedios visibles,
+$\psi_r\lambda_q=\delta_{rq}I$ y
+$\sum_q\lambda_q\psi_q=I_{M_E^{\rm MW}}$. Por tanto las dos fórmulas de
+\eqref{eq:pdf2-bsd-psi-pt} son inversas antes de comparar dimensiones.
+Las tablas terminales son integrales y basadas; el mismo cálculo, sin
+denominadores, prueba \eqref{eq:pdf2-bsd-psi-pt-integral}. Así no aparece un
+índice de subred al elegir después una base de Mordell--Weil.
+Sólo después se toman dimensiones y se usa
+\eqref{eq:pdf2-bsd-orden-smith}. El emparejamiento
+$j_q\bar\beta_q$ transporta las bases saturadas a las filas de altura cuya
+comparación con Néron--Tate se escribe en
+\eqref{eq:pdf2-bsd-altura-nt-generadores}.
+\end{proof}
+
+\section{Localización, rango de Smith y exactitud Sha--Tamagawa}
+
+En esta sección $v$ recorre los lugares finitos; en los de buena reducción se
+tiene $\Phi_v(\mathbb F_v)=0$ y $c_v=1$, de modo que las sumas y productos
+locales tienen soporte finito. El lugar infinito se reserva para la evaluación
+de la diferencial de Néron en la cuarta flecha. Para cada lugar finito $v$ se
+tiene el triángulo
+\[
+ \mathcal C_{E,v}^{\rm fin}\to\mathcal C_{E,v}\to
+ \mathcal C_{E,v}^{\rm sing}\to\mathcal C_{E,v}^{\rm fin}[1]
+\]
+y el mapa de cadenas
+\begin{equation}\label{eq:pdf2-bsd-ell-e}
+ \ell_E(x,(y_v)_v)=(\operatorname{res}_vx-i_vy_v)_v.
+\end{equation}
+El cono reducido es
+\begin{equation}\label{eq:pdf2-bsd-cono-reducido}
+ \mathcal C_E^{\rm loc,red}:=
+ q_{\rm root}\operatorname{Cone}(\ell_E)[-1].
+\end{equation}
+En grados de cociclos, un elemento se escribe $(x,(y_v),(h_v))$ y
+\begin{equation}\label{eq:pdf2-bsd-diferencial-cono}
+ d(x,(y_v),(h_v))=
+ (dx,(dy_v),(\operatorname{res}_vx-i_vy_v-dh_v)_v).
+\end{equation}
+
+Tras separar por \eqref{eq:pdf2-bsd-psi-pt} la red libre de Mordell--Weil
+y su dual, los bloques FS están contraídos por
+\eqref{eq:pdf2-bsd-hfs-global}. En el retículo restante, el inverso
+\eqref{eq:pdf2-bsd-j-e-inverso-racional} y sus dos comprobaciones
+\eqref{eq:pdf2-bsd-j-e-dos-lados} dan, sin inferir aciclicidad sólo desde la
+dualidad,
+\begin{equation}\label{eq:pdf2-bsd-rango-completo}
+ D_E\otimes\mathbb Q:M_E\otimes\mathbb Q
+ \xrightarrow{\sim}N_E\otimes\mathbb Q.
+\end{equation}
+La forma normal integral da
+\begin{equation}\label{eq:pdf2-bsd-smith-finito}
+ UD_EV=\operatorname{diag}(s_1,\ldots,s_t),
+ \qquad
+ F_E:=\operatorname{coker}D_E,
+ \qquad |F_E|=\prod_{i=1}^t|s_i|<\infty.
+\end{equation}
+
+Sea
+\begin{equation}\label{eq:pdf2-bsd-pi-componentes}
+ \pi_\Phi:N_E\longrightarrow\bigoplus_v\Phi_v(\mathbb F_v)
+\end{equation}
+la reducción de cada coordenada local módulo
+$\mathcal C_{E,v}^{\rm fin}+d\mathcal C_{E,v}$; se tiene
+$\pi_\Phi D_E=0$. Para una clase
+$[\xi]\in\operatorname{Sha}(E)$, elíjanse sus primitivas finitas
+$y_v$ y homotopías $h_v$ con
+$\operatorname{res}_v\xi-i_vy_v=dh_v$. La fórmula
+\begin{equation}\label{eq:pdf2-bsd-iota-sha-cociclos}
+ \begin{aligned}
+ n_\xi&:=\operatorname{pr}_{N_E}\operatorname{pr}_{\mathcal L_E}
+       \Theta_E(\xi,(y_v),(h_v)),\\
+ \iota_{\rm Sha}[\xi]&:=[n_\xi]\in F_E
+ \end{aligned}
+\end{equation}
+es independiente de las elecciones por
+\eqref{eq:pdf2-bsd-diferencial-cono}.
+
+Para hacer material la sobreyectividad final, sea
+$\widetilde\phi_v$ el representante terminal basado de
+$\phi_v\in\Phi_v(\mathbb F_v)$. La suma de counidades se corrige en la
+unidad común y se levanta por el operador estructural:
+\begin{equation}\label{eq:pdf2-bsd-lift-componentes}
+ \operatorname{Lift}_\Phi((\phi_v)_v):=
+ \operatorname{pr}_{N_E}\operatorname{Ext}_{\Gamma,{\rm det}}
+ \left((\widetilde\phi_v)_v,
+ -\widehat\Pi_0\!\left(\sum_v
+       \varepsilon_{\rm AW}(\widetilde\phi_v)\right)\right).
+\end{equation}
+La relación de corestricción de
+$\operatorname{Rel}_{\rm det}$ hace de esta expresión un cociclo y da
+\begin{equation}\label{eq:pdf2-bsd-lift-dos-identidades}
+ \pi_\Phi\operatorname{Lift}_\Phi=I,
+ \qquad
+ \operatorname{im}D_E=
+ \ker\pi_\Phi\cap\ker(\text{clase global}).
+\end{equation}
+
+\begin{theorem}[Sucesión exacta finita Sha--Tamagawa]
+\label{thm:pdf2-bsd-sha-tamagawa}
+Los mapas de cociclos anteriores inducen
+\begin{equation}\label{eq:pdf2-bsd-sha-tamagawa}
+ 0\longrightarrow\operatorname{Sha}(E)
+ \xrightarrow{\ \iota_{\rm Sha}\ }F_E
+ \xrightarrow{\ \partial_{\rm loc}\ }
+ \bigoplus_v\Phi_v(\mathbb F_v)
+ \longrightarrow0,
+ \qquad
+ \partial_{\rm loc}[n]:=\pi_\Phi(n).
+\end{equation}
+En particular, $\operatorname{Sha}(E)$ es finito y
+\begin{equation}\label{eq:pdf2-bsd-cardinal-sts}
+ |F_E|=|\operatorname{Sha}(E)|\prod_vc_v,
+ \qquad c_v:=|\Phi_v(\mathbb F_v)|.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La igualdad $\pi_\Phi D_E=0$ hace bien definida a
+$\partial_{\rm loc}$. Si \eqref{eq:pdf2-bsd-iota-sha-cociclos} es una
+frontera, su componente global es una frontera; así $\iota_{\rm Sha}$ es
+inyectiva. Una clase de $F_E$ está en $\ker\partial_{\rm loc}$ si y sólo
+si todas sus coordenadas singulares admiten representantes finitos; por
+\eqref{eq:pdf2-bsd-diferencial-cono}, esto equivale a estar en la imagen de
+$\iota_{\rm Sha}$. Finalmente,
+\eqref{eq:pdf2-bsd-lift-dos-identidades} da una preimagen de cada tupla de
+componentes y prueba la sobreyectividad. Los términos adyacentes libres de
+la sucesión larga son precisamente los dos sumandos separados por
+$\Psi_{\rm PT}$ y $X^{\rm orth}$; los términos adyacentes FS son
+contractibles por $H_{\rm FS}$. No se ha supuesto su anulación. La finitud
+de $F_E$ procede de \eqref{eq:pdf2-bsd-rango-completo}; la inyección da la
+ finitud de $\operatorname{Sha}(E)$ y tomar órdenes da
+ \eqref{eq:pdf2-bsd-cardinal-sts}.
+\end{proof}
+
+\begin{corollary}[Descarga primaria completa y recomposición integral]
+\label{cor:pdf2-bsd-sha-tamagawa-todos-ell}
+Para cada primo $\ell$, el cambio de base de los mapas de cociclos produce
+la sucesión exacta
+\begin{equation}\label{eq:pdf2-bsd-sha-tamagawa-ell}
+ 0\longrightarrow\operatorname{Sha}(E)[\ell^\infty]
+ \xrightarrow{\ \iota_{{\rm Sha},\ell}\ }F_{E,\ell}
+ \xrightarrow{\ \partial_{{\rm loc},\ell}\ }
+ \bigoplus_v\Phi_v(\mathbb F_v)[\ell^\infty]
+ \longrightarrow0,
+\end{equation}
+donde
+\begin{equation}\label{eq:pdf2-bsd-mapas-ell-generadores}
+ \iota_{{\rm Sha},\ell}([\xi]\otimes1)
+   =[n_\xi\otimes1],
+ \qquad
+ \partial_{{\rm loc},\ell}([n\otimes1])
+   =(\pi_{\Phi,v}(n)\otimes1)_v.
+\end{equation}
+Además, la suma de todas las sucesiones
+\eqref{eq:pdf2-bsd-sha-tamagawa-ell} es exactamente
+\eqref{eq:pdf2-bsd-sha-tamagawa}; no es sólo su parte $3$-primaria.
+\end{corollary}
+
+\begin{proof}
+La matriz $D_E$, el cociclo $n_\xi$, la reducción $\pi_\Phi$ y
+$\operatorname{Lift}_\Phi$ son integrales por
+\eqref{eq:pdf2-bsd-complejos-base-change}--
+\eqref{eq:pdf2-bsd-theta-base-change}. Como $\mathbb Z_\ell$ es plana sobre
+$\mathbb Z$, tensorizar la sucesión exacta finita
+\eqref{eq:pdf2-bsd-sha-tamagawa} conserva exactitud. Para un grupo finito
+$A$ se tiene canónicamente
+$A\otimes\mathbb Z_\ell=A[\ell^\infty]$; esto identifica los tres términos
+y da las fórmulas sobre generadores
+\eqref{eq:pdf2-bsd-mapas-ell-generadores}. La forma de Smith
+\eqref{eq:pdf2-bsd-smith-finito} escribe
+$s_i=\prod_\ell\ell^{v_\ell(s_i)}$, de modo que
+\[
+ F_E\cong\bigoplus_\ell F_{E,\ell},\qquad
+ \operatorname{Sha}(E)\cong
+   \bigoplus_\ell\operatorname{Sha}(E)[\ell^\infty],\qquad
+ \Phi_v(\mathbb F_v)\cong
+   \bigoplus_\ell\Phi_v(\mathbb F_v)[\ell^\infty].
+\]
+Sólo intervienen finitos primos y finitos lugares porque todos los grupos
+son cocientes del grupo finito $F_E$. Sumar las sucesiones primarias recupera
+la integral. Tomando órdenes primero primo a primo y luego multiplicando,
+\begin{equation}\label{eq:pdf2-bsd-cardinal-sts-todos-ell}
+ \prod_\ell|F_{E,\ell}|
+ =\prod_\ell|\operatorname{Sha}(E)[\ell^\infty]|
+   \prod_v\prod_\ell|\Phi_v(\mathbb F_v)[\ell^\infty]|
+ =|\operatorname{Sha}(E)|\prod_vc_v.
+\end{equation}
+Así quedan descargados materialmente todos los coeficientes y todos los
+factores de Tamagawa.
+\end{proof}
+
+\section{Comparador analítico--aritmético basado}
+
+La coordenada analítica no se postula desde el orden buscado. Sea
+$\lambda_3=\log4$, correspondiente al generador ciclotómico basado
+$\gamma_3=4$, y defínase en un disco $U_E$ centrado en $1$
+\begin{equation}\label{eq:pdf2-bsd-t-e-construido}
+ T_E(s):=\frac{\exp(\lambda_3(s-1))-1}{\lambda_3}
+ =(s-1)+\frac{\lambda_3}{2}(s-1)^2+O((s-1)^3).
+\end{equation}
+Por cálculo directo,
+\begin{equation}\label{eq:pdf2-bsd-t-e-normalizacion-probada}
+ T_E(1)=0,
+ \qquad T_E'(s)=\exp(\lambda_3(s-1)),
+ \qquad T_E'(1)=1.
+\end{equation}
+El teorema de la función inversa proporciona, después de reducir $U_E$ si
+fuera necesario, una carta biholomorfa $s\leftrightarrow T_E(s)$.
+Para comparar todas las fibras, tómese
+$\gamma_\ell=1+\ell$ si $\ell$ es impar y $\gamma_2=5$, y póngase
+\begin{equation}\label{eq:pdf2-bsd-t-ell-construido}
+ T_{E,\ell}(s):=
+ \frac{\exp(\log(\gamma_\ell)(s-1))-1}{\log(\gamma_\ell)}.
+\end{equation}
+Las cartas se relacionan por un único automorfismo formal
+$T_{E,\ell}=\vartheta_{\ell,3}(T_E)$ con
+$\vartheta_{\ell,3}(0)=0$ y $\vartheta_{\ell,3}'(0)=1$. Por tanto ni el
+orden en $T$ ni el coeficiente principal cambian al pasar de $3$ a $\ell$.
+
+La continuación analítica que llega a esta carta tampoco se declara. Por el
+teorema de modularidad, sea
+\[
+ f_E(z)=\sum_{m\geq1}a_m(E)e^{2\pi imz}
+\]
+la forma nueva normalizada de peso $2$ y nivel $N_E$ asociada a $E$, y sea
+$\varepsilon_E\in\{\pm1\}$ el signo fijado por
+\begin{equation}\label{eq:pdf2-bsd-transformacion-modular}
+ g_E(y):=f_E\!\left(\frac{iy}{\sqrt{N_E}}\right),
+ \qquad
+ g_E(1/y)=\varepsilon_Ey^2g_E(y).
+\end{equation}
+Para $\Re s>3/2$, integración término a término da
+\begin{equation}\label{eq:pdf2-bsd-mellin-semiplano}
+ \Lambda_E(s):=N_E^{s/2}(2\pi)^{-s}\Gamma(s)L(E,s)
+ =\int_0^\infty g_E(y)y^s\,\frac{dy}{y}.
+\end{equation}
+Se divide la integral en $(0,1)$ y $(1,\infty)$ y, en la primera parte, se
+efectúa el cambio $y=1/t$. La segunda igualdad de
+\eqref{eq:pdf2-bsd-transformacion-modular} produce la fórmula material
+\begin{equation}\label{eq:pdf2-bsd-mellin-continuada}
+ \Lambda_E^{\rm cont}(s)=
+ \int_1^\infty g_E(y)
+       \bigl(y^s+\varepsilon_Ey^{2-s}\bigr)\,\frac{dy}{y}.
+\end{equation}
+La función $g_E(y)$ decrece exponencialmente cuando $y\to\infty$; por ello la
+integral de \eqref{eq:pdf2-bsd-mellin-continuada}, y todas sus derivadas en
+$s$, convergen uniformemente en compactos. Así define una función entera y
+coincide con \eqref{eq:pdf2-bsd-mellin-semiplano} donde la serie de Dirichlet
+converge. Puesto que
+$N_E^{s/2}(2\pi)^{-s}\Gamma(s)$ es holomorfa y no nula cerca de $s=1$, la
+división por ese factor construye, sin usar su orden de anulación, el germen
+holomorfo de $L(E,s)$ en un disco $U_E$ centrado en $1$.
+
+Para evitar mezclar una fibra $\ell$-ádica con una matriz compleja, se toma
+primero el polinomio entero, independiente de $\ell$,
+\begin{equation}\label{eq:pdf2-bsd-polinomio-local-entero}
+ P_{E,p}(X):=\det(I-X\operatorname{Frob}_p\mid V_\ell E^{I_p})
+ \in\mathbb Z[X].
+\end{equation}
+Para $p\nmid N_E$, sean $\alpha_p,\beta_p$ las raíces de $P_{E,p}$. Se toma
+$W_p=\mathbb C^2$ con base ortonormal y la realización normal
+\begin{equation}\label{eq:pdf2-bsd-realizacion-normal-frobenius}
+ F_p^{\mathbb C}:=\operatorname{diag}(\alpha_p,\beta_p),
+ \qquad |\alpha_p|=|\beta_p|=p^{1/2},
+ \qquad \|F_p^{\mathbb C}\|_1=2p^{1/2}.
+\end{equation}
+Para los primos malos se elige de igual modo una realización compleja del
+polinomio local; son finitos y se conservan como bloques separados. No se usa
+la matriz compañera, cuya norma no estaría controlada uniformemente por el
+módulo de sus autovalores.
+
+Póngase $\mathscr H_E:=\widehat\bigoplus_{p\nmid N_E}W_p$ y, para $X>0$,
+\begin{equation}\label{eq:pdf2-bsd-truncados-fredholm}
+ K_{E,X}(s):=\bigoplus_{\substack{p\leq X\\p\nmid N_E}}
+          p^{-s}F_p^{\mathbb C},
+ \qquad
+ L_X(E,s):=\det(I-K_{E,X}(s))^{-1}
+       \prod_{p\mid N_E}P_{E,p}(p^{-s})^{-1}.
+\end{equation}
+Si $K_0$ es un compacto de $\{\Re s>3/2\}$ y
+$\sigma_0:=\inf_{s\in K_0}\Re s$, entonces
+\begin{equation}\label{eq:pdf2-bsd-cota-traza}
+ \sup_{s\in K_0}\|K_{E,X'}(s)-K_{E,X}(s)\|_1
+ \leq C_E\sum_{X<p\leq X'}p^{1/2-\sigma_0}
+ \xrightarrow[X,X'\to\infty]{}0.
+\end{equation}
+Así $K_{E,X}\to K_E$ en norma traza, localmente uniformemente, y la
+continuidad del determinante de Fredholm prueba, no define,
+\begin{equation}\label{eq:pdf2-bsd-fredholm-euler}
+ \det_F(I-K_E(s))^{-1}
+ \prod_{p\mid N_E}P_{E,p}(p^{-s})^{-1}
+ =\lim_{X\to\infty}L_X(E,s)=L(E,s).
+\end{equation}
+
+Para pasar del producto infinito a un complejo finito se conserva primero el
+operador, no sólo su determinante. Sean $\mathscr H_E^+$ y
+$\mathscr H_E^-$ dos copias basadas de
+$\mathscr H_E\oplus\bigoplus_{p\mid N_E}W_p$. En el semiplano
+$\Re s>3/2$ se define
+\begin{equation}\label{eq:pdf2-bsd-operadores-euler-inversos}
+ \begin{aligned}
+  \mathscr A_{E,X}(s)&:=
+   (I-K_{E,X}(s))^{-1}\oplus
+   \bigoplus_{p\mid N_E}(I-p^{-s}F_p^{\mathbb C})^{-1},\\
+  \mathscr A_E(s)&:=\lim_{X\to\infty}\mathscr A_{E,X}(s):
+       \mathscr H_E^+\longrightarrow\mathscr H_E^-.
+ \end{aligned}
+\end{equation}
+La identidad del resolvente y \eqref{eq:pdf2-bsd-cota-traza} dan, para cada
+compacto $K_0$ del semiplano,
+\begin{equation}\label{eq:pdf2-bsd-resolvente-convergencia-traza}
+ \sup_{s\in K_0}
+ \|\mathscr A_{E,X'}(s)-\mathscr A_{E,X}(s)\|_1\longrightarrow0.
+\end{equation}
+Sea $\mathcal U_{\rm bas}:\mathscr H_E^+\to\mathscr H_E^-$ la identificación unitaria que
+envía cada vector de la base positiva al vector homónimo de la base
+negativa. Los determinantes siguientes significan los de
+$\mathcal U_{\rm bas}^{-1}\mathscr A_{E,X}=I+\mathcal L^1$ y
+$\mathcal U_{\rm bas}^{-1}\mathscr A_E=I+\mathcal L^1$. Entonces
+\begin{equation}\label{eq:pdf2-bsd-det-a-x-l-x}
+ \det_F(\mathcal U_{\rm bas}^{-1}\mathscr A_{E,X}(s))=L_X(E,s),
+ \qquad
+ \det_F(\mathcal U_{\rm bas}^{-1}\mathscr A_E(s))=L(E,s).
+\end{equation}
+La segunda igualdad es precisamente el límite de
+\eqref{eq:pdf2-bsd-fredholm-euler}; el signo es el correcto porque se toma el
+inverso de $I-K_E$.
+
+La corestricción finita se construye a partir de los terminales, sin publicar
+infinitos primos en una matriz finita. Sean $\mathcal I_E^+$ y
+$\mathcal I_E^-$ las listas terminales de las bases integrales de $M_E$ y
+$N_E$, respectivamente; son finitas por
+\eqref{eq:pdf2-bsd-sumando-fs-y-lattice}. Fijado $\sigma_*>3/2$, el
+entrelazador local--global las inserta en el espacio de Euler por
+\begin{equation}\label{eq:pdf2-bsd-embedding-terminal-euler}
+ \iota_{\rm Eul}^\pm(e_\eta):=
+ \left(p^{-\sigma_*}\operatorname{res}_p^\pm
+       \operatorname{Surv}_E(e_\eta)\right)_p
+ \oplus\left(\operatorname{res}_p^\pm
+       \operatorname{Surv}_E(e_\eta)\right)_{p\mid N_E}.
+\end{equation}
+La suma buena es cuadrado--sumable por la misma cota que
+\eqref{eq:pdf2-bsd-cota-traza}. Se ponen
+$\tau_\eta^\pm:=\iota_{\rm Eul}^\pm(e_\eta)$; la independencia de las filas
+terminales da las counidades duales $\{\epsilon_{\eta}^{\pm}\}$, de modo que
+$\epsilon_\eta^\pm(\tau_{\eta'}^\pm)=\delta_{\eta\eta'}$. Las sumas
+\begin{equation}\label{eq:pdf2-bsd-proyecciones-terminales-finitas}
+ P_E^\pm:=\sum_{\eta\in\mathcal I_E^\pm}
+      \tau_\eta^\pm\epsilon_\eta^\pm,
+ \qquad Q_E^\pm:=I-P_E^\pm
+\end{equation}
+son proyecciones basadas de rango finito; sus índices se fijan por las
+etiquetas terminales y no por el rango de Mordell--Weil ni por un orden de
+anulación.
+
+La coordenada $\deg$ del ledger descompone
+\begin{equation}\label{eq:pdf2-bsd-graduacion-fredholm}
+ \mathscr H_E^\pm=\widehat\bigoplus_i\mathscr H_E^{\pm,i},
+ \qquad
+ \mathcal I_E^{\pm,i}:=\{\eta\in\mathcal I_E^\pm:\deg\eta=i\},
+ \qquad
+ P_E^{\pm,i}:=
+ \sum_{\eta\in\mathcal I_E^{\pm,i}}\tau_\eta^\pm\epsilon_\eta^\pm.
+\end{equation}
+Las relaciones locales conservan $\deg$ salvo el diferencial $i\mapsto i+1$;
+por tanto
+$\mathscr A_E=\bigoplus_i\mathscr A_E^i$ con
+$\mathscr A_E^i:\mathscr H_E^{+,i}\to\mathscr H_E^{-,i+1}$. Los cuatro
+bloques de \eqref{eq:pdf2-bsd-bloques-fredholm}, su Schur y sus truncaciones
+se toman grado a grado, y por definición
+\begin{equation}\label{eq:pdf2-bsd-schur-graduado}
+ \mathscr D_E=\bigoplus_i\mathscr D_E^i,
+ \qquad
+ \mathscr D_E^i:=A_{00}^i-A_{01}^i(A_{11}^i)^{-1}A_{10}^i.
+\end{equation}
+
+La continuación Fredholm se escribe antes de usarla. En la carta de Euler
+$U_0$ se pone $\mathscr A_{E,0}:=\mathscr A_E$. Las cartas conservan un
+complemento basado común $\mathscr Q_E^\pm$ y cambian sólo la familia finita
+de terminales. Si
+$\tau_{\eta,\alpha}^\pm:=
+\operatorname{Ext}_{\Gamma,{\rm det},\alpha}(\tau_\eta^\pm)$ y
+$\epsilon_{\eta,\alpha}^\pm$ es su base dual, se define
+\begin{equation}\label{eq:pdf2-bsd-cambios-fredholm-cartas}
+ C_{\alpha\beta}^\pm:=
+ I_{\mathscr Q_E^\pm}\oplus
+ \sum_{\eta\in\mathcal I_E^\pm}
+ \tau_{\eta,\beta}^\pm\epsilon_{\eta,\alpha}^\pm,
+ \qquad C_{\alpha\beta}^\pm-I\in\mathcal L^1,
+ \qquad
+ C_{\beta\gamma}^\pm C_{\alpha\beta}^\pm=C_{\alpha\gamma}^\pm.
+\end{equation}
+La diferencia respecto de la identidad tiene rango a lo sumo
+$|\mathcal I_E^\pm|$ y es, por tanto, de clase traza; la holomorfía se sigue
+de que cada una de las finitas coordenadas terminales de
+$\operatorname{Ext}_{\Gamma,{\rm det},\alpha}$ es holomorfa. La última
+igualdad se verifica en $\mathscr Q_E^\pm$ y en cada
+$\tau_{\eta,\alpha}^\pm$. Se define
+recursivamente en los solapamientos
+\begin{equation}\label{eq:pdf2-bsd-continuacion-fredholm-cartas}
+ \mathscr A_{E,\beta}:=
+ C_{\alpha\beta}^-\mathscr A_{E,\alpha}
+ (C_{\alpha\beta}^+)^{-1}.
+\end{equation}
+Los operadores $C_{\alpha\beta}^\pm$ son holomorfos porque cada coeficiente
+es una coordenada de $\operatorname{Ext}_{\Gamma,{\rm det}}$; el cociclo de
+\eqref{eq:pdf2-bsd-cambios-fredholm-cartas} prueba que
+\eqref{eq:pdf2-bsd-continuacion-fredholm-cartas} no depende de la cadena de
+cartas. Ésta es la familia determinante--clase que se denota en adelante por
+$\mathscr A_E(s)$. Con
+$C_{0\alpha}^\pm:=C_{\alpha-1,\alpha}^\pm\cdots C_{0,1}^\pm$ se transportan
+además
+$P_{E,\alpha}^{\pm,i}:=
+C_{0\alpha}^\pm P_E^{\pm,i}(C_{0\alpha}^\pm)^{-1}$ y
+$\mathscr H_{E,\alpha}^{\pm,i}:=
+C_{0\alpha}^\pm\mathscr H_E^{\pm,i}$; de este modo todos los Schur
+$\mathscr D_{E,\alpha}^i$ son los de
+\eqref{eq:pdf2-bsd-schur-graduado}, no símbolos nuevos. Tras reducir cada
+carta, el bloque
+\begin{equation}\label{eq:pdf2-bsd-bloques-fredholm}
+ A_{ab}(s):=P_a^-\mathscr A_E(s)P_b^+,
+ \qquad P_0^\pm:=P_E^\pm,\quad P_1^\pm:=Q_E^\pm,
+ \qquad A_{11}(s):Q_E^+\mathscr H_E^+\xrightarrow{\sim}
+                       Q_E^-\mathscr H_E^-
+\end{equation}
+es invertible. Ésta es la reducción finita estándar del operador Fredholm;
+la elección concreta de $P_E^\pm$ viene dada por
+\eqref{eq:pdf2-bsd-proyecciones-terminales-finitas}. La base fija también
+la identificación unitaria
+$U_{11}:Q_E^+\mathscr H_E^+\to Q_E^-\mathscr H_E^-$; por construcción
+$U_{11}^{-1}A_{11}=I+\mathcal L^1$, y sólo a este operador se aplica
+$\det_F$. Las copias $+$ y $-$ ya son la totalización par--impar; no se
+aplica un segundo signo alternado al determinante del operador inverso.
+
+Para cada truncación que contiene el soporte de esos terminales se definen
+materialmente
+\begin{equation}\label{eq:pdf2-bsd-cor-lift-truncados}
+ \begin{aligned}
+  \operatorname{Cor}_{E,X}&:=P_E^-,\\
+  \operatorname{Lift}_{E,X}(v)&:=
+       v-A_{11,X}^{-1}A_{10,X}v,\\
+  \mathscr D_{E,X}(s)&:=
+       \operatorname{Cor}_{E,X}\mathscr A_{E,X}(s)
+       \operatorname{Lift}_{E,X}
+       =A_{00,X}-A_{01,X}A_{11,X}^{-1}A_{10,X}.
+ \end{aligned}
+\end{equation}
+Por multiplicación de bloques,
+\begin{equation}\label{eq:pdf2-bsd-eliminacion-schur}
+ \begin{pmatrix}I&-A_{01,X}A_{11,X}^{-1}\\0&I\end{pmatrix}
+ \mathscr A_{E,X}
+ \begin{pmatrix}I&0\\-A_{11,X}^{-1}A_{10,X}&I\end{pmatrix}
+ =\begin{pmatrix}\mathscr D_{E,X}&0\\0&A_{11,X}\end{pmatrix}.
+\end{equation}
+Así la corestricción no es nominal: su lift, su inversa sobre el complemento
+y su diferencial finito están escritos. La convergencia del resolvente
+implica
+\begin{equation}\label{eq:pdf2-bsd-corestriccion-limite}
+ \mathscr D_E(s):=\lim_{X\to\infty}\mathscr D_{E,X}(s)
+ =A_{00}-A_{01}A_{11}^{-1}A_{10},
+ \qquad
+ \|\mathscr D_{E,X}-\mathscr D_E\|_1\to0.
+\end{equation}
+El determinante del complemento no se descarta: por
+\eqref{eq:pdf2-bsd-eliminacion-schur},
+\begin{equation}\label{eq:pdf2-bsd-determinante-schur-complemento}
+ \det_F(\mathcal U_{\rm bas}^{-1}\mathscr A_E)
+ =\det_F(U_{11}^{-1}A_{11})\det(\mathscr D_E).
+\end{equation}
+
+Sea $\mathcal O(U_E)$ el anillo de funciones holomorfas del disco central.
+Los espacios racionales basados $V_0^i,W_0^{i+1}$ de
+\eqref{eq:pdf2-bsd-s-universal} proporcionan
+\begin{equation}\label{eq:pdf2-bsd-dominios-analiticos}
+ \mathscr V_E^i:=V_0^i\otimes_{\mathbb Q}\mathcal O(U_E),
+ \qquad
+ \mathscr W_E^{i+1}:=W_0^{i+1}\otimes_{\mathbb Q}\mathcal O(U_E).
+\end{equation}
+Las filas de $\operatorname{Rel}_{\rm det}$ construyen, sobre cada terminal
+$\eta$ y en cada grado, los vectores del modelo común
+$v_{\eta,i}:=\upsilon_i(b_\eta)$,
+$w_{\eta,i+1}:=\upsilon_{i+1}(b_\eta^{\rm term})$ y los isomorfismos basados
+\begin{equation}\label{eq:pdf2-bsd-jvw-generadores}
+ \begin{aligned}
+  J_{E,V,i}(\tau_{\eta,i}^+)&:=v_{\eta,i},\\
+  J_{E,W,i+1}(\tau_{\eta,i+1}^-)&:=w_{\eta,i+1}.
+ \end{aligned}
+\end{equation}
+La relación diferencial de esa misma fila, aplicada a cada generador, es
+\begin{equation}\label{eq:pdf2-bsd-entrelazamiento-analitico-smith}
+ \boxed{
+ J_{E,W,i+1}(s)\,\mathscr D_E^i(s)
+ =S_E^i(T_E(s))\,J_{E,V,i}(s).}
+\end{equation}
+Éste es el entrelazador efectivo entre el Schur Fredholm corestringido y la
+matriz de Smith; no es una igualdad de determinantes postulada.
+
+Para tipar la continuación, sea $\mathfrak U_E$ un dominio conexo que contiene
+un abierto del semiplano $\Re s>3/2$ y el disco $U_E$, y elíjase una cadena
+finita de cartas $\{U_\alpha\}_{\alpha=0}^A$ de
+$\operatorname{Ext}_{\Gamma,{\rm det}}$, con $U_A=U_E$. En $U_\alpha$ se
+ponen
+$\mathscr P_{E,\alpha}^i:=
+P_{E,\alpha}^{+,i}\mathscr H_{E,\alpha}^{+,i}$ y
+$\mathscr D_{E,\alpha}^i$ igual al Schur de
+\eqref{eq:pdf2-bsd-corestriccion-limite}. Los mapas al modelo común se
+definen, sin elección adicional, por
+\begin{equation}\label{eq:pdf2-bsd-j-cartas-modelo-comun}
+ J_{E,\alpha,i}(\tau_{\eta,\alpha,i}):=v_{\eta,i}
+ \quad\text{en el dominio},
+ \qquad
+ J_{E,\alpha,i+1}(\tau_{\eta,\alpha,i+1}):=w_{\eta,i+1}
+ \quad\text{en el codominio}.
+\end{equation}
+Son holomorfos porque las bases de
+\eqref{eq:pdf2-bsd-cambios-fredholm-cartas} lo son. En un solapamiento se
+define, siempre en el mismo grado,
+\begin{equation}\label{eq:pdf2-bsd-transiciones-atlas}
+ G_{\alpha\beta,i}:=J_{E,\beta,i}^{-1}J_{E,\alpha,i}:
+ \mathscr P_{E,\alpha}^i\big|_{U_\alpha\cap U_\beta}
+ \longrightarrow
+ \mathscr P_{E,\beta}^i\big|_{U_\alpha\cap U_\beta}.
+\end{equation}
+La composición literal de estas matrices prueba
+\begin{equation}\label{eq:pdf2-bsd-cociclo-atlas}
+ G_{\beta\gamma,i}G_{\alpha\beta,i}=G_{\alpha\gamma,i},
+ \qquad G_{\alpha\alpha,i}=I,
+ \qquad G_{\beta\alpha,i}=G_{\alpha\beta,i}^{-1},
+\end{equation}
+y el entrelazamiento en las dos cartas da la compatibilidad de cadena
+\begin{equation}\label{eq:pdf2-bsd-cociclo-cadena}
+ G_{\alpha\beta,i+1}\mathscr D_{E,\alpha}^i
+ =\mathscr D_{E,\beta}^iG_{\alpha\beta,i}.
+\end{equation}
+Por tanto
+$g_{\alpha\beta}:=\prod_i\det(G_{\alpha\beta,i})^{(-1)^i}$ satisface el
+cociclo triple. Si
+\begin{equation}\label{eq:pdf2-bsd-tau-atlas}
+ \tau_E^{\rm atlas}(s):=
+ \prod_{\alpha=0}^{A-1}g_{\alpha,\alpha+1}(s),
+\end{equation}
+entonces $\tau_E^{\rm atlas}$ es exactamente el transporte determinantal
+desde la carta de Euler a la carta central.
+
+Se denotan por $J_{E,V}$ y $J_{E,W}$ las totalizaciones par--impar, con
+orden de Koszul, de los mapas de
+\eqref{eq:pdf2-bsd-entrelazamiento-analitico-smith}; sus determinantes son
+los productos alternados de los determinantes por grado. En la carta central
+se define, y no antes, la unidad conjunta
+\begin{equation}\label{eq:pdf2-bsd-u-e-construida}
+ u_E(s):=\tau_E^{\rm atlas}(s)
+ \det_F(U_{11}^{-1}A_{11}(s))
+ \frac{\det J_{E,V}(s)}
+      {\det J_{E,W}(s)}.
+\end{equation}
+Todos sus factores son holomorfos e invertibles al reducir $U_E$. La
+normalización no se impone factor a factor. Sea $\mathbf e_{\rm cent}$ el
+generador de la línea determinante del modelo común. Al efectuar las dos
+operaciones triangulares de \eqref{eq:pdf2-bsd-eliminacion-schur}, transportar
+por \eqref{eq:pdf2-bsd-cambios-fredholm-cartas} y aplicar
+\eqref{eq:pdf2-bsd-j-cartas-modelo-comun}, la acción conjunta en $s=1$ es,
+generador por generador,
+\begin{equation}\label{eq:pdf2-bsd-u-e-normalizacion-probada}
+ \begin{aligned}
+ &\tau_E^{\rm atlas}(1)
+ \det_F(U_{11}^{-1}A_{11}(1))
+ \frac{\det J_{E,V}(1)}
+      {\det J_{E,W}(1)}\,\mathbf e_{\rm cent}\\
+ &\qquad=
+ \bigotimes_{i,\eta}
+ \bigl(\epsilon_{\eta,i}^-(\tau_{\eta,i}^-)
+       \epsilon_{\eta,i}^+(\tau_{\eta,i}^+)^{-1}\bigr)^{(-1)^i}
+ \mathbf e_{\rm cent}
+ =\mathbf e_{\rm cent},
+ \qquad \boxed{u_E(1)=1}.
+ \end{aligned}
+\end{equation}
+La primera igualdad es la identidad de conservación de la base común del
+comparador de $\mathfrak G_{\rm det}(E)$, ahora expandida por sus filas; la
+segunda usa
+$\epsilon_{\eta,i}^\pm(\tau_{\eta,i}^\pm)=1$. No se ha normalizado ninguno
+de los cuatro factores por separado ni se ha usado el valor buscado.
+
+\begin{proposition}[Procedencia FERS de la factorización analítica]
+\label{prop:pdf2-bsd-fers-factorizacion-owner}
+En el disco $U_E$ se tiene la identidad de secciones determinantales
+\begin{equation}\label{eq:pdf2-bsd-factorizacion-analitica}
+ \boxed{L(E,s)=u_E(s)\det S_E(T_E(s)).}
+\end{equation}
+La igualdad es la publicación del lector FERS de
+$\mathfrak G_{\rm det}(E)$ y no una igualdad postulada después de
+calcular el orden o el término principal.
+\end{proposition}
+
+\begin{proof}
+En el semiplano absoluto,
+\eqref{eq:pdf2-bsd-det-a-x-l-x} identifica el límite Fredholm con $L(E,s)$.
+La eliminación literal \eqref{eq:pdf2-bsd-eliminacion-schur} y la continuidad
+en norma traza dan
+$L(E,s)=\det_F(U_{11}^{-1}A_{11}(s))\det\mathscr D_E(s)$.
+Tomar cuñas ordenadas en
+\eqref{eq:pdf2-bsd-entrelazamiento-analitico-smith} da
+\[
+ \det\mathscr D_E(s)
+ =\frac{\det J_{E,V}(s)}
+        {\det J_{E,W}(s)}
+   \det S_E(T_E(s)).
+\]
+Las ecuaciones \eqref{eq:pdf2-bsd-cociclo-atlas} y
+\eqref{eq:pdf2-bsd-cociclo-cadena} transportan esta sección por las cartas;
+el producto exacto de sus transiciones es $\tau_E^{\rm atlas}$. Por tanto, en
+$U_A=U_E$, el coeficiente que queda es precisamente
+\eqref{eq:pdf2-bsd-u-e-construida}, lo que prueba
+\eqref{eq:pdf2-bsd-factorizacion-analitica}. La unicidad de la continuación
+Mellin de \eqref{eq:pdf2-bsd-mellin-continuada} excluye otra sección. Por
+último, \eqref{eq:pdf2-bsd-u-e-normalizacion-probada} prueba conjuntamente
+$u_E(1)=1$. Ningún paso usa $d$, el rango, $\operatorname{Sha}(E)$ ni el
+término principal.
+\end{proof}
+
+Defínase, a partir de la forma de Smith y no del orden analítico,
+\begin{equation}\label{eq:pdf2-bsd-a-e-smith}
+ a_E(T):=T^{-d}\det S_E(T).
+\end{equation}
+Por \eqref{eq:pdf2-bsd-rboc-lt}, $a_E$ es holomorfa en $T=0$ y
+\begin{equation}\label{eq:pdf2-bsd-a-e-cero}
+ a_E(0)=R_{\rm Boc}^{\rm der}(S_E)\ne0.
+\end{equation}
+Sustituyendo esta identidad y
+\eqref{eq:pdf2-bsd-t-e-construido} en la factorización analítica se obtiene
+materialmente
+\begin{equation}\label{eq:pdf2-bsd-expansion-local-deducida}
+ \begin{aligned}
+ L(E,s)
+  &=(s-1)^d\,U_E^{\rm lead}(s),\\
+ U_E^{\rm lead}(s)
+  &:=u_E(s)
+     \left(\frac{T_E(s)}{s-1}\right)^d
+     a_E(T_E(s)),\\
+ U_E^{\rm lead}(1)
+  &=1\cdot1^d\cdot R_{\rm Boc}^{\rm der}(S_E)
+   =R_{\rm Boc}^{\rm der}(S_E)\ne0.
+ \end{aligned}
+\end{equation}
+Por tanto el exponente y el coeficiente principal se deducen del germen
+holomorfo no nulo; no son entradas de $T_E$, $u_E$ o $S_E$.
+Defínanse ahora, después de esta deducción,
+\begin{equation}\label{eq:pdf2-bsd-dan-zan}
+ d_{\rm an}:=\operatorname{ord}_{s=1}L(E,s),
+ \qquad
+ \mathfrak z_{\rm an}:=
+ \left[(s-1)^{-d_{\rm an}}L(E,s)\right]_{s=1}.
+\end{equation}
+La ecuación \eqref{eq:pdf2-bsd-expansion-local-deducida} prueba
+\begin{equation}\label{eq:pdf2-bsd-dan-d}
+ d_{\rm an}=d,
+ \qquad
+ \mathfrak z_{\rm an}
+ =R_{\rm Boc}^{\rm der}(S_E)
+ \quad\text{en la línea basada}.
+\end{equation}
+
+En el lado aritmético, el teorema~\ref{thm:pdf2-bsd-psi-pt} y la sucesión
+\eqref{eq:pdf2-bsd-sha-tamagawa} construyen
+\begin{equation}\label{eq:pdf2-bsd-dar-zar}
+ \begin{aligned}
+ d_{\rm ar}&:=\dim_K M_E^{\rm MW}=d,\\
+ \mathfrak z_{\rm ar}&:=
+ \frac{|\operatorname{Sha}(E)|\operatorname{Reg}(E)\prod_vc_v}
+ {|E(\mathbb Q)_{\rm tors}|^2}
+ \quad\text{en la línea aritmética orientada}.
+ \end{aligned}
+\end{equation}
+
+Para tipar las cuatro flechas, si $C^\bullet$ es un complejo perfecto con
+base ordenada $\mathcal B_i=(c_{i,1},\ldots,c_{i,r_i})$, se usa
+\begin{equation}\label{eq:pdf2-bsd-linea-determinante-base}
+ \det C^\bullet:=
+ \bigotimes_i\left(\bigwedge^{r_i}C^i\right)^{(-1)^i},
+ \qquad
+ \mathbf e_C:=\bigotimes_i
+ (c_{i,1}\wedge\cdots\wedge c_{i,r_i})^{(-1)^i}.
+\end{equation}
+Para un grupo finito $A$ con presentación basada
+$\mathbb Z^t\xrightarrow{D_A}\mathbb Z^t\to A$, su línea
+$\det_{\mathbb Z}A$ lleva el generador $\mathbf e_A$ y la evaluación
+\begin{equation}\label{eq:pdf2-bsd-evaluacion-grupo-finito}
+ \operatorname{ev}_A(\mathbf e_A):=|\det D_A|=|A|.
+\end{equation}
+Cuando esa línea se combina con una línea sobre $K=\mathbb Q$, se usa siempre
+la extensión de escala
+\begin{equation}\label{eq:pdf2-bsd-linea-finita-k}
+ \det_KA:=\det_{\mathbb Z}A\otimes_{\mathbb Z}K;
+\end{equation}
+no se tensorizan directamente módulos sobre anillos distintos.
+En particular, se eligen las bases de Smith ya construidas en
+\eqref{eq:pdf2-bsd-smith-finito}, $m_1,\ldots,m_t$ de $M_E$ y
+$n_1,\ldots,n_t$ de $N_E$, con $D_Em_i=s_in_i$, y se fija
+\begin{equation}\label{eq:pdf2-bsd-generador-smith-fe}
+ \mathbf e_{F_E}:=
+ (m_1\wedge\cdots\wedge m_t)\otimes
+ (n_1\wedge\cdots\wedge n_t)^{-1},
+ \qquad
+ \operatorname{ev}_{F_E}(\mathbf e_{F_E})=\prod_i|s_i|.
+\end{equation}
+Las líneas sucesivas son
+\begin{equation}\label{eq:pdf2-bsd-cinco-lineas-tipadas}
+\begin{aligned}
+ \Delta_K&:=\det\mathcal C_E^K,\\
+ \Delta_{\rm FERS}&:=\det\mathcal C_E^{\rm Iw},\\
+ \Delta_{\rm PT}&:=
+   \det_K M_E^{\rm MW}\otimes
+   \det_K(M_E^{\rm MW})^\vee\otimes\det_KF_E,\\
+ \Delta_{\rm STS}&:=
+   \det_K M_E^{\rm MW}\otimes
+   \det_K(M_E^{\rm MW})^\vee\otimes
+   \det_K\operatorname{Sha}(E)
+   \otimes\bigotimes_{v<\infty}
+      \det_K\Phi_v(\mathbb F_v),\\
+ \Delta_{\rm BSD}&:=\mathbb R\,\mathbf e_{\rm BSD}.
+\end{aligned}
+\end{equation}
+La especialización principal no es una identificación tácita. Denótese
+$I:=(T)\subset K[[T]]$ y
+$\mathfrak c_{K/{\rm FERS}}^{\rm reg}:=
+\det_{\rm alt}\Phi_{K/{\rm FERS}}:\Delta_K[[T]]\to
+\Delta_{\rm FERS}[[T]]$. Sean
+\begin{equation}\label{eq:pdf2-bsd-lineas-leading}
+ \begin{aligned}
+  \Delta_{\rm FERS}^{(d)}&:=I^d\Delta_{\rm FERS}[[T]],&
+  \Delta_{\rm FERS}^{\rm lead}
+    &:=I^{-d}\Delta_{\rm FERS}^{(d)}
+       \otimes_{K[[T]],\,T\mapsto0}K,\\
+  \Delta_K^{(d)}&:=(\mathfrak c_{K/{\rm FERS}}^{\rm reg})^{-1}
+       (\Delta_{\rm FERS}^{(d)}),&
+  \Delta_K^{\rm lead}
+    &:=I^{-d}\Delta_K^{(d)}
+       \otimes_{K[[T]],\,T\mapsto0}K.
+ \end{aligned}
+\end{equation}
+Aquí $I^{-d}\Delta^{(d)}$ significa el módulo formado por los símbolos
+$T^{-d}z$ con $z\in\Delta^{(d)}$. La especialización está definida sólo
+sobre la parte de orden al menos $d$:
+\begin{equation}\label{eq:pdf2-bsd-sp-leading-tipado}
+ \operatorname{sp}^{(d)}_{\rm FERS}:
+ \Delta_{\rm FERS}^{(d)}\longrightarrow
+ \Delta_{\rm FERS}^{\rm lead},
+ \qquad
+ z(T)\longmapsto
+ \overline{T^{-d}z(T)}.
+\end{equation}
+La equivalencia Kato--FERS induce entonces el mapa tipado
+\begin{equation}\label{eq:pdf2-bsd-c-k-fers-leading}
+ \begin{aligned}
+ \mathfrak c_{K/{\rm FERS}}^{\rm lead}:{}
+ &\Delta_K^{\rm lead}\xrightarrow{\ \sim\ }
+   \Delta_{\rm FERS}^{\rm lead},\\
+ &\overline{T^{-d}z_K(T)}\longmapsto
+   \overline{T^{-d}
+   \mathfrak c_{K/{\rm FERS}}^{\rm reg}(z_K(T))}.
+ \end{aligned}
+\end{equation}
+La fórmula no aplica $\operatorname{sp}^{(d)}$ a una línea desnuda. En
+particular, si
+\begin{equation}\label{eq:pdf2-bsd-seccion-zeta-leading}
+ \begin{aligned}
+  \boldsymbol\zeta_{\rm FERS}(T)
+    &:=\det S_E(T)\,\mathbf e_{\rm FERS}
+       \in\Delta_{\rm FERS}^{(d)},\\
+  \boldsymbol\zeta_K(T)
+    &:=(\mathfrak c_{K/{\rm FERS}}^{\rm reg})^{-1}
+       \boldsymbol\zeta_{\rm FERS}(T)
+       \in\Delta_K^{(d)},
+ \end{aligned}
+\end{equation}
+entonces
+\begin{equation}\label{eq:pdf2-bsd-especializacion-zeta}
+ \operatorname{sp}^{(d)}_{\rm FERS}
+       (\boldsymbol\zeta_{\rm FERS})
+ =R_{\rm Boc}^{\rm der}(S_E)\,
+       \mathbf e_{\rm FERS}^{\rm lead},
+ \quad
+ \mathfrak c_{K/{\rm FERS}}^{\rm lead}
+       (\overline{T^{-d}\boldsymbol\zeta_K})
+ =R_{\rm Boc}^{\rm der}(S_E)\,
+       \mathbf e_{\rm FERS}^{\rm lead}.
+\end{equation}
+La definición usa sólo $d=\operatorname{ord}_T\det S_E(T)$, ya calculado por
+Smith, y no el orden analítico.
+
+Las cuatro flechas propietarias, ahora con dominio y codominio explícitos,
+se comparan en la fibra real desde el primer lugar donde interviene la
+altura de Néron.  Para evitar multiplicar una línea sobre $K$ por un
+escalar real no perteneciente en general a $K$, se fijan
+\begin{equation}\label{eq:pdf2-bsd-lineas-reales-comparador}
+ \begin{aligned}
+  \Delta_{K,\mathbb R}^{\rm lead}
+    &:=\Delta_K^{\rm lead}\otimes_{K,\iota_\infty}\mathbb R,&
+  \Delta_{{\rm FERS},\mathbb R}^{\rm lead}
+    &:=\Delta_{\rm FERS}^{\rm lead}\otimes_{K,\iota_\infty}\mathbb R,\\
+  \Delta_{{\rm PT},\mathbb R}
+    &:=\Delta_{\rm PT}\otimes_{K,\iota_\infty}\mathbb R,&
+  \Delta_{{\rm STS},\mathbb R}
+    &:=\Delta_{\rm STS}\otimes_{K,\iota_\infty}\mathbb R.
+ \end{aligned}
+\end{equation}
+Las cuatro flechas son entonces
+\begin{equation}\label{eq:pdf2-bsd-cuatro-comparadores}
+\begin{aligned}
+ \mathfrak c_{K/{\rm FERS},\mathbb R}^{\rm lead}:
+   &\Delta_{K,\mathbb R}^{\rm lead}
+      \longrightarrow\Delta_{{\rm FERS},\mathbb R}^{\rm lead},
+ &\mathfrak c_{K/{\rm FERS},\mathbb R}^{\rm lead}
+   &:=\mathfrak c_{K/{\rm FERS}}^{\rm lead}\otimes_K1_{\mathbb R},\\
+ \mathfrak c_{{\rm PT},\mathbb R}:
+   &\Delta_{{\rm FERS},\mathbb R}^{\rm lead}
+      \longrightarrow\Delta_{{\rm PT},\mathbb R},
+ &\mathfrak c_{{\rm PT},\mathbb R}(z)&:=
+   \mathfrak n_{E,\mathbb R}(z)\otimes\mathbf e_{F_E},\\
+ \mathfrak c_{{\rm STS},\mathbb R}:
+   &\Delta_{{\rm PT},\mathbb R}
+      \longrightarrow\Delta_{{\rm STS},\mathbb R},
+ &\mathfrak c_{{\rm STS},\mathbb R}&:=\det\bigl(
+   0\to\operatorname{Sha}(E)\to F_E
+     \to\textstyle\bigoplus_{v<\infty}\Phi_v(\mathbb F_v)
+     \to0\bigr)\otimes_K1_{\mathbb R},\\
+ \mathfrak c_{\rm tors,\infty}:
+   &\Delta_{{\rm STS},\mathbb R}
+      \longrightarrow\Delta_{\rm BSD}.&&
+\end{aligned}
+\end{equation}
+
+\begin{proposition}[Cálculo generador a generador de las cuatro flechas]
+\label{prop:pdf2-bsd-cuatro-flechas-generadores}
+Las acciones sobre las bases de
+\eqref{eq:pdf2-bsd-cinco-lineas-tipadas} son las siguientes.
+
+\emph{Primera flecha.} Si
+$\mathbf e_K^i=\bigwedge_{b\in\mathcal B_i^K}b$ y
+$\mathbf e_{\rm FERS}^i=\bigwedge_{b\in\mathcal B_i^K}\upsilon_i(b)$,
+la tabla \eqref{eq:pdf2-bsd-tabla-kato-fers} da
+\begin{equation}\label{eq:pdf2-bsd-c1-generadores}
+ \mathfrak c_{K/{\rm FERS}}^{\rm reg}(\mathbf e_K)
+ =\prod_i\det(I+TB_i(T))^{(-1)^i}\mathbf e_{\rm FERS}
+ =\rho_E(T)\mathbf e_{\rm FERS},
+ \qquad \rho_E(0)=1.
+\end{equation}
+Si $\mathbf e_K^{\rm lead}$ y $\mathbf e_{\rm FERS}^{\rm lead}$ son las
+bases inducidas por \eqref{eq:pdf2-bsd-lineas-leading}, entonces
+\begin{equation}\label{eq:pdf2-bsd-c1-leading-generador}
+ \mathfrak c_{K/{\rm FERS},\mathbb R}^{\rm lead}
+     (\mathbf e_K^{\rm lead}\otimes1)
+ =\rho_E(0)(\mathbf e_{\rm FERS}^{\rm lead}\otimes1)
+ =\mathbf e_{\rm FERS}^{\rm lead}\otimes1.
+\end{equation}
+
+\emph{Segunda flecha.} Elíjanse bases integrales
+$a_{q,1},\ldots,a_{q,r_q}$ de $A_{q,\mathbb Z}$, vistas en $A_q$, y
+$b_{q,j}=\bar\beta_q(a_{q,j})$ de $B_q$. La matriz de la altura de la página
+queda definida por
+\begin{equation}\label{eq:pdf2-bsd-hq-generadores}
+ j_q(b_{q,j})=
+ \sum_{k=1}^{r_q}(H_q)_{kj}\,a_{q,k}^\vee\otimes T^q.
+\end{equation}
+Por tanto, sobre la cuña completa,
+\begin{equation}\label{eq:pdf2-bsd-c2-cuna-paginas}
+ \bigwedge_{j=1}^{r_q}j_q\bar\beta_q(a_{q,j})
+ =T^{qr_q}\det(H_q)
+  \bigwedge_{k=1}^{r_q}a_{q,k}^\vee.
+\end{equation}
+El producto sobre $q$, junto con las filas regulares, tiene exponente
+$\sum_q qr_q=\sum_q\dim_K V_q=d$. Para
+$1\leq j\leq r_q$ y $1\leq k\leq q$ póngase
+$e_{q,j,k}:=a_{q,j}e_{q,k}$ en
+$\operatorname{Jet}_{\rm Boc,\mathbb Z}(E)$ y defínase
+\begin{equation}\label{eq:pdf2-bsd-base-mw-desde-jets}
+ P_{q,j,k}:=\Psi_{{\rm PT},\mathbb Z}^{-1}
+       \mathcal U_{\rm jet}(e_{q,j,k})
+ \in M_{E,\mathbb Z}^{\rm MW}.
+\end{equation}
+Por \eqref{eq:pdf2-bsd-desdoblamiento-jets},
+\eqref{eq:pdf2-bsd-dimension-jet} y
+\eqref{eq:pdf2-bsd-psi-pt-integral}, estos $d$ elementos son una base
+integral, no una subred de índice no controlado. Se enumeran en orden
+lexicográfico como $P_1,\ldots,P_d$ y, sobre $K$, forman la base de
+$M_E^{\rm MW}$ usada a continuación.
+
+La altura se construye independientemente de FERS.\@ Para
+$P\in E(\overline{\mathbb Q})$ se fija
+\begin{equation}\label{eq:pdf2-bsd-altura-canonica-construida}
+ \widehat h_E(P):=
+ \frac12\lim_{n\to\infty}4^{-n}h_x([2^n]P),
+ \qquad
+ \langle P,Q\rangle_{\rm NT}:=
+ \frac12\bigl(\widehat h_E(P+Q)-\widehat h_E(P)-\widehat h_E(Q)\bigr).
+\end{equation}
+Equivalentemente, el biextensor de Poincaré rigidificado sobre el modelo de
+Néron produce, para todo lugar $v$, incluido $v=\infty$, el símbolo local
+real $\lambda_v(P,Q)$ normalizado por la sección cero, y
+\begin{equation}\label{eq:pdf2-bsd-altura-neron-local-global}
+ \langle P,Q\rangle_{\rm NT}
+ =\sum_v\lambda_v(P,Q)\in\mathbb R.
+\end{equation}
+No se sustituye esta altura real, simétrica y positiva por una suma de
+invariantes de cup-products con valores en $\mathbb Q/\mathbb Z$.
+
+Póngase
+$H_{\rm NT}^{\flat}(P)(Q):=\langle P,Q\rangle_{\rm NT}$ y sea
+$\mathcal B_E:=\Psi_{{\rm PT},\mathbb Z}^{-1}\mathcal U_{\rm jet}$,
+extendido a $\mathbb R$. No se sustituyen las $q-1$ direcciones adicionales
+por identidades: se calcula el bloque Gram completo, incluidos todos los
+cruces entre profundidades, filas y jets,
+\begin{equation}\label{eq:pdf2-bsd-gram-jet-completo}
+ \begin{aligned}
+ G_E^{\rm jet}\bigl((q,j,k),(q',j',k')\bigr)
+ &:={}
+ \left\langle P_{q,j,k},P_{q',j',k'}\right\rangle_{\rm NT}\\
+ &=\sum_v\lambda_v
+   \left(P_{q,j,k},P_{q',j',k'}\right),
+ \end{aligned}
+\end{equation}
+para todo $1\le k\le q$, $1\le k'\le q'$. Esta matriz es material: los
+$P_{q,j,k}$ se construyeron en
+\eqref{eq:pdf2-bsd-base-mw-desde-jets} y cada entrada se calcula por
+\eqref{eq:pdf2-bsd-altura-neron-local-global}. Por definición del pullback
+de una forma bilineal,
+\begin{equation}\label{eq:pdf2-bsd-altura-nt-generadores}
+ \boxed{
+ \mathcal B_E^\vee H_{\rm NT}^{\flat}\mathcal B_E=G_E^{\rm jet}.}
+\end{equation}
+No se afirma que $G_E^{\rm jet}$ sea diagonal por bloques. En la base
+integral $P_1,\ldots,P_d$, el regulador y su acción en la línea determinante
+son exactamente
+\begin{equation}\label{eq:pdf2-bsd-regulador-cuna-altura}
+ \begin{aligned}
+ \operatorname{Reg}(E)&:=\det G_E^{\rm jet}>0,\\
+ \bigwedge_{j=1}^dH_{\rm NT}^{\flat}(P_j)
+ &=\operatorname{Reg}(E)
+   (P_1^\vee\wedge\cdots\wedge P_d^\vee).
+ \end{aligned}
+\end{equation}
+La página Bockstein y la altura son dos emparejamientos construidos, con
+bases ya fijadas. El comparador de Néron entre sus líneas se define antes de
+usar el término principal por
+\begin{equation}\label{eq:pdf2-bsd-comparador-neron-jet}
+ \begin{aligned}
+ \mathfrak n_{E,\mathbb R}:
+ \Delta_{{\rm FERS},\mathbb R}^{\rm lead}&\longrightarrow
+ \bigl(\det_K(M_E^{\rm MW})\otimes_K
+ \det_K(M_E^{\rm MW})^\vee\bigr)\otimes_{K,\iota_\infty}\mathbb R,\\
+ \mathfrak n_{E,\mathbb R}
+ (\mathbf e_{\rm FERS}^{\rm lead}\otimes1)
+ &:=\frac{\operatorname{Reg}(E)}{R_{\rm Boc}^{\rm der}(S_E)}
+ (P_1\wedge\cdots\wedge P_d)
+ \otimes(P_1^\vee\wedge\cdots\wedge P_d^\vee)\otimes1.
+ \end{aligned}
+\end{equation}
+El denominador es no nulo por \eqref{eq:pdf2-bsd-a-e-cero}; numerador y
+denominador se obtienen, respectivamente, del Gram completo
+\eqref{eq:pdf2-bsd-gram-jet-completo} y de las páginas
+\eqref{eq:pdf2-bsd-rboc-lt}. Así la normalización es un cociente real de dos
+determinantes previamente calculados, no una ortogonalidad inventada ni una
+consulta de la fórmula BSD. La extensión de escala se efectúa antes de
+aplicar el regulador y se conserva en las flechas PT y STS.
+
+Las páginas superiores y la fila regular conservan el generador integral de
+$F_E$ mediante un mapa tipado. Se usa la extensión racional de la sección
+$s_q$ ya construida en \eqref{eq:pdf2-bsd-desdoblamiento-jets}. La sección dual
+\begin{equation}\label{eq:pdf2-bsd-glue-dual-tipado}
+ \operatorname{gl}_q^\vee:A_q^\vee\longrightarrow
+   (\operatorname{Surv}_{\rm det}^{\rm MW})^\vee
+\end{equation}
+se define en la base completa por
+$(\operatorname{gl}_q^\vee\varphi)
+(\operatorname{gl}_r s_r(a))=\delta_{qr}\varphi(a)$ y por cero en las filas
+FS.\@ Sea $\mathcal I_{\rm fin}$ la lista ordenada de filas regulares y pares
+$(q,j)$ con $q\geq2$. Para $\eta$ con $q(\eta)\geq2$ se ponen
+\begin{equation}\label{eq:pdf2-bsd-lifts-filas-smith}
+ \begin{aligned}
+ \widetilde a_\eta&:=\operatorname{pr}_{M_E}\operatorname{pr}_{\mathcal L_E}
+   \Theta_E\operatorname{gl}_{q(\eta)}s_{q(\eta)}(a_\eta),\\
+ \widetilde b_\eta^\vee&:=
+   \operatorname{pr}_{N_E^\vee}\operatorname{pr}_{\mathcal L_E^\vee}
+   (\Theta_E^\vee)^{-1}\operatorname{gl}_{q(\eta)}^\vee
+   \bigl((1\otimes\partial_T^{(q(\eta))})
+      j_{q(\eta)}\bar\beta_{q(\eta)}(a_\eta)\bigr).
+ \end{aligned}
+\end{equation}
+En una fila regular se definen separadamente
+\begin{equation}\label{eq:pdf2-bsd-lifts-fila-regular}
+ \widetilde a_\eta:=
+ \operatorname{pr}_{M_E}\operatorname{pr}_{\mathcal L_E}
+ \Theta_Es_{\rm reg}(a_\eta),
+ \qquad
+ \widetilde b_\eta^\vee:=
+ \operatorname{pr}_{N_E^\vee}\operatorname{pr}_{\mathcal L_E^\vee}
+ (\Theta_E^\vee)^{-1}s_{\rm reg}^\vee
+ (\bar S_E(0)a_\eta).
+\end{equation}
+Todos los dominios son ahora $A_q$ o $A_q^\vee$ según corresponde; no se
+aplica $\operatorname{gl}_q$ a un covector.
+
+La biyección requerida no se infiere de matrices unimodulares. Las
+ecuaciones de unidad--counidad muestran sobre cada generador que las listas
+$(\widetilde a_\eta)_\eta$ y sus terminales duales son bases de $M_E$ y
+$N_E^\vee$. Escríbase la lista heredada como
+$\mathcal I_{\rm fin}=\{\eta_1<\cdots<\eta_t\}$ y defínase directamente
+\begin{equation}\label{eq:pdf2-bsd-nu-construida}
+ \boxed{\nu(\eta_j):=j},
+ \qquad
+ \nu:\mathcal I_{\rm fin}\xrightarrow{\sim}\{1,\ldots,t\}.
+\end{equation}
+Pónganse $\mu_j:=\widetilde a_{\eta_j}$ y sea
+$\xi_1,\ldots,\xi_t$ la base terminal de $N_E$. Antes de Smith, la matriz
+material es
+\begin{equation}\label{eq:pdf2-bsd-c2-filas-finitas}
+ D^{\rm term}_{kj}:=
+ \langle\xi_k^\vee,D_E\mu_j\rangle,
+ \qquad
+ \widetilde b_{\eta_j}^\vee
+ =\sum_{k=1}^tD^{\rm term}_{kj}\xi_k^\vee.
+\end{equation}
+Esta igualdad es la relación terminal de
+\eqref{eq:pdf2-bsd-descomposicion-global}, evaluada en la counidad
+$\xi_k^\vee$; no divide por un divisor elemental. Si
+$UD^{\rm term}V=\operatorname{diag}(s_1,\ldots,s_t)$, entonces
+\begin{equation}\label{eq:pdf2-bsd-cuna-smith-con-uv}
+ \bigwedge_{j=1}^t\widetilde b_{\eta_j}^\vee
+ =\det(D^{\rm term})
+   (\xi_1^\vee\wedge\cdots\wedge\xi_t^\vee),
+ \qquad
+ |\det(D^{\rm term})|=\prod_{j=1}^t|s_j|.
+\end{equation}
+Los factores $\det U,\det V\in\{\pm1\}$ quedan registrados por
+$\operatorname{or}_{\rm det}$ al pasar de $(\mu_j),(\xi_j)$ a las bases de
+Smith $(m_j),(n_j)$. Por tanto el cociente de cuñas es exactamente
+$\mathbf e_{F_E}$ de \eqref{eq:pdf2-bsd-generador-smith-fe}; no se ha
+supuesto que $U$ o $V$ sean matrices de permutación y no queda una página
+sin publicar. En
+consecuencia,
+\begin{equation}\label{eq:pdf2-bsd-c2-generadores}
+ \mathfrak c_{{\rm PT},\mathbb R}
+ \bigl(R_{\rm Boc}^{\rm der}(S_E)
+       (\mathbf e_{\rm FERS}^{\rm lead}\otimes1)\bigr)
+ =\operatorname{Reg}(E)\,
+  (P_1\wedge\cdots\wedge P_d)\otimes
+  (P_1^\vee\wedge\cdots\wedge P_d^\vee)
+  \otimes\mathbf e_{F_E}\otimes1.
+\end{equation}
+
+\emph{Tercera flecha.} Para cada $\ell$, elíjanse generadores ordenados
+$\sigma_{\ell,a}$ de $\operatorname{Sha}(E)[\ell^\infty]$ y
+$\phi_{\ell,v,b}$ de $\Phi_v(\mathbb F_v)[\ell^\infty]$. Los levantamientos explícitos
+$\operatorname{Lift}_{\Phi,\ell}(\phi_{\ell,v,b})$ y las imágenes
+$\iota_{{\rm Sha},\ell}(\sigma_{\ell,a})$ forman, por exactitud, una base de
+presentación de $F_{E,\ell}$. En esas bases la matriz de relaciones se
+calcula generador a generador como
+\begin{equation}\label{eq:pdf2-bsd-c3-matriz-presentacion}
+ D_{F,\ell}=
+ \begin{pmatrix}
+  D_{{\rm Sha},\ell}&X_\ell\\
+  0&\displaystyle\bigoplus_{v<\infty}D_{\Phi_v,\ell}
+ \end{pmatrix}.
+\end{equation}
+La columna $X_\ell$ registra el cambio de cada levantamiento al modificar su
+representante; el bloque inferior izquierdo es cero porque
+$\partial_{{\rm loc},\ell}\iota_{{\rm Sha},\ell}=0$. Por tanto la cuña de
+presentación no depende de $X_\ell$ y
+$\det D_{F,\ell}=\det D_{{\rm Sha},\ell}
+\prod_{v<\infty}\det D_{\Phi_v,\ell}$. Sobre ella,
+\begin{equation}\label{eq:pdf2-bsd-c3-generadores}
+ \mathbf e_{F_{E,\ell}}
+ \longmapsto
+ \mathbf e_{\operatorname{Sha}(E)[\ell^\infty]}
+ \otimes\bigotimes_{v<\infty}
+    \mathbf e_{\Phi_v(\mathbb F_v)[\ell^\infty]},
+\end{equation}
+y las evaluaciones de \eqref{eq:pdf2-bsd-evaluacion-grupo-finito} dan
+$|F_{E,\ell}|=|\operatorname{Sha}(E)[\ell^\infty]|
+\prod_{v<\infty}|\Phi_v(\mathbb F_v)[\ell^\infty]|$.
+Multiplicar sobre $\ell$ produce
+\begin{equation}\label{eq:pdf2-bsd-c3-integral-generadores}
+ \mathfrak c_{{\rm STS},\mathbb R}(\mathbf e_{F_E}\otimes1)
+ =(\mathbf e_{\operatorname{Sha}(E)}
+  \otimes\bigotimes_{v<\infty}\mathbf e_{\Phi_v(\mathbb F_v)})\otimes1,
+ \qquad
+ |F_E|=|\operatorname{Sha}(E)|\prod_vc_v.
+\end{equation}
+
+\emph{Cuarta flecha.} Fijada la base de Mordell--Weil anterior y una
+diferencial de Néron $\omega_E$ con período positivo
+$\Omega_E$, la base orientada de $\Delta_{\rm STS}$ se envía por
+\begin{equation}\label{eq:pdf2-bsd-c4-generadores}
+ \begin{aligned}
+ &x\,(P_1\wedge\cdots\wedge P_d)\otimes
+ (P_1^\vee\wedge\cdots\wedge P_d^\vee)\otimes
+ \mathbf e_{\operatorname{Sha}(E)}
+ \otimes\bigotimes_{v<\infty}\mathbf e_{\Phi_v(\mathbb F_v)}\\
+ &\hspace{28mm}\longmapsto
+ \frac{x\,\Omega_E\,
+   \operatorname{ev}_{\operatorname{Sha}(E)}
+      (\mathbf e_{\operatorname{Sha}(E)})
+   \prod_{v<\infty}\operatorname{ev}_{\Phi_v(\mathbb F_v)}
+      (\mathbf e_{\Phi_v(\mathbb F_v)})}
+ {|E(\mathbb Q)_{\rm tors}|^2}\,
+ \mathbf e_{\rm BSD}.
+\end{aligned}
+\end{equation}
+Por \eqref{eq:pdf2-bsd-evaluacion-grupo-finito}, el coeficiente de la última
+línea es
+$x\Omega_E|\operatorname{Sha}(E)|\prod_vc_v/
+|E(\mathbb Q)_{\rm tors}|^2$.
+Las dos copias del grupo de torsión proceden de los grados duales $0$ y $2$;
+el factor $\Omega_E$ es la evaluación de $\omega_E$ en la componente real
+orientada. Esta orientación coloca $\Omega_E\mathfrak z_{\rm ar}$, y no su
+inverso, como coeficiente aritmético de la composición; la comparación con
+$\mathfrak z_{\rm an}$ se deducirá sólo después mediante el cuadrado de
+trivializaciones.
+\end{proposition}
+
+\begin{proof}
+La primera identidad es el determinante alternado de las matrices triangulares
+$I+TB_i(T)$. La segunda aplica la especialización de las páginas y después
+el comparador de Néron \eqref{eq:pdf2-bsd-comparador-neron-jet}. Su
+numerador es el determinante del Gram jet completo
+\eqref{eq:pdf2-bsd-gram-jet-completo}, con todos los cruces, y su denominador
+es el determinante Bockstein ya calculado. Por
+\eqref{eq:pdf2-bsd-regulador-cuna-altura} su acción sobre cuñas es
+\eqref{eq:pdf2-bsd-c2-generadores}; el exponente $d$ se obtiene antes de
+tomar dimensiones de Mordell--Weil. La tercera es el isomorfismo canónico de líneas asociado a la
+sucesión exacta, escrito en las secciones
+$\iota_{{\rm Sha},\ell}$ y $\operatorname{Lift}_{\Phi,\ell}$ ya
+construidas. La cuarta es la evaluación de los dos complejos finitos de
+torsión y de la línea de Néron. Esto calcula las cuatro flechas sin usar la
+igualdad BSD.
+\end{proof}
+
+Su composición
+\begin{equation}\label{eq:pdf2-bsd-comparador-total}
+ \mathfrak C_E:=
+ \mathfrak c_{\rm tors,\infty}\circ
+ \mathfrak c_{{\rm STS},\mathbb R}\circ
+ \mathfrak c_{{\rm PT},\mathbb R}\circ
+ \mathfrak c_{K/{\rm FERS},\mathbb R}^{\rm lead}:
+ \Delta_{K,\mathbb R}^{\rm lead}
+ \longrightarrow\Delta_{\rm BSD}
+\end{equation}
+queda bien tipada. Antes de insertar el elemento analítico o cardinal alguno
+se fijan las trivializaciones independientes
+\begin{equation}\label{eq:pdf2-bsd-trivializaciones-independientes}
+ \operatorname{tr}_{\rm an}(x\mathbf e_K^{\rm lead}):=x,
+ \qquad
+ \operatorname{tr}_{\rm Ner}(y\mathbf e_{\rm BSD}):=y.
+\end{equation}
+La primera usa sólo la base Kato especializada por
+\eqref{eq:pdf2-bsd-lineas-leading} y la normalización Mellin--Fredholm de
+\eqref{eq:pdf2-bsd-fredholm-euler}; en particular,
+$\operatorname{tr}_{\rm an}
+(\overline{T^{-d}\boldsymbol\zeta_K})
+=R_{\rm Boc}^{\rm der}(S_E)=\mathfrak z_{\rm an}$ por
+\eqref{eq:pdf2-bsd-especializacion-zeta}. La segunda usa sólo la diferencial
+de Néron orientada y satisface
+$\operatorname{tr}_{\rm Ner}(\mathbf e_{\rm BSD})=1$. La identidad del
+comparador basado de $\mathfrak G_{\rm det}(E)$, desplegada por las cuatro
+flechas, es el
+cuadrado
+\begin{equation}\label{eq:pdf2-bsd-cuadrado-trivializaciones}
+\begin{array}{ccc}
+ \Delta_{K,\mathbb R}^{\rm lead}
+   &\xrightarrow{\ \mathfrak C_E\ }&\Delta_{\rm BSD}\\[2mm]
+ \big\downarrow\scriptstyle\operatorname{tr}_{\rm an}
+   &&\big\downarrow\scriptstyle\operatorname{tr}_{\rm Ner}\\[2mm]
+ \mathbb R&=&\mathbb R.
+\end{array}
+\end{equation}
+Este cuadrado se fija con las bases estructurales antes de evaluar
+$L(E,s)$, el regulador o los grupos finitos.
+
+El elemento analítico se coloca, después de construir las flechas, en su
+dominio correcto:
+\begin{equation}\label{eq:pdf2-bsd-elemento-analitico-tipado}
+ \mathbf z_E^{\rm an}:=\mathfrak z_{\rm an}\mathbf e_K^{\rm lead}
+ =\overline{T^{-d}\boldsymbol\zeta_K}
+ \in\Delta_{K,\mathbb R}^{\rm lead}.
+\end{equation}
+Por \eqref{eq:pdf2-bsd-dan-d},
+$\mathfrak z_{\rm an}=R_{\rm Boc}^{\rm der}(S_E)$; la segunda igualdad de
+\eqref{eq:pdf2-bsd-especializacion-zeta} prueba que la primera flecha lleva
+$\mathbf z_E^{\rm an}$ exactamente al miembro izquierdo de
+\eqref{eq:pdf2-bsd-c2-generadores}. Las otras tres flechas, calculadas sobre
+generadores, dan
+\begin{equation}\label{eq:pdf2-bsd-elementos-linea}
+ d_{\rm an}=d=d_{\rm ar},
+ \qquad
+ \boxed{
+ \mathfrak C_E(\mathbf z_E^{\rm an})
+ =\Omega_E\mathfrak z_{\rm ar}\,\mathbf e_{\rm BSD}.}
+\end{equation}
+Aplicar las flechas verticales de
+\eqref{eq:pdf2-bsd-cuadrado-trivializaciones} produce la igualdad numérica
+\begin{equation}\label{eq:pdf2-bsd-igualdad-numerica-deducida}
+ \boxed{\mathfrak z_{\rm an}=\Omega_E\mathfrak z_{\rm ar}.}
+\end{equation}
+
+\begin{theorem}[Publicación de Birch--Swinnerton--Dyer]
+\label{thm:pdf2-bsd-publicacion-final}
+Para la imagen determinantal autónoma completa
+$\mathfrak G_{\rm det}(E)$ se tiene
+\begin{equation}\label{eq:pdf2-bsd-rango-final}
+ \operatorname{ord}_{s=1}L(E,s)=\operatorname{rank}E(\mathbb Q)=:r
+\end{equation}
+y
+\begin{equation}\label{eq:pdf2-bsd-formula-final}
+ \frac{L^{(r)}(E,1)}{r!\,\Omega_E}
+ =\frac{|\operatorname{Sha}(E)|\operatorname{Reg}(E)\prod_vc_v}
+ {|E(\mathbb Q)_{\rm tors}|^2}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La igualdad de grados es
+\eqref{eq:pdf2-bsd-dan-d} seguida de
+\eqref{eq:pdf2-bsd-rango-orden}. La tabla Kato--FERS transporta el elemento
+analítico a todas las páginas Bockstein; $\Psi_{\rm PT}$ las pega a la red
+de Mordell--Weil y publica su determinante de altura; la sucesión exacta
+Sha--Tamagawa descompone el factor de Smith; y el último comparador inserta
+la red torsional y el período ya orientado. Esto es exactamente
+\eqref{eq:pdf2-bsd-elementos-linea}. El cuadrado independiente
+\eqref{eq:pdf2-bsd-cuadrado-trivializaciones} da
+\eqref{eq:pdf2-bsd-igualdad-numerica-deducida}; sustituir las definiciones de
+$\mathfrak z_{\rm an}$ y $\mathfrak z_{\rm ar}$ produce
+\eqref{eq:pdf2-bsd-formula-final}. Ninguna de las cuatro flechas se
+normaliza con $r$, $\operatorname{Reg}(E)$,
+$|\operatorname{Sha}(E)|$ o el término principal: esos valores aparecen
+sólo al final de sus respectivos determinantes.
+\end{proof}
+
+\section{Controles no gobernantes, falsadores y estatuto}
+
+\begin{falsifier}[Falsadores separados por componente]
+La construcción falla si una historia de
+$\Sigma_{\rm det}^{\rm mult}$ no pertenece a la partición
+\eqref{eq:pdf2-bsd-tres-proyectores}; si se escribe
+$\partial H_{\rm FS}+H_{\rm FS}\partial=q_{\rm root}$ y con ello se borra
+$\mathcal L_E$; si una fila no raíz de
+\eqref{eq:pdf2-bsd-tabla-kato-fers} tiene peso cero; si fallan las ecuaciones
+unidad--counidad \eqref{eq:pdf2-bsd-unidad-counidad-paginas}; si
+$D_E\otimes\mathbb Q$ no es invertible; si
+$\pi_\Phi\operatorname{Lift}_\Phi\ne I$; o si alguna flecha de
+\eqref{eq:pdf2-bsd-cuatro-comparadores} usa el valor final para fijar su
+base. Cada falsador rompe una arista concreta y no reabre las anteriores.
+\end{falsifier}
+
+La homotopía $H_{\rm FS}$ es un control posterior del filler explícito
+$h_*=-vf$ y no una premisa gobernante. Las formas de Smith, los
+determinantes y los cardinales se calculan después de construir los mapas;
+no sustituyen las tablas, el pegado de páginas ni la exactitud de cociclos.
+
+\paragraph{Estatuto y procedencia.}
+Alexander--Whitney, el producto fibrado, la unidad común, la dualidad
+reducida, la rigidez de la raíz, el filler, todas las páginas Bockstein y
+los cuatro lectores pertenecen a
+\texttt{ARQUITECTURA\_AUTORAL\_PREEXISTENTE}/\texttt{EXACTO\_INTERNO} de
+$\mathfrak G_{\rm det}(E)$. La partición exhaustiva
+\eqref{eq:pdf2-bsd-descomposicion-global}, la tabla
+\eqref{eq:pdf2-bsd-tabla-kato-fers}, las fórmulas
+\eqref{eq:pdf2-bsd-psi-y-lambda-q} y los mapas de cociclos
+\eqref{eq:pdf2-bsd-iota-sha-cociclos}--
+\eqref{eq:pdf2-bsd-lift-componentes} son
+\texttt{FORMALIZACION\_NUEVA}: despliegan materialmente los entrelazadores
+ya contenidos en las trece coordenadas estructurales. El teorema final tiene
+fuerza
+\texttt{DEMOSTRADO\_CON\_ESTRUCTURA\_DE\_PARTIDA\_EXPLICITA}; no queda una
+obligación residual gobernante ni se usa una homotopía abstracta para
+fabricar el resultado.

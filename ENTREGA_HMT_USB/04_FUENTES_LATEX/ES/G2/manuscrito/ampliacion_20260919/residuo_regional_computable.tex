@@ -1,0 +1,293 @@
+% Interfaz computable CG-008; formalización nueva de un lector residual.
+% Productor: los caracteres e intervalos regionales construidos previamente.
+% No identifica la componente numérica con el estado enriquecido completo.
+
+\section{Inicialización residual computable y compatibilidad de las emisiones regionales}
+\label{sec:residuo-regional-computable}
+
+La realización numérica de una sección regional admite una descripción
+ejecutable por intervalos racionales. Esta descripción permite inicializar
+el residuo, actualizarlo y recuperar sus bloques sin introducir una cadena
+decimal previamente fijada. Su origen es el productor regional del
+\cref{x_reciprocidad:sec:generacion}: primero quedan determinados el carácter,
+su orientación y su normalización; después se construyen sus aproximaciones
+racionales. El presente desarrollo formaliza la componente residual de esa
+lectura. La trayectoria, la hoja, las incidencias y la memoria del estado
+enriquecido conservan simultáneamente sus operaciones propias.
+
+El orden de las operaciones es, por tanto,
+\[
+ \begin{gathered}
+ \text{estado regional generado}
+ \longrightarrow \text{intervalos racionales del carácter}
+ \\
+ \longrightarrow \text{nombre racional del residuo}
+ \longrightarrow \text{emisiones posicionales compatibles}.
+ \end{gathered}
+\]
+La comparación con la realización arquimediana aparece en la demostración
+de corrección. El algoritmo recibe intervalos; ninguna de sus instrucciones
+recibe un número real convencional ni una lista de cifras objetivo.
+
+\subsection{Nombre racional producido por un lector regional}
+\label{subsec:residual-nombre-racional}
+
+Se fija una región y se escribe \(j\mapsto[\ell_j,u_j]\) para su productor
+racional. Las condiciones de la interfaz son
+\begin{equation}
+ \ell_j\leq v\leq u_j,\qquad
+ \lim_{j\to\infty}(u_j-\ell_j)=0,
+ \qquad \ell_j,u_j\in\mathbb Q.
+ \label{eq:residual-contrato-productor}
+\end{equation}
+Aquí \(v\) designa la realización exacta del carácter para formular la
+corrección; el procedimiento que calcula \(\ell_j,u_j\) procede del lector
+regional. Los intervalos de clausura, propagación y autoescala ya
+construidos satisfacen estas condiciones. En la implementación, su interfaz
+es una función que, dado \(j\), devuelve dos fracciones exactas.
+
+La anidación se obtiene, si hace falta, mediante la operación finita
+\begin{equation}
+ L_j=\max_{0\leq i\leq j}\ell_i,
+ \qquad U_j=\min_{0\leq i\leq j}u_i,
+ \qquad I_j=[L_j,U_j].
+ \label{eq:residual-anidacion}
+\end{equation}
+
+\begin{proposition}[Anidación y conservación de la realización]
+\label{prop:residual-anidacion}
+Los intervalos \(I_j\) son racionales, no vacíos y encajados. Contienen
+\(v\), su anchura tiende a cero y \(\bigcap_j I_j=\{v\}\).
+\end{proposition}
+\begin{proof}
+Cada cota inferior es menor o igual que \(v\), y cada cota superior es
+mayor o igual que \(v\); la misma propiedad vale para el máximo y el mínimo
+finitos. Al aumentar \(j\), el máximo crece y el mínimo decrece.
+Además, \(0\leq U_j-L_j\leq u_j-\ell_j\). Si dos puntos pertenecieran a
+la intersección, su distancia estaría acotada por cada anchura y sería cero.
+La pertenencia de \(v\) acredita la no vacuidad.
+\end{proof}
+
+\subsection{Prefijo inicial y representación del residuo}
+\label{subsec:residual-inicializacion}
+
+Sean \(b\geq2\) una base entera y \(n_0\geq0\) una profundidad.
+Se supone que la realización evita las fronteras correspondientes:
+\begin{equation}
+ b^n v\notin\mathbb Z\qquad(n\geq0).
+ \label{eq:residual-no-frontera}
+\end{equation}
+La irracionalidad de los tres valores regionales implica esta propiedad;
+su demostración o su empleo como hipótesis pertenece al lector fijado.
+Para una profundidad concreta basta la evitación en las escalas que se
+utilizan. Las realizaciones con expansión terminal requieren, adicionalmente,
+un decisor exacto de frontera y una convención de representación.
+
+Definimos el predicado racional
+\[
+ \mathsf{Sep}(j,n):\quad
+ \lfloor b^n L_j\rfloor=\lceil b^n U_j\rceil-1.
+\]
+Es decidible mediante operaciones enteras sobre numeradores y
+denominadores. Sean
+\begin{equation}
+ j_0=\min\{j:\mathsf{Sep}(j,n_0)\},
+ \qquad N_0=\lfloor b^{n_0}L_{j_0}\rfloor.
+ \label{eq:residual-prefijo-inicial}
+\end{equation}
+El entero \(N_0\) se calcula desde el productor. Su uso como antecedente
+de la representación residual no exige introducirlo como dato literal.
+
+\begin{theorem}[Inicialización computable del residuo regional]
+\label{thm:residual-inicializacion}
+El índice \(j_0\) existe. Para \(j\geq j_0\), los intervalos
+\begin{equation}
+ E_{0,j}=
+ \bigl[b^{n_0}L_j-N_0,\ b^{n_0}U_j-N_0\bigr]
+ \label{eq:residual-nombre-inicial}
+\end{equation}
+son no vacíos, encajados y contenidos en \([0,1]\). Su anchura tiende a
+cero y su intersección consiste en un único elemento
+\(\varepsilon_0\in(0,1)\). En la realización arquimediana se cumple
+\begin{equation}
+ N_0=\lfloor b^{n_0}v\rfloor,
+ \qquad b^{n_0}v=N_0+\varepsilon_0.
+ \label{eq:residual-identificacion-inicial}
+\end{equation}
+La sucesión racional \((E_{0,j})_{j\geq j_0}\) constituye una
+representación computable del residuo.
+\end{theorem}
+\begin{proof}
+El punto \(b^{n_0}v\) está en el interior de una celda de extremos
+enteros. Su distancia a esos extremos es positiva. Cuando la anchura de
+\(b^{n_0}I_j\) es menor que esa distancia, ambos extremos pertenecen a la
+misma celda y se cumple \(\mathsf{Sep}(j,n_0)\). Existe por ello un
+primer índice de separación. En cualquier índice separado, el entero
+\(\lfloor b^{n_0}v\rfloor\) se encuentra entre los dos enteros iguales
+del predicado y coincide con ellos. La igualdad inicial sitúa los extremos
+de \(b^{n_0}I_{j_0}\) entre \(N_0\) y \(N_0+1\). La anidación
+preserva esa inclusión. La transformación afín de
+\eqref{eq:residual-nombre-inicial} conserva anidación y no vacuidad y
+multiplica las anchuras por \(b^{n_0}\). Su intersección es el punto de
+\eqref{eq:residual-identificacion-inicial}; la evitación de frontera lo
+sitúa en \((0,1)\). Cada extremo se calcula mediante fracciones exactas,
+y la búsqueda termina por el argumento anterior.
+\end{proof}
+
+La identidad \eqref{eq:residual-identificacion-inicial} es una conclusión
+de corrección. La representación ejecutable es la sucesión
+\eqref{eq:residual-nombre-inicial}, construida a partir de intervalos
+regionales. Esta distinción separa la producción de un nombre racional del
+reconocimiento de su valor.
+
+\subsection{Actualización residual y emisión mediante aritmética exacta}
+\label{subsec:residual-actualizacion}
+
+Supongamos construido el estado de lectura \((n_0+k,N_k,j_k)\), junto
+con el nombre
+\begin{equation}
+ E_{k,j}=
+ \bigl[b^{n_0+k}L_j-N_k,\ b^{n_0+k}U_j-N_k\bigr],
+ \qquad j\geq j_k.
+ \label{eq:residual-nombre-k}
+\end{equation}
+Se aumenta \(j\) desde \(j_k\) hasta que
+\[
+ \left\lfloor b\inf E_{k,j}\right\rfloor
+ =\left\lceil b\sup E_{k,j}\right\rceil-1.
+\]
+El primer índice que satisface esta igualdad se denota \(j_{k+1}\), y el
+entero común se denota \(d_k\). La actualización es
+\begin{equation}
+ N_{k+1}=bN_k+d_k,
+ \qquad E_{k+1,j}=bE_{k,j}-d_k
+ \quad(j\geq j_{k+1}).
+ \label{eq:residual-actualizacion-exacta}
+\end{equation}
+La multiplicación de un intervalo por \(b>0\) y la resta de \(d_k\)
+actúan sobre sus dos extremos. Se conservan el índice de lectura alcanzado,
+la profundidad y el bloque emitido.
+
+\Needspace{20\baselineskip}
+\begin{theorem}[Terminación a profundidad arbitraria y conmutación posicional]
+\label{thm:residual-compatibilidad-universal}
+Bajo \eqref{eq:residual-contrato-productor} y
+\eqref{eq:residual-no-frontera}, cada actualización termina y, para todo
+\(k\geq0\), se cumplen
+\begin{align}
+ N_k&=\lfloor b^{n_0+k}v\rfloor,
+ &0&\leq d_k<b,\label{eq:residual-prefijos-k}\\
+ \varepsilon_{k+1}&=b\varepsilon_k-d_k,
+ &d_k&=\lfloor b\varepsilon_k\rfloor,\label{eq:residual-recurrencia}\\
+ b^{n_0+k}v&=N_k+\varepsilon_k,
+ &0&<\varepsilon_k<1.\label{eq:residual-invariante}
+\end{align}
+Si \(P(b,n)\) es la emisión por separación racional del
+\cref{thm:df-emision-correcta}, entonces
+\begin{equation}
+ N_k=P(b,n_0+k),\qquad
+ d_k=P(b,n_0+k+1)\bmod b.
+ \label{eq:residual-igualdad-publicacion}
+\end{equation}
+Los índices de parada de ambas implementaciones pueden ser distintos;
+sus enteros emitidos coinciden exactamente.
+\end{theorem}
+\begin{proof}
+La inicialización proporciona las afirmaciones para \(k=0\). Supuestas
+en el nivel \(k\), la multiplicación del invariante por \(b\) da
+\[
+ b^{n_0+k+1}v=bN_k+b\varepsilon_k.
+\]
+La evitación de frontera implica \(b\varepsilon_k\notin\mathbb Z\).
+Los intervalos \(bE_{k,j}\) son encajados, contienen ese punto y tienen
+anchura tendente a cero. El argumento de separación del teorema anterior
+garantiza la terminación y fija
+\(d_k=\lfloor b\varepsilon_k\rfloor\). Como
+\(0<\varepsilon_k<1\), el bloque pertenece a
+\(\{0,\ldots,b-1\}\). Restar \(d_k\) transforma los intervalos en
+un nombre encajado del residuo siguiente y conserva su pertenencia a
+\((0,1)\). La parte entera de la igualdad precedente es
+\(bN_k+d_k\), lo que prueba el nuevo invariante. La inducción vale para
+cada profundidad finita, sin imponer una profundidad máxima.
+Finalmente, el teorema de emisión racional identifica también
+\(P(b,n)\) con \(\lfloor b^n v\rfloor\). La igualdad de los
+prefijos y la fórmula del residuo módulo \(b\) demuestran
+\eqref{eq:residual-igualdad-publicacion}.
+\end{proof}
+
+\begin{corollary}[Truncamiento, recuperación y cotas residuales]
+\label{cor:residual-recuperacion}
+Para \(k,h\geq0\),
+\[
+ \left\lfloor\frac{N_{k+h}}{b^h}\right\rfloor=N_k,
+ \qquad N_k=\frac{N_{k+1}-d_k}{b},
+ \qquad \varepsilon_k=\frac{\varepsilon_{k+1}+d_k}{b}.
+\]
+La anchura del nombre residual al índice \(j\) es
+\(b^{n_0+k}(U_j-L_j)\). En consecuencia, cualquier precisión racional
+positiva para el residuo se alcanza tras un número finito de consultas al
+productor. La profundidad y los bloques archivados determinan la
+recuperación en la componente de lectura.
+\end{corollary}
+\begin{proof}
+La división del prefijo extenso recupera el prefijo anterior por
+\eqref{eq:residual-prefijos-k}. Las dos fórmulas de recuperación se
+obtienen despejando en \eqref{eq:residual-actualizacion-exacta} y
+\eqref{eq:residual-recurrencia}. La fórmula de anchura es inmediata de
+\eqref{eq:residual-nombre-k}; su convergencia a cero proporciona la
+terminación de la búsqueda de precisión.
+\end{proof}
+
+\subsection{Correspondencia de profundidades ternarias y decimales}
+\label{subsec:residual-bases}
+
+En la normalización fraccionaria se escribe \(v=m+r\), donde
+\(m=P(b,0)\) se obtiene del mismo productor. El prefijo fraccionario es
+\(C_n=P(b,n)-mb^n\). Por cálculo entero,
+\[
+ b^n v-P(b,n)=b^n r-C_n.
+\]
+Esta igualdad reconcilia el prefijo que incluye la parte entera con el que
+se inicia en cero, conservando idéntico residuo. La resta de \(m\)
+es una transformación posterior del nombre regional.
+
+La agrupación trítica usa \(b=729=3^6\). Seis bloques corresponden a
+\(36\) trits; la especialización \(n_0=6\) proporciona un nombre
+racional del residuo de esa profundidad. La agrupación decimal usa
+\(b=1000=10^3\); seis bloques corresponden a \(18\) cifras decimales.
+Son coordenadas de lectura diferentes del mismo carácter. Su compatibilidad
+se expresa por los cilindros que contienen esa realización y por las
+identidades de cambio de escala; no exige igualar sus residuos numéricos.
+
+El antecedente residual de
+\cref{sec:c27-generacion-coinductiva-profundidad-arbitraria} distingue el
+estado interno de su publicación. La presente interfaz aporta una
+representación racional ejecutable de la componente numérica, con la misma
+recurrencia residual una vez fijada su lectura. Para identificarla con otra
+realización residual de esa sección basta acreditar que ambas leen el mismo
+carácter, a la misma profundidad y con igual normalización: la identidad
+\(b^n v=N_n+\varepsilon_n\) y la unicidad del prefijo fuerzan entonces
+la igualdad de los residuos. Esta comparación es una igualdad de lectores.
+La evolución de posiciones, hojas, incidencia y memoria permanece regida
+por el TPK enriquecido y por sus respectivos teoremas de transporte.
+
+\subsection{Contrato de la implementación exacta}
+\label{subsec:residual-implementacion}
+
+La implementación de esta interfaz emplea exclusivamente fracciones
+racionales, potencias enteras, máximo, mínimo, división con suelo y división
+con techo. El productor de intervalos es un argumento explícito del
+programa. Una consulta no devuelve \(v\): devuelve sus dos cotas generadas.
+El estado de ejecución conserva base, profundidad, prefijo, índice alcanzado
+y registro ordenado de emisiones. Para cada paso, el registro guarda el
+nombre residual anterior en el índice decisivo, el bloque y el nombre
+transformado; las dos recuperaciones del corolario se comprueban mediante
+igualdades racionales.
+
+Las pruebas universales anteriores justifican la terminación y la
+compatibilidad bajo el contrato del productor. Los ensayos finitos verifican
+la implementación de esas operaciones y sus identidades; la generalidad
+del resultado reside en la inducción y en la separación racional de celdas.
+Esta formalización reúne una interfaz computable de lectura y recuperación
+sin sustituir la selección regional ni atribuir a la componente numérica
+las operaciones adicionales del estado enriquecido.

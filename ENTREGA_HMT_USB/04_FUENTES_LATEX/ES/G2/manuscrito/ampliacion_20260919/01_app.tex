@@ -1,0 +1,589 @@
+\section{Construcción aritmética de APP}
+\label{app:construccion-explicita}
+
+La denominación \emph{All Possible Paths}, abreviada APP, designa la estructura aritmética de trayectorias construida sobre una retícula de nueve filas y nueve columnas. Su presentación principal es la tabla de multiplicar de los enteros del uno al nueve, reducida mediante la raíz digital positiva. La suma interviene tanto en la acumulación que produce cada fila como en una segunda evaluación de las mismas posiciones. Las trayectorias recorren ese soporte único y conservan el orden de las operaciones efectuadas.
+
+El desarrollo comienza por la construcción visible de APP y continúa con las operaciones necesarias para conservar su información aritmética. El residuo y el cociente recuperan cada evaluación entera; el acarreo determina cómo se componen esas recuperaciones; el registro de traslaciones distingue el retorno de una posición de la circulación acumulada. Son fundamentos de la dinámica generativa. El TRIT, unidad ternaria orientada con valores $-1,0,+1$, aportará el régimen de cada transición; el \emph{Topological Phase Kernel}, TPK, o núcleo topológico de fase, compondrá selección, transporte y actualización de memoria. Su definición operatoria se apoya en los objetos que aquí se construyen.
+
+\subsection{Construcción de la matriz APP mediante multiplicación y raíz digital}
+\label{sec:app-soporte}
+
+\subsubsection{Disposición de los enteros del uno al nueve}
+
+\begin{definicion}[Soporte nonádico ordenado]
+\label{def:app-soporte}
+Se define $D_9=\{1,2,\ldots,9\}$ y el soporte bidimensional $\mathcal X_9=D_9\times D_9$. Una posición es un par ordenado $x=(i,j)$; la primera coordenada identifica la fila y la segunda, la columna. Las filas aumentan hacia el sur y las columnas hacia el este.
+\end{definicion}
+
+El soporte contiene $9^2=81$ posiciones. La distinción entre posición y evaluación es esencial: varias posiciones pueden recibir el mismo resultado aritmético y conservar, a la vez, coordenadas diferentes. Por ejemplo, $(2,3)$ y $(3,2)$ poseen iguales suma y producto, mientras que la orientación de sus coordenadas las distingue.
+
+En la fila $i$, la acumulación de $i$ repetida $j$ veces determina la entrada de la columna $j$:
+\[
+ P(i,j)=\underbrace{i+\cdots+i}_{j\text{ sumandos}}=ij.
+\]
+Así se obtiene primero la tabla entera. Cada incremento de columna añade el índice de la fila; cada incremento de fila añade el índice de la columna.
+
+\input{ampliacion_20260919/generated/producto}
+
+La raíz digital positiva se calcula sumando reiteradamente las cifras decimales hasta obtener un entero de $1$ a $9$. Por ejemplo,
+\[
+ 16\longmapsto1+6=7,\qquad
+ 20\longmapsto2+0=2,\qquad
+ 25\longmapsto2+5=7,\qquad
+ 81\longmapsto8+1=9.
+\]
+Su aplicación a cada una de las ochenta y una entradas produce la matriz principal de APP. Con la notación $\rho_9$ para esta reducción, se escribe $\Pi(i,j)=\rho_9(ij)$.
+
+\input{ampliacion_20260919/generated/residuo_producto}
+
+La primera fila reproduce $1,\ldots,9$; la segunda distribuye el incremento dos en el orden $2,4,6,8,1,3,5,7,9$; la tercera recorre tres veces $3,6,9$. La última fila y la última columna tienen valor $9$. Estos patrones proceden de la operación aplicada a cada entrada y de la convención que representa mediante $9$ la clase nula módulo nueve. Las filas de índices coprimos con nueve recorren los nueve residuos; las restantes concentran varias posiciones sobre un mismo residuo. La demostración y la información conservada por esa concentración se desarrollan en las secciones siguientes.
+
+El bloque de filas $4,5$ y columnas $4,5$ ya puede leerse directamente:
+\[
+ \begin{pmatrix}16&20\\20&25\end{pmatrix}
+ \xrightarrow{\ \rho_9\ }
+ \begin{pmatrix}7&2\\2&7\end{pmatrix}.
+\]
+Su selección por congruencia, su descomposición espectral y sus realizaciones geométricas serán objeto del \cref{geo:chap}. Esta localización fija desde ahora las posiciones que producen el bloque.
+
+\subsubsection{Posiciones, intervalos e inversión central}
+
+La sucesión $1,\ldots,9$ contiene ocho intervalos entre enteros consecutivos. Al añadir la transición cíclica $9\to1$, se obtienen nueve enlaces. Esta convención permite precisar la relación entre longitud, cantidad de posiciones y período combinatorio. Cuando se consideran también los extremos $0$ y $10$ en una escala lineal, cambia el soporte de referencia: conviene indicar expresamente qué extremos y qué intervalos intervienen en cada construcción.
+
+Con ambos extremos, la subdivisión lineal se escribe
+\[
+ [0,1],\ [1,2],\ [2,3],\ [3,4],\ [4,5],\
+ [5,6],\ [6,7],\ [7,8],\ [8,9],\ [9,10].
+\]
+Son diez segmentos determinados por once marcas enteras. La inversión $i\mapsto10-i$ intercambia los extremos y conserva la marca central $5$; sobre los nueve enteros interiores induce las parejas $(1,9)$, $(2,8)$, $(3,7)$ y $(4,6)$, además del entero fijo $5$. La misma inversión actuará en cada coordenada del soporte bidimensional.
+
+Antes de evaluar suma o producto, la tabla posicional es
+\begin{tablacompleta}[htbp]
+\caption{Las ochenta y una posiciones anteriores a su evaluación aritmética.}
+\label{tab:app-posiciones}
+{\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{c*{9}{c}}
+\toprule
+$i\backslash j$ &1&2&3&4&5&6&7&8&9\\
+\midrule
+1 &$(1,1)$&$(1,2)$&$(1,3)$&$(1,4)$&$(1,5)$&$(1,6)$&$(1,7)$&$(1,8)$&$(1,9)$\\
+2 &$(2,1)$&$(2,2)$&$(2,3)$&$(2,4)$&$(2,5)$&$(2,6)$&$(2,7)$&$(2,8)$&$(2,9)$\\
+3 &$(3,1)$&$(3,2)$&$(3,3)$&$(3,4)$&$(3,5)$&$(3,6)$&$(3,7)$&$(3,8)$&$(3,9)$\\
+4 &$(4,1)$&$(4,2)$&$(4,3)$&$(4,4)$&$(4,5)$&$(4,6)$&$(4,7)$&$(4,8)$&$(4,9)$\\
+5 &$(5,1)$&$(5,2)$&$(5,3)$&$(5,4)$&$(5,5)$&$(5,6)$&$(5,7)$&$(5,8)$&$(5,9)$\\
+6 &$(6,1)$&$(6,2)$&$(6,3)$&$(6,4)$&$(6,5)$&$(6,6)$&$(6,7)$&$(6,8)$&$(6,9)$\\
+7 &$(7,1)$&$(7,2)$&$(7,3)$&$(7,4)$&$(7,5)$&$(7,6)$&$(7,7)$&$(7,8)$&$(7,9)$\\
+8 &$(8,1)$&$(8,2)$&$(8,3)$&$(8,4)$&$(8,5)$&$(8,6)$&$(8,7)$&$(8,8)$&$(8,9)$\\
+9 &$(9,1)$&$(9,2)$&$(9,3)$&$(9,4)$&$(9,5)$&$(9,6)$&$(9,7)$&$(9,8)$&$(9,9)$\\
+\bottomrule
+\end{tabular}}
+\end{tablacompleta}
+
+\subsubsection{Representación del residuo nulo y conservación del cociente}
+
+\begin{definicion}[Residuo positivo y cociente nonádico]
+\label{def:app-residuo}
+Para cada entero $n\geq1$, se definen
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\left\lfloor\frac{n-1}{9}\right\rfloor.
+ \label{eq:app-rho-q}
+\end{equation}
+El par $\bigl(\rho_9(n),q_9(n)\bigr)$ es el registro nonádico completo de $n$.
+\end{definicion}
+
+La elección de representantes $1,\ldots,9$ asigna el entero $9$ a la clase residual nula. Así, $9$, $18$ y $27$ tienen el mismo residuo positivo y cocientes respectivos $0$, $1$ y $2$. La coordenada residual describe una clase; el cociente determina la elevación entera dentro de esa clase.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Restitución aritmética exacta]
+\label{thm:app-reconstruccion}
+La aplicación
+\begin{equation}
+ \mathbb N_{>0}\longrightarrow D_9\times\mathbb N_0,
+ \qquad n\longmapsto\bigl(\rho_9(n),q_9(n)\bigr)
+\end{equation}
+es biyectiva. Su inversa es $(r,q)\mapsto r+9q$. En particular,
+\begin{equation}
+ n=\rho_9(n)+9q_9(n).
+ \label{eq:app-restitution}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+La división euclídea de $n-1$ por $9$ produce una pareja única $(q,t)$ con $q\geq0$, $0\leq t\leq8$ y $n-1=9q+t$. Al poner $r=t+1$, resulta $n=r+9q$ con $r\in D_9$. Esta es precisamente la pareja definida en \eqref{eq:app-rho-q}.
+
+Recíprocamente, dados $r\in D_9$ y $q\in\mathbb N_0$, el entero $n=r+9q$ satisface $n-1=(r-1)+9q$. Su división euclídea devuelve el mismo residuo $r-1$ y el mismo cociente $q$. Quedan demostradas las dos composiciones inversas.
+\end{proof}
+\end{bloqueindivisible}
+
+Esta restitución fija el significado de conservar información aritmética en la etapa inicial: se conservan exactamente los datos necesarios para recuperar el entero. La orientación de una operación y el registro de una sucesión de operaciones se incorporarán con sus propias coordenadas. El cociente de una evaluación aislada tiene, por tanto, un alcance preciso dentro de la construcción completa.
+
+\begin{ejemplo}[Dos elevaciones de una clase residual]
+Los enteros $10$ y $19$ se representan como $(1,1)$ y $(1,2)$. Su primera coordenada coincide; la segunda permite recuperar respectivamente $1+9=10$ y $1+18=19$.
+\end{ejemplo}
+
+\subsubsection{Raíz digital y evaluación decimal}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Expresión de la raíz digital]
+\label{prop:app-raiz-digital}
+La suma iterada de las cifras decimales de un entero positivo $n$ termina en $\rho_9(n)$.
+\end{proposicion}
+
+\begin{proof}
+Escribamos $n=\sum_{k=0}^{m}d_k10^k$, con $0\leq d_k\leq9$. Como $10\equiv1\pmod9$, se tiene $n\equiv\sum_kd_k\pmod9$. Para $n\geq10$, al menos una cifra de índice positivo es distinta de cero, de modo que
+\[
+ n-\sum_kd_k=\sum_{k\geq1}d_k(10^k-1)>0.
+\]
+La iteración desciende estrictamente mientras el entero tiene más de una cifra. Termina en un entero de $D_9$ y conserva la clase módulo nueve. La unicidad del representante positivo identifica el resultado con $\rho_9(n)$.
+\end{proof}
+\end{bloqueindivisible}
+
+El entero cero admite la raíz digital convencional $0$. La representación positiva del grupo residual, por su parte, representa su clase mediante $9$. Ambas convenciones quedan fijadas por sus dominios: la raíz digital actúa sobre enteros; la sección positiva selecciona representantes de clases residuales. Esta precisión adquiere relevancia cuando aparecen bloques decimales con ceros iniciales.
+
+\subsection{Evaluaciones aditiva y multiplicativa de APP}
+\label{sec:app-evaluaciones}
+
+\subsubsection{Definición conjunta de las dos evaluaciones}
+
+\begin{definicion}[Evaluación aritmética enriquecida de APP]
+\label{def:app-evaluacion}
+Para $(i,j)\in\mathcal X_9$, se definen
+\begin{align}
+ S(i,j)&=i+j, & P(i,j)&=ij,\\
+ \Sigma(i,j)&=\rho_9(i+j), & \Pi(i,j)&=\rho_9(ij),\\
+ q_+(i,j)&=q_9(i+j), &q_\times(i,j)&=q_9(ij).
+\end{align}
+La evaluación simultánea es
+\begin{equation}
+ \mathcal A(i,j)=\bigl((\Sigma(i,j),q_+(i,j)),
+                         (\Pi(i,j),q_\times(i,j))\bigr).
+ \label{eq:app-two-evaluations}
+\end{equation}
+El estado de esta etapa retiene además la posición $(i,j)$.
+\end{definicion}
+
+Los valores de $S$ recorren los enteros de $2$ a $18$; los de $P$ están comprendidos entre $1$ y $81$. La operación se efectúa primero en los enteros y después se descompone en residuo y cociente. Este orden permite reconocer qué contenido procede del cálculo entero y qué contenido corresponde a su representación modular.
+
+La multiplicación admite aquí su construcción por adición iterada:
+\[
+ P(i,1)=i,\qquad P(i,j+1)=P(i,j)+i,
+ \qquad P(i,j)=\underbrace{i+\cdots+i}_{j\text{ sumandos}}.
+\]
+Por inducción en $j$, esta recurrencia produce $ij$. Cada fila de la tabla multiplicativa se obtiene, por tanto, añadiendo sucesivamente su índice. La evaluación aditiva se construye sumando una sola vez los dos índices de la posición. Ambas operaciones proceden de los enteros del soporte, con reglas expresamente distintas.
+
+Para $2\leq k\leq10$, la ecuación $i+j=k$ tiene $k-1$ soluciones en $D_9^2$. Para $11\leq k\leq18$, tiene $19-k$. En la multiplicación, la multiplicidad de un valor $m$ es
+\[
+ \#\{i\in D_9:i\mid m\text{ y }m/i\in D_9\}.
+\]
+Estas multiplicidades cuentan posiciones con una evaluación determinada y conservan la diferencia entre la cantidad de posiciones y la cantidad de valores distintos.
+
+\input{ampliacion_20260919/generated/suma}
+
+\begin{bloqueindivisible}
+\begin{corolario}[Restitución simultánea de las dos evaluaciones]
+\label{cor:app-evaluaciones-restituidas}
+En cada posición de APP se recuperan exactamente los enteros evaluados mediante
+\begin{equation}
+ S=\Sigma+9q_+,
+ \qquad P=\Pi+9q_\times.
+ \label{eq:app-s-p-lift}
+\end{equation}
+\end{corolario}
+
+\begin{proof}
+Se aplica el \cref{thm:app-reconstruccion} a los enteros positivos $i+j$ e $ij$ en la misma posición $(i,j)$.
+\end{proof}
+\end{bloqueindivisible}
+
+\subsubsection{Atlas residual y registros de cociente}
+
+La matriz multiplicativa residual ya presentada se completa ahora con los residuos aditivos y con los dos registros de cociente. Estas tres tablas, junto con la matriz principal de APP, exponen por separado las coordenadas de \eqref{eq:app-two-evaluations}. Su lectura conjunta recompone las dos tablas enteras. El desglose hace visible una propiedad decisiva para el desarrollo posterior: la igualdad de residuos puede coexistir con diferencias de cociente.
+
+\input{ampliacion_20260919/generated/residuo_suma}
+\input{ampliacion_20260919/generated/cociente_suma}
+\input{ampliacion_20260919/generated/cociente_producto}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Registros del centro y coincidencia residual]
+\label{prop:app-centro}
+Las posiciones $(5,5)$ y $(8,2)$ tienen el mismo par de residuos $(\Sigma,\Pi)=(1,7)$ y distintos registros multiplicativos:
+\begin{align}
+ \mathcal A(5,5)&=((1,1),(7,2)),\\
+ \mathcal A(8,2)&=((1,1),(7,1)).
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+En $(5,5)$, las evaluaciones son $10=1+9$ y $25=7+18$. En $(8,2)$, son $10=1+9$ y $16=7+9$. La división de la diferencia por nueve produce los cocientes indicados.
+\end{proof}
+\end{bloqueindivisible}
+
+El registro multiplicativo del centro es, por tanto, $(7,2)$: un residuo y un cociente. Esta identificación tipada debe acompañar cualquier utilización posterior de esas cifras. Una concatenación decimal, una coordenada del soporte y un par residuo--cociente designan objetos diferentes y admiten operaciones diferentes.
+
+\subsubsection{Transposición e inversión central}
+
+La transposición $\sigma(i,j)=(j,i)$ conserva las dos evaluaciones por conmutatividad. Sus puntos fijos son las nueve posiciones diagonales; las otras setenta y dos posiciones se distribuyen en treinta y seis órbitas de dos elementos. Sobre las direcciones cardinales, intercambia norte con oeste y este con sur.
+
+La inversión central $\rho_c(i,j)=(10-i,10-j)$ satisface $\rho_c^2=\Id$. La ecuación de punto fijo equivale a $2i=10$ y $2j=10$, de donde se obtiene el único punto fijo $(5,5)$. Esta propiedad es una caracterización geométrica interna del centro. Las interpretaciones físicas posteriores deberán conservar la operación concreta de la que procede.
+
+La evaluación conjunta $(S,P)$ determina el multiconjunto $\{i,j\}$, pues ambos números son las raíces de $t^2-St+P$. La retención del par ordenado añade la orientación de las coordenadas y distingue los dos órdenes cuando $i\neq j$.
+
+\subsection{Transporte cardinal y registro de circulación}
+\label{sec:app-transporte}
+
+\subsubsection{Grupo de traslaciones del soporte}
+
+Identificamos cada coordenada de $D_9$ con su clase en $\mathbb Z/9\mathbb Z$. El soporte adquiere así la estructura del grupo aditivo
+\[
+ X_9=(\mathbb Z/9\mathbb Z)^2.
+\]
+La representación positiva selecciona de nuevo los enteros $1,\ldots,9$. Los cuatro desplazamientos elementales son
+\begin{equation}
+ \nu(N)=(-1,0),\quad \nu(E)=(0,1),\quad
+ \nu(S)=(1,0),\quad \nu(O)=(0,-1).
+\end{equation}
+La transición en dirección $a$ es $x\mapsto x+\nu(a)$ en $X_9$. Cada transición posee la inversa determinada por la dirección opuesta. Al cruzar un borde de la representación matricial, la reducción devuelve una posición del mismo soporte; el desplazamiento entero sigue formando parte del registro.
+
+Escribamos $T_N,T_E,T_S,T_O$ para las cuatro traslaciones. La suma de los vectores opuestos es cero; por tanto,
+\[
+ T_N\circ T_S=T_S\circ T_N=\Id,
+ \qquad T_E\circ T_O=T_O\circ T_E=\Id.
+\]
+Los casos interiores y los cruces de frontera se exhiben en la tabla siguiente. En cada cruce, la diferencia entre la coordenada entera alcanzada y su representante positivo es un múltiplo de nueve.
+
+\begin{tablacompleta}[htbp]
+\caption{Transiciones interiores y cruces de frontera en la representación matricial de APP.}
+\label{tab:app-frontera}
+\begin{tabular}{ccll}
+\toprule
+Dirección & Vector & Caso interior & Cruce de frontera\\
+\midrule
+$N$ &$(-1,0)$&$(5,5)\to(4,5)$&$(1,5)\to(0,5)\equiv(9,5)$\\
+$E$ &$(0,1)$&$(5,5)\to(5,6)$&$(5,9)\to(5,10)\equiv(5,1)$\\
+$S$ &$(1,0)$&$(5,5)\to(6,5)$&$(9,5)\to(10,5)\equiv(1,5)$\\
+$O$ &$(0,-1)$&$(5,5)\to(5,4)$&$(5,1)\to(5,0)\equiv(5,9)$\\
+\bottomrule
+\end{tabular}
+\notatabla{La congruencia de pares se interpreta coordenada a coordenada módulo nueve. El par intermedio pertenece a la elevación entera del desplazamiento.}
+\end{tablacompleta}
+
+El grafo de Cayley correspondiente tiene ochenta y un vértices y cuatro aristas salientes en cada vértice. Por tanto, contiene $324$ aristas dirigidas y $162$ aristas sin orientación. El recuento dirigido conserva la distinción entre una transición y su inversa.
+
+Su realización celular se obtiene al disponer nueve columnas y nueve filas de cuadrados y efectuar las identificaciones periódicas de los bordes opuestos. Con noventa grados entre las dos direcciones de la representación plana, el retículo resultante tiene $81$ vértices, $162$ aristas y $81$ celdas bidimensionales. Su característica de Euler es $81-162+81=0$. La descripción toroidal pertenece a esta realización celular del soporte y sus identificaciones; la definición aritmética permanece dada por $X_9$ y sus traslaciones.
+
+\subsubsection{Sucesiones de desplazamientos y elevación entera}
+
+Sea $w=a_1\cdots a_r$ una sucesión de direcciones de longitud $r$. Dada una posición inicial $x_0$, su trayectoria se define por
+\[
+ x_k=x_0+\sum_{\ell=1}^{k}\nu(a_\ell)\quad\text{en }X_9,
+ \qquad 0\leq k\leq r.
+\]
+El desplazamiento entero acumulado es
+\begin{equation}
+ d(w)=\sum_{\ell=1}^{r}\nu(a_\ell)
+      =\bigl(\#S-\#N,\#E-\#O\bigr)\in\mathbb Z^2.
+ \label{eq:app-displacement}
+\end{equation}
+Se dispone de $81\cdot4^r$ pares de posición inicial y sucesión cardinal de longitud $r$. Este recuento corresponde al alfabeto cardinal completo; los criterios de admisibilidad TPK actuarán sobre este soporte con sus registros adicionales.
+
+Para $r=0$, la sucesión vacía actúa como identidad: cada posición conserva su valor inicial y el desplazamiento acumulado es $(0,0)$. Hay exactamente ochenta y un pares de posición inicial y sucesión vacía. Bajo concatenación, la sucesión vacía es el elemento neutro.
+
+\begin{bloqueindivisible}
+\begin{teorema}[Retorno posicional y número de vueltas]
+\label{thm:app-transporte}
+La trayectoria de $w$ retorna a su posición inicial si y solo si $d(w)\in9\mathbb Z^2$. Para una trayectoria cerrada, el vector
+\begin{equation}
+ \operatorname{wind}(w)=\frac{d(w)}9\in\mathbb Z^2
+\end{equation}
+registra las vueltas orientadas en las dos direcciones periódicas. Es aditivo bajo concatenación de trayectorias cerradas. La inversión de la trayectoria cambia su signo.
+\end{teorema}
+
+\begin{proof}
+La igualdad $x_r=x_0$ en $(\mathbb Z/9\mathbb Z)^2$ equivale a la divisibilidad por nueve de ambas coordenadas de $d(w)$. La suma de desplazamientos es aditiva bajo concatenación. La trayectoria inversa se obtiene invirtiendo el orden de las direcciones y reemplazando cada una por su opuesta; su desplazamiento es $-d(w)$. La división por nueve conserva estas identidades.
+\end{proof}
+\end{bloqueindivisible}
+
+\begin{ejemplo}[Dos retornos con distinto registro]
+La sucesión $E^9$ y la sucesión $EO$ retornan a la posición inicial. Sus vectores de vueltas son, respectivamente, $(0,1)$ y $(0,0)$. El punto terminal coincide en ambos casos, mientras que el registro de circulación distingue los dos recorridos.
+\end{ejemplo}
+
+El vector de vueltas conserva la circulación neta. El orden completo de las transiciones contiene información adicional: las sucesiones $EO$ y $NS$ tienen el mismo vector nulo y distintas transiciones. La construcción progresiva del estado retendrá cada registro según la operación que deba recuperarse. De este modo, posición terminal, circulación neta y trayectoria ordenada conservan funciones bien diferenciadas.
+
+\subsection{Composición del acarreo y cambio de sección}
+\label{sec:app-cociclo}
+
+\subsubsection{El cociclo de la sección positiva}
+
+Sea $s_9:\mathbb Z/9\mathbb Z\to D_9$ la sección de representantes positivos. Para dos clases $a,b$, se define
+\begin{equation}
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+ \label{eq:app-cocycle}
+\end{equation}
+El numerador es divisible por nueve. Como las dos primeras cantidades están entre uno y nueve y la tercera representa su suma, $c_9(a,b)$ pertenece a $\{0,1\}$. La identidad
+\[
+ s_9(a)+s_9(b)=s_9(a+b)+9c_9(a,b)
+\]
+expresa el acarreo producido al sumar representantes positivos.
+
+\begin{bloqueindivisible}
+\begin{teorema}[Compatibilidad asociativa del acarreo]
+\label{thm:app-cociclo}
+Para cualesquiera $a,b,c\in\mathbb Z/9\mathbb Z$,
+\begin{equation}
+ c_9(a,b)+c_9(a+b,c)
+ =c_9(b,c)+c_9(a,b+c).
+ \label{eq:app-cocycle-associativity}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Multiplicamos la expresión de la izquierda por nueve y sustituimos \eqref{eq:app-cocycle}. Los términos $s_9(a+b)$ se cancelan, dejando
+\[
+ s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c).
+\]
+La misma sustitución en la expresión de la derecha cancela $s_9(b+c)$ y produce idéntica expresión. La división por nueve demuestra la igualdad.
+\end{proof}
+\end{bloqueindivisible}
+
+La identidad expresa la independencia del acarreo total respecto de las dos parentizaciones de una suma triple. Al repetirla, se obtiene la compatibilidad de cualquier suma finita con su reducción modular. El registro hace explícito el término que conecta el cálculo entero con la operación residual.
+
+\subsubsection{Normalizaciones residual positiva y residual usual}
+
+La sección usual $s_0$ toma valores en $\{0,\ldots,8\}$. Si $\delta_0(a)$ vale uno para la clase nula y cero para las restantes, ambas secciones se relacionan mediante
+\begin{equation}
+ s_9(a)=s_0(a)+9\delta_0(a).
+\end{equation}
+Definimos $c_0$ mediante la misma expresión que \eqref{eq:app-cocycle}, sustituyendo $s_9$ por $s_0$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Transformación exacta del acarreo]
+\label{prop:app-cambio-seccion}
+Los dos cociclos satisfacen
+\begin{equation}
+ c_9(a,b)=c_0(a,b)+\delta_0(a)+\delta_0(b)-\delta_0(a+b).
+ \label{eq:app-section-change}
+\end{equation}
+En particular, $c_9(0,a)=1$ y $c_0(0,a)=0$.
+\end{proposicion}
+
+\begin{proof}
+Sustituimos $s_9=s_0+9\delta_0$ en las tres apariciones de la sección en \eqref{eq:app-cocycle}. Los términos de $s_0$ producen $c_0$ y los términos restantes producen la diferencia de indicadores escrita. Para $a=0$, la identidad se evalúa directamente.
+\end{proof}
+\end{bloqueindivisible}
+
+El cambio de sección modifica el cociclo mediante un coborde. Esta formulación identifica exactamente qué término cambia al representar la clase nula con $9$ o con $0$. La restitución del entero conserva su consistencia en ambas convenciones cuando se transforma simultáneamente el cociente.
+
+Para explicitar los casos de frontera, pongamos $\varepsilon(a,b)=c_9(a,b)-c_0(a,b)$. La fórmula \eqref{eq:app-section-change} produce la partición siguiente:
+\begin{tablacompleta}[H]
+\caption{Corrección del acarreo bajo cambio de sección.}
+\label{tab:app-casos-seccion}
+\begin{tabular}{lc}
+\toprule
+Condición sobre las clases & $\varepsilon(a,b)$\\
+\midrule
+$a=b=0$ & $1+1-1=1$\\
+Exactamente una de $a,b$ es cero & $1$\\
+$a\neq0$, $b\neq0$, $a+b=0$ & $-1$\\
+$a\neq0$, $b\neq0$, $a+b\neq0$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{tablacompleta}
+La primera fila explicita el solapamiento de las condiciones de nulidad; las cuatro filas son disjuntas y cubren todas las parejas de clases.
+
+\subsection{Balances enteros y estructura multiplicativa}
+\label{sec:app-balances}
+
+\subsubsection{Los seis totales del atlas aritmético}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Totales de las evaluaciones y sus registros]
+\label{prop:app-totales}
+La suma sobre las ochenta y una posiciones satisface
+\begin{align}
+ \sum S&=810, &\sum P&=2025,\\
+ \sum\Sigma&=405, &\sum\Pi&=459,\\
+ \sum q_+&=45, &\sum q_\times&=174.
+ \label{eq:app-six-totals}
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+La suma $1+\cdots+9$ vale $45$. Por separación de las dos coordenadas,
+\[
+ \sum_{i,j}(i+j)=9\cdot45+9\cdot45=810,
+ \qquad \sum_{i,j}ij=45^2=2025.
+\]
+Cada fila de la evaluación aditiva residual contiene una permutación de los nueve representantes, con suma $45$. Por tanto, $\sum\Sigma=9\cdot45=405$.
+
+En la multiplicación residual, las filas de índices $1,2,4,5,7,8$ son permutaciones y suman $45$. Las filas de índices $3$ y $6$ contienen cada uno de los representantes $3,6,9$ tres veces y suman $54$. La fila de índice $9$ contiene nueve entradas de valor $9$ y suma $81$. Se obtiene $\sum\Pi=6\cdot45+2\cdot54+81=459$.
+
+Finalmente, sumamos \eqref{eq:app-s-p-lift}: $\sum q_+=(810-405)/9=45$ y $\sum q_\times=(2025-459)/9=174$.
+\end{proof}
+\end{bloqueindivisible}
+
+\input{ampliacion_20260919/generated/totales_filas}
+
+\subsubsection{Diferencia entre adición y multiplicación}
+
+La diferencia de las dos evaluaciones se descompone en cada posición como
+\begin{equation}
+ P-S=(\Pi-\Sigma)+9(q_\times-q_+).
+ \label{eq:app-difference-local}
+\end{equation}
+Al sumar el atlas completo resulta
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{eq:app-difference-global}
+\end{equation}
+El contraste residual total es $54$; el contraste de cocientes es $129$ y contribuye con $1161$ al contraste entero total $1215$. La igualdad local determina la global sin modificar el significado de ninguno de los registros.
+
+Esta descomposición permite seguir por separado el valor residual y su elevación entera. Cuando esos datos participen en operadores posteriores, la procedencia de los coeficientes quedará fijada por la evaluación y la suma que los produjo. La aparición de $54$ adquiere aquí un significado aritmético específico, anterior a cualquier interpretación dimensional ulterior.
+
+\subsubsection{Unidades, ideal radical y extracción ternaria}
+
+En el anillo $R=\mathbb Z/9\mathbb Z$, un residuo es invertible exactamente cuando es coprimo con nueve. Por ello,
+\[
+ R^\times=\{1,2,4,5,7,8\},
+ \qquad 1^{-1}=1,\quad2^{-1}=5,\quad4^{-1}=7,\quad8^{-1}=8.
+\]
+Las filas multiplicativas correspondientes a estos índices son permutaciones. Para los índices $3$ y $6$, la imagen tiene tres residuos; para el índice $0$, representado positivamente por $9$, tiene uno.
+
+Las inversas se comprueban por composición. La traslación aditiva $b\mapsto a+b$ se invierte mediante $c\mapsto c-a$; ambas composiciones devuelven el argumento inicial. Si $a$ es una unidad, el mapa multiplicativo $b\mapsto ab$ se invierte mediante $c\mapsto a^{-1}c$, pues $a^{-1}(ab)=b$ y $a(a^{-1}c)=c$. Las seis unidades indicadas se verifican mediante los productos $1\cdot1=1$, $2\cdot5=10\equiv1$, $4\cdot7=28\equiv1$ y $8\cdot8=64\equiv1$; las dos parejas intermedias proporcionan también las inversas de $5$ y $7$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Estructura radical de la multiplicación nonádica]
+\label{prop:app-radical}
+El ideal $\mathfrak m=(3)=\{0,3,6\}$ satisface $\mathfrak m^2=0$. La multiplicación por tres tiene núcleo e imagen iguales a $\mathfrak m$. La aplicación
+\begin{equation}
+ R/\mathfrak m\longrightarrow\mathfrak m,
+ \qquad x+\mathfrak m\longmapsto3x
+ \label{eq:app-radical}
+\end{equation}
+es un isomorfismo de espacios vectoriales sobre $\mathbb F_3$.
+\end{proposicion}
+
+\begin{proof}
+El producto de dos múltiplos de tres es múltiplo de nueve; de ahí $\mathfrak m^2=0$. La igualdad $3x=0$ en $R$ equivale a $x\in\mathfrak m$ y los valores de $3x$ recorren $\mathfrak m$. Si $x-y\in\mathfrak m$, entonces $3(x-y)=0$; así, \eqref{eq:app-radical} está bien definida. Su núcleo es nulo y su imagen contiene los tres elementos del codominio. La aditividad y la compatibilidad con escalares de $\mathbb F_3$ son inmediatas de la multiplicación en $R$.
+\end{proof}
+\end{bloqueindivisible}
+
+La operación de \eqref{eq:app-radical} preserva la estructura lineal. El producto de dos elementos de $\mathfrak m$ es cero, mientras que el cociente $R/\mathfrak m$ es el cuerpo de tres elementos. Esta distinción determina el tipo algebraico del isomorfismo.
+
+La sucesión visible $3,6,9$ admite dos evaluaciones ternarias. Su reducción directa módulo tres es $(0,0,0)$. La extracción del factor tres identifica $3k$ con su coordenada $k\bmod3$ y produce $(1,2,0)$. La primera operación calcula la clase del entero original; la segunda calcula la coordenada interna del ideal. Su distinción prepara el tipado del lector ternario sin anticipar su dinámica.
+
+\subsection{Realización operatoria de las evaluaciones}
+\label{sec:app-operadores}
+
+\subsubsection{Resolución aditiva de la identidad}
+
+La representación operatoria se construye desde las evaluaciones residuales ya definidas. Sea $\mathcal H_9=\mathbb C^9$, con base ortonormal $(e_r)_{r\in R}$, y sea $P_r=e_re_r^*$ el proyector sobre la dirección de $e_r$. A la posición $(a,b)\in R^2$ se asigna el proyector aditivo $P^+_{ab}=P_{a+b}$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Identidad operatoria por filas y columnas]
+\label{prop:app-aditivo-operador}
+Cada entrada $P^+_{ab}$ es un proyector ortogonal de rango uno y
+\begin{equation}
+ \sum_{b\in R}P^+_{ab}=I_9,
+ \qquad \sum_{a\in R}P^+_{ab}=I_9.
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+La ortonormalidad implica $P_r^2=P_r=P_r^*$ y $\sum_rP_r=I_9$. Para $a$ fijo, la traslación $b\mapsto a+b$ permuta todos los residuos; análogamente para $b$ fijo. Las dos sumas son por tanto la suma de los nueve proyectores de la base.
+\end{proof}
+\end{bloqueindivisible}
+
+La realización expresa la propiedad latina de la tabla aditiva mediante una resolución de la identidad. El espacio de Hilbert actúa aquí como codominio de una representación explícita de la aritmética construida.
+
+\subsubsection{Multiplicidades del operador multiplicativo}
+
+Definimos $P^\times_{ab}=P_{ab}$ y $T_a=\sum_bP^\times_{ab}$, donde el subíndice $ab$ designa el producto de residuos. Para $a\in R^\times$, se obtiene $T_a=I_9$. Para $a=3$ o $a=6$,
+\begin{equation}
+ T_a=3(P_0+P_3+P_6),
+\end{equation}
+y para $a=0$, se obtiene $T_0=9P_0$.
+
+Estas identidades se demuestran contando las preimágenes de cada residuo bajo $b\mapsto ab$. En las dos filas de imagen ternaria, los residuos $0,3,6$ poseen tres preimágenes cada uno. En la fila nula, el residuo $0$ posee nueve. Por consiguiente, los rangos de $T_a$ son respectivamente $9$, $3$ y $1$; sus autovalores no nulos son $1$, $3$ y $9$. En los tres casos, la traza conserva el valor $9$.
+
+El operador registra así tanto la concentración de multiplicidades como la cantidad total de contribuciones. La igualdad de trazas convive con diferencias de rango y de espectro. Esta distinción proporciona un ejemplo completo de conservación de una magnitud agregada con transformación de su distribución operatoria.
+
+\subsection{Bloques decimales y compatibilidad entre módulos}
+\label{sec:app-base-mil}
+
+\subsubsection{Descomposición en base mil}
+
+Para $N\in\mathbb N_0$, la división euclídea por mil produce
+\begin{equation}
+ N=1000Q+B,\qquad 0\leq B<1000.
+ \label{eq:app-base1000}
+\end{equation}
+El bloque $B$ tiene la escritura decimal de anchura tres
+\[
+ B=100a+10b+c,\qquad a,b,c\in\{0,\ldots,9\}.
+\]
+La anchura se conserva incluso cuando aparecen ceros iniciales: el bloque $001$ posee tres posiciones de cifra y valor entero uno. El índice del bloque en una sucesión y el cociente $Q$ conservan la información de escala requerida por el refinamiento.
+
+En la primera tabla APP, las sumas y los productos son menores que mil. Su residuo módulo mil coincide con su valor entero. La reducción módulo nueve tiene una función distinta: produce las evaluaciones $\Sigma$ y $\Pi$ y sus cocientes. La comparación de ambos módulos comienza, por tanto, con las operaciones concretas que cada uno efectúa.
+
+\subsubsection{Identidad exacta entre cocientes}
+
+\begin{bloqueindivisible}
+\begin{teorema}[Compatibilidad de los registros nonádico y decimal]
+\label{thm:app-compatibilidad-mil}
+Sea $N>0$ y sea \eqref{eq:app-base1000} su división euclídea por mil. Entonces
+\begin{equation}
+ \rho_9(N)=\rho_9(Q+B),\qquad
+ q_9(N)=111Q+q_9(Q+B).
+ \label{eq:app-cross-module}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Como $N>0$, se tiene $Q+B>0$. La identidad $1000=999+1$ da
+\[
+ N=999Q+(Q+B)=9\cdot111Q+(Q+B).
+\]
+Aplicamos la restitución nonádica al último término:
+\[
+ N=\rho_9(Q+B)+9\bigl(111Q+q_9(Q+B)\bigr).
+\]
+El residuo pertenece a $D_9$ y el cociente es un entero no negativo. La unicidad del \cref{thm:app-reconstruccion} identifica ambos con $\rho_9(N)$ y $q_9(N)$.
+\end{proof}
+\end{bloqueindivisible}
+
+\begin{ejemplo}[Cruce del umbral decimal]
+Para $N=1001$, la división por mil produce $Q=1$, $B=1$. La fórmula da $\rho_9(N)=\rho_9(2)=2$ y $q_9(N)=111$. El bloque final considerado aisladamente tiene residuo uno; la incorporación del cociente recupera el residuo dos del entero completo.
+
+Para $N=1000$, se obtiene $(\rho_9,q_9)=(1,111)$; para $N=999$, se obtiene $(9,110)$. La transición entre ambos enteros cambia simultáneamente el representante positivo y el cociente.
+\end{ejemplo}
+
+\subsubsection{Recomposición de una sucesión finita de bloques}
+
+\begin{bloqueindivisible}
+\begin{corolario}[Suma de bloques y restitución de la escala]
+\label{cor:app-bloques}
+Sea $N=\sum_{k=0}^{m}B_k1000^k>0$, con $0\leq B_k<1000$, y sea $S_B=\sum_kB_k$. Entonces
+\begin{align}
+ \rho_9(N)&=\rho_9(S_B),\\
+ q_9(N)&=q_9(S_B)+
+ \sum_{k=1}^{m}B_k\frac{1000^k-1}{9}.
+ \label{eq:app-blocks-complete}
+\end{align}
+\end{corolario}
+
+\begin{proof}
+La resta de $S_B$ a la expansión de $N$ produce $\sum_{k\geq1}B_k(1000^k-1)$. Cada coeficiente $1000^k-1$ es divisible por nueve. Sustituyendo $S_B=\rho_9(S_B)+9q_9(S_B)$ y aplicando la unicidad de la restitución, se obtienen las dos identidades.
+\end{proof}
+\end{bloqueindivisible}
+
+El residuo depende de la suma de los bloques; la segunda fórmula conserva además su posición mediante las potencias de mil. El orden y la escala de la expansión quedan explícitos en el registro entero. Esta identidad delimita la función del módulo mil en el presente capítulo. La selección de bloques por el calendario, la orientación trítica y la prolongación coinductiva corresponden a las operaciones TPK que se desarrollarán sobre esta base.
+
+\subsection{Dependencias establecidas para la etapa trítica}
+\label{sec:app-dependencias}
+
+La construcción ha producido un soporte ordenado de ochenta y una posiciones, dos evaluaciones enteras simultáneas y sus descomposiciones reversibles. También ha producido las traslaciones cardinales, el registro de circulación, el cociclo de acarreo y la estructura ternaria interna del ideal multiplicativo. La realización por proyectores y la compatibilidad de bloques decimales se obtienen después de esas operaciones y conservan sus dominios explícitos.
+
+En esta etapa, la reconstrucción exacta concierne a las evaluaciones aritméticas; la restitución de una trayectoria completa exige su registro ordenado. Esta jerarquía determina la transición al estado enriquecido: cada nueva operación deberá indicar qué coordenadas utiliza, qué modifica y qué conserva. La introducción de TRIT podrá entonces apoyarse en la reducción ternaria y en la elevación entera ya definidas; la introducción de TPK podrá actuar sobre transiciones y registros concretos.
+
+El desarrollo posterior de las regiones y de las constantes se insertará en esa secuencia generativa. Su exposición deberá conservar la diferencia entre el operador que genera una salida y la fórmula que permite reconocerla o evaluarla en un lenguaje posterior. La base aritmética queda aquí demostrada con el detalle necesario para seguir ambas funciones sin intercambiarlas.

@@ -1,0 +1,152 @@
+\chapter{Dépendances logiques et certificats de cohérence}
+
+\section{Chaîne causale des certificats : états finis \(\to\) restrictions \(\to\) survie \(\to\) section infinie \(\to\) réalisations}
+
+La chaîne logique de l'intégration ne part pas d'une conclusion archimédienne.
+Elle s'organise dans l'ordre suivant :
+\[
+\begin{tikzpicture}[baseline=(current bounding box.center),>=Latex,
+ node distance=7mm and 8mm,
+ n/.style={rounded corners,draw=hmtblue,fill=hmtlightblue,
+ minimum height=8mm,align=center,font=\small}]
+ \node[n] (finite) {estados finitos\\tipados};
+ \node[n,right=of finite] (maps) {restricciones\\compatibles};
+ \node[n,right=of maps] (surv) {supervivencia\\y poda};
+ \node[n,right=of surv] (lim) {sección\\infinita};
+ \node[n,right=of lim] (read) {lectores\\y realizaciones};
+ \draw[->,thick] (finite)--(maps);
+ \draw[->,thick] (maps)--(surv);
+ \draw[->,thick] (surv)--(lim);
+ \draw[->,thick] (lim)--(read);
+\end{tikzpicture}
+\]
+Un certificat de chiffres vérifie une restriction de la dernière flèche ; il ne
+crée pas rétrospectivement les états et ne remplace pas le théorème d'existence
+de la limite.
+
+\section{Identités arithmétiques exactes des certificats finis}
+
+Les recensements qui accompagnent le certificat de filtration nonadique satisfont
+\[
+ 396\cdot6=2376,
+ \qquad
+ 43\cdot9=387,
+ \qquad
+ 432+4\cdot144=1008.
+\]
+La première égalité relie les événements élémentaires de frontière aux trits
+émis par canal ; la deuxième compte les paires de phase \((K,K+9)\) ; la
+troisième reconstruit la multiplicité totale des cinq régions de
+\(\pi\).
+
+Les deux rôles régionaux qui ne peuvent pas être permutés sont
+\[
+\begin{array}{rcl}
+U_\pi^\perp&=&(501,614,498,169,272,272),\\
+E_{\rm sig}&=&555555,\qquad \text{multiplicité }432,\\[.35em]
+U_\pi^{--}&=&(870,923,810,418,674,521),\\
+E_{\rm sig}&=&933717,\qquad \text{multiplicité }144.
+\end{array}
+\]
+
+\section{Existence et unicité de la branche infinie dans un arbre à branchement fini de préfixes survivants}
+
+\begin{lemma}[Arbre à branchement fini]
+Soit \(T\) un arbre à niveaux finis non vides tel que tout nœud
+survivant ait un descendant survivant. Alors il existe une branche
+infinie. Si, en outre, chaque nœud de la sous-tour sélectionnée a exactement
+un descendant compatible, la branche est unique.
+\end{lemma}
+
+\begin{proof}
+L'existence résulte du lemme de König appliqué à l'arbre à branchement fini.
+Pour l'unicité, deux branches distinctes auraient un premier niveau où elles
+divergent, donnant deux descendants compatibles du même préfixe, contrairement à
+l'hypothèse.
+\end{proof}
+
+\begin{controlbox}
+Une exécution à la profondeur \(N\) ne prouve que ce qui s'est produit dans l'arbre
+tronqué. L'énoncé infini exige la loi uniforme qui préserve la non-
+vacuité et la compatibilité à tout niveau. Le corps du texte sépare expressément
+les deux statuts et, pour la filtration nonadique, conserve son sélecteur uniforme
+certifié.
+\end{controlbox}
+
+\section{Clôture et pleine puissance}
+
+Pour \(A\subseteq X=\varprojlim X_n\), il a été prouvé
+\[
+ \overline A=\bigcap_n p_n^{-1}(p_n(A)).
+\]
+L'ensemble des suites binaires ultimement nulles est dense et propre dans
+\(2^{\mathbb N}\), mais possède toutes les ombres finies. Ainsi, tout
+algorithme qui ne reçoit que \((p_n(A))_n\) ne peut pas distinguer \(A\) de sa
+clôture. Cet exemple bloque la fausse identité
+\[
+ \varprojlim\mathcal P(X_n)=\mathcal P(\varprojlim X_n).
+\]
+
+\section{Compatibilité typée des opérateurs}
+
+La différence entre l'inclusion unitaire et le coin marqué se vérifie
+directement :
+\[
+\begin{aligned}
+ \tau_{d+1}(a\otimes I_9)
+ &=\frac{\operatorname{Tr}(a)\operatorname{Tr}(I_9)}{9^{d+1}}
+ =\tau_d(a),\\
+ \tau_{d+1}(a\otimes p_j)
+ &=\frac{\operatorname{Tr}(a)}{9^{d+1}}
+ =\frac1{9}\tau_d(a).
+\end{aligned}
+\]
+La première branche est unitaire et traciale ; la seconde conserve un coin marqué
+et ne peut pas être utilisée pour inférer le facteur \(II_1\).
+
+\section{Annulation du coût de Landauer dans l'inversion réversible de l'état}
+
+Pour une variable complète \(X\) et une projection \(Y=q(X)\),
+\[
+ H(X)=H(Y)+H(X\mid Y).
+\]
+Si \(q\) est bijective, la fibre est un singleton et \(H(X\mid Y)=0\). Si \(q\)
+est une réinitialisation du TRIT uniforme, l'information rejetée est \(\log3\) et
+le coût minimal est \(k_B\Theta\log3\). Pour l'extension
+\(\widehat E_N\) à \(L^1\) d'une espérance conditionnelle normale
+préservant la trace \(E_N\), et sous les hypothèses de finitude déclarées,
+\[
+ S_\tau(\widehat E_Nh)-S_\tau(h)
+ =D_\tau(h\Vert \widehat E_Nh)\ge0.
+\]
+Les deux formules situent le même phénomène dans des domaines différents : le
+coût appartient à la contraction d'une fibre, non à l'évolution réversible
+de l'état complet.
+
+\section{Obstruction de Gödel–Turing à un décideur uniforme des multiplicités projectives}
+
+Soit \(T_e\) la machine d'indice \(e\). Au niveau \(n\), on définit
+\[
+ X_n^e=\{b_n\}\cup
+ \{c_n:T_e\text{ ne s'est pas arrêté avant }n\}.
+\]
+Chaque \(X_n^e\) est calculable. La fibre globale a deux branches si \(T_e\) ne
+s'arrête pas et une si elle s'arrête. Par conséquent
+\[
+ U_e:\quad \#q_\infty^{-1}(v)=1
+ \quad\Longleftrightarrow\quad T_e\downarrow.
+\]
+Un décideur uniforme pour \(U_e\) déciderait \(\HALT\). Une théorie
+récursivement axiomatisable, correcte et complète pour tous les \(U_e\)
+permettrait de les décider en énumérant en parallèle les preuves de \(U_e\) et de sa
+négation. C'est le noyau du \emph{Théorème HMT d'incomplétude uniforme
+pour les multiplicités projectives} ; sa démonstration utilise une réduction
+de Gödel--Turing. L'obstruction uniforme ne nie pas les sélecteurs particuliers
+construits sur des images HMT calibrées.
+
+\begin{controlbox}[title={Portée du contrôle d'incomplétude uniforme}]
+La réduction de Gödel--Turing établit l'obstruction uniforme pour les
+multiplicités projectives. Elle ne nie pas les sélecteurs particuliers construits
+sur des images HMT calibrées et ne transforme pas une obstruction de décision globale
+en une indétermination de chaque fibre concrète.
+\end{controlbox}

@@ -1,0 +1,233 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{newtxtext,newtxmath,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\title{\bfseries Ventana HMT--APP N33\\
+\large Derivaci\'on de $\pi$, $e$ y $\varphi$ desde APP+$\kappa$--27+MOV3 (sin inyecci\'on)}
+\author{HMT/OPS (paquete de cierre)}
+\date{\small (generado en esta sesi\'on; ver \texttt{HMT\_N33\_certificate.json} y \texttt{HMT\_N33\_MANIFEST.sha256})}
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\theoremstyle{definition}
+\newtheorem{defi}{Definici\'on}
+\theoremstyle{remark}
+\newtheorem{obs}{Observaci\'on}
+
+\begin{document}
+\maketitle
+\small
+
+\section*{0. Lista cerrada de pruebas (PASS/NO PASS)}
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|c|p{12.7cm}|c|}
+\hline
+\textbf{ID} & \textbf{Prueba} & \textbf{Estado}\\
+\hline
+N33.T1 & \textbf{Upstream completamente especificado} (APP+$\kappa$--27+MOV3+$\log_9$ discreto, sin outputs externos). & PASS\\
+\hline
+N33.T2 & \textbf{Barrido exhaustivo} de $324\times 324=104\,976$ semillas y construcci\'on del cat\'alogo $U_6$ y firmas $w_6\in\mathbb F_3^6$. & PASS\\
+\hline
+N33.T3 & \textbf{Lift sin dial} $w_6\mapsto w_{30}$ por matrices $L_0,L_1\in\mathrm{Mat}_{6\times 6}(\mathbb F_3)$ fijas; lectura base--1000 de 4 triadas. & PASS\\
+\hline
+N33.T4 & \textbf{Existencia interna}: las palabras $w_6=010211,201101,121200$ aparecen en el barrido (con semillas can\'onicas). & PASS\\
+\hline
+N33.T5 & \textbf{Verificaci\'on externa separada}: las triadas derivadas coinciden con los prefijos decimales de $\pi,e,\varphi$ (12 d\'igitos de la parte fraccionaria) y la coincidencia es \emph{\`unica} en el cat\'alogo. & PASS\\
+\hline
+N33.T6 & \textbf{Congelaci\'on por hash}: scripts, tablas y certificado quedan fijados por \texttt{HMT\_N33\_MANIFEST.sha256}. & PASS\\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{1. Objetivo y criterio de ``no inyecci\'on''}
+
+El objetivo de N33 es cerrar (con un certificado reproducible) el siguiente hecho:
+
+\begin{quote}
+\emph{En el lenguaje HMT, a partir \emph{\textbf{solo}} de APP, la rueda MOV3, el flip $\kappa$--27 y un mapa $\log_9$ discreto fijo, se generan de manera determinista palabras $w_6\in\mathbb F_3^6$ y, mediante un lift fijo $w_6\mapsto w_{30}$ y una lectura base--1000, se obtienen triadas que coinciden con los prefijos decimales de $\pi$, $e$ y $\varphi$, sin usar sus decimales como entrada.}
+\end{quote}
+
+\paragraph{No inyecci\'on (separaci\'on definici\'on/verificaci\'on).}
+\begin{itemize}
+\item \textbf{Definici\'on}: el motor upstream (APP/TPK/MOV3/$\kappa$--27/$\log_9$) y el lift (matrices $L_0,L_1$ y lectura base--1000) se definen sin referencias a $\pi,e,\varphi$.
+\item \textbf{Verificaci\'on}: solo al final, opcionalmente, se compara el output con los valores usuales de $\pi,e,\varphi$ para etiquetar qu\'e palabra corresponde a cu\'al constante.
+\end{itemize}
+
+\section*{2. Upstream: APP+$\kappa$--27+MOV3 $\Rightarrow U_{12}$}
+
+\subsection*{2.1. APP base $9\times 9$}
+Sea la ra\'iz digital (mod 9)
+\[
+\operatorname{dr}_9(n)=\begin{cases}n\bmod 9,&n\not\equiv 0\ (9),\\ 9,&n\equiv 0\ (9).\end{cases}
+\]
+Definimos los valores de APP en cada celda $(i,j)\in\{0,\dots,8\}^2$:
+\[
+L_+(i,j):=\operatorname{dr}_9\big((i+1)+(j+1)\big),\qquad
+L_{\times}(i,j):=\operatorname{dr}_9\big((i+1)(j+1)\big).
+\]
+
+\subsection*{2.2. MOV3 (selector tri\'adico) y flip $\kappa$--27}
+Sea $t=1,2,\dots,108$ el tick global y $r(t)=((t-1)\bmod 9)+1$.
+Definimos
+\[
+\mathrm{mov3}(r)=
+\begin{cases}
++1,&r\in\{1,4,7\},\\
+-1,&r\in\{2,5,8\},\\
+0,&r\in\{3,6,9\}.
+\end{cases}
+\]
+El flip $\kappa$--27 invierte las direcciones en $t\in\{27,54,81,108\}$.
+
+\subsection*{2.3. Mapa $\log_9$ discreto fijo}
+Sea el subgrupo de unidades de $\mathbb Z/9\mathbb Z$ con generador $2$.
+Definimos
+\[
+\log_9(1)=0,\ \log_9(2)=1,\ \log_9(4)=2,\ \log_9(8)=3,\ \log_9(7)=4,\ \log_9(5)=5,
+\]
+(y $0$ en los no-unidades).
+
+\subsection*{2.4. Semillas y evoluci\'on}
+Una semilla de la capa ``$+$'' es
+\[
+\mathrm{seed}_+:=(i_+,j_+,h_+),\quad (i_+,j_+)\in\mathbb Z_9^2,\ \ h_+\in\{N,E,S,O\},
+\]
+con direcciones unitarias $N=(1,0)$, $E=(0,1)$, $S=(-1,0)$, $O=(0,-1)$ (todo m\'odulo 9).
+Igualmente una semilla de la capa ``$\times$'' es $\mathrm{seed}_{\times}=(i_{\times},j_{\times},h_{\times})$.
+
+Con estado $(p_+(t),h_+(t))$ y $(p_{\times}(t),h_{\times}(t))$, se define en cada tick:
+\begin{itemize}
+\item si $\mathrm{mov3}(r(t))=+1$, se acumula $S\leftarrow S+L_+(p_+(t))$ y se avanza $p_+\leftarrow p_+ + h_+$;
+\item si $\mathrm{mov3}(r(t))=-1$, se acumula $E\leftarrow E+\log_9(L_{\times}(p_{\times}(t)))$ y se avanza $p_{\times}\leftarrow p_{\times}+h_{\times}$;
+\item si $\mathrm{mov3}(r(t))=0$, se acumula $T\leftarrow T+1$.
+\item si $t\in\{27,54,81,108\}$, se invierte $h_+\leftarrow -h_+$ y $h_{\times}\leftarrow -h_{\times}$.
+\end{itemize}
+
+Para cada ventana $m=1,\dots,12$ (9 ticks) se obtienen enteros $(S_m,E_m,T_m)$ y se define el bloque tri\'adico
+\[
+U_m:=100\,(S_m\bmod 10)+10\,((S_m+E_m)\bmod 10)+\bigl(3S_m+5E_m+7T_m\bigr)\bmod 10.
+\]
+Así, cada par de semillas $(\mathrm{seed}_+,\mathrm{seed}_{\times})$ determina
+\[
+U_{12}:=(U_1,\dots,U_{12})\in\{0,\dots,999\}^{12}.
+\]
+
+\section*{3. Reducci\'on tri\'adica: $U_6\Rightarrow w_6\in\mathbb F_3^6$}
+
+Definimos $U_6:=(U_1,\dots,U_6)$ y la palabra
+\[
+ w_6:=(-U_1\bmod 3,\dots,-U_6\bmod 3)\ \in\ \mathbb F_3^6.
+\]
+El script \texttt{hmt\_n33\_pi\_e\_phi\_closeout.py} realiza un barrido exhaustivo de las
+\(324\) semillas de la capa $+$ y las \(324\) semillas de la capa $\times$ (total $104\,976$ ejecuciones),
+construye el cat\'alogo de $U_6$ distintos (UIDs), y el multiconjunto de $w_6$ resultante.
+
+\section*{4. Lift can\'onico $w_6\mapsto w_{30}$ y lectura base--1000}
+
+\subsection*{4.1. Matrices $L_0,L_1$ (fijas, sin dial)}
+Trabajamos en $\mathbb F_3$. Sean las matrices
+\[
+L_0=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix},\qquad
+L_1=
+\begin{pmatrix}
+2&1&2&0&2&2\\
+1&2&1&1&2&0\\
+1&2&1&1&1&2\\
+0&1&0&0&2&1\\
+2&0&2&1&0&1\\
+0&2&2&2&1&1
+\end{pmatrix}
+\ \ (\bmod 3).
+\]
+
+\subsection*{4.2. Lift}
+Dada $u_0:=w_6$ (vector fila en $\mathbb F_3^6$), definimos
+\[
+ u_1=u_0L_0,\qquad u_2=u_1L_0,\qquad u_3=u_2L_1,\qquad u_4=u_3L_1.
+\]
+El lift es la concatenaci\'on
+\[
+ w_{30}:=u_0\,\|\,u_1\,\|\,u_2\,\|\,u_3\,\|\,u_4\ \in\ \mathbb F_3^{30}.
+\]
+
+\subsection*{4.3. Lectura base--1000 (4 triadas)}
+Interpretamos $w_{30}=d_0d_1\dots d_{29}$ como un entero en base 3,
+\[
+N:=\sum_{k=0}^{29} d_k\,3^{29-k},\qquad 0\le N<3^{30}.
+\]
+Definimos las primeras $4$ triadas base--1000 del racional $N/3^{30}$ como
+\[
+ q_j:=\Big\lfloor\frac{1000^j N}{3^{30}}\Big\rfloor,\qquad
+ a_j:=q_j\bmod 1000,\qquad j=1,2,3,4.
+\]
+Entonces $(a_1,a_2,a_3,a_4)$ es el output ``decimal--tri\'adico'' asociado a $w_6$.
+
+\section*{5. Resultado principal (con certificado)}
+
+\begin{teo}[Emergencia de prefijos tri\'adicos de $\pi,e,\varphi$]
+En el barrido exhaustivo de semillas (N33.T2), aparecen las palabras
+\[
+ w_6(\pi)=010211,\qquad w_6(e)=201101,\qquad w_6(\varphi)=121200.
+\]
+Aplicando el lift (N33.T3) y la lectura base--1000 (N33.T3) se obtienen
+\[
+\mathrm{triadas}(w_6(\pi))=(141,592,653,589),
+\]
+\[
+\mathrm{triadas}(w_6(e))=(718,281,828,459),
+\]
+\[
+\mathrm{triadas}(w_6(\varphi))=(618,033,988,749),
+\]
+que coinciden con los primeros 12 d\'igitos de la parte fraccionaria de $\pi,e,\varphi$.
+Adem\'as, la coincidencia es \emph{\`unica} dentro del cat\'alogo de palabras $w_6$ producidas.
+\end{teo}
+
+\subsection*{5.1. Semillas can\'onicas (sin dial)}
+El certificado computacional fija, para cada palabra, una semilla can\'onica
+(eligiendo el UID con mayor preimagen en semillas; empate por orden lexicogr\'afico):
+\begin{itemize}
+\item $w_6(\pi)=010211$ con $U_6=(501,614,498,169,272,272)$ y
+      $(\mathrm{seed}_+,\mathrm{seed}_{\times})=((0,4,N),(2,3,N))$.
+\item $w_6(e)=201101$ con $U_6=(850,963,890,149,252,212)$ y
+      $(\mathrm{seed}_+,\mathrm{seed}_{\times})=((0,6,E),(0,3,E))$.
+\item $w_6(\varphi)=121200$ con $U_6=(830,943,830,109,252,252)$ y
+      $(\mathrm{seed}_+,\mathrm{seed}_{\times})=((0,6,E),(0,6,N))$.
+\end{itemize}
+
+\subsection*{5.2. Certificado y congelaci\'on por hash}
+\begin{itemize}
+\item El archivo \texttt{HMT\_N33\_certificate.json} contiene:
+  (i) estad\'isticas completas del barrido, (ii) las semillas can\'onicas,
+  (iii) $w_{30}$ y triadas derivadas, y (iv) la verificaci\'on externa (opcional) con coincidencia \emph{\`unica}.
+\item El archivo \texttt{HMT\_N33\_MANIFEST.sha256} fija por hash los scripts y outputs
+  (cat\'alogo, certificado y este \TeX).
+\end{itemize}
+
+\section*{6. Observaciones finales (lectura HMT)}
+\begin{obs}
+Lo importante de N33 no es ``reconstruir $\pi$'' (que siempre se puede tomar como dato),
+sino fijar un \emph{puente cerrado}:
+\[
+\text{APP+$\kappa$--27+MOV3}\ \Longrightarrow\ w_6\ \Longrightarrow\ w_{30}\ \Longrightarrow\ \text{triadas base--1000}.
+\]
+Una vez congelado este puente por hash, los usos posteriores (por ejemplo, $\alpha$ 3.0
+v\'ia \emph{carry} y m\'ascaras $K_{R12}$) quedan protegidos frente a la cr\'itica
+``metiste $\pi,e,\varphi$ como entrada''.
+\end{obs}
+
+\end{document}

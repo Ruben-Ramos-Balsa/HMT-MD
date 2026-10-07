@@ -1,0 +1,460 @@
+% Sección aditiva. No modifica la edición de 211 páginas.
+% Procedencia y comprobaciones: documentos internos de este mismo directorio.
+\section{Refinamiento nonádico, banderas positivas y compatibilidad de los momentos}
+\label{sec:dim-cofinal}
+
+La longitud de una representación finita determina cuántos menores pueden
+formarse con sus columnas. El refinamiento conserva las columnas heredadas
+y añade otras con procedencia conocida. Por ello, la dimensión de una
+realización matricial puede crecer sin sustituir el registro que fija sus
+separaciones. La construcción siguiente reúne este crecimiento con dos
+nociones precisas de compatibilidad: restricción de evaluaciones a las
+marcas anteriores y promedio de observables sobre las celdas descendientes.
+La primera preserva las banderas polinomiales; la segunda conserva una
+medida y separa el incremento de información en detalles ortogonales.
+
+El dato de partida es la salida dodecafásica ya producida por
+APP--TRIT--TPK. Las dos hojas de APP conservan sus divisiones completas;
+TRIT orienta el régimen y el operador
+\(U_t=\operatorname{Upd}_t\circ\operatorname{Tra}_t\circ
+\operatorname{Sel}_t\) transporta el estado enriquecido. La prolongación
+\(w_6\to w_{12}\to w_{18}\to w_{24}\to w_{30}\to R_{36}\to G_9\)
+conserva retorno de fase y avance de memoria. La estructura discreta conjunta
+del continuo conserva correlativamente las representaciones de ese estado,
+con sus hojas, orientación, memoria y fronteras. De ese mismo estado proceden
+las representaciones regionales y el registro firmado cuya inversión da
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+ \qquad Q=\sum_{j=1}^{12}K_j=6263.
+\]
+Se utiliza esta salida con sus marcas y orientación; las matrices de
+momentos son realizaciones posteriores. El índice de refinamiento que se
+introduce abajo cuenta subdivisiones del lector geométrico. Su identificación
+con una duración física o con un número de microtransiciones del TPK
+requiere conservar el reloj de esa otra realización.
+
+\subsection{Particiones marcadas y crecimiento cofinal}
+
+Escribamos \(d_j=K_j/Q\), \(a_0=0\) y
+\(a_j=\sum_{h=1}^j d_h\). Para \(r\geq0\), definimos
+\[
+ L_r=12\,9^r,\qquad N_r=L_r+1,\qquad
+ t_{r,(j-1)9^r+c}=a_{j-1}+\frac{c}{9^r}d_j,
+ \quad 0\leq c\leq9^r.
+\]
+Los extremos comunes se cuentan una sola vez. Las \(L_r\) celdas se
+indexan por \((j,c)\), con \(1\leq j\leq12\) y
+\(0\leq c<9^r\), y tienen longitud
+\(\ell_{r,j,c}=d_j/9^r\). Se conserva también la escritura de \(c\)
+en \(r\) cifras nonádicas, incluidos los ceros iniciales. Un sucesor tiene
+índice \(9c+h\), con \(0\leq h\leq8\); la división euclídea recupera
+su predecesor y la última cifra. Los extremos compartidos retienen su marca
+de frontera; la convención de intervalos semiabiertos sólo organiza
+las celdas y no elimina ninguna marca.
+
+\begin{proposition}[Cofinalidad y recuperación del registro]
+\label{prop:dim-grid}
+Las marcas satisfacen
+\[
+ 0=t_{r,0}<t_{r,1}<\cdots<t_{r,L_r}=1,
+ \qquad t_{r+1,9i}=t_{r,i}.
+\]
+El máximo de las longitudes es
+\(h_r=(\max_jK_j)/(Q9^r)\), que tiende a cero. Para todo par de
+enteros \(k\geq1\), \(m\geq1\), existe \(r_0\) tal que
+\(k+m\leq N_r\) para \(r\geq r_0\). El registro se recupera en
+cualquier nivel por
+\[
+ K_j=Q\sum_{c=0}^{9^r-1}\ell_{r,j,c}.
+\]
+\end{proposition}
+\begin{proof}
+Cada diferencia consecutiva es \(d_j/9^r>0\). Al reemplazar \(c\)
+por \(9c\), la fórmula del nivel siguiente da exactamente la marca
+anterior. Las nueve longitudes de los sucesores suman la longitud del predecesor;
+la iteración prueba la recuperación. Finalmente \(N_r=12\,9^r+1\)
+crece sin cota. Una elección explícita es cualquier \(r_0\geq0\) con
+\(9^{r_0}\geq(k+m-1)/12\). Todo el argumento conserva \(Q\), el
+índice de bloque y las cifras de descendencia.
+\end{proof}
+
+La normalización determina las razones \(K_j/Q\). La recuperación de
+los enteros utiliza, además, la carga \(Q\) conservada por el registro.
+Así se distinguen la geometría normalizada y la información de escala
+que acompaña a su representación.
+
+\subsection{Banderas de evaluaciones y realizaciones en toda dimensión finita}
+
+Para \(1\leq q\leq N_r\), sea
+\[
+ V_r^{(q)}=(t_{r,i}^{\,a})_{0\leq a<q,\,0\leq i<N_r},
+ \qquad F_r^q=\operatorname{fila}V_r^{(q)}.
+\]
+La potencia de exponente cero vale uno también en el nodo cero.
+
+\begin{theorem}[Bandera positiva y composición de rango arbitrario]
+\label{thm:dim-all-ranks}
+Los espacios \(F_r^q\) forman una bandera
+\(F_r^1\subset F_r^2\subset\cdots\subset F_r^{N_r}\), con
+\(\dim F_r^q=q\), y cada matriz \(V_r^{(q)}\) tiene todos sus
+menores máximos ordenados estrictamente positivos. Para
+\(k\geq1\), \(m\geq1\), \(k+m\leq N_r\), las matrices
+\[
+ C_r=V_r^{(k)},\quad Z_r=V_r^{(k+m)},\quad
+ Y_r=C_rZ_r^{\mathsf T}
+\]
+satisfacen
+\[
+ (Y_r)_{ab}=\sum_{i=0}^{L_r}t_{r,i}^{a+b},\qquad
+ \operatorname{rank}Y_r=k,\qquad
+ [Y_r]\in\mathcal A_{N_r,k,m}(Z_r).
+\]
+La construcción alcanza todo par finito \((k,m)\) mediante un nivel
+suficientemente profundo de la misma partición marcada.
+\end{theorem}
+\begin{proof}
+Para \(i_1<\cdots<i_q\), el menor correspondiente es
+\[
+ \det(t_{r,i_b}^{a-1})_{a,b=1}^{q}
+   =\prod_{a<b}(t_{r,i_b}-t_{r,i_a})>0.
+\]
+Esto prueba rango, positividad e inclusiones de la bandera. El bloque
+inicial \(k\times k\) de \(Y_r\) es el Gram de las evaluaciones
+de \(1,t,\ldots,t^{k-1}\). Para \(x\neq0\),
+\[
+ x^{\mathsf T}(Y_r)_{[0,k-1],[0,k-1]}x
+ =\sum_i\left(\sum_{a=0}^{k-1}x_at_{r,i}^{a}\right)^2>0,
+\]
+porque un polinomio no nulo de grado inferior a \(k\) no se anula
+en los \(N_r\geq k+m\) nodos distintos. El bloque es invertible,
+y \(Y_r\), que tiene \(k\) filas, tiene rango \(k\).
+La pertenencia indicada es la aplicación de la matriz externa positiva
+\(Z_r\) al punto positivo representado por \(C_r\).
+\end{proof}
+
+Se emplea la convención matemática
+\[
+ \mathcal A_{N,k,m}(Z)=
+ \{[CZ^{\mathsf T}]:[C]\in\operatorname{Gr}_{\geq0}(k,N)\}.
+\]
+La definición para \(m\) general puede consultarse en S.~N.~Karp,
+L.~K.~Williams y Y.~X.~Zhang,
+\href{https://people.math.harvard.edu/~williams/papers/amplituhedron-plus.pdf}
+{\emph{Decompositions of amplituhedra}}, definición~1.1.
+Aquí el dato externo ya procede de la partición expresada por HMT.
+La conclusión construye una colección determinada de puntos y banderas;
+las dimensiones del Grassmanniano ambiente y de un atlas de su imagen
+son objetos adicionales a los rangos probados.
+
+Sea \(E_r:\mathbb R^{N_{r+1}}\to\mathbb R^{N_r}\) la restricción
+a las posiciones \(9i\). Para todo \(q\leq N_r\),
+\[
+ E_r\bigl((V_{r+1}^{(q)})^{\mathsf T}x\bigr)
+       =(V_r^{(q)})^{\mathsf T}x.
+\]
+Por tanto, \(E_r:F_{r+1}^q\to F_r^q\) es un isomorfismo sobre
+estos espacios de evaluaciones: sus dos realizaciones identifican el
+mismo polinomio de grado inferior a \(q\). La composición de las
+restricciones coincide con la restricción directa. Los menores sobre
+índices heredados conservan exactamente su valor.
+
+\begin{proposition}[Recuperación desde una bandera calibrada]
+Si se conservan el orden de las columnas, las marcas extremas y la
+calibración \(t_{r,0}=0\), \(t_{r,L_r}=1\), el plano \(F_r^2\)
+determina los nodos y las separaciones. Junto con \(Q\) y las
+marcas de descendencia determina \(K\).
+\end{proposition}
+\begin{proof}
+El plano contiene el vector constante y el vector de nodos. Cualquier
+otra coordenada que, junto con el vector constante, genere el mismo
+plano es \(a+bt\), con \(b\neq0\). Las dos calibraciones fijan
+\(a=0\), \(b=1\). Las diferencias consecutivas recuperan las
+longitudes, y la proposición~\ref{prop:dim-grid} recupera el registro.
+\end{proof}
+
+\subsection{Cuerpos convexos de rango uno y crecimiento del dominio}
+
+Para \(m\geq1\) y \(m+1\leq N_r\), definimos
+\[
+ P_r^{(m)}=\operatorname{conv}
+ \{(t_{r,i},t_{r,i}^2,\ldots,t_{r,i}^m):0\leq i\leq L_r\}.
+\]
+La normalización de una fila positiva de \(C\) como coeficientes
+baricéntricos prueba
+\(\mathcal A_{N_r,1,m}(Z_r)=P_r^{(m)}\). El determinante de
+Vandermonde proporciona \(m+1\) puntos afínmente independientes,
+de modo que el cuerpo tiene dimensión \(m\).
+
+\begin{proposition}[Cobertura simplicial a dimensión finita y límite convexo]
+\label{prop:dim-polytopes}
+Cada \(P_r^{(m)}\) admite una triangulación por sus vértices, con
+grado uno sobre el interior de cada celda simplicial. La suma de sus
+formas canónicas tiene residuos interiores cancelados. Además,
+\[
+ P_r^{(m)}\subseteq P_{r+1}^{(m)},\qquad
+ \overline{\bigcup_{r\geq r_0}P_r^{(m)}}=
+ \operatorname{conv}\{(t,t^2,\ldots,t^m):0\leq t\leq1\}.
+\]
+\end{proposition}
+\begin{proof}
+Se ordenan los vértices por sus marcas. En cada cara se elige su menor
+vértice; se triangulan recursivamente las facetas que no lo contienen
+y se forman los conos correspondientes. La inducción sobre la dimensión
+prueba cobertura e interiores disjuntos, y la misma regla en caras
+comunes garantiza compatibilidad. En cada simplex orientado
+\([v_0,\ldots,v_m]\), con matriz
+\(A=(v_1-v_0,\ldots,v_m-v_0)\) de determinante positivo y
+coordenadas baricéntricas \(\lambda_0,\ldots,\lambda_m\), la
+aplicación baricéntrica es afín e invertible. Su forma es
+\[
+ \Omega_{[v_0,\ldots,v_m]}=
+ \frac{dx_1\wedge\cdots\wedge dx_m}
+ {\det A\prod_{j=0}^{m}\lambda_j}.
+\]
+La restricción residual a cada cara es su forma orientada. Dos simplices
+adyacentes inducen orientaciones opuestas sobre su cara común, de modo
+que los residuos interiores se cancelan. Esta es la misma operación de
+triangulación y residuo aplicada en la realización de rango uno anterior,
+con el número de vértices ahora aumentado por el refinamiento.
+
+La inclusión de nodos heredados prueba la inclusión de cuerpos. La malla
+tiende a cero, por lo que las curvas muestreadas son densas en la curva
+compacta de momentos. Toda combinación convexa finita de puntos de la
+curva se aproxima por combinaciones con nodos de un nivel común.
+Recíprocamente, todos los cuerpos están contenidos en la envolvente
+convexa compacta de la curva. Ambas inclusiones prueban la igualdad.
+\end{proof}
+
+La cancelación de residuos opera sobre una triangulación o subdivisión
+de un cuerpo fijo. El paso de \(P_r^{(m)}\) a \(P_{r+1}^{(m)}\)
+añade vértices y puede ampliar el cuerpo. Sus formas pertenecen a esos
+dominios respectivos. El límite convexo precedente especifica la
+convergencia de los cuerpos, sin imponer una identidad entre sus formas.
+
+\subsection{Medida del calendario y convergencia de los momentos nodales}
+
+Sea \(F_K:[0,1]\to[0,1]\) la función creciente afín por tramos
+que lleva \((j-1)/12\) a \(a_{j-1}\) y \(j/12\) a \(a_j\).
+En el intervalo correspondiente su pendiente es \(12d_j>0\).
+La medida del calendario transportado es
+\[
+ \mu_K=(F_K)_*(ds),\qquad
+ \frac{d\mu_K}{dt}=\frac1{12d_j}\quad
+ (a_{j-1}<t<a_j).
+\]
+Cada intervalo inicial tiene masa \(1/12\), y cada celda de nivel
+\(r\) tiene masa \(1/L_r\). Esta elección asigna el mismo peso
+a las posiciones del calendario antes de realizar sus longitudes.
+La medida de longitud \(dt\) es otro lector; ambas coinciden cuando
+todas las separaciones iniciales son iguales.
+
+Sus momentos son racionales y están determinados por \(K\):
+\begin{equation}
+ M_p=\int_0^1t^p\,d\mu_K(t)
+   =\frac1{12(p+1)}\sum_{j=1}^{12}
+       \frac{a_j^{p+1}-a_{j-1}^{p+1}}{d_j},\qquad p\geq0.
+ \label{eq:dim-moments}
+\end{equation}
+\begin{proposition}[Recuperación por momentos y cuantiles]
+\label{prop:dim-moment-recovery}
+La sucesión completa \((M_p)_{p\geq0}\) determina \(\mu_K\).
+Si \(H_K(t)=\mu_K([0,t])\) es su función de distribución, entonces
+\[
+ a_j=H_K^{-1}(j/12),\qquad
+ K_j=Q\bigl(H_K^{-1}(j/12)-H_K^{-1}((j-1)/12)\bigr).
+\]
+En consecuencia, los momentos completos, la carga \(Q\) y el orden
+del calendario recuperan el registro inicial.
+\end{proposition}
+\begin{proof}
+Dos probabilidades sobre \([0,1]\) con los mismos momentos tienen las
+mismas integrales para todos los polinomios. La aproximación uniforme
+de funciones continuas por polinomios y la masa finita extienden esa
+igualdad a todas las funciones continuas; éstas determinan la medida
+de Borel. La densidad de \(\mu_K\) es positiva y constante en cada
+intervalo inicial. Su distribución es, por tanto, continua y
+estrictamente creciente, y cumple \(H_K(a_j)=j/12\). La inversión
+de esta igualdad y la diferencia de extremos prueban las fórmulas.
+\end{proof}
+
+La probabilidad nodal correspondiente al teorema
+\ref{thm:dim-all-ranks} es
+\(\nu_r=N_r^{-1}\sum_{i=0}^{L_r}\delta_{t_{r,i}}\).
+
+\begin{theorem}[Límite de la representación nodal]
+\label{thm:dim-nodal-limit}
+Se cumple \(\nu_r\rightharpoonup\mu_K\). Si \(f\) es continua,
+\[
+ \left|\int f\,d\nu_r-\int f\,d\mu_K\right|
+ \leq \omega_f(h_r)+\frac{\operatorname{osc}(f)}{N_r},
+\]
+donde \(\omega_f\) es su módulo de continuidad. Para \(p\geq1\),
+el error del momento de orden \(p\) está acotado por
+\(p h_r+1/N_r\). Para cada par fijo \((k,m)\),
+\[
+ \frac1{N_r}Y_r\longrightarrow (M_{a+b})_{
+     0\leq a<k,\,0\leq b<k+m}=:Y_\infty^{(k,m)},
+ \qquad\operatorname{rank}Y_\infty^{(k,m)}=k.
+\]
+\end{theorem}
+\begin{proof}
+La medida que asigna masa \(1/L_r\) a cada extremo izquierdo de
+celda aproxima su integral con error a lo sumo \(\omega_f(h_r)\).
+En efecto, cada celda tiene esa masa y diámetro no mayor que \(h_r\).
+La medida \(\nu_r\) es \(L_r/N_r\) veces dicha medida más
+\(\delta_1/N_r\), lo que añade a lo sumo
+\(\operatorname{osc}(f)/N_r\). Para \(f(t)=t^p\), la constante
+de Lipschitz es \(p\). La convergencia de cada entrada se sigue de
+estas cotas. El bloque inicial de la matriz límite es definido positivo:
+la integral del cuadrado de un polinomio no nulo es positiva, porque
+\(\mu_K\) tiene densidad estrictamente positiva en todo intervalo
+abierto de \([0,1]\). Así el límite conserva rango \(k\).
+\end{proof}
+
+Los momentos nodales varían exactamente por la incorporación de nodos.
+Si \(\mathcal J_r\) es el conjunto de las nuevas posiciones y
+\(z_q(t)=(1,t,\ldots,t^{q-1})^{\mathsf T}\), entonces
+\[
+ V_{r+1}^{(q)}(V_{r+1}^{(q)})^{\mathsf T}
+ =V_r^{(q)}(V_r^{(q)})^{\mathsf T}
+  +\sum_{i\in\mathcal J_r}z_q(t_{r+1,i})z_q(t_{r+1,i})^{\mathsf T}.
+\]
+Cada sumando es positivo semidefinido. Para las matrices rectangulares
+\(Y_r\) vale la misma actualización con
+\(z_kz_{k+m}^{\mathsf T}\). La igualdad expresa el cambio de la
+medida de conteo; la normalización y el teorema anterior describen su
+límite. El objeto límite de rango \(k\) tiene coordenadas en un
+Grassmanniano finito, mientras los datos externos \(Z_r\) pertenecen
+a las distintas representaciones de cada nivel.
+
+\subsection{Promedios celulares, operadores compatibles y detalle ortogonal}
+
+Para una celda \(I_{r,i}=[b_{r,i},b_{r,i}+\ell_{r,i}]\), ponemos
+\[
+ a_{r,i}^{(p)}=
+ \frac{(b_{r,i}+\ell_{r,i})^{p+1}-b_{r,i}^{p+1}}
+ {(p+1)\ell_{r,i}},\qquad
+ A_r^{(q)}=(a_{r,i}^{(p)})_{0\leq i<L_r,\,0\leq p<q}.
+\]
+Son las medias de los monomios respecto de la probabilidad condicional
+de \(\mu_K\) en cada celda. Esta probabilidad es uniforme en la
+celda, aunque \(\mu_K\) no sea la medida de longitud global.
+
+Sea \(\mathcal H_r=\mathbb R^{L_r}\) con producto
+\(\langle x,y\rangle_r=L_r^{-1}\sum_i x_i y_i\). La aplicación
+\(J_r:\mathcal H_r\to\mathcal H_{r+1}\) repite el valor de un
+predecesor en sus nueve sucesores. Su adjunta \(R_r=J_r^*\) promedia esos
+nueve valores. Se cumple \(R_rJ_r=I\).
+
+\begin{theorem}[Compatibilidad exacta y balance de los momentos]
+\label{thm:dim-cell-balance}
+Para todo \(p\geq0\),
+\[
+ R_r a_{r+1}^{(p)}=a_r^{(p)},\qquad
+ \frac1{L_r}\sum_i a_{r,i}^{(p)}=M_p.
+\]
+Definamos
+\[
+ D_r^{(q)}=A_{r+1}^{(q)}-J_rA_r^{(q)},\quad
+ G_r^{(q)}=\frac1{L_r}(A_r^{(q)})^{\mathsf T}A_r^{(q)}.
+\]
+Entonces
+\[
+ R_rD_r^{(q)}=0,\qquad
+ G_{r+1}^{(q)}=G_r^{(q)}+
+       \frac1{L_{r+1}}(D_r^{(q)})^{\mathsf T}D_r^{(q)},
+\]
+y
+\[
+ G_r^{(q)}\longrightarrow H_K^{(q)}=(M_{a+b})_{0\leq a,b<q}.
+\]
+Los detalles y el nivel inicial reconstruyen todos los niveles. Para
+\(q\leq L_r\), la matriz \(A_r^{(q)}\) tiene rango \(q\) y
+todos los menores ordenados de orden \(q\) son positivos.
+\end{theorem}
+\begin{proof}
+Las masas de los nueve sucesores son iguales y sus intervalos particionan
+el intervalo predecesor. La aditividad de la integral da la primera identidad;
+la suma sobre todas las celdas da la segunda. La descomposición
+\(A_{r+1}=J_rA_r+D_r\) es ortogonal en cada columna porque
+\(R_rD_r=0\). Al expandir su Gram se anulan los términos cruzados,
+y \(J_r\) es una isometría. Esto prueba el balance matricial.
+
+El observable constante por celdas que toma el valor \(a_{r,i}^{(p)}\)
+aproxima uniformemente \(t^p\), con error no mayor que \(p h_r\)
+para \(p\geq1\). Por tanto converge en \(L^2(\mu_K)\), y los
+productos internos convergen a \(M_{a+b}\). La reconstrucción se
+obtiene iterando \(A_{r+1}=J_rA_r+D_r\).
+
+Para probar los menores, elijamos \(q\) celdas ordenadas. Por
+multilinealidad y Fubini, el determinante de sus promedios es la media
+sobre el producto de esas celdas de
+\(\prod_{a<b}(x_b-x_a)\). Este integrando es positivo en el
+interior del producto porque las celdas son disjuntas y están ordenadas.
+Sus fronteras tienen medida nula. La media es estrictamente positiva.
+\end{proof}
+
+La identidad se prolonga al par de grados \(k\) y \(k+m\):
+\[
+ \overline Y_r=\frac1{L_r}(A_r^{(k)})^{\mathsf T}A_r^{(k+m)},
+ \qquad
+ \overline Y_{r+1}-\overline Y_r
+ =\frac1{L_{r+1}}(D_r^{(k)})^{\mathsf T}D_r^{(k+m)}.
+\]
+Para \(k+m\leq L_r\), las matrices de promedios definen una
+segunda realización amplituhedral positiva, de \(L_r\) columnas,
+y \(\overline Y_r\) tiene rango \(k\). Son promedios de celdas,
+mientras \(Y_r\) usa evaluaciones en \(N_r=L_r+1\) nodos. Ambas
+realizaciones convergen a \(Y_\infty^{(k,m)}\); su coincidencia
+en el límite procede de las demostraciones anteriores.
+
+La versión operatoria es igualmente explícita. Para una función continua
+\(f\), sea \(\Psi_r(f)\) el operador diagonal de sus medias
+condicionales en \(\mathcal H_r\). Es lineal, positivo y unital, y
+\[
+ R_r\Psi_{r+1}(f)J_r=\Psi_r(f).
+\]
+Esta igualdad se prueba aplicando ambos miembros a cada vector base.
+Para \(X(t)=t\), los dos primeros operadores determinan, celda a
+celda,
+\[
+ \Psi_r(X)_i=b_{r,i}+\frac{\ell_{r,i}}2,\qquad
+ \Psi_r(X^2)_i-\Psi_r(X)_i^2=\frac{\ell_{r,i}^2}{12}.
+\]
+Si \(v_{r,i}\) denota esa varianza, la fórmula
+\(\ell_{r,i}=\sqrt{12v_{r,i}}\) recupera la longitud; la
+primera identidad recupera el extremo inicial. Con orientación, marcas y \(Q\),
+se recupera nuevamente \(K\). El promedio es una compresión positiva:
+la varianza escrita cuantifica por qué \(\Psi_r(X^2)\) y
+\(\Psi_r(X)^2\) son operaciones distintas.
+
+\subsection{Transporte de la medida y alcance del crecimiento dimensional}
+
+Dos listas positivas de separaciones \(d\) y \(d'\), con las
+mismas marcas, determinan un homeomorfismo creciente afín por intervalos
+\(F=F_{K'}\circ F_K^{-1}\). Lleva cada celda a su celda homóloga
+y satisface \(F_*\mu_K=\mu_{K'}\). Por ello
+\[
+ \mathcal U_F:L^2(\mu_K)\longrightarrow L^2(\mu_{K'}),
+ \qquad\mathcal U_F f=f\circ F^{-1}
+\]
+es una isometría sobreyectiva. Si \(P_r\) y \(P'_r\) son las
+proyecciones a funciones constantes por celdas, entonces
+\(P'_r\mathcal U_F=\mathcal U_FP_r\): las medias condicionales
+se transportan porque las masas de las celdas correspondientes coinciden.
+Esto aplica en particular al flujo positivo de separaciones dirigido por
+\(K\), conservando la dirección de cada bloque en sus sucesores. Los
+momentos de la coordenada espacial pueden cambiar; la isometría transporta
+el observable junto con la medida y sus proyecciones.
+
+El crecimiento demostrado es cofinal en toda dimensión externa finita.
+Conserva un sistema de banderas positivas, una colección explícita de
+puntos amplituhedrales, cuerpos convexos completos en rango uno y una
+medida cuyos operadores de promedio son exactamente compatibles. La
+memoria de los detalles permite invertir la compresión entre niveles.
+Las pruebas de cobertura y residuos de rango uno conservan su dominio;
+para rangos mayores, el resultado presente fija matrices, positividad,
+recuperación, compatibilidad y límite con tipos explícitos. Esta
+separación sitúa el alcance de cada construcción en el mismo desarrollo
+sin confundir crecimiento de dimensión, parametrización de un punto y
+clasificación de todas las celdas de una imagen.

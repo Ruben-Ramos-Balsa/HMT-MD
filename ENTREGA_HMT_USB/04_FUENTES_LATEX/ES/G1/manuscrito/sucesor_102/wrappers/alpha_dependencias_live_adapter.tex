@@ -1,0 +1,119 @@
+% Adaptador local de aristas para el propietario exacto
+% propietarios_exactos/alpha/03a_alpha_y_dependencias_transversales.tex.
+% El propietario conserva sus once llamadas \HMTInputLive. En este ensamblado
+% sus cuerpos tienen residencias exactas o finales propias; la llamada verifica
+% que la arista esté registrada y la deja en el log, pero no vuelve a incluir el
+% cuerpo. La existencia y el orden de ambas puntas se auditan contra el grafo de
+% inputs. Así no se anteponen lectores ni se publica la copia histórica débil de
+% 08a.
+
+\makeatletter
+\newcommand{\HMTRegisterLiveInputEdge}[3]{%
+  \expandafter\def\csname hmt@liveinput@residence@\detokenize{#1}\endcsname{#2}%
+  \expandafter\def\csname hmt@liveinput@order@\detokenize{#1}\endcsname{#3}%
+}
+\newcommand{\HMTInputLive}[1]{%
+  \ifcsname hmt@liveinput@residence@\detokenize{#1}\endcsname
+    \edef\HMTLiveInputResidence{%
+      \csname hmt@liveinput@residence@\detokenize{#1}\endcsname}%
+    \edef\HMTLiveInputOrder{%
+      \csname hmt@liveinput@order@\detokenize{#1}\endcsname}%
+    \typeout{HMT-INPUT-LIVE-EDGE: #1.tex =>
+      \HMTLiveInputResidence\space [\HMTLiveInputOrder]; body not reloaded}%
+  \else
+    \PackageError{hmt-alpha-live-adapter}
+      {Arista sin residencia efectiva: #1.tex}
+      {Registre un propietario exacto o final; no se admite una copia reductiva.}%
+  \fi
+}
+
+% Todas las aristas del propietario 03a, en orden de aparición.
+\HMTRegisterLiveInputEdge
+  {sections/hmt/08_dodecafase_alpha}
+  {sections/hmt/08_dodecafase_alpha.tex}
+  {UPSTREAM-CH31-PREOWNER}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/08a_alpha_dos_vias_t1_rev8}
+  {../colaboracion/parte_iii/source/public_final/alpha/08a_alpha_dos_vias_t1_rev8_body.tex}
+  {DOWNSTREAM-CH31-FINAL}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/08b_alpha_t1_10000_rev9}
+  {../colaboracion/parte_iii/source/public_final/alpha/08b_alpha_t1_10000_rev9.tex}
+  {DOWNSTREAM-CH31-FINAL}
+\HMTRegisterLiveInputEdge
+  {sections/ampliacion_20260818/03_extension_holografica_euler}
+  {sucesor_102/deltas_ley9/c57_sistema_operatorio_euler_hmt.tex}
+  {DOWNSTREAM-CH57-SUCCESSOR}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/07b_realizacion_analitica_contraangulo}
+  {sucesor_102/wrappers/capitulo_38_jerarquia_unica.tex}
+  {DOWNSTREAM-CH38-FINAL}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/16c_transportador_positivo_accion}
+  {../colaboracion/parte_iii/source/public_final/ascensos_20260826/16d_medida_accion_positiva.tex + sucesor_102/wrappers/capitulo_38_jerarquia_unica.tex}
+  {DOWNSTREAM-CH35-AND-CH38-FINAL}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/delta_297/16c_entrelazador_dodecafase_witt}
+  {sections/hmt/delta_297/16c_entrelazador_dodecafase_witt.tex}
+  {UPSTREAM-PART-I-CH20}
+\HMTRegisterLiveInputEdge
+  {sections/hmt/delta_297/16d_medida_accion_positiva}
+  {../colaboracion/parte_iii/source/public_final/ascensos_20260826/16d_medida_accion_positiva.tex}
+  {DOWNSTREAM-CH35-FINAL}
+\HMTRegisterLiveInputEdge
+  {sections/md/04b_banda_particula_virtual}
+  {integracion_83/parte_iv/chapters/75_definicion_particula.tex}
+  {DOWNSTREAM-PART-IV-CH94}
+\HMTRegisterLiveInputEdge
+  {sections/md/06f_biografia_electron_rev6}
+  {integracion_83/parte_iv/body/B001_ch48_electron_primera_realizacion_a3f11d97b332_06f_biografia_electron_rev6.tex}
+  {DOWNSTREAM-PART-IV-CH58}
+\HMTRegisterLiveInputEdge
+  {sections/ampliacion_20260818/07_transduccion_metrologica_estados_genealogicos}
+  {integracion_83/continuo_constantes/tex/transiciones/umbral_09_metrologia_y_programa_cuerpo.tex}
+  {DOWNSTREAM-TRANSITION-III-IV}
+
+% Al no reincluir cuerpos, las antiguas operaciones de descenso/restauración
+% deben ser neutras. El grupo exterior impide que estas definiciones se filtren.
+\renewcommand{\HMTDemoteHeadings}{}
+\renewcommand{\HMTRestoreHeadings}{}
+
+% El propietario conserva su cabecera primaria. Sus otras dos \chapter* eran
+% rótulos de cuerpos que ahora residen después; se suprimen junto con las dos
+% entradas de índice asociadas, evitando capítulos vacíos sin tocar el dueño.
+\let\HMTAlphaOwnerChapter\chapter
+\let\HMTAlphaOwnerAddContentsLine\addcontentsline
+\newif\ifHMTAlphaOwnerPrimaryChapterSeen
+\newif\ifHMTAlphaOwnerSuppressNextContentsLine
+\HMTAlphaOwnerPrimaryChapterSeenfalse
+\HMTAlphaOwnerSuppressNextContentsLinefalse
+\long\def\chapter{%
+  \@ifstar{\HMTAlphaOwnerStarChapter}{%
+    \@ifnextchar[{\HMTAlphaOwnerOptionalChapter}{\HMTAlphaOwnerPlainChapter}}%
+}
+\long\def\HMTAlphaOwnerOptionalChapter[#1]#2{%
+  \HMTAlphaOwnerPrimaryChapterSeentrue
+  \HMTAlphaOwnerChapter[#1]{#2}%
+}
+\long\def\HMTAlphaOwnerPlainChapter#1{%
+  \HMTAlphaOwnerPrimaryChapterSeentrue
+  \HMTAlphaOwnerChapter{#1}%
+}
+\long\def\HMTAlphaOwnerStarChapter#1{%
+  \ifHMTAlphaOwnerPrimaryChapterSeen
+    \HMTAlphaOwnerSuppressNextContentsLinetrue
+    \typeout{HMT-ALPHA-OWNER-EMPTY-HEADING-SKIP: \detokenize{#1}}%
+  \else
+    \HMTAlphaOwnerPrimaryChapterSeentrue
+    \HMTAlphaOwnerChapter*{#1}%
+  \fi
+}
+\renewcommand{\addcontentsline}[3]{%
+  \ifHMTAlphaOwnerSuppressNextContentsLine
+    \HMTAlphaOwnerSuppressNextContentsLinefalse
+    \typeout{HMT-ALPHA-OWNER-EMPTY-TOC-SKIP: #1/#2}%
+  \else
+    \HMTAlphaOwnerAddContentsLine{#1}{#2}{#3}%
+  \fi
+}
+\makeatother

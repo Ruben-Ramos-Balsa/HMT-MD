@@ -1,0 +1,118 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N68 --- Cilindro intervalar, borde cero y supervivencia\\
+\large Corrección del extremo inferior y auditoría extendida \(t=5,\ldots,20\)}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N68 corrige el criterio de cilindro usado en auditorías previas. Un prefijo ternario no debe validarse sólo por el extremo inferior \(\lfloor 1000^K N/3^L\rfloor\). El criterio correcto es la intersección de cilindros: el intervalo ternario completo debe cortar el intervalo decimal. Esto formaliza el principio HMT de borde: el tail/carry puede empujar una frontera dentro del cilindro decimal. Con este criterio se audita \(t=5,\ldots,20\). Todos los bloques reales entran en las soluciones intervalares, y el fallo de \(t=12\) queda explicado como error de extremo inferior/corona.
+\end{abstract}
+
+\section{Criterio correcto}
+
+Un prefijo ternario de longitud \(L\) con entero \(N\) representa:
+\[
+\left[\frac{N}{3^L},\frac{N+1}{3^L}\right).
+\]
+Un prefijo decimal de \(K\) triadas con entero \(D\) representa:
+\[
+\left[\frac{D}{1000^K},\frac{D+1}{1000^K}\right).
+\]
+La compatibilidad correcta es:
+\[
+\boxed{
+\frac{N}{3^L}<\frac{D+1}{1000^K}
+\quad\text{y}\quad
+\frac{N+1}{3^L}>\frac{D}{1000^K}.
+}
+\]
+Equivalente:
+\[
+\boxed{
+N1000^K<(D+1)3^L,
+\qquad
+(N+1)1000^K>D3^L.
+}
+\]
+El criterio de extremo inferior falla en fronteras porque ignora el tail.
+
+\section{Auditoría extendida}
+
+\[
+\begin{array}{c|c|c|c|c|c}
+t&K&(|\pi|,|e|,|\varphi|)&\#\mathrm{local}&\#\mathrm{surv.}&\mathrm{dictamen}\\
+\hline
+5 & 5 & (39,151,151) & 1 & 0 & unique local \\
+6 & 6 & (110,110,69) & 1 & 0 & unique local \\
+7 & 7 & (81,29,81) & 3 & 1 & survival selects \\
+8 & 8 & (59,59,59) & 3 & 1 & survival selects \\
+9 & 9 & (43,43,43) & 2 & 1 & survival selects \\
+10 & 10 & (32,32,32) & 1 & 0 & unique local \\
+11 & 11 & (23,24,23) & 1 & 0 & unique local \\
+12 & 12 & (17,17,17) & 1 & 0 & unique local \\
+13 & 13 & (13,13,13) & 1 & 0 & unique local \\
+14 & 14 & (9,10,9) & 1 & 0 & unique local \\
+15 & 15 & (7,7,8) & 1 & 0 & unique local \\
+16 & 16 & (6,6,6) & 1 & 0 & unique local \\
+17 & 17 & (4,4,4) & 1 & 0 & unique local \\
+18 & 18 & (4,4,4) & 1 & 0 & unique local \\
+19 & 19 & (3,3,3) & 1 & 0 & unique local \\
+20 & 20 & (2,2,2) & 1 & 0 & unique local \\
+\end{array}
+\]
+
+\section{Stutter}
+
+En \(t=21\), \(K\) no avanza. Es una apertura sin nueva triada decimal:
+\[
+K(20)=20,\qquad K(21)=20.
+\]
+Por tanto el cilindro decimal no poda. La auditoría debe tratarlo como stutter, no como fallo. Se añade una prueba de firma-only para \(t=21,22\).
+
+\section{Lectura HMT}
+
+La corrección intervalar formaliza:
+\[
+\boxed{
+0_{\rm borde}\neq9_{\rm activo}.
+}
+\]
+El cero de corona no es raíz digital activa; es un borde cuyo tail puede arrastrar la lectura decimal. Por eso el bulk no pierde información: el cilindro completo conserva la casilla adyacente.
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: el criterio de cilindro intervalar corrige }t=12.
+}
+\]
+\[
+\boxed{
+\text{verde: todos los bloques reales }t=5,\ldots,20\text{ entran en el cilindro correcto.}
+}
+\]
+\[
+\boxed{
+\text{verde: la frontera + supervivencia queda mucho más estable.}
+}
+\]
+\[
+\boxed{
+\text{no se afirma generación infinita completa; se corrige la herramienta de borde.}
+}
+\]
+\end{document}

@@ -1,0 +1,169 @@
+CATÁLOGO DE MASAS — LECTURA Y REPRODUCCIÓN DOCUMENTAL
+MASS CATALOGUE — READING AND DOCUMENTARY REPRODUCTION
+CATALOGUE DES MASSES — LECTURE ET REPRODUCTION DOCUMENTAIRE
+
+ES — Los PDF, CSV y JSON originales ya están conservados en la entrega. No es
+necesario ejecutar ningún programa para leerlos. Esta receta permite preparar
+una copia documental fuera de la entrega utilizando las entradas incluidas;
+no modifica el constructor ni los archivos del USB y no compila un PDF.
+
+EN — The original PDFs, CSVs and JSON files are already included. No program
+needs to run to read them. This recipe prepares a documentary copy outside the
+delivery using the included inputs. It does not modify the builder or USB files,
+and it does not compile a PDF.
+
+FR — Les PDF, CSV et JSON originaux sont déjà conservés dans la livraison.
+Aucun programme n’est nécessaire pour les lire. Cette recette prépare une copie
+documentaire hors de la livraison avec les données fournies. Elle ne modifie
+ni le constructeur ni les fichiers de la clé et ne compile aucun PDF.
+
+LECTURA / READING / LECTURE
+
+  01_PDF_ESPANOL/06A_Anexo_de_masas_ES.pdf
+  02_PDF_ENGLISH/06A_Anexo_de_masas_EN.pdf
+  03_PDF_FRANCAIS/06A_Anexo_de_masas_FR.pdf
+
+CSV / JSON:
+  05_REPRODUCCION/OBRAS/VIa/ES/technical/catalogo_*.csv
+  05_REPRODUCCION/OBRAS/VIa/ES/technical/catalogo_*.json
+
+ES — También se conservan en VI y en los directorios EN/FR correspondientes.
+EN — They are also preserved under VI and the corresponding EN/FR directories.
+FR — Ils sont aussi conservés dans VI et les dossiers EN/FR correspondants.
+
+ENTRADAS INCLUIDAS / INCLUDED INPUTS / DONNÉES FOURNIES
+
+  05_REPRODUCCION/DATOS/MASAS/REV2
+  05_REPRODUCCION/DATOS/MASAS/INTEGRAL
+
+ES — --rev2-root y --integral-root sustituyen las rutas predeterminadas del
+constructor. Las rutas de origen que puedan aparecer como procedencia en los
+JSON conservados no son las entradas utilizadas por estos comandos.
+EN — --rev2-root and --integral-root override the builder’s default paths.
+Original provenance paths in preserved JSON files are not the input locations
+used by these commands.
+FR — --rev2-root et --integral-root remplacent les chemins par défaut du
+constructeur. Les anciens chemins de provenance dans les JSON conservés ne
+sont pas les emplacements utilisés par ces commandes.
+
+PREPARACIÓN / PREPARATION / PRÉPARATION
+
+ES — Requiere Python 3.9+ y sólo su biblioteca estándar. Abra una terminal en
+la raíz ENTREGA_HMT_USB. Copie la unidad completa, pues el constructor también
+lee sections/07_contraste_metrologico.tex. No ejecute el constructor directamente
+en el USB: escribe las salidas catalogo_*.csv/json junto a su propio archivo.
+
+EN — Requires Python 3.9+ and its standard library only. Open a terminal at
+the ENTREGA_HMT_USB root. Copy the whole unit because the builder also reads
+sections/07_contraste_metrologico.tex. Do not run the builder directly on the
+USB: it writes catalogo_*.csv/json beside its own file.
+
+FR — Python 3.9+ et sa bibliothèque standard suffisent. Ouvrez un terminal à
+la racine ENTREGA_HMT_USB. Copiez l’unité complète : le constructeur lit aussi
+sections/07_contraste_metrologico.tex. Ne le lancez pas directement sur la clé :
+il écrit catalogo_*.csv/json à côté de son propre fichier.
+
+macOS / Linux — COPIAR / COPY / COPIER
+
+  CATALOGO_IDIOMA=ES
+  CATALOGO_TRABAJO="$(mktemp -d /tmp/hmt_catalogo.XXXXXX)"
+  cp -R "05_REPRODUCCION/OBRAS/VIa/$CATALOGO_IDIOMA" "$CATALOGO_TRABAJO/$CATALOGO_IDIOMA"
+  printf '%s\n' "$CATALOGO_TRABAJO"
+
+macOS / Linux — RECONSTRUIR LA COPIA / REBUILD THE COPY / RECONSTRUIRE LA COPIE
+
+  python3 -I -S "$CATALOGO_TRABAJO/$CATALOGO_IDIOMA/technical/preparar_catalogo_masas.py" --rev2-root "05_REPRODUCCION/DATOS/MASAS/REV2" --integral-root "05_REPRODUCCION/DATOS/MASAS/INTEGRAL"
+
+Windows PowerShell — COPIAR / COPY / COPIER
+
+  $CatalogoIdioma = 'ES'
+  $CatalogoTrabajo = Join-Path $env:LOCALAPPDATA ('HMT_CATALOGO_' + [guid]::NewGuid().ToString('N'))
+  New-Item -ItemType Directory -Path $CatalogoTrabajo | Out-Null
+  Copy-Item -Recurse -LiteralPath "05_REPRODUCCION/OBRAS/VIa/$CatalogoIdioma" -Destination (Join-Path $CatalogoTrabajo $CatalogoIdioma)
+  $CatalogoTrabajo
+
+Windows PowerShell — RECONSTRUIR / REBUILD / RECONSTRUIRE
+
+  py -3 -I -S "$CatalogoTrabajo/$CatalogoIdioma/technical/preparar_catalogo_masas.py" --rev2-root "05_REPRODUCCION/DATOS/MASAS/REV2" --integral-root "05_REPRODUCCION/DATOS/MASAS/INTEGRAL"
+
+ES — Para EN o FR cambie el idioma y repita desde la creación de una carpeta
+nueva. La salida está en IDIOMA/technical dentro de la copia local. En macOS/
+Linux conserve la copia en una carpeta personal si desea guardarla: /tmp es
+temporal. El idioma selecciona la unidad documental; no traduce sus datos.
+EN — For EN or FR, change the language and create a fresh work folder. Output
+is under LANGUAGE/technical in the local copy. On macOS/Linux, save the copy
+elsewhere if needed because /tmp is temporary. Language selects a documentary
+unit; it does not translate its data.
+FR — Pour EN ou FR, changez la langue et créez un nouveau dossier de travail.
+La sortie se trouve dans LANGUE/technical de la copie locale. Sur macOS/Linux,
+conservez la copie ailleurs si nécessaire : /tmp est temporaire. La langue
+sélectionne une unité documentaire ; elle ne traduit pas les données.
+
+COMPROBACIÓN OPCIONAL DE LA COPIA / OPTIONAL COPY CHECK / VÉRIFICATION FACULTATIVE
+
+ES — Tras una reconstrucción satisfactoria, repita el comando del constructor
+añadiendo --check. Este modo reconstruye en memoria para comparar y no escribe
+archivos. No sustituya el manifiesto entregado para hacer pasar esa comparación.
+EN — After a successful rebuild, repeat the builder command with --check added.
+This rebuilds in memory for comparison and does not write files. Do not replace
+the delivered manifest to make that comparison pass.
+FR — Après une reconstruction réussie, répétez la commande avec --check.
+Ce mode reconstruit en mémoire pour comparer, sans écrire de fichiers. Ne
+remplacez pas le manifeste livré pour faire réussir cette comparaison.
+
+ALCANCE COMPROBADO / CHECKED SCOPE / PORTÉE VÉRIFIÉE
+
+Rutas y huellas exactas / Exact paths and hashes / Chemins et empreintes :
+  06_VERIFICACION/CORRESPONDENCIA_CATALOGO_MASAS.json
+  06_VERIFICACION/COTEJO_TABLAS_MASAS.json
+
+Sección correspondiente al certificado / Source section of the certificate /
+Section correspondant au certificat :
+  05_REPRODUCCION/DATOS/MASAS/SECCION_CERTIFICADA/07_contraste_metrologico.tex
+
+Comparación literal de 20 filas, sin cálculo / Literal comparison of 20 rows,
+without calculation / Comparaison littérale de 20 lignes, sans calcul :
+  macOS/Linux: python3 06_VERIFICACION/cotejar_catalogo.py
+  Windows:    py -3 06_VERIFICACION/cotejar_catalogo.py
+
+ES — Se han cotejado huellas, sin ejecutar el constructor: sus seis copias
+VI/VIa ES/EN/FR son idénticas; las 14 entradas REV2, las 2 entradas INTEGRAL y
+los 35 archivos de salida registrados coinciden con sus manifiestos conservados.
+Las secciones actuales tienen huellas distintas de section_control. Se incluye
+la sección exacta que identifica ese certificado. Sus 20 filas coinciden con
+las seis secciones actuales en expresiones HMT, estados, tipos y secuencias de
+numerales de referencia, normalizando espacios y allowbreak. El comparador
+incluido permite comprobar esa correspondencia sin calcular masas. La prosa y
+las unidades quedan fuera de ese cotejo. Un --check contra el manifiesto anterior
+puede señalar el cambio de huella de la sección; el recibo original se conserva.
+
+EN — Hashes were checked without running the builder: its six VI/VIa ES/EN/FR
+copies are identical; the 14 REV2 inputs, 2 INTEGRAL inputs and 35 registered
+output files match their preserved manifests. Current sections have different
+hashes from section_control. The exact source identified by that certificate is
+included. Its 20 rows match all six current sections in HMT expressions, states,
+types and reference numeral sequences after whitespace and allowbreak
+normalisation. The included checker reproduces that comparison without computing
+masses. Prose and units are outside its scope. A --check against the earlier
+manifest may report the changed section hash; the original receipt is preserved.
+
+FR — Les empreintes ont été comparées sans exécuter le constructeur : ses six
+copies VI/VIa ES/EN/FR sont identiques ; les 14 entrées REV2, les 2 entrées
+INTEGRAL et les 35 sorties enregistrées correspondent aux manifestes conservés.
+Les sections actuelles diffèrent de l’empreinte section_control. La section
+exacte identifiée par ce certificat est incluse. Ses 20 lignes correspondent aux
+six sections actuelles pour les expressions HMT, les états, les types et les
+séquences numériques de référence, après normalisation des espaces et de
+allowbreak. Le comparateur fourni reproduit ce contrôle sans calculer les masses.
+La prose et les unités sont hors de sa portée. Un --check de l’ancien manifeste
+peut signaler l’empreinte modifiée ; le certificat original est conservé.
+
+SHA-256 preparar_catalogo_masas.py:
+  cd754b5e77bcfbfc89fc323b1acdcca32b2692a7f217ee28b25b7a34538bd472
+
+ES — Al preparar estas instrucciones no se ha ejecutado ningún cálculo ni
+compilación ni se ha modificado ningún archivo de la entrega.
+EN — Preparing these instructions ran no calculation or compilation and changed
+no file in the delivery.
+FR — La préparation de ces instructions n’a exécuté aucun calcul ni compilation
+et n’a modifié aucun fichier de la livraison.

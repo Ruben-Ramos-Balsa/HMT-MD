@@ -1,0 +1,372 @@
+\section{Du registre de trajectoire à l’opérateur de masse
+}
+\label{vi:sec:operador-masa}
+
+La construction distingue deux opérations. D’abord, la dynamique produit
+un registre de la trajectoire. Ensuite, une fonctionnelle extrait des coordonnées
+entières et les évalue au moyen des constantes internes déjà obtenues.
+Conserver cet ordre explique comment la masse peut être une grandeur de la
+persistance sans épuiser sa structure.
+
+
+\subsection{Lecture chronologique et événements orientés
+}
+
+Soit \(d_1,\ldots,d_{108}\) la lecture numérique d’une route enrichie.
+Dans la coordinatisation déclarée, le support d’action est \(\{1,3,5,7\}\), et
+
+\[
+ n_A=\#\{t:d_t\in\{1,3,5,7\}\}.
+\]
+On conserve en outre les \(12\) événements des blocs de \(9\) pas :
+
+\[
+ e_m=\sigma_m\#\{t:9m+1\le t\le9m+9,\ d_t\in\{2,4,6,8\}\},
+ \quad 0\le m<12,
+\]
+où \(\sigma=(+,+,+,-,-,-,+,+,+,-,-,-)\). Le support de cet
+extracteur est une partie explicite de la coordinatisation de lecture ; sa fonction ne
+doit pas être confondue avec le sélecteur ternaire de phase du TPK.
+
+
+La distribution des événements est pertinente même lorsque leurs sommes
+coïncident. Pour la voir, nous introduisons
+
+\[
+ p_i=e_i+e_{i+6},\quad a_i=e_i-e_{i+6},\quad
+ s_C=\sum_{i=0}^{5}p_i,\quad M_i=p_i-p_5\ (0\le i<5).
+\]
+
+\begin{proposition}[Reconstruction entière des événements
+]
+\label{vi:prop:eventos}
+La transformation \((e_0,\ldots,e_{11})\mapsto(s_C,M_0,\ldots,M_4,a_0,\ldots,a_5)\)
+est injective sur \(\mathbb Z^{12}\). Son image est caractérisée par
+
+\[
+ s_C-\sum_{i=0}^4M_i\equiv0\pmod6,
+ \qquad p_i\equiv a_i\pmod2\quad(0\le i<6),
+\]
+où \(p_5=(s_C-\sum M_i)/6\) et \(p_i=p_5+M_i\) pour \(i<5\).
+
+\end{proposition}
+\begin{proof}
+Sommer les six expressions de \(p_i\) donne
+\(s_C=6p_5+\sum_{i<5}M_i\). Cela récupère les \(p_i\), puis
+
+\[
+ e_i=\frac{p_i+a_i}{2},\qquad
+ e_{i+6}=\frac{p_i-a_i}{2}.
+\]
+Les congruences sont nécessaires pour que ces quantités soient entières et
+suffisantes pour que les formules définissent une préimage entière. Substituer
+dans la transformation directe récupère toutes les coordonnées.
+
+\end{proof}
+
+La décomposition \(12=1+5+6\) acquiert ainsi un sens opératoire :
+le total, les différences et les orientations récupèrent les événements.
+La division par \(6\) appartient à cette reconstruction. Lorsque le caractère
+utilise \(s_C/6\), \(s_C\) reste la somme entière ; une coordonnée déjà
+divisée n’est pas divisée une seconde fois.
+
+
+\subsection{Mémoire torsionnelle et signature
+}
+
+Pour chaque occurrence de \(9\), la lecture conserve son prédécesseur.
+Nous définissons, avec des indices cycliques,
+
+\[
+ j_2(d)=\begin{cases}0,&d=9,\\1,&d\in\{2,4,6,8\},\\-1,&d\in\{1,3,5,7\},\end{cases}
+ \quad z_t=\mathbf1_{\{d_t=9\}}j_2(d_{t-1}).
+\]
+Alors
+\[
+ T_z=\sum_{t=1}^{108}z_t,\quad
+ C_z=\sum_{t\in\{27,54,81,108\}}z_t,\quad
+ k_{\Delta_4}=T_z-2C_z.
+\]
+La première somme conserve la mémoire accumulée et la seconde distingue les
+fermetures de couronne. Éliminer les prédécesseurs avant d’évaluer ces
+expressions altère l’objet lu.
+
+
+Avec \(\tau_m=\operatorname{sgn}(e_m)\), les autres coordonnées sont
+
+\[
+ b_{120}=\sum_{a=0}^{3}\operatorname{sgn}(e_a+e_{a+4}+e_{a+8}),
+ \qquad b_{\zeta}=\sum_{m=0}^{11}\tau_m\tau_{m+3},
+\]
+où le second indice est modulo \(12\). On obtient la signature
+
+\[
+ L_{\mathrm{tick}}(\gamma)
+ =\sigma(\gamma)=(n_A,s_C,k_{\Delta_4},b_{120},b_{\zeta})\in\mathbb Z^5.
+\]
+Cette application est déterministe dans la coordinatisation déclarée. Les signes et les
+corrélations expliquent pourquoi la composition doit se réaliser sur le
+registre avant d’extraire les \(5\) entiers : la somme des signatures ne
+représente pas, en général, la composition de deux histoires.
+
+
+\input{sections/05a_costura_108_1080.tex}
+
+\subsection{Caractère et spécialisation interne
+}
+
+Soit \(X=(X_A,X_C,X_4,X_{120},X_{270})\). Le caractère formel est
+
+\[
+ \chi(\sigma;X)=\exp\!\left(n_AX_A+s_CX_C+k_{\Delta_4}X_4+
+ b_{120}X_{120}+b_{\zeta}X_{270}\right).
+\]
+Pour chaque \(X\), il satisfait
+\(\chi(\sigma+\sigma';X)=\chi(\sigma;X)\chi(\sigma';X)\)
+parce que l’exposant est linéaire en la signature. C’est une loi sur les signatures ; elle
+n’affirme pas que l’extracteur est additif sur les routes sans conserver l’interface.
+
+
+La spécialisation emploie les coordonnées internes construites précédemment :
+
+\[
+ X_A=A_{\mathrm{rad}},\quad X_C=C^*_{\mathrm{rad}}/6,
+ \quad X_4=\Delta_4,\quad X_{120}=s_{120},\quad
+ X_{270}=\zeta_{270}:=135\Delta_4^2.
+\]
+Le caractère est adimensionnel et positif. Son effet est une homothétie sur
+la droite de masse. La forme exponentielle détermine comment agissent les
+coefficients ; leur provenance est fixée dans les registres et les constructions
+antérieurs.
+
+
+\subsection{Hiérarchie bicouche et conservation des deux généalogies
+}
+
+Nous écrivons \(x=A_{\mathrm{rad}}\), \(y=C^*_{\mathrm{rad}}\). Dans la
+chambre \(x>y>0\), les canaux sont
+
+\[
+ q_+=e^{-x-y},\qquad q_-=e^{-x+y},\qquad0<q_+<q_-<1.
+\]
+Pour une involution \(R\), avec \(P_\pm=(I\pm R)/2\), l’opérateur
+des deux canaux est
+
+\[
+ T=q_+P_++q_-P_-.
+\]
+Ses moments scalaire et orienté s’expriment sous la forme
+
+\[
+ c_n=q_-^n+q_+^n,\qquad s_n=q_-^n-q_+^n.
+\]
+Multiplier ces expressions prouve
+
+\[
+ c_n^2-s_n^2=4e^{-2nx},\quad
+ c_{m+n}=\frac{c_mc_n+s_ms_n}{2},\quad
+ s_{m+n}=\frac{s_mc_n+c_ms_n}{2}.
+\]
+Les deux suites satisfont
+
+\[
+ X_{n+2}=c_1X_{n+1}-e^{-2x}X_n,\qquad X\in\{c,s\}.
+\]
+Ces relations montrent que les hauteurs partagent un même opérateur.
+On ne définit pas de collection différente de moments pour chaque espèce.
+
+
+\begin{proposition}[Semi-groupe des hauteurs
+]
+\[
+ \langle90,120\rangle=\{90,120\}\cup\{30r:r\ge6\}.
+\]
+\end{proposition}
+\begin{proof}
+Après division par \(30\), il suffit d’étudier \(\langle3,4\rangle\).
+Les entiers \(6,7,8\) sont \(3+3,3+4,4+4\) ; ajouter \(3\) produit
+tous les entiers suivants. En dessous de \(6\), les seuls
+éléments positifs sont \(3,4\).
+
+\end{proof}
+
+Les hauteurs \(360=4\cdot90=3\cdot120\) illustrent la différence entre
+égalité d’évaluation et mémoire de composition. Le quotient algébrique
+identifie les deux exposants ; le registre conserve si le transport
+a employé quatre étapes d’un type ou trois de l’autre.
+
+
+La spécialisation raffinée a pour exposant
+
+\[
+ \log\chi_{\mathrm{ref}}=n_Ax+\frac{s_C}{6}y+k_{\Delta_4}\Delta_4
+ +b_{\zeta}\zeta_{270}+\sum_{h\in\langle90,120\rangle}N_hs_h,
+ \qquad N_h=\eta_h+b_{120}\mathbf1_{\{h=120\}}.
+\]
+La paire \((\eta_{120},b_{120})\) est conservée même si l’évaluation utilise
+sa somme. On conserve également séparés \(s_{270}\) et
+\(\zeta_{270}\) : le premier est un moment bicouche et le second une
+expression quadratique du raffinement.
+
+
+\begin{proposition}[Convergence de l’évaluation raffinée
+]
+Si \(\sum_h|N_hs_h|<\infty\), le caractère raffiné définit un scalaire
+positif fini et ses évaluations tronquées convergent vers lui.
+
+\end{proposition}
+\begin{proof}
+L’hypothèse donne la convergence absolue de l’exposant. La continuité de
+l’exponentielle permet de passer à la limite ; l’exponentielle d’un réel fini est
+strictement positive.
+
+\end{proof}
+
+La convergence évalue une suite de coefficients déjà spécifiée.
+La sélection de ces coefficients par la route est une opération différente,
+et doit accompagner toute évaluation attribuée à une espèce.
+
+
+La notation \(\chi_{\mathrm{full}}\) conservée dans certaines formules
+d’évaluation des secteurs désigne ce même caractère
+\(\chi_{\mathrm{ref}}\), avec les mêmes arguments et coefficients.
+Le changement de symbole n’ajoute ni autre spécialisation ni autre tour.
+
+
+\subsection{Lecteurs de déplacement et d’autocorrélation
+}
+
+La même route admet deux lectures du retour :
+
+\[
+ K_D=\left(D_{27}+D_{36},D_1,\frac{D_4-D_3}{2}\right),\qquad
+ K_\Omega=(\Omega,54,P_6).
+\]
+La première application conserve les défauts de déplacement ; la seconde, la mémoire de
+retour et l’autocorrélation. Dans le recensement complet de \(324\) orientations,
+il y a \(14\) profils de la première, \(9\) de la seconde et \(40\) paires
+conjointes. Les \(18\) coïncidences ont pour valeur \((80,54,6)\).
+On n’en infère pas l’égalité des deux opérateurs sur tout l’atlas.
+
+
+Pour la route électronique, les déplacements sont
+
+\[
+ (D_1,D_3,D_4,D_{27},D_{36})=(54,56,68,48,32).
+\]
+La substitution produit \(K_D=(80,54,6)\), coïncidant avec
+\(K_\Omega\). Son exposant est
+
+\[
+ \kappa_e=80-54\alpha+6\Delta_4.
+\]
+La trajectoire électronique est construite dans
+\eqref{vi:dep:trayectoria-electron} ; ses lecteurs de déplacement et
+d’autocorrélation sont évalués, respectivement, dans
+\eqref{vi:dep:KD} et \eqref{vi:dep:KOmega}. La coïncidence
+\(K_D=K_\Omega=(80,54,6)\) appartient au théorème de fermeture bêta de la
+sous-section~\ref{vi:dep:beta}. Ici, cette exception centrale est conservée et
+l’opération s’étend aux fibres de l’atlas.
+
+
+\subsection{Opérateur sur une fibre et section dimensionnelle
+}
+
+Soit \(\mathscr H_M\) l’espace de Hilbert fini de base orthonormale
+\((e_\gamma)\) étiquetée par les routes d’une multisection. Pour
+\(r\in\{D,\Omega\}\), l’opérateur de retour est défini par
+\(B_M^re_\gamma=\kappa_\gamma^re_\gamma\), avec des exposants réels ;
+il est donc autoadjoint. Soit \(M_M^{(0)}\) l’opérateur basal positif,
+dont la connexion avec le caractère est fixée ci-dessous.
+Le rapport adimensionnel des
+sections d’action est \(R_{\mathrm{act}}>0\). On définit
+
+\[
+ M_M^{\beta,r}=R_{\mathrm{act}}^{B_M^r/2}
+ M_M^{(0)}R_{\mathrm{act}}^{B_M^r/2}.
+\]
+
+\begin{proposition}[Positivité et restriction scalaire
+]
+L’opérateur \(M_M^{\beta,r}\) est positif. Si les deux opérateurs sont
+diagonaux dans la base de routes, chaque valeur basale \(m_\gamma^{(0)}\)
+se transforme en
+
+\[
+ m_\gamma^\beta=m_\gamma^{(0)}R_{\mathrm{act}}^{\kappa_\gamma}.
+\]
+\end{proposition}
+\begin{proof}
+Soit \(S=R_{\mathrm{act}}^{B_M^r/2}\), autoadjoint et inversible.
+Pour tout \(v\),
+\(\langle v,SM_M^{(0)}Sv\rangle=\langle Sv,M_M^{(0)}Sv\rangle\ge0\).
+Dans la base diagonale, les deux facteurs \(S\) multiplient chaque valeur
+par \(R_{\mathrm{act}}^{\kappa_\gamma/2}\) ; leur produit donne la formule.
+
+\end{proof}
+
+La section absolue de masse s’obtient à partir de l’action et de l’horloge :
+
+\[
+ \omega_0=\frac{2\pi}{108t_0},\qquad
+m_{\mathrm{clk}}=\hbar_{\mathrm{ret}}\omega_0c_{\mathrm{int}}^{-2}.
+\]
+Dans la coordinatisation normalisée par rapport à l’électron, l’opérateur basal précédent est
+
+\[
+ M_M^{(0)}e_\gamma
+ =m_e^{(0)}\,
+   \chi_{\mathrm{ref}}(\sigma_\gamma-\sigma_e,
+                       \eta_\gamma-\eta_e)e_\gamma.
+\]
+Ici, \(m_e^{(0)}\) est la réalisation de la coordonnée électronique
+basale, avec son préfacteur, son raffinement et sa base dimensionnelle.
+Si \(E_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_E\), alors
+
+\[
+ m_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_Ec_{\mathrm{int}}^{-2}
+ =b_e\,m_{\mathrm{clk}},\qquad
+ b_e=\varepsilon_e^{(0)}\frac{\mathcal U_E}{E_{\mathrm{clk}}}.
+\]
+Dans la coordinatisation \(\mathcal U_E=E_{\mathrm{clk}}\), on obtient
+\(b_e=\varepsilon_e^{(0)}\) ; dans une autre coordinatisation, le quotient
+de bases indiqué est conservé. Si les coordonnées de tour sont déjà
+relatives à l’électron, on omet une seconde soustraction de \(\eta_e\).
+Cette égalité relie l’opérateur à la signature de chaque route et conserve
+explicitement la normalisation électronique. Un choix différent de
+section de référence doit également transporter cette normalisation.
+L’échelle de la constante réduite de Planck appartient à cette construction
+dimensionnelle. Le caractère et le facteur de retour agissent ensuite comme
+scalaires. L’électron conserve sa structure : il ne s’identifie pas au
+quantum chronologique \(m_{\mathrm{clk}}\).
+
+
+Pour deux routes dans la même coordinatisation absolue,
+
+\[
+ \frac{m_Y^\beta}{m_X^\beta}
+ =\chi_{\mathrm{ref}}(\sigma_Y-\sigma_X,\eta_Y-\eta_X)
+ R_{\mathrm{act}}^{\kappa_Y-\kappa_X}.
+\]
+La section dimensionnelle commune s’annule. La différence des exposants de
+retour ne s’annule pas sauf si elle est nulle. Cette identité conserve la
+distinction entre échelle absolue et structure relative d’une collection.
+
+
+\subsection{Le secteur de propagation nulle
+}
+
+L’exponentielle prend des valeurs strictement positives. La coordinatisation nulle se
+construit avant ce caractère, dans la réalisation déployée
+
+\[
+ \mathcal A_{\mathrm{sp}}=\mathbb R[R]/(R^2-1),\quad
+ z=r_+P_++r_-P_-,\quad N(z)=r_+r_-.
+\]
+Les directions \(\mathbb RP_+\) et \(\mathbb RP_-\) ont une norme
+nulle. Une propagation transportée dans l’une d’elles appartient à ce secteur ;
+la lecture matérielle bicouche emploie le couplage des deux. De cette manière,
+le photon et le secteur gluonique conservent leur place dans la théorie même
+s’ils ne constituent pas une ligne du caractère positif. La réalisation de leurs
+représentations est exposée avec les secteurs correspondants.
+

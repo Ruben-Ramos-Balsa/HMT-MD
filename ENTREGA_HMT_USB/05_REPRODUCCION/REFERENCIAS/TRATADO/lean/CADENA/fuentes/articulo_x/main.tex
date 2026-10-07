@@ -1,0 +1,193 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=25mm,bottom=24mm,left=27mm,right=27mm,headheight=15pt,headsep=8mm,footskip=12mm]{geometry}
+\usepackage{fontspec,amsmath,amsthm,unicode-math}
+\usepackage[spanish,es-nodecimaldot,es-noquoting]{babel}
+\usepackage{microtype,xcolor,fancyhdr,titlesec,booktabs,longtable,array,tabularx}
+\usepackage{graphicx,tikz,enumitem,float,needspace}
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{1pt}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,matrix}
+\usepackage{xurl}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{theorem}{teorema}{teoremas}\Crefname{theorem}{Teorema}{Teoremas}
+\crefname{proposition}{proposición}{proposiciones}\Crefname{proposition}{Proposición}{Proposiciones}
+\crefname{lemma}{lema}{lemas}\Crefname{lemma}{Lema}{Lemas}
+\crefname{corollary}{corolario}{corolarios}\Crefname{corollary}{Corolario}{Corolarios}
+\crefname{definition}{definición}{definiciones}\Crefname{definition}{Definición}{Definiciones}
+\crefname{section}{sección}{secciones}\Crefname{section}{Sección}{Secciones}
+\crefname{subsection}{sección}{secciones}\Crefname{subsection}{Sección}{Secciones}
+\crefname{equation}{ecuación}{ecuaciones}\Crefname{equation}{Ecuación}{Ecuaciones}
+\crefname{figure}{figura}{figuras}\Crefname{figure}{Figura}{Figuras}
+\crefname{table}{tabla}{tablas}\Crefname{table}{Tabla}{Tablas}
+\setmainfont{STIXTwoText-Regular.otf}[BoldFont=STIXTwoText-Bold.otf,ItalicFont=STIXTwoText-Italic.otf,BoldItalicFont=STIXTwoText-BoldItalic.otf]
+\setmathfont{STIXTwoMath-Regular.otf}
+\hypersetup{pdftitle={Extrema y media razón holográfica},pdfauthor={Oumar Haidara Fall; Rubén Ramos Balsa},pdfsubject={Derivación de la constante holográfica de acoplamiento aritmético-geométrico y leyes de conservación y reversibilidad de la información},pdfkeywords={Holografía Modular Triádica; Mecánica Dimensional; extrema y media razón holográfica; acoplamiento aritmético-geométrico; refinamiento reversible; memoria operatoria; transporte bilateral; incidencia excepcional; observables invariantes; recuperación estable; conservación exterior; entropía de entrelazamiento}}
+\newcommand{\Autores}{Oumar Haidara Fall \textperiodcentered\ Rubén Ramos Balsa}
+\newcommand{\Titulo}{Extrema y media razón holográfica}
+\newcommand{\RR}{\mathbb R}\newcommand{\ZZ}{\mathbb Z}\newcommand{\QQ}{\mathbb Q}\newcommand{\CC}{\mathbb C}\newcommand{\FF}{\mathbb F}
+\newcommand{\Id}{\operatorname{id}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\dd}{\mathrm d}
+\newcommand{\Span}{\operatorname{span}}\newcommand{\Cyl}{\operatorname{Cyl}}
+\providecommand{\llbracket}{\lBrack}\providecommand{\rrbracket}{\rBrack}
+\newcommand{\HMT}{\mathrm{HMT}}\newcommand{\Tr}{\operatorname{Tr}}\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Cstar}{C^{*}}\newcommand{\R}{\mathbb R}\newcommand{\Z}{\mathbb Z}\newcommand{\I}{\mathrm I}
+\definecolor{ink}{HTML}{183D4A}\definecolor{accent}{HTML}{8C3D2E}
+\newcommand{\HMTNarrativePaper}{\clearpage\pagecolor{white}}
+\newcommand{\HMTMathematicalPaper}{\clearpage\pagecolor{white}}
+\newcommand{\HMTNarrativeHeading}[1]{\par\Needspace{8\baselineskip}\noindent{\fontsize{16}{21}\selectfont\bfseries\color{ink}#1\par}\vspace{8mm}}
+\newcommand{\HMTDivision}[4][]{%
+  \HMTNarrativePaper\phantomsection
+  \addcontentsline{toc}{part}{#3}%
+  \noindent{\fontsize{22}{28}\selectfont #2\par}\vspace{5mm}
+  \noindent{\fontsize{17}{22}\selectfont\bfseries\raggedright #3\par}\vspace{4mm}
+  \noindent{\fontsize{11}{15}\selectfont #4\par}\vspace{7mm}}
+\providecommand{\dashrightarrow}{\mathrel{\rightdasharrow}}
+\newcommand{\square}{\mdlgwhtsquare}
+\newcommand{\TPK}{\mathrm{TPK}}\newcommand{\APP}{\mathrm{APP}}\newcommand{\TRIT}{\{-1,0,+1\}}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{criterion}[theorem]{Criterio}
+\providecommand{\index}[1]{}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}\newtheorem{axiom}[theorem]{Axioma}
+\newtheorem{principle}[theorem]{Principio}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Observación}
+\numberwithin{equation}{section}
+\setlength{\parindent}{1em}\setlength{\parskip}{3pt plus 1pt minus .5pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\normalsize}{\fontsize{10.5}{13.4}\selectfont}\normalsize
+\setlist{nosep,topsep=5pt}
+\titleformat{\section}{\fontsize{13}{16}\selectfont\bfseries\raggedright\hyphenpenalty=10000}{\thesection}{.65em}{}
+\titleformat{\subsection}{\fontsize{11.2}{14}\selectfont\bfseries}{\thesubsection}{.65em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{.65em}{}
+\newif\ifHMTSectionPage\HMTSectionPagetrue
+\AddToHook{cmd/section/before}{\ifHMTSectionPage\clearpage\else\Needspace{8\baselineskip}\fi}
+\AddToHook{cmd/subsection/before}{\Needspace{7\baselineskip}}
+% Keep the differential heading with its first theorem in this edition.
+% Los saltos de subsección se rigen por el espacio disponible, no por números heredados.
+\AddToHook{cmd/subsubsection/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/theorem/before}{\Needspace{7\baselineskip}}
+\AddToHook{env/proposition/before}{\Needspace{7\baselineskip}}
+\setcounter{tocdepth}{1}
+\setlength{\cftbeforepartskip}{9pt}
+\renewcommand{\cftpartfont}{\bfseries}
+\newcounter{HMTBibliographyCount}
+\let\HMTOriginalTheBibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \HMTOriginalTheBibliography{99}%
+  \setcounter{enumiv}{\value{HMTBibliographyCount}}}
+\AddToHook{env/thebibliography/end}{\setcounter{HMTBibliographyCount}{\value{enumiv}}}
+\newenvironment{HMTCompactSection}{%
+  \begingroup
+  \setlength{\parskip}{1.5pt plus 1pt minus .5pt}%
+  \setlength{\abovedisplayskip}{8pt plus 2pt minus 4pt}%
+  \setlength{\belowdisplayskip}{8pt plus 2pt minus 4pt}%
+}{\par\endgroup}
+\titlespacing*{\section}{0pt}{17pt}{9pt}\titlespacing*{\subsection}{0pt}{13pt}{6pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\fontsize{8}{10}\selectfont Extrema y media razón holográfica}
+\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{.2pt}
+\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+\raggedbottom
+% Content-bound divisions remain valid when the causal order changes.
+\AddToHook{file/v_funcional_barbero.tex/before}{\HMTDivision{\(\gamma\)}{Parámetro de Barbero--Immirzi}{Incidencia hexádico--octádica, acción, área e información.}\input{libro/narrativas/07_area_informacion.tex}\HMTMathematicalPaper}
+\AddToHook{cmd/@startpbox/after}{\raggedright\arraybackslash}
+\input{libro/indice_jerarquico.tex}
+\begin{document}
+\input{libro/portada.tex}
+\input{libro/resumen.tex}
+\clearpage\begingroup\setlength{\parskip}{0pt}\tableofcontents\endgroup
+\HMTMathematicalPaper
+\input{libro/prologo.tex}
+\input{libro/resultados_rectores.tex}
+\input{libro/narracion_troncal.tex}
+\begin{HMTCompactSection}
+\input{libro/principios_holograficos.tex}
+\end{HMTCompactSection}
+\HMTDivision{\(\mathcal A\)}{Conservación evolutiva de la unidad dimensional por doble proyección holográfica}{Las dos hojas aritméticas, la orientación trítica y el transporte con memoria constituyen el punto de partida de las realizaciones del continuo.}
+\input{libro/narrativas/01_doble_proyeccion.tex}\HMTMathematicalPaper
+\input{nuclear/introduccion.tex}
+\input{sections/nucleo.tex}
+\input{sections/extension.tex}
+\input{sections/continuo_conjunto.tex}
+\HMTDivision{\(\pi\quad\varphi\quad e\)}{Generación coinductiva}{Las coordenadas regionales se construyen en prolongaciones compatibles de profundidad arbitraria. El estado conserva las relaciones que cada lectura utiliza.}
+\input{libro/narrativas/02_generacion.tex}\HMTMathematicalPaper
+\input{sections/generacion.tex}
+\HMTDivision{\(K\)}{Constante holográfica de acoplamiento aritmético-geométrico}{Extracción orientada, lectura posicional e incidencia del registro generado.}
+\input{libro/narrativas/03_acoplamiento.tex}\HMTMathematicalPaper
+\input{sections/registro_k.tex}
+\HMTDivision{\(\alpha\)}{Constante de la estructura fina}{Las coordenadas regionales y el registro ordenado concurren en las dos lecturas de la constante de estructura fina.}
+\input{libro/narrativas/04_alpha.tex}\HMTMathematicalPaper
+\input{sections/alpha.tex}
+\HMTDivision{\(h\quad\hbar\)}{Constantes de Planck y orientación}{La estructura determinantal fija la escala de acción; los coeficientes de retorno determinan las coordenadas angulares.}
+\input{libro/narrativas/05_accion.tex}\HMTMathematicalPaper
+\input{sections/iv_accion_antecedente.tex}
+\input{sections/iv_angulos_antecedente.tex}
+\HMTDivision{\(e^-\)}{Estructura algebraica del electrón}{Persistencia central, orientación y secciones de acción en la realización electrónica.}
+\input{libro/narrativas/06_electron.tex}\HMTMathematicalPaper
+\begin{HMTCompactSection}
+\input{sections/electron.tex}
+\end{HMTCompactSection}
+\HMTDivision{\(V^{\natural}\)}{Incidencia y realización dimensional}{Las relaciones excepcionales, las formas y los transportes dimensionales conservan sus mapas y sus condiciones de compatibilidad.}
+\input{libro/narrativas/08_incidencia.tex}\HMTMathematicalPaper
+\input{sections/excepcional.tex}
+\input{sections/orientaciones_reticulares.tex}
+\input{libro/rectas27.tex}
+\input{sections/01_hilbert_nonadico.tex}
+\input{libro/toro27.tex}
+\input{sections/iv_elipse_radio.tex}
+\input{sections/realizacion_lc.tex}
+\input{sections/02_dualidad_t.tex}
+\input{sections/03_pantallas_coordinadas.tex}
+\input{sections/04_accion_realizacion.tex}
+\HMTDivision{\(\mathsf U\)}{Conservación y recuperación de la información}{Refinamiento, recuperación, holonomía y simetrías de una evolución con registro completo.}
+\input{libro/narrativas/09_conservacion.tex}\HMTMathematicalPaper
+\input{nuclear/01.tex}
+\begin{HMTCompactSection}
+\input{nuclear/02.tex}
+\end{HMTCompactSection}
+\input{nuclear/03.tex}
+\input{nuclear/04.tex}
+\input{nuclear/05.tex}
+\input{nuclear/06.tex}
+\input{nuclear/07.tex}
+\input{nuclear/08.tex}
+\input{sections/retornos_completos.tex}
+\input{nuclear/09.tex}
+\begin{HMTCompactSection}
+\input{nuclear/10.tex}
+\end{HMTCompactSection}
+\input{nuclear/11.tex}
+\input{nuclear/antecedentes_fisicos.tex}
+\input{nuclear/gaussianas.tex}
+\input{nuclear/12.tex}
+\begin{HMTCompactSection}
+\fontsize{10}{12}\selectfont
+\titlespacing*{\subsection}{0pt}{8pt}{4pt}
+\input{nuclear/sintesis.tex}
+\end{HMTCompactSection}
+\HMTDivision{\(\kappa_{\mathrm{ag}}\)}{Acoplamiento aritmético-geométrico: conservación bilateral y refinamiento reversible}{Registro orientado, norma ternaria, refinamiento reversible y ley bilateral de conservación y recuperación.}
+\input{libro/narrativas/10_ley_bilateral.tex}\HMTMathematicalPaper
+\input{libro/01_acoplamiento.tex}
+\input{libro/02_norma_ternaria.tex}
+\input{libro/03_refinamiento.tex}
+\input{libro/04_bilateral.tex}
+\input{libro/05_levantamiento.tex}
+\input{libro/06_sintesis.tex}
+\input{libro/certificacion_lean.tex}
+\HMTDivision{\(\mathcal C\)}{Recuperación compatible y familias del continuo}{Memoria suficiente, naturalidad, medida y transporte de pertenencia en el continuo generado.}
+\input{libro/narrativas/11_familias.tex}\HMTMathematicalPaper
+\input{libro/armonizacion_memoria.tex}
+\input{apendice_cardinal/ch_cierre_cardinal.tex}
+\input{libro/censo_firmas_emision.tex}
+\HMTNarrativePaper
+\input{libro/narrativas/12_cierre.tex}
+\input{libro/conclusiones.tex}
+\clearpage\HMTSectionPagefalse
+\input{sections/bibliografia.tex}
+\input{nuclear/bibliografia.tex}
+\input{libro/bibliografia.tex}
+\input{libro/bibliografia_rev02.tex}
+\end{document}

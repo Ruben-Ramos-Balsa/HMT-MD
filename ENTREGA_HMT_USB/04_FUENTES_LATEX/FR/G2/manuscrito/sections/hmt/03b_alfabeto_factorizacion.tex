@@ -1,0 +1,387 @@
+\chapter[Image arithmétique finie et factorisation \(468=18\cdot26\)]{Image arithmétique finie et factorisation \(468=18\cdot26\)}
+\label{chap:alfabeto-42}
+\index{code décimal admissible}
+\index{chiffre de contrôle}
+
+L'image en base \(1000\) de l'application finie qui attribue les blocs décimaux est un
+sous-ensemble propre des mille blocs décimaux. La loi d'évolution définie dans
+\cref{chap:tpk-definicion} et l'arithmétique de \(\mathbb Z/9\mathbb Z\)
+déterminent une image de 42 triplets, organisée en six classes de sept. La
+même séparation des observables additive et multiplicative factorise ensuite les 468
+sorties en 18 signatures additives et 26 signatures multiplicatives.
+
+\section{Primitives et récurrence de l'émetteur fini}
+
+\begin{definition}[Données de départ de \(T_{\min}\)]
+\label{pf84:E02-15}
+Soit \(D=\{N,E,S,O\}\), avec les vecteurs cardinaux
+\[
+ v(N)=(-1,0),\quad v(E)=(0,1),\quad
+ v(S)=(1,0),\quad v(O)=(0,-1)
+ \qquad\text{dans }(\mathbb Z/9\mathbb Z)^2.
+\]
+La signature temporelle et l'indice multiplicatif sont fixés par
+\[
+ \operatorname{sgn}_9(t)=
+ \begin{cases}
+ +1,&t\bmod9\in\{1,4,7\},\\
+ -1,&t\bmod9\in\{2,5,8\},\\
+ 0,&t\bmod9\in\{0,3,6\},
+ \end{cases}
+\]
+et
+\[
+ \operatorname{ind}_2(1,2,4,8,7,5)=(0,1,2,3,4,5),
+\]
+avec une valeur nulle en dehors des unités. Une entrée de \(T_{\min}\) est une paire
+de germes
+\[
+ I_9:=\{0,1,\ldots,8\},\qquad
+ s_+=(i_+,j_+,d_+),\qquad s_\times=(i_\times,j_\times,d_\times)
+ \in I_9^2\times D.
+\]
+Ces tables, les lecteurs \(L_\Sigma,L_\Pi\), les six blocs de neuf
+instants et l'inversion des deux vecteurs lorsque \(27\mid t\) constituent toutes les
+données de départ. On n'introduit ni \(\pi\), ni \(e\), ni \(\varphi\), ni aucune autre
+valeur cible.
+\end{definition}
+
+\begin{algorithm}[Récurrence de 54 pas]
+\label{pf84:E02-16}
+Au départ, les deux curseurs occupent les positions de leurs germes et portent
+les vecteurs \(v(d_+)\), \(v(d_\times)\). Pour
+\(t=1,\ldots,54\), dans cet ordre :
+\begin{enumerate}
+  \item si \(\operatorname{sgn}_9(t)=+1\), on accumule
+  \(L_\Sigma(i_+(t),j_+(t))\) et l'on déplace le curseur additif ;
+  \item si \(\operatorname{sgn}_9(t)=-1\), on accumule
+  \(\operatorname{ind}_2(L_\Pi(i_\times(t),j_\times(t)))\) et l'on déplace le
+  curseur multiplicatif ;
+  \item si \(\operatorname{sgn}_9(t)=0\), les deux curseurs restent immobiles ;
+  \item après cette mise à jour, les deux vecteurs sont inversés si
+  \(27\mid t\).
+\end{enumerate}
+Les accumulateurs sont réinitialisés au début de chaque bloc
+\(9(r-1)+1\leq t\leq9r\). Si \(S_r,E_r\) sont leurs valeurs finales, on émet
+\[
+ U_r=100\bar S_r+10(\bar S_r+\bar E_r)_{10}
+       +(3S_r+5E_r+1)_{10},
+ \qquad
+ \bar S_r=S_r\bmod10,\quad \bar E_r=E_r\bmod10,
+\]
+et \(w_r=(-U_r)\bmod3\). On obtient ainsi
+\[
+ T_{\min}(s_+,s_\times)=(U_1,\ldots,U_6)
+ \in\mathcal U_6^{\rm cat},
+ \qquad
+ \Psi(U_6)=(-U_6)\bmod3=:w_6\in\mathbb F_3^6.
+\]
+\end{algorithm}
+
+\begin{criterion}[Contrôle dual indépendant de la valeur cible]
+\label{pf84:E02-17}
+La récurrence admet deux formulations indépendantes : factorisation des
+canaux et simulation conjointe. Le parcours exhaustif des
+\(104\,976\) entrées produit le même sextuplet par les deux voies pour chaque
+germe, sans consulter de constante cible. Un écart pour un seul
+germe réfuterait l'équivalence.
+\end{criterion}
+
+\section{Dynamique bivariée et observables par blocs}
+
+Nous travaillons sur le tore \(\mathbb Z_9^2\). Avec la convention précédente, un
+germe complet est
+\[
+\omega=(p_+,p_\times,h_+,h_\times)
+\in(\mathbb Z_9^2)^2\times\{N,E,S,O\}^2,
+\]
+de sorte que
+\[
+|\Omega|=9^4\cdot4^2=104\,976.
+\]
+Dans chaque fenêtre de neuf pas, les temps \(1,4,7\) évaluent l'observable additive,
+les temps \(2,5,8\) évaluent l'observable multiplicative et les temps \(3,6,9\)
+incrémentent le compteur neutre. Si \(S_m,E_m,T_m\) sont les accumulateurs
+de la fenêtre \(m\), l'observable décimale est
+\[
+d_1\equiv S_m,\qquad
+d_2\equiv S_m+E_m,\qquad
+d_3\equiv3S_m+5E_m+7T_m\pmod{10},
+\]
+et le triplet décimal est \(U_m=100d_1+10d_2+d_3\).
+
+\begin{lemma}[Compteur neutre]
+Pour toute fenêtre, \(T_m=3\).
+\end{lemma}
+\begin{proof}
+Chaque bloc de neuf temps contient exactement les trois temps neutres
+\(3,6,9\). Le compteur est donc incrémenté trois fois.
+\end{proof}
+
+\section{Image de l'accumulateur additif : \(\operatorname{Im}S_m=\{6,9,12,15,18,21,24\}\)}
+
+Soit \(s=i+j\pmod9\). L'observable additive visible est
+\[
+f(s)=\operatorname{dr}_9(s+2)=(2,3,4,5,6,7,8,9,1).
+\]
+Une translation cardinale modifie \(s\) de \(+1\) ou de \(-1\). Dans une fenêtre, on
+lit trois termes consécutifs ; inverser l'orientation inverse seulement leur
+ordre. Les neuf sommes cycliques sont
+\[
+9,12,15,18,21,24,18,12,6.
+\]
+
+\begin{lemma}[Image de l'accumulateur additif]
+\[
+S_m\in\{6,9,12,15,18,21,24\}.
+\]
+En particulier, \(d_1=S_m\bmod10\) parcourt exactement
+\(\{1,2,4,5,6,8,9\}\).
+\end{lemma}
+\nopagebreak[4]
+\begin{proof}
+La liste précédente énumère toutes les positions initiales de la trajectoire et les
+deux orientations. Leurs résidus décimaux sont au nombre de sept et distincts.\qedhere
+\end{proof}
+
+\section{Image de l'accumulateur multiplicatif : \(\operatorname{Im}E_m=\{0,1,3,5,7,9\}\)}
+
+Le groupe des unités \((\mathbb Z/9\mathbb Z)^\times\) est cyclique d'ordre
+six. Nous fixons la fonction de coordonnée multiplicative
+\[
+\ell_\times(1,2,3,4,5,6,7,8,9)=(0,1,0,2,5,0,4,3,0).
+\]
+Si la ligne ou la colonne parcourue possède un facteur divisible par trois, chaque
+évaluation appartient à \(\{3,6,9\}\) et apporte zéro. Si le facteur fixe est une
+unité, les sommes de trois termes consécutifs de
+\(b\mapsto\ell_\times(\operatorname{dr}_9(ab))\) sont :
+\[
+\begin{array}{c|c}
+a&\text{somme possible}\\
+\midrule
+1&\{1,3,7,9\}\\
+2&\{3,5,9\}\\
+4&\{1,5,7\}\\
+5&\{1,5,7\}\\
+7&\{3,5,9\}\\
+8&\{1,3,7,9\}.
+\end{array}
+\]
+
+\begin{lemma}[Image de l'accumulateur multiplicatif]
+\[
+E_m\in\{0,1,3,5,7,9\}.
+\]
+\end{lemma}
+\begin{proof}
+Le cas non inversible apporte \(0\). La table finie des six unités
+contient toutes les possibilités du cas inversible et leur union est
+\(\{1,3,5,7,9\}\).
+\end{proof}
+
+\section{Congruence décimale de l'alphabet ternaire : unicité du 3e chiffre}
+
+\begin{theorem}[Congruence de contrôle]
+Tout triplet \(\overline{d_1d_2d_3}\) émis par le système satisfait
+\[
+\boxed{d_3\equiv5d_2-2d_1+1\pmod{10}.}
+\]
+\end{theorem}
+\begin{proof}
+De \(d_2\equiv S_m+E_m\), on obtient
+\(E_m\equiv d_2-d_1\pmod{10}\). Comme \(T_m=3\),
+\[
+d_3\equiv3d_1+5(d_2-d_1)+21
+\equiv5d_2-2d_1+1\pmod{10}.\qedhere
+\]
+\end{proof}
+
+\begin{theorem}[Image exacte de l'application décimale]
+Le système produit exactement \(7\cdot6=42\) triplets décimaux. Regroupés par
+\(E=d_2-d_1\pmod{10}\), ce sont :
+\[
+\begin{array}{c|rrrrrrr}
+E&\multicolumn{7}{c}{\text{triplets décimaux}}\\
+\midrule
+0&114&227&443&556&669&885&998\\
+1&129&232&458&561&674&890&903\\
+3&149&252&478&581&694&810&923\\
+5&169&272&498&501&614&830&943\\
+7&189&292&418&521&634&850&963\\
+9&109&212&438&541&654&870&983.
+\end{array}
+\]
+\end{theorem}
+\begin{proof}
+Il existe sept possibilités pour \(d_1\) et six pour \(E\). Pour chaque paire,
+\(d_2\equiv d_1+E\) et la congruence de contrôle fixe un unique \(d_3\),
+de sorte qu'il existe au plus 42 triplets. La table applique ces deux formules
+aux 42 paires et ne contient pas de répétitions. L'énumération des
+104\,976 germes retrouve tous les triplets de la table et aucun en dehors
+de celle-ci ; la borne est atteinte.
+\end{proof}
+
+\section{Factorisation des \(2\) observables}
+
+Soit \(\mathcal S=\mathbb Z_9^2\times\{N,E,S,O\}\), avec
+\(|\mathcal S|=324\). À chaque germe additif \(P\in\mathcal S\), on
+associe la signature de six fenêtres
+\[
+s(P)=(S_1,\ldots,S_6)\pmod{10},
+\]
+et à chaque germe multiplicatif \(T\in\mathcal S\),
+\[
+e(T)=(E_1,\ldots,E_6)\pmod{10}.
+\]
+Les deux signatures se combinent coordonnée par coordonnée au moyen de
+\[
+G(s,e)_k=
+100s_k+10(s_k+e_k)_{10}+(3s_k+5e_k+1)_{10}.
+\]
+L'application \(G\) est injective : à partir d'un triplet, on récupère
+\(s_k=d_1\) et \(e_k=d_2-d_1\pmod{10}\), tandis que le troisième chiffre vérifie
+l'appartenance à l'image.
+
+\begin{lemma}[Classification exacte du canal additif]
+\label{pf84:E02-18}
+\[
+ |\operatorname{im}s|=18,
+\]
+et chaque signature additive possède exactement \(18\) préimages.
+\end{lemma}
+\begin{proof}
+La signature dépend uniquement de
+\((i+j\bmod9,\varepsilon)\), où \(\varepsilon=+1\) pour \(E,S\) et
+\(-1\) pour \(N,O\). Les \(9\cdot2\) paires produisent des signatures distinctes ; chacune
+possède neuf positions sur sa diagonale et deux directions, c'est-à-dire
+\(18\) préimages. Un nombre différent de signatures ou une classe de taille
+différente de \(18\) réfuterait la classification.
+\end{proof}
+
+\begin{lemma}[Classification exacte du canal multiplicatif]
+\label{pf84:E02-19}
+\[
+ |\operatorname{im}e|=26.
+\]
+Il existe \(24\) classes de taille \(8\), une de taille \(24\) et une de taille
+\(108\).
+\end{lemma}
+\begin{proof}
+L'énumération des \(9^2\cdot4=324\) germes au moyen de la table explicite
+de \(\ell_\times\) donne \(26\) sextuplets
+\((E_1,\ldots,E_6)\) et l'histogramme
+\[
+ 24\cdot8+24+108=324.
+\]
+Une classe supplémentaire, absente ou de taille différente réfuterait le recensement.
+\end{proof}
+
+\begin{theorem}[Factorisation exacte et injective du catalogue]
+\label{pf84:E02-20}
+\[
+|\operatorname{im}s|=18,\qquad
+|\operatorname{im}e|=26,\qquad
+|\operatorname{im}G|=468=18\cdot26.
+\]
+Chaque signature additive possède 18 préimages. Les signatures multiplicatives présentent
+l'histogramme
+\[
+24\text{ classes de taille }8,\qquad
+1\text{ de taille }24,\qquad
+1\text{ de taille }108.
+\]
+\end{theorem}
+\begin{proof}
+Les deux lemmes précédents donnent les cardinaux des signatures. Dans chaque composante
+émise, le chiffre des centaines est \(\bar S_r\), tandis que celui des dizaines est
+\(\bar S_r+\bar E_r\bmod10\). Par conséquent,
+\[
+ \bar S_r=\left\lfloor\frac{U_r}{100}\right\rfloor,\qquad
+ \bar E_r=
+ \left(\left\lfloor\frac{U_r}{10}\right\rfloor-\bar S_r\right)\bmod10.
+\]
+Le chiffre des unités vérifie \(3S_r+5E_r+1\bmod10\) ; il n'introduit pas d'autre
+identification. Ainsi, \(G\) est injective et son image possède
+\(18\cdot26=468\) éléments. Les \(24\) classes multiplicatives de taille
+\(8\), combinées aux \(18\) signatures additives, produisent \(432\) sextuplets
+de multiplicité \(144\) ; les deux autres classes produisent \(18\) sextuplets de
+multiplicité \(432\) et \(18\) de multiplicité \(1944\). En particulier,
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+Deux paires de signatures ayant le même \(U_6\), ou un histogramme qui ne restitue pas le
+domaine complet, réfuteraient le théorème.
+\end{proof}
+
+La composition complète se factorise donc sous la forme
+\[
+\mathcal S^2\xrightarrow{s\times e}
+\operatorname{im}s\times\operatorname{im}e
+\xrightarrow{G}\mathcal U_6
+\xrightarrow{\rho_3}\mathcal W_6\subset\mathbb F_3^6.
+\]
+La dernière projection possède 243 valeurs. La première descente conserve la
+séparation somme--produit ; la deuxième conserve 468 états décimaux ; la
+troisième élimine la coordonnée de fibre et retient un mot ternaire.
+
+\begin{corollary}[Recensement de la projection observable]
+\label{cor:censo-proyeccion-observable}
+\label{pf84:E02-21}
+L'énumération complète détermine la chaîne de cardinaux
+\[
+ 104\,976\longrightarrow468\longrightarrow243\subset729.
+\]
+Les \(468\) éléments intermédiaires sont des sextuplets d'entiers compris entre
+zéro et \(999\) ; seule leur image finale appartient à \(\mathbb F_3^6\). Les
+multiplicités des fibres de la première application satisfont
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+\end{corollary}
+
+\begin{proof}
+Le théorème de factorisation donne \(18\cdot26=468\), et l'énumération
+exhaustive des \(104\,976\) germes produit exactement les trois
+multiplicités indiquées. La réduction composante par composante parcourt les
+\(243\) mots enregistrés dans le catalogue ternaire. Les catalogues de
+signatures et de routes joints reproduisent les deux énumérations.
+\end{proof}
+
+\begin{proposition}[Microfibre quintuple du mot \(010211\)]
+\label{pf84:E02-22}
+Pour la réduction restreinte
+\[
+ \Psi:\mathcal U_6^{\rm cat}\longrightarrow\mathbb F_3^6,
+ \qquad \Psi(U_6)=(-U_6)\bmod3,
+\]
+la fibre de \(010211\) se compose exactement des cinq sextuplets suivants :
+\begingroup
+\scriptsize
+\[
+\begin{array}{@{}cclc@{}}
+\toprule
+U_6&\sigma_+&\sigma_\times&\text{multiplicité}\\
+\midrule
+(501,614,498,169,272,272)&(5,6,4,1,2,2)&(5,5,5,5,5,5)&432\\
+(810,923,870,169,272,272)&(8,9,8,1,2,2)&(3,3,9,5,5,5)&144\\
+(810,983,810,169,272,272)&(8,9,8,1,2,2)&(3,9,3,5,5,5)&144\\
+(870,923,810,169,272,272)&(8,9,8,1,2,2)&(9,3,3,5,5,5)&144\\
+(870,923,810,418,674,521)&(8,9,8,4,6,5)&(9,3,3,7,1,7)&144\\
+\bottomrule
+\end{array}
+\]
+\endgroup
+Ce sont cinq préimages du catalogue \(U_6\), non cinq histoires complètes
+TPK. Elles conservent des signatures et des multiplicités distinctes même si elles partagent le même
+mot visible.
+\end{proposition}
+
+\begin{proof}
+Le balayage exhaustif du catalogue de \(468\) sextuplets sélectionne exactement
+les cinq lignes de la table. La fonction de récupération des signatures reproduit
+les deux sextuplets de chaque ligne et la somme des multiplicités est
+\(432+4\cdot144=1008\). L'énumération vérifie en outre que chaque cellule est le
+produit cartésien de ses germes de canal. Un cardinal différent de cinq
+ou l'identification de deux lignes malgré leurs données enrichies réfuterait
+l'énoncé.
+\end{proof}

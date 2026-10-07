@@ -1,0 +1,120 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N72 --- Supervivencia coinductiva y novena puerta\\
+\large Del selector local al inverso límite de frontera}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N72 fortalece N71. El selector local de pares \((u,\delta)\) por firma de frontera no siempre es único. En lugar de cerrar en una sola frontera, se aplica supervivencia coinductiva: una rama es válida si admite extensiones sucesivas que satisfacen cilindro exacto y firma de frontera. Se audita \(t=5,\ldots,25\) hasta profundidad \(9\). Todas las ambigüedades se resuelven en profundidad menor o igual que \(3\), y la rama real sobrevive hasta la novena frontera futura. La novena puerta actúa como confirmación de estabilidad, no como aparición de nuevas ramas.
+\end{abstract}
+
+\section{Definición}
+
+Sea \(S_t\) el conjunto local de ramas seleccionadas por:
+\[
+\text{cilindro exacto}+\text{firma de frontera}.
+\]
+Una rama \(s\in S_t\) sobrevive a profundidad \(h\) si existe una cadena:
+\[
+s=s_t,s_{t+1},\ldots,s_{t+h-1}
+\]
+tal que cada \(s_{j+1}\) pertenece al selector de frontera sobre el prefijo extendido por \(s_j\).
+
+La rama coinductiva ideal es la que sobrevive para todo \(h\).
+
+\section{Auditoría}
+
+\[
+\begin{array}{c|c|c|c|c|c|c}
+t&\#S_t&h_{\rm res}&h1&h2&h3&h9\\
+\hline
+5 & 2 & 2 & 2 & 1 & 1 & 1 \\
+6 & 6 & 3 & 6 & 3 & 1 & 1 \\
+7 & 11 & 3 & 11 & 3 & 1 & 1 \\
+8 & 3 & 3 & 3 & 2 & 1 & 1 \\
+9 & 3 & 2 & 3 & 1 & 1 & 1 \\
+10 & 11 & 2 & 11 & 1 & 1 & 1 \\
+11 & 3 & 2 & 3 & 1 & 1 & 1 \\
+12 & 5 & 2 & 5 & 1 & 1 & 1 \\
+13 & 3 & 2 & 3 & 1 & 1 & 1 \\
+14 & 3 & 2 & 3 & 1 & 1 & 1 \\
+15 & 5 & 2 & 5 & 1 & 1 & 1 \\
+16 & 11 & 2 & 11 & 1 & 1 & 1 \\
+17 & 6 & 2 & 6 & 1 & 1 & 1 \\
+18 & 1 & 0 & 1 & 1 & 1 & 1 \\
+19 & 1 & 0 & 1 & 1 & 1 & 1 \\
+20 & 5 & 3 & 5 & 5 & 1 & 1 \\
+21 & 2 & 3 & 2 & 2 & 1 & 1 \\
+22 & 1 & 0 & 1 & 1 & 1 & 1 \\
+23 & 3 & 3 & 3 & 2 & 1 & 1 \\
+24 & 3 & 2 & 3 & 1 & 1 & 1 \\
+25 & 6 & 3 & 6 & 6 & 1 & 1 \\
+\end{array}
+\]
+
+\section{Novena puerta}
+
+En \(t=9\), que corresponde a \(K=9\), se tiene:
+\[
+\#S_9=3.
+\]
+A profundidad \(1\):
+\[
+3\text{ ramas sobreviven}.
+\]
+A profundidad \(2\):
+\[
+1\text{ rama sobrevive}.
+\]
+A profundidad \(9\):
+\[
+1\text{ rama sobrevive}.
+\]
+Por tanto:
+\[
+\boxed{
+\text{la novena puerta confirma estabilidad; no introduce falsa rama nueva.}
+}
+\]
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: todas las ambigüedades auditadas se resuelven por supervivencia finita.}
+}
+\]
+\[
+\boxed{
+\text{verde: la profundidad máxima necesaria en }t=5,\ldots,25\text{ es }3.
+}
+\]
+\[
+\boxed{
+\text{verde: la rama real sobrevive hasta la novena frontera futura.}
+}
+\]
+\[
+\boxed{
+\text{amarillo: esto es auditoría finita, no demostración infinita completa.}
+}
+\]
+
+\section{Lectura}
+
+La supervivencia no es un añadido externo: es el modo natural de leer números HMT como objetos de límite inverso. El número no es una cinta puntual; es la rama que sobrevive bajo todas las fronteras compatibles.
+\end{document}

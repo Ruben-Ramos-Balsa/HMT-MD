@@ -1,0 +1,360 @@
+% Ampliación propia de III; no modifica el núcleo común copiado de I.
+% Residencia propuesta: antes de Retorno de hoja, incidencia areal--volumétrica.
+% Procedencia y controles: VACANCIAS_PREFACTOR_PROCEDENCIA.md, en esta carpeta.
+\section{Polarización discreta y modo trítico de las proyecciones aritméticas}
+\label{iii:sec:vacancias-prefactor}
+
+El refinamiento y la comparación entre las hojas de APP proporcionan dos
+observaciones complementarias. La primera sigue la discrepancia acumulada
+entre el número de transiciones y la capacidad adquirida; la segunda conserva
+el modo del selector trítico en el emparejamiento de las fibras aditivas y
+multiplicativas. La polarización discreta y el prefactor electrónico se
+obtienen de estas operaciones respectivas. Su articulación con el vacío
+requiere mantener tanto la información temporal como los espacios sobre los
+que actúan los operadores.
+
+\subsection{Discrepancia del refinamiento y convención de extremos}
+
+Los cardinales del bloque ternario y de su representación decimal fijan
+\[
+ \rho=\log_{1000}729=\log_{10}9,\qquad
+ \delta=1-\rho=\log_{10}(10/9).
+\]
+Se tiene $0<\delta<1$. Además, $\delta$ es irracional: una igualdad
+$\delta=p/q$, con $q>0$, implicaría $10^{q-p}=9^q$, incompatible con
+la descomposición en factores primos. Este desajuste ya interviene en la
+codificación del refinamiento. Aquí se explicita su lectura centrada,
+conservando el origen de fase y la convención de extremos.
+
+\begin{definition}[Codificaciones inferior y superior]
+Para $\theta\in\mathbb R$ y $n\in\mathbb Z$, se definen
+\begin{align}
+ z_n^{\downarrow}(\theta)
+ &=\lfloor(n+1)\delta+\theta\rfloor-\lfloor n\delta+\theta\rfloor,
+ \label{iii:vp:lower}\\
+ z_n^{\uparrow}(\theta)
+ &=\lceil(n+1)\delta+\theta\rceil-\lceil n\delta+\theta\rceil.
+ \label{iii:vp:upper}
+\end{align}
+Ambas toman valores en $\{0,1\}$. La flecha distingue exclusivamente la
+convención de extremos de los intervalos; la orientación trítica conserva
+su definición anterior.
+\end{definition}
+
+La codificación inferior coincide con la utilizada en el desarrollo
+del refinamiento. La superior permite recuperar la formulación de la
+polarización con función techo. Las dos expresiones se relacionan por
+un término de frontera exactamente determinado.
+
+\begin{proposition}[Cambio de convención y término de frontera]
+Sea $b_n(\theta)=\mathbf1_{\mathbb Z}(n\delta+\theta)$. Entonces
+\begin{equation}
+ z_n^{\uparrow}(\theta)-z_n^{\downarrow}(\theta)
+ =b_n(\theta)-b_{n+1}(\theta).
+ \label{iii:vp:endpoint}
+\end{equation}
+En particular, para $N\geq0$,
+\[
+ \sum_{n=0}^{N-1}(z_n^{\uparrow}-z_n^{\downarrow})
+ =b_0-b_N.
+\]
+\end{proposition}
+\begin{proof}
+Para todo real $x$, $\lceil x\rceil=\lfloor x\rfloor+1-
+\mathbf1_{\mathbb Z}(x)$. Aplicar esta identidad a los dos extremos
+de cada incremento da \eqref{iii:vp:endpoint}; su suma es telescópica.
+La irracionalidad de $\delta$ implica que, fijada $\theta$, como máximo
+un índice entero satisface $n\delta+\theta\in\mathbb Z$.
+\end{proof}
+
+Con $\theta=0$, el primer símbolo superior es $1$ y el inferior es $0$;
+para $n\geq1$ coinciden. El término inicial pertenece al registro y se
+conserva cuando se cambia la convención. Las densidades y las cotas de
+discrepancia se transportan con ese término, sin modificar la actualización
+del TPK ni reiniciar la historia en cada retorno de fase.
+
+\subsection{Polarización acotada y balance temporal exacto}
+
+\begin{definition}[Polarización discreta centrada]
+La polarización de la codificación superior, respecto de la densidad
+$\delta$, es
+\begin{equation}
+ P_N^{\uparrow}(\theta)
+ =\sum_{n=0}^{N-1}\bigl(z_n^{\uparrow}(\theta)-\delta\bigr),
+ \qquad P_0^{\uparrow}=0.
+ \label{iii:vp:polarization}
+\end{equation}
+Su incremento temporal es
+\begin{equation}
+ J_N^{\uparrow}(\theta)
+ =P_{N+1}^{\uparrow}(\theta)-P_N^{\uparrow}(\theta)
+ =z_N^{\uparrow}(\theta)-\delta.
+ \label{iii:vp:current}
+\end{equation}
+\end{definition}
+
+El centrado separa el crecimiento uniforme de densidad $\delta$ de la
+información de fase. Así, $P_N^{\uparrow}$ mide un desequilibrio acumulado,
+no el número total de vacancias. El incremento $J_N^{\uparrow}$ conserva
+el pulso local y el fondo respecto del cual se evalúa.
+
+\begin{theorem}[Cota uniforme y continuidad discreta temporal]
+Para $N\geq0$ y toda fase $\theta$,
+\begin{equation}
+ P_N^{\uparrow}(\theta)
+ =\lceil N\delta+\theta\rceil-\lceil\theta\rceil-N\delta,
+ \qquad |P_N^{\uparrow}(\theta)|<1.
+ \label{iii:vp:bound}
+\end{equation}
+Para cualesquiera enteros $0\leq a<b$,
+\begin{equation}
+ \sum_{n=a}^{b-1}J_n^{\uparrow}(\theta)
+ =P_b^{\uparrow}(\theta)-P_a^{\uparrow}(\theta),
+ \qquad
+ \left|\sum_{n=a}^{b-1}J_n^{\uparrow}(\theta)\right|<1.
+ \label{iii:vp:continuity}
+\end{equation}
+La densidad de la sucesión de vacancias es $\delta$.
+\end{theorem}
+\begin{proof}
+La suma de los incrementos de techo de \eqref{iii:vp:upper} produce la
+primera identidad. Escribiendo $r(x)=\lceil x\rceil-x\in[0,1)$,
+se obtiene $P_N^{\uparrow}=r(N\delta+\theta)-r(\theta)$; su valor
+absoluto es menor que uno. Sobre el intervalo $[a,b)$ se obtiene
+análogamente $r(b\delta+\theta)-r(a\delta+\theta)$, lo que prueba
+la segunda cota, más precisa que la suma de dos cotas individuales.
+Finalmente,
+$N^{-1}\sum_{n=0}^{N-1}z_n^{\uparrow}
+=\delta+N^{-1}P_N^{\uparrow}\to\delta$.
+\end{proof}
+
+La codificación inferior admite las mismas demostraciones sustituyendo
+$r(x)$ por $\lfloor x\rfloor-x\in(-1,0]$. En particular,
+$P_N^{\uparrow}-P_N^{\downarrow}=b_0-b_N$. La discrepancia acotada
+utilizada anteriormente en las lecturas de Dirichlet y la polarización
+presente conservan, por tanto, una relación explícita de origen y extremos.
+La aperiodicidad tampoco introduce una deriva secular de este desequilibrio:
+la historia puede prolongarse indefinidamente mientras la discrepancia
+centrada permanece uniformemente acotada.
+
+\subsection{Realización en las rectas de carga y tiempo}
+
+Para realizar dimensionalmente el balance se especifican una recta de carga
+$\mathcal L_Q$ con sección no nula $u_Q$ y una sucesión creciente de
+instantes $t_N$ en una recta temporal orientada. Con
+$\Delta t_N=t_{N+1}-t_N>0$, la carga centrada y la corriente media de
+cada intervalo quedan definidas por
+\begin{equation}
+ Q_N=P_N^{\uparrow}u_Q,\qquad
+ I_N=\frac{Q_{N+1}-Q_N}{\Delta t_N}
+     =\frac{u_Q}{\Delta t_N}\bigl(z_N^{\uparrow}-\delta\bigr).
+ \label{iii:vp:dimensional}
+\end{equation}
+Así, $Q_N\in\mathcal L_Q$ e
+$I_N\in\mathcal L_Q\otimes\mathcal L_T^{-1}$. La sección $u_Q$ y
+los intervalos temporales son datos de esta realización; la construcción
+aritmética precedente ya ha determinado $P_N^{\uparrow}$ y
+$J_N^{\uparrow}$.
+
+\begin{proposition}[Conservación del balance bajo realización dimensional]
+Para $a<b$,
+\begin{equation}
+ Q_b-Q_a=\sum_{n=a}^{b-1}\Delta t_n I_n,
+ \qquad
+ \left|\frac{Q_b-Q_a}{u_Q}\right|<1.
+ \label{iii:vp:dimensional-balance}
+\end{equation}
+Si todos los intervalos tienen longitud $t_0$, las dos corrientes posibles
+son $-\delta u_Q/t_0$ y $(1-\delta)u_Q/t_0$.
+\end{proposition}
+\begin{proof}
+Multiplicar cada identidad de \eqref{iii:vp:dimensional} por
+$\Delta t_n$ y sumar telescopa las cargas. La cota es
+\eqref{iii:vp:continuity}; los dos valores locales se obtienen de
+$z_n^{\uparrow}\in\{0,1\}$.
+\end{proof}
+
+La continuidad demostrada es temporal y está referida a la carga centrada.
+Una realización espacial incorpora además la localización de las cargas,
+la incidencia entre celdas y la identificación de los flujos de frontera.
+En una descripción constitutiva por canales, el acoplamiento se especifica
+mediante una aplicación de excitación
+$\iota:\mathcal L_Q\to\mathcal H_{\rm ch}\otimes\mathcal L_Q$
+y una aplicación de observación
+$\ell:\mathcal H_{\rm ch}\otimes\mathcal L_Q\to\mathcal L_Q$,
+donde $\mathcal H_{\rm ch}$ es una realización real del espacio de canales.
+Si ambas son
+lineales e independientes del índice temporal, la respuesta de un operador
+$\mathcal V$ fijo se transporta por
+\[
+ Q_N^{\rm resp}=\ell(\mathcal V\otimes I_{\mathcal L_Q})\iota(Q_N),
+ \qquad
+ I_N^{\rm resp}=\frac{Q_{N+1}^{\rm resp}-Q_N^{\rm resp}}{\Delta t_N}.
+\]
+La linealidad conserva el balance telescópico. Esta composición hace
+explícitos los datos de una identificación constitutiva: la secuencia
+escalar determina el pulso, mientras $\iota$, $\mathcal V$ y $\ell$
+determinan su excitación, transporte y observación por canales. Las
+identidades \eqref{iii:vp:polarization}--\eqref{iii:vp:dimensional-balance}
+establecen la primera construcción con independencia de esa elección de
+realización. El operador del vacío se construye en la
+sección~\ref{iii:sec:constitutiva} sobre sus canales y proyectores propios.
+
+\subsection{Emparejamiento de las fibras aditivas y multiplicativas}
+
+La segunda observación procede de la realización tridimensional de APP,
+$\mathcal A_3=D_9^3$, con medida uniforme y
+$D_9=\{1,\ldots,9\}$. Se conservan los observables
+\[
+ \Sigma(x)=\rho_9(x_1+x_2+x_3),\qquad
+ \Pi(x)=\rho_9(x_1x_2x_3),
+\]
+donde $\rho_9(n)=1+[(n-1)\bmod9]$ para $n>0$. En
+$\ell^2(\mathcal A_3)$, sean $P_{\Sigma,3}$ y $P_{\Pi,3}$ las
+esperanzas condicionales sobre sus fibras. Por ejemplo,
+\[
+ (P_{\Sigma,3}f)(x)=
+ \frac1{|\Sigma^{-1}(\Sigma(x))|}
+ \sum_{y:\,\Sigma(y)=\Sigma(x)}f(y).
+\]
+Son proyecciones ortogonales definidas sobre el mismo soporte. La matriz
+de incidencias $N_{ab}=|\Sigma^{-1}(a)\cap\Pi^{-1}(b)|$ resulta de
+enumerar los $729$ triples, sumando y multiplicando sus coordenadas antes
+de aplicar $\rho_9$:
+\begin{equation}
+ N=9\begin{pmatrix}
+ 0&1&1&0&1&1&0&1&4\\
+ 1&0&1&1&0&1&1&0&4\\
+ 1&0&2&0&1&2&0&0&3\\
+ 0&1&1&0&1&1&0&1&4\\
+ 1&0&1&1&0&1&1&0&4\\
+ 0&0&2&1&0&2&0&1&3\\
+ 0&1&1&0&1&1&0&1&4\\
+ 1&0&1&1&0&1&1&0&4\\
+ 0&1&2&0&0&2&1&0&3
+ \end{pmatrix}.
+ \label{iii:vp:joint-matrix}
+\end{equation}
+Las filas suman $81$ y las sumas de columna son
+\[
+ (m_1,\ldots,m_9)=(36,36,108,36,36,108,36,36,297).
+\]
+Por ello, el emparejamiento de las indicatrices normalizadas de las fibras
+es $C_{ab}=N_{ab}/\sqrt{81m_b}$. La normalización recoge las
+multiplicidades producidas por APP, no una elección de valores singulares.
+
+\begin{proposition}[Modo singular del selector trítico]
+En la carta canónica, el vector del selector es
+$m_{\rm ph}=(1,-1,0)^3$. Se cumple
+\begin{equation}
+ Cm_{\rm ph}=C^{\mathsf T}m_{\rm ph}=-\tfrac12m_{\rm ph}.
+ \label{iii:vp:trit-mode}
+\end{equation}
+Así, el valor singular correspondiente es $s=1/2$.
+\end{proposition}
+\begin{proof}
+En las seis columnas donde $m_{\rm ph}$ es no nulo, $m_b=36$ y
+$C_{ab}=N_{ab}/54$. Multiplicar las filas de
+\eqref{iii:vp:joint-matrix} por $(1,-1,0)^3$ produce
+$-m_{\rm ph}/2$. Para el producto transpuesto, las sumas firmadas
+de las columnas $3,6,9$ son cero; las otras seis dan los mismos
+valores $-m_{{\rm ph},b}/2$. Esto prueba ambas identidades y, por
+composición, $CC^{\mathsf T}m_{\rm ph}=m_{\rm ph}/4$.
+\end{proof}
+
+\subsection{Norma del conmutador y prefactor electrónico}
+
+\begin{theorem}[Norma exacta de incompatibilidad aritmética]
+Las dos proyecciones satisfacen
+\begin{equation}
+ \bigl\|[P_{\Sigma,3},P_{\Pi,3}]\bigr\|=\frac{\sqrt3}{4}.
+ \label{iii:vp:prefactor}
+\end{equation}
+El máximo se alcanza en el plano principal correspondiente al modo
+trítico de \eqref{iii:vp:trit-mode}.
+\end{theorem}
+\begin{proof}
+La matriz racional $M=CC^{\mathsf T}$ tiene entradas
+$M_{ac}=\sum_bN_{ab}N_{cb}/(81m_b)$. Su espectro completo se
+comprueba mediante los siguientes subespacios independientes: los
+vectores $(1,\ldots,1)$, $(1,-1,0)^3$ y $(1,1,-2)^3$ tienen
+autovalores $1$, $1/4$ y $7/132$, respectivamente; el subespacio de
+vectores soportados en $\{3,6,9\}$ cuya suma es cero tiene dimensión
+$2$ y autovalor $1/18$; los vectores de suma cero soportados en
+$\{1,4,7\}$ o en $\{2,5,8\}$ forman un núcleo de dimensión $4$.
+La sustitución en la matriz verifica estas acciones y las dimensiones
+suman $9$. En consecuencia,
+\[
+ \operatorname{spec}M=
+ \{1,1/4,7/132,1/18,1/18,0,0,0,0\}.
+\]
+Para dos proyecciones ortogonales, un valor singular $s\in(0,1)$ del
+emparejamiento determina un plano principal en el que sus matrices son
+\[
+ P=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+ Q=\begin{pmatrix}s^2&s\sqrt{1-s^2}\\
+ s\sqrt{1-s^2}&1-s^2\end{pmatrix}.
+\]
+Esta forma se obtiene tomando un vector unitario $u$ de la primera
+imagen con $PQu=s^2u$ y completándolo con
+$(Qu-s^2u)/(s\sqrt{1-s^2})$. Su conmutador es
+$s\sqrt{1-s^2}\bigl(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\bigr)$.
+Los sectores de valor singular $0$ o $1$ contribuyen con cero.
+Por tanto, la norma total es el máximo de
+$\sqrt{\lambda(1-\lambda)}$ sobre el espectro de $M$. Dicho máximo
+es $\sqrt{3/16}$, alcanzado en $\lambda=1/4$.
+\end{proof}
+
+La norma es el prefactor que interviene en la composición electrónica.
+Su obtención conserva el soporte tridimensional, las fibras y el modo
+del selector; la evaluación escalar no sustituye esa estructura. En
+particular, conocer $\sqrt3/4$ permite conocer la magnitud máxima de
+la incompatibilidad, mientras los proyectores conservan las direcciones
+en que actúa.
+
+\subsection{Defecto cuadrático y respuesta de los sectores \(90/120\)}
+
+El modo trítico determina simultáneamente
+\begin{equation}
+ 1-s^2=\frac34=\frac{90}{120},\qquad s=\frac12.
+ \label{iii:vp:defect-ratio}
+\end{equation}
+La primera expresión es el defecto cuadrático del plano principal de APP.
+La última conserva las longitudes de los dos sectores del calendario.
+La respuesta constitutiva utiliza esos sectores sobre otro objeto: un
+canal contractivo $q\in(0,1)$. Su evaluación es
+\[
+ r(q)=\frac{1-q^{90}}{1-q^{120}}.
+\]
+La relación entre el cociente de sectores y esta respuesta puede
+precisarse sin identificar sus operadores.
+
+\begin{proposition}[Límite del cociente de respuesta]
+Para $0<q<1$,
+\begin{equation}
+ \frac34<r(q)<1,\qquad
+ \lim_{q\uparrow1}r(q)=\frac34=1-s^2.
+ \label{iii:vp:response-limit}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Con $u=q^{30}\in(0,1)$, la factorización de $1-u^3$ y
+$1-u^4$ da
+$r(q)=(1+u+u^2)/(1+u+u^2+u^3)$. El límite en $u=1$ es
+$3/4$. Además,
+$4(1+u+u^2)-3(1+u+u^2+u^3)
+=(1-u)(3u^2+2u+1)>0$, y el denominador supera al numerador
+en $u^3>0$. Se obtienen las dos desigualdades.
+\end{proof}
+
+La coincidencia exacta concierne al defecto del modo singular y al límite
+de la respuesta de los sectores. En el interior contractivo, la respuesta
+depende de $q$ y es estrictamente mayor que $3/4$. El desarrollo
+constitutivo conserva sus dos canales $q_\pm$ y sus proyectores
+$P_\pm$; los proyectores $P_{\Sigma,3}$ y $P_{\Pi,3}$ conservan,
+por su parte, las fibras aritméticas que determinaron el prefactor.
+Una equivalencia operatoria entre ambas realizaciones exige una aplicación
+entre sus espacios que entrelace las acciones correspondientes.
+Las ecuaciones \eqref{iii:vp:trit-mode}, \eqref{iii:vp:prefactor} y
+\eqref{iii:vp:response-limit} precisan la información compartida y
+mantienen visibles los datos de cada realización.

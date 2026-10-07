@@ -1,0 +1,89 @@
+% Corte mecánico íntegro: parte_ii.tex:323--419.
+% Residencia material del ensamblaje sucesor de 102 capítulos.
+% Residencia causal: capítulo 46.
+
+\chapter{Vis spectrale de Pell et suspension logarithmique}
+
+\section{Loi de vis}
+
+Le corpus contient l'identité exacte
+\begin{equation}
+ V^{-1}\mathscr S V=(2+\sqrt3)\ii\,\mathscr S.
+ \label{espiral:eq:tornillo-pell}
+\end{equation}
+Soit \(\varepsilon=2+\sqrt3\). L'orbite transverse
+\[
+ z_n=z_0(\varepsilon\ii)^n
+\]
+satisfait
+\[
+ r_n=r_0\varepsilon^n,
+ \qquad
+ \theta_n=\theta_0+\frac{\pi n}{2}.
+\]
+Eliminando \(n\),
+\begin{equation}
+ r(\theta)=r_0
+ \exp\!\left[
+ \frac{2\log(2+\sqrt3)}{\pi}
+ (\theta-\theta_0)
+ \right].
+ \label{espiral:eq:espiral-log-pell}
+\end{equation}
+La spirale logarithmique est une sortie de l'opérateur : son équation n'a pas été choisie pour ajuster ensuite \(\varepsilon\).
+
+\begin{proof}[Dérivation de \cref{espiral:eq:espiral-log-pell}]
+De \(\theta_n-\theta_0=n\pi/2\) découle \(n=2(\theta_n-\theta_0)/\pi\). En substituant dans \(r_n=r_0\varepsilon^n\),
+\[
+ r_n=r_0\exp\left(
+ \frac{2\log\varepsilon}{\pi}(\theta_n-\theta_0)
+ \right).
+\]
+L'interpolation continue est l'équation indiquée.
+\end{proof}
+
+\section{Involution conjuguée de contraction}
+
+L'extension bilatérale \(n\in\Z\) produit
+\[
+ n\to+\infty:\ r_n\to\infty,
+ \qquad
+ n\to-\infty:\ r_n\to0.
+\]
+L'inversion \(n\mapsto-n\) échange expansion et contraction. Comme \(\varepsilon^{-1}=2-\sqrt3\), les deux branches appartiennent à la même unité de Pell. Ce ne sont pas deux spirales indépendantes, mais deux orientations de la même vis spectrale.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.82]
+ \draw[->,HMTGray] (-5.1,0)--(5.1,0) node[right] {$x$};
+ \draw[->,HMTGray] (0,-3.1)--(0,3.1) node[above] {$y$};
+ \draw[HMTBlue,very thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(\t))},{.27*exp(.22*\t)*sin(deg(\t))});
+ \draw[HMTRed,thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(-\t))},{.27*exp(.22*\t)*sin(deg(-\t))});
+ \foreach \k in {-4,-3,...,4}{
+   \pgfmathsetmacro{\ang}{1.57079632679*\k}
+   \fill[HMTNavy]
+     ({.27*exp(.22*\ang)*cos(deg(\ang))},
+      {.27*exp(.22*\ang)*sin(deg(\ang))}) circle (.8pt);
+ }
+ \node[HMTBlue,font=\small\sffamily] at (3.5,2.4) {expansion};
+ \node[HMTRed,font=\small\sffamily] at (3.5,-2.4) {orientation conjuguée};
+\end{tikzpicture}
+\caption{Projection transverse de la vis de Pell. Les marques représentent des quarts de tour.}
+\label{espiral:fig:tornillo-pell}
+\end{figure}
+
+\section{Covariance d'échelle et conservation énergétique}
+
+La dilatation \(\varepsilon\) ne doit pas être interprétée comme une croissance gratuite de l'amplitude énergétique d'une onde dans le vide. Sa réalisation cohérente agit sur l'échelle spatiale ou spectrale :
+\[
+ (r,\varphi,\lambda)
+ \longmapsto
+ (\varepsilon r,\varphi+\pi/2,\varepsilon\lambda).
+\]
+Cette distinction sera essentielle dans la réalisation électromagnétique de la \cref{espiral:chap:realizacion-em}.
+
+\begin{resultbox}[title={Compatibilité exacte entre la vis spectrale de Pell et la suspension phase--mémoire}]
+Le relèvement phase--mémoire minimal est une hélice circulaire. La vis spectrale combine un quart de tour et une dilatation de Pell ; sa projection est une spirale logarithmique. Tous deux proviennent du registre HMT, mais ne sont pas la même périodicité et ne s'obtiennent pas l'un à partir de l'autre par oubli des types.
+\end{resultbox}

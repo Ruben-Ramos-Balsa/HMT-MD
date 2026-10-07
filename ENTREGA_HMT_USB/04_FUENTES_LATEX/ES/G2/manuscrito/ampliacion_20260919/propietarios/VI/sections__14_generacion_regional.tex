@@ -1,0 +1,299 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/VI/delivery/MANUSCRIPT_VI_ES_EN_COMPLETE/source_es/sections/14_generacion_regional.tex
+\section{Condiciones iniciales y generación regional}
+\label{vi:vi:reg:seccion}\label{vi:sec:extension}\label{vi:sec:generacion}
+
+Una posición de APP no contiene por sí sola la condición inicial de su
+dinámica. Ésta incluye la dirección de transporte y distingue los cursores
+de las dos hojas. Antes de clasificar las partículas es necesario
+construir ese dominio: de él proceden los registros regionales que
+intervendrán en la coordenada electrónica, la acción y los lectores de
+masa. Las operaciones de esta sección no reciben una especie física ni
+un valor metrológico como condición inicial.
+
+\subsection{Dos cursores orientados sobre el soporte completo}
+
+Empleamos índices \(I_9=\{0,\ldots,8\}\), cuya etiqueta positiva es
+\(i+1\), y las direcciones cardinales \(\mathcal D=\{N,E,S,O\}\).
+El dominio de un cursor y el dominio conjunto son
+\begin{equation}
+ \mathcal S=I_9^2\times\mathcal D,\qquad
+ \Omega_{\mathrm{seed}}=\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S|=324,\quad
+ |\Omega_{\mathrm{seed}}|=104\,976.
+ \label{vi:eq:semillas}
+\end{equation}
+El subíndice \(\mathrm{seed}\) conserva la denominación del dominio en
+los antecedentes; matemáticamente se trata de condiciones iniciales
+orientadas. El producto cartesiano incluye todas las parejas ordenadas.
+La hoja aditiva dispone de un cursor y la multiplicativa de otro; una
+coincidencia posterior entre sus lecturas es un resultado del recorrido.
+
+En los \(54\) instantes de la emisión inicial, el selector de fase
+repite \((+1,-1,0)\). En el régimen positivo se evalúa primero
+\(\rho_9(i+j+2)\) en el cursor aditivo y se transporta después ese
+cursor una posición. En el negativo se evalúa
+\(\rho_9((i+1)(j+1))\) en el multiplicativo y después se transporta
+el segundo cursor. El régimen nulo registra un evento neutral. Las
+direcciones se invierten después de los instantes \(27\) y \(54\).
+Esta última inversión pertenece al estado terminal aunque no altera
+las lecturas ya efectuadas.
+
+El observable multiplicativo usa la carta de exponentes del grupo de
+unidades de \(\ZZ/9\ZZ\):
+\[
+ \ell_9(1)=0,\quad\ell_9(2)=1,\quad\ell_9(4)=2,\quad
+ \ell_9(8)=3,\quad\ell_9(7)=4,\quad\ell_9(5)=5.
+\]
+En el sector \(\{3,6,9\}\), este observable toma el valor cero.
+La pertenencia al sector radical sigue presente en el estado; asignar
+ese valor a una lectura escalar no identifica el radical con la unidad
+multiplicativa.
+
+\subsection{Fórmula finita de las firmas de ventana}
+
+Las seis ventanas tienen nueve instantes cada una. Cada hoja se evalúa
+tres veces por ventana. Una fórmula cerrada permite reconstruir las
+firmas sin consultar un listado previo. Para un cursor de origen
+\(p=(i,j)\) y dirección \(d\), sea
+\[
+ f(k)=\begin{cases}k,&0\le k<9,\\18-k,&9\le k<18,
+ \end{cases}\qquad p_k=p+f(k)\nu_d\pmod9.
+\]
+El índice \(k\) cuenta solamente las evaluaciones de esa hoja. La
+inversión después de nueve de sus evaluaciones explica la segunda
+expresión de \(f\). Escribiendo \(p_k=(i_k,j_k)\), para
+\(m=0,\ldots,5\) se obtiene
+\begin{align}
+ S_m(p,d)&=\sum_{k=3m}^{3m+2}\rho_9(i_k+j_k+2),\notag\\
+ E_m(p,d)&=\sum_{k=3m}^{3m+2}
+       \ell_9\!\left(\rho_9((i_k+1)(j_k+1))\right),\notag\\
+ s_m&=[S_m]_{10},\qquad e_m=[E_m]_{10}.
+ \label{vi:vi:reg:firmas}
+\end{align}
+La evaluación entera y su cociente de división siguen almacenados en
+el registro. Las firmas anteriores son las proyecciones decimales
+especificadas por el emisor.
+
+Como cada ventana tiene \(Z_m=3\) eventos neutrales, la regla que
+acopla ambas firmas es
+\begin{align}
+ d_{m,1}&=[S_m]_{10},\qquad
+ d_{m,2}=[S_m+E_m]_{10},\notag\\
+ d_{m,3}&=[3S_m+5E_m+7Z_m]_{10},\notag\\
+ U_m&=100s_m+10[s_m+e_m]_{10}+[3s_m+5e_m+1]_{10}.
+ \label{vi:eq:emisor-seis}
+\end{align}
+El término final \(1\) es la reducción de \(7Z_m=21\) módulo
+diez. Los coeficientes y el calendario están declarados en la ley
+emisora; las magnitudes físicas no aparecen entre sus argumentos.
+La proyección ternaria orientada es
+\begin{equation}
+ \Psi(U_0,\ldots,U_5)=([-U_0]_3,\ldots,[-U_5]_3)
+ \in\FF_3^6.
+ \label{vi:eq:psi-catalogo}
+\end{equation}
+Después se aplica la identificación balanceada del TRIT. El signo
+menos pertenece a esta carta y debe transportarse al cambiarla.
+
+\begin{proposition}[Factorización y censo de la emisión]
+\label{vi:vi:reg:censo}
+Las condiciones iniciales producen \(18\) firmas aditivas y \(26\)
+multiplicativas. Su acoplamiento es inyectivo y tiene \(468\)
+emisiones. La imagen de \(\Psi\) contiene \(243\) palabras en el
+ambiente de \(729\) elementos.
+\end{proposition}
+\begin{proof}
+Las centenas de \(U_m\) recuperan \(s_m\). Si \(b_m\) es la
+cifra de decenas, \(e_m=[b_m-s_m]_{10}\); la cifra de unidades
+comprueba la tercera congruencia. Por ello ninguna pareja distinta
+de firmas tiene la misma emisión.
+
+Para obtener el censo se evalúa \eqref{vi:vi:reg:firmas} en
+\(i,j=0,\ldots,8\) y las cuatro direcciones. El apéndice
+\ref{vi:vi:reg:tablas} contiene todas las firmas resultantes. Cada
+firma aditiva tiene \(18\) preimágenes. Entre las multiplicativas,
+\(24\) tienen \(8\), una tiene \(24\) y una tiene \(108\).
+Estas sumas son respectivamente \(18\cdot18=324\) y
+\(24\cdot8+24+108=324\). Puesto que ambos cursores son
+independientes, las multiplicidades se multiplican. Resultan
+\(432\) emisiones de peso \(144\), \(18\) de peso \(432\) y
+\(18\) de peso \(1944\), con suma
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+Se aplican las seis reducciones de \eqref{vi:eq:psi-catalogo} a cada pareja
+de las \(18\) y \(26\) firmas publicadas en el apéndice. La
+descomposición completa en órbitas allí incluida da
+\(38\cdot6+5\cdot3=243\) imágenes diferentes. Todas las
+operaciones de esta enumeración son las sumas, productos y residuos
+finitos de las fórmulas anteriores.
+\end{proof}
+
+La demostración finita no identifica exhaustividad del dominio con
+profundidad ilimitada. Las condiciones iniciales se han censado sobre
+un soporte fijo. La profundidad se construye por prolongaciones
+compatibles que conservan esas condiciones y sus transportes.
+
+\subsection{Selección de regiones mediante fibras orientadas}
+
+Para \(w=(w_1,\ldots,w_6)\), definamos
+\[
+ r(w)=(w_3,w_1,w_2,w_5,w_6,w_4),\qquad
+ s(w)=(w_4,w_5,w_6,w_1,w_2,w_3).
+\]
+Las identidades \(r^3=s^2=I\), \(srs=r^{-1}\) realizan
+\(D_3\). Permutar del mismo modo las seis componentes de \(U\)
+conmuta con \(\Psi\). La enumeración anterior comprueba que las
+órbitas conservan las multiplicidades de sus fibras.
+
+Sean \(f(w)\) el número de emisiones sobre \(w\), \(m(w)\)
+su multiplicidad total y \(\nu(w)=(n_0,n_1,n_2)\) su censo
+ternario. La firma aditiva conserva la clase diagonal
+\(d=[i+j]_9\) del origen y el sentido \(ES\) o \(NO\).
+Escribimos \(\mathcal D(\mathcal O)\) para el conjunto de estas
+clases sobre una órbita.
+
+\begin{proposition}[Regiones distinguidas del catálogo]
+\label{vi:vi:reg:seleccion}
+Existe una única órbita de seis palabras con cinco emisiones por
+palabra y multiplicidades \(432+4\cdot144\). Entre las órbitas
+de seis palabras que satisfacen
+\[
+ f(w)=1,\quad m(w)=144\quad(w\in\mathcal O),\qquad
+ \mathcal D(\mathcal O)=\{0,3,6\},
+\]
+el censo \((2,3,1)\) y el censo \((2,2,2)\) seleccionan,
+cada uno, una única órbita. La marca \(d=6\) con orientación
+\(ES\) determina los representantes
+\[
+ w^{\rm cl}=010211,\qquad w^{\rm pr}=201101,
+ \qquad w^{\rm au}=121200.
+\]
+\end{proposition}
+\begin{proof}
+La tabla completa de las \(43\) órbitas en
+\ref{vi:vi:reg:tablas} permite aplicar los predicados. La órbita de
+clausura es la única con fibra de tamaño cinco y peso \(1008\);
+sus cinco pesos son los indicados. La condición diagonal y la
+fibra simple de peso \(144\) dejan seis órbitas. Sus censos
+seleccionan respectivamente una con \((2,3,1)\) y una con
+\((2,2,2)\). Aplicar las seis permutaciones de \(D_3\) y
+comprobar la clase diagonal y la orientación en
+\eqref{vi:vi:reg:firmas} fija los tres representantes escritos.
+La unicidad usa todas las condiciones: si se omite el conjunto de
+diagonales, aparecen cuatro órbitas equilibradas de fibra simple
+y peso \(144\).
+\end{proof}
+
+Las designaciones clausura, propagación y autoescala se aplican
+primero a estas regiones. La sección siguiente introduce sus
+caracteres de evaluación. En particular, la firma multiplicativa
+\(555555\) distingue una emisión transversal de clausura, mientras
+que \((5,5)\) es una posición del soporte electrónico. Las dos
+construcciones se relacionan mediante operaciones posteriores y no
+por identidad de sus cifras.
+
+\subsubsection{Involución especular de las componentes regionales}
+\label{vi:mono-ampl:regiones}
+
+Sobre el bloque regional
+\(B=(u^{\rm cl},u^{\rm pr},u^{\rm au})\in(\FF_3^6)^3\),
+el intercambio es
+\[
+ \mathfrak cB=(u^{\rm pr},u^{\rm cl},u^{\rm au}).
+\]
+Su cuadrado es la identidad y mantiene la componente de autoescala.
+Si \(q=u^{\rm cl}+u^{\rm pr}+u^{\rm au}\),
+\(a=u^{\rm cl}+u^{\rm pr}-u^{\rm au}\) y
+\(d=u^{\rm cl}-u^{\rm pr}\), se recupera el bloque mediante
+\[
+ u^{\rm au}=2(q-a),\quad s=q-u^{\rm au},\quad
+ u^{\rm cl}=2(s+d),\quad u^{\rm pr}=2(s-d).
+\]
+La demostración usa \(2^{-1}=2\) en \(\FF_3\). El intercambio
+conserva \(q,a,s\) y cambia el signo de \(d\). Por tanto,
+el agregado simétrico y la diferencia orientada conservan juntos
+las dos componentes que el agregado aislado no distingue.
+Esta involución regional y la inversión de una ruta cardinal
+actúan sobre dominios distintos. La componente fija puede
+evolucionar durante el transporte aunque sea fija por el intercambio.
+
+\subsection{Calendario, monodromía y memoria}
+
+El calendario finito se compone de doce ventanas nonádicas. Su
+sucesión de grupos es
+\begin{equation}
+ 0\longrightarrow C_{12}\xrightarrow{[b]\mapsto[9b]}C_{108}
+ \xrightarrow{[t]\mapsto[t]_9}C_9\longrightarrow0.
+ \label{vi:eq:extension108}
+\end{equation}
+Para \(t=9b+r\), \(0\le r<9\), la composición contiene
+el cociente de transporte
+\[
+ (b,r)+(b',r')=
+ \left(b+b'+\left\lfloor\frac{r+r'}9\right\rfloor,
+       [r+r']_9\right),
+\]
+reduciendo la primera coordenada módulo doce. La proyección es
+exacta porque su núcleo son los múltiplos de nueve. No admite una
+sección homomorfa: ésta daría \(C_{108}\cong C_{12}\times C_9\),
+pero los exponentes respectivos son \(108\) y \(36\).
+
+La monodromía describe la acción de una vuelta de la base de fase
+sobre su fibra. En la dinámica con memoria, la holonomía nonádica
+\(\Gamma_9\) conserva la fase y avanza la profundidad. Su
+proyección a fase y contador cumple
+\[
+ (r,n)\longmapsto(r,n+1).
+\]
+Esta fórmula es una representación reducida de la acción, no una
+definición que elimine el resto del estado. Sobre historias
+bidireccionales el contador puede extenderse a \(\ZZ\); sobre
+historias iniciadas en profundidad cero, el retroceso sólo está
+definido donde se conserva el predecesor. El calendario puede
+retornar al cabo de \(108\) transiciones y conservar una memoria
+distinta de la inicial. Esa distinción será esencial cuando se
+construya la partícula como persistencia y no como repetición de
+una coordenada visible.
+
+\subsection{De los registros a los operadores de prolongación}
+
+Los operadores lineales de publicación se determinan sobre las
+transiciones del transporte. Si \(x_j^\chi\) es un estado regional
+y \(\Pi_6\) su publicación de seis componentes, la dependencia es
+\[
+ b_j^\chi=\Pi_6(x_j^\chi),\qquad
+ x_{j+1}^\chi=U_{9j+9}\cdots U_{9j+1}(x_j^\chi).
+\]
+Las matrices de orígenes \(X_a\) y destinos \(Y_a\), en
+vectores fila de \(\FF_3^6\), son
+\[
+\begin{array}{c|c|c|c}
+X_0&Y_0&X_1&Y_1\\\hline
+010211&012222&010211&002111\\
+012222&010211&002111&110221\\
+201101&121221&102011&012222\\
+121221&102011&012222&102011\\
+121200&112202&121020&010210\\
+112202&121020&010210&010200
+\end{array}
+\]
+Se tiene \(\det X_0=1\), \(\det X_1=-1\) en \(\FF_3\).
+La solución única de \(X_aL_a=Y_a\) es \(L_a=X_a^{-1}Y_a\).
+La concatenación de bloques publicados en el calendario
+\((L_0,L_0,L_1,L_1)\) produce longitudes
+\(6,12,18,24,30\). La frontera de longitud \(36\) conserva
+el terminal y la relación de prolongación. Estas matrices
+representan transiciones: la inversión lineal prueba su unicidad
+para el registro dado, mientras que la generación de los estados
+pertenece a la composición efectiva \(U_t\) del TPK.
+
+\subsection{Alcance de la construcción regional en el estudio de masas}
+
+El censo ha separado condiciones iniciales, emisiones, regiones y
+operadores que representan sus transiciones. La siguiente etapa
+evalúa las coordenadas regionales y compone el registro dodecafásico.
+Más adelante, el atlas de partículas se construirá sobre el mismo
+soporte pero empleará otra clasificación. Esta continuidad preserva
+una procedencia común sin convertir una fibra numérica en una
+especie por simple coincidencia de cardinales o etiquetas.

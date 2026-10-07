@@ -1,0 +1,667 @@
+\section[Campos sobre el retículo de incidencia]{Generación y localidad de los campos sobre el retículo de incidencia}
+\label{sec:df-campos-reticulares}
+
+La construcción reticular se realiza después de la selección del registro
+dodecafásico y de sus incidencias. El origen marcado, el producto entero y
+la forma de paridad que utiliza el espacio de estados proceden de esa
+construcción. A continuación se explicitan las operaciones que producen
+los campos, sus coeficientes y sus relaciones de localidad. El mismo
+retículo interviene en la generación de estados, en los productos sobre
+el vacío y en los conmutadores de todos los modos enteros.
+
+\subsection{Residencia del origen marcado y persistencia de la incidencia}
+
+% Fuentes: lean/incidencia/SelectedRegionalIncidence.lean;
+% deltas/union/ConcreteNativeFourPlusOne.lean y SelectedExceptionalChain.lean.
+% El antecedente SelectedFromRegionalInputs conserva en su propietario la
+% interfaz S8 no ordenada y Lean.ofReduceBool del selector terminal. Este
+% capítulo desarrolla sus salidas; no declara eliminadas esas dependencias.
+
+Escribamos \(K_i\), \(0\leq i<12\), para las coordenadas del registro
+seleccionado. Las dos lecturas de soporte son
+\begin{equation}
+ T_K=\{i:K_i\geq729\},\qquad
+ H_K=\{i:p_i+e_i-f_i-K_i<0\},
+ \label{eq:df-soportes-K}
+\end{equation}
+donde \(p_i,e_i,f_i\) son los bloques regionales utilizados por el lector
+de preacarreo. El soporte superior utiliza el umbral entero \(729\);
+el soporte negativo utiliza el signo del preacarreo antes de reducirlo.
+Se conservan así dos operaciones diferentes sobre el mismo registro.
+
+La selección ya establecida da
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+\]
+como evaluación del registro, y produce la bandera
+\(T_K\subset H_K\), con \(|T_K|=4\), \(|H_K|=6\).
+Las incidencias regionales de propagación y autoescala, junto con el
+soporte APP, determinan el conjunto
+\[
+ O_K=(E_{\mathrm{inc}}\cap F_{\mathrm{inc}})
+       \setminus(H_K\cup A_{\mathrm{inc}}).
+\]
+La construcción de incidencia demuestra que \(O_K\) es un singleton.
+Su único elemento, \(o\), fija el origen marcado que se conserva en
+todo lo que sigue.
+
+En la realización concreta de Golay, el soporte \(T_K\) corresponde a
+\(\{4,6,8,14\}\). Las cuatro hexadas incidentes a ese soporte tienen
+cuatro elevaciones octádicas; la estrella octádica completa tiene cinco
+elementos. Su diferencia es una única octada adicional. El soporte
+\(H_K\), por su parte, tiene una elevación octádica única en la misma
+realización. Estas propiedades proceden de la realización residual
+concreta y mantienen el origen regional del soporte seleccionado.
+
+El vecino reticular marcado \(\Lambda_o\) obtenido de esa incidencia
+tiene rango \(24\), forma bilineal entera y par, autodualidad integral
+y mínimo cuadrático \(4\). El vector radial utilizado por la construcción
+marcada tiene cuadrado \(54\). Denotaremos por
+\(\langle x,y\rangle\in\mathbb Z\) la forma entera de \(\Lambda_o\).
+Los teoremas de esta sección utilizan precisamente ese retículo y esa
+forma ya construidos.
+
+\subsection{Cociclo de paridad y álgebra reticular torcida}
+\label{subsec:df-cociclo}
+
+% Fuentes: deltas/voa/TriangularSignCocycle.lean,
+% WittLatticeCocycle.lean y WittComplexAlgebra.lean.
+
+Elijamos una base integral \((b_i)_{i=1}^{r}\) de \(\Lambda_o\), con
+\(r=24\). Esta elección presenta las coordenadas de un retículo ya
+obtenido. Su matriz de Gram es
+\(G_{ij}=\langle b_i,b_j\rangle\). Para
+\(x=\sum_i x_i b_i\), \(y=\sum_i y_i b_i\), definimos
+\begin{equation}
+ \tau(x,y)=\sum_{i<j}x_iG_{ij}y_j\pmod2,
+ \qquad \varepsilon(x,y)=(-1)^{\tau(x,y)}.
+ \label{eq:df-cociclo}
+\end{equation}
+
+\begin{proposition}[Identidad cocíclica y conmutador de paridad]
+\label{prop:df-cociclo}
+Se cumplen
+\begin{align}
+ \varepsilon(x,y)\varepsilon(x+y,z)
+ &=\varepsilon(y,z)\varepsilon(x,y+z),\label{eq:df-identidad-cociclica}\\
+ \varepsilon(x,y)\varepsilon(y,x)
+ &=(-1)^{\langle x,y\rangle},\label{eq:df-conmutador-cociclo}\\
+ \varepsilon(0,x)&=\varepsilon(x,0)=1.
+\end{align}
+\end{proposition}
+
+\begin{proof}
+La bilinealidad de \(\tau\) en \(\mathbb F_2\) da
+\(\tau(x,y)+\tau(x+y,z)=\tau(y,z)+\tau(x,y+z)\), y al aplicar
+\(a\mapsto(-1)^a\) se obtiene \eqref{eq:df-identidad-cociclica}.
+La simetría de \(G\), junto con el carácter par de su diagonal, permite
+reunir las dos sumas triangulares:
+\[
+ \tau(x,y)+\tau(y,x)
+ =\sum_{i,j}x_iG_{ij}y_j
+ =\langle x,y\rangle\pmod2.
+\]
+Esto prueba \eqref{eq:df-conmutador-cociclo}. Las identidades con cero
+resultan directamente de \eqref{eq:df-cociclo}.
+\end{proof}
+
+El álgebra compleja torcida \(\mathbb C_{\varepsilon}[\Lambda_o]\)
+consiste en las combinaciones lineales finitas de símbolos
+\(\mathbf e^x\), con producto
+\begin{equation}
+ \mathbf e^x\mathbf e^y=\varepsilon(x,y)\mathbf e^{x+y}.
+ \label{eq:df-producto-torcido}
+\end{equation}
+La identidad cocíclica demuestra la asociatividad y
+\(\mathbf e^0\) es la unidad. La escritura \(\mathbf e^x\) designa el
+elemento básico de carga \(x\), y conserva la etiqueta reticular completa.
+
+\subsection{Espacio oscilatorio y representación de Heisenberg}
+\label{subsec:df-osciladores}
+
+% Fuente: deltas/voa/LatticeOscillatorFock.lean.
+
+Sea \(\mathfrak h=\mathbb C\otimes_{\mathbb Z}\Lambda_o\). El espacio
+oscilatorio algebraico es
+\[
+ \mathfrak h_-=
+ \bigoplus_{n\geq1}\mathfrak h\,t^{-n},
+ \qquad
+ M(1)=\operatorname{Sym}_{\mathbb C}(\mathfrak h_-).
+\]
+El soporte de cada vector es finito, mientras que el conjunto de frecuencias
+disponibles comprende todos los enteros positivos. El espacio de estados
+que conserva simultáneamente ocupación oscilatoria y carga reticular es
+\begin{equation}
+ V_{\Lambda_o}=M(1)\otimes_{\mathbb C}
+                  \mathbb C_{\varepsilon}[\Lambda_o],
+ \qquad \mathbf1=1\otimes\mathbf e^0.
+ \label{eq:df-espacio-estados}
+\end{equation}
+
+Para \(x\in\Lambda_o\) y \(n\geq1\), el operador \(x(-n)\) multiplica
+por el generador \(x\,t^{-n}\). El operador \(x(n)\) es la derivación
+de \(M(1)\) determinada por
+\begin{equation}
+ x(n)(y\,t^{-m})=n\,\delta_{n,m}\langle x,y\rangle.
+ \label{eq:df-derivacion-oscilatoria}
+\end{equation}
+Ambos actúan como la identidad sobre el segundo factor de
+\eqref{eq:df-espacio-estados}. El modo cero actúa sobre la carga mediante
+\[
+ x(0)(v\otimes\mathbf e^y)
+ =\langle x,y\rangle v\otimes\mathbf e^y.
+\]
+
+\begin{theorem}[Relaciones de conmutación y no vacuidad]
+\label{thm:df-heisenberg}
+Para \(m,n\geq1\),
+\begin{align}
+ [x(n),y(-m)]&=n\delta_{n,m}\langle x,y\rangle I,
+ \label{eq:df-CCR}\\
+ [x(-n),y(-m)]&=0,
+ & [x(n),y(m)]&=0.
+\end{align}
+Además, \(x(n)\mathbf1=0\) y \(\mathbf1\ne0\).
+\end{theorem}
+
+\begin{proof}
+Si \(D\) es una derivación y \(M_a\) la multiplicación por \(a\), la
+regla de Leibniz da \([D,M_a](v)=D(a)v\). Aplicada a
+\eqref{eq:df-derivacion-oscilatoria}, produce \eqref{eq:df-CCR}.
+Los multiplicadores conmutan porque el álgebra simétrica es conmutativa;
+las derivaciones de coordenadas conmutan en los generadores y, por
+Leibniz, en todos los monomios. La anulación del vacío se obtiene al
+derivar la unidad. Finalmente, el funcional que toma el coeficiente del
+monomio vacío y de la carga cero vale \(1\) sobre \(\mathbf1\), de modo
+que el vacío es distinto de cero. La extensión por producto tensorial
+conserva todas las identidades.
+\end{proof}
+
+Cada monomio oscilatorio tiene un peso entero
+\(\operatorname{wt}(a)=\sum_{n,i}n a_{n,i}\), donde
+\(a_{n,i}\) son sus ocupaciones. Esta graduación proporciona los límites
+finitos de las sumas que aparecen en los coeficientes de campo.
+
+\subsection{Coeficientes de creación y aniquilación en todos los grados}
+\label{subsec:df-exponenciales}
+
+% Fuentes: deltas/campos/LatticeCreationExponential.lean,
+% LatticeAnnihilationExponential.lean y LatticeAnnihilationEnergy.lean.
+
+Se construyen las dos series formales de operadores
+\begin{equation}
+ E^-_x(z)=\exp\!\left(\sum_{n\geq1}\frac{x(-n)}n z^n\right)
+         =\sum_{d\geq0}C_x(d)z^d,
+ \label{eq:df-creacion}
+\end{equation}
+\begin{equation}
+ E^+_x(s)=\exp\!\left(-\sum_{n\geq1}\frac{x(n)}n s^n\right)
+         =\sum_{r\geq0}A_x(r)s^r.
+ \label{eq:df-aniquilacion}
+\end{equation}
+Estas exponenciales son operaciones formales sobre los modos ya
+construidos. Cada coeficiente se define por una suma finita. En particular,
+si \(P_x(z)=\sum_{n\geq1}x(-n)z^n/n\), entonces
+\begin{equation}
+ C_x(d)=\sum_{q=0}^{d}\frac1{q!}[z^d]P_x(z)^q,
+ \label{eq:df-coeficiente-creacion}
+\end{equation}
+y se obtiene la fórmula análoga para \(A_x(r)\) sustituyendo el potencial
+de aniquilación. El orden de composición de los endomorfismos se conserva
+en cada potencia.
+
+\begin{lemma}[Estabilización de los coeficientes]
+\label{lem:df-estabilizacion}
+Para cualquier potencial formal \(P\) con término constante cero,
+\([z^d]P^q=0\) cuando \(q>d\). Por tanto, ampliar el límite superior
+de \eqref{eq:df-coeficiente-creacion} a cualquier \(N\geq d\) conserva
+su valor. Además,
+\[
+ C_x(0)=A_x(0)=I,
+ \qquad A_x(r)1=0\quad(r>0).
+\]
+Si \(v\) tiene peso a lo sumo \(N\), entonces \(A_x(r)v=0\) para
+\(r>N\).
+\end{lemma}
+
+\begin{proof}
+Cada factor de \(P\) tiene grado al menos uno, por lo que un producto de
+\(q\) factores tiene grado al menos \(q\). Este argumento utiliza
+únicamente la graduación y se aplica también a coeficientes no
+conmutativos. Las identidades en grado cero provienen de la potencia
+vacía. Toda composición no vacía de modos de aniquilación anula la
+unidad. Finalmente, un término de grado \(r\) en el potencial de
+aniquilación reduce el peso oscilatorio en \(r\). Una reducción mayor
+que el peso inicial da cero; por linealidad, la conclusión se conserva
+en todo el subespacio de peso a lo sumo \(N\).
+\end{proof}
+
+Los primeros coeficientes ilustran la normalización:
+\begin{align*}
+ C_x(1)&=x(-1),&
+ C_x(2)&=\tfrac12\bigl(x(-1)^2+x(-2)\bigr),\\
+ A_x(1)&=-x(1),&
+ A_x(2)&=\tfrac12\bigl(x(1)^2-x(2)\bigr).
+\end{align*}
+Cada denominador procede de la frecuencia o del orden de la potencia
+formal. La forma de Gram que entra en los conmutadores sigue siendo la
+forma entera del retículo marcado.
+
+\subsection{Campo de carga y cota de truncamiento de Laurent}
+\label{subsec:df-campo-carga}
+
+% Fuente: deltas/campos/LatticeChargedVertexField.lean.
+
+El campo asociado a una carga \(x\in\Lambda_o\) se escribe
+\begin{equation}
+ Y_x(z)=E^-_x(z)E^+_x(z^{-1})\,e_x z^{x(0)},
+ \qquad Y_x(z)=\sum_{k\in\mathbb Z}Y_x[k]z^k,
+ \label{eq:df-campo}
+\end{equation}
+donde \(e_x\mathbf e^y=\varepsilon(x,y)\mathbf e^{x+y}\).
+La siguiente fórmula define sus coeficientes sobre una base monomial y
+explicita la finitud de cada operación.
+
+\begin{definition}[Coeficiente de campo sobre un estado cargado]
+Si \(v\) es un monomio de peso \(N\), se define
+\begin{equation}
+ Y_x[k](v\otimes\mathbf e^y)
+ =\varepsilon(x,y)
+ \sum_{j=0}^{N}
+ C_x\bigl(k-\langle x,y\rangle+j\bigr)A_x(j)v
+       \otimes\mathbf e^{x+y},
+ \label{eq:df-coeficiente-campo}
+\end{equation}
+con la convención \(C_x(d)=0\) para \(d<0\). Se extiende linealmente
+a \(V_{\Lambda_o}\).
+\end{definition}
+
+\begin{theorem}[Estabilidad, truncamiento y creación de estados de carga]
+\label{thm:df-campo-truncamiento}
+La fórmula \eqref{eq:df-coeficiente-campo} es independiente de cualquier
+cota de peso superior a \(N\). Se cumple
+\begin{equation}
+ k<\langle x,y\rangle-N
+ \quad\Longrightarrow\quad
+ Y_x[k](v\otimes\mathbf e^y)=0.
+ \label{eq:df-truncamiento-laurent}
+\end{equation}
+Cada estado admite, por tanto, una cota inferior de Laurent. Sobre el
+vacío,
+\begin{equation}
+ Y_x[k]\mathbf1=
+ \begin{cases}
+ C_x(k)1\otimes\mathbf e^x,&k\geq0,\\
+ 0,&k<0.
+ \end{cases}
+ \label{eq:df-campo-vacio}
+\end{equation}
+En particular, \(Y_x[0]\mathbf1=1\otimes\mathbf e^x\).
+\end{theorem}
+
+\begin{proof}
+La ampliación de la cota añade términos \(A_x(j)v\) con \(j>N\), que
+son cero por el lema~\ref{lem:df-estabilizacion}. Si se cumple la
+desigualdad de \eqref{eq:df-truncamiento-laurent}, todos los índices
+\(k-\langle x,y\rangle+j\), con \(j\leq N\), son negativos; cada
+sumando se anula. Una combinación lineal finita de monomios conserva
+la menor de sus cotas, lo que prueba la afirmación para cualquier
+estado. Sobre \(\mathbf1\), sólo subsiste \(j=0\), y
+\(\varepsilon(x,0)=1\), \(\langle x,0\rangle=0\). Se obtiene
+\eqref{eq:df-campo-vacio}.
+\end{proof}
+
+\begin{theorem}[Generación de todo el espacio reticular de estados]
+\label{thm:df-generacion-campos}
+El subespacio generado a partir del vacío por composiciones finitas de
+los operadores \(Y_x[0]\), \(x\in\Lambda_o\), y de todos los modos
+de creación \(b_i(-n)\), \(n\geq1\), es \(V_{\Lambda_o}\).
+\end{theorem}
+
+\begin{proof}
+Por \eqref{eq:df-campo-vacio}, \(Y_x[0]\) aplicado al vacío produce
+el estado fundamental de cualquier carga \(x\). Los operadores de
+creación multiplican por los generadores del álgebra simétrica;
+composiciones finitas de ellos producen todos los monomios sobre ese
+estado fundamental. Los monomios oscilatorios por los elementos
+\(\mathbf e^x\) constituyen una base algebraica de
+\eqref{eq:df-espacio-estados}. Su envolvente lineal es, por tanto, todo
+el espacio. El argumento comprende cualquier frecuencia, ocupación
+finita y carga reticular.
+\end{proof}
+
+\begin{corollary}[Determinación de los entrelazadores por el vacío]
+Dos endomorfismos de \(V_{\Lambda_o}\) que conmutan con todos los
+generadores del teorema anterior y coinciden sobre el vacío son iguales.
+\end{corollary}
+
+\begin{proof}
+La conmutación transporta la igualdad en el vacío a cualquier
+composición finita de generadores. La generación total y la linealidad
+extienden esa igualdad a todo el espacio.
+\end{proof}
+
+\subsection{Contracción escalar y ordenación normal de los productos}
+\label{subsec:df-contraccion}
+
+% Fuentes: deltas/generacion/LatticeExponentialContraction.lean,
+% LatticeContractionFactor.lean, LatticeNormalOrdering.lean;
+% deltas/productos/LatticeVacuumContraction.lean.
+
+El producto entero \(p=\langle x,y\rangle\) fija una sucesión escalar
+por la recurrencia
+\begin{equation}
+ s_p(0)=1,\qquad
+ (r+1)s_p(r+1)=(r-p)s_p(r).
+ \label{eq:df-contraccion-recurrencia}
+\end{equation}
+La recurrencia determina cada coeficiente a partir del anterior. Su
+expresión cerrada es
+\(s_p(r)=(-1)^r\binom pr\), con el binomial entero generalizado.
+Los primeros términos son
+\[
+ 1,\quad -p,\quad \frac{p(p-1)}2,\quad
+ -\frac{p(p-1)(p-2)}6.
+\]
+
+\begin{proposition}[Factor formal de contracción]
+\label{prop:df-factor-contraccion}
+La serie \(S_p(u)=\sum_{r\geq0}s_p(r)u^r\) satisface
+\begin{equation}
+ (1-u)S_p'(u)=-pS_p(u),\qquad S_p(0)=1.
+ \label{eq:df-ecuacion-factor}
+\end{equation}
+Es la única solución formal de esas condiciones. Además,
+\[
+ S_{p+q}=S_pS_q,qquad S_0=1,qquad S_1=1-u,qquad
+ S_pS_{-p}=1.
+\]
+Para \(p\geq0\), \(S_p(u)=(1-u)^p\), y sus coeficientes de grado
+superior a \(p\) se anulan.
+\end{proposition}
+
+\begin{proof}
+Comparar el coeficiente de \(u^r\) en
+\eqref{eq:df-ecuacion-factor} reproduce exactamente
+\eqref{eq:df-contraccion-recurrencia}. Como \(r+1\ne0\), los
+coeficientes quedan determinados inductivamente. La regla de Leibniz
+muestra que \(S_pS_q\) satisface la misma ecuación que \(S_{p+q}\)
+y tiene el mismo término constante; la unicidad da la identidad
+multiplicativa. Los casos \(0,1\) se verifican directamente. La
+identidad inversa resulta del caso \(q=-p\), y las potencias naturales
+se obtienen por inducción. Si \(p\) es natural, el paso \(r=p\) de
+la recurrencia produce cero y los pasos posteriores conservan ese cero.
+\end{proof}
+
+\begin{theorem}[Ordenación normal en todos los grados]
+\label{thm:df-ordenacion}
+Las series construidas a partir de los modos satisfacen
+\begin{equation}
+ E^+_x(s)E^-_y(z)
+ =S_{\langle x,y\rangle}(sz),E^-_y(z)E^+_x(s).
+ \label{eq:df-ordenacion-normal}
+\end{equation}
+En coeficientes, para \(r,d\geq0\),
+\begin{equation}
+ A_x(r)C_y(d)
+ =\sum_{i=0}^{\min(r,d)}
+ s_{\langle x,y\rangle}(i),
+ C_y(d-i)A_x(r-i).
+ \label{eq:df-ordenacion-coeficientes}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Sean
+\(Q_x(s)=-\sum_{n\geq1}x(n)s^n/n\) y
+\(P_y(z)=\sum_{m\geq1}y(-m)z^m/m\).
+Por \eqref{eq:df-CCR},
+\[
+ [Q_x(s),P_y(z)]
+ =-\langle x,y\rangle\sum_{n\geq1}\frac{(sz)^n}{n}\,I.
+\]
+El conmutador es central. La identidad exponencial para dos potenciales
+con conmutador central se demuestra aquí coeficiente a coeficiente:
+conmutar una potencia de \(Q_x\) a través de una potencia de \(P_y\)
+añade los términos escalares de ese conmutador; las sumas a cada
+bigrado son finitas por el lema~\ref{lem:df-estabilizacion}. El factor
+escalar resultante tiene término constante uno y satisface
+\eqref{eq:df-ecuacion-factor}, con
+\(p=\langle x,y\rangle\); por la unicidad de la
+proposición~\ref{prop:df-factor-contraccion}, es \(S_p(sz)\).
+Esto demuestra \eqref{eq:df-ordenacion-normal}. La extracción del
+coeficiente \(s^rz^d\) da
+\eqref{eq:df-ordenacion-coeficientes}; el factor de contracción consume
+el mismo grado \(i\) en ambas variables, de donde procede el límite
+\(i\leq\min(r,d)\).
+\end{proof}
+
+\begin{theorem}[Contracción exacta de los estados creados desde el vacío]
+\label{thm:df-contraccion-vacio}
+Para toda pareja de cargas \(x,y\) y todos los grados \(r,d\),
+\begin{equation}
+ A_x(r)C_y(d)1=
+ \begin{cases}
+ s_{\langle x,y\rangle}(r),C_y(d-r)1,&r\leq d,\\
+ 0,&r>d.
+ \end{cases}
+ \label{eq:df-contraccion-vacio}
+\end{equation}
+En la diagonal \(r=d\), el resultado es
+\(s_{\langle x,y\rangle}(r)1\). Si
+\(\langle x,y\rangle=p\geq0\), también se anula para \(r>p\).
+\end{theorem}
+
+\begin{proof}
+Evaluamos \eqref{eq:df-ordenacion-coeficientes} sobre \(1\).
+El lema~\ref{lem:df-estabilizacion} anula todos los sumandos con
+\(r-i>0\). Subsiste únicamente \(i=r\), siempre que \(r\leq d\).
+Para \(r=d\), \(C_y(0)=I\). La última anulación sigue de la cota
+polinómica de \(S_p\).
+\end{proof}
+
+Por ejemplo, \(A_x(1)C_y(1)1=-\langle x,y\rangle1\).
+Para \(p=-1\), la recurrencia da \(s_{-1}(r)=1\) en todos los grados;
+para \(p=2\), da \((1,-2,1,0,\ldots)\). Estas dos evaluaciones
+exhiben, respectivamente, una contracción de orden ilimitado y una
+cancelación polinómica finita, ambas determinadas por la misma forma
+entera del retículo.
+
+\subsection{Conmutador mixto en todos los modos enteros}
+\label{subsec:df-conmutador-mixto}
+
+% Fuentes: deltas/integracion/LatticePositiveMixedFields.lean,
+% LatticeNegativeMixedFields.lean y LatticeAllMixedFields.lean.
+
+Para \(x\in\Lambda_o\), escribimos \(H_x(m)=x(m)\), con
+\(m\in\mathbb Z\), incluyendo los modos negativos de creación,
+el modo cero de carga y los positivos de aniquilación.
+
+\begin{theorem}[Conmutador mixto integral]
+\label{thm:df-conmutador-mixto}
+Para todas las cargas \(x,y\) y todos los enteros \(m,k\),
+\begin{equation}
+ [H_x(m),Y_y[k]]
+ =\langle x,y\rangle,Y_y[k-m].
+ \label{eq:df-conmutador-mixto}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Tratamos separadamente los tres signos de \(m\), conservando en cada
+caso los coeficientes de campo de \eqref{eq:df-coeficiente-campo}.
+
+Si \(m>0\), la relación de Heisenberg da
+\[
+ [x(m),C_y(d)]=
+ \begin{cases}
+ \langle x,y\rangle C_y(d-m),&d\geq m,\\
+ 0,&d<m.
+ \end{cases}
+\]
+Los modos positivos conmutan con los coeficientes de aniquilación y
+con el desplazamiento de carga. Al conmutar término a término en
+\eqref{eq:df-coeficiente-campo}, el grado de creación disminuye en
+\(m\), que equivale a reemplazar \(k\) por \(k-m\). El corte de peso
+permanece válido porque la aniquilación disminuye el peso.
+
+Si \(m=0\), el campo desplaza la carga \(z\) a \(y+z\). La diferencia
+de los autovalores del modo cero es
+\(\langle x,y+z\rangle-\langle x,z\rangle=\langle x,y\rangle\).
+Los operadores oscilatorios preservan la carga, de modo que se obtiene
+\eqref{eq:df-conmutador-mixto} con \(k-m=k\).
+
+Finalmente, sea \(m=-a\), con \(a>0\). Los modos de creación conmutan
+entre sí, mientras que la relación derivada de
+\eqref{eq:df-CCR} y \eqref{eq:df-aniquilacion} es
+\[
+ [x(-a),A_y(j)]=
+ \begin{cases}
+ \langle x,y\rangle A_y(j-a),&j\geq a,\\
+ 0,&j<a.
+ \end{cases}
+\]
+Si el estado inicial tiene peso a lo sumo \(N\), después de crear el
+modo \(-a\) tiene peso a lo sumo \(N+a\). Usamos este corte común en
+los dos términos del conmutador. Los sumandos con \(j<a\) se anulan;
+reindexamos los restantes mediante \(j=r+a\), \(0\leq r\leq N\).
+El grado de creación se transforma en
+\(k-\langle y,z\rangle+r+a\), exactamente el coeficiente de campo
+con índice \(k+a=k-m\). La identidad queda probada sobre los estados
+monomiales cargados y se extiende por linealidad a todo el espacio.
+\end{proof}
+
+El desplazamiento del índice de campo distingue correctamente la
+orientación de los modos: un modo positivo resta su frecuencia, un modo
+negativo la suma y el modo cero conserva el índice. Los tres casos son
+realizaciones de una única identidad en \(\mathbb Z\).
+
+\subsection{Localidad mixta por cancelación coeficiente a coeficiente}
+\label{subsec:df-localidad-mixta}
+
+% Fuentes: deltas/integracion/LatticeMixedLocalityCriterion.lean,
+% LatticeMixedLocality.lean y SelectedMixedFieldLocality.lean.
+
+Consideremos el campo de Heisenberg
+\(H_x(z)=\sum_{m\in\mathbb Z}H_x(m)z^{-m-1}\).
+Para una serie bivariada de coeficientes \(F(a,b)\), la multiplicación
+por \(z-w\) actúa como
+\begin{equation}
+ (\mathcal C F)(a,b)=F(a-1,b)-F(a,b-1).
+ \label{eq:df-operador-cruce}
+\end{equation}
+Las composiciones ordenadas de los dos campos tienen coeficientes
+\[
+ F(a,b)=H_x(-a-1)Y_y[b],\qquad
+ G(a,b)=Y_y[b]H_x(-a-1).
+\]
+
+\begin{theorem}[Localidad mixta de orden uno]
+\label{thm:df-localidad-mixta}
+Los campos construidos satisfacen
+\begin{equation}
+ (z-w)H_x(z)Y_y(w)=(z-w)Y_y(w)H_x(z).
+ \label{eq:df-localidad-mixta}
+\end{equation}
+La igualdad es una identidad de coeficientes endomorfos en todo
+\(V_{\Lambda_o}\).
+\end{theorem}
+
+\begin{proof}
+Por \eqref{eq:df-operador-cruce}, el coeficiente \((a,b)\) de la
+diferencia es
+\[
+ [H_x(-a),Y_y[b]]-[H_x(-a-1),Y_y[b-1]].
+\]
+El teorema~\ref{thm:df-conmutador-mixto} convierte ambos términos en
+\(\langle x,y\rangle Y_y[a+b]\). Su resta es cero para todos los
+enteros \(a,b\). La identidad se cumple en los endomorfismos, por lo
+que vale simultáneamente para todos los estados.
+\end{proof}
+
+\subsection{Localidad de los campos cargados y conservación del origen}
+\label{subsec:df-localidad-cargada}
+
+% Fuentes: deltas/localidad/LatticeFactorConvolution.lean,
+% LatticeChargedLocality.lean, LatticeChargedLocalityFull.lean,
+% SelectedFieldLocality.lean y deltas/integracion/SelectedMixedFieldLocality.lean.
+
+La ordenación normal permite demostrar también la localidad de dos
+campos de carga. Sea \(p=\langle x,y\rangle\) y
+\(N_p=\max(0,-p)\). El factor de contracción de los dos órdenes se
+expande en las regiones formales \(w/z\) y \(z/w\); su paridad relativa
+está fijada por \eqref{eq:df-conmutador-cociclo}.
+
+\begin{theorem}[Localidad uniforme de los campos cargados]
+\label{thm:df-localidad-cargada}
+Para cualesquiera \(x,y\in\Lambda_o\),
+\begin{equation}
+ (z-w)^{N_p}Y_x(z)Y_y(w)
+ =(z-w)^{N_p}Y_y(w)Y_x(z),
+ \qquad N_p=\max(0,-\langle x,y\rangle).
+ \label{eq:df-localidad-cargada}
+\end{equation}
+El exponente depende de las cargas y es válido para todos los estados.
+\end{theorem}
+
+\begin{proof}
+Sobre un estado de peso acotado, los productos de los coeficientes de
+campo se expresan mediante \eqref{eq:df-ordenacion-coeficientes}, los
+desplazamientos de carga y el cociclo. Las sumas por coeficiente son
+finitas: la aniquilación tiene corte de peso y las dos variables del
+producto ordenado tienen una cota inferior. La identidad cocíclica
+reúne los desplazamientos en el mismo elemento de carga \(x+y\), y
+la identidad de conmutador aporta el factor \((-1)^p\) entre los
+dos órdenes.
+
+Los factores escalares resultantes son las dos expansiones de
+\((z-w)^p\). Si \(p\geq0\), ambas son el mismo polinomio y coinciden
+sin multiplicación adicional. Si \(p<0\), multiplicar por
+\((z-w)^{-p}\) transforma ambas expansiones en el factor uno.
+Formalmente, cada aplicación de \(\mathcal C\) eleva en uno el
+exponente de ambas expansiones; después de \(-p\) aplicaciones se
+alcanza el exponente cero. Esta cancelación es independiente del corte
+de peso elegido y de la carga del estado sobre el que actúan los
+campos. Se obtiene así \eqref{eq:df-localidad-cargada} sobre todo
+estado monomial cargado, y la linealidad la extiende a
+\(V_{\Lambda_o}\).
+\end{proof}
+
+\begin{theorem}[Composición conservativa de incidencia, generación y localidad]
+\label{thm:df-composicion-campos}
+Fijado el origen \(o\) producido por la incidencia del registro
+seleccionado, el mismo espacio \(V_{\Lambda_o}\) satisface conjuntamente:
+la generación desde el vacío del
+teorema~\ref{thm:df-generacion-campos}, los productos de todos los grados
+del teorema~\ref{thm:df-contraccion-vacio}, la localidad cargada de
+\eqref{eq:df-localidad-cargada} y la localidad mixta de
+\eqref{eq:df-localidad-mixta}. Su forma entera, su cociclo, su vacío
+y sus operadores de carga son los definidos a partir de
+\(\Lambda_o\) en esta sección.
+\end{theorem}
+
+\begin{proof}
+Todos los enunciados anteriores están cuantificados sobre el mismo
+retículo y la misma forma entera. Al especializarlos al origen
+\(o\) ya seleccionado, sus objetos coinciden por sus definiciones:
+el cociclo usa la base de \(\Lambda_o\), los osciladores usan su
+Gram, los campos utilizan esos osciladores y ese cociclo, y los
+productos utilizan esos mismos coeficientes de campo. La conjunción
+de los teoremas preserva, por tanto, la bandera de incidencia de
+\eqref{eq:df-soportes-K} y todas las dependencias que determinaron
+el origen. Ninguna especialización introduce una nueva elección
+reticular.
+\end{proof}
+
+La concatenación demostrativa distingue con precisión sus operaciones:
+los bloques regionales determinan prefijos, cilindros y firmas; la
+selección dodecafásica y la incidencia producen el origen reticular;
+el retículo determina la forma entera y el cociclo; éstos fijan los
+modos, los campos y sus productos. La estructura de campos resultante
+queda así provista de generación total y de identidades de localidad
+en el espacio algebraico completo. Los capítulos dedicados a la
+reconstrucción de la estructura de operadores de vértice, al sector
+torcido y a la realización excepcional utilizan estos resultados con
+sus respectivas hipótesis adicionales, manteniendo esta misma
+procedencia generativa.

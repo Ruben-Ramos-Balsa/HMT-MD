@@ -1,0 +1,86 @@
+% Fragmento de inserción breve. Desarrollo y procedencia en la misma carpeta.
+\subsubsection{Memoria aritmética del canal multiplicativo}
+\label{prd-arit:seccion}
+
+La conservación de la firma regional se prolonga a la evaluación
+aritmética completa de APP. Para una posición orientada
+\(x=(i,j,d)\in\{1,\ldots,9\}^2\times\{N,E,S,O\}\), sea
+\(\chi(x)=(a,b,\epsilon)\), donde \(a\) es la coordenada fija,
+\(b\) la coordenada móvil y \(\epsilon\) su orientación:
+\[
+ \chi(i,j,N)=(j,i,-1),\quad \chi(i,j,S)=(j,i,+1),\qquad
+ \chi(i,j,E)=(i,j,+1),\quad \chi(i,j,O)=(i,j,-1).
+\]
+La etiqueta de eje \(\iota\in\{i,j\}\) conserva cuál de las
+dos coordenadas originales se mueve. Escribiendo
+\(\langle b\rangle_9=1+((b-1)\bmod9)\), los operadores y la
+evaluación son
+\begin{align}
+ \overline P(a,b,\epsilon)&=(a,\langle b+\epsilon\rangle_9,\epsilon),
+ &\overline H(a,b,\epsilon)&=(a,b,-\epsilon),\label{prd-arit:PH}\\
+ n(a,b)&=ab,&r(a,b)&=\langle ab\rangle_9,\qquad
+ q(a,b)=\frac{ab-r(a,b)}9.\label{prd-arit:rq}
+\end{align}
+
+\begin{proposition}[Representación exacta del transporte aritmético]
+\label{prd-arit:minimal}
+Se cumplen \(\chi P=\overline P\chi\) y
+\(\chi H=\overline H\chi\). La representación \(\chi\)
+tiene \(162\) estados y es la menos fina de las representaciones
+estables bajo \(P,H\) que conservan el producto entero o,
+equivalentemente, el par \((r,q)\). Conservar además \(\iota\)
+recupera las \(324\) posiciones orientadas originales.
+\end{proposition}
+\begin{proof}
+El avance modifica sólo \(b\), y la media vuelta sólo
+\(\epsilon\), lo que prueba las dos identidades de transporte.
+Las nueve observaciones \(n_k=n(\overline P^k\chi(x))\),
+\(0\leq k<9\), recorren \(a,2a,\ldots,9a\). Así se recuperan
+\(a=\min_k n_k\), \(b=n_0/a\) y el signo mediante
+\((n_1/a-n_0/a)\bmod9\in\{1,8\}\). Toda equivalencia estable
+que conserve \(n\) conserva estas nueve observaciones y, por
+tanto, distingue todos los estados \((a,b,\epsilon)\).
+La identidad \(n=r+9q\) prueba la equivalencia de las dos
+evaluaciones. Cada fibra de \(\chi\) contiene las dos rutas
+transpuestas: \((i,j,d)\mapsto(j,i,d^\top)\), con
+\(N^\top=O,O^\top=N,E^\top=S,S^\top=E\). La etiqueta de eje distingue
+esas dos preimágenes y permite reconstruir posición y dirección.
+\end{proof}
+
+El selector TRIT activa el producto en \(t\equiv2,5,8\pmod9\),
+antes de cada avance. La media vuelta actúa al finalizar cada
+\(27\) instantes. Si \(y_{t-1}\) denota el estado aritmético
+previo, el incremento y su memoria acumulada quedan determinados por
+\begin{equation}
+ \eta_q(t)=\mathbf1_{\{t\equiv2\ (3)\}}q(y_{t-1}),\qquad
+ \lambda_q(t)=\lambda_q(t-1)+\eta_q(t),\quad \lambda_q(0)=0.
+ \label{prd-arit:incremento}
+\end{equation}
+Se cumple \(0\leq q(a,b)\leq a-1\). Para invertir una
+actualización se deshace primero la media vuelta que corresponda,
+después el avance, y finalmente se resta el cociente recuperado del
+estado previo. El registro retiene fase, eje, orden de eventos y
+memoria; \(\lambda_q\) es un cociclo aditivo de este transporte.
+
+Cada bloque de \(27\) contiene nueve avances y recorre una vez
+la coordenada móvil. Por ello, el retorno de posición y orientación
+en \(54\), y de fase en \(108\), coexiste con
+\begin{equation}
+ \lambda_q(108N)=NQ_\times^+(a),\qquad
+ Q_\times^+(a)=\frac{180a-4\sum_{b=1}^9r(a,b)}9,
+ \qquad N\geq0.
+ \label{prd-arit:retorno}
+\end{equation}
+En efecto, cada bloque suma los productos \(a,2a,\ldots,9a\);
+sumar \(n=r+9q\) en los cuatro bloques da la fórmula. Si
+\(a\) es primo con \(9\), los residuos suman \(45\), y
+\(Q_\times^+(a)=20(a-1)\). En la ventana \(j\), contando desde
+\(j=0\), el signo relativo del calendario es
+\(\sigma_j=(-1)^{\lfloor j/3\rfloor}\), y la orientación
+efectiva es \(\epsilon_j=\epsilon_0\sigma_j\).
+La carga firmada por \(\sigma_j\) se anula; la carga ponderada
+por la orientación efectiva se anula asimismo al multiplicarse por
+\(\epsilon_0\). El libro conserva la orientación inicial, la carga
+acumulada y sus incrementos. Estas cantidades pertenecen
+al cursor multiplicativo; los lectores de una trayectoria que
+alterna ambas hojas actúan sobre el registro de esa trayectoria.

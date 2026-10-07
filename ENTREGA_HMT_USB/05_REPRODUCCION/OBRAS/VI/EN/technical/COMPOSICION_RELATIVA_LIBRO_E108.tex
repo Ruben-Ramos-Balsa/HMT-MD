@@ -1,0 +1,233 @@
+% Incorporación propuesta; no incluida automáticamente en main.tex.
+% Resultado recuperado y formalización reunida, 2026-09-10.
+% Propietarios completos: registro_incidencias.tex y constructor_incidencial.py
+% del Artículo II REV09; procedencia detallada en la nota Markdown homónima.
+\subsection{Evaluación del libro orientado y reconstrucción integral}
+\label{vi:lib:seccion}
+
+La evaluación incidencial tiene un dominio distinto de su selección
+dinámica. El dominio reúne visitas APP y trazas orientadas; la selección
+TPK determina qué libro corresponde al estado terminal. Una vez fijado
+ese libro, la evaluación siguiente es finita, unívoca y enteramente
+aritmética. La prueba permite identificar exactamente qué información
+se publica y qué información permanece en el historial.
+
+\begin{definition}[Libro incidencial de doce ventanas]
+\label{vi:lib:dominio}
+Un libro \(\mathscr L\) consta de una familia finita no vacía de rutas,
+un conjunto finito de visitas identificadas y una familia finita de
+trazas orientadas. Cada ruta conserva al menos sus visitas de los
+instantes \(1,\ldots,108\), con una sola visita por instante y ruta.
+Se permiten visitas posteriores cuando una traza las necesite. Una
+visita \(v\) conserva
+\[
+ (\gamma(v),t(v),i(v),j(v),s(v),\tau(v),w(v),\epsilon_\partial(v)),
+\]
+donde \(1\le i,j\le9\), \(\tau\in\{-1,0,1\}\),
+\(w\) es una multiplicidad entera positiva y \(s\) designa la hoja.
+La lectura aritmética declarada en esta carta es
+\[
+ n_v=\begin{cases}
+ i(v)+j(v),&s(v)=\Sigma,\\
+ i(v)j(v),&s(v)=\Pi,\\
+ 9,&s(v)=0,
+ \end{cases}
+ \qquad n_v=r_v+9q_v,\quad1\le r_v\le9.
+\]
+La hoja \(0\) es la convención de umbral de esta carta. Para una visita
+con \(r_v=9\), el operador de frontera especifica
+\(\epsilon_\partial(v)=1\) en la corona y \(-1\) en el interior;
+esta etiqueta no se deduce únicamente del valor del residuo.
+
+Cada traza \(\theta=(v_1,\ldots,v_N)\) está contenida en una ruta,
+sus instantes son consecutivos y su origen pertenece a una ventana
+\(E_m=\{9m-8,\ldots,9m\}\). Conserva una multiplicidad positiva
+\(u(\theta)\) y una unidad de longitud reducida \(\lambda(\theta)>0\)
+entera, de modo que
+\[
+ N\lambda(\theta)=120(1+3j(\theta)),\qquad j(\theta)\ge0.
+\]
+Su canal orientado es
+\[
+ \sigma(\theta)=\operatorname{sgn}
+       \left(\sum_{a=1}^{N}\tau(v_a)\right)\in\{-1,1\}.
+\]
+Esta familia sólo cuenta trazas de canal no nulo. La selección de la
+familia, las multiplicidades, el operador de frontera y las unidades
+de longitud son datos declarados del libro. Si el libro se presenta
+como publicación del TPK, su procedencia incluye además la regla que
+los obtiene del transporte y la cobertura de las trazas admitidas por
+esa regla. La comprobación de formato de un libro no demuestra esa
+procedencia.
+\end{definition}
+
+La división positiva anterior se calcula, sin recibir el residuo como
+otro argumento, mediante
+\[
+ r_v=1+((n_v-1)\bmod9),\qquad q_v=(n_v-r_v)/9.
+\]
+La diferencia entre longitud reducida y número de instantes se conserva
+en \(\lambda\); el calendario de \(108\) instantes no autoriza a
+identificar ambas magnitudes por omisión.
+
+Sea \(\mathscr V_m\) el conjunto de visitas cuyo instante está en
+\(E_m\), y \(\mathscr T_m\) la familia de trazas cuyo origen está en
+esa ventana. Se calculan los tres recuentos
+\begin{align}
+ A_m&=\sum_{v\in\mathscr V_m}w(v)
+              \mathbf1_{\{1,3,5,7\}}(r_v),\notag\\
+ C_m&=-\sum_{\theta\in\mathscr T_m}u(\theta)\sigma(\theta),\notag\\
+ V_m&=\sum_{v\in\mathscr V_m}w(v)
+              \mathbf1_{\{9\}}(r_v)\epsilon_\partial(v).
+ \label{vi:lib:recuentos}
+\end{align}
+El segundo coincide con
+\(\sum_j(\nu^-_{120,m}(j)-\nu^+_{120,m}(j))\), donde
+\(\nu^\pm\) es la suma de multiplicidades de las trazas del canal
+correspondiente y longitud \(120(1+3j)\). Todas las sumas son finitas.
+Para cualquier entero \(x\), sea
+\(x=[x]_{10}+10\lfloor x/10\rfloor\), con \(0\le[x]_{10}<10\).
+Los bloques y sus coordenadas transversales se definen por
+\begin{align}
+ z_m&=100[A_m]_{10}+10[C_m]_{10}+[V_m]_{10},\notag\\
+ \mathcal E_{\mathrm{cnt}}(\mathscr L)
+   &=\mathcal D(z):=(D_3z,D_4z,Q(z)),\label{vi:lib:directa}\\
+ (D_hz)_i&=z_i-z_{i+h},\qquad Q(z)=\sum_i z_i.\notag
+\end{align}
+En las fórmulas cíclicas siguientes se numeran las posiciones de cero
+a once, sin cambiar su orden. La aplicación tiene \(25\) coordenadas
+enteras, pero su imagen tiene rango \(12\): las diferencias y la suma
+no constituyen \(25\) datos independientes.
+
+\begin{theorem}[Composición y reversibilidad sobre el libro declarado]
+\label{vi:lib:composicion}
+Para todo libro de la definición~\ref{vi:lib:dominio}, la fórmula
+\eqref{vi:lib:directa} produce un único elemento de
+\(\mathcal D(\{0,\ldots,999\}^{12})\). Su reconstrucción integral
+es única. El cambio de representación armónico descrito abajo satisface
+\[
+ \Pi_H\mathcal E_{\mathrm{cnt}}(\mathscr L)=H_{12}z,
+ \qquad
+ \tfrac14H_{12}\Pi_H\mathcal E_{\mathrm{cnt}}(\mathscr L)=z.
+\]
+En particular, el sello obtenido por esta composición es \(K(\mathscr L)=z\).
+Ninguna congruencia de compatibilidad debe ajustarse después de conocer
+el resultado: todas son consecuencias de la evaluación directa.
+\end{theorem}
+
+\begin{proof}
+Las sumas enteras y las divisiones euclídeas determinan unívocamente
+los bloques. Sean \(b=D_3z\), \(c=D_4z\), \(q=Q(z)\), y
+\[
+ w_i=c_i-b_{i+1},\quad P_0=0,\quad
+ P_i=\sum_{j<i}w_j,\quad T=\sum_{i=0}^{11}P_i.
+\]
+Sustituir la definición de las diferencias da
+\(w_i=z_i-z_{i+1}\). Por tanto,
+\[
+ \sum_iw_i=0,\quad b_i=w_i+w_{i+1}+w_{i+2},\quad
+ q+T=12z_0.
+\]
+Se obtiene la reconstrucción
+\[
+ z_i=(q+T)/12-P_i.
+\]
+Estas tres relaciones caracterizan también la imagen integral de
+\(\mathcal D\). En efecto, si se cumplen para \(b,c,q\) y
+\(q+T\equiv0\pmod{12}\), la fórmula reconstruida es entera,
+cíclica, tiene diferencias \(b,c\) y suma \(q\). Su diferencia
+con otra solución tiene todas las diferencias consecutivas nulas y
+suma cero, por lo que es nula. La linealidad y esta inyectividad de
+\(\mathcal D\colon\mathbb Z^{12}\to\mathbb Z^{25}\) prueban
+la afirmación de rango.
+
+Para escribir el cambio armónico, sean \(r=0,1,2\),
+\[
+ S_r=\sum_{j=0}^3c_{r+3j},\quad
+ a_0=(q+2S_0+S_1)/3,\quad
+ a_1=a_0-S_0,\quad a_2=a_1-S_1,
+ \qquad d_{r,j}=b_{r+3j}.
+\]
+Definimos sobre la imagen integral, en el orden de cada órbita,
+\[
+ \Pi_H^{(r)}(b,c,q)=
+ (a_r,d_{r,1}-d_{r,3},d_{r,0}+d_{r,2},d_{r,0}-d_{r,2}).
+\]
+Si \(s_r=\sum_jz_{r+3j}\), entonces
+\(S_r=s_r-s_{r+1}\) y \(q=s_0+s_1+s_2\). De aquí
+\(a_r=s_r\); en particular, sus divisiones por tres son enteras.
+En la órbita \(x_j=z_{r+3j}\), se tiene \(d_{r,j}=x_j-x_{j+1}\).
+La sustitución en las tres diferencias anteriores da
+\[
+ \Pi_H^{(r)}(b,c,q)=
+ \begin{pmatrix}
+ 1&1&1&1\\1&1&-1&-1\\
+ 1&-1&1&-1\\1&-1&-1&1
+ \end{pmatrix}
+ \begin{pmatrix}x_0\\x_1\\x_2\\x_3\end{pmatrix}.
+\]
+Llamando \(H_4\) a esa matriz, \(H_4^2=4I_4\) por
+multiplicación directa. \(H_{12}\) aplica estos tres bloques a las
+órbitas ordenadas \((0,3,6,9)\), \((1,4,7,10)\),
+\((2,5,8,11)\), conservando la misma convención al volver a las
+doce posiciones. Por tanto \(H_{12}^2=4I_{12}\) y ambas
+composiciones anunciadas se siguen. La preimagen empleada en esta
+prueba no se introduce como argumento de \(\Pi_H\).
+\end{proof}
+
+\begin{corollary}[Información conservada por la publicación]
+\label{vi:lib:fibras}
+Sean \(\mathscr L,\mathscr L'\) dos libros y \(N,N'\) sus
+matrices de recuentos \((A,C,V)\). Entonces
+\[
+ \mathcal E_{\mathrm{cnt}}(\mathscr L)
+   =\mathcal E_{\mathrm{cnt}}(\mathscr L')
+ \quad\Longleftrightarrow\quad
+ N-N'\in10\mathbb Z^{36}.
+\]
+La salida conserva los \(36\) residuos decimales. Los cocientes de
+división, la identidad de las visitas, sus hojas, sus orientaciones y
+su transporte permanecen en el libro, pero no se recuperan en general
+de esas \(25\) coordenadas.
+\end{corollary}
+\begin{proof}
+La igualdad de los residuos produce los mismos bloques y coordenadas.
+Recíprocamente, la inyectividad de \(\mathcal D\) fuerza \(z=z'\).
+La unicidad de la escritura de cada entero entre \(0\) y \(999\)
+en tres cifras recupera los tres residuos de cada ventana. La división
+euclídea muestra que esto equivale a la congruencia indicada.
+\end{proof}
+
+La congruencia describe las fibras de una aplicación de conjuntos.
+La codificación mediante representantes decimales no es aquí un
+homomorfismo aditivo hacia \(\mathbb Z^{25}\); por ello no se
+interpreta la afirmación como un núcleo lineal de dimensión \(36\).
+
+\paragraph{Empalme con la selección dinámica.}
+Sea \(\mathcal R_{12}(x)\) la extracción del historial de un estado
+TPK, y sea \(\mathcal B\) la regla de selección que, de ese historial,
+obtiene la familia incidencial de la definición~\ref{vi:lib:dominio}.
+Cuando se especifica esa regla, la composición efectiva es
+\[
+ x\longmapsto\mathcal R_{12}(x)
+  \longmapsto\mathcal B(\mathcal R_{12}(x))
+  \longmapsto\mathcal E_{\mathrm{cnt}}
+       (\mathcal B(\mathcal R_{12}(x)))
+  \longmapsto U(x)\longmapsto K(x).
+\]
+La igualdad de su tramo incidencial con
+\(\mathcal E_{108}^{90,120}\) significa que se usa el libro y el
+lector del estado terminal correspondiente. El teorema demuestra todo
+el tramo desde el libro suministrado; identificar ese libro con el
+canónico requiere la selección \(\mathcal B\), sus multiplicidades,
+su clasificación de frontera y su cobertura de trazas. Fijar únicamente
+el calendario, la semilla inicial o un vector de doce eventos no
+enumera por sí solo estos datos. Tampoco la inversión del sello
+selecciona retrospectivamente el libro.
+
+Así queda cerrado el resultado relativo de evaluación y reversibilidad
+con estructura de partida explícita. La afirmación de que un estado
+terminal concreto produce un sello numérico concreto añade una
+evaluación de \(\mathcal B\mathcal R_{12}\) que debe conservarse
+junto a esa afirmación; no se deduce de la invertibilidad recién
+demostrada.

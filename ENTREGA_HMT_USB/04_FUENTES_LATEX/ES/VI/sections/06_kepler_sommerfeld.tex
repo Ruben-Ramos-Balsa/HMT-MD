@@ -1,0 +1,330 @@
+\section{Realización central de las trayectorias y holonomía de Sommerfeld}
+\label{vi:sec:kepler}
+
+La partícula definida en la sección~\ref{vi:sec:particula} posee
+una historia observable antes de recibir una realización orbital.
+La pregunta de esta sección es cómo una representación de esa
+historia conserva flujo, área y fase cuando se expresa como
+movimiento central. La respuesta se organiza en cuatro operaciones:
+cancelación de los flujos interiores en un corte del grafo,
+normalización de su frontera en una coordenatización métrica, evolución bajo
+el operador central declarado y transporte de fase sobre sus ciclos.
+
+El orden mantiene visible qué dato interviene en cada afirmación.
+El grafo y sus registros proceden de APP--TRIT--TPK; la coordenatización
+métrica especifica cómo se mide su frontera; la realización dinámica
+fija el lagrangiano que actúa en esa coordenatización; la condición semiclásica
+utiliza la constante reducida de Planck ya construida y la holonomía
+de la línea transportada. Los resultados de geometría orbital se
+demuestran con estos datos de partida explícitos. La mecánica
+central se reconoce en la realización resultante, sin hacer de sus
+constantes convencionales entradas del generador.
+
+\subsection{Conservación de flujo y lectura de la frontera}
+\label{vi:subsec:gauss}
+
+Sea $G=(V,E)$ un corte finito del grafo de rutas de la
+realización considerada, con un arco en cada orientación de sus
+aristas. Un flujo orientado es una función
+$F:\vec E\to\mathbb R$ que satisface
+$F(y,x)=-F(x,y)$. Para un vértice $x$, su divergencia es
+\begin{equation}
+ \operatorname{div}F(x)
+ =\sum_{y:\{x,y\}\in E}F(x,y).
+ \label{vi:eq:divergencia-grafo}
+\end{equation}
+Para $S\subseteq V$, el flujo saliente se evalúa sobre los
+arcos con origen en $S$ y extremo en $V\setminus S$.
+
+\begin{theorem}[Balance de flujo en un corte finito]
+\label{vi:thm:gauss}
+Para toda parte $S\subseteq V$,
+\begin{equation}
+ \sum_{x\in S}\operatorname{div}F(x)
+ =\sum_{\substack{x\in S,\ y\notin S\\\{x,y\}\in E}}F(x,y).
+ \label{vi:eq:gauss}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Una arista con ambos extremos en $S$ contribuye dos veces a la
+suma de divergencias, mediante $F(x,y)+F(y,x)=0$. Las aristas
+con ambos extremos fuera de $S$ no contribuyen. Quedan
+exactamente las aristas que atraviesan la frontera, con la
+orientación indicada.
+\end{proof}
+
+El teorema transmite a la frontera el balance producido en el
+interior. Para una representación cúbica con vecinos inmediatos,
+considérese
+\[
+ C_R=\{x\in\mathbb Z^3:\|x\|_\infty\leq R\},
+ \qquad R\in\mathbb Z_{\geq0}.
+\]
+Cada una de las seis caras contiene $(2R+1)^2$ enlaces
+salientes en su dirección normal. Los enlaces de direcciones
+distintas se cuentan por separado, incluso cuando parten de
+un mismo vértice de arista o esquina. Por tanto,
+\begin{equation}
+ |\partial C_R|=6(2R+1)^2.
+ \label{vi:eq:frontera-cubica}
+\end{equation}
+Este censo corresponde a enlaces salientes, no al número de
+vértices de la frontera.
+
+Si $Q_F$ es el flujo total de la fuente encerrada, su media
+por enlace es $Q_F/[6(2R+1)^2]$. Bajo la condición de isotropía
+media del lector, esa media es la intensidad que se asigna al
+cascarón. Definamos su radio efectivo, en unidades del paso de
+la coordenatización, por
+\begin{equation}
+ 4\pi r_{\mathrm{eff}}^2=6(2R+1)^2.
+ \label{vi:eq:radio-efectivo}
+\end{equation}
+Se obtiene entonces
+\begin{equation}
+ E_R=\frac{Q_F}{4\pi r_{\mathrm{eff}}^2}.
+ \label{vi:eq:inverso-area}
+\end{equation}
+La coordenada $\pi$ de esta normalización es la salida regional
+HMT ya expresada. La identidad procede del censo y de la
+definición del radio; el paso de una media a una realización
+central utiliza, además, la isotropía indicada. La coordenatización
+dimensional decide después si $Q_F$ representa flujo eléctrico,
+gravitatorio u otro observable y cómo convierte el paso
+reticular en longitud. El balance finito conserva ese
+distinto estatuto de cada operación.
+
+\subsection{Dinámica central en la hoja euclídea}
+\label{vi:subsec:dinamica-central}
+
+Sea $\mu>0$ la masa reducida de la realización material y sea
+$\mathcal K>0$ su acoplamiento central, con dimensión
+producto de energía y longitud. Estas coordenadas se reciben después
+de las construcciones internas de masa, acción y acoplamiento;
+su origen y su recta dimensional se conservan al efectuar la
+realización. El teorema siguiente tiene como dominio todas
+las realizaciones que, en su hoja euclídea, adopten
+\begin{equation}
+ L(\mathbf r,\dot{\mathbf r})
+ =\frac\mu2\|\dot{\mathbf r}\|^2+\frac{\mathcal K}{r},
+ \qquad
+ H(\mathbf r,\mathbf p)
+ =\frac{\|\mathbf p\|^2}{2\mu}-\frac{\mathcal K}{r},
+ \quad r=\|\mathbf r\|>0,
+ \quad\mathbf p=\mu\dot{\mathbf r}.
+ \label{vi:eq:kepler-lh}
+\end{equation}
+La exclusión de $r=0$ delimita el dominio regular de estas
+coordenadas. La trayectoria se considera en un intervalo de
+tiempo sin colisión.
+
+\begin{proposition}[Plano orbital y ecuación de la cónica]
+\label{vi:prop:conica}
+Una solución no radial de la ecuación de Euler--Lagrange de
+\eqref{vi:eq:kepler-lh} conserva
+$\boldsymbol\ell=\mathbf r\times\dot{\mathbf r}$, con
+$\ell=\|\boldsymbol\ell\|>0$. En el plano ortogonal a
+$\boldsymbol\ell$ puede escribirse
+\begin{equation}
+ r(\theta)=\frac{p}{1+\epsilon\cos(\theta-\theta_0)},
+ \qquad p=\frac{\mu\ell^2}{\mathcal K},
+ \qquad \epsilon\geq0.
+ \label{vi:eq:conica}
+\end{equation}
+La energía negativa corresponde al régimen elíptico
+$0\leq\epsilon<1$.
+\end{proposition}
+\begin{proof}
+La derivada del potencial da
+\begin{equation}
+ \mu\ddot{\mathbf r}=-\frac{\mathcal K}{r^3}\mathbf r.
+ \label{vi:eq:fuerza-central}
+\end{equation}
+De aquí,
+$\dot{\boldsymbol\ell}=\mathbf r\times\ddot{\mathbf r}=0$.
+La posición y la velocidad permanecen ortogonales al vector
+constante no nulo $\boldsymbol\ell$, lo que fija el plano.
+En sus coordenadas polares $r^2\dot\theta=\ell$. Al introducir
+$u=1/r$ en la ecuación radial se obtiene la ecuación de Binet
+\[
+ u''(\theta)+u(\theta)=\frac{\mathcal K}{\mu\ell^2}.
+\]
+Su solución general es
+$u=\mathcal K[1+\epsilon\cos(\theta-\theta_0)]/(\mu\ell^2)$,
+y su inversión prueba \eqref{vi:eq:conica} en el dominio
+donde el denominador es positivo. Sustituir la solución en
+la energía da
+$H=\mathcal K(\epsilon^2-1)/(2p)$, que es negativa
+exactamente cuando $\epsilon<1$.
+\end{proof}
+
+La letra $\epsilon$ designa aquí la excentricidad orbital y
+no el número de Euler. El vector $\boldsymbol\ell$ es un
+momento angular específico, no la constante de Planck.
+Estas elecciones de notación permiten comparar, sin mezclarlos,
+los observables geométricos y las constantes internas que
+intervienen en su realización.
+
+\begin{proposition}[Conservación areal y ley del periodo]
+\label{vi:prop:ley-areal}
+La velocidad areolar de la órbita es constante:
+\begin{equation}
+ \frac{d\mathcal A_{\mathrm{orb}}}{dt}=\frac\ell2.
+ \label{vi:eq:ley-areal}
+\end{equation}
+Para una elipse de semieje mayor $a$, su periodo satisface
+\begin{equation}
+ T^2=\frac{4\pi^2\mu}{\mathcal K}a^3.
+ \label{vi:eq:tercera-ley}
+\end{equation}
+\end{proposition}
+\begin{proof}
+El sector barrido en tiempo $dt$ tiene área
+$r^2d\theta/2=\ell\,dt/2$. Si $b=a\sqrt{1-\epsilon^2}$
+es el semieje menor, el área total es $\pi ab$ y
+$T=2\pi ab/\ell$. La relación
+$p=a(1-\epsilon^2)=\mu\ell^2/\mathcal K$ implica
+$\ell^2=\mathcal K a(1-\epsilon^2)/\mu$.
+Sustituir en $T^2=4\pi^2a^2b^2/\ell^2$ da la expresión
+\eqref{vi:eq:tercera-ley}.
+\end{proof}
+
+La conservación areal está determinada por la simetría central
+del movimiento. La elipse de esta proposición vive en el
+espacio de configuración. La elipse de acción construida
+desde el par angular vive, en cambio, en su coordenatización de acción
+y transporta las normalizaciones correspondientes. El enlace
+entre ambas exige el mapa de realización que identifica sus
+variables; compartir una forma elíptica no sustituye ese mapa.
+La lectura orbital conserva así las dependencias de masa,
+acoplamiento y geometría que la producen.
+
+\subsection{Cubierta orbital y línea real de signo}
+\label{vi:subsec:cubierta-orbital}
+
+En el plano complejo sin el origen, la aplicación
+\begin{equation}
+ q=z^2:\mathbb C\setminus\{0\}\longrightarrow
+                 \mathbb C\setminus\{0\}
+ \label{vi:eq:levi-civita}
+\end{equation}
+es una cubierta doble. Si $q(t)=r(t)e^{i\theta(t)}$ y se
+elige inicialmente una raíz, su levantamiento es
+$z(t)=\sqrt{r(t)}e^{i\theta(t)/2}$. Una vuelta con incremento
+$2\pi$ de $\theta$ termina en $-z(0)$, y dos vueltas
+restituyen el punto inicial. Este es el transporte de los dos
+levantamientos sobre el plano perforado.
+
+Una banda orbital requiere otro objeto: una línea real
+asociada a la órbita y a su carácter de signo. Sea
+$\gamma:S^1\to\mathbb R^2$ una parametrización regular
+inyectiva de una órbita elíptica y sea $\delta>0$. Con
+holonomía $-1$ en una vuelta, su banda de intervalos se
+representa por
+\begin{equation}
+ M_\gamma=([0,2\pi]\times[-\delta,\delta])/
+          \bigl((0,u)\sim(2\pi,-u)\bigr).
+ \label{vi:eq:mobius-orbital}
+\end{equation}
+La identificación de la base con la imagen de $\gamma$
+sitúa la sección nula sobre la órbita.
+
+\begin{proposition}[Transporte orientado sobre el ciclo orbital]
+\label{vi:prop:holonomia-orbital}
+El transporte de la línea de \eqref{vi:eq:mobius-orbital}
+satisface
+$\mathcal H(\gamma)=-I$ y $\mathcal H(\gamma^2)=I$.
+\end{proposition}
+\begin{proof}
+La fibra terminal se identifica con la inicial por
+$u\mapsto-u$; componer ese mapa dos veces da la identidad.
+Es la construcción del
+teorema~\ref{vi:thm:retorno-mobius}, aplicada al lazo orbital.
+\end{proof}
+
+La cubierta \eqref{vi:eq:levi-civita} tiene fibras de dos
+puntos; \eqref{vi:eq:mobius-orbital} tiene fibras de
+intervalos. La monodromía de orden dos aparece en ambas,
+pero conserva esos tipos distintos. La regularización
+dinámica de Levi--Civita utiliza, además, la transformación
+de momentos y la reparametrización temporal. En la presente
+construcción se utiliza únicamente su cubierta y su ley de
+levantamiento, con el alcance que acaba de demostrarse.
+
+\subsection{Condición de fase y desplazamiento semientero}
+\label{vi:subsec:sommerfeld}
+
+Sea $\gamma$ un ciclo de la realización hamiltoniana y sea
+\begin{equation}
+ J_\gamma=\oint_\gamma\mathbf p\cdot d\mathbf q
+ \label{vi:eq:accion-ciclo}
+\end{equation}
+su acción. La constante reducida de Planck
+$\hbar_{\mathrm{int}}>0$ se recibe de la construcción HMT
+de acción, en la misma recta dimensional que $J_\gamma$.
+El cociente $J_\gamma/\hbar_{\mathrm{int}}$ es, por tanto,
+adimensional. Supóngase que el transporte semiclásico en la
+línea complejificada aporta la fase
+$\exp(iJ_\gamma/\hbar_{\mathrm{int}})$ y que la línea real
+de orientación aporta el carácter
+$\varepsilon_\gamma\in\{+1,-1\}$. La condición de cierre
+de la sección transportada es
+\begin{equation}
+ \varepsilon_\gamma
+       \exp\!\left(\frac{iJ_\gamma}{\hbar_{\mathrm{int}}}\right)=1.
+ \label{vi:eq:cierre-sommerfeld}
+\end{equation}
+El producto conserva las dos contribuciones: acción del
+ciclo y signo de la línea. La segunda no se absorbe en una
+modificación de la constante de Planck.
+
+\begin{theorem}[Sectores entero y semientero de la acción]
+\label{vi:thm:sommerfeld}
+Bajo el transporte \eqref{vi:eq:cierre-sommerfeld},
+\begin{equation}
+ J_\gamma=
+ \begin{cases}
+  2\pi\hbar_{\mathrm{int}}n,
+          &\varepsilon_\gamma=+1,\\[1mm]
+  2\pi\hbar_{\mathrm{int}}(n+\tfrac12),
+          &\varepsilon_\gamma=-1,
+ \end{cases}
+ \qquad n\in\mathbb Z.
+ \label{vi:eq:accion-sommerfeld}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Para signo positivo, la exponencial debe valer $1$, cuyos
+argumentos reales son $2\pi n$. Para signo negativo, debe
+valer $-1$, cuyos argumentos son $(2n+1)\pi$. Multiplicar
+por $\hbar_{\mathrm{int}}$ produce las dos colecciones.
+\end{proof}
+
+La fórmula determina la restricción de cierre sobre la
+acción de un ciclo dado. Para obtener un espectro atómico
+se utiliza, además, el Hamiltoniano específico, los ciclos
+independientes y la prescripción de cuantización. Si esta
+prescripción incluye índices de Maslov, sus fases se
+componen con \eqref{vi:eq:cierre-sommerfeld} conforme al
+transporte escogido, evitando contar dos veces una misma
+contribución topológica.
+
+Invertir la orientación del ciclo cambia $J_\gamma$ por
+$-J_\gamma$, mientras el carácter de signo cumple
+$\varepsilon_{\gamma^{-1}}=\varepsilon_\gamma^{-1}
+=\varepsilon_\gamma$. La fase total se transforma en su
+inversa y la condición de cierre se conserva. Esta es una
+ley precisa de bidireccionalidad orbital. Su identificación
+con las antisecciones materiales requiere el levantamiento
+de la sección~\ref{vi:subsec:antisecciones}; la igualdad
+de dos signos no establece por sí sola esa identificación.
+
+La realización reúne, de este modo, tres conservaciones
+consecutivas: el flujo pasa del interior a la frontera;
+la dinámica central conserva el momento angular y el área
+barrida por unidad de tiempo; el transporte de la sección
+conserva su condición de cierre mediante acción y
+holonomía. Cada resultado conserva la ecuación, el dominio
+y los datos que lo sostienen. La historia material del
+TPK se representa en esa dinámica con su memoria, en lugar
+de quedar sustituida por la figura orbital que expresa.

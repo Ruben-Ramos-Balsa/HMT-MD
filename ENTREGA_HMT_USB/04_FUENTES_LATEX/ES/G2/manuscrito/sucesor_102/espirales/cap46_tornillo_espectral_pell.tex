@@ -1,0 +1,101 @@
+% Corte mecánico íntegro: parte_ii.tex:323--419.
+% Residencia material del ensamblaje sucesor de 102 capítulos.
+% Residencia causal: capítulo 46.
+
+\chapter{Tornillo espectral de Pell y suspensión logarítmica}
+
+\section{Ley de tornillo}
+
+El corpus contiene la identidad exacta
+\begin{equation}
+ V^{-1}\mathscr S V=(2+\sqrt3)\ii\,\mathscr S.
+ \label{espiral:eq:tornillo-pell}
+\end{equation}
+Sea \(\varepsilon=2+\sqrt3\). La órbita transversal
+\[
+ z_n=z_0(\varepsilon\ii)^n
+\]
+satisface
+\[
+ r_n=r_0\varepsilon^n,
+ \qquad
+ \theta_n=\theta_0+\frac{\pi n}{2}.
+\]
+Eliminando \(n\),
+\begin{equation}
+ r(\theta)=r_0
+ \exp\!\left[
+ \frac{2\log(2+\sqrt3)}{\pi}
+ (\theta-\theta_0)
+ \right].
+ \label{espiral:eq:espiral-log-pell}
+\end{equation}
+La espiral logarítmica es una salida del operador: no se eligió su ecuación
+para ajustar después \(\varepsilon\).
+
+\begin{proof}[Derivación de \cref{espiral:eq:espiral-log-pell}]
+De \(\theta_n-\theta_0=n\pi/2\) se sigue
+\(n=2(\theta_n-\theta_0)/\pi\). Sustituyendo en
+\(r_n=r_0\varepsilon^n\),
+\[
+ r_n=r_0\exp\left(
+ \frac{2\log\varepsilon}{\pi}(\theta_n-\theta_0)
+ \right).
+\]
+La interpolación continua es la ecuación indicada.
+\end{proof}
+
+\section{Involución conjugada de contracción}
+
+La extensión bilateral \(n\in\Z\) produce
+\[
+ n\to+\infty:\ r_n\to\infty,
+ \qquad
+ n\to-\infty:\ r_n\to0.
+\]
+La inversión \(n\mapsto-n\) intercambia expansión y contracción. Como
+\(\varepsilon^{-1}=2-\sqrt3\), ambas ramas pertenecen a la misma unidad de
+Pell. No son dos espirales independientes, sino dos orientaciones del mismo
+tornillo espectral.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.82]
+ \draw[->,HMTGray] (-5.1,0)--(5.1,0) node[right] {$x$};
+ \draw[->,HMTGray] (0,-3.1)--(0,3.1) node[above] {$y$};
+ \draw[HMTBlue,very thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(\t))},{.27*exp(.22*\t)*sin(deg(\t))});
+ \draw[HMTRed,thick,domain=-7:5.2,samples=240,smooth,variable=\t]
+   plot ({.27*exp(.22*\t)*cos(deg(-\t))},{.27*exp(.22*\t)*sin(deg(-\t))});
+ \foreach \k in {-4,-3,...,4}{
+   \pgfmathsetmacro{\ang}{1.57079632679*\k}
+   \fill[HMTNavy]
+     ({.27*exp(.22*\ang)*cos(deg(\ang))},
+      {.27*exp(.22*\ang)*sin(deg(\ang))}) circle (.8pt);
+ }
+ \node[HMTBlue,font=\small\sffamily] at (3.5,2.4) {expansión};
+ \node[HMTRed,font=\small\sffamily] at (3.5,-2.4) {orientación conjugada};
+\end{tikzpicture}
+\caption{Proyección transversal del tornillo de Pell. Las marcas representan cuartos de giro.}
+\label{espiral:fig:tornillo-pell}
+\end{figure}
+
+\section{Covariancia de escala y conservación energética}
+
+La dilatación \(\varepsilon\) no debe interpretarse como crecimiento
+gratuito de la amplitud energética de una onda en vacío. Su realización
+coherente actúa sobre la escala espacial o espectral:
+\[
+ (r,\varphi,\lambda)
+ \longmapsto
+ (\varepsilon r,\varphi+\pi/2,\varepsilon\lambda).
+\]
+Esta distinción será esencial en la realización electromagnética de la
+\cref{espiral:chap:realizacion-em}.
+
+\begin{resultbox}[title={Compatibilidad exacta entre el tornillo espectral de Pell y la suspensión fase--memoria}]
+La elevación fase--memoria mínima es una hélice circular. El tornillo
+espectral combina un cuarto de giro y una dilatación de Pell; su proyección
+es una espiral logarítmica. Ambos proceden del registro HMT, pero no son la
+misma periodicidad ni se obtienen el uno del otro por olvido de tipos.
+\end{resultbox}

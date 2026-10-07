@@ -1,0 +1,261 @@
+% Formalización nueva integrada en la revisión III; originales preservados.
+% Propietarios: U016, ecuaciones extractor-diferencias-k y lector-armonico-*;
+% registro_k.tex, subsecciones k-pi-h, k-hadamard y k-transversal.
+\subsection{Compatibilité entière et détermination du registre transversal}
+\label{img09:seccion}
+
+Le domaine de cette construction est la représentation du registre d’une
+histoire APP--TRIT--TPK. On distingue l’évaluation des événements du
+registre, la compatibilité de ses canaux et l’inversion de ses
+coordonnées. Le résultat suivant donne un critère entier complet pour
+le second niveau et une factorisation explicite pour relier le premier à celui-ci.
+La démonstration utilise les opérateurs du registre et établit leurs
+relations pour tout élément des domaines entiers indiqués.
+
+\subsubsection{Caractérisation par accroissements adjacents}
+
+Les indices appartiennent à $\mathbb Z/12\mathbb Z$. Soient
+\[
+ (Sz)_i=z_{i+1},\qquad D_3=I-S^3,\qquad D_4=I-S^4,
+ \qquad Q(z)=\sum_{i=0}^{11}z_i.
+\]
+On conserve l'extracteur transversal
+\[
+ \mathcal D:\mathbb Z^{12}\longrightarrow\mathbb Z^{25},
+ \qquad k\longmapsto(D_3k,D_4k,Q(k)).
+\]
+Pour un triplet de coordonnées entières $(b,c,q)$, on écrit
+\begin{equation}
+ w_i=c_i-b_{i+1},\qquad
+ P_0=0,\quad P_i=\sum_{j=0}^{i-1}w_j\ (1\leq i\leq12),
+ \qquad T(w)=\sum_{i=0}^{11}P_i.
+ \label{img09:incremento}
+\end{equation}
+
+\begin{theorem}[Image entière de l'extracteur transversal]
+\label{img09:imagen}
+Un triplet $(b,c,q)\in\mathbb Z^{25}$ appartient à
+$\operatorname{im}\mathcal D$ si et seulement s'il satisfait
+\begin{align}
+ b_i&=w_i+w_{i+1}+w_{i+2}&& (0\leq i<12),
+ \label{img09:relaciones}\\
+ \sum_{i=0}^{11}w_i&=0,
+ \label{img09:cierre}\\
+ q+T(w)&\equiv0\pmod {12}.
+ \label{img09:congruencia}
+\end{align}
+Son unique préimage entière est
+\begin{equation}
+ k_i=\frac{q+T(w)}{12}-P_i,\qquad0\leq i<12.
+ \label{img09:inversa}
+\end{equation}
+Les douze équations de \eqref{img09:relaciones} et l'équation
+\eqref{img09:cierre} sont linéairement indépendantes sur $\mathbb Q$.
+\end{theorem}
+\begin{proof}
+Pour une sortie de $\mathcal D$, on a
+\[
+ c_i-b_{i+1}=(k_i-k_{i+4})-(k_{i+1}-k_{i+4})=k_i-k_{i+1}.
+\]
+La somme de trois accroissements donne $b_i$ ; la somme cyclique de tous
+est nulle. De plus, $P_i=k_0-k_i$, d'où
+$q=12k_0-T(w)$. On obtient toutes les conditions et la formule inverse.
+
+Réciproquement, \eqref{img09:congruencia} rend entière la formule
+\eqref{img09:inversa} ; \eqref{img09:cierre} permet de la prolonger
+cycliquement. Ses différences adjacentes sont $w_i$. Par conséquent,
+$D_3k=b$ et
+\[
+ (D_4k)_i=w_i+w_{i+1}+w_{i+2}+w_{i+3}
+ =w_i+b_{i+1}=c_i.
+\]
+La somme de l'inverse donne $Q(k)=q$. La même formule prouve l'unicité.
+Pour l'indépendance, le changement entier inversible
+$(b,c)\mapsto(b,w=c-Sb)$ transforme les douze premières relations en
+$b=(I+S+S^2)w$. Chacune isole une coordonnée différente de $b$.
+La condition $\sum w_i=0$ est une relation supplémentaire indépendante.
+\end{proof}
+
+L'image rationnelle a pour dimension douze. Sa structure entière ajoute
+une congruence d'ordre douze : celle-ci est la manifestation constructive du
+dernier facteur de Smith de $\mathcal D$. Les onze accroissements
+$w_0,\ldots,w_{10}$ et la charge $q$ sont des coordonnées suffisantes, avec
+$w_{11}=-\sum_{i=0}^{10}w_i$ et la congruence
+\eqref{img09:congruencia}. Les vingt-cinq coordonnées initiales
+conservent ces mêmes douze degrés de liberté au moyen de treize relations.
+
+\subsubsection{Commutativité avec la lecture harmonique}
+
+Soit $\mathcal H_{12}$ la transformation de Hadamard du registre,
+avec les orbites $(r,r+3,r+6,r+9)$ pour $r=0,1,2$. Son bloc est
+\[
+ H_4=\begin{pmatrix}
+ 1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1
+ \end{pmatrix},\qquad H_4^2=4I_4.
+\]
+Pour $(b,c,q)$ compatible, on définit
+\[
+ B_r=\sum_{j=0}^3c_{r+3j},\qquad
+ A_0=\frac{q+2B_0+B_1}{3},\quad A_1=A_0-B_0,
+ \quad A_2=A_1-B_1.
+\]
+Le lecteur $\Pi_H$ de \eqref{eq:k-bloques-firmados} possède les blocs
+\[
+ (\Pi_H(b,c,q))^{(r)}=
+ (A_r,b_{r+3}-b_{r+9},b_r+b_{r+6},b_r-b_{r+6}).
+\]
+
+\begin{proposition}[Concordance des deux reconstructions]
+\label{img09:triangulo}
+Sur $\operatorname{im}\mathcal D$, on a
+\[
+ \Pi_H\mathcal D=\mathcal H_{12},\qquad
+ \mathcal D^{-1}=\tfrac14\mathcal H_{12}\Pi_H.
+\]
+L'image de $\Pi_H$ restreinte à ce domaine est exactement
+\[
+ \mathcal L_H=
+ \{u\in\mathbb Z^{12}:\mathcal H_{12}u\equiv0\pmod4\}.
+\]
+\end{proposition}
+\begin{proof}
+Pour $k=\mathcal D^{-1}(b,c,q)$, soit
+$a_r=\sum_{j=0}^3k_{r+3j}$. Le décalage de quatre positions
+envoie chaque orbite sur la suivante, et donc $B_r=a_r-a_{r+1}$.
+Avec $q=a_0+a_1+a_2$, ces identités donnent $A_r=a_r$.
+Sur une orbite, notons $(x_0,x_1,x_2,x_3)$ les coordonnées
+de $k$ et $d_j=x_j-x_{j+1}$. Alors
+\[
+ d_1-d_3=x_0+x_1-x_2-x_3,\quad
+ d_0+d_2=x_0-x_1+x_2-x_3,\quad
+ d_0-d_2=x_0-x_1-x_2+x_3.
+\]
+Ce sont les trois autres lignes de $H_4k^{(r)}$. L'inversion et la
+caractérisation entière découlent de $\mathcal H_{12}^2=4I$.
+\end{proof}
+
+La condition $\Pi_H(b,c,q)\in\mathcal L_H$ ne contrôle que la
+sortie harmonique. L'appartenance des vingt-cinq coordonnées à
+$\operatorname{im}\mathcal D$ exige en outre
+\eqref{img09:relaciones}--\eqref{img09:congruencia}.
+Par exemple, ajouter à $c$ le vecteur $e_0-e_3$ conserve les trois sommes
+orbitales et laisse $\Pi_H$ inchangé. En partant de $(0,0,0)$, on
+obtient ainsi un triplet avec $\Pi_H=0$ qui ne satisfait pas
+\eqref{img09:relaciones}. Il s'agit d'un contrôle négatif exact de la
+compatibilité du canal, indépendant de toute évaluation terminale.
+
+\subsubsection{Détermination et transport sur les orbites du registre}
+
+Le théorème~\ref{img09:imagen} détermine $k$ lorsque ses
+canaux et sa charge ont été produits. Comme condition sur des sorties non encore
+individualisées, la même image est un groupe isomorphe à
+$\mathbb Z^{12}$. Une fois fixée uniquement une charge $q$, les solutions
+forment une classe affine de
+\[
+ L_0=\{v\in\mathbb Z^{12}:\sum v_i=0\}
+ =\bigoplus_{i=0}^{10}\mathbb Z(e_i-e_{11}).
+\]
+Par exemple, $100\mathbf1+e_0$ et $100\mathbf1+e_1$ sont deux
+registres distincts, de charge $1201$, avec des composantes dans
+$\{0,\ldots,999\}$. Chacun satisfait toutes les conditions
+d'image et toutes les congruences de Hadamard au moyen de ses propres
+canaux. Ces témoins comparent les équations de compatibilité ;
+on ne leur attribue pas le statut d'histoires terminales HMT.
+
+\begin{proposition}[Covariance cyclique et stabilisateur du registre]
+\label{img09:covariancia}
+Soient $\rho$ la translation des fenêtres sur un domaine de registres
+$\mathscr R$ et $S$ la translation précédente sur $\mathbb Z^{12}$.
+Sur l'orbite de $R\in\mathscr R$, un lecteur covariant est
+déterminé par un vecteur
+\[
+ k\in\operatorname{Fix}(S^p),
+\]
+où $p\mid12$ est la période minimale de $R$ sous $\rho$.
+La condition de charge $Q(k)=q$ admet des solutions entières si et seulement si
+$12/p$ divise $q$ ; lorsqu'elles existent, elles forment une classe affine de rang
+$p-1$. En particulier, sur une orbite libre, covariance et charge
+laissent onze degrés de liberté.
+\end{proposition}
+\begin{proof}
+La règle $F(\rho^jR)=S^jk$ est bien définie exactement lorsque
+$S^pk=k$. Ces vecteurs répètent $12/p$ fois un mot de
+longueur $p$. Leur charge est $\frac{12}{p}\sum_{i=0}^{p-1}k_i$.
+La divisibilité et le rang découlent de cette formule. La
+covariance des canaux résulte de $D_aS=SD_a$ et de $QS=Q$.
+Sur $\mathcal L_H$, l'action correspondante est
+$\widehat S_H=\mathcal H_{12}S\mathcal H_{12}/4$ ;
+d'après la proposition~\ref{img09:triangulo}, les deux reconstructions
+entrelacent ces actions.
+\end{proof}
+
+Si le domaine porte une origine marquée, il faut utiliser l'action qui
+transporte aussi cette marque. La proposition concerne cette action
+cyclique déclarée ; elle ne présuppose pas la périodicité de l'histoire
+enrichie. La naturalité par rapport aux troncatures ultérieures à la coupure
+$108$ s'obtient, pour tout lecteur $F_{108}$ déjà défini, au moyen de
+$F_N=F_{108}\circ\tau_{N,108}$. Cette naturalité conserve la règle
+d'évaluation initiale ; elle ne choisit pas à elle seule l'une des règles possibles
+sur les cent huit premiers événements.
+
+\subsubsection{Évaluation par événements et composition des contributions}
+
+La caractérisation précédente fournit une factorisation de l'extraction au moyen de deux
+lectures effectives du registre :
+\begin{equation}
+ \omega:\mathscr R\longrightarrow
+ \{w\in\mathbb Z^{12}:\sum w_i=0\},\qquad
+ q_{\rm reg}:\mathscr R\longrightarrow\mathbb Z,
+ \quad q_{\rm reg}(R)+T(\omega(R))\equiv0\pmod {12}.
+ \label{img09:contrato-productor}
+\end{equation}
+Ces applications doivent être évaluées sur les événements, l'orientation,
+l'incidence et la mémoire produits par APP--TRIT--TPK. Une fois données leurs
+actions sur ces données, la composition
+\[
+ R\longmapsto(w,q)\longmapsto
+ ((I+S+S^2)w,(I+S+S^2+S^3)w,q)
+ \xrightarrow{\Pi_H}u\xrightarrow{\mathcal H_{12}/4}k
+\]
+est déterminée et satisfait tous les contrôles inverses. La formule
+$w=c-Sb$ permet également de raccorder un producteur qui fournit déjà les deux
+canaux : c'est une vérification portant sur sa sortie, antérieure à toute comparaison
+avec le témoin terminal.
+
+\begin{proposition}[Accumulation des contributions et unicité prospective]
+\label{img09:acumulacion}
+Supposons que l'état initial et chaque événement $a_t$ du registre
+produisent, selon des règles fixées au préalable, des contributions
+$(\delta w_t,\delta q_t)$ avec
+\[
+ \sum_i\delta w_{t,i}=0,\qquad
+ \delta q_t+T(\delta w_t)\equiv0\pmod {12}.
+\]
+Avec des conditions initiales compatibles $(w^{(0)},q^{(0)})$,
+l'actualisation
+\[
+ w^{(t+1)}=w^{(t)}+\delta w_t,\qquad
+ q^{(t+1)}=q^{(t)}+\delta q_t
+\]
+produit un registre unique à chaque étape. Son accroissement est
+\[
+ \delta k_{t,i}=
+ \frac{\delta q_t+T(\delta w_t)}{12}-P_i(\delta w_t).
+\]
+La construction respecte la concaténation des registres, et la lecture
+d'un préfixe reste identique sous les prolongements ultérieurs.
+\end{proposition}
+\begin{proof}
+Les conditions de compatibilité se conservent par addition. La formule
+\eqref{img09:inversa} est additive en $(w,q)$ et produit
+l'accroissement indiqué. La récurrence fixe successivement chaque état.
+La somme sur deux segments est la somme concaténée, et un préfixe reçoit
+exactement les mêmes termes avant et après le prolongement de l'histoire.
+\end{proof}
+
+La proposition fournit un critère suffisant, non une exigence de linéarité pour tout lecteur TPK. Si les événements sont transportés par des actions non triviales, leurs contributions peuvent s'exprimer dans la coordinatisation terminale au moyen du cocycle affine correspondant. L'équation de cocycle conserve alors la même indépendance vis-à-vis de la partition de la trajectoire. Dans les deux cas, les règles d'événement et l'état initial constituent les données constructives qui doivent provenir de l'article : les choisir pour reproduire un vecteur attendu substituerait une autre tâche à cette provenance.
+
+Le résultat de ce développement est la condition exacte de détermination
+\eqref{img09:contrato-productor}, son inversion démontrée et ses identités
+de transport. Sa portée est le registre transversal ; les autres
+constructions de HMT conservent leurs domaines et leurs preuves propres.

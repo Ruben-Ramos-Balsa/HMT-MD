@@ -1,0 +1,555 @@
+\clearpage
+\section[Espérances de frontière et reconstruction des canaux analytiques]{Espérances de frontière et\\reconstruction des canaux analytiques}
+\label{sec:lectores-gamma}
+% Fuente íntegra: ampliacion/expediente/AGENTE_CARTAS_Y_EXPECTATIVA.md
+
+% PROCEDENCIA Fecha del corte: 11 de septiembre de 2026. Nota interna de desarrollo, no modificación de un artículo ni dictamen global sobre HMT. No se ha comunicado a otras tareas del usuario.
+
+\subsection{Action des lecteurs et contenu des moments}
+\label{gamma-add-sub-5}
+
+Les actions explicites de l'odomètre, du lecteur de différences, de l'inclusion uniforme, du raffinement de Helmert, de la frontière bidirectionnelle et de la coordinatisation polaire ont été récupérées et composées. Le calcul produit :
+
+\begin{enumerate}
+\item Les moments des colonnes positive et négative, considérées séparément, sont déterminés par des opérateurs explicites. Ils comprennent tous les produits croisés entre tests.
+\item L'espérance uniforme ne coïncide pas avec le raffinement de Helmert. Sur le mode de retenue, elle donne un facteur exact, calculé ci-dessous ; elle ne transforme pas à elle seule une différence de translation en mode uniforme.
+\item La résolvante de queue gamma réalise bien la conversion analytique et reconstruit exactement toutes les lignes négatives, sur toute fenêtre et avant d'utiliser un signe.
+\item L'identification simultanée du premier moment du codeur et du moment de sa projection ne s'obtient pas à partir des trois identités des coordinatisations précédentes par une simple somme directe. La composition supplémentaire concrète qu'il faut vérifier est localisée ci-dessous. On ne déclare pas absent le lecteur structurel et l'on n'identifie pas ce contrôle focal au TPK complet.
+
+\end{enumerate}
+L'avancée est un calcul d'action et de produits croisés, et non une réitération du fait que la projection est positive.
+
+\paragraph{Provenance des coordinatisations.}
+Les formules sont réunies à partir des développements \emph{Démonstration spectrale polaire}, \emph{Forme et Gram}, \emph{Connecteur de queue gamma}, \emph{Odomètre et retenue}, \emph{Pulsation et espérance} et \emph{Coordinatisation polaire modulaire}. Les localisateurs et la lecture effectuée sont conservés dans le dossier des sources de la livraison. Chaque coordinatisation est utilisée avec les espaces, normalisations et identités explicités ci-dessous ; une référence documentaire ne se substitue pas à ces conditions.
+
+% DOCUMENTACION ## 2. Propietarios y lectura efectuada
+% DOCUMENTACION 
+% DOCUMENTACION Se utilizan estos propietarios, leídos completos en esta formalización:
+% DOCUMENTACION 
+% DOCUMENTACION - **P10**: [10b — prueba espectral polar](</Users/ruben/Documents/New project/output/ARTICULO_VIII_PRIMOS_ESTRUCTURA_ESPECTRAL_20260910/antecedentes/integral/manuscrito/sucesor_102/deltas_ley9/10b_prueba_espectral_polar_riemann_weil_rectificacion_probatoria_20260903.tex>), 1.166 líneas. Las columnas están en 151–235; la expectativa y el codificador nativo en 288–367; la transferencia derivada de los momentos en 369–452; el codificador escrito mediante el complemento, más adelante, utiliza la identidad energética ya obtenida.
+% DOCUMENTACION - **PG**: [Forma y Gram](</Users/ruben/Documents/excelencia academica/ARTICULOS_CIENTIFICOS_HMT_MD_2026-08-14/RIEMANN_REDHEFFER_WEIL/manuscrito/secciones/00_forma_y_gram.tex>), 630 líneas. Fórmulas explícitas de los dos modos y del refinamiento: 133–191; columnas: 194–220; codificador y momentos comunes: 222–304.
+% DOCUMENTACION - **PT**: [Conector de cola gamma](</Users/ruben/Documents/excelencia academica/ARTICULOS_CIENTIFICOS_HMT_MD_2026-08-14/RIEMANN_REDHEFFER_WEIL/manuscrito/secciones/02b_conector_cola_gamma.tex>), completo. Inversión: 1–45; elevación y frontera: 47–155; todas las filas negativas: 157–242; restricción alcanzable: 250–269.
+% DOCUMENTACION - **PO**: [Odómetro y acarreo](</Users/ruben/Documents/excelencia academica/CLAUSURA_WEIL_HMT_PULSACION_NONADICA_2026-08-11/PUBLICACION_WEIL_RIEMANN_HMT_MD_REVISION_EDITORIAL_2026-08-12/manuscrito/sections/03_odometro_carry.tex>), completo.
+% DOCUMENTACION - **PE**: [Pulsación y expectativa](</Users/ruben/Documents/excelencia academica/CLAUSURA_WEIL_HMT_PULSACION_NONADICA_2026-08-11/PUBLICACION_WEIL_RIEMANN_HMT_MD_REVISION_EDITORIAL_2026-08-12/manuscrito/sections/02_pulsacion_y_expectativa.tex>), completo.
+% DOCUMENTACION - **PP**: [Carta polar modular](</Users/ruben/Documents/excelencia academica/CLAUSURA_WEIL_HMT_PULSACION_NONADICA_2026-08-11/PUBLICACION_WEIL_RIEMANN_HMT_MD_REVISION_EDITORIAL_2026-08-12/manuscrito/sections/06_canal_polar_modular.tex>), completo. Carta Witt–dodecafase: 134–181.
+% DOCUMENTACION - [Acarreo ortogonal del residual](</Users/ruben/Documents/excelencia academica/ARTICULOS_CIENTIFICOS_HMT_MD_2026-08-14/RIEMANN_REDHEFFER_WEIL/manuscrito/secciones/00d_carry_ortogonal_app_weil.tex>), completo.
+% DOCUMENTACION 
+% DOCUMENTACION Se contrastó además el propietario de las cinco realizaciones del continuo del 17 de agosto, sección de Riemann desde su objeto hasta el transporte del complemento, sin disgregar esas construcciones: allí se vuelve a formular el mismo par de momentos nativos. La consulta de esa sección no equivale a una lectura íntegra de todo ese manuscrito.
+% DOCUMENTACION 
+% DOCUMENTACION Los antecedentes de agosto se consultan como propietarios de las fórmulas que P10 reutiliza, no como sustitutos de la selección autoral del integral de 2.249 páginas. Los localizadores globales que todavía resuelven 2.084 páginas quedan registrados como históricos para esta serie.
+% DOCUMENTACION 
+\subsection{Conventions et coupe généalogique}
+\label{gamma-add-sub-32}
+
+Le point de départ pertinent est l'état APP--TRIT--TPK, son raffinement à mémoire et ses lecteurs natifs. Dans cette formalisation :
+
+\begin{itemize}
+\item APP fournit le support et le sélecteur des irréductibles. Le produit natif, la coproductivité et le sélecteur précèdent la représentation des étiquettes premier--puissance.
+\item TRIT et le transport des feuillets conservent l'orientation et la couture.
+\item Le TPK conserve le passage de phase et le registre de retenue ; son odomètre induit la différence de translation. La représentation logarithmique des horloges produit \(\ell_{p,k}=k\log p\) et \(w_{p,k}=(\log p)p^{-k/2}\).
+\item Les coordinatisations de frontière et polaire sont des réalisations ultérieures des mêmes lecteurs. Aucun état n'est sélectionné au moyen de zéros de zêta ni au moyen d'une valeur cible.
+
+\end{itemize}
+Cette section calcule la flèche entre ces lecteurs et l'espérance, après la génération commune ; elle ne prétend ni reconstruire ni remplacer le continu conjoint.
+
+Nous travaillons avec des coordonnées orthonormales d'histoire. Dans celles-ci, \(u_N=N^{-1/2}(1,\ldots,1)\). Si l'on utilise des fonctions munies d'une mesure de probabilité uniforme, les coordonnées constantes et les moyennes sont conjuguées par le facteur de normalisation correspondant ; les projections et tous les quotients de normes suivants sont les mêmes.
+
+Soient \(H=L^2(\mathbb R)\), \(T_af(x)=f(x-a)\), \(\mathcal D_R=C_c^\infty((-R/2,R/2))\). On écrit \(d_a=T_a-I\) ; passer simultanément à \(I-T_a\) conserve leurs matrices de Gram, mais change le signe de la cotrace inverseuse.
+
+Le produit scalaire est linéaire en la première variable. On maintient les évaluations polaires et le scalaire de la forme complète,
+\begin{equation}
+\begin{aligned}
+A_f&=\int_{\mathbb R}f(x)e^{x/2}\,dx,
+&B_f&=\int_{\mathbb R}f(x)e^{-x/2}\,dx,\\
+c_\Gamma&=-\gamma-\frac\pi2-3\log2-\log\pi<0,
+&\mu(a)&=\frac{e^{-a/2}}{1-e^{-2a}}.
+\end{aligned}
+\label{gamma-add-def-evaluaciones}
+\end{equation}
+Ici \(\pi\), \(\gamma\) et les logarithmes conservent la représentation interne et la réalisation ultérieure déclarées dans les chapitres précédents. La formule n'introduit pas de valeurs cibles dans le générateur.
+
+\subsection{Action de l'odomètre sur les générateurs}
+\label{gamma-add-sub-47}
+
+Pour \(N=9^m\), \(m\ge1\), et la couture située sur le premier vecteur,
+
+\begin{equation}
+U_{a,N}(e_r\otimes f)=
+\begin{cases}
+e_{r+1}\otimes f,&r<N-1,\\
+e_0\otimes T_af,&r=N-1.
+\end{cases}
+\label{gamma-add-display-1}
+\end{equation}
+
+L'uniformisation \(i_Nf=u_N\otimes f\) donne
+
+\begin{equation}
+U_{a,N}i_Nf
+=u_N\otimes f+N^{-1/2}e_0\otimes d_af.
+\label{gamma-add-display-2}
+\end{equation}
+
+Par conséquent, pour \(P_N=|u_N\rangle\langle u_N|\otimes I\),
+
+\begin{equation}
+\begin{aligned}
+i_N^*U_{a,N}i_N&=I+\frac{d_a}{N},\\
+(I-P_N)U_{a,N}i_N
+&=\frac{\sqrt{N-1}}{N}\eta_N\otimes d_a.
+\end{aligned}
+\label{gamma-add-display-3}
+\end{equation}
+
+où
+
+\begin{equation}
+\eta_N=\frac{Ne_0-\mathbf1_N}{\sqrt{N(N-1)}}.
+\label{gamma-add-display-4}
+\end{equation}
+
+On retrouve ainsi le lecteur normalisé des différences :
+
+\begin{equation}
+\widehat\delta_{a,m}f=\eta_N\otimes u_{81}\otimes d_af,
+\qquad
+j_mf=u_N\otimes u_{81}\otimes f.
+\label{gamma-add-display-5}
+\end{equation}
+
+L'action sur toute combinaison de générateurs, sans éliminer leurs termes croisés, est
+
+\begin{equation}
+\left\langle\sum_i\widehat\delta_{a_i,m}f_i,
+                  \sum_j\widehat\delta_{b_j,m}g_j\right\rangle
+=\sum_{i,j}\langle d_{a_i}f_i,d_{b_j}g_j\rangle.
+\label{gamma-add-display-6}
+\end{equation}
+
+En particulier,
+
+\begin{equation}
+\widehat\delta_{a,m}^*\widehat\delta_{b,m}=d_a^*d_b,\qquad
+j_m^*j_m=I,\qquad
+j_m^*\widehat\delta_{a,m}=0.
+\label{gamma-add-eq-1}
+\end{equation}
+
+Le dernier produit croisé procède de \(\langle u_N,\eta_N\rangle=0\). C'est une information matérielle sur l'orientation des modes, supplémentaire aux deux normes isolées.
+
+\subsection{Deux raffinements distincts et leurs espérances}
+\label{gamma-add-sub-108}
+
+\subsubsection{Inclusion uniforme et projection du dernier chiffre}
+\label{gamma-add-sub-110}
+
+Écrivons \(M=9N\) et \(\mathbb C^M=\mathbb C^N\otimes\mathbb C^9\). L'inclusion et son adjointe sont
+
+\begin{equation}
+\iota_Nx=x\otimes u_9,\qquad
+E_N=I_N\otimes\langle u_9|,\qquad P_N^{\rm unif}=\iota_NE_N.
+\label{gamma-add-display-8}
+\end{equation}
+
+En agissant en coordonnées,
+
+\begin{equation}
+E_Nu_M=u_N,\qquad
+E_N\eta_M=a_N\eta_N,\qquad
+a_N=\sqrt{\frac{N-1}{9N-1}}.
+\label{gamma-add-eq-2}
+\end{equation}
+
+\begin{proof}
+On a \(E_Ne_0^{(M)}=e_0^{(N)}/3\) et \(E_N\mathbf1_M=3\mathbf1_N\).
+La substitution dans \(\eta_M=(Me_0-\mathbf1_M)/\sqrt{M(M-1)}\)
+produit \eqref{gamma-add-eq-2}.
+\end{proof}
+
+Par conséquent,
+
+\begin{equation}
+(E_N\otimes I)\widehat\delta_{a,m+1}=a_N\widehat\delta_{a,m},
+\qquad
+(E_N\otimes I)j_{m+1}=j_m.
+\label{gamma-add-eq-3}
+\end{equation}
+
+Tous les moments projetés sont déterminés :
+
+\begin{equation}
+\begin{aligned}
+\widehat\delta_{a,m+1}^*(P_N^{\rm unif}\otimes I)\widehat\delta_{b,m+1}
+ &=a_N^2d_a^*d_b,\\
+j_{m+1}^*(P_N^{\rm unif}\otimes I)j_{m+1}&=I,\\
+j_{m+1}^*(P_N^{\rm unif}\otimes I)\widehat\delta_{b,m+1}&=0.
+\end{aligned}
+\label{gamma-add-eq-4}
+\end{equation}
+
+La fraction complémentaire de la retenue est \(1-a_N^2=8N/(9N-1)\). Pour \(N=9\), la fraction exprimée est \(1/10\), et non \(1\), et sa sortie reste une différence.
+
+On ne confond pas ici \(P_N^{\rm unif}\), qui prend la moyenne sur le dernier chiffre, et la projection sur l'unique droite globale \(u_M\) : cette dernière annule entièrement \(\eta_M\).
+
+\subsubsection{Raffinement de Helmert}
+\label{gamma-add-sub-156}
+
+L'opérateur \(W_N\) est fixé par les bases orthonormales de Helmert
+des deux niveaux, ordonnées pour conserver les modes uniforme et de
+retenue. C'est l'isométrie qui envoie les \(N\) premiers vecteurs de la
+base du niveau \(N\) sur les vecteurs correspondants de la base du niveau \(M\).
+En particulier, il satisfait
+
+\begin{equation}
+W_Nu_N=u_M,\qquad W_N\eta_N=\eta_M,\qquad W_N^*W_N=I.
+\label{gamma-add-display-12}
+\end{equation}
+
+Ainsi, \(E_N^{\rm H}=W_N^*\), \(P_N^{\rm H}=W_NW_N^*\) donnent
+
+\begin{equation}
+E_N^{\rm H}j_{m+1}=j_m,\qquad
+E_N^{\rm H}\widehat\delta_{a,m+1}=\widehat\delta_{a,m}.
+\label{gamma-add-eq-5}
+\end{equation}
+
+Le produit croisé uniforme--retenue reste nul et celui de deux différences reste \(d_a^*d_b\). Le raffinement est donc naturel pour les deux modes, mais ne transforme pas l'un en l'autre. Concrètement, \(W_N\ne\iota_N\).
+
+\subsubsection{Conjugaison des espérances et conservation des moments}
+\label{gamma-add-sub-174}
+
+Il existe un opérateur unitaire \(S_M\) sur \(\mathbb C^M\) qui envoie \(\iota_N\mathbb C^N\) sur \(W_N\mathbb C^N\), avec \(W_N=S_M\iota_N\). Il suffit d'envoyer les deux bases orthonormées l'une sur l'autre et de compléter les compléments. Alors
+
+\begin{equation}
+P_N^{\rm H}=S_MP_N^{\rm unif}S_M^*.
+\label{gamma-add-display-14}
+\end{equation}
+
+En conjuguant simultanément l'état \(C\) et sa projection,
+
+\begin{equation}
+(S_MC)^*(S_MP S_M^*)(S_MC)=C^*PC,\qquad
+(S_MC)^*(S_MC)=C^*C.
+\label{gamma-add-eq-6}
+\end{equation}
+
+Aucun des deux moments ne change. Si l'on ne change que la projection, on passe dans ce cas de la fraction \(a_N^2\) à \(1\), mais l'opérateur analytique reste \(d_a\), et non \(I\).
+
+Plus généralement, pour toute projection agissant uniquement dans la fibre finie d'histoire, le moment d'un unique canal est
+\(\langle\eta,P\eta\rangle d_a^*d_b\). Ce changement de base ne le transforme pas en \(2I\). Un éventuel couplage effectif entre canaux analytiques est une autre opération et doit être écrit, non inféré de la conjugaison.
+
+\subsection{Identités métriques des coordinatisations de frontière et polaire}
+\label{gamma-add-sub-195}
+
+\subsubsection{Frontière bidirectionnelle}
+\label{gamma-add-sub-197}
+
+La coordinatisation bidirectionnelle conserve la composition
+
+\begin{equation}
+\begin{aligned}
+K_2&=\mathbb C^{81}\otimes u_9^\perp,\\
+\Delta_a&=j_{\rm APP}(\eta_9\otimes d_a),\\
+\beta_0&=R_{\rm tw}(L^3+\varepsilon\nabla_x)FI_{Q_9}|_{K_2}.
+\end{aligned}
+\label{gamma-add-display-16}
+\end{equation}
+
+Dans cette réalisation, \(j_{\rm APP}\) est l'inclusion isométrique de la fibre indiquée ; \(\beta_0\) est injectif et \(\Lambda_{\rm tw}^{\#}\) est défini positif sur l'espace de frontière. Ce sont les conditions de la coordinatisation : les facteurs de la composition sont reçus avec leurs domaines compatibles, et cette injectivité n'est pas déduite ici d'une coïncidence de dimensions.
+% ENSAMBLAJE: los factores R_tw, L^3, epsilon*nabla_x, F e I_Q9
+% pertenecen al propietario PT, 85--155. Para esta identidad bastan
+% la inclusión isométrica, beta0 inyectivo y Lambda_tw^# positivo.
+Avec \(V_\beta=\beta_0(\beta_0^*\beta_0)^{-1/2}\) et
+\(U_{\rm tw}=(\Lambda_{\rm tw}^{\#})^{-1/2}V_\beta\),
+
+\begin{equation}
+G_a=(U_{\rm tw}\otimes I)\Delta_a,\qquad
+G_a^*(\Lambda_{\rm tw}^{\#}\otimes I)G_b=d_a^*d_b.
+\label{gamma-add-eq-7}
+\end{equation}
+
+\begin{proof}
+La normalisation polaire donne \(V_\beta^*V_\beta=I\) et donc
+\(U_{\rm tw}^*\Lambda_{\rm tw}^{\#}U_{\rm tw}=I\).
+Comme \(j_{\rm APP}\) et \(\eta_9\) sont normalisés,
+\(\Delta_a^*\Delta_b=d_a^*d_b\). La composition prouve
+\eqref{gamma-add-eq-7}, y compris tous les produits croisés.
+\end{proof}
+\(U_{\rm tw}\) est isométrique pour la métrique déclarée
+\(\Lambda_{\rm tw}^{\#}\). En coordonnées hilbertiennes ordinaires,
+l'isométrie entre les espaces effectifs est
+\((\Lambda_{\rm tw}^{\#})^{1/2}U_{\rm tw}=V_\beta\).
+
+L'identité \eqref{gamma-add-eq-7} ne contient ni une espérance ni sa valeur sur \(G_a\). Pour transporter une projection, il faut la conjuguer par cette même isométrie et son adjointe dans la métrique correcte. Ainsi, \eqref{gamma-add-eq-6} conserve le moment comprimé précédent : passer à la frontière ne crée pas le second moment.
+
+\subsubsection{Coordinatisation polaire effective}
+\label{gamma-add-sub-220}
+
+La réalisation polaire au moyen de cinq octades fournit la matrice à cinq
+colonnes \(T\), dont le gramien et la normalisation sont
+
+\begin{equation}
+T^*T=4I_5+\frac43J_5,\qquad
+\widehat T=T(T^*T)^{-1/2},\qquad
+F_{34}=(f_3,f_6,f_9,f_4,f_8).
+\label{gamma-add-display-18}
+\end{equation}
+
+La coordinatisation avec ses espaces explicites est
+
+\begin{equation}
+U=F_{34}\widehat T^*:
+\operatorname{Ran}\widehat T\subset\mathbb C^{24}
+\longrightarrow\operatorname{span}(f_3,f_6,f_9,f_4,f_8)\subset\mathbb C^{12}.
+\label{gamma-add-display-19}
+\end{equation}
+
+Pour \(\eta=\operatorname{diag}(1,1,1,-1,-1)\),
+
+\begin{equation}
+U^*J_{34}U=\widehat T\eta\widehat T^*,\qquad
+\widehat T^*U^*J_{34}U\widehat T=\eta.
+\label{gamma-add-eq-8}
+\end{equation}
+
+Ici, les cinq vecteurs de \(F_{34}\) sont orthonormés et \(F_{34}^*J_{34}F_{34}=\eta\). Substituer \(U=F_{34}\widehat T^*\) et \(\widehat T^*\widehat T=I_5\) prouve les deux égalités de \eqref{gamma-add-eq-8}. C'est l'écriture typée de l'égalité avec la matrice diagonale. Les cinq rôles sont effectifs ; l'identification des coordonnées ne doit pas être effacée.
+% ENSAMBLAJE: la selección concreta de cinco octadas y el cálculo de
+% T*T=4I5+(4/3)J5 proceden de PP, 134--181. Se conserva esta carta con
+% su Gram de partida explícito; no se genera aquí un nuevo diseño.
+
+Pour les deux évaluations polaires,
+
+\begin{equation}
+b_\pm(f)=\frac{A_f\pm B_f}{\sqrt2},\qquad
+b_+(f)\overline{b_+(g)}-b_-(f)\overline{b_-(g)}
+=A_f\overline{B_g}+B_f\overline{A_g}.
+\label{gamma-add-eq-9}
+\end{equation}
+
+\eqref{gamma-add-eq-8} transporte la signature et \eqref{gamma-add-eq-9} transporte ses termes croisés. Aucune n'identifie la ligne positive isolée à une source suffisante de la négative : pour \(f\) réel, impair et non nul, choisi avec \(f(x)>0\) sur le demi-axe positif de son support, on a \(b_+(f)=0\) et \(b_-(f)>0\). La récupération doit faire intervenir l'état analytique commun, comme le fait le connecteur de queue gamma développé ci-dessous.
+
+\subsection{Différence entre la lecture par canaux et le transfert commun}
+\label{gamma-add-sub-259}
+
+Pour fixer tous les termes utilisés, soit
+\(\mathcal K_m=\mathbb C^{9^m}\otimes\mathbb C^{81}\otimes H\),
+et soient \(\zeta_+\), \(\zeta_-\) des vecteurs unitaires des deux
+droites polaires. Les indices \(\ell\leq R\) parcourent les étiquettes
+premier--puissance \((p,k)\) avec \(k\log p\leq R\), en conservant
+leur poids \(w_\ell=(\log p)p^{-k/2}\). Les colonnes sont
+\begin{equation}
+\begin{aligned}
+J_{+,R}f={}&\Bigl(
+ (\sqrt{w_\ell}\,\widehat\delta_{\ell,m}f)_{\ell\leq R},\,
+ (\sqrt{\mu(a)}\,\widehat\delta_{a,m}f)_{a>0},\,
+ \zeta_+b_+(f)\Bigr),\\
+J_{-,R}f={}&\Bigl(
+ \sqrt{-c_\Gamma}\,j_mf,\,
+ (\sqrt{2w_\ell}\,j_mf)_{\ell\leq R},\,
+ \zeta_-b_-(f)\Bigr).
+\end{aligned}
+\label{gamma-add-columnas-completas}
+\end{equation}
+La composante continue de la première colonne appartient à \(L^2((0,\infty),da;\mathcal K_m)\) ; les composantes restantes se réunissent dans les sommes orthogonales indiquées. Les évaluations \(b_\pm\) sont celles de \eqref{gamma-add-eq-9}. Leur domaine commun est celui des fonctions tests d'énergie gamma finie. L'identité
+\begin{equation}
+\mathscr W_R(f,g)
+=\langle J_{+,R}f,J_{+,R}g\rangle
+ -\langle J_{-,R}f,J_{-,R}g\rangle
+\label{gamma-add-diferencia-columnas}
+\end{equation}
+se vérifie en développant
+\(\langle d_\ell f,d_\ell g\rangle
+=2\langle f,g\rangle-\langle T_\ell f,g\rangle
+-\langle f,T_\ell g\rangle\), en utilisant l'intégrale gamma
+et l'identité polaire \eqref{gamma-add-eq-9}. On conserve ainsi
+les trois canaux et tous les termes croisés.
+
+Prendre pour codeur la colonne positive explicite \(\Xi_+\) satisfait par calcul son premier moment. Appliquer ensuite l'espérance uniforme produit dans chaque canal premier
+
+\begin{equation}
+w_\ell a_N^2\langle d_\ell f,d_\ell g\rangle,
+\label{gamma-add-display-22}
+\end{equation}
+
+tandis que la ligne négative requise est
+
+\begin{equation}
+2w_\ell\langle f,g\rangle.
+\label{gamma-add-display-23}
+\end{equation}
+
+Ce n'est pas la même identité. Par exemple, choisissons \(R>\ell>0\) et \(f\in\mathcal D_R\) réelle, non négative, dont le support chevauche sa translation par \(\ell\). Alors
+
+\begin{equation}
+\|d_\ell f\|^2
+=2\|f\|^2-2\langle f,T_\ell f\rangle
+<2\|f\|^2.
+\label{gamma-add-eq-10}
+\end{equation}
+
+Aucune projection contractante appliquée uniquement à ce canal ne peut produire \(\sqrt2f\). Pour le raffinement de Helmert, le facteur \(a_N^2\) est éliminé, mais \eqref{gamma-add-eq-10} persiste. C'est un test de réfutation de l'identification \textbf{canal par canal}, et non une réfutation d'un transfert commun qui redistribuerait l'énergie entre les canaux.
+
+D'autre part, introduire directement \(j_mf\), ses copies premières--scalaires et \(b_-(f)\) comme termes orthogonaux du codeur garantit leurs sorties, mais ajoute leurs normes au premier moment. Pour maintenir le premier moment initial, une redistribution isométrique explicite est nécessaire. Cette redistribution est précisément l'opération que l'identification simultanée des deux moments doit présenter.
+
+L'invariance du sous-espace cyclique sous \(P\) ne détermine pas non plus à elle seule la valeur de \(PCf\) ; elle garantit seulement que cette valeur demeure dans le sous-espace.
+
+\subsection{Inverse de la queue gamma et reconstruction de toutes les lignes}
+\label{gamma-add-sub-288}
+
+Il y a bien ici une action explicite sur tout générateur et toute combinaison linéaire. Soit
+
+\begin{equation}
+\mu(a)=\frac{e^{-a/2}}{1-e^{-2a}},\quad
+A_R=[R+1,R+2],\quad \nu_R=\int_{A_R}\mu(a)\,da>0,
+\quad M_R=\mathbf1_{(-R/2,R/2)}.
+\label{gamma-add-display-25}
+\end{equation}
+
+Pour le signe \(d_a=T_a-I\) déjà fixé, nous définissons la cotrace
+
+\begin{equation}
+\epsilon_m=\langle\eta_{9^m}|\otimes\langle u_{81}|\otimes M_R,
+\qquad
+\mathcal R^-_{m,R}F
+=-\nu_R^{-1}\int_{A_R}\sqrt{\mu(a)}\,\epsilon_m F(a)\,da.
+\label{gamma-add-eq-11}
+\end{equation}
+
+Le signe moins disparaît si l'on utilise \(I-T_a\), qui est la convention alternative du lecteur de queue. Pour \(f\in\mathcal D_R\) et \(a>R\), \(M_RT_af=0\). En conséquence,
+
+\begin{equation}
+\mathcal R^-_{m,R}
+\bigl(a\mapsto\sqrt{\mu(a)}\widehat\delta_{a,m}f\bigr)=f.
+\label{gamma-add-eq-12}
+\end{equation}
+\label{gamma-add:cola-lector}
+
+En outre, \(\|\mathcal R^-_{m,R}\|\le\nu_R^{-1/2}\) par Cauchy--Schwarz. On n'inverse pas de translation individuelle et on n'utilise pas la positivité de Weil.
+
+Écrivons
+
+\begin{equation}
+S_Rf=\left(\sqrt{-c_\Gamma}\,j_mf,\,
+              (\sqrt{2w_\ell}\,j_mf)_{\ell\le R}\right),
+\quad B_-f=\zeta_-b_-(f).
+\label{gamma-add-display-28}
+\end{equation}
+
+La ligne commune concrète, définie sur l'espace ambiant positif complet, est
+
+\begin{equation}
+\mathcal C_R^{\rm tail}
+=
+\begin{pmatrix}
+0&S_R\mathcal R^-_{m,R}&0\\
+0&B_-\mathcal R^-_{m,R}&0
+\end{pmatrix}.
+\label{gamma-add-eq-13}
+\end{equation}
+
+De \eqref{gamma-add-eq-12},
+
+\begin{equation}
+\mathcal C_R^{\rm tail}J_{+,R}f=J_{-,R}f
+\quad\hbox{pour tout }f\in\mathcal D_R.
+\label{gamma-add-eq-14}
+\end{equation}
+
+Cette action contient les lignes scalaire, premier--puissance et polaire, avec leurs constantes et orientations intactes. Pour toute paire \(f,g\),
+
+\begin{equation}
+\begin{aligned}
+\langle\mathcal C_R^{\rm tail}J_+f,\mathcal C_R^{\rm tail}J_+g\rangle
+={}&\left(-c_\Gamma+2\sum_{\ell\le R}w_\ell\right)\langle f,g\rangle\\
+&+b_-(f)\overline{b_-(g)}.
+\end{aligned}
+\label{gamma-add-eq-15}
+\end{equation}
+
+Pour \(f=\sum_i f_i\), \(g=\sum_j g_j\), le membre droit contient la somme complète dans \(i,j\) ; les fonctions tests n'ont pas été remplacées par des cellules orthogonales. Les termes croisés premier--gamma de \eqref{gamma-add-eq-7} sont conservés lors du changement des représentations d'entrée. La forme finale est
+
+\begin{equation}
+J_+^*\left(I-(\mathcal C_R^{\rm tail})^*\mathcal C_R^{\rm tail}\right)J_+
+=J_+^*J_+-J_-^*J_-=\mathcal W_R.
+\label{gamma-add-eq-16}
+\end{equation}
+
+C'est une égalité effective de formes, sans supposer encore que l'opérateur entre parenthèses soit positif. L'opérateur est borné ; une borne explicite est
+
+\begin{equation}
+\|\mathcal C_R^{\rm tail}\|
+\le\nu_R^{-1/2}
+\sqrt{-c_\Gamma+2\sum_{\ell\le R}w_\ell+2\sinh(R/2)-R}.
+\label{gamma-add-display-33}
+\end{equation}
+
+La borne fixe le type ; elle ne prouve pas que la norme soit inférieure ou égale à un.
+
+\subsection{Condition exacte pour réunir les deux moments dans une espérance}
+\label{gamma-add-sub-375}
+
+Soit \(\mathcal M_+=\overline{J_+\mathcal D_R}\). Le transfert atteignable
+
+\begin{equation}
+C_{\rm rea}(J_+f)=J_-f
+\label{gamma-add-display-34}
+\end{equation}
+
+est bien défini parce que la queue gamma prouve que \(J_+\) est injectif. C'est la restriction de \eqref{gamma-add-eq-13} ; il est donc borné. Tout autre transfert borné donnant les mêmes sorties coïncide avec lui sur \(\mathcal M_+\).
+
+Un changement de coordonnées ne fournit pas de transfert atteignable différent. La donnée à établir pour que \eqref{gamma-add-eq-13} possède une dilatation isométrique avec l'espérance native est
+
+\begin{equation}
+\|C_{\rm rea}x\|\le\|x\|,
+\qquad x\in\mathcal M_+.
+\label{gamma-add-eq-17}
+\end{equation}
+
+Sa relation avec les deux moments peut s'écrire sans ambiguïté. \textbf{Si} \eqref{gamma-add-eq-17} est démontré à partir des opérateurs natifs, \(D=(I-C_{\rm rea}^*C_{\rm rea})^{1/2}\) existe et
+
+\begin{equation}
+\mathfrak C_{\rm dil}f
+=u_9\otimes(J_-f,0)+\eta_9\otimes(0,DJ_+f)
+\label{gamma-add-eq-18}
+\end{equation}
+
+satisfait, pour \(P=|u_9\rangle\langle u_9|\otimes I\),
+
+\begin{equation}
+\mathfrak C_{\rm dil}^*\mathfrak C_{\rm dil}=J_+^*J_+,\qquad
+\mathfrak C_{\rm dil}^*P\mathfrak C_{\rm dil}=J_-^*J_-.
+\label{gamma-add-display-37}
+\end{equation}
+
+\eqref{gamma-add-eq-18} est une forme normale de la dilatation une fois \eqref{gamma-add-eq-17} prouvé, et \textbf{non} une nouvelle preuve prospective de \eqref{gamma-add-eq-17}. Elle permet d'identifier exactement ce que doit produire la colligation native : le défaut de ce transfert commun, avec tous ses termes croisés, et pas seulement le défaut de chaque horloge prise séparément.
+
+La composition concrète suivante consiste à composer le budget énergétique du connecteur complet avec les identités locales et de raffinement récupérées. Si une colligation native alternative réalise \eqref{gamma-add-eq-14} et est contractante sur tout \(\mathcal M_+\), elle prouve \eqref{gamma-add-eq-17} par unicité atteignable. Il n'est pas nécessaire d'inventer un autre lecteur ; il faut en revanche calculer son action et son énergie commune.
+
+\subsection{Vérifications et provenance}
+\label{gamma-add-sub-412}
+
+Les actions \eqref{gamma-add-eq-1}, \eqref{gamma-add-eq-7},
+\eqref{gamma-add-eq-8} et \eqref{gamma-add-eq-12}--\eqref{gamma-add-eq-16}
+réunissent des opérateurs et des résultats préexistants. Les compositions
+\eqref{gamma-add-eq-2}--\eqref{gamma-add-eq-6} et le test de réfutation
+\eqref{gamma-add-eq-10} sont des calculs explicites sur ces formules ;
+aucune priorité mathématique ne leur est attribuée et on n'en déduit pas une
+absence globale d'autres opérateurs.
+
+On a conservé 25 contrôles rationnels sur \(v_{9N}=9Ne_0-\mathbf1\), pour \(N=2,3,9,81,729\). Ils vérifient l'action de la moyenne, la fraction \((N-1)/(9N-1)\), la moyenne nulle, l'orthogonalité du détail et le complément \(8N/(9N-1)\). Les 25 contrôles ont donné le même résultat en mode normal et optimisé, sans assertions supprimables. Ils vérifient les identités \eqref{gamma-add-eq-2}--\eqref{gamma-add-eq-4}, et non la positivité globale. Les programmes, commandes, reçus et localisateurs sont conservés dans l'annexe~\ref{ap:procedencia-reproduccion}.
+
+% PROCEDENCIA HISTORICA \begin{itemize}
+% PROCEDENCIA HISTORICA \item Las acciones \eqref{gamma-add-eq-1}, \eqref{gamma-add-eq-7}, \eqref{gamma-add-eq-8}, \eqref{gamma-add-eq-12}--\eqref{gamma-add-eq-16} reúnen resultados y operadores preexistentes. Estatuto: \textbf{RESULTADO_RECUPERADO / FORMALIZACIÓN_REUNIDA}.
+% PROCEDENCIA HISTORICA \item Las composiciones explícitas \eqref{gamma-add-eq-2}--\eqref{gamma-add-eq-6} y el control \eqref{gamma-add-eq-10} son cálculos de esta formalización sobre esas fórmulas; no se les atribuye prioridad matemática ni se los presenta como ausencia global de otros operadores. Procedencia exhaustiva de la forma exacta de esos cálculos: no investigada.
+% PROCEDENCIA HISTORICA \item Se ejecutaron 25 controles racionales sobre las coordenadas sin normalizar \(v_{9N}=9Ne_0-\mathbf1\), para \(N=2,3,9,81,729\). Verificaron la acción del promedio, la fracción \((N-1)/(9N-1)\), la media nula, la ortogonalidad del detalle y la fracción complementaria \(8N/(9N-1)\). Se conservaron en el script reproducible, sin uso de aserciones eliminables. Pasaron los mismos 25 controles en modo normal y los 25 en modo optimizado: recibo normal y recibo optimizado. Son controles de \eqref{gamma-add-eq-2}--\eqref{gamma-add-eq-4}, no de positividad global.
+% PROCEDENCIA HISTORICA \item Pasaron el núcleo formal permanente, la autocomprobación causal de constantes, el comprobador del resolutor y la puerta de principios operativos. El resolutor conserva la referencia histórica de 2.084 páginas; esta formalización respeta la selección autoral de 2.249 y no modifica ese registro.
+% PROCEDENCIA HISTORICA \item El expediente fuente conserva los PDF, índices y paquetes anteriores inalterados; esta incorporación añade la exposición de las identidades y no cambia retroactivamente sus recibos.
+% PROCEDENCIA HISTORICA 
+% PROCEDENCIA HISTORICA \end{itemize}
+% PROCEDENCIA HISTORICA Para repetir los controles desde esta carpeta:
+% PROCEDENCIA HISTORICA 
+% PROCEDENCIA HISTORICA % DOCUMENTACION     python3 -I -S verificar_expectativa_modos.py --receipt CONTROL_EXPECTATIVA_MODOS_NORMAL.json
+% PROCEDENCIA HISTORICA % DOCUMENTACION     python3 -I -S -O verificar_expectativa_modos.py --receipt CONTROL_EXPECTATIVA_MODOS_OPTIMIZADO.json
+% PROCEDENCIA HISTORICA 
+% PROCEDENCIA HISTORICA 
+\textbf{Conclusion opérationnelle :} l'état et les deux lecteurs n'ont pas disparu. Le calcul restitue leur action et démontre exactement la différence entre transport isométrique des modes, espérance uniforme et récupération analytique des canaux. La seconde identité de moments dispose d'une voie concrète de vérification au moyen du connecteur commun ; la conjugaison des coordinatisations, à elle seule, n'effectue pas cette vérification.

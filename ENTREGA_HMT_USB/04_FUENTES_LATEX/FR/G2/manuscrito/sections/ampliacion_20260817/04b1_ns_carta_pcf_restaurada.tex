@@ -1,0 +1,416 @@
+\section{Carte PC--Fock complète, mémoire et stockage terminal}
+\label{sec:ns-pcf-prospective-construction}
+
+Nous fixons \(s>5/2\), \(\nu>0\), une coupure de Galerkin \(M\), une profondeur nonadique \(J\) et un horizon \(T<\infty\). Soit \(V_M\subset H^s_\sigma(\mathbb T^3)\) l'espace solénoïdal de moyenne nulle, et soient
+\begin{equation}
+ A_M=P_M(-\Delta)P_M,
+ \qquad
+ N_M(u)=P_M\mathbb P(u\cdot\nabla u).
+ \label{eq:ns-import-galerkin-operators}
+\end{equation}
+Cette section construit le support PC--Fock complet, ses lecteurs, mémoires, retenue, stockage terminal et retour, qui interviennent dans la réalisation de référence de la section suivante. Son KYP local, son observabilité NS--OBS et les dominations LRDN--LCN sont exclusivement un \texttt{CONTRÔLE\_NON\_DÉTERMINANT} : ils ne conditionnent ni la métrique \(U^{\rm own}\), ni sa télescopie, ni son budget racine, ni la conclusion globale.
+
+\subsection{Tour complète et lecteurs de degrés un et deux}
+
+Le relèvement physique est pris dans l'espace de Fock symétrique complet :
+\begin{equation}
+ \mathcal V_M^{\rm PCF}(u)
+ :=\bigoplus_{n\ge0}\frac{R_{\rm F}^n}{\sqrt{n!}}u^{\odot n},
+ \qquad
+ \|\mathcal V_M^{\rm PCF}(u)\|^2
+ =e^{R_{\rm F}^2\|u\|_{H^s}^2}.
+ \label{eq:ns-import-pcf-lift}
+\end{equation}
+La tour n'est pas tronquée. Pour \(z_{n,M}=u_M^{\odot n}\), la règle de Leibniz donne la récurrence exacte
+\begin{equation}
+ \dot z_{n,M}
+ =L_{n,M}z_{n,M}
+ +\mathcal N_{n,n+1;M}z_{n+1,M}
+ +\mathcal F_{n,n-1;M}(f_M)z_{n-1,M},
+ \qquad n\ge1,
+ \label{eq:ns-import-carleman-all-degrees}
+\end{equation}
+où, sur la diagonale cohérente,
+\begin{align}
+ L_{n,M}u^{\odot n}
+ &=-\nu n(A_Mu)\odot u^{\odot(n-1)}, \notag\\
+ \mathcal N_{n,n+1;M}u^{\odot(n+1)}
+ &=-nN_M(u)\odot u^{\odot(n-1)}, \notag\\
+ \mathcal F_{n,n-1;M}(f)u^{\odot(n-1)}
+ &=nf\odot u^{\odot(n-1)}.
+ \label{eq:ns-import-carleman-blocks}
+\end{align}
+
+L'espace d'état est la somme orthogonale
+\begin{equation}
+ \mathscr K_{M,j}^{\rm PCF}
+ =\mathscr K_{M,j}^{\rm HMT}\widehat\otimes\Gamma_s(V_M)
+ \oplus\mathscr K_{M,j}^{\kappa}
+ \oplus\mathscr K_{M,j}^{\rm micro}
+ \oplus\mathscr K_{M,j}^{\rm sh},
+ \label{eq:ns-import-full-carrier}
+\end{equation}
+où \(\mathscr K_{M,j}^{\rm HMT}\) conserve feuillet, orientation, \(q_A,q_V,T\), bord, parcours et les deux mémoires \(D/H\). Les degrés un et deux sont lus au moyen de
+\begin{equation}
+ \begin{aligned}
+ z_M(u)&=\nu^{1/2}A_M^{1/2}\Lambda^su,\\
+ w_M(u)&=\nu^{-1/2}A_M^{-1/2}\Lambda^sN_M(u),\\
+ \mathcal Y_{\beta,M}\mathcal V_M^{\rm PCF}(u)
+ &=\sqrt\beta\,z_M(u)
+   \oplus\frac{1}{2\sqrt\beta}\,w_M(u).
+ \end{aligned}
+ \label{eq:ns-import-degree-one-two-reader}
+\end{equation}
+En conséquence,
+\begin{equation}
+ |B_{s,M}(u)|
+ \le
+ \|\mathcal Y_{\beta,M}\mathcal V_M^{\rm PCF}(u)\|^2
+ =\beta\nu D_{s,M}(u)+\frac{\|w_M(u)\|^2}{4\beta}.
+ \label{eq:ns-import-young-port}
+\end{equation}
+La seconde coordonnée est un opérateur linéaire uniformément borné sur \(\operatorname{Sym}^2H^s_\sigma\) :
+\begin{equation}
+ \sup_M\|\mathfrak C_M\|
+ \le\widetilde M_{s,\beta,\nu},
+ \qquad
+ C_M^{\rm obs}:=\sqrt2\,\mathfrak C_M\pi_2,
+ \qquad
+ \Sigma_M:=\bigl(I+(C_M^{\rm obs})^*C_M^{\rm obs}\bigr)^{-1}
+ \succeq\frac{I}{1+2\widetilde M_{s,\beta,\nu}^2}.
+ \label{eq:ns-import-uniform-graph}
+\end{equation}
+
+\subsection{Mémoire bidirectionnelle et stockage terminal}
+
+Avec
+\begin{equation}
+ r=\frac{\pi_{\rm HMT}}{\varphi_{\rm HMT}^2},
+ \qquad
+ D_{M,j}^{\rm mem}=(r-1)(M_{M,j}^+-M_{M,j}^-),
+ \qquad
+ H_{M,j}=(1+r)(M_{M,j}^++M_{M,j}^-),
+ \label{eq:ns-import-dh}
+\end{equation}
+les deux mémoires satisfont
+\begin{equation}
+ \dot D_{M,j}^{\rm mem}=B_{s,M,j},
+ \qquad
+ \dot H_{M,j}=\frac{1+r}{r-1}|B_{s,M,j}|.
+ \label{eq:ns-import-dh-dot}
+\end{equation}
+En posant
+\[
+ \delta_r=\frac{r-1}{r+1},
+ \qquad
+ \mathcal N_{M,j}:=\delta_rH_{M,j}-D_{M,j}^{\rm mem}
+ =2(r-1)M_{M,j}^-\ge0,
+\]
+on obtient
+\begin{equation}
+ \dot{\mathcal N}_{M,j}=|B_{s,M,j}|-B_{s,M,j}.
+ \label{eq:ns-import-negative-memory}
+\end{equation}
+Le stockage terminal explicite est
+\begin{equation}
+ \begin{aligned}
+ G_{M,j,T}(t)
+ &=E_{s,M,j}(t)
+   +2(r-1)\bigl(M_{M,j}^-(T)-M_{M,j}^-(t)\bigr),\\
+ G_{M,j,T}(t)&\ge E_{s,M,j}(t),\\
+ \dot G_{M,j,T}+\nu D_{s,M,j}+|B_{s,M,j}|
+ &=F_{s,M,j}.
+ \end{aligned}
+ \label{eq:ns-import-terminal-storage}
+\end{equation}
+Si
+\[
+ h^-_{M,j;t,T}(\tau)
+ :=\mathbf1_{[t,T]}(\tau)\sqrt{\dot M^-_{M,j}(\tau)},
+\]
+la colonne
+\begin{equation}
+ \mathcal E_{M,j,T}^{\rm term}(t)\Xi
+ :=2^{-1/2}\Lambda^su_{M,j}(t)
+ \oplus\sqrt{2(r-1)}\,h^-_{M,j;t,T}
+ \label{eq:ns-import-terminal-column}
+\end{equation}
+réalise le stockage comme un Gram :
+\begin{equation}
+ \|\mathcal E_{M,j,T}^{\rm term}(t)\Xi\|^2
+ =G_{M,j,T}(t).
+ \label{eq:ns-import-terminal-gram}
+\end{equation}
+
+La retenue commune entre profondeurs est
+\begin{equation}
+ \kappa_{M,j}
+ =\frac12\left(E_j|B_{s,M,j+1}|-|B_{s,M,j}|\right)\ge0,
+ \qquad
+ E_jB_{s,M,j+1}=B_{s,M,j}.
+ \label{eq:ns-import-carry}
+\end{equation}
+Sa coordonnée de sortie est fixée par
+\begin{equation}
+ q_{M,j}^{\kappa}
+ :=\left(\frac{2(1+r)}{r-1}\kappa_{M,j}\right)^{1/2},
+ \qquad
+ \|q_{M,j}^{\kappa}\|^2
+ =\frac{2(1+r)}{r-1}\kappa_{M,j}.
+ \label{eq:ns-import-carry-port}
+\end{equation}
+Parallèlement,
+\begin{equation}
+ E_j\Delta_T\mathcal N_{M,j+1}
+ =\Delta_T\mathcal N_{M,j}+2K_{M,j}(T),
+ \qquad
+ K_{M,j}(T):=\int_0^T\kappa_{M,j}(t)\,dt.
+ \label{eq:ns-import-carry-telescope}
+\end{equation}
+Les innovations microscopiques et les bandes de Galerkin restent orthogonales :
+\begin{equation}
+ Q_{\rm micro}^{\rm APP}=I-J_9E_9,
+ \qquad E_9y^{\rm micro}=0,
+ \qquad \mathsf K_{\rm carry}y^{\rm micro}=0,
+ \label{eq:ns-import-micro}
+\end{equation}
+et, degré par degré,
+\begin{equation}
+ \mathcal N_{n,n+1;3M}J_M^{(n+1)}
+ =J_M^{(n)}\mathcal N_{n,n+1;M}
+ +\mathcal S_{n,M}^{\rm sh},
+ \qquad
+ E_M^{(n)}\mathcal S_{n,M}^{\rm sh}=0.
+ \label{eq:ns-import-shell}
+\end{equation}
+
+\subsection{Contrôle KYP fini non déterminant et cascade de la carte}
+
+La force et son terme direct sont incorporés au moyen de
+\begin{equation}
+ \begin{aligned}
+ x_{M,j+1}
+ &=\mathcal A_{M,j}^{[j]}x_{M,j}
+   +\mathcal B_{M,j,T}^{F,[j]}g_{M,j},\\
+ y_{M,j}^{\rm loss}
+ &=\mathcal C_{M,j,T}^{[j]}x_{M,j}
+   +\mathcal D_{M,j,T}^{F,[j]}g_{M,j},
+ \end{aligned}
+ \label{eq:ns-import-affine-step}
+\end{equation}
+avec la décomposition orthogonale
+\begin{equation}
+ \mathcal C_{M,j,T}
+ =\mathcal C_{M,j,T}^{(1)}
+ \oplus\mathcal C_{M,j,T}^{(2)}
+ \oplus\mathcal C_{M,j,T}^{\kappa}
+ \oplus\mathcal C_{M,j,T}^{\rm micro}
+ \oplus\mathcal C_{M,j,T}^{\rm sh}.
+ \label{eq:ns-import-loss-decomposition}
+\end{equation}
+Le terme direct apparaît déjà dans
+\[
+ g_M=A_M^{-1/2}\Lambda^sP_Mf,
+ \qquad
+ a_M=\frac{g_M}{2\sqrt\nu},
+ \qquad
+ y_{D,M}=\sqrt\nu A_M^{1/2}\Lambda^su_M-a_M,
+\]
+pour lequel
+\begin{equation}
+ dG_{M,j,T}
+ +\bigl(\|y_{D,M}\|^2+|B_{s,M,j}|\bigr)\,dt
+ =\|a_M\|^2\,dt.
+ \label{eq:ns-import-force-feedthrough}
+\end{equation}
+
+L'affinité est homogénéisée sans dupliquer la donnée. Soit
+\[
+ \mathscr G_M^{F,[j]}
+ :=\bigoplus_{k=j}^{J-1}L^2(\Omega_k;\mathscr G^F_{M,k,T}),
+ \qquad
+ \mathbf x_{M,j}:=x_{M,j}\oplus(g_{M,j},\ldots,g_{M,J-1}),
+\]
+et soient \(e_j\) l'évaluation de la première entrée et \(\mathsf S_j\) le décalage de la queue. Nous définissons
+\begin{equation}
+ \mathbf\Gamma_{M,j}
+ :=\begin{pmatrix}
+  \mathcal A_{M,j}^{[j]}&\mathcal B_{M,j,T}^{F,[j]}e_j\\
+  0&\mathsf S_j
+ \end{pmatrix},
+ \qquad
+ \mathbf L_{M,j,T}
+ :=\mathcal Q_{M,j,T}^{\rm loss,inc}
+ \begin{pmatrix}
+  \mathcal C_{M,j,T}^{[j]}&\mathcal D_{M,j,T}^{F,[j]}e_j
+ \end{pmatrix}.
+ \label{eq:ns-import-homogeneous-affine-step}
+\end{equation}
+Ici, \(\mathcal Q_{M,0,T}^{\rm loss,inc}=I\) ; pour \(j>0\), il supprime uniquement la copie héritée des canaux PC--Fock et agit comme l'identité sur la retenue, l'innovation microscopique et la bande spectrale.
+
+\begin{theorem}[Contrôle de factorisation KYP finie non circulaire]
+\label{thm:ns-import-affine-stein}
+Au niveau terminal, on définit
+\begin{equation}
+ \mathbf U_{M,J,T}(t)
+ :=(\mathcal E_{M,J,T}^{\rm term}(t))^*
+   \mathcal E_{M,J,T}^{\rm term}(t).
+ \label{eq:ns-import-terminal-metric}
+\end{equation}
+Une fois \(M,J,T\) fixés, soient \(A,B,C,D\) les quatre blocs du pas affine et \(U_+=\widetilde{\mathbf U}_{M,j+1,T}(t)\). Définissons
+\begin{equation}
+ Q:=I-B^*U_+B-D^*D,
+ \qquad L:=B^*U_+A+D^*C.
+ \label{eq:ns-import-kyp-q-l}
+\end{equation}
+Si \(Q\succ0\), la récurrence non circulaire est
+\begin{equation}
+ U:=A^*U_+A+C^*C+L^*Q^{-1}L.
+ \label{eq:ns-import-affine-stein}
+\end{equation}
+Alors la matrice KYP complète satisfait
+\begin{equation}
+ \begin{aligned}
+ \mathfrak S_{M,j,T}
+ &:=
+ \begin{pmatrix}
+ U-A^*U_+A-C^*C&-A^*U_+B-C^*D\\
+ -B^*U_+A-D^*C&I-B^*U_+B-D^*D
+ \end{pmatrix}\\
+ &=
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}^{*}
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}
+ \succeq0.
+ \end{aligned}
+ \label{eq:ns-import-affine-supply}
+\end{equation}
+Pour \(Q\succeq0\), la variante avec pseudo-inverse est valable si \(\operatorname{Ran}L\subseteq\operatorname{Ran}Q^{1/2}\). Cette construction est finie : elle n'affirme pas que \(Q^{-1}\), \(U\) ou le gain restent uniformes lorsque \(M,J\) est retiré.
+\end{theorem}
+
+\begin{proof}
+Par \eqref{eq:ns-import-affine-stein}, le bloc supérieur gauche est \(L^*Q^{-1}L\) ; les blocs non diagonaux sont \(-L^*\) et \(-L\), et le bloc inférieur droit est \(Q\). La multiplication de la ligne exposée dans \eqref{eq:ns-import-affine-supply} donne exactement les quatre blocs. La positivité précède ainsi l'extraction de toute racine.
+\end{proof}
+
+Ce théorème vérifie uniquement la carte finie lorsque ses propres hypothèses sont satisfaites. Il ne fournit aucune prémisse au développement de référence Stein--Lyapunov et ne limite pas l'uniformité démontrée par son Gram terminal et sa racine commune.
+
+Dans les coordonnées homogénéisées, on prend \(\mathbf U_{M,j,T}=U\) et l'on note \(\mathbf R_{M,j,T}\) le relèvement de la ligne \(\begin{psmallmatrix}Q^{-1/2}L&-Q^{1/2}\end{psmallmatrix}\).
+Avec cette convention, on retrouve, pour chaque troncature finie satisfaisant l'hypothèse KYP,
+\[
+ \mathbf U_{M,j,T}
+ =\mathbf\Gamma_{M,j}^*\widetilde{\mathbf U}_{M,j+1,T}
+  \mathbf\Gamma_{M,j}
+ +\mathbf L_{M,j,T}^*\mathbf L_{M,j,T}
+ +\mathbf R_{M,j,T}^*\mathbf R_{M,j,T}.
+\]
+
+La colonne
+\begin{equation}
+ [\mathbf x]_{\mathbf U_{M,j,T}}
+ \longmapsto
+ [\mathbf\Gamma_{M,j}\mathbf x]_{
+  \widetilde{\mathbf U}_{M,j+1,T}}
+ \oplus\mathbf L_{M,j,T}\mathbf x
+ \oplus\mathbf R_{M,j,T}\mathbf x
+ \label{eq:ns-import-local-isometry}
+\end{equation}
+est isométrique. Sa dilatation de Julia et sa composition produisent \(\mathfrak U_{M,J,T}\) avec
+\begin{equation}
+ \mathfrak U_{M,J,T}^{\sharp}\mathfrak U_{M,J,T}=I
+ \label{eq:ns-import-cascade-isometry}
+\end{equation}
+et le télescope
+\begin{equation}
+ \begin{aligned}
+ \|\mathbf x_{M,0}\|_{\mathbf U_{M,0,T}}^2
+ ={}&\mathbb E_{0:J}
+ \|\mathbf x_{M,J}\|_{\mathbf U_{M,J,T}}^2\\
+ &+\sum_{j=0}^{J-1}\mathbb E_{0:j}
+ \left(\|\mathbf L_{M,j,T}\mathbf x_{M,j}\|^2
+       +\|\mathbf R_{M,j,T}\mathbf x_{M,j}\|^2\right).
+ \end{aligned}
+ \label{eq:ns-import-stein-telescope}
+\end{equation}
+
+\subsection{Budget de la carte et retour de la vitesse}
+
+Sur la diagonale physique, la première coordonnée terminale est \(G_{M,J,T}\), et les autres coordonnées forment la somme des pertes :
+\begin{equation}
+ \|Z_{M,J,t}\|^2
+ =\mathbb E_{0:J}G_{M,J,T}(t)
+ +\sum_{j=0}^{J-1}\mathbb E_{0:j}\Lambda_{M,j}([0,t]).
+ \label{eq:ns-import-ledger}
+\end{equation}
+Puisque \(q_{M,j}^{\kappa}\) est l'une de ces coordonnées, \eqref{eq:ns-import-carry-telescope} n'est intégré qu'une seule fois :
+\begin{equation}
+ 2\sum_{j=0}^{J-1}\mathbb E_{0:j}K_{M,j}(T)
+ \le\|\Xi_{M,0}\|^2+Q_f(T).
+ \label{eq:ns-import-carry-funded}
+\end{equation}
+D'où,
+\begin{equation}
+ \mathbb E_{0:J}G_{M,J,T}(0)
+ \le E_{s,M}(P_Mu_0)
+ +\Delta_T\mathcal N_0+\|\Xi_{M,0}\|^2+Q_f(T).
+ \label{eq:ns-import-root-bound}
+\end{equation}
+La racine est commune à toutes les coupures :
+\begin{equation}
+ \Xi_{M,0}=J_{0\to M}\Xi_0,
+ \qquad J_{0\to M}^*J_{0\to M}=I,
+ \qquad \mathcal N_{M,0}=\mathcal N_0.
+ \label{eq:ns-import-common-root}
+\end{equation}
+De plus,
+\begin{equation}
+ \|\Xi_{M,0}\|^2
+ \le C_{\rm HMT}
+ +(1+2\widetilde M_{s,\beta,\nu}^2)
+ e^{R_{\rm F}^2\|u_0\|_{H^s}^2},
+ \qquad
+ Q_f(T)\le C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt.
+ \label{eq:ns-import-root-data-bound}
+\end{equation}
+Par conséquent, pour cette carte et ces \(M,J,T\), nous posons
+\begin{align}
+ \mathcal B_{M,J,T}^{\rm route}:={}&
+ \frac12\|u_0\|_{H^s}^2
+ +|\Delta_T\mathcal N_{M,0}|+C_{\rm HMT}
+ +(1+2\widetilde M_{s,\beta,\nu}^2)
+ e^{R_{\rm F}^2\|u_0\|_{H^s}^2}\notag\\
+ &+C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt
+ <\infty
+ \label{eq:ns-import-explicit-budget}
+\end{align}
+La présence explicite de \(\Delta_T\mathcal N_{M,0}\) empêche d'utiliser cette expression comme preuve indépendante d'uniformité. C'est un diagnostic local de la carte ; il ne remplace pas le budget de référence \eqref{eq:nsclose-owner-data-budget}. L'identité terminale et l'inégalité de Young donnent, pour la coupure fixée,
+\begin{equation}
+ \boxed{
+ \sup_{0\le t\le T}\|Z_{M,J,t}\|^2
+ +\frac{\nu}{2}\int_0^TD_{s,M}(t)\,dt
+ \le\mathcal B_{M,J,T}^{\rm route}.}
+ \label{eq:ns-import-uniform-budget}
+\end{equation}
+
+L'expression de la vitesse est normalisée par
+\begin{equation}
+ \iota_{s,M}u=2^{-1/2}\Lambda^su,
+ \qquad
+ \mathcal R_{1,M}=\sqrt2\,\Lambda^{-s}\pi_1,
+ \qquad
+ \mathcal R_{1,M}\iota_{s,M}=I_{V_M}.
+ \label{eq:ns-import-grade-one-return}
+\end{equation}
+Le lecteur de la cascade est
+\begin{equation}
+ \mathcal R_{M,J,T}^{\rm phys}
+ :=\mathcal R_{1,M}\mathfrak U_{M,J,T}^{\sharp}.
+ \label{eq:ns-import-full-return}
+\end{equation}
+Par \eqref{eq:ns-import-cascade-isometry},
+\begin{equation}
+ \boxed{
+ \mathcal R_{M,J,T}^{\rm phys}
+ \mathfrak U_{M,J,T}\mathcal V_M^{\rm PCF}(u_M(t))
+ =u_M(t).}
+ \label{eq:ns-import-exact-return}
+\end{equation}
+Le retour utilise l'adjoint métrique de la même cascade et retrouve l'expression hydrodynamique sans sélectionner de branche probabiliste.

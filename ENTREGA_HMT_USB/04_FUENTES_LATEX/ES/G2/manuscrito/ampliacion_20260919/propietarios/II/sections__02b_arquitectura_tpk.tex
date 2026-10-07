@@ -1,0 +1,1020 @@
+% Propietario conservado: /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/02b_arquitectura_tpk.tex
+% Fragmento acumulativo para insertar después de la presentación de la
+% actualización TPK en nucleo.tex. No sustituye nucleo, extension,
+% generacion ni registro_k. Procedencia detallada en el MD compañero.
+\subsection{Arquitectura operatoria del transporte, la memoria y la prolongación}
+\label{ii:ii:tpk-arquitectura}
+
+El núcleo topológico de fase organiza la evolución de las dos evaluaciones
+de APP sobre historias orientadas. Su estructura reúne un soporte de caminos,
+reglas locales de actualización, relaciones de prolongación, registros
+temporales y aplicaciones de lectura. Cada componente tiene un dominio
+propio. Esta jerarquía permite conservar, en una misma construcción, la
+posición observable, el cociente de transporte y la memoria de las
+fronteras atravesadas. La composición de la ecuación~\eqref{ii:eq:actualizacion}
+adquiere así una realización precisa en cada uno de esos niveles.
+
+\subsubsection{Caminos bivariados y transporte levantado}
+
+Sea \(\mathsf P_{\rm APP}\) la categoría libre del grafo cardinal sobre
+\(X_9=(\mathbb Z/9\mathbb Z)^2\). Sus objetos son las posiciones de APP;
+sus morfismos son las palabras cardinales, con composición por
+concatenación. La categoría
+\[
+ \mathsf P_{\rm APP}^{(2)}
+ =\mathsf P_{\rm APP}\times\mathsf P_{\rm APP}
+\]
+conserva ordenadamente el camino de la hoja aditiva y el de la hoja
+multiplicativa. Ambos caminos recorren el mismo soporte aritmético y
+mantienen diferenciadas sus evaluaciones.
+
+En la carta \(I_9=\{0,\ldots,8\}\), los generadores son
+\[
+ \nu_N=(-1,0),\quad\nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad\nu_O=(0,-1),
+ \qquad T_d(x)=[x+\nu_d]_9.
+\]
+Para \(w=d_1\cdots d_r\), el levantamiento al recubridor entero conserva
+\[
+ \widetilde x_k=\widetilde x_0+\sum_{j=1}^{k}\nu_{d_j},
+ \qquad x_k=[\widetilde x_k]_9.
+\]
+Cuando \(x_r=x_0\), la clase de enrollamiento es
+\begin{equation}
+ \operatorname{wind}(w)
+ =\frac{1}{9}(\#S-\#N,\#E-\#O)\in\mathbb Z^2.
+ \label{ii:ii:tpk-enrollamiento}
+\end{equation}
+La posición final y el enrollamiento son dos lecturas diferentes de la
+misma ruta. La segunda registra el desplazamiento del levantamiento aun
+cuando la primera haya retornado.
+
+La inversión de caminos tiene dominio y codominio determinados:
+\[
+ \operatorname{rev}:\operatorname{Hom}(x,y)
+ \longrightarrow\operatorname{Hom}(y,x),\qquad
+ d_1\cdots d_r\longmapsto\overline d_r\cdots\overline d_1,
+\]
+donde \(\overline N=S\), \(\overline E=O\). Satisface
+\(\operatorname{rev}^2=I\), invierte el orden de composición y cambia el
+signo de~\eqref{ii:ii:tpk-enrollamiento}. Ésta es la operación precisa que
+debe transportarse al comparar orientaciones conjugadas de una ruta.
+
+\subsubsection{Estado completo y conservación de las actualizaciones}
+
+La descripción de \(\widehat X\) se organiza sobre las posiciones y
+direcciones de los dos cursores. Sobre cada configuración observable
+\(q\), la fibra aritmética se escribe
+\begin{equation}
+ \mathcal F_q=
+ \mathsf O_q\times\mathsf H_q\times\mathsf C_q\times
+ \mathsf S_q\times\mathsf B_q\times\symup{\Lambda}_q.
+ \label{ii:ii:tpk-fibra}
+\end{equation}
+Las coordenadas \(\mathsf O_q\) conservan orientación y hoja;
+\(\mathsf H_q\), los residuos y cocientes de las evaluaciones;
+\(\mathsf C_q\), los acarreos compatibles;
+\(\mathsf S_q\), la firma de frontera;
+\(\mathsf B_q\), el prefijo y sus cilindros; y
+\(\symup{\Lambda}_q\), el registro ordenado de transporte. La fibra está
+restringida por las identidades aritméticas, de incidencia y de
+truncamiento correspondientes. El estado completo conserva además la ruta
+que lo ha producido y el origen desde el que se leen sus fases.
+
+La selección de modo tiene tipo
+\[
+ M_{\rm ph}:D_9\longrightarrow\{-1,0,+1\},\qquad
+ \mathsf{Sel}_t:\widehat X\longrightarrow\widehat X^{\rm sel}_t.
+\]
+La segunda aplicación incorpora al estado el valor de la primera y
+activa la hoja correspondiente. El transporte levantado
+\[
+ \mathsf{Tra}_t:\widehat X^{\rm sel}_t
+ \longrightarrow\widehat X^{\rm tra}_t
+\]
+aplica \(T_d\) al cursor activo, concatena su letra de ruta y conserva la
+hoja seleccionada. Finalmente,
+\[
+ \mathsf{Upd}_t:\widehat X^{\rm tra}_t\longrightarrow\widehat X
+\]
+actualiza las evaluaciones y los registros. En esta notación,
+\(\mathsf{Upd}_t\) es la actualización \(\mathsf{Mem}_t\) de
+\eqref{ii:eq:actualizacion}, explicitada en sus componentes.
+
+Cada evaluación entera \(a\) se conserva mediante
+\(a=\rho_9(a)+9q_9(a)\); cada evaluación ternaria, mediante su resto
+orientado y su acarreo. Para una concatenación \(r_2r_1\), el transporte
+de los acarreos satisface la ley cocíclica
+\begin{equation}
+ k_{\rm tr}(r_2r_1)
+ =k_{\rm tr}(r_2)+\mathsf C(r_2)k_{\rm tr}(r_1),
+ \label{ii:ii:tpk-cociclo-transporte}
+\end{equation}
+donde \(\mathsf C(r_2)\) es la acción de transporte de la segunda ruta
+sobre la coordenada de acarreo de la primera. En el registro ordenado,
+la actualización se realiza por adjunción del evento producido:
+\[
+ \Lambda_{t+1}=\Lambda_t\Vert
+ (\text{hoja},d_t,\text{residuo},\text{cociente},
+   \text{acarreo},\text{orientación},\text{frontera})_t.
+\]
+La conservación tiene aquí un significado dinámico: las contribuciones
+anteriores permanecen recuperables dentro del registro que se prolonga.
+Sus coordenadas pueden cambiar al transportar el estado.
+
+\subsubsection{Acción afín sobre la memoria de transporte}
+
+Para una trayectoria \(r:q\to q'\), las aplicaciones
+\[
+ \mathsf H(r):\mathsf H_q\to\mathsf H_{q'},\qquad
+ \mathsf C(r):\mathsf C_q\to\mathsf C_{q'}
+\]
+respetan identidad y concatenación; \(\mathsf C_q\) es el grupo
+abeliano de memoria de transporte y \(\mathsf C(r)\) su homomorfismo.
+El incremento \(k_{\rm tr}(r)\in\mathsf C_{q'}\), con
+\(k_{\rm tr}(\operatorname{id}_q)=0\), es el cociclo de
+\eqref{ii:ii:tpk-cociclo-transporte}. Este símbolo distingue el incremento
+de transporte de las coordenadas racionales del registro dodecafásico.
+
+En una carta con datos \((h,c,\lambda)\), la actualización tiene la
+forma explícita
+\begin{equation}
+ h'=\mathsf H(r)h,\qquad
+ c'=\mathsf C(r)c+k_{\rm tr}(r),\qquad
+ \lambda'=r\circ\lambda.
+ \label{ii:ii:tpk-accion-afin}
+\end{equation}
+La firma se evalúa mediante
+\(\operatorname{Sig}_{q'}(h',c',\lambda')\). Su residencia en la
+fibra \(\mathsf S_{q'}\) conserva su dependencia de esos datos.
+
+\begin{proposition}[Composición de la memoria afín]
+\label{ii:ii:tpk-composicion-afin}
+La actualización por \(r_1\), seguida de la actualización por
+\(r_2\), coincide con la actualización por \(r_2r_1\).
+\end{proposition}
+\begin{proof}
+Dos actualizaciones de la memoria dan
+\[
+ c''=\mathsf C(r_2)\mathsf C(r_1)c
+       +\mathsf C(r_2)k_{\rm tr}(r_1)+k_{\rm tr}(r_2).
+\]
+La compatibilidad de \(\mathsf C\) con la concatenación y la
+identidad~\eqref{ii:ii:tpk-cociclo-transporte} convierten esta expresión
+en \(\mathsf C(r_2r_1)c+k_{\rm tr}(r_2r_1)\).
+La coordenada \(h\) satisface la misma compatibilidad por
+functorialidad de \(\mathsf H\); la trayectoria la satisface por
+asociatividad. La firma coincide al evaluarse sobre los mismos datos.
+\end{proof}
+
+La carta espacial de cada cursor proporciona una realización elemental
+de esa ley. Para \(x\in I_9^2\) y una dirección cardinal \(d\),
+\[
+ a_d(x)=\frac{x+\nu_d-T_d(x)}9\in\mathbb Z^2,
+ \qquad x'=T_d(x),\qquad c'=c+a_d(x).
+\]
+Aquí \(\mathsf C(r)=I\), y \(k_{\rm tr}(r)\) suma los
+cruces enteros de las fronteras. Para una ruta de longitud \(n\),
+la suma telescópica da
+\[
+ x_n=x_0+\sum_{j=1}^n\nu_{d_j}
+             -9\sum_{j=1}^n a_{d_j}(x_{j-1}).
+\]
+En un lazo, la última suma coincide con
+\(\operatorname{wind}(r)\). La posición residual retorna mientras
+el levantamiento conserva el número y orientación de sus cruces.
+Las componentes restantes de la memoria mantienen sus aplicaciones
+propias de transporte y sus relaciones de prolongación.
+
+\subsubsection{Cronología de los dos cursores y retorno observable}
+
+El calendario finito vive en \(\Theta_{108}=\mathbb Z/108\mathbb Z\).
+Para \(0\leq\widetilde\theta<108\), ponemos
+\[
+ r(\theta)=1+(\widetilde\theta\bmod9),\qquad
+ \beta(\theta)=\left[\left\lfloor\frac{\widetilde\theta}{9}
+ \right\rfloor\right]_{12},\qquad
+ \varepsilon_9(r)=M_{\rm ph}(r).
+\]
+La presentación~\eqref{ii:tpk-int:qobs} agrupa posición y dirección por
+cursor. En esta ampliación se agrupan primero las dos posiciones y
+después las dos direcciones. Ambas cartas se identifican mediante la
+permutación de factores
+\begin{equation}
+ \begin{aligned}
+ \mathfrak p_{\rm obs}:\ (X_9\times\mathcal D)^2\times\Theta_{108}
+ &\longrightarrow X_9^2\times\mathcal D^2\times\Theta_{108},\\
+ (x_+,d_+,x_\times,d_\times,\theta)
+ &\longmapsto(x_+,x_\times,d_+,d_\times,\theta),
+ \end{aligned}
+ \label{ii:ii:permutacion-coordenadas-observables}
+\end{equation}
+con \(\mathcal D=\{N,E,S,O\}\). La inversa repone la dirección junto
+a su cursor. Si los superíndices \({\rm agr}\) y \({\rm sep}\) distinguen
+estas dos escrituras del sucesor observable, entonces
+\[
+ \mathfrak p_{\rm obs}F_{\rm obs}^{\rm agr}
+ =F_{\rm obs}^{\rm sep}\mathfrak p_{\rm obs}.
+\]
+En efecto, el selector depende de la misma fase, el vector cardinal se
+aplica al mismo cursor y la inversión de direcciones ocurre en el mismo
+instante; únicamente cambia el orden de las coordenadas. Conservamos
+\(\mathcal Q_{\rm obs}\) y \(F_{\rm obs}\) para el espacio y la
+aplicación así identificados. Esta permutación de presentación deja
+inalterados los eventos y las coordenadas de memoria de la historia.
+
+El espacio observable es
+\[
+ \mathcal Q_{\rm obs}
+ =X_9^2\times\{N,E,S,O\}^2\times\Theta_{108}.
+\]
+Escribamos un estado como
+\(q=(x_+,x_\times,d_+,d_\times,\theta)\). Primero se evalúa la hoja
+activa en la posición actual. Después se actualizan las posiciones por
+\begin{equation}
+ (x_+',x_\times')=
+ \begin{cases}
+ (T_{d_+}x_+,x_\times),&\varepsilon_9(r)=+1,\\
+ (x_+,T_{d_\times}x_\times),&\varepsilon_9(r)=-1,\\
+ (x_+,x_\times),&\varepsilon_9(r)=0.
+ \end{cases}
+ \label{ii:ii:tpk-fobs-posiciones}
+\end{equation}
+Si \(\widetilde\theta+1\) es múltiplo de \(27\), se sustituyen
+\((d_+,d_\times)\) por \((\overline d_+,\overline d_\times)\).
+En todos los casos se incrementa \(\theta\) módulo \(108\). Estas reglas
+definen el sucesor
+\(F_{\rm obs}:\mathcal Q_{\rm obs}\to\mathcal Q_{\rm obs}\).
+La realización de emisión de la sección~\ref{ii:sec:extension} aplica
+exactamente este orden de evaluación, transporte e inversión.
+
+\begin{proposition}[Retorno observable y conservación de la historia]
+\label{ii:ii:tpk-retorno-observable}
+La aplicación \(F_{\rm obs}\) es una permutación. El operador
+\(\mathcal K_{27}=F_{\rm obs}^{27}\) satisface
+\(\mathcal K_{27}^{4}=I\). Una historia completa de ciento ocho
+actualizaciones conserva además los eventos y el acarreo acumulados
+durante esa vuelta.
+\end{proposition}
+\begin{proof}
+Conocida la fase posterior se recupera la fase anterior. La regla indica
+si se produjo una inversión de direcciones; deshacerla y aplicar el
+transporte cardinal inverso al cursor activo recupera el estado previo.
+En cada tramo de veintisiete transiciones hay nueve activaciones de cada
+hoja. Desde un extremo de tramo, cada cursor realiza nueve desplazamientos
+en la misma dirección, cuya suma es cero en \(X_9\); después invierte
+su orientación. Dos tramos restauran las orientaciones y cuatro restauran
+también el calendario. La identidad se transporta a cualquier fase por
+la invertibilidad de \(F_{\rm obs}\). El registro completo conserva la
+concatenación de los ciento ocho eventos y su contador, que se han
+actualizado en cada transición.
+\end{proof}
+
+La periodicidad de esta permutación pertenece al cociente observable. En
+la historia completa, el contador entero de ventanas aumenta en doce
+durante el mismo intervalo. La sucesión exacta
+\eqref{ii:eq:extension108} expresa la reducción del contador a su coordenada
+dodecafásica y conserva su defecto de aditividad.
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/02c_transporte_electronico.tex
+\subsubsection{Transporte electrónico bidireccional y registro aritmético}
+\label{ii:ii:transporte-electronico}
+
+La representación central utiliza una celda compartida por las dos
+evaluaciones APP. Sus coordenadas pertenecen a \(D_9=\{1,\ldots,9\}\),
+y la inversión \((r,c)\mapsto(10-r,10-c)\) tiene el punto fijo único
+\((5,5)\). El estado visible se escribe \((r,c,h,v,n)\), con
+\(h,v\in\{-1,1\}\) e índice cronológico entero \(n\geq0\).
+El selector trítico repite \((+1,-1,0)\). En la hoja aditiva se lee
+\(r+c\) y se traslada la columna en la dirección \(h\); en la
+multiplicativa se lee \(rc\) y se traslada la fila en la dirección
+\(v\). El umbral conserva la posición. Ambas orientaciones se
+invierten al completar cada intervalo de veintisiete actualizaciones.
+
+Para expresar la lectura y el acarreo con el mismo convenio positivo,
+definimos
+\[
+ [z]^+_9=1+((z-1)\bmod9),\qquad
+ q_9(z)=\frac{z-[z]^+_9}{9}.
+\]
+La evaluación precede al desplazamiento. Si \(a_n\) es el entero
+leído, el evento conserva \((a_n,[a_n]^+_9,q_9(a_n))\), la hoja,
+la posición anterior, la orientación y el cruce de frontera. El
+símbolo trítico es \([a_n]^+_9\bmod3\). El levantamiento espacial
+retiene, por ejemplo, el entero
+\(q_9(c+h)\) cuando \(c\) se sustituye por \([c+h]^+_9\).
+
+La representación de celda compartida y la representación de dos
+cursores de \eqref{ii:ii:tpk-fobs-posiciones} tienen estados visibles
+diferentes. Sus registros quedan relacionados con el estado TPK por
+sus mapas de representación respectivos. Para la trayectoria central
+se utiliza aquí, de forma íntegra, la actualización sobre la celda
+compartida que produce la palabra electrónica.
+
+\begin{proposition}[Actualización invertible con cocientes conservados]
+\label{ii:ii:electron-inversa-cocientes}
+Añadamos al estado visible dos registros enteros \(Q_+,Q_\times\)
+y dos números de enrollamiento \(W_r,W_c\). Cada lectura activa
+incrementa el registro de su hoja en \(q_9(a_n)\); cada desplazamiento
+incrementa el enrollamiento correspondiente en su cruce de frontera.
+Esta actualización posee una inversa explícita sobre su imagen.
+\end{proposition}
+\begin{proof}
+El índice posterior determina el modo anterior y si acaba de ocurrir
+una inversión de orientaciones. Se deshace primero esa inversión.
+Si el modo era aditivo, se recupera la columna previa como
+\([c-h]^+_9\); si era multiplicativo, se recupera la fila como
+\([r-v]^+_9\). El modo neutro conserva ambas coordenadas. La celda
+recuperada determina nuevamente el entero leído, su residuo, su
+cociente y el cruce de frontera. Restando esos incrementos de
+\(Q_+,Q_\times,W_r,W_c\) e invirtiendo el índice cronológico se
+recupera exactamente el estado precedente. La composición de estas
+inversas recupera una historia finita completa. La concatenación de
+eventos conserva además el orden de las lecturas.
+\end{proof}
+
+Los registros \(Q_+,Q_\times\) son una publicación aditiva explícita
+de la historia de cocientes. La construcción se integra en la fibra
+de memoria junto con sus demás coordenadas. Su ley de composición,
+para historias concatenables \(u,v\), es
+\[
+ Q_s(uv)=Q_s(u)+Q_s(v),\qquad s\in\{+,\times\},
+\]
+donde la segunda historia comienza en el estado final de la primera.
+La inversión algebraica de una actualización resta sus incrementos;
+recorrer posteriormente un trayecto espacial de vuelta registra
+nuevas evaluaciones. Esa distinción conserva simultáneamente la
+reversibilidad del transporte y la duración de la historia.
+
+\begin{proposition}[Retorno central y acumulación exacta]
+\label{ii:ii:electron-memoria-retorno}
+Desde \((r,c,h,v,n)=(5,5,1,1,0)\) y registros iniciales nulos, la
+proyección espacial y sus orientaciones retornan después de cincuenta y cuatro
+actualizaciones. En ese intervalo,
+\[
+ (\Delta W_r,\Delta W_c)=(0,0),\qquad
+ (\Delta Q_+,\Delta Q_\times)=(10,46).
+\]
+Después de \(54N\) actualizaciones, para todo entero \(N\geq0\),
+se tiene \((Q_+,Q_\times)=(10N,46N)\), mientras las coordenadas
+espaciales y sus orientaciones retornan. El índice entero toma el valor
+\(54N\); el calendario dodecafásico módulo \(108\) retorna para
+\(N\) par.
+\end{proposition}
+\begin{proof}
+Cada par de modos activos desplaza una vez cada coordenada. En
+veintisiete actualizaciones ambas recorren una vuelta de nueve
+posiciones y retornan a la diagonal central; después se invierten
+\(h,v\). El bloque siguiente recorre la vuelta opuesta. Los cruces
+espaciales se cancelan entre ambos bloques.
+
+En cada bloque las lecturas aditivas recorren \(2k\),
+\(1\leq k\leq9\), cuyo cociente positivo suma cinco. Las lecturas
+multiplicativas del bloque positivo recorren
+\(k[k+1]^+_9\). Su suma entera y su suma de residuos son
+\[
+ \sum_{k=1}^9 k[k+1]^+_9=249,\qquad
+ \sum_{k=1}^9[k[k+1]^+_9]^+_9=42.
+\]
+La segunda identidad resulta de la lista
+\((2,6,3,2,3,6,2,9,9)\). Por división euclídea,
+la suma de cocientes es \((249-42)/9=23\). La sustitución
+\(k\mapsto[k-1]^+_9\) muestra que el bloque negativo contiene
+el mismo multiconjunto de productos. Ambos bloques producen, por
+tanto, diez y cuarenta y seis unidades de los registros respectivos.
+La proyección espacial y sus orientaciones vuelven a sus valores
+iniciales. Las reglas de activación y de inversión se repiten al
+desplazar el índice en \(54\), y los incrementos no dependen de los
+registros acumulados. La ley aditiva
+anterior prueba por inducción la fórmula para todo \(N\).
+\end{proof}
+
+La lectura trítica y la orientación por ventanas proporcionan, sobre
+la misma trayectoria,
+\[
+ \gamma_e=\bigl((100000220)^3(120200000)^3\bigr)^2,\qquad
+ \tau_e=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+Las potencias representan concatenaciones. Los lectores de
+discrepancias y de ventanas desarrollados en
+\eqref{ii:eq:el-kd} y \eqref{ii:eq:el-komega} calculan ambos
+\((80,54,6)\). La evaluación se obtiene de la trayectoria antes
+de incorporar \(\alpha\), la sección de acción o una masa.
+La memoria de cocientes conserva información adicional a ese triple:
+en ciento ocho actualizaciones registra \((20,92)\), con
+enrollamiento espacial neto nulo. Cada publicación mantiene así el
+tipo del observable que la produce.
+
+% END OWNER
+
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/02d_bidireccion_memoria.tex
+% Desarrollo separado, 9 de septiembre de 2026.
+% Amplía el lector producto de centro_electronico_registros.tex.
+% No identifica la media vuelta espacial con una conjugación física.
+\subsubsection{Bidireccionalidad del lector producto y memoria de cocientes}
+\label{ii:bim09:seccion}
+
+La lectura de producto conserva cuatro coordenadas aritméticas antes de
+publicar una firma. Para $x=(i,j)\in D_9^2$, $D_9=\{1,\ldots,9\}$,
+se definen
+\[
+ N(x)=ij,\qquad r(x)=1+((ij-1)\bmod9),\qquad
+ q(x)=\frac{N(x)-r(x)}9,
+\]
+y el lector discreto
+\[
+ \ell(1,2,4,8,7,5)=(0,1,2,3,4,5),\qquad
+ \ell(3)=\ell(6)=\ell(9)=0.
+\]
+Así, $N=r+9q$ conserva simultáneamente producto entero, residuo positivo
+y cociente aritmético. La función $f_\ell(x)=\ell(r(x))$ es la
+coordenada utilizada por la firma regional. Las funciones $N,r,q$ y
+$f_\ell$ tienen dominio posicional; la dirección de transporte permanece
+en la semilla orientada.
+
+\paragraph{Avance, media vuelta y lectura anterior al transporte.}
+
+Sea $\mathscr X_\times=D_9^2\times\{N,E,S,O\}$. Los vectores cardinales
+son $\nu_N=(-1,0)$, $\nu_E=(0,1)$, $\nu_S=(1,0)$,
+$\nu_O=(0,-1)$. La suma posicional se reduce a representantes positivos
+módulo nueve. Definimos
+\[
+ P(x,d)=(x+\nu_d,d),\qquad H(x,d)=(x,\bar d),
+ \qquad \nu_{\bar d}=-\nu_d.
+\]
+Estos operadores satisfacen $P^9=I$, $H^2=I$ y $HPH=P^{-1}$.
+
+En las primeras cincuenta y cuatro transiciones TPK, el canal producto
+se activa en las fases $2,5,8$ de cada ventana nonádica. Cada activación
+lee la posición anterior al avance. Tras las transiciones $27$ y $54$
+se aplica $H$. Por tanto, las dieciocho posiciones leídas son, para una
+semilla $s$,
+\[
+ P^0s,P^1s,\ldots,P^8s,\quad
+ HP^9s,\,P H P^9s,\ldots,P^8H P^9s,
+\]
+entendiendo que la lectura posicional omite únicamente la dirección.
+Para cualquier función posicional $f$, pongamos $f_n=f(P^ns)$, con
+índices módulo nueve. La palabra de lecturas crudas es
+\begin{equation}
+ \mathcal R_f(s)=
+ (f_0,f_1,\ldots,f_8,\ f_0,f_8,f_7,\ldots,f_1).
+ \label{ii:bim09:palabra}
+\end{equation}
+Las seis sumas de ventana, cada una de tres activaciones, son
+\begin{align}
+ A_j^f(s)&=f_{3j}+f_{3j+1}+f_{3j+2},&&0\leq j<3,\label{ii:bim09:ida}\\
+ A_{3+j}^f(s)&=f_{-3j}+f_{-3j-1}+f_{-3j-2},&&0\leq j<3.
+ \label{ii:bim09:vuelta}
+\end{align}
+Para $f=f_\ell$, la firma es
+$E_{\rm sig}(s)=([A_0^f]_{10},\ldots,[A_5^f]_{10})$.
+El cociente decimal de cada acumulador es
+$c_j^{10}=\lfloor A_j^f/10\rfloor$ y conserva
+$A_j^f=[A_j^f]_{10}+10c_j^{10}$.
+
+\begin{proposition}[Media vuelta y permutación de semiciclos]
+\label{ii:bim09:media-vuelta}
+Para toda semilla orientada y toda función posicional $f$,
+\[
+ \mathcal R_f(Hs)=\operatorname{rot}_9\mathcal R_f(s),\qquad
+ A_j^f(Hs)=A_{j+3\bmod6}^f(s).
+\]
+La misma permutación transporta los residuos y los cocientes decimales
+de los acumuladores. Se aplica, en particular, a $N,r,q$ y $f_\ell$.
+\end{proposition}
+\begin{proof}
+La relación $P^nH=HP^{-n}$ y la igualdad $f(Hs)=f(s)$ dan
+$f(P^nHs)=f(P^{-n}s)=f_{-n}$. Sustituir en
+\eqref{ii:bim09:palabra} intercambia sus dos grupos de nueve entradas.
+La suma en grupos de tres produce la identidad de ventanas. La división
+euclídea por diez se efectúa componente a componente y respeta la
+permutación.
+\end{proof}
+
+El avance también tiene una ley exacta sobre los acumuladores:
+\begin{align}
+ A_j^f(Ps)-A_j^f(s)&=f_{3j+3}-f_{3j},&&0\leq j<3,
+ \label{ii:bim09:avance-ida}\\
+ A_{3+j}^f(Ps)-A_{3+j}^f(s)&=f_{1-3j}-f_{-2-3j},&&0\leq j<3.
+ \label{ii:bim09:avance-vuelta}
+\end{align}
+La prueba consiste en cancelar los dos sumandos comunes de cada ventana.
+El transporte de una firma requiere, por tanto, las evaluaciones de
+frontera que aparecen en estas diferencias, además de las sumas ya
+publicadas.
+
+\paragraph{Inversión cronológica y términos de frontera.}
+
+Sea $\gamma=(x_0,\ldots,x_n)$ una trayectoria registrada y sea
+$\gamma^\dagger=(x_n,\ldots,x_0)$ su inversión cronológica, con cada
+arista orientada en sentido opuesto. Para una función posicional $f$,
+la lectura anterior a cada avance es
+\[
+ C_f(\gamma)=\sum_{t=0}^{n-1}f(x_t).
+\]
+Entonces
+\begin{equation}
+ C_f(\gamma^\dagger)=C_f(\gamma)+f(x_n)-f(x_0).
+ \label{ii:bim09:frontera-inversion}
+\end{equation}
+Si $n=3m$ y $A_j^f$ agrupa tres aristas consecutivas,
+\begin{equation}
+ A_j^f(\gamma^\dagger)=A_{m-1-j}^f(\gamma)
+ +f(x_{3(m-j)})-f(x_{3(m-j-1)}).
+ \label{ii:bim09:frontera-ventana}
+\end{equation}
+Ambas fórmulas se siguen de que la trayectoria inversa lee los extremos
+de llegada de las aristas originales. Los sumandos interiores coinciden;
+la diferencia conserva los extremos.
+
+Para un observable de arista antisimétrico $a(x,y)=-a(y,x)$, su palabra
+sí se transforma mediante
+\[
+ \mathcal R_a(\gamma^\dagger)
+ =-\operatorname{rev}\mathcal R_a(\gamma).
+\]
+Esta identidad actúa sobre aristas orientadas. Las identidades
+\eqref{ii:bim09:frontera-inversion}--\eqref{ii:bim09:frontera-ventana}
+actúan sobre lecturas posicionales. La media vuelta $H$ cambia la
+dirección inicial y conserva el orden del calendario; la inversión
+cronológica invierte el registro completo. Sus dominios y sus reglas de
+lectura quedan especificados por separado.
+
+\paragraph{Cociclo de ocupación y memoria conservada en ida y vuelta.}
+
+Para una arista cardinal $x\to y$, con representantes positivos
+$\widetilde x,\widetilde y$, el cruce del recubrimiento es
+\[
+ b(x,y)=\frac{\widetilde x+\nu_d-\widetilde y}{9}\in\mathbb Z^2.
+\]
+Se cumple $b(y,x)=-b(x,y)$. En la categoría libre de caminos
+registrados, definimos el lector aditivo
+\begin{equation}
+ \mathfrak m(\gamma)=
+ \left(\sum_{t=0}^{n-1}b(x_t,x_{t+1}),\ C_q(\gamma),\ n\right).
+ \label{ii:bim09:memoria-aditiva}
+\end{equation}
+La concatenación satisface
+$\mathfrak m(\gamma_2\circ\gamma_1)=
+\mathfrak m(\gamma_1)+\mathfrak m(\gamma_2)$.
+Es un cociclo aditivo sobre trayectorias registradas: el registro conserva
+las aristas de ida y de vuelta como eventos diferentes.
+
+Por \eqref{ii:bim09:frontera-inversion},
+\begin{equation}
+ \mathfrak m(\gamma^\dagger\circ\gamma)=
+ \bigl(0,\ 2C_q(\gamma)+q(x_n)-q(x_0),\ 2n\bigr),
+ \label{ii:bim09:memoria-retorno}
+\end{equation}
+donde $\gamma^\dagger\circ\gamma$ denota la concatenación temporal
+de la ida seguida de la vuelta. La suma orientada de cruces se cancela;
+la ocupación aritmética y la longitud permanecen. Este lector no
+desciende al cociente que identifica un recorrido seguido de su inversa
+con la trayectoria vacía, puesto que ese cociente elimina los eventos
+que la segunda y la tercera coordenadas conservan.
+
+Hay también una lectura par puramente fronteriza:
+\[
+ V_b(\gamma)=\sum_{t=0}^{n-1}
+ b(x_t,x_{t+1})b(x_t,x_{t+1})^{\mathsf T},\qquad
+ V_b(\gamma^\dagger\circ\gamma)=2V_b(\gamma).
+\]
+La lectura impar y la lectura par registran propiedades distintas de
+las mismas aristas; ambas están calculadas antes de olvidar el camino.
+
+\paragraph{Aplicación exacta a la fibra de firma \texorpdfstring{$555555$}{555555}.}
+
+La enumeración finita de $\mathscr X_\times$ contiene $324$ semillas,
+$26$ firmas y $24$ semillas con firma $555555$. La partición estable
+por $P,H$ refina esta fibra en tres clases de ocho elementos. Pueden
+etiquetarse por su firma después de un avance:
+\[
+ \mathscr C_{177},\quad\mathscr C_{717},\quad\mathscr C_{771}.
+\]
+La acción de media vuelta es
+\[
+ H\mathscr C_{177}=\mathscr C_{177},\qquad
+ H\mathscr C_{717}=\mathscr C_{771},\qquad
+ H\mathscr C_{771}=\mathscr C_{717}.
+\]
+El certificado finito adjunto verifica estas identidades sobre todos los
+representantes. En las veinticuatro semillas, los seis acumuladores
+crudos de $f_\ell$ valen exactamente cinco. Por tanto, los cocientes
+decimales $c_j^{10}$ se anulan en esta fibra. La información adicional
+se observa en las posiciones, las evaluaciones enteras y los cocientes
+aritméticos, que tienen lecturas diferentes de esa firma.
+
+La coordenada transversal fija $a$ del recorrido cardinal vale $4$ o
+$5$ en esas semillas. Durante una vuelta de nueve avances se recorre
+una vez cada valor de la coordenada móvil $u\in D_9$. Puesto que
+$\gcd(a,9)=1$, los residuos positivos $r(au)$ permutan $D_9$.
+De aquí se obtiene, sin utilizar una constante física,
+\[
+ \sum_{u=1}^9au=45a,\qquad
+ \sum_{u=1}^9r(au)=45,\qquad
+ \sum_{u=1}^9q(au)=5(a-1).
+\]
+La vuelta posterior recorre las mismas posiciones en sentido opuesto.
+En las dieciocho activaciones,
+\begin{equation}
+ \sum N=90a,\qquad\sum r=90,\qquad
+ \sum q=10(a-1)=
+ \begin{cases}30,&a=4,\\40,&a=5.\end{cases}
+ \label{ii:bim09:ocupacion-30-40}
+\end{equation}
+El producto entero acumulado vale, respectivamente, $360$ o $450$.
+El enrollamiento neto es cero; la suma de cocientes y las dieciocho
+incidencias conservan la historia de la lectura. Cada una de las tres
+clases de firma contiene representantes de ambos valores transversales.
+La misma firma y la misma clase de transporte de ese cociente finito
+pueden, por tanto, coexistir con ocupaciones aritméticas distintas.
+
+Estos resultados conectan la memoria conservada con operaciones
+concretas: permutación de semiciclos, diferencias de frontera,
+cocientes aritméticos y registro de incidencias. La identificación
+físico-matemática de cualquier lector posterior conserva sus mapas
+propios; las identidades aquí demostradas pertenecen a la dinámica
+interna del canal producto.
+
+% END OWNER
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/02e_estado_producto.tex
+% Fragmento de inserción breve. Desarrollo y procedencia en la misma carpeta.
+\subsubsection{Memoria aritmética del canal multiplicativo}
+\label{ii:prd-arit:seccion}
+
+La conservación de la firma regional se prolonga a la evaluación
+aritmética completa de APP. Para una posición orientada
+\(x=(i,j,d)\in\{1,\ldots,9\}^2\times\{N,E,S,O\}\), sea
+\(\chi(x)=(a,b,\epsilon)\), donde \(a\) es la coordenada fija,
+\(b\) la coordenada móvil y \(\epsilon\) su orientación:
+\[
+ \chi(i,j,N)=(j,i,-1),\quad \chi(i,j,S)=(j,i,+1),\qquad
+ \chi(i,j,E)=(i,j,+1),\quad \chi(i,j,O)=(i,j,-1).
+\]
+La etiqueta de eje \(\iota\in\{i,j\}\) conserva cuál de las
+dos coordenadas originales se mueve. Escribiendo
+\(\langle b\rangle_9=1+((b-1)\bmod9)\), los operadores y la
+evaluación son
+\begin{align}
+ \overline P(a,b,\epsilon)&=(a,\langle b+\epsilon\rangle_9,\epsilon),
+ &\overline H(a,b,\epsilon)&=(a,b,-\epsilon),\label{ii:prd-arit:PH}\\
+ n(a,b)&=ab,&r(a,b)&=\langle ab\rangle_9,\qquad
+ q(a,b)=\frac{ab-r(a,b)}9.\label{ii:prd-arit:rq}
+\end{align}
+
+\begin{proposition}[Representación exacta del transporte aritmético]
+\label{ii:prd-arit:minimal}
+Se cumplen \(\chi P=\overline P\chi\) y
+\(\chi H=\overline H\chi\). La representación \(\chi\)
+tiene \(162\) estados y es la menos fina de las representaciones
+estables bajo \(P,H\) que conservan el producto entero o,
+equivalentemente, el par \((r,q)\). Conservar además \(\iota\)
+recupera las \(324\) posiciones orientadas originales.
+\end{proposition}
+\begin{proof}
+El avance modifica sólo \(b\), y la media vuelta sólo
+\(\epsilon\), lo que prueba las dos identidades de transporte.
+Las nueve observaciones \(n_k=n(\overline P^k\chi(x))\),
+\(0\leq k<9\), recorren \(a,2a,\ldots,9a\). Así se recuperan
+\(a=\min_k n_k\), \(b=n_0/a\) y el signo mediante
+\((n_1/a-n_0/a)\bmod9\in\{1,8\}\). Toda equivalencia estable
+que conserve \(n\) conserva estas nueve observaciones y, por
+tanto, distingue todos los estados \((a,b,\epsilon)\).
+La identidad \(n=r+9q\) prueba la equivalencia de las dos
+evaluaciones. Cada fibra de \(\chi\) contiene las dos rutas
+transpuestas: \((i,j,d)\mapsto(j,i,d^\top)\), con
+\(N^\top=O,O^\top=N,E^\top=S,S^\top=E\). La etiqueta de eje distingue
+esas dos preimágenes y permite reconstruir posición y dirección.
+\end{proof}
+
+El selector TRIT activa el producto en \(t\equiv2,5,8\pmod9\),
+antes de cada avance. La media vuelta actúa al finalizar cada
+\(27\) instantes. Si \(y_{t-1}\) denota el estado aritmético
+previo, el incremento y su memoria acumulada quedan determinados por
+\begin{equation}
+ \eta_q(t)=\mathbf1_{\{t\equiv2\ (3)\}}q(y_{t-1}),\qquad
+ \lambda_q(t)=\lambda_q(t-1)+\eta_q(t),\quad \lambda_q(0)=0.
+ \label{ii:prd-arit:incremento}
+\end{equation}
+Se cumple \(0\leq q(a,b)\leq a-1\). Para invertir una
+actualización se deshace primero la media vuelta que corresponda,
+después el avance, y finalmente se resta el cociente recuperado del
+estado previo. El registro retiene fase, eje, orden de eventos y
+memoria; \(\lambda_q\) es un cociclo aditivo de este transporte.
+
+Cada bloque de \(27\) contiene nueve avances y recorre una vez
+la coordenada móvil. Por ello, el retorno de posición y orientación
+en \(54\), y de fase en \(108\), coexiste con
+\begin{equation}
+ \lambda_q(108N)=NQ_\times^+(a),\qquad
+ Q_\times^+(a)=\frac{180a-4\sum_{b=1}^9r(a,b)}9,
+ \qquad N\geq0.
+ \label{ii:prd-arit:retorno}
+\end{equation}
+En efecto, cada bloque suma los productos \(a,2a,\ldots,9a\);
+sumar \(n=r+9q\) en los cuatro bloques da la fórmula. Si
+\(a\) es primo con \(9\), los residuos suman \(45\), y
+\(Q_\times^+(a)=20(a-1)\). En la ventana \(j\), contando desde
+\(j=0\), el signo relativo del calendario es
+\(\sigma_j=(-1)^{\lfloor j/3\rfloor}\), y la orientación
+efectiva es \(\epsilon_j=\epsilon_0\sigma_j\).
+La carga firmada por \(\sigma_j\) se anula; la carga ponderada
+por la orientación efectiva se anula asimismo al multiplicarse por
+\(\epsilon_0\). El libro conserva la orientación inicial, la carga
+acumulada y sus incrementos. Estas cantidades pertenecen
+al cursor multiplicativo; los lectores de una trayectoria que
+alterna ambas hojas actúan sobre el registro de esa trayectoria.
+
+% END OWNER
+
+
+La emisión finita, su acoplamiento de firmas y la reducción ternaria tienen
+tipos sucesivos:
+\[
+ \mathcal S^2\xrightarrow{s\times e}
+ \operatorname{im}s\times\operatorname{im}e
+ \xrightarrow{G}\mathcal U_6
+ \xrightarrow{\Psi_6}W_6\hookrightarrow\mathbb F_3^6.
+\]
+La sección~\ref{ii:sec:extension} demuestra la factorización de las
+\(104\,976\) semillas en \(18\cdot26=468\) emisiones y las
+\(243\) palabras visibles del ambiente de \(729\) elementos. Las
+aplicaciones \(G\) y \(\Psi_6\) son las de
+\eqref{ii:eq:acoplamiento} y~\eqref{ii:eq:psi-catalogo}; el registro conserva
+las preimágenes aritméticas junto a esa publicación finita.
+
+\subsubsection{Compatibilidad de cocientes y cilindros de refinamiento}
+
+La prolongación compara estados que conservan simultáneamente residuos,
+cocientes y fronteras. En la carta lineal de seis coordenadas del registro,
+la matriz
+\[
+ A_H=\begin{pmatrix}
+ 2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+ 0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+ \end{pmatrix},\qquad\det A_H=1,
+\]
+da la aplicación de división
+\begin{equation}
+ \mathcal H:\mathbb Z^6\longrightarrow
+ \{0,1,2\}^6\times\mathbb Z^6,\qquad
+ x\longmapsto(u,x^+),\quad
+ y=xA_H,\quad u=[y]_3,\quad x^+=(y-u)/3.
+ \label{ii:ii:tpk-hensel-local}
+\end{equation}
+Las filas se interpretan como vectores. El par \((u,x^+)\) conserva
+\(y=u+3x^+\) y permite recuperar
+\(x=(u+3x^+)A_H^{-1}\). La orientación ternaria de \(u\) se obtiene
+después mediante \(\rho_3^{\rm or}\), conservando el cociente anterior.
+Así se explicita el contenido reversible de esta carta local.
+
+La carta cilíndrica relaciona un prefijo ternario de longitud \(L\), de
+índice entero \(N\), con \(K\) tríadas decimales, de índice \(D\).
+Los correspondientes cilindros semiabiertos tienen extremos racionales
+\[
+ I_3(N,L)=\left[\frac N{3^L},\frac{N+1}{3^L}\right),\qquad
+ I_{1000}(D,K)=\left[\frac D{1000^K},\frac{D+1}{1000^K}\right).
+\]
+Definamos los enteros de frontera
+\[
+ a=N1000^K-D3^L,\qquad b=(N+1)1000^K-D3^L.
+\]
+
+\begin{lemma}[Actualización entera de los cilindros compatibles]
+\label{ii:ii:tpk-cilindros-enteros}
+Los cilindros anteriores se intersectan si y sólo si
+\(a<3^L\) y \(b>0\). Al añadir un bloque ternario
+\(u\in\{0,\ldots,728\}\), se tiene \(N'=729N+u\) y
+\(L'=L+6\). Para \(\Delta K\in\{0,1\}\), las fronteras se
+actualizan por
+\[
+ \begin{array}{ll}
+ \Delta K=0:&a'=729a+u1000^K,\\[2pt]
+ \Delta K=1:&D'=1000D+\delta,\quad
+ a'=729000a+u1000^{K+1}-\delta\,729\,3^L,
+ \end{array}
+\]
+donde \(\delta\in\{0,\ldots,999\}\) es la tríada de la
+prolongación compatible. En ambos casos,
+\(b'=a'+1000^{K+\Delta K}\).
+\end{lemma}
+\begin{proof}
+Dos intervalos semiabiertos se intersectan precisamente cuando cada extremo
+izquierdo es menor que el extremo derecho del otro. Multiplicar esas dos
+desigualdades por \(3^L1000^K\) da \(a<3^L\), \(b>0\).
+La sustitución de \(N'\), \(L'\) y \(D'\) en
+\(a'=N'1000^{K+\Delta K}-D'3^{L'}\) produce las dos recurrencias.
+Restar las definiciones de \(b'\) y \(a'\) da la última identidad.
+\end{proof}
+
+Estas operaciones actúan sobre prefijos enteros y sus restricciones
+compatibles. La lectura arquimediana aparece al evaluar el sistema de
+cilindros resultante. El dominio de prolongación incorpora además la
+orientación, el acarreo y la firma conjunta de frontera de
+\eqref{ii:ii:tpk-fibra}; la comparación de intervalos es una componente de
+esa compatibilidad conjunta.
+
+\subsubsection{Relaciones de extensión y conexión nonádica conjunta}
+
+Para una ruta observable \(r:q\to q'\), la prolongación tiene tipo
+\[
+ \operatorname{Ext}_r\subseteq\mathcal F_q\times\mathcal F_{q'},
+ \qquad
+ \operatorname{Ext}_{r_2}\circ\operatorname{Ext}_{r_1}
+ \subseteq\operatorname{Ext}_{r_2r_1}.
+\]
+Las identidades satisfacen
+\(\Delta_{\mathcal F_q}\subseteq
+\operatorname{Ext}_{\operatorname{id}_q}\).
+Conserva los truncamientos, las hojas, las orientaciones, los acarreos y
+las incidencias de frontera de las dos historias. Las identidades y las
+concatenaciones admisibles forman la categoría de estados y prolongaciones
+del TPK. Esta estructura relacional admite fibras locales con más de una
+continuación y permite imponer conjuntamente su persistencia.
+
+Sea \(\mathcal H_m\) el conjunto de historias admisibles de profundidad
+\(m\), con truncamientos \(p_{n,m}\). La supervivencia se expresa por
+\[
+ \operatorname{Surv}_m^{(N)}=p_{N,m}(\mathcal H_N),\qquad
+ \operatorname{Surv}_m=\bigcap_{N\geq m}
+ \operatorname{Surv}_m^{(N)},\qquad
+ X_\chi=\varprojlim_m\operatorname{Surv}_m^{(\chi)}.
+\]
+La sección compatible conserva simultáneamente todos sus prefijos. Las
+relaciones locales \(\mathcal R_k\) de la conexión se componen en
+\begin{equation}
+ \Gamma_{9,k}=\mathcal R_{k+8}\circ\cdots\circ\mathcal R_k,\qquad
+ \Gamma_{9,k}:\widehat X_k\dashrightarrow\widehat X_{k+9}.
+ \label{ii:ii:tpk-holonomia}
+\end{equation}
+El dominio indicado es el de las historias compatibles. Sobre una historia
+individualizada, las nueve relaciones representan su transporte efectivo;
+el sistema conserva todas las prolongaciones admisibles antes de esa
+individualización.
+
+La ley de retorno se escribe
+\[
+ g(\Gamma_{9,k}x)=g(x),\qquad
+ q_{\rm mem}(\Gamma_{9,k}x)=q_{\rm mem}(x)+1.
+\]
+La fase vuelve y la historia se prolonga. Los prefijos
+\(w_6,w_{12},w_{18},w_{24},w_{30}\), la frontera \(R_{36}\) y las
+cartas \(G_9\) son estados, extensiones o presentaciones de esta
+construcción, con tipos distintos de la holonomía \(\Gamma_9\).
+Su realización regional se desarrolla en la sección~\ref{ii:sec:generacion};
+la composición de vueltas y sus representaciones están demostradas en
+\ref{ii:mono-ampl:def-vuelta}--\ref{ii:mono-ampl:representacion}.
+
+\subsubsection{Incidencia de fase y origen aritmético de los canales}
+
+El selector \(M_{\rm ph}\) induce las clases
+\[
+ H_+=\{1,4,7\},\quad H_-=\{2,5,8\},\quad
+ H_0=\{3,6,9\},\quad H_{\rm act}=H_+\sqcup H_-.
+\]
+El origen de fase fija el representante terminal
+\(\star_{\rm ph}=9\) y el conjunto
+\(O_{\rm ph}=D_9\setminus\{\star_{\rm ph}\}\).
+Escribimos \(P_2(H_{\rm act})\) para los pares no ordenados de fases
+activas y definimos
+\[
+ \mathcal F_6^{\rm ph}=H_{\rm act}\times P_2(H_{\rm act}),\qquad
+ \mathcal F_8^{\rm ph}=O_{\rm ph}\times P_2(H_{\rm act}),\qquad
+ \Theta_{\rm ph}=D_9\times P_2(H_{\rm act}).
+\]
+
+\begin{theorem}[Incidencia de la semicorona de fase]
+\label{ii:ii:tpk-semicorona}
+En el origen de ventana declarado,
+\[
+ |\mathcal F_6^{\rm ph}|=90,\qquad
+ |\mathcal F_8^{\rm ph}|=120,\qquad
+ |\Theta_{\rm ph}|=135.
+\]
+La frontera orientada, el retorno apuntado y el cierre lateral,
+\[
+ \partial_{\rm ph}=\Theta_{\rm ph}\times\{-1,+1\},\quad
+ E_{\rm ph}=\partial_{\rm ph}\sqcup\{\infty\},\quad
+ L_{\rm ph}=H_0\times P_2(H_{\rm act}),\quad
+ P_{\rm ph}=\partial_{\rm ph}\sqcup L_{\rm ph},
+\]
+satisfacen
+\[
+ |\partial_{\rm ph}|=270,\quad |E_{\rm ph}|=271,\quad
+ |L_{\rm ph}|=45,\quad |P_{\rm ph}|=315.
+\]
+La traslación del origen transporta por biyecciones todos estos conjuntos
+y conserva sus incidencias.
+\end{theorem}
+\begin{proof}
+Hay seis fases activas y \(\binom62=15\) pares no ordenados.
+Los productos por \(6,8,9\) dan \(90,120,135\). La orientación
+duplica el último conjunto, el retorno apuntado añade un elemento y las
+tres fases neutrales aportan \(3\cdot15=45\) incidencias laterales.
+La acción de \(C_9\) transporta simultáneamente el selector, el
+representante terminal y cada factor de los productos cartesianos.
+\end{proof}
+
+La diferencia de cardinales activos es \(120-90=30\). El defecto
+normalizado posee por ello la expresión exacta
+\begin{equation}
+ \frac{30}{120}-\frac{30}{90}=-\frac1{12}.
+ \label{ii:ii:tpk-defecto-incidencia}
+\end{equation}
+Aquí \(90\) y \(120\) son cardinales de incidencias producidas por la
+regla de fase. La posterior realización hexádico--octádica transporta esta
+incidencia a sus objetos combinatorios. Las coordenadas angulares de esos
+objetos se establecen mediante sus aplicaciones de realización.
+
+\subsubsection{Registro temporal, extracción firmada y coordenadas reversibles}
+
+Sea \(E_m=\{9(m-1)+1,\ldots,9m\}\). La restricción de una historia
+a doce ventanas conserva, en cada una, su subruta \(\tau_m\),
+orientación \(\sigma_m\), acarreo de frontera \(\kappa_m\) y registro
+local \(\Lambda_m\):
+\[
+ \mathcal R_{12}(x)
+ =\bigl((E_m,\tau_m,\sigma_m,\kappa_m,\Lambda_m)\bigr)_{m=1}^{12}.
+\]
+El mapa \(\mathcal R_{12}\) tiene como dominio las historias; el grupo
+\(C_{12}\) tiene como elementos las clases de sector, y
+\(\Theta_{108}\) conserva su calendario. Esta distinción mantiene
+visibles los datos que cada realización conserva.
+
+La extracción firmada de la sección~\ref{ii:sec:k-registro} factoriza por
+\begin{equation}
+ \mathcal X_{\rm TPK}^{\rm term,mem}
+ \xrightarrow{\mathcal R_{12}}\mathcal R_{12}^{\rm mem}
+ \xrightarrow{\mathcal E_{108}^{90,120}}
+ \mathbb Z^{12}\times\mathbb Z^{12}\times\mathbb Z
+ \xrightarrow{\Pi_H}\mathbb Z^{12}.
+ \label{ii:ii:tpk-extraccion-tipada}
+\end{equation}
+El segundo mapa publica los canales
+\((b^{90},b^{120},Q_{\rm TPK})\); el tercero construye el vector
+firmado \(U\). La regla \(\varepsilon_9=M_{\rm ph}\) pertenece a la
+selección de fase, mientras \(\mathcal E_{108}^{90,120}\) actúa sobre
+el registro completo de canales. Sus dominios y sus salidas los distinguen.
+
+Las ecuaciones~\eqref{ii:eq:k-sumas-armonicas} y
+\eqref{ii:eq:k-bloques-firmados} dan la acción aritmética de \(\Pi_H\).
+Después, la transformación \(\mathcal H_{12}\), construida por las
+tres órbitas de paso tres, relaciona reversiblemente \(U\) con el
+registro \(K\). Las diferencias cíclicas y la carga total proporcionan
+lecturas posteriores del mismo registro. Así se conserva la procedencia
+común de las coordenadas regionales y de la coordenada firmada antes de la
+clausura entera que determina \(\alpha\).
+
+\subsubsection{Transferencia reducida y memoria conservada por la dinámica}
+
+Una vez construida la factorización de las emisiones,
+\(\mathcal U_6\simeq\mathcal A_+\times\mathcal A_\times\), con
+\(|\mathcal A_+|=18\) y \(|\mathcal A_\times|=26\), se dispone de
+dos proyecciones sobre las funciones del catálogo:
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal A_+}f(s',e),\qquad
+ (E_\times f)(s,e)=\frac1{26}\sum_{e'\in\mathcal A_\times}f(s,e').
+\]
+Los alfabetos de firmas \(\mathcal A_+,\mathcal A_\times\) se
+distinguen de los conjuntos de semillas de los dos cursores.
+Cada una promedia la coordenada activa y conserva la otra. Con
+\(P_{+1}=E_+\), \(P_{-1}=E_\times\), \(P_0=I\), el núcleo
+de transferencia sobre \(\mathcal U_6\times C_9\) es
+\[
+ \mathcal K_{\rm ph}((u,r),(v,r+1))=P_{M_{\rm ph}(r)}(u,v).
+\]
+Las dos proyecciones conmutan y son idempotentes. Por tanto, su composición
+durante una vuelta de fase satisface
+\begin{equation}
+ \mathcal K_{\rm ph}^{9}\big|_r=E_+E_\times,\qquad
+ (E_+E_\times)(u,v)=\frac1{468}.
+ \label{ii:ii:tpk-renovacion}
+\end{equation}
+Este operador es una publicación de memoria reducida sobre emisiones ya
+construidas. La holonomía \(\Gamma_9\) conserva además las
+coordenadas de la historia sobre la que se efectúa esa publicación.
+
+En una realización isométrica \(U_{\Gamma_9}\) del transporte y para
+una inclusión isométrica \(J\) de la coordenada observada, sus dos
+componentes son
+\[
+ T=J^*U_{\Gamma_9}J,\qquad
+ \eta=(I-JJ^*)U_{\Gamma_9}J.
+\]
+Se obtiene directamente
+\[
+ U_{\Gamma_9}J=JT+\eta,\qquad J^*\eta=0,\qquad
+ I-T^*T=\eta^*\eta.
+\]
+La componente \(\eta\) se calcula a partir de la misma actualización
+realizada y de la proyección declarada. La telescopía
+\eqref{ii:eq:telescopia} conserva tanto las contribuciones expresadas en el
+complemento ortogonal como el término terminal. Esta separación es la
+base operatoria de la distinción posterior entre información registrada,
+entropía de una observación y realización dimensional de la acción.

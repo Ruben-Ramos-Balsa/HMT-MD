@@ -1,0 +1,491 @@
+\section{Construcción correlativa del continuo: historias, transporte, incidencia y terminal}
+\label{iv:continuo-conjunto}
+La aritmética publicada por una forma normal conserva una lectura precisa del estado que la produce. Para situar esa lectura dentro de HMT es necesario mantener también las historias, las hojas y las operaciones que actúan sobre ellas. Este capítulo reúne ese sustrato común. Sus distintas construcciones se obtienen del mismo árbol de ejecuciones APP–TRIT–TPK; los cortes de exposición permiten estudiar sus propiedades sin convertirlas en dominios independientes elegidos por una aplicación posterior.
+
+El punto de partida es el núcleo formal expuesto anteriormente. Una emisión admisible contiene la operación de APP, la orientación del TRIT, el cambio de hoja, el residuo y el cociente, junto con la actualización efectiva de memoria del TPK. Cuando se publica solamente un residuo, la historia de ejecución sigue perteneciendo al objeto de partida. Dos ejecuciones con idéntica lectura final no se identifican por ese solo motivo.
+
+\subsection{Historias admisibles y memoria por composición}
+\label{iv:cont:historias}
+Sea \(X_k\) el conjunto de historias admisibles de longitud \(k\). Sus elementos se construyen por emisiones sucesivas desde el dominio inicial del núcleo. Escribimos \(h\varepsilon\) para la prolongación de \(h\) por una emisión admisible \(\varepsilon\), y \(\rho_k(h\varepsilon)=h\) para la supresión de la última emisión. Se conserva la etiqueta de la emisión, incluso cuando diferentes etiquetas producen un mismo estado publicado.
+
+En las dos hojas aritméticas, los datos locales satisfacen las divisiones exactas
+
+\[
+\delta_\diamond=r_\diamond+9q_\diamond,
+\qquad 0\leq r_\diamond<9,
+\qquad \diamond\in\{\Sigma,\Pi\}.
+\]
+La coordenada orientada del TRIT admite, análogamente, una escritura \(\Delta=o_r+3\kappa\), con el representante orientado declarado por el núcleo. La conservación del cociente permite componer esas publicaciones sin sustituir una emisión por su residuo aislado.
+
+En una carta de memoria, la actualización de una emisión se escribe
+
+\[
+U_\varepsilon(m)=C_\varepsilon m+\kappa_\varepsilon.
+\]
+Para una trayectoria \(\alpha=(\varepsilon_1,\ldots,\varepsilon_k)\), la operación efectiva es la composición ordenada de esas actualizaciones. Su parte lineal y su traslación son
+
+\[
+C_\alpha=C_{\varepsilon_k}\cdots C_{\varepsilon_1},
+\qquad
+\kappa_\alpha=
+\sum_{j=1}^{k}C_{\varepsilon_k}\cdots
+C_{\varepsilon_{j+1}}\kappa_{\varepsilon_j}.
+\]
+El producto vacío de la última suma es la identidad.
+
+\begin{proposition}[Compatibilidad afín de la concatenación]
+\label{iv:cont:concatenacion}
+Si \(\alpha\) precede a \(\beta\), entonces
+
+\[
+C_{\beta\alpha}=C_\beta C_\alpha,
+\qquad
+\kappa_{\beta\alpha}=C_\beta\kappa_\alpha+\kappa_\beta,
+\qquad
+U_{\beta\alpha}=U_\beta U_\alpha.
+\]
+\end{proposition}
+\begin{proof}
+Sustituir \(U_\alpha(m)\) en \(U_\beta\) produce \(C_\beta C_\alpha m+C_\beta\kappa_\alpha+\kappa_\beta\). La descomposición en parte lineal y traslación da las tres identidades. La asociatividad de la composición demuestra que el resultado no depende de una subdivisión auxiliar de la trayectoria.
+\end{proof}
+
+Esta identidad de cociclo es el contenido preciso de la memoria acumulada. La cantidad transportada por una segunda trayectoria depende de la actualización de carta que ésta realiza; no es, en general, la suma sin transporte de dos registros.
+
+El retorno nonádico conserva una segunda distinción. En las coordenadas de fase y vuelta, con \(\bar r\in\{0,\ldots,8\}\), su publicación es
+
+\[
+\sigma_9(w,r)=
+\left(w+\left\lfloor\frac{\bar r+1}{9}\right\rfloor,
+r+1\pmod9\right),
+\qquad
+\sigma_9^9(w,r)=(w+1,r).
+\]
+Durante nueve pasos se produce exactamente un cruce de \(8\) a \(0\). La fase retorna y la coordenada de vuelta aumenta. La holonomía enriquecida retiene además las actualizaciones de memoria que acompañan ese recorrido.
+
+\subsection{Refinamiento del árbol y medida de historias}
+\label{iv:cont:medida}
+Se fija el conjunto inicial finito no vacío de semillas admisibles, con una masa inicial estrictamente positiva y de suma \(1\). En este apartado cada historia tiene un número finito y positivo de prolongaciones. La supresión de emisiones define las aplicaciones de refinamiento. La admisibilidad del núcleo proporciona las prolongaciones; cuando una residencia utiliza una emisión neutra, ésta da explícitamente una sección de \(\rho_k\). La existencia de esa sección se refiere al árbol que incluye dicha emisión, no a cualquier restricción arbitraria de rutas.
+
+Sea \(d(h)\geq1\) el número de emisiones admisibles en \(h\). La elección equiprobable entre sus hijos define
+
+\[
+\mu(h\varepsilon)=\frac{\mu(h)}{d(h)}.
+\]
+Más generalmente, una distribución local positiva \(p(\varepsilon\mid h)\), cuya suma es \(1\), define \(\mu(h\varepsilon)=\mu(h)p(\varepsilon\mid h)\). Esta segunda formulación permite conservar las ponderaciones del lector cuando los números de prolongaciones no son uniformes.
+
+\begin{proposition}[Compatibilidad cilíndrica y esperanza condicional]
+\label{iv:cont:esperanza}
+En cada nivel se cumple
+
+\[
+\sum_{\rho_k(y)=x}\mu(y)=\mu(x).
+\]
+En los espacios \(L^2(X_k,\mu_k)\), las aplicaciones
+
+\[
+(J_kf)(y)=f(\rho_k(y)),
+\qquad
+(E_kg)(x)=\sum_{\rho_k(y)=x}\frac{\mu(y)}{\mu(x)}g(y)
+\]
+satisfacen \(E_k=J_k^*\), \(E_kJ_k=I\) y \(\|J_kf\|=\|f\|\).
+
+\end{proposition}
+\begin{proof}
+La primera identidad es la normalización de las probabilidades locales. Aplicándola a \(|f(x)|^2\) se obtiene la isometría. Al agrupar por padres la suma que define \(\langle J_kf,g\rangle\), se obtiene la fórmula de \(E_k\); sobre una función constante en cada fibra, esa fórmula devuelve su valor.
+\end{proof}
+
+Las masas compatibles definen una medida de probabilidad sobre el espacio de historias infinitas: el cilindro de una historia finita recibe su masa \(\mu(h)\). La medida se extiende desde la álgebra de cilindros, y su unicidad procede de que éstos generan la sigma-álgebra. Si el árbol es finitamente ramificado y cada historia tiene una prolongación, el límite inverso de sus niveles por supresión de emisiones es no vacío. En la topología cilíndrica, cada cilindro no vacío tiene medida positiva.
+
+Esta medida distingue historias que convergen a una misma publicación. La medida uniforme sobre valores terminales sería una lectura distinta, pues eliminaría las multiplicidades que la construcción acaba de conservar.
+
+\subsection{Transporte por hojas y contabilidad exacta de las salidas}
+\label{iv:cont:transporte}
+Consideremos primero el espacio con base ortonormal formada por las historias del nivel \(k\). El transporte que conserva la etiqueta de cada prolongación es
+
+\[
+\mathcal U_ke_h=
+\sum_{\varepsilon\ \mathrm{admisible\ en}\ h}
+\sqrt{p(\varepsilon\mid h)}\,e_{h\varepsilon}.
+\]
+Los conjuntos de hijos de padres distintos son disjuntos. La normalización de \(p\) demuestra, por tanto, \(\mathcal U_k^*\mathcal U_k=I\). La representación mediante masas de historias se relaciona con ésta por el cambio de base diagonal que incorpora \(\sqrt{\mu(h)}\).
+
+La etiqueta de hoja forma parte del registro completo de una historia. Se escribe
+\[
+\widehat h=((h_0,s_0),\ldots,(h_k,s_k)),\qquad
+s_j\in\{\Sigma,\Pi\},
+\]
+donde \(s_j\) es la hoja activa en el paso \(j\). La prolongación añade la emisión y la hoja \(s_{k+1}\) que determina el selector operativo del TPK, conservando íntegro el prefijo, incluida la hoja inicial. En la base de esas historias levantadas,
+\[
+\mathcal U_ke_{\widehat h}
+=\sum_{\varepsilon\ \mathrm{admisible\ en}\ \widehat h}
+\sqrt{p(\varepsilon\mid\widehat h)}\,e_{\widehat h\varepsilon},
+\qquad
+P_ke_{\widehat h}=\mathbf1_{s_k=\Sigma}e_{\widehat h},\quad
+Q_k=I-P_k.
+\]
+Así, \(P_k\) lee la hoja actual, mientras la distinción entre historias se mantiene por su prefijo completo. Dos historias iniciales que lleguen a la misma hoja activa siguen teniendo hijos distintos. La prueba de isometría por familias disjuntas de prolongaciones se aplica literalmente a esta base.
+La orientación trítica es otra coordenada del registro: el valor \(0\) conserva la lectura de umbral en cada hoja y no añade una tercera hoja a esta descomposición. Separamos ahora la conservación de hoja y el intercambio de hoja:
+
+\[
+A_k=P_{k+1}\mathcal U_kP_k+Q_{k+1}\mathcal U_kQ_k,
+\qquad
+\eta_k=Q_{k+1}\mathcal U_kP_k+P_{k+1}\mathcal U_kQ_k.
+\]
+\begin{proposition}[Identidad de Gram por hojas]
+\label{iv:cont:gram}
+Para un transporte lineal \(U\), sea o no isométrico, la descomposición anterior satisface
+
+\[
+A^*A+\eta^*\eta=PU^*UP+QU^*UQ.
+\]
+En particular, para \(U=\mathcal U_k\),
+
+\[
+A_k^*A_k+\eta_k^*\eta_k=I.
+\]
+\end{proposition}
+\begin{proof}
+En \(A^*A\) y \(\eta^*\eta\), los términos mixtos que contienen \(P_{k+1}Q_{k+1}\) se anulan. Al sumar los términos restantes aparece \(P_kU^*(P_{k+1}+Q_{k+1})UP_k\), y su análogo con \(Q_k\). La primera identidad resulta de la complementariedad de los proyectores; la segunda utiliza además \(U^*U=I\).
+\end{proof}
+
+La primera identidad es la fórmula general. Sustituir su lado derecho por \(U^*U\) requiere que los bloques cruzados de ese Gram se anulen. La conservación isométrica del transporte de historias proporciona aquí esa condición; no debe atribuirse automáticamente a una compresión posterior.
+
+Escribamos \(F_{0,0}=I\), \(F_{0,n}=A_{n-1}\cdots A_0\) y \(T_N=F_{0,N}^*F_{0,N}\).
+
+\begin{theorem}[Descomposición finita con residuo terminal]
+\label{iv:cont:terminal}
+Para cada horizonte \(N\),
+
+\[
+I=\sum_{n=0}^{N-1}
+F_{0,n}^*\eta_n^*\eta_nF_{0,n}+T_N.
+\]
+La sucesión \(T_N\) es positiva y decreciente, y posee un límite fuerte positivo \(T_\infty\). La suma de salidas converge fuertemente a \(I-T_\infty\).
+
+\end{theorem}
+\begin{proof}
+La proposición~\ref{iv:cont:gram} da \(T_n-T_{n+1}=F_{0,n}^*\eta_n^*\eta_nF_{0,n}\). La suma telescópica prueba la igualdad finita y la monotonía. Para cada vector, las formas cuadráticas decrecen a un límite; la polarización define una forma acotada positiva y, por el teorema de representación de formas acotadas, un operador \(T_\infty\). La convergencia es fuerte porque, para un operador positivo \(S\leq I\), \(\|Sv\|^2\leq\langle v,Sv\rangle\); se aplica a \(S=T_N-T_\infty\).
+\end{proof}
+
+El residuo terminal se conserva hasta demostrar su extinción en el dominio considerado. Esta distinción impide que un retorno de fase, por sí solo, se convierta en una hipótesis de agotamiento de todas las historias.
+
+\subsection{Balance orientado y cancelación en el refinamiento}
+\label{iv:cont:balance}
+Una historia lleva su orientación acumulada \(o(h)\) y los recuentos de sus visitas a las dos hojas. El balance local correspondiente es
+
+\[
+b(h)=o(h)\bigl(N_\Sigma(h)-N_\Pi(h)\bigr),
+\qquad
+b^+=\frac{|b|+b}{2},\quad b^-=\frac{|b|-b}{2}.
+\]
+Cuando un lector publica la media sobre las prolongaciones, se define \(b_c=Eb_f\). La orientación sigue estando en el argumento de \(b_f\); no se elimina antes de promediar.
+
+\begin{proposition}[Defecto exacto de cancelación]
+\label{iv:cont:cancelacion}
+La cantidad
+
+\[
+\kappa_{\mathrm{can}}=
+\frac{E|b_f|-|Eb_f|}{2}
+\]
+es no negativa y satisface
+
+\[
+E(b_f^+)=(b_c)^++\kappa_{\mathrm{can}},
+\qquad
+E(b_f^-)=(b_c)^-+\kappa_{\mathrm{can}}.
+\]
+\end{proposition}
+\begin{proof}
+La desigualdad triangular ponderada da \(|Eb_f|\leq E|b_f|\). Al escribir las partes positiva y negativa mediante \((|b|\pm b)/2\), se obtienen ambas igualdades.
+\end{proof}
+
+La información omitida al publicar solamente el balance es la cancelación común de las contribuciones opuestas. Esta cantidad se determina desde las mismas prolongaciones utilizadas por el transporte anterior. El factor \(1/9\) aparece sólo cuando la fibra contiene nueve hijos con pesos iguales; la esperanza condicional es la regla que sigue siendo válida para ramificación y ponderaciones generales.
+
+\subsection{Incidencia ternaria de las hojas y complejo rectangular}
+\label{iv:cont:incidencia-rectangular}
+Las dos hojas determinan el módulo \(V=\mathbb F_3e_\Sigma\oplus\mathbb F_3e_\Pi\). Sus cuatro direcciones proyectivas son las rectas generadas por \(e_\Sigma,e_\Pi,e_\Sigma+e_\Pi,e_\Sigma-e_\Pi\). De ellas proceden seis pares no ordenados. Los ocho vectores no nulos son sus representantes orientados. Así, los recuentos \(4,6,8\) pertenecen a operaciones distintas sobre un mismo módulo de hojas.
+
+Sobre las seis posiciones de pares, definimos
+
+\[
+(Ba)_{\{L,L'\}}=a_L+a_{L'},
+\qquad
+s(q)=\sum_{\{L,L'\}}q_{\{L,L'\}}.
+\]
+Cada dirección interviene en tres pares; por ello \(sB=0\) en \(\mathbb F_3\). El lector \(W(q)=\mathbf1_{s(q)=0}-1/3\) es invariante bajo \(q\mapsto q+Ba\). Sobre el ambiente uniforme \(\mathbb F_3^6\), sus momentos son
+
+\[
+\mathbb EW=0,\qquad
+\mathbb EW^2=\frac29,\qquad
+\mathbb EW^3=\frac2{27}.
+\]
+En efecto, \(s\) es sobreyectiva y cada fibra contiene \(3^5\) elementos. El lector vale \(2/3\) con probabilidad \(1/3\) y \(-1/3\) con probabilidad \(2/3\). Estas medias describen el ambiente uniforme; la distribución inducida por un subconjunto de historias debe calcularse con sus propias multiplicidades, ya conservadas en \(X_k\).
+
+Para fijar los puertos sin perder multiplicidades, a profundidad \(k\) se conservan las lecturas etiquetadas \(\lambda_\Sigma(h)=(h,\Sigma)\) y \(\lambda_\Pi(h)=(h,\Pi)\). Sus conjuntos son
+\[
+I_k=\{\lambda_\Sigma(h):h\in X_k\},\qquad
+J_k=\{\lambda_\Pi(h):h\in X_k\}.
+\]
+Son finitos y no vacíos porque lo es \(X_k\). Los valores, cocientes y residuos se publican sobre esos puertos; una igualdad de valores no identifica sus etiquetas. El producto \(I_k\times J_k\) es el dominio de la lectura rectangular, dentro del cual se registra el soporte de las incidencias admisibles.
+
+Fijado este nivel, escribimos \(I=I_k\), \(J=J_k\) y \(A_N=\mathbb Z/3^N\mathbb Z\). Elegimos puertos de referencia \(i_0,j_0\). Esta elección sólo proporciona coordenadas para las fórmulas de reconstrucción. Las aplicaciones
+
+\[
+\kappa(u,v)_{ij}=u_i-v_j,
+\qquad
+(\delta w)_{ij}=w_{ij}-w_{ij_0}-w_{i_0j}+w_{i_0j_0}
+\]
+definen la siguiente secuencia, válida sobre el anillo finito \(A_N\):
+
+\[
+0\longrightarrow A_N\longrightarrow
+A_N^I\oplus A_N^J\mathrel{\mathop{\longrightarrow}^{\kappa}}
+A_N^{I\times J}\mathrel{\mathop{\longrightarrow}^{\delta}}
+A_N^{(I\setminus\{i_0\})\times(J\setminus\{j_0\})}
+\longrightarrow0.
+\]
+\begin{proposition}[Exactitud de la incidencia rectangular]
+\label{iv:cont:rectangular-exacta}
+La secuencia anterior es exacta, con primera flecha dada por la diagonal constante.
+
+\end{proposition}
+\begin{proof}
+La igualdad \(u_i-v_j=0\) para cada par obliga a que todas las coordenadas de \(u\) y \(v\) sean una misma constante. La sustitución directa da \(\delta\kappa=0\). Si \(\delta w=0\), tómense \(u_i=w_{ij_0}\) y \(v_j=w_{i_0j_0}-w_{i_0j}\). Entonces \(u_i-v_j=w_{ij}\). Finalmente, cualquier matriz del último término se prolonga con fila y columna de referencia nulas; su imagen por \(\delta\) es la matriz inicial. La prueba sólo utiliza sumas y restas, por lo que no exige dividir por una unidad del anillo.
+\end{proof}
+
+Reducir de \(A_{N+1}\) a \(A_N\), manteniendo fijos \(k,I_k,J_k,i_0,j_0\), conmuta con las dos aplicaciones. Las fórmulas de reconstrucción son las mismas en cada profundidad modular. Ésta es la compatibilidad aritmética demostrada en este apartado. La prolongación de historias \(k\to k+1\) conserva las etiquetas de prefijo; sus aplicaciones entre conjuntos de puertos son un dato distinto del cambio de anillo \(N\to N+1\).
+
+Esas aplicaciones se obtienen de la supresión de emisiones:
+\[
+\rho_k^\Sigma(h\varepsilon,\Sigma)=(h,\Sigma),\qquad
+\rho_k^\Pi(h\varepsilon,\Pi)=(h,\Pi).
+\]
+Se fija una historia de referencia con prolongaciones compatibles, cuya existencia se demostró para el árbol sin hojas terminales. Sus dos etiquetas definen puertos de referencia compatibles en todos los niveles. El transporte de coordenadas es la precomposición:
+\[
+(L_ku)_{i'}=u_{\rho_k^\Sigma(i')},\quad
+(L_kv)_{j'}=v_{\rho_k^\Pi(j')},\quad
+(L_kw)_{i'j'}=w_{\rho_k^\Sigma(i'),\rho_k^\Pi(j')}.
+\]
+Para el último módulo de la secuencia, se prolonga primero la matriz por cero en la fila y la columna de referencia, se aplica esta misma fórmula y se restringe al nuevo complemento de los puertos de referencia. Esta regla define \(L_k\) también cuando un puerto nuevo tiene por padre el puerto marcado.
+
+\begin{proposition}[Naturalidad del complejo rectangular bajo prolongación]
+\label{iv:rectangular-natural}
+Las aplicaciones anteriores verifican
+\(L_k\kappa_k=\kappa_{k+1}L_k\) y
+\(L_k\delta_k=\delta_{k+1}L_k\).
+Además conmutan con la reducción de coeficientes
+\(A_{N+1}\to A_N\) y se componen conforme a la supresión de prefijos.
+\end{proposition}
+\begin{proof}
+La primera identidad se obtiene de
+\(u_{\rho_k^\Sigma(i')}-v_{\rho_k^\Pi(j')}\).
+En la segunda, cada uno de los cuatro términos que define \(\delta\)
+se transporta por la misma precomposición. La compatibilidad de los
+puertos marcados identifica sus filas y columnas; cuando un padre es
+el puerto marcado, los cuatro términos se cancelan y coinciden con
+la prolongación por cero. Todas las fórmulas son sumas y restas con
+coeficientes enteros, de modo que conmutan con la reducción modular.
+La composición de precomposiciones es la precomposición con el
+prefijo compuesto, lo que demuestra la última afirmación.
+\end{proof}
+
+\subsection{Complejo de memoria y compatibilidad de las incidencias}
+\label{iv:cont:memoria}
+La misma coordenada acumulada de memoria \(c_y\in\mathbb Z\), en una residencia \(y\), define un complejo libre entero. Su reducción a \(A_N\) utiliza el mismo registro entero antes de reducirlo; por tanto, las profundidades sucesivas son compatibles. Sus generadores son \(f_y\) en grado \(2\), \(e_y,b_y,r_y\) en grado \(1\), y \(g_y\) en grado \(0\):
+
+\[
+\partial f_y=3c_y e_y+b_y,\qquad
+\partial e_y=g_y,\qquad
+\partial b_y=-3c_y g_y,\qquad
+\partial r_y=0.
+\]
+La identidad \(\partial^2=0\) se verifica sobre \(f_y\) mediante \(3c_yg_y-3c_yg_y=0\), y es inmediata en los otros generadores.
+
+Si una trayectoria \(\alpha:y\to y'\) actualiza la memoria, su transporte en el complejo envía los generadores homónimos a sus nuevos representantes, salvo
+
+\[
+\Psi_\alpha(b_y)=b_{y'}+3(c_{y'}-c_y)e_{y'}.
+\]
+\begin{proposition}[Naturalidad del complejo de memoria]
+\label{iv:cont:memoria-natural}
+Se cumplen \(\partial\Psi_\alpha=\Psi_\alpha\partial\) y \(\Psi_{\beta\alpha}=\Psi_\beta\Psi_\alpha\). Las aplicaciones se prolongan linealmente sobre el anillo de coeficientes elegido.
+
+\end{proposition}
+\begin{proof}
+Sobre \(f_y\), la imagen de su borde es \(3c_ye_{y'}+b_{y'}+3(c_{y'}-c_y)e_{y'} =3c_{y'}e_{y'}+b_{y'}\). Sobre \(b_y\), el borde de su imagen es \(-3c_{y'}g_{y'}+3(c_{y'}-c_y)g_{y'}=-3c_yg_{y'}\). Los otros dos casos son inmediatos. En una concatenación, las diferencias de memoria se suman telescópicamente, lo que prueba la segunda identidad.
+\end{proof}
+
+La relación entre dos representantes de una misma residencia también puede escribirse como un borde explícito. Para una coordenada entera \(v\), reducida en el mismo anillo cuando corresponda, sean
+
+\[
+z^-=r_y,\qquad z^+=r_y+3c_yv e_y+v b_y,
+\qquad h_*=-vf_y.
+\]
+Entonces \(\partial h_*=z^--z^+\). Bajo un transporte que actualiza también \(v\), la corrección \(K_\alpha=(v_{y'}-v_y)f_{y'}\) satisface \(K_{\beta\alpha}=K_\beta+\Psi_\beta K_\alpha\). Los símbolos \(K_\alpha\) de esta homotopía local no designan el sello dodecafásico \(K\): pertenecen a otro dominio y su función está especificada por la identidad anterior. Su función puede comprobarse también en la igualdad
+
+\[
+z^+_{y'}-\Psi_\alpha z^+_y=\partial K_\alpha.
+\]
+Ambos miembros valen \((v_{y'}-v_y)(3c_{y'}e_{y'}+b_{y'})\).
+
+\begin{proposition}[Homología y memoria del complejo local]
+\label{iv:cont:memoria-homologia}
+Sobre \(\mathbb Z\), o después de reducir a \(A_N\), se tiene
+
+\[
+H_0(\Gamma)=H_2(\Gamma)=0,
+\qquad H_1(\Gamma)\cong A_N[r_y]
+\]
+en la realización modular, y \(H_1(\Gamma)\cong\mathbb Z[r_y]\) en la realización entera.
+
+\end{proposition}
+\begin{proof}
+Defínase la homotopía de grado \(1\) mediante \(h(g_y)=e_y\), \(h(b_y)=f_y\), y cero en los otros generadores. Sean \(p\) la proyección al sumando generado por \(r_y\) e \(\iota\) su inclusión. La comprobación sobre cada generador da
+
+\[
+\partial h+h\partial=I-\iota p.
+\]
+En particular, sobre \(b_y\) los términos \(3c_ye_y\) y \(-3c_ye_y\) se cancelan. El complejo se retrae por homotopía al módulo generado por \(r_y\), concentrado en grado \(1\), lo que demuestra la afirmación.
+\end{proof}
+
+El transporte \(\Psi_\alpha\) es una cizalla de determinante \(1\). Así, este complejo conserva explícitamente cómo cambia \(c_y\) a nivel de cadenas, pero su homología local no distingue los valores de esa coordenada. La memoria completa permanece en las etiquetas y en los transportes del estado fuente; no se recupera a partir de \(H_1\) aisladamente. Una torsión numérica dependiente de memoria requiere el ensamblaje y la lectura determinantal especificados, además de este complejo local.
+
+\subsection{Ensamblaje con caminos terminales}
+\label{iv:cont:ensamblaje}
+Para un horizonte finito, las residencias y sus prolongaciones forman una categoría de caminos. A cada residencia \(\nu\) se asigna el módulo libre \(W(\nu)=A_N[\operatorname{Path}(\nu,\mathrm{Term})]\), que conserva cada continuación terminal como generador. Una trayectoria inicial actúa en \(W\) por precomposición. El complejo \(\Gamma(\nu)\) del apartado anterior actúa covariantemente mediante \(\Psi\).
+
+El ensamblaje utiliza ambos transportes en el mismo módulo bigraduado:
+
+\[
+\mathcal B_{q,r}=
+\bigoplus_{\nu_0\to\cdots\to\nu_q}
+W(\nu_q)\otimes_{A_N}\Gamma_r(\nu_0).
+\]
+Se utiliza el complejo de caminos normalizado: se omiten las cadenas degeneradas que contienen identidades. El horizonte finito acota entonces el número de prolongaciones estrictas y el grado horizontal. El borde horizontal suprime una residencia intermedia componiendo las flechas adyacentes. En el primer extremo transporta \(\Gamma\); en el último precompone \(W\). Con los signos alternados se obtiene el borde de caminos \(d_{\mathrm{bar}}\). El diferencial total es
+
+\[
+D=d_{\mathrm{bar}}+(-1)^q\partial_\Gamma.
+\]
+Las identidades de caras cancelan por pares los términos de \(d_{\mathrm{bar}}^2\). La naturalidad de la proposición~\ref{iv:cont:memoria-natural} implica que \(d_{\mathrm{bar}}\) conmuta con \(\partial_\Gamma\); el factor \((-1)^q\) cancela los términos cruzados del cuadrado. Por tanto, \(D^2=0\). La compatibilidad se demuestra sobre generadores de caminos y no se introduce por una etiqueta de pertenencia a un complejo.
+
+La evaluación terminal tampoco requiere elegir una historia particular. Para cada continuación \(h\), se aplica la composición efectiva de sus actualizaciones. El resultado conserva el par formado por \(h\) y su lectura, con su multiplicidad. Si \(k<\ell<N\), las continuaciones se descomponen como una unión disjunta de prefijos hasta \(\ell\) y sus continuaciones hasta \(N\). La proposición~\ref{iv:cont:concatenacion} demuestra que evaluar directamente o evaluar esas dos partes produce la misma lectura. Así se obtiene el cuadrado de naturalidad del terminal.
+
+Los módulos de caminos, las incidencias, el transporte de memoria y sus diferenciales proceden de las mismas prolongaciones. Su ensamblaje no consiste en añadir a un estado cinco coordenadas que se conservarían por definición: sus relaciones se construyen mediante sumas, bordes y composiciones efectivas, y se verifican sobre sus generadores.
+
+\subsection{Determinantes, límite y lectura aritmética}
+\label{iv:cont:determinantes}
+En cada residencia, el complejo local libre \(\Gamma\) admite su línea determinante graduada
+
+\[
+\operatorname{Det}\Gamma=
+\bigotimes_r\left(\bigwedge^{\mathrm{rk}\Gamma_r}\Gamma_r\right)^{(-1)^r}.
+\]
+El ensamblaje total del apartado anterior tiene, por su parte, los módulos \(\operatorname{Tot}_d\mathcal B=\bigoplus_{q+r=d}\mathcal B_{q,r}\). A horizonte finito y sobre el mismo anillo, son libres de rango finito y sólo un número finito de ellos es no nulo. Su línea es
+\[
+\operatorname{Det}(\operatorname{Tot}\mathcal B)=
+\bigotimes_{q,r}
+\left(\bigwedge^{\operatorname{rk}\mathcal B_{q,r}}
+\mathcal B_{q,r}\right)^{(-1)^{q+r}}.
+\]
+Esta fórmula resulta de la descomposición por suma directa en cada grado. Distingue la línea del complejo local y la del ensamblaje con todos los caminos; sus bases se ordenan mediante las etiquetas conservadas. La reducción modular conmuta con estas potencias exteriores porque los módulos y sus bases proceden de los mismos módulos libres enteros a horizonte fijado.
+La línea está definida por los módulos y sus grados, tanto sobre \(\mathbb Z\) como después de reducir a \(A_N\); el exponente negativo designa el módulo dual. Una torsión numérica no nula exige, adicionalmente, especificar el complejo sobre un cuerpo, las bases y las identificaciones de homología pertinentes. Para calcular factores de Smith se usa la matriz entera producida antes de la reducción, no un levantamiento arbitrario de una matriz modular. Un bloque cuadrado entero de determinante no nulo es invertible sobre \(\mathbb Q\); su reducción es invertible sobre \(A_N\) solamente cuando ese determinante es una unidad, es decir, cuando no es divisible por \(3\). El refinamiento de memorias e incidencias permite formular y comprobar la estabilidad de los factores invariantes pertinentes; estas condiciones no se deducen de la existencia de la línea determinante.
+
+El paso al límite conserva los proyectivos compatibles de residuos, las historias y sus multiplicidades. Los cuadrados probados en los apartados anteriores permanecen conmutativos porque sus aplicaciones están dadas por las mismas fórmulas en cada nivel. Para una coordenada arquimediana, el paso adicional consiste en publicar intervalos cilíndricos no vacíos, compatibles por inclusión y de diámetro tendente a cero. Sus clausuras compactas anidadas tienen una intersección de un solo punto: la existencia se obtiene por compacidad y la unicidad por la cota del diámetro. Ése es el valor de la lectura límite. Si los intervalos son semiabiertos, el punto puede pertenecer sólo a sus clausuras; la regla de representación de frontera determina entonces su escritura posicional. El valor no sustituye la historia que lo ha producido. La otra publicación conserva las incidencias del mismo estado. Los dos destinos comparten su origen sin recibir por ello la misma información.
+
+En los capítulos siguientes, las regiones coinductivas, el registro dodecafásico y la incidencia excepcional se publican desde ese sustrato con sus respectivos mapas. La realización hilbertiana conserva después las etiquetas de fase y especifica su propia inclusión unital; la dualidad y las pantallas actúan sobre los codominios que allí se construyen. Las operaciones conjuntas aquí reunidas transmiten historias, hojas, orientación y memoria a esas publicaciones. La identificación de un funcional concreto con una forma analítica externa requiere, a su vez, escribir su aplicación sobre los generadores y verificar sus productos escalares: las identidades de conservación del presente capítulo no reemplazan esa composición.
+
+\subsection{Procedencia, comprobación y alcance}
+\label{iv:cont:mapa-correlativo}
+% RESULTADO_RECUPERADO: 04b2_operaciones_intrinsecas_correlativas.tex,
+% eq:pdfv2-cor-accion-sp/sol/gau/coh/det y eq:pdfv2-cor-memorias.
+% Las marcas internas sp/sol/gau/coh/det corresponden, en ese orden,
+% a las cinco filas siguientes; no son cinco dominios independientes.
+Las cinco operaciones se reconocen por su acción sobre las mismas
+historias y por las relaciones demostradas en los apartados anteriores.
+El transporte afín \(U_\alpha\) de la memoria y el transporte
+lineal \(\mathcal U_k\) de las historias tienen los dominios
+respectivos de las secciones~\ref{iv:cont:historias}
+y~\ref{iv:cont:transporte}. La graduación de hojas es
+\(\sigma_k=P_k-Q_k\). Para una historia
+\(h_j=(\varepsilon_1,\ldots,\varepsilon_j)\), la acumulación del
+balance queda explícita mediante
+\[
+ M_0^\pm=0,\qquad
+ M_k^\pm(h_k)=\sum_{j=1}^k b^\pm(h_j),\qquad
+ M_{k+1}^\pm(h_k\varepsilon)
+ =M_k^\pm(h_k)+b^\pm(h_k\varepsilon).
+\]
+Cada sumando es la lectura firmada del prefijo correspondiente,
+definida en la sección~\ref{iv:cont:balance}. Separar el último
+sumando demuestra la actualización; las identidades
+\(M_k^+-M_k^-=\sum_{j=1}^kb(h_j)\) y
+\(M_k^++M_k^-=\sum_{j=1}^k|b(h_j)|\) se deducen de las
+definiciones de las partes positiva y negativa. La acumulación y la
+cancelación condicional son, así, operaciones distintas sobre las
+mismas contribuciones.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{.21\linewidth}p{.48\linewidth}p{.23\linewidth}@{}}
+\toprule
+Operación conjunta & Objetos y acción efectiva & Desarrollo y prueba\\
+\midrule
+Transporte y graduación de hojas
+& \(\mathcal U_k:\ell^2(\widehat X_k)\to
+\ell^2(\widehat X_{k+1})\), con \(\widehat X_k\) formado por
+las historias levantadas; \(\sigma_k=P_k-Q_k\), \(A_k\) y
+\(\eta_k\) conservan o intercambian la hoja actual.
+& Sección~\ref{iv:cont:transporte}; proposición~\ref{iv:cont:gram}
+y teorema~\ref{iv:cont:terminal}.\\[5pt]
+Balance, cancelación y memoria
+& \(b:X_k\to\ZZ\), \(b^\pm:X_k\to\mathbb N_0\);
+acumulación \(M_k^\pm\) sobre prefijos y cancelación
+\(\kappa_{\mathrm{can}}=(E|b_f|-|Eb_f|)/2\) al publicar
+la media condicional.
+& Sección~\ref{iv:cont:balance};
+proposición~\ref{iv:cont:cancelacion}.\\[5pt]
+Incidencia ternaria de las hojas
+& \(B:\FF_3^4\to\FF_3^6\),
+\((Ba)_{\{L,L'\}}=a_L+a_{L'}\); se conserva el ambiente
+completo de \(q\), con \(sB=0\) y \(W(q+Ba)=W(q)\).
+& Primera parte de la
+sección~\ref{iv:cont:incidencia-rectangular}.\\[5pt]
+Puertos y complejo rectangular
+& \(\kappa:A_N^{I_k}\oplus A_N^{J_k}\to
+A_N^{I_k\times J_k}\), \(\kappa(u,v)_{ij}=u_i-v_j\);
+la diferencia \(\delta\) y la precomposición \(L_k\)
+conservan las etiquetas y sus multiplicidades.
+& Proposiciones~\ref{iv:cont:rectangular-exacta}
+y~\ref{iv:rectangular-natural}.\\[5pt]
+Memoria celular, relleno y línea determinante
+& \(\Psi_\alpha:\Gamma_y\to\Gamma_{y'}\),
+\(K_\alpha\in\Gamma_{y',2}\),
+\(\partial h_*=z^--z^+\); las líneas
+\(\operatorname{Det}\Gamma\) y
+\(\operatorname{Det}(\operatorname{Tot}\mathcal B)\)
+se forman sobre los complejos basados correspondientes.
+& Secciones~\ref{iv:cont:memoria}--\ref{iv:cont:determinantes};
+proposiciones~\ref{iv:cont:memoria-natural}
+y~\ref{iv:cont:memoria-homologia}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+El cuadro identifica cinco acciones de una misma construcción: cada
+prefijo conserva sus hojas, orientación, residuos, cocientes, memoria
+y prolongaciones terminales. La precomposición de puertos lleva
+coordenadas de un nivel al refinado; la reducción de coeficientes
+lleva \(A_{N+1}\) a \(A_N\). Sus sentidos y dominios son
+distintos y sus cuadrados conmutativos están explicitados en la
+proposición~\ref{iv:rectangular-natural}. El ensamblaje de la
+sección~\ref{iv:cont:ensamblaje} utiliza simultáneamente las
+continuaciones terminales y el transporte del complejo de memoria;
+sus fórmulas de composición reúnen las acciones del cuadro sobre el
+mismo sistema de historias. La lectura de una línea determinante
+como escalar conserva las condiciones de bases, homología y
+no singularidad de la sección~\ref{iv:cont:determinantes}.
+
+Este desarrollo reúne las construcciones de estado, árbol y medida común; las operaciones intrínsecas correlativas; y el ensamblaje terminal con naturalidad y límite demostrados en esta sección. Se incorporan sus identidades de balance, incidencia y memoria, con demostraciones dentro de este capítulo. Las cinco construcciones del continuo se mantienen como operaciones sobre un mismo árbol. La exposición amplía sus pruebas locales y explicita las condiciones de cada especialización: transporte isométrico, pesos uniformes, extinción del terminal y no singularidad de un bloque determinantal.
+
+El comprobador adjunto contrasta instancias exactas de los cociclos, la cancelación ponderada, la secuencia rectangular y el complejo de memoria. Esos controles acompañan las demostraciones generales del texto y verifican los operadores aquí definidos en sus dominios respectivos. El paso posterior hacia las representaciones excepcionales y la realización hilbertiana conserva sus aplicaciones sobre generadores: la sección~\ref{iv:hilbert} especifica la fibra de fase, los operadores de Weyl y las inclusiones que determinan sus clausuras. La conservación documental y los controles finitos mantienen su función de trazabilidad y contraste de esas pruebas.

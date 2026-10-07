@@ -1,0 +1,658 @@
+\section{Alignement cyclotomique, orbifold d'ordre \(3\) et Moonshine monstrueux}
+\label{p12-83-c20-s8:chap:alineamiento-orbifold-moonshine}
+
+Le réseau de Leech construit dans la
+\cref{p12-83-c20-s5:thm:identificacion-vecino-leech} permet de passer de l'incidence
+finie à une structure graduée infinie. Cette transition ne s'effectuera pas
+au moyen d'une chaîne de noms. Seront construits, dans un ordre typé :
+\begin{enumerate}
+ \item l'entrelacement des douze fibres \(A_2\) ;
+ \item une isométrie de réseau sans points fixes d'ordre trois ;
+ \item sa trace graduée et son relèvement de type zéro ;
+ \item l'orbifold cyclique et son automorphisme dual de classe \(3B\) ;
+ \item l'algèbre d'opérateurs de sommets lunaire ;
+ \item par des publications distinctes, son groupe d'automorphismes, son caractère
+       gradué et les séries de McKay--Thompson.
+\end{enumerate}
+Moonshine sera le théorème qui coordonne l'action et les séries. On n'utilisera pas
+le raccourci non typé
+\(V^\natural\to\mathbb M\to\text{Moonshine}\).
+
+\subsection{Alignement des \(12\) fibres APP et Witt}
+
+Les douze fibres de \(W_{\mathrm{APP}}\cong A_2^{12}\) portent trois
+étiquettes indépendantes :
+\[
+ i\in\mathbb Z/3\mathbb Z
+ \quad\text{(paire de coordonnées)},\qquad
+ \mu\in\{0,1\}
+ \quad\text{(feuillet)},\qquad
+ \varepsilon\in\{0,1\}
+ \quad\text{(orbite cyclotomique)}.
+\]
+L'origine dodécaphasique construite dans le TPK étant fixée, nous définissons
+\begin{equation}
+ \lambda(i,\mu,\varepsilon)
+ :=4i+2\mu+\varepsilon\pmod{12}.
+ \label{p12-83-c20-s8:eq:alineamiento-doce-fibras-u031}
+\end{equation}
+
+\begin{lemma}[Bijectivité de l'alignement]
+\label{p12-83-c20-s8:lem:biyectividad-alineamiento-u031}
+L'application \(\lambda\) de
+\eqref{p12-83-c20-s8:eq:alineamiento-doce-fibras-u031} est une bijection sur
+\(\mathbb Z/12\mathbb Z\).
+\end{lemma}
+
+\begin{proof}
+Pour chaque \(i\), les quatre valeurs \(4i+2\mu+\varepsilon\) forment le bloc
+\(\{4i,4i+1,4i+2,4i+3\}\). Les trois blocs pour \(i=0,1,2\) sont disjoints
+et couvrent les douze classes.
+\end{proof}
+
+Soit \(C\) le Coxeter de \(A_2\) et soit \(\mathsf R\) la réflexion qui
+satisfait
+\begin{equation}
+ \mathsf R C\mathsf R=C^{-1}.
+ \label{p12-83-c20-s8:eq:reflexion-conjuga-coxeter-u031}
+\end{equation}
+Les trivialisations \(\iota_b\) et les cadres orientés \(P_b\) étant fixés,
+nous posons
+\begin{align}
+ g_b&:=\iota_b^{-1}P_bCP_b^{-1}\iota_b,
+ \label{p12-83-c20-s8:eq:coxeter-calibrado-fibra-u031}\\
+ T_{i\mu\varepsilon}
+ &:=\iota_{\lambda(i,\mu,\varepsilon)}^{-1}
+ P_{\lambda(i,\mu,\varepsilon)}\mathsf R^\mu.
+ \label{p12-83-c20-s8:eq:entrelazador-fibra-u031}
+\end{align}
+
+\begin{theorem}[Entrelacement APP--Witt]
+\label{p12-83-c20-s8:thm:alineamiento-app-witt-u031}
+Pour chaque triplet \((i,\mu,\varepsilon)\),
+\begin{equation}
+ g_{\lambda(i,\mu,\varepsilon)}T_{i\mu\varepsilon}
+ =T_{i\mu\varepsilon}C^{(-1)^\mu}.
+ \label{p12-83-c20-s8:eq:identidad-entrelazamiento-app-witt-u031}
+\end{equation}
+La somme directe définit un isomorphisme \(C_3\)-équivariant
+\begin{equation}
+ T_\lambda:
+ W_{\mathrm{APP}}\otimes\mathbb C
+ \xrightarrow{\;\cong\;}
+ W_c:=\bigoplus_{b=0}^{11}
+ (A_{2,b}\otimes\mathbb C).
+ \label{p12-83-c20-s8:eq:isomorfismo-app-witt-u031}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Pour \(\mu=0\), la définition de \(g_b\) donne directement la conjugaison
+par \(C\). Pour \(\mu=1\), on insère
+\(\mathsf RC\mathsf R=C^{-1}\). Le
+\cref{p12-83-c20-s8:lem:biyectividad-alineamiento-u031} garantit que la somme directe
+utilise exactement une fois chaque position de Witt et conserve paire, feuillet et orbite.
+\end{proof}
+
+Le théorème est relatif au transport simultané de l'ordre des paires, des feuillets et des
+orbites, de l'origine de Witt, des cadres et de l'orientation. Changer une
+seule de ces coordonnées ne définit pas le même foncteur.
+
+\subsection{Trace graduée du générateur ternaire}
+
+Soit
+\[
+ \rho_W:=\bigoplus_{b=0}^{11}g_b
+\]
+et considérons l'enveloppe bosonique
+\begin{equation}
+ \mathcal H_{\rm bos}(W_c)
+ :=
+ \operatorname{Sym}\!\left(
+ \bigoplus_{n\ge1}W_c[n]
+ \right).
+ \label{p12-83-c20-s8:eq:fock-bosonico-doce-fibras-u031}
+\end{equation}
+Si \(N\) est l'opérateur de degré, nous définissons
+\begin{equation}
+ Z_{\rm Fock}(q)
+ :=
+ q^{-1}\operatorname{Tr}_{\mathcal H_{\rm bos}(W_c)}
+ \left(\Gamma_{\rm bos}(\rho_W)q^N\right).
+ \label{p12-83-c20-s8:eq:traza-graduada-fock-u031}
+\end{equation}
+
+\begin{proposition}[Produit cyclotomique de niveau trois]
+\label{p12-83-c20-s8:prop:producto-tres-doce-fibras-u031}
+Comme série formelle de Laurent,
+\begin{equation}
+ \boxed{
+ Z_{\rm Fock}(q)
+ =q^{-1}\prod_{n\ge1}(1+q^n+q^{2n})^{-12}
+ =:t_3(q).}
+ \label{p12-83-c20-s8:eq:t3-producto-u031}
+\end{equation}
+Son développement commence par
+\begin{equation}
+ t_3(q)
+ =q^{-1}-12+54q-76q^2-243q^3+1188q^4+O(q^5).
+ \label{p12-83-c20-s8:eq:t3-expansion-u031}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Chaque \(g_b\) est conjugué à \(C\), de sorte que
+\[
+ \det(I-g_bq^n)=1+q^n+q^{2n}.
+\]
+L’identité
+\[
+ \sum_{k\ge0}
+ \operatorname{Tr}(\operatorname{Sym}^k\rho_W)t^k
+ =\det(I-\rho_Wt)^{-1}
+\]
+appliquée à chaque degré produit le produit. La multiplication formelle jusqu'au
+degré cinq donne le développement. En particulier, le coefficient de \(q\)
+s'obtient comme
+\[
+ [q^2]\,
+ (1+q+q^2)^{-12}(1+q^2+q^4)^{-12}
+ =66-12=54.
+\]
+\end{proof}
+
+La valeur \(54\) apparaît ici comme coefficient d'une trace construite à partir de
+douze fibres. L'unité U030 l'a également obtenue comme indice orienté de
+l'agrégat APP et a prouvé que douze est l'unique solution positive de la rigidité
+cyclotomique--radiale. L'égalité des deux valeurs est une compatibilité de
+deux réalisations ; aucune n'utilise le coefficient de \(J\) comme entrée.
+
+\subsection{Mot de support total et isométrie sans points fixes}
+
+Soit
+\[
+ q_*=(1,1,1,1,1,1)\in\mathbb F_3^6.
+\]
+La multiplication par la matrice de Paley--Witt donne
+\begin{equation}
+ q_*A_W=(2,1,1,1,1,1).
+ \label{p12-83-c20-s8:eq:producto-qstar-aw-u031}
+\end{equation}
+Par conséquent,
+\begin{equation}
+ c_*:=(q_*,q_*A_W)
+ =(1,1,1,1,1,1,2,1,1,1,1,1)
+ \in C_W
+ \label{p12-83-c20-s8:eq:palabra-soporte-total-u031}
+\end{equation}
+et toutes ses coordonnées sont non nulles.
+
+Pour chaque position \(b\), nous fixons
+\begin{equation}
+ P_b(c_*)=
+ \begin{cases}
+  \mathsf R,&(c_*)_b=1,\\
+  I,&(c_*)_b=2,
+ \end{cases}
+ \qquad
+ g_c:=\bigoplus_{b=0}^{11}P_b(c_*)CP_b(c_*)^{-1}.
+ \label{p12-83-c20-s8:eq:isometria-orden-tres-u031}
+\end{equation}
+
+\begin{proposition}[Ordre, absence de points fixes et recollement]
+\label{p12-83-c20-s8:prop:isometria-fijo-libre-pegado-u031}
+L'opérateur \(g_c\) est d'ordre trois, n'a pas de vecteurs fixes non nuls et
+préserve le réseau de Niemeier \(N(A_2^{12})\) construit dans U021.
+\end{proposition}
+
+\begin{proof}
+Chaque bloc est conjugué au Coxeter \(C\), dont le polynôme minimal est
+\(X^2+X+1\). Il est donc d'ordre trois et ne possède pas la valeur propre un. La somme
+directe conserve les deux propriétés. Le Coxeter agit trivialement sur
+\(A_2^*/A_2\) ; c'est pourquoi chaque bloc conserve la classe discriminante et la
+réunion de classes latérales qui définit le recollement.
+\end{proof}
+
+\subsection{Préservation du voisin de Leech}
+
+Écrivons
+\[
+ v:=v_{\mathcal F_*}
+ =4\rho_1+\rho_2+\cdots+\rho_{12},
+ \qquad
+ v^2=54,
+\]
+pour le vecteur sélectionné par l'origine d'incidence de
+\eqref{p12-83-c20-s5:eq:vector-marco-incidencial}. Soient
+\[
+ N:=N(A_2^{12}),
+ \qquad
+ N_0:=\ker(\langle\,\cdot\,,v\rangle\bmod3),
+ \qquad
+ N_v:=N_0+\mathbb Z\frac v3\cong\Lambda_{24}.
+\]
+
+\begin{theorem}[Préservation orientée du voisin]
+\label{p12-83-c20-s8:thm:preservacion-vecino-orden-tres-u031}
+Les déplacements
+\begin{equation}
+ y_*:=\frac{g_cv-v}{3},
+ \qquad
+ z_*:=\frac{g_c^{-1}v-v}{3}
+ \label{p12-83-c20-s8:eq:desplazamientos-vecino-u031}
+\end{equation}
+appartiennent à \(N_0\). En conséquence,
+\[
+ g_cN_0=N_0,
+ \qquad
+ g_cN_v=N_v.
+\]
+\end{theorem}
+
+\begin{proof}
+Les mots discriminants de \(y_*\) et \(z_*\) sont \(c_*\) et
+\(-c_*\), tous deux dans \(C_W\) ; d'où \(y_*,z_*\in N\). Le calcul dans chaque
+facteur \(A_2\) donne
+\begin{equation}
+ \langle y_*,v\rangle
+ =\langle z_*,v\rangle
+ =-(4^2+11)=-27\equiv0\pmod3.
+ \label{p12-83-c20-s8:eq:emparejamientos-desplazamientos-u031}
+\end{equation}
+Ils sont donc tous deux dans \(N_0\). Pour \(x\in N_0\),
+\[
+ \langle g_cx,v\rangle
+ =\langle x,g_c^{-1}v\rangle
+ =\langle x,v\rangle+3\langle x,z_*\rangle
+ \equiv0\pmod3.
+\]
+Le même calcul avec \(g_c^{-1}\) donne l'égalité du noyau. Enfin,
+\[
+ g_c(v/3)=v/3+y_*,
+\]
+de sorte que la classe qui engendre le voisin est préservée.
+\end{proof}
+
+\subsection{\(24\) orientations et naturalité des réseaux}
+
+L’énumérateur de poids de \eqref{p12-83-c20-s1:eq:enumerador-pesos-cw} contient
+\(24y^{12}\). Par conséquent, l’ensemble
+\[
+ C_W^\times:=
+ \{u\in C_W:u_b\in\{1,2\}\text{ pour tout }b\}
+\]
+possède 24 éléments. Pour chaque \(u\in C_W^\times\), nous définissons
+\[
+ P_b(u)=
+ \begin{cases}
+  \mathsf R,&u_b=1,\\
+  I,&u_b=2,
+ \end{cases}
+ \qquad
+ g_u:=\bigoplus_{b=0}^{11}P_b(u)CP_b(u)^{-1}.
+\]
+
+\begin{proposition}[Robustesse des orientations à support total]
+\label{p12-83-c20-s8:prop:robustez-orientaciones-u031}
+Pour toute \(u\in C_W^\times\),
+\[
+ \frac{g_uv-v}{3},
+ \quad
+ \frac{g_u^{-1}v-v}{3}
+ \in N_0.
+\]
+En particulier, chaque \(g_u\) préserve le voisin construit avec
+l’orientation transportée.
+\end{proposition}
+
+\begin{proof}
+En coordonnées de racines simples,
+\[
+ C\rho-\rho=(-2,-1),
+ \qquad
+ C^{-1}\rho-\rho=(-1,-2).
+\]
+Les classes discriminantes des deux déplacements sont \(u\) et \(-u\).
+Pour le coefficient radial \(a_b\in\{4,1\}\),
+\[
+ \left\langle
+ \frac{(C^{\pm1}-I)a_b\rho}{3},a_b\rho
+ \right\rangle=-a_b^2.
+\]
+La somme sur les douze facteurs donne de nouveau \(-27\). La preuve du
+\cref{p12-83-c20-s8:thm:preservacion-vecino-orden-tres-u031} s’applique composante par
+composante.
+\end{proof}
+
+Pour typer le recalibrage, soit
+\(h\in\operatorname{Aut}(C_W)\) monomial : une permutation \(\sigma\) des
+douze coordonnées suivie de multiplicateurs
+\(\epsilon_b\in\{1,2\}\). Nous définissons son relèvement réticulaire
+\begin{equation}
+ \widetilde h
+ :=P_\sigma\circ
+ \bigoplus_{b=0}^{11}\mathsf R^{\nu_b},
+ \qquad
+ \nu_b=
+ \begin{cases}
+ 0,&\epsilon_b=1,\\
+ 1,&\epsilon_b=2.
+ \end{cases}
+ \label{p12-83-c20-s8:eq:elevacion-monomial-u031}
+\end{equation}
+Son action sur le discriminant est exactement \(h\). Si le changement transporte
+simultanément le code, le drapeau, l’origine incidencielle, le vecteur \(v\), le voisin et les
+repères, alors
+\begin{equation}
+ g_{hu}=\widetilde h\,g_u\,\widetilde h^{-1}.
+ \label{p12-83-c20-s8:eq:naturalidad-isometrias-u031}
+\end{equation}
+La matrice ternaire \(h\) n’agit sans élévation ni sur \(A_2^{12}\) ni sur
+Leech.
+
+\subsection{Trace de réseau et calcul du type \(0\)}
+
+Soit \(\widehat g_c\) le relèvement standard de \(g_c\) à la VOA de réseau
+\[
+ V_{N_v}=M(1)\otimes\mathbb C_\varepsilon[N_v].
+\]
+Pour \(j=1,2\), la décomposition oscillateur--réseau produit
+\begin{equation}
+ \begin{split}
+ Z_{0,j}(\tau)
+ &:=
+ \operatorname{Tr}_{V_{N_v}}
+ \left(\widehat g_c^{\,j}q^{L_0-1}\right)\\
+ &=q^{-1}
+ \left(
+ \sum_{\lambda\in N_v^{g_c^j}}
+ \varepsilon_j(\lambda)
+ q^{\langle\lambda,\lambda\rangle/2}
+ \right)
+ \prod_{n\ge1}\det(I-g_c^jq^n)^{-1}.
+ \end{split}
+ \label{p12-83-c20-s8:eq:factorizacion-traza-reticular-u031}
+\end{equation}
+
+\begin{proposition}[Trace des secteurs non triviaux]
+\label{p12-83-c20-s8:prop:traza-reticular-t3-u031}
+On a
+\[
+ Z_{0,1}(\tau)=Z_{0,2}(\tau)=t_3(\tau).
+\]
+\end{proposition}
+
+\begin{proof}
+L'absence de points fixes implique
+\[
+ N_v^{g_c}=N_v^{g_c^2}=\{0\},
+\]
+de sorte que la somme de réseau de
+\eqref{p12-83-c20-s8:eq:factorizacion-traza-reticular-u031} vaut un. Dans chaque facteur,
+\(g_c^j\) a pour valeurs propres \(\zeta_3,\zeta_3^2\) ; par conséquent,
+\[
+ \det(I-g_c^jq^n)=1+q^n+q^{2n}.
+\]
+Les douze facteurs reproduisent \eqref{p12-83-c20-s8:eq:t3-producto-u031}.
+\end{proof}
+
+\begin{theorem}[Poids tordu et type du relèvement]
+\label{p12-83-c20-s8:thm:peso-torcido-tipo-cero-u031}
+Le relèvement standard est d'ordre trois, de poids tordu
+\begin{equation}
+ \rho_{g_c}=\frac43
+ \label{p12-83-c20-s8:eq:peso-torcido-u031}
+\end{equation}
+et de type zéro.
+\end{theorem}
+
+\begin{proof}
+Dans
+\(\mathfrak h=N_v\otimes_{\mathbb Z}\mathbb C\), chacun des douze
+facteurs apporte un vecteur propre de valeur propre \(\zeta_3\) et un autre de valeur propre
+\(\zeta_3^2\). Par conséquent,
+\[
+ \dim\mathfrak h_{\zeta_3}
+ =\dim\mathfrak h_{\zeta_3^2}=12.
+\]
+La formule du poids du vide tordu d'ordre trois donne
+\[
+ \rho_{g_c}
+ =\frac1{4\cdot3^2}
+ \bigl(1\cdot2\cdot12+2\cdot1\cdot12\bigr)
+ =\frac43.
+\]
+Pour une isométrie de réseau d'ordre impair, le relèvement standard conserve
+l'ordre. Le type est la classe de
+\[
+ 3^2\rho_{g_c}=12\equiv0\pmod3.
+\]
+Ainsi, les deux hypothèses initialement indépendantes sont calculées ici.
+\end{proof}
+
+\subsection{Orbifold cyclique et classe duale \texorpdfstring{\(3B\)}{3B}}
+
+\begin{theorem}[Orbifold triadique du voisin de Leech]
+\label{p12-83-c20-s8:thm:orbifold-triadico-vnatural-u031}
+Les théorèmes classiques d'orbifold cyclique, appliqués au relèvement standard
+du \cref{p12-83-c20-s8:thm:peso-torcido-tipo-cero-u031}, donnent
+\begin{equation}
+ \operatorname{Orb}_{\mathbb Z/3}
+ (V_{N_v},\widehat g_c)
+ \cong V^\natural.
+ \label{p12-83-c20-s8:eq:orbifold-triadico-vnatural-u031}
+\end{equation}
+L'automorphisme dual appartient à la classe \(3B\) et sa série est
+\begin{equation}
+ T_{3B}(\tau)=t_3(\tau)+12.
+ \label{p12-83-c20-s8:eq:serie-3b-u031}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+L'isométrie est sans points fixes et d'ordre trois ; le poids tordu et le type zéro ont été
+calculés, non supposés. Les théorèmes d'orbifold cyclique identifient
+l'extension holomorphe au module lunaire et classent l'automorphisme dual
+comme \(3B\)
+\cite{ChenLamShimakura2016,AbeLamYamada2017,Carnahan2017}.
+L'identification utilise ces théorèmes après la construction de l'objet de réseau ;
+elle ne se déduit pas uniquement d'une égalité de séries.
+\end{proof}
+
+Si \(V^{(i)}\) est le module \(\widehat g_c^{\,i}\)-tordu et
+\[
+ Z_{i,j}(\tau):=
+ \operatorname{Tr}_{V^{(i)}}\!
+ \left(
+ \phi_i(\widehat g_c)^j q^{L_0-1}
+ \right),
+\]
+le caractère de l'orbifold est la moyenne des neuf secteurs :
+\begin{equation}
+ \operatorname{ch}_{V^\natural}(\tau)
+ =\frac13\sum_{i,j\in\mathbb Z/3}Z_{i,j}(\tau)
+ =J(\tau).
+ \label{p12-83-c20-s8:eq:promedio-nueve-sectores-u031}
+\end{equation}
+L'identité rationnelle de niveau trois est
+\begin{equation}
+ J
+ =t_3+12+\frac{10\,3^9}{t_3}
+ +\frac{4\,3^{14}}{t_3^2}
+ +\frac{3^{18}}{t_3^3}.
+ \label{p12-83-c20-s8:eq:j-desde-t3-u031}
+\end{equation}
+Comme \(t_3^{-1}=q+O(q^2)\),
+\begin{equation}
+ [q]J=54+10\cdot3^9=196884
+ =54(5\cdot729+1).
+ \label{p12-83-c20-s8:eq:coeficiente-196884-u031}
+\end{equation}
+C'est une compatibilité graduée au sein du corridor construit, non un
+morphisme scalaire \(54\to V^\natural\).
+
+\subsection{Construction de réseau d'ordre \(2\)}
+
+La route d'ordre trois précédente et la construction classique de
+Frenkel--Lepowsky--Meurman produisent deux présentations de la même VOA lunaire.
+Pour déclarer la seconde, nous fixons l'extension centrale
+\begin{equation}
+ 1\longrightarrow\{\pm1\}
+ \longrightarrow\widehat\Lambda_{24}
+ \longrightarrow\Lambda_{24}
+ \longrightarrow1
+ \label{p12-83-c20-s8:eq:extension-central-leech-u031}
+\end{equation}
+de commutateur
+\((-1)^{\langle\lambda,\mu\rangle}\), et un cocycle
+\(\varepsilon(\lambda,\mu)\) qui la représente. L'algèbre de groupe
+tordue est \(\mathbb C_\varepsilon[\Lambda_{24}]\), et
+\begin{equation}
+ V_\Lambda
+ :=M(1)\otimes\mathbb C_\varepsilon[\Lambda_{24}]
+ \label{p12-83-c20-s8:eq:voa-reticular-leech-u031}
+\end{equation}
+est la VOA de réseau de charge centrale 24.
+
+La négation \(\lambda\mapsto-\lambda\) possède un relèvement
+\(\theta\) compatible avec \eqref{p12-83-c20-s8:eq:extension-central-leech-u031}. Sa trace
+est
+\begin{equation}
+ t_2(\tau)
+ :=
+ \operatorname{Tr}_{V_\Lambda}
+ (\theta q^{L_0-1})
+ =q^{-1}\prod_{n\ge1}(1+q^n)^{-24}.
+ \label{p12-83-c20-s8:eq:t2-leech-u031}
+\end{equation}
+En effet, la négation apparie \(e^\lambda\) avec \(e^{-\lambda}\), et
+l'absence de torsion ne laisse que \(\lambda=0\) dans la trace de réseau ; chacun
+des 24 oscillateurs apporte \((1+q^n)^{-1}\).
+
+Soit \(V_\Lambda^T\) le module irréductible tordu par \(\theta\), et
+\((V_\Lambda^T)^+\) son secteur de signe positif. La construction FLM est
+\begin{equation}
+ V^\natural
+ =(V_\Lambda)^+\oplus(V_\Lambda^T)^+.
+ \label{p12-83-c20-s8:eq:vnatural-flm-u031}
+\end{equation}
+La route \(\mathbb Z/2\) de
+\eqref{p12-83-c20-s8:eq:vnatural-flm-u031} et la route \(\mathbb Z/3\) de
+\eqref{p12-83-c20-s8:eq:orbifold-triadico-vnatural-u031} sont des constructions parallèles
+identifiées par des théorèmes classiques ; aucune ne se substitue à l'autre.
+
+\subsection{Groupe d'automorphismes, caractère et séries graduées}
+
+Une fois \(V^\natural\) construit, deux publications distinctes apparaissent :
+\begin{align}
+ \operatorname{Aut}(V^\natural)&\cong\mathbb M,
+ \label{p12-83-c20-s8:eq:aut-vnatural-monstruo-u031}\\
+ \operatorname{ch}_{V^\natural}(\tau)
+ &=J(\tau)=j(\tau)-744
+ =q^{-1}+196884q+21493760q^2+\cdots.
+ \label{p12-83-c20-s8:eq:caracter-vnatural-j-u031}
+\end{align}
+La première identifie le groupe de symétries ; la seconde compte les dimensions
+graduées. La droite de vide est
+\[
+ (V^\natural)_0=\mathbb C\mathbf1,
+\]
+et l'absence de racines de \(\Lambda_{24}\) donne
+\[
+ (V^\natural)_1=0.
+\]
+En degré deux,
+\[
+ 196884=1+196883=196560+324=54(5\cdot729+1).
+\]
+Seule la première égalité est une décomposition en dimensions de
+représentations du Monstre ; les autres sont des contrôles arithmétiques.
+
+Pour \(g\in\mathbb M\), on définit la série de McKay--Thompson
+\begin{equation}
+ T_g(\tau):=
+ \operatorname{Tr}_{V^\natural}
+ \left(gq^{L_0-1}\right).
+ \label{p12-83-c20-s8:eq:serie-mckay-thompson-u031}
+\end{equation}
+
+\begin{theorem}[Moonshine monstrueux]
+\label{p12-83-c20-s8:thm:moonshine-monstruoso-u031}
+L'action graduée de \(\mathbb M\) sur \(V^\natural\) produit la famille
+\(\{T_g\}_{g\in\mathbb M}\). Les théorèmes de Moonshine identifient ces
+séries à des fonctions modulaires de genre zéro et prouvent leurs identités de
+réplicabilité
+\cite{ConwayNorton1979,Borcherds1992,FLM1988}.
+\end{theorem}
+
+Ce théorème a pour entrée le couple
+\[
+ \bigl(V^\natural,\operatorname{Aut}(V^\natural)\bigr)
+\]
+et sa graduation. Ce n'est pas la conséquence d'une flèche dont le domaine serait le
+groupe abstrait \(\mathbb M\).
+
+Pour \(J=T_{1A}\), soient \(P_n\) les polynômes de Faber normalisés par
+\[
+ P_n(J)=q^{-n}+O(q).
+\]
+L'identité de Hecke--Faber est
+\begin{equation}
+ P_n(J)=n\,T_nJ.
+ \label{p12-83-c20-s8:eq:hecke-faber-u031}
+\end{equation}
+Elle contrôle tous les degrés ; le coefficient 196884 n'est que la première
+manifestation non triviale.
+
+\subsection{Graphe de dépendances du corridor Paley–Witt–Golay–Leech–Moonshine}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=huge,row sep=large]
+ &C_W
+   \arrow[dl,"W_{12}"']
+   \arrow[d,"N(A_2^{12})"',font=\scriptsize]
+   \arrow[dr,phantom,"\substack{\text{branches}\\\text{distinctes}}",
+          description,pos=.72,font=\scriptsize]&\\
+ M_{12}
+ &\Lambda_{24}
+   \arrow[d,"V_\Lambda"]
+ &(\mathcal G_{24},D,\ell)
+   \arrow[d,"W_{24}"]\\
+ &V^\natural
+   \arrow[dl,"\operatorname{Aut}"']
+   \arrow[d,"\operatorname{ch}"]
+   \arrow[dr,"g\mapsto T_g"]
+ &M_{24}\\
+ \mathbb M
+ &J
+ &\{T_g\}_{g\in\mathbb M}
+\end{tikzcd}
+\caption{Bifurcation exceptionnelle et trois publications de
+\(V^\natural\). L'entrée binaire \((\mathcal G_{24},D,\ell)\) est
+indépendante ; il n'existe pas de flèche \(W_{24}\to\Lambda_{24}\).}
+\label{p12-83-c20-s8:fig:grafo-excepcional-moonshine-u031}
+\end{figure}
+
+\begin{criterion}[Critères de réfutation du corridor lunaire]
+\label{p12-83-c20-s8:crit:refutacion-corredor-lunar-u031}
+La construction est réfutée si l'un des faits suivants se produit :
+\begin{enumerate}
+ \item \(\lambda\) n'est pas bijective ou
+       \eqref{p12-83-c20-s8:eq:identidad-entrelazamiento-app-witt-u031} échoue ;
+ \item \(c_*\notin C_W\), \(g_c\) possède des points fixes ou ne préserve pas le
+       voisin ;
+ \item les déplacements de
+       \eqref{p12-83-c20-s8:eq:desplazamientos-vecino-u031} n'appartiennent pas à \(N_0\) ;
+ \item le relèvement de réseau \(\widetilde h\) ne réalise pas l'automorphisme
+       monomial \(h\) dans le discriminant ;
+ \item le poids tordu n'est pas \(4/3\) ou le relèvement n'est pas de type zéro ;
+ \item l'orbifold est identifié à \(V^\natural\) sans vérification des
+       hypothèses du théorème classique ;
+ \item on utilise \(W_{24}\) comme constructeur de Leech ;
+ \item une égalité de dimensions est présentée comme construction de
+       \(\mathbb M\) ;
+ \item on sérialise indûment les publications
+       \(\operatorname{Aut}\), \(\operatorname{ch}\) et \(g\mapsto T_g\).
+\end{enumerate}
+\end{criterion}

@@ -1,0 +1,320 @@
+% Article VII. Incorporation of pre-existing results, 10-09-2026.
+% Complete source owners preserved in fuentes_conservadas:
+% 17_pantalla_cubica_soldadura.tex (P), 18_clausura_energetica.tex (E).
+% P: incidence, quotient, cellular soldering, and refinement.
+% E: response, uniqueness, minimal extension, and tracial expectation.
+% Earlier dependencies of VII: APP--TRIT--TPK kernel; cubic realization
+% of the route, transport cocycle, and compression q_vis=5/9.
+% This fragment does not by itself constitute the self-contained article.
+% The screen identity is distinguished from the matter spin contraction.
+
+\section{Boundary soldering and energy response}
+\label{vii:sec:pantalla-respuesta}
+
+The cubic realization of transport preserves six oriented incidences.
+Its geometric quotient, Lorentzian form, and energy response
+are obtained from the same incidence matrix. Transport originates in
+the enriched APP--TRIT--TPK route: face, sign, carry, and
+memory accompany each edge. This section develops the
+linear operation acting on that boundary representation.
+
+\subsection{Cubic incidence and the rank-four quotient}
+\label{vii:sec:cociente-pantalla}
+
+Let \(H_F=\mathbb R^F\), with
+\(F=\{(i,\epsilon):1\leq i\leq3,\ \epsilon\in\{-1,1\}\}\),
+its Euclidean inner product, and its basis \(e_{i,\epsilon}\).
+Face opposition is the orthogonal involution
+\(Re_{i,\epsilon}=e_{i,-\epsilon}\). Define
+\[
+ u=\sum_{i,\epsilon}e_{i,\epsilon},\qquad
+ P_u=\frac{uu^{\mathsf T}}6,\qquad P_-=\frac{I-R}{2},\qquad
+ P_0=\frac{I+R}{2}-P_u,\qquad P_\square=P_u+P_-.
+\]
+The vertices are \(V=\{-1,1\}^3\). The incidence matrix
+\(M:\mathbb R^V\longrightarrow H_F\) is determined by
+\[
+ M_{(i,\epsilon),\nu}=\mathbf1_{\{\nu_i=\epsilon\}}.
+\]
+
+\begin{proposition}[Incidence decomposition]
+\label{vii:prop:incidencia}
+We have
+\[
+ MM^{\mathsf T}=12P_u+4P_-,
+ \qquad
+ \ker M^{\mathsf T}=P_0H_F.
+\]
+Consequently, the quotient
+\(Q=H_F/P_0H_F\), orthogonally identified with
+\(P_\square H_F\), has dimension four.
+\end{proposition}
+
+\begin{proof}
+A face contains four vertices. Two opposite faces have no common
+vertices, and two faces on different axes have two common vertices.
+Writing \(\mathbf J=uu^{\mathsf T}\), we obtain
+\[
+ MM^{\mathsf T}=4I+2(\mathbf J-I-R)
+ =2(I-R)+2\mathbf J=4P_-+12P_u.
+\]
+The three projectors \(P_u,P_-,P_0\) are orthogonal and sum to \(I\);
+their ranks are respectively one, three, and two. The identity
+\(\|M^{\mathsf T}x\|^2=\langle x,MM^{\mathsf T}x\rangle\)
+identifies the stated kernel. The complementary rank is four.
+\end{proof}
+
+On \(Q\), the form
+\[
+ B=P_--P_u
+\]
+has signature \((3,1)\). The time orientation is fixed by \(u\).
+With
+\[
+ t=\frac{u}{\sqrt6},\qquad
+ d_i=\frac{e_{i,+}-e_{i,-}}{\sqrt2},\qquad
+ W=\sqrt6P_u+\sqrt2P_-,
+\]
+we have \(We_{i,\epsilon}=t+\epsilon d_i\). These six vectors
+are null for \(B\), whereas
+\[
+ 3t+\nu_1d_1+\nu_2d_2+\nu_3d_3
+\]
+has quadratic norm \(-6\). The same incidence satisfies
+\(MM^{\mathsf T}=2W^*W\) on \(Q\). Proper rotations of the cube
+commute with the projectors, preserve both forms, and fix \(t\).
+These identities determine the metric of the cubic representation.
+
+\subsection{Cellular soldering and memory transport}
+\label{vii:sec:soldadura-celular}
+
+For each oriented edge \(a\), representation of the route provides
+the face \(\lambda(\underline a)\), the sign
+\(\sigma(a)\), the source and target fibres, and the transport
+\(U(a):Q_{s(a)}\longrightarrow Q_{t(a)}\).
+Inversion satisfies \(U(\bar a)=U(a)^{-1}\).
+Boundary half-edges retain their formal inversion and their incidence
+on the boundary. With \(\ell_m=\ell_0\,9^{-m}>0\), the soldering is
+\begin{equation}
+ \beta_m(a)=\ell_m\sigma_m(a)
+              n_{\lambda(\underline a)}^{s(a)},\qquad
+ n_{i,\epsilon}=t+\epsilon d_i.
+ \label{vii:eq:soldadura-arista}
+\end{equation}
+The face and sign are transported together with the route memory.
+The inversion convention requires
+\begin{equation}
+ \beta_m(\bar a)=-U_m(a)\beta_m(a).
+ \label{vii:eq:inversion-soldadura}
+\end{equation}
+Applying this relation twice recovers \(\beta_m(a)\);
+the carry register separately preserves the ordered composition.
+
+\begin{proposition}[Naturality of soldering under refinement]
+\label{vii:prop:refinamiento-soldadura}
+Let \(a=a_1\cdots a_9\) be a compatible refinement of an edge.
+Suppose that the nine successor incidences, transported to the predecessor
+fibre, preserve face and sign, and that
+\(\ell_{m+1}=\ell_m/9\). Let
+\(\mathcal U_j:Q_{m,s(a)}\longrightarrow Q_{m+1,s(a_j)}\)
+be the accumulated transport including the refinement identification
+and the path to the source of successor \(j\). Then
+\[
+ \beta_m(a)=
+ \sum_{j=1}^{9}\mathcal U_j^{-1}\beta_{m+1}(a_j).
+\]
+The equality is compatible with inversion and with concatenation
+of the memory register.
+\end{proposition}
+
+\begin{proof}
+Each summand, expressed in the fibre at the predecessor's source, is
+\((\ell_m/9)\sigma_m(a)n_{\lambda(\underline a)}\).
+The sum of nine terms reproduces the predecessor's soldering.
+Inversion reverses the order of the transports and replaces each
+by its inverse; relation \eqref{vii:eq:inversion-soldadura} supplies
+the overall sign. Memory is concatenated in that same order, so
+refinement preserves both the vector representation and its
+enriched register.
+\end{proof}
+
+\subsection{Positive response, uniqueness, and minimal extension}
+\label{vii:sec:respuesta-positiva}
+
+The linear screen soldering is
+\(\bar\beta_m=\ell_mW|_Q\). It is invertible, with
+\[
+ \bar\beta_m^{-1}
+ =\ell_m^{-1}\left(\frac1{\sqrt6}P_u+\frac1{\sqrt2}P_-\right).
+\]
+The eigenvalue \(5/9\) of the antisymmetric sector of the normalized block
+\(B_c/9\), constructed in Section~\ref{vii:sec:bloque-compresion},
+determines the compression
+coefficient \(q_{\mathrm{vis}}=5/9\). We reserve this notation to
+distinguish it from the Euclidean quotient \(q_9(n)\) of the arithmetic kernel.
+Its realization on the screen uses an isometry
+\(V_9:Q\longrightarrow\mathcal K\). The visible contribution
+\(C_9=q_{\mathrm{vis}}V_9\) and its complement
+\(D_9=\sqrt{1-q_{\mathrm{vis}}^2}\,V_9\) satisfy
+\[
+ C_9^*C_9+D_9^*D_9=I_Q,\qquad D_9^*D_9=\frac{56}{81}I_Q.
+\]
+The coefficient \(56\) is \(9^2-5^2\); it belongs to the quadratic defect
+of this compression reader.
+
+\begin{theorem}[Energy response determined by soldering]
+\label{vii:thm:respuesta-unica}
+There exists a unique operator \(\Lambda_m:Q\longrightarrow Q\) such that
+\(\bar\beta_m^*\Lambda_m\bar\beta_m=D_9^*D_9\). It is positive definite, and
+\begin{equation}
+ \Lambda_m=\frac{28}{243\ell_m^2}(P_u+3P_-)
+ =\frac{112}{81\ell_m^2}
+       (MM^{\mathsf T}|_Q)^{-1}.
+ \label{vii:eq:lambda-pantalla}
+\end{equation}
+On \(H_F\), the corresponding identity has right-hand side
+\((56/81)P_\square\).
+\end{theorem}
+
+\begin{proof}
+Congruence by the invertible soldering necessarily determines
+\[
+ \Lambda_m=\bar\beta_m^{-*}\frac{56}{81}I_Q\bar\beta_m^{-1}.
+\]
+Substituting the inverse, the coefficient of \(P_u\) is
+\(56/(486\ell_m^2)=28/(243\ell_m^2)\); that of \(P_-\) is
+\(28/(81\ell_m^2)\). Both are positive. By
+Proposition \ref{vii:prop:incidencia},
+\((MM^{\mathsf T}|_Q)^{-1}=P_u/12+P_-/4\),
+which gives the second expression. Extension to six faces annihilates
+\(P_0H_F\); the identity therefore extends through \(P_\square\).
+\end{proof}
+
+\begin{proposition}[Characterization by minimal extension]
+\label{vii:prop:minima-extension}
+For every \(b\in Q\),
+\[
+ \langle b,\Lambda_m b\rangle
+ =\frac{112}{81\ell_m^2}
+   \min_{Mx=b}\|x\|^2.
+\]
+The minimizing extension is unique:
+\(x_{\min}=M^{\mathsf T}(MM^{\mathsf T}|_Q)^{-1}b\).
+\end{proposition}
+
+\begin{proof}
+The stated vector satisfies \(Mx_{\min}=b\) and belongs to
+\(\operatorname{im}M^{\mathsf T}=(\ker M)^\perp\).
+Every other solution is \(x_{\min}+z\), with \(z\in\ker M\); by
+orthogonality, its squared norm is \(\|x_{\min}\|^2+\|z\|^2\).
+Moreover,
+\[
+ \|x_{\min}\|^2
+ =\langle b,(MM^{\mathsf T}|_Q)^{-1}b\rangle.
+\]
+The formula for \(\Lambda_m\) completes the proof.
+\end{proof}
+
+The operator \(MM^{\mathsf T}|_Q\) realizes the Dirichlet--to--Neumann
+response of this incidence formulation; its inverse
+is the Neumann--to--Dirichlet response. The preceding energy corresponds
+to the latter, with the normalization of soldering and of the compression
+defect. The Schur complement of
+\(\left(\begin{smallmatrix}I&M^{\mathsf T}\\M&0\end{smallmatrix}\right)\)
+is \(-MM^{\mathsf T}\), providing the same variational elimination.
+
+\subsection{Conservation of density under refinement}
+\label{vii:sec:densidad-refinamiento}
+
+Consider the sector of cubic transports, orthogonal for the energy
+inner product and compatible with the form \(B\). Fix a
+common label space \(Q^{\mathrm{lab}}\), identified
+isometrically with the predecessor's screen. The solderings have
+types
+\(\bar\beta_m:Q^{\mathrm{lab}}\longrightarrow Q_m\) and
+\(\bar\beta_{m+1,j}:Q^{\mathrm{lab}}\longrightarrow Q_{m+1,j}\);
+the operators \(\Lambda\) act in their respective target fibres.
+If
+\(U_j:Q_j\longrightarrow Q\) transports the successor fibre to the predecessor fibre,
+then
+\[
+ \bar\beta_{m+1,j}=\frac19U_j^{-1}\bar\beta_m,\qquad
+ \Lambda_{m+1,j}=81U_j^{-1}\Lambda_mU_j.
+\]
+The factor \(81\) comes from \(\ell_{m+1}^{-2}=81\ell_m^{-2}\).
+
+\begin{theorem}[Invariance of the normalized density]
+\label{vii:thm:densidad}
+Each successor preserves the predecessor's quadratic response:
+\[
+ \bar\beta_{m+1,j}^*\Lambda_{m+1,j}\bar\beta_{m+1,j}
+ =\frac{56}{81}I_{Q^{\mathrm{lab}}}.
+\]
+For \(r\) refinements, the joint response, expressed in the predecessor
+fibres, is
+\[
+ E_{m+r}=\frac{56}{81}I_{Q^{\mathrm{lab}}}\otimes I_{9^r}.
+\]
+The expectation with normalized trace
+\(\tau_{9^r}(A)=9^{-r}\operatorname{Tr}(A)\) satisfies
+\[
+ (\operatorname{id}\otimes\tau_{9^r})(E_{m+r})
+ =\frac{56}{81}I_{Q^{\mathrm{lab}}}
+\]
+at every finite depth.
+\end{theorem}
+
+\begin{proof}
+A successor's congruence contains the factors \(1/9,81,1/9\);
+their product is one. Orthogonality cancels the intermediate
+transports. The direct sum of nine equal responses identifies
+the first refinement with \((56/81)I_Q\otimes I_9\).
+Iteration produces the tensor with \(I_{9^r}\).
+Finally, \(\tau_{9^r}(I_{9^r})=1\). Expectations compose
+through the identity
+\(\tau_{9^{r+s}}=\tau_{9^r}\otimes\tau_{9^s}\).
+\end{proof}
+
+The unital inclusions \(A\mapsto A\otimes I_9\) are compatible with
+this collection of traces. In the inductive limit of the matrix algebras,
+the response is the central element
+\((56/81)I_Q\otimes\mathbf1\). The unnormalized extensive sum instead gives
+\(9^r(56/81)I_Q\). This distinction specifies the quantity
+preserved: the quadratic screen density.
+
+\subsection{Variational realization of the response}
+\label{vii:sec:realizacion-respuesta}
+
+The matter realization uses an isometry
+\(J_{\mathrm{scr}}:Q\longrightarrow\mathcal H_\partial\)
+compatible with the spin action and refinement.
+The boundary co-tetrad is \(e=J_{\mathrm{scr}}\bar\beta_m\).
+Let \(\Lambda_{\mathrm{CE}}\) be the boundary response obtained
+by second variation of the matter and geometric action, with its
+boundary conditions and elimination of the interior variables.
+The compatibility defect is
+\begin{equation}
+ \mathcal R_{\mathrm{grav}}
+ =\bar\beta_m^*
+   (J_{\mathrm{scr}}^*\Lambda_{\mathrm{CE}}J_{\mathrm{scr}}-\Lambda_m)
+   \bar\beta_m
+ =e^*\Lambda_{\mathrm{CE}}e-D_9^*D_9.
+ \label{vii:eq:defecto-respuesta}
+\end{equation}
+By invertibility of \(\bar\beta_m\),
+\[
+ \mathcal R_{\mathrm{grav}}=0
+ \quad\Longleftrightarrow\quad
+ J_{\mathrm{scr}}^*\Lambda_{\mathrm{CE}}J_{\mathrm{scr}}=\Lambda_m.
+\]
+The isometry \(J_{\mathrm{scr}}\) transports the boundary states;
+the variational spin current is a bivector-valued three-form.
+Each enters the realization of the response with its own
+domain.
+
+The construction determines a positive energy form, its minimizing
+interior extension, and the density conserved under refinement.
+The amplitude of a specific matter contribution is obtained by evaluating
+the current of that realization in its variational quadratic form.
+This distinguishes the operator fixing the response, the current
+on which it acts, and the gravitational observable expressed by the evaluation.

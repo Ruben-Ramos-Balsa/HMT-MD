@@ -1,0 +1,118 @@
+\subsubsection{Codificación de pares tríticos y suma con acarreo}
+\label{mg04:codificacion}
+
+La lectura ternaria de las emisiones APP--TRIT--TPK tiene un ambiente
+de seis coordenadas sobre \(\mathbb F_3\). Agruparlas en tres pares
+ordena ese ambiente mediante tres dígitos nonádicos. La agrupación
+conserva la posición y el orden de los trits; la suma que representa
+debe transportar también su acarreo.
+
+Sea \(T=\{0,1,2\}\) el conjunto de representantes ternarios.
+Para una clase \(x\in\mathbb Z/9\mathbb Z\), escribimos
+\(\widetilde x\in\{0,\ldots,8\}\) para su representante canónico.
+Definimos
+\begin{equation}
+ \beta:T^2\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad \beta(a,b)=[a+3b]_9.
+ \label{mg04:beta}
+\end{equation}
+Aquí \([s]_m\) designa, cuando se emplea como dígito, el representante
+en \(\{0,\ldots,m-1\}\) de la clase de \(s\).
+
+\begin{proposition}[Inversa y transporte de la suma]
+El mapa \(\beta\) es una biyección, con inversa
+\begin{equation}
+ \beta^{-1}(x)=
+ \left([\widetilde x]_3,
+       \left\lfloor\frac{\widetilde x}{3}\right\rfloor\right).
+ \label{mg04:inversa}
+\end{equation}
+La ley sobre \(T^2\) transportada desde la suma nonádica es
+\begin{equation}
+ (a,b)\oplus(c,d)=
+ \left([a+c]_3,
+ \left[b+d+\left\lfloor\frac{a+c}{3}\right\rfloor\right]_3\right).
+ \label{mg04:suma}
+\end{equation}
+Con esta ley, \(\beta\) es un isomorfismo de grupos aditivos.
+El neutro es \((0,0)\) y la inversa de \((a,b)\) es
+\begin{equation}
+ \left([-a]_3,
+ \left[-b+\left\lfloor\frac{-a}{3}\right\rfloor\right]_3\right).
+ \label{mg04:opuesto}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La división euclídea de cada \(0\leq\widetilde x\leq8\) por
+tres da un único resto \(a\in T\) y un único cociente \(b\in T\),
+con \(\widetilde x=a+3b\). Esto prueba la biyección y
+\eqref{mg04:inversa}.
+
+Para la suma, escribamos \(a+c=3k+r\), con
+\(r=[a+c]_3\) y \(k=\lfloor(a+c)/3\rfloor\). Entonces
+\[
+ (a+3b)+(c+3d)=r+3(b+d+k).
+\]
+La reducción de \(b+d+k\) módulo tres sólo cambia el miembro
+derecho en un múltiplo de nueve. Por tanto,
+\(\beta((a,b)\oplus(c,d))=\beta(a,b)+\beta(c,d)\).
+La biyectividad transporta asociatividad, conmutatividad y neutro.
+Por último, la división \(-a=3\lfloor-a/3\rfloor+[-a]_3\)
+aplicada a \(-a-3b\) da \eqref{mg04:opuesto}.
+\end{proof}
+
+El acarreo es visible ya en
+\[
+ (2,0)\oplus(1,0)=(0,1),\qquad
+ \beta(2,0)+\beta(1,0)=[3]_9.
+\]
+La suma vectorial de \(\mathbb F_3^2\) produciría \((0,0)\)
+en ese mismo ejemplo. Asimismo, \((1,0)\) tiene orden nueve para
+\(\oplus\), mientras que su orden para la suma vectorial es tres.
+Estas operaciones especifican las dos estructuras algebraicas que
+conviven sobre el mismo conjunto de nueve representantes.
+
+\begin{corollary}[Coordenatización cúbica del ambiente ternario y fibras de proyección]
+La aplicación coordenada a coordenada
+\begin{equation}
+ \begin{split}
+ \beta^{\times3}:T^6&\longrightarrow(\mathbb Z/9\mathbb Z)^3,\\
+ (t_1,t_2,t_3,t_4,t_5,t_6)&\longmapsto
+ \bigl(\beta(t_1,t_2),\beta(t_3,t_4),\beta(t_5,t_6)\bigr)
+ \end{split}
+ \label{mg04:cubo}
+\end{equation}
+es una biyección de conjuntos de \(729=3^6=9^3\) elementos. La
+proyección \(\operatorname{pr}_{12}(X,Y,Z)=(X,Y)\) sobre las
+\(81\) posiciones nonádicas tiene exactamente nueve elementos
+por fibra.
+\end{corollary}
+
+\begin{proof}
+El producto de las tres inversas de \eqref{mg04:inversa} invierte
+\eqref{mg04:cubo}. Fijadas \(X,Y\), la tercera coordenada
+recorre las nueve clases de \(\mathbb Z/9\mathbb Z\); de ahí
+\(\operatorname{pr}_{12}^{-1}(X,Y)=
+\{(X,Y,Z):Z\in\mathbb Z/9\mathbb Z\}\) y el cardinal afirmado.
+Conservar \(Z\) junto con \(X,Y\) permite aplicar la inversa
+completa y recuperar los seis trits ordenados.
+\end{proof}
+
+El dominio de esta cuenta es el ambiente completo de \(729\)
+palabras. El catálogo de \(468\) emisiones decimales y su imagen
+admisible de \(243\) palabras ternarias conservan sus propios mapas
+emisores y sus restricciones. La restricción de \(\beta^{\times3}\)
+a esa imagen sigue siendo inyectiva, mientras que los cardinales de
+sus fibras de proyección se determinan por la intersección con la
+fibra ambiente. La afirmación uniforme de nueve elementos pertenece
+al cubo completo.
+
+La coordenatización bidimensional resultante recupera una representación etiquetada
+del soporte APP ya construido. Las hojas de suma y producto son funciones adicionales sobre
+ese soporte, con los representantes y cocientes declarados en el núcleo.
+La tercera coordenada conserva el dato omitido por la proyección
+facial; las rutas y la memoria temporal permanecen en el estado TPK
+del que procede la lectura. De este modo, la codificación finita
+explicita la información que transporta y la distingue de la historia
+completa a la que pertenece.

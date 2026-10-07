@@ -1,0 +1,286 @@
+\section{Produit natif, factorisation et irréductibilité}
+\label{lectura:manuscrito-01}
+Ce chapitre développe le secteur arithmétique des formes normales sur le noyau commun et la construction corrélative du continu de la section~\ref{lectura:manuscrito-05}. L'opération locale se prolonge aux mots, ses fibres distinguent les irréductibles et l'évaluation permet de reconnaître les nombres premiers. Le développement reprend le produit natif du corpus ; la provenance documentaire est réunie dans l'annexe~\ref{ap:procedencia-reproduccion}.
+
+\subsection{L'information nécessaire pour multiplier}
+La sélection des nombres premiers exige d'avoir construit une multiplication. Dans l'holographie modulaire triadique, cette opération doit être exposée à partir des deux feuillets d'APP, en conservant tant la coordonnée résiduelle que son quotient. Le résidu seul permet de reconnaître une classe de congruence. Le couple résidu–quotient permet de reconstruire le résultat entier de l'opération locale. Cette distinction détermine quelle information doit être transportée lors de la composition des cellules.
+
+Soit $D_9=\{1,\ldots,9\}$. Pour chaque paire $(a,b)\in D_9^2$, les feuillets additif et multiplicatif s'écrivent
+
+\[
+a+b=R_+(a,b)+9Q_+(a,b),\qquad
+ab=R_\times(a,b)+9Q_\times(a,b),
+\]
+avec $R_+,R_\times\in D_9$. Le choix du représentant positif fixe de manière unique les quatre données. En particulier, un résultat divisible par neuf a un résidu représenté par $9$, et son quotient est inférieur d'une unité à celui de la division euclidienne à reste nul. Il s'agit d'une convention exacte de représentation, qui doit être maintenue tout au long de la construction.
+
+Par exemple,
+
+\[
+2\cdot5=1+9\cdot1,\qquad 9\cdot9=9+9\cdot8.
+\]
+Le premier résultat conserve l'information qui distingue $10$ de $1$ ; le second conserve celle qui distingue $81$ de $9$. Si le quotient est omis dans l'une de ces étapes, une multiplication ultérieure agit sur un autre objet. La mémoire arithmétique n'est pas ici une interprétation ajoutée à l'algorithme : elle intervient dans la reconstruction de son résultat.
+
+Les deux feuillets se couplent même pendant une multiplication. Le produit de deux chiffres engendre un couple $(R_\times,Q_\times)$ ; lorsque le quotient provenant d’une position antérieure est incorporé à la position actuelle, le feuillet additif est de nouveau nécessaire. L’opération globale compose les deux feuillets.
+
+\HMTresultado{Proposition}{Compatibilité locale des quotients}{rz-num-01-1}
+Les quotients satisfont les identités nécessaires pour associer et distribuer les opérations sans modifier l'entier reconstruit. Par exemple, pour l'addition,
+
+\[
+Q_+(a,b)+Q_+\bigl(R_+(a,b),c\bigr)
+=Q_+(b,c)+Q_+\bigl(a,R_+(b,c)\bigr).
+\]
+Pour le produit,
+
+\[
+Q_\times\bigl(R_\times(a,b),c\bigr)+cQ_\times(a,b)
+=Q_\times\bigl(a,R_\times(b,c)\bigr)+aQ_\times(b,c).
+\]
+\textbf{Démonstration.} En substituant les deux décompositions de $a+b+c$, les restes finaux sont le même représentant positif de leur classe modulo neuf. Les soustraire et diviser par neuf donne la première égalité. Pour $abc$, on applique le même argument à
+
+\[
+\bigl(R_\times(a,b)+9Q_\times(a,b)\bigr)c
+=a\bigl(R_\times(b,c)+9Q_\times(b,c)\bigr).
+\]
+L'identité distributive s'obtient en reconstruisant $a(b+c)=ab+ac$ avec les deux feuillets. Dans les trois cas, l'unicité de la représentation résiduelle détermine exactement le quotient qui doit l'accompagner. \hfill\(\square\)
+
+Ces identités permettent d'organiser le registre des opérations : deux parenthésages produisent le même entier sans imposer d'identifier leurs histoires d'exécution. L'égalité du résultat et l'identité de l'histoire sont des affirmations différentes.
+
+\subsection{Mots nonadiques et forme normale}
+L'extension à des entiers arbitrairement grands utilise des suites finies de chiffres de $D_9$. On adopte l'orientation de la position de plus faible poids vers celle de plus fort poids. Pour $u=(u_0,\ldots,u_{r-1})$, soit
+
+\[
+\operatorname{ev}_9(u)=\sum_{j=0}^{r-1}u_j9^j.
+\]
+La séquence vide représente zéro. Dans cette numération bijective, le symbole $9$ demeure un chiffre ; il ne devient pas un zéro sans quotient.
+
+\HMTresultado{Proposition}{Existence et unicité de la forme normale}{rz-num-01-2}
+L'évaluation précédente est une bijection entre les mots finis sur $D_9$, y compris le mot vide, et les entiers non négatifs.
+
+\textbf{Démonstration.} Si $n>0$, on définit
+
+\[
+d(n)=1+((n-1)\bmod9),\qquad q(n)=\frac{n-d(n)}9.
+\]
+Alors $d(n)\in D_9$, $q(n)\ge0$ et $q(n)<n$. L’itération se termine à zéro et produit un mot dont l’évaluation est $n$. Pour l’unicité, le premier chiffre de tout mot qui s’évalue à $n$ doit représenter la classe de $n$ modulo neuf dans $D_9$ ; il doit donc être $d(n)$. Le retirer et diviser par neuf ramène la question à $q(n)$. La récurrence prouve l’unicité. \hfill\(\square\)
+
+Quelques formes normales sont
+
+\[
+9\leftrightarrow(9),\quad
+10\leftrightarrow(1,1),\quad
+81\leftrightarrow(9,8),\quad
+1000\leftrightarrow(1,3,3,1).
+\]
+L'écriture se vérifie directement : $1000=1+3\cdot9+3\cdot9^2+9^3$. Cette dernière égalité n'identifie pas à elle seule le mot d'un entier à la complétion cubique d'un domaine géométrique. Les deux occurrences de $1000$ ont des objets et des opérations différents ; une identification exigerait son application.
+
+La forme normale est une coordonnée arithmétique. L'état du TPK conserve en outre l'orientation, le feuillet, la route, la frontière et la mémoire de transport. Lorsque différentes histoires produisent une même forme normale, l'application d'évaluation réunit leurs valeurs, mais n'établit pas de bijection entre ces histoires. Le développement de l'article doit conserver les deux niveaux et l'application qui les relie.
+
+\subsection{Construction du produit sans évaluation préalable des opérandes}
+L'addition des mots s'effectue position par position. Si une position comporte deux chiffres, on consulte le feuillet additif. Si elle n'en comporte qu'un, ce chiffre est conservé. Le quotient provenant de la position précédente est incorporé au moyen d'une autre consultation additive, et les quotients des deux consultations sont additionnés. Si \(a+b=r+9q\) et \(r+c=r'+9q'\), on transporte \(q+q'\). Par exemple, \(9+9+1=1+9\cdot2\). Le quotient entrant est compris entre zéro et deux ; lorsqu'il est nul, aucune cellule supplémentaire n'est consultée. Une position absente n'est pas une cellule d'APP contenant le chiffre zéro.
+
+La multiplication par un chiffre $d\in D_9$ agit de manière analogue : à chaque position, on applique d’abord le feuillet multiplicatif au chiffre du mot et à $d$ ; puis on incorpore le quotient en attente au moyen du feuillet additif. Le nouveau quotient est la somme du quotient du produit local et de celui de cette consultation additive, et il est compris entre zéro et neuf. Le procédé se termine en ajoutant, lorsqu’il n’est pas nul, le quotient final.
+
+Notons ces opérations $u\boxplus v$ et $d\odot u$. Si $v=(v_0,\ldots,v_{m-1})$, le produit natif se construit par la récurrence
+
+\[
+a_m=\varnothing,\qquad
+a_j=(9\odot a_{j+1})\boxplus(v_j\odot u),
+\quad j=m-1,\ldots,0,
+\]
+et on définit $u\boxtimes v=a_0$. Chaque opération du membre de droite utilise les deux feuillets locaux déjà définis. L'évaluation du mot n'intervient pas comme instruction pour calculer le produit.
+
+\HMTresultado{Théorème}{Exactitude du produit natif}{rz-num-01-3}
+Pour tous les mots finis $u,v$,
+
+\[
+\operatorname{ev}_9(u\boxtimes v)
+=\operatorname{ev}_9(u)\operatorname{ev}_9(v).
+\]
+\textbf{Démonstration.} Les identités de reconstruction des cellules prouvent, par récurrence sur les positions, que
+
+\[
+\operatorname{ev}_9(u\boxplus v)
+=\operatorname{ev}_9(u)+\operatorname{ev}_9(v),\qquad
+\operatorname{ev}_9(d\odot u)=d\operatorname{ev}_9(u).
+\]
+Pendant la récurrence du produit, on conserve l'invariant
+
+\[
+\operatorname{ev}_9(a_j)
+=\operatorname{ev}_9(u)\sum_{k=j}^{m-1}v_k9^{k-j}.
+\]
+Le cas $j=m$ est immédiat. S'il vaut pour $j+1$, multiplier par neuf et ajouter $v_j\operatorname{ev}_9(u)$ produit le cas $j$. Pour $j=0$, on obtient l'égalité annoncée. \hfill\(\square\)
+
+\HMTresultado{Corollaire}{Structure multiplicative des formes normales}{rz-num-01-4}
+Les mots non vides, munis du produit $\boxtimes$, forment un monoïde commutatif d'unité $(1)$. Lorsqu'on ajoute le mot vide, celui-ci est absorbant.
+
+\textbf{Démonstration.} L’évaluation est multiplicative par le théorème et injective par la proposition~\ref{rz-num-01-2}. L’associativité, la commutativité et l’identité se vérifient après évaluation et se récupèrent par injectivité. \hfill\(\square\)
+
+La preuve permet de reconnaître la multiplication ordinaire dans l'opération construite. L'ordre logique est important : on définit d'abord le transducteur de cellules et on démontre son invariant ; on identifie ensuite sa réalisation entière.
+
+\subsection{Ouvertures multiplicatives et sélection des irréductibles}
+Une fois le produit construit, la factorisation peut se définir comme sa fibre. Pour chaque mot non vide $w$, soit
+
+\[
+\operatorname{Fac}(w)=\{(u,v):u\boxtimes v=w\}.
+\]
+Cette fibre est finie. En effet, si $n=\operatorname{ev}_9(w)$, l'exactitude implique $\operatorname{ev}_9(u)\operatorname{ev}_9(v)=n$, les deux facteurs étant positifs et ne dépassant pas $n$. La finitude justifie la somme algébrique
+
+\[
+\Delta e_w=\sum_{(u,v)\in\operatorname{Fac}(w)}e_u\otimes e_v.
+\]
+L’ordre dans le couple de facteurs est conservé. Pour $n=12$, par exemple, les évaluations de la fibre sont
+
+\[
+(1,12),(2,6),(3,4),(4,3),(6,2),(12,1).
+\]
+Le coproduit réduit élimine les deux décompositions contenant l'unité, pour $w\ne(1)$ :
+
+\[
+\widetilde\Delta e_w
+=\sum_{\substack{u\boxtimes v=w\\u\ne(1),\ v\ne(1)}}e_u\otimes e_v.
+\]
+On fixe $\widetilde\Delta e_{(1)}=0$. Cette convention permet de traiter l'unité séparément, sans la confondre avec un irréductible.
+
+\HMTresultado{Définition}{Irréductible natif}{rz-num-01-5}
+Un mot $w\ne(1)$ est multiplicativement irréductible si $\widetilde\Delta e_w=0$.
+
+La définition ne reçoit pas de table de nombres premiers et n'utilise pas de période décimale. Elle demande si l'opération déjà construite admet une ouverture non triviale.
+
+\HMTresultado{Théorème}{Reconnaissance des nombres premiers}{rz-num-01-6}
+L'évaluation établit une bijection entre les irréductibles natifs et les nombres premiers positifs.
+
+\textbf{Démonstration.} Si $w=u\boxtimes v$ avec des facteurs distincts de l’unité, son évaluation est le produit de deux entiers supérieurs à un ; il n’est donc pas premier. Réciproquement, si $\operatorname{ev}_9(w)=ab$, avec $a,b>1$, leurs formes normales $u,v$ satisfont
+
+\[
+\operatorname{ev}_9(u\boxtimes v)=ab=\operatorname{ev}_9(w).
+\]
+L'injectivité donne $u\boxtimes v=w$, de sorte que $w$ n'est pas irréductible. La bijection des formes normales complète la preuve. \hfill\(\square\)
+
+Ce résultat identifie une propriété de l'opération à la propriété de sa réalisation entière. Les valeurs des nombres premiers apparaissent lors de l'évaluation des objets sélectionnés, après la définition du produit et de ses fibres.
+
+\HMTresultado{Proposition}{Coassociativité}{rz-num-01-7}
+Sur l’espace algébrique engendré par les mots positifs,
+
+\[
+(\Delta\otimes I)\Delta=(I\otimes\Delta)\Delta.
+\]
+\textbf{Démonstration.} Les deux membres énumèrent, avec un coefficient égal à un, les triplets ordonnés $(u,v,z)$ dont le produit est $w$. L'associativité du produit identifie les deux parenthésages et toutes les sommes sont finies. \hfill\(\square\)
+
+\subsection{Réalisation opératorielle du sélecteur}
+Dans \(\mathcal H=\ell^2(\mathcal W_9^+)\), de base orthonormée \(\{e_w\}\), le coproduit se définit d’abord sur les combinaisons finies. Les supports de $\Delta e_w$ et $\Delta e_{w'}$ sont disjoints si $w\ne w'$ : un couple ordonné a un produit unique. Par conséquent,
+
+\[
+\|\Delta e_w\|^2=|\operatorname{Fac}(w)|,
+\qquad
+\|\widetilde\Delta e_w\|^2=r(w),
+\]
+où $r(w)$ compte les ouvertures ordonnées non triviales.
+
+La fermeture de $\widetilde\Delta$ a pour domaine
+
+\[
+\left\{x=\sum_wx_we_w\in\mathcal H:\sum_wr(w)|x_w|^2<\infty\right\}.
+\]
+Son opérateur positif associé est diagonal :
+
+\[
+A_{\mathrm{irr}}=\overline{\widetilde\Delta}^{\,*}\overline{\widetilde\Delta},
+\qquad A_{\mathrm{irr}}e_w=r(w)e_w.
+\]
+Son domaine maximal est
+
+\[
+\operatorname{Dom}(A_{\mathrm{irr}})
+=\left\{x\in\mathcal H:\sum_wr(w)^2|x_w|^2<\infty\right\}.
+\]
+Le projecteur sur les irréductibles est alors
+
+\[
+P_{\mathrm{irr}}=(I-P_{(1)})\mathbf1_{\{0\}}(A_{\mathrm{irr}}).
+\]
+La formule incorpore deux exclusions différentes : le noyau élimine tous les mots possédant une ouverture non triviale, et $I-P_{(1)}$ retire l'unité. La positivité procède d'une norme au carré et possède ici une signification déterminée : elle compte des décompositions. Ce n'est pas encore une affirmation sur la positivité d'une autre forme, telle que la forme complétée de Weil.
+
+\subsection{Lecture normalisée du préfixe TPK et conservation de la généalogie}
+La forme normale admet une composition explicite avec le préfixe entier produit par le TPK. On note \(\beta_9=\operatorname{ev}_9^{-1}\) le normalisateur de la proposition~\ref{rz-num-01-2}. Ici \(K\) est la profondeur de blocs de l’état TPK, distincte de la longueur \(k\) d’une histoire élémentaire de l’arbre d’émissions. La construction s’applique à une coordonnée régionale de l’état de blocs ; le même calcul vaut pour chacune des trois coordonnées avec son registre propre.
+
+Pour le vecteur ligne profond \(x_K\in\mathbb Z^6\), le pas entier du TPK utilise la matrice
+
+\[
+A_H=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix}
+\]
+et produit
+
+\[
+y_K=x_KA_H,\qquad
+u_{K+1}=y_K\bmod3,\qquad
+x_{K+1}=\frac{y_K-u_{K+1}}3.
+\]
+Le bloc \(u_{K+1}\in\mathbb F_3^6\), avec les représentants \(\overline u_j\in\{0,1,2\}\), a pour indice
+
+\[
+I(u_{K+1})=\sum_{j=1}^{6}\overline u_j3^{6-j},
+\qquad 0\leq I(u_{K+1})<729.
+\]
+Le lecteur cylindrique met à jour le préfixe au moyen de
+
+\[
+N_{K+1}=729N_K+I(u_{K+1}).
+\]
+La matrice \(A_H\) appartient à la mise à jour du noyau TPK. Dans la composition suivante, elle n'est pas remplacée par une règle arithmétique externe : le bloc et son indice proviennent du pas qui vient d'être exécuté.
+
+\HMTresultado{Proposition}{Compatibilité du préfixe natif et de sa forme normale}{rz-num-01-8}
+Si \(w_K=\beta_9(N_K)\), alors
+
+\[
+w_{K+1}
+=\bigl(\beta_9(729)\boxtimes w_K\bigr)
+\boxplus\beta_9(I(u_{K+1})).
+\]
+La troncature typée de cette lecture est
+
+\[
+\varrho(w)=
+\beta_9\!\left(
+\left\lfloor\frac{\operatorname{ev}_9(w)}{729}\right\rfloor
+\right);
+\qquad \varrho(w_{K+1})=w_K.
+\]
+\textbf{Démonstration.} Les compatibilités de l'addition et de la multiplication des mots démontrent que l'évaluation du membre de droite est
+
+\[
+729\operatorname{ev}_9(w_K)+I(u_{K+1})
+=729N_K+I(u_{K+1})=N_{K+1}.
+\]
+L'unicité de la forme normale donne la première égalité. Puisque l'indice du bloc est compris entre zéro et \(728\), le quotient entier de \(N_{K+1}\) par \(729\) est \(N_K\). Appliquer \(\beta_9\) prouve l'identité de troncature. \hfill\(\square\)
+
+La troncature ne consiste pas à effacer trois chiffres d’un mot bijectif. Par exemple, \(\beta_9(729)=(9,8,8)\), tandis que le quotient entier de \(729\) par \(729\) est un ; effacer ses trois chiffres produirait le mot vide. La règle \(\varrho\) conserve la convention de reste et de quotient qui définit la numération.
+
+La proposition normalise un préfixe déjà engendré et conserve sa compatibilité par raffinement. Son application à l'état maintient, dans le registre original, le bloc \(u_{K+1}\), le quotient profond \(x_{K+1}\), les retenues de la coordinatisation décimale, la phase et la route. Elle n'affirme ni que \(w_K\) reconstruise à lui seul ces coordonnées, ni que toute suite soit exprimée par une section régionale fixée. L'égalité des formes normales concerne le préfixe numérique ; l'identité des historiques se décide dans l'état complet.
+
+Le registre qui accompagne le produit contient les consultations des deux feuillets ainsi que leurs résidus et leurs quotients. Il permet d'expliquer pourquoi une sortie a été obtenue et de reproduire l'opération. Le résultat du transducteur n'épuise cependant pas l'état d'un prolongement du TPK : une forme normale peut être atteinte par des histoires différentes.
+
+L'intégration à la dynamique conserve donc le sens de chaque application : l'état TPK exprime son préfixe et celui-ci admet la lecture normalisée qui vient d'être construite. La compatibilité d'un produit sur les historiques exige en outre de spécifier son domaine, son transport et sa survie. Elle n'exige pas d'inverser une lecture numérique qui n'individualise pas l'historique. L'identité des valeurs ne remplace pas ce carré de compatibilité ; chaque application doit être accompagnée de l'opération concrète et de l'information qu'elle conserve.
+
+Le point de départ de l'arithmétique est déjà spécifié : deux opérations locales, une forme normale, un transducteur global, ses fibres et un sélecteur. L'extension spectrale doit utiliser ces résultats sans changer rétrospectivement leur origine.
+
+\subsection{Correspondance avec l'implémentation conservée}
+Le code \texttt{a9\_\allowbreak{}native.\allowbreak{}py} implémente les opérations dans cet ordre :
+
+\begin{enumerate}
+\item Cellules locales d'addition et de multiplication.
+\item Codage bijectif nonadique et évaluation séparée.
+\item Addition de mots et multiplication par un chiffre.
+\item Récurrence du produit de mots.
+\item Énumération des fibres du produit.
+\item Sélection des irréductibles par absence d'ouverture non triviale.
+\end{enumerate}
+Le vérificateur utilise la multiplication entière et un test conventionnel de primalité après avoir engendré les sorties. Ces opérations contrôlent l’implémentation ; elles ne sont pas incorporées au corps du producteur de mots. Les contrôles qui suppriment un quotient ou altèrent une cellule documentent quelle dépendance est rompue. Les reçus de reproduction déclarent la taille de la fenêtre vérifiée ; cette portée computationnelle reste séparée des démonstrations générales précédentes.

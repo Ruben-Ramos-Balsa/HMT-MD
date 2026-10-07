@@ -1,0 +1,196 @@
+\ifdefined\HMTTRITFormal
+\chapter{Estado local ternario y orientación del transporte}
+\label{chap:trit}
+\index{TRIT}
+
+El TRIT es la coordenada ternaria que conserva la orientación local de una
+transición. Su definición precede a cualquier interpretación temporal: los
+tres valores distinguen tipos algebraicos de transporte y sólo adquieren una
+lectura de pasado, umbral o futuro cuando se fija un parámetro ordenado.
+
+\section{Firma ternaria orientada y espacio de estados}
+
+El espacio de firmas visibles es
+\[
+\TRIT=\{-1,0,+1\}.
+\]
+Sus elementos son símbolos orientados, no resultados de una operación en
+\(\ZZ\). El mapa balanceado
+\[
+\FF_3\longrightarrow\TRIT,
+\qquad0\mapsto0,\quad1\mapsto+1,\quad2\mapsto-1,
+\]
+permite pasar del residuo ternario a la firma orientada.
+
+\begin{definition}[Estado completo del TRIT y fibra de acarreo]
+\label{def:trit-levantado-carry-rev8}
+En un paso local cuya amplitud requiere a lo sumo un acarreo, la
+descomposición ternaria balanceada se escribe
+\[
+ \widehat\tau=(r,c),\qquad
+ a+b=r+3c,
+ \qquad r,c\in\{-1,0,+1\}.
+\]
+La primera coordenada \(r\) es el residuo visible y la segunda \(c\) conserva
+el cociente que hizo posible esa lectura.  En particular, la fibra sobre el
+cero visible contiene tres estados distintos:
+\[
+ 0^+=(0,+1),\qquad 0^0=(0,0),\qquad 0^-=(0,-1),
+ \qquad
+ \operatorname{vis}(0^+)=\operatorname{vis}(0^0)
+ =\operatorname{vis}(0^-)=0.
+\]
+\end{definition}
+
+Esta separación local entre residuo y cociente es la que, en la elevación
+Bockstein--Hensel posterior, adopta la forma matricial
+\[
+ x_k A=u_k+3x_{k+1}.
+\]
+Allí \(u_k\) publica el residuo del nivel \(k\), mientras \(x_{k+1}\)
+transporta la memoria necesaria para recuperar el levantamiento \(x_k\).  Por tanto,
+un cero visible no determina por sí solo el estado ni su futuro admisible.
+Esta afirmación es algebraica: no convierte \(0^\pm\) en un infinitesimal,
+una energía, una torsión física ni un intervalo temporal.
+
+Un trit visible no determina el conjunto de continuaciones admisibles. El
+espacio completo de estados de transporte contiene los campos
+\[
+x=(t,\mu,o,h,c,\sigma,\lambda,g).
+\]
+Aquí \(t\in\TRIT\) es la firma visible;
+\(\mu\in\mathsf M:=\{\Sigma,\Pi,\varnothing\}\), la etiqueta del observable
+aditivo, multiplicativo o neutro; \(o\), la orientación; \(h\), la coordenada de extensión;
+\(c\), el acarreo acumulado; \(\sigma\), la firma de frontera; \(\lambda\), el
+registro de trayectoria; y
+\(g\in\ZZ/9\ZZ\), la fase. La proyección \(x\mapsto t\) elimina todas las
+demás componentes.
+
+\begin{remark}[Distinción entre símbolo y estado]
+Dos estados pueden mostrar el mismo trit y poseer continuaciones distintas.
+Una palabra ternaria tampoco determina por sí sola la etiqueta de observable,
+la orientación, el acarreo o la
+monodromía. Esta distinción explica por qué cinco regiones de \(\pi\) pueden
+compartir una palabra \(w_\pi\) sin convertirse en una sola región.
+\end{remark}
+
+\fi
+
+\ifdefined\HMTTRITDevelopments
+\chapter{Álgebras cuadráticas y regímenes de transporte}
+\label{chap:trit-algebras}
+
+\section{\(3\) álgebras cuadráticas asociadas}
+
+Para \(\tau\in\TRIT\), sea \(\bar\tau\in\{-1,0,+1\}\subset\RR\) su
+imagen por la identificación balanceada anterior. Consideramos el álgebra real
+unitaria
+\[
+\mathbb A_\tau=\RR[X]/(X^2+\bar\tau),
+\]
+en la que \(J\) denota la clase de \(X\) e \(I\) la unidad. Esta convención
+separa el símbolo TRIT de su valor escalar.
+Según el signo se obtienen tres tipos:
+\[
+\begin{array}{ccl}
+\tau=+1&:&J^2=-I,\quad\text{tipo elíptico o complejo},\\
+\tau=0&:&J^2=0,\quad\text{tipo parabólico o nilpotente},\\
+\tau=-1&:&J^2=+I,\quad\text{tipo hiperbólico o descompuesto}.
+\end{array}
+\]
+Las exponenciales exhiben la diferencia:
+\[
+e^{tJ}=
+\begin{cases}
+\cos t+J\sin t,&J^2=-I,\\
+1+tJ,&J^2=0,\\
+\cosh t+J\sinh t,&J^2=+I.
+\end{cases}
+\]
+Las tres álgebras son, respectivamente, la extensión compleja, el álgebra de
+números duales y el álgebra real descompuesta. Sus subgrupos exponenciales
+producen evoluciones elípticas, parabólicas e hiperbólicas sin introducir una
+geometría continua adicional en la definición del TRIT\@.
+Las realizaciones reales concretas seleccionadas por el Coxeter de APP, el
+generador nilpotente y la incidencia de hojas TPK se construyen, sin
+duplicar esta clasificación abstracta, en
+\cref{sec:tres-generadores-concretos-trit}.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{\input{figures/fig_trit_atlas}}
+\caption{Tres tipos algebraicos asociados al estado ternario orientado. La
+primera línea recoge las identidades algebraicas; la segunda, su interpretación
+respecto de una parametrización ordenada.}
+\label{fig:trit-atlas}
+\end{figure}
+
+\section{Compatibilidad y trayectorias parametrizadas}
+
+La expresión \emph{All Possible Paths} invita a imaginar caminos recorridos en
+el tiempo. HMT sitúa el objeto un paso antes. Sea \(\Omega_{\rm HMT}\) un
+conjunto de estados locales provisto de una relación de transición admisible
+\(\leadsto\), una firma TRIT y datos de transporte que se tiparán en el
+apartado siguiente. Si
+\(\mathcal T\) es un conjunto discretamente ordenado, una trayectoria
+parametrizada es una aplicación
+\[
+\gamma:\mathcal T\longrightarrow\Omega_{\rm HMT}
+\]
+que satisface \(\gamma(t)\leadsto\gamma(t^+)\) para cada sucesor \(t^+\).
+El orden de \(\mathcal T\) convierte la compatibilidad en una sucesión
+parametrizada. Antes de elegir un orden sólo hay una familia compatible
+indexada por el grafo o poset correspondiente; no se la denomina sección salvo
+que se haya declarado una proyección \(p:E\to\mathcal T\) con
+\(p\circ\gamma=\operatorname{id}_{\mathcal T}\).
+En consecuencia, una suma de caminos finita puede leerse como suma sobre
+temporalizaciones de una estructura que, en su nivel primario, no presupone
+un tiempo exterior.
+
+\section{Parametrización ordenada de la compatibilidad}
+
+Una parametrización ordenada permite interpretar retorno, umbral y apertura
+como tres posiciones relativas en una evolución. La convención utilizada en la
+\cref{fig:trit-atlas} es
+\[
+\begin{array}{ccl}
+J^2=-I&\rightsquigarrow&\text{retorno y orientación inversa},\\
+J^2=0&\rightsquigarrow&\text{estado umbral},\\
+J^2=+I&\rightsquigarrow&\text{descomposición en dos direcciones propias}.
+\end{array}
+\]
+En la parametrización temporal adoptada, \(+1\) representa
+retorno, memoria y pasado; \(0\), umbral y presente; y \(-1\), apertura
+bidireccional y futuro. Esta lectura ordenada no altera los tres tipos
+cuadráticos precedentes.
+La involución exacta, tipada para cada \(n\geq1\),
+\[
+C_{\rm rev}:\TRIT^n\longrightarrow\TRIT^n,
+\qquad
+C_{\rm rev}(\tau_1,\ldots,\tau_n)=(-\tau_n,\ldots,-\tau_1)
+\]
+intercambia \(+1\) y \(-1\), preserva \(0\) y satisface
+\(C_{\rm rev}^2=\operatorname{id}_{\TRIT^n}\).
+Así, la orientación temporal no se introduce como un cuarto estado: resulta
+de la parametrización de la firma junto con una involución que conserva el
+umbral.
+
+\section{Descomposición espectral del tipo hiperbólico}
+
+En el tipo hiperbólico, los proyectores
+\[
+P_\pm=\frac{I\pm J}{2}
+\]
+separan dos direcciones propias. La involución que cambia la orientación las
+intercambia. Algebraicamente, \(P_+P_-=0\), \(P_++P_-=I\) y
+\(JP_\pm=\pm P_\pm\). Por tanto el tipo hiperbólico contiene dos subespacios
+propios complementarios y una operación exacta que los permuta.
+
+\begin{remark}[Estructura completa del estado TRIT]
+TRIT no es un sustituto de los signos \(-,0,+\). Es el observable mínimo de
+un estado con etiqueta de observable, orientación y registro de trayectoria.
+Sus tres álgebras asociadas hacen posible
+que un mismo soporte admita cierres elípticos, umbrales parabólicos y aperturas
+hiperbólicas antes de fijar una evaluación temporal.
+\end{remark}
+\fi

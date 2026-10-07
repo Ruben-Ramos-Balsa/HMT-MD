@@ -1,0 +1,454 @@
+\section{Carta PC--Fock completa, memoria y almacenamiento terminal}
+\label{sec:ns-pcf-prospective-construction}
+
+Fijamos \(s>5/2\), \(\nu>0\), un corte de Galerkin \(M\), una profundidad
+nonádica \(J\) y un horizonte \(T<\infty\). Sea
+\(V_M\subset H^s_\sigma(\mathbb T^3)\) el espacio solenoidal de media cero y
+sean
+\begin{equation}
+ A_M=P_M(-\Delta)P_M,
+ \qquad
+ N_M(u)=P_M\mathbb P(u\cdot\nabla u).
+ \label{eq:ns-import-galerkin-operators}
+\end{equation}
+Esta sección construye el portador PC--Fock completo, sus lectores, memorias,
+acarreo, almacenamiento terminal y retorno, que ingresan en la realización
+propietaria de la sección siguiente. Su KYP local, su observabilidad NS--OBS y
+las dominaciones LRDN--LCN son exclusivamente
+\texttt{CONTROL\_NO\_GOBERNANTE}: no condicionan la métrica
+\(U^{\rm own}\), su telescopía, su presupuesto raíz ni la conclusión global.
+
+\subsection{Torre completa y lectores de grados uno y dos}
+
+La elevación física se toma en la Fock simétrica completa:
+\begin{equation}
+ \mathcal V_M^{\rm PCF}(u)
+ :=\bigoplus_{n\ge0}\frac{R_{\rm F}^n}{\sqrt{n!}}u^{\odot n},
+ \qquad
+ \|\mathcal V_M^{\rm PCF}(u)\|^2
+ =e^{R_{\rm F}^2\|u\|_{H^s}^2}.
+ \label{eq:ns-import-pcf-lift}
+\end{equation}
+La torre no se trunca. Para \(z_{n,M}=u_M^{\odot n}\), la regla de Leibniz
+da la recurrencia exacta
+\begin{equation}
+ \dot z_{n,M}
+ =L_{n,M}z_{n,M}
+ +\mathcal N_{n,n+1;M}z_{n+1,M}
+ +\mathcal F_{n,n-1;M}(f_M)z_{n-1,M},
+ \qquad n\ge1,
+ \label{eq:ns-import-carleman-all-degrees}
+\end{equation}
+donde, sobre la diagonal coherente,
+\begin{align}
+ L_{n,M}u^{\odot n}
+ &=-\nu n(A_Mu)\odot u^{\odot(n-1)}, \notag\\
+ \mathcal N_{n,n+1;M}u^{\odot(n+1)}
+ &=-nN_M(u)\odot u^{\odot(n-1)}, \notag\\
+ \mathcal F_{n,n-1;M}(f)u^{\odot(n-1)}
+ &=nf\odot u^{\odot(n-1)}.
+ \label{eq:ns-import-carleman-blocks}
+\end{align}
+
+El espacio de estado es la suma ortogonal
+\begin{equation}
+ \mathscr K_{M,j}^{\rm PCF}
+ =\mathscr K_{M,j}^{\rm HMT}\widehat\otimes\Gamma_s(V_M)
+ \oplus\mathscr K_{M,j}^{\kappa}
+ \oplus\mathscr K_{M,j}^{\rm micro}
+ \oplus\mathscr K_{M,j}^{\rm sh},
+ \label{eq:ns-import-full-carrier}
+\end{equation}
+donde \(\mathscr K_{M,j}^{\rm HMT}\) conserva hoja, orientación,
+\(q_A,q_V,T\), borde, ruta y las dos memorias \(D/H\). Los grados uno y dos
+se leen mediante
+\begin{equation}
+ \begin{aligned}
+ z_M(u)&=\nu^{1/2}A_M^{1/2}\Lambda^su,\\
+ w_M(u)&=\nu^{-1/2}A_M^{-1/2}\Lambda^sN_M(u),\\
+ \mathcal Y_{\beta,M}\mathcal V_M^{\rm PCF}(u)
+ &=\sqrt\beta\,z_M(u)
+   \oplus\frac{1}{2\sqrt\beta}\,w_M(u).
+ \end{aligned}
+ \label{eq:ns-import-degree-one-two-reader}
+\end{equation}
+En consecuencia,
+\begin{equation}
+ |B_{s,M}(u)|
+ \le
+ \|\mathcal Y_{\beta,M}\mathcal V_M^{\rm PCF}(u)\|^2
+ =\beta\nu D_{s,M}(u)+\frac{\|w_M(u)\|^2}{4\beta}.
+ \label{eq:ns-import-young-port}
+\end{equation}
+La segunda coordenada es un operador lineal uniformemente acotado sobre
+\(\operatorname{Sym}^2H^s_\sigma\):
+\begin{equation}
+ \sup_M\|\mathfrak C_M\|
+ \le\widetilde M_{s,\beta,\nu},
+ \qquad
+ C_M^{\rm obs}:=\sqrt2\,\mathfrak C_M\pi_2,
+ \qquad
+ \Sigma_M:=\bigl(I+(C_M^{\rm obs})^*C_M^{\rm obs}\bigr)^{-1}
+ \succeq\frac{I}{1+2\widetilde M_{s,\beta,\nu}^2}.
+ \label{eq:ns-import-uniform-graph}
+\end{equation}
+
+\subsection{Memoria bidireccional y almacenamiento terminal}
+
+Con
+\begin{equation}
+ r=\frac{\pi_{\rm HMT}}{\varphi_{\rm HMT}^2},
+ \qquad
+ D_{M,j}^{\rm mem}=(r-1)(M_{M,j}^+-M_{M,j}^-),
+ \qquad
+ H_{M,j}=(1+r)(M_{M,j}^++M_{M,j}^-),
+ \label{eq:ns-import-dh}
+\end{equation}
+las dos memorias satisfacen
+\begin{equation}
+ \dot D_{M,j}^{\rm mem}=B_{s,M,j},
+ \qquad
+ \dot H_{M,j}=\frac{1+r}{r-1}|B_{s,M,j}|.
+ \label{eq:ns-import-dh-dot}
+\end{equation}
+Poniendo
+\[
+ \delta_r=\frac{r-1}{r+1},
+ \qquad
+ \mathcal N_{M,j}:=\delta_rH_{M,j}-D_{M,j}^{\rm mem}
+ =2(r-1)M_{M,j}^-\ge0,
+\]
+se obtiene
+\begin{equation}
+ \dot{\mathcal N}_{M,j}=|B_{s,M,j}|-B_{s,M,j}.
+ \label{eq:ns-import-negative-memory}
+\end{equation}
+El almacenamiento terminal explícito es
+\begin{equation}
+ \begin{aligned}
+ G_{M,j,T}(t)
+ &=E_{s,M,j}(t)
+   +2(r-1)\bigl(M_{M,j}^-(T)-M_{M,j}^-(t)\bigr),\\
+ G_{M,j,T}(t)&\ge E_{s,M,j}(t),\\
+ \dot G_{M,j,T}+\nu D_{s,M,j}+|B_{s,M,j}|
+ &=F_{s,M,j}.
+ \end{aligned}
+ \label{eq:ns-import-terminal-storage}
+\end{equation}
+Si
+\[
+ h^-_{M,j;t,T}(\tau)
+ :=\mathbf1_{[t,T]}(\tau)\sqrt{\dot M^-_{M,j}(\tau)},
+\]
+la columna
+\begin{equation}
+ \mathcal E_{M,j,T}^{\rm term}(t)\Xi
+ :=2^{-1/2}\Lambda^su_{M,j}(t)
+ \oplus\sqrt{2(r-1)}\,h^-_{M,j;t,T}
+ \label{eq:ns-import-terminal-column}
+\end{equation}
+realiza el almacenamiento como un Gram:
+\begin{equation}
+ \|\mathcal E_{M,j,T}^{\rm term}(t)\Xi\|^2
+ =G_{M,j,T}(t).
+ \label{eq:ns-import-terminal-gram}
+\end{equation}
+
+El acarreo común entre profundidades es
+\begin{equation}
+ \kappa_{M,j}
+ =\frac12\left(E_j|B_{s,M,j+1}|-|B_{s,M,j}|\right)\ge0,
+ \qquad
+ E_jB_{s,M,j+1}=B_{s,M,j}.
+ \label{eq:ns-import-carry}
+\end{equation}
+Su coordenada de salida se fija por
+\begin{equation}
+ q_{M,j}^{\kappa}
+ :=\left(\frac{2(1+r)}{r-1}\kappa_{M,j}\right)^{1/2},
+ \qquad
+ \|q_{M,j}^{\kappa}\|^2
+ =\frac{2(1+r)}{r-1}\kappa_{M,j}.
+ \label{eq:ns-import-carry-port}
+\end{equation}
+Al mismo tiempo,
+\begin{equation}
+ E_j\Delta_T\mathcal N_{M,j+1}
+ =\Delta_T\mathcal N_{M,j}+2K_{M,j}(T),
+ \qquad
+ K_{M,j}(T):=\int_0^T\kappa_{M,j}(t)\,dt.
+ \label{eq:ns-import-carry-telescope}
+\end{equation}
+Las innovaciones microscópicas y las bandas de Galerkin permanecen
+ortogonales:
+\begin{equation}
+ Q_{\rm micro}^{\rm APP}=I-J_9E_9,
+ \qquad E_9y^{\rm micro}=0,
+ \qquad \mathsf K_{\rm carry}y^{\rm micro}=0,
+ \label{eq:ns-import-micro}
+\end{equation}
+y, grado a grado,
+\begin{equation}
+ \mathcal N_{n,n+1;3M}J_M^{(n+1)}
+ =J_M^{(n)}\mathcal N_{n,n+1;M}
+ +\mathcal S_{n,M}^{\rm sh},
+ \qquad
+ E_M^{(n)}\mathcal S_{n,M}^{\rm sh}=0.
+ \label{eq:ns-import-shell}
+\end{equation}
+
+\subsection{Control KYP finito no gobernante y cascada de la carta}
+
+La fuerza y su término directo se incorporan mediante
+\begin{equation}
+ \begin{aligned}
+ x_{M,j+1}
+ &=\mathcal A_{M,j}^{[j]}x_{M,j}
+   +\mathcal B_{M,j,T}^{F,[j]}g_{M,j},\\
+ y_{M,j}^{\rm loss}
+ &=\mathcal C_{M,j,T}^{[j]}x_{M,j}
+   +\mathcal D_{M,j,T}^{F,[j]}g_{M,j},
+ \end{aligned}
+ \label{eq:ns-import-affine-step}
+\end{equation}
+con la descomposición ortogonal
+\begin{equation}
+ \mathcal C_{M,j,T}
+ =\mathcal C_{M,j,T}^{(1)}
+ \oplus\mathcal C_{M,j,T}^{(2)}
+ \oplus\mathcal C_{M,j,T}^{\kappa}
+ \oplus\mathcal C_{M,j,T}^{\rm micro}
+ \oplus\mathcal C_{M,j,T}^{\rm sh}.
+ \label{eq:ns-import-loss-decomposition}
+\end{equation}
+El término directo aparece ya en
+\[
+ g_M=A_M^{-1/2}\Lambda^sP_Mf,
+ \qquad
+ a_M=\frac{g_M}{2\sqrt\nu},
+ \qquad
+ y_{D,M}=\sqrt\nu A_M^{1/2}\Lambda^su_M-a_M,
+\]
+para el que
+\begin{equation}
+ dG_{M,j,T}
+ +\bigl(\|y_{D,M}\|^2+|B_{s,M,j}|\bigr)\,dt
+ =\|a_M\|^2\,dt.
+ \label{eq:ns-import-force-feedthrough}
+\end{equation}
+
+La afinidad se homogeneiza sin duplicar el dato. Sea
+\[
+ \mathscr G_M^{F,[j]}
+ :=\bigoplus_{k=j}^{J-1}L^2(\Omega_k;\mathscr G^F_{M,k,T}),
+ \qquad
+ \mathbf x_{M,j}:=x_{M,j}\oplus(g_{M,j},\ldots,g_{M,J-1}),
+\]
+y sean \(e_j\) la evaluación de la primera entrada y \(\mathsf S_j\) el
+desplazamiento de la cola. Definimos
+\begin{equation}
+ \mathbf\Gamma_{M,j}
+ :=\begin{pmatrix}
+  \mathcal A_{M,j}^{[j]}&\mathcal B_{M,j,T}^{F,[j]}e_j\\
+  0&\mathsf S_j
+ \end{pmatrix},
+ \qquad
+ \mathbf L_{M,j,T}
+ :=\mathcal Q_{M,j,T}^{\rm loss,inc}
+ \begin{pmatrix}
+  \mathcal C_{M,j,T}^{[j]}&\mathcal D_{M,j,T}^{F,[j]}e_j
+ \end{pmatrix}.
+ \label{eq:ns-import-homogeneous-affine-step}
+\end{equation}
+Aquí \(\mathcal Q_{M,0,T}^{\rm loss,inc}=I\); para \(j>0\) elimina
+únicamente la copia heredada de los canales PC--Fock y actúa como la identidad
+sobre acarreo, innovación microscópica y banda espectral.
+
+\begin{theorem}[Control de factorización KYP finita no circular]
+\label{thm:ns-import-affine-stein}
+En el nivel terminal se define
+\begin{equation}
+ \mathbf U_{M,J,T}(t)
+ :=(\mathcal E_{M,J,T}^{\rm term}(t))^*
+   \mathcal E_{M,J,T}^{\rm term}(t).
+ \label{eq:ns-import-terminal-metric}
+\end{equation}
+Fijados \(M,J,T\), sean \(A,B,C,D\) los cuatro bloques del paso afín y
+\(U_+=\widetilde{\mathbf U}_{M,j+1,T}(t)\). Defínanse
+\begin{equation}
+ Q:=I-B^*U_+B-D^*D,
+ \qquad L:=B^*U_+A+D^*C.
+ \label{eq:ns-import-kyp-q-l}
+\end{equation}
+Si \(Q\succ0\), la recurrencia no circular es
+\begin{equation}
+ U:=A^*U_+A+C^*C+L^*Q^{-1}L.
+ \label{eq:ns-import-affine-stein}
+\end{equation}
+Entonces la matriz KYP completa satisface
+\begin{equation}
+ \begin{aligned}
+ \mathfrak S_{M,j,T}
+ &:=
+ \begin{pmatrix}
+ U-A^*U_+A-C^*C&-A^*U_+B-C^*D\\
+ -B^*U_+A-D^*C&I-B^*U_+B-D^*D
+ \end{pmatrix}\\
+ &=
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}^{*}
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}
+ \succeq0.
+ \end{aligned}
+ \label{eq:ns-import-affine-supply}
+\end{equation}
+Para \(Q\succeq0\) vale la variante con pseudoinversa si
+\(\operatorname{Ran}L\subseteq\operatorname{Ran}Q^{1/2}\). Esta construcción
+es finita: no afirma que \(Q^{-1}\), \(U\) o la ganancia permanezcan
+uniformes al retirar \(M,J\).
+\end{theorem}
+
+\begin{proof}
+Por \eqref{eq:ns-import-affine-stein}, el bloque superior izquierdo es
+\(L^*Q^{-1}L\); los bloques no diagonales son \(-L^*\) y \(-L\), y el bloque
+inferior derecho es \(Q\). La multiplicación de la fila mostrada en
+\eqref{eq:ns-import-affine-supply} da exactamente los cuatro bloques. La
+positividad precede así a la toma de cualquier raíz.
+\end{proof}
+
+Este teorema comprueba únicamente la carta finita cuando se satisfacen sus
+hipótesis propias. No aporta una premisa al owner Stein--Lyapunov ni limita la
+uniformidad demostrada por su Gram terminal y su raíz común.
+
+En las coordenadas homogeneizadas se toma
+\(\mathbf U_{M,j,T}=U\) y se denota por
+\(\mathbf R_{M,j,T}\) el levantamiento de la fila
+\(\begin{psmallmatrix}Q^{-1/2}L&-Q^{1/2}\end{psmallmatrix}\).
+Con esta convención se recupera, para cada truncación finita que satisface la
+hipótesis KYP,
+\[
+ \mathbf U_{M,j,T}
+ =\mathbf\Gamma_{M,j}^*\widetilde{\mathbf U}_{M,j+1,T}
+  \mathbf\Gamma_{M,j}
+ +\mathbf L_{M,j,T}^*\mathbf L_{M,j,T}
+ +\mathbf R_{M,j,T}^*\mathbf R_{M,j,T}.
+\]
+
+La columna
+\begin{equation}
+ [\mathbf x]_{\mathbf U_{M,j,T}}
+ \longmapsto
+ [\mathbf\Gamma_{M,j}\mathbf x]_{
+  \widetilde{\mathbf U}_{M,j+1,T}}
+ \oplus\mathbf L_{M,j,T}\mathbf x
+ \oplus\mathbf R_{M,j,T}\mathbf x
+ \label{eq:ns-import-local-isometry}
+\end{equation}
+es isométrica. Su dilatación de Julia y su composición producen
+\(\mathfrak U_{M,J,T}\) con
+\begin{equation}
+ \mathfrak U_{M,J,T}^{\sharp}\mathfrak U_{M,J,T}=I
+ \label{eq:ns-import-cascade-isometry}
+\end{equation}
+y el telescopio
+\begin{equation}
+ \begin{aligned}
+ \|\mathbf x_{M,0}\|_{\mathbf U_{M,0,T}}^2
+ ={}&\mathbb E_{0:J}
+ \|\mathbf x_{M,J}\|_{\mathbf U_{M,J,T}}^2\\
+ &+\sum_{j=0}^{J-1}\mathbb E_{0:j}
+ \left(\|\mathbf L_{M,j,T}\mathbf x_{M,j}\|^2
+       +\|\mathbf R_{M,j,T}\mathbf x_{M,j}\|^2\right).
+ \end{aligned}
+ \label{eq:ns-import-stein-telescope}
+\end{equation}
+
+\subsection{Presupuesto de la carta y retorno de la velocidad}
+
+Sobre la diagonal física, la primera coordenada terminal es
+\(G_{M,J,T}\), y las demás coordenadas forman la suma de pérdidas:
+\begin{equation}
+ \|Z_{M,J,t}\|^2
+ =\mathbb E_{0:J}G_{M,J,T}(t)
+ +\sum_{j=0}^{J-1}\mathbb E_{0:j}\Lambda_{M,j}([0,t]).
+ \label{eq:ns-import-ledger}
+\end{equation}
+Como \(q_{M,j}^{\kappa}\) es una de esas coordenadas,
+\eqref{eq:ns-import-carry-telescope} se integra una sola vez:
+\begin{equation}
+ 2\sum_{j=0}^{J-1}\mathbb E_{0:j}K_{M,j}(T)
+ \le\|\Xi_{M,0}\|^2+Q_f(T).
+ \label{eq:ns-import-carry-funded}
+\end{equation}
+De aquí,
+\begin{equation}
+ \mathbb E_{0:J}G_{M,J,T}(0)
+ \le E_{s,M}(P_Mu_0)
+ +\Delta_T\mathcal N_0+\|\Xi_{M,0}\|^2+Q_f(T).
+ \label{eq:ns-import-root-bound}
+\end{equation}
+La raíz es común a todos los cortes:
+\begin{equation}
+ \Xi_{M,0}=J_{0\to M}\Xi_0,
+ \qquad J_{0\to M}^*J_{0\to M}=I,
+ \qquad \mathcal N_{M,0}=\mathcal N_0.
+ \label{eq:ns-import-common-root}
+\end{equation}
+Además,
+\begin{equation}
+ \|\Xi_{M,0}\|^2
+ \le C_{\rm HMT}
+ +(1+2\widetilde M_{s,\beta,\nu}^2)
+ e^{R_{\rm F}^2\|u_0\|_{H^s}^2},
+ \qquad
+ Q_f(T)\le C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt.
+ \label{eq:ns-import-root-data-bound}
+\end{equation}
+Por tanto, para esta carta y estos \(M,J,T\), ponemos
+\begin{align}
+ \mathcal B_{M,J,T}^{\rm route}:={}&
+ \frac12\|u_0\|_{H^s}^2
+ +|\Delta_T\mathcal N_{M,0}|+C_{\rm HMT}
+ +(1+2\widetilde M_{s,\beta,\nu}^2)
+ e^{R_{\rm F}^2\|u_0\|_{H^s}^2}\notag\\
+ &+C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt
+ <\infty
+ \label{eq:ns-import-explicit-budget}
+\end{align}
+La presencia explícita de \(\Delta_T\mathcal N_{M,0}\) impide usar esta
+expresión como prueba independiente de uniformidad. Es un diagnóstico local
+de la carta; no reemplaza el presupuesto owner
+\eqref{eq:nsclose-owner-data-budget}. La identidad terminal y la desigualdad
+de Young dan, para el corte fijo,
+\begin{equation}
+ \boxed{
+ \sup_{0\le t\le T}\|Z_{M,J,t}\|^2
+ +\frac{\nu}{2}\int_0^TD_{s,M}(t)\,dt
+ \le\mathcal B_{M,J,T}^{\rm route}.}
+ \label{eq:ns-import-uniform-budget}
+\end{equation}
+
+La publicación de la velocidad se normaliza por
+\begin{equation}
+ \iota_{s,M}u=2^{-1/2}\Lambda^su,
+ \qquad
+ \mathcal R_{1,M}=\sqrt2\,\Lambda^{-s}\pi_1,
+ \qquad
+ \mathcal R_{1,M}\iota_{s,M}=I_{V_M}.
+ \label{eq:ns-import-grade-one-return}
+\end{equation}
+El lector de la cascada es
+\begin{equation}
+ \mathcal R_{M,J,T}^{\rm phys}
+ :=\mathcal R_{1,M}\mathfrak U_{M,J,T}^{\sharp}.
+ \label{eq:ns-import-full-return}
+\end{equation}
+Por \eqref{eq:ns-import-cascade-isometry},
+\begin{equation}
+ \boxed{
+ \mathcal R_{M,J,T}^{\rm phys}
+ \mathfrak U_{M,J,T}\mathcal V_M^{\rm PCF}(u_M(t))
+ =u_M(t).}
+ \label{eq:ns-import-exact-return}
+\end{equation}
+El retorno emplea el adjunto métrico de la misma cascada y recupera la
+publicación hidrodinámica sin seleccionar una rama probabilística.

@@ -1,0 +1,78 @@
+import LatticeHeisenbergTranslation
+import LatticeNormalTranslation
+import LatticeTranslationDefect
+import LatticeTranslationChargedGround
+import LatticeChargedTranslation
+import LatticeTranslationLinear
+import LatticeLocalFieldUniqueness
+import LatticeCovariantFieldUniqueness
+import LatticeFieldDerivative
+import LatticeDerivativeLocality
+import LatticeStateFieldTranslation
+import SelectedTranslationCoherence
+#print axioms HMT.IV.LatticeHeisenbergTranslation.translation_create
+#print axioms HMT.IV.LatticeHeisenbergTranslation.translation_annihilate_succ
+#print axioms HMT.IV.LatticeHeisenbergTranslation.translation_annihilate_zero
+#print axioms HMT.IV.LatticeHeisenbergTranslation.translation_hmode
+#print axioms HMT.IV.LatticeHeisenbergTranslation.translation_heisenberg_coefficient
+#print axioms HMT.IV.LatticeNormalTranslation.commutator_mul
+#print axioms HMT.IV.LatticeNormalTranslation.commutator_smul
+#print axioms HMT.IV.LatticeNormalTranslation.locallyFiniteSum_commutator_of_telescoping
+#print axioms HMT.IV.LatticeNormalTranslation.choose_step
+#print axioms HMT.IV.LatticeNormalTranslation.creationTerm_commutator
+#print axioms HMT.IV.LatticeNormalTranslation.annihilationTerm_commutator_zero
+#print axioms HMT.IV.LatticeNormalTranslation.annihilationTerm_commutator_succ
+#print axioms HMT.IV.LatticeNormalTranslation.creation_sum_translation
+#print axioms HMT.IV.LatticeNormalTranslation.annihilation_sum_translation
+#print axioms HMT.IV.LatticeNormalTranslation.normalField_translation_covariant
+#print axioms HMT.IV.LatticeTranslationDefect.defect
+#print axioms HMT.IV.LatticeTranslationDefect.field_creator_reverse
+#print axioms HMT.IV.LatticeTranslationDefect.defect_creator_commutator
+#print axioms HMT.IV.LatticeTranslationDefect.zeroDefectSpace
+#print axioms HMT.IV.LatticeTranslationDefect.mem_zeroDefectSpace
+#print axioms HMT.IV.LatticeTranslationDefect.creator_preserves_zeroDefectSpace
+#print axioms HMT.IV.LatticeTranslationDefect.defect_zero_of_ground
+#print axioms HMT.IV.LatticeTranslationChargedGround.field_charged_ground
+#print axioms HMT.IV.LatticeTranslationChargedGround.field_charged_ground_nonnegative
+#print axioms HMT.IV.LatticeTranslationChargedGround.field_charged_ground_negative
+#print axioms HMT.IV.LatticeTranslationChargedGround.translation_ground_nonnegative
+#print axioms HMT.IV.LatticeTranslationChargedGround.translation_ground_shift
+#print axioms HMT.IV.LatticeTranslationChargedGround.translation_pure_charge
+#print axioms HMT.IV.LatticeTranslationChargedGround.translation_charged_ground
+#print axioms HMT.IV.LatticeChargedTranslation.charged_translation_defect_zero
+#print axioms HMT.IV.LatticeChargedTranslation.translation_charged_coefficient
+#print axioms HMT.IV.LatticeChargedTranslation.translation_charged_coefficient_apply
+#print axioms HMT.IV.LatticeTranslationLinear.TranslationCovariant
+#print axioms HMT.IV.LatticeTranslationLinear.covariant_zero
+#print axioms HMT.IV.LatticeTranslationLinear.covariant_add
+#print axioms HMT.IV.LatticeTranslationLinear.covariant_smul
+#print axioms HMT.IV.LatticeTranslationLinear.covariance_linear_extension
+#print axioms HMT.IV.LatticeLocalFieldUniqueness.crossing_pow_negative_second
+#print axioms HMT.IV.LatticeLocalFieldUniqueness.crossing_pow_constant_second
+#print axioms HMT.IV.LatticeLocalFieldUniqueness.local_field_coefficient_zero
+#print axioms HMT.IV.LatticeLocalFieldUniqueness.local_field_zero
+#print axioms HMT.IV.LatticeCovariantFieldUniqueness.covariant_nonnegative_zero
+#print axioms HMT.IV.LatticeCovariantFieldUniqueness.covariant_vacuum_zero
+#print axioms HMT.IV.LatticeCovariantFieldUniqueness.creative_covariant_fields_unique
+#print axioms HMT.IV.LatticeFieldDerivative.derivativeCoefficient
+#print axioms HMT.IV.LatticeFieldDerivative.derivative_bounded
+#print axioms HMT.IV.LatticeFieldDerivative.derivativeField
+#print axioms HMT.IV.LatticeFieldDerivative.derivativeField_coefficient
+#print axioms HMT.IV.LatticeFieldDerivative.derivative_covariant
+#print axioms HMT.IV.LatticeFieldDerivative.derivative_regular
+#print axioms HMT.IV.LatticeFieldDerivative.derivative_constant
+#print axioms HMT.IV.LatticeDerivativeLocality.firstDerivative
+#print axioms HMT.IV.LatticeDerivativeLocality.derivative_crossing
+#print axioms HMT.IV.LatticeDerivativeLocality.crossing_derivative
+#print axioms HMT.IV.LatticeDerivativeLocality.crossing_pow_derivative
+#print axioms HMT.IV.LatticeDerivativeLocality.derivative_annihilated
+#print axioms HMT.IV.LatticeDerivativeLocality.derivative_localAt
+#print axioms HMT.IV.LatticeDerivativeLocality.derivative_local
+#print axioms HMT.IV.LatticeStateFieldTranslation.descendant_translation_covariant
+#print axioms HMT.IV.LatticeStateFieldTranslation.stateField_translation_covariant
+#print axioms HMT.IV.LatticeStateFieldTranslation.stateField_translation
+#print axioms HMT.IV.LatticeStateFieldTranslation.stateField_translation_vacuum_coefficient
+#print axioms HMT.IV.LatticeStateFieldTranslation.stateField_translated_state
+#print axioms HMT.I.SelectedTranslationCoherence.selected_translation_covariant
+#print axioms HMT.I.SelectedTranslationCoherence.selected_translated_state
+#print axioms HMT.I.SelectedTranslationCoherence.selected_local_translation_publication

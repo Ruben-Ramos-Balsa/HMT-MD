@@ -1,0 +1,85 @@
+\subsection{Réduction causale de la mise à jour bilatérale}
+\label{lib04:reduccion-causal}
+
+La mise à jour unitaire précédente réalise le transport de l’état et de sa
+mémoire dans un même espace. L’observation de la première composante admet
+une description équivalente qui conserve explicitement la contribution du
+registre. Cette description s’obtient à partir du transport déjà construit, avec les
+mêmes coefficients et la même orientation ; la mémoire éliminée de la liste
+des variables réapparaît comme dépendance à l’égard des états précédents.
+
+Fixons les opérateurs \(A,D\) de \eqref{lib04:ad} et une réalisation \(H\oplus H\). Pour \(n\geq0\), soient
+\begin{equation}
+ v_{n+1}=Av_n-D^*m_n,\qquad
+ m_{n+1}=Dv_n+A^*m_n.
+ \label{lib04:recurrencia-memoria}
+\end{equation}
+La mise à jour conjointe est \(\mathscr R_a\) et conserve \(\|v_n\|^2+\|m_n\|^2\).
+
+\begin{proposition}[Élimination exacte du registre auxiliaire]
+\label{lib04:prop-memoria-reducida}
+Pour tout \(n\geq0\), la somme vide étant interprétée comme zéro,
+\begin{align}
+ m_n&=(A^*)^n m_0+
+       \sum_{k=0}^{n-1}(A^*)^{n-1-k}Dv_k,
+       \label{lib04:memoria-explicita}\\
+ v_{n+1}&=Av_n-D^*(A^*)^n m_0
+       +\sum_{k=0}^{n-1}\mathscr K_{n-1-k}v_k,
+       \label{lib04:evolucion-reducida}\\
+ \mathscr K_j&=-D^*(A^*)^jD\quad(j\geq0).
+       \label{lib04:nucleo-retardo}
+\end{align}
+L’équation réduite, avec \eqref{lib04:memoria-explicita}, est
+équivalente à la récurrence conjointe pour les mêmes données \((v_0,m_0)\).
+\end{proposition}
+\begin{proof}
+La première identité vaut pour \(n=0\). Si elle vaut pour \(n\), la seconde équation de \eqref{lib04:recurrencia-memoria} fournit
+\[
+ m_{n+1}=(A^*)^{n+1}m_0+
+ \sum_{k=0}^{n-1}(A^*)^{n-k}Dv_k+Dv_n,
+\]
+qui est l’identité dans \(n+1\). La substituer, à la profondeur \(n\), dans
+la première équation démontre \eqref{lib04:evolucion-reducida}.
+Réciproquement, si \(v_n\) satisfait cette dernière et si l’on définit \(m_n\)
+par \eqref{lib04:memoria-explicita}, la même différence de sommes prouve
+\(m_{n+1}=Dv_n+A^*m_n\) ; l’autre équation se récupère par substitution.
+\end{proof}
+
+Le noyau \(\mathscr K_j\) décrit un transfert vers le registre, \(j\) mises à jour à l'intérieur de celui-ci et une rentrée dans la composante lue. Le terme \(-D^*(A^*)^nm_0\) conserve la mémoire initiale. Sa suppression correspond au cas particulier \(m_0=0\), et non à une identité du transport général. Dans \eqref{lib04:evolucion-reducida} interviennent uniquement l'état actuel et les états antérieurs. La causalité de cette réduction provient de l'ordre de la récurrence conjointe.
+
+La normalisation du bilan fournit en outre une estimation explicite.
+Comme \(Q_-=aI-U\), on a
+\(\|A\|^2\leq r_a=(a+1)^3/((a+1)^3+a^3)<1\), tandis que
+\(D^*D\leq I\). Par conséquent,
+\begin{equation}
+ \|\mathscr K_j\|\leq r_a^{j/2},\qquad
+ \sum_{j\geq0}\|\mathscr K_j\|
+ \leq\frac{1}{1-\sqrt{r_a}}.
+ \label{lib04:cota-nucleo-retardo}
+\end{equation}
+Cette borne contrôle le poids de la mémoire dans l’équation réduite ; la norme
+de l’état conjoint reste conservée par la mise à jour unitaire.
+
+La proposition est la réalisation temporelle de la réduction de Schur de
+\cref{mem:prop-schur}. Dans les séries formelles
+\(V(z)=\sum_{n\geq0}v_nz^n\) et
+\(M(z)=\sum_{n\geq0}m_nz^n\), les récurrences donnent
+\(V=v_0+zAV-zD^*M\) et \(M=m_0+zDV+zA^*M\). En éliminant \(M\),
+\begin{equation}
+ V(z)=\bigl[I-zA+z^2D^*(I-zA^*)^{-1}D\bigr]^{-1}
+       \bigl[v_0-zD^*(I-zA^*)^{-1}m_0\bigr].
+ \label{lib04:schur-bilateral}
+\end{equation}
+Les inverses formels existent car leurs termes constants sont des identités ;
+les séries des états et la résolvante conjointe convergent également pour
+\(|z|<1\). La source initiale et l’opérateur effectif se transforment ensemble.
+Un lecteur qui agit également sur \(m_n\) conserve sa contribution au moyen de
+\eqref{lib04:memoria-explicita}, conformément à \eqref{mem:schur-lector}.
+
+La réentrée décrite ici actualise un registre entrant. La politique
+d’archivage qui suit conserve en revanche chaque complément dans une coordonnée
+distincte. Les deux opérations possèdent leur propre loi de conservation. Le noyau
+\(\mathscr K_j\), les propagateurs de Green et une force dimensionnelle sont
+des objets de types différents : le premier élimine une composante d’état,
+les seconds résolvent des équations de source avec des conditions de support, et
+la force ajoute une réalisation dynamique et ses unités.

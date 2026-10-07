@@ -1,0 +1,159 @@
+% Desarrollo reunido de DESARROLLO_MATEMATICO, apartados 38--40 y 50.
+\subsubsection{Índice de capacidad, vacancias e inducción del régimen trítico}
+\label{vac-capacidad-trit}
+
+La sucesión de vacancias está vinculada al refinamiento mediante una
+identidad de incrementos. Para mostrarla se fija el origen de fase
+\(\theta=0\). Sean
+\[
+ \rho=\log_{10}9=1-\delta,\qquad
+ \mathcal C_t=\lfloor(t+1)\rho\rfloor\quad(t\geq0).
+\]
+El índice \(\mathcal C_t\) expresa la capacidad decimal del refinamiento
+en la normalización que compara un bloque ternario de \(6\) posiciones,
+con \(729\) posibilidades, y un bloque decimal de \(3\) posiciones, con
+\(1000\) posibilidades. En efecto,
+\(\log_{1000}729=\log_{10}9=\rho\). Se reserva la letra \(K\) para
+el registro dodecafásico que se construirá posteriormente.
+
+\begin{proposition}[Complementariedad de capacidad y vacancia]
+\label{prop:capacidad-vacancia}
+Para \(t\geq1\),
+\begin{equation}
+ \mathcal C_t-\mathcal C_{t-1}=1-z_t(0).
+ \label{eq:capacidad-vacancia}
+\end{equation}
+En consecuencia, si \(0\leq a<b\),
+\[
+ \mathcal C_b-\mathcal C_a+
+ \sum_{t=a+1}^{b}z_t(0)=b-a.
+\]
+\end{proposition}
+\begin{proof}
+La irracionalidad de \(\delta\) da
+\[
+ \mathcal C_t
+ =t+1-\lceil(t+1)\delta\rceil
+ =t-\lfloor(t+1)\delta\rfloor.
+\]
+La resta de dos términos consecutivos produce
+\eqref{eq:capacidad-vacancia}. La suma sobre el intervalo es telescópica.
+\end{proof}
+
+Cada transición aumenta en una unidad el contador de bloques. Si
+\(z_t=0\), aumenta también la capacidad; si \(z_t=1\), la capacidad se
+mantiene mientras se incorpora una transición a la historia. La vacancia
+es aquí un evento de retención de capacidad, con una posición y un
+antecedente determinados. El balance anterior conserva exactamente la
+longitud entre capacidad adquirida y vacancias registradas. La fase
+observada \(g_t^{\rm cap}=[\mathcal C_t]_9\) satisface
+\[
+ g_t^{\rm cap}-g_{t-1}^{\rm cap}\equiv1-z_t\pmod9.
+\]
+Esta fase de capacidad y la fase cronológica \([t]_9\) son dos
+observaciones diferentes. Una retención local de capacidad y una vuelta
+completa de la holonomía tienen mecanismos distintos, aunque ambas
+permitan conservar la observación de fase con modificación del estado.
+
+La relación con TRIT puede seguirse en las propias posiciones de vacancia.
+Para \(j\geq1\), defínanse
+\[
+ p_j=\left\lfloor\frac j\delta\right\rfloor,\qquad
+ v_j=\mathcal C_{p_j},\qquad h_j=p_{j+1}-p_j.
+\]
+La desigualdad \(p_j\delta<j<(p_j+1)\delta\) identifica \(p_j\)
+como la posición del evento \(j\). Como \(0<\delta<1\), da también
+\(\lfloor(p_j+1)\delta\rfloor=j\), y por tanto
+\[
+ v_j=p_j-j,\qquad
+ v_{j+1}-v_j=h_j-1.
+\]
+Si \(s_j=22-h_j\), entonces \(s_j\in\{0,1\}\) y
+\begin{equation}
+ [v_{j+1}]_3=[v_j-s_j]_3.
+ \label{eq:vacancia-regimen}
+\end{equation}
+Un intervalo de longitud \(22\) conserva la clase; uno de longitud
+\(21\) la desplaza una unidad en sentido negativo. El selector canónico
+se aplica a la fase positiva \(r_j=1+[v_j]_9\):
+\[
+ \tau_j=M_{\rm ph}(r_j).
+\]
+Queda determinado así un régimen trítico por el índice de capacidad
+retenido en cada evento, además de la codificación binaria de la vacancia.
+
+Las posiciones de los intervalos cortos forman la codificación mecánica
+inducida de pendiente \(22-1/\delta\). Sus separaciones \(6\) y \(7\)
+determinan las longitudes de las mesetas de la clase \([v_j]_3\), una
+vez fijados el origen y la convención de extremos. Las primeras clases
+son \(2\) durante \(6\) eventos, \(1\) durante \(7\) y \(0\) durante
+\(7\); el primer tramo de \(6\) es la restricción inicial de una meseta.
+Sus firmas recorren \(0,-1,+1\). Las ecuaciones
+\eqref{eq:capacidad-vacancia} y \eqref{eq:vacancia-regimen} explicitan el
+enlace entre refinamiento, vacancias y selección del régimen. La lectura
+cuadrática del TRIT realiza después esos tipos mediante sus respectivos
+generadores; el acontecimiento temporal y su representación geométrica
+conservan así una dependencia identificable.
+
+La inversión del índice monótono proporciona otra observación útil:
+\[
+ \mathcal T(k)=\min\{t:\mathcal C_t=k\}
+   =\left\lceil\frac k\rho\right\rceil-1\qquad(k\geq1).
+\]
+Si \(\sigma=\rho^{-1}-1\), el número de bloques necesarios para ganar
+\(m\) unidades de capacidad es
+\[
+ \mathcal T(k+m)-\mathcal T(k)
+ =m+\lceil(k+m)\sigma\rceil-\lceil k\sigma\rceil
+ \in\{m+\lfloor m\sigma\rfloor,m+\lceil m\sigma\rceil\}.
+\]
+En particular, \(9\) unidades de capacidad requieren \(9\) o \(10\)
+bloques. El período de una fase finita permanece exacto, mientras el
+tiempo de retorno medido por el otro índice admite dos valores. Esta
+distinción es parte de la dinámica del refinamiento y no una corrección
+de sus valores numéricos a posteriori.
+
+\begin{proposition}[Renovación trítica y capacidad marcada]
+\label{v:prop:renovacion-capacidad-24}
+Sea $K_{\rm ph}$ la representación de memoria reducida posterior a la
+holonomía $\Gamma_9$, y sea $Q(u,r)=(u,[r]_3)$ el cociente de fase
+$C_9\to C_3$. En cada bloque de tres regímenes, las esperanzas condicionales
+$I,E_+,E_\times$ satisfacen
+\[
+ \bar K^3=E_+E_\times=:\Pi,\qquad
+ \operatorname{rank}(I,E_+,E_\times,\Pi)=(468,26,18,1).
+\]
+Si $a_t=\mathcal C_{t+1}-\mathcal C_t$ y
+$\mathcal R_t=K_{\rm ph}^{a_t}$, el transporte ampliado
+\[
+ (t,\mathcal C_t,v_t)\longmapsto
+ (t+1,\mathcal C_t+a_t,v_t+1-a_t)
+\]
+conserva $t=\mathcal C_t+v_t$. Desde el primer evento $p_1=21$, el
+primer tiempo en el que la composición deja de depender del microestado
+inicial es $T_{\rm ren}=24$, y
+\begin{equation}
+ (\mathcal C_{p_1},T_{\rm ren},T_{\rm ren}+1,
+   \mathcal C_{T_{\rm ren}})=(20,24,25,23).
+ \label{v:eq:tupla-renovacion-capacidad}
+\end{equation}
+La composición directa tiene rangos $468\to26\to1$; la conjugada,
+$468\to18\to1$.
+\end{proposition}
+\begin{proof}
+El cociente fuerte se obtiene sumando el núcleo sobre cada fibra de $Q$.
+En tres fases aparece una vez cada esperanza y éstas son idempotentes,
+autoadjuntas y conmutativas; sus rangos tensoriales dan los cuatro enteros.
+Los incrementos de capacidad entre $21$ y $24$ aplican
+$I,E_+,E_\times$, por lo que la primera composición de rango uno ocurre
+en $24$. La lectura conjugada invierte el orden de las dos esperanzas y
+conserva el mismo producto final.
+\end{proof}
+
+El retorno del régimen no es un reinicio del estado: el cociente y la memoria
+continúan avanzando. Para las secciones marcadas posteriores se emplea la
+regla de localización
+\[
+ s_j=\min\{t\ge24:\mathcal C_t=23+3j\},
+\]
+que conserva el umbral $23$, el residuo trítico y el cociente ilimitado.

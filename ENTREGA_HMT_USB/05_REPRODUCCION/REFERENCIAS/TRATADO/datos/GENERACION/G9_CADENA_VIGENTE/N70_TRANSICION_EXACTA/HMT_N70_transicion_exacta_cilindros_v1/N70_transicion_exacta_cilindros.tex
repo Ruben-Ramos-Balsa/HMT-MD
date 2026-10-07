@@ -1,0 +1,126 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N70 --- Transición exacta de cilindros\\
+\large La ley de carry intervalar y el último selector de frontera}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N70 deriva la ley exacta de transición del cilindro ternario/decimal. El estado generativo no es sólo el bloque \(B_t\), sino el par de cilindros:
+\[
+[N/3^L,(N+1)/3^L),
+\qquad
+[D/1000^K,(D+1)/1000^K).
+\]
+La supervivencia se expresa por dos desigualdades enteras, y la transición de los residuos de cilindro tiene fórmula cerrada. Esto convierte el carry de borde en teorema aritmético. Lo que queda abierto no es la dinámica del cilindro, sino el selector de frontera que escoge el par admisible \((u,\delta)\).
+\end{abstract}
+
+\section{Estado de cilindro}
+
+Sea \(N\) el entero del prefijo ternario de longitud \(L\), y \(D\) el entero del prefijo decimal de \(K\) triadas. Definimos:
+\[
+A=N1000^K-D3^L,
+\]
+\[
+B=(N+1)1000^K-D3^L.
+\]
+La intersección de cilindros equivale a:
+\[
+\boxed{
+A<3^L,\qquad B>0.
+}
+\]
+
+\section{Transición}
+
+Al añadir un bloque ternario:
+\[
+u\in\{0,\ldots,728\},
+\]
+se tiene:
+\[
+N'=729N+u.
+\]
+Si \(\Delta K=0\), entonces:
+\[
+D'=D,
+\]
+y:
+\[
+\boxed{
+A'=729A+u1000^K.
+}
+\]
+Si \(\Delta K=1\), aparece una nueva triada decimal:
+\[
+D'=1000D+\delta,
+\]
+y:
+\[
+\boxed{
+A'=729000A+u1000^{K+1}-\delta\,729\,3^L.
+}
+\]
+Además:
+\[
+\boxed{
+B'=A'+1000^{K+\Delta K}.
+}
+\]
+
+\section{Lectura}
+
+Esta es la ley exacta de carry/cilindro:
+\[
+\boxed{
+\text{el tail/carry se arrastra por }A,B.
+}
+\]
+Cuando \(\Delta K=1\), la nueva triada \(\delta\) no es un dato externo: es una coordenada de salida compatible con la supervivencia del cilindro.
+
+\section{Qué queda}
+
+La transición de cilindros no selecciona sola una rama única. Hay múltiples pares \((u,\delta)\) compatibles. Por tanto, el último selector sigue siendo:
+\[
+\boxed{
+\text{firma de frontera}.
+}
+\]
+Pero la dinámica de fondo ya está cerrada:
+\[
+\boxed{
+\text{Cyl}+\text{Beatty}+\text{Transition}_{A,B}.
+}
+\]
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: ley exacta de transición de cilindros.}
+}
+\]
+\[
+\boxed{
+\text{verde: }0_{\rm borde}\neq9_{\rm activo}\text{ queda formalizado por }A,B.
+}
+\]
+\[
+\boxed{
+\text{amarillo: selector de frontera para elegir }(u,\delta).
+}
+\]
+\end{document}

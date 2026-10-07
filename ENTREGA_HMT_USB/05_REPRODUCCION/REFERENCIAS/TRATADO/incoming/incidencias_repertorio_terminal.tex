@@ -1,0 +1,208 @@
+% RESULTADO_RECUPERADO: K31-10/P10 del inventario REV05.
+% Fuente de las incidencias:
+% 16_CIERRE_GLOBAL_HMT_MD_2026-07-22/02_LECTURA_DODECAFASICA/continuacion_fases/
+% verificar_obstruccion_y_dato_minimo_w72.py, lineas 45--60 y 141--233.
+% RESULTADO_OBSTRUCCION_Y_DATO_MINIMO_W72.json, phase_charge_reader.
+% Fuente de las bandas: N69_signatures_t0_t99.csv, tiempos impresos abajo.
+% Consumidor: PAQUETE_CONTINUIDAD_K_UNIDAD_20260918_BASE_COMPARTIDA/python/
+% selector_orbital_original.py, verify_historical_inputs, lineas 159--193.
+% No se transfiere la restriccion del lector comparativo al generador completo.
+\subsection{Incidencias temporales del repertorio terminal y recuperación por posición}
+\label{sec:repertorio-incidencias-completas}
+
+La publicación del repertorio terminal utiliza los mismos bloques regionales,
+los mismos acarreos y el mismo calendario que producen el descriptor inicial
+de veinticuatro trits. Conviene explicitar por separado dos operaciones de
+esta composición. La primera recupera ocho palabras a partir de incidencias
+temporales registradas. La segunda presenta esas ocho palabras al selector
+dodecafásico como un conjunto no ordenado. El selector vuelve a establecer
+el orden mediante sus condiciones de incidencia, de cilindro y de cierre.
+La distinción permite conservar los testigos de procedencia sin convertir
+el orden de una segmentación histórica en una entrada del selector.
+
+Sea $B_t=(b_{t,0},b_{t,1},b_{t,2})\in(\mathbb F_3^6)^3$ la frontera
+regional ya generada en el tiempo $t$, con $0\leq t<100$. En la carta
+utilizada por el registro histórico, la matriz de incidencia es
+\[
+ A_{\mathrm{hist}}=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&1&2&2\\
+ 1&1&0&2&1&2\\
+ 1&1&2&0&2&1\\
+ 1&2&1&2&0&1\\
+ 1&2&2&1&1&0
+ \end{pmatrix}.
+\]
+Las palabras se consideran vectores fila. Sus dos cargas y la fase
+cronológica son
+\[
+ r_{t,i}=\sum_{j=1}^{6}b_{t,i,j},\qquad
+ d_{t,i}=\sum_{j=1}^{6}(b_{t,i}A_{\mathrm{hist}})_j,
+ \qquad \vartheta_t=t-1\pmod 3.
+\]
+Todas las operaciones de estas tres expresiones tienen lugar en
+$\mathbb F_3$. El subíndice histórico identifica una carta concreta de
+la incidencia de Witt; mantiene explícita la transformación de coordenadas
+cuando se utiliza otra presentación de esa misma incidencia.
+
+Para $c\in\{r_t,d_t\}$, $\delta\in\mathbb F_3$ y
+$\epsilon\in\{1,-1\}$, definimos
+\[
+ \eta_i(c,\delta,\epsilon)=
+ \begin{cases}
+  \epsilon,&c_i=\vartheta_t+\delta,\\
+  -\epsilon,&c_i\ne\vartheta_t+\delta,
+ \end{cases}
+ \qquad
+ L_{t,c,\delta,\epsilon}
+   =\sum_{i=0}^{2}\eta_i(c,\delta,\epsilon)b_{t,i}.
+\]
+La orientación $-1$ se escribe como $2$ al imprimir los coeficientes
+ternarios. Junto a estos doce lectores comparativos por frontera, el
+registro dispone del lector afín
+\[
+ L^{\mathrm{af}}_t
+    =\sum_{i=0}^{2}(d_{t,i}+\vartheta_t)b_{t,i}.
+\]
+La adición de la fase en el lector afín y la comparación de cargas en
+el lector anterior son operaciones distintas, ambas sobre datos ya
+producidos por la frontera TPK.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rccc cc}
+\toprule
+$t$&$b_{t,0}$&$b_{t,1}$&$b_{t,2}$&$r_t$&$d_t$\\
+\midrule
+8 &200121&212212&110110&011&202\\
+11&022212&110001&100021&001&012\\
+30&210112&110202&211110&100&012\\
+34&121022&000011&112110&220&021\\
+37&120121&011202&112221&100&201\\
+49&110212&200212&100122&110&201\\
+58&111121&022121&122201&122&220\\
+67&010012&001220&011120&122&122\\
+75&220000&020111&100002&120&021\\
+81&122201&020202&201122&202&001\\
+90&022112&022110&121010&202&200\\
+\bottomrule
+\end{tabular}
+\caption{Fronteras temporales que realizan las incidencias impresas del
+repertorio terminal. Cada entrada de seis cifras conserva el orden de
+las seis coordenadas de la frontera regional.}
+\label{tab:terminal-bandas-testigo}
+\end{table}
+
+La tabla siguiente despliega todas las incidencias comparativas del
+registro sobre los doce bloques de la segmentación considerada. Las
+letras $r$ y $d$ designan respectivamente la carga visible y la carga
+dual. La columna $j$ conserva el índice de posición del testigo histórico;
+la operación de entrega al selector olvida este índice después de formar
+el conjunto de palabras.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rrcrrc c}
+\toprule
+$j$&$t$&carga&$\delta$&$\epsilon$&$(\eta_0\eta_1\eta_2)$&$L_{t,c,\delta,\epsilon}$\\
+\midrule
+4&11&$d$&0& 1&212&021101\\
+5&67&$d$&1&$-1$&211&002001\\
+5&67&$d$&2& 1&211&002001\\
+5&67&$r$&1&$-1$&211&002001\\
+5&67&$r$&2& 1&211&002001\\
+6&81&$d$&0& 1&222&020111\\
+6&81&$r$&2& 1&222&020111\\
+7&34&$r$&1&$-1$&111&200110\\
+7&75&$d$&1&$-1$&211&200110\\
+7&75&$r$&2&$-1$&211&200110\\
+8&90&$r$&0& 1&121&121012\\
+8&90&$r$&1&$-1$&121&121012\\
+9&49&$d$&0&$-1$&121&010122\\
+11&11&$d$&2&$-1$&211&221110\\
+11&37&$d$&0&$-1$&121&221110\\
+12&8&$d$&0&$-1$&111&222110\\
+12&8&$r$&1&$-1$&111&222110\\
+12&58&$d$&1&$-1$&111&222110\\
+12&58&$r$&0&$-1$&111&222110\\
+\bottomrule
+\end{tabular}
+\caption{Incidencias fase--carga completas sobre la segmentación terminal
+en las cien fronteras del registro. Las coincidencias de palabras entre
+filas conservan sus tiempos, orientaciones y tipos de carga.}
+\label{tab:terminal-incidencias-completas}
+\end{table}
+
+El décimo bloque dispone de un testigo afín. En $t=30$ se tiene
+$d_{30}=(0,1,2)$ y $\vartheta_{30}=2$, de donde
+\[
+ (d_{30,0}+\vartheta_{30},d_{30,1}+\vartheta_{30},
+ d_{30,2}+\vartheta_{30})=(2,0,1)
+\]
+y, usando las bandas de la tabla~\ref{tab:terminal-bandas-testigo},
+\[
+ L^{\mathrm{af}}_{30}
+ =2(210112)+0(110202)+(211110)
+ =(001001)\quad\text{en }\mathbb F_3^6.
+\]
+La igualdad es coordenada a coordenada: antes de reducir módulo tres,
+el vector de la suma es $(6,3,1,3,3,4)$.
+
+\begin{proposition}[Recuperación íntegra del repertorio por incidencias]
+\label{prop:repertorio-terminal-ocho-incidencias}
+Considérese el registro de incidencias comparativas de la
+tabla~\ref{tab:terminal-incidencias-completas}, aumentado con el testigo
+afín $(j,t,L)=(10,30,001001)$. Para cada posición $5\leq j\leq12$, el
+conjunto de palabras de salida de sus incidencias es unitario. La
+extracción de esas ocho palabras y el olvido posterior de su orden
+producen exactamente
+\[
+ \mathcal S_{\mathrm{term}}=
+ \{002001,020111,200110,121012,010122,001001,221110,222110\}.
+\]
+Su codificación como enteros de base tres es
+\[
+ \{28,55,98,175,437,498,687,714\}.
+\]
+\end{proposition}
+\begin{proof}
+La multiplicidad de incidencias por posición $j=5,6,7,8,9,10,11,12$
+es, respectivamente,
+\[
+ (4,2,3,2,1,1,2,4).
+\]
+En cada posición, todas las filas imprimen la misma palabra. Cada fila
+se verifica sustituyendo sus tres bandas y los tres coeficientes en la
+fórmula de $L$; el décimo caso se ha calculado explícitamente mediante
+$L^{\mathrm{af}}_{30}$. Por ejemplo, en $t=67$ y con coeficientes
+$(2,1,1)$ se obtiene
+\[
+ 2(010012)+(001220)+(011120)=(002001)\pmod3.
+\]
+Los ocho resultados son distintos como palabras de longitud seis. Su
+codificación $\sum_{k=1}^{6}w_k3^{6-k}$ da, en el orden de las
+posiciones, $(55,175,498,437,98,28,714,687)$. Al olvidar el orden se
+obtiene el conjunto de enteros enunciado. Así, la extracción preserva
+cada palabra completa, incluidas sus posiciones nulas, y entrega ocho
+elementos distintos al selector.
+\end{proof}
+
+La prueba anterior es una recuperación exacta desde incidencias
+identificadas. Su dato de entrada comprende el registro de incidencias
+con sus posiciones y testigos. La selección orbital posterior recibe
+únicamente $\mathcal S_{\mathrm{term}}$ y el descriptor regional inicial;
+recorre las $8!$ ordenaciones y determina su compatibilidad con las
+fronteras funcionales y las incidencias orientadas de la rueda
+dodecafásica. Ambas operaciones quedan así contiguas, con dominios
+explícitos: procedencia temporal de las ocho palabras y determinación
+constructiva de su orden.
+
+El cuadro comparativo contiene las diecinueve incidencias que su fórmula
+produce sobre la segmentación de doce bloques en los cien tiempos
+declarados. Esa exhaustividad finita se comprueba recorriendo
+$100\cdot2\cdot3\cdot2=1200$ evaluaciones. El lector afín amplía la
+cobertura de las posiciones terminales de siete a ocho. Este recuento
+caracteriza el repertorio local de lectores que acaba de definirse;
+las demás operaciones del TPK conservan los dominios y funciones
+constructivas establecidos en sus respectivas derivaciones.

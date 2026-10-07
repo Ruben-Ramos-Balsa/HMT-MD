@@ -1,0 +1,854 @@
+\subsubsection{Realización arista por arista de las tres prolongaciones nonádicas}
+\label{subsubsec:tres-vueltas-ext-ch}
+
+Esta subsección especifica el modelo autónomo generado por la relación de
+extensión TPK que interviene en la prueba cardinal. No se infiere la existencia de
+una arista por coincidencia de tipos: se construyen sus estados inicial y final,
+su relación APP, su transporte de fibra y la actualización unaria del registro.
+La construcción utiliza exclusivamente las dos hojas de APP, el selector TRIT
+y la composición \(\mathsf{Sel}\)--\(\mathsf{Tra}\)--\(\operatorname{Upd}\) del TPK.
+
+\paragraph{Células completas y tres reducciones balanceadas.}
+En la carta \(D_9=\{1,\ldots,9\}\), mantendremos siempre la célula APP
+completa
+\[
+ a_{p,q}:=(p,q;R^\Sigma_{p,q},q^\Sigma_{p,q},
+                 R^\Pi_{p,q},q^\Pi_{p,q}),
+\]
+con
+\[
+ p+q=R^\Sigma_{p,q}+9q^\Sigma_{p,q},\qquad
+ pq=R^\Pi_{p,q}+9q^\Pi_{p,q}.
+\]
+La hoja activa se registra en una coordenada separada; no se escinde
+\(a_{p,q}\) en una supuesta célula aditiva y otra multiplicativa. Para
+\(r\in D_9\), sean
+\begin{equation}
+ a(r):=
+ \begin{cases}
+  a_{1,9},&r=1,\\
+  a_{1,r-1},&2\le r\le9,
+ \end{cases}
+ \qquad
+ \tau(r):=M_{\rm ph}(r),
+ \qquad
+ m(r):=\tau(r)\in\{-1,0,+1\}.
+ \label{eq:celula-completa-fase-ch}
+\end{equation}
+El residuo aditivo de \(a(r)\) proporciona aquí un representante APP de la
+fase; esto no convierte \(\Sigma\) en hoja activa universal. El selector
+dinámico activa \(\Sigma\) en \(r\in\{1,4,7\}\), activa \(\Pi\) en
+\(r\in\{2,5,8\}\) y conserva ambas hojas, sin desplazar cursor, en
+\(r\in\{3,6,9\}\). En los tres casos se transportan conjuntamente
+\(R^\Sigma,q^\Sigma,R^\Pi,q^\Pi\). Se tiene
+\[
+ (m(1),\ldots,m(9))=(1,-1,0,1,-1,0,1,-1,0).
+\]
+Las tres parejas ordenadas por la base nonádica son
+\begin{equation}
+ \mathfrak p_{+1}:=(1,4),\qquad
+ \mathfrak p_{-1}:=(2,5),\qquad
+ \mathfrak p_{0}:=(3,6).
+ \label{eq:tres-pares-internos-ch}
+\end{equation}
+Estas parejas son la sección normalizada que toma las dos primeras
+ocurrencias de cada tipo TRIT bajo el desplazamiento \(r\mapsto r+3\); el
+tercer bloque de fases \(7,8,9\) conserva el control de cierre de la vuelta.
+Sus dos miembros pertenecen a una misma fibra de \(M_{\rm ph}\). La
+reducción balanceada del capítulo TRIT da, sin introducir un coeficiente
+objetivo,
+\begin{equation}
+ \begin{array}{c|c|c|c}
+ \varepsilon&m(\mathfrak p_\varepsilon^{(1)})
+                  +m(\mathfrak p_\varepsilon^{(2)})
+   &r_3\bigl(2\varepsilon\bigr)&
+   \chi(\varepsilon,\varepsilon)\\ \hline
+ +1&1+1=(-1)+3\cdot1&-1&+1\\
+ 0&0+0=0+3\cdot0&0&0\\
+ -1&(-1)+(-1)=1+3\cdot(-1)&+1&-1
+ \end{array}
+ \label{eq:tres-carry-derivados-ch}
+\end{equation}
+Por tanto,
+\begin{equation}
+ \chi(\varepsilon,\varepsilon)
+ =\frac{2\varepsilon-r_3(2\varepsilon)}3=\varepsilon.
+ \label{eq:carry-no-parametrico-ch}
+\end{equation}
+El signo de la rama es así la salida del cociclo balanceado aplicado a dos
+emisiones TRIT producidas por APP. Cada pareja proporciona una de las tres
+salidas de acarreo. Por claridad, indexaremos después la pareja mediante
+\(\varepsilon(\mathfrak p):=
+\chi(m(\mathfrak p^{(1)}),m(\mathfrak p^{(2)}))\); el símbolo
+\(\varepsilon\) no suministra a \(\operatorname{Upd}^{\rm cal}\) un acarreo libre.
+
+La arquitectura de fase, el levantamiento balanceado y el transporte de
+memoria se realizan aquí mediante veintisiete incidencias locales y sus
+grafos de extensión. La sección normalizada fija representantes de las
+fibras de \(M_{\rm ph}\); la cobertura que se demostrará utiliza la existencia
+de esos representantes y permanece invariante al sustituirlos por otra
+sección compatible.
+
+\paragraph{Datos tipados de las nueve aristas.}
+Sea
+\(K_{\rm Carr}:=\langle\kappa_{\rm Carr}\rangle_{\rm Ab}\) el módulo de
+acarreo. Las acciones están tipadas por
+\[
+ H_{\rm Carr}:\mathscr P_{\rm TPK}^{\rm op}
+   \longrightarrow\operatorname{End}(K_{\rm Carr}),\qquad
+ Y_{\rm Carr}:\mathscr P_{\rm TPK}
+   \longrightarrow\operatorname{End}(K_{\rm Carr}).
+\]
+En este modelo generado se toman las acciones triviales
+\(H_{\rm Carr}(e)=Y_{\rm Carr}(e)=\operatorname{id}_{K_{\rm Carr}}\): la
+hoja activa y la ruta se conservan como coordenadas propias del registro y no
+actúan sobre el sumando libre de acarreo. Sea además
+\((\mathsf M_d,\jmath_{d',d})\) el sistema directo graduado de memoria. Para
+no confundir dos representantes identificados por el colímite, el estado
+conserva además el grado como coordenada y se usa el portador etiquetado
+\[
+ \widetilde{\mathsf M}:=
+ \bigsqcup_{d\ge1}\bigl(\{d\}\times\mathsf M_d\bigr),
+ \qquad
+ \operatorname{gr}_{\mathsf M}(d,\mu)=d.
+\]
+La publicación en la memoria límite viene dada por
+\[
+\begin{aligned}
+ \mathsf M&:=\varinjlim_d\mathsf M_d,&
+ \jmath_d&:\mathsf M_d\longrightarrow\mathsf M,\\
+ u&:=\jmath_d(u_d),&
+ \iota_{\mathsf M}:\mathbb Z&\longrightarrow\mathsf M,
+ \qquad n\longmapsto nu .
+\end{aligned}
+\]
+Aquí \(\jmath_d\) es el mapa canónico del colímite y los \(u_d\) forman una
+familia compatible. Su componente libre permite
+el lector \(\deg_u(nu)=n\).
+Las proyecciones de configuración, fase, memoria, acarreo, ruta y
+supervivencia se tiparán sobre el portador calibrado construido
+recursivamente más abajo; no se importará para ellas ningún espacio ambiental.
+Para cada arista construida \(e\), la
+componente calibrada
+\(\operatorname{Upd}^{\rm cal}_e:=\mathsf{Mem}^{\rm cal}_e\) denotará la
+tercera aplicación de la factorización; su ley se fija campo por campo más
+abajo y no se presupone como restricción de una relación ambiental.
+
+Fijemos la profundidad inicial \(k_0=1\), una configuración completa
+\(q_\star\in\mathcal Q_{\rm obs}\) de fase uno y
+\[
+ q_{n,r}:=F_{\rm obs}^{9n+r-1}(q_\star),\qquad
+ q_{n,10}:=q_{n+1,1}.
+\]
+Como el calendario observable es periódico, su valor \(q_{n,r}\) no
+distingue por sí solo apariciones separadas por doce vueltas. El modelo
+calibrado emplea, por ello, la elevación etiquetada
+\[
+ \widetilde q_{n,r}:=(q_{n,r},n,r),\qquad
+ \widetilde q_{n,10}:=\widetilde q_{n+1,1},\qquad
+ \pi_{\rm obs}(\widetilde q_{n,r})=q_{n,r}.
+\]
+La dinámica elevada
+\(\widetilde F_{\rm obs}(\widetilde q_{n,r})
+=\widetilde q_{n,r+1}\) proyecta a \(F_{\rm obs}\); la etiqueta no modifica
+la fase física, sino que hace distintos sus niveles de aparición.
+Se etiqueta la copia de la célula en cada nivel mediante
+\[
+ a_{n,r}:=(n,r;a(r)),\qquad
+ (n,r)^+:=
+ \begin{cases}
+  (n,r+1),&1\le r<9,\\
+  (n+1,1),&r=9.
+ \end{cases}
+\]
+La etiqueta sólo evita identificar dos apariciones de una misma célula; las
+dos divisiones euclídeas y sus cuatro coordenadas son las de \(a(r)\).
+Para la vuelta \(n\ge0\) y la fase \(r\in D_9\), el símbolo
+\[
+ e_{\varepsilon,n,r}:\widetilde q_{n,r}
+ \longrightarrow\widetilde q_{n,r+1},
+ \qquad r^+:=1+(r\bmod9),
+\]
+ocupa el nivel
+\(d_{n,r}:=k_n+r-1\), donde \(k_n:=k_0+9n\). Su registro local contiene
+la célula completa \(a(r)\), la hoja activa determinada por \(M_{\rm ph}(r)\),
+el tipo \(\tau(r)\),
+la marca de pertenencia a \(\mathfrak p_\varepsilon\) y, al alcanzar el segundo miembro
+de esa pareja, la identidad certificada
+\eqref{eq:tres-carry-derivados-ch}. Definimos sus operadores únicamente a
+partir de ese registro:
+\begin{align}
+ \mathsf C_{\mathsf M}(e_{\varepsilon,n,r})
+   &=\jmath_{d_{n,r}+1,d_{n,r}},&
+ \kappa_{\mathsf M}(e_{\varepsilon,n,r})
+   &=\mathbf1_{\{r=9\}}u_{d_{n,r}+1},
+ \label{eq:memoria-arista-ch}\\
+       \operatorname{Carr}(e_{\varepsilon,n,r})
+   &=d_{\varepsilon,r}\kappa_{\rm Carr},&
+ d_{\varepsilon,r}
+   &:=\mathbf1_{\{r=\mathfrak p_\varepsilon^{(2)}\}}
+       \chi\!\left(m(\mathfrak p_\varepsilon^{(1)}),
+                    m(\mathfrak p_\varepsilon^{(2)})\right).
+ \label{eq:carry-arista-derivado-ch}
+\end{align}
+Para las identidades y para toda composición admisible se define, además,
+\begin{align}
+ \mathsf C_{\mathsf M}(\operatorname{id}_{\widetilde q};d)
+   &:=\operatorname{id}_{\mathsf M_d},&
+ \kappa_{\mathsf M}(\operatorname{id}_{\widetilde q};d)&:=0,
+ \label{eq:memoria-identidad-ch}\\
+ \mathsf C_{\mathsf M}(e_t\cdots e_1)
+   &:=\mathsf C_{\mathsf M}(e_t)\circ\cdots\circ
+      \mathsf C_{\mathsf M}(e_1),&
+ \kappa_{\mathsf M}(e_2e_1)
+   &:=\mathsf C_{\mathsf M}(e_2)
+        \bigl(\kappa_{\mathsf M}(e_1)\bigr)
+      +\kappa_{\mathsf M}(e_2).
+ \label{eq:cociclo-memoria-calibrado-ch}
+\end{align}
+La identidad lleva el grado \(d\) porque una misma configuración observable
+puede reaparecer en profundidades distintas. La última igualdad, iterada, define
+\(\kappa_{\mathsf M}(e_t\cdots e_1)\) para cualquier longitud y es la ley de
+cociclo del sistema directo; las inclusiones satisfacen
+\(\jmath_{d+2,d+1}\jmath_{d+1,d}=\jmath_{d+2,d}\).
+Además se fija
+\(s(e_{\varepsilon,n,r})=\top\). Las siguientes veintisiete entradas
+certifican las coordenadas que distinguen las tres prolongaciones; los campos
+universales del transporte se especifican inmediatamente después. Los símbolos \(I\) y \(II\)
+designan, respectivamente, la primera emisión conservada y la segunda emisión
+que efectúa la reducción; un guion indica incremento de acarreo nulo, pero no
+ausencia de arista.
+\begin{center}
+\small
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{c c cc cc cc c}
+\toprule
+\(r\)&\(M_{\rm ph}(r)\)&\multicolumn{2}{c}{\(\mathfrak p_{+1}\)}&
+\multicolumn{2}{c}{\(\mathfrak p_0\)}&
+\multicolumn{2}{c}{\(\mathfrak p_{-1}\)}&
+\(\Delta\operatorname{mem}\)\\
+& &marca&\(d_{+1,r}\)&marca&\(d_{0,r}\)&marca&\(d_{-1,r}\)&\\
+\midrule
+1&\(+1\)&I&0&--&0&--&0&0\\
+2&\(-1\)&--&0&--&0&I&0&0\\
+3&0&--&0&I&0&--&0&0\\
+4&\(+1\)&II&\(+1\)&--&0&--&0&0\\
+5&\(-1\)&--&0&--&0&II&\(-1\)&0\\
+6&0&--&0&II&0&--&0&0\\
+7&\(+1\)&--&0&--&0&--&0&0\\
+8&\(-1\)&--&0&--&0&--&0&0\\
+9&0&--&0&--&0&--&0&\(u\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Así, \(d_{\varepsilon,r}\) se calcula a partir de dos salidas del selector y
+es distinto de los cocientes \(q^\Sigma,q^\Pi\) de la célula. El registro
+conserva también el par marcado y el residuo balanceado; en particular, la
+rama nula no se confunde con una ausencia de evento.
+
+La ley de composición del acarreo empleada por la categoría TPK es
+\begin{equation}
+ \operatorname{Carr}(\operatorname{id}_{\widetilde q})=0,\qquad
+ \operatorname{Carr}(e_2e_1)
+ =H_{\rm Carr}(e_1)\bigl(\operatorname{Carr}(e_2)\bigr)
+  +Y_{\rm Carr}(e_2)\bigl(\operatorname{Carr}(e_1)\bigr).
+ \label{eq:ley-carry-correcta-ch}
+\end{equation}
+En identidades y caminos se prolongan functorialmente:
+\[
+\begin{aligned}
+ H_{\rm Carr}(\operatorname{id})
+   &=Y_{\rm Carr}(\operatorname{id})=\operatorname{id},\\
+ H_{\rm Carr}(e_t\cdots e_1)
+   &=H_{\rm Carr}(e_1)\circ\cdots\circ H_{\rm Carr}(e_t),\\
+ Y_{\rm Carr}(e_t\cdots e_1)
+   &=Y_{\rm Carr}(e_t)\circ\cdots\circ Y_{\rm Carr}(e_1).
+\end{aligned}
+\]
+En este modelo todas estas acciones siguen siendo la identidad, pero
+su tipado explicita qué endomorfismo actúa sobre cada sumando de
+\eqref{eq:ley-carry-correcta-ch}.
+En las aristas calibradas, \(H_{\rm Carr}=Y_{\rm Carr}=\operatorname{id}\),
+por lo que la composición suma los incrementos ya producidos. La ecuación
+\eqref{eq:ley-carry-correcta-ch}, y no una identificación entre orientación y
+cociente, gobierna el registro acumulado.
+
+\paragraph{Construcción independiente de las tuplas de transición.}
+Un estado de la fibra se escribirá, en el orden de sus campos pertinentes,
+\[
+ x=(a;q;\tau,o,h;b_{\rm ref};
+       R^\Sigma,q^\Sigma,R^\Pi,q^\Pi;c;
+       \operatorname{Sig};C,\partial C;p_{\APP},p_{\TRIT};
+       \lambda;\operatorname{gr}_{\mathsf M};\operatorname{mem};
+       s;\operatorname{Led}).
+\]
+La notación de actualización \(x[f\leftarrow v]\) cambia sólo el campo
+indicado. Para \(h\in\{(\Sigma,\Pi),(\Pi,\Sigma)\}\), defínase
+\[
+ h_r(h)=
+ \begin{cases}
+  (\Sigma,\Pi),&r\in\{1,4,7\},\\
+  (\Pi,\Sigma),&r\in\{2,5,8\},\\
+ h,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+La coordenada completa de hoja y aritmética se abrevia por
+\[
+ \widehat h(x):=
+ \bigl(h(x),R^\Sigma(x),q^\Sigma(x),R^\Pi(x),q^\Pi(x)\bigr).
+\]
+Sea \(\widehat{\mathcal H}^{\rm cal}_{\widetilde q_{n,r}}\) el conjunto de
+las quíntuplas
+\[
+ \bigl(h,R^\Sigma_{a_{n,r}},q^\Sigma_{a_{n,r}},
+          R^\Pi_{a_{n,r}},q^\Pi_{a_{n,r}}\bigr),
+ \qquad
+ h\in\{(\Sigma,\Pi),(\Pi,\Sigma)\},
+\]
+cuyos cuatro datos aritméticos son las dos divisiones euclídeas de la célula
+APP etiquetada \(a_{n,r}\). Esta definición directa no presupone un estado
+en un portador todavía no construido. Sean
+\(\mathsf{Hist}^{\rm cal}_{\widetilde q}\) el conjunto de caminos finitos
+admisibles del grafo de aristas etiquetadas que terminan en
+\(\widetilde q\), incluida la identidad, y
+\(\mathsf B^{\rm cal}_{\widetilde q}\) el conjunto de sus sucesiones
+ordenadas de extremos. Definimos
+\[
+ \mathsf S^{\rm cal}_{\widetilde q}:=
+ \widehat{\mathcal H}^{\rm cal}_{\widetilde q}
+ \times\{o_{\rightarrow},o_{\circ},o_{\leftarrow}\}
+ \times K_{\rm Carr}\times
+ \mathsf{Hist}^{\rm cal}_{\widetilde q}\times
+ \mathsf B^{\rm cal}_{\widetilde q}\times\mathsf M .
+\]
+La firma calibrada no se postula: es la aplicación de reunión tipada
+\[
+ \operatorname{Sig}^{\rm cal}_{\widetilde q}:
+ \widehat{\mathcal H}^{\rm cal}_{\widetilde q}
+ \times\{o_{\rightarrow},o_{\circ},o_{\leftarrow}\}
+ \times K_{\rm Carr}\times
+ \mathsf{Hist}^{\rm cal}_{\widetilde q}\times
+ \mathsf B^{\rm cal}_{\widetilde q}\times\mathsf M
+ \longrightarrow\mathsf S^{\rm cal}_{\widetilde q},
+\quad
+ (\widehat h,o,c,\lambda,\partial C,\mu)
+ \longmapsto(\widehat h,o,c,\lambda,\partial C,\mu).
+\]
+Asimismo, \(\pi_{\mathcal F}\) denota la proyección que elimina únicamente
+las dos primeras coordenadas \((a;q)\) de la tupla de estado; conserva
+\(\tau,o,h,b_{\rm ref}\), los cuatro datos euclídeos, acarreo, firma,
+cilindro, frontera, prefijos, ruta, grado de memoria, memoria, supervivencia y
+registro.
+La orientación correspondiente queda fijada por
+\(o(+1)=o_{\rightarrow}\), \(o(0)=o_{\circ}\) y
+\(o(-1)=o_{\leftarrow}\).
+La fibra APP calibrada sobre \(\widetilde q_{n,r}\) contendrá la copia etiquetada
+\(a_{n,r}\) ya definida. El estado inicial queda fijado sin coordenadas libres:
+\[
+ \widehat h_\star:=
+ \bigl((\Sigma,\Pi),R^\Sigma_{1,9},q^\Sigma_{1,9},
+       R^\Pi_{1,9},q^\Pi_{1,9}\bigr).
+\]
+\begin{equation}
+\begin{aligned}
+ x_\star:=\bigl(&a_{0,1};\widetilde q_{0,1};
+ +1,o_{\rightarrow},(\Sigma,\Pi);\bot;
+ R^\Sigma_{1,9},q^\Sigma_{1,9},R^\Pi_{1,9},q^\Pi_{1,9};0;\\
+ &\operatorname{Sig}^{\rm cal}_{\widetilde q_{0,1}}
+       (\widehat h_\star,o_{\rightarrow},0,
+        \operatorname{id}_{\widetilde q_{0,1}},\varnothing,
+        \jmath_{k_0}(0_{\mathsf M_{k_0}}));
+ \varnothing,\varnothing;
+ (a_{0,1}),(+1);\operatorname{id}_{\widetilde q_{0,1}};
+ k_0;0_{\mathsf M_{k_0}};\top;\varnothing\bigr).
+\end{aligned}
+\label{eq:estado-inicial-calibrado-ch}
+\end{equation}
+La tupla no contiene coordenadas indeterminadas y satisface
+\(s(x_\star)=\top\). Sea \(G_0:=\{x_\star\}\).
+Supuesto construido \(G_n\), fijemos \(x\in G_n\),
+\(\varepsilon\in\{-1,0,+1\}\) y
+\(x_{\varepsilon,0}(x):=x\). Para \(r=1,\ldots,9\), se construye primero
+el registro elemental
+\begin{equation}
+\begin{aligned}
+ \ell_{\varepsilon,n,r}:=\bigl(&e_{\varepsilon,n,r},a_{n,r},a_{(n,r)^+},
+ \widetilde q_{n,r},\widetilde q_{n,r+1},M_{\rm ph}(r),\\
+ &h_r(h(x_{\varepsilon,r-1}(x))),o(M_{\rm ph}(r)),\mathfrak p_\varepsilon,
+ d_{\varepsilon,r},\\
+ &\mathsf C_{\mathsf M}(e_{\varepsilon,n,r}),
+ \kappa_{\mathsf M}(e_{\varepsilon,n,r}),
+ \operatorname{Carr}(e_{\varepsilon,n,r})\bigr),
+\end{aligned}
+ \label{eq:registro-elemental-ext-ch}
+\end{equation}
+y se pone
+\(\operatorname{Led}^{\rm new}_{\varepsilon,n,r}:=
+\operatorname{Led}(x_{\varepsilon,r-1}(x))^\frown
+\ell_{\varepsilon,n,r}\). Se construye entonces la tupla
+\begin{equation}
+ y_{\varepsilon,r}(x):=
+ x_{\varepsilon,r-1}(x)
+ [\tau\leftarrow M_{\rm ph}(r),\
+  h\leftarrow h_r(h(x_{\varepsilon,r-1}(x))),\
+  o\leftarrow o(M_{\rm ph}(r)),\
+  b_{\rm ref}\leftarrow\mathfrak p_\varepsilon],
+ \label{eq:tupla-sel-cal-ch}
+\end{equation}
+donde la selección deja intactos célula, cocientes, acarreo, ruta, memoria,
+cilindro, frontera, supervivencia y registro; la coordenada
+\(b_{\rm ref}\) hace explícita la reducción balanceada escogida. No se presupone aquí
+pertenencia a una relación ambiental.
+
+A continuación se define \(z_{\varepsilon,r}(x)\) campo por campo: su
+configuración es \(\widetilde q_{n,r+1}\); su célula completa es
+\(a_{(n,r)^+}\), con los
+cuatro residuos y cocientes recalculados por las dos divisiones euclídeas;
+conserva la hoja seleccionada y la orientación; y efectúa las seis
+actualizaciones siguientes, en las que sólo se omite el argumento común \(x\):
+\begin{equation}
+\begin{aligned}
+ C(z_{\varepsilon,r})&:=C(y_{\varepsilon,r})^\frown
+       e_{\varepsilon,n,r},\\
+ \partial C(z_{\varepsilon,r})&:=\partial C(y_{\varepsilon,r})^\frown
+       (\widetilde q_{n,r},\widetilde q_{n,r+1}),\\
+ p_{\APP}(z_{\varepsilon,r})&:=p_{\APP}(y_{\varepsilon,r})^\frown
+       a_{(n,r)^+},\\
+ p_{\TRIT}(z_{\varepsilon,r})&:=p_{\TRIT}(y_{\varepsilon,r})^\frown
+       \tau(r),\\
+ \operatorname{Led}(z_{\varepsilon,r})&:=
+       \operatorname{Led}^{\rm new}_{\varepsilon,n,r},\\
+ \lambda(z_{\varepsilon,r})&:=e_{\varepsilon,n,r}
+       \lambda(y_{\varepsilon,r}),
+\end{aligned}
+ \label{eq:tupla-tra-cal-ch}
+\end{equation}
+y mantiene todavía los campos
+\(c,\operatorname{gr}_{\mathsf M},\operatorname{mem},s\) de
+\(y_{\varepsilon,r}(x)\). Su firma, en cambio, se vuelve a tipar en la
+configuración de destino mediante la prefirma transportada
+\begin{equation}
+\begin{aligned}
+ \operatorname{Sig}(z_{\varepsilon,r}(x))
+  :=\operatorname{Sig}^{\rm cal}_{\widetilde q_{n,r+1}}
+       \Bigl(&\widehat h(z_{\varepsilon,r}(x)),
+             o(z_{\varepsilon,r}(x)),c(y_{\varepsilon,r}(x)),
+             \lambda(z_{\varepsilon,r}(x)),\\[-2pt]
+             &\partial C(z_{\varepsilon,r}(x)),
+             \jmath_{d_{n,r}}
+                (\operatorname{mem}_{d_{n,r}}
+                   (y_{\varepsilon,r}(x)))\Bigr).
+\end{aligned}
+\label{eq:prefirma-transporte-cal-ch}
+\end{equation}
+Así, y sólo en
+\(\mathsf{Tra}^{\rm cal}\), se añaden la arista, sus extremos, la marca
+\((\mathfrak p_\varepsilon,r,d_{\varepsilon,r})\) y sus cociclos al registro de
+incidencias.
+
+El estado inicial satisface
+\[
+ c(x_\star)=0=\operatorname{Carr}
+   (\operatorname{id}_{\widetilde q_{0,1}})
+   =\operatorname{Carr}(\lambda(x_\star)).
+\]
+En los estados completos \(x_{\varepsilon,r-1}(x)\), y también después de la
+selección \(y_{\varepsilon,r}(x)\), se conserva el invariante tipado
+\(c(v)=\operatorname{Carr}(\lambda(v))\), pues
+\(\mathsf{Sel}^{\rm cal}\) no modifica ninguno de esos dos campos. El
+transporte avanza la ruta pero deja pendiente el acarreo; por ello la tupla de
+preactualización satisface exactamente
+\[
+ c(z_{\varepsilon,r}(x))=c(y_{\varepsilon,r}(x))
+ =\operatorname{Carr}(\lambda(y_{\varepsilon,r}(x))).
+\]
+La aplicación \(\operatorname{Upd}^{\rm cal}\) restaura entonces
+\(c(x_{\varepsilon,r}(x))=
+\operatorname{Carr}(\lambda(x_{\varepsilon,r}(x)))\) mediante la ley de
+composición, sin atribuir ese invariante al estado intermedio \(z\).
+
+Finalmente se aplica la función unaria
+\(\operatorname{Upd}^{\rm cal}_{e_{\varepsilon,n,r}}
+=\mathsf{Mem}^{\rm cal}_{e_{\varepsilon,n,r}}\) a esa tupla. Su
+resultado \(x_{\varepsilon,r}(x)\) viene dado por
+\begin{equation}
+\begin{aligned}
+ c\bigl(x_{\varepsilon,r}(x)\bigr)
+   &=\operatorname{Carr}\bigl(\lambda(z_{\varepsilon,r}(x))\bigr)\\
+   &=H_{\rm Carr}(\lambda(y_{\varepsilon,r}(x)))
+       \bigl(\operatorname{Carr}(e_{\varepsilon,n,r})\bigr)
+     +Y_{\rm Carr}(e_{\varepsilon,n,r})
+       \bigl(c(y_{\varepsilon,r}(x))\bigr),\\
+ \lambda\bigl(x_{\varepsilon,r}(x)\bigr)
+   &=\lambda(z_{\varepsilon,r}(x)),\\
+ \operatorname{gr}_{\mathsf M}
+      \bigl(x_{\varepsilon,r}(x)\bigr)
+   &=d_{n,r}+1,\\
+ \operatorname{mem}_{d_{n,r}+1}
+       \bigl(x_{\varepsilon,r}(x)\bigr)
+   &=\mathsf C_{\mathsf M}(e_{\varepsilon,n,r})
+       \operatorname{mem}_{d_{n,r}}(z_{\varepsilon,r}(x))
+     +\kappa_{\mathsf M}(e_{\varepsilon,n,r}),\\
+ s\bigl(x_{\varepsilon,r}(x)\bigr)
+   &=s(e_{\varepsilon,n,r})\wedge s(z_{\varepsilon,r}(x)),\\
+ \operatorname{Sig}\bigl(x_{\varepsilon,r}(x)\bigr)
+   &=\operatorname{Sig}^{\rm cal}_{\widetilde q_{n,r+1}}
+       \Bigl(\widehat h(z_{\varepsilon,r}(x)),
+             o(z_{\varepsilon,r}(x)),
+             c(x_{\varepsilon,r}(x)),
+             \lambda(z_{\varepsilon,r}(x)),
+             \partial C(z_{\varepsilon,r}(x)),\\[-2pt]
+   &\hspace{112pt}
+             \jmath_{d_{n,r}+1}
+              \bigl(\operatorname{mem}_{d_{n,r}+1}
+                 (x_{\varepsilon,r}(x))\bigr)\Bigr).
+\end{aligned}
+\label{eq:upd-unaria-tres-vueltas-ch}
+\end{equation}
+Todos los campos no enumerados en
+\eqref{eq:upd-unaria-tres-vueltas-ch} coinciden con los de
+\(z_{\varepsilon,r}(x)\). En particular, la firma se calcula con la hoja,
+orientación, frontera y ruta ya fijadas por \(\mathsf{Sel}^{\rm cal}\) y
+\(\mathsf{Tra}^{\rm cal}\), y con el acarreo y la memoria calculados en las
+líneas anteriores; no se define circularmente a partir del estado final.
+Ni \(\varepsilon\), ni \(d_{\varepsilon,r}\), ni \(u\) son argumentos
+adicionales de \(\operatorname{Upd}^{\rm cal}\): la función lee los tres datos de la
+arista ya construida.
+
+\paragraph{Inducción simultánea de los niveles.}
+Completadas las nueve etapas anteriores para un \(G_n\) ya construido,
+se define inmediatamente
+\begin{equation}
+ \gamma_{\varepsilon,k_n}(x):=x_{\varepsilon,9}(x),\qquad
+ G_{n+1}:=\{\gamma_{\varepsilon,k_n}(x):
+       x\in G_n,\ \varepsilon\in\TRIT\}.
+ \label{eq:injerto-total-tres-vueltas-ch}
+\end{equation}
+\label{eq:tres-vueltas-tpk-ch}
+La base \(G_0=\{x_\star\}\), las tuplas intermedias y
+\eqref{eq:injerto-total-tres-vueltas-ch} constituyen una única definición por
+recursión sobre \(n\). Por tanto, ningún portador posterior se utiliza para
+suponer la existencia de \(G_n\): el nivel siguiente sólo se introduce
+después de construir todas sus aristas desde el nivel precedente.
+
+\paragraph{Relación de extensión TPK y pertenencia efectiva.}
+Sea \(\mathcal E^{\rm cal}_{\widetilde q}\) la menor familia etiquetada que contiene
+\(x_\star\) y, en cada paso de la recurrencia anterior, las cuatro tuplas
+\(x_{\varepsilon,r-1}(x),y_{\varepsilon,r}(x),
+z_{\varepsilon,r}(x),x_{\varepsilon,r}(x)\) en sus configuraciones de origen
+y destino. Sea asimismo
+\(\mathcal A^{\rm cal}_{\widetilde q_{n,r}}:=\{a_{n,r}\}\), y póngase
+\[
+ \widetilde{\mathcal Q}_{\rm obs}:=
+   \{\widetilde q_{n,r}:n\ge0,\ 1\le r\le9\},
+ \qquad
+ \mathcal E^{\rm cal}:=\bigsqcup_{\widetilde q}
+     \mathcal E^{\rm cal}_{\widetilde q},
+ \qquad
+ \mathcal F^{\rm cal}_{\widetilde q}:=
+     \pi_{\mathcal F}(\mathcal E^{\rm cal}_{\widetilde q}).
+\]
+Para cada profundidad \(d\), sea
+\(\mathcal E^{\rm cal}_d:=
+\operatorname{gr}_{\mathsf M}^{-1}(d)\subset\mathcal E^{\rm cal}\). La
+coordenada explícita de grado, y no la mera pertenencia de un representante a
+alguna imagen del sistema directo, hace disjuntos estos portadores. Sobre ellos
+quedan tipadas las proyecciones
+\[
+\begin{aligned}
+ \operatorname{cfg}&:\mathcal E^{\rm cal}\longrightarrow
+     \widetilde{\mathcal Q}_{\rm obs},\\
+ g(x)&:=\operatorname{fase}\!
+       \bigl(\pi_{\rm obs}(\operatorname{cfg}(x))\bigr)\in C_9,\\
+ c&:\mathcal E^{\rm cal}\longrightarrow K_{\rm Carr},\\
+ s&:\mathcal E^{\rm cal}\longrightarrow\{\bot,\top\},\\
+ \lambda&:\mathcal E^{\rm cal}_{\widetilde q}
+       \longrightarrow\mathsf{Hist}^{\rm cal}_{\widetilde q},\\
+ \operatorname{gr}_{\mathsf M}&:\mathcal E^{\rm cal}
+       \longrightarrow\mathbb N_{\ge1},\\
+ \operatorname{mem}_d&:\mathcal E^{\rm cal}_d
+       \longrightarrow\mathsf M_d,\\
+ \operatorname{mem}(x)&:=
+       \jmath_d\bigl(\operatorname{mem}_d(x)\bigr)\in\mathsf M
+       \quad(x\text{ de profundidad }d).
+\end{aligned}
+\]
+Aquí \(\operatorname{cfg}(x)\) es la segunda coordenada de la tupla y
+\(\operatorname{fase}\) lee la fase del calendario observable. Para las tres
+clases de portador se fijan las diagonales
+\[
+\begin{aligned}
+ \Delta_{\APP,\widetilde q}
+   &:=\{(a,a):a\in\mathcal A^{\rm cal}_{\widetilde q}\},\\
+ \Delta_{{\rm fib},\widetilde q}
+   &:=\{(f,f):f\in\mathcal F^{\rm cal}_{\widetilde q}\},\\
+ \Delta_{{\rm enr},\widetilde q}
+   &:=\{(x,x):x\in\mathcal E^{\rm cal}_{\widetilde q}\}.
+\end{aligned}
+\]
+En particular,
+\[
+ a_{0,1}\in\mathcal A^{\rm cal}_{\widetilde q_{0,1}},
+ \qquad
+ x_\star\in\mathcal E^{\rm cal}_{\widetilde q_{0,1}}.
+\]
+Sobre estos portadores se
+definen por sus grafos completos, y no mediante implicaciones necesarias, las
+relaciones
+\begin{align}
+ \mathsf{Sel}^{\rm cal}_{e_{\varepsilon,n,r}}
+   &:=\{(x_{\varepsilon,r-1}(x),y_{\varepsilon,r}(x)):
+          x\in G_n\},\\
+ \mathsf{Tra}^{\rm cal}_{e_{\varepsilon,n,r}}
+   &:=\{(y_{\varepsilon,r}(x),z_{\varepsilon,r}(x)):
+          x\in G_n\},\\
+ \operatorname{Ext}^{\APP,\rm cal}_{e_{\varepsilon,n,r}}
+   &:=\{(a_{n,r},a_{(n,r)^+})\},
+ \label{eq:ext-app-calibrada-ch}\\
+ \operatorname{Ext}^{\rm fib,cal}_{e_{\varepsilon,n,r}}
+   &:=\{(\pi_{\mathcal F}x_{\varepsilon,r-1}(x),
+          \pi_{\mathcal F}x_{\varepsilon,r}(x)):x\in G_n\}.
+ \label{eq:ext-fibra-calibrada-ch}
+\end{align}
+La extensión enriquecida sincronizada es
+\begin{equation}
+ \operatorname{Ext}^{\rm enr,cal}_{e_{\varepsilon,n,r}}
+ :=\{(x_{\varepsilon,r-1}(x),x_{\varepsilon,r}(x)):
+       x\in G_n\}.
+ \label{eq:ext-enriquecida-calibrada-ch}
+\end{equation}
+La tercera aplicación queda definida por
+\begin{equation}
+ \operatorname{graph}
+ \bigl(\operatorname{Upd}^{\rm cal}_{e_{\varepsilon,n,r}}\bigr)
+ :=\{(z_{\varepsilon,r}(x),x_{\varepsilon,r}(x)):
+       x\in G_n\},
+ \label{eq:grafo-upd-calibrado-ch}
+\end{equation}
+donde el segundo componente es exactamente el de
+\eqref{eq:upd-unaria-tres-vueltas-ch}. Por consiguiente,
+\begin{equation}
+ \mathcal U^{(1),\rm cal}_{e_{\varepsilon,n,r}}
+ :=\operatorname{Upd}^{\rm cal}_{e_{\varepsilon,n,r}}\circ
+   \mathsf{Tra}^{\rm cal}_{e_{\varepsilon,n,r}}\circ
+   \mathsf{Sel}^{\rm cal}_{e_{\varepsilon,n,r}}
+ =\{(x_{\varepsilon,r-1}(x),x_{\varepsilon,r}(x)):
+      x\in G_n\}.
+ \label{eq:transicion-cal-en-tpk-ch}
+\end{equation}
+Cada operador está indexado por la arista
+\(e_{\varepsilon,n,r}\) producida por la reducción
+\(\mathfrak p_\varepsilon\), y no por un trit suministrado desde fuera. La
+coordenada \(b_{\rm ref}\) distingue además sus codominios. Por ello
+\(\mathsf{Sel}^{\rm cal}_{e}\),
+\(\mathsf{Tra}^{\rm cal}\) y \(\operatorname{Upd}^{\rm cal}\) son funciones
+sobre sus respectivos dominios, mientras
+la unión
+\(\bigcup_{\varepsilon\in\TRIT}
+\mathcal U^{(1),\rm cal}_{e_{\varepsilon,n,r}}\) conserva deliberadamente
+las tres salidas de la trisección.
+
+Para \(\bullet\in\{\APP,{\rm fib},{\rm enr}\}\), las identidades y las
+composiciones no quedan implícitas. Se definen
+\begin{align}
+ \operatorname{Ext}^{\bullet,\rm cal}_{\operatorname{id}_{\widetilde q}}
+   &:=\Delta_{\bullet,\widetilde q},\\
+ \operatorname{Ext}^{\bullet,\rm cal}_{e_t\cdots e_1}
+   &:=\operatorname{Ext}^{\bullet,\rm cal}_{e_t}\circ\cdots\circ
+      \operatorname{Ext}^{\bullet,\rm cal}_{e_1}
+ \label{eq:ext-palabra-calibrada-ch}
+\end{align}
+para toda palabra admisible de aristas. Las dos clausuras de caminos APP y
+fibra se forman por separado,
+\begin{equation}
+ \operatorname{Path}(\operatorname{Ext}^{\APP,\rm cal}),\qquad
+ \operatorname{Path}(\operatorname{Ext}^{\rm fib,cal}),
+ \label{eq:dos-clausuras-ext-ch}
+\end{equation}
+y \(\mathsf{Tra}^{\rm cal}\) las sincroniza arista por arista.
+
+Finalmente, los niveles de estados completos y sus truncamientos se fijan
+por la propia recurrencia:
+\begin{align}
+ H^{\rm cal}_{d_{n,r}}
+   &:=\{x_{\varepsilon,r-1}(x):
+          x\in G_n,\ \varepsilon\in\TRIT\},\\
+ H^{\rm cal}_{d_{n,r}+1}
+   &:=\{x_{\varepsilon,r}(x):
+          x\in G_n,\ \varepsilon\in\TRIT\},\\
+ \rho^{\rm cal}_{d_{n,r}+1,d_{n,r}}
+   \bigl(x_{\varepsilon,r}(x)\bigr)
+   &:=x_{\varepsilon,r-1}(x).
+ \label{eq:truncamiento-calibrado-definido-ch}
+\end{align}
+El último registro conserva \((n,r,\mathfrak p_\varepsilon)\), de modo que
+el predecesor del miembro izquierdo es único y \(\rho^{\rm cal}\) está bien
+definida. Para \(b>a\), se pone
+\(\rho^{\rm cal}_{b,a}:=\rho^{\rm cal}_{a+1,a}\circ\cdots\circ
+\rho^{\rm cal}_{b,b-1}\). Esta aplicación recupera el estado anterior
+completo, incluida su firma; no pretende invertir una coordenada sobrescrita
+sin consultar el registro.
+
+\begin{proposition}[Realización autónoma del TPK mediante transiciones explícitas]
+\label{prop:modelo-tpk-calibrado-ch}
+La familia
+\[
+\begin{aligned}
+ \mathfrak T_{\rm TPK}^{\rm cal}:=\bigl(
+ &(\widetilde q_{n,r})_{n,r},\pi_{\rm obs},
+   \widetilde F_{\rm obs},M_{\rm ph},\\
+ &(\mathcal A_{\widetilde q}^{\rm cal})_{\widetilde q},
+   (\mathcal E_{\widetilde q}^{\rm cal})_{\widetilde q},
+   (\mathcal F_{\widetilde q}^{\rm cal})_{\widetilde q},
+   \operatorname{Ext}^{\APP,\rm cal},
+   \operatorname{Ext}^{\rm fib,cal},
+   \operatorname{Ext}^{\rm enr,cal},\rho^{\rm cal},\\
+ &\mathsf{Sel}^{\rm cal},\mathsf{Tra}^{\rm cal},
+   \operatorname{Upd}^{\rm cal},\mathsf C_{\mathsf M},
+   \kappa_{\mathsf M},\operatorname{gr}_{\mathsf M},
+   H_{\rm Carr},Y_{\rm Carr},\\
+ &\operatorname{Sig}^{\rm cal},\pi_{\mathcal F}\bigr).
+\end{aligned}
+\]
+es un modelo enriquecido del TPK. En particular, cada par del miembro derecho
+de \eqref{eq:transicion-cal-en-tpk-ch} es una arista TPK efectiva, y no la
+consecuencia inferida de una condición solamente necesaria.
+\end{proposition}
+
+\begin{proof}
+Las etiquetas \((n,r)\) hacen disjuntas las copias de los portadores y fijan
+sin ambigüedad cada origen y destino. La relación
+\(\operatorname{Ext}^{\APP,\rm cal}\) transporta la célula completa y
+preserva las dos identidades euclídeas; la relación
+\(\operatorname{Ext}^{\rm fib,cal}\) relaciona las fibras de los estados
+completos anterior y posterior: transporta hoja, orientación, prefijo,
+cilindro, frontera y registro e incorpora el acarreo, la memoria y la firma
+actualizados. La selección no modifica el registro y el transporte concatena
+exactamente una entrada y produce la prefirma de destino
+\eqref{eq:prefirma-transporte-cal-ch}. La actualización recalcula la firma mediante la
+aplicación tipada \(\operatorname{Sig}^{\rm cal}_{\widetilde q}\) desde
+hoja, orientación, acarreo, ruta, frontera y memoria ya determinados. La aplicación
+\(\operatorname{Upd}^{\rm cal}\) es unaria porque la arista contenida en
+\(z_{\varepsilon,r}(x)\) determina sus cociclos.
+
+Las identidades son las diagonales y las extensiones por palabras son las
+composiciones de \eqref{eq:ext-palabra-calibrada-ch}. La concatenación de
+prefijos y registros es asociativa; la memoria satisface la ley de cociclo y
+el acarreo satisface
+\eqref{eq:ley-carry-correcta-ch}. Por tanto, las dos parentizaciones de tres
+aristas producen el mismo estado. La fórmula
+\eqref{eq:truncamiento-calibrado-definido-ch} define el truncamiento sobre
+los estados completos y la unicidad del último registro prueba que recupera
+el origen en todos los campos. Éstas son las leyes de identidad, fuente,
+destino, composición, memoria, acarreo y truncamiento del TPK enriquecido.
+En particular, las relaciones de extensión quedan determinadas como grafos
+de aplicaciones efectivas y no como consecuencias de meras condiciones
+necesarias.
+\end{proof}
+
+Cada \(\gamma_{\varepsilon,k_n}\) comprende exactamente nueve aplicaciones
+de \(\operatorname{Upd}^{\rm cal}_{e_{\varepsilon,n,r}}\circ
+\mathsf{Tra}^{\rm cal}_{e_{\varepsilon,n,r}}\circ
+\mathsf{Sel}^{\rm cal}_{e_{\varepsilon,n,r}}\). La
+supervivencia se probará mediante una cola construida y no se utilizará para
+definir \(G_n\).
+
+\begin{lemma}[Trisección interna efectiva de una vuelta]
+\label{lem:elevacion-catalogal-nonadica}
+Para todo \(n\ge0\), todo \(x\in G_n\) y todo
+\(\varepsilon\in\{-1,0,+1\}\), la expresión
+\(\gamma_{\varepsilon,k_n}(x)\) está definida por nueve transiciones TPK,
+con sus relaciones sincronizadas
+\(\operatorname{Ext}^{\APP,\rm cal}\) y
+\(\operatorname{Ext}^{\rm fib,cal}\), y satisface
+\begin{align}
+ \rho^{\rm cal}_{k_n+9,k_n}\gamma_{\varepsilon,k_n}(x)&=x,
+ \label{eq:truncamiento-injerto-ch}\\
+ g\bigl(\gamma_{\varepsilon,k_n}(x)\bigr)
+   &=g(x),&
+ \jmath_{k_n+9}\!\left(\operatorname{mem}_{k_n+9}
+        (\gamma_{\varepsilon,k_n}(x))\right)
+   &=\jmath_{k_n}\!\left(\operatorname{mem}_{k_n}(x)\right)+u,
+ \label{eq:fase-memoria-injerto-ch}\\
+ c\bigl(\gamma_{\varepsilon,k_n}(x)\bigr)
+   &=c(x)+\varepsilon\kappa_{\rm Carr}.&&
+ \label{eq:carry-injerto-ch}
+\end{align}
+\label{eq:tres-vueltas-propiedades-ch}
+\label{eq:tres-vueltas-acarreo-ch}
+El registro ordenado de las nueve aristas determina \(\varepsilon\) de manera única.
+Las tres imágenes son, por tanto, disjuntas. Cada extremo pertenece a
+\(G_{n+1}\) y vuelve a admitir las tres aplicaciones
+\(\gamma_{-1,k_{n+1}},\gamma_{0,k_{n+1}},
+\gamma_{+1,k_{n+1}}\).
+\end{lemma}
+
+\begin{proof}
+Las fórmulas \eqref{eq:celula-completa-fase-ch} recorren una vez las nueve
+fases y devuelven la copia \(a_{n+1,1}\) de \(a(1)\). En cada paso, la relación APP transporta el
+séxtuplo completo; \(\mathsf{Sel}^{\rm cal}\) fija el tipo TRIT desde la marca de fase
+\(r\) conservada en el estado;
+y \(\mathsf{Tra}^{\rm cal}\) añade exactamente un símbolo al prefijo, un tramo al
+cilindro y su par ordenado de extremos a la frontera. Por inducción sobre
+\(r\), las tuplas explícitas \(y_{\varepsilon,r}(x)\) y
+\(z_{\varepsilon,r}(x)\) satisfacen los predicados de las relaciones
+indicadas, y la actualización unaria produce el estado del nivel siguiente.
+La identidad
+\(\rho^{\rm cal}_{d_{n,r}+1,d_{n,r}}
+(x_{\varepsilon,r}(x))=x_{\varepsilon,r-1}(x)\) es la definición
+\eqref{eq:truncamiento-calibrado-definido-ch}; su buena definición procede de
+la unicidad del último registro. La composición de las nueve aplicaciones de
+truncamiento recupera \(x\), lo que prueba
+\eqref{eq:truncamiento-injerto-ch} sin invertir por separado los campos
+sobrescritos.
+
+La fase \(9\to1\) aparece una sola vez. Por
+\eqref{eq:memoria-arista-ch} y la ley de cociclo, la parte lineal de memoria
+transporta la memoria previa y su parte traslacional suma exactamente \(u\)
+en el límite directo. La compatibilidad
+\(\jmath_{d+1}\jmath_{d+1,d}=\jmath_d\) prueba
+\eqref{eq:fase-memoria-injerto-ch}; el retorno concierne a la fase, no al
+estado enriquecido.
+
+Por \eqref{eq:carry-arista-derivado-ch}, ocho aristas poseen incremento nulo y
+la arista que completa \(\mathfrak p_\varepsilon\) posee el incremento calculado
+\(\chi(\varepsilon,\varepsilon)\kappa_{\rm Carr}\). La ley
+\eqref{eq:ley-carry-correcta-ch} y
+\eqref{eq:carry-no-parametrico-ch} dan
+\eqref{eq:carry-injerto-ch}. El registro conserva
+\((\mathfrak p_\varepsilon,2\varepsilon,r_3(2\varepsilon),
+\chi(\varepsilon,\varepsilon))\); los tres valores de este registro son
+distintos incluso cuando el incremento escalar es cero. Por ello las imágenes
+no se identifican y el decodificador de bloque recupera una única
+\(\varepsilon\).
+
+Las definiciones de las aristas dependen sólo de la nueva fase y concatenan,
+en vez de sustituir, prefijo, cilindro, frontera y registro. También son
+invariantes bajo
+\(\jmath_d\operatorname{mem}_d\mapsto
+  \jmath_d\operatorname{mem}_d+nu\)
+y bajo la traslación del acarreo de
+entrada. En consecuencia, la misma construcción se aplica al extremo de
+cualquier vuelta. Para cada estado finito, la sucesión explícita
+\[
+ x,\quad\gamma_{0,k_n}(x),\quad
+ \gamma_{0,k_{n+1}}\gamma_{0,k_n}(x),\quad\ldots
+\]
+es una cola infinita compatible. Esto demuestra la supervivencia de todos los
+estados construidos y la disponibilidad reiterada de las tres ramas, sin
+postular ninguna de ambas propiedades. Por consiguiente podemos, finalmente,
+identificar, de acuerdo con las definiciones de nivel anteriores,
+\begin{equation}
+ H_{k_n}^{\rm cal}:=G_n
+ \label{eq:subarbol-calibrado-superviviente-ch}
+\end{equation}
+para todo \(n\ge0\).
+\end{proof}
+
+El cierre anterior distingue los tres relojes implicados. Nueve emisiones
+devuelven la fase en \(C_9\) y avanzan la memoria. Doce vueltas, es decir,
+\(108\) emisiones, devuelven además la posición del calendario observable;
+tampoco entonces se borran el registro ni la memoria. El operador
+\(\mathcal K_{\rm ph}\) actúa únicamente después, como reconocimiento de
+memoria reducida de las vueltas ya construidas; nunca genera las aristas de
+\(\operatorname{Ext}^{\rm enr,cal}\).

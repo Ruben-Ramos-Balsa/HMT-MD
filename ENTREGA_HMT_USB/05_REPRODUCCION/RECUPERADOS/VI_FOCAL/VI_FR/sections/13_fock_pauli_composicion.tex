@@ -1,0 +1,688 @@
+\section{Completación graduada de los canales y principio de exclusión}
+\label{vi:sec:fock-pauli}
+
+La construcción de una partícula proporciona un espacio de canales, sus
+etiquetas y los operadores que transportan orientación y memoria. La
+composición de varias partículas añade una cuestión distinta: cómo se
+intercambian esos canales y cómo se cuentan sus ocupaciones. Aquí se
+construye ese estrato a partir de los datos ya producidos por
+APP--TRIT--TPK. La masa y el Hamiltoniano pueden actuar después sobre
+el espacio obtenido; sus valores no intervienen en la demostración de
+las reglas de ocupación.
+
+La paridad empleada es la del transporte de hoja en la representación
+de una partícula. No es el signo de la carga, la paridad de un entero
+visible ni la tercera coordenada del TRIT considerada aisladamente.
+Las distintas lecturas conservan sus mapas. La
+sección~\ref{vi:sec:conjugacion} construye el retorno orientado y la
+representación espinorial; esta sección desarrolla el álgebra
+multiparticular que corresponde a una graduación y una regla de
+intercambio declaradas.
+
+\subsection{Espacio finito de canales y carácter de paridad}
+\label{vi:subsec:canales-graduados}
+
+Fijada una profundidad \(K\), sea \(S_K\) el conjunto finito de
+canales de la realización considerada. Sus elementos conservan los
+datos de ruta y de representación que todavía distinguen estados:
+hoja, orientación, frontera, memoria, sabor, color y componente de
+espín cuando pertenecen al sector. El cociente que define \(S_K\)
+se efectúa antes de construir la ocupación; no identifica dos canales
+por la sola igualdad de sus masas.
+
+El espacio de una partícula es
+\begin{equation}
+ \mathcal H_K=\bigoplus_{s\in S_K}V_s,
+ \qquad\langle e_{s,a},e_{t,b}\rangle=\delta_{st}\delta_{ab},
+ \label{vi:eq:espacio-canales-fock}
+\end{equation}
+donde \(V_s\) porta la multiplicidad de representación declarada.
+Cada \(e_{s,a}\) es un modo completo, no una celda del atlas sin
+etiquetas. Su producto interno positivo pertenece a esa realización
+finita y hace explícita la normalización usada a continuación.
+
+El dato de paridad es un carácter composicional del transporte,
+\begin{equation}
+ p:\operatorname{Mor}(\mathsf P_{\mathrm{TPK}})
+ \longrightarrow\mathbb Z/2\mathbb Z,
+ \qquad p(\gamma\eta)=p(\gamma)+p(\eta).
+ \label{vi:eq:caracter-paridad-fock}
+\end{equation}
+Sobre los canales en los que está realizada esa graduación, la
+involución de holonomía \(J_p\) satisface
+\(J_pe=(-1)^{p(e)}e\). Por tanto,
+\[
+ \mathcal H_K=\mathcal H_{K,\bar0}\oplus\mathcal H_{K,\bar1},
+ \qquad \Pi_{\bar0}=\frac{I+J_p}{2},\quad
+ \Pi_{\bar1}=\frac{I-J_p}{2}.
+\]
+Los dos proyectores son ortogonales porque \(J_p^*=J_p\) y
+\(J_p^2=I\). La igualdad \eqref{vi:eq:caracter-paridad-fock} asegura
+que componer transportes conserva la graduación. Cuando una realización
+no ha suministrado ese carácter, la completación que sigue es una
+construcción relativa a su elección explícita, no una atribución
+estadística obtenida de la apariencia de una ruta.
+
+\subsection{Intercambio graduado y proyectores de permutación}
+\label{vi:subsec:intercambio-graduado}
+
+Para vectores homogéneos se define el intercambio
+\begin{equation}
+ \tau_p(v\otimes w)=(-1)^{p(v)p(w)}w\otimes v.
+ \label{vi:eq:intercambio-graduado}
+\end{equation}
+El signo es negativo exactamente cuando ambos modos pertenecen al
+sector impar. El intercambio no modifica las etiquetas de un modo:
+transporta el modo completo de una posición tensorial a otra.
+
+\Needspace{10\baselineskip}
+\begin{proposition}[Representación graduada de las permutaciones]
+\label{vi:prop:permutaciones-graduadas}
+Los intercambios adyacentes \(\tau_{p,j}\) sobre
+\(\mathcal H_K^{\otimes n}\) son unitarios y satisfacen
+\[
+\begin{gathered}
+ \tau_{p,j}^2=I,\qquad
+ \tau_{p,j}\tau_{p,k}=\tau_{p,k}\tau_{p,j}\quad(|j-k|>1),\\
+ \tau_{p,j}\tau_{p,j+1}\tau_{p,j}
+ =\tau_{p,j+1}\tau_{p,j}\tau_{p,j+1}.
+\end{gathered}
+\]
+Definen, por tanto, una representación unitaria \(U_p\) de
+\(\mathfrak S_n\).
+\end{proposition}
+\begin{proof}
+Aplicar dos veces un intercambio da el signo
+\((-1)^{2p(v)p(w)}=1\) y restaura ambos vectores. Los operadores
+que actúan en pares disjuntos conmutan. Sobre una terna homogénea
+de grados \(a,b,c\), los dos miembros de la relación de tres
+intercambios producen el mismo orden final y el signo
+\((-1)^{ab+ac+bc}\). Cada operador permuta una base ortonormal
+multiplicándola por signos de módulo uno, luego es unitario.
+\end{proof}
+
+El promedio
+\[
+ P_n^p=\frac1{n!}\sum_{\pi\in\mathfrak S_n}U_p(\pi)
+\]
+es el proyector ortogonal sobre los tensores invariantes por el
+intercambio graduado. En un espacio homogéneo par coincide con el
+simetrizador ordinario; en uno homogéneo impar coincide con el
+antisimetrizador. Si \(U\) denota la permutación sin signo,
+\begin{equation}
+ S_n=\frac1{n!}\sum_\pi U(\pi),\qquad
+ A_n=\frac1{n!}\sum_\pi\operatorname{sgn}(\pi)U(\pi).
+ \label{vi:eq:simetrizadores-fock}
+\end{equation}
+
+\begin{proposition}[Simetrización y antisimetrización exactas]
+\label{vi:prop:proyectores-fock}
+Se tiene \(S_n^*=S_n^2=S_n\) y \(A_n^*=A_n^2=A_n\).
+Para \(n\ge2\), \(S_nA_n=0\). Sus imágenes son, respectivamente,
+\(\operatorname{Sym}^n\mathcal H\) y \(\bigwedge^n\mathcal H\).
+\end{proposition}
+\begin{proof}
+La adjunción sustituye cada permutación por su inversa y deja
+invariantes las sumas. En el cuadrado de cada promedio, toda
+permutación \(\rho\) aparece \(n!\) veces; en el segundo promedio
+su coeficiente es \(\operatorname{sgn}(\rho)\). Esto prueba
+la idempotencia. El producto de ambos proyectores incluye la suma
+de los signos de todas las permutaciones, que es cero para
+\(n\ge2\). Finalmente, sus imágenes son los tensores invariantes
+y alternantes por sus propias fórmulas de promedio.
+\end{proof}
+
+\subsection{Álgebra universal y normalización de los estados de ocupación}
+\label{vi:subsec:fock-construccion}
+
+Sea \(T(\mathcal H)=\bigoplus_{n\ge0}\mathcal H^{\otimes n}\)
+el álgebra tensorial. La completación algebraica graduada es el
+cociente por el ideal generado por
+\begin{equation}
+ v\otimes w-(-1)^{p(v)p(w)}w\otimes v.
+ \label{vi:eq:ideal-fock}
+\end{equation}
+La propiedad universal del cociente significa que toda aplicación
+lineal graduada de los canales a un álgebra que cumpla estas
+relaciones se prolonga de manera única a un homomorfismo del
+cociente. La regla de intercambio, una vez declarada, fija así el
+producto de ocupaciones sin recurrir a energías objetivo.
+
+\begin{theorem}[Descomposición simétrica y exterior]
+\label{vi:thm:fock-graduado}
+Si \(d_0=\dim\mathcal H_{\bar0}\) y
+\(d_1=\dim\mathcal H_{\bar1}\), la completación graduada tiene
+la descomposición
+\begin{equation}
+ \mathcal F(\mathcal H)=
+ \mathcal F_+(\mathcal H_{\bar0})\otimes
+ \mathcal F_-(\mathcal H_{\bar1}),
+ \label{vi:eq:fock-producto}
+\end{equation}
+\[
+ \mathcal F_+(\mathcal H_{\bar0})=
+ \bigoplus_{m\ge0}\operatorname{Sym}^m\mathcal H_{\bar0},
+ \qquad
+ \mathcal F_-(\mathcal H_{\bar1})=
+ \bigoplus_{k=0}^{d_1}\bigwedge^k\mathcal H_{\bar1}.
+\]
+El sector de número total \(n\) es
+\[
+ \mathcal F_n(\mathcal H)=
+ \bigoplus_{k=0}^{\min(n,d_1)}
+ \operatorname{Sym}^{n-k}\mathcal H_{\bar0}
+ \otimes\bigwedge^k\mathcal H_{\bar1}.
+\]
+\end{theorem}
+\begin{proof}
+Fijadas bases homogéneas ordenadas, las relaciones
+\eqref{vi:eq:ideal-fock} permiten colocar primero los factores pares
+y después los impares. Los pares conmutan; los impares anticonmutan,
+y el cuadrado de un impar es cero porque se trabaja en característica
+cero. Cada monomio queda escrito como
+\[
+ e_1^{m_1}\cdots e_{d_0}^{m_{d_0}}
+ f_{i_1}\cdots f_{i_k},
+ \qquad m_j\ge0,\quad i_1<\cdots<i_k.
+\]
+La realización mediante tensores simétricos y alternantes hace
+linealmente independientes esos monomios. Proporciona la aplicación
+inversa y demuestra la descomposición. Agruparlos por
+\(m_1+\cdots+m_{d_0}+k=n\) da el último enunciado.
+\end{proof}
+
+La completación de Hilbert declara ortonormales los vectores de
+ocupación normalizados \(|\boldsymbol m;I\rangle\), donde
+\(\boldsymbol m\in\mathbb N_0^{d_0}\) e
+\(I\subset\{1,\ldots,d_1\}\). En el sector bosónico de grado
+\(n=\sum_jm_j\), la normalización tensorial es
+\[
+ |\boldsymbol m\rangle=
+ \sqrt{\frac{n!}{\prod_jm_j!}}\,
+ S_n(e_1^{\otimes m_1}\otimes\cdots\otimes
+ e_{d_0}^{\otimes m_{d_0}}).
+\]
+Para \(I=\{i_1<\cdots<i_k\}\), el vector exterior es
+\[
+ |I\rangle=\frac1{\sqrt{k!}}\sum_{\pi\in\mathfrak S_k}
+ \operatorname{sgn}(\pi)
+ f_{i_{\pi(1)}}\otimes\cdots\otimes f_{i_{\pi(k)}}.
+\]
+En la primera fórmula hay \(n!/\prod m_j!\) tensores distintos;
+en la segunda hay \(k!\). Contarlos prueba que ambas normas son uno.
+El grado cero es \(\mathbb C|0\rangle\); este vacío de ocupación
+no se identifica con la carta constitutiva del vacío electromagnético
+ni con una vacancia del registro TPK.
+
+\subsection{Creación fermiónica y derivación de las relaciones CAR}
+\label{vi:subsec:car-construccion}
+
+Sea \(I\) un subconjunto ordenado de modos impares y
+\(r_j(I)=\#\{i\in I:i<j\}\). Se definen
+\begin{align}
+ a_j^\dagger|I\rangle&=
+ \begin{cases}
+ 0,&j\in I,\\
+ (-1)^{r_j(I)}|I\cup\{j\}\rangle,&j\notin I,
+ \end{cases}\notag\\
+ a_j|I\rangle&=
+ \begin{cases}
+ (-1)^{r_j(I)}|I\setminus\{j\}\rangle,&j\in I,\\
+ 0,&j\notin I.
+ \end{cases}
+ \label{vi:eq:creacion-fermi}
+\end{align}
+El signo cuenta las transposiciones necesarias para insertar o retirar
+el modo manteniendo el orden de la base exterior. No usa su masa,
+su carga ni el signo de un valor escalar publicado. Las matrices de
+ambas aplicaciones son adjuntas y sus normas son \(1\), salvo el
+caso trivial sin modos impares.
+
+\begin{theorem}[Relaciones canónicas de anticonmutación]
+\label{vi:thm:car-construidas}
+Los operadores de \eqref{vi:eq:creacion-fermi} satisfacen
+\[
+ \{a_i,a_j^\dagger\}=\delta_{ij}I,\qquad
+ \{a_i,a_j\}=0,\qquad
+ \{a_i^\dagger,a_j^\dagger\}=0.
+\]
+Son relaciones exactas sobre la totalidad de
+\(\mathcal F_-(\mathcal H_{\bar1})\).
+\end{theorem}
+\begin{proof}
+Para \(i=j\), el producto \(a_j^\dagger a_j\) es la identidad
+en los vectores que contienen \(j\) y cero en los restantes;
+\(a_ja_j^\dagger\) tiene las acciones complementarias. Su suma
+es \(I\). Dos inserciones o dos retiradas del mismo modo dan cero.
+Para \(i\ne j\), si alguna operación está impedida, ambos términos
+del anticomutador correspondiente son cero. Si ambas composiciones
+son admisibles, producen el mismo conjunto de ocupaciones. Cambiar
+el orden modifica en una unidad el número de modos que preceden a
+una de las inserciones o retiradas; los signos son opuestos. Esto
+prueba los tres anticomutadores en cada vector de la base.
+\end{proof}
+
+\begin{corollary}[Exclusión y ocupación de un modo completo]
+\label{vi:cor:pauli-ocupacion}
+Para \(N_j=a_j^\dagger a_j\),
+\[
+ N_j^*=N_j,\qquad N_j^2=N_j,\qquad
+ \operatorname{Spec}(N_j)\subset\{0,1\}.
+\]
+El mismo modo completo admite como máximo una ocupación fermiónica.
+\end{corollary}
+\begin{proof}
+Las CAR dan
+\[
+ N_j^2=a_j^\dagger a_ja_j^\dagger a_j
+ =a_j^\dagger(I-a_j^\dagger a_j)a_j=N_j,
+\]
+porque \(a_j^2=(a_j^\dagger)^2=0\). La autoadjunción es inmediata;
+un autovalor de un idempotente autoadjunto vale \(0\) o \(1\).
+\end{proof}
+
+La prueba construye CAR antes de deducir Pauli: no introduce la
+exclusión como restricción adicional de una tabla de partículas.
+También explica los generadores reales empleados en la
+proposición~\ref{vi:prop:car-real}: esa proposición actúa ahora
+sobre el álgebra exterior explícita. Su interpretación Majorana
+conserva las condiciones de la sección~\ref{vi:sec:topologia}.
+
+\subsection{Creación bosónica, CCR y dominio de partículas finitas}
+\label{vi:subsec:ccr-construccion}
+
+Sobre la base bosónica normalizada se definen
+\begin{equation}
+ b_j^\dagger|\boldsymbol m\rangle=
+ \sqrt{m_j+1}\,|\boldsymbol m+\boldsymbol e_j\rangle,
+ \qquad
+ b_j|\boldsymbol m\rangle=
+ \sqrt{m_j}\,|\boldsymbol m-\boldsymbol e_j\rangle,
+ \label{vi:eq:creacion-bose}
+\end{equation}
+con valor cero en la segunda expresión cuando \(m_j=0\).
+Los factores proceden de la normalización de tensores simétricos.
+El dominio común \(\mathcal D_{\mathrm{fin}}\) es la suma directa
+algebraica de los sectores de número: los vectores tienen sólo un
+número finito de componentes de ocupación no nulas. Es denso e
+invariante por las aplicaciones anteriores.
+
+\begin{theorem}[Relaciones canónicas de conmutación]
+\label{vi:thm:ccr-construidas}
+En \(\mathcal D_{\mathrm{fin}}\),
+\[
+ [b_i,b_j^\dagger]=\delta_{ij}I,\qquad
+ [b_i,b_j]=[b_i^\dagger,b_j^\dagger]=0.
+\]
+Los operadores de número \(N_j^B=b_j^\dagger b_j\) satisfacen
+\(N_j^B|\boldsymbol m\rangle=m_j|\boldsymbol m\rangle\).
+\end{theorem}
+\begin{proof}
+Para un mismo modo,
+\(b_jb_j^\dagger|\boldsymbol m\rangle=(m_j+1)|\boldsymbol m\rangle\)
+y \(b_j^\dagger b_j|\boldsymbol m\rangle=m_j|\boldsymbol m\rangle\).
+La diferencia es la identidad. Para modos distintos, los factores
+afectan coordenadas de ocupación diferentes, por lo que conmutan.
+Las fórmulas de número siguen de aplicar consecutivamente las dos
+operaciones de \eqref{vi:eq:creacion-bose}.
+\end{proof}
+
+Si hay algún modo par, \(b_j\) y \(b_j^\dagger\) son operadores
+no acotados en la completación de Hilbert: sus normas sobre
+\(|m_j\rangle\) crecen como raíces de \(m_j\). Las igualdades
+anteriores tienen por ello un dominio explícito y no se presentan
+como identidades entre matrices finitas en todo el espacio bosónico.
+Los operadores fermiónicos actúan sobre el segundo factor de
+\eqref{vi:eq:fock-producto}; los bosónicos, sobre el primero. En
+el dominio común, los operadores de esos dos factores conmutan.
+
+\begin{proposition}[Defecto exacto de un corte bosónico duro]
+\label{vi:prop:corte-bosonico}
+En un modo, sea \(P_N\) la proyección sobre
+\(|0\rangle,\ldots,|N\rangle\) y sea \(b^{(N)}=P_NbP_N\).
+Sobre ese espacio finito,
+\[
+ [b^{(N)},(b^{(N)})^\dagger]
+ =I-(N+1)|N\rangle\langle N|.
+\]
+\end{proposition}
+\begin{proof}
+Para \(m<N\), la creación y aniquilación conservan el cálculo
+\((m+1)-m=1\). En \(|N\rangle\), la creación truncada es
+cero y el producto inverso vale \(N\); el conmutador vale
+\(-N=1-(N+1)\). Son todos los vectores de la base.
+\end{proof}
+
+La corrección reside en el último nivel del corte, no en la ley de
+ocupación. Un cálculo finito puede verificar las CCR lejos de esa
+frontera y debe conservar el término de borde cuando incluye el
+nivel terminal. Esta distinción es indispensable para que un
+certificado matricial no confunda un truncamiento con la
+completación bosónica completa.
+
+\subsection{Qué significa «el mismo estado» en el principio de Pauli}
+\label{vi:subsec:pauli-etiquetas-hojas}
+
+La exclusión se refiere al mismo vector de un modo completo. Dos
+canales pueden compartir celda, masa o firma reducida y seguir
+siendo linealmente independientes por su espín, hoja, color,
+sabor u otra coordenada que el transporte conserve. Esos dos
+vectores admiten un producto exterior no nulo. Si un cociente
+físico los identifica, ese cociente debe actuar antes de afirmar
+cuántos modos independientes hay.
+
+\begin{proposition}[Criterio de independencia para una ocupación doble]
+\label{vi:prop:pauli-gram}
+Para dos vectores de un espacio de canales,
+\[
+ \|u\wedge v\|^2
+ =\|u\|^2\|v\|^2-|\langle u,v\rangle|^2.
+\]
+En particular, dos modos ortonormales producen un estado exterior
+de norma uno y dos vectores proporcionales producen cero.
+\end{proposition}
+\begin{proof}
+La realización exterior de grado dos es
+\((u\otimes v-v\otimes u)/\sqrt2\). Expandir su norma da
+la fórmula. La igualdad en Cauchy--Schwarz caracteriza la
+dependencia lineal; la ortonormalidad da norma cuadrada uno.
+\end{proof}
+
+Para un canal orbital \(u\) y dos componentes de espín
+ortogonales \(\xi_+,\xi_-\), los modos
+\(u\otimes\xi_+\) y \(u\otimes\xi_-\) son distintos y su
+producto exterior puede estar ocupado. No existe doble ocupación
+de un mismo modo: existe ocupación de dos componentes distintas
+de la representación. Lo mismo se aplica a dos hojas cuando éstas
+siguen siendo componentes independientes de la realización.
+
+La palabra electrónica central puede ser fija por \(C_M\), mientras
+la representación de carga distingue electrón y positrón. Esa
+coincidencia de palabra no identifica sus modos completos ni
+decide su ocupación. La involución de palabra, la inversión
+celular y el intercambio de factores de Fock conservan los
+dominios diferenciados de la sección~\ref{vi:sec:conjugacion}.
+
+Si \(r\) modos fermiónicos ortonormales poseen el mismo valor
+de un observable parcial, su ocupación total puede tomar valores
+\(0,1,\ldots,r\). Cada \(N_j\) sigue siendo un proyector;
+la suma \(\sum_{j=1}^rN_j\) no tiene por qué serlo. Esta
+consecuencia distingue degeneración espectral y exclusión de
+un modo, dos propiedades que una cifra de masa aislada no separa.
+
+\subsection{Dimensiones finitas y transporte por refinamiento}
+\label{vi:subsec:fock-refinamiento}
+
+\begin{proposition}[Censo de ocupaciones]
+\label{vi:prop:censo-fock}
+Para \(d\) modos,
+\[
+ \dim\bigwedge^n\mathbb C^d=\binom dn,
+ \qquad
+ \dim\operatorname{Sym}^n\mathbb C^d=\binom{d+n-1}{n}
+ \quad(d\ge1).
+\]
+La primera dimensión es cero para \(n>d\). En el espacio
+graduado, las dimensiones de número total \(n\) se obtienen
+sumando los productos de ambas dimensiones para
+\(k=0,\ldots,\min(n,d_1)\).
+\end{proposition}
+\begin{proof}
+Una base exterior se elige mediante subconjuntos de \(n\) modos
+distintos. Una base simétrica se elige mediante
+\((m_1,\ldots,m_d)\in\mathbb N_0^d\) de suma \(n\).
+La colocación de \(d-1\) separadores entre \(n\) ocupaciones
+cuenta esas composiciones débiles y da el segundo binomio.
+La fórmula graduada sigue de \eqref{vi:eq:fock-producto} por
+sumas directas y productos tensoriales.
+\end{proof}
+
+Sean \(T:\mathcal H_K\to\mathcal H_L\) los entrelazadores
+de refinamiento declarados, que conservan la graduación y los
+datos de canal correspondientes. Cada uno induce
+\begin{equation}
+ \Gamma(T)=\bigoplus_{n\ge0}T^{\otimes n}|_{\mathcal F_n},
+ \qquad T^{\otimes0}=I_{\mathbb C}.
+ \label{vi:eq:segunda-cuantizacion-transporte}
+\end{equation}
+
+\begin{theorem}[Compatibilidad de la completación con el transporte]
+\label{vi:thm:fock-naturalidad}
+Si \(T\) conserva el grado, entonces
+\(T^{\otimes n}P_n^p=P_n^{p'}T^{\otimes n}\).
+Si además \(\|T\|\le1\), \(\Gamma(T)\) es un operador
+acotado de norma a lo sumo \(1\) sobre Fock y
+\[
+ \Gamma(T_2T_1)=\Gamma(T_2)\Gamma(T_1),\qquad
+ \Gamma(I)=I.
+\]
+Por consiguiente, los cuadrados compatibles de refinamiento
+de los canales inducen cuadrados compatibles de ocupaciones.
+\end{theorem}
+\begin{proof}
+La conservación del grado hace conmutar \(T^{\otimes n}\)
+con cada intercambio adyacente; por la
+proposición~\ref{vi:prop:permutaciones-graduadas}, conmuta
+con las permutaciones y con su promedio. Las restricciones
+quedan así bien definidas. Su norma está acotada por
+\(\|T\|^n\le1\), de modo que la suma directa es acotada.
+Las identidades y composiciones se verifican en cada grado
+y, por continuidad, en la completación.
+\end{proof}
+
+La contractividad es una condición suficiente que permite tratar
+la suma bosónica sin restricciones adicionales. En grados finitos
+las potencias existen para cualquier aplicación lineal, pero su
+suma no siempre es acotada: para un modo bosónico y \(T=2I\),
+\(\Gamma(T)|n\rangle=2^n|n\rangle\). En el sector exterior
+finito sólo hay \(d_1+1\) grados, de modo que cualquier
+aplicación lineal de ese sector tiene una segunda cuantización
+finita acotada. La diferencia es de dominio, no de causalidad.
+
+\begin{proposition}[Transporte de creaciones y aniquilaciones]
+\label{vi:prop:fock-transporte-adjunto}
+Sea \(T:\mathcal H_K\to\mathcal H_L\) un transporte acotado
+que conserva el grado. Para \(f\in\mathcal H_K\) y
+\(g\in\mathcal H_L\), en el dominio algebraico de partículas
+finitas se cumplen
+\begin{align}
+ \Gamma(T)c_K^\dagger(f)
+ &=c_L^\dagger(Tf)\Gamma(T),
+ \label{vi:eq:fock-transporte-creacion}\\
+ c_L(g)\Gamma(T)
+ &=\Gamma(T)c_K(T^*g).
+ \label{vi:eq:fock-transporte-aniquilacion}
+\end{align}
+Los subíndices indican la fibra sobre la que actúa cada operador.
+Si \(T\) es isométrico, la segunda identidad se especializa a
+\[
+ c_L(Tf)\Gamma(T)=\Gamma(T)c_K(f),
+ \qquad
+ N_{L,Tf}\Gamma(T)=\Gamma(T)N_{K,f},
+\]
+donde \(N_{K,f}=c_K^\dagger(f)c_K(f)\) y, para un modo unitario,
+\(N_{L,Tf}\) es su operador de ocupación transportado.
+\end{proposition}
+\begin{proof}
+En un producto simétrico o exterior, aplicar \(T\) a cada factor
+conmuta con insertar \(f\), que se convierte en \(Tf\). Esto
+demuestra \eqref{vi:eq:fock-transporte-creacion}. La aniquilación
+contrae cada factor con el modo observado. Para cada factor \(v\),
+\[
+ \langle g,Tv\rangle=\langle T^*g,v\rangle.
+\]
+Los signos exteriores, o graduados, se conservan porque \(T\)
+preserva el grado; las normalizaciones simétricas son iguales en
+ambos miembros. La suma de contracciones demuestra
+\eqref{vi:eq:fock-transporte-aniquilacion}. Si \(T^*T=I\), se
+sustituye \(g=Tf\). La composición de las identidades de creación
+y aniquilación da después la de ocupación. Todas las operaciones
+consideradas preservan el dominio de partículas finitas; cuando
+\(\|T\|\le1\), \(\Gamma(T)\) posee además la extensión acotada
+del teorema~\ref{vi:thm:fock-naturalidad}.
+\end{proof}
+
+La identidad general conserva el adjunto \(T^*\) y es válida sin
+isometría. La necesidad de la condición isométrica aparece al
+transportar el mismo modo. Por ejemplo, si \(T=tI\), con
+\(0<t<1\), para un modo unitario \(f\) y el vacío \(\Omega\),
+\[
+ c(tf)\Gamma(T)f=t^2\Omega,
+ \qquad \Gamma(T)c(f)f=\Omega.
+\]
+La fórmula general da correctamente
+\(\Gamma(T)c(T^*tf)f=t^2\Omega\). Se conserva así el
+transporte por contracciones, con su adjunto explícito, y la
+especialización isométrica de la ocupación.
+
+\subsection{Simetría de intercambio y registro de un compuesto}
+\label{vi:subsec:pauli-composicion}
+
+La composición de la sección~\ref{vi:subsec:composicion-registro}
+actúa primero sobre historias y sus fronteras. Fock organiza
+la ocupación de canales; \(\mathfrak C_{12}\) organiza el
+registro de enlace. Son operaciones coordinadas que no se
+sustituyen entre sí. En particular, la antisimetrización no
+suprime la memoria del orden de acoplamiento.
+
+Sea \(\mathcal D\subset\mathcal H^{\otimes n}\) el espacio
+generado por expresiones de constituyentes admisibles para una
+interfaz. La linealización de la composición se escribe
+\(C_{\mathcal T}:\mathcal D\to\mathcal H_{\mathrm{comp}}\).
+Cuando un grupo finito \(G\) de intercambios conserva la
+admisibilidad y la frontera, la compatibilidad concreta es
+\[
+ C_{\mathcal T}U(g)=V(g)C_{\mathcal T},\qquad g\in G,
+\]
+donde \(U,V\) son representaciones unitarias y \(V\) transporta
+los registros compuestos, incluidos sus datos de hoja y memoria.
+La ecuación es la condición de
+intercambio de esa realización; no se infiere del simple
+censo de expresiones.
+
+\begin{proposition}[Descenso de la composición al sector estadístico]
+\label{vi:prop:composicion-estadistica}
+Sea \(\chi:G\to\{+1,-1\}\) el carácter del sector de
+intercambio. Bajo la compatibilidad anterior,
+\[
+ P_\chi^{\mathrm{comp}}C_{\mathcal T}
+ =C_{\mathcal T}P_\chi^{\mathrm{in}},
+\]
+donde
+\[
+ P_\chi^{\mathrm{in}}=\frac1{|G|}\sum_g\chi(g)U(g),
+ \qquad
+ P_\chi^{\mathrm{comp}}=\frac1{|G|}\sum_g\chi(g)V(g).
+\]
+\end{proposition}
+\begin{proof}
+Multiplicar cada igualdad de entrelazamiento por
+\(\chi(g)/|G|\) y sumar da exactamente la identidad.
+Los promedios son proyectores por el mismo cálculo de
+la proposición~\ref{vi:prop:proyectores-fock}.
+\end{proof}
+
+El resultado justifica componer dentro de un sector simétrico
+o alternante cuando la frontera posee el transporte requerido.
+Si una permutación cambia el canal físico de enlace, se
+conservan los árboles distintos y sus interrelaciones; no se
+identifican mediante una simetrización que olvide esa frontera.
+
+\subsubsection{Antisimetría cromática y resto del estado bariónico}
+
+En la realización bariónica, la
+proposición~\ref{vi:prop:singlete-barion} construye el vector
+cromático \(|\varepsilon\rangle\), que cambia de signo
+bajo una transposición. Tras reagrupar los factores del estado
+completo, un vector factorizado tiene la forma
+\[
+ \Psi=|\varepsilon\rangle_{\mathrm{col}}
+ \otimes\Phi_{\mathrm{espín,sabor,orbital,hoja}}.
+\]
+El intercambio de dos constituyentes actúa simultáneamente
+en ambos factores. Si \(U_{\mathrm{rest}}(\pi)\Phi=\Phi\),
+entonces el estado completo cambia de signo y pertenece al
+sector fermiónico. Recíprocamente, para un vector factorizado
+con el singlete cromático no nulo, la alternancia total exige
+que el resto sea simétrico bajo esas mismas permutaciones.
+La prueba consiste en factorizar
+\(U_{\mathrm{tot}}(\pi)=U_{\mathrm{col}}(\pi)\otimes
+U_{\mathrm{rest}}(\pi)\) y cancelar el signo cromático.
+
+La palabra «resto» incluye explícitamente sabor y hoja.
+Intercambiar colores sin transportar esas componentes no es
+la permutación de dos modos completos. Para un estado no
+factorizable se aplica el proyector alternante al espacio
+tensorial completo, sin sustituirlo por una regla escalar.
+
+\subsubsection{Compatibilidad de proyectores físicos}
+
+Los proyectores de color, canal y estadística pueden combinarse
+por producto cuando conmutan. Si \(P,Q\) son proyectores
+ortogonales y \([P,Q]=0\), entonces
+\((PQ)^*=PQ\), \((PQ)^2=PQ\) y
+\(\operatorname{im}(PQ)=\operatorname{im}P\cap\operatorname{im}Q\).
+La inclusión en ambas imágenes es directa; para un vector
+en la intersección, \(PQv=v\). Si no conmutan, su producto
+no representa en general el proyector de las dos condiciones
+simultáneas: la realización debe construir el subespacio
+común o el orden físico de las operaciones.
+
+Esta precisión conserva el sentido de los proyectores
+singlete y de Pauli que intervienen en los compuestos de la
+sección~\ref{vi:sec:familias-compuestos}. El acoplamiento
+selecciona un sector; la masa compuesta se evalúa después
+de construir el registro de enlace de ese sector.
+
+\subsection{Acción del operador material y alcance de la identificación física}
+\label{vi:subsec:fock-alcance}
+
+Sea \(B=B^*\) un operador de un canal ya obtenido de la
+dinámica interna y que conserva la graduación. En grado \(n\)
+actúa mediante
+\[
+ d\Gamma_n(B)=\sum_{j=1}^n
+ I^{\otimes(j-1)}\otimes B\otimes I^{\otimes(n-j)}.
+\]
+La suma conmuta con las permutaciones graduadas y se restringe
+a \(\mathcal F_n\). Si \(B\ge0\), cada restricción es positiva.
+En una base propia, su valor es la suma de las ocupaciones
+por los valores propios de \(B\), con las ocupaciones
+permitidas por las pruebas anteriores. Esta es la acción
+de un observable aditivo sobre canales independientes;
+no identifica el operador de un compuesto ligado con la
+suma de las masas aisladas de sus constituyentes.
+
+En la suma de Hilbert bosónica, \(d\Gamma(B)\) posee el
+dominio natural
+\[
+ \left\{\psi=(\psi_n):
+ \sum_n\|d\Gamma_n(B)\psi_n\|^2<\infty\right\}.
+\]
+Cada bloque es autoadjunto en dimensión finita, y su suma
+directa con ese dominio es autoadjunta. El operador de enlace
+o de canales abiertos se añade sólo cuando ha sido construido
+por la dinámica correspondiente. La formación de un polo
+complejo sigue el tratamiento de
+\ref{vi:subsec:resonancias-familias}.
+
+Se han obtenido, por tanto, resultados algebraicos completos:
+proyectores de simetría, bases normalizadas, CAR y CCR en
+sus dominios, exclusión de un modo, censos de ocupación y
+compatibilidad con entrelazadores de refinamiento. El punto
+de partida de esos resultados está declarado en
+\eqref{vi:eq:espacio-canales-fock},
+\eqref{vi:eq:caracter-paridad-fock} y
+\eqref{vi:eq:intercambio-graduado}.
+
+Cuando la realización de rotaciones satisface
+\(U(2\pi)=(-1)^p\), la misma graduación coordina la
+restauración de orientación a \(4\pi\) y la completación
+exterior. Esa compatibilidad no se sustituye por una
+coincidencia entre dos signos. La identificación con el
+teorema relativista de espín--estadística requiere además
+la representación lorentziana, la localidad y la positividad
+de la realización física. Los sectores de trenzado que no
+descienden a permutaciones permanecen en el codominio de
+la sección~\ref{vi:sec:topologia}, no se fuerzan dentro
+de esta completación bosónica o fermiónica.

@@ -1,0 +1,198 @@
+% RESULTADO_RECUPERADO. Fuentes conservadas en la entrega:
+% antecedentes/controles_articulo_I/FIRMAS_EMISION.json:
+% plus_classes, times_classes, seed_id_formula y coordinate_convention.
+% antecedentes/controles_articulo_I/procedencia_excepcional.md:
+% sección «Comprobación finita ejecutada», matriz A y seis generadores.
+% Se explicitan las enumeraciones ya utilizadas; no se cambia su dominio.
+\section{Énumérations finies de l’émission et des étoiles de Witt}
+\label{iv:apendice-enumeraciones}
+
+Les deux énumérations de cet appendice correspondent à des objets distincts.
+La première classe les signatures des curseurs de l’émission APP ;
+la seconde calcule le groupe engendré par les étoiles du plan de Witt.
+Leurs domaines et leurs règles sont conservés, de sorte que chaque tableau puisse
+être reproduit sans être utilisé comme entrée du calcul.
+
+\subsection{Indices des conditions initiales et récurrence des signatures}
+\label{iv:apendice-firmas}
+
+Soient \(i,j\in\{0,\ldots,8\}\) et \(a\in\{0,1,2,3\}\), avec l’ordre
+des directions \((N,E,S,O)\) et les vecteurs
+\[
+ v_N=(-1,0),\quad v_E=(0,1),\quad
+ v_S=(1,0),\quad v_O=(0,-1).
+\]
+L’indice
+\[
+ \operatorname{id}(i,j,a)=4(9i+j)+a
+\]
+parcourt exactement \(\{0,\ldots,323\}\). Son inverse s’obtient
+au moyen de \(a=\operatorname{id}\bmod4\),
+\(j=\lfloor\operatorname{id}/4\rfloor\bmod9\) et
+\(i=\lfloor\operatorname{id}/36\rfloor\).
+Deux indices, un par feuillet, énumèrent les \(324^2\) conditions conjointes
+de \eqref{eq:semillas} ; ce domaine n’est pas identifié aux 81 positions.
+
+Pour chaque indice, le curseur est initialisé en \((i,j)\), avec le vecteur \(v_a\).
+On parcourt les instants \(t=1,\ldots,54\), répartis en six fenêtres
+de neuf instants. Écrivons \(r_t=1+((t-1)\bmod9)\). La règle est :
+\begin{enumerate}
+\item Dans le feuillet additif, on agit lorsque \(r_t\in\{1,4,7\}\) :
+on ajoute \(\rho_9(i+j+2)\) à l’accumulateur de la fenêtre et on
+déplace le curseur de \(v_a\), modulo neuf.
+\item Dans le feuillet multiplicatif, on agit lorsque \(r_t\in\{2,5,8\}\) :
+on ajoute \(\ell_9(\rho_9((i+1)(j+1)))\) et on déplace le curseur
+de \(v_a\), modulo neuf. On conserve l’extension par zéro de
+\(\ell_9\) hors des unités, déclarée dans la section~\ref{sec:extension}.
+\item Aux autres instants, ce curseur ne se déplace pas. Après
+les instants \(27\) et \(54\), on remplace \(v_a\) par \(-v_a\).
+\item À la fermeture de chaque fenêtre, on enregistre son accumulateur modulo dix
+et on réinitialise uniquement l’accumulateur ; ni la position ni l’orientation.
+\end{enumerate}
+Cela définit deux fonctions sur les 324 indices,
+\[
+ s:\{0,\ldots,323\}\longrightarrow\{0,\ldots,9\}^6,\qquad
+ e:\{0,\ldots,323\}\longrightarrow\{0,\ldots,9\}^6.
+\]
+La multiplicité d’une signature est le nombre d’indices ayant cette image.
+L’indice témoin des tableaux est le plus petit de sa fibre.
+Les préimages complètes sont récupérées en appliquant la récurrence aux
+324 indices et en conservant ceux qui produisent la signature indiquée.
+
+\begin{longtable}{rcrr}
+\caption{Signatures additives : image de \(s\), multiplicité et indice témoin.}
+\label{iv:tabla-firmas-aditivas}\\
+\toprule
+Classe & Signature & Multiplicité & Indice témoin\\
+\midrule
+\endfirsthead
+\toprule
+Classe & Signature & Multiplicité & Indice témoin\\
+\midrule
+\endhead
+1&122564&18&17\\
+2&122898&18&24\\
+3&212645&18&5\\
+4&212988&18&0\\
+5&221456&18&29\\
+6&221889&18&12\\
+7&456221&18&28\\
+8&465898&18&21\\
+9&546988&18&9\\
+10&564122&18&16\\
+11&645212&18&4\\
+12&654889&18&33\\
+13&889221&18&13\\
+14&889654&18&32\\
+15&898122&18&25\\
+16&898465&18&20\\
+17&988212&18&1\\
+18&988546&18&8\\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}{rcrr}
+\caption{Signatures multiplicatives : image de \(e\), multiplicité et indice témoin.}
+\label{iv:tabla-firmas-multiplicativas}\\
+\toprule
+Classe & Signature & Multiplicité & Indice témoin\\
+\midrule
+\endfirsthead
+\toprule
+Classe & Signature & Multiplicité & Indice témoin\\
+\midrule
+\endhead
+1&000000&108&8\\
+2&177393&8&1\\
+3&177555&8&54\\
+4&177771&8&11\\
+5&339555&8&6\\
+6&339771&8&15\\
+7&339933&8&59\\
+8&393177&8&0\\
+9&393393&8&45\\
+10&393555&8&40\\
+11&555177&8&52\\
+12&555339&8&4\\
+13&555393&8&41\\
+14&555555&24&84\\
+15&555717&8&14\\
+16&555771&8&18\\
+17&555933&8&24\\
+18&717555&8&12\\
+19&717717&8&21\\
+20&717933&8&19\\
+21&771177&8&9\\
+22&771339&8&13\\
+23&771555&8&16\\
+24&933339&8&57\\
+25&933555&8&26\\
+26&933717&8&17\\
+\bottomrule
+\end{longtable}
+
+Les sommes des multiplicités sont \(18\cdot18=324\) et
+\(24\cdot8+24+108=324\). Pour obtenir l’émission conjointe, on applique
+\eqref{eq:acoplamiento} à chaque paire de signatures. L’inverse par centaines
+et dizaines démontré dans la section~\ref{sec:extension} identifie les 468
+émissions et donne leurs multiplicités par produit des deux fibres.
+L’application ultérieure \eqref{eq:psi-catalogo} produit les 243
+mots visibles. Ainsi sont spécifiés séparément le domaine initial,
+l’émission, ses fibres et le quotient ternaire.
+
+\subsection{Générateurs explicites et clôture des étoiles}
+\label{iv:apendice-estrellas}
+
+On conserve la matrice \(A_W\) de \eqref{exc:aw} et on forme,
+dans l’ordre lexicographique, les mots
+\[
+ c(w)=(w,wA_W),\qquad w\in\mathbb F_3^6.
+\]
+On les regroupe par poids et on retient les supports de poids six.
+Cela produit l’énumérateur \eqref{exc:enumerador} et les 132 hexades
+de \(\mathcal H\). Pour chaque quadruplet \(B\subset\{1,\ldots,12\}\),
+les quatre paires \(H\setminus B\), avec \(B\subset H\in\mathcal H\),
+définissent \(\sigma_B\) : elle fixe \(B\) et échange les deux points
+de chaque paire. On obtient ainsi la collection des 495 étoiles de
+la proposition~\ref{exc:m12}.
+
+Les six générateurs utilisés dans leur clôture sont exprimés par leurs listes
+d’images de \(1,\ldots,12\) :
+\[
+\begin{array}{c|rrrrrrrrrrrr}
+ &1&2&3&4&5&6&7&8&9&10&11&12\\ \hline
+g_1&1&2&3&4&12&11&9&10&7&8&6&5\\
+g_2&1&2&3&12&5&10&11&9&8&6&7&4\\
+g_3&1&2&3&11&10&6&8&7&12&5&4&9\\
+g_4&1&2&12&4&5&9&8&7&6&11&10&3\\
+g_5&1&12&3&4&5&8&10&6&11&7&9&2\\
+g_6&12&2&3&4&5&7&6&11&10&9&8&1
+\end{array}
+\]
+On vérifie que chaque ligne est une étoile en la comparant aux
+\(\sigma_B\) déjà construites. Pour \(j=1,\ldots,6\), la clôture
+est calculée au moyen de
+\[
+ G_j^{(0)}=\{\operatorname{id}\},\qquad
+ G_j^{(n+1)}
+ =G_j^{(n)}\cup
+   \{g_i\circ p:1\leq i\leq j,\ p\in G_j^{(n)}\}.
+\]
+La suite croissante se stabilise dans l’ensemble fini
+\(\operatorname{Sym}(12)\). Comme les générateurs sont des involutions,
+sa valeur stable est exactement le groupe \(G_j\) qu’ils engendrent.
+Avec la convention \((g_i\circ p)(a)=g_i(p(a))\), leurs ordres sont
+\[
+\begin{array}{c|rrrrrr}
+ j&1&2&3&4&5&6\\ \hline
+ |G_j|&2&6&18&360&7920&95040 .
+\end{array}
+\]
+Enfin, on vérifie que chacune des 495 étoiles appartient
+à \(G_6\) et qu’elles préservent toutes \(\mathcal H\). La première inclusion,
+avec l’appartenance des six générateurs à la collection,
+établit l’égalité des deux groupes engendrés. La préservation se vérifie
+au moyen de \(\{\sigma_B(H):H\in\mathcal H\}=\mathcal H\).
+C’est l’énumération finie utilisée dans la preuve de
+\ref{exc:m12} ; la reconnaissance ultérieure comme \(M_{12}\)
+conserve la référence externe qui y est déclarée.

@@ -1,0 +1,261 @@
+# Árbol maestro de consulta — revisión 02
+
+Este índice enlaza todas las fichas de REV01 y sus primeras ampliaciones. No es un árbol cerrado ni una certificación de exhaustividad. Las ramas aún no subdivididas conservan íntegros sus textos y sus pendientes.
+
+El perímetro es el corpus global: integral de 2.249 páginas, síntesis, cadena compacta, reservorio, serie, narración y desarrollos posteriores. Las dos canteras antiguas tienen una función auxiliar y no determinan qué puede incorporarse.
+
+Lectura reunida: [inventario acumulativo REV02](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/INVENTARIO_ACUMULATIVO_REV02.md>).
+
+## Todas las fichas de partida y sus descendientes APP
+
+- [APP-001 — Alfabeto posicional y recta de referencia](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:7>)
+  - APP-001.01 — Marcas interiores
+  - APP-001.02 — Extremos de referencia
+  - APP-001.03 — Intervalos consecutivos
+  - APP-001.04 — Orden y orientación
+- [APP-002 — Producto de dos ejes](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:17>)
+  - APP-002.01 — Eje de filas
+  - APP-002.02 — Eje de columnas
+  - APP-002.03 — Producto de posiciones
+  - APP-002.04 — Soporte anterior a la evaluación
+- [APP-003 — Identificación cíclica](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:27>)
+  - APP-003.01 — Proyección de cada eje
+  - APP-003.02 — Carta positiva
+  - APP-003.03 — Identificación de fronteras
+  - APP-003.04 — Posición y desplazamiento
+- [APP-004 — Residuo positivo y raíz digital](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:36>)
+  - APP-004.01 — Resto euclídeo de n−1
+  - APP-004.02 — Representante residual positivo
+  - APP-004.03 — Múltiplos de nueve
+  - APP-004.04 — Congruencia con suma de cifras
+  - APP-004.05 — Iteración de la raíz digital
+  - APP-004.06 — Tratamiento de cero
+- [APP-005 — Cociente exacto de la lectura nonádica](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:45>)
+  - APP-005.01 — Cálculo del cociente
+  - APP-005.02 — Integridad del cociente
+  - APP-005.03 — Reconstrucción exacta
+    - APP-005.03.01 — División inicial
+    - APP-005.03.02 — Cambio de representante
+    - APP-005.03.03 — Identificación de coordenadas
+    - APP-005.03.04 — Restitución del entero
+  - APP-005.04 — Unicidad de la pareja
+  - APP-005.05 — Pérdida al olvidar el cociente
+- [APP-006 — Hoja aditiva anterior al cociente](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:54>)
+  - APP-006.01 — Evaluación individual de suma
+  - APP-006.02 — Tabla íntegra de sumas
+  - APP-006.03 — Multiplicidad de cada suma
+  - APP-006.04 — Proyección posterior de la suma
+- [APP-007 — Hoja multiplicativa anterior al cociente](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:63>)
+  - APP-007.01 — Acumulación repetida
+  - APP-007.02 — Evaluación individual de producto
+  - APP-007.03 — Tabla íntegra de productos
+  - APP-007.04 — Proyección posterior del producto
+  - APP-007.05 — Multiplicidades de lectura
+- [APP-008 — Evaluación levantada de las dos hojas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:71>)
+  - APP-008.01 — Pareja de la hoja aditiva
+  - APP-008.02 — Pareja de la hoja multiplicativa
+  - APP-008.03 — Evaluación levantada conjunta
+  - APP-008.04 — Recuperación de las dos evaluaciones
+  - APP-008.05 — Ejemplo central (5,5)
+  - APP-008.06 — Ejemplo comparativo (8,2)
+  - APP-008.07 — Dato que separa ambas celdas
+- [APP-009 — Intercambio de ejes](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:80>)
+  - APP-009.01 — Transposición del soporte
+  - APP-009.02 — Celdas fijas y pares
+  - APP-009.03 — Invariancia de las evaluaciones
+  - APP-009.04 — Acción sobre direcciones
+- [APP-010 — Cuatro traslaciones cardinales](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:88>)
+  - APP-010.01 — Paso norte
+  - APP-010.02 — Paso este
+  - APP-010.03 — Paso sur
+  - APP-010.04 — Paso oeste
+  - APP-010.05 — Composición inversa
+  - APP-010.06 — Transporte y lectura
+- [APP-011 — Grafo de Cayley y soporte toroidal](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:96>)
+  - APP-011.01 — Grupo aditivo subyacente
+  - APP-011.02 — Adyacencia orientada
+  - APP-011.03 — Realización toroidal
+  - APP-011.04 — Grafo y superficie
+- [APP-012 — Palabra de transporte y censo de rutas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:104>)
+  - APP-012.01 — Alfabeto de direcciones
+  - APP-012.02 — Inicialización de ruta
+  - APP-012.03 — Actualización prefijal
+  - APP-012.04 — Censo de palabras con origen
+  - APP-012.05 — Rutas y extremos
+  - APP-012.06 — Restricción TPK posterior
+- [APP-013 — Enrollamiento de una ruta cerrada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:112>)
+  - APP-013.01 — Desplazamiento levantado
+  - APP-013.02 — Condición de cierre residual
+  - APP-013.03 — Índice de enrollamiento
+  - APP-013.04 — Inversión de la ruta
+  - APP-013.05 — Vuelta y retroceso
+- [APP-014 — Cociclo de acarreo del transporte](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:120>)
+  - APP-014.01 — Sección positiva
+  - APP-014.02 — Cociente de composición
+  - APP-014.03 — Primera asociación
+  - APP-014.04 — Segunda asociación
+  - APP-014.05 — Identidad de cociclo
+  - APP-014.06 — Lectura composicional
+- [APP-015 — Cambio de sección y normalización del cociclo](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:129>)
+  - APP-015.01 — Valor en la identidad
+  - APP-015.02 — Sección normalizada
+  - APP-015.03 — Corrección del cociclo
+  - APP-015.04 — Casos de clase nula
+  - APP-015.05 — Datos conservados por el cambio de carta
+- [APP-016 — Totales de las tablas antes y después del cociente](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:137>)
+  - APP-016.01 — Total de suma bruta
+  - APP-016.02 — Total de producto bruto
+  - APP-016.03 — Total de suma residual
+  - APP-016.04 — Total de producto residual
+  - APP-016.05 — Total del cociente aditivo
+  - APP-016.06 — Total del cociente multiplicativo
+  - APP-016.07 — Concordancia de tabla y fórmula
+- [APP-017 — Descomposición exacta de la diferencia suma–producto](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:144>)
+  - APP-017.01 — Identidad por celda
+  - APP-017.02 — Suma de diferencias
+  - APP-017.03 — Defecto visible
+  - APP-017.04 — Defecto de cociente
+  - APP-017.05 — Reconstrucción del balance
+- [APP-018 — Unidades y sector no invertible](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:151>)
+  - APP-018.01 — Prueba de invertibilidad
+  - APP-018.02 — Filas aditivas
+  - APP-018.03 — Filas multiplicativas invertibles
+  - APP-018.04 — Fila tres
+  - APP-018.05 — Fila seis
+  - APP-018.06 — Fila nueve
+- [APP-019 — Nilpotencia y dos lecturas de 3/6/9](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:159>)
+  - APP-019.01 — Ideal de múltiplos de tres
+  - APP-019.02 — Nilpotencia
+  - APP-019.03 — Núcleo de multiplicación por tres
+  - APP-019.04 — Imagen de multiplicación por tres
+  - APP-019.05 — Mapa inducido
+  - APP-019.06 — Distinción de productos
+  - APP-019.07 — Reducción directa de 3/6/9
+  - APP-019.08 — Coordenada interna de 3/6/9
+- [APP-020 — Realización operatoria de la hoja aditiva](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:167>)
+  - APP-020.01 — Base de realización
+  - APP-020.02 — Vector asociado a celda
+  - APP-020.03 — Proyector de rango uno
+  - APP-020.04 — Resolución por fila
+  - APP-020.05 — Resolución por columna
+  - APP-020.06 — Reconocimiento posterior
+- [APP-021 — Multiplicidad operatoria de la hoja multiplicativa](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:175>)
+  - APP-021.01 — Vectores multiplicativos
+  - APP-021.02 — Operador de la fila tres
+  - APP-021.03 — Rango y multiplicidad
+  - APP-021.04 — Contraste con la identidad
+  - APP-021.05 — Fila nueve como caso extremo
+- [TRIT-001 — Firma balanceada y acarreo ternario](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:183>)
+- [TRIT-002 — Tres realizaciones cuadráticas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:190>)
+- [TRIT-003 — Exponenciación y conservación cuadrática](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:197>)
+- [TRIT-004 — Direcciones hiperbólicas y lectura temporal](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:204>)
+- [TPK-001 — Selector trítico de fase operativa](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:211>)
+- [TPK-002 — Campos del estado enriquecido](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:218>)
+- [TPK-003 — Composición de selección, transporte y actualización](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:224>)
+- [APP-022 — Carta base 1000: localizador distinto de la tabla residual](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/01_APP_TRIT_TPK_PASOS_ELEMENTALES.md:231>)
+  - APP-022.01 — División en base mil
+  - APP-022.02 — Primera tabla sin cambio por módulo mil
+  - APP-022.03 — Compatibilidad aritmética con módulo nueve
+  - APP-022.04 — Ejemplo de acarreo entre bloques
+  - APP-022.05 — Ruta 3/6/9 y lector efectivo
+- [SR-001 — Condición inicial de un cursor](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:58>)
+- [SR-002 — Pareja independiente de cursores y censo de semillas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:68>)
+- [SR-003 — Identificador reversible de semilla](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:78>)
+- [SR-004 — Cronología observable de cincuenta y cuatro transiciones](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:88>)
+- [SR-005 — Lectura multiplicativa en las unidades y sector radical](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:98>)
+- [SR-006 — Totales de una ventana y conteo trítico](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:108>)
+- [SR-007 — Emisor decimal de tres posiciones](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:118>)
+- [SR-008 — Factorización inyectiva en dos firmas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:128>)
+- [SR-009 — Imágenes de firmas y sus multiplicidades](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:138>)
+- [SR-010 — Las 468 emisiones y el balance de preimágenes](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:180>)
+- [SR-011 — Publicación ternaria orientada y perfil de fibras](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:190>)
+- [SR-012 — Cociente finito compatible con el transporte entero](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:200>)
+- [SR-013 — Acción diedral y equivariancia de Ψ](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:212>)
+- [SR-014 — Cuarenta y tres órbitas y clasificación completa de la imagen](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:222>)
+- [SR-015 — Invariantes de fibra y metadatos de origen](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:232>)
+- [SR-016 — Selección única de la órbita de clausura](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:242>)
+- [SR-017 — Sector de órbitas mínimas radicales](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:252>)
+- [SR-018 — Órbita de propagación](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:262>)
+- [SR-019 — Órbita de autoescala](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:272>)
+- [SR-020 — Calibre interno y tres representantes orientados](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:282>)
+- [SR-021 — Región transversal de clausura](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:292>)
+- [SR-022 — Primera región de orientación positiva](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:302>)
+- [SR-023 — Segunda región de orientación positiva](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:312>)
+- [SR-024 — Tercera región de orientación positiva](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:322>)
+- [SR-025 — Región de retorno orientado](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:332>)
+- [SR-026 — Microfibra conjunta y morfología bipartita](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:342>)
+- [SR-027 — Emisiones orientadas de propagación y autoescala](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:352>)
+- [SR-028 — Estado transportado y registros de transiciones](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:364>)
+- [SR-029 — Reconstrucción única de los dos lifts](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:385>)
+- [SR-030 — Calendario único de cuatro elevaciones](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:406>)
+- [SR-031 — Biografías de treinta trits y prefijos conservados](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:416>)
+- [SR-032 — Incidencia en la primera frontera conjunta](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:435>)
+- [SR-033 — Saturación, ocupación y neutralidad dual](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:452>)
+- [SR-034 — Dos soluciones especulares y orientación seleccionada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:462>)
+- [SR-035 — Objeto R36 y separación de homónimos](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:473>)
+- [SR-036 — Lift entero residuo–cociente e inversa exacta](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:483>)
+- [SR-037 — Igualdad visible sin retorno del estado](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:493>)
+- [SR-038 — Criterios de refutación del tramo](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:505>)
+- [SR-039 — Separación entre selección regional y reconocimiento analítico](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:515>)
+- [SR-040 — Interfaz hacia incidencia excepcional, no agrupación por cardinales](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/02_SEMILLAS_REGIONES_R36.md:525>)
+- [CG-001 — División nonádica con representante positivo y cociente conservado](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:24>)
+- [CG-002 — División balanceada, transporte de operaciones y cero con segundo registro](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:45>)
+- [CG-003 — Tres regímenes cuadráticos del TRIT y cambio de tipo temporal](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:66>)
+- [CG-004 — Emisor finito, doble cursor y catálogo \(104976\to468\to243\subset729\)](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:85>)
+- [CG-005 — Levantamientos ternarios reconstruidos y biografías finitas hasta \(w_{30}\)](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:107>)
+- [CG-006 — Selector de frontera \(R_{36}\) recuperado sin objetivo arquimediano](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:127>)
+- [CG-007 — Frontera coinductiva, apertura \(G_9\) y supervivencia compatible](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:152>)
+- [CG-008 — Prolongación forward, residuo interno inicial y publicación posterior](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:176>)
+- [CG-009 — Holonomía nonádica, memoria ilimitada y cociente dodecafásico](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:206>)
+- [CG-010 — Cambio de base, residuos de cilindros y vacancias de publicación](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:227>)
+- [CG-011 — Eje de autoescala, fases de agregación y espejo: tres tipos distintos](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:254>)
+- [CG-012 — Cayley aditivo, toro discreto, curvatura mixta y realización Lorentz local](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:268>)
+- [CG-013 — Incidencia cúbica, cociente \(1+3\) y forma de Minkowski](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:295>)
+- [CG-014 — Hilbert nonádico, extensión de Heisenberg y dos límites operatoriales](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:316>)
+- [CG-015 — Toro \(27\times27\), dirección conservada y suma exacta de recorridos](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:336>)
+- [CG-016 — Compresión isométrica, archivo del complemento y término terminal](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/03_COINDUCCION_GEOMETRIAS.md:357>)
+- [KA-001 — Genealogía única y doble lectura](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:29>)
+- [KA-002 — Censo, prolongación nonádica y memoria](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:39>)
+- [KA-003 — Elevaciones L_0 y L_1 y frontera R_36](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:49>)
+- [KA-004 — Reloj de conversión y primera pausa](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:59>)
+- [KA-005 — Descriptor inicial por retorno y fase–carga](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:69>)
+- [KA-006 — Repertorio terminal de ocho bloques: interfaz localizada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:80>)
+- [KA-007 — Panel regional y calendario de firmas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:90>)
+- [KA-008 — Censo de candidatos y selector heterotípico terminal](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:100>)
+- [KA-009 — Reconstrucción integral de Hadamard](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:111>)
+- [KA-010 — Lectores transversales y modo uniforme](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:121>)
+- [KA-011 — Registro K y lectura racional κ_per](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:130>)
+- [KA-012 — K como marco de identificación operatoria](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:140>)
+- [KA-013 — Clausura entera de alfa y extremos del acarreo](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:149>)
+- [KA-014 — Precoordenada común y compatibilidad a toda profundidad](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:159>)
+- [KA-015 — Jet de grado nueve y estatuto de la prolongación](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:169>)
+- [KA-016 — Recurrencia analítica explícita de todos los grados](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:179>)
+- [KA-017 — Convergencia, raíz única y publicación certificada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:190>)
+- [KA-018 — Composición Lean desde el registro seleccionado a alfa](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:199>)
+- [KA-019 — Código de Paley–Witt y soporte ternario](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:209>)
+- [KA-020 — Bandera K–alfa y origen marcado](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:219>)
+- [KA-021 — Recuperación por incidencia ponderada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:229>)
+- [KA-022 — Estrellas de Witt y elevación hexada–octada](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:239>)
+- [KA-023 — Pegado ternario y retículo de rango 24](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:249>)
+- [KA-024 — Vecino marcado sin raíces](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:259>)
+- [KA-025 — Una misma selección: publicación aritmética y retículo](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:269>)
+- [KA-026 — De Leech a Moonshine y Monster](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:279>)
+- [KA-027 — Dirección marcada y pantallas dimensionales](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:290>)
+- [KA-028 — Coordinación con dualidad y realización física](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/04_K_ALPHA_INCIDENCIA.md:300>)
+
+## Ampliaciones y concordancias
+
+- [10_CRITERIO_DE_DESCOMPOSICION.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/10_CRITERIO_DE_DESCOMPOSICION.md>)
+- [15_ALCANCE_GLOBAL_Y_CONTINUIDAD.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/15_ALCANCE_GLOBAL_Y_CONTINUIDAD.md>)
+- [11_APP_ARBOL_ELEMENTAL.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/11_APP_ARBOL_ELEMENTAL.md>)
+- [12_LECTURA_RAPIDA_Y_GENERACION.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/12_LECTURA_RAPIDA_Y_GENERACION.md>)
+- [13_ESTRUCTURA_DISCRETA_ARBOL.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/13_ESTRUCTURA_DISCRETA_ARBOL.md>)
+- [14_NUCLEO_COMUN_Y_CARTOGRAFIAS_PREVIAS.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/14_NUCLEO_COMUN_Y_CARTOGRAFIAS_PREVIAS.md>)
+- [17_CONCORDANCIA_REGISTRO_K_SERIE_Y_DELTAS.md](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/17_CONCORDANCIA_REGISTRO_K_SERIE_Y_DELTAS.md>)
+
+Las extracciones de fuentes de generación y de continuo contienen sus propios IDs y localizadores, además de los vínculos a SR/CG/KA. No se suman mecánicamente a los IDs APP como si fueran resultados disjuntos. La futura concordancia será muchos-a-muchos cuando una operación tenga varios propietarios.
+
+## Pendientes preservados
+
+[P01–P10 íntegros](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/05_PENDIENTES_DE_INTEGRACION.md>) y [actualización de alcance y tareas](</Users/ruben/Documents/New project/output/INVENTARIO_GENEALOGICO_HMT_20260919/REV02_ARBOL/15_ALCANCE_GLOBAL_Y_CONTINUIDAD.md>).
+

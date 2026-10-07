@@ -1,0 +1,345 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable,enumitem}
+\usepackage{xcolor,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black,citecolor=blue!55!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\definecolor{HMTblue}{RGB}{18,70,140}
+\definecolor{HMTred}{RGB}{150,35,35}
+\definecolor{HMTgreen}{RGB}{20,115,75}
+\definecolor{HMTgold}{RGB}{150,105,15}
+\definecolor{HMTsoft}{RGB}{245,248,255}
+\newcommand{\blue}[1]{\textcolor{HMTblue}{#1}}
+\newcommand{\red}[1]{\textcolor{HMTred}{#1}}
+\newcommand{\green}[1]{\textcolor{HMTgreen}{#1}}
+\newcommand{\gold}[1]{\textcolor{HMTgold}{#1}}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Pone}{\mathbb P^1}
+\newcommand{\APP}{\operatorname{APP}}
+\newcommand{\HMT}{\mathrm{HMT}}
+\newcommand{\AW}{A_W}
+\newcommand{\CW}{C_W}
+\newcommand{\Wdoce}{W_{12}}
+\newcommand{\Vonce}{V_{11}}
+\newcommand{\one}{\mathbf 1}
+\newtheorem{definicion}{Definición}
+\newtheorem{lema}{Lema}
+\newtheorem{proposicion}{Proposición}
+\newtheorem{teorema}{Teorema}
+\newtheorem{observacion}{Observación}
+\newtheorem{conjetura}{Conjetura}
+\title{\bfseries \textcolor{HMTblue}{Puerta Hensel--Paley--Witt}\
+\large Derivación de la polaridad \(A_W\), cierre Golay--Witt y puente de once modos}
+\author{Ventana técnica HMT}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Se cierra la puerta conceptual pendiente del macroobjeto HMT. La dualidad \(A_W\) no debe presentarse como una matriz insertada a mano, sino como la polaridad Paley--Witt inducida por la frontera reversible de la célula Hensel. La cadena es
+\[
+\blue{\APP+U_6+\text{Hensel}\longrightarrow U_9\longrightarrow \Pone(\F_5)\longrightarrow \chi_5\longrightarrow A_W\longrightarrow W_{12}.}
+\]
+Se demuestra la ortogonalidad por sumas de caracteres cuadráticos en \(\F_5\), se verifica el enumerador de Golay ternario y se explica cómo esta misma estructura prepara el módulo de once modos
+\(\mathbb R^{12}=\mathbb R\one\oplus V_{11}\), con \(V_{11}\cong3\oplus3'\oplus5\) en la lectura icosaédrica.
+\end{abstract}
+\tableofcontents
+
+\section{Dictamen}
+La formulación correcta ya no es:
+\[
+\text{``falta derivar }A_W\text{ desde APP/cubo/carry''.}
+\]
+La formulación correcta es:
+\[
+\boxed{\blue{\text{hay que auditar la cadena }U_9\to \Pone(\F_5)\to\chi_5\to A_W.}}
+\]
+Hecha esa auditoría, \(A_W\) deja de ser un ansatz libre. Se obtiene como polaridad Paley de una línea proyectiva de seis puntos.
+
+\section{De APP/Hensel a la frontera reversible \(U_9\)}
+El núcleo Hensel es
+\[
+\beta:\F_3^2\to\Z/9\Z,
+\qquad
+\beta(a,b)=a+3b\pmod9.
+\]
+Así:
+\[
+U_6=\F_3^6\xrightarrow{\beta^3}(\Z/9\Z)^3.
+\]
+APP es una carta de dos coordenadas de esta célula cúbico--Hensel. La parte reversible de una coordenada \(\Z/9\Z\) no son los nueve estados, sino sus unidades:
+\[
+\boxed{\green{U_9=(\Z/9\Z)^\times=\{1,2,4,5,7,8\}.}}
+\]
+Los estados \(0,3,6\) son singulares respecto del producto. Por tanto, si buscamos una frontera orientada e invertible de la célula APP/Hensel, la candidata natural es \(U_9\), no todo \(\Z/9\Z\).
+
+\begin{observacion}
+Esta es la primera reducción no arbitraria: APP separa unidades y no-unidades. La frontera reversible de Hensel tiene seis puntos.
+\end{observacion}
+
+\section{De \(U_9\) a \(\Pone(\F_5)\)}
+El grupo de unidades \(U_9\) es cíclico de orden seis. Un generador es \(2\):
+\[
+1,\;2,\;4,\;8,\;7,\;5,\;1.
+\]
+Una geometría proyectiva natural con seis puntos es
+\[
+\Pone(\F_5)=\{\infty,0,1,2,3,4\}.
+\]
+La identificación HMT preserva el ciclo de unidades mediante el orden
+\[
+\boxed{\gold{(\infty,0,1,4,2,3).}}
+\]
+Concretamente:
+\[
+1\mapsto\infty,
+\quad
+2\mapsto0,
+\quad
+4\mapsto1,
+\quad
+8\mapsto4,
+\quad
+7\mapsto2,
+\quad
+5\mapsto3.
+\]
+Este orden es el ciclo de la transformación de Möbius
+\[
+T(x)=\frac{1}{3x+1}\quad \text{en }\F_5,
+\]
+con
+\[
+\infty\mapsto0\mapsto1\mapsto4\mapsto2\mapsto3\mapsto\infty.
+\]
+
+\begin{proposicion}[Projectivización de la frontera reversible]
+La frontera reversible \(U_9\) de la célula Hensel admite una projectivización natural como \(\Pone(\F_5)\) al preservar su ciclo de unidades.
+\end{proposicion}
+
+\begin{observacion}
+Aquí nace el componente pentádico: seis unidades Hensel se leen como \(1+5\), un punto infinito más cinco puntos finitos. El 5 no entra por gusto; entra como parte finita de la frontera proyectiva.
+\end{observacion}
+
+\section{El carácter cuadrático \(\chi_5\)}
+El carácter cuadrático de \(\F_5\) es
+\[
+\chi_5(0)=0,
+\qquad
+\chi_5(1)=\chi_5(4)=+1,
+\qquad
+\chi_5(2)=\chi_5(3)=-1.
+\]
+Esta es la polaridad mínima disponible en la línea proyectiva: distingue residuos y no-residuos cuadráticos.
+
+\section{Construcción de la matriz Paley--Witt}
+Indexamos por
+\[
+(\infty,0,1,4,2,3).
+\]
+Definimos la matriz signada \(C\) por:
+\[
+C_{xx}=0,
+\]
+\[
+C_{\infty,y}=C_{y,\infty}=1,
+\]
+\[
+C_{x,y}=\chi_5(x-y)\quad(x,y\in\F_5,
+\ x\ne y).
+\]
+En ese orden:
+\[
+C=
+\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&-1&-1\\
+1&1&0&-1&1&-1\\
+1&1&-1&0&-1&1\\
+1&-1&1&-1&0&1\\
+1&-1&-1&1&1&0
+\end{pmatrix}.
+\]
+Reduciendo \(-1\equiv2\pmod3\), obtenemos:
+\[
+A_W=
+\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&2&2\\
+1&1&0&2&1&2\\
+1&1&2&0&2&1\\
+1&2&1&2&0&1\\
+1&2&2&1&1&0
+\end{pmatrix}\pmod3.
+\]
+Esta forma es gauge/monomialmente equivalente a la normalización usada en la auditoría con \(A_WA_W^T\equiv2I\pmod3\). Ambas representan la misma polaridad Witt.
+
+\section{Ortogonalidad por suma de caracteres}
+\begin{teorema}[Ortogonalidad Paley]
+La matriz signada \(C\) satisface
+\[
+\boxed{C C^T=5I.}
+\]
+\end{teorema}
+
+\begin{proof}
+La norma de cada fila es 5, porque cada fila contiene cinco entradas no nulas de valor \(\pm1\).
+
+Sea \(x\in\F_5\). El producto escalar de la fila \(\infty\) con la fila \(x\) es
+\[
+\sum_{z\in\F_5}\chi_5(x-z)=0,
+\]
+porque \(\chi_5\) es un carácter no trivial.
+
+Para \(x\ne y\) en \(\F_5\), el producto escalar entre las filas finitas es
+\[
+1+
+\sum_{z\in\F_5}\chi_5(x-z)\chi_5(y-z).
+\]
+Usamos
+\[
+\sum_{z\in\F_5}\chi_5((x-z)(y-z))=-1
+\quad(x\ne y),
+\]
+propiedad estándar de las sumas de caracteres cuadráticos. Por tanto el producto escalar es
+\[
+1-1=0.
+\]
+Así todas las filas son ortogonales y tienen norma 5.
+\end{proof}
+
+Reduciendo módulo 3:
+\[
+5\equiv2\pmod3,
+\]
+por tanto:
+\[
+\boxed{A_WA_W^T\equiv2I\pmod3.}
+\]
+
+\section{Código gráfico y autodualidad}
+Definimos
+\[
+C_W=\{(q,qA_W):q\in\F_3^6\}.
+\]
+Con
+\[
+G=[I_6\mid A_W],
+\]
+se tiene
+\[
+GG^T=I_6+A_WA_W^T\equiv I_6+2I_6\equiv0\pmod3.
+\]
+Así el código es auto-ortogonal. Como tiene dimensión 6 en longitud 12, es autodual.
+
+La enumeración produce:
+\[
+\boxed{1+264y^6+440y^9+24y^{12}.}
+\]
+Los 264 codewords de peso 6 dan 132 soportes bajo \(c\sim-c\). Esos soportes son las hexadas de \(W_{12}\).
+
+\section{Witt pequeño}
+Los números de incidencia son:
+\[
+\lambda_0=132,
+\quad
+\lambda_1=66,
+\quad
+\lambda_2=30,
+\quad
+\lambda_3=12,
+\quad
+\lambda_4=4,
+\quad
+\lambda_5=1.
+\]
+En particular:
+\[
+\boxed{\lambda_5=1.}
+\]
+Esto significa:
+\[
+\boxed{\text{todo 5-subconjunto está contenido en una única hexada}.}
+\]
+Por tanto:
+\[
+\boxed{W_{12}=S(5,6,12).}
+\]
+
+\section{Cierre de la puerta conceptual}
+La puerta conceptual pendiente eran tres decisiones:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item Tomar las unidades \(U_9\) como frontera reversible.
+\item Projectivizarlas como \(\Pone(\F_5)\) preservando el ciclo de unidades.
+\item Tomar \(\chi_5\) como polaridad cuadrática de esa frontera.
+\end{enumerate}
+Bajo esas tres decisiones, que son naturales en la gramática Hensel/APP, se obtiene \(A_W\). Luego Golay/Witt cae por ortogonalidad Paley.
+
+\[
+\boxed{\APP+\text{Hensel}\to U_9\to\Pone(\F_5)\to\chi_5\to A_W\to W_{12}.}
+\]
+
+\section{Puente de once modos}
+La misma rueda dodecafásica permite otra lectura. Sea
+\[
+V_{12}=\mathbb R^{12},
+\qquad
+\one=(1,\ldots,1).
+\]
+El modo global es \(\mathbb R\one\). El espacio activo es
+\[
+V_{11}=\one^\perp=
+\{x\in\mathbb R^{12}:\sum_i x_i=0\}.
+\]
+Entonces
+\[
+\boxed{V_{12}=\mathbb R\one\oplus V_{11}.}
+\]
+Si los 12 puntos se leen con la acción icosaédrica \(A_5\), la representación de permutación se descompone como
+\[
+\boxed{\mathbb R^{12}\cong1\oplus3\oplus3'\oplus5.}
+\]
+Por tanto:
+\[
+\boxed{V_{11}\cong3\oplus3'\oplus5=3\oplus8.}
+\]
+Lectura HMT:
+\[
+3=\text{sector visible/cúbico},
+\]
+\[
+3'=\text{sector dual/contracara},
+\]
+\[
+5=\text{sector pentádico de cierre},
+\]
+\[
+8=3'\oplus5=\text{sector interno octádico}.
+\]
+Esto no debe venderse como igualdad literal con M-teoría. La frase correcta es:
+\[
+\boxed{\text{HMT no reproduce la teoría M; explica por qué una física de frontera puede ver once modos activos.}}
+\]
+
+\section{Conclusión}
+La cadena fuerte queda:
+\[
+\boxed{\text{célula Hensel}\to\text{frontera reversible}\to\text{línea proyectiva}\to\text{Paley}\to\text{Witt}.}
+\]
+Y el macroobjeto HMT queda formulado como una célula cúbico--Hensel--Witt:
+\[
+\boxed{
+\mathcal X_{\rm HMT}=(U_6,\beta^3,\partial_{\APP},\kappa,A_W,C_W,W_{12},\mathcal G_9,\mathcal R_{1000}).
+}
+\]
+La frase final:
+\[
+\boxed{\text{la polaridad Witt emerge de la frontera Hensel de APP; no se inserta como matriz arbitraria.}}
+\]
+\end{document}

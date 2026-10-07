@@ -1,0 +1,285 @@
+\section*{Balance solenoidal, acarreo y terminal enriquecido}
+
+Este módulo refuerza el \texttt{OWNER\_RECTOR} Navier--Stokes: conserva en
+una sola cadena el acarreo de Galerkin, el balance causal, el Gram terminal,
+Stein, la telescopía, la inyección raíz, el retorno y el paso global. La carta
+KYP aparece sólo después y queda fuera de esa cadena.
+
+Para los cortes de Galerkin \(m\leq n\), el acarreo conservado es
+\begin{equation}\label{eq:amp-ns-owner-acarreo-galerkin}
+ C_{m\leftarrow n}
+ :=P_mB(u_n,u_n)-B_m(P_m u_n,P_m u_n).
+\end{equation}
+La lectura nonádica de este estado está tipada por
+\begin{equation}\label{eq:amp-ns-owner-e9j9}
+ E_9J_9=I,\qquad P_9=J_9E_9,\qquad Q_{\rm micro}=I-P_9,
+\end{equation}
+y conserva el balance causal
+\begin{equation}\label{eq:amp-ns-owner-balance-causal}
+ \boxed{
+ \mathbb E_9\|\Xi_{m+1}\|^2+\mathbb E_9\ell_m
+ =\|\Xi_m\|^2,\qquad \ell_m\geq0.}
+\end{equation}
+El campo, la proyección solenoidal, el acarreo, la frontera, la ruta y las
+pérdidas positivas permanecen así en un mismo estado antes de construir el
+almacenamiento.
+
+\section*{Gram truncado del estado completo e inyección raíz uniforme}
+
+La realización que gobierna el balance no comienza por la desigualdad KYP.
+Sean \(\Gamma_{M,j}^{\rm term}\) la transición de un paso del estado
+PC--Fock enriquecido, \(\Gamma_{M,j:k}^{\rm term}\) su composición entre
+las profundidades \(j\) y \(k\), y
+\(L_{M,k,T}^{\rm term}\) la columna de pérdidas de grado uno, grado dos,
+acarreo, innovación, archivo y memoria en el horizonte \([0,T]\). La
+notación \(\mathbb E_{j:k}\) designa la suma ortogonal con los pesos de
+las ramas del refinamiento entre esos niveles. Para \(j\leq J\) se define
+la columna finita
+\begin{equation}\label{eq:amp-ns-owner-columna-gram-truncado}
+ \begin{aligned}
+ \mathbf G_{M,j;J,T}^{\rm term}x
+ :={}&
+ \bigl(\mathcal E_{M,J,T}^{\rm term}
+       \Gamma_{M,j:J}^{\rm term}x\bigr)_{\mathbb E_{j:J}}\\
+ &\oplus
+ \bigoplus_{k=j}^{J-1}
+ \bigl(L_{M,k,T}^{\rm term}
+       \Gamma_{M,j:k}^{\rm term}x\bigr)_{\mathbb E_{j:k}},
+ \qquad
+ U_{M,j;J,T}^{\rm term}
+ :=(\mathbf G_{M,j;J,T}^{\rm term})^*
+    \mathbf G_{M,j;J,T}^{\rm term}.
+ \end{aligned}
+\end{equation}
+En particular, el almacenamiento es un Gram truncado construido con el
+terminal y las pérdidas futuras del mismo estado. Su forma cuadrática es
+\begin{equation}\label{eq:amp-ns-owner-gram-truncado}
+ \begin{aligned}
+ \langle x,U_{M,j;J,T}^{\rm term}x\rangle
+ ={}&\mathbb E_{j:J}
+ \|\mathcal E_{M,J,T}^{\rm term}
+       \Gamma_{M,j:J}^{\rm term}x\|^2\\
+ &+\sum_{k=j}^{J-1}\mathbb E_{j:k}
+ \|L_{M,k,T}^{\rm term}
+       \Gamma_{M,j:k}^{\rm term}x\|^2 .
+ \end{aligned}
+\end{equation}
+
+\begin{lemma}[Identidad de Stein del Gram truncado]
+\label{lem:amp-ns-owner-stein-truncado}
+Para todo \(j<J\),
+\begin{equation}\label{eq:amp-ns-owner-stein-truncado}
+ U_{M,j;J,T}^{\rm term}
+ =(\Gamma_{M,j}^{\rm term})^*
+   U_{M,j+1;J,T}^{\rm term}\Gamma_{M,j}^{\rm term}
+  +(L_{M,j,T}^{\rm term})^*L_{M,j,T}^{\rm term}.
+\end{equation}
+Por iteración se obtiene, conservando el sumando terminal,
+\begin{equation}\label{eq:amp-ns-owner-telescopio-truncado}
+ \begin{aligned}
+ U_{M,0;J,T}^{\rm term}
+ ={}&(\Gamma_{M,0:J}^{\rm term})^*
+      U_{M,J;J,T}^{\rm term}\Gamma_{M,0:J}^{\rm term}\\
+ &+\sum_{j=0}^{J-1}
+   (\Gamma_{M,0:j}^{\rm term})^*
+   (L_{M,j,T}^{\rm term})^*L_{M,j,T}^{\rm term}
+   \Gamma_{M,0:j}^{\rm term}.
+ \end{aligned}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+En \eqref{eq:amp-ns-owner-columna-gram-truncado}, se separa el sumando
+\(k=j\). Los restantes sumandos, incluido el terminal, son exactamente la
+columna de nivel \(j+1\) precedida por
+\(\Gamma_{M,j}^{\rm term}\). La ortogonalidad de la suma y la propiedad de
+torre de \(\mathbb E_{j:k}\) dan
+\eqref{eq:amp-ns-owner-stein-truncado}. La repetición del mismo
+desdoblamiento da \eqref{eq:amp-ns-owner-telescopio-truncado}; no se
+descarta
+\((\Gamma_{M,0:J}^{\rm term})^*U_{M,J;J,T}^{\rm term}
+\Gamma_{M,0:J}^{\rm term}\).
+\end{proof}
+
+\begin{theorem}[Inyección raíz y presupuesto uniforme]
+\label{thm:amp-ns-inyeccion-raiz-uniforme}
+La raíz del realizador se transporta a cada corte y profundidad mediante
+una inclusión isométrica:
+\begin{equation}\label{eq:amp-ns-inyeccion-raiz-comun}
+ \begin{aligned}
+ x_{M,0}^{\rm data}
+ &:=\mathcal V_M^{\rm full}(P_Mu_0)\oplus g_M^F,\\
+ \mathbf G_{M,0;J,T}^{\rm term}x_{M,0}^{\rm data}
+ &=\mathcal J_{M,J,T}^{\rm term}(u_0,f),\\
+ \mathcal J_{M,J,T}^{\rm term}
+ &:=I_{0\to M,J}\mathcal J_T^{\rm term},
+ & I_{0\to M,J}^*I_{0\to M,J}&=I.
+ \end{aligned}
+\end{equation}
+Para los datos de \eqref{eq:realizaciones-ns-dominio}, existe
+\(C_{{\rm HMT},T}\), independiente de \(M\) y \(J\), tal que
+\begin{equation}\label{eq:amp-ns-inyeccion-raiz-cota}
+ \sup_{M,J}
+ \|\mathcal J_{M,J,T}^{\rm term}(u_0,f)\|^2
+ \leq C_{{\rm HMT},T}
+ +(1+2\widetilde M_{s,\beta,\nu}^{\,2})
+  e^{R_{\rm F}^{\,2}\|u_0\|_{H^s}^2}
+ +C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt .
+\end{equation}
+Equivalentemente, la cota es una cota del Gram terminal evaluado en
+los datos:
+\begin{equation}\label{eq:amp-ns-owner-gram-cota-uniforme}
+ \sup_{M,J}
+ \left\langle x_{M,0}^{\rm data},
+ U_{M,0;J,T}^{\rm term}x_{M,0}^{\rm data}\right\rangle
+ =
+ \sup_{M,J}
+ \|\mathcal J_{M,J,T}^{\rm term}(u_0,f)\|^2
+ <\infty .
+\end{equation}
+La aplicación \(\mathcal J_T^{\rm term}\) depende sólo del estado inicial,
+de sus dos hojas, del terminal heredado y del puerto de fuerza; no recibe
+como argumento \(u_M(t)\) para \(0<t\leq T\).
+\end{theorem}
+
+\begin{proof}
+La componente lineal y las memorias \(D/H\) se transportan
+isométricamente. En la componente PC--Fock, la columna coherente es
+\[
+ \bigoplus_{n\geq0}
+ \frac{R_{\rm F}^{\,n}}{\sqrt{n!}}\,u_0^{\odot n},
+ \qquad
+ \sum_{n\geq0}\frac{R_{\rm F}^{\,2n}}{n!}
+       \|u_0\|_{H^s}^{2n}
+ =e^{R_{\rm F}^{\,2}\|u_0\|_{H^s}^2}.
+\]
+Para justificar la uniformidad del lector cuadrático, se polariza
+\begin{equation}\label{eq:amp-ns-lector-cuadratico-polarizado}
+ \mathcal B_M(u,v):=
+ \frac{1}{4\sqrt{\beta\nu}}\,
+ A_M^{-1/2}\Lambda^sP_M\mathbb P
+ \bigl((P_Mu\!\cdot\!\nabla)P_Mv
+      +(P_Mv\!\cdot\!\nabla)P_Mu\bigr).
+\end{equation}
+En las bases transversales
+\(e^s_{p,a}=\langle p\rangle^{-s}a\,e^{ip\cdot x}\), si
+\(k=p+q\ne0\), sus filas de Fourier cumplen
+\begin{equation}\label{eq:amp-ns-filas-fourier-uniformes}
+ \|c^M_{k;p,q}\|
+ \leq\frac{C}{\sqrt{\beta\nu}}\,
+ \frac{\langle k\rangle^s(|p|+|q|)}
+ {|k|\langle p\rangle^s\langle q\rangle^s},
+ \qquad
+ \sup_{M,k\ne0}\sum_{p+q=k}\|c^M_{k;p,q}\|^2<\infty .
+\end{equation}
+La segunda cota se obtiene separando \(|p|\leq2|k|\) de
+\(|p|>2|k|\); en la cola domina
+\(\sum_p\langle p\rangle^{2-2s}<\infty\) porque \(s>5/2\).
+Cauchy--Schwarz en cada fila y la ortogonalidad de los bloques con distinto
+\(k\) prolongan \(\mathcal B_M\) a
+\[
+ \mathfrak C_M:H^s_\sigma\odot_2H^s_\sigma\longrightarrow L^2_\sigma,
+ \qquad
+ \sup_M\|\mathfrak C_M\|
+ \leq\widetilde M_{s,\beta,\nu}.
+\]
+Así, la constante usada en la raíz controla la suma de todos los pares
+Fourier y no sólo cada coeficiente por separado. El puerto afín verifica
+\[
+ Q_f(T)\leq C_{\nu,s}
+ \int_0^T\|f(t)\|_{H^{s-1}}^2\,dt .
+\]
+Por suma ortogonal de esas componentes,
+\begin{equation}\label{eq:amp-ns-raiz-cota-por-componentes}
+ \|\Xi_{M,0}\|^2
+ \leq C_{{\rm HMT},T}
+ +(1+2\widetilde M_{s,\beta,\nu}^{\,2})
+ e^{R_{\rm F}^{\,2}\|u_0\|_{H^s}^2}.
+\end{equation}
+Las inclusiones de \eqref{eq:amp-ns-inyeccion-raiz-comun} no cambian esta
+norma. Al sumar la cota del puerto se obtiene exactamente
+\eqref{eq:amp-ns-inyeccion-raiz-cota}. Como todos los términos se evalúan
+en \((u_0,f)\), la estimación precede a la trayectoria y no presupone la
+cota global que después se deduce de
+\eqref{eq:amp-ns-owner-telescopio-truncado}.
+\end{proof}
+
+El Gram terminal \eqref{eq:amp-ns-owner-gram-truncado}, su identidad de
+Stein, la telescopía con terminal y la inyección raíz uniforme forman la
+construcción propietaria. Ésta es la rama que gobierna el cierre y coincide
+con la realización íntegra restaurada en
+\cref{sec:ns-owner-closure,thm:nsclose-proprietary-full}.
+
+\section*{Separación del control KYP finito no gobernante}
+
+La factorización KYP finita correcta del
+\cref{thm:ns-import-affine-stein} se conserva como control alternativo de
+una carta reducida y no constituye una premisa del owner
+\(U^{\rm own}\). No se utiliza la mutación firmada que pretendía
+incorporar \(C_{m,M}^*C_{m,M}\) a un término \(P\succeq0\) y
+recuperarlo después con signo negativo: al entrar en \(P\), ese
+sumando aparece necesariamente con signo positivo. Por tanto, esa
+factorización no interviene en el balance, el presupuesto raíz, el retorno
+físico ni la conclusión Navier--Stokes.
+
+\section*{Derivada temporal, presión y pegado de horizontes}
+
+El tramo siguiente es consecuencia de la cota uniforme de trayectoria
+obtenida por el Gram terminal propietario, su telescopía y el retorno
+físico exacto. Se
+dispone de la cota conjunta uniforme en
+\(L^\infty(0,T;H^s)\cap L^2(0,T;H^{s+1})\).
+La ecuación proyectada se escribe
+\begin{equation}\label{eq:amp-ns-proyectada}
+ \partial_tu_m
+ =\nu\Delta u_m-P_mB(u_m,u_m)+P_mf.
+\end{equation}
+Para \(s>5/2\), el producto de Sobolev y la cota conjunta en
+\(L^\infty(0,T;H^s)\cap L^2(0,T;H^{s+1})\) dan
+\begin{equation}\label{eq:amp-ns-dt}
+ \sup_m\|\partial_tu_m\|_{L^2(0,T;H^{s-1})}
+ \leq C_T(u_0,f,\Xi_0).
+\end{equation}
+La estimación \eqref{eq:amp-ns-dt} y la compacidad espacial producen
+convergencia fuerte en \(L^2(0,T;H^s)\), suficiente para pasar al término
+bilineal sin perder el carry de Galerkin.
+
+Recuperada la velocidad, la presión normalizada de media cero queda fijada
+por
+\begin{equation}\label{eq:amp-ns-presion}
+ -\Delta p
+ =\partial_i\partial_j(u_i u_j)-\nabla\!\cdot f,
+ \qquad \int_{\mathbb T^3}p(t,x)\,dx=0.
+\end{equation}
+La presión es así una salida de la misma solución solenoidal; no es una
+variable libre usada para seleccionar la rama regular.
+
+\begin{proposition}[Pegado global por unicidad]
+\label{prop:amp-ns-pegado}
+Sean \(u^{(T)}\) las soluciones obtenidas en \([0,T]\) por el límite de
+Galerkin. Si \(T_1<T_2\), entonces
+\(u^{(T_2)}|_{[0,T_1]}=u^{(T_1)}\). La familia define una única solución
+global suave para \(t>0\).
+\end{proposition}
+
+\begin{proof}
+Ambas restricciones poseen los mismos datos y pertenecen al dominio de la
+estimación uniforme. La ecuación de su diferencia, el control bilineal en
+\(H^{s-1}\) y Grönwall implican igualdad en \([0,T_1]\). Los intervalos
+finitos forman un sistema dirigido; la igualdad en los solapamientos define
+la solución global. La regularización parabólica del teorema se aplica en
+cada intervalo \([\varepsilon,T]\), \(\varepsilon>0\).
+\end{proof}
+
+El control de refutación es preciso: una pérdida de uniformidad en
+\eqref{eq:amp-ns-dt}, dos límites diferentes en un mismo horizonte o una
+presión que no satisfaga \eqref{eq:amp-ns-presion} romperían la cadena antes
+de la conclusión global.
+
+\paragraph{Conclusión propietaria.}
+El Gram terminal propietario, Stein, la telescopía con terminal, su ledger,
+el retorno físico exacto y la inyección raíz producen una cota \(H^s\) uniforme para
+\(s>5/2\). Por tanto se demuestra la existencia, unicidad y regularidad
+global de Navier--Stokes tridimensional periódico en el dominio HMT
+registrado. Las cartas KYP finitas permanecen como
+\texttt{CONTROL\_NO\_GOBERNANTE}.

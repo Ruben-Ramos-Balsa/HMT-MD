@@ -1,0 +1,612 @@
+\section{Incidencia ternaria, pegado de discriminantes y construcción de Leech}
+\label{sec:lf-foundations}
+
+La construcción reticular utiliza la información de incidencia que
+acompaña al registro dodecafásico. Su dominio conserva las palabras
+ternarias, el marco en que se representan, la orientación previa al
+acarreo y la bandera que distingue una de las doce posiciones. El
+paso a un retículo transmite esos datos mediante operaciones
+sucesivas: codificación lineal, selección incidencial, pegado de
+discriminantes y formación de un vecino. La clasificación reticular
+interviene después de probar la positividad, paridad, autodualidad
+y ausencia de raíces de la construcción obtenida.
+
+Estas operaciones continúan la misma generación
+APP--TRIT--TPK y el mismo refinamiento compatible del continuo
+conjunto que anteceden a la lectura numérica \cite{HMT-IV}.
+La matriz finita, el código y la métrica que se definen a
+continuación son realizaciones con dominios precisos. La prueba
+reticular recibe el estado marcado; el escalar final de una
+constante no desempeña el papel de código de pegado ni de longitud.
+
+\subsection{Coordenatización elíptica y transporte de la incidencia}
+\label{subsec:lf-incidence}
+
+Las seis unidades \(\{1,2,4,5,7,8\}\) módulo nueve, conservadas
+por el transporte modular, admiten una coordenatización de seis posiciones.
+La identificamos con
+\(\mathbb P^1(\mathbb F_5)=\{\infty,0,1,2,3,4\}\), en ese orden.
+Esta identificación fija coordenadas para realizar la relación
+cuadrática del régimen elíptico del TRIT.
+
+Sea \(\chi:\mathbb F_5\to\{0,1,-1\}\) el carácter cuadrático:
+\(\chi(0)=0\), \(\chi(1)=\chi(4)=1\) y
+\(\chi(2)=\chi(3)=-1\). Definimos la matriz entera
+\(C_{\mathrm P}\) con diagonal cero,
+\((C_{\mathrm P})_{\infty,a}=(C_{\mathrm P})_{a,\infty}=1\),
+y entradas finitas \((C_{\mathrm P})_{a,b}=\chi(b-a)\).
+Su cuadrado es \(5I_6\). En efecto, cada entrada diagonal del
+cuadrado suma cinco unidades. Las entradas que involucran
+\(\infty\) fuera de la diagonal se anulan porque la suma de
+\(\chi\) es cero. Para dos índices finitos distintos, la
+contribución uno de la posición \(\infty\) se cancela con
+\(\sum_c\chi(c-a)\chi(c-b)=-1\). Esta última identidad se verifica
+directamente sobre los cinco residuos, o mediante la sustitución
+afín que lleva \((a,b)\) a \((0,1)\).
+
+La reducción módulo tres produce la matriz simétrica
+\begin{equation}
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix},
+ \qquad A_W^2=2I_6=-I_6
+ \quad\text{en }\mathbb F_3.
+ \label{eq:lf-aw}
+\end{equation}
+La igualdad conserva el tipo elíptico en este codominio finito.
+El cuerpo finito y la posterior realización arquimediana de la
+unidad imaginaria tienen dominios diferentes.
+
+Para una matriz \(A\in M_6(\mathbb F_3)\) y una palabra fila
+\(w\in\mathbb F_3^6\), escribimos
+\[
+ \gamma_A(w)=(w,wA)\in\mathbb F_3^{12}.
+\]
+Si \(f\in\operatorname{GL}_6(\mathbb F_3)\), entonces
+\begin{equation}
+ \gamma_{fAf^{-1}}(wf^{-1})
+   =\gamma_A(w)(f^{-1}\oplus f^{-1}).
+ \label{eq:lf-frame-covariance}
+\end{equation}
+La primera mitad es \(wf^{-1}\); la segunda es
+\(wf^{-1}fAf^{-1}=wAf^{-1}\), lo que prueba la identidad.
+
+Sea \(X_n^{\mathrm{mar}}\) el espacio de prefijos enriquecidos de
+longitud \(n\), con marco inicial declarado, y sean
+\(p_{n,m}:X_n^{\mathrm{mar}}\to X_m^{\mathrm{mar}}\) sus
+truncaciones. En el paso \(j\), el prefijo contiene una palabra
+visible \(w_j\) y un marco \(f_j\). La actualización del marco
+tiene la forma \(f_{j+1}=g_j(x)f_j\), donde \(g_j(x)\) depende
+únicamente de información ya contenida en el prefijo. Una
+prolongación compatible conserva, por ello, todos los marcos
+anteriores.
+
+\begin{proposition}[Naturalidad del transporte incidencial]
+\label{prop:lf-incidence-naturality}
+La aplicación
+\begin{equation}
+ \mathcal Q_n(x)=
+ \bigl((f_j,\gamma_{f_jA_Wf_j^{-1}}(w_j))\bigr)_{0\leq j<n}
+ \label{eq:lf-Qn}
+\end{equation}
+satisface \(r_{n,m}\mathcal Q_n=\mathcal Q_mp_{n,m}\), donde \(r_{n,m}\) trunca
+las primeras \(m\) componentes codificadas. Por tanto induce una
+aplicación entre los límites inversos de los sistemas de
+prefijos y de incidencias marcadas.
+\end{proposition}
+\begin{proof}
+Dos prefijos compatibles tienen las mismas palabras y los mismos
+operadores de transporte hasta el paso \(m-1\). Partiendo del
+mismo marco inicial, la relación recursiva da por inducción los
+mismos \(f_j\) hasta ese paso. Coinciden entonces las primeras
+\(m\) componentes de \eqref{eq:lf-Qn}. La propiedad universal
+del límite inverso produce la aplicación de prolongación.
+\end{proof}
+
+En cada marco, la primera proyección de \(\gamma_A\) recupera
+exactamente la palabra visible. Este alcance es local: la
+memoria profunda se conserva en el estado enriquecido y su
+recuperación exige las coordenadas correspondientes. Al pasar
+de palabras a soportes se retiene todavía menos información.
+Asimismo, un cambio general de base en
+\(\operatorname{GL}_6(\mathbb F_3)\) transporta también la métrica
+de Hamming y la incidencia de la coordenatización. Los cambios monomiales
+las preservan directamente. Los soportes utilizados en esta
+sección se calculan en la coordenatización explícita \eqref{eq:lf-aw}.
+
+La naturalidad anterior concreta la lectura incidencial que
+acompaña a los cilindros numéricos. El encajamiento de cilindros
+y la restricción de \eqref{eq:lf-Qn} actúan sobre un mismo
+prefijo compatible, conservando respectivamente su evaluación
+posicional y sus relaciones marcadas. El ambiente
+\(\mathbb F_3^6\), de \(729\) palabras, proporciona el dominio
+lineal de la codificación; conserva su distinción respecto de
+las \(243\) palabras visibles y las \(468\) emisiones del censo
+admisible de APP--TRIT--TPK.
+
+\subsection{Código ternario autodual y enumeración de sus pesos}
+\label{subsec:lf-code}
+
+\begin{definition}[Código de la coordenatización dodecafásica]
+El código lineal asociado a \eqref{eq:lf-aw} es
+\[
+ C_W=\{(w,wA_W):w\in\mathbb F_3^6\}\subset\mathbb F_3^{12}.
+\]
+El peso \(\operatorname{wt}(c)\) cuenta las coordenadas no nulas
+de \(c\), y \(\operatorname{supp}(c)\subset\{1,\ldots,12\}\)
+es su conjunto de posiciones no nulas. Una hexada es el soporte
+de una palabra de peso seis; su colección se denota \(\mathcal H\).
+\end{definition}
+
+\begin{theorem}[Autodualidad, distancia mínima y enumerador]
+\label{thm:lf-code}
+El código \(C_W\) es autodual de parámetros \([12,6,6]_3\) y
+tiene enumerador
+\begin{equation}
+ W_{C_W}(z)=1+264z^6+440z^9+24z^{12}.
+ \label{eq:lf-enumerator}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La matriz generadora \([I_6\mid A_W]\) tiene rango seis.
+Por la simetría de \(A_W\) y \eqref{eq:lf-aw},
+\[
+ [I_6\mid A_W][I_6\mid A_W]^{\mathsf T}
+       =I_6+A_W^2=0.
+\]
+Así, el código es autoortogonal de dimensión mitad de la
+longitud y, en consecuencia, autodual.
+
+La enumeración restante es una operación entera finita sobre
+la matriz explícita. Para \(r\in\{0,\ldots,6\}\), agrupamos
+las palabras por \(\operatorname{wt}(w)=r\). La tabla siguiente
+da el número de palabras con cada peso total:
+\[
+\begin{array}{c|rrrr|r}
+r&0&6&9&12&\text{total}\\ \hline
+0&1&0&0&0&1\\
+1&0&12&0&0&12\\
+2&0&60&0&0&60\\
+3&0&120&40&0&160\\
+4&0&60&180&0&240\\
+5&0&12&180&0&192\\
+6&0&0&40&24&64\\ \hline
+\text{total}&1&264&440&24&729
+\end{array}
+\]
+Cada fila contiene \(\binom6r2^r\) palabras. Para verificar
+todas sus entradas, sea \(q\) un entero de \(0\) a \(728\), y
+definamos sus seis cifras ternarias
+\[
+ d_i(q)=\left\lfloor\frac{q}{3^{6-i}}\right\rfloor\bmod3,
+ \qquad
+ e_j(q)=\left(\sum_{i=1}^{6}d_i(q)(A_W)_{ij}\right)\bmod3.
+\]
+La fila y la columna de la contribución de \(q\) son,
+respectivamente,
+\[
+ r(q)=\sum_i\mathbf1_{\{d_i(q)\ne0\}},\qquad
+ h(q)=r(q)+\sum_j\mathbf1_{\{e_j(q)\ne0\}}.
+\]
+La recurrencia de acumulación empieza con
+\(T^{(0)}_{r,h}=0\) y aplica
+\[
+ T^{(q+1)}_{r,h}
+ =T^{(q)}_{r,h}
+   +\mathbf1_{\{r=r(q)\}}\mathbf1_{\{h=h(q)\}}
+ \quad(0\leq q<729).
+\]
+Produce exactamente la tabla mostrada. La expansión ternaria
+da una biyección entre esos \(729\) enteros y todas las palabras
+de \(\mathbb F_3^6\), por lo que la operación agota el código.
+La suma de sus filas prueba \eqref{eq:lf-enumerator}; el primer
+peso no nulo es seis.
+\end{proof}
+
+\begin{remark}[Evaluación reproducible de la recurrencia finita]
+El siguiente bucle implementa literalmente las sumas de la prueba.
+Sus únicos datos son los enteros de la matriz
+\eqref{eq:lf-aw}; calcula el enumerador antes de compararlo con
+la igualdad obtenida.
+\end{remark}
+{\small
+\begin{verbatim}
+from collections import Counter
+from itertools import product
+A = ((0,1,1,1,1,1), (1,0,1,2,2,1),
+     (1,1,0,1,2,2), (1,2,1,0,1,2),
+     (1,2,2,1,0,1), (1,1,2,2,1,0))
+rows = [Counter() for _ in range(7)]
+for w in product(range(3), repeat=6):
+    v = tuple(sum(w[i]*A[i][j] for i in range(6)) % 3
+              for j in range(6))
+    r = sum(x != 0 for x in w)
+    h = r + sum(x != 0 for x in v)
+    rows[r][h] += 1
+total = sum(rows, Counter())
+if dict(total) != {0:1, 6:264, 9:440, 12:24}:
+    raise ArithmeticError("Enumerador incompatible")
+\end{verbatim}
+}
+
+\begin{proposition}[Hexadas y diseño de Witt]
+\label{prop:lf-witt}
+La colección \(\mathcal H\) contiene \(132\) hexadas y cada
+quintupla de posiciones pertenece a una única hexada.
+\end{proposition}
+\begin{proof}
+Dos palabras de peso seis con el mismo soporte difieren por
+un escalar. En efecto, entre sus seis cocientes de coordenadas
+no nulas, uno de los signos \(1,-1\) aparece al menos tres
+veces. Restando el múltiplo correspondiente, si las palabras
+no fueran proporcionales, se obtendría una palabra no nula
+de peso a lo sumo tres, en contradicción con
+el teorema~\ref{thm:lf-code}. Cada soporte corresponde así a
+la pareja \(\{c,-c\}\), y hay \(264/2=132\) soportes.
+
+Si dos soportes distintos compartieran cinco posiciones,
+en esa intersección uno de los dos cocientes aparecería al
+menos tres veces. La combinación lineal que cancela dichas
+coordenadas tendría soporte en una unión de tamaño siete
+y peso a lo sumo cuatro. La distancia mínima lo impide.
+Una quintupla pertenece, por tanto, a lo sumo a una hexada.
+Como
+\[
+ 132\binom65=792=\binom{12}{5},
+\]
+pertenece a exactamente una.
+\end{proof}
+
+El objeto construido es el código ternario extendido de Golay
+con su pequeño diseño de Witt. El reconocimiento se efectúa
+después de la codificación, la autodualidad y el cómputo de
+distancia. Para la construcción reticular sólo se necesitan
+las propiedades ya demostradas y la bandera marcada que se
+obtiene a continuación.
+
+\subsection{Bandera dodecafásica y selección del origen}
+\label{subsec:lf-flag}
+
+En el marco del registro generado se conservan las palabras
+\[
+ w_\pi=010211,\qquad
+ w_e=201101,\qquad
+ w_\varphi=121200,\qquad
+ w_{\mathrm{APP}}=022020.
+\]
+Los subíndices \(\pi,e,\varphi\) identifican las correspondientes
+regiones de lectura de las constantes; \(w_e\) conserva aquí
+la región de Euler. Aplicar \(\gamma_{A_W}\) y tomar soportes da
+\[
+\begin{aligned}
+ P_\pi&=\{2,4,5,6,7,8,9,10,11\},\\
+ H_e&=\{1,3,4,6,9,10\},\\
+ H_\varphi&=\{1,2,3,4,7,9\},\\
+ H_{\mathrm{APP}}&=\{2,3,5,10,11,12\}.
+\end{aligned}
+\]
+El primer soporte tiene peso nueve; los tres restantes son
+hexadas. El registro
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601)
+\]
+selecciona
+\[
+ B_K=\{j:K_j\geq729\}=\{4,6,9,10\}=H_e\cap P_\pi.
+\]
+El umbral \(729\) pertenece al formato de bloques de la
+lectura declarada. En este registro concreto, los umbrales
+enteros de \(660\) a \(729\) producen el mismo soporte, de
+modo que el soporte conserva la incidencia seleccionada,
+mientras el registro completo conserva también los bloques
+y el umbral de su lectura.
+
+El registro firmado anterior al acarreo es
+\[
+\begin{split}
+ Z_0={}&(7,297,353,-430,-715,-1199,\\
+       &\hspace{9mm}-3,286,-894,-528,380,663).
+\end{split}
+\]
+Su soporte negativo es la hexada
+\[
+ H_\alpha^-=\{4,5,6,7,9,10\}.
+\]
+Los signos se reciben del estado previo al acarreo y no se
+extraen de la expansión del escalar final.
+
+\begin{proposition}[Coincidencia de selección firmada e incidencial]
+\label{prop:lf-flag}
+La hexada \(H_\alpha^-\) es la única \(H\in\mathcal H\) que cumple
+\[
+\begin{gathered}
+ B_K\subset H\subset P_\pi,\\
+ (|H\cap H_e|,|H\cap H_\varphi|,
+                   |H\cap H_{\mathrm{APP}}|)=(4,3,2).
+\end{gathered}
+\]
+\end{proposition}
+\begin{proof}
+La codificación de las palabras de peso seis, o la recurrencia
+finita anterior aplicada a sus soportes, da las cuatro
+hexadas sobre \(B_K\). Sus pares complementarios son
+\[
+ \{1,3\},\qquad\{2,11\},\qquad\{5,7\},\qquad\{8,12\}.
+\]
+Sólo el segundo y el tercero están contenidos en \(P_\pi\).
+La hexada del segundo tiene intersecciones de tamaño tres
+con \(H_\varphi\) y con \(H_{\mathrm{APP}}\), y por tanto
+incumple la última condición. La del tercero tiene
+intersecciones \(4,3,2\), y coincide con \(H_\alpha^-\).
+\end{proof}
+
+\begin{lemma}[Origen de la bandera marcada]
+\label{lem:lf-origin}
+El origen seleccionado por la incidencia es
+\[
+ o_*=(H_e\cap H_\varphi)
+                 \setminus(H_\alpha^-\cup H_{\mathrm{APP}})
+     =\{1\}.
+\]
+La selección conmuta con toda biyección aplicada
+simultáneamente a los soportes.
+\end{lemma}
+\begin{proof}
+La intersección \(H_e\cap H_\varphi\) es
+\(\{1,3,4,9\}\). La unión sustraída contiene \(3,4,9\)
+y excluye \(1\). La equivariancia procede de que las
+biyecciones conmutan con unión, intersección y diferencia.
+\end{proof}
+
+La bandera distingue una componente entre doce antes del
+paso métrico. El vector radial se determina después,
+dentro de una cámara positiva declarada. Así quedan
+separadas y articuladas la selección combinatoria y la
+operación reticular.
+
+\subsection{Pegado ternario de las doce componentes}
+\label{subsec:lf-glue}
+
+Sea \(A_2=\mathbb Za_1\oplus\mathbb Za_2\), con forma
+bilineal de matriz
+\[
+ B_2=\begin{pmatrix}2&-1\\-1&2\end{pmatrix},
+ \qquad \rho=a_1+a_2,\qquad \rho^2=2.
+\]
+Para \(x=ua_1+va_2\),
+\[
+ x^2=2(u^2-uv+v^2).
+\]
+La identidad
+\(4(u^2-uv+v^2)=(2u-v)^2+3v^2\) muestra
+la positividad. El determinante es tres. Las tres
+clases de \(A_2^*/A_2\) se representan mediante
+\[
+ \varpi_0=0,\qquad
+ \varpi_1=\frac{2a_1+a_2}{3},\qquad
+ \varpi_2=\frac{a_1+2a_2}{3}.
+\]
+El emparejamiento con \(a_1,a_2\) verifica que estos
+vectores pertenecen a \(A_2^*\), y
+\(2\varpi_1-\varpi_2=a_1\). Por ello
+\(j\mapsto\varpi_j+A_2\) identifica aditivamente
+\(\mathbb F_3\) con el discriminante.
+
+Para \(c\in C_W\), definimos
+\(\phi(c)=(\varpi_{c_1},\ldots,\varpi_{c_{12}})\)
+y
+\begin{equation}
+ N=\bigcup_{c\in C_W}\bigl(A_2^{12}+\phi(c)\bigr).
+ \label{eq:lf-glue}
+\end{equation}
+
+\begin{theorem}[Retículo de pegado par y unimodular]
+\label{thm:lf-niemeier}
+El conjunto \(N\) es un retículo positivo, par y
+unimodular de rango \(24\). Sus vectores de norma dos
+son exactamente las raíces de \(A_2^{12}\).
+\end{theorem}
+\begin{proof}
+La linealidad del código y la aditividad del discriminante
+hacen que la unión sea un subgrupo de
+\((A_2^*)^{12}\) que contiene \(A_2^{12}\).
+Es, por tanto, un retículo de rango \(24\).
+
+El emparejamiento de las clases discriminantes es
+\(2cd/3\) módulo \(\mathbb Z\) en cada componente.
+La autoortogonalidad de \(C_W\) anula su suma y prueba
+la integralidad de \(N\). La norma de una clase
+representada por \(\phi(c)\) es
+\(2\operatorname{wt}(c)/3\) módulo \(2\mathbb Z\).
+Todos los pesos de \eqref{eq:lf-enumerator} son
+múltiplos de tres, luego \(N\) es par.
+
+Su índice sobre \(A_2^{12}\) es \(|C_W|=3^6\).
+Con el determinante de la matriz de Gram,
+\[
+ \det N=\frac{\det(A_2^{12})}{[N:A_2^{12}]^2}
+       =\frac{3^{12}}{(3^6)^2}=1.
+\]
+La forma ambiente es la suma ortogonal de doce formas
+positivas; queda demostrada la positividad.
+La integralidad y el determinante uno implican
+\(N^*=N\).
+
+En una clase no nula del discriminante local, un
+vector tiene la forma \((ua_1+va_2)/3\), con residuos
+\((u,v)\equiv(2,1)\) o \((1,2)\pmod3\).
+El entero \(u^2-uv+v^2\) es positivo y divisible
+por tres, luego es al menos tres. Los representantes
+\(\varpi_1,\varpi_2\) alcanzan ese valor: la norma
+mínima de cada clase no nula es \(2/3\).
+Una palabra no nula del código tiene por lo menos
+seis coordenadas no nulas. Todo vector de una clase
+de pegado no trivial tiene, por tanto, norma
+al menos \(6(2/3)=4\).
+
+En \(A_2^{12}\), una norma dos sólo puede proceder
+de una única componente, porque cada componente
+tiene norma par positiva mínima dos. Las soluciones
+de \(u^2-uv+v^2=1\) son
+\((\pm1,0),(0,\pm1),(1,1),(-1,-1)\).
+Son las seis raíces de \(A_2\), y completan el censo
+de raíces de \(N\).
+\end{proof}
+
+Las propiedades anteriores identifican \(N\) como el
+retículo de Niemeier de sistema de raíces \(A_2^{12}\).
+La descripción de todas sus raíces es necesaria para
+controlar cuáles sobreviven al paso al vecino.
+
+\subsection{Cámara radial y vecino sin raíces}
+\label{subsec:lf-neighbour}
+
+Se fija la cámara radial
+\[
+ v(a)=\sum_{j=1}^{12}a_j\rho_j,\qquad
+ a_j=1+3b_j,\qquad b_j\in\mathbb Z_{\geq0},
+\]
+donde \(\rho_j\) es la copia de \(\rho\) en la
+componente \(j\). La paridad de un vecino de índice
+tres requiere \(v(a)^2\equiv0\pmod{18}\).
+Como
+\[
+ v(a)^2=2\sum_j(1+3b_j)^2
+       =24+12\sum_jb_j+18\sum_jb_j^2,
+\]
+la congruencia equivale a \(\sum_jb_j\equiv1\pmod3\).
+La norma mínima dentro de la cámara se alcanza con
+un único \(b_j=1\) y los demás cero, y vale \(54\).
+El origen \(o_*=1\) del lema~\ref{lem:lf-origin}
+selecciona
+\begin{equation}
+ v_\alpha=4\rho_1+\rho_2+\cdots+\rho_{12},
+ \qquad v_\alpha^2=54.
+ \label{eq:lf-valpha}
+\end{equation}
+El calificativo de mínimo se refiere a la cámara
+declarada. En la clase residual completa,
+\((a_1-2a_2,\rho,\ldots,\rho)\) representa la
+misma clase módulo tres y tiene norma
+\(14+11\cdot2=36\). Esta distinción preserva
+la condición que determina el coeficiente cuatro.
+
+Definimos
+\begin{equation}
+\begin{split}
+ N_0&=\{x\in N:\langle x,v_\alpha\rangle\equiv0\pmod3\},\\
+ \Lambda&=N_0+\mathbb Z\,v_\alpha/3.
+\end{split}
+\label{eq:lf-lambda}
+\end{equation}
+
+\begin{theorem}[Vecino par autodual sin raíces]
+\label{thm:lf-leech}
+La construcción \eqref{eq:lf-lambda} es un
+retículo positivo, par y autodual de rango \(24\)
+sin vectores de norma dos. En consecuencia, es
+isométrica al retículo de Leech.
+\end{theorem}
+\begin{proof}
+El carácter \(x\mapsto\langle x,v_\alpha\rangle\bmod3\)
+es no nulo. Una raíz simple de la componente \(j\)
+tiene emparejamiento \(a_j\equiv1\pmod3\) con
+\(a_j\rho_j\). Por tanto \([N:N_0]=3\), de donde
+\(\det N_0=9\).
+
+Para \(x\in N_0\), el emparejamiento
+\(\langle x,v_\alpha/3\rangle\) es entero, y así
+\(v_\alpha/3\in N_0^*\). Además,
+\(\langle v_\alpha,v_\alpha\rangle=54\) implica
+\(v_\alpha\in N_0\). Si \(v_\alpha/3\in N\),
+la integralidad de \(N\) obligaría a que todos los
+emparejamientos de \(N\) con \(v_\alpha\) fuesen
+divisibles por tres, contradiciendo el carácter
+no nulo. La clase de \(v_\alpha/3\) sobre \(N_0\)
+tiene entonces orden exactamente tres. Resulta
+\[
+ [\Lambda:N_0]=3,\qquad
+ \det\Lambda=\frac9{3^2}=1.
+\]
+Los emparejamientos de \(N_0\) con el nuevo
+generador son enteros y la norma de este generador
+es seis. La extensión es integral. Para
+\(x\in N_0\) y \(m\in\mathbb Z\),
+\[
+ \left(x+m\frac{v_\alpha}{3}\right)^2
+ =x^2+2m\frac{\langle x,v_\alpha\rangle}{3}
+       +6m^2\in2\mathbb Z.
+\]
+Por ello \(\Lambda\) es par; su integralidad y
+determinante uno prueban la autodualidad.
+La positividad y el rango se heredan del espacio
+euclídeo ambiente.
+
+Para excluir raíces, primero consideramos la
+clase \(N_0\). Todas las raíces de \(N\) pertenecen
+a \(A_2^{12}\) por el teorema~\ref{thm:lf-niemeier}.
+Los emparejamientos de sus seis raíces locales
+con \(a_j\rho_j\) son \(\pm a_j,\pm2a_j\),
+congruentes con \(\pm1,\pm2\pmod3\).
+Ninguna raíz pertenece a \(N_0\).
+
+Las otras dos clases de \(\Lambda/N_0\) pueden
+representarse con \(\pm v_\alpha/3\).
+En cada componente, sus vectores pertenecen a
+una de las clases
+\[
+ A_2+\varpi_j\pm\rho/3,\qquad j=0,1,2.
+\]
+La componente distinguida tiene la misma
+descripción porque \(4\rho/3\equiv\rho/3\pmod{A_2}\).
+Para los numeradores \((u,v)\) en
+\((ua_1+va_2)/3\), los seis residuos son
+\[
+ (1,1),(0,2),(2,0),(2,2),(1,0),(0,1)\pmod3.
+\]
+Todos son no nulos. La positividad de
+\(u^2-uv+v^2\) obliga a que sea al menos uno,
+y los representantes
+\((1,1),(0,-1),(-1,0),(-1,-1),(1,0),(0,1)\)
+alcanzan ese mínimo en las seis clases.
+Cada componente tiene norma al menos \(2/9\).
+Un vector de cualquiera de las dos clases
+nuevas tiene norma al menos
+\[
+ 12\cdot\frac29=\frac83>2.
+\]
+Se han excluido raíces en las tres clases.
+El teorema de clasificación de los retículos
+positivos pares unimodulares de rango veinticuatro
+identifica el único caso sin raíces con el
+retículo de Leech \cite{ConwaySloane}.
+\end{proof}
+
+La identificación final utiliza una clasificación
+externa sobre un objeto cuyas propiedades ya han
+sido demostradas. La selección de la componente
+distinguida conserva la bandera procedente del
+registro firmado; el subíndice \(\alpha\) expresa
+esa procedencia. La norma y los coeficientes del
+vector radial se obtienen de la métrica y de
+la cámara mediante la congruencia indicada.
+
+El retículo \(\Lambda\), su forma bilineal, sus
+doce planos ambientes y el vector \(v_\alpha/3\)
+quedan así determinados con todas las propiedades
+utilizadas por la deformación posterior. El
+código contiene asimismo la palabra
+\[
+ c_*=(1,1,1,1,1,1,2,1,1,1,1,1),
+\]
+pues \(q_*=(1,1,1,1,1,1)\) satisface
+\(q_*A_W=(2,1,1,1,1,1)\). Éste es el dato
+de soporte completo que permite construir y
+probar la estabilidad de la isometría de orden
+tres en la sección~\ref{sec:leech-dualidad}.

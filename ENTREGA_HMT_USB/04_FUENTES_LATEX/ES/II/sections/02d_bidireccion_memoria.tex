@@ -1,0 +1,228 @@
+% Desarrollo separado, 9 de septiembre de 2026.
+% Amplía el lector producto de centro_electronico_registros.tex.
+% No identifica la media vuelta espacial con una conjugación física.
+\subsubsection{Bidireccionalidad del lector producto y memoria de cocientes}
+\label{bim09:seccion}
+
+La lectura de producto conserva cuatro coordenadas aritméticas antes de
+determinar una firma. Para $x=(i,j)\in D_9^2$, $D_9=\{1,\ldots,9\}$,
+se definen
+\[
+ N(x)=ij,\qquad r(x)=1+((ij-1)\bmod9),\qquad
+ q(x)=\frac{N(x)-r(x)}9,
+\]
+y el lector discreto
+\[
+ \ell(1,2,4,8,7,5)=(0,1,2,3,4,5),\qquad
+ \ell(3)=\ell(6)=\ell(9)=0.
+\]
+Así, $N=r+9q$ conserva simultáneamente producto entero, residuo positivo
+y cociente aritmético. La función $f_\ell(x)=\ell(r(x))$ es la
+coordenada utilizada por la firma regional. Las funciones $N,r,q$ y
+$f_\ell$ tienen dominio posicional; la dirección de transporte permanece
+en la semilla orientada.
+
+\paragraph{Avance, media vuelta y lectura anterior al transporte.}
+
+Sea $\mathscr X_\times=D_9^2\times\{N,E,S,O\}$. Los vectores cardinales
+son $\nu_N=(-1,0)$, $\nu_E=(0,1)$, $\nu_S=(1,0)$,
+$\nu_O=(0,-1)$. La suma posicional se reduce a representantes positivos
+módulo nueve. Definimos
+\[
+ P(x,d)=(x+\nu_d,d),\qquad H(x,d)=(x,\bar d),
+ \qquad \nu_{\bar d}=-\nu_d.
+\]
+Estos operadores satisfacen $P^9=I$, $H^2=I$ y $HPH=P^{-1}$.
+
+En las primeras cincuenta y cuatro transiciones TPK, el canal producto
+se activa en las fases $2,5,8$ de cada ventana nonádica. Cada activación
+lee la posición anterior al avance. Tras las transiciones $27$ y $54$
+se aplica $H$. Por tanto, las dieciocho posiciones leídas son, para una
+semilla $s$,
+\[
+ P^0s,P^1s,\ldots,P^8s,\quad
+ HP^9s,\,P H P^9s,\ldots,P^8H P^9s,
+\]
+entendiendo que la lectura posicional omite únicamente la dirección.
+Para cualquier función posicional $f$, pongamos $f_n=f(P^ns)$, con
+índices módulo nueve. La palabra de lecturas crudas es
+\begin{equation}
+ \mathcal R_f(s)=
+ (f_0,f_1,\ldots,f_8,\ f_0,f_8,f_7,\ldots,f_1).
+ \label{bim09:palabra}
+\end{equation}
+Las seis sumas de ventana, cada una de tres activaciones, son
+\begin{align}
+ A_j^f(s)&=f_{3j}+f_{3j+1}+f_{3j+2},&&0\leq j<3,\label{bim09:ida}\\
+ A_{3+j}^f(s)&=f_{-3j}+f_{-3j-1}+f_{-3j-2},&&0\leq j<3.
+ \label{bim09:vuelta}
+\end{align}
+Para $f=f_\ell$, la firma es
+$E_{\rm sig}(s)=([A_0^f]_{10},\ldots,[A_5^f]_{10})$.
+El cociente decimal de cada acumulador es
+$c_j^{10}=\lfloor A_j^f/10\rfloor$ y conserva
+$A_j^f=[A_j^f]_{10}+10c_j^{10}$.
+
+\begin{proposition}[Media vuelta y permutación de semiciclos]
+\label{bim09:media-vuelta}
+Para toda semilla orientada y toda función posicional $f$,
+\[
+ \mathcal R_f(Hs)=\operatorname{rot}_9\mathcal R_f(s),\qquad
+ A_j^f(Hs)=A_{j+3\bmod6}^f(s).
+\]
+La misma permutación transporta los residuos y los cocientes decimales
+de los acumuladores. Se aplica, en particular, a $N,r,q$ y $f_\ell$.
+\end{proposition}
+\begin{proof}
+La relación $P^nH=HP^{-n}$ y la igualdad $f(Hs)=f(s)$ dan
+$f(P^nHs)=f(P^{-n}s)=f_{-n}$. Sustituir en
+\eqref{bim09:palabra} intercambia sus dos grupos de nueve entradas.
+La suma en grupos de tres produce la identidad de ventanas. La división
+euclídea por diez se efectúa componente a componente y respeta la
+permutación.
+\end{proof}
+
+El avance también tiene una ley exacta sobre los acumuladores:
+\begin{align}
+ A_j^f(Ps)-A_j^f(s)&=f_{3j+3}-f_{3j},&&0\leq j<3,
+ \label{bim09:avance-ida}\\
+ A_{3+j}^f(Ps)-A_{3+j}^f(s)&=f_{1-3j}-f_{-2-3j},&&0\leq j<3.
+ \label{bim09:avance-vuelta}
+\end{align}
+La prueba consiste en cancelar los dos sumandos comunes de cada ventana.
+El transporte de una firma requiere, por tanto, las evaluaciones de
+frontera que aparecen en estas diferencias, además de las sumas ya
+expresadas.
+
+\paragraph{Inversión cronológica y términos de frontera.}
+
+Sea $\gamma=(x_0,\ldots,x_n)$ una trayectoria registrada y sea
+$\gamma^\dagger=(x_n,\ldots,x_0)$ su inversión cronológica, con cada
+arista orientada en sentido opuesto. Para una función posicional $f$,
+la lectura anterior a cada avance es
+\[
+ C_f(\gamma)=\sum_{t=0}^{n-1}f(x_t).
+\]
+Entonces
+\begin{equation}
+ C_f(\gamma^\dagger)=C_f(\gamma)+f(x_n)-f(x_0).
+ \label{bim09:frontera-inversion}
+\end{equation}
+Si $n=3m$ y $A_j^f$ agrupa tres aristas consecutivas,
+\begin{equation}
+ A_j^f(\gamma^\dagger)=A_{m-1-j}^f(\gamma)
+ +f(x_{3(m-j)})-f(x_{3(m-j-1)}).
+ \label{bim09:frontera-ventana}
+\end{equation}
+Ambas fórmulas se siguen de que la trayectoria inversa lee los extremos
+de llegada de las aristas originales. Los sumandos interiores coinciden;
+la diferencia conserva los extremos.
+
+Para un observable de arista antisimétrico $a(x,y)=-a(y,x)$, su palabra
+sí se transforma mediante
+\[
+ \mathcal R_a(\gamma^\dagger)
+ =-\operatorname{rev}\mathcal R_a(\gamma).
+\]
+Esta identidad actúa sobre aristas orientadas. Las identidades
+\eqref{bim09:frontera-inversion}--\eqref{bim09:frontera-ventana}
+actúan sobre lecturas posicionales. La media vuelta $H$ cambia la
+dirección inicial y conserva el orden del calendario; la inversión
+cronológica invierte el registro completo. Sus dominios y sus reglas de
+lectura quedan especificados por separado.
+
+\paragraph{Cociclo de ocupación y memoria conservada en ida y vuelta.}
+
+Para una arista cardinal $x\to y$, con representantes positivos
+$\widetilde x,\widetilde y$, el cruce del recubrimiento es
+\[
+ b(x,y)=\frac{\widetilde x+\nu_d-\widetilde y}{9}\in\mathbb Z^2.
+\]
+Se cumple $b(y,x)=-b(x,y)$. En la categoría libre de caminos
+registrados, definimos el lector aditivo
+\begin{equation}
+ \mathfrak m(\gamma)=
+ \left(\sum_{t=0}^{n-1}b(x_t,x_{t+1}),\ C_q(\gamma),\ n\right).
+ \label{bim09:memoria-aditiva}
+\end{equation}
+La concatenación satisface
+$\mathfrak m(\gamma_2\circ\gamma_1)=
+\mathfrak m(\gamma_1)+\mathfrak m(\gamma_2)$.
+Es un cociclo aditivo sobre trayectorias registradas: el registro conserva
+las aristas de ida y de vuelta como eventos diferentes.
+
+Por \eqref{bim09:frontera-inversion},
+\begin{equation}
+ \mathfrak m(\gamma^\dagger\circ\gamma)=
+ \bigl(0,\ 2C_q(\gamma)+q(x_n)-q(x_0),\ 2n\bigr),
+ \label{bim09:memoria-retorno}
+\end{equation}
+donde $\gamma^\dagger\circ\gamma$ denota la concatenación temporal
+de la ida seguida de la vuelta. La suma orientada de cruces se cancela;
+la ocupación aritmética y la longitud permanecen. Este lector no
+desciende al cociente que identifica un recorrido seguido de su inversa
+con la trayectoria vacía, puesto que ese cociente elimina los eventos
+que la segunda y la tercera coordenadas conservan.
+
+Hay también una lectura par puramente fronteriza:
+\[
+ V_b(\gamma)=\sum_{t=0}^{n-1}
+ b(x_t,x_{t+1})b(x_t,x_{t+1})^{\mathsf T},\qquad
+ V_b(\gamma^\dagger\circ\gamma)=2V_b(\gamma).
+\]
+La lectura impar y la lectura par registran propiedades distintas de
+las mismas aristas; ambas están calculadas antes de olvidar el camino.
+
+\paragraph{Aplicación exacta a la fibra de firma \texorpdfstring{$555555$}{555555}.}
+
+La enumeración finita de $\mathscr X_\times$ contiene $324$ semillas,
+$26$ firmas y $24$ semillas con firma $555555$. La partición estable
+por $P,H$ refina esta fibra en tres clases de ocho elementos. Pueden
+etiquetarse por su firma después de un avance:
+\[
+ \mathscr C_{177},\quad\mathscr C_{717},\quad\mathscr C_{771}.
+\]
+La acción de media vuelta es
+\[
+ H\mathscr C_{177}=\mathscr C_{177},\qquad
+ H\mathscr C_{717}=\mathscr C_{771},\qquad
+ H\mathscr C_{771}=\mathscr C_{717}.
+\]
+El certificado finito adjunto verifica estas identidades sobre todos los
+representantes. En las veinticuatro semillas, los seis acumuladores
+crudos de $f_\ell$ valen exactamente cinco. Por tanto, los cocientes
+decimales $c_j^{10}$ se anulan en esta fibra. La información adicional
+se observa en las posiciones, las evaluaciones enteras y los cocientes
+aritméticos, que tienen lecturas diferentes de esa firma.
+
+La coordenada transversal fija $a$ del recorrido cardinal vale $4$ o
+$5$ en esas semillas. Durante una vuelta de nueve avances se recorre
+una vez cada valor de la coordenada móvil $u\in D_9$. Puesto que
+$\gcd(a,9)=1$, los residuos positivos $r(au)$ permutan $D_9$.
+De aquí se obtiene, sin utilizar una constante física,
+\[
+ \sum_{u=1}^9au=45a,\qquad
+ \sum_{u=1}^9r(au)=45,\qquad
+ \sum_{u=1}^9q(au)=5(a-1).
+\]
+La vuelta posterior recorre las mismas posiciones en sentido opuesto.
+En las dieciocho activaciones,
+\begin{equation}
+ \sum N=90a,\qquad\sum r=90,\qquad
+ \sum q=10(a-1)=
+ \begin{cases}30,&a=4,\\40,&a=5.\end{cases}
+ \label{bim09:ocupacion-30-40}
+\end{equation}
+El producto entero acumulado vale, respectivamente, $360$ o $450$.
+El enrollamiento neto es cero; la suma de cocientes y las dieciocho
+incidencias conservan la historia de la lectura. Cada una de las tres
+clases de firma contiene representantes de ambos valores transversales.
+La misma firma y la misma clase de transporte de ese cociente finito
+pueden, por tanto, coexistir con ocupaciones aritméticas distintas.
+
+Estos resultados conectan la memoria conservada con operaciones
+concretas: permutación de semiciclos, diferencias de frontera,
+cocientes aritméticos y registro de incidencias. La identificación
+físico-matemática de cualquier lector posterior conserva sus mapas
+propios; las identidades aquí demostradas pertenecen a la dinámica
+interna del canal producto.

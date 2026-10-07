@@ -1,0 +1,52 @@
+\subsubsection{Inversión de Hensel en la torre aritmética y realización por historias}
+\label{sec:ch-capacidad-hensel}
+
+Antes de levantar las ramas a historias enriquecidas, conviene recuperar el
+argumento finito que determina la capacidad de la torre aritmética. Se
+incorpora la prueba completa del transductor no filtrado de la matriz; su
+dominio se distingue del árbol superviviente.
+
+\begin{proposition}[Conjugación de la torre de Hensel no filtrada]
+\label{prop:ch-hensel-bruto}
+Sean \(p\) primo, \(d\geq1\) y \(A\in\operatorname{GL}_d(\mathbb Z)\).
+Para vectores fila, tomando representantes de residuos en
+\(\{0,\ldots,p-1\}^d\), se define
+\[
+ x_tA=u_t+px_{t+1},\qquad u_t=x_tA\bmod p.
+\]
+La aplicación
+\[
+ \Psi_T:(\mathbb Z/p^T\mathbb Z)^d\longrightarrow
+             (\mathbb F_p^d)^T,\qquad
+ x_0\longmapsto(u_0,\ldots,u_{T-1})
+\]
+es biyectiva, con inversa
+\[
+ x_0\equiv\sum_{t=0}^{T-1}p^tu_tA^{-(t+1)}\pmod{p^T}.
+\]
+Las biyecciones conmutan con las reducciones y dan un homeomorfismo
+\(\Psi:\mathbb Z_p^d\to(\mathbb F_p^d)^{\mathbb N}\), donde
+\(\mathbb Z_p:=\varprojlim_T\mathbb Z/p^T\mathbb Z\). La actualización
+\(x_t\mapsto x_{t+1}\) corresponde a suprimir el primer bloque.
+\end{proposition}
+
+\begin{proof}
+La inversa entera de \(A\) existe porque su determinante es \(\pm1\).
+Iterando \(x_t=(u_t+px_{t+1})A^{-1}\), se obtiene
+\[
+ x_0=\sum_{t=0}^{T-1}p^tu_tA^{-(t+1)}+p^Tx_TA^{-T}.
+\]
+Módulo \(p^T\), una palabra determina una única clase inicial. Dada una
+palabra arbitraria, fijar \(x_T=0\) y reconstruir hacia atrás produce una
+clase que la emite, lo que prueba la sobreyectividad. La misma fórmula
+prueba compatibilidad al truncar. El paso al límite inverso da el
+homeomorfismo y la relación con el desplazamiento de la cinta.
+\end{proof}
+
+Para \(p=3\) y \(d=6\), el alfabeto de bloques tiene \(3^6=729\)
+elementos. Esta capacidad aritmética no se identifica por definición con
+la realizabilidad de cada bloque tras cada prefijo superviviente. El
+enlace con las aristas \(\operatorname{Ext}\) es precisamente el cometido
+del lema~\ref{lem:elevacion-catalogal-nonadica}. Se mantienen así las dos
+operaciones que distingue la matriz: representación en la torre bruta y
+realización bajo las compatibilidades APP--TRIT--TPK.

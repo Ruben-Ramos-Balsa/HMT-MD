@@ -1,0 +1,102 @@
+\subsection{Memoria profunda y compatibilidad de los cilindros}
+\label{memprof:seccion}
+
+La prolongación compara estados que conservan simultáneamente residuos,
+cocientes y fronteras. En la coordenatización lineal de seis coordenadas del registro,
+tomamos el representante entero de \(L_0\) cuyas entradas se han mostrado:
+\[
+ A_H=\begin{pmatrix}
+ 2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+ 0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+ \end{pmatrix},\qquad\det A_H=1.
+\]
+La elección de este representante forma parte de la coordenatización: la reducción
+módulo tres conserva \(L_0\), mientras que el representante entero fija
+la operación sobre los cocientes profundos. Con vectores fila se obtiene
+\begin{equation}
+ \begin{aligned}
+ \mathsf{Div}_H:\mathbb Z^6&\longrightarrow
+       \{0,1,2\}^6\times\mathbb Z^6,\\
+ x_H&\longmapsto(u_H,x_H^+),\\
+ y_H&=x_HA_H,\qquad u_H=[y_H]_3,\qquad
+ x_H^+=(y_H-u_H)/3 .
+ \end{aligned}
+ \label{memprof:division}
+\end{equation}
+El par \((u_H,x_H^+)\) conserva \(y_H=u_H+3x_H^+\). Puesto que
+\(A_H\) es unimodular, su inversa es entera y
+\begin{equation}
+ x_H=(u_H+3x_H^+)A_H^{-1}.
+ \label{memprof:inversa}
+\end{equation}
+Esta identidad recupera la coordenada profunda desde su residuo y su
+cociente. Los otros campos del estado conservan sus registros propios.
+La orientación ternaria se lee después mediante
+\(0\mapsto0,\ 1\mapsto+1,\ 2\mapsto-1\), manteniendo el residuo
+\(u_H\in\{0,1,2\}^6\) y el cociente de \eqref{memprof:division}.
+
+La coordenatización cilíndrica relaciona un prefijo ternario de longitud \(L\), de
+índice entero \(N\), con \(k_{\mathrm{dec}}\) tríadas decimales, de
+índice \(D\). Los cilindros semiabiertos correspondientes son
+\[
+ I_3(N,L)=\left[\frac N{3^L},\frac{N+1}{3^L}\right),\qquad
+ I_{1000}(D,k_{\mathrm{dec}})
+ =\left[\frac D{1000^{k_{\mathrm{dec}}}},
+         \frac{D+1}{1000^{k_{\mathrm{dec}}}}\right).
+\]
+Definimos los enteros de frontera
+\[
+ a_{\mathrm{cyl}}=N1000^{k_{\mathrm{dec}}}-D3^L,\qquad
+ b_{\mathrm{cyl}}=(N+1)1000^{k_{\mathrm{dec}}}-D3^L.
+\]
+Para un bloque de seis residuos fijamos su codificación entera
+\[
+ \nu(u_H)=\sum_{j=1}^6(u_H)_j3^{6-j}
+ \in\{0,\ldots,728\}.
+\]
+
+\begin{lemma}[Actualización entera de los cilindros compatibles]
+\label{memprof:cilindros}
+Los cilindros anteriores se intersectan si y sólo si
+\(a_{\mathrm{cyl}}<3^L\) y \(b_{\mathrm{cyl}}>0\).
+Al añadir un bloque ternario de índice
+\(\nu\in\{0,\ldots,728\}\), se tiene \(N'=729N+\nu\) y
+\(L'=L+6\). Para \(\Delta k_{\mathrm{dec}}\in\{0,1\}\),
+las fronteras se actualizan por
+\[
+ \begin{array}{ll}
+ \Delta k_{\mathrm{dec}}=0:
+   &a_{\mathrm{cyl}}'=729a_{\mathrm{cyl}}+\nu1000^{k_{\mathrm{dec}}},\\[2pt]
+ \Delta k_{\mathrm{dec}}=1:
+   &D'=1000D+\delta,\\
+   &a_{\mathrm{cyl}}'=729000a_{\mathrm{cyl}}
+      +\nu1000^{k_{\mathrm{dec}}+1}-\delta\,729\,3^L ,
+ \end{array}
+\]
+donde \(\delta\in\{0,\ldots,999\}\) es la tríada de la prolongación
+compatible. En ambos casos,
+\[
+ b_{\mathrm{cyl}}'=a_{\mathrm{cyl}}'
+          +1000^{k_{\mathrm{dec}}+\Delta k_{\mathrm{dec}}}.
+\]
+\end{lemma}
+\begin{proof}
+Dos intervalos semiabiertos se intersectan precisamente cuando cada extremo
+izquierdo es menor que el extremo derecho del otro. Multiplicar esas dos
+desigualdades por \(3^L1000^{k_{\mathrm{dec}}}\) da
+\(a_{\mathrm{cyl}}<3^L\) y \(b_{\mathrm{cyl}}>0\).
+La sustitución de \(N'\), \(L'\) y \(D'\) en
+\[
+ a_{\mathrm{cyl}}'
+ =N'1000^{k_{\mathrm{dec}}+\Delta k_{\mathrm{dec}}}-D'3^{L'}
+\]
+produce las dos recurrencias. Restar las definiciones de
+\(b_{\mathrm{cyl}}'\) y \(a_{\mathrm{cyl}}'\) da la última identidad.
+\end{proof}
+
+Estas operaciones actúan sobre prefijos enteros y sus restricciones
+compatibles. La lectura arquimediana aparece al evaluar el sistema de
+cilindros resultante. El dominio de prolongación incorpora además la
+orientación, el acarreo, la firma conjunta y los datos de frontera del estado
+\(\widehat X\) de \eqref{eq:actualizacion}; la comparación de intervalos
+es una componente de esa compatibilidad conjunta.

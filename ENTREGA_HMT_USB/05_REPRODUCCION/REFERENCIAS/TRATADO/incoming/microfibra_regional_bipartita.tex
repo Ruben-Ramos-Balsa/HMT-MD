@@ -1,0 +1,127 @@
+% Procedencia: inventario REV05, SR-015--027; ampliacion 04_tpk_emisor,
+% firmas y factorizacion; X_RECIPROCIDAD/sections__generacion.tex:16--43.
+% Ampliacion de la prueba de metadatos y de las tres componentes.
+\section{Metadatos orientados y descomposición de la microfibra regional}
+\label{sec:microfibra-bipartita-explicita}
+
+La firma aditiva conserva la clase diagonal de origen y la orientación
+de su desplazamiento. Para un cursor inicial $(i,j;d)$, con índices entre
+cero y ocho, definimos
+\[
+ c=[i+j]_9,\qquad
+ h(d)=\begin{cases}ES,&d\in\{E,S\},\\NO,&d\in\{N,O\}.
+ \end{cases}
+\]
+En las activaciones aditivas consecutivas, la clase $c$ aumenta en uno
+para $ES$ y disminuye en uno para $NO$. Tras la novena activación se
+invierte la dirección. La sucesión de muestras es, por tanto, determinada
+por $(c,h)$, con la inversión posterior a la muestra novena. La muestra
+en clase $c'$ es $\rho_9(c'+2)$; cada firma decimal suma tres muestras
+consecutivas y reduce el total módulo diez.
+
+\begin{proposition}[Recuperación de los metadatos aditivos]
+El lector $(c,h)\mapsto f_+(c,h)$ es biyectivo sobre las dieciocho
+firmas aditivas del emisor. Cada preimagen en el espacio de cursores
+consta de dieciocho condiciones iniciales. Las dos coordenadas se
+recuperan mediante la tabla siguiente.
+\end{proposition}
+
+\begin{center}
+\begin{tabular}{c|cc}
+\toprule
+$c$&$f_+(c,ES)$&$f_+(c,NO)$\\
+\midrule
+0&\texttt{988212}&\texttt{212988}\\
+1&\texttt{212645}&\texttt{645212}\\
+2&\texttt{546988}&\texttt{988546}\\
+3&\texttt{889221}&\texttt{221889}\\
+4&\texttt{122564}&\texttt{564122}\\
+5&\texttt{465898}&\texttt{898465}\\
+6&\texttt{898122}&\texttt{122898}\\
+7&\texttt{221456}&\texttt{456221}\\
+8&\texttt{654889}&\texttt{889654}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{proof}
+Para cada entrada se aplica la recurrencia de clases descrita antes del
+enunciado durante dieciocho activaciones; sus grupos de tres dan las seis
+cifras impresas. Por ejemplo, desde $(c,h)=(4,NO)$ las primeras nueve
+clases son $4,3,2,1,0,8,7,6,5$ y las muestras son
+$6,5,4,3,2,1,9,8,7$. Los tres totales son $15,6,24$, que publican
+$5,6,4$. La inversión deja la segunda mitad $1,2,2$, y resulta
+\texttt{564122}. Las dieciocho cadenas de la tabla son distintas,
+por lo que el lector es inyectivo y enumera toda su imagen. Para cada
+$c$ hay nueve parejas $(i,j)$, una por cada $i$, y para cada $h$ hay
+dos direcciones. Esto da $9\cdot2=18$ condiciones por firma y
+$18\cdot18=324$ condiciones en total.
+\end{proof}
+
+Sean $A_s=f_+^{-1}(s)$ y $B_e=f_\times^{-1}(e)$ las clases de cursores
+de las dos hojas. La ley decimal recupera ambas firmas de cada emisión
+$U$: si $U_j=100s_j+10t_j+u_j$, entonces
+$s_j=\lfloor U_j/100\rfloor$ y $e_j=[t_j-s_j]_{10}$.
+En consecuencia, la preimagen de $U$ es exactamente $A_s\times B_e$.
+Las condiciones iniciales permanecen en ese producto; sus cardinales
+son una lectura adicional de la misma preimagen.
+
+\begin{definition}[Incidencia bipartita de la microfibra]
+Para la palabra orientada $w=\texttt{010211}$, se forma el grafo cuyos
+vértices de una clase son las firmas aditivas que aparecen sobre $w$ y
+cuyos vértices de la otra clase son las firmas multiplicativas. Una
+arista $(s,e)$ representa la emisión correspondiente y conserva como
+preimagen etiquetada el producto $A_s\times B_e$.
+\end{definition}
+
+La recuperación de firmas de las cinco emisiones da la tabla completa
+de aristas:
+\begin{center}
+\begin{tabular}{llrrl}
+\toprule
+$s$&$e$&$|A_s|$&$|B_e|$&estrato\\
+\midrule
+\texttt{564122}&\texttt{555555}&18&24&transversal\\
+\texttt{898122}&\texttt{339555}&18&8&positivo\\
+\texttt{898122}&\texttt{393555}&18&8&positivo\\
+\texttt{898122}&\texttt{933555}&18&8&positivo\\
+\texttt{898465}&\texttt{933717}&18&8&retorno\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{theorem}[Descomposición exacta en tres componentes]
+La incidencia bipartita tiene tres componentes conexas, isomorfas a
+$K_{1,1}$, $K_{1,3}$ y $K_{1,1}$. Su preimagen conjunta es la unión
+disjunta
+\begin{align*}
+ &A_{\texttt{564122}}\times B_{\texttt{555555}},\\
+ &A_{\texttt{898122}}\times
+  (B_{\texttt{339555}}\sqcup B_{\texttt{393555}}
+     \sqcup B_{\texttt{933555}}),\\
+ &A_{\texttt{898465}}\times B_{\texttt{933717}}.
+\end{align*}
+Los cardinales respectivos son $432,432,144$ y suman $1008$.
+La descomposición por emisiones consta de cinco productos y la
+descomposición por componentes consta de tres conjuntos.
+\end{theorem}
+\begin{proof}
+Las tres firmas aditivas impresas son distintas. Las cinco firmas
+multiplicativas también lo son. Sólo las tres aristas positivas comparten
+un vértice, el asociado a \texttt{898122}; forman una estrella conexa
+con tres aristas. Las otras dos aristas carecen de vértices comunes con
+ella o entre sí y cada una forma una componente. Las preimágenes de
+firmas diferentes bajo una función son disjuntas. La factorización del
+emisor y la distributividad del producto cartesiano sobre esa unión
+disjunta prueban las tres expresiones. Sus cardinales son
+$18\cdot24$, $18(8+8+8)$ y $18\cdot8$. Las cinco aristas siguen
+individualizadas dentro de esas componentes, con su multiplicidad y su
+emisión ordenada.
+\end{proof}
+
+El recuperador de metadatos da $(c,h)=(4,NO)$ para la transversal,
+$(6,ES)$ para cada una de las tres positivas y $(5,NO)$ para el retorno.
+Así, orientación, clase diagonal, incidencia y multiplicidad se leen de
+las mismas firmas producidas por los cursores. La distinción entre cinco
+emisiones y tres componentes conserva la estructura completa del censo,
+incluida la coincidencia de cardinal $432$ entre dos componentes distintas.

@@ -1,0 +1,704 @@
+% FORMALIZACION_REUNIDA. Desarrollo ampliado de las tres composiciones de
+% EXPLORACION_AMBIVALENCIA_ESPEJO_DIAGONAL_20260918, con dependencias de X.
+% Las coordenadas pi, phi, e, alpha y el registro K son salidas generadas.
+% Este capítulo define lectores posteriores y no altera el generador TPK.
+\chapter{Holonomía nonádica, reciprocidad y recuperación de lectores geométricos}
+\label{hrr:capitulo}
+
+La conexión nonádica, la incidencia areal--volumétrica y la reciprocidad
+radial intervienen en realizaciones diferentes del mismo estado enriquecido.
+La conexión conserva la sucesión orientada de las nueve fases y prolonga
+la memoria al retornar. La incidencia registra las transiciones entre dos
+modos de lectura. La reciprocidad radial intercambia las dos orientaciones
+de una forma geométrica de área fijada. Su composición se expresa mediante
+tres resultados precisos: la invariancia de un cociente de marcas a toda
+profundidad, la factorización de una deformación de determinante uno y la
+reconstrucción de la anisotropía a partir de una longitud normalizada y su
+orientación.
+
+El orden de construcción permanece
+\[
+ \begin{gathered}
+ \mathrm{APP}\longrightarrow\mathrm{TRIT}\longrightarrow\mathrm{TPK}
+ \longrightarrow\text{estado enriquecido},\\
+ \text{estado enriquecido}
+ \longrightarrow\text{estructura discreta conjunta del continuo},\\
+ \text{estructura discreta conjunta del continuo}
+ \longrightarrow\text{lectores aquí compuestos}.
+ \end{gathered}
+\]
+Las coordenadas \(\pi,\varphi,e,\alpha\) y el registro \(K\) que aparecen
+en las fórmulas son las salidas de la generación regional precedente. El
+calendario trítico ya determina los pares consecutivos de los modos
+aditivo y multiplicativo. El lenguaje de matrices, funciones hiperbólicas
+y menores exteriores explicita a continuación las realizaciones de esa
+estructura generada.
+
+\section{Incidencia modal y marcas regionales sobre retornos finitos}
+\label{hrr:incidencia}
+
+\subsection{Enumeración de los retornos entre hojas}
+
+El bloque temporal \((+,-,0)\) induce la sucesión modal
+\((\Sigma,\Pi,\Pi)\). Sus pares consecutivos, incluido el enlace de retorno,
+son \((\Sigma,\Pi)\), \((\Pi,\Pi)\) y \((\Pi,\Sigma)\). La incidencia
+primitiva, en el orden areal--volumétrico, es por tanto
+\begin{equation}
+ F_{\mathrm{av}}=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.
+ \label{hrr:incidencia-matriz}
+\end{equation}
+Esta matriz registra los pares del calendario. El envolvente simbólico
+de memoria uno que determina conserva esa incidencia; las restricciones
+adicionales de fase, orientación y registro permanecen en el estado TPK.
+Así se distinguen el recuento del envolvente y la supervivencia de una
+historia enriquecida completa.
+
+Sean \(f_0=0\), \(f_1=1\) y
+\(f_{n+1}=f_n+f_{n-1}\) para \(n\geq1\). Estos enteros expresan aquí
+los recuentos producidos por las potencias de la incidencia. La
+identificación convencional de esta sucesión conserva su carácter
+posterior a la construcción del calendario.
+
+\begin{proposition}[Potencias de la incidencia y retornos diagonales]
+\label{hrr:potencias}
+Para todo \(n\geq1\),
+\begin{equation}
+ F_{\mathrm{av}}^n=
+ \begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix}.
+ \label{hrr:potencias-formula}
+\end{equation}
+En particular, los retornos de longitud \(n\) a las hojas areal y
+volumétrica tienen multiplicidades \(f_{n-1}\) y \(f_{n+1}\),
+respectivamente.
+\end{proposition}
+\begin{proof}
+Para \(n=1\), la fórmula es la definición de
+\(F_{\mathrm{av}}\), pues \(f_2=1\). Supuesta válida para \(n\),
+la multiplicación por la derecha proporciona
+\[
+ \begin{pmatrix}f_{n-1}&f_n\\f_n&f_{n+1}\end{pmatrix}
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}
+ =\begin{pmatrix}f_n&f_{n-1}+f_n\\
+ f_{n+1}&f_n+f_{n+1}\end{pmatrix}
+ =\begin{pmatrix}f_n&f_{n+1}\\f_{n+1}&f_{n+2}\end{pmatrix}.
+\]
+La inducción prueba la identidad. Para una matriz de incidencia con
+entradas cero o uno, la regla de multiplicación suma las sucesiones de
+transiciones compatibles entre dos posiciones. Por inducción sobre la
+longitud, la entrada \((i,j)\) de la potencia cuenta las sucesiones de
+longitud \(n\) de \(i\) a \(j\). Las dos entradas diagonales cuentan
+los retornos declarados.
+\end{proof}
+
+\subsection{Marcación regional del soporte de retorno}
+
+Sean \(e_{\mathrm{ar}}=(1,0)^{\mathsf T}\) y
+\(e_{\mathrm{vol}}=(0,1)^{\mathsf T}\). Para una coordenada positiva
+\(c\), producida antes de esta evaluación, definimos el lector de marca
+\[
+ D_c=c\,e_{\mathrm{ar}}e_{\mathrm{ar}}^{\mathsf T}
+       +e_{\mathrm{vol}}e_{\mathrm{vol}}^{\mathsf T}
+     =\operatorname{diag}(c,1).
+\]
+La diagonalidad conserva las dos hojas; la entrada volumétrica expresa
+su normalización unitaria. La marca areal \(c\) se aplica una sola vez,
+después del recuento de retornos. Su evaluación es
+\begin{equation}
+ \Theta_{c,n}=
+ \frac{\langle e_{\mathrm{ar}},D_c F_{\mathrm{av}}^n
+ e_{\mathrm{ar}}\rangle}
+ {\langle e_{\mathrm{vol}},F_{\mathrm{av}}^n
+ e_{\mathrm{vol}}\rangle}
+ =c\,\frac{f_{n-1}}{f_{n+1}},\qquad n\geq1.
+ \label{hrr:marca}
+\end{equation}
+La elección \(c=\pi\) coincide con el lector de frontera del retorno
+areal--volumétrico. La elección \(c=e\) define el lector posterior
+complementario considerado en este capítulo. En ambos casos se utiliza
+el mismo soporte de retornos y la coordenada regional ya generada.
+
+\begin{theorem}[Cociente de marcas independiente de la profundidad]
+\label{hrr:cociente}
+Para cualesquiera marcas positivas \(c,d\) y todo \(n\geq2\),
+\begin{equation}
+ \frac{\Theta_{c,n}}{\Theta_{d,n}}=\frac cd.
+ \label{hrr:cociente-exacto}
+\end{equation}
+En particular,
+\begin{equation}
+ \frac{\Theta_{\pi,n}}{\Theta_{e,n}}=\frac\pi e,
+ \qquad
+ \lim_{n\to\infty}\Theta_{\pi,n}=\frac\pi{\varphi^2},
+ \qquad
+ \lim_{n\to\infty}\Theta_{e,n}=\frac e{\varphi^2}.
+ \label{hrr:pi-e-phi}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La recurrencia implica \(f_j>0\) para \(j\geq1\). Para \(n\geq2\),
+el cociente \(r_n=f_{n-1}/f_{n+1}\) es positivo. Por
+\eqref{hrr:marca}, las dos evaluaciones son \(cr_n\) y \(dr_n\),
+de modo que su división cancela exactamente el mismo factor de retorno.
+La identificación precedente de la coordenada regional de autoescala
+con la razón estable de esta incidencia da
+\(r_n\to\varphi^{-2}\). Al multiplicar por las marcas constantes
+\(\pi\) y \(e\), se obtienen ambos límites. El cociente finito,
+en cambio, ya tiene su valor exacto antes del paso al límite.
+\end{proof}
+
+La primera longitud tiene \(f_0=0\): ambas evaluaciones se anulan y su
+cociente queda fuera del dominio de \eqref{hrr:cociente-exacto}. La
+restricción \(n\geq2\) expresa una propiedad del recuento y evita
+extender una simplificación a un denominador nulo.
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\(n\)&2&3&4&5&6\\\hline
+\(r_n\)&\(1/2\)&\(1/3\)&\(2/5\)&\(3/8\)&\(5/13\)\\
+\(\Theta_{\pi,n}\)&\(\pi/2\)&\(\pi/3\)&\(2\pi/5\)&\(3\pi/8\)&\(5\pi/13\)\\
+\(\Theta_{e,n}\)&\(e/2\)&\(e/3\)&\(2e/5\)&\(3e/8\)&\(5e/13\)
+\end{tabular}
+\end{center}
+La tabla exhibe dos hechos simultáneos: cada lector cambia con la
+profundidad, mientras que la comparación entre ambos permanece fija.
+La invariancia corresponde a una relación entre lectores y no a la
+inmovilidad del estado que sostiene la lectura.
+
+\subsection{Cota exacta de convergencia a la razón estable}
+
+La correspondencia ya establecida de la coordenada generada
+\(\varphi\) con el autovalor positivo de
+\(F_{\mathrm{av}}\) proporciona \(\varphi^2=\varphi+1\) y
+\(\varphi>1\). Es posible cuantificar el límite sin introducir
+una expansión decimal objetivo.
+
+\begin{proposition}[Error del cociente de retornos]
+\label{hrr:error-retorno}
+Puesto \(q=-\varphi^{-2}\), para \(n\geq1\) se cumple
+\begin{align}
+ r_n&=\varphi^{-2}\frac{1-q^{n-1}}{1-q^{n+1}},
+ \label{hrr:rn-exacto}\\
+ r_n-\varphi^{-2}
+ &=\varphi^{-2}
+ \frac{q^{n-1}(q^2-1)}{1-q^{n+1}}.
+ \label{hrr:rn-error}
+\end{align}
+En particular,
+\begin{equation}
+ |r_n-\varphi^{-2}|
+ \leq\varphi^{-2}
+ \frac{|q|^{n-1}(1-q^2)}{1-|q|^{n+1}}.
+ \label{hrr:rn-cota}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Sea \(\psi=-\varphi^{-1}\). De \(\varphi^2=\varphi+1\)
+se deduce \(\psi^2=\psi+1\). La sucesión
+\(b_n=(\varphi^n-\psi^n)/(\varphi-\psi)\)
+satisface \(b_0=0\), \(b_1=1\) y la misma recurrencia de
+\(f_n\). La inducción da \(b_n=f_n\). Al dividir la expresión
+de \(f_{n-1}\) por la de \(f_{n+1}\), y usar
+\(\psi/\varphi=q\), resulta \eqref{hrr:rn-exacto}.
+La resta del límite produce \eqref{hrr:rn-error}. Finalmente,
+\(|q|<1\), \(1-q^2>0\) y
+\(|1-q^{n+1}|\geq1-|q|^{n+1}>0\) dan la cota.
+\end{proof}
+
+Esta fórmula constituye una lectura exacta de la velocidad de convergencia
+de la incidencia ya generada. Las marcas reciben el error multiplicado
+por \(c\), pero su cociente conserva la cancelación exacta del
+teorema~\ref{hrr:cociente}.
+
+\section{Composición multiplicativa del flujo de acoplamiento}
+\label{hrr:flujo}
+
+\subsection{Dirección generada y eliminación de la componente uniforme}
+
+El registro dodecafásico \(K\), con su marcación, produce la dirección
+\[
+ u_K=P_3P_{11}K,\qquad u_K\neq0,\qquad
+ \langle u_K,\mathbf1\rangle=0.
+\]
+Los proyectores son los operadores ya construidos en la realización
+correspondiente del registro. En esta sección se fija su resultado y
+se escribe
+\[
+ v=\frac{u_K}{\|u_K\|},\qquad
+ H_K=\operatorname{diag}(v_1,\ldots,v_{12}).
+\]
+Entonces \(\sum_i v_i=0\), \(\sum_i v_i^2=1\) y
+\(\operatorname{tr}H_K=0\). Para una marca positiva \(r\) y un
+parámetro real \(t\), definimos
+\begin{equation}
+ g_{K,r}(t)=\exp\bigl(t\log(r)H_K\bigr)
+ =\operatorname{diag}\bigl(r^{tv_1},\ldots,r^{tv_{12}}\bigr).
+ \label{hrr:g-definicion}
+\end{equation}
+La dirección procede del registro; la marca determina la escala
+logarítmica de la deformación. El parámetro \(t\) parametriza este
+flujo geométrico. Una identificación con un reloj físico requiere la
+realización temporal correspondiente.
+
+\begin{theorem}[Homomorfismo de marcas y conservación del determinante]
+\label{hrr:homomorfismo}
+Para \(a,b>0\) y \(s,t\in\mathbb R\),
+\begin{align}
+ g_{K,ab}(t)&=g_{K,a}(t)g_{K,b}(t),
+ \label{hrr:producto}\\
+ g_{K,a/b}(t)&=g_{K,a}(t)g_{K,b}(t)^{-1},
+ \label{hrr:cociente-flujo}\\
+ g_{K,r}(s+t)&=g_{K,r}(s)g_{K,r}(t),
+ \label{hrr:grupo-t}\\
+ \det g_{K,r}(t)&=1.
+ \label{hrr:determinante}
+\end{align}
+Además, \(g_{K,r}(t)^{-1}=g_{K,r}(-t)=g_{K,r^{-1}}(t)\).
+\end{theorem}
+\begin{proof}
+Todas las matrices son diagonales. La entrada \(i\) de la primera
+igualdad es \((ab)^{tv_i}=a^{tv_i}b^{tv_i}\), puesto que
+\(\log(ab)=\log a+\log b\) para bases positivas. Cada entrada
+es estrictamente positiva, por lo que la matriz es invertible, y
+la sustitución \(b\mapsto b^{-1}\) prueba la segunda igualdad.
+La tercera se obtiene de \(r^{(s+t)v_i}=r^{sv_i}r^{tv_i}\).
+El determinante es el producto de las doce entradas:
+\[
+ \prod_{i=1}^{12}r^{tv_i}
+ =r^{t\sum_i v_i}=r^0=1.
+\]
+La fórmula de la inversa es nuevamente la inversión de cada entrada.
+\end{proof}
+
+\begin{corollary}[Composición de ambivalencia y espejo regional]
+\label{hrr:composicion}
+Para todo \(n\geq2\),
+\begin{equation}
+ g_{K,\Theta_{\pi,n}}(t)
+ g_{K,\Theta_{e,n}}(t)^{-1}
+ =g_{K,\pi/e}(t).
+ \label{hrr:composicion-finita}
+\end{equation}
+En el límite estable,
+\begin{equation}
+ g_{K,\pi/\varphi^2}(t)
+ =g_{K,\pi/e}(t)\,g_{K,e/\varphi^2}(t).
+ \label{hrr:composicion-limite}
+\end{equation}
+\end{corollary}
+\begin{proof}
+Las dos marcas finitas son positivas para \(n\geq2\). Aplicando
+\eqref{hrr:cociente-flujo} y \eqref{hrr:cociente-exacto}, su cociente
+de matrices es el flujo de la marca \(\pi/e\). Para la segunda
+igualdad basta usar
+\((\pi/e)(e/\varphi^2)=\pi/\varphi^2\) en
+\eqref{hrr:producto}. También se obtiene como límite de la identidad
+finita, porque la exponencial y el logaritmo son continuos en el
+dominio de bases positivas.
+\end{proof}
+
+La igualdad compara deformaciones con una misma dirección \(u_K\).
+El intercambio especular interno de los canales regionales conserva
+su propio dominio sobre el estado enriquecido; la razón \(\pi/e\)
+es su lectura escalar posterior. El operador de holonomía \(\Gamma_9\)
+continúa actuando sobre fase y memoria. Estos dominios determinan el
+sentido de la composición y preservan el registro que acompaña al retorno.
+
+\subsection{Transporte de menores e invariantes exteriores}
+
+Sea \(X\) una matriz real de rango \(k\) con doce columnas y
+\(\Delta_I(X)\) el menor de columnas indicado por un conjunto
+\(I\) de \(k\) índices. La acción por la derecha de
+\(g_{K,r}(t)\) escala la columna \(i\) por \(r^{tv_i}\).
+
+\begin{proposition}[Signos, estratos e invariantes de cocientes]
+\label{hrr:plucker}
+Se cumple
+\begin{equation}
+ \Delta_I\bigl(Xg_{K,r}(t)\bigr)
+ =r^{t\sum_{i\in I}v_i}\Delta_I(X).
+ \label{hrr:plucker-formula}
+\end{equation}
+Se conservan los signos y el patrón de anulación de todos los menores.
+Si \(I,J,P,Q\) satisfacen
+\(\mathbf1_I+\mathbf1_J=\mathbf1_P+\mathbf1_Q\), entonces,
+donde \(\Delta_P(X)\Delta_Q(X)\neq0\), el cociente
+\begin{equation}
+ \frac{\Delta_I\Delta_J}{\Delta_P\Delta_Q}
+ \label{hrr:cociente-menores}
+\end{equation}
+es invariante bajo el flujo.
+\end{proposition}
+\begin{proof}
+La multilinealidad del determinante multiplica el menor por el producto
+de los factores de sus columnas, lo que prueba
+\eqref{hrr:plucker-formula}. Ese producto es positivo y, por tanto,
+conserva el signo y la nulidad del menor. En
+\eqref{hrr:cociente-menores}, el exponente total es
+\[
+ t\sum_{i=1}^{12}
+ (\mathbf1_I(i)+\mathbf1_J(i)-\mathbf1_P(i)-\mathbf1_Q(i))v_i=0.
+\]
+El denominador permanece distinto de cero y la cancelación es exacta.
+\end{proof}
+
+Para \(k=2\), una aplicación concreta es
+\[
+ \frac{\Delta_{12}\Delta_{34}}{\Delta_{13}\Delta_{24}}.
+\]
+Cada uno de los cuatro índices aparece una vez en el numerador y una
+vez en el denominador. En una configuración donde los menores del
+denominador sean distintos de cero, esta cantidad permanece fija,
+aunque cada menor individual cambie. La conservación exterior posee
+así observables explícitos, adicionales al determinante global.
+
+\subsection{Elevación reticular y dualidad}
+
+En la realización reticular marcada del capítulo precedente se utiliza
+la suma ortogonal de doce planos. Escribamos
+\[
+ G_{K,r}(t)=\bigoplus_{i=1}^{12}r^{tv_i}I_2.
+\]
+Si \(\Lambda\) es la red euclídea autodual de referencia ya obtenida,
+definimos \(\Lambda_{r,t}=G_{K,r}(t)\Lambda\).
+
+\begin{proposition}[Covolumen y reciprocidad de las redes deformadas]
+\label{hrr:redes}
+El covolumen de \(\Lambda_{r,t}\) coincide con el de \(\Lambda\), y
+\begin{equation}
+ \Lambda_{r,t}^{*}=\Lambda_{r,-t}.
+ \label{hrr:red-dual}
+\end{equation}
+La factorización \eqref{hrr:composicion-limite} se eleva a estos
+operadores de veinticuatro dimensiones.
+\end{proposition}
+\begin{proof}
+Cada radio aparece dos veces en el determinante. Por tanto,
+\[
+ \det G_{K,r}(t)=\prod_i r^{2tv_i}=1.
+\]
+El cambio lineal multiplica el covolumen por el valor absoluto del
+determinante, por lo que lo conserva. Para cualquier operador invertible
+\(G\), la condición \(y\in(G\Lambda)^*\) equivale a
+\(\langle y,Gx\rangle\in\mathbb Z\) para todo \(x\in\Lambda\).
+Equivale a \(G^{\mathsf T}y\in\Lambda^*\), y por ello
+\((G\Lambda)^*=G^{-\mathsf T}\Lambda^*\). Aquí
+\(\Lambda^*=\Lambda\), \(G\) es diagonal positivo y
+\(G^{-\mathsf T}=G_{K,r}(-t)\), lo que demuestra
+\eqref{hrr:red-dual}. La factorización se verifica sobre cada bloque
+de dos dimensiones exactamente como en \eqref{hrr:producto}.
+\end{proof}
+
+Esta conclusión conserva el covolumen y relaciona la deformación con
+su dual. La integralidad de los productos escalares y la paridad de
+las normas son propiedades adicionales de una red. La reciprocidad
+espectral theta--Mellin utiliza precisamente la dualidad demostrada,
+junto con la sumabilidad gaussiana y la fórmula de Poisson desarrolladas
+en su capítulo propio.
+
+\section{Diagonal normalizada y restitución de la orientación radial}
+\label{hrr:diagonal}
+
+\subsection{Separación de escala y forma}
+
+La carta radial antecedente parte de las coordenadas angulares generadas
+\(A>0\) y \(C^*\), en el dominio \(|C^*|<A\). Definimos
+\[
+ \xi=\frac{C^*}{A},\qquad
+ \eta=\operatorname{artanh}\xi.
+\]
+La variable \(\eta\) designa la anisotropía de la forma. Su significado
+es distinto del de la mantisa de retorno \(\eta_{\mathrm{ret}}\)
+que interviene en la sección de acción.
+
+Sea \(s>0\) la escala areal producida por esa sección. En la realización
+de la elipse de acción, \(s=2\hbar\). Los semiejes positivos son
+\begin{equation}
+ a=\sqrt{s}\,e^{\eta/2},\qquad
+ b=\sqrt{s}\,e^{-\eta/2},\qquad ab=s.
+ \label{hrr:semiejes}
+\end{equation}
+La reciprocidad intercambia \(a\) y \(b\). Su coordenada radial es
+\(R_*=\sqrt{b/a}=e^{-\eta/2}\). La longitud considerada a
+continuación es la diagonal del rectángulo de lados \(a,b\):
+\[
+ d=\sqrt{a^2+b^2},\qquad D=\frac{d}{\sqrt{ab}}.
+\]
+La normalización elimina la escala areal y conserva la forma del
+rectángulo hasta el intercambio de sus lados.
+
+\begin{theorem}[Diagonal, anisotropía y reciprocidad]
+\label{hrr:diagonal-teorema}
+En el dominio anterior,
+\begin{equation}
+ D^2=2\cosh\eta=R_*^2+R_*^{-2},
+ \qquad
+ D=\frac{\sqrt2}{(1-\xi^2)^{1/4}}.
+ \label{hrr:diagonal-formula}
+\end{equation}
+Se cumple \(D\geq\sqrt2\), y son equivalentes
+\[
+ D=\sqrt2,\qquad \eta=0,\qquad \xi=0,\qquad R_*=1,
+ \qquad a=b.
+\]
+Para \(D>\sqrt2\), el dato adicional
+\(\varepsilon=\operatorname{sgn}\eta\in\{-1,+1\}\) determina
+de manera única
+\begin{align}
+ \eta&=\varepsilon\operatorname{arcosh}(D^2/2),
+ \label{hrr:eta-recuperada}\\
+ \xi&=\varepsilon\sqrt{1-4/D^4},
+ \label{hrr:xi-recuperada}\\
+ R_*&=\exp\!\left[-\frac{\varepsilon}{2}
+                   \operatorname{arcosh}(D^2/2)\right].
+ \label{hrr:radio-recuperado}
+\end{align}
+\end{theorem}
+\begin{proof}
+Dividiendo \(a^2+b^2\) por \(ab=s\) en
+\eqref{hrr:semiejes}, resulta
+\[
+ D^2=e^{\eta}+e^{-\eta}=2\cosh\eta.
+\]
+Como \(R_*^2=e^{-\eta}\), la suma es también
+\(R_*^2+R_*^{-2}\). De \(\xi=\tanh\eta\) y
+\(1-\tanh^2\eta=\cosh^{-2}\eta\), con
+\(\cosh\eta>0\), se obtiene
+\(\cosh\eta=(1-\xi^2)^{-1/2}\). La raíz positiva proporciona
+la segunda fórmula de \eqref{hrr:diagonal-formula}.
+
+La desigualdad \(\cosh\eta\geq1\), con igualdad sólo para
+\(\eta=0\), prueba la cota y sus equivalencias mediante las
+definiciones. Para \(D>\sqrt2\), \(\cosh\) determina
+\(|\eta|=\operatorname{arcosh}(D^2/2)\), y la orientación
+\(\varepsilon\) determina su signo. Además,
+\[
+ \xi^2=1-\cosh^{-2}\eta=1-\frac4{D^4}.
+\]
+La monotonía de \(\tanh\) implica
+\(\operatorname{sgn}\xi=\operatorname{sgn}\eta\), de donde
+\eqref{hrr:xi-recuperada}. La sustitución de
+\eqref{hrr:eta-recuperada} en \(R_*=e^{-\eta/2}\) prueba la
+última fórmula. Cada paso es unívoco en el dominio indicado.
+\end{proof}
+
+\begin{corollary}[Recuperación exacta de los semiejes]
+\label{hrr:semiejes-recuperacion}
+Los datos \((s,D,\varepsilon)\), con \(s>0\) y
+\(D>\sqrt2\), recuperan los semiejes ordenados por
+\begin{equation}
+ a^2=\frac{s}{2}\left(D^2+\varepsilon\sqrt{D^4-4}\right),
+ \qquad
+ b^2=\frac{s}{2}\left(D^2-\varepsilon\sqrt{D^4-4}\right).
+ \label{hrr:semiejes-radicales}
+\end{equation}
+Si \(D=\sqrt2\), la recuperación es \(a=b=\sqrt{s}\).
+\end{corollary}
+\begin{proof}
+Las ecuaciones \(a^2+b^2=sD^2\) y \(a^2b^2=s^2\)
+determinan \(a^2,b^2\) como las raíces positivas de
+\(z^2-sD^2z+s^2=0\). Sus raíces son las dos cantidades
+\(s(D^2\pm\sqrt{D^4-4})/2\). El signo de
+\(a-b\) coincide con el de \(\eta\), de modo que
+\(\varepsilon\) asigna cada raíz a su semieje. Las raíces son
+positivas porque \(D^2>\sqrt{D^4-4}\). El caso de igualdad
+produce una raíz doble \(s\).
+\end{proof}
+
+\subsection{Ejemplo exacto de dos realizaciones recíprocas}
+
+Tomemos una forma de prueba con \(\xi=3/5\). Este ejemplo verifica
+el lector geométrico; la asignación concreta de una sección HMT se
+obtiene de sus propias coordenadas generadas. Se calcula
+\[
+ \eta=\operatorname{artanh}(3/5)=\log2,\qquad
+ R_*=\frac1{\sqrt2},\qquad
+ D^2=2+\frac12=\frac52.
+\]
+Para escala \(s\), los semiejes son
+\(a=\sqrt{2s}\) y \(b=\sqrt{s/2}\). La forma recíproca tiene
+\(\xi=-3/5\), \(\eta=-\log2\), \(R_*=\sqrt2\) y los
+semiejes intercambiados. Ambas poseen la misma diagonal normalizada
+\(D=\sqrt{5/2}\) y el mismo producto \(ab=s\). El dato de
+orientación distingue exactamente esas dos realizaciones.
+
+La diagonal representa por tanto una intensidad de anisotropía. El
+registro orientado permite reconstruir la forma ordenada. La escala
+areal, por su parte, recupera su tamaño. Esta separación especifica
+qué dato conserva cada lector y qué dato aporta el archivo.
+
+\subsection{Cartas de Poincaré y Klein}
+
+La carta de Poincaré del diámetro radial y su carta de Klein son
+\begin{equation}
+ w=\frac{R_*^2-1}{R_*^2+1}
+   =-\tanh(\eta/2),\qquad
+ x_{\mathrm K}=\frac{2w}{1+w^2}=-\tanh\eta=-\xi.
+ \label{hrr:cartas}
+\end{equation}
+Los dominios \(R_*>0\), \(-1<w<1\) y \(-1<x_{\mathrm K}<1\)
+se corresponden mediante estas aplicaciones.
+
+\begin{proposition}[Reciprocidad radial en las dos cartas]
+\label{hrr:reciprocidad-cartas}
+La inversión \(R_*\mapsto R_*^{-1}\) actúa por
+\[
+ \eta\mapsto-\eta,\qquad w\mapsto-w,
+ \qquad x_{\mathrm K}\mapsto-x_{\mathrm K}.
+\]
+La diagonal y la escala areal permanecen invariantes. El par
+\((D,\varepsilon)\) recupera ambas coordenadas de disco mediante
+\eqref{hrr:eta-recuperada} y \eqref{hrr:cartas}.
+\end{proposition}
+\begin{proof}
+La identidad \(R_*=e^{-\eta/2}\) transforma la inversión en el
+cambio de signo de \(\eta\). Las dos funciones hiperbólicas de
+\eqref{hrr:cartas} son impares, por lo que cambian de signo.
+La fórmula \(D^2=R_*^2+R_*^{-2}\) es invariante y el producto
+de los semiejes permanece \(s\). Las fórmulas inversas del
+teorema~\ref{hrr:diagonal-teorema} completan la recuperación.
+\end{proof}
+
+En el ejemplo \(\xi=3/5\), se obtiene
+\(w=-1/3\) y \(x_{\mathrm K}=-3/5\). La forma recíproca
+tiene \(w=1/3\) y \(x_{\mathrm K}=3/5\). La coincidencia de
+la diagonal acompaña así a dos posiciones opuestas del mismo diámetro.
+
+\subsection{Inversión radial y reflexión en la carta compleja}
+
+El radio positivo también interviene en la carta compleja de
+reciprocidad. Para \(r>0\) y un argumento \(\theta\), sea
+\[
+ z=re^{i\theta},\qquad s(r,\theta)=\frac1{1-z},
+ \qquad z\neq1.
+\]
+El dominio excluye únicamente el polo de esta carta. La inversión
+radial conserva \(\theta\) y sustituye \(r\) por \(r^{-1}\).
+
+\begin{proposition}[Reflexión respecto de la recta de parte real media]
+\label{hrr:reflexion-compleja}
+En el dominio anterior,
+\begin{align}
+ s(r^{-1},\theta)&=1-\overline{s(r,\theta)},
+ \label{hrr:reflexion}\\
+ \operatorname{Re}s(r,\theta)-\frac12
+ &=\frac{1-r^2}{2|1-re^{i\theta}|^2}.
+ \label{hrr:reflexion-parte-real}
+\end{align}
+Por tanto, el círculo \(r=1\), salvo el polo, se transforma en la
+recta \(\operatorname{Re}s=1/2\). La inversión radial se realiza
+como reflexión respecto de esa recta vertical.
+\end{proposition}
+\begin{proof}
+El conjugado de \(s(r,\theta)\) es
+\((1-re^{-i\theta})^{-1}\). Por cálculo directo,
+\[
+ 1-\frac1{1-re^{-i\theta}}
+ =\frac{-re^{-i\theta}}{1-re^{-i\theta}}
+ =\frac1{1-r^{-1}e^{i\theta}},
+\]
+lo que demuestra \eqref{hrr:reflexion}. Para la segunda identidad,
+se multiplica numerador y denominador de \(s\) por
+\(1-re^{-i\theta}\). Su parte real es
+\[
+ \frac{1-r\cos\theta}{1-2r\cos\theta+r^2}.
+\]
+Al restar \(1/2\), el numerador se reduce a \((1-r^2)/2\).
+El denominador es positivo en el dominio. De aquí se deduce que
+\(\operatorname{Re}s=1/2\) equivale a \(r=1\). Finalmente,
+si \(s=x+iy\), entonces \(1-\overline s=(1-x)+iy\), que
+es exactamente la reflexión respecto de la recta vertical indicada.
+\end{proof}
+
+Para \(\theta=\pi\), los radios \(r=2\) y \(r=1/2\)
+producen respectivamente \(s=1/3\) y \(s=2/3\). El punto
+\(r=1\) produce \(s=1/2\). Este ejemplo hace visible la
+reciprocidad mediante tres valores racionales de la carta.
+
+La transformación demostrada pertenece a la geometría de la carta
+compleja. Su aplicación a un operador espectral exige conservar el
+operador y su dominio, además de esa carta. Del mismo modo, la carta
+radial \(R_*\) conserva la sección angular que la genera. La igualdad
+de una operación de inversión en dos realizaciones proporciona la
+correspondencia escrita; la identificación de sus objetos antecedentes
+se mantiene mediante los transportes ya construidos.
+
+\section{Recuperación del flujo y compatibilidad de los lectores}
+\label{hrr:archivo}
+
+La aplicación de estos lectores a una dirección de flujo exige conservar
+la dirección generada, además de sus valores escalares. El archivo
+reducido construido previamente posee operadores \(M\) y \(L\)
+con \(LM=P_{11}\). Si \(m=MK\), entonces
+\begin{equation}
+ u_K=P_3Lm.
+ \label{hrr:archivo-direccion}
+\end{equation}
+Esta igualdad mantiene la acción de cada operador y permite componer
+la recuperación con el flujo.
+
+\begin{proposition}[Reconstrucción del flujo desde el archivo reducido]
+\label{hrr:archivo-flujo}
+Con los operadores y la marcación precedentes, el archivo \(m\) y
+una marca positiva \(r\) determinan
+\[
+ g_{K,r}(t)=
+ \operatorname{diag}\left(
+ r^{\,t(P_3Lm)_1/\|P_3Lm\|},\ldots,
+ r^{\,t(P_3Lm)_{12}/\|P_3Lm\|}\right).
+\]
+Se conservan todas las identidades de composición de
+\eqref{hrr:producto}--\eqref{hrr:determinante}.
+\end{proposition}
+\begin{proof}
+De \(m=MK\) y \(LM=P_{11}\) se deduce
+\(P_3Lm=P_3LMK=P_3P_{11}K=u_K\).
+La dirección es distinta de cero por la propiedad ya demostrada del
+registro generado. La normalización recupera exactamente \(v\),
+y su sustitución en \eqref{hrr:g-definicion} recupera cada entrada
+del flujo. Las identidades dependen únicamente de esa dirección y
+de la positividad de las marcas, por lo que permanecen válidas.
+\end{proof}
+
+La identidad de archivo recupera la dirección de la deformación.
+Los lectores regionales aportan sus marcas. El lector diagonal de
+la forma radial conserva su anisotropía absoluta, y el registro
+orientado recupera el signo. Se obtiene una composición en la cual
+la invariancia y la reversibilidad se asignan a datos explícitos:
+\[
+ \begin{gathered}
+ \text{retornos de hoja}
+ \longrightarrow(\Theta_{\pi,n},\Theta_{e,n})
+ \longrightarrow\pi/e,\\
+ \text{archivo de }K\longrightarrow u_K
+ \longrightarrow g_{K,r}(t)
+ \longrightarrow\text{covolumen y menores transportados},\\
+ (s,D,\varepsilon)\longrightarrow(a,b)
+ \longleftrightarrow(R_*,w,x_{\mathrm K}).
+ \end{gathered}
+\]
+La primera línea distingue el soporte común de dos marcas. La segunda
+expresa la función operatoria del registro. La tercera especifica la
+información geométrica necesaria para la inversión. El estado enriquecido
+mantiene la fase, las vueltas, los acarreos y las incidencias que permiten
+componer estos lectores dentro de su genealogía.
+
+\section{Realización temporal y dominio de interpretación física}
+
+La holonomía nonádica conserva su acción sobre fase y memoria; el retorno
+de fase incrementa el registro de vueltas. Los recuentos del envolvente
+modal y las razones de marcas se evalúan sobre realizaciones posteriores.
+La reciprocidad radial actúa sobre una carta de forma y su orientación.
+La articulación demostrada reúne estas operaciones mediante lectores
+compatibles, conservando la distinción entre sus parámetros.
+
+La relación \(\pi/\varphi^2\) comparece como razón marcada de retornos
+y como escala del flujo conservativo. La razón \(\pi/e\) comparece
+como cociente de marcas sobre el mismo soporte. Ambas satisfacen la
+factorización exacta \eqref{hrr:composicion-limite}. La intervención
+de estas razones en una realización gravitatoria o cosmológica conserva
+las condiciones del correspondiente lector físico: identificación del
+reloj, magnitudes dimensionales, respuesta de frontera y dominio geométrico.
+El resultado de este capítulo pertenece a la composición matemática de
+los lectores generados. Sus aplicaciones físicas utilizan después la
+realización que les corresponde.

@@ -1,0 +1,247 @@
+% RESULTADO_RECUPERADO and expanded self-contained exposition; the common kernel is unchanged.
+% Compared source owners:
+% Article I REV02/sections/vacancias_capacidad.tex, complete.
+% Monografia775/manuscrito/generated/cristal_relojes_sincronizacion.tex,
+% lines1--223 and931--1032: capacity, returns, and TRIT induction.
+% The universal proofs of both scales are assembled here; the checker
+% ampliacion/verificar_vacancias.py adds a finite rational certificate.
+\subsection{Vacancies of nonadic refinement and hierarchy of returns}
+\label{vac-add-seccion}
+
+APP--TRIT--TPK prolongation preserves, together with the expressed block, the cylinder, orientation, and history that allow it to be continued. Its capacity readout compares two cardinalities already determined by that construction: the \(3^6=729\) possibilities of a six-position ternary block and the \(10^3=1000\) positions of its three-digit decimal chart. This comparison produces its own schedule. Some transitions increase the capacity index; others incorporate a block into the history while retaining that index. The latter are the \emph{capacity vacancies} studied below.
+
+The object under consideration is therefore a representation of joint refinement. Its definition preserves its origin in the two finite supports; the logarithmic expression permits the properties of its schedule to be proved. Block time, vacancy index, and capacity index will be written separately. This separation makes clear why the returns \(21/22\) and \(6/7\) belong to successive scales of a single construction.
+
+\subsubsection{Decimal capacity and preservation of the increment}
+\label{vac-add-capacidad}
+
+\begin{definition}[Capacity index and vacancy]
+\label{vac-add-definicion}
+At phase origin \(0\), define
+\begin{equation}
+ \rho=\log_{1000}729=\log_{10}9,
+ \qquad \delta=1-\rho=\log_{10}(10/9),
+ \label{vac-add-densidad}
+\end{equation}
+and, for \(t\in\mathbb Z_{\geq0}\),
+\begin{equation}
+ \mathcal C_t=\lfloor(t+1)\rho\rfloor,
+ \qquad
+ z_t=\lfloor(t+1)\delta\rfloor-\lfloor t\delta\rfloor.
+ \label{vac-add-indices}
+\end{equation}
+The integer \(\mathcal C_t\) is the decimal capacity index of the readout; \(z_t=1\) marks a vacancy. The letter \(K\) remains reserved for the dodecaphasic register and does not denote a capacity counter here.
+\end{definition}
+
+We have \(0<\delta<1\). Moreover, \(\delta\) is irrational: if \(\rho=a/b\) were rational, with \(a,b\) positive integers, the equality \(9^b=10^a\) would have zero valuation at the prime \(5\) on the left and positive valuation on the right. This contradiction proves the irrationality of \(\rho\) and of \(1-\rho\). In particular, no positive integer multiple of \(\delta\) belongs to \(\mathbb Z\), which fixes the endpoints of the intervals in this development unambiguously.
+
+\begin{proposition}[Exact capacity--vacancy balance]
+\label{vac-add-balance}
+For \(t\geq1\), \(z_t\in\{0,1\}\) and
+\begin{equation}
+ \mathcal C_t-\mathcal C_{t-1}=1-z_t.
+ \label{vac-add-incremento}
+\end{equation}
+Consequently, for \(0\leq a<b\),
+\begin{equation}
+ \mathcal C_b-\mathcal C_a+
+ \sum_{t=a+1}^{b}z_t=b-a.
+ \label{vac-add-conservacion}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Since \(0<\delta<1\), the difference between the floors of two numbers separated by \(\delta\) is \(0\) or \(1\). Furthermore, the established irrationality gives
+\[
+ \mathcal C_t=t+1-\lceil(t+1)\delta\rceil
+             =t-\lfloor(t+1)\delta\rfloor.
+\]
+Subtracting this equality at \(t\) and \(t-1\) proves \eqref{vac-add-incremento}; telescopic summation proves \eqref{vac-add-conservacion}.
+\end{proof}
+
+Each transition contributes exactly one unit to the right-hand side of the balance. That unit is recorded as acquired capacity when \(z_t=0\), or as a vacancy when \(z_t=1\). Retention of the index \(\mathcal C_t\) therefore leaves a recoverable position in the history. The equation expresses preservation of the increment through two readouts, rather than an indeterminate loss of information.
+
+The density also follows from the same balance:
+\[
+ \frac1N\sum_{t=1}^{N}z_t
+ =\frac{\lfloor(N+1)\delta\rfloor}{N}\longrightarrow\delta.
+\]
+Thus \((z_t)\) is not eventually periodic: an eventually periodic binary sequence has rational density. Here aperiodicity follows from the capacity rule already fixed by \(729/1000\).
+
+\subsubsection{Exact determination of the intervals \(21/22\)}
+\label{vac-add-primarios}
+
+\begin{lemma}[Rational bounds for the slope]
+\label{vac-add-cotas}
+The vacancy density satisfies
+\begin{equation}
+ \frac7{153}<\delta<\frac6{131}.
+ \label{vac-add-cota-delta}
+\end{equation}
+If \(\lambda=\delta^{-1}\), \(\beta=22-\lambda\), and \(\mu=\beta^{-1}\), then
+\begin{equation}
+ 21<\lambda<22,
+ \qquad \frac17<\beta<\frac16,
+ \qquad 6<\mu<7.
+ \label{vac-add-cotas-inducidas}
+\end{equation}
+\end{lemma}
+\begin{proof}
+We provide a finite verification by rational arithmetic. For \(0<u<1\), let
+\[
+ S_N(u)=2\sum_{k=0}^{N}\frac{u^{2k+1}}{2k+1},
+ \qquad
+ R_N(u)=\frac{2u^{2N+3}}{(2N+3)(1-u^2)}.
+\]
+Integrating the geometric series for \(2/(1-u^2)\) gives
+\[
+ S_N(u)<\log\frac{1+u}{1-u}<S_N(u)+R_N(u).
+\]
+Indeed, the tail is positive and, on replacing each denominator \(2k+1\) by \(2N+3\), is bounded by the geometric series defining \(R_N\). These inequalities are applied to \(u=1/19,1/3,1/9\), corresponding respectively to \(\log(10/9),\log2,\log(5/4)\), and we use \(\log10=3\log2+\log(5/4)\).
+
+With \(N=4\), writing \(A=S_4(1/19)\), \(B=3S_4(1/3)+S_4(1/9)\), and \(E=3R_4(1/3)+R_4(1/9)\), we obtain
+\[
+ \frac7{153}
+ <\frac{A}{B+E}
+ <\delta
+ <\frac{A+R_4(1/19)}{B}
+ <\frac6{131}.
+\]
+The two outer inequalities are checked by multiplying through by the positive denominators of these sums of five rational terms. This proves \eqref{vac-add-cota-delta} using a remainder bound, without taking a decimal expansion as a premise. Inverting the bound gives \(131/6<\lambda<153/7\). Subtracting from \(22\) and then inverting yields all the inequalities in \eqref{vac-add-cotas-inducidas}.
+\end{proof}
+
+\begin{theorem}[Positions and gaps of the vacancies]
+\label{vac-add-teorema-primario}
+The positions of the events \(z_t=1\), ordered from the first event, are exactly
+\begin{equation}
+ p_j=\lfloor j\lambda\rfloor
+     =\left\lfloor\frac j\delta\right\rfloor,
+ \qquad j\geq1.
+ \label{vac-add-posiciones}
+\end{equation}
+Their gaps satisfy
+\begin{equation}
+ h_j=p_{j+1}-p_j\in\{21,22\}.
+ \label{vac-add-huecos}
+\end{equation}
+Both values occur infinitely often.
+\end{theorem}
+\begin{proof}
+The event crossing the integer \(j\) occurs precisely when \(t\delta<j<(t+1)\delta\). Irrationality excludes equality at the endpoints. Dividing by \(\delta\) gives \(t=\lfloor j/\delta\rfloor=p_j\). Since \(\delta<1\), a step crosses at most one integer, so the enumeration is exact. Writing \(\lambda=21+\eta\), with \(0<\eta<1\), gives
+\[
+ h_j=21+\lfloor(j+1)\eta\rfloor-\lfloor j\eta\rfloor,
+\]
+which proves \eqref{vac-add-huecos}. Finally, \((p_{J+1}-p_1)/J\to\lambda\in(21,22)\). If either value occurred only finitely often, this mean would converge to the other integer value, a contradiction.
+\end{proof}
+
+\subsubsection{Induction on the short intervals: the returns \(6/7\)}
+\label{vac-add-secundarios}
+
+\begin{theorem}[Induced schedule of short intervals]
+\label{vac-add-teorema-secundario}
+Let \(s_j=22-h_j\), for \(j\geq1\). This indicator equals \(1\) exactly when the interval between vacancies is short, of length \(21\). With \(\beta\) and \(\mu\) as defined in Lemma~\ref{vac-add-cotas},
+\begin{equation}
+ s_j=\lfloor(j+1)\beta\rfloor-\lfloor j\beta\rfloor.
+ \label{vac-add-indicador-corto}
+\end{equation}
+The indices of the short intervals are
+\begin{equation}
+ q_m=\lfloor m\mu\rfloor=\lfloor m/\beta\rfloor,
+ \qquad q_{m+1}-q_m\in\{6,7\},\quad m\geq1.
+ \label{vac-add-posiciones-cortos}
+\end{equation}
+Both gaps occur infinitely often, and their order is not eventually periodic.
+\end{theorem}
+\begin{proof}
+The irrationality of \(\delta\) implies that of \(\lambda\), \(\beta\), and \(\mu\). Since \(\lambda=22-\beta\), for \(j\geq1\) we have
+\[
+ p_j=22j-\lceil j\beta\rceil
+     =22j-\lfloor j\beta\rfloor-1.
+\]
+Subtracting consecutive terms gives \eqref{vac-add-indicador-corto}. Applying the integer-crossing argument of the preceding theorem to the indicator of slope \(\beta\) shows that its event \(m\) occurs at \(q_m=\lfloor m/\beta\rfloor\). The inequality \(6<\mu<7\) proves the two possible gaps. Their mean converges to \(\mu\); hence both occur infinitely often. Moreover, an eventually periodic sequence of gaps would have rational mean, whereas \(\mu\) is irrational. This also rules out strict alternation, whose mean would be \(13/2\).
+\end{proof}
+
+Here the numbers \(6\) and \(7\) count \emph{intervals between vacancy events}, not refinement blocks. The return to the primary scale is equally explicit. Between \(q_m\) and \(q_{m+1}\) there is a single short interval, located at the beginning, and all the others are long. Consequently, if \(d_m=q_{m+1}-q_m\),
+\begin{equation}
+ p_{q_{m+1}}-p_{q_m}=21+22(d_m-1)=22d_m-1
+ \in\{131,153\}.
+ \label{vac-add-retorno-bloques}
+\end{equation}
+Thus \(131=14\cdot9+5\) and \(153=17\cdot9\) describe two return readouts \emph{in the block clock}. The equation preserves the operation connecting the scales, rather than identifying their cardinalities merely because they occur.
+
+\subsubsection{Retained capacity and selection of the TRIT regime}
+\label{vac-add-regimen}
+
+Let \(v_j=\mathcal C_{p_j}\) be the capacity recorded at vacancy \(j\). From \(p_j\delta<j<(p_j+1)\delta\) and \(\delta<1\), it follows that \(\lfloor(p_j+1)\delta\rfloor=j\). By \eqref{vac-add-indices},
+\begin{equation}
+ v_j=p_j-j,
+ \qquad v_{j+1}-v_j=h_j-1=21-s_j,
+ \qquad [v_{j+1}]_3=[v_j-s_j]_3.
+ \label{vac-add-transporte-mod3}
+\end{equation}
+A long interval preserves the class modulo \(3\); a short interval shifts it by one unit in the negative direction. Applying the selector of the formal kernel to the positive phase \(r_j=1+[v_j]_9\) gives
+\begin{equation}
+ \tau_j=M_{\rm ph}(r_j),\qquad
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+ \label{vac-add-selector}
+\end{equation}
+This composition fixes the regime induced by capacity at each event. It preserves both the order of the changes and the number of events for which each regime persists.
+
+\begin{corollary}[Plateaus of the induced regime]
+\label{vac-add-mesetas}
+For every \(m\geq1\), the class \([v_j]_3\), and hence \(\tau_j\), is constant on \(q_m+1\leq j\leq q_{m+1}\). The length of each complete plateau is \(q_{m+1}-q_m\in\{6,7\}\).
+\end{corollary}
+\begin{proof}
+On the indicated integer interval, the next change occurs exactly when passing from \(j=q_{m+1}\) to \(j=q_{m+1}+1\): this is the next position at which \(s_j=1\). At all preceding steps \(s_j=0\), so \eqref{vac-add-transporte-mod3} preserves the class. At the endpoint it decreases the class by one unit. The selector \eqref{vac-add-selector} assigns distinct values to the three classes; it therefore preserves the same plateaus and their endpoints.
+\end{proof}
+
+The initial segment \(1\leq j\leq q_1\) depends on the chosen origin and is an initial restriction of a plateau. At the present origin it has length \(q_1=6\). The first twenty classes are
+\[
+ \underbrace{2,\ldots,2}_{6},\qquad
+ \underbrace{1,\ldots,1}_{7},\qquad
+ \underbrace{0,\ldots,0}_{7},
+\]
+with signatures \(0,-1,+1\), respectively. Each short interval triggers the next step of the cycle of regimes.
+
+The two phases of interest are defined as
+\[
+ g_t^{\rm cron}=[t]_9,
+ \qquad g_t^{\rm cap}=[\mathcal C_t]_9,
+ \qquad
+ g_t^{\rm cap}-g_{t-1}^{\rm cap}\equiv1-z_t\pmod9.
+\]
+A vacancy retains the capacity phase while block time advances. The transition of the enriched state remains the TPK composition of selection, transport, and memory update. Thus \(\mathcal C_t=\mathcal C_{t-1}\) neither resets the state nor replaces the holonomic winding \(\Gamma_9\) by a pause. The two induced scales likewise retain this distinction: between consecutive short events in \eqref{vac-add-retorno-bloques}, the capacity increment is \(21d_m-1\), that is, \(125\) or \(146\), whereas the block increment is \(131\) or \(153\).
+
+\subsubsection{Rationally certified sample and provenance}
+\label{vac-add-muestra}
+
+The table presents a sample at the canonical origin. \(h_j\) is the gap \emph{following} \(p_j\); thus vacancy \(j=6\), at block \(131\), begins the first short interval.
+\begin{center}
+\small
+\begin{tabular}{r|rrrrrrrrrr}
+\toprule
+\(j\)&1&2&3&4&5&6&7&8&9&10\\
+\midrule
+\(p_j\)&21&43&65&87&109&131&152&174&196&218\\
+\(h_j\)&22&22&22&22&22&21&22&22&22&22\\
+\(v_j\)&20&41&62&83&104&125&145&166&187&208\\
+\([v_j]_3\)&2&2&2&2&2&2&1&1&1&1\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first short-interval indices and their gaps are
+\[
+ (q_m)_{m=1}^{10}=(6,13,20,27,34,41,48,54,61,68),
+\]
+\[
+ (q_{m+1}-q_m)_{m=1}^{9}=(7,7,7,7,7,7,6,7,7).
+\]
+The sample exhibits the actual order, while the preceding proofs establish its law at arbitrary depth.
+
+The attached file \texttt{ampliacion/verificar\_vacancias.py} computes rational brackets using the series and remainders of Lemma~\ref{vac-add-cotas}. Each floor is accepted only when both endpoints of the bracket yield the same integer. At order \(16\), it reproduces \(512\) events up to block \(11189\), and \(64\) secondary gaps, together with the balance identities, residues, and plateaus. This finite check retains a scope distinct from that of the universal theorems.
+
+The capacity index, its complementarity with vacancies, and induction of the TRIT selector are recovered from Article I and from the chapters on the schedule and induced clock in the monograph on aperiodic topological--temporal order. Their definitions and the proofs of both scales are assembled here with a single indexing convention. The rational certificate provides an additional check of those results and preserves their provenance.

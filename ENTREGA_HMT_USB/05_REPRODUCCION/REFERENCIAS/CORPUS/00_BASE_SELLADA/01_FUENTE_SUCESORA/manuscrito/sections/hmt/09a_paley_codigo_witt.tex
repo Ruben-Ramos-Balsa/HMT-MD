@@ -1,0 +1,258 @@
+\chapter{Construcción de Paley, estructura compleja finita y código ternario
+extendido de Golay}
+\label{chap:paley-codigo-witt}
+\index{Paley!matriz de conferencia}
+\index{Golay!código ternario extendido}
+\index{Witt!sistema de Steiner}
+
+La prolongación excepcional de la frontera nonádica requiere una construcción
+algebraica anterior a cualquier uso de hexadas, octadas o grupos de Mathieu.
+Esta sección fija esa construcción en coordenadas. El orden lógico es
+\[
+ (\mathbb Z/9\mathbb Z)^\times
+ \longrightarrow \mathbb P^1(\mathbb F_5)
+ \longrightarrow C_P
+ \longrightarrow A_W
+ \longrightarrow C_W
+ \longrightarrow W_{12}.
+\]
+Las flechas no se deducen de coincidencias numéricas: las dos primeras fijan
+un sistema de coordenadas, las dos siguientes son operaciones matriciales y la
+última toma soportes proyectivos de peso seis.
+
+\section{Coordenadas proyectivas y matriz de conferencia}
+
+El conjunto de unidades módulo nueve tiene seis elementos. Elegimos la
+bijección de coordenadas
+\[
+\begin{array}{c|cccccc}
+u&1&2&4&8&7&5\\ \hline
+\theta(u)&\infty&0&1&2&3&4
+\end{array}
+\]
+en la que la primera fila sigue las potencias del generador \(2\) módulo
+nueve. Esta elección fija un origen y una orientación, e identifica el
+conjunto subyacente con la recta proyectiva
+\[
+ \mathbb P^1(\mathbb F_5)=\{\infty,0,1,2,3,4\}.
+\]
+La aplicación \(\theta\) es un calibre de coordenadas, no un homomorfismo ni
+una consecuencia canónica de la estructura multiplicativa de las unidades.
+El carácter cuadrático de \(\mathbb F_5\) determina, en el orden anterior, la
+matriz simétrica de conferencia
+\begin{equation}
+ C_P=
+ \begin{pmatrix}
+ 0& 1& 1& 1& 1& 1\\
+ 1& 0& 1&-1&-1& 1\\
+ 1& 1& 0& 1&-1&-1\\
+ 1&-1& 1& 0& 1&-1\\
+ 1&-1&-1& 1& 0& 1\\
+ 1& 1&-1&-1& 1& 0
+ \end{pmatrix}.
+ \label{eq:paley-conference-explicita}
+\end{equation}
+El producto fila por fila da
+\begin{equation}
+ C_PC_P^{\mathsf T}=5I_6.
+ \label{eq:paley-conference-identidad}
+\end{equation}
+La diagonal nula y la ortogonalidad de filas expresan, respectivamente, la
+ausencia de autoincidencia y el equilibrio del carácter cuadrático. Un cambio
+simultáneo de orden o de signos produce una matriz monomialmente equivalente;
+la matriz \eqref{eq:paley-conference-explicita} fija el calibre empleado en
+todo el manuscrito.
+
+\section[Reducción ternaria y estructura compleja interna]{Reducción
+ternaria y endomorfismo cuadrático
+\texorpdfstring{\(A_W^2=-I_6\)}{AW2=-I6}}
+
+Reducimos las entradas de \(C_P\) módulo tres, identificando
+\(-1\equiv2\pmod3\). Se obtiene
+\begin{equation}
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix}
+ \in M_6(\mathbb F_3).
+ \label{eq:AW-explicita}
+\end{equation}
+Como \(A_W=A_W^{\mathsf T}\), la reducción de
+\eqref{eq:paley-conference-identidad} implica
+\begin{equation}
+ A_W^2=A_WA_W^{\mathsf T}=2I_6=-I_6.
+ \label{eq:AW-raiz-menos-uno}
+\end{equation}
+Por tanto \(A_W\) realiza una raíz cuadrada de \(-I\) dentro de un espacio
+vectorial definido sobre \(\mathbb F_3\). No se identifica el cuerpo ternario
+con \(\mathbb C\); se afirma la identidad matricial exacta
+\eqref{eq:AW-raiz-menos-uno}, que proporciona una estructura compleja finita
+en el sentido algebraico de un endomorfismo \(J\) con \(J^2=-I\).
+
+\begin{proposition}[Descomposición en subespacios propios conjugados]
+Sea \(V=\mathbb F_3^6\) y sea \(J=A_W\). La extensión escalar
+\(V\otimes_{\mathbb F_3}\mathbb F_9\) se descompone en los dos espacios
+propios de \(J\) correspondientes a las raíces \(\iota\) y \(-\iota\) de
+\(X^2+1\) en \(\mathbb F_9\).
+\end{proposition}
+
+\begin{proof}
+El polinomio \(X^2+1\) no tiene raíces en \(\mathbb F_3\), pues los
+cuadrados son cero y uno. En \(\mathbb F_9\) se factoriza como
+\((X-\iota)(X+\iota)\), con raíces distintas. La identidad \(J^2=-I\)
+muestra que el polinomio mínimo de \(J\) divide a \(X^2+1\); como \(J\) no
+es escalar, coincide con él. El endomorfismo es, por tanto, diagonalizable
+después de extender escala a \(\mathbb F_9\), y la suma de ambos espacios
+propios es directa y exhaustiva.
+\end{proof}
+
+\section{Código gráfico autodual}
+
+Definimos el morfismo lineal
+\[
+ c:\mathbb F_3^6\longrightarrow\mathbb F_3^{12},
+ \qquad c(q)=(q,qA_W),
+\]
+y su imagen
+\[
+ C_W=\operatorname{im}c.
+\]
+La matriz generadora es \(G=(I_6\mid A_W)\). Por
+\eqref{eq:AW-raiz-menos-uno},
+\[
+ GG^{\mathsf T}=I_6+A_WA_W^{\mathsf T}=I_6+2I_6=0
+ \quad\text{en }\mathbb F_3.
+\]
+Las seis filas de \(G\) son independientes, de modo que \(C_W\) tiene
+dimensión seis y es igual a su dual ortogonal. La enumeración de los
+\(3^6=729\) vectores \(q\) proporciona el enumerador de pesos
+\begin{equation}
+ W_{C_W}(y)=1+264y^6+440y^9+24y^{12}.
+ \label{eq:enumerador-CW}
+\end{equation}
+En particular, la distancia mínima es seis y
+\[
+ C_W=[12,6,6]_3,
+\]
+el código ternario extendido de Golay en las coordenadas fijadas por
+\eqref{eq:AW-explicita}.
+
+La enumeración exhaustiva de los \(729\) mensajes, formando cada palabra con
+la matriz impresa y contando sus pesos, produce
+\eqref{eq:enumerador-CW}.
+
+\begin{proposition}[Palabra marcada y controles uniformes]
+\label{prop:palabra-marcada-witt}
+En la presentación orientada determinada por el corte \(6+6\), la matriz
+\(A_W\) de \eqref{eq:AW-explicita} y la orientación positiva, sea
+\[
+q_\ast=(1,1,1,1,1,1)\in\mathbb F_3^6.
+\]
+Entonces
+\[
+\boxed{
+c_\ast=c(q_\ast)
+=(1,1,1,1,1,1,2,1,1,1,1,1)\in C_W.}
+\]
+En cambio,
+\[
+(1,\ldots,1)\notin C_W,
+\qquad
+(2,\ldots,2)\notin C_W.
+\]
+La primera palabra es canónica relativamente a la presentación orientada
+declarada; no es una palabra absoluta independiente del calibre.
+\end{proposition}
+
+\begin{proof}
+La suma de las filas de la matriz impresa da
+\[
+q_\ast A_W=(2,1,1,1,1,1),
+\]
+que prueba la fórmula de \(c_\ast\). Para las dos palabras uniformes, la
+primera mitad fija respectivamente \(q=q_\ast\) y \(q=-q_\ast\), mientras
+las segundas mitades requeridas serían \(q_\ast\) y \(-q_\ast\); las
+segundas mitades efectivas son
+\((2,1,1,1,1,1)\) y \((1,2,2,2,2,2)\). Por tanto ninguna palabra uniforme
+pertenece al código. La enumeración exhaustiva de las \(729\) palabras
+confirma que no aparece otra excepción.
+\end{proof}
+
+\[
+\mathsf R=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\qquad
+\mathsf R C\mathsf R=C^{-1}.
+\]
+La palabra marcada especializa, después de la construcción abstracta del
+\cref{thm:funtor-ciclotomico-fase-longitud}, la familia de trivializaciones
+mediante
+\[
+c_b:=c_{b+1},
+\qquad c\in C_W,\quad b\in\{0,\ldots,11\},
+\]
+donde la expresión de la derecha usa la numeración impresa
+\(1,\ldots,12\). Esta convención se mantiene en todo lo que sigue y tipa, en
+particular, \((c_\ast)_b\) y el posterior \(P_b(c)\). Entonces
+\[
+P_b^{(\ast)}=
+\begin{cases}
+\mathsf R,&(c_\ast)_b=1,\\
+I,&(c_\ast)_b=2.
+\end{cases}
+\]
+Esta regla depende del corte, de la matriz y de la orientación declarados;
+no interviene en la definición previa del funtor fase--longitud.
+
+La ausencia de las palabras uniformes es un control de esta orientación:
+impide usarlas en la prueba concreta del vecino, pero no altera por sí sola
+el pegado Niemeier, que se conserva por la acción trivial de cada Coxeter
+sobre \(A_2^\ast/A_2\).
+
+\section{Soportes proyectivos y sistema de Witt}
+
+Cada una de las 264 palabras de peso seis tiene un soporte de seis
+coordenadas. Las palabras opuestas \(u\) y \(-u\) poseen el mismo soporte y
+no hay otra identificación, por lo que se obtienen
+\[
+ \frac{264}{2}=132
+\]
+hexadas distintas. Denotemos por \(\mathcal H_W\) la familia de esos
+soportes.
+
+\begin{theorem}[Sistema de Witt ternario]
+El sistema de incidencia
+\[
+ \bigl(\{1,\ldots,12\},\mathcal H_W\bigr)
+\]
+es un sistema de Steiner \(S(5,6,12)\). En consecuencia, es una realización
+del diseño de Witt \(W_{12}\).
+\end{theorem}
+
+\begin{proof}
+El recorrido de los \(\binom{12}{5}=792\) subconjuntos de cinco puntos cuenta
+las hexadas que contienen cada uno. Todos los conteos valen
+uno. Ésta es exactamente la propiedad definitoria de un
+\(S(5,6,12)\). El número de bloques también resulta de la identidad de
+incidencias
+\[
+ |\mathcal H_W|\binom65=\binom{12}{5},
+\]
+que da \(|\mathcal H_W|=132\).
+\end{proof}
+
+Esta sección fija por tanto, antes de utilizarla, la cadena completa
+\[
+ C_P\longmapsto A_W\longmapsto C_W\longmapsto W_{12}.
+\]
+Las secciones posteriores añaden el marco dodecafásico, las involuciones de
+estrella, la elevación relativa a una dodecada binaria y la construcción
+reticular. Ninguno de esos pasos modifica el calibre matricial ya establecido.

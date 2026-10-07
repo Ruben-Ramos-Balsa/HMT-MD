@@ -1,0 +1,1365 @@
+\section{Weil form, double circle, and spectral representation}
+\label{lectura:manuscrito-03}
+The factorization and clocks of Section~\ref{lectura:manuscrito-02} produce two readouts of the same arithmetic. The first decomposes a normal form into irreducibles; the second records the returns of their multiplicative actions. The spectral development must preserve both lines of provenance. Its object is not obtained by assigning a known zero of a function to a return: the functionals are constructed, their compatibility is established, and their analytic realization is identified afterwards.
+
+This chapter brings together the preserved developments of the completed form and the double circle. It presents separately the unconditional normalization results, the exact consequences of a positive boundary identity, and the realizations of that identity. This separation fixes the logical order of the proofs. In particular, computing a representation that uses positivity cannot replace the construction that must establish it.
+
+\subsection{From cyclic refinement to the completed form}
+Let \(N=3^m\), with \(m\geq1\). The quadratic operator of the preceding chapter is retained on the cycle of \(N\) positions. If the Fourier indices are chosen in the symmetric interval
+
+\[
+-\frac{N-1}{2}\leq n\leq\frac{N-1}{2},
+\]
+its quadratic eigenvalues are
+
+\[
+\lambda_{m,n}=\frac{N^2}{\pi}\sin^2\!\left(\frac{\pi n}{N}\right).
+\]
+The coordinate \(\pi\) is the prior regional output of the HMT kernel. At this stage it enters the normalization of the analytic realization, not the selection of irreducibles. The constant mode is removed, and the two orientations of a nonzero mode are counted only once:
+
+\[
+\Theta_m(x)=\frac12\sum_{n\neq0}e^{-x\lambda_{m,n}}
+=\sum_{n=1}^{(N-1)/2}e^{-x\lambda_{m,n}},\qquad x>0.
+\]
+\HMTresultado{Proposition}{Limit of the heat trace}{rz-num-03-1}
+For every \(x>0\),
+
+\[
+\lim_{m\to\infty}\Theta_m(x)
+=\Theta_+(x):=\sum_{n=1}^{\infty}e^{-\pi n^2x}.
+\]
+Convergence is uniform as \(x\) ranges over a compact subset of \((0,\infty)\).
+
+\textbf{Proof.} For a fixed index \(n\), the relation \(\sin y/y\to1\) gives \(\lambda_{m,n}\to\pi n^2\). Moreover, \(\sin y\geq2y/\pi\) for \(0\leq y\leq\pi/2\), whence
+
+\[
+\lambda_{m,n}\geq\frac{4n^2}{\pi}.
+\]
+If \(x\geq a>0\), each term is dominated by \(e^{-4an^2/\pi}\), whose sum converges. Extending the terms by zero outside the cycle's index interval and applying dominated convergence yields the limit and its uniformity on compact sets. \hfill\(\square\)
+
+Inversion of this trace explains why the completion contains a polar contribution in addition to the positive modes. Define
+
+\[
+\vartheta(x)=1+2\Theta_+(x).
+\]
+The periodization of the Gaussian
+
+\[
+F_x(t)=\sum_{n\in\mathbb Z}e^{-\pi x(t+n)^2}
+\]
+converges together with all its derivatives. Its Fourier coefficient of index \(k\) is \(x^{-1/2}e^{-\pi k^2/x}\), obtained by integrating the Gaussian over the line. The Fourier series converges absolutely; evaluating it at \(t=0\) gives
+
+\[
+\vartheta(x)=x^{-1/2}\vartheta(1/x).
+\]
+In terms of the positive trace,
+
+\[
+\Theta_+(x)=x^{-1/2}\Theta_+(1/x)+\frac{x^{-1/2}-1}{2}.
+\]
+The last summand preserves the difference between removing the constant mode before or after inverting the scale.
+
+\HMTresultado{Proposition}{Mellin transform and continuation}{rz-num-03-2}
+For \(\Re s>1\), the arithmetic partition function \(Z(s)=\sum_{n\geq1}n^{-s}\) satisfies
+
+\[
+\Lambda(s):=\int_0^\infty\Theta_+(x)x^{s/2-1}\,dx
+=\pi^{-s/2}\Gamma(s/2)Z(s).
+\]
+The function
+
+\[
+\xi(s)=\frac12s(s-1)\Lambda(s)
+\]
+admits an entire continuation and satisfies \(\xi(s)=\xi(1-s)\).
+
+\textbf{Proof.} Absolute convergence for \(\Re s>1\) permits termwise integration. The substitution \(u=\pi n^2x\) gives the factor \(\pi^{-s/2}\Gamma(s/2)n^{-s}\). To continue the integral, separate the intervals \((0,1)\) and \((1,\infty)\) and apply the preceding inversion to the former. This yields
+
+\[
+\Lambda(s)=\frac1{s(s-1)}
++\int_1^\infty\Theta_+(x)
+\left(x^{s/2-1}+x^{(1-s)/2-1}\right)\,dx.
+\]
+The integral is entire in \(s\): the exponential decay of \(\Theta_+(x)\) uniformly dominates every power and every power of \(\log x\) on compact subsets of the plane. The factor \(s(s-1)\) removes the two poles displayed explicitly. The expression is invariant under \(s\mapsto1-s\), proving the functional equation. \hfill\(\square\)
+
+The Mellin transform of the trace is not simply \(Z(s)\): it contains the factors \(\pi^{-s/2}\Gamma(s/2)\). Keeping them explicit is indispensable, since their contributions reappear in the completed quadratic form. The product over irreducibles of the preceding chapter and this additive construction agree in the half-plane of convergence by a proved identity of functionals.
+
+\subsection{The arithmetic, gamma, and polar contributions}
+\label{rz:forma}
+Fix \(R>0\) and consider
+
+\[
+\mathcal D_R=C_c^\infty((-R/2,R/2)).
+\]
+The inner product will be linear in the first variable. We use
+
+\[
+\widehat f(z)=\int_{\mathbb R}f(x)e^{-izx}\,dx,\qquad
+(T_af)(x)=f(x-a),
+\]
+\[
+C_{f,g}(a)=\langle f,T_ag\rangle_{L^2(\mathbb R)},\qquad
+h_{f,g}(z)=\widehat f(z)\overline{\widehat g(\overline z)}.
+\]
+These definitions fix both the orientation of translations and the Fourier normalization. For \(f,g\in\mathcal D_R\), \(C_{f,g}(a)=0\) if \(|a|\geq R\).
+
+The previously constructed irreducibles supply the prime-power indices and their weights:
+
+\[
+\ell_{p,k}=k\log p,\qquad
+w_{p,k}=(\log p)p^{-k/2},\qquad k\geq1.
+\]
+The contribution from the gamma completion uses
+
+\[
+\mu(a)=\frac{e^{-a/2}}{1-e^{-2a}},\qquad
+c_\Gamma=\psi(1/4)-\log\pi,
+\]
+where \(\psi=\Gamma'/\Gamma\). In particular, \(c_\Gamma<0\). For example, the monotonicity of \(\psi\) on the positive axis, obtained from \(\psi'(x)=\sum_{n\geq0}(n+x)^{-2}>0\), together with \(\psi(1)=-\gamma_{\mathrm E}<0\), gives this inequality.
+
+The completed form is
+
+\[
+\begin{aligned}
+\mathscr W_R(f,g)={}&h_{f,g}(i/2)+h_{f,g}(-i/2)
++c_\Gamma C_{f,g}(0)\\
+&+\int_0^\infty\mu(a)
+\bigl(2C_{f,g}(0)-C_{f,g}(a)-C_{f,g}(-a)\bigr)\,da\\
+&-\sum_{\ell_{p,k}\leq R}w_{p,k}
+\bigl(C_{f,g}(\ell_{p,k})+C_{f,g}(-\ell_{p,k})\bigr).
+\end{aligned}
+\]
+The prime-power sum is finite: only \(p^k\leq e^R\) occur. The form has not been replaced by a finite sampling of zeros.
+
+\HMTresultado{Proposition}{Existence and compatibility of the form}{rz-num-03-3}
+The preceding expression defines a continuous Hermitian sesquilinear form on \(\mathcal D_R\). If \(R<R'\), their restrictions agree:
+
+\[
+\mathscr W_{R'}|_{\mathcal D_R\times\mathcal D_R}=\mathscr W_R.
+\]
+\textbf{Proof.} Since translations are unitary,
+
+\[
+2C_{f,g}(0)-C_{f,g}(a)-C_{f,g}(-a)
+=\langle(I-T_a)f,(I-T_a)g\rangle.
+\]
+As \(a\to0\), each difference has norm \(O(a)\), whereas \(\mu(a)=O(a^{-1})\). The integrand is therefore \(O(a)\). As \(a\to\infty\), the differences have bounded norms and \(\mu(a)=O(e^{-a/2})\). The integral converges absolutely. These same estimates, expressed in terms of the norms of \(f,g\) and their first derivatives on a fixed compact set, prove continuity. Hermitian symmetry follows by interchanging \(f,g\) and conjugating. If \(R\) is enlarged, the added prime-power terms have zero correlations on \(\mathcal D_R\), proving compatibility. \hfill\(\square\)
+
+One can thus write a single form \(\mathscr W\) on \(\mathcal D=C_c^\infty(\mathbb R)=\bigcup_R\mathcal D_R\). Compatibility concerns the complete difference of contributions; it does not require each auxiliary column separately to preserve its norm when the support is enlarged.
+
+\subsection{Transport columns and the positive boundary identity}
+\label{rz:columnas}
+For a cycle of length \(N\), the uniform-defect representation of the preceding chapter gives
+
+\[
+\delta_N(T_a)^*\delta_N(T_b)=(I-T_a)^*(I-T_b).
+\]
+This equality allows translation differences to be realized on a normalized transport sheet. To present the argument without repeating that realization, we simply write \(\delta_af=(I-T_a)f\). The polar evaluations decompose as
+
+\[
+b_\pm(f)=\frac{\widehat f(i/2)\pm\widehat f(-i/2)}{\sqrt2}.
+\]
+Define two maps on \(\mathcal D_R\):
+
+\[
+J_{+,R}f=
+\left(
+(\sqrt{w_{p,k}}\,\delta_{\ell_{p,k}}f)_{\ell_{p,k}\leq R},
+(\sqrt{\mu(a)}\,\delta_af)_{a>0},
+b_+(f)
+\right),
+\]
+\[
+J_{-,R}f=
+\left(
+(\sqrt{2w_{p,k}}\,f)_{\ell_{p,k}\leq R},
+\sqrt{-c_\Gamma}\,f,
+b_-(f)
+\right).
+\]
+The target spaces consist of orthogonal sums of copies of \(L^2(\mathbb R)\), a direct integral in the gamma component, and a scalar component. When their ranges are used as effective spaces, the closures of \(\operatorname{ran}J_{+,R}\) and \(\operatorname{ran}J_{-,R}\) will be taken. The closure of a diagonal range must not be confused with the sum of all coordinates of the ambient space.
+
+\HMTresultado{Proposition}{Exact decomposition of the form}{rz-num-03-4}
+The following identity holds:
+
+\[
+\mathscr W_R(f,g)
+=\langle J_{+,R}f,J_{+,R}g\rangle
+-\langle J_{-,R}f,J_{-,R}g\rangle.
+\]
+\textbf{Proof.} For each prime power, the first column contributes
+
+\[
+w_{p,k}\bigl(2C_{f,g}(0)
+-C_{f,g}(\ell_{p,k})-C_{f,g}(-\ell_{p,k})\bigr);
+\]
+the second removes \(2w_{p,k}C_{f,g}(0)\). The gamma component is precisely the integral in Proposition~\ref{rz-num-03-3}. The negative constant component produces \(c_\Gamma C_{f,g}(0)\). Finally,
+
+\[
+b_+(f)\overline{b_+(g)}-b_-(f)\overline{b_-(g)}
+=h_{f,g}(i/2)+h_{f,g}(-i/2).
+\]
+Adding these identities gives the stated expression. \hfill\(\square\)
+
+This decomposition does not by itself establish positivity: it is a difference of two positive forms. The boundary identity in the source containing the proof uses a space \(\mathcal K_R\), an orthogonal projection \(P_R\), and an encoder \(\Xi_R:\mathcal D_R\to\mathcal K_R\) whose moments must satisfy
+
+\[
+\langle\Xi_Rf,\Xi_Rg\rangle
+=\langle J_{+,R}f,J_{+,R}g\rangle,
+\]
+\[
+\langle P_R\Xi_Rf,P_R\Xi_Rg\rangle
+=\langle J_{-,R}f,J_{-,R}g\rangle.
+\]
+\HMTresultado{Theorem}{Consequence of the two boundary moments}{rz-num-03-5}
+If the two preceding identities hold on \(\mathcal D_R\), the map \(E_R=(I-P_R)\Xi_R\) satisfies
+
+\[
+\mathscr W_R(f,g)=\langle E_Rf,E_Rg\rangle.
+\]
+In particular, \(\mathscr W_R(f,f)\geq0\).
+
+\textbf{Proof.} The orthogonal decomposition of \(\Xi_Rf\) by \(P_R\) and \(I-P_R\) gives
+
+\[
+\langle\Xi_Rf,\Xi_Rg\rangle
+=\langle P_R\Xi_Rf,P_R\Xi_Rg\rangle
++\langle E_Rf,E_Rg\rangle.
+\]
+Substitute the two moments and apply Proposition~\ref{rz-num-03-4}. \hfill\(\square\)
+
+The significance of the theorem lies in identifying the arithmetic form with a boundary norm. The decisive step in its application is the encoder's action and the proof of both moments; the orthogonality of a projection does not impose them on an arbitrary form. This edition's provenance appendix records the preserved source and the point at which it is materially incorporated. That action is not replaced by an operator defined retrospectively from the positivity to be established.
+
+There is a second conservation law, useful once \(E_R\) has been constructed. The incidence matrix
+
+\[
+B=\begin{pmatrix}7&2\\2&7\end{pmatrix}=9P_++5P_-
+\]
+has orthogonal projections
+
+\[
+P_\pm=\frac12
+\begin{pmatrix}1&\pm1\\\pm1&1\end{pmatrix}.
+\]
+Its normalization gives \(A=P_++qP_-\), with \(q=5/9\). If \(D=\sqrt{1-q^2}\,P_-\), then \(A^*A+D^*D=I\). Iteration gives
+
+\[
+\|x\|^2=\sum_{n=0}^{M-1}\|DA^nx\|^2+\|A^Mx\|^2.
+\]
+On the sheet \(P_-x=x\), the terminal term is \(q^{2M}\|x\|^2\); consequently, the map
+
+\[
+Lx=(DA^nx)_{n\geq0}
+\]
+is isometric on that sheet. Telescoping explains conservation through the distribution of losses; membership of \(E_Rf\) in the sheet must come from the preceding construction. Eliminating a terminal term does not retrospectively select the form from which it started.
+
+\subsubsection*{Internal history encoder and its two finite moments}
+The correlative transport of the TPK already allows an encoder to be constructed before its residual is defined. Fix a horizon \(N\geq1\). At each level, let \(\mathscr H_k\) be the orthogonal sum of the two sheet fibres over the complete histories at that level. If \(d(x)\) counts the outgoing emissions from a history \(x\), transport acts by
+
+\[
+U_k\iota_xv=
+\sum_{\alpha:x\to y}\frac1{\sqrt{d(x)}}\,\iota_yU_\alpha v.
+\]
+Here we consider the isometric realization of sheet transport: \(U_\alpha^*U_\alpha=I\). Distinct histories have distinct descendants because the complete route is preserved. Therefore,
+
+\[
+\left.U_k^*U_k\right|_{\mathscr H_x}
+=\frac1{d(x)}\sum_{\alpha:x\to y}U_\alpha^*U_\alpha=I.
+\]
+Consistency of the weights and preservation of memory are developed in Section~\ref{lectura:manuscrito-05} and applied to spectral transport in Subsection~\ref{rz:refinamiento}. The isometry of each sheet transport is an explicit sufficient condition for this equality; normalization of the weights alone does not prove it.
+
+Let \(P_k,Q_k\) be the orthogonal sheet projections, with \(P_k+Q_k=I\). The sheet-preserving and sheet-changing parts of transport are
+
+\[
+A_k=P_{k+1}U_kP_k+Q_{k+1}U_kQ_k,
+\qquad
+\eta_k=Q_{k+1}U_kP_k+P_{k+1}U_kQ_k.
+\]
+Block calculation gives exactly
+
+\[
+A_k^*A_k+\eta_k^*\eta_k
+=P_kU_k^*U_kP_k+Q_kU_k^*U_kQ_k=I.
+\]
+The first equality holds for any bounded transport. The second uses the indicated isometric realization. In general, the left-hand side is the sheet-diagonal part of the Gram operator of \(U_k\), not necessarily its full Gram operator.
+
+Define \(F_{0,0}=I\), \(F_{0,k}=A_{k-1}\cdots A_0\) for \(k\geq1\), and \(T_N=F_{0,N}^*F_{0,N}\). The internal encoder has domain and action
+
+\[
+\Xi_N^{\mathrm{int}}:\mathscr H_0\longrightarrow
+\mathscr K_N^{\mathrm{int}}
+:=\left(\bigoplus_{k=0}^{N-1}\mathscr H_{k+1}\right)\oplus\mathscr H_N,
+\]
+\[
+\Xi_N^{\mathrm{int}}v
+=\bigl(\eta_kF_{0,k}v\bigr)_{0\leq k<N}\oplus F_{0,N}v.
+\]
+The last summand is kept separate even when its underlying space coincides with that of an earlier output. Let \(\Pi_N^{\mathrm{term}}\) be the orthogonal projection onto that terminal summand. We obtain the two internal moments
+
+\[
+(\Xi_N^{\mathrm{int}})^*\Xi_N^{\mathrm{int}}=I,
+\qquad
+(\Xi_N^{\mathrm{int}})^*\Pi_N^{\mathrm{term}}\Xi_N^{\mathrm{int}}=T_N.
+\]
+\textbf{Proof.} The block identity implies
+
+\[
+F_{0,k}^*F_{0,k}-F_{0,k+1}^*F_{0,k+1}
+=F_{0,k}^*\eta_k^*\eta_kF_{0,k}.
+\]
+Summing from \(k=0\) to \(N-1\) yields \(I=\sum_{k<N}F_{0,k}^*\eta_k^*\eta_kF_{0,k}+T_N\), the first stated Gram operator. The terminal projection retains only \(F_{0,N}v\), so its Gram operator is \(T_N\). Thus the complement \((I-\Pi_N^{\mathrm{term}})\Xi_N^{\mathrm{int}}\) records sheet outputs and has Gram operator \(I-T_N\). All these operators come from the same transport collection; the encoder is not defined from a residual whose positivity is assumed in advance. \hfill\(\square\)
+
+This result recovers an effective encoder with its two moments, within the joint constructor that preserves the other four readouts of the continuum. Applying it to the completed columns of this section entails a precise additional requirement: one would have to identify a prior action \(R_R:\mathcal D_R\to\mathscr H_0\), with the horizon compatibility required by the test domain, for which
+
+\[
+\langle R_Rf,R_Rg\rangle
+=\langle J_{+,R}f,J_{+,R}g\rangle,
+\]
+\[
+\langle F_{0,N}R_Rf,F_{0,N}R_Rg\rangle
+=\langle J_{-,R}f,J_{-,R}g\rangle.
+\]
+The composition \(\Xi_N^{\mathrm{int}}R_R\) would then have the moments of Theorem~\ref{rz-num-03-5}. This identification of \(R_R\) with the prime-power, gamma, and polar columns is not assembled here. The preceding internal construction is assembled here, with its action and proof; it is not presented as a proof of global positivity of \(\mathscr W\). Nor is \(T_N\) suppressed, or its limit asserted to be zero.
+
+\subsubsection*{Horizon compatibility and the type of the projection}
+The terminal projection \(\Pi_N^{\mathrm{term}}\) selects the last summand of the history encoder. By contrast, the uniform expectation \(P_R\) of Theorem~\ref{rz-num-03-5} selects the uniform component of a nine-position calendar. Equality of their roles in a composition must be proved through the concrete map between those spaces; both are orthogonal projections, but that common property does not identify their ranges.
+
+Dependence on the horizon likewise imposes a verifiable identity. Let \(R\) be one and the same map and \(J_-\) a fixed column. If, for two consecutive horizons, one requires
+
+\[
+R^*T_NR=J_-^*J_-=R^*T_{N+1}R,
+\]
+then
+
+\[
+\eta_NF_{0,N}R=0.
+\]
+\textbf{Proof.} Subtracting the equalities and using the telescoping identity gives
+
+\[
+0=R^*(T_N-T_{N+1})R
+=(\eta_NF_{0,N}R)^*(\eta_NF_{0,N}R).
+\]
+Evaluation on each vector implies the stated vanishing. If equality of the moments holds with the same \(R\) along an unbounded sequence of horizons and \(T_N\) tends strongly to zero, one also obtains \(J_-=0\). \hfill\(\square\)
+
+Therefore, an identification with a nonzero negative column must specify its horizon or its compatible collection of maps \(R_{R,N}\), or retain the limiting terminal term that actually applies. Without that distinction, contraction of an output residual cannot be transferred to the complete column representing the second moment. This clarification preserves the recovered encoder in full and determines the additional compatibility its analytic realization must satisfy.
+
+\subsection{Representation of translations}
+\label{rz:traslaciones}
+Suppose that a positive identity has been established on all of \(\mathcal D\),
+
+\[
+\mathscr W(f,g)=\langle Ef,Eg\rangle
+\]
+compatible with the support domains. The spectral space is constructed from the form itself:
+
+\[
+\mathcal N=\{f\in\mathcal D:\mathscr W(f,f)=0\},\qquad
+\mathcal H_{\mathscr W}
+=\overline{\mathcal D/\mathcal N}.
+\]
+The Cauchy–Schwarz inequality for a positive form proves that the quotient inner product is well defined. The map \([f]\mapsto Ef\) extends to a unitary isomorphism from \(\mathcal H_{\mathscr W}\) onto \(\overline{\operatorname{ran}E}\).
+
+\HMTresultado{Proposition}{Unitary evolution and generator}{rz-num-03-6}
+Translations induce a strongly continuous unitary group
+
+\[
+U_t[f]=[T_tf].
+\]
+Its self-adjoint generator \(H\), with the convention \(U_t=e^{itH}\), acts on classes of test functions by
+
+\[
+H[f]=[i f'].
+\]
+\textbf{Proof.} Correlations are invariant under a common translation of both arguments. Moreover, \(\widehat{T_tf}(z)=e^{-izt}\widehat f(z)\); in \(h_{T_tf,T_tg}(z)\) the factors also cancel for complex \(z\). Hence \(\mathscr W(T_tf,T_tg)=\mathscr W(f,g)\), and translation preserves \(\mathcal N\). It defines an isometry on the quotient, inverted by \(U_{-t}\), which extends to the complete space.
+
+As \(t\to0\), \(T_tf-f\) tends to zero in every test-function seminorm on a common compact set. The continuity proved for \(\mathscr W\) implies strong continuity on the dense quotient; unitarity extends it to the whole space. Stone's theorem supplies a self-adjoint generator. The derivative at \(t=0\) is \([-f']\), which agrees with \(iH[f]\). \hfill\(\square\)
+
+The test functions also form a core for the generator. This can be seen by regularizing a vector with \(\int\chi(t)U_t\,dt\), where \(\chi\in C_c^\infty(\mathbb R)\). This regularization and its derivative are bounded operators, controlled by \(\|\chi\|_1\) and \(\|\chi'\|_1\). First approximate the regularized vectors by classes of test functions, and then approximate the identity with a collection of regularizers. The resulting approximation is in the graph norm \(\|x\|+\|Hx\|\), proving the assertion.
+
+The representation has been constructed from a positive form and its translations. This argument uses neither a list of zero ordinates nor an assignment of zeros to calendar turns as inputs.
+
+\subsection{Analytic identification and multiplicities}
+\label{rz:identificacion}
+The preceding explicit form is recognized as the completed Weil form. With
+
+\[
+\Phi_f(s)=\widehat f\bigl(i(s-1/2)\bigr),
+\qquad \rho^\sharp=1-\overline\rho,
+\]
+the explicit formula supplies its spectral expression
+
+\[
+\mathscr W(f,g)=\sum_\rho
+\Phi_f(\rho)\overline{\Phi_g(\rho^\sharp)},
+\]
+in terms of the nontrivial zeros of the completed function and their multiplicities.
+The global formulation of Weil's criterion states that positivity for
+all test functions is equivalent to \(\Re\rho=1/2\) for all
+those zeros. We use the criterion in the formulation of
+Bombieri~\cite{bombieri2000}. The global condition cannot be replaced
+by positivity of finitely many matrices.
+
+\subsubsection*{Mellin--Fourier test-function dictionary}
+\label{rz:mellin-fourier}
+To make the normalization of that recognition explicit, let
+\(\mathcal D=C_c^\infty(\mathbb R;\mathbb C)\). The map
+\[
+ (\mathcal T_{\log}f)(x)=x^{-1/2}f(\log x),\qquad x>0,
+\]
+is a bijection onto \(C_c^\infty((0,\infty);\mathbb C)\), with inverse
+\[
+ (\mathcal T_{\log}^{-1}u)(t)=e^{t/2}u(e^t).
+\]
+Indeed, the exponential change of variables takes compact supports to compact sets
+bounded away from zero and infinity. The formulas are inverses and their factors
+are smooth. Defining
+\(\widehat u_{\rm Mel}(s)=\int_0^\infty u(x)x^{s-1}\,dx\),
+the substitution \(x=e^t\) gives, for every \(s\in\mathbb C\),
+\[
+ \widehat{\mathcal T_{\log}f}_{\rm Mel}(s)
+ =\int_{\mathbb R}f(t)e^{(s-1/2)t}\,dt
+ =\widehat f\bigl(i(s-1/2)\bigr)=\Phi_f(s).
+\]
+Conjugation is preserved exactly:
+\[
+ \widehat{\overline{\mathcal T_{\log}g}}_{\rm Mel}(1-s)
+ =\overline{\Phi_g(1-\overline s)}.
+\]
+Thus the two factors in the spectral summand agree with those in the
+explicit formula in multiplicative coordinates, with no residual factor
+and with the same multiplicities counted. The sum converges absolutely:
+integration by parts gives rapid decay of the transforms
+in vertical strips, and the zero count is \(O(T\log T)\).
+The bijection transfers the quantifier over all test functions, not a
+selection of them. The explicit formula and the difficult implication of the
+criterion are the cited antecedents; the preceding change of variables
+proves the correspondence of their domains and normalizations, not a new
+positivity theorem. This compact-support domain is not asserted to be invariant under
+the integral Cayley operator: its subsequent realization uses the exponential space
+of Subsection~\ref{tm-add-m4}.
+
+Once those antecedents are satisfied, writing \(\rho=1/2+i\gamma\) gives
+
+\[
+\mathscr W(f,g)
+=\sum_{\gamma\in\Gamma_\xi}
+m_\gamma\widehat f(-\gamma)\overline{\widehat g(-\gamma)}.
+\]
+Here \(\Gamma_\xi\) contains the distinct ordinates and \(m_\gamma\) is the multiplicity of the corresponding zero. Let
+
+\[
+\mu_\xi=\sum_{\gamma\in\Gamma_\xi}m_\gamma\delta_\gamma.
+\]
+The map
+
+\[
+\mathcal F_\xi[f](\gamma)=\widehat f(-\gamma)
+\]
+is an isometry from \(\mathcal H_{\mathscr W}\) into \(L^2(\Gamma_\xi,\mu_\xi)\). In this representation, \(U_t\) acts as multiplication by \(e^{it\gamma}\) and \(H\) as multiplication by \(\gamma\).
+
+\HMTresultado{Proposition}{Exhaustiveness of the atomic representation}{rz-num-03-7}
+The map \(\mathcal F_\xi\) is surjective.
+
+\textbf{Proof.} Its closed range is invariant under multiplication by \(e^{it\gamma}\) for positive and negative \(t\); it is therefore reducing. For a fixed ordinate \(\gamma_0\), the averages
+
+\[
+\frac1{2T}\int_{-T}^T e^{-it\gamma_0}U_t\,dt
+\]
+converge strongly to the projection onto the atom \(\gamma_0\). This is checked first coordinatewise and then by dominated convergence in the sequence space. There exists \(f\in C_c^\infty\) with \(\widehat f(-\gamma_0)\neq0\); for example, it suffices to modulate a function with nonzero integral. The range thus contains the vector of that atom. Since it contains every finitely supported vector and is closed, it equals the whole space. \hfill\(\square\)
+
+The measure preserves arithmetic multiplicity as a weight. Its relation to operator multiplicity should be specified: the scalar space \(L^2(\Gamma_\xi,\mu_\xi)\) has a one-dimensional eigenspace for each atom, even if \(m_\gamma>1\). Therefore, if a function \(F\) produces a trace-class operator,
+
+\[
+\operatorname{Tr}(F(H))=\sum_{\gamma\in\Gamma_\xi}F(\gamma),
+\]
+whereas the sum preserving the weights of the zeros is
+
+\[
+\int F(\gamma)\,d\mu_\xi(\gamma)
+=\sum_{\gamma\in\Gamma_\xi}m_\gamma F(\gamma).
+\]
+This second sum can be represented as a weighted trace \(\operatorname{Tr}(M_mF(H))\), when the product is trace class, where \(M_m\) is multiplication by \(m_\gamma\). A different construction would place a fibre of dimension \(m_\gamma\) at each atom. These two representations are not interchanged without an explicit declaration.
+
+\subsection{The two circles and spectral orientation}
+\label{rz:circulos}
+The first circle is a compact coordinate for the spectral line. For a real number \(\gamma\), define
+
+\[
+\tau_\gamma=\frac{\gamma+i/2}{\gamma-i/2}.
+\]
+Its modulus is one and \(\tau_\gamma\neq1\). The inverse formulas are
+
+\[
+\gamma=\frac{i}{2}\frac{\tau_\gamma+1}{\tau_\gamma-1},
+\qquad
+\gamma=\frac12\cot\frac{\theta}{2}
+\quad\text{if}\quad\tau_\gamma=e^{i\theta}.
+\]
+If \(s=1/2+i\gamma\), also
+
+\[
+\tau_\gamma=\frac{s-1}{s},\qquad s=\frac1{1-\tau_\gamma}.
+\]
+Passing to the phase does not lose the ordinate, provided the point on the circle and the orientation convention are retained.
+
+For the preceding self-adjoint generator, functional calculus defines the unitary operator
+
+\[
+C=(H+iI/2)(H-iI/2)^{-1}.
+\]
+The equality \(C^*C=I\) follows because both factors are functions of the same self-adjoint operator and \(|(\gamma+i/2)/(\gamma-i/2)|=1\). The point \(1\) does not correspond to a finite ordinate, but it may belong to the spectrum of \(C\) as an accumulation point when \(H\) is unbounded.
+
+The second circle is the dual of integer memory: a phase \(\tau\) is associated with the character
+
+\[
+\chi_\tau(n)=\tau^n,\qquad n\in\mathbb Z.
+\]
+The nonadic connection returns the visible phase to its initial position and increases the memory of a turn by one unit. The spectral realization assigns the action of \(C\) to that unit; on an eigenvector with ordinate \(\gamma\), the memory of \(n\) turns acts by \(\tau_\gamma^n\). The first circle encodes the ordinate; the second expresses how its phase acts on additive memory. These are two related mathematical roles, not two lists to be identified by their ordinal positions.
+
+\subsection{Cylindrical refinement with memory}
+\label{rz:refinamiento}
+The connection must act on the structure being refined. In the common TPK tree, a vertex is a finite history of admissible emissions; two histories reaching the same terminal state remain distinct when their transport records differ. If \(\operatorname{Out}(x)\) is the finite set of outgoing emissions, counted with multiplicity, write
+
+\[
+d(x)=|\operatorname{Out}(x)|\geq1.
+\]
+Neutral prolongation preserves nonemptiness of the levels. The local weight specified by the tree is \(1/d(x)\). For a history \(h=(\epsilon_1,\ldots,\epsilon_k)\), with successive states \(x_0,\ldots,x_k\), its weight is
+
+\[
+\mu_k(h)=\prod_{j=0}^{k-1}\frac1{d(x_j)}.
+\]
+The sum of the weights of all its successors is
+
+\[
+\sum_{\epsilon\in\operatorname{Out}(x_k)}
+\mu_{k+1}(h\epsilon)
+=\mu_k(h)\sum_{\epsilon\in\operatorname{Out}(x_k)}\frac1{d(x_k)}
+=\mu_k(h).
+\]
+Starting from the root of weight one, this identity proves normalization and projective consistency by induction. If a reversible symmetry transports the outgoing emissions bijectively with their multiplicities, it preserves \(d(x)\), all these weights, and their cylinder measures. Thus the measure used below comes from the declared branching rule, before an operator is assigned to its fibres. It is not confused with a uniform distribution on terminal states that would identify different histories.
+
+In general, let \(\mathcal Z_k\) be a finite level of cylindrical states and let \(\pi_k:\mathcal Z_{k+1}\to\mathcal Z_k\) be its truncation map. Suppose a collection of compatible positive weights is given,
+
+\[
+\mu_k(z)=\sum_{\pi_k(z')=z}\mu_{k+1}(z'),
+\qquad \sum_{z\in\mathcal Z_k}\mu_k(z)=1.
+\]
+The weights belong to the state measure being transported. The shape of a visible numerical cylinder does not by itself suffice to reconstruct them.
+
+Let \(q_k:\mathcal Z_k\to\mathbb Z\) be the memory coordinates. The increment of a prolongation is
+
+\[
+m(z',z)=q_{k+1}(z')-q_k(z).
+\]
+Concatenating prolongations satisfies the cocycle law exactly:
+
+\[
+m(z'',z)=m(z'',z')+m(z',z).
+\]
+Define
+
+\[
+w(z',z)=
+\sqrt{\frac{\mu_{k+1}(z')}{\mu_k(z)}},
+\qquad
+\mathcal K_k=\ell^2(\mathcal Z_k)\otimes\mathcal H_{\mathscr W}.
+\]
+Transport with memory is
+
+\[
+\widetilde U_k(e_z\otimes v)
+=\sum_{\pi_k(z')=z}w(z',z)e_{z'}\otimes C^{m(z',z)}v.
+\]
+\HMTresultado{Proposition}{Isometry and composition of transport}{rz-num-03-8}
+Each \(\widetilde U_k\) is isometric. Composition across several levels has the same form, with the weight ratio between the endpoint levels and the total memory increment.
+
+\textbf{Proof.} Two distinct predecessors have disjoint sets of descendants. For a fixed predecessor, powers of \(C\) are unitary and \(\sum_{z'\mapsto z}w(z',z)^2=1\). These are exactly the identities preserving inner products of basis vectors. In a composition, the product of weights telescopes:
+
+\[
+\sqrt{\frac{\mu_{k+2}(z'')}{\mu_{k+1}(z')}}
+\sqrt{\frac{\mu_{k+1}(z')}{\mu_k(z)}}
+=\sqrt{\frac{\mu_{k+2}(z'')}{\mu_k(z)}}.
+\]
+The powers of \(C\) add their exponents by the cocycle law. Repetition proves the assertion for any finite number of levels. \hfill\(\square\)
+
+The same identity admits an interpretation through a change of representation. If \(U_k\) denotes transport without memory and
+
+\[
+G_k(e_z\otimes v)=e_z\otimes C^{q_k(z)}v,
+\]
+then
+
+\[
+\widetilde U_k=G_{k+1}(U_k\otimes I)G_k^*.
+\]
+The memory coordinate is not lost in formulating the isometry: it appears at both ends of the transport. This equality also shows that the twisted representation uses an already specified operator \(C\). By itself, it does not identify an arbitrary prior native transport with that operator; identification requires composing their maps and checking their actions on the same domain.
+
+\HMTresultado{Proposition}{Nonadic return on the compatible section}{rz-num-03-9}
+Define
+
+\[
+\Omega_k=\sum_z\sqrt{\mu_k(z)}e_z,\qquad
+J_kv=\Omega_k\otimes v.
+\]
+If every return trajectory from \(k\) to \(k+9\) has memory increment one, then
+
+\[
+\widetilde U_{\Gamma,k}J_k=J_{k+9}C.
+\]
+For \(r\) consecutive turns,
+
+\[
+\widetilde U_{\Gamma,k+9(r-1)}\cdots
+\widetilde U_{\Gamma,k}J_k=J_{k+9r}C^r.
+\]
+\textbf{Proof.} Multiplying each descendant's weight by its predecessor's coefficient \(\sqrt{\mu_k(z)}\) leaves \(\sqrt{\mu_{k+9}(z')}\). The condition on the increment allows the same operator \(C\) to be factored out of every summand. This gives the first equality. The second follows by induction. \hfill\(\square\)
+
+The level indices are essential. It is the phase that returns, while the section extends to another level; the formula does not reset the state in the previous space.
+
+The memory condition in this proposition has a concrete action in TPK chronology. For a phase \(r\in\mathbb Z/9\mathbb Z\), with representative \(\bar r\in\{0,\ldots,8\}\), and a memory depth \(w\in\mathbb Z_{\geq0}\), each emission updates
+
+\[
+\sigma_9(w,r)=
+\left(w+\left\lfloor\frac{\bar r+1}{9}\right\rfloor,r+[1]_9\right).
+\]
+After \(n\) emissions, the number of crossings from representative \(8\) to representative \(0\) is \(\lfloor(\bar r+n)/9\rfloor\). Therefore,
+
+\[
+\sigma_9^n(w,r)=
+\left(w+\left\lfloor\frac{\bar r+n}{9}\right\rfloor,r+[n]_9\right),
+\qquad
+\sigma_9^9(w,r)=(w+1,r).
+\]
+Taking \(q_k=w_k\) recovers the preceding cocycle and the unit increment of each turn. Even a neutral emission on the APP sheets records an extension in this chronology. The calculation does not by itself impose the spectral operator \(C\): it determines the memory on which the realization acts, once its intertwining has been established.
+
+\subsection{Nonadic calendar and contraction over one turn}
+\label{rz:calendario}
+The finite calendar is a representation of this transport. On \(\mathbb C^9\otimes\mathcal H_{\mathscr W}\), let
+
+\[
+S_C=\sum_{r=1}^{8}|r+1\rangle\langle r|\otimes I
++|1\rangle\langle9|\otimes C.
+\]
+The unitarity of \(C\) makes \(S_C\) unitary, and the complete turn satisfies
+
+\[
+S_C^9=I_{\mathbb C^9}\otimes C.
+\]
+Each vector crosses the oriented seam containing \(C\) exactly once; this is why \(C^9\) does not appear.
+
+Let \(u=9^{-1/2}(1,\ldots,1)\) and \(\iota v=u\otimes v\). The uniform compression of one step is
+
+\[
+A_C=\iota^*S_C\iota=\frac{8I+C}{9}.
+\]
+A direct calculation gives
+
+\[
+I-A_C^*A_C
+=\frac8{81}(I-C)^*(I-C).
+\]
+The defect of a compressed unitary transport measures the component leaving the uniform state. It is not a loss of unitarity of the complete calendar.
+
+The contraction \(q=5/9\) of the complementary sheet and the calendar are distinct operations. If \(q\) corresponds to one nonadic turn, the operator per turn is
+
+\[
+M_{\mathrm{vuelta}}=qS_C^9
+=q(I\otimes C).
+\]
+It can be distributed uniformly over the nine steps by
+
+\[
+M_{\mathrm{paso}}=q^{1/9}S_C,\qquad
+M_{\mathrm{paso}}^9=M_{\mathrm{vuelta}}.
+\]
+By contrast, taking \(qS_C\) as the operator at each step produces \(q^9(I\otimes C)\) upon completing the turn. The two normalizations describe different contractions and must not be identified. At an ordinate \(\gamma\), \(r\) turns in the first regime produce
+
+\[
+q^r\tau_\gamma^r.
+\]
+The modulus records extinction of the terminal term; the phase records the action on memory. Knowing only the modulus does not determine the spectral ordinates.
+
+\subsection{Moment matrices and spectral approximation}
+\label{rz:galerkin}
+The preceding realization allows approximations to be constructed from test functions, not from assigned spectral values. Choose \(f_1,\ldots,f_d\in\mathcal D\) whose classes are linearly independent in \(\mathcal H_{\mathscr W}\). With \(e_j=[f_j]\), define
+
+\[
+G_{ij}=\langle e_j,e_i\rangle,\qquad
+K_{ij}=\langle He_j,e_i\rangle,\qquad
+Q_{ij}=\langle He_j,He_i\rangle.
+\]
+The index convention ensures that, for \(x=\sum_jv_je_j\), one has \(\|x\|^2=v^*Gv\). \(G\) is positive-definite Hermitian, and \(K,Q\) are Hermitian. If the initial classes were dependent, the kernel of \(G\) would have to be removed before inverting it.
+
+\HMTresultado{Proposition}{Galerkin approximation and residual}{rz-num-03-10}
+The generalized problem
+
+\[
+Kv=\gamma Gv
+\]
+is equivalent to the ordinary Hermitian problem for \(\widehat H=G^{-1/2}KG^{-1/2}\). For any \(\gamma\in\mathbb R\) and \(v\neq0\), the spectral residual of the corresponding vector satisfies
+
+\[
+\frac{\|(H-\gamma)x\|^2}{\|x\|^2}
+=\frac{v^*(Q-2\gamma K+\gamma^2G)v}{v^*Gv}.
+\]
+In particular,
+
+\[
+\operatorname{dist}(\gamma,\sigma(H))
+\leq\frac{\|(H-\gamma)x\|}{\|x\|}.
+\]
+\textbf{Proof.} The change \(w=G^{1/2}v\) transforms the generalized equation into \(\widehat Hw=\gamma w\). Expanding the residual norm gives the quadratic identity because \(H\) is symmetric on the vectors used. The final inequality follows from the spectral measure of \(H\):
+
+\[
+\|(H-\gamma)x\|^2
+=\int |\lambda-\gamma|^2\,d\langle E_H(\lambda)x,x\rangle.
+\]
+The integrand is bounded below by the squared distance to the spectrum. \hfill\(\square\)
+
+The phase matrix
+
+\[
+\widehat C=(\widehat H+iI/2)(\widehat H-iI/2)^{-1}
+\]
+is unitary for the Euclidean inner product. If \(G^{-1}K\) is used instead in the original basis, the corresponding unitarity is expressed relative to \(G\). These are two bases for the same problem, not two norms interchangeable without transformation.
+
+A small residual approximates the spectrum of the operator already constructed. By itself, it does not count all its eigenvalues, prove global positivity of \(\mathscr W\), or certify decimal digits affected by quadrature errors. For a validated bound, the entries of \(G,K,Q\) must be accompanied by error bounds and a positive lower bound for the form \(v^*Gv\).
+
+\subsection{Compact resolvent and exhaustiveness checks}
+\label{rz:resolvente}
+In the atomic realization, the ordinates form a discrete set and escape to infinity. Therefore,
+
+\[
+R=(H-iI)^{-1}
+\]
+is compact: in the atomic basis it acts by \((\gamma-i)^{-1}\), which tends to zero. It is also recovered directly from the translation group through
+
+\[
+R=i\int_0^\infty e^{-t}U_{-t}\,dt.
+\]
+The integral over a finite interval is defined in the strong sense. Its tail from \(T\) has operator norm at most \(e^{-T}\), so the truncated integrals converge in norm. Functional calculus reduces the identity to \(i/(1+i\gamma)=(\gamma-i)^{-1}\).
+
+\HMTresultado{Proposition}{Norm convergence of compressions}{rz-num-03-11}
+If \(P_d\) are finite-rank orthogonal projections with \(P_d\to I\) strongly, then
+
+\[
+\|R-P_dRP_d\|\longrightarrow0.
+\]
+\textbf{Proof.} The strong convergence of \(P_d\), together with the bound \(\|P_d\|\leq1\), is uniform on every compact set. Apply it to the compact closure of the image of the unit ball under \(R\), obtaining \(\|(I-P_d)R\|\to0\). Applying the same argument to \(R^*\) yields \(\|R(I-P_d)\|\to0\). The decomposition
+
+\[
+R-P_dRP_d=(I-P_d)R+P_dR(I-P_d)
+\]
+completes the proof. \hfill\(\square\)
+
+This convergence permits checks along resolvent contours. If a closed curve \(\mathcal C\) separates a group of nonzero eigenvalues and the norm of the compression error is less than the reciprocal of a bound for the approximate resolvent on \(\mathcal C\), the Neumann series preserves invertibility along the curve. The Riesz projections of the two operators then have the same rank. This is an exhaustiveness check in a delimited spectral region, additional to a vector residual.
+
+The multiplicity counted by that rank is the multiplicity of the represented operator. In the scalar space of Subsection~\ref{rz:identificacion}, it must not be replaced by the weight \(m_\gamma\) without explicitly introducing the weighted observable.
+
+\subsection{From internal identities to the analytic assembly}
+\label{rz:alcance}
+The proofs of the heat and Mellin normalization, the explicit construction of the completed form, its column decomposition, cylindrical transport with memory, the two circles, the calendar, and the spectral checks have been assembled here. The arithmetic construction of irreducibles precedes their appearance in the prime-power weights. Memory comes from compatible prolongations; it is not replaced by a phase digit.
+
+Subsection~\ref{rz:columnas} also assembles a finite internal encoder constructed from history transports, together with the proof of its moments \(I\) and \(T_N\) in the isometric realization. Applying Theorem~\ref{rz-num-03-5} to the native encoder of the completed form retains a more specific identification: the prior action \(R_R\) on test functions and equality of those moments with the moments of \(J_{+,R}\) and \(J_{-,R}\). The source of the completed form states those identities and develops their consequences. This exposition preserves those consequences with their explicit antecedents and the internal composition actually recovered; it does not replace the remaining link with a merely nominal formulation. The distinction concerns the proof assembled in this article, not an assertion that the result is absent from the corpus as a whole.
+
+The complete link between all APP–TRIT–TPK histories and the word normalization of the first chapter also retains its integration requirement. The five consubstantial constructions of the continuum remain part of the common kernel; this chapter presents their spectral readout and does not redefine them as independent structures selected by conventional problems.
+
+Identifying the global form with the explicit formula and Weil's criterion fixes the exact scope of any eventual terminal conclusion. Finite checks of the native producer and spectral approximations are distinct verifiable results. Accordingly, this working edition does not present the chapter as an already completed, self-contained proof of the Riemann hypothesis.
+
+\subsection{Bidirectional recovery and assembly of the readouts}
+\label{rz:gamma}
+The gamma information recovers the test function that produced it. This property provides an explicit action between the complete columns before the sign of their difference is known. The following development extends the integration status described in Subsections~\ref{rz:columnas} and~\ref{rz:alcance}: the global bounded connector is recovered; its contractivity is studied on the same action and the same range, not on another operator.
+
+The construction follows the prime-power weights, the completed trace, and the transports already defined. It does not change the selection of irreducibles or receive zeros as inputs. The sources of the gamma tail, the basal domain, and the prior folding are preserved in full in the provenance package for this integration.
+
+\HMTresultado{Proposition}{Left inverse of the tail and global connector}{rz-num-03-12}
+Let \(H_R=L^2(I_R)\), identified with its zero extension to the line, and let \(M_R\) be orthogonal restriction to \(I_R\). Define
+
+\[
+a_R=2\int_R^\infty\mu(a)\,da,\qquad
+(B_Rf)(a)=\sqrt{\mu(a)}(I-T_a)f\quad(a\geq R).
+\]
+Then \(B_R\) is bounded and \(B_R^*B_R=a_RI\). If \(\pi_{\Gamma,\geq R}\) extracts the gamma tail from the positive column, the map
+
+\[
+L_R=a_R^{-1}B_R^*\pi_{\Gamma,\geq R}
+\]
+satisfies \(L_RJ_{+,R}f=f\) for \(f\in\mathcal D_R\), and \(L_RL_R^*=a_R^{-1}I\) on \(H_R\). The first identity extends to the joint closed domain of the readouts; it does not assert that the complete gamma column is defined on all of \(L^2(I_R)\). In particular,
+
+\[
+\mathcal C_R=J_{-,R}L_R,\qquad
+\mathcal C_RJ_{+,R}=J_{-,R}
+\]
+is a bounded connector for every \(R>0\).
+
+\textbf{Proof.} For \(a\geq R\), the supports of \(f,g\in H_R\) and of their translates are disjoint, apart from endpoints of measure zero. Therefore
+
+\[
+\langle(I-T_a)f,(I-T_a)g\rangle=2\langle f,g\rangle.
+\]
+Integration gives the first Gram operator. The adjoint has the explicit action
+
+\[
+B_R^*F=M_R\int_R^\infty\sqrt{\mu(a)}(I-T_{-a})F(a)\,da.
+\]
+The integral converges in norm by Cauchy–Schwarz; the tail of \(\mu\) is integrable and \(T_a^*=T_{-a}\). Applying the adjoint to the tail of \(J_{+,R}f\) returns \(a_Rf\). Extraction is a coisometry onto its summand, whence \(L_RL_R^*=a_R^{-2}B_R^*B_R=a_R^{-1}I\). The negative column is bounded on \(H_R\): it has finitely many vector-valued rows and a continuous polar functional on that interval. Composition completes the argument. \hfill\(\square\)
+
+Inversion uses the conjugate translations before publishing the recovered function. The source also provides a finite-band version: with \(A_R=[R+1,R+2]\) and \(\nu_R=\int_{A_R}\mu(a)\,da\),
+
+\[
+\mathfrak R_RF=\nu_R^{-1}\int_{A_R}
+\sqrt{\mu(a)}M_RF(a)\,da,\qquad
+\mathfrak R_RD_\Gamma f=f.
+\]
+The identity follows from \(M_RT_af=0\) on that band. Both inverses precede a Weil inequality. The first allows the ambient norm of its connector to be computed exactly.
+
+\HMTresultado{Proposition}{Connector norm and basal factorization}{rz-num-03-13}
+Write
+
+\[
+s_R^2=2\sum_{\ell_{p,k}\leq R}w_{p,k}-c_\Gamma,\qquad
+\beta_R=2\sinh(R/2)-R.
+\]
+Then
+
+\[
+\|\mathcal C_R\|^2=\frac{s_R^2+\beta_R}{a_R}.
+\]
+Consequently, if \(0<h<\log2\) and
+
+\[
+2M_\Gamma(h)\geq-c_\Gamma+2\sinh(h/2)-h,\qquad
+M_\Gamma(h)=\int_h^\infty\mu(a)\,da,
+\]
+there exists a dilation realizing the two moments of Theorem~\ref{rz-num-03-5} on all functions in \(\mathcal D_h\).
+
+\textbf{Proof.} The negative column has Gram operator \(J_-^*J_-=s_R^2I+b_-^*b_-\). The functional
+
+\[
+b_-(f)=\sqrt2\int_{-R/2}^{R/2}f(x)\sinh(x/2)\,dx
+\]
+has squared norm \(2\int_{-R/2}^{R/2}\sinh^2(x/2)\,dx=\beta_R\). The Gram operator has norm \(s_R^2+\beta_R\). The preceding identity \(L_RL_R^*=a_R^{-1}I\) gives \(\mathcal C_R\mathcal C_R^*=a_R^{-1}J_-J_-^*\), proving the formula.
+
+For \(R=h<\log2\), no prime-power lengths occur in the sum. The stated inequality proves \(\|\mathcal C_h\|\leq1\). One can construct, in this order,
+
+\[
+D_h^{\mathrm{def}}=(I-\mathcal C_h^*\mathcal C_h)^{1/2},
+\qquad
+\Xi_hf=J_{-,h}f\oplus D_h^{\mathrm{def}}J_{+,h}f.
+\]
+The sum of the Gram operators of \(\mathcal C_h\) and its defect is the identity. Since \(\mathcal C_hJ_{+,h}=J_{-,h}\), the first moment of \(\Xi_h\) is \(J_{+,h}^*J_{+,h}\); projection onto the first summand has moment \(J_{-,h}^*J_{-,h}\). Theorem~\ref{rz-num-03-5} gives positivity. The square root of the defect is taken after contractivity has been proved, not as a substitute for that proof.
+
+If the window is enlarged to \(R\geq h\), each added prime channel satisfies \(\|(I-T_\ell)f\|^2=2\|f\|^2\) on \(H_h\). The map from that image to \(\sqrt2f\) is an isometry, extended by zero on the complement of its closed range. The direct sum of those rows with the gamma–polar connector retains contractivity on the same basal domain. \hfill\(\square\)
+
+The basal endpoint is determined by
+
+\[
+2M_\Gamma(h_*)=-c_\Gamma+2\sinh(h_*/2)-h_*.
+\]
+The substitution \(t=e^{-a/2}\) gives
+
+\[
+M_\Gamma(h)=\operatorname{arctanh}(e^{-h/2})
++\arctan(e^{-h/2}).
+\]
+The left-hand side of the equation decreases strictly from infinity to zero; the right-hand side is positive and increases strictly for \(h>0\). There is a unique positive root. The source evaluates it as \(h_*=0.08562601762973687068\ldots<\log2\). One may work with any \(h<h_*\) certified by inequalities, without needing the decimal expansion of that endpoint.
+
+The complete form also preserves translation of test functions. On the polar ports, translation acts by
+
+\[
+\binom{b_+(T_tf)}{b_-(T_tf)}=
+\begin{pmatrix}\cosh(t/2)&\sinh(t/2)\\
+\sinh(t/2)&\cosh(t/2)\end{pmatrix}
+\binom{b_+(f)}{b_-(f)}.
+\]
+The matrix preserves the difference of squares, and the other rows are translated unitarily. The basal domain may therefore be placed in any translated interval of length \(h\).
+
+\HMTresultado{Proposition}{Uniqueness on the effective range}{rz-num-03-14}
+Let \(\mathcal M_{+,R}=\overline{J_{+,R}\mathcal D_R}\). The restriction of the constructed connector to this subspace is unique among bounded maps with that output identity. Moreover,
+
+\[
+\|\mathcal C_R|_{\mathcal M_{+,R}}\|\leq1
+\quad\Longleftrightarrow\quad
+\mathscr W_R(f,f)\geq0\quad(f\in\mathcal D_R).
+\]
+\textbf{Proof.} Two bounded operators agreeing on the dense range agree on its closure. The equivalence follows from \(\mathcal C_RJ_{+,R}f=J_{-,R}f\) and the norm identity; the inequality extends to the closure by continuity. \hfill\(\square\)
+
+The global formula is therefore constructed:
+
+\[
+\mathscr W_R(f,g)=
+\langle J_{+,R}f,(I-\mathcal C_R^*\mathcal C_R)J_{+,R}g\rangle.
+\]
+Changing the ambient representation may facilitate computation of the norm, but it does not permit changing its action on test functions. Failure of contractivity on the entire ambient space does not refute positivity on the complete range, where the row correlations remain. Projection onto that range does not automatically prove the bound either.
+
+\HMTresultado{Proposition}{Prior folding and all cross terms}{rz-num-03-15}
+With a basal fibre fixed, let \(m=9^q\) and let \(\ell_j\) be the displacements expressed by its routes. On \(m\) copies of \(L^2(\mathbb R)\), the folding and its uniform representation are
+
+\[
+\mathcal F_qx=\sum_{j=1}^mT_{\ell_j}x_j,\qquad
+\mathsf S_qx=u_q\otimes\mathcal F_qx=3^qP_q\mathsf T_qx,
+\qquad u_q=m^{-1/2}(1,\ldots,1).
+\]
+For every linear readout \(J\) defined on those test functions,
+
+\[
+\|J\mathcal F_qx\|^2
+=\sum_{i,j}\langle JT_{\ell_i}x_i,JT_{\ell_j}x_j\rangle.
+\]
+Moreover, \(\mathcal F_q\) is surjective, with right inverse
+
+\[
+(\mathcal E_qf)_j=m^{-1}T_{-\ell_j}f,\qquad
+\mathcal F_q\mathcal E_q=I,\qquad
+\|\mathcal E_qf\|^2=m^{-1}\|f\|^2.
+\]
+\textbf{Proof.} Averaging the \(m\) routes and multiplying by \(\sqrt m=3^q\) gives the expression for \(\mathsf S_q\). Expanding the inner product retains every cross term. Substituting \(\mathcal E_qf\) produces \(m\) copies of \(f/m\); unitarity of the translations gives the norm. \hfill\(\square\)
+
+If the successors satisfy \(\ell_{jr}=\ell_j+\delta_{jr}\), the operation \((\mathcal A_qx)_j=\sum_{r=0}^8T_{\delta_{jr}}x_{jr}\) satisfies exactly
+
+\[
+\mathcal F_{q+1}=\mathcal F_q\mathcal A_q,\qquad
+\mathsf S_{q+1}=\mathcal I_q\mathsf S_q\mathcal A_q,\qquad
+\mathcal I_qy=y\otimes u_9.
+\]
+The gamma, prime, and polar columns are thus applied to the same sum before their norms are taken. Unitary mixing after an orthogonal sum preserves diagonal energy; it does not manufacture omitted cross terms.
+
+Surjectivity determines the scope of refinement. On the complete fibre, positivity of \(\mathscr W(\mathcal F_qx,\mathcal F_qx)\) for all states is equivalent to positivity of \(\mathscr W(f,f)\) for all test functions. The reverse implication uses \(x=\mathcal E_qf\), whose components remain smooth and compactly supported. Folding preserves the problem and its cross terms: merely increasing the routes does not restrict the test functions. Restriction to more specific reachable states requires their construction and its proof.
+
+\subsubsection*{Assembled result and global extension}
+The gamma inverse, the complete output link, the basal domain, its translation, and folding prior to the readouts have action, domain, and proof here. They are results recovered from the corpus and assembled formalizations, not discoveries attributed retrospectively.
+
+For the requested global scope, it remains to prove the bound for that same output on the entire effective range, including the cross terms in sums of local test functions, compatibly as the windows are enlarged. The output identity of one connector and the contractivity of another cannot be combined without proving that they represent the same action. Comparison with the internal history encoder retains the two moments specified in Subsection~\ref{rz:columnas}.
+
+\subsection{Irreducible-clock windows and refinement with cross terms}
+\label{rz:ventanas}
+The native product determines irreducibles and their powers before the logarithmic readout. The lengths \(\ell_{p,k}=k\log p\) and weights \(w_{p,k}=(\log p)p^{-k/2}\) appearing below are those already expressed in Sections~\ref{lectura:manuscrito-01} and~\ref{lectura:manuscrito-02}. They are not selected from the sign to be checked. On this arithmetic output, a collection of test functions can be evaluated jointly, retaining the channels of the completed form and all their cross terms.
+
+This section assembles the density result and Schur criterion from the source “Surviving readout of two APP routes”, and extends the calculation to translated intervals of equal width. The choice of nine windows certified below is an explicit analytic collection; its cardinality does not by itself identify those windows with the nine canonical successors of a TPK state.
+
+\HMTresultado{Proposition}{Complete kernel of translated intervals}{rz-num-03-16}
+For \(\varepsilon>0\), let
+
+\[
+b_{\varepsilon,t}(x)=\varepsilon^{-1/2}
+\mathbf1_{[t-\varepsilon/2,t+\varepsilon/2]}(x),\qquad
+\tau_\varepsilon(x)=\left(1-\frac{|x|}{\varepsilon}\right)_+,
+\]
+\[
+a_\varepsilon=\frac{4\sinh(\varepsilon/4)}{\sqrt\varepsilon},
+\qquad \lambda_n=2n+\frac12,\qquad
+F(x)=\sum_{n\geq0}\frac{e^{-\lambda_nx}}{\lambda_n^2}
+\quad(x\geq0).
+\]
+The complete form on these intervals depends on the difference between their centres:
+
+\[
+\mathscr W(b_{\varepsilon,s},b_{\varepsilon,t})
+=K_\varepsilon(s-t),
+\]
+where
+
+\[
+\begin{aligned}
+K_\varepsilon(d)={}&2a_\varepsilon^2\cosh(d/2)
++c_\Gamma\tau_\varepsilon(d)\\
+&+\frac{2F(|d|)-F(|d-\varepsilon|)-F(|d+\varepsilon|)}{\varepsilon}\\
+&-\sum_{p,k}w_{p,k}\bigl[
+\tau_\varepsilon(d-\ell_{p,k})+
+\tau_\varepsilon(d+\ell_{p,k})\bigr].
+\end{aligned}
+\]
+The prime-power sum is finite; only lengths \(\ell_{p,k}<|d|+\varepsilon\) contribute.
+
+\textbf{Proof.} The overlap of two normalized intervals is the triangular correlation \(\tau_\varepsilon\). Inserting the translations of each clock gives the two prime terms. The polar integrals of \(b_{\varepsilon,t}\) are \(a_\varepsilon e^{t/2}\) and \(a_\varepsilon e^{-t/2}\). Their cross product gives \(a_\varepsilon^2(e^{(s-t)/2}+e^{(t-s)/2})\), the polar term in the formula. In particular, dependence on the difference between centres belongs to the complete form, although each polar port separately changes under translation.
+
+The expansion \(\mu(a)=\sum_{n\geq0}e^{-\lambda_na}\) and integration over the linear pieces of \(\tau_\varepsilon\) give
+
+\[
+\int_0^\infty e^{-\lambda a}
+\bigl[2\tau_\varepsilon(d)-\tau_\varepsilon(d-a)
+-\tau_\varepsilon(d+a)\bigr]\,da
+=\frac{2e^{-\lambda|d|}-e^{-\lambda|d-\varepsilon|}
+-e^{-\lambda|d+\varepsilon|}}{\varepsilon\lambda^2}.
+\]
+To justify interchanging the series and integral, the triangular function also satisfies
+
+\[
+|2\tau_\varepsilon(d)-\tau_\varepsilon(d-a)-\tau_\varepsilon(d+a)|
+\leq\min(4,2a/\varepsilon).
+\]
+Its product with \(\mu(a)\) is integrable both at the origin and at infinity. The sum of the absolute integrals is thus bounded, justifying the interchange. The integrated summand is also bounded in absolute value by \(4/(\varepsilon\lambda_n^2)\), whose series converges. The joint contribution of both sides cancels the singularity of \(\mu\) at the origin. One can therefore sum the integrated identity and obtain the stated gamma term. \hfill\(\square\)
+
+These indicator functions are elements of the closed domain of the readouts, not smooth functions. Extension from \(\mathcal D_R\) is justified without modifying the form. For a normalized interval,
+
+\[
+\|b_{\varepsilon,t}-T_ab_{\varepsilon,t}\|_2^2
+=2\min(|a|/\varepsilon,1).
+\]
+The integral against \(\mu(a)\) is finite. Let \(b_{\varepsilon,t}^{(\delta)}=\rho_\delta*b_{\varepsilon,t}\) be a smooth regularization supported in a fixed window. Take \(\rho\geq0\), smooth and compactly supported, with \(\int\rho=1\), and \(\rho_\delta(x)=\delta^{-1}\rho(x/\delta)\). The gamma symbol is
+
+\[
+\sigma_\Gamma(\xi)=\int_0^\infty
+\mu(a)|1-e^{-ia\xi}|^2\,da.
+\]
+In Fourier coordinates, the integrand expressing the gamma norm of the difference contains \(\sigma_\Gamma|\widehat b|^2 |\widehat\rho(\delta\xi)-1|^2\). The first product is integrable, and the last factor is bounded by \(4\) and tends to zero. Dominated convergence proves gamma convergence. The prime channels are finite and bounded in that window; the polar channels are continuous functionals on its support. This gives convergence in the joint readout norm and, consequently, convergence of every finite Gram matrix.
+
+\HMTresultado{Corollary}{Two orientations of the same prime window}{rz-num-03-17}
+Set \(D_\varepsilon=K_\varepsilon(0)\). For two centres separated by \(L\), the complete Gram matrix is
+
+\[
+G_2=\begin{pmatrix}D_\varepsilon&K_\varepsilon(L)\\
+K_\varepsilon(L)&D_\varepsilon\end{pmatrix}.
+\]
+Therefore
+
+\[
+\mathscr W(af+bg,af+bg)=
+\frac{D_\varepsilon+K_\varepsilon(L)}2|a+b|^2
++\frac{D_\varepsilon-K_\varepsilon(L)}2|a-b|^2.
+\]
+Positivity on their span requires both \(D_\varepsilon+K_\varepsilon(L)\geq0\) and \(D_\varepsilon-K_\varepsilon(L)\geq0\).
+
+If \(L\geq\varepsilon\), define
+
+\[
+I_\varepsilon(L)=
+\frac{F(L-\varepsilon)-2F(L)+F(L+\varepsilon)}{\varepsilon}>0,
+\]
+\[
+P_\varepsilon(L)=
+\sum_{|\ell_{p,k}-L|<\varepsilon}w_{p,k}
+\left(1-\frac{|\ell_{p,k}-L|}{\varepsilon}\right).
+\]
+Strict convexity of each exponential proves positivity of \(I_\varepsilon\). The condition on both signs is written exactly as
+
+\[
+2a_\varepsilon^2\cosh(L/2)-I_\varepsilon(L)-D_\varepsilon
+\leq P_\varepsilon(L)
+\leq
+2a_\varepsilon^2\cosh(L/2)-I_\varepsilon(L)+D_\varepsilon.
+\]
+Thus the complete cross term controls a window of irreducible-clock lengths with their weights, not merely a diagonal value. The identity follows from Proposition~\ref{rz-num-03-16} and diagonalization of the two-entry matrix; it does not presuppose its sign. \hfill\(\square\)
+
+\HMTresultado{Proposition}{Joint control of nine test functions}{rz-num-03-18}
+Let \(\varepsilon=1/100\), \(t_j=j\log2\), \(0\leq j\leq8\), and \(G_{ij}=K_\varepsilon(t_i-t_j)\). The interval calculation preserved with this chapter certifies
+
+\[
+\lambda_{\min}(G)>0.8479.
+\]
+Consequently,
+
+\[
+\mathscr W\left(\sum_{j=0}^8z_jb_{\varepsilon,t_j},
+\sum_{j=0}^8z_jb_{\varepsilon,t_j}\right)
+>0.8479\sum_{j=0}^8|z_j|^2
+\quad(z\neq0).
+\]
+\textbf{Proof and reproduction.} For \(F_N(x)=\sum_{n=0}^{N-1}e^{-\lambda_nx}/\lambda_n^2\), the summand is decreasing and
+
+\[
+0\leq F(x)-F_N(x)
+\leq e^{-\lambda_Nx}
+\left(\lambda_N^{-2}+\frac1{2\lambda_N}\right).
+\]
+Indeed, separate the first term of the tail and bound the remainder by the integral of \((2u+1/2)^{-2}\), factoring out the largest exponential. We use \(N=1024\) and interval operations with outward rounding. The condition \(8\log2+\varepsilon<\log259\) allows all prime-power pairs up to \(259\) to be enumerated: this gives \(71\) rows. The irreducibles and products come from the preserved native producer; recognition by ordinary integers is subsequent. The constant \(c_\Gamma\) is evaluated from the certified intervals of the preceding coordinates, not from a target value of this form.
+
+The formula in Proposition~\ref{rz-num-03-16} gives intervals for the nine entries of the first row. For each row \(i\), these intervals verify
+
+\[
+G_{ii}-\sum_{j\neq i}|G_{ij}|>0.8479.
+\]
+The matrix is Hermitian. The inequality \(2|z_i||z_j|\leq|z_i|^2+|z_j|^2\), applied to each cross term, directly gives the stated quadratic bound. The verification preserves the intervals for all nine rows and the complete census. The strict margins and the convergence of Gram matrices proved above also allow simultaneous regularization of the nine test functions, yielding positivity on their smooth span for a sufficiently fine regularization. \hfill\(\square\)
+
+This control covers all complex combinations of nine test functions, not merely their sum. Its dimension remains finite. The computational record states that scope and does not use its result as a certificate of a universal inequality.
+
+\HMTresultado{Proposition}{Refinement and eight detail components}{rz-num-03-19}
+The geometric subdivision of an interval into nine parts satisfies
+
+\[
+b_{\varepsilon,t}=\frac13\sum_{r=0}^8
+b_{\varepsilon/9,t+(r-4)\varepsilon/9}.
+\]
+If \(V=(1,\ldots,1)^{\mathsf T}/3\), then
+
+\[
+G_{\mathrm{padre}}=V^*G_{\mathrm{hijos}}V.
+\]
+For several predecessors, take the blockwise isometric inclusion with that same column. In a basis formed by the uniform component and the eight detail components for each predecessor, write
+
+\[
+G_{\mathrm{hijos}}=
+\begin{pmatrix}A&B^*\\B&D\end{pmatrix},\qquad
+A=G_{\mathrm{padres}}.
+\]
+If \(A>0\), the exact condition is
+
+\[
+G_{\mathrm{hijos}}\succeq0
+\quad\Longleftrightarrow\quad D-BA^{-1}B^*\succeq0.
+\]
+\textbf{Proof.} The nine successor intervals partition the predecessor apart from endpoints of measure zero. Normalization of their indicator functions proves the linear identity, and sesquilinearity gives the Gram identity with every cross term. Finally,
+
+\[
+\begin{aligned}
+\begin{pmatrix}x\\y\end{pmatrix}^*
+\begin{pmatrix}A&B^*\\B&D\end{pmatrix}
+\begin{pmatrix}x\\y\end{pmatrix}
+={}&(x+A^{-1}B^*y)^*A(x+A^{-1}B^*y)\\
+&+y^*(D-BA^{-1}B^*)y.
+\end{aligned}
+\]
+Taking \(x=-A^{-1}B^*y\) proves necessity, and the same identity proves sufficiency. \hfill\(\square\)
+
+The uniform component reproduces the previous Gram matrix; the details contain the new interference terms. Preserving both parts is the exact requirement for extending a positivity proof under this refinement. The return of nine phases does not by itself make the Gram matrix circulant: in the preceding collection, \(K_\varepsilon(\log2)\neq K_\varepsilon(8\log2)\). Phase and distance memory remain distinct data.
+
+The detail matrix and its Schur complement provide a verifiable condition for each enlargement. The prospective readout is not defined through a retrospective factorization of the form; it is the form expressed by the previously constructed readouts that is checked. Completing the global argument requires an estimate for all those details, uniform over cofinal enlargements and over the complete test-function domain.
+
+\subsection{Coercive assembly and stability of nonadic details}
+\label{rz:ensamblaje}
+The basal property allows entire function spaces to be controlled. Assembling several intervals requires comparing that local margin with every interaction between routes. The complete kernel of the preceding section provides an estimate for those interactions before a function is chosen. This yields an infinite-dimensional result on a disconnected domain, not merely a Gram matrix of indicator functions.
+
+The positions are taken after representation of the irreducible clocks. The explicit case uses successive translations of the native clock 2 and a declared positional width. The difference operators preserve both orientations. Subsequent refinement subdivides each interval into nine parts and retains the same function before its two energy readouts. This analytic collection is specified as such: its cardinality does not by itself identify it with a canonical selection of TPK states.
+
+\HMTresultado{Proposition}{Diagonal margin and bound for cross terms}{rz-num-03-20}
+Let \(t_1<\cdots<t_m\) be distinct centres and \(I_j=(t_j-\varepsilon/2,t_j+\varepsilon/2)\) disjoint intervals, with \(0<\varepsilon<\log2\). Define
+
+\[
+\delta_\varepsilon=2M_\Gamma(\varepsilon)+c_\Gamma
+-2\sinh(\varepsilon/2)+\varepsilon.
+\]
+For \(f_j\in C_c^\infty(I_j)\),
+
+\[
+\mathscr W(f_j,f_j)\geq\delta_\varepsilon\|f_j\|_2^2.
+\]
+If \(d_{ij}=|t_i-t_j|>\varepsilon\), set
+
+\[
+\rho_{ij}(\varepsilon)=
+\sum_{|\ell_{p,k}-d_{ij}|<\varepsilon}w_{p,k}
++\varepsilon\mu(d_{ij}-\varepsilon)
++2\varepsilon\cosh((d_{ij}+\varepsilon)/2).
+\]
+Then
+
+\[
+|\mathscr W(f_i,f_j)|
+\leq\rho_{ij}(\varepsilon)\|f_i\|_2\|f_j\|_2
+\qquad(i\neq j).
+\]
+\textbf{Proof.} On an interval of width \(\varepsilon\), the gamma tail contributes at least \(2M_\Gamma(\varepsilon)\|f_j\|_2^2\). There is no diagonal prime-power correlation, because its minimum length is \(\log2>\varepsilon\). In a larger ambient window, each prime difference and its counterterm cancel on that support. After centring the interval, the negative polar port has squared norm \(2\sinh(\varepsilon/2)-\varepsilon\). Discarding the positive polar port and the gamma part preceding the tail gives the bound. Translation invariance of the complete form carries the same bound to any centre.
+
+In the cross term, the scalar contribution vanishes because the supports are disjoint. For each positive length, only one of the two orientations can connect the intervals. Unitarity of translation bounds the prime contribution by the stated sum of weights. The gamma cross term has kernel \(-\mu(|x-y|)\) on \(I_i\times I_j\). Since \(\mu\) is decreasing,
+
+\[
+|\mathscr W_\Gamma(f_i,f_j)|
+\leq\mu(d_{ij}-\varepsilon)\|f_i\|_1\|f_j\|_1
+\leq\varepsilon\mu(d_{ij}-\varepsilon)\|f_i\|_2\|f_j\|_2.
+\]
+The complete polar kernel is \(2\cosh((x-y)/2)\). The bound \(|x-y|\leq d_{ij}+\varepsilon\) and the same inequality between the \(L^1\) and \(L^2\) norms give the polar term. Adding the three estimates proves the result. \hfill\(\square\)
+
+\HMTresultado{Theorem}{Coercivity of the assembly}{rz-num-03-21}
+If
+
+\[
+\eta=\delta_\varepsilon-
+\max_i\sum_{j\neq i}\rho_{ij}(\varepsilon)>0,
+\]
+then, for \(\Omega=\bigcup_j I_j\),
+
+\[
+\boxed{\mathscr W(f,f)\geq\eta\|f\|_2^2
+\quad\text{for every }f\in C_c^\infty(\Omega).}
+\]
+The assertion holds in the closure of that domain in the joint readout norm. In particular, for
+
+\[
+m=9,\qquad t_j=j\log2\ (0\leq j\leq8),\qquad
+\varepsilon=1/1000,
+\]
+the certified evaluation gives \(\eta>1\).
+
+\textbf{Proof.} Writing \(f=\sum_jf_j\) on the disjoint supports and \(x_j=\|f_j\|_2\) gives
+
+\[
+\begin{aligned}
+\mathscr W(f,f)&\geq
+\delta_\varepsilon\sum_jx_j^2
+-2\sum_{i<j}\rho_{ij}(\varepsilon)x_ix_j\\
+&\geq\sum_i\left(\delta_\varepsilon-
+\sum_{j\neq i}\rho_{ij}(\varepsilon)\right)x_i^2.
+\end{aligned}
+\]
+We used \(2x_ix_j\leq x_i^2+x_j^2\) for each cross term. The sum of the squared norms is \(\|f\|_2^2\). Continuity of the readouts extends the inequality to the closed domain.
+
+In the explicit case, the distances are \(d\log2\), \(1\leq d\leq8\). For \(\varepsilon=1/1000\),
+
+\[
+2^d(e^\varepsilon-1)<\frac{256}{999}<1,
+\qquad 2^d(1-e^{-\varepsilon})<\frac{256}{1000}<1.
+\]
+The first inequality uses the exponential series and \(e^\varepsilon<1/(1-\varepsilon)\); the second uses \(1-e^{-\varepsilon}<\varepsilon\). Since the expressed powers are integers, the only prime-power clock in the window at that distance is \((p,k)=(2,d)\). Thus
+
+\[
+\rho_d=(\log2)2^{-d/2}
++\frac1{1000}\mu(d\log2-1/1000)
++\frac2{1000}\cosh((d\log2+1/1000)/2).
+\]
+The native producer also verifies the complete census up to \(259\). The calculation of \(\delta_\varepsilon\) uses the previously proved formula for \(M_\Gamma\) and the identity
+
+\[
+\arctan t=\frac\pi4-
+\arctan\frac{1-t}{1+t}\qquad(0<t<1).
+\]
+The second argument is small, and its alternating series has an error bound given by the first omitted term. The internal representation of \(\pi\), the rational interval for gamma, and the subsequent interval operations yield the bounds
+
+\[
+\delta_\varepsilon>4.4921,\qquad
+\max_i\sum_{j\neq i}\rho_{ij}<2.5385,\qquad
+\eta>1.9536>1.
+\]
+The receipt retains the margin for each row. No particular functions are evaluated to infer the universal inequality on \(C_c^\infty(\Omega)\): it follows from the operator estimate above. \hfill\(\square\)
+
+\HMTresultado{Corollary}{All refinements of the assembled domain}{rz-num-03-22}
+Successively subdivide each \(I_j\) into nine parts. The normalized indicators of the \(9^{n+1}\) intervals at depth \(n\) form an orthonormal collection in \(L^2\). Their full Gram matrix satisfies
+
+\[
+G_n\succeq\eta I\qquad(n\geq0).
+\]
+The uniform inclusion \(V_n\), with nine components \(1/3\) per predecessor, satisfies
+
+\[
+V_n^*G_{n+1}V_n=G_n.
+\]
+In the uniform–detail decomposition,
+
+\[
+G_{n+1}=\begin{pmatrix}A_n&B_n^*\\B_n&D_n\end{pmatrix},
+\qquad A_n=G_n,
+\]
+one obtains, at any depth,
+
+\[
+\boxed{D_n-B_nA_n^{-1}B_n^*\succeq\eta I.}
+\]
+\textbf{Proof.} The theorem applies to the regularizations of each combination of indicators. The norm convergence of the readouts in subsection~\ref{rz:ventanas} allows passage to the limit. An indicator reaching an endpoint of \(I_j\) is approximated first by slightly contracting its support towards the centre, and then by regularizing within \(I_j\). The triangular correlation and its integrable translation bound prove the same convergence; no extension of the coercivity domain is used. Orthonormality in \(L^2\) turns the functional bound into \(G_n\succeq\eta I\), and exact subdivision gives the compression identity.
+
+For a detail vector \(y\), take \(x=-A_n^{-1}B_n^*y\). The Schur identity gives
+
+\[
+\begin{aligned}
+y^*(D_n-B_nA_n^{-1}B_n^*)y
+&=\begin{pmatrix}x\\y\end{pmatrix}^*G_{n+1}
+\begin{pmatrix}x\\y\end{pmatrix}\\
+&\geq\eta(\|x\|^2+\|y\|^2)\geq\eta\|y\|^2.
+\end{aligned}
+\]
+The same \(\eta\) works at every depth. \hfill\(\square\)
+
+The corollary controls the eight new details per predecessor at arbitrary depth within the assembly. The function is neither replaced by its mean nor stripped of its zero-sum components. This strengthens the Gram matrix of nine indicators: it covers infinite-dimensional function spaces and gives a depth-independent bound.
+
+\subsubsection*{Finite collections and extension of the domain}
+For any finite set of distinct centres, there is a sufficiently small positive width for which theorem~\ref{rz-num-03-21} applies. Indeed, \(2M_\Gamma(\varepsilon)\to+\infty\) as \(\varepsilon\downarrow0\), whereas the local negative polar term tends to zero. The distances between centres are bounded away from zero. The sums of prime weights remain bounded as each window shrinks, because there are finitely many lengths below any fixed bound. The gamma and polar cross terms tend to zero. Thus, \(\delta_\varepsilon\) eventually exceeds the sum of interactions in each row.
+
+The admissible width depends on the centres. The unions of narrow intervals obtained in this way do not, by the construction above alone, form a cofinal covering of all compactly supported functions. Global positivity also requires control of the growth of the domain and its new interactions. The proved uniformity in depth remains distinct from extension to an arbitrary test-function domain, which is not proved here.
+
+\subsection{Coercivity of details in an arbitrary fixed window}
+\label{rz:detalles}
+The preceding estimate retains a uniform margin when the interiors of nine separated intervals are refined. A second construction controls the fine details of any fixed window, including its contiguous cells. The two statements have different and complementary domains: the first estimates the full function on a disconnected support; the second estimates the cellwise zero-mean components in an entire window.
+
+The previously constructed clocks, weights, and readouts are retained. In particular, the lengths \(\ell_{p,k}\), the weights \(w_{p,k}\), the scalar \(c_\Gamma\), and the internal representation \(\pi\) retain their provenance. The following argument acts on the functional realization of these objects; it does not modify their generator. Write
+
+\[
+\beta_R=2\sinh(R/2)-R,\qquad
+\mathfrak c_R=\frac23-c_\Gamma+
+2\sum_{\ell_{p,k}\leq R}w_{p,k}+\beta_R.
+\]
+The sum is finite and comes from the native product below the bound \(e^R\). Divide \(I_R=(-R/2,R/2)\) into \(M\) cells of length at most \(h\), with \(0<h\leq1\).
+
+\HMTresultado{Theorem}{Explicit threshold for zero-mean details}{rz-num-03-23}
+Let \(d\) be a function in the joint domain of the readouts, supported in \(I_R\), whose integral over each cell is zero. Then
+
+\[
+\boxed{\mathscr W_R(d,d)\geq
+\bigl[\log(1+4/h)-\mathfrak c_R\bigr]\|d\|_2^2.}
+\]
+Consequently, the form is strictly coercive on this detail space if
+
+\[
+0<h<\min\left(1,\frac4{\exp(\mathfrak c_R)-1}\right).
+\]
+The threshold depends on the window \(R\), but not on the function or on a finite enumeration of examples.
+
+\textbf{Proof.} On each cell \([a,b]\), define \(F(x)=\int_a^x d(t)\,dt\). The zero-mean condition implies \(F(a)=F(b)=0\). Assembling the primitives yields \(F\in H_0^1(I_R)\), extended by zero outside the window, with \(F'=d\). The Dirichlet inequality on each cell gives
+
+\[
+\|F\|_2^2\leq\frac{h^2}{\pi^2}\|d\|_2^2.
+\]
+Here \(\pi\) is the same internal coordinate recognized in the functional realization. No new constant is selected.
+
+The gamma tail admits the positive expansion already used,
+
+\[
+\mu(a)=\sum_{n=0}^{\infty}e^{-\lambda_n a},
+\qquad \lambda_n=2n+\frac12.
+\]
+For \(\lambda>0\), let \(C_\lambda\) denote convolution with \(e^{-\lambda|x|}\). The contribution of one summand is
+
+\[
+E_\lambda(d)=\int_0^\infty e^{-\lambda a}
+\|(I-T_a)d\|_2^2\,da
+=\frac2\lambda\|d\|_2^2-
+\langle d,C_\lambda d\rangle\geq0.
+\]
+Its positivity is that of an integral of squared norms. Denote the unitary Fourier transform by \(\mathcal F_u F=(2\pi)^{-1/2}\widehat F\), distinguishing it from the unnormalized transform used earlier. The multiplier of \(C_\lambda\) is \(2\lambda/(\lambda^2+\xi^2)\). Since \(d=F'\), Plancherel implies
+
+\[
+\begin{aligned}
+\langle d,C_\lambda d\rangle
+&=\int_{\mathbb R}
+\frac{2\lambda\xi^2}{\lambda^2+\xi^2}
+|(\mathcal F_u F)(\xi)|^2\,d\xi\\
+&\leq2\lambda\|F\|_2^2
+\leq\frac{2\lambda h^2}{\pi^2}\|d\|_2^2.
+\end{aligned}
+\]
+By Tonelli, the gamma form is the sum of the \(E_{\lambda_n}\). The first \(N+1\) terms are retained, and only a nonnegative tail is discarded. This yields
+
+\[
+\begin{aligned}
+Q_\Gamma(d)&\geq S_N(h)\|d\|_2^2,\\
+S_N(h)&=4\sum_{n=0}^N\frac1{4n+1}
+-\frac{h^2(N+1)(2N+1)}{\pi^2}.
+\end{aligned}
+\]
+Choose \(N=\lfloor1/h\rfloor\). Then \(\lambda_N h\leq2+h/2<\pi\); the retained bounds are nonnegative. Comparison with the integral of a decreasing function gives
+
+\[
+4\sum_{n=0}^N\frac1{4n+1}
+\geq\int_0^{N+1}\frac4{4x+1}\,dx
+=\log(4N+5)\geq\log(1+4/h).
+\]
+Moreover, \(\pi^2>9\) and \(h\leq1\) imply
+
+\[
+\frac{h^2(N+1)(2N+1)}{\pi^2}
+\leq\frac{(1+h)(2+h)}{\pi^2}<\frac23.
+\]
+Therefore, \(Q_\Gamma(d)\geq[\log(1+4/h)-2/3]\|d\|_2^2\). In the full form, the scalar term contributes \(c_\Gamma\|d\|_2^2\); the prime part is bounded below by \(-2\sum_{\ell_{p,k}\leq R}w_{p,k}\|d\|_2^2\) by unitarity of each translation; and the polar part is bounded by \(-\beta_R\|d\|_2^2\), as proved in subsection~\ref{rz:gamma}. Their sum proves the stated inequality. The threshold displayed is equivalent to \(\log(1+4/h)>\mathfrak c_R\). Passage to the closed domain preserves the estimate by continuity of the readouts and of the cell integrals. \hfill\(\square\)
+
+\HMTresultado{Corollary}{Finite dimensionality of the possible negative directions}{rz-num-03-24}
+For fixed \(R\) and a partition satisfying the threshold above, any subspace of the domain on which \(\mathscr W_R\) is strictly negative definite has dimension at most \(M\), the number of cells.
+
+\textbf{Proof.} Consider the linear map
+
+\[
+\mathcal P(d)=\left(\int_{I_1}d,\ldots,
+\int_{I_M}d\right)\in\mathbb C^M.
+\]
+Its kernel is the detail space of theorem~\ref{rz-num-03-23}, on which the form is positive definite. The restriction of \(\mathcal P\) to a strictly negative subspace is injective: a nonzero vector in its kernel would have both a positive and a negative value. The dimension of that subspace cannot exceed \(M\). \hfill\(\square\)
+
+This reduction retains a finite coupling problem in each window. It is not equivalent to proving that the negative index is zero. In a mean–detail decomposition, the detail block is coercive at sufficient depth, but the mean block and the cross terms must be retained. If the Schur complement is used, its sign requires that full composition. In particular, an exact prime resonance between two cells does not disappear when zero mean is imposed: it may act as a negative multiple of the identity on their corresponding details. The theorem retains such terms through its translation bound.
+
+The result provides a second effective uniformity: in any fixed window, sufficiently fine details have an explicit common bound. Subsection~\ref{rz:ensamblaje} also proves the sign of the full assembly, including its cross terms, for the specified union of nine intervals. Extending that sign to every window remains the global step that this edition does not regard as proved.

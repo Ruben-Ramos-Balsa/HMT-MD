@@ -1,0 +1,298 @@
+\subsection{Mémoire accumulée et résolvantes du transport}
+\label{subsec:memoria-resolvente}
+
+Le retour du calendrier n'élimine pas les incréments produits pendant
+le parcours. Pour exprimer cette différence en termes opératoriels, on construit
+d'abord un registre cumulatif des événements de la trajectoire, puis sa
+série génératrice. La réduction des variables de mémoire s'effectuera sur
+ce transport, en conservant également la source et le lecteur de sortie.
+
+\subsubsection{Événements orientés et actualisation du registre}
+
+Soit \((d_t)\) la suite des codes entiers de direction conservée
+par une trajectoire du TPK. Le code \(d_t\) et la direction cardinale
+du curseur sont des coordonnées distinctes ; aucune identification
+entre leurs alphabets n'est supposée. Numérotons à partir de zéro les fenêtres
+\[
+ I_m=\{9m+1,\ldots,9m+9\},\qquad m\geq0.
+\]
+Pendant le premier cycle, \(I_m\) est la fenêtre \(E_{m+1}\) du registre
+dodécaphasique. Son orientation est
+\(\sigma=(1,1,1,-1,-1,-1,1,1,1,-1,-1,-1)\).
+Pour une histoire prolongée, \(\sigma_m\in\{-1,1\}\) est le signe
+conservé dans la fenêtre correspondante. L’événement signé est
+\begin{equation}
+ a_m=\sigma_m\sum_{t\in I_m}
+       \mathbf1_{\{2,4,6,8\}}(d_t),\qquad |a_m|\leq9.
+ \label{mem:evento}
+\end{equation}
+Chaque terme est incorporé lorsque sa transition se produit. Cette définition
+compte les événements de la trace ; elle ne choisit pas les directions à partir d'une valeur
+à obtenir ultérieurement.
+
+Soient \(\mathbf e_0,\ldots,\mathbf e_{11}\) la base de \(\ZZ^{12}\)
+et \(S\mathbf e_j=\mathbf e_{j+1\bmod12}\). Écrivons
+\(R=S^{-1}\). Le registre accumulé en coordonnées fixes satisfait
+\[
+z_{m+1}=z_m+a_m\mathbf e_{m\bmod12}.
+\]
+Un préfixe sans histoire accumulée commence en \(z_0=0\) ; à une autre
+origine, \(z_0\) conserve le registre antérieur.
+Le repère qui accompagne le calendrier est \(y_m=S^{-m}z_m\).
+
+\begin{proposition}[Actualisation et retour avec mémoire]
+\label{mem:prop-actualizacion}
+Le registre dans le repère mobile satisfait
+\begin{equation}
+ y_{m+1}=Ry_m+\eta_m,\qquad
+ \eta_m=a_mR\mathbf e_0.
+ \label{mem:actualizacion}
+\end{equation}
+Pour tout \(n\geq1\),
+\begin{equation}
+ y_n=R^ny_0+\sum_{j=0}^{n-1}R^{n-1-j}\eta_j.
+ \label{mem:iteracion}
+\end{equation}
+En particulier,
+\begin{equation}
+ y_{12}=y_0+\sum_{j=0}^{11}a_j\mathbf e_j.
+ \label{mem:retorno12}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplier l'actualisation de \(z_m\) par \(S^{-(m+1)}\) donne
+\(y_{m+1}=S^{-1}y_m+a_mS^{-1}\mathbf e_0\), puisque
+\(S^{-m}\mathbf e_{m\bmod12}=\mathbf e_0\).
+La formule \eqref{mem:iteracion} s'obtient par récurrence.
+Pour \(n=12\), \(R^{12}=I\) et
+\(R^{11-j}\eta_j=a_jR^{12-j}\mathbf e_0=a_j\mathbf e_j\),
+ce qui démontre \eqref{mem:retorno12}.
+\end{proof}
+
+Ainsi, douze fenêtres rétablissent le repère et conservent le vecteur des événements.
+Le dénombrement ne permet pas à lui seul de retrouver l'ordre de tous les pas
+à l'intérieur de chaque fenêtre ; cet ordre demeure dans la trajectoire enregistrée.
+
+Pour préciser le bilan, nous définissons
+\[
+ D_3=I-S^3,\quad D_4=I-S^4,\quad
+ B=D_3^{\mathsf T}D_3+D_4^{\mathsf T}D_4,
+\]
+\[
+ \mathcal M(y)=\tfrac12y^{\mathsf T}By,
+ \qquad q(y)=\sum_{j=0}^{11}y_j.
+\]
+La première est une forme quadratique du registre ; la seconde enregistre
+la somme de ses coordonnées. Elles ne sont pas identifiées ici à une énergie ou à une charge physiques.
+
+\begin{proposition}[Bilan produit par l'événement]
+\label{mem:prop-balance}
+L'actualisation \eqref{mem:actualizacion} satisfait
+\begin{equation}
+ \begin{aligned}
+ \mathcal M(y_{m+1})-\mathcal M(y_m)
+   &=a_m(By_m)_0+2a_m^2,\\
+ q(y_{m+1})-q(y_m)&=a_m.
+ \end{aligned}
+ \label{mem:balance}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Le développement des produits donne
+\(B=4I-S^3-S^{-3}-S^4-S^{-4}\) ; par conséquent,
+\(R^{\mathsf T}BR=B\) et \(B_{00}=4\).
+Comme \(y_{m+1}=R(y_m+a_m\mathbf e_0)\), la différence quadratique
+est \(a_m\mathbf e_0^{\mathsf T}By_m+\tfrac12a_m^2B_{00}\).
+La somme des coordonnées est invariante sous la permutation \(R\),
+d'où la deuxième égalité.
+\end{proof}
+
+\Needspace{20\baselineskip}
+\subsubsection{Série génératrice et contrôle uniforme de la mémoire}
+
+La série conserve tous les incréments, et pas uniquement leur somme à la fin
+d'un cycle. Avec une variable formelle \(u\), soient
+\[
+ Y(u)=\sum_{m\geq0}y_mu^m,\qquad
+ H_\eta(u)=\sum_{m\geq0}\eta_mu^m.
+\]
+
+\begin{proposition}[Résolvante et majoration du reste]
+\label{mem:prop-serie}
+On a l'identité formelle
+\begin{equation}
+ Y(u)=(I-uR)^{-1}\bigl(y_0+uH_\eta(u)\bigr).
+ \label{mem:serie}
+\end{equation}
+Les deux séries convergent pour \(|u|<1\). Si \(\ell:\RR^{12}\to\RR\)
+est linéaire, \(L=\|\ell\|_{1\to\RR}\), \(M_0=\|y_0\|_1\) et
+\(0<r<1\), alors, pour tout entier \(N\geq0\) et \(|u|\leq r\),
+\begin{equation}
+ \left|\sum_{m>N}\ell(y_m)u^m\right|
+ \leq Lr^{N+1}\left(
+ \frac{M_0+9(N+1)}{1-r}+\frac{9r}{(1-r)^2}\right).
+ \label{mem:cota}
+\end{equation}
+La série des dérivées converge uniformément dans chaque disque
+\(|u|\leq r<1\).
+\end{proposition}
+\begin{proof}
+Multiplier \eqref{mem:actualizacion} par \(u^{m+1}\) et sommer donne
+\(Y-y_0=uRY+uH_\eta\). Le terme constant de \(I-uR\) est
+inversible, de sorte que son inverse formel est \(\sum_{k\geq0}u^kR^k\).
+De plus, \(R\) préserve la norme \(\ell^1\) et
+\(\|\eta_m\|_1\leq9\), d'où
+\(\|y_m\|_1\leq M_0+9m\).
+Pour le reste, on somme les majorants
+\(L(M_0+9m)r^m\), en utilisant
+\[
+ \sum_{m>N}r^m=\frac{r^{N+1}}{1-r},\qquad
+ \sum_{m>N}mr^m=r^{N+1}
+ \left(\frac{N+1}{1-r}+\frac r{(1-r)^2}\right).
+\]
+Enfin, \(\sum_{m\geq1}Lm(M_0+9m)r^{m-1}<\infty\)
+majore la série dérivée et démontre sa convergence uniforme.
+\end{proof}
+
+La variable \(u\) compte les fenêtres de neuf transitions. Son identification
+avec la variable d'un autre lecteur exige de conserver cette horloge et l'application
+qui relie les deux lectures.
+
+\subsubsection{Élimination de mémoire : opérateur, source et lecteur}
+
+Sur un domaine où l'actualisation est fixée comme \(U:X\to X\),
+l'espace vectoriel libre \(V=\QQ^{(X)}\) sur les états admet l'opérateur
+\(T\delta_x=\delta_{U(x)}\). L'horloge est incluse dans \(x\) si la
+transition en dépend. Cette extension linéaire conserve des états
+distincts même lorsqu'ils partagent une phase observable.
+
+Considérons une décomposition \(V=V_0\oplus V_1\), où \(V_1\)
+est le secteur auxiliaire que l'on souhaite éliminer, et écrivons
+\[
+ T=\begin{pmatrix}A&B_1\\C&D\end{pmatrix},\qquad
+ v=\binom{v_0}{v_1},\qquad \ell=(\ell_0,\ell_1).
+\]
+Ici, \(A:V_0\to V_0\), \(B_1:V_1\to V_0\),
+\(C:V_0\to V_1\) et \(D:V_1\to V_1\).
+Les identités suivantes sont formelles ; elles valent également là où les
+résolvantes convergent.
+
+\begin{proposition}[Réduction de Schur avec source et lecteur]
+\label{mem:prop-schur}
+Soient
+\[
+ D_u=(I-uD)^{-1},\qquad
+ \mathscr F(u)=I-uA-u^2B_1D_uC.
+\]
+La composante retenue de \((I-uT)^{-1}v\) est
+\begin{equation}
+ w_0=\mathscr F(u)^{-1}\bigl(v_0+uB_1D_uv_1\bigr),
+ \qquad w_1=D_u(v_1+uCw_0).
+ \label{mem:schur-fuente}
+\end{equation}
+Sa lecture complète satisfait
+\begin{equation}
+ \begin{split}
+ \ell(I-uT)^{-1}v
+ ={}&(\ell_0+u\ell_1D_uC)
+       \mathscr F(u)^{-1}(v_0+uB_1D_uv_1)\\
+    &+\ell_1D_uv_1.
+ \end{split}
+ \label{mem:schur-lector}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Les deux équations de \((I-uT)w=v\) sont
+\(w_0=v_0+uAw_0+uB_1w_1\) et
+\(w_1=v_1+uCw_0+uDw_1\).
+Résoudre la seconde et la substituer dans la première donne
+\eqref{mem:schur-fuente} ; appliquer \(\ell_0\) et \(\ell_1\)
+aux deux composantes donne \eqref{mem:schur-lector}.
+Tous les inverses formels existent parce que leurs termes constants
+sont des identités.
+\end{proof}
+
+Le terme \(u^2B_1D_uC=\sum_{k\geq0}u^{k+2}B_1D^kC\)
+décrit une sortie vers la mémoire, \(k\) pas à l'intérieur de celle-ci et
+un retour. En revanche, \(u\ell_1D_uC\) lit la mémoire avant ce
+retour. Réduire seulement l'opérateur ne conserve donc pas nécessairement
+l'observation : la source et le lecteur doivent également être transformés.
+
+La différence est visible dans le cycle déjà construit. Si \(P\) retient
+\(\mathbf e_0\), alors \(PRP=0\), mais
+\begin{equation}
+ \left\langle\mathbf e_0,(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac1{1-u^{12}},\qquad
+ \left\langle\mathbf e_{11},(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac u{1-u^{12}}.
+ \label{mem:ejemplo-ciclo}
+\end{equation}
+En effet, \(R^n\mathbf e_0=\mathbf e_{-n\bmod12}\) : les
+deux séries recueillent respectivement \(n\equiv0\) et
+\(n\equiv1\pmod{12}\). La résolvante de la compression est \(I\),
+tandis que la compression de la résolvante conserve les retours omis.
+Cet exemple correspond au registre de douze fenêtres, et non à la totalité
+de l'état du TPK.
+
+\subsubsection{Composition des segments et cohérence de la réduction}
+
+Soient trois transports affines composables
+\(F_i(y)=R_i y+b_i\), avec des domaines et codomaines compatibles.
+La mémoire produite par le parcours complet est
+\begin{equation}
+ F_3F_2F_1(y)
+ =R_3R_2R_1y+b_3+R_3b_2+R_3R_2b_1.
+ \label{mem:cociclo-tres}
+\end{equation}
+La preuve est la substitution successive des trois formules affines.
+Regrouper d'abord les deux premiers segments ou les deux derniers produit
+la même expression ; les facteurs transportent chaque incrément depuis
+le point où il a pris naissance. Dans \eqref{mem:actualizacion},
+\(R_i=R\) et \(b_i\) est l'événement de sa fenêtre.
+
+L'élimination de plusieurs couches conserve une cohérence analogue.
+Pour l'expliciter, décomposons maintenant
+\(V=V_0\oplus V_1\oplus V_2\) et écrivons
+\[
+ T=\begin{pmatrix}
+ A&B_1&B_2\\C_1&D_{11}&D_{12}\\C_2&D_{21}&D_{22}
+ \end{pmatrix},\qquad Q_2=(I-uD_{22})^{-1}.
+\]
+L'élimination de la troisième composante laisse les quatre blocs
+\begin{equation}
+ \begin{aligned}
+ A'&=A+uB_2Q_2C_2,&
+ B_1'&=B_1+uB_2Q_2D_{21},\\
+ C_1'&=C_1+uD_{12}Q_2C_2,&
+ D_{11}'&=D_{11}+uD_{12}Q_2D_{21}.
+ \end{aligned}
+ \label{mem:schur-intermedio}
+\end{equation}
+
+\begin{proposition}[Transitivité de l'élimination]
+Si \(D_*=(D_{ij})_{i,j=1}^2\), le complément obtenu en deux étapes
+coïncide avec celui obtenu en éliminant conjointement les deux mémoires :
+\begin{equation}
+ \begin{split}
+ I-uA'-u^2B_1'(I-uD_{11}')^{-1}C_1'
+ ={}&I-uA\\
+ &-u^2(B_1\ B_2)(I-uD_*)^{-1}\binom{C_1}{C_2}.
+ \end{split}
+ \label{mem:schur-transitivo}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Résoudre la troisième équation de \((I-uT)w=v\) et la substituer dans les
+deux premières produit \eqref{mem:schur-intermedio}. Éliminer ensuite la
+deuxième composante donne le membre gauche de
+\eqref{mem:schur-transitivo}. Résoudre simultanément les deux équations de
+mémoire donne le membre droit, par la proposition~\ref{mem:prop-schur}.
+La solution formelle est unique parce que \(I-uT\) a pour terme constant
+\(I\). Dans les deux procédures, la source et
+le lecteur sont également transformés selon \eqref{mem:schur-fuente}--\eqref{mem:schur-lector}.
+\end{proof}
+
+Le bilan \eqref{mem:balance} décrit les incréments du registre.
+Les identités précédentes permettent de les transporter lors de la réutilisation de la mémoire
+dans la clôture dodécaphasique ; elles ne déterminent pas à elles seules des coefficients
+analytiques supplémentaires.

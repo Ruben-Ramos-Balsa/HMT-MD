@@ -1,0 +1,121 @@
+% FORMALIZACION_NUEVA de la justificación del límite utilizado en
+% 70_radiacion_termica.tex. No introduce un generador de constantes.
+\subsection{Límite termodinámico de las sumas de ocupación}
+\label{v:subsec:limite-termodinamico}
+
+La densidad radial anterior puede obtenerse como límite efectivo de las
+sumas de la realización periódica. La estimación debe conservar el modo
+constante fijado y controlar uniformemente tanto el origen como la cola
+espectral. Las representaciones de acción y calendario permanecen previas
+a esta operación de realización.
+
+\begin{lemma}[Convergencia de los tres observables térmicos]
+\label{v:lem:limite-termodinamico}
+Sean \(a,b>0\), \(L>0\), \(\Delta=2\pi/L\) y
+\[
+ F_N(r)=\frac{1}{e^{ar}-1},\qquad
+ F_E(r)=\frac{br}{e^{ar}-1},\qquad
+ F_Z(r)=-\log(1-e^{-ar})\quad(r>0).
+\]
+Para cada una de estas funciones se cumple
+\begin{equation}
+ \lim_{L\to\infty}\frac{2}{L^3}
+ \sum_{\nu\in\mathbb Z^3\setminus\{0\}}
+ F\!\left(\frac{2\pi}{L}|\nu|\right)
+ =\frac{1}{\pi^2}\int_0^\infty r^2F(r)\,dr.
+ \label{v:eq:limite-modos-discretos}
+\end{equation}
+Las sumas y la integral son finitas. La especialización
+\(a=\beta\hbar c\), \(b=\hbar c\) proporciona, respectivamente,
+las densidades de número, energía de excitación y logaritmo de la función
+de partición de los modos transversales.
+\end{lemma}
+
+\begin{proof}
+Las tres funciones son continuas y positivas en \((0,\infty)\).
+Existen constantes \(C_0,C_1,d>0\), dependientes de \(a,b\) pero
+independientes de \(\Delta\), tales que
+\begin{equation}
+ F(r)\leq\frac{C_0}{r}\quad(0<r\leq1),\qquad
+ F(r)\leq C_1e^{-dr}\quad(r\geq1).
+ \label{v:eq:envolventes-termicas}
+\end{equation}
+En efecto, \(e^{ar}-1\geq ar\) controla \(F_N\) y \(F_E\)
+cerca del origen; además,
+\(F_Z(r)=\log(1+F_N(r))\leq F_N(r)\leq1/(ar)\).
+Para \(r\geq1\), la desigualdad
+\(-\log(1-y)\leq y/(1-y)\), con \(y=e^{-ar}\), da la cota
+exponencial de \(F_Z\). Las otras dos siguen de
+\((e^{ar}-1)^{-1}\leq e^{-ar}/(1-e^{-a})\), absorbiendo el factor
+\(r\) de \(F_E\) en una exponencial de menor tasa. Estas cotas
+prueban ya la integrabilidad de \(r^2F(r)\).
+
+Para las sumas discretas, agrupamos los puntos enteros por
+\(m=\|\nu\|_\infty\geq1\). Cada capa contiene exactamente
+\[
+ (2m+1)^3-(2m-1)^3=24m^2+2
+\]
+puntos y satisface \(m\leq|\nu|\leq\sqrt3m\).
+Fijemos \(0<\delta\leq1\) y \(0<\Delta\leq1\).
+Si \(\delta<\Delta\), no hay puntos con
+\(0<\Delta|\nu|\leq\delta\). En otro caso, poniendo
+\(N=\lfloor\delta/\Delta\rfloor\), la primera cota de
+\eqref{v:eq:envolventes-termicas} permite escribir
+\begin{align*}
+ \Delta^3\!\sum_{0<\Delta|\nu|\leq\delta}F(\Delta|\nu|)
+ &\leq C_0\Delta^2\sum_{m=1}^{N}\frac{24m^2+2}{m}\\
+ &\leq26C_0\Delta^2\sum_{m=1}^{N}m
+ \leq26C_0\delta^2.
+\end{align*}
+En la segunda línea se ha usado \(m^{-1}\leq m\) y, después,
+\(N(N+1)/2\leq N^2\) para \(N\geq1\).
+La contribución integral del mismo entorno también es de orden
+\(\delta^2\), pues
+\(\int_0^\delta r^2F(r)\,dr\leq C_0\delta^2/2\).
+
+Para \(R\geq1\), todo punto con \(\Delta|\nu|>R\) pertenece
+a una capa \(m>R/(\sqrt3\Delta)\). La segunda cota de
+\eqref{v:eq:envolventes-termicas} da
+\begin{align*}
+ \Delta^3\!\sum_{\Delta|\nu|>R}F(\Delta|\nu|)
+ &\leq C_1e^{-dR/(2\sqrt3)}
+ \Delta^3\sum_{m\geq1}(24m^2+2)e^{-d\Delta m/2}\\
+ &\leq C_2e^{-dR/(2\sqrt3)},
+\end{align*}
+donde \(C_2\) no depende de \(0<\Delta\leq1\). Para comprobar
+esa uniformidad, se toma \(q=e^{-d\Delta/2}\) y se utilizan
+\[
+ \sum_{m\geq1}q^m=\frac{q}{1-q},\qquad
+ \sum_{m\geq1}m^2q^m=\frac{q(1+q)}{(1-q)^3}.
+\]
+La primera identidad procede de la serie geométrica y la segunda de
+aplicar dos veces \(q\,d/dq\), operación válida en \(|q|<1\).
+Además,
+\(1-e^{-d\Delta/2}\geq\Delta(1-e^{-d/2})\) por concavidad.
+El factor \(\Delta^3\) compensa, por tanto, los denominadores de
+las dos expresiones. La cola integral tiende asimismo a cero por la
+cota exponencial. Para cada \(\Delta>0\), estas mismas estimaciones
+prueban la convergencia de la suma infinita.
+
+En el anillo compacto \(\delta\leq|k|\leq R\), la función
+\(F(|k|)\) es continua y acotada. Las sumas de Riemann de malla
+\(\Delta\) convergen a su integral; las dos esferas de frontera
+tienen medida nula. Se hace primero \(\Delta\to0\), después
+\(\delta\to0\) y finalmente \(R\to\infty\), usando las cotas
+uniformes anteriores. Resulta
+\[
+ \Delta^3\sum_{\nu\ne0}F(\Delta|\nu|)
+ \longrightarrow \int_{\mathbb R^3}F(|k|)\,d^3k
+ =4\pi\int_0^\infty r^2F(r)\,dr.
+\]
+Como \(2/L^3=2\Delta^3/(2\pi)^3\), el coeficiente radial final
+es \(2\cdot4\pi/(2\pi)^3=1/\pi^2\), lo que demuestra
+\eqref{v:eq:limite-modos-discretos}.
+\end{proof}
+
+El control del origen se efectúa sobre excitaciones de energía positiva.
+El modo constante permanece fijado antes de formar la función de partición:
+su eliminación posterior de una integral no sustituiría esa condición de
+la representación finita. La prueba establece el paso al límite de la
+realización declarada y conserva la distinción entre esta realización y
+la construcción anterior de sus parámetros de acción y calendario.

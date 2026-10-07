@@ -1,0 +1,507 @@
+% Punto de entrada aditivo del sucesor; el main.tex rector queda inmutable.
+\RequirePackage{fix-cm}
+\documentclass[11pt,a4paper,twoside,openany]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{1D49}{\textsuperscript{e}}
+\DeclareUnicodeCharacter{02B3}{\textsuperscript{r}}
+\DeclareUnicodeCharacter{03BC}{\ensuremath{\mu}}
+\DeclareUnicodeCharacter{03C4}{\ensuremath{\tau}}
+\DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
+\DeclareUnicodeCharacter{03C0}{\ensuremath{\pi}}
+\DeclareUnicodeCharacter{03B3}{\ensuremath{\gamma}}
+\DeclareUnicodeCharacter{03A9}{\ensuremath{\Omega}}
+\DeclareUnicodeCharacter{03C1}{\ensuremath{\rho}}
+\DeclareUnicodeCharacter{03C6}{\ensuremath{\varphi}}
+\DeclareUnicodeCharacter{03C8}{\ensuremath{\psi}}
+\DeclareUnicodeCharacter{03A5}{\ensuremath{\Upsilon}}
+\DeclareUnicodeCharacter{03B7}{\ensuremath{\eta}}
+\DeclareUnicodeCharacter{00B1}{\ensuremath{\pm}}
+\input glyphtounicode
+\pdfgentounicode=1
+\usepackage[shorthands=off,english,french]{babel}
+\usepackage{newtxtext}
+\usepackage[protrusion=true,expansion=true,tracking=true]{microtype}
+\usepackage[a4paper,inner=2.72cm,outer=2.34cm,top=2.42cm,bottom=2.68cm,
+  headheight=31pt,headsep=18pt,footskip=30pt]{geometry}
+\usepackage{amsmath,amsthm,amscd,mathtools,mathrsfs,bm}
+\usepackage{newtxmath}
+% Las jerarquías de títulos, el índice y las tablas emplean escalas
+% intermedias. Se mantiene la familia RSFS y se habilita su escalado continuo,
+% de modo que la notación matemática conserve el cuerpo tipográfico exacto
+% sin sustituciones silenciosas de tamaño.
+\DeclareFontFamily{U}{rsfs}{\skewchar\font127}
+\DeclareFontShape{U}{rsfs}{m}{n}{%
+  <-6> s*[1.0] rsfs5
+  <6-8> s*[1.0] rsfs7
+  <8-> s*[1.0] rsfs10
+}{}
+\usepackage{array,booktabs,longtable,tabularx,multirow}
+\usepackage{enumitem,graphicx,float,pdfpages,pdflscape}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+\pdfinclusioncopyfonts=1
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,matrix,shapes.geometric,
+  decorations.pathreplacing,decorations.markings,backgrounds,patterns}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace,csquotes,xurl,fancyhdr,fancyvrb,listings,tocloft,titlesec,needspace,etoolbox}
+\usepackage{hyperref}
+% Los marcadores PDF son parte de la jerarquía científica de la obra.  Esta
+% tabla conserva en texto Unicode la notación que aparece en los títulos, en
+% lugar de dejar que hyperref suprima silenciosamente flechas y constantes.
+\pdfstringdefDisableCommands{%
+  \def\({}\def\){}\def\[{}\def\]{}%
+  \def\ensuremath#1{#1}%
+  \def\mathrm#1{#1}\def\mathbf#1{#1}\def\mathsf#1{#1}%
+  \def\mathbb#1{#1}\def\mathcal#1{#1}\def\mathfrak#1{#1}%
+  \def\operatorname#1{#1}\def\text#1{#1}\def\bm#1{#1}%
+  \def\allowbreak{}%
+  \def\frac#1#2{#1/#2}\def\sqrt#1{racine(#1)}%
+  \def\to{→}\def\longrightarrow{→}\def\mapsto{↦}%
+  \def\leftrightarrow{↔}\def\Rightarrow{⇒}\def\Longrightarrow{⇒}%
+  \def\pi{π}\def\varphi{φ}\def\phi{φ}\def\alpha{α}%
+  \def\varepsilon{ε}\def\epsilon{ε}\def\mu{μ}\def\lambda{λ}%
+  \def\Omega{Ω}\def\zeta{ζ}\def\partial{∂}%
+  \def\ast{*}\def\cdot{·}\def\natural{natural}\def\log{log}%
+  \def\times{×}\def\otimes{⊗}\def\ltimes{⋉}\def\cong{≅}%
+  \def\tau{τ}\def\eta{η}\def\theta{θ}\def\Gamma{Γ}\def\gamma{γ}%
+  \def\Delta{Δ}\def\beta{β}\def\rho{ρ}\def\Lambda{Λ}\def\omega{ω}%
+  \def\Sigma{Σ}\def\Pi{Π}\def\sigma{σ}\def\kappa{κ}\def\xi{ξ}%
+  \def\chi{χ}\def\ell{ℓ}\def\hbar{ℏ}\def\aleph{ℵ}\def\infty{∞}%
+  \def\in{∈}\def\ge{≥}\def\pm{±}\def\circ{∘}\def\equiv{≡}%
+  \def\langle{〈}\def\rangle{〉}\def\exp{exp}%
+  \def\overline#1{#1}\def\widehat#1{#1}\def\hat#1{#1}%
+  \def\widetilde#1{#1}\def\tilde#1{#1}\def\\{ }%
+}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{appendix}{annexe}{annexes}
+\Crefname{appendix}{Annexe}{Annexes}
+\usepackage[noautomatic,quiet]{imakeidx}
+\makeindex
+\allowdisplaybreaks
+
+\input{hmt_style}
+\input{hmt_claims_rev9}
+\input{integracion_20260812_prelude}
+% Estado material V3 comentario-only: conserva los 219 resultados de V5 y
+% registra las dos correcciones editoriales autorizadas del puente matricial.
+% Los sidecars 218/219 previos quedan como testigos inactivos e inmutables.
+\input{preflight/continuidad_material_219_v3}
+% Sidecar operativo sucesor: conserva los 219 resultados atómicos de REV.4 y
+% añade los 29 resultados CHI, separado del estado material testigo.
+\input{preflight/continuidad_precompile_261_reforzada_20260818}
+% Sidecar sucesor de la reparación semántica aprobada: 32 residencias
+% rectoras, comentario-only y enlazadas al nuevo recibo de precompilación.
+\input{preflight/continuidad_reparacion_32_20260819}
+\colorlet{hmtlight}{hmtpaper}
+\theoremstyle{definition}
+\newtheorem{principle}[theorem]{Principe}
+
+% Jerarquía tipográfica de monografía científica. Los títulos de capítulo
+% comparten línea con su numeración, se componen con cuerpo moderado y dejan
+% espacio suficiente para el primer párrafo o la primera ecuación.
+\titleformat{\part}[display]
+  {\centering\normalfont\bfseries\color{hmtblue}}
+  {\Large\scshape\partname\ \thepart}
+  {.45ex}
+  {\Huge}
+\titlespacing*{\part}{0pt}{1.25cm}{1.0cm}
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries\color{hmtblue}\LARGE}
+  {\normalsize\scshape\chaptertitlename\ \thechapter}
+  {1.0em}
+  {\raggedright}
+\titlespacing*{\chapter}{0pt}{-0.35cm}{0.75cm}
+\titleformat{name=\chapter,numberless}[block]
+  {\normalfont\bfseries\color{hmtblue}\LARGE}
+  {}{0pt}{\raggedright}
+\titlespacing*{name=\chapter,numberless}{0pt}{-0.35cm}{.75cm}
+\titleformat{\section}
+  {\normalfont\bfseries\Large\color{hmtblue}}
+  {\thesection}{.65em}{}
+\titlespacing*{\section}{0pt}{2.0ex plus .45ex minus .2ex}{.65ex}
+\titleformat{\subsection}
+  {\normalfont\bfseries\large}
+  {\thesubsection}{.65em}{}
+\titlespacing*{\subsection}{0pt}{1.65ex plus .4ex minus .2ex}{.55ex}
+\titleformat{\subsubsection}
+  {\normalfont\itshape\normalsize}
+  {\thesubsubsection}{.65em}{}
+\titlespacing*{\subsubsection}{0pt}{1.35ex plus .3ex minus .2ex}{.4ex}
+
+% Jerarquía editorial de la edición revisada. Los archivos heredados
+% conservan sus rótulos y etiquetas, pero sus capítulos se presentan como
+% secciones dentro de capítulos macroscópicos.
+\let\HMTBookChapter\chapter
+\let\HMTBookSection\section
+\let\HMTBookSubsection\subsection
+\let\HMTBookSubsubsection\subsubsection
+\let\HMTBookParagraph\paragraph
+\let\HMTBookSubparagraph\subparagraph
+\newcommand{\HMTDemoteHeadings}{%
+  \let\chapter\HMTBookSection
+  \let\section\HMTBookSubsection
+  \let\subsection\HMTBookSubsubsection
+  \let\subsubsection\HMTBookParagraph
+  \let\paragraph\HMTBookSubparagraph}
+\newcommand{\HMTRestoreHeadings}{%
+  \let\chapter\HMTBookChapter
+  \let\section\HMTBookSection
+  \let\subsection\HMTBookSubsection
+  \let\subsubsection\HMTBookSubsubsection
+  \let\paragraph\HMTBookParagraph
+  \let\subparagraph\HMTBookSubparagraph}
+
+% Notación de la frontera con Mecánica Dimensional.
+\providecommand{\APP}{\ensuremath{\mathrm{APP}}}
+\providecommand{\TPK}{\ensuremath{\mathrm{TPK}}}
+\providecommand{\Znine}{\mathbb Z/9\mathbb Z}
+\providecommand{\Cstar}{C^{*}}
+\providecommand{\Cstarrad}{C^{*}_{\rm rad}}
+\providecommand{\hbarHMT}{\hbar_{\mathrm{HMT}}}
+\providecommand{\etaRet}{\eta_{\mathrm{ret}}^{(\mathrm{deg})}}
+\providecommand{\etaRetRad}{\eta_{\mathrm{ret}}^{(\mathrm{rad})}}
+\providecommand{\alphaAngle}{\alpha_{\angle,\mathrm{deg}}}
+\providecommand{\alphaHMT}{\alpha_{\mathrm{HMT}}}
+\providecommand{\piHMT}{\pi_{\mathrm{HMT}}}
+\providecommand{\phiHMT}{\varphi_{\mathrm{HMT}}}
+\providecommand{\eexp}{\mathrm e}
+\providecommand{\Dfour}{\Delta_{4}}
+\providecommand{\zCorr}{\zeta_{270}^{\mathrm{corr}}}
+\providecommand{\sSpec}{s_{270}^{\mathrm{spec}}}
+\providecommand{\Kfield}{\mathbb K}
+\providecommand{\rank}{\operatorname{rank}}
+\providecommand{\nint}{\operatorname{nint}}
+\providecommand{\MD}{\ensuremath{\mathrm{MD}}}
+\providecommand{\CT}{\ensuremath{\mathrm{CT}_{108}}}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\PP}{\mathbb P}
+\providecommand{\hbarpre}{\hbar_{\mathrm{pre}}}
+\providecommand{\hbarret}{\hbar_{\mathrm{ret}}}
+\providecommand{\Ract}{R_{\mathrm{act}}}
+\providecommand{\ellP}{\ell_{\mathrm P}}
+\providecommand{\mP}{m_{\mathrm P}}
+\providecommand{\tP}{t_{\mathrm P}}
+\providecommand{\EP}{E_{\mathrm P}}
+\providecommand{\rg}{r_{\mathrm g}}
+\providecommand{\rs}{r_{\mathrm s}}
+\providecommand{\lambdabarC}{\bar\lambda_{\mathrm C}}
+\providecommand{\lambdaC}{\lambda_{\mathrm C}}
+\providecommand{\Nsp}{N_{\mathrm{sp}}}
+\providecommand{\thetaStar}{\theta_{\!*}}
+\providecommand{\Gammae}{\Gamma_{e}}
+\providecommand{\mebeta}{m_{e}^{\beta}}
+\providecommand{\epigraphtext}[2]{%
+  \begin{flushright}%
+  \begin{minipage}{0.76\textwidth}\itshape
+  #1\par\smallskip
+  \raggedleft\normalfont--- #2
+  \end{minipage}%
+  \end{flushright}%
+}
+
+\newtcolorbox{historybox}[1][]{%
+  colback=hmtlightblue,colframe=hmtblue,
+  title={Fait historique documenté},fonttitle=\bfseries,#1}
+\newtcolorbox{readingbox}[1][]{%
+  colback=hmtlightgold,colframe=hmtgold,
+  title={Lectura HMT},fonttitle=\bfseries,#1}
+\newtcolorbox{statusbox}[1][]{%
+  colback=white,colframe=hmtblue!55,
+  title={Hypothèses, domaine et conclusion},fonttitle=\bfseries,#1}
+\newtcolorbox{warningbox}[1][]{%
+  colback=white,colframe=hmtgold!75!black,
+  title={Condition de compatibilité},fonttitle=\bfseries,#1}
+\newtcolorbox{thesisbox}[1][]{%
+  colback=white,colframe=hmtviolet,
+  title={Tesis rectora},fonttitle=\bfseries,#1}
+\newtcolorbox{proofstatusbox}[1][]{%
+  colback=white,colframe=hmtgreen,
+  title={Estatuto probatorio},fonttitle=\bfseries,#1}
+\newtcolorbox{falsifierbox}[1][]{%
+  colback=white,colframe=hmtred,
+  title={Critère de réfutation},fonttitle=\bfseries,#1}
+\newtcolorbox{falsadorBox}[1][]{%
+  colback=hmtlightred,colframe=hmtred,
+  title={Control negativo},fonttitle=\bfseries,#1}
+\newtcolorbox{fronteraBox}[1][]{%
+  colback=hmtlightgold,colframe=hmtgold,
+  title={Frontière de validité},fonttitle=\bfseries,#1}
+\newtcolorbox{programbox}[1][]{%
+  colback=hmtlightgold,colframe=hmtgold,
+  title={Hypothèses et programme de démonstration},fonttitle=\bfseries,#1}
+\newtcolorbox{takeawaybox}[1][]{%
+  colback=white,colframe=hmtblue,
+  title={Résultat de la section},fonttitle=\bfseries,#1}
+% Entornos académicos conservados por los propietarios científicos extensos.
+% Se tipan aquí con la jerarquía gráfica única del tratado para evitar que cada
+% incorporación restablezca una tipografía o un preámbulo autónomos.
+\newtcolorbox{resultado}[1][]{%
+  colback=white,colframe=hmtgreen,
+  title={Résultat},fonttitle=\bfseries,#1}
+\newtcolorbox{definicionnarrativa}[1][]{%
+  colback=hmtlightblue,colframe=hmtblue,
+  title={Définition},fonttitle=\bfseries,#1}
+\newtcolorbox{lecturafisica}[1][]{%
+  colback=hmtlightgold,colframe=hmtgold,
+  title={Réalisation physique},fonttitle=\bfseries,#1}
+\newtcolorbox{frontera}[1][]{%
+  colback=hmtlightgold,colframe=hmtgold,
+  title={Frontière de validité},fonttitle=\bfseries,#1}
+\newtheorem{falsifier}[theorem]{Critère de réfutation}
+\newtheorem{test}[theorem]{Programme de comparaison}
+\newenvironment{keyresult}
+  {\begin{quote}\color{hmtblue}\bfseries}
+  {\end{quote}}
+
+\lstdefinestyle{hmtcode}{
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{hmtpaper},
+  frame=single,
+  rulecolor=\color{hmtgray!45},
+  breaklines=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true
+}
+
+\hypersetup{
+  colorlinks=true,
+  bookmarksdepth=3,
+  pdflang={es-ES},
+  linkcolor=hmtblue,
+  citecolor=hmtblue,
+  urlcolor=hmtgold,
+  pdftitle={Holographie Modulaire Triadique},
+  pdfsubject={Exposé systématique du noyau formel, de ses extensions et de ses dérivations},
+  pdfauthor={Oumar Haidara Fall; Rubén Ramos Balsa},
+  pdfkeywords={arithmétique nonadique, orientation ternaire, noyau topologique de phase, monodromie, constantes mathématiques, symétrie exceptionnelle, Mécanique Dimensionnelle, masse, action, information, gravité}
+}
+
+\setstretch{1.035}
+\setlength{\parskip}{0.16em}
+\setlength{\parindent}{1.25em}
+% El índice científico de la edición definitiva hace visibles capítulos y
+% secciones rectoras. Los niveles inferiores permanecen en el cuerpo para
+% conservar la demostración sin convertir el índice en un inventario.
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\cftchappagefont}{\fontsize{11.5}{13.4}\selectfont\bfseries}
+\renewcommand{\cftchapfont}{\fontsize{11.5}{13.4}\selectfont\bfseries}
+\renewcommand{\cftsecfont}{\fontsize{10.75}{12.8}\selectfont\bfseries}
+\renewcommand{\cftsecpagefont}{\fontsize{10.75}{12.8}\selectfont\bfseries}
+\renewcommand{\cftsubsecfont}{\fontsize{10.25}{12.2}\selectfont}
+\renewcommand{\cftsubsecpagefont}{\fontsize{10.25}{12.2}\selectfont}
+\renewcommand{\cftsubsubsecfont}{\fontsize{9.5}{11.4}\selectfont\itshape}
+\renewcommand{\cftsubsubsecpagefont}{\fontsize{9.5}{11.4}\selectfont\itshape}
+\setlength{\cftbeforechapskip}{.38em}
+\setlength{\cftbeforesecskip}{.05em}
+\setlength{\cftchapnumwidth}{3.25em}
+\setlength{\cftsecindent}{3.25em}
+\setlength{\cftsecnumwidth}{4.15em}
+\setlength{\cftsubsecnumwidth}{5.4em}
+\setlist[itemize]{leftmargin=1.65em,itemsep=.25em,topsep=.35em}
+\setlist[enumerate]{leftmargin=2em,itemsep=.25em,topsep=.35em}
+\emergencystretch=3em
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=10000
+\predisplaypenalty=500
+\postdisplaypenalty=500
+\raggedbottom
+% Cada epígrafe debe permanecer unido a un desarrollo mínimo. Se protegen
+% tanto los mandos públicos como sus copias editoriales, pues los capítulos
+% heredados se degradan localmente mediante \HMTDemoteHeadings.
+\pretocmd{\section}{\Needspace{9\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{7\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{5\baselineskip}}{}{}
+\pretocmd{\HMTBookSection}{\Needspace{9\baselineskip}}{}{}
+\pretocmd{\HMTBookSubsection}{\Needspace{7\baselineskip}}{}{}
+\pretocmd{\HMTBookSubsubsection}{\Needspace{5\baselineskip}}{}{}
+\pretocmd{\HMTBookParagraph}{\Needspace{9\baselineskip}}{}{}
+
+\crefname{chapter}{chapitre}{chapitres}
+\Crefname{chapter}{Chapitre}{Chapitres}
+\crefname{section}{section}{sections}
+\Crefname{section}{Section}{Sections}
+\crefname{subsection}{section}{sections}
+\Crefname{subsection}{Section}{Sections}
+\crefname{subsubsection}{section}{sections}
+\Crefname{subsubsection}{Section}{Sections}
+\crefname{figure}{figure}{figures}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{tableau}{tableaux}
+\Crefname{table}{Tableau}{Tableaux}
+\crefname{equation}{équation}{équations}
+\Crefname{equation}{Équation}{Équations}
+\crefname{theorem}{théorème}{théorèmes}
+\Crefname{theorem}{Théorème}{Théorèmes}
+\crefname{lemma}{lemme}{lemmes}
+\Crefname{lemma}{Lemme}{Lemmes}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{corollaire}{corollaires}
+\Crefname{corollary}{Corollaire}{Corollaires}
+\crefname{definition}{définition}{définitions}
+\Crefname{definition}{Définition}{Définitions}
+\crefname{construction}{construction}{constructions}
+\Crefname{construction}{Construction}{Constructions}
+\crefname{algorithm}{algorithme}{algorithmes}
+\Crefname{algorithm}{Algorithme}{Algorithmes}
+\crefname{ablation}{proposition de nécessité structurelle}
+  {propositions de nécessité structurelle}
+\Crefname{ablation}{Proposition de nécessité structurelle}
+  {Propositions de nécessité structurelle}
+\crefname{remark}{remarque}{remarques}
+\Crefname{remark}{Remarque}{Remarques}
+\crefname{principle}{principe}{principes}
+\Crefname{principle}{Principe}{Principes}
+\crefname{criterion}{critère de comparaison}{critères de comparaison}
+\Crefname{criterion}{Critère de comparaison}{Critères de comparaison}
+\AtBeginDocument{%
+  \renewcommand{\crefrangeconjunction}{ a\nobreakspace}%
+  \renewcommand{\crefpairconjunction}{ y\nobreakspace}%
+  \renewcommand{\crefmiddleconjunction}{, }%
+  \renewcommand{\creflastconjunction}{ y\nobreakspace}%
+  \renewcommand{\crefpairgroupconjunction}{ y\nobreakspace}%
+  \renewcommand{\crefmiddlegroupconjunction}{, }%
+  \renewcommand{\creflastgroupconjunction}{ y\nobreakspace}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\thepage}
+% Las cajas de marca se reservan dentro del 84 % central del encabezado. Así
+% los títulos extensos pueden ocupar dos líneas sin invadir el folio exterior.
+\fancyhead[LO]{\parbox[b]{.84\headwidth}{\raggedright\footnotesize\nouppercase{\leftmark}}}
+\fancyhead[RE]{\parbox[b]{.84\headwidth}{\raggedleft\footnotesize\nouppercase{\leftmark}}}
+\renewcommand{\headrulewidth}{0.25pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% Jerarquía óptica moderada aprobada para el sucesor y mapa declarativo de
+% rótulos públicos. El adaptador del radión aporta sólo sus macros locales;
+% no importa el estilo autónomo ni modifica la tipografía general.
+\input{sucesor_102/estilo_jerarquia_refinada_20260828.tex}
+\input{sucesor_102/mapa_retitulado_purista_20260828.tex}
+\input{sucesor_102/wrappers/radion_macros_shim.tex}
+\input{sucesor_102/wrappers/espirales_macros_shim.tex}
+
+% Identificador estable para builds reproducibles.
+\ifdefined\pdfinfoomitdate
+  \pdfinfoomitdate=1
+\fi
+\ifdefined\pdfsuppressptexinfo
+  \pdfsuppressptexinfo=15
+\fi
+\ifdefined\pdftrailerid
+  \pdftrailerid{<554E49444144484F4C4F47524146494341>
+                <44494D454E53494F4E414C484D54323026>}
+\fi
+
+\input{ampliacion_20260919/compatibilidad.tex}
+\input{ampliacion_20260919/residencias_dinamicas.tex}
+\begin{document}
+% La edición rectora contenía un alias histórico que redirigía
+% \texttt{thm:generacion-monodromica-conjunta-rev7} hacia un teorema
+% diferente. En el sucesor el propietario original vuelve a estar activo;
+% conservamos temporalmente su referencia leída del AUX y la restauramos
+% después de cargar, sin modificar, el archivo de compatibilidad preservado.
+\makeatletter
+\ifcsdef{r@thm:generacion-monodromica-conjunta-rev7}{%
+  \csletcs{hmt@native@generacion@monodromica}{r@thm:generacion-monodromica-conjunta-rev7}%
+}{}
+\ifcsdef{r@thm:generacion-monodromica-conjunta-rev7@cref}{%
+  \csletcs{hmt@native@generacion@monodromica@cref}{r@thm:generacion-monodromica-conjunta-rev7@cref}%
+}{}
+\makeatother
+\input{integracion_83/referencias_compatibilidad_83}
+\makeatletter
+\ifcsdef{hmt@native@generacion@monodromica}{%
+  \csletcs{r@thm:generacion-monodromica-conjunta-rev7}{hmt@native@generacion@monodromica}%
+}{}
+\ifcsdef{hmt@native@generacion@monodromica@cref}{%
+  \csletcs{r@thm:generacion-monodromica-conjunta-rev7@cref}{hmt@native@generacion@monodromica@cref}%
+}{}
+\makeatother
+\input{sucesor_102/referencias_compatibilidad_102}
+\input{ampliacion_20260919/aliases_referencias.tex}
+\frontmatter
+\input{ampliacion_20260919/portada.tex}
+\pagenumbering{arabic}
+
+\input{ampliacion_20260919/presentacion_sistematica.tex}
+\input{frontmatter/00_prefacio_autoral_20260826}
+\clearpage
+\input{sucesor_102/deltas_ley9/00_teorema_generador_frontal_20260903}
+\gdef\HMTTeoremaGeneradorFrontalCargado{1}
+\clearpage
+\input{frontmatter/00_resumen_academico_autonomo_20260807}
+\clearpage
+\tableofcontents
+\clearpage
+
+% Activación de la numeración de capítulos sin reiniciar la paginación:
+% cubierta, preliminares y cuerpo forman una secuencia arábiga única. La
+% Introducción general se incorpora una sola vez desde la arquitectura de
+% 102 capítulos, antes de la Parte I.
+\makeatletter\@mainmattertrue\makeatother
+\markboth{Introduction générale}{Introduction générale}
+\input{sucesor_102/estructura_102_capitulos_20260828.tex}
+
+\input{ampliacion_20260919/parte_conservacion.tex}
+\input{ampliacion_20260919/conclusiones_sistematicas.tex}
+
+\appendix
+% Se restituye el contenedor acumulativo completo que quedó desconectado al
+% pasar de la edición de 948 páginas a la integral reforzada.  No es una
+% síntesis: vuelve a publicar las demostraciones, protocolos, algoritmos,
+% datos reproducibles, controles de dependencia, independencia prospectiva
+% y suplemento digital de masas en sus propietarios íntegros.
+\input{appendices_acumulativa_revfinal}
+
+% Los dos apéndices científicos recuperados por la auditoría de la Parte III
+% contienen demostraciones y certificados que no aparecen en el contenedor
+% acumulativo precedente. Se publican una sola vez, después de éste, sin
+% fusionarlos mientras su equivalencia cuerpo a cuerpo siga pendiente.
+\input{../colaboracion/parte_iii/tex/residencias_posteriores/apendices_cientificos_constantes_ley9_editor_ready}
+\input{../colaboracion/parte_iii/tex/residencias_posteriores/anexo_precision_arbitraria_editor_ready}
+
+% La ley general de masas culmina en tres residencias científicas
+% complementarias: el puente analítico que fija tipos y gramática, el atlas
+% exhaustivo de rutas y el inventario metrológico integral. Las antiguas
+% tablas parciales permanecen preservadas en sus fuentes, pero no compiten
+% con estos censos completos.
+\input{integracion_83/masas_p0/tex/apendice_puente_analitico_masas}
+\input{sucesor_102/wrappers/apendices_masas_atlas_inventarios_editor_unico.tex}
+
+% Demostraciones, tablas de clasificación y bibliografía específica de la
+% incorporación de correspondencias espirales. Se conservan completas y
+% subordinadas a los apéndices del tratado, sin introducir otra portada.
+\begin{HMTSpiralAppendixBody}
+\input{sucesor_102/espirales/apendices_demostrativos.tex}
+\end{HMTSpiralAppendixBody}
+% Las referencias de espirales se conservan en la bibliografía unificada.
+
+\setcounter{secnumdepth}{0}
+\backmatter
+\input{backmatter/A_nomenclatura_publica_rev8}
+\begingroup
+\sloppy
+\small
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{3em}
+% Bibliografía material del integral, preservada en su cierre FLS.
+\input{ampliacion_20260919/bibliografia_unificada.tex}
+\endgroup
+\begingroup
+\setlength{\columnsep}{2.5em}
+\printindex
+\endgroup
+\end{document}

@@ -1,0 +1,411 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=24mm,bottom=24mm,left=26mm,right=26mm,headheight=14pt]{geometry}
+\usepackage{fontspec,amsmath,amsthm,unicode-math}
+\usepackage[english,french]{babel}
+\usepackage{microtype,xcolor,graphicx,tikz,booktabs,array,needspace,fancyhdr}
+\usepackage{longtable,tabularx,enumitem,float,import,xurl,multicol}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,matrix}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{theorem}{théorème}{théorèmes}\Crefname{theorem}{Théorème}{Théorèmes}
+\crefname{proposition}{proposition}{propositions}\Crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{lemme}{lemmes}\Crefname{lemma}{Lemme}{Lemmes}
+\crefname{section}{section}{sections}\Crefname{section}{Section}{Sections}
+\crefname{equation}{équation}{équations}\Crefname{equation}{Équation}{Équations}
+\setmainfont{STIXTwoText-Regular.otf}[BoldFont=STIXTwoText-Bold.otf,ItalicFont=STIXTwoText-Italic.otf,BoldItalicFont=STIXTwoText-BoldItalic.otf]
+\setmathfont{STIXTwoMath-Regular.otf}
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+\newtheorem{falsifier}[theorem]{Critère de réfutation}
+\newtheorem{ablation}[theorem]{Preuve de nécessité structurelle}
+\newtheorem{criterion}[theorem]{Critère}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Définition}
+\newtheorem{axiom}[theorem]{Axiome}
+\newtheorem{principle}[theorem]{Principe}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remarque}
+\newcommand{\RR}{\mathbb R}\newcommand{\QQ}{\mathbb Q}
+\newcommand{\ZZ}{\mathbb Z}\newcommand{\CC}{\mathbb C}
+\newcommand{\Gr}{\operatorname{Gr}}\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\APP}{\mathrm{APP}}\newcommand{\TPK}{\mathrm{TPK}}
+\newcommand{\TRIT}{\mathrm{TRIT}}\newcommand{\id}{\operatorname{id}}
+\newcommand{\diag}{\operatorname{diag}}\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\FF}{\mathbb F}\newcommand{\Id}{\operatorname{id}}
+\newcommand{\tr}{\operatorname{tr}}\newcommand{\dd}{\mathrm d}
+\newcommand{\Span}{\operatorname{span}}\newcommand{\Cyl}{\operatorname{Cyl}}
+\providecommand{\llbracket}{\lBrack}\providecommand{\rrbracket}{\rBrack}
+\providecommand{\square}{\mdlgwhtsquare}
+\providecommand{\dashrightarrow}{\mathrel{\rightdasharrow}}
+\providecommand{\index}[1]{}
+\newcommand{\HMT}{\mathrm{HMT}}\newcommand{\Tr}{\operatorname{Tr}}\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Cstar}{C^{*}}\newcommand{\R}{\mathbb R}\newcommand{\Z}{\mathbb Z}\newcommand{\I}{\mathrm I}
+\setcounter{tocdepth}{2}
+\setlist{nosep,topsep=4pt}
+\numberwithin{equation}{section}
+\setlength{\parskip}{4pt plus 1pt}\setlength{\parindent}{1em}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\normalsize}{\fontsize{10.5}{13.5}\selectfont}\normalsize
+\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+\AddToHook{cmd/section/before}{\Needspace{10\baselineskip}}
+\AddToHook{cmd/subsection/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/theorem/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/proposition/before}{\Needspace{6\baselineskip}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize Grassmanniennes positives et amplituèdres : formes canoniques et raffinement}
+\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{.2pt}
+\hypersetup{pdftitle={Grassmanniennes positives et amplituèdres : formes canoniques et raffinement},pdfsubject={Dualité réticulaire et écart de masse de Yang–Mills en holographie modulaire triadique},pdfauthor={Oumar Haidara Fall; Rubén Ramos Balsa}}
+\makeatletter
+\newcommand{\compactcontents}{%
+  \begingroup
+  \fontsize{9.2}{11.1}\selectfont
+  \setlength{\parskip}{0pt}\setlength{\columnsep}{7mm}
+  \renewcommand{\l@section}{\@dottedtocline{1}{0pt}{1.8em}}
+  \renewcommand{\l@subsection}{\@dottedtocline{2}{1.5em}{2.7em}}
+  \renewcommand{\l@part}[2]{\addpenalty{-\@highpenalty}\addvspace{6pt}%
+    {\bfseries\noindent ##1\nobreak\hfill\nobreak ##2\par}\nobreak}
+  \section*{Table des matières}
+  \@starttoc{toc}
+  \endgroup}
+\makeatother
+% BEGIN NUCLEO_ADITIVO_20260921_PREAMBULO
+\input{nucleo_ampliado/compatibilidad_editorial.tex}
+% END NUCLEO_ADITIVO_20260921_PREAMBULO
+% Apertura independiente del índice: corrección quirúrgica 20260928.
+\let\HMTIndiceOriginal\tableofcontents
+\renewcommand{\tableofcontents}{\clearpage\begingroup\setlength{\parskip}{0pt}\fontsize{9.2}{10.5}\selectfont\HMTIndiceOriginal\endgroup\clearpage}
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\small Manuscrit de compilation pour le transfert académique}\par\vspace{6mm}
+{\LARGE\bfseries Grassmanniennes positives et amplituèdres :\\formes canoniques et raffinement}\par\vspace{3mm}
+{\large Dualité réticulaire et saut de masse de Yang--Mills\\en holographie modulaire triadique}\par\vspace{5mm}
+Oumar Haidara Fall \textperiodcentered\ Rubén Ramos Balsa\par
+{\fontsize{8}{10}\selectfont Coécriture sans préséance de contribution\par
+Intégration et compilation documentaires générées par ChatGPT - Astra.}
+\end{center}
+\begin{abstract}
+L'Holographie modulaire triadique construit la structure discrète conjointe du continu au moyen d'APP, de TRIT et du transport avec mémoire du TPK. La réduction compatible des cylindres produit la réalisation arithmétique, tandis que la projection conjuguée conserve l'incidence exceptionnelle. Sur cette généalogie, on démontre une collection de réalisations positives récupérables. La charge uniforme et deux mémoires nonadiques déterminent le registre à douze coordonnées ; ses séparations ordonnées produisent une mesure planaire de frontière et une représentation grassmannienne avec inverse marqué. Les lecteurs qui se factorisent par le registre sont transportés vers cette représentation et conservés sous les changements de coordonnées du même point. Le raffinement nonadique construit des drapeaux positifs et des points amplituédraux dans tout rang et toute dimension externe finis admissibles. En rang un, on obtient une couverture simpliciale complète et l'annulation des résidus intérieurs en toute dimension finie. Les formes à valeurs dans la droite d'action satisfont une condition exacte de recollement sur les frontières communes. Les moyennes cellulaires conservent une mesure chronologique et décomposent l'incrément des moments en détails orthogonaux ; leur limite détermine un opérateur de Jacobi dont les compressions finies ont un spectre simple, des résidus positifs et des résolvantes en fraction continue. La réduction de Schur conserve l'énergie effective de la partition, avec reconstruction du détail et réalisation limite de Sobolev. Le flot du registre induit en outre une déformation réticulaire à vingt-quatre dimensions qui conserve le volume et la symétrie ternaire, et transforme l'inversion du paramètre en dualité réticulaire et en réciprocité thêta. On réunit les hamiltoniens elliptique, hyperbolique et parabolique, leurs coordinatisations symplectiques, leurs termes de connexion et leurs transformations de Legendre, ainsi que les lecteurs matériels correspondants. Le développement de Yang--Mills incorpore la mesure commune, l'échelle aire--volume, la coercivité uniforme, le témoin spectral persistant et la reconstruction de l'hamiltonien. L'articulation de ces résultats distingue et relie les positivités de Plücker, des moments, des constitutives et du spectre au moyen d'opérations explicites sur le même état enrichi. La représentation incidentielle conserve les douze coordonnées au moyen d'une isométrie pondérée avec inverse explicite. La transition hexade--octade permet de distinguer l'aire totale de la composition sectorielle et de reconstruire les occupations ; sa purification détermine une entropie d'intrication avec loi modulaire finie. La composition longitudinale du retour marqué détermine l'échelle aréale et conserve sa naturalité sous les raffinements hérités ; les formes canoniques à coefficient opératoriel d'aire transmettent l'additivité et les résidus de frontière.
+\par\smallskip\noindent\textbf{Mots-clés :} Grassmanniennes positives ; réseaux planaires ; coordonnées de Plücker ; géométrie d’incidence ; holographie modulaire triadique.
+\end{abstract}
+\clearpage
+\compactcontents
+\clearpage
+
+\section{Introduction : généalogie de la forme et conservation du raffinement}
+\label{sec:genealogy}
+\input{sections/introduction_addition.tex}
+\subsection{Généalogie arithmétique et système de réalisations géométriques}
+La construction commence par les deux feuillets arithmétiques d’APP. Si
+\(p,q\in\{1,\ldots,9\}\), chaque opération conserve une division complète,
+\[
+ p+q=R_\Sigma+9q_\Sigma,\qquad
+ pq=R_\Pi+9q_\Pi.
+\]
+TRIT ajoute le régime local et l'orientation. Le sélecteur tritique de phase opératoire choisit l'opération compatible avec cet état, tandis que les deux feuillets demeurent dans le support. Sur l'espace des états enrichis, le Topological Phase Kernel compose sélection, transport et mise à jour :
+\[
+ U_t=\operatorname{Upd}_t\circ\operatorname{Tra}_t\circ\operatorname{Sel}_t.
+\]
+Le registre conserve les résidus, quotients, retenues, feuillets, routes, frontières, mémoire et survie utilisés par chaque prolongement. L'holonomie nonadique \(\Gamma_9=U_{t+8}\circ\cdots\circ U_t\) appartient à cette dynamique enrichie. Sa représentation réduite de mémoire est effectuée ensuite. Le retour de phase conserve l'avancement du registre et distingue donc des états situés à des profondeurs différentes.
+
+Le prolongement
+\[
+ w_6\longrightarrow w_{12}\longrightarrow w_{18}\longrightarrow
+ w_{24}\longrightarrow w_{30}\longrightarrow R_{36}\longrightarrow G_9
+\]
+organise les raffinements compatibles du même état. Les cinq constructions du continu émergent conjointement, avec leurs aspects spectral, solénoïdal, de jauge, cohomologique et déterminantal. Les lecteurs de cet état expriment corrélativement \(\pi,\varphi,e,\alpha\). Leur origine commune admet un ordre interne d'évaluation : les coordonnées régionales déjà engendrées agissent avec le registre dodécaphasique dans les lecteurs de clôture de \(\alpha\). Dans cet article, les grassmanniennes, polygones et formes différentielles sont des réalisations ultérieures de données engendrées par cette chaîne. Leurs paramètres sont fixés avant toute comparaison géométrique ou métrologique.
+
+Le problème concret consiste à décrire ce que conserve une réalisation
+positive et ce qui peut varier lorsque sa forme change. Une même liste positive
+admet plusieurs usages mathématiques : poids d’arêtes, longueurs d’intervalles,
+coefficients d’une forme quadratique ou coordonnées d’un lecteur matériel.
+Chaque usage possède un domaine, une opération et des invariants propres.
+L’expression \emph{multimorphologie} désigne ici le système de ces réalisations
+avec leurs applications explicites de compatibilité. Une identité de leurs nombres
+exige une vérification moindre qu’une identité de leurs opérateurs ; le
+développement suivant formule et démontre chaque niveau séparément.
+
+La base de provenance est l'article sur la génération coinductive des constantes et la structure algébrique de l'électron, avec le développement de l'extrême et moyenne raison holographique. Leurs constructions antérieures fixent le registre utilisé ci-dessous. Les résultats géométriques de ce texte commencent par cette sortie finie et prouvent ses conséquences au moyen de données explicites. Les propositions de transfert matériel déclarent en outre les lecteurs qu'elles emploient. Cette organisation préserve la portée spécifique de chaque preuve.
+
+\clearpage
+\part{Construction arithmétique, état enrichi et continu conjoint}
+\begingroup
+\sloppy
+\renewcommand{\TRIT}{\{-1,0,+1\}}
+\import{foundation/}{sections/nucleo.tex}
+% BEGIN NUCLEO_ADITIVO_20260921_CENSO
+\clearpage
+\input{nucleo_ampliado/censo_emisor_tpk.tex}
+% END NUCLEO_ADITIVO_20260921_CENSO
+\import{foundation/}{sections/extension.tex}
+\import{foundation/}{sections/continuo_conjunto.tex}
+\import{foundation/}{sections/generacion.tex}
+% BEGIN NUCLEO_ADITIVO_20260921_SELECCION
+\clearpage
+\input{nucleo_ampliado/lectores_cilindros_incidencia.tex}
+\input{nucleo_ampliado/calendario_completo.tex}
+\clearpage
+\input{nucleo_ampliado/seleccion_registro_k.tex}
+\clearpage
+% END NUCLEO_ADITIVO_20260921_SELECCION
+\import{foundation/}{sections/registro_k.tex}
+\import{foundation/}{sections/alpha.tex}
+\import{foundation/}{sections/excepcional.tex}
+\import{foundation/}{sections/01_hilbert_nonadico.tex}
+\endgroup
+\clearpage
+\part{Géométrie positive, raffinement et dualité réticulaire}
+\input{sections/trit_projection.tex}
+\input{sections/incidence_transport.tex}
+
+\section{Extraction dodécaphasique et projection isotypique de la direction}
+\label{sec:register}
+Avant d’évaluer des nombres, les lecteurs distinguent des régions dynamiques.
+La symétrie spéculaire du corpus agit sur le bloc
+\(B=(u^\pi,u^e,u^\varphi)\in(\mathbb F_3^6)^3\) par
+\[
+ \mathfrak cB=(u^e,u^\pi,u^\varphi).
+\]
+Avec \(q=u^\pi+u^e+u^\varphi\), \(a=u^\pi+u^e-u^\varphi\) et \(d=u^\pi-u^e\), les formules
+\[
+ u^\varphi=2(q-a),\quad s=q-u^\varphi,\quad
+ u^\pi=2(s+d),\quad u^e=2(s-d)
+\]
+sont des identités composante par composante dans \(\mathbb F_3\). Le miroir conserve l'axe et l'agrégat dans une fibre et inverse la répartition antisymétrique. Le transport nonadique fait évoluer la fibre elle-même. La cinquième phase a pour donnée de frontière \(111111\), pour signature résiduelle \(000\), une solution locale et une extension : la marque de \(\varphi\) en cinq identifie l'axe régional de cette opération. Dans les phases six, sept et huit, les agrégats régionaux sont \(012100\), \(101001\) et \(112000\), respectivement. Ces données appartiennent au domaine ternaire ; les lecteurs d'histoires compatibles produisent ensuite leurs évaluations réelles.
+
+Le registre des douze fenêtres et les blocs régionaux conservent ainsi leurs domaines et leur lien dans le même état. La réalisation positive qui suit utilise le registre exprimé, avec son ordre et son échelle. Pour transporter le miroir régional vers une déformation géométrique, il faut d'abord composer son action sur ce registre ; l'égalité de généalogie exprime à elle seule moins que la commutativité de ce carré. Cette précision permet de conserver la dynamique régionale complète en étudiant l'une de ses réalisations finies.
+
+Le calendrier divise les cent huit positions en douze fenêtres nonadiques.
+L’extraction terminale possède la composition
+\[
+ x_{\rm term}\longmapsto\mathcal R_{12}(x_{\rm term})
+ \longmapsto(b^{90},b^{120},Q)\longmapsto U_{\rm sgn}\longmapsto K.
+\]
+Les deux premières flèches conservent l'histoire orientée dans les lecteurs du corpus. Pour montrer intégralement la reconstruction finie qu'utilise cet article, leurs sorties entières sont
+\begin{align*}
+ b^{90}&=(-495,-116,-684,108,601,-90,-173,-88,313,560,-397,461),\\
+ b^{120}&=(-425,-281,-481,671,-255,30,475,-543,680,251,6,-128),
+ \qquad Q=6263.
+\end{align*}
+On fixe l’ordre cyclique de douze positions. Soient
+\(B_r=\sum_{j=0}^3 b^{120}_{r+3j}\) et
+\(d_{r,j}=b^{90}_{r+3j}\), pour \(r=1,2,3\). Alors
+\[
+ s_1=\frac{Q+2B_1+B_2}{3},\quad s_2=s_1-B_1,\quad s_3=s_2-B_2,
+ \qquad
+ U^{(r)}=(s_r,d_{r,1}-d_{r,3},d_{r,0}+d_{r,2},d_{r,0}-d_{r,2}).
+\]
+L’évaluation donne
+\[
+ U^{(1)}=(2378,-452,-668,-322),\quad
+ U^{(2)}=(1406,998,-204,-28),\quad
+ U^{(3)}=(2479,-551,-371,-997).
+\]
+La matrice
+\[
+ H_4=\begin{pmatrix}1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1\end{pmatrix},
+ \qquad H_4^2=4I_4,
+\]
+reconstruit chaque orbite au moyen de \(H_4U^{(r)}/4\). Restituer l'ordre des positions produit
+\begin{equation}
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+ \qquad Q=\sum_{j=1}^{12}K_j=6263.
+ \label{eq:K-main}
+\end{equation}
+Chaque composante est positive. La division par trois provient des trois
+orbites et la division par quatre de l’inverse de Hadamard. Le contrôle
+direct supplémentaire est \((I-S_3)K=b^{90}\),
+\((I-S_4)K=b^{120}\), où \((S_aK)_j=K_{j+a}\) avec des indices cycliques.
+Ces identités rendent la reconstruction reproductible sans sélectionner
+des coefficients au moyen d’une géométrie cible.
+
+La coordinatisation incidentielle du corpus réalise les douze positions comme classes latérales de \(A_5/C_5\). Si \(\rho\) est cette représentation et \(\chi_3\) son caractère réel tridimensionnel, son projecteur est
+\[
+ P_3=\frac3{60}\sum_{a\in A_5}\chi_3(a^{-1})\rho(a),\qquad
+ P_{11}=I-\frac1{12}\mathbf1\mathbf1^{\mathsf T}.
+\]
+L'énumération et l'orientation des classes latérales sont conservées dans la source de cette coordinatisation. Pour que l'extension géométrique soit directement évaluable, on écrit sa sortie exacte \(u=P_3P_{11}K\), avec \(r=\sqrt5\) :
+\begin{equation}
+\begin{split}
+u=\bigl(&-495/4-233r/10,\quad403/4+169r/10,\\
+&-403/4-169r/10,\quad495/4+233r/10,\\
+&601/4+1031r/10,\quad203/4+211r/5,\\
+&-203/4-211r/5,\quad-601/4-1031r/10,\\
+&313/4+569r/10,\quad162+219r/20,\\
+&-162-219r/20,\quad-313/4-569r/10\bigr).
+\end{split}
+\label{eq:u-main}
+\end{equation}
+On vérifie par somme et produit dans \(\QQ(\sqrt5)\) que
+\[
+ \mathbf1^{\mathsf T}u=0,\qquad
+ \|u\|^2=\frac{6638585+2275584\sqrt5}{20}>0.
+\]
+En particulier, ses coordonnées ne sont pas constantes. La direction \(u\), le registre intégral \(K\) et le projecteur \(P_{10}=P_{11}-uu^{\mathsf T}/\|u\|^2\) conservent des quantités différentes d'information. Cette distinction permet d'utiliser la direction pour un flux sans la substituer au registre qu'emploient les lecteurs d'action.
+
+\input{sections/memory_geometry.tex}
+\input{sections/registro_incidencia_geometria.tex}
+\input{appendices/network_cluster.tex}
+\input{appendices/polygon_amplituhedron.tex}
+\input{sections/higher_rank.tex}
+\input{sections/refinamiento_dimensional_momentos.tex}
+\input{sections/jacobi_spectral.tex}
+\input{appendices/figures.tex}
+\input{appendices/convex_refinement.tex}
+\input{sections/energy_refinement.tex}
+\input{sections/energy_limit.tex}
+\input{sections/nonadic_transport.tex}
+\input{sections/leech_foundations.tex}
+\input{sections/leech_dualidad.tex}
+\input{appendices/mass_bridge.tex}
+\input{sections/lectores_formas_compatibles.tex}
+\input{sections/incidencia_area_entropia.tex}
+\input{appendices/multimorphology_figure.tex}
+
+\clearpage
+\part{Réalisation de jauge, raffinement et écart spectral}
+\input{sections/ym_bridge.tex}
+\input{sections/ym_scale.tex}
+\input{sections/ym_construction.tex}
+\input{sections/ym_gauge_object.tex}
+\input{sections/ym_complete.tex}
+\input{sections/hamiltonianos_curvatura.tex}
+
+\section{Discussion : reconstruction, invariants et dualité}
+\label{sec:discussion}
+Le résultat structurel prioritaire est la récupérabilité de la forme.
+La charge uniforme et les deux mémoires nonadiques reconstruisent le registre
+au moyen d’un inverse explicite ; le cône positif décrit exactement
+le domaine où cette reconstruction induit des mineurs strictement positifs.
+La borne de stabilité quantifie la persistance de ce domaine. Par
+conséquent, les poids géométriques admettent une provenance et une récupération
+opératoires, en plus de leur évaluation numérique.
+
+La composition développée a une séquence explicite. Le registre
+terminal engendre douze poids positifs ; leurs sommes partielles donnent treize points
+ordonnés ; un réseau planaire réalise leurs mineurs ; la courbe des moments
+construit des polygones et des polytopes ; leurs triangulations fournissent une couverture
+et des formes à résidus orientés. Le raffinement d’une cellule fixée conserve
+la somme de ses formes. L’introduction de nouveaux sommets sur la courbe des
+moments produit pour sa part une autre géométrie et exige de comparer les domaines.
+
+La direction algébrique du registre distingue deux opérations. Le redimensionnement positif des colonnes conserve les rapports projectifs pertinents. Son action normalisée sur les intervalles engendre en revanche une déformation effective, certifiée par une dérivée exacte non nulle. Cette déformation admet un potentiel convexe dont la transformée de Legendre est conservée lors d'une subdivision à direction héritée. L'invariance possède ainsi un mécanisme vérifiable : chaque successeur conserve le générateur de son prédécesseur et la somme de ses poids restitue le poids antérieur.
+
+Le raffinement énergétique fournit une seconde conservation exacte.
+La réduction de Schur retrouve le laplacien effectif et le prolongement
+minimisant sépare chaque configuration en sa partie observée et un détail
+reconstructible. Les énergies des détails s’additionnent orthogonalement.
+Avec des maillages décroissants et une énergie uniformément bornée, cette suite
+converge dans la réalisation de Sobolev déclarée. L’invariance de la
+forme canonique, l’identité du potentiel convexe et la conservation de
+l’énergie sont trois résultats distincts de compatibilité, démontrés
+pour les raffinements spécifiés.
+
+Le prolongement aux douze plans réticulaires conserve une symétrie
+ternaire et le volume. Le résultat décisif est la réciprocité
+\(\Lambda_s^*=\Lambda_{-s}\), qui induit l’inversion
+\(\Theta_s(t)=t^{-12}\Theta_{-s}(t^{-1})\). La réalisation déployée de
+signature \((24,24)\) conserve intégralité, parité et autodualité pour
+tout le flot. Dans la projection euclidienne, la variation explicite d’une
+norme distingue déformation et automorphisme du réseau initial. Cette
+distinction détermine le contenu exact de la connexion avec la dualité
+des moments et des enroulements.
+
+La réalisation matérielle conserve ses propres lecteurs. La représentation d'action et le caractère des masses reçoivent le registre par des compositions déjà construites ; la congruence préserve la positivité et l'inertie, tandis que la métrique détermine l'interprétation de leurs valeurs propres. Ces différences précisent la signification de la multimorphologie : plusieurs formes mathématiques proviennent d'une généalogie commune et sont reliées par des opérations vérifiables. L'identification complète des amplituèdres de rang supérieur exigera les preuves de couverture et de résidus pour ces applications concrètes. Le résultat de rang un démontré ici fixe un cas complet, avec coordonnées rationnelles, triangulation et contrôles reproductibles.
+
+L’orientation temporelle du TRIT intègre le retour avec mémoire, la
+mise à jour du seuil et les prolongements conjugués. Ses générateurs
+elliptique, nilpotent et hyperbolique fournissent des lois distinctes
+d’évolution ; la composition du TPK conserve la généalogie qui les
+concatène. En particulier, l’activité du régime zéro est exprimée
+par un transport unipotent, et la double projection conserve simultanément
+la convergence des coordonnées et l’incidence exceptionnelle. La thèse
+géométrique de l’article réside dans cette articulation : la structure de
+départ engendre des registres récupérables et ceux-ci soutiennent des réalisations
+positives dont les transformations, les frontières et les mémoires peuvent être calculées
+et comparées avec précision.
+
+L’entrelacement \(B_FM=MB_V\) ajoute un transport exact depuis le
+bloc modulaire jusqu’au quotient incidentiel. Les multiplicités
+un et trois s’y déduisent de la matrice de Gram, et la forme signée déclarée
+s’exprime comme \(J_L=(7I_Q-\overline B_F)/2\). Les matrices de
+Vandermonde et de Hankel apportent, d’autre part, des réalisations explicites
+\(Y^{(k)}\) pour \(2\le k\le9\), avec positivité et rang prouvés
+dans la partition initiale. Le prolongement nonadique étend ensuite
+cette construction à tout couple fini admissible de rang et de dimension
+externe, au moyen des systèmes de nœuds et de moments développés ici.
+Ces résultats étendent le système de réalisations sans identifier
+la dimension d’un quotient, le rang d’une matrice et le nombre de
+générateurs d’une superalgèbre.
+
+Dans la réalisation de jauge, l'échelle surfacique--volumétrique précède l'hamiltonien. Le générateur produit conserve tous les secteurs de la décomposition orthogonale, tandis que sa restriction physique contient un témoin qui atteint le premier niveau positif. Les opérateurs d'entrelacement du raffinement conservent la coercivité et ce témoin. Le développement continu réunit en outre la mesure commune, la courbure, la continuité euclidienne, les formes de réflexion et l'hamiltonien reconstruit. Ainsi, l'argument de l'écart spectral se situe aux côtés de la construction qui lui donne son domaine et son sens, et la positivité de Plücker maintient sa propre réalisation géométrique. Leur articulation exige ces transports explicites ; le mot positivité désigne des propriétés typées que l'état commun permet de comparer sans les substituer les unes aux autres.
+
+\clearpage
+\part{Vérification exacte et énumération des émissions}
+\input{sections/exact_reproduction.tex}
+\begingroup\setlength{\parskip}{2pt}\fontsize{10}{11.5}\selectfont
+\import{foundation/}{libro/censo_firmas_emision.tex}
+\par\endgroup
+\begingroup\setlength{\parskip}{2pt}\fontsize{10}{11.5}\selectfont
+\input{sections/conclusions.tex}
+\par\endgroup
+
+\begin{thebibliography}{99}
+\bibitem{hmtI} O. Haidara Fall et R. Ramos Balsa,
+\emph{Génération coinductive de \(\pi,\varphi,e\) à une profondeur arbitraire,
+dérivation de la constante de structure fine et structure algébrique de
+l’électron}. Série HMT--MD, article I, édition consultée de septembre 2026.
+\bibitem{hmtX} O. Haidara Fall et R. Ramos Balsa,
+\emph{Extrême et moyenne raison holographique}. Développement du couplage
+arithmético--géométrique, registre dodécaphasique et direction dimensionnelle,
+édition consultée de septembre 2026.
+\bibitem{hmtII} O. Haidara Fall et R. Ramos Balsa,
+\emph{Origine structurelle du paramètre de Barbero--Immirzi et des
+angles de mélange CKM ; dérivation des constantes de Planck, de Boltzmann
+et de gravitation universelle}. Série HMT--MD, article II, édition de
+septembre 2026. Relation entre action, aire, information et entropie
+d’intrication.
+\bibitem{hmtVI} O. Haidara Fall et R. Ramos Balsa,
+\emph{Particules, persistance et spectre des masses}. Série HMT--MD, article VI,
+édition consultée de septembre 2026.
+\bibitem{HMT-IV} O. Haidara Fall et R. Ramos Balsa,
+\emph{Moonshine, dualité T et théorie M à partir de la structure discrète du
+continu}. Série HMT--MD, article IV, édition consultée de septembre 2026.
+\bibitem{HMT-VIII} O. Haidara Fall et R. Ramos Balsa,
+\emph{Arithmétique généalogique des nombres premiers et structure spectrale
+de la fonction zêta}. Série HMT--MD, article VIII, édition consultée de septembre 2026.
+\bibitem{HMT-IX} O. Haidara Fall et R. Ramos Balsa,
+\emph{Résolution de l’hypothèse du continu dans la clôture généalogique
+holographique}. Série HMT--MD, article IX, édition consultée de septembre 2026.
+\bibitem{Elkies} N. D. Elkies,
+\emph{Rational lattices and their theta functions}. Arizona Winter School,
+2009, théorème 2.
+\href{https://people.math.harvard.edu/~elkies/aws09.pdf}{Notes de l’auteur}.
+\bibitem{ConwaySloane} J. H. Conway et N. J. A. Sloane,
+\emph{Sphere Packings, Lattices and Groups}, troisième édition, Springer, 1999.
+\href{https://doi.org/10.1007/978-1-4757-6568-7}{DOI: 10.1007/978-1-4757-6568-7}.
+\bibitem{postnikov} A. Postnikov,
+\emph{Total positivity, Grassmannians, and networks}, 2006,
+\href{https://arxiv.org/abs/math/0609764}{arXiv:math/0609764}.
+\bibitem{scott} J. S. Scott,
+\emph{Grassmannians and Cluster Algebras}, 2003,
+\href{https://arxiv.org/abs/math/0311148}{arXiv:math/0311148}.
+\bibitem{amplituhedron} N. Arkani-Hamed et J. Trnka,
+\emph{The Amplituhedron}, 2013,
+\href{https://arxiv.org/abs/1312.2007}{arXiv:1312.2007}.
+\bibitem{positive} N. Arkani-Hamed, Y. Bai et T. Lam,
+\emph{Positive Geometries and Canonical Forms}, 2017,
+\href{https://arxiv.org/abs/1703.04541}{arXiv:1703.04541}.
+\bibitem{HMT-YM} O. Haidara Fall et R. Ramos Balsa,
+\emph{La clôture holographique de l’infini}, édition intégrale de 2.249 pages,
+chapitre 99, « Image de jauge et composition vers Yang--Mills », pp. 1742--1762 ;
+et \emph{Yang--Mills : mesure commune, reconstruction et écart spectral},
+monographie spécialisée, développement de l’échelle aréale--volumétrique.
+\bibitem{hmtIntegral} O. Haidara Fall et R. Ramos Balsa,
+\emph{La clôture holographique de l’infini}, édition intégrale de 2.249 pages,
+septembre 2026. Développements des régimes quadratiques, du vide
+électromagnétique, de la réalisation électrofaible et des correspondances
+spirales de la mécanique dimensionnelle.
+\input{sections/bibliography_additions.tex}
+\end{thebibliography}
+\end{document}

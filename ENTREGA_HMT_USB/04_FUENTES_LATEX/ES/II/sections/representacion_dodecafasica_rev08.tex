@@ -1,0 +1,202 @@
+% FORMALIZACION_REUNIDA de la proyección del calendario y la representación
+% de doce posiciones ya desarrolladas en la arquitectura TPK y el enlace Witt.
+% Formalización explícita del cotejo de Gram y del transporte de marco.
+\subsubsection{Proyección del calendario y representación de sus doce posiciones}
+\label{ii:dodeca:calendario}
+El calendario de la sección~\ref{ii:tpk-arquitectura} proporciona una
+coordenada observable del estado completo. Con sus notaciones, escribimos
+\(r_0(\theta)=r(\theta)-1\in\{0,\ldots,8\}\) y
+\(b=\beta(\theta)\in\mathbb Z/12\mathbb Z\). La proyección de reloj es
+\[
+ Q_{\rm clk}(x)=\bigl(\beta(\theta(x)),r_0(\theta(x))\bigr).
+\]
+Para una ruta admisible de \(n\) actualizaciones, el transporte inducido es
+\begin{equation}
+ k(r_0,n)=\left\lfloor\frac{r_0+n}{9}\right\rfloor,
+ \qquad
+ T_n(b,r_0)=\bigl(b+k(r_0,n)\bmod12,\ (r_0+n)\bmod9\bigr).
+ \label{ii:dodeca:transporte-reloj}
+\end{equation}
+Aquí \(n\in\mathbb N_0\) cuenta actualizaciones efectivas; el cociente
+entero \(k\) registra los retornos nonádicos atravesados.
+
+\begin{proposition}[Compatibilidad del calendario con la composición de rutas]
+\label{ii:dodeca:composicion}
+La proyección \(Q_{\rm clk}\), junto con la longitud de cada ruta, define
+un funtor de la categoría de rutas admisibles TPK a la categoría de acción
+del calendario~\eqref{ii:dodeca:transporte-reloj}. Se cumplen
+\(T_{m+n}=T_mT_n\), \(T_0=I\),
+\(T_9(b,r_0)=(b+1,r_0)\) y \(T_{108}(b,r_0)=(b,r_0)\).
+\end{proposition}
+\begin{proof}
+Poniendo \(r'_0=(r_0+n)\bmod9\), la división euclidiana da
+\[
+ k(r_0,n+m)=k(r_0,n)+k(r'_0,m).
+\]
+Esta identidad conserva simultáneamente residuo y cociente al concatenar
+las rutas. La actualización de \(\theta\) establecida en la
+sección~\ref{ii:tpk-arquitectura} induce exactamente
+\eqref{ii:dodeca:transporte-reloj}; las identidades restantes se obtienen
+por sustitución. La categoría de llegada tiene los pares \((b,r_0)\) como
+objetos y las longitudes admisibles como flechas, con suma como composición.
+\end{proof}
+
+El índice \(p=b+1\in\{1,\ldots,12\}\), tomando el representante
+\(0\le b<12\), indica la posición dodecafásica. Una vuelta de
+\(108\) actualizaciones recorre sus doce posiciones. La periodicidad
+demostrada corresponde a esta proyección: ruta, acarreo acumulado y
+memoria permanecen en el estado fuente y continúan su actualización.
+
+\paragraph{Realización de incidencia a partir del proyector angular.}
+Los representantes \(r_pC_5\) y la representación \(\rho\) de la
+sección~\ref{sec:ii-enlace-angular-witt} fijan la coordenatización de las doce
+posiciones. El proyector ya definido por
+\eqref{eq:ii-witt-projector-character} produce
+\begin{equation}
+ \begin{gathered}
+ \mathcal H_3=P_3^{\mathrm{ico}}\mathbb R^{12},\qquad v_p=2P_3^{\mathrm{ico}}e_p,
+ \\[-2pt]
+ (P_3^{\mathrm{ico}})_{pq}=\frac1{20}
+ \sum_{\substack{g\in A_5\\gr_qC_5=r_pC_5}}\chi_3(g^{-1}).
+ \end{gathered}
+ \label{ii:dodeca:vertices-proyector}
+\end{equation}
+La última suma contiene cinco términos por entrada y utiliza los
+representantes y las dos clases de ciclos de orden cinco allí fijados.
+
+\begin{proposition}[Realización icosaédrica de las posiciones dodecafásicas]
+\label{ii:dodeca:realizacion}
+Los vectores \(v_p\) son doce vectores unitarios distintos de
+\(\mathcal H_3\). Su incidencia es
+\(p\sim q\Longleftrightarrow\langle v_p,v_q\rangle=1/\sqrt5\).
+La aplicación \(p\mapsto v_p\) es \(A_5\)-equivariante y su imagen
+es isométrica a \(\Omega_{12}^{\rm ico}\).
+\end{proposition}
+\begin{proof}
+La transitividad y \(\operatorname{Tr}P_3^{\mathrm{ico}}=3\) dan
+\((P_3^{\mathrm{ico}})_{pp}=1/4\); por idempotencia,
+\(\langle v_p,v_q\rangle=4(P_3^{\mathrm{ico}})_{pq}\) y \(\|v_p\|=1\).
+La evaluación de los cinco términos de
+\eqref{ii:dodeca:vertices-proyector} da los pares antipodales
+\[
+ (1,4),\ (2,3),\ (5,8),\ (6,7),\ (9,12),\ (10,11).
+\]
+Para los representantes \((1,2,5,6,9,10)\), su matriz de Gram es
+\begin{equation}
+ I_6+\frac D{\sqrt5},\qquad
+ D=\begin{pmatrix}
+ 0&-1&-1&1&-1&1\\
+ -1&0&1&1&-1&-1\\
+ -1&1&0&1&1&1\\
+ 1&1&1&0&-1&1\\
+ -1&-1&1&-1&0&1\\
+ 1&-1&1&1&1&0
+ \end{pmatrix},\qquad D^2=5I_6.
+ \label{ii:dodeca:gram}
+\end{equation}
+Los restantes productos escalares se obtienen mediante antipodía.
+Así, aparte de un vértice y su opuesto, los productos son
+\(\pm1/\sqrt5\), y cada vértice tiene cinco vecinos. La tabla siguiente
+explicita el cotejo con la coordenatización firmada de seis posiciones
+\(\mathcal U=(\infty,0,1,2,3,4)\):
+\begin{equation}
+\begin{array}{c|cc@{\qquad}c|cc}
+p&u(p)&\sigma(p)&p&u(p)&\sigma(p)\\ \hline
+1&\infty&+1&7&3&-1\\
+2&0&-1&8&1&+1\\
+3&0&+1&9&2&-1\\
+4&\infty&-1&10&4&+1\\
+5&1&-1&11&4&-1\\
+6&3&+1&12&2&+1
+\end{array}
+\label{ii:dodeca:carta-firmada}
+\end{equation}
+En efecto, para \(C=\operatorname{bal}(A_W)\), con \(A_W\) dado en
+\eqref{exc:aw}, las entradas de \(D\) son
+\(D_{ab}=\sigma(p_a)\sigma(p_b)C_{u(p_a),u(p_b)}\).
+Por consiguiente, la tabla y~\eqref{ii:dodeca:gram} identifican
+isométricamente \(v_p\) con
+\(\sigma(p)\sqrt2 E_Ce_{u(p)}\), donde
+\(E_C=(I_6+C/\sqrt5)/2\). Ambos sistemas generan espacios de dimensión
+tres y tienen idéntica matriz de Gram, lo que prueba que la aplicación
+lineal inducida está bien definida y es isométrica. La realización
+explícita de~\eqref{ii:ico:proyector-seis}, demostrada a continuación,
+la identifica con~\(\Omega_{12}^{\rm ico}\) y su incidencia.
+Finalmente, \(P_3^{\mathrm{ico}}\rho(g)=\rho(g)P_3^{\mathrm{ico}}\) implica
+\(v_{g\cdot p}=\rho(g)v_p\). La biyección de las doce posiciones da
+\(\operatorname{Stab}_{A_5}(v_p)=r_pC_5r_p^{-1}\).
+\end{proof}
+
+Se obtiene así la composición representacional
+\begin{equation}
+ x\longmapsto Q_{\rm clk}(x)\longmapsto
+ p=\beta(\theta(x))+1\longmapsto v_p.
+ \label{ii:dodeca:composicion-representacional}
+\end{equation}
+La expresión firmada de esta composición es
+\(r_\pm^{\rm rep}(x)=(u(p),\sigma(p))\), determinada por la
+tabla~\eqref{ii:dodeca:carta-firmada}. La tabla es una elección explícita
+de alineamiento entre coordenatizaciones; las acciones de \(A_5\) proporcionan sus
+alineamientos equivalentes. El registro completo se conserva en el
+dominio de~\eqref{ii:dodeca:composicion-representacional}.
+
+\paragraph{Enlace con el portador tensorial de cinco componentes.}
+En \(\mathcal H_3\), formamos
+\(Q_p=v_pv_p^*-I_{\mathcal H_3}/3\). Sea \(J=\mathbf1\mathbf1^*\)
+y sea \(\mathsf A\) la matriz de la permutación antipodal anterior.
+El producto de Frobenius y~\eqref{ii:dodeca:gram} dan
+\begin{equation}
+ \begin{aligned}
+ \operatorname{Gram}(Q_p)
+ &=(4P_3^{\mathrm{ico}})\circ(4P_3^{\mathrm{ico}})-\frac13J
+ =\frac45(I+\mathsf A)-\frac2{15}J,
+ \\
+ P^{\rm ico}_5&=\frac58\operatorname{Gram}(Q_p)
+ =\frac12(I+\mathsf A)-\frac1{12}J.
+ \end{aligned}
+ \label{ii:dodeca:puente-tensorial}
+\end{equation}
+El símbolo \(\circ\) denota el producto entrada a entrada. La última
+expresión es el proyector ortogonal sobre las coordenadas pares bajo
+antipodía y ortogonales a \(\mathbf1\), de dimensión cinco. Su carácter
+es \((5,1,-1,0,0)\): sobre los seis pares antipodales, los números de
+puntos fijos son \((6,2,0,1,1)\), y se retira la componente constante.
+Por ello coincide con el proyector central de
+\eqref{ii:pent:eq:gravity-p5}. Esta identidad une la construcción
+tridimensional con \(\Gamma_0\) y \(\Gamma_5\), definidos en
+\eqref{ii:pent:eq:gravity-Gamma0} y~\eqref{ii:pent:eq:gravity-gamma5},
+mediante la operación cuadrática explícita \(v_p\mapsto Q_p\).
+
+\subsubsection{Transporte del marco representacional}
+\label{ii:dodeca:marco}
+Sea \(s=(1\,2\,\cdots\,12)\) y sea \(S_ce_p=e_{s(p)}\).
+Un retorno nonádico del calendario lleva \(p\) a \(s(p)\). El transporte
+conjunto de marco, representación y proyector se expresa por
+\begin{equation}
+ \begin{gathered}
+ P_{3,k}^{\mathrm{ico}}=S_c^kP_3^{\mathrm{ico}}S_c^{-k},\qquad
+ \rho^{(k)}(g)=S_c^k\rho(g)S_c^{-k},\\
+ v^{(k)}_{s^k(p)}=2P_{3,k}^{\mathrm{ico}}e_{s^k(p)}=S_c^kv_p.
+ \end{gathered}
+ \label{ii:dodeca:marco-movil}
+\end{equation}
+La última igualdad se prueba por sustitución; la ortogonalidad de
+\(S_c\) conserva todos los productos escalares y transporta la
+incidencia. Para una ruta de longitud \(n\), se toma
+\(k=k(r_0,n)\). La identidad de acarreo de la
+proposición~\ref{ii:dodeca:composicion} prueba la compatibilidad de
+estos transportes con la concatenación. Aunque \(S_c^{12}=I\),
+las doce vueltas actualizan la memoria de la ruta fuente.
+
+La igualdad~\eqref{ii:dodeca:marco-movil} establece covariancia entre
+marcos. La acción activa sobre una incidencia fija tiene un contenido
+adicional: requiere identificar el transporte del estado completo y su
+acción en esa coordenatización. En particular, \(s\) tiene orden doce, mientras
+que los órdenes de los elementos de \(A_5\) son \(1,2,3,5\).
+Asimismo, el estabilizador de un vértice tiene orden cinco, y el de su
+par antipodal tiene orden diez; la involución de la coordenatización firmada
+intercambia los dos vértices. Estas distinciones conservan el significado
+de orientación, hoja y retorno en las propiedades (i)--(iv): la
+realización representacional demostrada y el descenso de la ruta
+excepcional completa se relacionan mediante esas propiedades, con sus
+dominios y fibras declarados.

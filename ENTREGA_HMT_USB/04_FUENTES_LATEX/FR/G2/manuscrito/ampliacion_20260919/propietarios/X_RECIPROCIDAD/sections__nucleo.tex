@@ -1,0 +1,1391 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/sections/nucleo.tex
+\section{Noyau formel de l'holographie modulaire triadique}
+\label{x_reciprocidad:sec:nucleo}
+
+L'holographie modulaire triadique, abrégée HMT, commence par une structure finie de positions et d'opérations. L'ordre de construction importe : les positions reçoivent des évaluations arithmétiques, les transitions acquièrent une signature ternaire et la dynamique conserve l'information nécessaire pour les prolonger. Ce n'est qu'ensuite que les réalisations numériques sont formées. Une constante reconnue à la fin de ce processus ne remplace ni la règle qui a produit sa région ni l'histoire qui détermine son évaluation.
+
+La dénomination \emph{All Possible Paths}, APP, exprime le rôle des chemins sur le support. Elle est adoptée comme dénomination de la construction, avec une référence conceptuelle à la formulation par chemins de la mécanique quantique ; elle ne suppose pas que sa loi arithmétique soit l'intégrale de chemins de Feynman. Le \emph{Topological Phase Kernel}, TPK,\footnote{Les auteurs dédient également les initiales TPK à Tan Pengkiang. Cette dédicace est indépendante de la définition mathématique.} désigne la composition de la sélection, du transport, de la mise à jour de la mémoire et du prolongement. Les sigles ne sont maintenus qu'après la définition des objets qu'ils représentent.
+
+\subsection{APP : support positionnel et évaluations arithmétiques}
+
+Considérons les neuf marques intérieures d'une droite graduée entre zéro et dix,
+\[
+ D_9=\{1,2,3,4,5,6,7,8,9\}.
+\]
+Leur disposition horizontale et verticale produit les quatre-vingt-une positions de \(D_9^2\). Les marques intérieures ne doivent pas être confondues avec les dix intervalles unitaires de la droite de référence. Cette disposition fixe un alphabet et deux directions ; elle n'utilise pas encore un développement réel pour décider d'une trajectoire.
+
+L'identification cyclique des positions conduit au support
+\[
+ X_9=(\ZZ/9\ZZ)^2.
+\]
+La carte des représentants positifs conserve le symbole neuf pour la classe nulle. Pour tout entier positif, on définit
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9,
+ \qquad n=\rho_9(n)+9q_9(n).
+ \label{x_reciprocidad:eq:residuo-cociente}
+\end{equation}
+La racine numérique positive est donc un choix de représentant de la classe résiduelle. Elle ne conserve pas à elle seule l'entier antérieur à la réduction ; la coordonnée \(q_9\) fournit précisément l'information manquante.
+
+À chaque position \((i,j)\), l'accumulation de \(i\) répétée \(j\) fois produit \(ij\). Les deux évaluations entières et leurs projections sont
+\[
+ S(i,j)=i+j,\qquad P(i,j)=ij,\qquad
+ \Sigma(i,j)=\rho_9(i+j),\quad \Pi(i,j)=\rho_9(ij).
+\]
+La symétrie \((i,j)\mapsto(j,i)\) échange les directions d'accumulation et conserve les deux évaluations. C'est une propriété d'un unique support, et non une identification ultérieure entre deux matrices indépendantes.
+
+\begin{definition}[Évaluation arithmétique relevée]
+L'évaluation d'APP qui conserve les deux feuillets est
+\begin{equation}
+ \mathcal A(i,j)=
+ \bigl((R^+_{ij},q^+_{ij}),(R^\times_{ij},q^\times_{ij})\bigr)
+ =\bigl((\rho_9(i+j),q_9(i+j)),(\rho_9(ij),q_9(ij))\bigr).
+ \label{x_reciprocidad:eq:app-levantada}
+\end{equation}
+Le terme \emph{feuillet} indique ici une évaluation sur le même support : additive ou multiplicative. Les deux coordonnées de quotient appartiennent à l'état arithmétique et ne sont pas éliminées lors de la réduction des résidus.
+\end{definition}
+
+
+% BEGIN OWNER /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/figures/app.tex
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=.53cm,y=.53cm,font=\small]
+\fill[black!5] (1.5,-.5) rectangle (2.5,8.5);
+\fill[black!5] (4.5,-.5) rectangle (5.5,8.5);
+\fill[black!5] (-.5,2.5) rectangle (8.5,3.5);
+\fill[black!5] (-.5,5.5) rectangle (8.5,6.5);
+\fill[black!12] (7.5,-.5) rectangle (8.5,8.5);
+\fill[black!12] (-.5,-.5) rectangle (8.5,.5);
+\foreach \i in {1,...,9}{
+ \node at (\i-1,9.05) {\(\i\)};
+ \node at (-1.05,9-\i) {\(\i\)};
+ \foreach \j in {1,...,9}{
+  \pgfmathtruncatemacro{\v}{mod(\i*\j-1,9)+1}
+  \node at (\j-1,9-\i) {\(\v\)};
+ }
+}
+\foreach \k in {0,...,9}{
+ \draw[black!25] (\k-.5,-.5)--(\k-.5,8.5);
+ \draw[black!25] (-.5,\k-.5)--(8.5,\k-.5);
+}
+\draw[line width=.65pt] (2.5,3.5) rectangle (4.5,5.5);
+\node[anchor=west,align=left,text width=6.5cm] at (10,7.2) {Un support : \(81\) positions.\\[5pt]Deux évaluations :\\ \(S(i,j)=i+j\), \(P(i,j)=ij\).\\[5pt]Chaque ligne est engendrée par accumulation :\\ \(P(i,j+1)-P(i,j)=i\).};
+\node[anchor=west,align=left,text width=6.5cm] at (10,1.8) {La carta representa \(0\pmod9\) por \(9\).\\[5pt]El bloque señalado es\\ \(B_c=\left(\begin{smallmatrix}7&2\\2&7\end{smallmatrix}\right)\),\\ con autovalores \(9\) y \(5\).};
+\end{tikzpicture}
+\caption{Tabla multiplicativa de APP en representantes positivos. Las filas y columnas no unitarias se distinguen por trama gris; el marco identifica el bloque diagonal adyacente de diagonales iguales. La tabla dibujada es un observable del toro aritmético; sus bordes de representación no constituyen una frontera topológica intrínseca del toro.}
+\label{x_reciprocidad:fig:app}
+\end{figure}
+
+% END OWNER
+
+
+\begin{proposition}[Reconstruction des évaluations]
+Los dos pares de \eqref{x_reciprocidad:eq:app-levantada} determinan exactamente \(i+j\) e \(ij\). Los residuos aislados no determinan esas evaluaciones enteras ni sus cocientes.
+\end{proposition}
+\begin{proof}
+La primera afirmación es \eqref{x_reciprocidad:eq:residuo-cociente} aplicada a cada hoja. Para la segunda, \(10=1+9\) y \(19=1+2\cdot9\) tienen el mismo residuo y distinto cociente. En el soporte bidimensional, las posiciones \((5,5)\) y \((8,2)\) dan la misma suma y el mismo residuo producto, pero productos \(25=7+18\) y \(16=7+9\). La proyección residual identifica datos que la evaluación levantada distingue.
+\end{proof}
+
+\subsubsection{Grafo de Cayley, topología toroidal y grado de enrollamiento}
+
+Las traslaciones cardinales están dadas, en coordenadas de fila y columna, por
+\[
+ \nu_N=(-1,0),\quad\nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad\nu_O=(0,-1),\qquad T_d(x)=x+\nu_d.
+\]
+La première coordonnée augmente vers le sud et la seconde vers l'est. Le graphe
+\[
+ \mathscr G_9=\operatorname{Cay}(X_9,\{\nu_N,\nu_E,\nu_S,\nu_O\})
+\]
+est le réseau cyclique bidimensionnel : il possède quatre-vingt-un sommets et quatre arêtes orientées sortantes par sommet. C'est un graphe de Cayley pour la structure \emph{additive} du support. La multiplication des résidus possède des diviseurs de zéro et ne transforme pas toutes les lignes d'APP en un groupe multiplicatif.
+
+Un mot cardinal \(w=d_1\cdots d_r\) et une origine \(x_0\) déterminent
+\[
+ x_k=x_0+\sum_{j=1}^k\nu_{d_j}\pmod9.
+\]
+Il existe \(81\cdot4^r\) chemins orientés de longueur \(r\), retours et retours en arrière compris. Lorsque le chemin se ferme, son déplacement entier avant réduction définit
+\begin{equation}
+ \operatorname{wind}(w)=\frac19
+ \bigl(\#S(w)-\#N(w),\#E(w)-\#O(w)\bigr)\in\ZZ^2.
+\end{equation}
+L'inversion du chemin change le signe de ce vecteur. Le retour à la même position résiduelle n'impose donc pas que l'enroulement soit nul. C'est le premier exemple d'une différence qui réapparaîtra dans le retour de phase : une coordonnée peut se refermer tandis qu'une autre enregistre une évolution non triviale.
+
+\subsubsection{Quotient de transport et identité de cocycle}
+
+Soit \(s_9:\ZZ/9\ZZ\to D_9\) la section des représentants positifs. Le quotient de transport associé à la composition additive, également appelé \emph{retenue} en arithmétique positionnelle, est
+\[
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+\]
+Le caractère compositionnel de cette mémoire s'exprime par une identité exacte.
+
+\begin{lemma}[Identité de cocycle]
+Pour \(a,b,c\in\ZZ/9\ZZ\),
+\[
+ c_9(a,b)+c_9(a+b,c)=c_9(b,c)+c_9(a,b+c).
+\]
+\end{lemma}
+\begin{proof}
+Les deux sommes sont égales à
+\[
+ \frac{s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c)}9.
+\]
+L'associativité de la somme des représentants relevés requiert précisément ce terme supplémentaire lors de la composition dans le quotient.
+\end{proof}
+
+Avec des représentants positifs, ce cocycle n'est pas normalisé en l'identité : \(c_9(0,a)=1\). Si \(s_0\) prend ses représentants dans \(\{0,\ldots,8\}\), sa retenue normalisée \(c_0\) satisfait
+\[
+ c_9(a,b)=c_0(a,b)+\mathbf1_{a=0}+\mathbf1_{b=0}-\mathbf1_{a+b=0}.
+\]
+La différence est le changement de section ; elle n'altère pas l'identité de cocycle. La décomposition ultérieure du calendrier en phase et fenêtre utilisera les représentants de zéro à huit.
+
+Les totaux des deux évaluations distinguent la contribution visible et celle conservée dans le quotient :
+\[
+ \sum S=810,\quad\sum P=2025,\quad
+ \sum\Sigma=405,\quad\sum\Pi=459,
+\]
+\[
+ \sum q^+=45,\qquad\sum q^\times=174.
+\]
+On en obtient
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{x_reciprocidad:eq:defecto-integrado}
+\end{equation}
+La différence somme--produit ne se réduit pas au défaut visible \(54\). L'identité conserve également le défaut de quotient \(129\). Le supprimer modifierait l'arithmétique transportée, même si le tableau résiduel demeurait identique.
+
+\subsubsection{Réduction ternaire et radical multiplicatif}
+
+L'anneau \(R=\ZZ/9\ZZ\) a pour groupe des unités \(\{1,2,4,5,7,8\}\) et pour idéal maximal
+\[
+ \mathfrak m=(3)=\{0,3,6\},\qquad\mathfrak m^2=0.
+\]
+Toute ligne additive est une permutation des neuf représentants. Une ligne multiplicative l'est exactement lorsque son indice est une unité. Les lignes trois et six contiennent trois valeurs répétées ; la ligne neuf contient uniquement le représentant de la classe nulle. Le repliement multiplicatif distingue donc déjà, avant toute géométrie continue, les unités du secteur nilpotent.
+
+L'application \(x\mapsto3x\) a un noyau et une image égaux à \(\mathfrak m\). Elle induit un isomorphisme d'espaces vectoriels sur \(\FF_3\),
+\[
+ R/\mathfrak m\longrightarrow\mathfrak m,\qquad [x]\longmapsto3x,
+\]
+mais pas un isomorphisme d'anneaux. En particulier, la suite visible \(3,6,9\) admet deux lectures différentes : sa réduction directe modulo trois est \(0,0,0\), tandis que l'extraction du facteur trois suivie de la réduction de sa coordonnée interne donne \(1,2,0\). Cette seconde opération conserve une coordonnée de l'idéal ; ce n'est pas la même projection que la réduction directe du nombre original.
+
+\subsubsection{Réalisation latine de l'évaluation additive}
+
+La différence entre les deux évaluations peut également s'exprimer au moyen d'
+opérateurs. Soit \((e_r)_{r\in\ZZ/9\ZZ}\) la base orthonormale de \(\CC^9\).
+L'affectation \(v_{ab}=e_{a+b}\) produit une base orthonormale dans chaque ligne
+et chaque colonne. Les projecteurs \(P_{ab}=v_{ab}v_{ab}^{*}\) satisfont
+\[
+ \sum_bP_{ab}=I_9=\sum_aP_{ab},\qquad P_{ab}^2=P_{ab}.
+\]
+En effet, chaque translation \(b\mapsto a+b\) permute les neuf résidus. On obtient une réalisation par des projecteurs de rang un d'un carré latin, dans la terminologie des carrés latins quantiques \cite{x_reciprocidad:mustovicary,x_reciprocidad:delascuevas2023}. Cette construction part du feuillet additif déjà défini et explicite l'application vers sa représentation opératorielle.
+
+L'évaluation multiplicative conserve un autre contenu : pour \(a=3\), les
+vecteurs \(e_{3b}\) répètent les résidus \(0,3,6\), et
+\[
+ \sum_{b\in\ZZ/9\ZZ}|e_{3b}\rangle\langle e_{3b}|
+ =3\bigl(|e_0\rangle\langle e_0|+|e_3\rangle\langle e_3|
+                    +|e_6\rangle\langle e_6|\bigr).
+\]
+La multiplicité est enregistrée dans l'opérateur et caractérise le radical
+multiplicatif. Le support toroïdal, la propriété latine et la
+résolution opératorielle de l'identité sont donc des propriétés qui exigent
+des définitions différentes. Les carrés magiques quantiques étudiés par
+De las Cuevas, Drescher et Netzer exigent des entrées positives et des sommes de lignes
+et de colonnes égales à l'identité ; leur théorie distingue en outre les
+dilatations à entrées commutatives\cite{x_reciprocidad:delascuevas2020}. Cette référence
+fournit un langage précis pour comparer les réalisations d'APP.
+
+\subsection{TRIT : orientation et régimes quadratiques}
+
+\begin{definition}[Signature ternaire et relèvement local]
+La signature TRIT utilise l'identification équilibrée
+\[
+ \FF_3\longrightarrow\TRIT,\qquad 0\mapsto0,\quad1\mapsto+1,\quad2\mapsto-1.
+\]
+Pour \(n\in\ZZ\), son relèvement conserve \(n=r+3c\), où \(r\in\TRIT\) et \(c\in\ZZ\). Dans une transition d'amplitude locale bornée, les trois états \((0,-1),(0,0),(0,+1)\) peuvent présenter le même résidu nul et des retenues distinctes.
+\end{definition}
+
+La signature ne remplace pas la trajectoire. Un zéro résiduel ne signifie pas l'absence d'information d'orientation, de phase ou de quotient. Il n'introduit pas non plus à lui seul une grandeur physique. Sa fonction est de distinguer algébriquement les classes de transport qui seront réalisées ci-après.
+
+\subsubsection{Trois régimes quadratiques et une exponentielle commune}
+
+Une fois la signature ternaire obtenue, sa réalisation quadratique est définie par
+\begin{equation}
+ \mathbb A_\tau=\RR[X]/(X^2+\tau),\qquad \tau\in\TRIT.
+ \label{x_reciprocidad:eq:algebras-trit}
+\end{equation}
+Si \(J_\tau\) est la classe de \(X\), alors \(J_\tau^2=-\tau I\). La structure distingue le type elliptique \(\tau=+1\), le type parabolique \(\tau=0\) et le type hyperbolique \(\tau=-1\). La réalisation réelle ne génère pas la signature : elle exprime les types que la réduction orientée a déjà produits.
+
+\begin{proposition}[Exponentiation des trois types]
+Dans chaque algèbre \eqref{x_reciprocidad:eq:algebras-trit},
+\begin{equation}
+ \exp(tJ_\tau)=C_\tau(t)I+S_\tau(t)J_\tau,
+\end{equation}
+où
+\[
+ C_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n}}{(2n)!},\qquad
+ S_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n+1}}{(2n+1)!}.
+\]
+Les trois réalisations sont
+\[
+ \begin{array}{c|c|c}
+ \tau&J_\tau^2&\exp(tJ_\tau)\\\hline
+ +1&-I&\cos t\,I+\sin t\,J_\tau\\
+ 0&0&I+tJ_\tau\\
+ -1&I&\cosh t\,I+\sinh t\,J_\tau.
+ \end{array}
+\]
+\end{proposition}
+\begin{proof}
+Séparer les termes pairs et impairs de la série exponentielle et substituer \(J_\tau^{2n}=(-\tau)^nI\) et \(J_\tau^{2n+1}=(-\tau)^nJ_\tau\) donne les formules. Pour \(\tau=0\), tous les termes de degré au moins deux s'annulent. Dans les deux autres cas, on retrouve les séries trigonométriques ou hyperboliques.
+\end{proof}
+
+L'exponentielle est commune aux trois régimes : elle n'est pas attribuée exclusivement à la branche parabolique. Les invariants
+\[
+ C_\tau(t)^2+\tau S_\tau(t)^2=1
+\]
+se déduisent de \(\exp(tJ_\tau)\exp(-tJ_\tau)=I\). Le même principe algébrique conserve l'unité à travers des réalisations qui diffèrent par leur type quadratique.
+
+Dans le régime hyperbolique, \(P_\pm=(I\pm J_{-1})/2\) sont des projecteurs complémentaires et
+\[
+ \exp(tJ_{-1})=e^tP_++e^{-t}P_-.
+\]
+La croissance et la contraction apparaissent conjointement dans deux directions propres. Dans le régime elliptique, le paramètre décrit une rotation ; dans le régime parabolique, une translation nilpotente. L'interprétation temporelle adoptée par HMT associe \(+1\) au retour à mémoire, \(0\) au seuil et \(-1\) à l'ouverture bidirectionnelle. Cette interprétation exige un ordre de paramétrage ; elle n'ajoute pas un quatrième type algébrique.
+
+
+% BEGIN OWNER /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/sections/trit_desarrollo.tex
+% Ampliación acumulativa del TRIT; se inserta antes de la figura de regímenes.
+% No sustituye ni elimina el desarrollo precedente.
+\subsubsection{Division équilibrée et composition des relèvements}
+\label{x_reciprocidad:trit-ampl-div-balanceada}
+
+La réduction ternaire permet d'exprimer une évaluation entière d'APP en une
+coordonnée visible et une coordonnée de prolongation. Sa fonction ne consiste
+pas seulement à abréger l'écriture d'un entier : elle fournit une règle de
+composition qui détermine comment le quotient est modifié lorsqu'on additionne ou
+multiplie des évaluations. Le choix équilibré explicite en outre la
+compatibilité de cette règle avec l'inversion du signe.
+
+\begin{definition}[Coordonnées ternaires équilibrées]
+\label{x_reciprocidad:trit-ampl-def-coordenadas}
+Pour \(n\in\mathbb Z\), soient
+\[
+ q_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3q_3(n).
+\]
+L'application
+\[
+ \mathcal B:\mathbb Z\longrightarrow\TRIT\times\mathbb Z,\qquad
+ n\longmapsto(r_3(n),q_3(n))
+\]
+est appelée décomposition ternaire équilibrée. Son inverse est
+\(\mathcal L(r,c)=r+3c\).
+\end{definition}
+
+En effet, \(r_3(n)\in\{-1,0,+1\}\). Si deux paires représentent le même entier,
+\(r+3c=s+3d\), alors \(r-s\) est un multiple de \(3\) et appartient à l'intervalle
+\([-2,2]\) ; nécessairement \(r=s\) et \(c=d\). La représentation est donc
+unique. La division peut être répétée sur \(q_3(n)\), de sorte que chaque niveau
+conserve la donnée nécessaire pour reconstruire le précédent. Le quotient n'est pas une
+perturbation du résidu : il constitue sa coordonnée complémentaire.
+
+La signature obtenue à partir d'une évaluation \(F\), avec \(F=S\) ou \(F=P\) dans APP, est \(r_3\circ F\). Lorsque la réduction agit sur le curseur de phase, la même section équilibrée produit les classes \(\{1,4,7\}\), \(\{2,5,8\}\) et \(\{3,6,9\}\), de valeurs \(+1,-1,0\). Le sélecteur du TPK défini ci-après utilise ces classes pour déterminer le mode opératoire. La lecture d'une évaluation et la sélection d'un mode ont ainsi la même réduction ternaire, mais des domaines et des fonctions différents.
+
+\Needspace{16\baselineskip}
+\begin{proposition}[Arithmétique des couples équilibrés]
+\label{x_reciprocidad:trit-ampl-prop-aritmetica}
+Soient \(n=r+3c\) et \(m=s+3d\), avec \(r,s\in\TRIT\). Définissons
+\[
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+Les opérations entières sont transportées vers les couples au moyen de
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r_3(r+s),c+d+\chi(r,s)\bigr),
+ \label{x_reciprocidad:trit-ampl-eq-suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr).
+ \label{x_reciprocidad:trit-ampl-eq-producto}
+\end{align}
+L'application \(\mathcal L\) conserve les deux opérations.
+\end{proposition}
+\begin{proof}
+L'égalité \(r+s=r_3(r+s)+3\chi(r,s)\) donne
+\[
+ n+m=r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+D'autre part,
+\[
+ nm=rs+3(rd+sc+3cd).
+\]
+Comme le produit de deux représentants équilibrés appartient de nouveau à
+\(\{-1,0,+1\}\), il ne nécessite pas de réduction résiduelle supplémentaire. L'unicité
+de la décomposition démontre les deux formules.
+\end{proof}
+
+Par exemple, \(2=(-1)+3\) et \(4=1+3\). Leur somme et leur produit se reconstruisent
+sous la forme
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+Les évaluations résultantes sont \(6\) et \(8\). La somme des quotients suffit
+dans cet exemple additif ; dans le produit interviennent les termes croisés
+\(rd\), \(sc\) et \(3cd\). L'écart entre les deux opérations réside
+également dans la coordonnée de prolongement, et pas seulement dans le résidu.
+
+Le terme \(\chi\) est un cocycle de la section équilibrée. Si
+\(r\oplus s=r_3(r+s)\), il satisfait
+\[
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\]
+Les deux membres représentent le quotient de la même somme de trois entiers.
+Cette identité garantit que le regroupement des opérations ne change pas l'
+évaluation reconstruite. En même temps, la projection sur la première
+composante supprime cette comptabilité : \(1+1=-1+3\), tandis que la lecture
+résiduelle conserve uniquement \(-1\). L'information éliminée est
+déterminée, dans ce cas, par \(\chi(1,1)=1\).
+
+La relation avec le module \(9\) conserve une seconde échelle discrète. L'application
+\[
+ \beta:\TRIT\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad (r,\bar c)\longmapsto r+3c\pmod9
+\]
+est bien définie et bijective. Changer le représentant de \(\bar c\) ajoute un multiple de \(9\) ; réciproquement, une égalité d'images fixe d'abord \(r\) par réduction modulo \(3\), puis \(\bar c\). L'addition transportée par cette bijection contient le terme \(\chi(r,s)\) de \eqref{x_reciprocidad:trit-ampl-eq-suma}, maintenant réduit modulo \(3\). Ainsi, les deux niveaux ternaires ne se composent pas par une addition indépendante des coordonnées : la normalisation du premier niveau modifie le second.
+
+En particulier, les classes \(3\), \(6\) et \(0\) de
+\(\mathbb Z/9\mathbb Z\) ont pour première composante \(0\), mais pour seconde
+composante \(1\), \(2\) et \(0\), respectivement. La distinction déjà observée
+entre la réduction directe et l'extraction de la coordonnée de l'idéal apparaît
+comme une propriété de \(\beta\). Conserver cette coordonnée empêche que le
+secteur résiduel nul se transforme artificiellement en une seule position.
+Le module \(1000\), utilisé ensuite pour organiser les blocs décimaux,
+remplit une autre fonction de représentation positionnelle ; son quotient est conservé
+au moyen de la division correspondante. Un changement de base conserve l'entier
+lorsqu'il retient le résidu et le quotient, tandis que la coïncidence des résidus
+dans des bases différentes n'identifie pas à elle seule leurs états de transport.
+
+\Needspace{11\baselineskip}
+\subsubsection{Inversion, classe résiduelle et coordonnées non visibles}
+\label{x_reciprocidad:trit-ampl-inversion}
+
+L'inversion additive se relève sans ambiguïté :
+\[
+ \mathcal B(-n)=(-r_3(n),-q_3(n)).
+\]
+En particulier, \(3\), \(0\) et \(-3\) ont pour coordonnées
+\((0,1)\), \((0,0)\) et \((0,-1)\). Ils partagent une signature nulle, mais représentent des
+évaluations distinctes. Dans une transition restreinte à un quotient d'
+amplitude maximale \(1\), ce sont les trois possibilités de la fibre visible au-dessus de
+zéro ; dans un relèvement entier général, cette fibre contient tous les couples
+\((0,c)\), avec \(c\in\mathbb Z\).
+
+La coordonnée de quotient récupère l'entier évalué, mais ne récupère pas à elle seule la trajectoire qui l'a produit. Deux chemins d'APP peuvent partager évaluation, résidu et quotient, et différer par l'orientation, la succession des modes ou l'enroulement. La décomposition \(\mathcal B\) est donc intégrée à l'état de transport, au lieu de le remplacer. La mémoire arithmétique d'une division et la mémoire d'une trajectoire sont des coordonnées liées, et non des synonymes.
+
+Pour une suite de signatures de longueur \(n\), l'inversion orientée est
+\[
+ C_{\rm rev}(\tau_1,\ldots,\tau_n)
+   =(-\tau_n,\ldots,-\tau_1).
+\]
+L'appliquer deux fois restitue la suite. L'opération inverse l'ordre des
+positions et le signe de chaque signature ; elle conserve sa longueur et les
+positions nulles dans l'ordre inversé. Dans le paramétrage adopté,
+elle échange le retour avec mémoire, associé à \(+1\), et l'ouverture
+bidirectionnelle, associée à \(-1\), tout en maintenant le seuil \(0\). Le transport
+des autres données d'une trajectoire est spécifié au moyen de
+l'involution correspondante du TPK.
+
+Cette inversion de signatures doit être distinguée de la conjugaison dans une
+algèbre quadratique. La première peut changer le type \(\tau\) ; la seconde,
+construite ci-dessous, agit à l'intérieur du type déjà fixé. La
+distinction empêche d'attribuer à une inversion de signe une équivalence
+algébrique entre des régimes différents.
+
+\subsubsection{Produit quadratique, conjugaison et norme algébrique}
+\label{x_reciprocidad:trit-ampl-norma}
+
+Un élément de \(\mathbb A_\tau\) possède une expression unique \(aI+bJ_\tau\). La relation \(J_\tau^2=-\tau I\) détermine son produit :
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+   =(ac-\tau bd)I+(ad+bc)J_\tau.
+ \label{x_reciprocidad:trit-ampl-producto-cuadratico}
+\end{equation}
+Il s'agit d'une réalisation réelle du type déjà sélectionné. Les coordonnées \(a,b\) ne sont pas des résidus d'APP, et le produit \eqref{x_reciprocidad:trit-ampl-producto-cuadratico} ne remplace pas \eqref{x_reciprocidad:trit-ampl-eq-producto} ; il exprime une autre opération, dans le codomaine quadratique déclaré.
+
+\begin{definition}[Conjugaison et norme algébrique]
+\label{x_reciprocidad:trit-ampl-def-norma}
+La conjugaison du type \(\tau\) et sa norme algébrique sont
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+\end{definition}
+
+\begin{proposition}[Multiplicativité et inversibilité]
+\label{x_reciprocidad:trit-ampl-prop-norma}
+Pour \(z,w\in\mathbb A_\tau\),
+\[
+ z\bar z=N_\tau(z)I,\qquad
+ N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+De plus, \(z\) est inversible si et seulement si \(N_\tau(z)\ne0\), et dans ce cas
+\[
+ z^{-1}=\frac{\bar z}{N_\tau(z)}.
+\]
+\end{proposition}
+\begin{proof}
+Le produit de \(aI+bJ_\tau\) et de \(aI-bJ_\tau\) est
+\((a^2+\tau b^2)I\). La conjugaison est multiplicative et l'algèbre est
+commutative, de sorte que
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). Si la norme ne s'annule pas, la
+formule indiquée fournit l'inverse. Réciproquement, si \(zw=I\), la
+multiplicativité implique \(N_\tau(z)N_\tau(w)=1\).
+\end{proof}
+
+La forme quadratique \(N_\tau\) n'est définie positive que dans le type elliptique. Pour \(\tau=0\), elle vaut \(a^2\), et l'élément \(J_0\) est non nul bien que son carré et sa norme soient nuls. Pour \(\tau=-1\), elle vaut \(a^2-b^2\) ; les éléments non nuls \(I+J_{-1}\) et \(I-J_{-1}\) ont une norme nulle et leur produit s'annule. La norme algébrique est ici une forme quadratique multiplicative : elle ne présuppose pas une norme positive d'espace vectoriel.
+
+Les trois types peuvent être réalisés fidèlement au moyen de
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}.
+\]
+Le déterminant de cette matrice est \(N_\tau(aI+bJ_\tau)\). Sont ainsi
+représentées, avec une même expression matricielle, la structure
+complexe, la structure des nombres duaux et la structure réelle scindée.
+Chacune conserve sa loi et ses diviseurs de zéro. La forme de signature
+\((1,1)\) du dernier cas a une interprétation lorentzienne en dimension
+\(1+1\) ; l'identification d'une métrique physique exige en outre un espace,
+un champ et une règle de transport spécifiques.
+
+\subsubsection{Conservation multiplicative et composition des évolutions}
+\label{x_reciprocidad:trit-ampl-evoluciones}
+
+L'exponentielle déjà obtenue appartient à l'ensemble des éléments de norme un :
+\[
+ N_\tau\bigl(\exp(tJ_\tau)\bigr)=1.
+\]
+Cette conservation se maintient lors de la composition des paramètres. En effet, tous les
+facteurs sont des fonctions du même générateur, et
+\[
+ \exp(tJ_\tau)\exp(sJ_\tau)=\exp((t+s)J_\tau).
+\]
+En comparant les deux composantes, on déduit les lois d'addition
+\begin{align}
+ C_\tau(t+s)&=C_\tau(t)C_\tau(s)-\tau S_\tau(t)S_\tau(s),\\
+ S_\tau(t+s)&=S_\tau(t)C_\tau(s)+C_\tau(t)S_\tau(s).
+\end{align}
+La conjugaison remplace \(t\) par \(-t\) et coïncide avec l'inversion dans
+ce sous-groupe. Elle ne change pas \(\tau\) : elle inverse une évolution du régime
+choisi.
+
+Dans le type elliptique, la forme conservée est \(a^2+b^2\), et la trajectoire exponentielle parcourt le cercle de norme un. Dans le type hyperbolique, les coordonnées propres sont \(u=a+b\), \(v=a-b\), avec \(uv=N_{-1}(z)\). L'exponentielle donne
+\[
+ (u,v)=(e^t,e^{-t}),\qquad uv=1.
+\]
+La croissance d'une coordonnée s'accompagne de la contraction de l'autre.
+La conservation exprime une relation entre les deux coordonnées ; elle n'affirme pas que
+chacune reste constante.
+
+Dans le type parabolique,
+\[
+ (I+tJ_0)(I+sJ_0)=I+(t+s)J_0,\qquad
+ (I+tJ_0)^{-1}=I-tJ_0.
+\]
+L'évolution ne s'arrête pas du fait que \(J_0^2=0\). La nilpotence élimine les
+termes d'ordre au moins deux, mais conserve le terme linéaire qui
+transporte le paramètre. Le symbole visible \(0\), l'
+élément nul de l'algèbre et le générateur non nul \(J_0\) sont distincts. Cette distinction
+est nécessaire pour décrire le seuil sans l'identifier à l'absence d'
+état ou de dynamique.
+
+\begin{proposition}[Composition de coordonnées affines]
+\label{x_reciprocidad:trit-ampl-prop-pendientes}
+Dans la carte où la composante scalaire ne s'annule pas, représentons une
+direction par \(I+uJ_\tau\). Si \(1-\tau uv\ne0\), la direction de son
+produit avec \(I+vJ_\tau\) a pour coordonnée
+\[
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\]
+\end{proposition}
+\begin{proof}
+On a
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+   =(1-\tau uv)I+(u+v)J_\tau.
+\]
+La division par la composante scalaire donne l'expression annoncée.
+\end{proof}
+
+La carte affine conserve le rapport entre composantes, et non le facteur scalaire par lequel on a divisé. Lorsque \(1-\tau uv=0\), il faut examiner le produit avant de changer de carte : il peut avoir une direction définie avec une composante scalaire nulle, ou être l'élément zéro en présence de diviseurs de zéro. La loi de composition appartient toujours à l'algèbre complète ; la singularité d'une coordonnée n'équivaut pas automatiquement à une singularité de l'objet. Cette formule réapparaîtra dans la lecture régionale elliptique. Son utilisation exige de maintenir le dénominateur et, le cas échéant, le facteur de normalisation.
+
+\subsubsection{Transport du type et réalisations ultérieures}
+\label{x_reciprocidad:trit-ampl-puentes}
+
+Les algèbres \(\mathbb A_{+1}\), \(\mathbb A_0\) et
+\(\mathbb A_{-1}\) ne sont pas isomorphes en tant qu'algèbres réelles unitaires.
+La première est un corps ; la deuxième contient un nilpotent non nul ; la
+troisième possède des idempotents non triviaux et est isomorphe à
+\(\mathbb R\times\mathbb R\). Le changement de signature qui organise une
+route ne peut donc pas s'interpréter comme un isomorphisme indifférencié entre les
+trois réalisations. Le TPK conserve l'indice de régime, les domaines et
+l'opérateur effectif qui agit à chaque transition.
+
+Dans le chapitre électronique, le couple de projections des feuillets d'APP
+produit un commutateur normalisé dont le carré est \(-I\). Le même bloc
+contient une involution de carré \(I\) et deux directions nilpotentes. La
+réalisation conjointe sera démontrée sur ce couple concret de projections ;
+la classification précédente explique pourquoi les trois relations quadratiques
+peuvent apparaître dans une même algèbre matricielle sans s'identifier entre elles.
+
+Dans le prolongement exceptionnel, la matrice de Paley réduite modulo \(3\) satisfait \(A_W^2=-I_6\). La relation dote l'espace ternaire d'une structure de dimension \(3\) sur \(\mathbb F_9\). Son lien avec une racine opératorielle réelle s'exprime au moyen de la présentation entière
+\[
+ \mathbb Z[u]/(u^2+1).
+\]
+Les changements de base vers \(\mathbb F_3\) et vers \(\mathbb R\) produisent des
+représentations de cette même relation. Chacune conserve sa caractéristique,
+sa dimension et son information d'incidence. Le développement des
+opérateurs respectifs établit le lien, et non l'égalité de leurs
+cardinaux.
+
+La conservation de la norme un décrit donc les réalisations
+quadratiques des évolutions. La conservation des quotients, de l'orientation et de la
+trajectoire appartient à l'état arithmétique transporté. Les deux propriétés
+interviennent dans la construction, avec des fonctions différentes : l'une détermine les
+identités des représentations ; l'autre permet de composer, de reconstruire et de
+prolonger les opérations qui les produisent.
+
+% END OWNER
+
+
+
+% BEGIN OWNER /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/figures/regimenes_trit.tex
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.88,>=Stealth,font=\small]
+\foreach \c/\titulo in {0/{Elliptique},4.6/{Parabolique},9.2/{Hyperbolique}}{
+\begin{scope}[xshift=\c cm]
+\draw[->,gray] (-1.65,0)--(1.7,0) node[right] {\(u\)};
+\draw[->,gray] (0,-1.35)--(0,1.5) node[above] {\(v\)};
+\node at (0,2.05) {\titulo};
+\end{scope}}
+\draw[thick] (0,0) circle[radius=1];
+\draw[->,thick] (1,0) arc[start angle=0,end angle=60,radius=1];
+\node at (0,-1.85) {\(u^2+v^2=1\)};
+\node at (0,-2.35) {\(J^2=-I\)};
+\draw[thick] (3.6,-1.2)--(3.6,1.2);
+\draw[->,thick] (5.6,-1.2)--(5.6,1.2);
+\node at (4.6,-1.85) {\(u^2=1\)};
+\node at (4.6,-2.35) {\(J^2=0\)};
+\draw[thick,domain=-.9:.9,samples=50] plot ({9.2+cosh(\x)},{sinh(\x)});
+\draw[thick,domain=-.9:.9,samples=50] plot ({9.2-cosh(\x)},{sinh(\x)});
+\node at (9.2,-1.85) {\(u^2-v^2=1\)};
+\node at (9.2,-2.35) {\(J^2=I\)};
+\end{tikzpicture}
+\caption{Réalisations quadratiques du TRIT. Pour
+\(J_\tau=\left(\begin{smallmatrix}0&-\tau\\1&0\end{smallmatrix}\right)\),
+l’exponentielle conserve \(u^2+\tau v^2\). La dégénérescence parabolique
+conserve \(u\) et transporte \(v\) linéairement. Les trois diagrammes représentent
+des orbites de formes quadratiques ; leur type géométrique correspond à la relation
+algébrique du générateur.}
+\label{x_reciprocidad:fig:trit-regimenes}
+\end{figure}
+
+% END OWNER
+
+
+\newpage
+\subsection{TPK : noyau topologique de phase}
+
+La dynamique utilise le sélecteur de phase
+\[
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+Sa valeur décide quelle évaluation opère. Le transport cardinal déplace le curseur correspondant ; le registre conserve la valeur précédente, le nouveau quotient, l'orientation et la transition. La sélection et le transport sont donc des fonctions distinctes : un signe ternaire n'est pas un déplacement du tore.
+
+Nous désignerons par \(\widehat X\) l'espace des états arithmétiques avec mémoire de trajectoire. Un élément contient les positions et les directions des deux curseurs, le mode actif, la signature TRIT, la phase, les résidus et les quotients des deux évaluations, les retenues, le préfixe construit et les données de frontière. Lorsqu'un cylindre de raffinement est introduit, il fait partie de l'état. La notation évite de remplacer l'objet par une version réduite qui ne conserve que le symbole visible.
+
+\begin{definition}[Mise à jour du TPK]
+Soient \(\mathsf{Sel}_t\) la sélection du mode au moyen de \(M_{\rm ph}\), \(\mathsf{Tra}_t\) le transport cardinal relevé et \(\mathsf{Mem}_t\) la mise à jour des registres. La transition est
+\begin{equation}
+ \mathcal U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+ \label{x_reciprocidad:eq:actualizacion}
+\end{equation}
+Chaque application conserve les champs qu'elle ne modifie pas et met à jour les autres au moyen de la division euclidienne et de la concaténation de la trajectoire.
+\end{definition}
+
+La notation \eqref{x_reciprocidad:eq:actualizacion} exprime l'ordre de composition et ne remplace pas les règles effectives. La section suivante spécifie complètement sa réalisation finie à deux curseurs. Ensuite, le prolongement ne s'obtiendra pas en effaçant sa mémoire et en répétant la première émission, mais en transportant les préfixes et leurs frontières compatibles. Ainsi, APP fournit les évaluations, TRIT distingue leurs régimes et TPK compose leur évolution.
+
+
+% BEGIN OWNER /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/sections/tpk_desarrollo_integrado.tex
+% Recuperación expositiva desde los propietarios del núcleo TPK.
+% La procedencia y el control de conservación se documentan en technical/TPK_INTEGRACION.md.
+% Este archivo amplía la sección TPK; no sustituye extension.tex ni generacion.tex.
+
+\subsubsection{État dynamique, observables et dépendance des opérations}
+\label{x_reciprocidad:tpk-int:estado}
+
+Le noyau topologique de phase organise l'évolution des deux feuillets d'APP avec l'orientation déterminée par TRIT. Sa définition comprend l'état sur lequel il agit, les règles de transition et les relations qui rendent compatibles les prolongements. L'équation \eqref{x_reciprocidad:eq:actualizacion} acquiert un contenu opératoire lorsqu'on spécifie quelles coordonnées reçoit et modifie chacun de ses facteurs. La position appartient au support toroïdal ; la phase appartient au calendrier ; l'orientation détermine le transport ; les quotients enregistrent l'évaluation arithmétique antérieure à sa réduction. Ces coordonnées sont reliées par la transition et conservent des fonctions mathématiques différentes.
+
+La projection observable d'un état est
+\begin{equation}
+ q=(x_+,d_+,x_\times,d_\times,\theta)
+ \in\mathcal Q_{\rm obs}
+ :=(X_9\times\mathcal D)^2\times\Theta_{108},
+ \qquad \mathcal D=\{N,E,S,O\},\quad
+ \Theta_{108}=\ZZ/108\ZZ.
+ \label{x_reciprocidad:tpk-int:qobs}
+\end{equation}
+Les indices distinguent les curseurs additif et multiplicatif. Dans les
+fibres des états complets au-dessus de \(q\) se conservent la trajectoire ordonnée, les évaluations
+entières des deux feuillets, leurs résidus et quotients, et les registres
+d'orientation et de frontière. Dans un prolongement de précision s'ajoutent le
+préfixe et le cylindre compatible. Deux états ayant la même
+projection \(q\) peuvent donc conserver des registres distincts.
+
+La dépendance des opérations possède trois niveaux. Au niveau local,
+le sélecteur active un feuillet, le transport modifie sa position et la
+mise à jour calcule les nouvelles coordonnées arithmétiques. Au niveau des
+trajectoires, ces transitions se composent et conservent les registres des
+étapes antérieures. Au niveau du raffinement, les relations d'
+extension déterminent quelle continuation conserve le préfixe, la signature et la
+frontière de l'antécédent. Le calendrier fini décrit la phase de ces
+opérations ; l'holonomie décrit leur composition sur l'histoire.
+
+\subsubsection{Sélection tritique et transport cardinal relevé}
+\label{x_reciprocidad:tpk-int:seleccion}
+
+Soit \(\bar\theta\in\{0,\ldots,107\}\) le représentant du calendrier.
+La phase opérationnelle et le secteur dodécaphasique sont
+\begin{equation}
+ r(\theta)=1+(\bar\theta\bmod9),\qquad
+ \beta(\theta)=\left[\left\lfloor\frac{\bar\theta}{9}\right\rfloor\right]_{12}.
+ \label{x_reciprocidad:tpk-int:fase}
+\end{equation}
+Le sélecteur déjà défini peut s'écrire \(\varepsilon_9=M_{\rm ph}\). Son vecteur de valeurs, dans la carte ordonnée de \(D_9\), est
+\[
+ m_{\rm ph}=(1,-1,0,1,-1,0,1,-1,0).
+\]
+La fonction \(M_{\rm ph}:D_9\to\TRIT\) et ce vecteur sont deux
+présentations du même sélecteur, avec leurs domaines respectifs.
+
+Définissons les indicateurs d'activation
+\[
+ a_+(\theta)=\mathbf1_{\{1,4,7\}}(r(\theta)),\qquad
+ a_\times(\theta)=\mathbf1_{\{2,5,8\}}(r(\theta)).
+\]
+Le transport des curseurs est alors
+\begin{equation}
+ x_+'=x_++a_+(\theta)\nu_{d_+},\qquad
+ x_\times'=x_\times+a_\times(\theta)\nu_{d_\times}
+ \quad\text{dans }X_9.
+ \label{x_reciprocidad:tpk-int:cursores}
+\end{equation}
+Aux phases \(3,6,9\), les deux positions sont maintenues ; l'événement neutre
+fait partie de la chronologie et de son registre. Les directions cardinales
+déterminent les vecteurs \(\nu_d\), tandis que la signature de phase détermine
+lequel de ces vecteurs s'applique.
+
+Le relèvement entier conserve le franchissement de la frontière. Si
+\(s:X_9\to D_9^2\) choisit les représentants positifs et
+\(x'=x+a\nu_d\), avec \(a\in\{0,1\}\), on définit
+\begin{equation}
+ b_d(x,a)=\frac{s(x)+a\nu_d-s(x')}{9}\in\ZZ^2.
+ \label{x_reciprocidad:tpk-int:borde}
+\end{equation}
+La divisibilité par \(9\) découle de l'égalité dans \(X_9\). Si \(z\in\ZZ^2\) enregistre les franchissements précédents, la mise à jour est \(z'=z+b_d(x,a)\). Ainsi,
+\[
+ s(x')+9z'=s(x)+9z+a\nu_d.
+\]
+La donnée entière de transport reste reconstructible après réduction de
+la position sur le tore.
+
+\begin{proposition}[Conservation du déplacement relevé]
+\label{x_reciprocidad:tpk-int:prop-desplazamiento}
+Pour une trajectoire cardinale de \(n\) pas, dont les indicateurs d'activation sont \(a_t\), on a
+\[
+ s(x_n)+9z_n=s(x_0)+9z_0+
+ \sum_{t=0}^{n-1}a_t\nu_{d_t}.
+\]
+La même égalité se conserve lorsqu'on concatène deux trajectoires compatibles.
+\end{proposition}
+\begin{proof}
+L'identité d'une étape est \eqref{x_reciprocidad:tpk-int:borde}. En la sommant sur les
+\(n\) étapes, les coordonnées intermédiaires s'annulent. Diviser l'intervalle
+de sommation en deux tronçons produit exactement la loi de concaténation. Sur une
+trajectoire fermée, la différence \(z_n-z_0\) est le degré d'
+enroulement défini précédemment.
+\end{proof}
+
+Le même principe régit les évaluations d'APP. Si un feuillet prend la
+valeur entière \(N_t\), son registre conserve simultanément
+\(N_t=R_t+9q_t\). La différence entre deux étapes vérifie
+\[
+ N_{t+1}-N_t=(R_{t+1}-R_t)+9(q_{t+1}-q_t).
+\]
+La mémoire de franchissement spatial \(z_t\) et le quotient arithmétique \(q_t\) ont des définitions différentes ; leur conservation conjointe maintient la provenance géométrique et arithmétique de chaque transition.
+
+\subsubsection{Chronologie de deux curseurs et retours composés}
+\label{x_reciprocidad:tpk-int:cronologia}
+
+L'involution cardinale \(\jmath\) échange \(N\) avec \(S\) et
+\(E\) avec \(O\). Après l'application de \eqref{x_reciprocidad:tpk-int:cursores}, les deux
+directions sont inversées lorsqu'un bloc de \(27\) étapes s'achève.
+En écrivant
+\[
+ h(\theta)=\mathbf1_{\{0,27,54,81\}}
+             ((\bar\theta+1)\bmod108),
+\]
+la règle complète sur la projection observable est
+\begin{equation}
+ F_{\rm obs}(q)=
+ \bigl(x_+',\jmath^{h(\theta)}d_+,
+       x_\times',\jmath^{h(\theta)}d_\times,
+       \theta+1\bigr).
+ \label{x_reciprocidad:tpk-int:fobs}
+\end{equation}
+La lecture qui forme l'émission utilise les positions antérieures au
+transport, selon la récurrence explicite de la
+section~\ref{x_reciprocidad:sec:extension}. La mise à jour observable et l'émission
+se composent donc dans un ordre fixé.
+
+\begin{proposition}[Réversibilité et période du calendrier observable]
+\label{x_reciprocidad:tpk-int:periodo}
+L'application \(F_{\rm obs}\) est une permutation de \(\mathcal Q_{\rm obs}\) et satisfait \(F_{\rm obs}^{108}=I\). Dans un bloc de \(54\) pas, les positions et les directions sont rétablies ; la coordonnée de \(\Theta_{108}\) avance de \(54\).
+\end{proposition}
+\begin{proof}
+Étant donné l'état final, on retrouve d'abord la phase précédente en soustrayant un
+dans \(\Theta_{108}\). Cette phase détermine si les
+directions ont été inversées et quel curseur s'est déplacé. Appliquer l'involution correspondante
+et soustraire le vecteur cardinal retrouve l'état initial de manière unique.
+
+Chaque intervalle de \(27\) étapes contient neuf activations de chaque
+curseur. Le bloc suivant conserve les activations et inverse les
+directions, de sorte que les déplacements entiers s'annulent en
+\(54\) étapes. La règle a une période \(54\) dans ses incréments de
+position et d'orientation ; la même annulation vaut quelle que soit l'origine
+du calendrier. Après \(108\) étapes, \(\theta\) est également rétabli.
+\end{proof}
+
+On réserve
+\[
+ \mathcal K_{27}=F_{\rm obs}^{27}:
+ \mathcal Q_{\rm obs}\longrightarrow\mathcal Q_{\rm obs}
+\]
+pour l'itéré de \(27\) transitions. Son quatrième itéré est l'identité sur l'état observable défini dans \eqref{x_reciprocidad:tpk-int:qobs}. La projection de l'histoire sur le calendrier permet d'effectuer cette vérification finie. Le registre de la trajectoire, ses évaluations et les nouveaux préfixes sont conservés dans l'état dynamique sur lequel agit \(\mathcal U_t\) ; l'égalité observable ne les réinitialise pas.
+
+\subsubsection{Transport affine de la mémoire et composition des états}
+\label{x_reciprocidad:tpk-int:memoria}
+
+La projection observable admet des fibres de données arithmétiques et géométriques.
+Sur une configuration \(q\), nous écrivons un état sous la forme
+\[
+ x=(q,o,h,c,\sigma,C,b,\lambda).
+\]
+Ici, \(o\) conserve l'orientation et le feuillet ; \(h\), les résidus
+et quotients ; \(c\), la mémoire additive de transport ; \(\sigma\),
+la signature de frontière ; \(C\), le cylindre de précision ; \(b\), son
+étiquette de frontière ; et \(\lambda\), la trajectoire enregistrée. La
+signature est déterminée par une application
+\[
+ \operatorname{Sig}_q:
+ \mathsf H_q\times\mathsf C_q\times\mathsf{Hist}_q
+ \longrightarrow\mathsf S_q,
+ \qquad \sigma=\operatorname{Sig}_q(h,c,\lambda).
+\]
+Les symboles \(\mathsf H_q,\mathsf C_q,\mathsf{Hist}_q\) et
+\(\mathsf S_q\) désignent, respectivement, les ensembles de données
+résidu--quotient, le groupe abélien de mémoire de transport, les
+trajectoires enregistrées et les signatures de frontière.
+Les réalisations de cette signature sont spécifiées avec leurs composantes dans
+les constructions régionale et terminale. Cette dépendance empêche de traiter
+la signature comme un paramètre libre une fois fixées les données qui la produisent.
+
+La carte élémentaire de résidu et de quotient est explicite. Pour \(n\in\ZZ\), soient
+\[
+ r=1+((n-1)\bmod9),\qquad u=\frac{n-r}{9}.
+\]
+Alors \(n=r+9u\), avec \(r\in D_9\) et \(u\in\ZZ\). L'unicité découle du fait que deux représentants de \(D_9\) congrus modulo \(9\) sont égaux. Cette carte fournit la reconstruction entière locale. Les tours de précision incorporent en outre les applications de troncature et les cylindres développés dans \ref{x_reciprocidad:sec:extension} et \ref{x_reciprocidad:sec:generacion}.
+
+Soit \(\gamma:q\to q'\) une trajectoire observable. Le transport
+des fibres s'exprime au moyen d'applications
+\[
+ \mathsf H(\gamma):\mathsf H_q\to\mathsf H_{q'},\qquad
+ \mathsf C(\gamma):\mathsf C_q\to\mathsf C_{q'},\qquad
+ \mathsf{Hist}(\gamma):\mathsf{Hist}_q\to\mathsf{Hist}_{q'}.
+\]
+Les applications respectent les identités et la composition, et
+\(\mathsf C(\gamma)\) est un homomorphisme de groupes abéliens.
+L'incrément \(k_{\rm tr}(\gamma)\in\mathsf C_{q'}\) satisfait
+\begin{equation}
+ \begin{split}
+ k_{\rm tr}(\operatorname{id}_q)&=0,\\
+ k_{\rm tr}(\gamma_2\circ\gamma_1)
+ &=k_{\rm tr}(\gamma_2)+
+   \mathsf C(\gamma_2)k_{\rm tr}(\gamma_1).
+ \end{split}
+ \label{x_reciprocidad:tpk-int:cociclo}
+\end{equation}
+Le symbole \(k_{\rm tr}\) désigne ici le cocycle de transport ;
+la coordonnée rationnelle \(\kappa\) du registre \(K\) conserve
+sa notation dans le chapitre de la clôture dodécaphasique.
+
+Les coordonnées transportables sont mises à jour par
+\begin{equation}
+ \begin{aligned}
+ h'&=\mathsf H(\gamma)h,&
+ c'&=\mathsf C(\gamma)c+k_{\rm tr}(\gamma),\\
+ \lambda'&=\gamma\circ\lambda,&
+ \sigma'&=\operatorname{Sig}_{q'}(h',c',\lambda').
+ \end{aligned}
+ \label{x_reciprocidad:tpk-int:accion-memoria}
+\end{equation}
+La seconde équation est une action affine : le terme linéaire transporte la mémoire antérieure et le cocycle ajoute l'incrément produit par la trajectoire. Dans la réalisation de franchissement spatial de chaque curseur pris séparément, \(\mathsf C(\gamma)=I\) et \(k_{\rm tr}(\gamma)\) est la somme des vecteurs de \eqref{x_reciprocidad:tpk-int:borde}. Ce cas concret relie la loi abstraite aux opérations cardinales déjà définies.
+
+\begin{proposition}[Compatibilité de la mise à jour avec la concaténation]
+\label{x_reciprocidad:tpk-int:composicion-memoria}
+La mise à jour \eqref{x_reciprocidad:tpk-int:accion-memoria} par
+\(\gamma_1\), suivie de la mise à jour par \(\gamma_2\),
+coïncide avec la mise à jour par \(\gamma_2\circ\gamma_1\).
+\end{proposition}
+\begin{proof}
+Pour la coordonnée affine, deux mises à jour donnent
+\[
+ c''=\mathsf C(\gamma_2)\mathsf C(\gamma_1)c
+       +\mathsf C(\gamma_2)k_{\rm tr}(\gamma_1)
+       +k_{\rm tr}(\gamma_2).
+\]
+La fonctorialité de \(\mathsf C\) et
+\eqref{x_reciprocidad:tpk-int:cociclo} transforment cette expression en
+\(\mathsf C(\gamma_2\circ\gamma_1)c+
+k_{\rm tr}(\gamma_2\circ\gamma_1)\).
+L'affirmation pour \(h\) découle de la composition de
+\(\mathsf H\), et pour \(\lambda\), de l'associativité des
+trajectoires. La signature finale coïncide parce qu'elle est évaluée sur les mêmes
+trois coordonnées reconstruites.
+\end{proof}
+
+Le cylindre et sa frontière complètent cette loi au moyen des relations
+\(\operatorname{Ext}_\gamma\), définies dans
+\ref{x_reciprocidad:tpk-int:bidireccionalidad}. Leurs éléments déterminent lesquelles
+des mises à jour précédentes conservent un prolongement admissible.
+Les états, avec les triplets \((\gamma,x,x')\) admis par
+ces relations, forment une catégorie au-dessus des trajectoires observables :
+\[
+ (\gamma_2,x',x'')\circ(\gamma_1,x,x')
+     =(\gamma_2\circ\gamma_1,x,x'').
+\]
+L'identité de \(x\) est \((\operatorname{id}_q,x,x)\). La composition conserve à la fois le transport arithmétique et la prolongeabilité de frontière. C'est la structure dans laquelle s'effectuent les retours avec mémoire et les raffinements successifs.
+
+\subsubsection{Registre dodécaphasique, phase et mémoire accumulée}
+\label{x_reciprocidad:tpk-int:dodecafase}
+
+Les \(108\) transitions se répartissent dans les fenêtres ordonnées
+\[
+ E_m=\{9m-8,\ldots,9m\},\qquad 1\leq m\leq12.
+\]
+Le registre conserve l'origine de phase, l'orientation et les données
+produites pendant chaque fenêtre. Son application est
+\[
+ \mathcal R_{12}(x)=
+ \bigl((E_m,\tau_m,\sigma_m,\kappa_m,\Lambda_m)\bigr)_{m=1}^{12},
+\]
+où \(\tau_m\) est la sous-route de la fenêtre, \(\sigma_m\) son
+orientation, \(\kappa_m\) l'incrément entier de frontière et
+\(\Lambda_m\) le registre local des incidences. On adopte la carte
+qui sera développée dans \ref{x_reciprocidad:subsec:k-registro-integral} ; ses indices
+de fenêtre correspondent à \(m=\beta+1\).
+Le domaine comprend les histoires compatibles
+du TPK et le codomaine, leurs registres temporels orientés. La
+composition des segments et de leurs incréments est régie par
+\eqref{x_reciprocidad:tpk-int:accion-memoria}. Le groupe \(C_{12}\) décrit en
+revanche la translation de l'indice de fenêtre ; \(\Theta_{108}\) conserve
+le calendrier des étapes. Cette distinction permet de préciser ce qui se transforme
+et ce qui s'observe lorsqu'un cycle s'achève.
+
+Dans les coordonnées \(\theta=9b+r\), avec \(0\leq r<9\), l'avancée
+de \(9\) étapes conserve \(r\) et augmente \(b\) d'une unité.
+L'addition des phases introduit le quotient
+\[
+ c_0(r,r')=\left\lfloor\frac{r+r'}9\right\rfloor,
+\]
+dont l'identité de cocycle assure l'associativité de la composition. Dans le calendrier fini, on conserve \([b]_{12}\) ; dans un registre de tours, on conserve \(b\in\ZZ\), ou \(b\in\mathbb N_0\) pour une histoire d'origine fixée. La section~\ref{x_reciprocidad:sec:extension} démontre la suite exacte non scindée \eqref{x_reciprocidad:eq:extension108}. Sa fonction est de décrire la relation entre ces coordonnées, avant de les employer dans la construction de l'état signé.
+
+Le registre signé reçoit les données de phase et de mémoire au moyen de la
+composition développée dans la section~\ref{x_reciprocidad:sec:k-registro} :
+\begin{equation}
+ R_{\rm sgn}=\Pi_H\circ\mathcal E_{108}^{90,120}
+                         \circ\mathcal R_{12}.
+ \label{x_reciprocidad:tpk-int:registro-causal}
+\end{equation}
+Son domaine est l'état terminal à mémoire ; sa sortie appartient à
+\(\ZZ^{12}\). La transformation réversible entre cet état signé
+et \(K\), ainsi que la lecture rationnelle de \(K\), sont démontrées dans
+le chapitre correspondant. Les opérations d'enregistrement précèdent
+ces transformations. La reconstruction d'un registre à partir de ses
+différences cycliques vérifie sa récupérabilité ; la provenance dynamique
+doit être conservée au moyen des événements qui l'ont produit.
+
+Pour la trace codée \((d_t)\) conservée par le registre, le lecteur d'événements compte les codes \(\{2,4,6,8\}\) de chaque fenêtre avec l'orientation \((+,+,+,-,-,-,+,+,+,-,-,-)\). Ces codes et les symboles cardinaux de \(\mathcal D\) sont des coordonnées distinctes du registre. Le chapitre~\ref{x_reciprocidad:sec:k-registro} développe ce lecteur, la décomposition entière \(1+5+6\), les congruences qui caractérisent son image et son inverse exacte. La preuve d'inversion établit quelles données conserve cette carte ; la définition de \(\mathcal R_{12}\) spécifie l'histoire orientée sur laquelle il agit.
+
+\subsubsection{Incidence des phases et construction interne des canaux}
+\label{x_reciprocidad:tpk-int:incidencia}
+
+Le sélecteur détermine trois sous-ensembles de \(D_9\) :
+\[
+ H_+=\{1,4,7\},\qquad H_-=\{2,5,8\},\qquad H_0=\{3,6,9\}.
+\]
+Soit \(H_{\rm act}=H_+\sqcup H_-\) l'ensemble des phases actives et
+soit \(O_{\rm ph}=D_9\setminus\{9\}\) la carte antérieure au retour
+marqué. Notons \(P_2(H_{\rm act})\) l'ensemble des paires
+non ordonnées de phases actives. L'incidence interne est donnée par
+\begin{equation}
+ \mathcal F^{\rm ph}_6=H_{\rm act}\times P_2(H_{\rm act}),\qquad
+ \mathcal F^{\rm ph}_8=O_{\rm ph}\times P_2(H_{\rm act}),\qquad
+ \Theta_{\rm ph}=D_9\times P_2(H_{\rm act}).
+ \label{x_reciprocidad:tpk-int:fases90120}
+\end{equation}
+Les indices décrivent la quantité de positions de la première composante.
+La construction utilise les phases et l'origine du calendrier déjà fixées ;
+les réalisations exceptionnelles ultérieures transporteront ces
+incidences vers leurs propres domaines.
+
+\begin{proposition}[Cardinaux et incidence orientée de phase]
+\label{x_reciprocidad:tpk-int:cardinales}
+Les ensembles de \eqref{x_reciprocidad:tpk-int:fases90120} ont pour cardinaux \(90,120,135\), respectivement. Si
+\[
+ \partial_{\rm ph}=\Theta_{\rm ph}\times\{-1,+1\},\qquad
+ E_{\rm ph}=\partial_{\rm ph}\sqcup\{\infty\},\qquad
+ L_{\rm ph}=H_0\times P_2(H_{\rm act}),
+\]
+alors
+\[
+ |\partial_{\rm ph}|=270,\quad |E_{\rm ph}|=271,\quad
+ |L_{\rm ph}|=45,\quad
+ |\partial_{\rm ph}\sqcup L_{\rm ph}|=315.
+\]
+Translater simultanément l'origine de phase et le retour marqué conserve
+tous ces cardinaux et leurs inclusions.
+\end{proposition}
+\begin{proof}
+Il existe six phases actives, donc
+\(|P_2(H_{\rm act})|=\binom62=15\). Les produits par
+\(6,8,9\) donnent \(90,120,135\). L'orientation double \(135\) ;
+la marque de retour ajoute un élément ; les trois phases neutres donnent
+\(3\cdot15=45\). Une translation du calendrier transporte chaque
+facteur par une bijection et envoie le point marqué sur son image. Les
+produits et les unions disjointes conservent ainsi l'incidence.
+\end{proof}
+
+Le cardinal \(271\) possède ici une réalisation par incidence de phase. La complétion cubique de la section~\ref{x_reciprocidad:sec:extension} possède sa propre construction de la couronne \(1000-729\). La correspondance entre les deux réalisations doit conserver les applications et les marques qui les identifient, en plus du cardinal. De même, le sélecteur \(\varepsilon_9\), l'incidence \((90,120)\) et l'extracteur \(\mathcal E_{108}^{90,120}\) conservent les domaines et les opérations qui viennent d'être distingués.
+
+\subsubsection{Inversion des trajectoires et prolongements conjugués}
+\label{x_reciprocidad:tpk-int:bidireccionalidad}
+
+La bidirectionnalité commence par une opération sur les trajectoires, avant
+de leur attribuer des valeurs scalaires. Pour
+\(\gamma=(x_0;d_1,\ldots,d_n)\), d'extrémité \(x_n\), nous définissons
+\[
+ \operatorname{rev}\gamma
+   =(x_n;\jmath d_n,\ldots,\jmath d_1).
+\]
+L'origine de la trajectoire inverse est l'extrémité de la trajectoire originale.
+La composition satisfait
+\[
+ \operatorname{rev}^2\gamma=\gamma,\qquad
+ \operatorname{rev}(\gamma_2\circ\gamma_1)
+   =\operatorname{rev}\gamma_1\circ\operatorname{rev}\gamma_2,
+\]
+et le déplacement entier change de signe. Ces identités s'obtiennent
+en inversant l'ordre des étapes et en remplaçant chaque vecteur cardinal par
+son opposé. Dans un lacet, il s'ensuit
+\(\operatorname{wind}(\operatorname{rev}\gamma)
+=-\operatorname{wind}(\gamma)\).
+
+Sur les registres, l'inversion requiert également de transporter l'ordre
+de leurs composantes et l'orientation de leurs événements. L'inversion de
+route et une conjugaison de signature sont des opérations distinctes : leur
+composition est spécifiée lorsqu'elle s'applique à un registre concret. En
+particulier, l'involution régionale qui échange les composantes de
+clôture et de propagation conserve l'axe d'auto-échelle ; sa formule est
+présentée dans la section~\ref{x_reciprocidad:mono-ampl:regiones}. Cette opération régionale
+agit sur un autre domaine que l'inversion d'une trajectoire cardinale.
+
+Les extensions sur une route \(r:q\to q'\) s'expriment par des relations entre fibres d'états compatibles. Si \(\mathcal F_q\) désigne la fibre des états complets sur \(q\), on exige
+\[
+ \operatorname{Ext}_r\subseteq\mathcal F_q\times\mathcal F_{q'},
+ \qquad \Delta_{\mathcal F_q}\subseteq
+        \operatorname{Ext}_{\operatorname{id}_q},
+\]
+\[
+ \operatorname{Ext}_{r_2}\circ\operatorname{Ext}_{r_1}
+       \subseteq\operatorname{Ext}_{r_2\circ r_1}.
+\]
+Leur composition conserve les évaluations des deux feuillets, l'orientation,
+les quotients, le préfixe et la frontière. L'inversion de la route
+n'implique pas à elle seule que toute relation d'extension soit une bijection.
+Le prolongement conjugué est défini sur le domaine où le transport de
+ces données satisfait les compatibilités correspondantes.
+
+\subsubsection{Holonomie nonadique et continuité du raffinement}
+\label{x_reciprocidad:tpk-int:holonomia}
+
+Un tour de phase compose les transitions sur l'état avec mémoire :
+\begin{equation}
+ \Gamma_{9,k}=\mathcal U_{k+8}\circ\cdots\circ\mathcal U_k.
+ \label{x_reciprocidad:tpk-int:gamma}
+\end{equation}
+Sur une histoire individualisée, cette composition fonctionnelle réalise la relation d'holonomie ; dans le domaine complet, on conserve \(\Gamma_{9,k}\subseteq\widehat X_k\times\widehat X_{k+9}\), avec les prolongements admissibles développés plus loin. La base cyclique a neuf phases, tandis que la fibre conserve la trajectoire, les quotients et la frontière. La monodromie est l'action d'un tour de cette base sur les fibres ; l'holonomie \(\Gamma_{9,k}\) exprime sa réalisation par les transitions effectives du TPK.
+
+Si \(g\) observe la phase et \(M\) le nombre de tours conservés,
+\[
+ g(\Gamma_{9,k}x)=g(x),\qquad M(\Gamma_{9,k}x)=M(x)+1.
+\]
+La première identité exprime la clôture de phase et la seconde identifie
+la nouvelle profondeur temporelle. Le prolongement coinductif conserve
+en outre ses cylindres et préfixes. Les restrictions entre profondeurs
+composent un système inverse ; une section compatible réunit ses
+antécédents sans les remplacer par la dernière observation. Le développement
+de cette arithmétique des histoires et de leur unité occupe
+\ref{x_reciprocidad:hist:seccion}--\ref{x_reciprocidad:hist:doble-varianza} ; la construction des
+régions et de leurs lecteurs s'effectue dans la section~\ref{x_reciprocidad:sec:generacion}.
+
+Le transfert de phase sur des émissions déjà construites possède un autre
+domaine. Soient \(\mathcal A_+\) et \(\mathcal A_\times\) les
+alphabets de signatures additives et multiplicatives, de cardinaux \(18\)
+et \(26\). Leur produit identifie le catalogue \(\mathcal U_6\).
+Pour \(f:\mathcal A_+\times\mathcal A_\times\to\RR\),
+les moyennes de feuillet sont
+\[
+ (E_+f)(s,e)=\frac1{18}\sum_{s'\in\mathcal A_+}f(s',e),\qquad
+ (E_\times f)(s,e)=\frac1{26}\sum_{e'\in\mathcal A_\times}f(s,e').
+\]
+La construction de ces émissions et de leurs cardinaux s'effectue au moyen de la récurrence de la section~\ref{x_reciprocidad:sec:extension}. Une fois celles-ci obtenues, l'opérateur de transfert est défini sur \(\mathcal U_6\times C_9\) par
+\[
+ P_+=E_+,\quad P_-=E_\times,\quad P_0=I,\qquad
+ \mathcal K_{\rm ph}((u,r),(v,r+1))=P_{M_{\rm ph}(r)}(u,v),
+\]
+avec un poids nul pour les autres transitions de phase. L'indice
+\(r\) utilise le représentant positif de la classe cyclique.
+L'ordre des phases \((+1,-1,0)^3\) produit alors le renouvellement
+\[
+ \mathcal K_{\rm ph}^{9}\big|_r=E_+E_\times.
+\]
+En effet, les deux moyennes sont idempotentes, commutent et moyennent des facteurs
+différents ; leur composition attribue le poids \(1/(18\cdot26)=1/468\)
+à chaque émission. Cette égalité caractérise un observable de transfert
+ultérieur. Le transport des histoires reste donné par
+\eqref{x_reciprocidad:tpk-int:gamma}, avec sa mémoire et sa frontière.
+
+La hiérarchie résultante établit la fonction des chapitres suivants. L'émission finie construit le domaine et les régions ; les relations d'extension conservent leurs préfixes ; la connexion nonadique les prolonge ; le registre dodécaphasique détermine les données qui interviennent dans \(K\) et dans la clôture de \(\alpha\). La réalisation numérique et la réalisation d'incidence reçoivent cette structure antérieure. Cet ordre permet d'exposer chaque conséquence dans son chapitre en conservant, depuis le noyau formel, les objets qui la rendent possible.
+
+% END OWNER
+
+
+
+% BEGIN OWNER /Users/ruben/Documents/New project/output/EXTREMA_MEDIA_RAZON_RECIPROCIDAD_ES_EN_20260918/ARTICULO/ES/source/sections/memoria_resolvente.tex
+\subsection{Mémoire accumulée et résolvantes du transport}
+\label{x_reciprocidad:subsec:memoria-resolvente}
+
+Le retour du calendrier n'élimine pas les incréments produits pendant
+le parcours. Pour exprimer cette différence en termes opératoriels, on construit
+d'abord un registre cumulatif des événements de la trajectoire, puis sa
+série génératrice. La réduction des variables de mémoire s'effectuera sur
+ce transport, en conservant également la source et le lecteur de sortie.
+
+\subsubsection{Événements orientés et actualisation du registre}
+
+Soit \((d_t)\) la suite des codes entiers de direction conservée
+par une trajectoire du TPK. Le code \(d_t\) et la direction cardinale
+du curseur sont des coordonnées distinctes ; aucune identification
+entre leurs alphabets n'est supposée. Numérotons à partir de zéro les fenêtres
+\[
+ I_m=\{9m+1,\ldots,9m+9\},\qquad m\geq0.
+\]
+Pendant le premier cycle, \(I_m\) est la fenêtre \(E_{m+1}\) du registre
+dodécaphasique. Son orientation est
+\(\sigma=(1,1,1,-1,-1,-1,1,1,1,-1,-1,-1)\).
+Pour une histoire prolongée, \(\sigma_m\in\{-1,1\}\) est le signe
+conservé dans la fenêtre correspondante. L’événement signé est
+\begin{equation}
+ a_m=\sigma_m\sum_{t\in I_m}
+       \mathbf1_{\{2,4,6,8\}}(d_t),\qquad |a_m|\leq9.
+ \label{x_reciprocidad:mem:evento}
+\end{equation}
+Chaque terme est incorporé lorsque sa transition se produit. Cette définition
+compte les événements de la trace ; elle ne choisit pas les directions à partir d'une valeur
+à obtenir ultérieurement.
+
+Soient \(\mathbf e_0,\ldots,\mathbf e_{11}\) la base de \(\ZZ^{12}\)
+et \(S\mathbf e_j=\mathbf e_{j+1\bmod12}\). Écrivons
+\(R=S^{-1}\). Le registre accumulé en coordonnées fixes satisfait
+\[
+z_{m+1}=z_m+a_m\mathbf e_{m\bmod12}.
+\]
+Un préfixe sans histoire accumulée commence en \(z_0=0\) ; à une autre
+origine, \(z_0\) conserve le registre antérieur.
+Le repère qui accompagne le calendrier est \(y_m=S^{-m}z_m\).
+
+\begin{proposition}[Actualisation et retour avec mémoire]
+\label{x_reciprocidad:mem:prop-actualizacion}
+Le registre dans le repère mobile satisfait
+\begin{equation}
+ y_{m+1}=Ry_m+\eta_m,\qquad
+ \eta_m=a_mR\mathbf e_0.
+ \label{x_reciprocidad:mem:actualizacion}
+\end{equation}
+Pour tout \(n\geq1\),
+\begin{equation}
+ y_n=R^ny_0+\sum_{j=0}^{n-1}R^{n-1-j}\eta_j.
+ \label{x_reciprocidad:mem:iteracion}
+\end{equation}
+En particulier,
+\begin{equation}
+ y_{12}=y_0+\sum_{j=0}^{11}a_j\mathbf e_j.
+ \label{x_reciprocidad:mem:retorno12}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplier l'actualisation de \(z_m\) par \(S^{-(m+1)}\) donne
+\(y_{m+1}=S^{-1}y_m+a_mS^{-1}\mathbf e_0\), puisque
+\(S^{-m}\mathbf e_{m\bmod12}=\mathbf e_0\).
+La formule \eqref{x_reciprocidad:mem:iteracion} s'obtient par récurrence.
+Pour \(n=12\), \(R^{12}=I\) et
+\(R^{11-j}\eta_j=a_jR^{12-j}\mathbf e_0=a_j\mathbf e_j\),
+ce qui démontre \eqref{x_reciprocidad:mem:retorno12}.
+\end{proof}
+
+Ainsi, douze fenêtres rétablissent le repère et conservent le vecteur des événements.
+Le dénombrement ne permet pas à lui seul de retrouver l'ordre de tous les pas
+à l'intérieur de chaque fenêtre ; cet ordre demeure dans la trajectoire enregistrée.
+
+Pour préciser le bilan, nous définissons
+\[
+ D_3=I-S^3,\quad D_4=I-S^4,\quad
+ B=D_3^{\mathsf T}D_3+D_4^{\mathsf T}D_4,
+\]
+\[
+ \mathcal M(y)=\tfrac12y^{\mathsf T}By,
+ \qquad q(y)=\sum_{j=0}^{11}y_j.
+\]
+La première est une forme quadratique du registre ; la seconde enregistre
+la somme de ses coordonnées. Elles ne sont pas identifiées ici à une énergie ou à une charge physiques.
+
+\begin{proposition}[Bilan produit par l'événement]
+\label{x_reciprocidad:mem:prop-balance}
+L'actualisation \eqref{x_reciprocidad:mem:actualizacion} satisfait
+\begin{equation}
+ \begin{aligned}
+ \mathcal M(y_{m+1})-\mathcal M(y_m)
+   &=a_m(By_m)_0+2a_m^2,\\
+ q(y_{m+1})-q(y_m)&=a_m.
+ \end{aligned}
+ \label{x_reciprocidad:mem:balance}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Le développement des produits donne
+\(B=4I-S^3-S^{-3}-S^4-S^{-4}\) ; par conséquent,
+\(R^{\mathsf T}BR=B\) et \(B_{00}=4\).
+Comme \(y_{m+1}=R(y_m+a_m\mathbf e_0)\), la différence quadratique
+est \(a_m\mathbf e_0^{\mathsf T}By_m+\tfrac12a_m^2B_{00}\).
+La somme des coordonnées est invariante sous la permutation \(R\),
+d'où la deuxième égalité.
+\end{proof}
+
+\Needspace{20\baselineskip}
+\subsubsection{Série génératrice et contrôle uniforme de la mémoire}
+
+La série conserve tous les incréments, et pas uniquement leur somme à la fin
+d'un cycle. Avec une variable formelle \(u\), soient
+\[
+ Y(u)=\sum_{m\geq0}y_mu^m,\qquad
+ H_\eta(u)=\sum_{m\geq0}\eta_mu^m.
+\]
+
+\begin{proposition}[Résolvante et majoration du reste]
+\label{x_reciprocidad:mem:prop-serie}
+On a l'identité formelle
+\begin{equation}
+ Y(u)=(I-uR)^{-1}\bigl(y_0+uH_\eta(u)\bigr).
+ \label{x_reciprocidad:mem:serie}
+\end{equation}
+Les deux séries convergent pour \(|u|<1\). Si \(\ell:\RR^{12}\to\RR\)
+est linéaire, \(L=\|\ell\|_{1\to\RR}\), \(M_0=\|y_0\|_1\) et
+\(0<r<1\), alors, pour tout entier \(N\geq0\) et \(|u|\leq r\),
+\begin{equation}
+ \left|\sum_{m>N}\ell(y_m)u^m\right|
+ \leq Lr^{N+1}\left(
+ \frac{M_0+9(N+1)}{1-r}+\frac{9r}{(1-r)^2}\right).
+ \label{x_reciprocidad:mem:cota}
+\end{equation}
+La série des dérivées converge uniformément dans chaque disque
+\(|u|\leq r<1\).
+\end{proposition}
+\begin{proof}
+Multiplier \eqref{x_reciprocidad:mem:actualizacion} par \(u^{m+1}\) et sommer donne
+\(Y-y_0=uRY+uH_\eta\). Le terme constant de \(I-uR\) est
+inversible, de sorte que son inverse formel est \(\sum_{k\geq0}u^kR^k\).
+De plus, \(R\) préserve la norme \(\ell^1\) et
+\(\|\eta_m\|_1\leq9\), d'où
+\(\|y_m\|_1\leq M_0+9m\).
+Pour le reste, on somme les majorants
+\(L(M_0+9m)r^m\), en utilisant
+\[
+ \sum_{m>N}r^m=\frac{r^{N+1}}{1-r},\qquad
+ \sum_{m>N}mr^m=r^{N+1}
+ \left(\frac{N+1}{1-r}+\frac r{(1-r)^2}\right).
+\]
+Enfin, \(\sum_{m\geq1}Lm(M_0+9m)r^{m-1}<\infty\)
+majore la série dérivée et démontre sa convergence uniforme.
+\end{proof}
+
+La variable \(u\) compte les fenêtres de neuf transitions. Son identification
+avec la variable d'un autre lecteur exige de conserver cette horloge et l'application
+qui relie les deux lectures.
+
+\subsubsection{Élimination de mémoire : opérateur, source et lecteur}
+
+Sur un domaine où l'actualisation est fixée comme \(U:X\to X\),
+l'espace vectoriel libre \(V=\QQ^{(X)}\) sur les états admet l'opérateur
+\(T\delta_x=\delta_{U(x)}\). L'horloge est incluse dans \(x\) si la
+transition en dépend. Cette extension linéaire conserve des états
+distincts même lorsqu'ils partagent une phase observable.
+
+Considérons une décomposition \(V=V_0\oplus V_1\), où \(V_1\)
+est le secteur auxiliaire que l'on souhaite éliminer, et écrivons
+\[
+ T=\begin{pmatrix}A&B_1\\C&D\end{pmatrix},\qquad
+ v=\binom{v_0}{v_1},\qquad \ell=(\ell_0,\ell_1).
+\]
+Ici, \(A:V_0\to V_0\), \(B_1:V_1\to V_0\),
+\(C:V_0\to V_1\) et \(D:V_1\to V_1\).
+Les identités suivantes sont formelles ; elles valent également là où les
+résolvantes convergent.
+
+\begin{proposition}[Réduction de Schur avec source et lecteur]
+\label{x_reciprocidad:mem:prop-schur}
+Soient
+\[
+ D_u=(I-uD)^{-1},\qquad
+ \mathscr F(u)=I-uA-u^2B_1D_uC.
+\]
+La composante retenue de \((I-uT)^{-1}v\) est
+\begin{equation}
+ w_0=\mathscr F(u)^{-1}\bigl(v_0+uB_1D_uv_1\bigr),
+ \qquad w_1=D_u(v_1+uCw_0).
+ \label{x_reciprocidad:mem:schur-fuente}
+\end{equation}
+Sa lecture complète satisfait
+\begin{equation}
+ \begin{split}
+ \ell(I-uT)^{-1}v
+ ={}&(\ell_0+u\ell_1D_uC)
+       \mathscr F(u)^{-1}(v_0+uB_1D_uv_1)\\
+    &+\ell_1D_uv_1.
+ \end{split}
+ \label{x_reciprocidad:mem:schur-lector}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Les deux équations de \((I-uT)w=v\) sont
+\(w_0=v_0+uAw_0+uB_1w_1\) et
+\(w_1=v_1+uCw_0+uDw_1\).
+Résoudre la seconde et la substituer dans la première donne
+\eqref{x_reciprocidad:mem:schur-fuente} ; appliquer \(\ell_0\) et \(\ell_1\)
+aux deux composantes donne \eqref{x_reciprocidad:mem:schur-lector}.
+Tous les inverses formels existent parce que leurs termes constants
+sont des identités.
+\end{proof}
+
+Le terme \(u^2B_1D_uC=\sum_{k\geq0}u^{k+2}B_1D^kC\)
+décrit une sortie vers la mémoire, \(k\) pas à l'intérieur de celle-ci et
+un retour. En revanche, \(u\ell_1D_uC\) lit la mémoire avant ce
+retour. Réduire seulement l'opérateur ne conserve donc pas nécessairement
+l'observation : la source et le lecteur doivent également être transformés.
+
+La différence est visible dans le cycle déjà construit. Si \(P\) retient
+\(\mathbf e_0\), alors \(PRP=0\), mais
+\begin{equation}
+ \left\langle\mathbf e_0,(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac1{1-u^{12}},\qquad
+ \left\langle\mathbf e_{11},(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac u{1-u^{12}}.
+ \label{x_reciprocidad:mem:ejemplo-ciclo}
+\end{equation}
+En effet, \(R^n\mathbf e_0=\mathbf e_{-n\bmod12}\) : les
+deux séries recueillent respectivement \(n\equiv0\) et
+\(n\equiv1\pmod{12}\). La résolvante de la compression est \(I\),
+tandis que la compression de la résolvante conserve les retours omis.
+Cet exemple correspond au registre de douze fenêtres, et non à la totalité
+de l'état du TPK.
+
+\subsubsection{Composition des segments et cohérence de la réduction}
+
+Soient trois transports affines composables
+\(F_i(y)=R_i y+b_i\), avec des domaines et codomaines compatibles.
+La mémoire produite par le parcours complet est
+\begin{equation}
+ F_3F_2F_1(y)
+ =R_3R_2R_1y+b_3+R_3b_2+R_3R_2b_1.
+ \label{x_reciprocidad:mem:cociclo-tres}
+\end{equation}
+La preuve est la substitution successive des trois formules affines.
+Regrouper d'abord les deux premiers segments ou les deux derniers produit
+la même expression ; les facteurs transportent chaque incrément depuis
+le point où il a pris naissance. Dans \eqref{x_reciprocidad:mem:actualizacion},
+\(R_i=R\) et \(b_i\) est l'événement de sa fenêtre.
+
+L'élimination de plusieurs couches conserve une cohérence analogue.
+Pour l'expliciter, décomposons maintenant
+\(V=V_0\oplus V_1\oplus V_2\) et écrivons
+\[
+ T=\begin{pmatrix}
+ A&B_1&B_2\\C_1&D_{11}&D_{12}\\C_2&D_{21}&D_{22}
+ \end{pmatrix},\qquad Q_2=(I-uD_{22})^{-1}.
+\]
+L'élimination de la troisième composante laisse les quatre blocs
+\begin{equation}
+ \begin{aligned}
+ A'&=A+uB_2Q_2C_2,&
+ B_1'&=B_1+uB_2Q_2D_{21},\\
+ C_1'&=C_1+uD_{12}Q_2C_2,&
+ D_{11}'&=D_{11}+uD_{12}Q_2D_{21}.
+ \end{aligned}
+ \label{x_reciprocidad:mem:schur-intermedio}
+\end{equation}
+
+\begin{proposition}[Transitivité de l'élimination]
+Si \(D_*=(D_{ij})_{i,j=1}^2\), le complément obtenu en deux étapes
+coïncide avec celui obtenu en éliminant conjointement les deux mémoires :
+\begin{equation}
+ \begin{split}
+ I-uA'-u^2B_1'(I-uD_{11}')^{-1}C_1'
+ ={}&I-uA\\
+ &-u^2(B_1\ B_2)(I-uD_*)^{-1}\binom{C_1}{C_2}.
+ \end{split}
+ \label{x_reciprocidad:mem:schur-transitivo}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Résoudre la troisième équation de \((I-uT)w=v\) et la substituer dans les
+deux premières produit \eqref{x_reciprocidad:mem:schur-intermedio}. Éliminer ensuite la
+deuxième composante donne le membre gauche de
+\eqref{x_reciprocidad:mem:schur-transitivo}. Résoudre simultanément les deux équations de
+mémoire donne le membre droit, par la proposition~\ref{x_reciprocidad:mem:prop-schur}.
+La solution formelle est unique parce que \(I-uT\) a pour terme constant
+\(I\). Dans les deux procédures, la source et
+le lecteur sont également transformés selon \eqref{x_reciprocidad:mem:schur-fuente}--\eqref{x_reciprocidad:mem:schur-lector}.
+\end{proof}
+
+Le bilan \eqref{x_reciprocidad:mem:balance} décrit les incréments du registre.
+Les identités précédentes permettent de les transporter lors de la réutilisation de la mémoire
+dans la clôture dodécaphasique ; elles ne déterminent pas à elles seules des coefficients
+analytiques supplémentaires.
+
+% END OWNER
+

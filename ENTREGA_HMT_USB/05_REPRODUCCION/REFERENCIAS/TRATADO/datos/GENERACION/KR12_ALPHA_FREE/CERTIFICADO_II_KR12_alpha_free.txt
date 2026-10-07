@@ -1,0 +1,167 @@
+Certificado II — K_R12 alpha-free
+Reconstrucción U → K_R12^CAN → α y cierre de la objeción de “máscara”
+Este certificado fija el tramo que más se reabre indebidamente: K_R12^CAN no se introduce mirando α. El protocolo HMT tiene la forma U→K→α, no α→K. Los tres bloques U son datos de ledger del corpus y se invierten mediante Hadamard H_4. Una vez obtenido K_R12^CAN, se aplica la lectura de carry derecha-izquierda sobre π,e,φ. Por tanto, la objeción “K es una máscara” queda desplazada: la auditoría superior puede pedir el origen del ledger U, pero no puede decir que K fue calculado desde α si no demuestra que U contiene α.
+1. Datos de entrada alpha-free
+U^(1) = (2378, -452, -668, -322).
+U^(2) = (1406,  998, -204,  -28).
+U^(3) = (2479, -551, -371, -997).
+Estos bloques no son triadas de α. No son α^{-1}. No son CODATA. No son una tabla construida después de leer α. En el tramo U→K tampoco entran las triadas de π,e,φ. π,e,φ entran sólo en el segundo tramo, K→α.
+2. Matriz Hadamard
+H4 = 1  1  1  1 1  1 -1 -1 1 -1  1 -1 1 -1 -1  1
+H_4^2 = 4I,     H_4^{-1} = (1/4)H_4.
+K^(j) = (1/4) H_4 U^(j).
+La condición de integridad es que H_4 U^(j) sea divisible por 4 componente a componente.
+3. Cálculos
+Bloque
+H_4 U
+K=(1/4)H_4U
+U^(1)
+(936, 2916, 2484, 3176)
+(234, 729, 621, 794)
+U^(2)
+(2172, 2636, 232, 584)
+(543, 659, 058, 146)
+U^(3)
+(560, 3296, 3656, 2404)
+(140, 824, 914, 601)
+La intercalación R12 es:
+K = (K1_1,K2_1,K3_1, K1_2,K2_2,K3_2, K1_3,K2_3,K3_3, K1_4,K2_4,K3_4).
+K_R12^CAN = 234|543|140|729|659|824|621|058|914|794|146|601.
+4. Qué demuestra y qué no demuestra Hadamard
+Hadamard demuestra unicidad condicional: dado U, existe un único K entero por inversión H_4^{-1}. Hadamard no crea por sí solo el origen absoluto de U. Por eso la formulación purista es:
+Lema 1: dado U, K queda fijado de manera única si H_4U≡0 (mod 4).
+Lema 2: los tres bloques U generan el K_R12^CAN usado después en α.
+Teorema HMT: como U pertenece al ledger HMT y no usa α, K_R12^CAN es alpha-free.
+La objeción técnicamente admisible se desplaza al origen de U. No reabre K como máscara. Una vez dado el ledger U, K queda fijado y no se calcula desde α.
+5. Lectura de α
+Con K ya fijado, se toman las triadas de π,e,φ:
+π: 141|592|653|589|793|238|462|643|383|279|502|884
+e: 718|281|828|459|045|235|360|287|471|352|662|497
+φ: 618|033|988|749|894|848|204|586|834|365|638|117
+s_m = d_π(m)+d_e(m)-d_φ(m)-K_m+c_{m+1}.
+d_α(m)=s_m mod 1000,     c_m=(s_m-d_α(m))/1000,     c_13=0.
+m
+dπ
+de
+dφ
+K
+c_{m+1}
+s_m
+dα
+12
+884
+497
+117
+601
+0
+663
+663
+11
+502
+662
+638
+146
+0
+380
+380
+10
+279
+352
+365
+794
+0
+-528
+472
+9
+383
+471
+834
+914
+-1
+-895
+105
+8
+643
+287
+586
+058
+-1
+285
+285
+7
+462
+360
+204
+621
+0
+-3
+997
+6
+238
+235
+848
+824
+-1
+-1200
+800
+5
+793
+045
+894
+659
+-2
+-717
+283
+4
+589
+459
+749
+729
+-1
+-431
+569
+3
+653
+828
+988
+140
+-1
+352
+352
+2
+592
+281
+033
+543
+0
+297
+297
+1
+141
+718
+618
+234
+0
+7
+007
+α = 0.007|297|352|569|283|800|997|285|105|472|380|663...
+6. Controles negativos
+Cambio
+Salida / efecto
+Dictamen
+Carry izquierda-derecha
+007|297|353|570|284|800|995|285|106|471|379|663
+Rompe la lectura
+c_13=1
+Última triada 663→664
+El cierre importa
+Rotación de K
+698|699|763|639|119|004|559|429|226|119|926|030
+K tiene posición
+Perturbar K_1: 234→235
+006|297|352|569|283|800|997|285|105|472|380|663
+La salida responde localmente
+7. Verificador mínimo
+H4 = [[1,1,1,1],[1,1,-1,-1],[1,-1,1,-1],[1,-1,-1,1]]U_BLOCKS = [[2378,-452,-668,-322],[1406,998,-204,-28],[2479,-551,-371,-997]]def mat_vec(H,v):    return [sum(H[i][j]*v[j] for j in range(4)) for i in range(4)]def K_from_U(U):    HU = mat_vec(H4,U)    assert all(x % 4 == 0 for x in HU)    return [x//4 for x in HU]K_blocks = [K_from_U(U) for U in U_BLOCKS]K_R12 = []for i in range(4):    K_R12.extend([K_blocks[0][i], K_blocks[1][i], K_blocks[2][i]])K_R12 = [x % 1000 for x in K_R12]print(K_R12)pi_tr  = [141,592,653,589,793,238,462,643,383,279,502,884]e_tr   = [718,281,828,459,45,235,360,287,471,352,662,497]phi_tr = [618,33,988,749,894,848,204,586,834,365,638,117]d=[0]*12; carry=[0]*13; carry[12]=0for m in range(11,-1,-1):    s=pi_tr[m]+e_tr[m]-phi_tr[m]-K_R12[m]+carry[m+1]    d[m]=s%1000    carry[m]=(s-d[m])//1000print('|'.join(f'{x:03d}' for x in d))
+Dictamen
+PASA: U→K es alpha-free y algebraicamente único dado U. PASA: K→α por carry derecha-izquierda. PASA: los controles negativos muestran rigidez operacional. La objeción “K es máscara” queda cerrada dentro del corpus. La única auditoría superior posible es el origen HMT de U, no la acusación de que K haya sido ajustado mirando α.

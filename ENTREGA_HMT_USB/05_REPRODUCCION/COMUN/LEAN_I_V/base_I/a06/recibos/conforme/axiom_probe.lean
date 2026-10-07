@@ -1,0 +1,134 @@
+import LatticeCreationTaylor
+import LatticeGramDual
+import LatticeConformalState
+import LatticeNormalEnergy
+import LatticeStateFieldEnergy
+import LatticeConformalCovariance
+import LatticeEvenTranslation
+import LatticeConformalLowModes
+import LatticeGramSymmetry
+import LatticeConformalCoefficient
+import LatticeConformalCentralCoefficient
+import LatticeGramContractions
+import LatticeNormalZeroMode
+import LatticeConformalEnergyParts
+import LatticeConformalEnergy
+import LatticeConformalTranslation
+import LatticeConformalFoundation
+#print axioms HMT.IV.LatticeCreationTaylor.creation_translation_recurrence
+#print axioms HMT.IV.LatticeCreationTaylor.creation_factorial_coefficient
+#print axioms HMT.IV.LatticeCreationTaylor.creation_taylor_coefficient
+#print axioms HMT.IV.LatticeGramDual.integerForm
+#print axioms HMT.IV.LatticeGramDual.integerForm_nondegenerate
+#print axioms HMT.IV.LatticeGramDual.integerGram
+#print axioms HMT.IV.LatticeGramDual.integerGram_apply
+#print axioms HMT.IV.LatticeGramDual.integerGram_det_ne_zero
+#print axioms HMT.IV.LatticeGramDual.gramMatrix
+#print axioms HMT.IV.LatticeGramDual.gram_eq_integerGram_cast
+#print axioms HMT.IV.LatticeGramDual.gram_det_ne_zero
+#print axioms HMT.IV.LatticeGramDual.gramInv
+#print axioms HMT.IV.LatticeGramDual.gramInv_mul_gram
+#print axioms HMT.IV.LatticeGramDual.gram_mul_gramInv
+#print axioms HMT.IV.LatticeGramDual.gramInv_pairing
+#print axioms HMT.IV.LatticeGramDual.pairing_gramInv
+#print axioms HMT.IV.LatticeConformalState.conformalState
+#print axioms HMT.IV.LatticeConformalState.conformalField
+#print axioms HMT.IV.LatticeConformalState.derivativeField_zero
+#print axioms HMT.IV.LatticeConformalState.conformalField_eq_normal_sum
+#print axioms HMT.IV.LatticeConformalState.conformalField_creates
+#print axioms HMT.IV.LatticeConformalState.energy_one_creator
+#print axioms HMT.IV.LatticeConformalState.energy_two_creators
+#print axioms HMT.IV.LatticeConformalState.conformalState_weight_two
+#print axioms HMT.IV.LatticeConformalState.conformalMode
+#print axioms HMT.IV.LatticeNormalEnergy.EnergyCovariant
+#print axioms HMT.IV.LatticeNormalEnergy.locallyFiniteSum_commutator
+#print axioms HMT.IV.LatticeNormalEnergy.creationTerm_energy
+#print axioms HMT.IV.LatticeNormalEnergy.annihilationTerm_energy
+#print axioms HMT.IV.LatticeNormalEnergy.normalField_energy_covariant
+#print axioms HMT.IV.LatticeStateFieldEnergy.descendantWeight
+#print axioms HMT.IV.LatticeStateFieldEnergy.descendant_energy_covariant
+#print axioms HMT.IV.LatticeStateFieldEnergy.energy_of_creative_field
+#print axioms HMT.IV.LatticeStateFieldEnergy.descendantState_energy
+#print axioms HMT.IV.LatticeStateFieldEnergy.descendant_energy_identity
+#print axioms HMT.IV.LatticeStateFieldEnergy.stateField_energy
+#print axioms HMT.IV.LatticeStateFieldEnergy.stateField_homogeneous_energy
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_energy
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_changes_energy
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_translation
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_vacuum
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_minus_two_vacuum
+#print axioms HMT.IV.LatticeConformalCovariance.conformalMode_minus_three_vacuum
+#print axioms HMT.IV.LatticeEvenTranslation.theta_translation
+#print axioms HMT.IV.LatticeEvenTranslation.theta_translation_commutes
+#print axioms HMT.IV.LatticeEvenTranslation.translation_mem_parity
+#print axioms HMT.IV.LatticeEvenTranslation.translation_mem_even
+#print axioms HMT.IV.LatticeEvenTranslation.evenTranslation
+#print axioms HMT.IV.LatticeEvenTranslation.evenTranslation_coe
+#print axioms HMT.IV.LatticeEvenTranslation.evenTranslation_vacuum
+#print axioms HMT.IV.LatticeEvenTranslation.evenCoefficient_translation
+#print axioms HMT.IV.LatticeEvenTranslation.evenCoefficient_translation_vacuum
+#print axioms HMT.IV.LatticeEvenTranslation.evenCoefficient_translated_state
+#print axioms HMT.IV.LatticeEvenTranslation.evenField
+#print axioms HMT.IV.LatticeEvenTranslation.evenField_coefficient
+#print axioms HMT.IV.LatticeEvenTranslation.evenField_translation_covariant
+#print axioms HMT.IV.LatticeEvenTranslation.evenField_translated_state
+#print axioms HMT.IV.LatticeEvenTranslation.conformalState_fixed
+#print axioms HMT.IV.LatticeEvenTranslation.conformalState_mem_even
+#print axioms HMT.IV.LatticeEvenTranslation.conformalMode_mem_even
+#print axioms HMT.IV.LatticeConformalLowModes.negative_energy_vector_zero
+#print axioms HMT.IV.LatticeConformalLowModes.conformalMode_above_weight_zero
+#print axioms HMT.IV.LatticeConformalLowModes.conformalMode_above_two_state
+#print axioms HMT.IV.LatticeConformalLowModes.conformalMode_one_state
+#print axioms HMT.IV.LatticeConformalLowModes.conformalMode_two_state_vacuum_line
+#print axioms HMT.IV.LatticeGramSymmetry.gramMatrix_transpose
+#print axioms HMT.IV.LatticeGramSymmetry.gramInv_transpose
+#print axioms HMT.IV.LatticeGramSymmetry.gramInv_symmetric
+#print axioms HMT.IV.LatticeConformalCoefficient.coefficientReader
+#print axioms HMT.IV.LatticeConformalCoefficient.conformalMode_normal_sum
+#print axioms HMT.IV.LatticeConformalCoefficient.conformalMode_normal_sum_apply
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.nonnegative_mode_create
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.nonnegative_mode_one_creator
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.nonnegative_mode_two_creators
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.gram_contract_vectors
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.gram_contract_vectors_right
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.nonnegative_mode_conformalState
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.creationTerm_central_state
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.annihilationTerm_central_state
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.normal_central_state
+#print axioms HMT.IV.LatticeConformalCentralCoefficient.conformalMode_two_state
+#print axioms HMT.IV.LatticeGramContractions.dual_mode_kernel
+#print axioms HMT.IV.LatticeGramContractions.dualAnnihilate_monomial
+#print axioms HMT.IV.LatticeGramContractions.pair_basis_coordinates
+#print axioms HMT.IV.LatticeGramContractions.dual_pair_coordinates
+#print axioms HMT.IV.LatticeNormalZeroMode.creation_zero_mode
+#print axioms HMT.IV.LatticeNormalZeroMode.annihilation_zero_mode_zero
+#print axioms HMT.IV.LatticeNormalZeroMode.annihilation_zero_mode_succ
+#print axioms HMT.IV.LatticeNormalZeroMode.normal_zero_mode_cutoff
+#print axioms HMT.IV.LatticeConformalEnergyParts.number_contraction_monomial
+#print axioms HMT.IV.LatticeConformalEnergyParts.quadratic_pair_contraction
+#print axioms HMT.IV.LatticeConformalEnergyParts.half_quadratic_pair_contraction
+#print axioms HMT.IV.LatticeConformalEnergyParts.rectangular_weight
+#print axioms HMT.IV.LatticeConformalEnergyParts.oscillators_energy_cutoff
+#print axioms HMT.IV.LatticeConformalEnergyParts.annihilate_monomial_cutoff
+#print axioms HMT.IV.LatticeConformalEnergy.zero_mode_cutoff
+#print axioms HMT.IV.LatticeConformalEnergy.carrier_oscillators_energy_cutoff
+#print axioms HMT.IV.LatticeConformalEnergy.carrier_charge_quadratic
+#print axioms HMT.IV.LatticeConformalEnergy.conformalMode_zero_eq_energy
+#print axioms HMT.IV.LatticeConformalTranslation.creation_translation_mode
+#print axioms HMT.IV.LatticeConformalTranslation.annihilation_translation_mode
+#print axioms HMT.IV.LatticeConformalTranslation.normal_translation_cutoff
+#print axioms HMT.IV.LatticeConformalTranslation.gram_symmetrized
+#print axioms HMT.IV.LatticeConformalTranslation.conformal_translation_cutoff
+#print axioms HMT.IV.LatticeConformalTranslation.charge_term_creator_commute
+#print axioms HMT.IV.LatticeConformalTranslation.shift_term_creator_commutator
+#print axioms HMT.IV.LatticeConformalTranslation.conformal_translation_creator
+#print axioms HMT.IV.LatticeConformalTranslation.conformal_translation_ground
+#print axioms HMT.IV.LatticeConformalTranslation.conformalMode_neg_one_eq_translation
+#print axioms HMT.IV.LatticeConformalFoundation.conformalMode_zero_state
+#print axioms HMT.IV.LatticeConformalFoundation.conformalMode_minus_one_state
+#print axioms HMT.IV.LatticeConformalFoundation.conformalMode_zero_commutator
+#print axioms HMT.IV.LatticeConformalFoundation.conformalMode_minus_one_commutator
+#print axioms HMT.IV.LatticeConformalFoundation.mobius_zero_minus_one
+#print axioms HMT.IV.LatticeConformalFoundation.mobius_zero_one
+#print axioms HMT.IV.LatticeConformalFoundation.mobius_one_minus_one
+#print axioms HMT.IV.LatticeConformalFoundation.conformal_self_coefficients

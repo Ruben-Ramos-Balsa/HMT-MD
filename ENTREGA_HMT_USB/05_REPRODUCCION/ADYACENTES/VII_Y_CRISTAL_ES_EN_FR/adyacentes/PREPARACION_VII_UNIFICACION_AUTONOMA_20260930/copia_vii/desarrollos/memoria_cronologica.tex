@@ -1,0 +1,331 @@
+% Fuente conservada íntegra: originales/cuaderno/NOTA.md, §§1--7.
+\section{Memoria cronológica, balance y respuesta de vacancias}
+\label{md:cron:seccion}
+
+La construcción siguiente recibe el factor simbólico de capacidad y estudia
+sus lectores posteriores. La razón interna $3^6/10^3=729/1000$ y su
+calendario pertenecen a la construcción precedente
+(secciones~\ref{mono-ampl:relojes} y~\ref{vac-capacidad-trit}).
+La arquitectura APP--TRIT--TPK, las regiones, el retorno nonádico y el
+registro $K$ conservan su posición causal anterior. Los logaritmos empleados
+en el lector de capacidad describen dicho factor y no seleccionan de nuevo
+las regiones de $\pi,\varphi,e,\alpha$.
+Las proposiciones son consecuencias focales sobre observación y memoria;
+su alcance se distingue del estado TPK completo y de una atribución de
+prioridad histórica a resultados generales sobre sucesiones mecánicas o
+información.
+
+\subsection{Objeto, medida y dos lectores}
+\label{md:cron:lectores}
+
+Sea $\delta=\log_{10}(10/9)$ la pendiente del calendario de capacidad,
+y sea $\theta$ una fase uniformemente distribuida en $[0,1)$.
+La medida representa incertidumbre sobre el origen de lectura, mientras el
+mecanismo permanece determinado. Definimos
+\begin{equation}
+ \begin{aligned}
+ z_j(\theta)&=\lfloor(j+1)\delta+\theta\rfloor
+             -\lfloor j\delta+\theta\rfloor,\\
+ W_n(\theta)&=(z_0(\theta),\ldots,z_{n-1}(\theta)),\\
+ B_n(\theta)&=\sum_{j=0}^{n-1}z_j(\theta).
+ \end{aligned}
+ \label{md:cron:dos-lectores}
+\end{equation}
+El bloque $W_n$ conserva la cronología y $B_n$ conserva el balance.
+Para una fase exacta y una regla exacta conocidas, ambos objetos son
+deterministas; las entropías se refieren expresamente al conjunto de fases
+posibles.
+
+La telescopía da
+\begin{equation}
+ B_n(\theta)=\lfloor n\delta+\theta\rfloor.
+ \label{md:cron:telescopia}
+\end{equation}
+Por tanto, $B_n$ admite sólo los valores $\lfloor n\delta\rfloor$ y
+$\lceil n\delta\rceil$. Los puntos $\{-j\delta\}$, con $j=0,\ldots,n$,
+dividen el círculo en $n+1$ intervalos de fase. Cada intervalo porta una
+secuencia distinta de longitud $n$. En efecto, los prefijos acumulados
+$\lfloor k\delta+\theta\rfloor$, para $k=1,\ldots,n$, son monótonos en
+$\theta$, y cada frontera cambia uno de ellos; la secuencia reconstruye
+todos esos prefijos.
+
+Los extremos tienen medida cero. Una convención semiabierta resuelve su
+asignación y conserva las entropías.
+
+\subsection{Información creciente y tasa entrópica nula}
+\label{md:cron:crecimiento}
+
+Sean $\ell_0,\ldots,\ell_n$ las longitudes de los intervalos de fase y
+\begin{equation}
+ H_n=-\sum_{j=0}^{n}\ell_j\log_2\ell_j.
+ \label{md:cron:entropia-bloque}
+\end{equation}
+
+\begin{proposition}
+\label{md:cron:proposicion-tasa}
+Se cumplen simultáneamente
+\begin{equation}
+ H_n\longrightarrow+\infty,\qquad
+ \frac{H_n}{n}\longrightarrow0.
+ \label{md:cron:dos-limites}
+\end{equation}
+\end{proposition}
+\begin{proof}
+La cota superior es $H_n\leq\log_2(n+1)$. Si
+$\ell_{\max}(n)=\max_j\ell_j$, entonces
+$H_n\geq-\log_2\ell_{\max}(n)$.
+La pendiente $\delta$ es irracional: si $\delta=p/q$ con $q>0$,
+se tendría $(10/9)^q=10^p$, lo cual contradice la valuación del primo $3$.
+Por irracionalidad, los puntos de la órbita son densos. Las particiones
+sucesivas tienen malla máxima tendente a cero: para cada $\epsilon>0$
+existe un tramo finito $\epsilon$-denso, y los tramos posteriores sólo
+subdividen sus intervalos. Por tanto, la cota inferior diverge. La cota
+superior dividida por $n$ tiende a cero.
+\end{proof}
+
+Las longitudes de los intervalos no son iguales en general. La prueba
+establece las cotas anteriores, sin afirmar
+$H_n=\log_2(n+1)$ ni una ley asintótica logarítmica exacta que requiriese
+condiciones diofánticas adicionales.
+La entropía topológica del factor también es cero porque
+$\log(n+1)/n\to0$. La información del bloque y su tasa son cantidades
+diferentes. El crecimiento del archivo de una trayectoria conocida no
+equivale, por sí solo, a producción de información estadística independiente.
+
+\subsection{Información cronológica no determinada por el balance}
+\label{md:cron:condicional}
+
+\begin{corollary}
+\label{md:cron:corolario-condicional}
+Para el mismo conjunto de fases,
+\begin{equation}
+ H(W_n\mid B_n)=H_n-H(B_n)
+ \geq H_n-1\longrightarrow+\infty.
+ \label{md:cron:entropia-condicional}
+\end{equation}
+\end{corollary}
+\begin{proof}
+$B_n$ es función de $W_n$, de modo que la regla de la cadena da la igualdad.
+Su soporte tiene dos elementos, por lo que $H(B_n)\leq1$ bit.
+Se aplica la proposición~\ref{md:cron:proposicion-tasa}.
+\end{proof}
+
+La entropía condicional que diverge es la media sobre los balances;
+no se atribuye la misma incertidumbre a cada balance concreto.
+Tampoco se atribuye esa pérdida al estado enriquecido completo: cuando la
+memoria retenida recupera $W_n$, se tiene
+\begin{equation}
+ H(W_n\mid B_n,M_n)=0.
+ \label{md:cron:restitucion-memoria}
+\end{equation}
+Por cardinalidad, al menos una de las dos fibras de $B_n$ contiene
+$\lceil(n+1)/2\rceil$ secuencias o más. Esta cota combinatoria se distingue
+de la cota entrópica.
+El resultado precisa la relación entre valor y genealogía en este lector:
+los dos balances posibles no agotan las historias temporales compatibles.
+
+\subsection{Corriente centrada: balance acotado y actividad persistente}
+\label{md:cron:corriente}
+
+El lector centrado se expresa por
+\begin{equation}
+ J_j=z_j-\delta,\qquad
+ \sum_{j=0}^{n-1}J_j=B_n-n\delta.
+ \label{md:cron:corriente-definicion}
+\end{equation}
+En consecuencia,
+$\left|\sum_{j=0}^{n-1}J_j\right|<1$ para toda ventana.
+A la vez,
+\begin{equation}
+ \lim_{n\to\infty}\frac1n\sum_{j=0}^{n-1}J_j=0,\qquad
+ \lim_{n\to\infty}\frac1n\sum_{j=0}^{n-1}J_j^2
+ =\delta(1-\delta)>0.
+ \label{md:cron:actividad}
+\end{equation}
+\begin{proof}
+Se tiene $z_j^2=z_j$ y $B_n/n\to\delta$ por la cota de discrepancia.
+La expansión
+$(z_j-\delta)^2=z_j(1-2\delta)+\delta^2$, seguida de la sustitución del
+promedio de $z_j$, da la segunda identidad.
+El argumento vale para cualquier fase y no requiere un promedio aleatorio.
+\end{proof}
+
+El balance acumulado acotado, la actividad cuadrática positiva y la tasa de
+entropía cero son, por tanto, compatibles. Las identidades conservan la
+distinción entre el lector centrado y una representación de carga
+elemental; tampoco establecen una producción energética sin balance.
+
+Si una realización dimensional ya establecida toma
+$I_j=(u_Q/t_0)J_j$, se obtiene
+\begin{equation}
+ I_{\mathrm{rms}}^2
+ =\left(\frac{u_Q}{t_0}\right)^2\delta(1-\delta).
+ \label{md:cron:eficaz}
+\end{equation}
+Si cada $I_j$ se mantiene durante un intervalo de duración $t_0$, este
+promedio discreto coincide con el promedio temporal.
+Como contraste físico posterior, una carga resistiva ideal
+$R_{\mathrm{res}}>0$ tendría potencia media
+\begin{equation}
+ \overline P_{\mathrm{res}}
+ =R_{\mathrm{res}}\left(\frac{u_Q}{t_0}\right)^2
+ \delta(1-\delta)>0.
+ \label{md:cron:potencia-resistiva}
+\end{equation}
+Es una predicción del modelo compuesto con esa carga. La resistencia y el
+dispositivo conservan su especificación propia; no se derivan de la sola
+sucesión de capacidad.
+
+\subsection{Espectro de la corriente y orientación}
+\label{md:cron:espectro}
+
+La función de observación es
+$f(\theta)=\mathbf1_{[1-\delta,1)}(\theta)-\delta$, con
+$J_j=f(\theta+j\delta)$. Sus coeficientes de Fourier, para $m\neq0$, son
+\begin{equation}
+ a_m=\frac{\exp(2\pi i m\delta)-1}{2\pi i m},\qquad
+ |a_m|^2=\frac{\sin^2(\pi m\delta)}{\pi^2m^2},\qquad
+ a_0=0.
+ \label{md:cron:fourier}
+\end{equation}
+Se obtienen integrando la indicatriz sobre su intervalo. La identidad de
+Parseval da
+\begin{equation}
+ \sum_{m\neq0}|a_m|^2=\delta(1-\delta),
+ \label{md:cron:parseval}
+\end{equation}
+en concordancia con la actividad cuadrática. Las frecuencias temporales
+son $m\delta$ módulo $1$. La correlación estacionaria, con fase uniforme,
+queda determinada por esas intensidades; éstas no contienen la fase inicial.
+Una traslación multiplica $a_m$ por una fase unitaria, y la inversión
+temporal intercambia las frecuencias opuestas.
+
+La potencia espectral aislada no recupera la orientación ni el origen
+temporal. Una lectura sensible a fase o una referencia marcada aporta
+la información complementaria. La deducción conserva la distinción entre
+esa referencia general y el registro $K$, así como entre ritmos simbólicos
+y una realización experimental determinada.
+
+\subsubsection{Referencia cíclica y transportes de igual intensidad espectral}
+\label{md:cron:k-ciclico}
+
+La propiedad cíclica del registro $K$ permite una consecuencia finita
+independiente del espectro anterior. En $V_K=\mathbb R^{12}$, sea $S$ el
+desplazamiento $(Sx)_i=x_{i+1}$ y
+\begin{equation}
+ O_K=(K,SK,\ldots,S^{11}K).
+ \label{md:cron:matriz-ciclica}
+\end{equation}
+Se utiliza la invertibilidad de $O_K$ establecida por la referencia cíclica
+del registro. Para cualquier operador real $H$ que conmute con $S$,
+pongamos $y_+=HK$ e $y_-=H^TK$.
+
+\begin{proposition}
+\label{md:cron:proposicion-intensidades}
+Las doce intensidades de Fourier de $y_+$ e $y_-$ coinciden.
+Sin embargo, $y_+=y_-$ si y sólo si $H=H^T$.
+Cada respuesta vectorial completa, junto con $K$ y la orientación de $S$,
+recupera su operador.
+\end{proposition}
+\begin{proof}
+$H$ es circulante. Sus multiplicadores de Fourier son $\lambda_m$ y los
+de $H^T$ son sus conjugados, de modo que las dos respuestas tienen
+intensidades $|\lambda_m|^2|\widehat K_m|^2$.
+Si sus vectores coinciden, $(H-H^T)K=0$. La conmutación implica que
+$H-H^T$ anula también $S^jK$ para todo $j$. Esos vectores forman una base;
+por tanto, $H-H^T=0$. La implicación inversa es inmediata.
+La recuperación se expresa por
+\begin{equation}
+ H=O_{y_+}O_K^{-1},\qquad
+ H^T=O_{y_-}O_K^{-1}.
+ \label{md:cron:restitucion-operador}
+\end{equation}
+\end{proof}
+
+En particular, los desplazamientos $S$ y $S^{-1}$ producen respuestas con
+el mismo espectro de potencia, pero distintas. Las autocorrelaciones exactas
+del registro dan
+\begin{equation}
+ \|SK-S^{-1}K\|^2
+ =2\bigl(\|K\|^2-\langle K,S^2K\rangle\bigr)
+ =2175744>0.
+ \label{md:cron:separacion-desplazamientos}
+\end{equation}
+La inversión racional de $O_K$ recupera de ambas respuestas los
+coeficientes $e_1$ y $e_{11}$, respectivamente. $K$ se utiliza después
+de su generación como referencia marcada. La intensidad espectral o el
+balance escalar no sustituyen la respuesta vectorial.
+El corolario describe el portador cíclico de doce componentes;
+conserva la diferencia entre $S$ y la dinámica enriquecida completa,
+así como los operadores adicionales de una conjugación física de carga.
+Para un $H$ general, la transposición tampoco significa inversión temporal;
+en el caso $S$, sí coincide con $S^{-1}$.
+
+\subsection{Enlace operatorio electrónico}
+\label{md:cron:electron}
+
+La incidencia entre las fibras de suma y producto de APP sobre $D_9^3$
+define $C$. Su vector trítico
+$m_{\mathrm{ph}}=(1,-1,0)^3$ satisface
+\begin{equation}
+ Cm_{\mathrm{ph}}=C^Tm_{\mathrm{ph}}
+ =-\frac12m_{\mathrm{ph}}.
+ \label{md:cron:modo-tritico}
+\end{equation}
+El calendario inducido recorre los regímenes del mismo selector trítico;
+la incidencia selecciona el plano principal de singularidad $1/2$.
+En él,
+\begin{equation}
+ P=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+ Q=\begin{pmatrix}1/4&\sqrt3/4\\\sqrt3/4&3/4\end{pmatrix},
+ \qquad J=\frac4{\sqrt3}[P,Q],\qquad J^2=-I.
+ \label{md:cron:plano-electronico}
+\end{equation}
+La incidencia y la norma del conmutador se desarrollan en la
+sección~\ref{vi:dep:prefactor}. Se recupera así una relación efectiva entre
+organización temporal y bloque electrónico, conservando el selector,
+sus etiquetas y la incidencia. La representación de carga y la realización
+dimensional mantienen sus operadores propios: el enlace no asigna
+directamente las cargas elementales opuestas a $z_j-\delta$.
+
+\subsection{Información retenida y composición energética}
+\label{md:cron:informacion-energia}
+
+La recuperación de fibra establece
+\begin{equation}
+ H(X\mid q(X),M(X))=0
+ \label{md:cron:inversa-enriquecida}
+\end{equation}
+cuando el lector enriquecido tiene inversa; una actualización biyectiva
+conserva $H(X)$. Estas propiedades se reúnen en
+\eqref{eq:ii-kb-aut-fibra} y~\eqref{eq:ii-kb-aut-reversible}.
+La coexistencia de $H_n$ creciente y tasa cero es compatible con esas
+propiedades y con las identidades de Shannon.
+
+El trabajo de borrado depende de la información accesible retenida.
+En el régimen ideal isotermo de memorias lógicas degeneradas y en el
+límite asintótico apropiado, el coste por copia con información lateral es
+\begin{equation}
+ W_{\mathrm{borrado,ideal}}
+ =k_BT\ln(2)\,H(X\mid M).
+ \label{md:cron:borrado}
+\end{equation}
+Si $X$ se recupera desde $M$, la contribución lógica ideal puede ser cero.
+El transporte físico, la lectura, el control y el ciclo completo conservan
+balances propios; la igualdad $h_{\mathrm{top}}=0$ no los elimina.
+
+La composición relevante conserva la secuencia
+\[
+ \begin{gathered}
+ \text{cronología}\longrightarrow
+ \text{registro de frontera}\longrightarrow
+ \text{lector de corriente y estado}\\
+ \longrightarrow
+ \text{memoria retenida}\longrightarrow
+ \text{balance térmico}.
+ \end{gathered}
+\]
+El desarrollo anterior construye los dos primeros lectores y sus
+consecuencias informacionales. Su alcance se distingue de la certificación
+de un dispositivo físico completo y mantiene intacta la genealogía
+constructiva de las constantes.

@@ -1,0 +1,249 @@
+% FORMALIZACION_REUNIDA: CG-015/P09 del inventario REV05.
+% Propietarios: sections/nucleo.tex (Cayley APP), libro/toro27.tex:123--256,
+% PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/deltas/integracion/
+% APPRouteWinding.lean (desplazamiento y cociclo entero).
+% Esta insercion explicita el cambio de soporte y las fibras aritmeticas.
+\section{Refinamiento bidimensional de la APP y cociclo de acarreo}
+\label{sec:refinamiento-app-27-9}
+
+La realización de la APP sobre un toro de nueve posiciones por coordenada
+y su ampliación a veintisiete posiciones se relacionan mediante división
+euclídea. La ampliación conserva dos direcciones independientes y asigna
+un dígito ternario adicional a cada coordenada. Por ello cada posición
+de la APP inicial posee nueve levantamientos en el soporte ampliado.
+Los dos dígitos adicionales conservan la posición dentro de la fibra,
+mientras que la dirección del transporte y el régimen del lector TRIT
+permanecen como coordenadas propias del estado enriquecido.
+
+Para $m\geq1$, escribimos
+\[
+ T_m=(\mathbb Z/m\mathbb Z)^2.
+\]
+En los cálculos de esta sección se eligen representantes
+$0,\ldots,m-1$. La presentación nonádica $1,\ldots,9$ imprime la
+clase cero mediante el signo $9$. Esta convención permite leer la tabla
+APP y efectuar las divisiones enteras con una regla única de residuos.
+
+\subsection{Proyección, fibras y coordenadas ternarias de refinamiento}
+
+La proyección y la sección de representantes son
+\[
+ p:T_{27}\longrightarrow T_9,\qquad
+ p(x,y)=(x\bmod9,y\bmod9),
+\]
+\[
+ s:T_9\longrightarrow T_{27},\qquad s(r,t)=(r,t),
+ \quad 0\leq r,t<9.
+\]
+La proyección es un homomorfismo sobreyectivo de grupos aditivos. Su
+núcleo es
+\[
+ \ker p=\{(9a,9b):a,b\in\mathbb F_3\}
+        \simeq\mathbb F_3^2.
+\]
+La aplicación de coordenadas
+\begin{equation}
+ \Psi:T_9\times\mathbb F_3^2\longrightarrow T_{27},\qquad
+ \Psi((r,t),(a,b))=(r+9a,t+9b)
+ \label{eq:app-refinamiento-coordenadas}
+\end{equation}
+utiliza representantes $0\leq a,b<3$.
+
+\begin{proposition}[Descomposición única de las posiciones ampliadas]
+\label{prop:app-refinamiento-fibras}
+La aplicación $\Psi$ es biyectiva. Cada fibra de $p$ contiene nueve
+posiciones y la totalidad del soporte satisface
+\[
+ |T_{27}|=27^2=9^2\cdot3^2=729.
+\]
+Las dos coordenadas de $\mathbb F_3^2$ son los dos trits posicionales
+que describen el refinamiento de las dos coordenadas de la APP.
+\end{proposition}
+\begin{proof}
+Para $0\leq x,y<27$, las divisiones euclídeas
+\[
+ x=r+9a,\qquad y=t+9b,
+ \quad 0\leq r,t<9,\quad0\leq a,b<3
+\]
+existen y son únicas. Estas fórmulas construyen la inversa de $\Psi$.
+Fijados $r,t$, los nueve pares $(a,b)$ son distintos y agotan la
+fibra. El censo resulta al multiplicar las $81$ posiciones residuales
+por sus nueve levantamientos.
+\end{proof}
+
+Por ejemplo, la posición $(5,5)$ posee la fibra
+\[
+ \{(5+9a,5+9b):0\leq a,b<3\}.
+\]
+La fila de esta fibra con $b=1$ es
+$(5,14),(14,14),(23,14)$. Cada posición conserva el mismo par residual
+$(5,5)$ y un par distinto de cocientes. La multiplicidad nueve expresa
+dos elecciones ternarias independientes. La lectura topológica y
+temporal del TRIT conserva, además, su propio dominio operatorio.
+
+\subsection{Composición aditiva y memoria del cruce modular}
+
+Para $r,t\in\{0,\ldots,8\}$, definimos
+\[
+ r\oplus t=(r+t)\bmod9,\qquad
+ c_9(r,t)=\left\lfloor\frac{r+t}{9}\right\rfloor.
+\]
+Transportada por $\Psi$, la adición en una coordenada de
+$\mathbb Z/27\mathbb Z$ es
+\begin{equation}
+ (r,a)\boxplus(t,b)
+   =\bigl(r\oplus t,\ a+b+c_9(r,t)\pmod3\bigr).
+ \label{eq:app-refinamiento-adicion}
+\end{equation}
+En dos coordenadas, la misma fórmula se aplica por separado a cada eje.
+
+\begin{proposition}[Cociclo de la extensión posicional]
+\label{prop:app-refinamiento-cociclo}
+El acarreo satisface
+\begin{equation}
+ c_9(r,t)+c_9(r\oplus t,u)
+ =c_9(t,u)+c_9(r,t\oplus u)
+ =\left\lfloor\frac{r+t+u}{9}\right\rfloor.
+ \label{eq:app-refinamiento-cociclo}
+\end{equation}
+Por tanto, \eqref{eq:app-refinamiento-adicion} es asociativa y
+reproduce exactamente el grupo aditivo del soporte ampliado.
+\end{proposition}
+\begin{proof}
+La igualdad $r+t=(r\oplus t)+9c_9(r,t)$ da
+\[
+ \left\lfloor\frac{r+t+u}{9}\right\rfloor
+ =c_9(r,t)+\left\lfloor\frac{(r\oplus t)+u}{9}\right\rfloor.
+\]
+La agrupación $r+(t+u)$ proporciona el otro miembro. Sustituir
+$x=r+9a$ e $y=t+9b$ en $x+y$ prueba
+\eqref{eq:app-refinamiento-adicion}; la reducción de su segundo
+componente módulo tres corresponde a reducir $x+y$ módulo veintisiete.
+La identidad del cociclo prueba directamente la asociatividad de esa
+escritura por residuos y cocientes.
+\end{proof}
+
+En particular, $8+1=0+9\cdot1$ muestra el cruce elemental: el residuo
+retorna a la clase cero, impresa como $9$ en la tabla nonádica, y el
+primer cociente aumenta en una unidad. Si se conserva únicamente el
+residuo, se pierde el dato que distingue $0$, $9$ y $18$ en el soporte
+ampliado; el estado levantado distingue esas tres posiciones.
+
+La extensión
+\[
+ 0\longrightarrow\mathbb Z/3\mathbb Z
+ \xrightarrow{\ a\mapsto9a\ }
+ \mathbb Z/27\mathbb Z
+ \longrightarrow\mathbb Z/9\mathbb Z\longrightarrow0
+\]
+es no escindida como extensión de grupos. En efecto, cualquier
+levantamiento de la clase $1$ es $1+9a$, de orden veintisiete. Una
+sección homomorfa tendría que enviar un elemento de orden nueve a uno
+cuyo orden dividiera nueve. La sección de representantes posee, en
+cambio, el defecto exacto $9c_9$, que la fórmula anterior conserva.
+
+\subsection{Compatibilidad de la hoja multiplicativa}
+
+La misma descomposición conserva la segunda operación de la APP. Para
+una coordenada, definimos
+\[
+ r\odot t=rt\bmod9,\qquad
+ m_9(r,t)=\left\lfloor\frac{rt}{9}\right\rfloor.
+\]
+El producto levantado es
+\begin{equation}
+ (r,a)\boxtimes(t,b)
+ =\bigl(r\odot t,\ m_9(r,t)+rb+ta\pmod3\bigr).
+ \label{eq:app-refinamiento-producto}
+\end{equation}
+\begin{proof}
+La expansión entera proporciona
+\[
+ (r+9a)(t+9b)=rt+9(rb+ta)+81ab.
+\]
+El último término se anula módulo veintisiete. Al sustituir
+$rt=(r\odot t)+9m_9(r,t)$ se obtiene la fórmula. La unicidad de la
+división euclídea prueba que sus dos componentes recuperan el producto
+residual y su cociente de refinamiento.
+\end{proof}
+Por ejemplo, $8\cdot8=64\equiv10\pmod{27}$ se representa mediante
+$(1,1)$: el residuo es $1$ y
+$m_9(8,8)=7\equiv1\pmod3$. Así, suma y producto conservan sus
+respectivos acarreos dentro de un mismo soporte ampliado.
+
+\subsection{Direcciones y realización del transporte}
+
+Sea $\mathcal D=\{N,S,E,O\}$ el registro de direcciones y
+$\delta_d\in\mathbb Z^2$ el desplazamiento unitario asociado a $d$.
+En el soporte con dirección definimos
+\[
+ S_m(z,d)=(z+\delta_d\pmod m,d).
+\]
+La proyección conserva explícitamente la dirección,
+$p_{\mathcal D}(z,d)=(p(z),d)$, y cumple
+\begin{equation}
+ p_{\mathcal D}S_{27}=S_9p_{\mathcal D}.
+ \label{eq:app-refinamiento-direccion}
+\end{equation}
+El cálculo del cociente usa, para un desplazamiento entero $v$,
+\[
+ c_9(r;v)=\left\lfloor\frac{r+v}{9}\right\rfloor,
+ \qquad r'=r+v-9c_9(r;v),\qquad
+ a'=a+c_9(r;v)\pmod3.
+\]
+La fórmula incluye los desplazamientos negativos. Por ejemplo,
+$r=0,v=-1$ da $r'=8,c_9=-1$; el retorno inverso restituye el cociente.
+
+\begin{proposition}[Conjugación del desplazamiento en coordenadas de fibra]
+El cambio de coordenadas $\Psi$ transforma $S_{27}$ en el
+desplazamiento residual $S_9$ acompañado por la actualización de los
+dos cocientes que acaba de definirse. Esta transformación es biyectiva
+y conserva la dirección. Sus potencias conservan la misma identidad
+para cualquier longitud finita del transporte.
+\end{proposition}
+\begin{proof}
+En cada eje se sustituye $x=r+9a$ en $x+v$ y se realiza la división
+euclídea. La dirección permanece fija en la definición de $S_m$.
+La inversa utiliza $-v$ y el cociclo, por lo que recupera el estado
+inicial. Componer la identidad una vez por cada transición prueba
+el enunciado para todas las potencias.
+\end{proof}
+
+La realización de Hilbert conserva esta descomposición. Sobre las bases
+de posiciones, el operador
+\[
+ \mathcal U\delta_{\Psi(z,a),d}
+       =\delta_{z,d}\otimes\delta_a
+\]
+define una isometría sobreyectiva
+\[
+ \ell^2(T_{27}\times\mathcal D)
+ \simeq\ell^2(T_9\times\mathcal D)\otimes\ell^2(\mathbb F_3^2).
+\]
+El desplazamiento conjugado es el operador de permutación con acarreo
+descrito en la proposición. Un factor interno adicional $E$ permanece
+intacto al tensorizar con $I_E$. Si un lector de fase depende sólo de
+la proyección y un operador direccional actúa con la misma matriz en
+todas las posiciones, sus cuadrados de compatibilidad también
+conmutan. Un lector que utiliza el cociente se realiza, precisamente,
+en el factor de fibra conservado. Estas condiciones explicitan la
+relación entre el soporte ampliado y los factores del operador sobre
+el toro, con las acciones internas declaradas en su construcción.
+
+\subsection{Seis dígitos ternarios y estructuras algebraicas distintas}
+
+Cada coordenada de $T_{27}$ posee tres dígitos de base tres. Su escritura
+conjunta define una biyección de conjuntos
+\[
+ T_{27}\longleftrightarrow\mathbb F_3^6.
+\]
+Esta biyección publica seis dígitos posicionales. La adición del toro
+contiene acarreos entre los dígitos y la adición vectorial de
+$\mathbb F_3^6$ se efectúa componente a componente. Por ejemplo, la
+suma posicional $2+1=3$ transforma $(2,0,0)$ en $(0,1,0)$, mientras
+que la suma vectorial ternaria daría $(0,0,0)$. El toro contiene
+elementos de orden veintisiete; el espacio vectorial ternario tiene
+exponente tres. Los dos objetos comparten una codificación finita,
+con operaciones tipadas diferentes. La fibra de palabras ternarias,
+el soporte de posiciones y las rectas de una superficie cúbica
+conservan, de este modo, sus construcciones y sus mapas específicos.

@@ -1,0 +1,468 @@
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Geometry & typography ---
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\shorthandoff{<>}
+\usepackage{microtype}
+\usepackage{lmodern}
+%\usepackage{newtxtext,newtxmath} % (omitido por compatibilidad)
+
+% --- Math & theorem-like environments ---
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{bm}
+
+% --- Figures / diagrams ---
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+% --- Tables & hyperlinks ---
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+% --- Paragraph style ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+
+% --- Theorem styles (academic, classical) ---
+\newtheorem{theorem}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{lemma}{Lema}
+\newtheorem{corollary}{Corolario}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\theoremstyle{remark}
+\newtheorem{remark}{Observación}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries N8 — Correspondencia de McKay para el grupo icosaédrico binario $2A_5\simeq \mathrm{SL}(2,5)$:\\
+reconstrucción computacional del diagrama afín $\widetilde{E}_8$ y puente estructural hacia grafos HMT (APP/TPK)}\\[0.6em]
+{\normalsize Documento técnico del corpus HMT (Holografía Modular Triádica)}\\
+{\normalsize Fecha: 2025-12-21}
+\end{center}
+
+\vspace{0.5em}
+
+\textbf{Resumen.}
+Este documento fija y ejecuta, de manera \emph{computacionalmente auditable} y \emph{sin parámetros libres}, el puente clásico
+\[
+\Gamma \subset \mathrm{SU}(2) \quad\Longrightarrow\quad \text{diagrama afín ADE}
+\]
+en el caso $\Gamma=2A_5$ (grupo icosaédrico binario, de orden $120$), mostrando cómo emerge el tipo $\widetilde{E}_8$.
+El núcleo es la \emph{correspondencia de McKay}: a partir de la representación fundamental $V\simeq\mathbb C^2$ (la inclusión de $\Gamma$ en $\mathrm{SU}(2)$),
+se define un grafo de tensorización cuyas aristas codifican la descomposición de $V\otimes\rho$ en irreducibles.
+El cálculo, implementado en un archivo Python compañero, produce:
+(i) la matriz de adyacencia $A$ de $\widetilde{E}_8$, (ii) el vector de marcas/dimensiones
+\[
+\bm d=(1,2,3,4,5,6,4,2,3),
+\]
+que satisface $(2I-A)\bm d=\bm 0$ y $\sum_i d_i^2=120$, (iii) las reglas explícitas $V\otimes\rho_i=\bigoplus_{j\sim i}\rho_j$,
+(iv) la serie de Hilbert de invariantes $\dim(\mathrm{Sym}^nV)^\Gamma$, verificada por recursión y coincidente con
+\[
+\frac{1-t^{60}}{(1-t^{12})(1-t^{20})(1-t^{30})}.
+\]
+Finalmente se enuncia un \emph{protocolo de comparación estructural} con grafos de HMT (APP/TPK) sobre invariantes duros (espectro, relaciones tipo Cartan, series de Poincaré),
+sin depender de ajuste experimental externo. Se incluye bibliografía clásica (Klein, Du Val, McKay, Slodowy, Kostant, Bourbaki) y conclusiones técnicas.
+
+\tableofcontents
+
+\section{Núcleo operativo de HMT (recordatorio mínimo y explícito)}
+En el corpus HMT, el trabajo se organiza alrededor de un \emph{ledger discreto} (APP/TPK) y un diccionario modular--triádico
+(escala $\kappa$--$27$, filtros tipo SU--12, y un anclaje angular canónico). En particular:
+
+\begin{itemize}
+\item Existe una estructura discreta de estados (en el modelo mínimo: $9$ estados), sobre la que se construyen matrices de transición/adyacencia $\mathsf M$
+y, por extensión, objetos espectrales (zeta de determinantes, fórmulas de traza triádicas, etc.).
+\item El corpus fija un par de ángulos canónicos $(A,C^\ast)$, que se usan como entradas geométricas para definir escalas y cierres (p.\,ej.\ torsión mínima $\Delta_4$).
+\item El objetivo conceptual a largo plazo es demostrar que la simetría interna de APP/TPK \emph{genera}, vía puentes modulares y espectrales, patrones de simetría
+del ecosistema Moonshine (función $J$, coeficientes como trazas y leyes de replicación/Hecke).
+\end{itemize}
+
+\textbf{Advertencia epistemológica (disciplina anti--circularidad).}
+En N8 el cálculo que sigue es \emph{puramente interno} a teoría de grupos/representaciones y geometría de $\mathrm{SU}(2)$:
+no usa CODATA ni datos metrológicos. La idea HMT aparece solo en la \emph{comparación estructural} final:
+una vez fijado el objeto rígido $\widetilde{E}_8$, se propone compararlo con el grafo/matriz inducida por APP/TPK mediante invariantes duros.
+
+\section{De $\mathrm{SU}(2)$ a la esfera de Bloch y la esfera de Riemann}
+La relevancia de $\mathrm{SU}(2)$ en física matemática es doble:
+
+\begin{enumerate}
+\item (\emph{Esfera de Bloch.}) $\mathrm{SU}(2)$ actúa transitivamente sobre el espacio de estados puros de un qubit;
+el cociente por fases produce la esfera $S^2$ (Bloch), y las subacciones finitas corresponden a simetrías de sólidos platónicos.
+\item (\emph{Esfera de Riemann.}) Por proyección estereográfica, $S^2$ se identifica con la esfera de Riemann $\widehat{\mathbb C}$,
+y la acción proyectiva de $\mathrm{SU}(2)$ se describe por transformaciones de Möbius
+\[
+z\longmapsto \frac{az+b}{-\overline b\,z+\overline a},\qquad |a|^2+|b|^2=1.
+\]
+Esto conecta el lenguaje cuántico (Bloch) con el lenguaje complejo clásico (Riemann/Klein).
+\end{enumerate}
+
+El paso relevante aquí es el siguiente: si $\Gamma\subset \mathrm{SU}(2)$ es finito, su proyección en $\mathrm{SO}(3)$ es un grupo rotacional finito
+(cíclico, diedral, tetraédrico, octaédrico, icosaédrico). El preimagen en $\mathrm{SU}(2)$ es \emph{binaria} (doble recubrimiento):
+\[
+\text{icosaédrico en }\mathrm{SO}(3)\ \cong\ A_5
+\qquad\rightsquigarrow\qquad
+\text{icosaédrico binario en }\mathrm{SU}(2)\ \cong\ 2A_5\simeq \mathrm{SL}(2,5).
+\]
+
+\section{El grupo icosaédrico binario $2A_5$ y su caracterización mínima}
+\subsection{Definición y datos invariantes}
+Denotaremos por $\Gamma=2A_5$ al grupo icosaédrico binario, de orden
+\[
+|\Gamma|=120.
+\]
+Es un grupo perfecto (su abelianización es trivial) y es isomorfo al grupo lineal especial sobre el cuerpo finito $\mathbb F_5$:
+\[
+\Gamma \simeq \mathrm{SL}(2,5).
+\]
+Desde el punto de vista geométrico, $\Gamma$ es la preimagen en $\mathrm{SU}(2)$ del grupo rotacional del icosaedro/dodecaedro.
+
+\subsection{Presentación de triángulo (2,3,5)}
+Un modo clásico de describirlo es como un cociente de un grupo de triángulo:
+\[
+\Gamma \simeq \langle x,y,z\mid x^2=y^3=z^5=xyz\rangle,
+\]
+donde $x,y,z$ corresponden a rotaciones (en el recubrimiento doble) asociadas a ejes de orden $2,3,5$.
+Esta presentación explica dos números que reaparecerán:
+\[
+\mathrm{lcm}(2,3,5)=30
+\qquad\text{y}\qquad
+2\cdot 30=60.
+\]
+Ambos aparecerán como \emph{número de Coxeter} (30) y como grado de relación invariante (60) en el caso $E_8$.
+
+\section{Correspondencia de McKay: definición operativa}
+La correspondencia de McKay (en su formulación original y en sus desarrollos modernos) establece un puente rígido entre:
+\[
+\Gamma\subset \mathrm{SU}(2)
+\quad\leftrightarrow\quad
+\text{diagramas afines ADE}.
+\]
+
+\begin{definition}[Grafo de McKay]
+Sea $\Gamma\subset \mathrm{SU}(2)$ finito, y sea $V\simeq\mathbb C^2$ la representación compleja de dimensión $2$ obtenida por restricción de la representación estándar de $\mathrm{SU}(2)$.
+Sea $\{\rho_i\}_{i\in I}$ un sistema completo de representaciones irreducibles complejas de $\Gamma$ (con $\rho_0$ la trivial).
+Se define la matriz de McKay $A=(a_{ij})$ por
+\[
+V\otimes \rho_i \;\cong\; \bigoplus_{j\in I} a_{ij}\,\rho_j,
+\qquad a_{ij}\in\mathbb Z_{\ge 0}.
+\]
+El \emph{grafo de McKay} tiene vértices $I$ y $a_{ij}$ aristas entre $i$ y $j$.
+\end{definition}
+
+En nuestro caso, el grupo es simplemente--lazo (tipo ADE), y la matriz $A$ es simétrica; se identifica con la matriz de adyacencia de un diagrama afín.
+
+\begin{definition}[Cartan afín asociado]
+Para un grafo simplemente--lazo con matriz de adyacencia $A$, se define la matriz tipo Cartan
+\[
+C := 2I - A.
+\]
+En los casos afines ADE, $C$ es semidefinida positiva y singular; su núcleo está generado por el \emph{vector de marcas} (o \emph{null root}).
+\end{definition}
+
+\begin{theorem}[McKay, Du Val, clasificación ADE — enunciado]
+Si $\Gamma\subset \mathrm{SU}(2)$ es un subgrupo finito, entonces el grafo de McKay asociado a $(\Gamma,V)$ es uno de los diagramas afines $\widetilde{A}_n,\widetilde{D}_n,\widetilde{E}_6,\widetilde{E}_7,\widetilde{E}_8$.
+Más aún, el tipo ADE codifica tanto la estructura del anillo de representaciones como la geometría del cociente $\mathbb C^2/\Gamma$ (singularidades de Du Val/Kleinian).
+\end{theorem}
+
+\begin{remark}
+En este documento \emph{no} se re--demuestra la clasificación ADE desde cero (eso requiere un desarrollo geométrico largo);
+lo que sí se hace es: \emph{dado} que $\Gamma=2A_5$ es un subgrupo finito de $\mathrm{SU}(2)$ de orden $120$,
+se reconstruye y verifica computacionalmente el objeto afín correspondiente, y se extraen invariantes (marcas, series de Hilbert, espectro).
+\end{remark}
+
+\section{Reconstrucción computacional de $\widetilde{E}_8$ a partir de invariantes internos}
+\subsection{La matriz de adyacencia afín y su diagrama}
+La implementación Python fija el siguiente grafo (nueve vértices), que es isomorfo al diagrama afín $\widetilde{E}_8$.
+Para mantener el vínculo McKay, se etiqueta el vértice $0$ como la representación trivial $\rho_0$ y el vértice $1$ como la representación fundamental $V=\rho_1$ (dimensión 2), adyacente a la trivial.
+
+\begin{center}
+\begin{tikzpicture}[
+  node/.style={circle,draw,minimum size=7.5mm,inner sep=0pt},
+  every edge/.style={draw,thick},
+  % >=Latex  (no se requiere punta de flecha)
+]
+\node[node] (n0) at (0,0) {$0$};
+\node[node] (n1) at (1.3,0) {$1$};
+\node[node] (n2) at (2.6,0) {$2$};
+\node[node] (n3) at (3.9,0) {$3$};
+\node[node] (n4) at (5.2,0) {$4$};
+\node[node] (n5) at (6.5,0) {$5$};
+
+\node[node] (n6) at (7.8,0) {$6$};
+\node[node] (n7) at (9.1,0) {$7$};
+\node[node] (n8) at (6.5,1.5) {$8$};
+
+\draw (n0)--(n1)--(n2)--(n3)--(n4)--(n5)--(n6)--(n7);
+\draw (n5)--(n8);
+\end{tikzpicture}
+\end{center}
+
+La matriz de adyacencia correspondiente es:
+\[
+A_{\widetilde{E}_8}=
+\begin{bmatrix}
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
+\end{bmatrix}.
+\]
+La matriz tipo Cartan afín es, por definición, $C_{\widetilde{E}_8}=2I-A_{\widetilde{E}_8}$, esto es:
+\[
+C_{\widetilde{E}_8}=
+\begin{bmatrix}
+2 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+-1 & 2 & -1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & -1 & 2 & -1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & 2 & -1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 2 & -1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & -1 & 2 & -1 & 0 & -1 \\
+0 & 0 & 0 & 0 & 0 & -1 & 2 & -1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & -1 & 2 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 2
+\end{bmatrix}.
+\]
+
+\subsection{Vector de marcas/dimensiones como null root}
+El cálculo del núcleo de $C_{\widetilde{E}_8}$ (exacto, racional) produce un generador positivo mínimo:
+\[
+\bm d=(d_0,\dots,d_8)=(1,2,3,4,5,6,4,2,3).
+\]
+Este vector satisface, de forma equivalente,
+\[
+C_{\widetilde{E}_8}\,\bm d=\bm 0
+\qquad\Longleftrightarrow\qquad
+2d_i=\sum_{j\sim i} d_j\quad\text{para todo vértice }i,
+\]
+y constituye el \emph{vector de marcas} del diagrama afín.
+
+\subsection{Chequeo ``de orden'' (no arbitrario): $\sum d_i^2 = |\Gamma|$}
+En la correspondencia de McKay, los enteros $d_i$ se interpretan como dimensiones de las representaciones irreducibles $\rho_i$ de $\Gamma$.
+Una condición durísima, independiente de cualquier \emph{diccionario ad hoc}, es la identidad general de teoría de representaciones finitas:
+\[
+|\Gamma|=\sum_{i} (\dim\rho_i)^2.
+\]
+Sustituyendo $\dim\rho_i=d_i$ se obtiene:
+\[
+\sum_{i=0}^8 d_i^2 = 1^2+2^2+3^2+4^2+5^2+6^2+4^2+2^2+3^2 = 120 = |\Gamma|.
+\]
+Esto es un \textbf{criterio de no--arbitrariedad}: no hay libertad para ``ajustar'' el vector;
+la suma de cuadrados fija el orden del grupo y viceversa.
+
+\subsection{Reglas de descomposición $V\otimes\rho_i$}
+Dado que $A_{\widetilde{E}_8}$ es simplemente--lazo, las multiplicidades son 0 o 1.
+Por construcción del grafo:
+\[
+V\otimes \rho_i \;\cong\; \bigoplus_{j\sim i}\rho_j.
+\]
+En el etiquetado anterior (con $V=\rho_1$), las reglas explícitas quedan:
+
+\begin{align*}
+V\otimes\rho_0 &\cong \rho_1,\\
+V\otimes\rho_1 &\cong \rho_0\oplus \rho_2,\\
+V\otimes\rho_2 &\cong \rho_1\oplus \rho_3,\\
+V\otimes\rho_3 &\cong \rho_2\oplus \rho_4,\\
+V\otimes\rho_4 &\cong \rho_3\oplus \rho_5,\\
+V\otimes\rho_5 &\cong \rho_4\oplus \rho_6\oplus \rho_8,\\
+V\otimes\rho_6 &\cong \rho_5\oplus \rho_7,\\
+V\otimes\rho_7 &\cong \rho_6,\\
+V\otimes\rho_8 &\cong \rho_5.
+\end{align*}
+
+\begin{remark}[Chequeo dimensional local]
+Cada línea anterior cumple automáticamente la identidad de dimensiones
+\[
+2\,d_i=\sum_{j\sim i} d_j,
+\]
+que no es una ``coincidencia numérica'': es la compatibilidad entre tensorización por $V$ y el vector de marcas.
+\end{remark}
+
+\section{Serie de Hilbert de invariantes y grados 12--20--30 (Klein/icosaedro)}
+Uno de los hechos más profundos (y, a la vez, \emph{numéricamente verificables}) es que el paquete
+\[
+(\Gamma\subset \mathrm{SU}(2)) \quad\Longrightarrow\quad \text{serie de invariantes de } \mathbb C[x,y]^\Gamma
+\]
+está controlado por el tipo ADE. Para el caso $E_8$ aparece el trío de grados
+\[
+12,\quad 20,\quad 30,
+\]
+y una relación en grado $60$. La forma compacta (serie de Hilbert) es:
+
+\begin{proposition}[Serie de Hilbert (forma cerrada)]
+Sea $V=\mathbb C^2$ la representación fundamental, y sea $\mathrm{Sym}^n(V)$ la potencia simétrica $n$--ésima.
+Definamos
+\[
+a_n := \dim\bigl(\mathrm{Sym}^n(V)\bigr)^\Gamma.
+\]
+Entonces la serie generatriz $\sum_{n\ge 0} a_n t^n$ satisface
+\[
+\sum_{n\ge 0} a_n t^n \;=\;
+\frac{1-t^{60}}{(1-t^{12})(1-t^{20})(1-t^{30})}.
+\]
+\end{proposition}
+
+\subsection{Recursión desde McKay (cálculo interno)}
+Lo que se verifica en el archivo Python es que esta fórmula se obtiene \emph{sin invocar geometría externa}:
+solo se usa (i) la matriz de McKay $A$, y (ii) la identidad de Clebsch--Gordan en $\mathrm{SU}(2)$:
+\[
+V\otimes \mathrm{Sym}^n(V)\;\cong\; \mathrm{Sym}^{n+1}(V)\oplus \mathrm{Sym}^{n-1}(V).
+\]
+Al restringir a $\Gamma$ y escribir descomposiciones en la base $\{\rho_i\}$, se obtiene una recursión vectorial
+\[
+\bm m_{n+1} = A\,\bm m_n - \bm m_{n-1},
+\qquad
+\bm m_0 = (1,0,\dots,0),
+\qquad
+\bm m_1 = (0,1,0,\dots,0),
+\]
+donde $\bm m_n(i)$ es la multiplicidad de $\rho_i$ en $\mathrm{Sym}^n(V)$.
+Entonces $a_n=\bm m_n(0)$ es la componente trivial.
+
+\subsection{Chequeo numérico explícito}
+El script computa $\{a_n\}_{0\le n\le 60}$ por recursión y compara término a término con la expansión de
+\[
+\frac{1-t^{60}}{(1-t^{12})(1-t^{20})(1-t^{30})}.
+\]
+La comparación coincide exactamente en todo el rango (y no solo asintóticamente).
+Este chequeo es importante por dos razones:
+\begin{itemize}
+\item conecta la \emph{estructura de tensorización} (McKay) con la \emph{estructura de invariantes} (Klein/icosaedro),
+\item fija de manera rígida los grados $12,20,30$ y el ``cierre'' $60$, sin knobs.
+\end{itemize}
+
+\section{Extracción del tipo finito $E_8$ y datos estructurales (Cartan, Coxeter, espectro)}
+El diagrama afín $\widetilde{E}_8$ contiene el diagrama finito $E_8$ eliminando el nodo afín ($0$).
+En matrices: si $A_{\mathrm{fin}}$ es la submatriz de $A_{\widetilde{E}_8}$ restringida a los nodos $1,\dots,8$,
+entonces el Cartan finito es $C_{\mathrm{fin}}=2I-A_{\mathrm{fin}}$.
+
+\[
+A_{E_8}=
+\begin{bmatrix}
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
+\end{bmatrix},
+\qquad
+C_{E_8}=
+\begin{bmatrix}
+2 & -1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+-1 & 2 & -1 & 0 & 0 & 0 & 0 & 0 \\
+0 & -1 & 2 & -1 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & 2 & -1 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 2 & -1 & 0 & -1 \\
+0 & 0 & 0 & 0 & -1 & 2 & -1 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 2 & 0 \\
+0 & 0 & 0 & 0 & -1 & 0 & 0 & 2
+\end{bmatrix}.
+\]
+
+\begin{proposition}[Determinante unimodular]
+$\det(C_{E_8})=1$. En particular, la retícula de raíces $E_8$ es unimodular.
+\end{proposition}
+
+\begin{remark}[Número de Coxeter y espectro de la adyacencia]
+El número de Coxeter del tipo $E_8$ es $h=30$.
+El radio espectral de la matriz de adyacencia $A_{E_8}$ es
+\[
+\rho(A_{E_8}) = 2\cos\!\left(\frac{\pi}{30}\right)\approx 1.9890437907,
+\]
+y el conjunto de autovalores se describe por los exponentes $m\in\{1,7,11,13,17,19,23,29\}$ mediante
+\[
+\lambda_m = 2\cos\!\left(\frac{\pi m}{30}\right).
+\]
+La implementación Python verifica este patrón numéricamente.
+\end{remark}
+
+\section{Protocolo de comparación con grafos/matrices APP--TPK (HMT)}
+El objetivo HMT en este punto es \emph{operacional}:
+
+\begin{quote}
+Dado un objeto rígido $\widetilde{E}_8$ (McKay/icosaedro binario), definir criterios duros para detectar su aparición
+como subestructura, cociente o ``modo'' en la dinámica discreta APP/TPK, sin re--etiquetado circular.
+\end{quote}
+
+Sin asumir \emph{a priori} que APP/TPK coincide con $\widetilde{E}_8$, el protocolo mínimo propone contrastar:
+
+\begin{enumerate}
+\item \textbf{Invariante espectral.} Comparar espectros (o espectros de Laplacianos normalizados) del grafo candidato
+con el espectro de $A_{\widetilde{E}_8}$ o $A_{E_8}$. Para un match no trivial, se exige coincidencia
+\emph{en multiplicidades} y estabilidad bajo refinamiento triádico (candado $\kappa$--$27$).
+\item \textbf{Relación tipo Cartan.} Verificar si existe un vector positivo $\bm d$ tal que $(2I-A)\bm d=\bm0$
+para la matriz inducida por APP/TPK (o su reducción canónica). La existencia de un ``null root'' entero es un rasgo ADE.
+\item \textbf{Serie de Poincaré/Hilbert interna.} Construir (desde trazas/orbitas triádicas) una serie generatriz
+que juegue el papel de $\sum a_n t^n$, y contrastar si factoriza en grados discretos análogos a $12,20,30,60$.
+Aquí \emph{no} se admiten ajustes: los grados deben emerger de la gramática del autómata.
+\end{enumerate}
+
+\begin{remark}
+Este protocolo encaja con el criterio de HMT de ``pruebas duras'': son invariantes algebraicos/analíticos que o bien pasan
+o bien fallan, sin margen de interpretación por re--etiquetado.
+\end{remark}
+
+\section{Conclusiones (técnicas, no retóricas)}
+\begin{itemize}
+\item Se ha fijado y verificado por cálculo la estructura $\widetilde{E}_8$ asociada al grupo icosaédrico binario $2A_5\simeq \mathrm{SL}(2,5)$,
+en el sentido operativo de McKay: matriz de adyacencia, vector de marcas, reglas de descomposición $V\otimes\rho_i$.
+\item El vector $\bm d$ satisface simultáneamente dos propiedades rígidas: (i) es null root de la matriz tipo Cartan afín, (ii) su suma de cuadrados
+reproduce el orden del grupo $|\Gamma|=120$. Esto elimina arbitrariedad numérica.
+\item A partir exclusivamente de $A_{\widetilde{E}_8}$ y de la identidad de Clebsch--Gordan de $\mathrm{SU}(2)$ se reproduce por recursión
+la serie de Hilbert de invariantes, en forma cerrada $\frac{1-t^{60}}{(1-t^{12})(1-t^{20})(1-t^{30})}$,
+que históricamente se asocia a Klein/icosaedro y, geométricamente, a la singularidad tipo $E_8$.
+\item Se ha extraído el tipo finito $E_8$ (Cartan unimodular, $h=30$, espectro cosenoidal), dejando preparado un \emph{protocolo}
+para comparar esta firma con matrices/grafos APP/TPK del corpus HMT (sin circularidad).
+\end{itemize}
+
+\section*{Bibliografía mínima (clásica y de referencia)}
+\begin{thebibliography}{99}
+
+\bibitem{Klein1884}
+F.~Klein,
+\emph{Vorlesungen über das Ikosaeder und die Auflösung der Gleichungen vom fünften Grade},
+Teubner, Leipzig, 1884.
+(Traducciones y reimpresiones modernas disponibles).
+
+\bibitem{DuVal1934}
+P.~Du~Val,
+\emph{On isolated singularities of surfaces which do not affect the conditions of adjunction},
+Proc.\ Camb.\ Phil.\ Soc.\ 30 (1934), 453--465.
+
+\bibitem{McKay1980}
+J.~McKay,
+\emph{Graphs, singularities, and finite groups},
+Proc.\ Sympos.\ Pure Math.\ 37 (1980), 183--186.
+
+\bibitem{Slodowy1980}
+P.~Slodowy,
+\emph{Simple Singularities and Simple Algebraic Groups},
+Lecture Notes in Mathematics 815, Springer, 1980.
+
+\bibitem{Kostant1984}
+B.~Kostant,
+\emph{The McKay correspondence, the Coxeter element and representation theory},
+Astérisque 1985.
+
+\bibitem{BourbakiLie}
+N.~Bourbaki,
+\emph{Groupes et Algèbres de Lie}, Chapitres 4--6,
+Hermann, Paris (varias ediciones).
+
+\end{thebibliography}
+
+\end{document}

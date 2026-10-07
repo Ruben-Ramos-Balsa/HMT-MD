@@ -1,0 +1,249 @@
+% Propietario conservado: /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/03_actualizacion.tex
+\section{Mise à jour dodécaphasique et registre de mémoire}
+\label{ii:sec:eta}
+Soit $d_t$ le code entier de direction conservé par une trace TPK. Ce code et la direction cardinale du curseur sont des coordonnées distinctes. Les douze fenêtres $E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$, divisent les 108 pas du registre. L'orientation est
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+L'événement d'une fenêtre est le résultat
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{ii:eq:events}
+\end{equation}
+La notation $a_m$ évite de confondre cet événement avec le nombre d’Euler. Le registre source conserve en outre l’orientation TRIT, la signature, la retenue et le segment de trajectoire correspondant, conformément à l’architecture de la section~\ref{ii:ii:tpk-arquitectura}.
+
+\begin{proposition}[Accroissement produit par le transport]
+Soit $\mathbf e_m$ la base de $\R^{12}$ et
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. Si
+$\mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_m$ et $y_m=S^{-m}\mathbf z_m$, alors
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{ii:eq:eta}
+\end{equation}
+Après un tour complet,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{ii:eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplier la mise à jour de $\mathbf z_m$ par $S^{-(m+1)}$ donne
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+En itérant, le coefficient de l’événement $a_m$ est
+$S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Comme $S^{12}=I$,
+on obtient \eqref{ii:eq:cycle}.
+\end{proof}
+
+Le gras identifie ici le vecteur accumulé
+\(\mathbf z_m\in\R^{12}\), tandis que le bloc d’incidence
+\(z_m\) de \eqref{ii:eq:registro-bloque-incidencial} est un entier entre
+\(0\) et \(999\). Le repère mobile \(y_m\) transporte le premier objet ;
+le codage décimal du second conserve sa définition propre.
+
+Ainsi, $\eta_m$ n’est pas une force libre choisie pour imposer une conservation : c’est une expression de l’événement TPK. L’égalité de phase après un tour n’annule pas les événements accumulés. Ce lecteur conserve les dénombrements, tandis que le registre complet conserve aussi leur ordre et leur provenance. On distingue $\eta_m$, incrément vectoriel, de $\eta_{\rm ret}$, mantisse scalaire d’action, et de $\eta_{\rm el}$, paramètre de forme introduit dans la section~\ref{ii:sec:ellipse}.
+
+\subsection{Bilan quadratique}
+On définit
+\[
+\nabla_3=I-S^3,\quad \nabla_4=I-S^4,\quad
+B=\nabla_3^{\mathsf T}\nabla_3+\nabla_4^{\mathsf T}\nabla_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+Les lecteurs orientés du registre signé satisfont
+$(D_jz)_m=z_m-z_{m+j}$ ; avec la convention
+$S\mathbf e_m=\mathbf e_{m+1}$, on a
+$D_j=I-S^{-j}=\nabla_j^{\mathsf T}$. Les deux sens produisent la même
+forme quadratique $B$, car les puissances de $S$ commutent.
+On a $S^{\mathsf T}BS=B$ et $B_{00}=4$. En substituant
+\eqref{ii:eq:eta}, on déduit exactement
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\label{ii:ii:mem:balance}
+\end{equation}
+De même, la charge $q(y)=\sum_jy_j$ satisfait
+$q(y_{m+1})-q(y_m)=a_m$.
+La preuve est le développement du polynôme quadratique après retrait de la
+permutation $S^{-1}$. Aucune valeur métrologique n’entre dans ce calcul.
+La forme $\mathcal M$ mesure ce registre ; son interprétation comme une
+énergie physique déterminée nécessiterait le lecteur dimensionnel correspondant.
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/03b_memoria_resolvente.tex
+\subsection{Résolvantes du transport et conservation de la mémoire}
+\label{ii:subsec:ii-memoria-resolvente}
+
+L’histoire prolongée détermine les fenêtres
+\(I_m=\{9m+1,\ldots,9m+9\}\), pour \(m\geq0\).
+Avec la numérotation de cette section, \(I_m=E_m\) pendant le premier cycle.
+Soit \(\sigma_m\in\{-1,1\}\) l’orientation conservée par cette histoire ;
+pour \(0\leq m<12\), elle coïncide avec \(\Sigma_{12}(m)\). On définit
+\[
+ a_m=\sigma_m\sum_{t\in I_m}\mathbf1_{\{2,4,6,8\}}(d_t),
+ \qquad |a_m|\leq9.
+\]
+Le registre et le repère mobile se prolongent par
+\[
+ \mathbf z_{m+1}=\mathbf z_m+a_m\mathbf e_{m\bmod12},\qquad y_m=S^{-m}\mathbf z_m.
+\]
+L’état initial \(\mathbf z_0\) conserve l’histoire antérieure ; il vaut zéro pour
+un préfixe initialement vide. Dans cette partie, nous écrivons
+\(R=S^{-1}\) pour le transport du repère. La mise à jour
+\eqref{ii:eq:eta} est maintenue dans toute fenêtre. L’orientation et les événements
+ultérieurs s’obtiennent à partir de l’histoire prolongée : le retour du repère
+ne présuppose pas la périodicité de la suite d’événements.
+
+\begin{proposition}[Identité de troncature avec état terminal]
+Pour $N\geq1$, soient
+\[
+Y_N(u)=\sum_{m=0}^N y_mu^m,\qquad
+H_{\eta,N}(u)=\sum_{m=0}^{N-1}\eta_mu^m.
+\]
+On a l’identité polynomiale exacte
+\begin{equation}
+(I-uR)Y_N(u)=y_0+uH_{\eta,N}(u)-u^{N+1}Ry_N.
+\label{ii:mem:identidad-finita}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Aux degrés $1\leq m\leq N$, le coefficient du membre de gauche est
+$y_m-Ry_{m-1}=\eta_{m-1}$, d’après \eqref{ii:eq:eta}.
+Ses coefficients aux degrés zéro et $N+1$ sont $y_0$ et $-Ry_N$,
+respectivement. La comparaison des coefficients prouve l’égalité.
+\end{proof}
+
+Le terme terminal conserve la mémoire transportée lorsqu’on coupe une histoire.
+L’identité permet de comparer une évaluation finie à son prolongement
+en maintenant explicite l’état qui reste à la frontière.
+
+\subsubsection{Correspondance avec le transport du noyau commun}
+
+La numérotation des fenêtres de la section~\ref{ii:subsec:memoria-resolvente}
+et celle employée ici décrivent la même partition de l’histoire. La
+correspondance est
+\[
+ \underbrace{I_m=E_{m+1}}_{\text{indice du noyau commun}}
+ \quad\longleftrightarrow\quad
+ \underbrace{I_m=E_m}_{\text{indice de cette section}},
+ \qquad 0\leq m<12.
+\]
+L’indice change le nom de la fenêtre ; ses neuf transitions,
+son orientation \(\sigma_m=\Sigma_{12}(m)\), son événement \(a_m\) et
+sa position dans le registre restent identiques. Pour tout prolongement,
+\(R=S^{-1}\), \(y_m=S^{-m}\mathbf z_m\) et la
+mise à jour~\eqref{ii:eq:eta} coïncident avec
+\eqref{ii:mem:actualizacion}. L’orientation et la suite d’événements
+conservent la dépendance à l’égard de l’histoire, également après le
+retour du repère.
+
+Cette identification permet d’appliquer directement la
+proposition~\ref{ii:mem:prop-serie} : la série~\eqref{ii:mem:serie}, la
+borne~\eqref{ii:mem:cota} et la convergence uniforme de ses dérivées
+correspondent à ce même registre et à la même horloge de fenêtres. L’identité
+finie~\eqref{ii:mem:identidad-finita} détermine en outre le terme
+terminal lorsqu’on tronque cette série. Ses hypothèses maintiennent l’histoire initiale
+et l’événement borné \(|a_m|\leq9\).
+
+En réutilisant le registre, la proposition~\ref{ii:mem:prop-schur} conserve
+conjointement l’opérateur, la source et le lecteur au moyen de
+\eqref{ii:mem:schur-fuente} et~\eqref{ii:mem:schur-lector}. L’exemple
+\eqref{ii:mem:ejemplo-ciclo} précise l’effet des excursions omises
+par une compression. La composition affine~\eqref{ii:mem:cociclo-tres}, les
+blocs intermédiaires~\eqref{ii:mem:schur-intermedio} et l’identité
+\eqref{ii:mem:schur-transitivo} garantissent la cohérence lors de la concaténation de
+segments ou de l’élimination de plusieurs couches. Leurs démonstrations complètes figurent
+dans la section~\ref{ii:subsec:memoria-resolvente}, avec les domaines, les
+sources et les applications de lecture qui y sont spécifiés.
+
+Le bilan~\eqref{ii:ii:mem:balance} conserve la correspondance entre les
+lecteurs orientés du registre signé et la forme quadratique commune.
+La distinction entre le vecteur accumulé \(\mathbf z_m\) et le bloc
+décimal d’incidence \(z_m\) reste celle établie dans cette section.
+Les identités de transport s’appliquent à la mémoire ainsi typée ; elles ne
+déterminent pas à elles seules des coefficients analytiques supplémentaires.
+
+% END OWNER
+
+
+
+% BEGIN OWNER /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/II/manuscript_es/sections/ii_sello_y_lectura.tex
+\section{Sceau dodécaphasique et lecture rationnelle réversible}
+\label{ii:sec:sello}
+
+Le registre terminal possède une coordonnée visible et une coordonnée
+signée. Le sceau s'obtient à partir de cette dernière par la transformation
+de Hadamard par orbites ; une lecture scalaire ultérieure permet de retrouver
+le sceau lorsque son cadre de représentation est conservé. Cette propriété
+précise ce que signifie ici une définition structurelle d'une constante :
+les applications de production et de récupération sont explicitées, en plus de sa valeur.
+
+Soient $U\in\Z^{12}$ la coordonnée signée produite par le registre,
+$H_4$ la matrice de Hadamard développée à la section~\ref{ii:sec:action}
+et $P_{\rm orb}$ la permutation qui regroupe
+\[
+ (1,4,7,10),\qquad(2,5,8,11),\qquad(3,6,9,12).
+\]
+Définissons
+\[
+ \mathcal H_{12}=P_{\rm orb}^{-1}
+ (H_4\oplus H_4\oplus H_4)P_{\rm orb}.
+\]
+On a $\mathcal H_{12}^2=4I$. Lorsque
+$\mathcal H_{12}U\equiv0\pmod4$, le sceau entier est
+\[
+ K=\tfrac14\mathcal H_{12}U,
+ \qquad U=\mathcal H_{12}K.
+\]
+Les différences transversales $D_3K,D_4K$ et la charge $Q(K)$ récupèrent les canaux spécifiés par le registre de la section~\ref{x_reciprocidad:sec:k-registro}. Le sceau est ainsi une coordonnée reconstructible de ce registre orienté ; la profondeur et la trajectoire complète demeurent des champs distincts.
+
+\begin{proposition}[Récupération des blocs et transport de l'origine]
+Une base entière $b\ge2$ et douze positions ordonnées étant fixées, soit
+$K_j\in\{0,\ldots,b-1\}$. Définissons
+\[
+ I(K)=\sum_{j=1}^{12}K_jb^{12-j},\qquad
+ \kappa(K)=\frac{I(K)}{b^{12}-1}.
+\]
+La lecture exacte $\kappa$ détermine de manière unique les douze blocs.
+Pour la rotation $\rho K=(K_2,\ldots,K_{12},K_1)$,
+\[
+ \boxed{\kappa(\rho K)=b\kappa(K)-K_1.}
+\]
+\end{proposition}
+\begin{proof}
+L'entier $I=(b^{12}-1)\kappa$ se décompose de manière unique en douze
+positions de base $b$, en complétant par des zéros les positions initiales
+nécessaires. D'autre part,
+\[
+ I(\rho K)=bI(K)-K_1(b^{12}-1).
+\]
+Diviser par $b^{12}-1$ donne la loi de transformation. Pour le bloc
+constant $K_j=b-1$, la lecture est $\kappa=1$ ; le type de représentation
+périodique fixé conserve également sa récupération.
+\end{proof}
+
+Dans la base $1000$ du registre, les blocs de trois chiffres demeurent
+récupérables, y compris les zéros initiaux. La lecture rationnelle
+périodique conserve davantage qu'une approximation décimale tronquée.
+Lorsqu'on modifie l'origine de phase, sa valeur change généralement selon
+l'identité précédente ; au bout de douze rotations, elle revient.
+L'avancée de mémoire de l'état TPK est une transformation supplémentaire :
+la périodicité du lecteur n'identifie pas les histoires accumulées.
+
+\begin{apunte}{lecture réversible et information}
+La récupération exacte des blocs est une propriété du lecteur
+rationnel dans son repère ordonné. La complexité des mots, l’entropie
+d’une dynamique symbolique, l’entropie de l’état réduit et la
+production thermodynamique sont des objets distincts. Une relation entre
+eux nécessite de spécifier la distribution ou l’état et l’application de
+transport correspondante ; la réversibilité du sceau, à elle seule,
+n’identifie pas ces fonctionnelles.
+\end{apunte}
+
+% END OWNER
+

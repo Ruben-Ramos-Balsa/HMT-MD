@@ -1,0 +1,357 @@
+\section[Cocientes conjugados y memoria mínima]{Cocientes conjugados y
+memoria mínima del atlas finito}
+\label{sec:cocientes-conjugados-rev11}
+\index{cociente!conjugado}
+\index{memoria!mínima}
+\index{selector interno}
+\index{palabra dodecafásica}
+
+La doble proyección exige distinguir el estado transportado de cada una de
+sus imágenes. En el nivel finito del atlas, esa distinción admite una
+formulación exacta: una misma palabra dodecafásica posee varios cocientes,
+cada uno de los cuales conserva una familia determinada de invariantes y
+contrae el resto. La configuración denominada históricamente
+\emph{diamante} se formula aquí como un sistema de cocientes conjugados sobre
+un soporte común. Su contenido matemático consiste en identificar las fibras
+de esos cocientes y en determinar la memoria mínima necesaria para separar
+los estados que una proyección ha identificado.
+
+\subsection{Dominio celular, rutas y estado interno enriquecido}
+
+Sea
+\[
+ \mathcal C_9=\{1,\ldots,9\}^2
+\]
+la carta finita de APP. Para una celda \(x=(r,c)\), el atlas fija el tipo
+celular interno, el nivel
+\[
+ G(r,c)=
+ \begin{cases}
+ 0,&(r,c)=(5,5),\\
+ \max\{1,|r-5|,|c-5|\},&\text{en otro caso},
+ \end{cases}
+\]
+y, en el sector correspondiente, la clase de color \((r-c)\bmod 3\). La
+evaluación multiplicativa publicada es
+\[
+ a_{\times}(r,c)=\dr(rc).
+\]
+Estos lectores se calculan desde la celda orientada; una denominación física
+posterior no interviene en su definición.
+
+El catálogo de rutas asocia a \(x\) la coordenada
+\[
+ \mathcal R(x)=
+ \bigl(n_A,s_C,k_{\Delta_4},\nu_{120},\nu_{270},\tau_{12}\bigr)
+ \in\mathscr R_{56},
+\]
+donde \(\tau_{12}\in\{-1,0,1\}^{12}\) es la palabra dodecafásica. La
+comparación exhaustiva del atlas de \(81\) celdas con el catálogo CT--108
+ampliado establece un único mapa sobreyectivo
+\[
+ \mathcal R:\mathcal C_9\longrightarrow\mathscr R_{56},
+ \qquad |\operatorname{im}\mathcal R|=56,
+\]
+cuyas fibras tienen la distribución
+\begin{equation}
+ 41\cdot1+10\cdot2+2\cdot3+1\cdot4+2\cdot5=81.
+ \label{eq:fibras-r56-rev11}
+\end{equation}
+
+Para \(\tau=(\tau_0,\ldots,\tau_{11})\) y
+\(d\in\{3,4,6\}\), sean \(\mathcal O_d\) las órbitas de
+\(j\mapsto j+d\) en \(\mathbb Z/12\mathbb Z\). Definimos
+\[
+ \nu_d(\tau)=
+ \sum_{O\in\mathcal O_d}
+ \operatorname{sgn}\!\left(\sum_{j\in O}\tau_j\right),
+ \qquad
+ (\nu_{90},\nu_{120},\nu_{180})=(\nu_3,\nu_4,\nu_6),
+\]
+y las correlaciones cíclicas
+\[
+ Q_k(\tau)=\sum_{j=0}^{11}\tau_j\tau_{j+k},
+ \qquad k=1,\ldots,6,
+\]
+con índices tomados módulo doce. Completan el lector
+\[
+ z_0(\tau)=\#\{j:\tau_j=0\},\qquad
+ w(\tau)=\sum_j|\tau_j|,\qquad
+ L(\tau)=\sum_j\tau_j.
+\]
+La notación \(z_0\) separa el número de entradas nulas del invariante distinto
+\(R_3=Q_3/2\).
+
+\HMTClaim{HMT-R-ATLAS-MINIMAL-INTERNAL-SELECTOR}
+\begin{theorem}[Selector interno mínimo]
+\label{thm:selector-interno-minimo-rev11}
+Fijado el origen de la carta y su orden lexicográfico, sea
+\[
+ \kappa(x)=
+ \#\{y\in\mathcal R^{-1}(\mathcal R(x)):y<_{\rm lex}x\}
+ \in M_5:=\{0,1,2,3,4\}.
+\]
+La aplicación
+\begin{align}
+ \mathcal S_{\rm int}:\mathcal C_9&\longrightarrow
+ \mathscr E_{\rm int}:=\mathscr R_{56}\times M_5\times\mathbb Z^9,
+ \notag\\
+ x&\longmapsto
+ \bigl(\mathcal R(x),\kappa(x),\nu_{90}(\tau_x),
+ \nu_{180}(\tau_x),Q_1(\tau_x),\ldots,Q_6(\tau_x),z_0(\tau_x)\bigr)
+ \label{eq:selector-interno-rev11}
+\end{align}
+es inyectiva. Entre los levantamientos inyectivos de la forma
+\((\mathcal R,m)\), su alfabeto de memoria tiene cardinal mínimo.
+\end{theorem}
+
+\begin{proof}
+La distribución \eqref{eq:fibras-r56-rev11} contiene fibras de cardinal
+cinco. Por el principio del palomar, todo mapa \(m:\mathcal C_9\to M\) para
+el cual \((\mathcal R,m)\) sea inyectivo satisface \(|M|\geq5\). Dentro de
+cada fibra, \(\kappa\) enumera exactamente sus elementos de acuerdo con el
+orden fijado; por tanto separa dos celdas que comparten ruta. Las celdas con
+rutas distintas ya se separan por \(\mathcal R\). En consecuencia,
+\((\mathcal R,\kappa)\), y con mayor razón
+\(\mathcal S_{\rm int}\), es inyectiva y alcanza la cota inferior.
+\end{proof}
+
+La proyección sobre la primera coordenada produce el diagrama conmutativo
+\[
+\begin{CD}
+ \mathcal C_9 @>{\mathcal S_{\rm int}}>> \mathscr E_{\rm int}\\
+ @V{\mathcal R}VV @VV{\operatorname{pr}_{\mathscr R}}V\\
+ \mathscr R_{56} @>{\operatorname{id}}>> \mathscr R_{56}.
+\end{CD}
+\]
+Así, \(\kappa\) mide la memoria celular mínima olvidada por
+\(\mathcal R\). Su canonicidad es relativa al origen y al orden de la carta:
+si éstos se consideran un calibre, el objeto intrínseco es la fibra ordenada
+o su órbita. El índice \(\kappa\) y la memoria antihoja
+\(A_6=(e_0-e_6,\ldots,e_5-e_{11})\) responden a pérdidas de información de
+la misma naturaleza categórica, pero cumplen funciones diferentes:
+\(\kappa\) separa celdas de una fibra de \(\mathcal R\), mientras \(A_6\)
+participa en la reconstrucción del registro dodecafásico.
+
+\subsection{Tipos gruesos y multisecciones naturales}
+
+El cociente
+\[
+ q:\mathcal C_9\longrightarrow\mathscr Y_{13},
+ \qquad
+ q(x)=\bigl(\operatorname{familia}(x),G(x)\bigr),
+\]
+tiene trece valores. Las cardinalidades de sus fibras son
+\[
+ 1,8,16;\qquad 2,4,6,8;\qquad 2,4,6,8;\qquad 4,12.
+\]
+La salida determinada por \(y\in\mathscr Y_{13}\) es la multisección finita
+\begin{equation}
+ \mathfrak S(y)=
+ \{\mathcal S_{\rm int}(x):q(x)=y\}
+ \in\operatorname{Fin}^{+}(\mathscr E_{\rm int}).
+ \label{eq:multiseccion-natural-rev11}
+\end{equation}
+
+Sea \(\rho(r,c)=(10-r,10-c)\). Las trece fibras son estables bajo
+\(\rho\), pero sólo \(q^{-1}(q(5,5))\) contiene un punto fijo. Por ello, en
+las doce fibras restantes, una sección puntual \(\rho\)-equivariante no
+existe: la multisección \eqref{eq:multiseccion-natural-rev11} es la salida
+natural del tipo grueso. La elección de un representante requiere un dato
+adicional de orientación o de representación y no se obtiene del nombre
+asignado posteriormente al tipo.
+
+\subsection{Conjugación dodecafásica y cocientes de firma}
+
+Sea \(\mathcal T_{12}=\{-1,0,1\}^{12}\) y defínase la involución
+\[
+ C_M:\mathcal T_{12}\longrightarrow\mathcal T_{12},
+ \qquad C_M(\tau)=-\operatorname{rev}(\tau).
+\]
+Agrupamos los lectores lineales y cuadráticos en
+\[
+ \mathcal L(\tau)=
+ (\nu_{90},\nu_{120},\nu_{180},L)\in\mathbb Z^4,
+\]
+\[
+ \mathcal Q(\tau)=
+ (Q_1,\ldots,Q_6,z_0,w)\in\mathbb Z^8.
+\]
+La conjugación satisface las identidades
+\begin{equation}
+ \mathcal L(C_M\tau)=-\mathcal L(\tau),
+ \qquad
+ \mathcal Q(C_M\tau)=\mathcal Q(\tau).
+ \label{eq:paridad-conjugacion-rev11}
+\end{equation}
+Para cualquier lector \(F:\mathcal T_{12}\to I_F\), escribimos
+\[
+ \tau\sim_F\tau'\quad\Longleftrightarrow\quad F(\tau)=F(\tau'),
+ \qquad
+ \mathfrak Q_F=\mathcal T_{12}/\!\sim_F.
+\]
+Cuando \(F\) es equivariante respecto de \(C_M\), la involución desciende a
+\(\overline C_{M,F}\) y se obtiene
+\[
+\begin{CD}
+ \mathcal T_{12} @>{C_M}>> \mathcal T_{12}\\
+ @V{q_F}VV @VV{q_F}V\\
+ \mathfrak Q_F @>{\overline C_{M,F}}>> \mathfrak Q_F.
+\end{CD}
+\]
+En particular, \(\overline C_{M,\mathcal Q}\) es la identidad y
+\(\overline C_{M,\mathcal L}\) cambia el signo de la firma publicada. Esta
+diferencia de paridad es la estructura conjugada de los dos cocientes; no
+son dos evaluaciones de estados iniciales distintos.
+
+El atlas contiene siete formas de palabra dodecafásica con multiplicidades
+\begin{equation}
+ 54,2,2,2,7,7,7.
+ \label{eq:multiplicidades-formas-rev11}
+\end{equation}
+Una forma es fija por \(C_M\); las otras seis constituyen tres pares
+conjugados. En cada par, las multiplicidades celulares son \(2\) y \(7\).
+En consecuencia, ninguna biyección de \(\mathcal C_9\) puede levantar
+\(C_M\) preservando las fibras de forma. La inversión \(\rho\) entrelaza las
+palabras en \(49\) celdas y deja \(32\) excepciones. La anti-sección exacta
+en este nivel es, por tanto, la correspondencia
+\[
+ x\longmapsto
+ \{y\in\mathcal C_9:\tau_y=C_M(\tau_x)\}.
+\]
+La igualdad numérica \(54+9+9+9=81\) describe la agrupación de una forma
+fija y tres pares de multiplicidad \(2+7\); no constituye una
+descomposición en órbitas biyectivas de las celdas.
+
+\subsection{Configuración exacta de cocientes}
+
+Definamos los lectores parciales
+\[
+ \Sigma_7(\tau)=
+ (\nu_{90},\nu_{120},\nu_{180},Q_3,Q_4,Q_6,z_0)
+ \in\mathbb Z^7,
+\]
+\[
+ \ell_3(\tau)=(\nu_{90},\nu_{120},\nu_{180})\in\mathbb Z^3,
+ \qquad
+ p_4(\tau)=(Q_3,Q_4,Q_6,z_0)\in\mathbb Z^4.
+\]
+Cada lector induce su cociente \(\mathfrak Q_{\Sigma_7}\),
+\(\mathfrak Q_{\ell_3}\) o \(\mathfrak Q_{p_4}\). Las tres colisiones
+siguientes localizan con precisión qué información retiene cada proyección.
+
+\HMTClaim{HMT-R-ATLAS-CONJUGATE-QUOTIENTS}
+\begin{theorem}[Configuración de cocientes conjugados]
+\label{thm:configuracion-cocientes-conjugados-rev11}
+En el catálogo finito se cumplen simultáneamente las afirmaciones siguientes.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+ \item Las palabras de borde \(H_\alpha\) y \(H_{\rm APP}\) son distintas
+ y pertenecen a órbitas diedrales distintas, pero
+ \[
+  \Sigma_7(H_\alpha)=\Sigma_7(H_{\rm APP})
+  =(-3,-4,-5,3,2,2,6).
+ \]
+ La coordenada omitida de primer vecino las separa:
+ \[
+  Q_1(H_\alpha)=4,
+  \qquad Q_1(H_{\rm APP})=3.
+ \]
+
+ \item El soporte obstructor \(P_\pi\) y la plantilla históricamente
+ designada por \(\tau_{\rm lep}\) satisfacen
+ \[
+  \ell_3(P_\pi)=\ell_3(\tau_{\rm lep})=(-3,-4,-6),
+ \]
+ mientras
+ \[
+  p_4(P_\pi)=(7,6,6,3),
+  \qquad p_4(\tau_{\rm lep})=(4,3,2,5).
+ \]
+
+ \item Las plantillas legadas nominalmente como electrónica y protónica
+ publican la misma palabra,
+ \[
+  \tau_e^{\rm hist}=\tau_p^{\rm hist}=0^{12}.
+ \]
+ Todo invariante que factorice exclusivamente a través de
+ \(\mathcal T_{12}\) toma necesariamente el mismo valor en ambas.
+\end{enumerate}
+Por tanto, la configuración completa es un abanico de cocientes de un mismo
+estado enriquecido,
+\begin{equation}
+ \mathscr E_{\rm int}
+ \longrightarrow
+ \left\{
+ \begin{array}{c}
+  \mathfrak Q_{\mathcal L},\\[1mm]
+  \mathfrak Q_{\mathcal Q},\\[1mm]
+  \mathfrak Q_{\Sigma_7},\\[1mm]
+  \mathfrak Q_{\ell_3},\\[1mm]
+  \mathfrak Q_{p_4},\\[1mm]
+  \mathcal T_{12},
+ \end{array}
+ \right.
+ \label{eq:abanico-cocientes-rev11}
+\end{equation}
+y no una correspondencia biyectiva entre constantes matemáticas y clases
+físicas.
+\end{theorem}
+
+\begin{proof}
+Las igualdades de (i)--(iii) resultan de evaluar los lectores definidos
+arriba sobre las palabras publicadas. En (i), la desigualdad de \(Q_1\)
+demuestra que la coincidencia en \(\mathfrak Q_{\Sigma_7}\) procede de la
+coordenada suprimida y no de una identidad de palabras. En (ii), la firma
+lineal coincide y el vector par difiere, luego la identificación ocurre sólo
+en \(\mathfrak Q_{\ell_3}\). En (iii), la igualdad de palabras implica
+\(F(\tau_e^{\rm hist})=F(\tau_p^{\rm hist})\) para toda aplicación
+\(F\) cuyo dominio efectivo sea exclusivamente \(\mathcal T_{12}\). Así,
+cada igualdad determina una fibra concreta y cada separación identifica la
+memoria que debe restaurarse. Esto prueba la interpretación
+\eqref{eq:abanico-cocientes-rev11}.
+\end{proof}
+
+El teorema ofrece un modelo finito del principio general de doble
+proyección: una imagen puede conservar una firma exacta y, a la vez,
+identificar estados diferentes. La pareja formada por la firma publicada y
+la memoria omitida refina el cociente; la recuperación del estado requiere
+reincorporar celda, orientación, sección de banda o la coordenada pertinente
+en cada caso.
+
+\subsection{Exactitud de los cocientes conjugados y obstrucciones a la reconstrucción sin memoria}
+
+La construcción parte del atlas finito de \(81\) celdas, sus \(56\)
+familias de ruta, las siete formas de sección y la involución \(C_M\), todos
+ellos definidos sobre el calendario dodecafásico de \(108\) pasos. Un estado
+es la cuádrupla formada por celda, ruta, orientación y sección de banda; esta
+cuádrupla precede a cualquier denominación física y fija el dominio de los
+cocientes conjugados.
+
+Sobre ese dominio, el índice \(\kappa\) y la minimalidad de cinco estados se
+deducen del origen y del orden de la carta. Las igualdades de
+\cref{thm:configuracion-cocientes-conjugados-rev11} son igualdades exactas de
+firmas: en cada una se especifican el lector conservado y la coordenada de
+memoria que el cociente olvida. El recorrido exhaustivo de las \(81\) celdas
+reproduce de manera independiente las fibras, los valores de \(\nu_d\), los
+cocientes \(Q_k\) y la configuración de diamante; esa enumeración finita
+complementa la demostración algebraica y permite reproducirla sin alterar sus
+premisas.
+
+La conclusión queda demostrada para estas primitivas explícitas. Dos
+prolongaciones requieren mapas adicionales: reconstruir el atlas desde el
+núcleo mínimo de APP y construir, para las multisecciones no centrales, una
+sección física fina que preserve orientación y representación sin consultar
+una masa objetivo. Ninguna de esas prolongaciones interviene en las
+igualdades finitas ya establecidas.
+
+La construcción es incompatible con cualquiera de las siguientes
+variaciones: un cardinal distinto de \(81\), una imagen distinta de \(56\)
+familias, una distribución de fibras distinta de
+\eqref{eq:fibras-r56-rev11}, un fallo en la reproducción de
+\(\nu_d\) y \(Q_k\), la inyectividad de
+\(\mathcal S_{\rm int}\), las tres igualdades del
+\cref{thm:configuracion-cocientes-conjugados-rev11}, el recuento
+\(49+32\) del entrelazamiento parcial de \(\rho\), o el cierre functorial de
+los cobordes del grafo suplementario. Una interpretación física exige,
+además, un mapa de representación que conserve esas identidades y un
+contraste independiente de su construcción.

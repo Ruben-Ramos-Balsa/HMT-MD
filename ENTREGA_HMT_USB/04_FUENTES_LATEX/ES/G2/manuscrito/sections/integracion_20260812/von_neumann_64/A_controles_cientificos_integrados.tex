@@ -1,0 +1,152 @@
+\chapter{Dependencias lógicas y certificados de consistencia}
+
+\section{Cadena causal de los certificados: estados finitos \(\to\) restricciones \(\to\) supervivencia \(\to\) sección infinita \(\to\) realizaciones}
+
+La cadena lógica de la integración no parte de una conclusión arquimediana.
+Se organiza en el orden siguiente:
+\[
+\begin{tikzpicture}[baseline=(current bounding box.center),>=Latex,
+ node distance=7mm and 8mm,
+ n/.style={rounded corners,draw=hmtblue,fill=hmtlightblue,
+ minimum height=8mm,align=center,font=\small}]
+ \node[n] (finite) {estados finitos\\tipados};
+ \node[n,right=of finite] (maps) {restricciones\\compatibles};
+ \node[n,right=of maps] (surv) {supervivencia\\y poda};
+ \node[n,right=of surv] (lim) {sección\\infinita};
+ \node[n,right=of lim] (read) {lectores\\y realizaciones};
+ \draw[->,thick] (finite)--(maps);
+ \draw[->,thick] (maps)--(surv);
+ \draw[->,thick] (surv)--(lim);
+ \draw[->,thick] (lim)--(read);
+\end{tikzpicture}
+\]
+Un certificado de cifras verifica una restricción de la última flecha; no
+crea retrospectivamente los estados ni sustituye el teorema de existencia
+del límite.
+
+\section{Identidades aritméticas exactas de los certificados finitos}
+
+Los censos que acompañan al certificado de filtración nonádica satisfacen
+\[
+ 396\cdot6=2376,
+ \qquad
+ 43\cdot9=387,
+ \qquad
+ 432+4\cdot144=1008.
+\]
+La primera igualdad relaciona eventos elementales de frontera y trits
+emitidos por canal; la segunda cuenta las parejas de fase \((K,K+9)\); la
+tercera reconstruye la multiplicidad total de las cinco regiones de
+\(\pi\).
+
+Los dos papeles regionales que no pueden permutarse son
+\[
+\begin{array}{rcl}
+U_\pi^\perp&=&(501,614,498,169,272,272),\\
+E_{\rm sig}&=&555555,\qquad \text{multiplicidad }432,\\[.35em]
+U_\pi^{--}&=&(870,923,810,418,674,521),\\
+E_{\rm sig}&=&933717,\qquad \text{multiplicidad }144.
+\end{array}
+\]
+
+\section{Existencia y unicidad de la rama infinita en un árbol finitamente ramificado de prefijos supervivientes}
+
+\begin{lemma}[Árbol finitamente ramificado]
+Sea \(T\) un árbol con niveles finitos no vacíos y tal que todo nodo
+superviviente tiene un descendiente superviviente. Entonces existe una rama
+infinita. Si, además, cada nodo de la subtorre seleccionada tiene exactamente
+un descendiente compatible, la rama es única.
+\end{lemma}
+
+\begin{proof}
+La existencia es el lema de König aplicado al árbol finitamente ramificado.
+Para la unicidad, dos ramas distintas tendrían un primer nivel en el que
+divergen, dando dos descendientes compatibles del mismo prefijo, contra la
+hipótesis.
+\end{proof}
+
+\begin{controlbox}
+Una ejecución a profundidad \(N\) sólo prueba lo ocurrido en el árbol
+truncado. La afirmación infinita requiere la ley uniforme que preserva no
+vaciedad y compatibilidad para todo nivel. El cuerpo separa expresamente
+ambos estatutos y, para la filtración nonádica, conserva su selector uniforme
+certificado.
+\end{controlbox}
+
+\section{Clausura y potencia plena}
+
+Para \(A\subseteq X=\varprojlim X_n\), se ha probado
+\[
+ \overline A=\bigcap_n p_n^{-1}(p_n(A)).
+\]
+El conjunto de sucesiones binarias finalmente nulas es denso y propio en
+\(2^{\mathbb N}\), pero posee todas las sombras finitas. Por ello cualquier
+algoritmo que reciba sólo \((p_n(A))_n\) no puede distinguir \(A\) de su
+clausura. Este ejemplo bloquea la falsa identidad
+\[
+ \varprojlim\mathcal P(X_n)=\mathcal P(\varprojlim X_n).
+\]
+
+\section{Compatibilidad tipada de los operadores}
+
+La diferencia entre la inclusión unital y la esquina marcada se verifica
+directamente:
+\[
+\begin{aligned}
+ \tau_{d+1}(a\otimes I_9)
+ &=\frac{\operatorname{Tr}(a)\operatorname{Tr}(I_9)}{9^{d+1}}
+ =\tau_d(a),\\
+ \tau_{d+1}(a\otimes p_j)
+ &=\frac{\operatorname{Tr}(a)}{9^{d+1}}
+ =\frac1{9}\tau_d(a).
+\end{aligned}
+\]
+La primera rama es unital y tracial; la segunda conserva una esquina marcada
+y no puede usarse para inferir el factor \(II_1\).
+
+\section{Anulación del coste de Landauer en la inversión reversible del estado}
+
+Para una variable completa \(X\) y una proyección \(Y=q(X)\),
+\[
+ H(X)=H(Y)+H(X\mid Y).
+\]
+Si \(q\) es biyectiva, la fibra es unitaria y \(H(X\mid Y)=0\). Si \(q\)
+es un reinicio del TRIT uniforme, la información descartada es \(\log3\) y
+el coste mínimo es \(k_B\Theta\log3\). Para la extensión
+\(\widehat E_N\) a \(L^1\) de una esperanza condicional normal
+traza-preservante \(E_N\), y bajo las hipótesis de finitud declaradas,
+\[
+ S_\tau(\widehat E_Nh)-S_\tau(h)
+ =D_\tau(h\Vert \widehat E_Nh)\ge0.
+\]
+Las dos fórmulas localizan el mismo fenómeno en dominios diferentes: el
+coste pertenece a la contracción de una fibra, no a la evolución reversible
+del estado completo.
+
+\section{Obstrucción Gödel–Turing a un decisor uniforme de multiplicidades proyectivas}
+
+Sea \(T_e\) la máquina de índice \(e\). En el nivel \(n\) se define
+\[
+ X_n^e=\{b_n\}\cup
+ \{c_n:T_e\text{ no se detuvo antes de }n\}.
+\]
+Cada \(X_n^e\) es computable. La fibra global tiene dos ramas si \(T_e\) no
+se detiene y una si se detiene. Por tanto
+\[
+ U_e:\quad \#q_\infty^{-1}(v)=1
+ \quad\Longleftrightarrow\quad T_e\downarrow.
+\]
+Un decisor uniforme para \(U_e\) decidiría \(\HALT\). Una teoría
+recursivamente axiomatizable, correcta y completa para todos los \(U_e\)
+permitiría decidirlos enumerando en paralelo pruebas de \(U_e\) y de su
+negación. Éste es el núcleo del \emph{Teorema HMT de incompletitud uniforme
+para multiplicidades proyectivas}; su demostración emplea una reducción
+Gödel--Turing. La obstrucción uniforme no niega los selectores particulares
+construidos sobre imágenes HMT calibradas.
+
+\begin{controlbox}[title={Alcance del control de incompletitud uniforme}]
+La reducción Gödel--Turing establece la obstrucción uniforme para las
+multiplicidades proyectivas. No niega los selectores particulares construidos
+sobre imágenes HMT calibradas ni convierte una obstrucción de decisión global
+en una indeterminación de cada fibra concreta.
+\end{controlbox}

@@ -1,0 +1,92 @@
+\section{Flux de poids, géométrie de l'information et dualité de Legendre}
+\label{sec:convex-refinement}
+
+La déformation des intervalles admet une description variationnelle
+exacte. Soient \(d_j=K_j/Q>0\), \(\sum_jd_j=1\), et \(u_j\) les
+coordonnées de la direction \eqref{eq:u-main}. Pour \(s\in\RR\),
+on définit
+\begin{equation}
+ Z(s)=\sum_{j=1}^{12}d_j e^{su_j},\qquad
+ \psi(s)=\log Z(s),\qquad
+ d_j(s)=\frac{d_j e^{su_j}}{Z(s)}.
+ \label{eq:convex-partition}
+\end{equation}
+Tous les arguments de l'exponentielle sont sans dimension. Le paramètre \(s\) est la coordonnée de cette déformation géométrique. L'attribution d'une durée physique relève d'un lecteur temporel déclaré.
+
+\begin{theorem}[Convexité stricte et coordonnée duale]
+La fonction \(\psi\) est analytique et strictement convexe sur \(\RR\).
+Si \(u_- =\min_j u_j\) et \(u_+=\max_j u_j\), l’application
+\(v=\psi'(s)\) est un difféomorphisme de \(\RR\) sur \((u_-,u_+)\).
+Pour chaque \(v\) dans cet intervalle, il existe une unique coordonnée \(s(v)\), et
+\[
+ \psi^*(v)=s(v)v-\psi(s(v)),\qquad
+ (\psi^*)'(v)=s(v),\qquad
+ (\psi^*)''(v)=\frac1{\psi''(s(v))}>0.
+\]
+\end{theorem}
+\begin{proof}
+Les sommes finies permettent de dériver terme à terme. On obtient
+\begin{align}
+ \psi'(s)&=\sum_jd_j(s)u_j=:\overline u(s),\notag\\
+ \psi''(s)&=\sum_jd_j(s)(u_j-\overline u(s))^2.
+ \label{eq:variance}
+\end{align}
+Les poids sont strictement positifs et les \(u_j\) ne sont pas tous égaux ; la variance est donc strictement positive. Lorsque \(s\) tend vers \(+\infty\), la division du numérateur et du dénominateur de \(\psi'\) par \(e^{su_+}\) montre que seuls subsistent les indices tels que \(u_j=u_+\). Ainsi \(\psi'(s)\to u_+\). L'argument avec \(u_-\) donne la limite opposée. La monotonie et le théorème d'inversion locale fournissent une bijection lisse. La fonction \(sv-\psi(s)\) a son unique maximum en \(s(v)\) ; la dérivation de la valeur maximale démontre les deux identités duales.
+\end{proof}
+
+L’évolution de chaque intervalle est
+\begin{equation}
+ \dot d_j(s)=d_j(s)\bigl(u_j-\overline u(s)\bigr).
+ \label{eq:replicator}
+\end{equation}
+La somme des dérivées est nulle. La longueur totale demeure donc
+unitaire tandis que les longueurs internes se redistribuent. Cette conservation
+de l’échelle globale permet d’attribuer le changement des birapports à une
+déformation des positions et non à une dilatation commune.
+
+Dans le simplexe ouvert des poids, la métrique
+\(g_d(\xi,\zeta)=\sum_j\xi_j\zeta_j/d_j\), sur les vecteurs tangents
+de somme nulle, est positive. La fonction linéaire
+\(F(d)=\sum_jd_ju_j\) a pour gradient relativement à cette métrique
+précisément le champ de \eqref{eq:replicator}, car
+\[
+ g_d\bigl(d_j(u_j-\overline u),\xi\bigr)
+ =\sum_j(u_j-\overline u)\xi_j=\sum_ju_j\xi_j=dF(\xi).
+\]
+Par conséquent, \(dF/ds=\psi''(s)>0\) le long du flot. Le
+caractère ascendant correspond à cette fonction et à cette métrique précises.
+
+\begin{theorem}[Invariance variationnelle par subdivision héritée]
+Pour chaque intervalle \(j\), soient \(r_{j,c}>0\), \(\sum_c r_{j,c}=1\), les poids relatifs d'une subdivision fixe. Attribuons aux successeurs
+\[
+ d_{j,c}=r_{j,c}d_j,\qquad u_{j,c}=u_j.
+\]
+La fonction de partition, son logarithme, toutes ses dérivées et la transformée de Legendre coïncident exactement avec ceux de la partition initiale. De plus, le flot commute avec la somme des successeurs :
+\[
+ \sum_c d_{j,c}(s)=d_j(s),\qquad
+ d_{j,c}(s)=r_{j,c}d_j(s).
+\]
+\end{theorem}
+\begin{proof}
+Par regroupement de la somme finie,
+\[
+ Z_{\rm ref}(s)=\sum_{j,c}r_{j,c}d_j e^{su_j}
+ =\sum_j d_j e^{su_j}=Z(s).
+\]
+Toutes les conclusions se déduisent de cette identité et de la division de chaque poids par le même \(Z(s)\). Le même argument vaut après tout nombre fini de subdivisions. Pour une subdivision dénombrable, la somme de termes positifs converge vers la même valeur par regroupement selon les prédécesseurs.
+\end{proof}
+
+L'hypothèse de direction héritée a un contenu vérifiable. Si un intervalle de direction \(a\) est divisé en deux moitiés de directions \(a+b\) et \(a-b\), sa contribution passe de \(d e^{sa}\) à \(d e^{sa}\cosh(sb)\). Pour \(b\ne0\), l'égalité des fonctions de partition échoue bien que le poids total en \(s=0\) soit le même. Ainsi, la conservation géométrique et variationnelle exige de conserver également l'information directionnelle pertinente. L'identité démontrée s'applique à la subdivision héritée ; son transport à une mise à jour TPK qui change ces directions se décide en composant le lecteur de cette mise à jour.
+
+Il existe une formulation hamiltonienne régulière de la coordonnée duale. Dans le
+plan cotangent de coordonnées \((q,p)\), prenons
+\(H(q,p)=\psi(p)\). Les équations sont
+\(\dot q=\psi'(p)\), \(\dot p=0\). Pour des vitesses
+\(\dot q\in(u_-,u_+)\), la transformation de Legendre donne
+\[
+ L(q,\dot q)=\psi^*(\dot q),\qquad
+ \frac{\partial^2L}{\partial\dot q^2}>0.
+\]
+Ce système réalise variationnellement le potentiel du flot des intervalles. Son équation \(\dot p=0\) montre que le temps hamiltonien est distinct du paramètre \(s\) parcourant la collection \eqref{eq:convex-partition}. L'évaluation de \(H\) et \(L\) est conservée sous la subdivision du théorème, puisque \(\psi\) et \(\psi^*\) demeurent identiques.
+
+Par ailleurs, tout flot \(\dot d=F(d)\) admet, dans une coordinatisation locale du simplexe, un relèvement cotangent avec \(\mathscr H(d,p)=p\cdot F(d)\). Cette seconde construction reproduit le flot \eqref{eq:replicator} lui-même sur sa base, mais son hessien par rapport à \(p\) est nul. Les deux réalisations répondent à des questions distinctes : l'une produit une dualité convexe régulière et l'autre transporte une dynamique de base donnée. Cette distinction préserve la signification de l'hamiltonien et du lagrangien lors de la comparaison de cette géométrie avec les lecteurs physiques du corpus.

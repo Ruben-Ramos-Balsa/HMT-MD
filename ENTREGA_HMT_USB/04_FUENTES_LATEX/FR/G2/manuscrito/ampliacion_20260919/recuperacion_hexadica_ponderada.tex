@@ -1,0 +1,253 @@
+% K31-30, JC-003 y P01 del inventario REV05.
+% Residencia: después de la derivación del registro K y de la incidencia Witt;
+% antes de utilizar la lectura ponderada para la recuperación del registro.
+% Propietarios: output/IMPLEMENTACION_K_SEMILLAS_INCIDENCIA_20260918/
+% WeightedIncidenceRecovery.lean (íntegro) y
+% COMPOSICION_GENERATIVA_Y_RECUPERACION_K.tex:257--306.
+% Codificador: PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/
+% lean/biblioteca/CoxeterNeighbor.lean:322--343;
+% lean/biblioteca/SectorIncidenceData.lean:27--33.
+% Estatuto: RESULTADO_RECUPERADO, explicitación íntegra de las matrices que
+% la exposición anterior remitía al código. La prueba Lean es la ya existente.
+
+\section[Récupération par incidences hexadiques]{Récupération intégrale du registre au moyen d'incidences hexadiques pondérées}
+\label{rh:sec:recuperacion}
+
+Le registre dodécaphasique engendré conserve douze composantes ordonnées et
+une origine de phase. L'incidence de Paley--Witt fournit une lecture
+supplémentaire de ce registre : chaque support hexadique rassemble six de ses
+composantes au moyen d'une somme pondérée par l'incidence elle-même. La
+reconstruction développée ici reçoit les valeurs de ces sommes
+du même registre. Son objet est de prouver que les lectures conservent
+toutes les composantes et d'exhiber l'opérateur inverse à coefficients
+rationnels explicites.
+
+\subsection{Codeur d'incidence et douze témoins explicites}
+
+Dans le système de coordonnées d'incidence déjà fixé, soit
+\[
+A_W=\begin{pmatrix}
+0&1&1&1&1&1\\1&0&1&2&2&1\\1&1&0&1&2&2\\
+1&2&1&0&1&2\\1&2&2&1&0&1\\1&1&2&2&1&0
+\end{pmatrix}\in M_6(\mathbb F_3).
+\]
+Pour $w\in\mathbb F_3^6$, le codeur est
+$\operatorname{Enc}(w)=(w,wA_W)\in\mathbb F_3^{12}$ et son support
+est
+\[
+H(w)=\{j\in\{1,\ldots,12\}:\operatorname{Enc}(w)_j\ne0\}.
+\]
+Le choix d'une position utilise des indices de un à douze ; les
+implémentations à indices commençant à zéro sont transportées au moyen de
+$j\mapsto j+1$.
+
+Les douze témoins suivants appartiennent au domaine du codeur :
+\[
+\begin{array}{c|c@{\qquad}c|c}
+i&w^{(i)}&i&w^{(i)}\\\hline
+1&112210&7&122020\\
+2&122101&8&112002\\
+3&121200&9&111001\\
+4&111100&10&110122\\
+5&121012&11&101221\\
+6&111020&12&011111.
+\end{array}
+\]
+Définissons $H_i=H(w^{(i)})$ et
+$B_{ij}=\mathbf1_{\{j\in H_i\}}$. L'évaluation du codeur donne
+\begingroup\small\setlength{\arraycolsep}{3pt}
+\setcounter{MaxMatrixCols}{12}
+\begin{equation}
+B=\begin{pmatrix}
+1&1&1&1&1&0&0&0&0&0&0&1\\
+1&1&1&1&0&1&0&0&0&0&1&0\\
+1&1&1&1&0&0&1&0&1&0&0&0\\
+1&1&1&1&0&0&0&1&0&1&0&0\\
+1&1&1&0&1&1&0&0&0&1&0&0\\
+1&1&1&0&1&0&1&0&0&0&1&0\\
+1&1&1&0&1&0&0&1&1&0&0&0\\
+1&1&1&0&0&1&1&1&0&0&0&0\\
+1&1&1&0&0&1&0&0&1&0&0&1\\
+1&1&0&1&1&1&0&0&1&0&0&0\\
+1&0&1&1&1&1&0&1&0&0&0&0\\
+0&1&1&1&1&1&1&0&0&0&0&0
+\end{pmatrix}.
+\label{rh:eq:incidencia}
+\end{equation}
+\endgroup
+Chaque ligne contient six entrées égales à un. Par conséquent, chaque
+$H_i$ est une hexade de l'image du codeur, et la matrice $B$ est
+construite à partir de ces supports.
+
+\subsection{Inverse rationnel et unicité de récupération}
+
+Soit la matrice entière
+\begingroup\small\setlength{\arraycolsep}{3pt}
+\setcounter{MaxMatrixCols}{12}
+\begin{equation}
+M=\begin{pmatrix}
+7&1&8&-7&7&-1&-4&8&-7&3&3&-15\\
+7&7&-4&-1&1&-7&8&8&-7&3&-15&3\\
+1&7&8&-7&7&-7&8&-4&-1&-15&3&3\\
+1&1&2&5&-5&-1&-4&-4&-1&3&3&3\\
+1&-5&-4&-1&1&5&2&-4&-1&3&3&3\\
+-5&1&-4&-1&1&-1&-4&2&5&3&3&3\\
+-5&-11&2&5&-5&11&-10&2&5&3&3&3\\
+-5&-5&-10&11&-11&5&2&2&5&3&3&3\\
+-11&-5&2&5&-5&5&2&-10&11&3&3&3\\
+-11&-11&-4&17&1&11&-10&-10&11&3&3&3\\
+-11&1&-10&11&-11&17&-4&-10&11&3&3&3\\
+1&-11&-10&11&-11&11&-10&-4&17&3&3&3
+\end{pmatrix}.
+\label{rh:eq:inversa-entera}
+\end{equation}
+\endgroup
+
+\begin{theorem}[Récupération exacte à partir de douze lectures hexadiques]
+\label{rh:thm:doce}
+Pour $v\in\mathbb Q^{12}$, soient
+\[
+\operatorname{Read}(v)=Bv,
+\qquad
+\operatorname{Rec}(y)=\frac1{18}My.
+\]
+On vérifie
+\[
+\operatorname{Rec}(\operatorname{Read}(v))=v,
+\qquad
+\operatorname{Read}(\operatorname{Rec}(y))=y.
+\]
+Par conséquent, tout $y\in\mathbb Q^{12}$ admet un unique registre
+$v\in\mathbb Q^{12}$ avec $\operatorname{Read}(v)=y$.
+\end{theorem}
+\begin{proof}
+Les multiplications entières des matrices
+\eqref{rh:eq:incidencia} et \eqref{rh:eq:inversa-entera} donnent
+$MB=BM=18I_{12}$. Chaque entrée diagonale résulte d'un produit
+scalaire égal à dix-huit et chaque entrée hors diagonale résulte
+d'un produit scalaire nul. En divisant par dix-huit, on obtient
+les deux identités inverses.
+
+En particulier,
+$\operatorname{Rec}(\operatorname{Read}(v))=(MB/18)v=v$ et
+$\operatorname{Read}(\operatorname{Rec}(y))=(BM/18)y=y$.
+La seconde identité prouve l'existence, au moyen de
+$v=\operatorname{Rec}(y)$. Si $Bu=Bv$, appliquer $M/18$ aux deux
+membres donne $u=v$, ce qui prouve l'unicité.
+\end{proof}
+
+La vérification de $B$ à partir du codeur et les deux multiplications
+exactes sont formalisées dans les théorèmes
+\texttt{incidence\_from\_encoder}, \texttt{inverse\_left} et
+\texttt{inverse\_right}. Les identités de composition correspondent
+à \texttt{recover\_read} et \texttt{read\_recover}.
+Leur contenu mathématique se trouve intégralement dans les matrices et
+dans la preuve précédente ; le certificat formel consigne la vérification
+de ces mêmes opérations.
+
+\begin{corollary}[Séparation par toutes les incidences pondérées]
+Si $u,v\in\mathbb Q^{12}$ satisfont
+\[
+\sum_{j\in H(w)}u_j=\sum_{j\in H(w)}v_j
+\]
+pour tout $w\in\mathbb F_3^6$ dont le support codé comporte six
+positions, alors $u=v$.
+\end{corollary}
+\begin{proof}
+L'hypothèse s'applique en particulier aux douze témoins exposés.
+Par la définition de $B$, leurs douze égalités constituent $Bu=Bv$.
+Le théorème~\ref{rh:thm:doce} permet de récupérer les deux entrées et
+conclut $u=v$.
+\end{proof}
+
+\begin{example}[Récupération d'une composante périphérique]
+Pour le vecteur canonique $v=e_{12}$, les seules lectures non nulles sont
+la première et la neuvième :
+\[
+y=Be_{12}=(1,0,0,0,0,0,0,0,1,0,0,0)^{\mathsf T}.
+\]
+La somme des première et neuvième colonnes de $M$ est $18e_{12}$.
+Par conséquent, $My/18=e_{12}$. Les deux sommes hexadiques distinguent
+cette position dans la lecture conjointe parce que les autres composantes
+s'annulent exactement dans l'opérateur de récupération.
+\end{example}
+
+\subsection{Opérateur de récupération symétrique sur les cent trente-deux hexades}
+
+Le système de Steiner $S(5,6,12)$ déjà produit par l'incidence
+contient $132$ hexades. Notons leur ensemble $\mathcal H$ et
+définissons
+\[
+\mathcal I:\mathbb Q^{12}\longrightarrow\mathbb Q^{\mathcal H},
+\qquad
+(\mathcal I v)_H=\sum_{j\in H}v_j.
+\]
+Ce lecteur présente une redondance : il conserve les douze composantes au moyen de
+$132$ sommes, tandis que le théorème précédent fournit une base de
+douze de ces sommes.
+
+\begin{theorem}[Inverse sur l'image du lecteur complet]
+\label{rh:thm:steiner}
+On a
+\[
+\mathcal I^{\mathsf T}\mathcal I=36I_{12}+30J_{12},
+\]
+où $J_{12}$ a toutes ses entrées égales à un. Pour
+$y=\mathcal I v$, le registre est récupéré au moyen de
+\begin{equation}
+396v_i=11\sum_{H\ni i}y_H-5\sum_{H\in\mathcal H}y_H,
+\qquad i=1,\ldots,12.
+\label{rh:eq:recuperador}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La propriété $S(5,6,12)$ implique que chaque position appartient à
+$\binom{11}{4}/\binom{5}{4}=66$ hexades. Chaque paire de positions
+distinctes appartient à $\binom{10}{3}/\binom{4}{3}=30$ hexades.
+Par conséquent, le produit de la transposée de la matrice d'incidence par
+elle-même a pour diagonale $66$ et pour entrées hors diagonale $30$, ce qui
+est $36I+30J$.
+
+Soit $S=\sum_jv_j$. Les deux comptages précédents donnent
+\[
+\sum_{H\ni i}y_H=66v_i+30\sum_{j\ne i}v_j=36v_i+30S,
+\qquad
+\sum_Hy_H=66S.
+\]
+Multiplier la première égalité par onze et soustraire cinq fois la
+seconde élimine $S$ et produit $396v_i$. Cela démontre
+\eqref{rh:eq:recuperador} pour toute lecture appartenant à
+l'image de $\mathcal I$.
+\end{proof}
+
+\begin{corollary}[Composantes uniforme et transversale]
+Sur $\mathbb R^{12}$, le lecteur complet a pour valeur singulière
+$\sqrt{396}$ dans la direction uniforme et pour valeur singulière $6$ dans son
+complément orthogonal. Son opérateur inverse sur l'image a pour norme
+opératorielle $1/6$.
+\end{corollary}
+\begin{proof}
+La matrice $J$ agit par douze sur $\mathbb R\mathbf1$ et par zéro
+sur $\mathbf1^\perp$. Les valeurs propres de $36I+30J$ sont, par
+conséquent, $396$ et $36$. Les valeurs singulières sont leurs racines
+positives ; la plus grande valeur singulière de l'opérateur inverse est l'inverse
+de la plus petite d'entre elles.
+\end{proof}
+
+\subsection{Composition avec le registre engendré}
+
+En appliquant ces identités au registre entier dodécaphasique $K$, déjà
+produit avec son ordre et son origine, les lectures $BK$ ou $\mathcal I K$
+permettent de récupérer exactement ses douze composantes. L'interprétation
+positionnelle ultérieure prend ce même registre en base mille ; les
+opérateurs de Hadamard, les différences et les lecteurs hexadiques sont
+des réalisations récupérables d'une provenance commune.
+
+Le système de douze coordonnées rationnelles admet toute entrée
+$y\in\mathbb Q^{12}$ et la reconstruit comme un registre rationnel
+unique. Le sous-domaine correspondant aux registres HMT engendrés
+conserve, en outre, ses conditions d'intégralité, de largeur des
+triades, d'origine, de sélection et de frontière. Pour le système redondant de
+$132$ lectures, l'inverse agit sur l'image de $\mathcal I$.
+Ces précisions typent le contenu récupéré sans modifier la
+génération antécédente du registre.

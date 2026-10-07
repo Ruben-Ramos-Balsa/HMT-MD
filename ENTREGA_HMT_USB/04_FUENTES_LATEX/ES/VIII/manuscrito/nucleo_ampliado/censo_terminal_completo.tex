@@ -1,0 +1,303 @@
+\subsection{Censo completo de cilindros y selección de la frontera terminal}
+\label{act21:censo:terminal-completo}
+
+La lectura terminal utiliza conjuntamente dos informaciones: la compatibilidad
+de los cilindros regionales y un perfil de incidencia con canales y posiciones
+etiquetados. En este apartado se construyen los catálogos completos, se
+enumeran sus ternas y se demuestra el efecto de cada condición del lector.
+El punto de partida son las salidas regionales ya producidas en la
+sección~\ref{sec:generacion}, no valores introducidos para definir el
+transporte APP--TRIT--TPK. La reducción a una matriz pertenece a una lectura
+posterior de esas salidas y conserva el orden de los tres canales.
+
+El resultado es un teorema censal con estructura de partida explícita.
+El perfil de Gram, pesos, distancias y márgenes se declara como dato del
+lector terminal. La exhaustividad de la enumeración demuestra qué selecciona
+ese perfil sobre los catálogos fijados; no demuestra, por sí sola, que el
+perfil sea una ley universal ni que pueda reconstruirse desde la única terna
+que finalmente lo satisface. Esta separación permite incorporar la prueba
+finita completa sin invertir su genealogía.
+
+\subsubsection{De las salidas regionales a los catálogos ternarios}
+
+Sean \(x_\pi,x_e,x_\varphi\in[0,1)\) las partes fraccionarias de las
+tres coordenadas regionales ya construidas. Se utilizan sus cilindros
+expresados de mil posiciones decimales,
+\[
+ J_\chi^{(1000)}=
+ \left[\frac{d_\chi}{10^{1000}},
+       \frac{d_\chi+1}{10^{1000}}\right),
+ \qquad \chi\in\{\pi,e,\varphi\}.
+\]
+Los enteros \(d_\chi\) son lecturas finitas de salida. La longitud mil
+es suficiente para los enteros que siguen, como se comprueba mediante las
+dos cotas de cada intervalo; no es una profundidad supuesta infinita.
+Definimos
+\begin{equation}
+ p=30,\quad r=1050,\quad L=p+r=1080,\quad k=171,
+ \qquad D=3^L,\quad Q=1000^k,
+ \label{act21:censo:parametros}
+\end{equation}
+y
+\[
+ P_\chi=\lfloor3^{30}x_\chi\rfloor,\qquad
+ T_\chi=\lfloor Qx_\chi\rfloor.
+\]
+Aquí \(k\) cuenta tríadas decimales y no designa el registro dodecafásico
+\(K\). Se tiene \(1000^{171}\leq3^{1080}<1000^{172}\).
+
+\begin{lemma}[Extracción estable de un entero]
+\label{act21:censo:estabilidad}
+Para \(d,m,h\in\mathbb Z\), con \(m,h>0\), el valor de
+\(\lfloor mx\rfloor\) es constante en \([d/h,(d+1)/h)\) si y sólo si
+\begin{equation}
+ \left\lfloor\frac{md}{h}\right\rfloor
+ =\left\lfloor\frac{m(d+1)-1}{h}\right\rfloor.
+ \label{act21:censo:prueba-estabilidad}
+\end{equation}
+Cuando se cumple, cualquiera de los dos miembros da ese valor.
+\end{lemma}
+\begin{proof}
+El mínimo de \(mx\) se alcanza en el extremo izquierdo. Su supremo
+es \(m(d+1)/h\) y no se alcanza. El mayor entero que puede tomar
+\(\lfloor mx\rfloor\) es
+\(\lceil m(d+1)/h\rceil-1\), igual al segundo miembro porque
+el numerador y el denominador son enteros. La igualdad de los extremos
+del intervalo de valores prueba la afirmación.
+\end{proof}
+
+La prueba de estabilidad se cumple en los tres canales para
+\(m=3^{30},Q,3^{1080}\). La última elección se utilizará únicamente
+para una comparación posterior, no para seleccionar el perfil. Las
+primeras treinta posiciones recuperadas son precisamente las cinco
+etapas de seis trits del transporte regional:
+\begin{center}\small
+\begin{tabular}{@{}c l r@{}}\toprule
+Canal&Prefijo de treinta trits&\(P_\chi\)\\\midrule
+\(\pi\)&\texttt{010211012222010211002111110221}&29152671743887\\
+\(e\)&\texttt{201101121221102011012222102011}&147887858824447\\
+\(\varphi\)&\texttt{121200112202121020010210010200}&127247717616687\\\bottomrule
+\end{tabular}
+\end{center}
+La coincidencia conserva la prolongación ya construida; la lectura decimal
+no se usa para sustituir retroactivamente sus matrices de transporte.
+
+Fijado un canal, una cola de \(r\) trits se representa por
+\(0\leq R<3^r\). Su cilindro y el cilindro de las primeras \(k\)
+tríadas son
+\begin{equation}
+ I_{\chi,R}=\left[\frac{P_\chi3^r+R}{D},
+                       \frac{P_\chi3^r+R+1}{D}\right),\qquad
+ J_{\chi,T}=\left[\frac{T_\chi}{Q},\frac{T_\chi+1}{Q}\right).
+ \label{act21:censo:dos-cilindros}
+\end{equation}
+El catálogo incluye todas las colas para las que estos dos cilindros
+tienen intersección no vacía.
+
+\begin{proposition}[Catálogo por intersección exacta]
+\label{act21:censo:catalogos}
+Las colas compatibles son los enteros del intervalo \([a_\chi,b_\chi]\),
+con
+\begin{align}
+ a_\chi&=\max\left(0,
+       \left\lfloor\frac{T_\chi D}{Q}\right\rfloor-P_\chi3^r\right),
+       \label{act21:censo:extremo-a}\\
+ b_\chi&=\min\left(3^r-1,
+       \left\lfloor\frac{(T_\chi+1)D-1}{Q}\right\rfloor-P_\chi3^r\right).
+       \label{act21:censo:extremo-b}
+\end{align}
+Para los cilindros regionales fijados, los recortes no actúan y se obtiene
+\begin{equation}
+\begin{array}{c|r|r|r}
+ \chi&a_\chi\bmod729&b_\chi\bmod729&b_\chi-a_\chi+1\\\hline
+ \pi&67&262&196\\
+ e&584&51&197\\
+ \varphi&117&312&196
+\end{array}
+\label{act21:censo:tabla-catalogos}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Escribamos \(N=P_\chi3^r+R\). Dos intervalos semiabiertos de
+\eqref{act21:censo:dos-cilindros} se cortan exactamente cuando
+\[
+ NQ<(T_\chi+1)D,\qquad (N+1)Q>T_\chi D.
+\]
+La segunda desigualdad equivale a
+\(N\geq\lfloor T_\chi D/Q\rfloor\); la primera, a
+\(N\leq\lfloor((T_\chi+1)D-1)/Q\rfloor\). Restar
+\(P_\chi3^r\) y conservar \(0\leq R<3^r\) prueba las fórmulas.
+La evaluación por divisiones enteras de los \(T_\chi\) extraídos por
+\eqref{act21:censo:prueba-estabilidad} da la tabla. Como \(r\geq6\),
+\(P_\chi3^r\equiv0\pmod{729}\), de modo que el residuo del primer
+extremo también se obtiene directamente de
+\(\lfloor T_\chi D/Q\rfloor\bmod729\).
+\end{proof}
+
+Los últimos seis trits de una cola forman la palabra
+\(\nu_6(R\bmod729)\), donde \(\nu_6\) es la escritura ternaria
+de longitud seis, incluidos sus ceros iniciales. Por la tabla, cada
+catálogo tiene menos de \(729\) elementos consecutivos, de manera que
+esta reducción es inyectiva sobre él. Así, los tres catálogos de frontera
+quedan descritos completamente, sin elegir las ternas finales:
+\begin{equation}
+ \begin{split}
+ \mathcal B_\pi&=\{\nu_6(67+i):0\leq i<196\},\\
+ \mathcal B_e&=\{\nu_6((584+j)\bmod729):0\leq j<197\},\\
+ \mathcal B_\varphi&=\{\nu_6(117+\ell):0\leq\ell<196\}.
+ \end{split}
+ \label{act21:censo:fronteras-explicitas}
+\end{equation}
+Exigir que el extremo izquierdo de \(I_{\chi,R}\) pertenezca a
+\(J_{\chi,T}\) sería otra condición: perdería el primer cilindro
+que corta la frontera y daría \(195,196,195\). El censo utiliza la
+intersección de los cilindros completos, de acuerdo con su definición.
+
+\subsubsection{Perfil declarado e indicadores de compatibilidad}
+
+Para \(u,v\in\mathbb F_3^6\), sean
+\(g(u,v)=\sum u_iv_i\in\mathbb F_3\),
+\(n(u)=g(u,u)\), \(w(u)=\#\{i:u_i\ne0\}\) y
+\(h(u,v)=\#\{i:u_i\ne v_i\}\). Las dos últimas funciones toman
+valores enteros; las dos primeras, valores en \(\mathbb F_3\).
+El perfil local del lector, en orden \((\pi,e,\varphi)\), es
+\begin{equation}
+ \begin{split}
+ (g_{\pi e},g_{\pi\varphi},g_{e\varphi})&=(2,2,0),\qquad
+ (n_\pi,n_e,n_\varphi)=(0,0,0),\\
+ (w_\pi,w_e,w_\varphi)&=(3,3,3),\qquad
+ (h_{\pi e},h_{\pi\varphi},h_{e\varphi})=(2,5,3).
+ \end{split}
+ \label{act21:censo:perfil-local}
+\end{equation}
+Las palabras se ordenan como en \eqref{act21:censo:fronteras-explicitas}.
+Usaremos \([E]\in\{0,1\}\) para el indicador de una condición \(E\).
+Para cada par de canales \(\chi,\psi\), la matriz rectangular
+\(A_{\chi\psi}\) tiene entrada \([g(u,v)=g_{\chi\psi}]\).
+La matriz \(A^{h}_{\chi\psi}\) multiplica esa entrada por
+\([h(u,v)=h_{\chi\psi}]\). Sean \(D_\chi^n\) la matriz diagonal
+de \([n(u)=0]\), y \(D_\chi^{nw}\) la de
+\([n(u)=0][w(u)=3]\).
+
+\begin{theorem}[Enumeración exhaustiva por sumas finitas]
+\label{act21:censo:teorema-conteo}
+El producto de los tres catálogos contiene \(7\,567\,952\) ternas.
+Las condiciones sucesivas de \eqref{act21:censo:perfil-local} dejan
+\begin{equation}
+ 7\,567\,952\longrightarrow275\,794\longrightarrow6235
+ \longrightarrow3127\longrightarrow331.
+ \label{act21:censo:cadena-local}
+\end{equation}
+Estos cuatro conteos son, respectivamente,
+\begin{align}
+ N_g&=\operatorname{tr}(A_{\pi e}A_{e\varphi}A_{\varphi\pi}),
+ \nonumber\\
+ N_{gn}&=\operatorname{tr}(D_\pi^n A_{\pi e}
+             D_e^n A_{e\varphi}D_\varphi^n A_{\varphi\pi}),
+ \nonumber\\
+ N_{gnw}&=\operatorname{tr}(D_\pi^{nw} A_{\pi e}
+             D_e^{nw} A_{e\varphi}D_\varphi^{nw} A_{\varphi\pi}),
+ \nonumber\\
+ N_{gnwh}&=\operatorname{tr}(D_\pi^{nw} A^h_{\pi e}
+             D_e^{nw} A^h_{e\varphi}D_\varphi^{nw} A^h_{\varphi\pi}).
+ \label{act21:censo:trazas}
+\end{align}
+Todos los productos y trazas de esta fórmula se calculan en los enteros,
+no en el cuerpo de tres elementos.
+\end{theorem}
+\begin{proof}
+El tamaño del producto es \(196\cdot197\cdot196\). Al expandir
+una traza de \eqref{act21:censo:trazas}, sus índices recorren exactamente una
+terna de palabras. El sumando vale uno si satisface todas las condiciones
+representadas y cero en otro caso. Cada terna se cuenta una vez.
+Las matrices diagonales añaden las condiciones individuales; los factores
+rectangulares añaden las condiciones por pares. Esto demuestra que las
+trazas son precisamente los cardinales anunciados.
+
+Para explicitar su evaluación, fijados los índices \(i,j\) de los dos
+primeros canales, se forman los conjuntos de índices \(\ell\) del tercero
+que cumplen cada condición por pares. Se intersectan sus indicadores,
+se añaden los indicadores individuales pertinentes y se suma su cardinal.
+La suma final recorre \(0\leq i<196\), \(0\leq j<197\).
+La sustitución de las palabras de \eqref{act21:censo:fronteras-explicitas} y
+del perfil \eqref{act21:censo:perfil-local} da, en ese orden,
+\(275794,6235,3127,331\). El suplemento registra las cuatro contribuciones
+de cada uno de los \(196\) índices \(i\) y las \(331\) ternas completas;
+su programa evalúa estas sumas con indicadores binarios exactos y contrasta
+escalarmente cada superviviente. No interviene una muestra ni una tolerancia.
+\end{proof}
+
+\subsubsection{Incidencia etiquetada y carga de orientación}
+
+Para una terna superviviente, sea \(B\in\mathbb F_3^{3\times6}\) su
+matriz de filas ordenadas. El segundo perfil exige
+\begin{equation}
+ \operatorname{rank}_{\mathbb F_3}B=3,\qquad
+ w_{\mathrm{col}}(B)=(1,1,2,2,3,0),\qquad
+ q_{\partial}(B)=(1,2,2,1,2,0),
+ \label{act21:censo:perfil-columnas}
+\end{equation}
+donde \(w_{\mathrm{col}}\) cuenta los elementos no nulos de cada
+columna y \(q_{\partial}\) suma sus entradas módulo tres. Es un perfil
+de columnas etiquetadas; permutarlas sin transportar el perfil define otro
+lector. Denotemos por \(\mathcal F\) el conjunto de las \(331\) ternas
+del teorema anterior.
+
+\begin{proposition}[Reducción del censo al par terminal]
+\label{act21:censo:dos-matrices}
+Las sumas de indicadores sobre \(\mathcal F\), al exigir sucesivamente
+rango, pesos de columna y sumas de columna, son
+\begin{equation}
+ \sum_{B\in\mathcal F}[\operatorname{rank}B=3]=331,
+ \qquad N_{\mathrm{rango,pesos}}=18,
+ \qquad N_{\mathrm{rango,pesos,sumas}}=2.
+ \label{act21:censo:conteo-columnas}
+\end{equation}
+Con índices de catálogo comenzando en uno, las dos ternas finales son
+\((120,197,157)\) y \((129,197,148)\), y sus matrices son
+\[
+ B_0=\begin{pmatrix}0&2&0&2&2&0\\0&0&1&2&2&0\\1&0&1&0&1&0\end{pmatrix},
+ \qquad
+ B_1=\begin{pmatrix}0&2&1&0&2&0\\0&0&1&2&2&0\\1&0&0&2&1&0\end{pmatrix}.
+\]
+\end{proposition}
+\begin{proof}
+En cada terna del conjunto ya enumerado se calcula el rango por eliminación
+en \(\mathbb F_3\), se cuentan los elementos no nulos de las seis
+columnas y se suman éstas módulo tres. Los productos de los indicadores
+de \eqref{act21:censo:perfil-columnas} dan \eqref{act21:censo:conteo-columnas}.
+La sustitución de los dos índices finales en
+\eqref{act21:censo:fronteras-explicitas} da las matrices expuestas. La lista
+completa de supervivientes y los filtros exactos del suplemento permiten
+reproducir la eliminación sin presuponer esas dos matrices como dominio.
+\end{proof}
+
+La orientación \(\sigma=(1,1,-1)=(1,1,2)\in\mathbb F_3^3\)
+selecciona la recta
+\(\langle\sigma\rangle=\{(0,0,0),(1,1,2),(2,2,1)\}\).
+Las cargas de filas de \(B_0,B_1\) son \((0,2,0)\) y \((2,2,1)\);
+sólo la segunda pertenece a esa recta. Se recupera así el último paso
+del selector de la sección~\ref{act21:censo:dos-matrices}, ahora precedido por
+la construcción y enumeración de su dominio completo. La lectura estable
+de \(\lfloor3^{1080}x_\chi\rfloor\), efectuada después de los filtros,
+da las fronteras \texttt{021020}, \texttt{001220}, \texttt{100210},
+con los mismos rangos \((129,197,148)\). Este cotejo posterior no define
+el perfil ni participa en las sumas de indicadores.
+
+\subsubsection{Información conservada y alcance del resultado}
+
+El procedimiento conserva el prefijo de treinta trits, la cola compatible,
+el orden regional, la posición de cada trit y la orientación. La reducción
+módulo \(729\) conserva aquí la identidad de cada candidato porque el
+intervalo de colas tiene longitud menor que \(729\); esa inyectividad
+no se afirma para una historia arbitraria. El censo de \(331\) demuestra
+también que el perfil local aislado no selecciona una sola matriz: los
+márgenes etiquetados y la carga aportan condiciones efectivas adicionales.
+
+Se ha recuperado, por tanto, una enumeración finita íntegra y su selector
+sobre cilindros de salida, con perfil de lectura explícito. La construcción
+del registro firmado utiliza además su lector de memoria y sus canales,
+como se especifica a continuación; la matriz visible no se identifica con
+ese registro por igualdad de número de componentes. Tampoco este conteo
+demuestra la universalidad del perfil, genera de nuevo las coordenadas
+regionales ni decide una afirmación sobre alfa o sobre el continuo completo.

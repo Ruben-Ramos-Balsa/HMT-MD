@@ -1,0 +1,519 @@
+\section{Géométrie d'APP et structure de ses trajectoires}
+\label{geo:chap}
+
+La matrice principale d'APP permet de reconnaître visuellement ses régularités. Son contenu géométrique est déterminé par les opérations qui relient ses positions : translation, inversion, composition de trajectoires et évaluation simultanée de la somme et du produit. Ces opérations produisent des réalisations distinctes et compatibles. Le graphe de Cayley décrit l'adjacence ; l'identification périodique des bords produit une surface toroïdale ; le relèvement entier conserve l'enroulement ; l'interaction des deux évaluations détermine une courbure discrète orientée. Le bloc central, sélectionné au sein de la matrice elle-même, admet en outre une réalisation spectrale et une normalisation lorentzienne.
+
+Chaque construction est introduite avec son domaine. Ainsi est conservée la relation entre le support fini, sa réalisation cellulaire, les espaces de fonctions sur celui-ci et les formes bilinéaires obtenues à partir de ses opérateurs. Cette distinction permet d'utiliser tout le contenu géométrique d'APP sans substituer une réalisation à une autre.
+
+\subsection{Graphe de Cayley et structure arithmétique des trajectoires}
+\label{geo:cayley}
+
+\subsubsection{Du support positionnel au graphe orienté}
+
+L'identification des représentants $1,\ldots,9$ aux classes modulo neuf transforme le support positionnel de la section~\ref{app:construccion-explicita} en le groupe additif
+\[
+ X_9=(\mathbb Z/9\mathbb Z)^2.
+\]
+La projection $\mathcal X_9\to X_9$ est bijective : chaque classe de chaque coordonnée a un unique représentant dans $D_9$. Les quatre déplacements cardinaux déterminent l'ensemble symétrique
+\[
+ \mathscr D=\{(-1,0),(0,1),(1,0),(0,-1)\}.
+\]
+L'orientation des coordonnées est celle fixée précédemment : première coordonnée vers le sud et seconde vers l'est.
+
+\begin{definicion}[Graphe cardinal d'APP]
+\label{geo:def-grafo}
+Le graphe orienté $\mathscr G_9$ a pour ensemble de sommets $X_9$ et une arête $x\to x+v$ pour chaque $x\in X_9$ et $v\in\mathscr D$. Dans la notation des graphes de Cayley,
+\[
+ \mathscr G_9=\operatorname{Cay}(X_9,\mathscr D).
+\]
+L'arête inverse de $x\to x+v$ est $x+v\to x$, associée à $-v$.
+\end{definicion}
+
+\begin{proposicion}[Connexité, degré et symétrie par translations]
+\label{geo:prop-cayley}
+Le graphe $\mathscr G_9$ est connexe, possède $81$ sommets, $324$ arêtes orientées et $162$ arêtes non orientées. Chaque translation $T_a:x\mapsto x+a$ est un automorphisme du graphe et agit librement sur les sommets.
+\end{proposicion}
+
+\begin{proof}
+Les classes de $(1,0)$ et de $(0,1)$ engendrent $X_9$. Depuis n'importe quel sommet, on peut en atteindre un autre par une suite de ces déplacements ou de leurs inverses ; cela démontre la connexité. Les quatre vecteurs de $\mathscr D$ sont distincts modulo neuf et aucun n'est nul. Chaque sommet a donc quatre arêtes sortantes et le nombre total d'arêtes orientées est $81\cdot4=324$. Chaque arête non orientée apparaît exactement deux fois, une dans chaque sens, ce qui donne $162$.
+
+Si $y-x\in\mathscr D$, alors $(y+a)-(x+a)=y-x\in\mathscr D$. Ainsi, $T_a$ conserve les arêtes et leur orientation ; son inverse est $T_{-a}$. Enfin, $T_a(x)=x$ implique $a=0$, ce qui exprime la liberté de l'action.
+\end{proof}
+
+La structure de groupe employée dans ce résultat est l'addition des positions. L'observable multiplicative $\Pi$ reste définie sur les mêmes sommets et conserve le radical décrit dans le \cref{prop:app-radical}. Les deux opérations interviennent donc avec des fonctions distinctes : l'addition définit les translations du graphe ; la multiplication attribue à chaque position son évaluation principale et ses multiplicités.
+
+\subsubsection{Trajectoires, concaténation et ordre des registres}
+
+Un parcours orienté de longueur $r$ est spécifié par une origine $x_0$ et une suite $w=a_1\cdots a_r$ de directions. Sa position à l'instant $k$ est
+\[
+ x_k=x_0+\sum_{j=1}^{k}\nu(a_j)\quad\text{dans }X_9.
+\]
+La différence $x_k-x_{k-1}$ permet de retrouver la direction $a_k$, puisque les quatre générateurs sont distincts. Une bijection est ainsi établie entre les couples $(x_0,w)$ et les trajectoires orientées de longueur $r$. Le dénombrement $81\cdot4^r$ inclut exactement les trajectoires avec rebroussements et retours admises par cette définition.
+
+\begin{definicion}[Composition des trajectoires APP]
+\label{geo:def-composicion}
+Une trajectoire $\gamma:x\to y$ et une autre $\delta:y\to z$ se composent en concaténant leurs listes d'arêtes. La trajectoire vide à chaque position est l'identité. Les deux évaluations d'une trajectoire sont les suites ordonnées
+\[
+ \Sigma[\gamma]=(\Sigma(x_0),\ldots,\Sigma(x_r)),\qquad
+ \Pi[\gamma]=(\Pi(x_0),\ldots,\Pi(x_r)).
+\]
+Le registre arithmétique complet ajoute à chaque position les quotients $q_+$ et $q_\times$.
+\end{definicion}
+
+La concaténation est associative parce que la concaténation des listes l'est. Les objets et opérations précédents constituent la catégorie des trajectoires du graphe. L'inversion du parcours inverse l'ordre des arêtes et change chaque direction en son opposée. La concaténation d'une trajectoire avec son inverse conserve une liste de transitions d'aller et de retour ; en passant au quotient qui annule les rebroussements immédiats, on obtient, en revanche, une identité. Cette distinction exprime exactement quelle information retient la trajectoire enregistrée et quelle information conserve sa classe réduite.
+
+La structure APP peut être réunie sous la forme
+\[
+ \mathcal A_{\rm APP}=
+ \bigl(X_9,\mathscr G_9,\Sigma,\Pi,
+             \operatorname{Path}(\mathscr G_9)\bigr),
+\]
+accompagnée du relèvement reste--quotient défini en \eqref{eq:app-two-evaluations}. Le terme \emph{feuillet} désigne l'une des deux évaluations sur ce support commun. Si deux curseurs sont utilisés, chaque trajectoire conserve en outre l'identifiant du feuillet sur lequel elle est évaluée. Cette différenciation est la base du couplage ultérieur des deux émissions.
+
+\subsection{Réalisation toroïdale et relèvement des parcours}
+\label{geo:toro}
+
+\subsubsection{Identification périodique de la grille}
+
+La réalisation cellulaire est construite sur le réseau entier du plan : ses sommets sont les couples d'entiers ; ses arêtes joignent des couples qui diffèrent d'un générateur cardinal ; ses faces sont des carrés unitaires. On identifie les cellules translatées par des vecteurs de $9\mathbb Z^2$. Le quotient contient neuf positions par direction et son graphe d'arêtes est précisément $\mathscr G_9$.
+
+\begin{proposicion}[Surface toroïdale d'APP]
+\label{geo:prop-toro}
+La réalisation cellulaire précédente est une surface orientable fermée homéomorphe au tore bidimensionnel. Sa décomposition cellulaire a $81$ sommets, $162$ arêtes et $81$ faces, et sa caractéristique d'Euler est nulle.
+\end{proposicion}
+
+\begin{proof}
+Le carré de côté neuf, dont les côtés opposés sont identifiés par des translations, est un domaine fondamental. En identifiant d'abord une paire de côtés opposés, on obtient un cylindre ; en identifiant les deux extrémités du cylindre au moyen de la translation restante, on obtient le tore. L'orientation des carrés du plan est conservée par les translations et descend au quotient.
+
+Les classes de sommets sont les couples de restes modulo neuf, de sorte qu'il y en a $81$. De chaque classe part une arête horizontale positive et une arête verticale positive ; chaque arête géométrique a une unique description de ce type, et il y en a donc $162$. Les classes de carrés sont identifiées par leur sommet initial et sont au nombre de $81$. Par conséquent,
+\[
+ \chi=81-162+81=0.
+\]
+L'identification élimine le bord du domaine fondamental : une arête de ce bord est jointe à son opposée et appartient à deux faces. Le lien de chaque sommet est un cycle de quatre arêtes, comme dans la grille plane. Cela vérifie localement la structure de surface fermée.
+\end{proof}
+
+Les bords de la table imprimée agissent comme des coupures d'un domaine fondamental. Leur rôle arithmétique provient des représentants choisis. En particulier, la dernière ligne et la dernière colonne correspondent à des coordonnées de classe nulle. Ces coupures permettent de représenter la périodicité sur une page sans en faire une frontière intrinsèque de la surface toroïdale.
+
+\begin{proposicion}[Distribution des représentants nuls multiplicatifs]
+\label{geo:prop-ceros}
+L'évaluation $\Pi$ prend la valeur neuf à exactement vingt et une positions. Dix-sept appartiennent à la réunion de la dernière ligne et de la dernière colonne ; les quatre autres sont
+\[
+ (3,3),\quad(3,6),\quad(6,3),\quad(6,6).
+\]
+\end{proposicion}
+
+\begin{proof}
+La condition $\Pi(i,j)=9$ équivaut à $9\mid ij$. Si une coordonnée est neuf, elle est vérifiée pour toute valeur de l'autre. La dernière ligne et la dernière colonne réunissent $9+9-1=17$ positions. Si les deux coordonnées sont comprises entre un et huit, la divisibilité par neuf exige qu'elles soient toutes deux multiples de trois, puisqu'aucune ne contient déjà le facteur neuf. Les seules possibilités sont $i,j\in\{3,6\}$, qui donnent les quatre positions indiquées. Les deux ensembles sont disjoints et leur réunion a $21$ positions.
+\end{proof}
+
+La nullité multiplicative distingue ainsi la coupure coordonnée et le secteur radical intérieur de la représentation. Chaque position conserve en outre son évaluation additive et ses quotients ; la valeur visible neuf a vingt et une provenances positionnelles différentes.
+
+\subsubsection{Relèvement entier et registre de franchissement de frontière}
+
+Fixons un représentant entier $\widetilde x_0\in D_9^2$ de l'origine. Le relèvement d'une trajectoire est construit sans réduction modulaire :
+\[
+ \widetilde x_k=\widetilde x_0+\sum_{j=1}^{k}\nu(a_j)
+ \in\mathbb Z^2.
+\]
+Sa réduction modulo neuf est $x_k$. Notons $s_9(x_k)\in D_9^2$ le représentant positif coordonnée par coordonnée. Il existe un unique vecteur $q_k\in\mathbb Z^2$ tel que
+\[
+ \widetilde x_k=s_9(x_k)+9q_k.
+\]
+Le vecteur $q_k$ compte les déplacements entre domaines fondamentaux du relèvement.
+
+\begin{proposicion}[Accumulation exacte des franchissements]
+\label{geo:prop-cruces}
+Pour chaque transition, le vecteur
+\[
+ \kappa_k=
+ \frac{s_9(x_{k-1})+\nu(a_k)-s_9(x_k)}9
+ \in\mathbb Z^2
+\]
+satisfait $q_k=q_{k-1}+\kappa_k$. Dans une trajectoire de longueur $r$,
+\[
+ \sum_{k=1}^{r}\kappa_k
+ =\frac{s_9(x_0)+d(w)-s_9(x_r)}9.
+\]
+Si la trajectoire est fermée, cette somme est son vecteur d'enroulement $\operatorname{wind}(w)$.
+\end{proposicion}
+
+\begin{proof}
+La congruence $s_9(x_{k-1})+\nu(a_k)\equiv s_9(x_k)\pmod9$ démontre que $\kappa_k$ est entier. En substituant $\widetilde x_{k-1}=s_9(x_{k-1})+9q_{k-1}$ dans la règle de relèvement, on obtient
+\[
+ \widetilde x_k=s_9(x_k)+9(q_{k-1}+\kappa_k).
+\]
+L'unicité de la décomposition donne la première identité. En sommant les expressions de $\kappa_k$, les positions intermédiaires s'annulent et il reste la seconde. Pour un parcours fermé, $s_9(x_r)=s_9(x_0)$ ; le résultat est $d(w)/9$, selon le \cref{thm:app-transporte}.
+\end{proof}
+
+\begin{ejemplo}[Relèvement d'un tour horizontal]
+Depuis $(5,5)$, neuf déplacements vers l'est produisent les colonnes entières
+\[
+ 5,6,7,8,9,10,11,12,13,14.
+\]
+Leurs représentants positifs sont
+\[
+ 5,6,7,8,9,1,2,3,4,5.
+\]
+Au passage de $9$ à $1$, la seconde composante de $\kappa_k$ vaut un ; aux autres pas, elle vaut zéro. La position résiduelle finale coïncide avec l'initiale, tandis que le relèvement final est $(5,14)$ et que l'enroulement est $(0,1)$.
+\end{ejemplo}
+
+L'entier de franchissement conserve la circulation accumulée. La suite ordonnée des franchissements et des positions conserve des données supplémentaires, comme l'instant où la coupure est traversée. Les deux registres ont des applications différentes au sein de l'état enrichi. Leur conservation permet de transporter une histoire qui traverse à plusieurs reprises le même ensemble de positions.
+
+\subsubsection{Réalisation complexe et structure de Kähler du tore continu}
+\label{geo:kahler}
+
+La réalisation cellulaire admet une extension géométrique explicite :
+\[
+ \mathbb T_{9,\mathrm{an}}=\mathbb R^2/(9\mathbb Z)^2.
+\]
+L'application qui envoie une position entière sur sa classe dans ce quotient inclut les $81$ sommets d'APP comme une grille finie. L'espace réel est utilisé ici comme codomaine de réalisation de l'objet arithmétique déjà construit. Les développements du continu généalogique établiront séparément leur propre construction de valeurs.
+
+Dans les coordonnées locales $(u,v)$ héritées du plan, on définit
+\[
+ g=\dd u^2+\dd v^2,\qquad
+ J(a,b)=(-b,a),\qquad
+ \omega=\dd u\wedge\dd v.
+\]
+Ces structures sont invariantes par les translations du réseau. Elles descendent donc au tore.
+
+\begin{proposicion}[Structure de Kähler de la réalisation toroïdale]
+\label{geo:prop-kahler}
+Le triplet $(g,J,\omega)$ définit une structure de Kähler plate sur $\mathbb T_{9,\mathrm{an}}$. Il satisfait
+\[
+ J^2=-I,\qquad g(JX,JY)=g(X,Y),\qquad
+ \omega(X,Y)=g(JX,Y),\qquad \dd\omega=0.
+\]
+\end{proposicion}
+
+\begin{proof}
+La formule de $J$ donne $J^2(a,b)=(-a,-b)$ et conserve le produit scalaire. Si $X=(a,b)$ et $Y=(c,d)$, alors
+\[
+ g(JX,Y)=-bc+ad=\omega(X,Y).
+\]
+Les coefficients constants de $\omega$ impliquent $\dd\omega=0$. La coordonnée complexe $z=u+\mathrm i v$ fournit la structure complexe ; les changements entre les coordonnées de deux domaines fondamentaux sont des translations $z\mapsto z+9m+9\mathrm i n$, qui sont holomorphes. Par conséquent, $J$ est intégrable. La métrique a des coefficients constants dans ces coordonnées locales, de sorte que sa courbure riemannienne est nulle.
+\end{proof}
+
+La propriété de Kähler appartient à cette réalisation différentielle. Le graphe conserve sa description combinatoire et les $81$ sommets conservent leurs évaluations arithmétiques. Le choix explicite de $g$ et de $J$ montre comment les deux niveaux sont reliés et permet d'identifier la donnée supplémentaire utilisée par la réalisation continue.
+
+\subsection{Interaction des évaluations et courbure discrète}
+\label{geo:curvatura}
+
+\subsubsection{Potentiels de sommet et différences de liaison}
+
+Nous travaillons maintenant avec les observables à valeurs dans $R=\mathbb Z/9\mathbb Z$. Pour éviter de les confondre avec leurs représentants entiers, nous écrivons
+\[
+ \overline S(x,y)=x+y,\qquad \overline P(x,y)=xy.
+\]
+L'application $s_9$ permet de retrouver les tables visibles : $\Sigma=s_9\circ\overline S$ et $\Pi=s_9\circ\overline P$. Dans cette partie, les soustractions et les produits de valeurs sont effectués dans $R$.
+
+Pour $T:X_9\to R$, nous définissons
+\[
+ \Delta_xT(x,y)=T(x+1,y)-T(x,y),\qquad
+ \Delta_yT(x,y)=T(x,y+1)-T(x,y).
+\]
+Chaque différence est une variable associée à la liaison correspondante. Un choix ordonné de potentiels $(T_x,T_y)$ détermine les variables
+\[
+ A_x=\Delta_xT_x,\qquad A_y=\Delta_yT_y.
+\]
+La circulation autour de la plaquette orientée positivement est
+\begin{align}
+ F(T_x,T_y)(x,y)
+ &=A_x(x,y)+A_y(x+1,y)\notag\\
+ &\quad-A_x(x,y+1)-A_y(x,y)\notag\\
+ &=\Delta_x\Delta_yT_y-\Delta_y\Delta_xT_x.
+ \label{geo:eq-curvatura}
+\end{align}
+La formule fixe simultanément l'orientation et l'ordre des potentiels.
+
+\begin{proposicion}[Courbure orientée des évaluations mixtes]
+\label{geo:prop-curvatura}
+Dans toutes les plaquettes d'APP, on a
+\[
+ F(\overline S,\overline S)=F(\overline P,\overline P)=0,
+ \qquad
+ F(\overline S,\overline P)=1,
+ \qquad F(\overline P,\overline S)=-1.
+\]
+\end{proposicion}
+
+\begin{proof}
+Les différences des deux potentiels sont
+\[
+ \Delta_x\overline S=1,\quad\Delta_y\overline S=1,
+ \qquad
+ \Delta_x\overline P=y,\quad\Delta_y\overline P=x.
+\]
+En les différenciant de nouveau, on obtient $\Delta_x\Delta_y\overline S=\Delta_y\Delta_x\overline S=0$ et $\Delta_x\Delta_y\overline P=\Delta_y\Delta_x\overline P=1$. La substitution dans \eqref{geo:eq-curvatura} produit les quatre valeurs. Toutes les identités sont polynomiales dans l'anneau résiduel, et restent donc valables dans les plaquettes qui traversent la coupure de la représentation positive.
+\end{proof}
+
+Dans une même plaquette, sélectionner la somme dans la direction horizontale et le produit dans la direction verticale produit une unité orientée de circulation. Intervertir les deux sélections inverse son signe. Le résultat est obtenu à partir de l'ordre effectif des évaluations et de leurs différences, avant toute lecture physique.
+
+\begin{teorema}[Identité discrète de Stokes]
+\label{geo:thm-stokes}
+Soit $R_{a,b}$ un rectangle de $a\times b$ plaquettes dans un relèvement de la grille. La somme orientée de ses liaisons de bord satisfait
+\[
+ W_{\partial R_{a,b}}(\overline S,\overline P)=ab,
+ \qquad
+ W_{\partial R_{a,b}}(\overline P,\overline S)=-ab
+ \quad\text{dans }R.
+\]
+\end{teorema}
+
+\begin{proof}
+Nous sommons la première expression de \eqref{geo:eq-curvatura} sur les $ab$ plaquettes. Chaque liaison intérieure est parcourue une fois dans chaque sens, avec le même potentiel et des valeurs opposées, et ses contributions s'annulent. Il reste exactement les liaisons du bord extérieur avec l'orientation induite. La courbure de chaque plaquette est respectivement $1$ ou $-1$, de sorte que la somme totale est $ab$ ou $-ab$ modulo neuf.
+\end{proof}
+
+Pour un rectangle d'une plaquette, la circulation est une unité ; pour un rectangle de trois sur trois, sa somme est neuf et sa classe résiduelle est nulle. La différence entre la circulation entière accumulée et son évaluation modulaire rend de nouveau pertinent le registre de relèvement. La courbure discrète de cette partie et la courbure riemannienne de la réalisation de Kähler agissent sur des objets différents : la première mesure le mélange de deux potentiels arithmétiques dans les liaisons ; la seconde appartient à la métrique déclarée sur la surface continue.
+
+\subsection{Sélection et décomposition spectrale du bloc central}
+\label{geo:bloque-central}
+
+\subsubsection{Sélection intrinsèque par congruence}
+
+Dans la matrice principale, considérons les blocs de deux lignes et de deux colonnes consécutives de mêmes indices. Pour $1\leq k\leq8$, leurs évaluations entières sont
+\[
+ \widetilde B_k=
+ \begin{pmatrix}k^2&k(k+1)\\k(k+1)&(k+1)^2\end{pmatrix}.
+\]
+Leur réduction entrée par entrée au moyen de $\rho_9$ définit $B_k$.
+
+\begin{teorema}[Unicité du bloc adjacent à diagonales égales]
+\label{geo:thm-bloque}
+La condition d'égalité des deux entrées diagonales de $B_k$ sélectionne uniquement $k=4$. Le bloc résultant est
+\[
+ B_c=\begin{pmatrix}7&2\\2&7\end{pmatrix}.
+\]
+\end{teorema}
+
+\begin{proof}
+L'égalité des représentants positifs équivaut à l'égalité de leurs classes. Par conséquent,
+\[
+ \rho_9(k^2)=\rho_9((k+1)^2)
+ \quad\Longleftrightarrow\quad 2k+1\equiv0\pmod9.
+\]
+L'inverse de deux modulo neuf est cinq. Multiplier la congruence par cinq donne $k\equiv-5\equiv4\pmod9$. Parmi les indices $1,\ldots,8$, seul $4$ apparaît. Les quatre entrées sont les réductions de $16,20,20,25$, qui produisent $7,2,2,7$.
+\end{proof}
+
+La condition qui sélectionne ce bloc dépend uniquement d'entrées adjacentes d'APP. Le point fixe $(5,5)$ de l'inversion centrale et le bloc de positions $\{4,5\}\times\{4,5\}$ ont des types distincts : le premier est une position ; le second réunit quatre évaluations. Leurs relations sont maintenues au moyen des indices, sans identifier le point à la matrice.
+
+\subsubsection{Modes symétrique et antisymétrique}
+
+Nous définissons l'involution d'échange et ses deux projecteurs :
+\[
+ R=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+ P_+=\frac{I+R}{2},\qquad P_-=\frac{I-R}{2}.
+\]
+Les vecteurs $(1,1)$ et $(1,-1)$ engendrent leurs espaces propres respectifs. Comme $R^2=I$, on a $P_\pm^2=P_\pm$, $P_+P_-=0$ et $P_++P_-=I$.
+
+\begin{proposicion}[Décomposition exacte du bloc]
+\label{geo:prop-espectro-central}
+Le bloc sélectionné satisfait
+\[
+ B_c=7I+2R=9P_++5P_-,\qquad
+ \det B_c=45,\qquad \operatorname{tr}B_c=14.
+\]
+La différence de ses valeurs propres est quatre et son coefficient d'échange est deux.
+\end{proposicion}
+
+\begin{proof}
+En substituant $I=P_++P_-$ et $R=P_+-P_-$ dans $7I+2R$, on obtient $9P_++5P_-$. Les valeurs propres sont donc neuf et cinq ; leur produit est $45$ et leur somme $14$. La différence est $9-5=4$, tandis que le coefficient de l'opérateur $R$ est le deux des entrées antidiagonales.
+\end{proof}
+
+La concaténation décimale ordonnée de chaque ligne produit les blocs $72$ et $27$. La concaténation des diagonales produit $77$ et $22$. Ces lectures satisfont
+\[
+ 72+27=77+22=99,
+ \qquad72-27=45,
+ \qquad77-22=55=54+1.
+\]
+L'égalité $72-27=\det B_c$ relie deux évaluations explicites du même bloc : concaténation décimale et déterminant. Chaque lecture conserve sa règle ; l'égalité de leurs résultats est une identité vérifiable entre ces règles.
+
+\subsection{Normalisations conservatives du bloc et réalisation lorentzienne}
+\label{geo:lorentz}
+
+\subsubsection{Normalisation stochastique et contraction différentielle}
+
+La somme de chaque ligne et de chaque colonne de $B_c$ vaut neuf. La division par neuf définit la matrice doublement stochastique
+\[
+ P_B=\frac19B_c
+ =\begin{pmatrix}7/9&2/9\\2/9&7/9\end{pmatrix}
+ =P_++\frac59P_-.
+\]
+Ses entrées sont positives et les sommes des lignes et des colonnes sont égales à un.
+
+\begin{proposicion}[Itération des deux modes]
+\label{geo:prop-markov}
+Pour tout $n\geq0$,
+\[
+ P_B^n=P_++\left(\frac59\right)^nP_-.
+\]
+Si $v=(a,b)^{\mathsf T}$, la somme de ses composantes est conservée et leur différence est multipliée par $(5/9)^n$.
+\end{proposicion}
+
+\begin{proof}
+L'orthogonalité des projecteurs élimine tous les produits croisés dans la puissance. Leurs puissances positives sont eux-mêmes, ce qui donne la formule. De plus,
+\[
+ v=\frac{a+b}{2}(1,1)^{\mathsf T}
+   +\frac{a-b}{2}(1,-1)^{\mathsf T}.
+\]
+La première composante est fixe et la seconde est multipliée par $(5/9)^n$. Cela démontre simultanément la conservation de la somme et la contraction de la différence.
+\end{proof}
+
+Cette lecture décrit une transformation locale de deux composantes. Son facteur $5/9$ et son gap $1-5/9=4/9$ proviennent du spectre du bloc sélectionné. L'opérateur global du TPK utilise des états et des registres supplémentaires ; les deux échelles conservent leurs domaines propres.
+
+\subsubsection{Normalisation déterminantale et forme de Minkowski de dimension deux}
+
+Soit $\eta=\operatorname{diag}(1,-1)$ et définissons
+\[
+ M_c=\frac{B_c}{\sqrt{45}}.
+\]
+La normalisation est fixée par le déterminant qui vient d'être obtenu à partir du bloc.
+
+\begin{teorema}[Réalisation lorentzienne locale d'APP]
+\label{geo:thm-lorentz}
+La matrice $M_c$ satisfait
+\[
+ M_c^{\mathsf T}\eta M_c=\eta,
+ \qquad \det M_c=1.
+\]
+Elle préserve la composante future du cône temporel de la forme $t^2-x^2$ et appartient à $SO^+(1,1)$. Si
+\[
+ \theta_c=\frac12\log\frac95,
+\]
+alors
+\[
+ M_c=\exp(\theta_cR),\qquad
+ \frac59=\exp(-2\theta_c).
+\]
+\end{teorema}
+
+\begin{proof}
+La multiplication directe donne
+\[
+ B_c^{\mathsf T}\eta B_c
+ =\begin{pmatrix}7&2\\2&7\end{pmatrix}
+  \begin{pmatrix}7&2\\-2&-7\end{pmatrix}
+ =\begin{pmatrix}45&0\\0&-45\end{pmatrix}
+ =45\eta.
+\]
+Diviser par $45$ démontre l'invariance de la forme. Comme $\det B_c=45$, la division de chacune des deux colonnes par $\sqrt{45}$ donne $\det M_c=1$.
+
+Pour $t>|x|$, on a $7t+2x\geq7t-2|x|>0$. La première coordonnée de $M_c(t,x)$ est positive et la forme temporelle est conservée ; elle demeure donc dans la même composante du cône.
+
+Enfin, la décomposition spectrale produit
+\[
+ M_c=\sqrt{\frac95}\,P_++\sqrt{\frac59}\,P_-.
+\]
+Puisque $R=P_+-P_-$, son exponentielle est $e^{\theta_c}P_++e^{-\theta_c}P_-$. Les définitions de $\theta_c$ identifient exactement les deux coefficients. La dernière identité résulte de $-2\theta_c=-\log(9/5)$.
+\end{proof}
+
+La même matrice entière admet donc deux normalisations explicites. La normalisation par la somme de ligne conserve le mode uniforme et contracte le mode différentiel. La normalisation par la racine du déterminant conserve une forme indéfinie. La relation $5/9=e^{-2\theta_c}$ relie les deux lectures du bloc. La réalisation démontrée a pour dimension $1+1$ ; les constructions d'incidence et les applications dimensionnelles ultérieures déterminent ses extensions physiques.
+
+\subsection{Réduction par classes ternaires et structure spectrale agrégée}
+\label{geo:agregacion}
+
+\subsubsection{Moyennage des deux évaluations}
+
+La projection des classes modulo neuf sur les classes modulo trois détermine
+\[
+ C_1=\{1,4,7\},\qquad
+ C_2=\{2,5,8\},\qquad
+ C_0=\{3,6,9\}.
+\]
+Chaque ensemble $C_a\times C_b$ contient neuf positions. Pour une évaluation réelle $T$ sur $D_9^2$, nous définissons sa matrice agrégée par
+\[
+ (M_T)_{ab}=\frac19\sum_{i\in C_a}\sum_{j\in C_b}T(i,j),
+ \qquad a,b\in\{1,2,0\}.
+\]
+L'ordre des indices $(1,2,0)$ est fixé pour les lignes et les colonnes.
+
+\begin{proposicion}[Matrices agrégées d'APP]
+\label{geo:prop-agregadas}
+Le moyennage des tables résiduelles donne
+\[
+ M_\Pi=\begin{pmatrix}4&5&6\\5&4&6\\6&6&9\end{pmatrix},
+ \qquad
+ M_\Sigma=\begin{pmatrix}5&6&4\\6&4&5\\4&5&6\end{pmatrix}.
+\]
+Les totaux sont conservés au moyen de
+\[
+ 9\sum_{a,b}(M_\Pi)_{ab}=459,
+ \qquad9\sum_{a,b}(M_\Sigma)_{ab}=405.
+\]
+\end{proposicion}
+
+\begin{proof}
+Pour la multiplication, le bloc $C_1\times C_1$ contient trois fois chaque valeur $1,4,7$, de sorte que sa moyenne est $(1+4+7)/3=4$. Le bloc $C_1\times C_2$ contient trois fois chaque valeur $2,5,8$ et a pour moyenne cinq. Les blocs d'une classe unitaire avec $C_0$ contiennent trois fois chaque valeur $3,6,9$ et ont pour moyenne six. Le bloc $C_2\times C_2$ a pour moyenne quatre et le bloc $C_0\times C_0$ est constitué de neuf valeurs neuf. La symétrie complète la matrice.
+
+Dans la somme, le bloc $C_a\times C_b$ distribue uniformément les trois représentants de la classe $a+b$ modulo trois. Les moyennes des classes $C_1,C_2,C_0$ sont respectivement quatre, cinq et six. En évaluant $a+b$ dans l'ordre fixé, on obtient $M_\Sigma$. Les neuf blocs partitionnent les $81$ positions et chaque moyenne est multipliée par neuf pour retrouver sa somme. Cela démontre les deux identités de totaux.
+\end{proof}
+
+On obtient $\sum M_\Pi=51$ et $\sum M_\Sigma=45$. La différence six correspond à la structure agrégée ; en restituant la multiplicité de neuf positions par bloc, on retrouve $9\cdot6=54$. Ce calcul relie l'agrégation ternaire au contraste global du \cref{sec:app-balances}.
+
+\subsubsection{Forme de signature deux plus un et sous-réseau hyperbolique}
+
+\begin{teorema}[Spectre exact de la matrice multiplicative agrégée]
+\label{geo:thm-espectro-agregado}
+Le polynôme caractéristique et le spectre de $M_\Pi$ sont
+\[
+ \det(\lambda I-M_\Pi)
+ = (\lambda+1)((\lambda-9)^2-72),
+\]
+\[
+ \operatorname{Spec}(M_\Pi)
+ =\{-1,9-6\sqrt2,9+6\sqrt2\}.
+\]
+Son déterminant est $-9$ et la forme quadratique $v\mapsto v^{\mathsf T}M_\Pi v$ a pour signature $(2,1)$.
+\end{teorema}
+
+\begin{proof}
+Le vecteur $v_-=(1,-1,0)$ satisfait $M_\Pi v_-=-v_-$. Le plan engendré par $v_+=(1,1,0)$ et $v_0=(0,0,1)$ est invariant, puisque
+\[
+ M_\Pi v_+=9v_++12v_0,\qquad
+ M_\Pi v_0=6v_++9v_0.
+\]
+La matrice de la restriction dans cette base est $\left(\begin{smallmatrix}9&6\\12&9\end{smallmatrix}\right)$ et son polynôme caractéristique est $(\lambda-9)^2-72$. Ajouter le facteur $\lambda+1$ de la première direction donne la formule. Les deux racines du facteur quadratique sont positives parce que $81>72$. La direction de valeur propre $-1$ est négative et les deux autres sont positives. Le produit des valeurs propres est $-(81-72)=-9$.
+\end{proof}
+
+La restriction au plan invariant s'écrit
+\[
+ \begin{pmatrix}9&6\\12&9\end{pmatrix}
+ =3H,\qquad
+ H=\begin{pmatrix}3&2\\4&3\end{pmatrix},\qquad\det H=1.
+\]
+Les valeurs propres de $H$ sont $3\pm2\sqrt2=(1\pm\sqrt2)^2$. La matrice dont les colonnes sont $v_-,v_+,v_0$ a un déterminant de valeur absolue deux. Ces vecteurs engendrent donc un sous-réseau d'indice deux dans $\mathbb Z^3$. La décomposition est complète en tant que décomposition réelle ; sa version entière conserve expressément cet indice.
+
+\subsubsection{Localisation du contraste dans le secteur non unitaire}
+
+Le secteur formé par les lignes et les colonnes d'indices $3,6,9$ réunit $27+27-9=45$ positions. Leur intersection $C_0\times C_0$ comporte neuf entrées de valeur neuf et a pour somme $81$. Les quatre blocs restants, $C_0\times C_1$, $C_0\times C_2$, $C_1\times C_0$ et $C_2\times C_0$, ont chacun pour somme $54$ et apportent $216$. Ainsi,
+\[
+ 297=216+81=3\cdot72+3\cdot27=3(72+27).
+\]
+La partition par classes ternaires et les concaténations du bloc central produisent ces identités par leurs procédures respectives. Le facteur trois reste explicite ; la valeur $297$ appartient à une somme sur $45$ positions et la valeur $99$ appartient à une concaténation de paires du bloc.
+
+Les nombres qui apparaissent au fil du développement acquièrent ainsi des sens précis : quatre est la séparation spectrale locale ; deux, le coefficient d'échange ; six, la différence des moyennes agrégées ; cinquante-quatre, le contraste global des restes. Leurs relations sont démontrées au moyen des opérations qui relient chaque niveau.
+
+\subsection{Réalisation opératorielle des trajectoires}
+\label{geo:operadores-trayectorias}
+
+Soit $\mathcal H_X=\ell^2(X_9)$, de base orthonormale $(e_x)_{x\in X_9}$, et soit $U$ un opérateur dont les éléments de matrice satisfont $U_{yx}=0$ lorsque $x\to y$ n'est pas une arête de $\mathscr G_9$. L'hypothèse exprime la localité par rapport au graphe déjà construit. Une fois cet opérateur fixé, la composition de ses transitions a un développement exact.
+
+\begin{teorema}[Développement fini de la transition par trajectoires]
+\label{geo:thm-expansion}
+Pour $r\geq1$ et les positions $i,f\in X_9$,
+\[
+ (U^r)_{fi}
+ =\sum_{\substack{\gamma:i\to f\\|\gamma|=r}}
+   \prod_{k=0}^{r-1}U_{x_{k+1},x_k},
+ \qquad\gamma=(x_0=i,x_1,\ldots,x_r=f).
+\]
+\end{teorema}
+
+\begin{proof}
+Pour $r=1$, l'affirmation coïncide avec l'entrée $U_{fi}$, et les entrées hors du graphe sont nulles par hypothèse. Supposons la formule valable pour $r$. La multiplication des matrices donne
+\[
+ (U^{r+1})_{fi}=\sum_{j\in X_9}U_{fj}(U^r)_{ji}.
+\]
+Nous substituons l'expression de récurrence de $(U^r)_{ji}$. Chaque terme est une trajectoire de longueur $r$ de $i$ à $j$, suivie de l'arête finale $j\to f$. Toute trajectoire de longueur $r+1$ a un unique avant-dernier sommet $j$ et une unique troncature de longueur $r$. La somme parcourt donc chaque trajectoire exactement une fois, avec le produit de ses éléments de transition.
+\end{proof}
+
+Le développement exprime la composition d'un opérateur déclaré au moyen des trajectoires d'APP. Le registre complet d'une transition TPK incorpore, en outre, le feuillet sélectionné, la signature tritique, la retenue, la phase et la mémoire. Le support et le développement opératoriel de ce chapitre fournissent les domaines sur lesquels est construite cette mise à jour enrichie. L'ordre de dépendance demeure explicite : d'abord les positions et les évaluations, puis les trajectoires et leurs réalisations, et sur celles-ci la loi de sélection et de transport à mémoire.

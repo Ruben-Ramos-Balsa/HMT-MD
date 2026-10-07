@@ -1,0 +1,263 @@
+\section{Momentos genealógicos, operadores de Jacobi y residuos espectrales}
+\label{sec:jacobi-generated}
+
+La medida inducida por el calendario proporciona un enlace entre la
+geometría de las celdas y una realización espectral positiva. Este enlace
+utiliza toda la partición marcada: cada uno de sus doce intervalos conserva
+la misma masa cronológica, mientras su longitud procede de la coordenada
+correspondiente del registro. La densidad compensa exactamente esa
+longitud. Por consiguiente, la distribución espacial de la medida retiene
+la anisotropía del registro aunque la distribución entre ventanas sea
+uniforme.
+
+Sean \(K_j>0\), \(Q=\sum_{j=1}^{12}K_j\), \(d_j=K_j/Q\) y
+\(t_j=\sum_{i\leq j}d_i\), con \(t_0=0\). La medida de probabilidad
+utilizada en esta sección es
+\[
+ \dd\mu_K(t)=\sum_{j=1}^{12}
+ \frac{\mathbf1_{[t_{j-1},t_j]}(t)}{12d_j}\,\dd t.
+\]
+Los extremos compartidos tienen medida nula. Sus momentos son racionales
+para todo registro entero:
+\begin{equation}
+ m_r=\int_0^1t^r\,\dd\mu_K(t)
+ =\frac1{12(r+1)}\sum_{j=1}^{12}
+   \frac{t_j^{r+1}-t_{j-1}^{r+1}}{d_j},\qquad r\geq0.
+ \label{eq:jacobi-moments}
+\end{equation}
+La igualdad \(m_0=1\) expresa conservación de la masa total. Para cada
+\(n\geq1\), la matriz de Hankel \(H_n=(m_{a+b})_{0\leq a,b<n}\)
+es definida positiva: su forma cuadrática es la integral del cuadrado
+de un polinomio no nulo sobre un intervalo donde la densidad es positiva.
+Esta observación permite pasar de los momentos a un operador sin elegir
+un espectro objetivo.
+
+\begin{theorem}[Recurrencia tridiagonal determinada por la partición]
+\label{thm:jacobi-recurrence}
+Existe una única sucesión de polinomios mónicos \(p_n\), de grado \(n\),
+ortogonales para \(\mu_K\). Si
+\[
+ h_n=\int p_n^2\,\dd\mu_K>0,\qquad
+ a_n=\frac{\int t p_n^2\,\dd\mu_K}{h_n},\qquad
+ \beta_n=\frac{h_n}{h_{n-1}}>0\quad(n\geq1),
+\]
+entonces \(p_0=1\), \(p_1=t-a_0\) y
+\begin{equation}
+ p_{n+1}(t)=(t-a_n)p_n(t)-\beta_np_{n-1}(t),\qquad n\geq1.
+ \label{eq:jacobi-recurrence}
+\end{equation}
+Todos los coeficientes \(a_n,\beta_n\) son racionales para el registro
+entero declarado. En la base ortonormal \(\psi_n=p_n/\sqrt{h_n}\),
+la compresión de la multiplicación por \(t\) a los polinomios de grado
+menor que \(n\) tiene matriz simétrica
+\[
+ J_n=\begin{pmatrix}
+ a_0&\sqrt{\beta_1}&&0\\
+ \sqrt{\beta_1}&a_1&\ddots&\\
+ &\ddots&\ddots&\sqrt{\beta_{n-1}}\\
+ 0&&\sqrt{\beta_{n-1}}&a_{n-1}
+ \end{pmatrix}.
+\]
+\end{theorem}
+\begin{proof}
+La positividad de \(H_n\) garantiza que el sistema lineal que impone
+ortogonalidad a un polinomio mónico tiene solución única. Como sus
+coeficientes son momentos racionales, la solución es racional. Se
+descompone \(tp_n\) en la base mónica hasta grado \(n+1\). Para
+\(j\leq n-2\), la simetría del producto interno da
+\(\langle tp_n,p_j\rangle=\langle p_n,tp_j\rangle=0\).
+Quedan únicamente los términos de grados \(n+1,n,n-1\). Sus
+coeficientes son, respectivamente, \(1,a_n,h_n/h_{n-1}\), lo que
+demuestra la recurrencia. La normalización por \(\sqrt{h_n}\)
+convierte los dos coeficientes adyacentes en \(\sqrt{\beta_n}\).
+\end{proof}
+
+Para el registro expresado en la sección~\ref{sec:register}, la primera
+posición diagonal y el cuadrado del primer acoplamiento son
+\[
+ a_0=m_1=\frac{71195}{150312},\qquad
+ \beta_1=m_2-m_1^2=\frac{2206226167}{22593697344}.
+\]
+La primera igualdad calcula el centro de masa de la partición cronológica;
+la segunda calcula su dispersión y determina el primer enlace de la
+matriz tridiagonal. Ambas cifras se obtienen integrando las longitudes
+generadas, y su significado estructural antecede a cualquier evaluación
+decimal.
+
+\begin{theorem}[Espectro simple, cuadratura y residuos positivos]
+\label{thm:jacobi-residues}
+Los autovalores \(\lambda_1<\cdots<\lambda_n\) de \(J_n\) son
+simples y pertenecen a \((0,1)\). Existen pesos únicos
+\(w_i>0\), de suma uno, tales que
+\begin{equation}
+ \int f(t)\,\dd\mu_K(t)=\sum_{i=1}^{n}w_i f(\lambda_i)
+ \qquad(\deg f\leq2n-1).
+ \label{eq:jacobi-quadrature}
+\end{equation}
+El resolvente observado en la constante unitaria \(e_0\) satisface
+\begin{equation}
+ g_n(z)=\langle e_0,(zI-J_n)^{-1}e_0\rangle
+       =\sum_{i=1}^{n}\frac{w_i}{z-\lambda_i}
+       =\cfrac1{z-a_0-\cfrac{\beta_1}{z-a_1-
+          \cfrac{\beta_2}{\ddots-\cfrac{\beta_{n-1}}{z-a_{n-1}}}}}.
+ \label{eq:jacobi-resolvent}
+\end{equation}
+En particular, sus polos y residuos se obtienen del registro por las
+operaciones de momento, ortogonalización y compresión.
+\end{theorem}
+\begin{proof}
+Para cualquier polinomio no nulo \(p\) de grado menor que \(n\),
+\[
+ 0<\int_0^1 t|p(t)|^2\,\dd\mu_K(t)
+   <\int_0^1 |p(t)|^2\,\dd\mu_K(t).
+\]
+
+La caracterización variacional coloca el espectro de \(J_n\) en
+\((0,1)\). Cada subdiagonal es positiva. Las ecuaciones de un autovector
+determinan recursivamente todas sus coordenadas a partir de la primera;
+si ésta se anulase, se anularía el vector entero. Cada autoespacio tiene
+así dimensión uno. La simetría de la matriz da diagonalización ortogonal
+y simplicidad del espectro. Para autovectores unitarios \(v_i\), se toma
+\(w_i=|\langle e_0,v_i\rangle|^2>0\). La completitud de la base
+propia da \(\sum_iw_i=1\) y la primera expresión del resolvente.
+
+La recurrencia tridiagonal muestra por expansión del determinante que
+\(\det(tI-J_n)=p_n(t)\). Para \(\deg f\leq2n-1\), la división
+euclídea escribe \(f=qp_n+r\), con \(\deg q,\deg r<n\).
+La ortogonalidad anula la integral de \(qp_n\), y su evaluación en los
+\(\lambda_i\) también se anula. Para \(r\) de grado menor que
+\(n\), las sucesivas multiplicaciones de la constante por \(t\)
+permanecen dentro del espacio de polinomios hasta el grado requerido;
+por ello \(\int r\,\dd\mu_K=\langle e_0,r(J_n)e_0\rangle\).
+La resolución espectral prueba la fórmula de cuadratura. Su unicidad
+se deduce de la invertibilidad de la matriz de Vandermonde evaluada
+en las raíces distintas. Finalmente, el complemento de Schur de la
+primera fila y columna de \(zI-J_n\), iterado sobre las submatrices
+terminales, produce la fracción continua.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex, node distance=8mm and 8mm,
+ every node/.style={font=\small}, box/.style={draw,rounded corners=1pt,
+ text width=37mm,minimum height=13mm,align=center}]
+\node[box] (k) {Registro marcado\\\(K,Q\)};
+\node[box,right=of k] (m) {Medida cronológica\\\(\mu_K\)};
+\node[box,right=of m] (h) {Momentos positivos\\\(H_n\)};
+\node[box,below=of h] (j) {Operador tridiagonal\\\(J_n\)};
+\node[box,left=of j] (g) {Resolvente\\\(g_n(z)\)};
+\node[box,left=of g] (w) {Polos y residuos\\\(\lambda_i,w_i>0\)};
+\draw[->] (k)--(m);\draw[->] (m)--(h);\draw[->] (h)--(j);
+\draw[->] (j)--(g);\draw[->] (g)--(w);
+\end{tikzpicture}
+\caption{Realización espectral de la partición HMT. La geometría de las
+celdas determina la medida; la positividad de sus momentos produce el
+operador y los residuos positivos de su resolvente.}
+\label{fig:jacobi-generated}
+\end{figure}
+
+La fórmula del resolvente aporta una lectura espectral de la memoria
+espacial. Los pesos positivos describen cuánto observa la coordenada
+constante de cada modo; los polos son las frecuencias algebraicas del
+operador de multiplicación comprimido. Los momentos de orden creciente
+recuperan detalles sucesivos de la medida, y los coeficientes de la
+fracción continua conservan esa información mediante una recurrencia
+local de tres términos. La apariencia clásica de una matriz de Jacobi
+se reconoce después de haber construido sus coeficientes desde las
+celdas HMT. La cadena causal queda fijada por
+\[
+ K\longmapsto(d,t)\longmapsto\mu_K\longmapsto(m_r)_{r\geq0}
+ \longmapsto\bigl((a_n)_{n\geq0},(\beta_n)_{n\geq1}\bigr)
+ \longmapsto(J_n,g_n).
+\]
+
+\begin{proposition}[Compatibilidad de dimensión y de refinamiento]
+\label{prop:jacobi-refinement}
+Las matrices \(J_n\) son compresiones principales compatibles de la
+misma multiplicación acotada por \(t\) en \(L^2(\mu_K)\). Sus
+medidas espectrales \(\sum_iw_i\delta_{\lambda_i}\) convergen
+débilmente a \(\mu_K\). Si cada subintervalo nonádico se representa
+por su punto medio y por su masa \(1/(12\cdot9^r)\), la medida
+atómica resultante \(\mu_{K,r}\) aproxima los momentos de
+\(\mu_K\). Para un grado fijo \(n\), la construcción desde esos
+momentos recupera los coeficientes \(a_j,\beta_j\) de la misma
+matriz cuando el refinamiento tiende a profundidad infinita.
+\end{proposition}
+\begin{proof}
+La ortogonalización de la sucesión completa utiliza las mismas fórmulas
+al aumentar \(n\), de modo que cada bloque principal permanece fijo.
+La cuadratura reproduce exactamente cualquier polinomio cuando
+\(2n-1\) supera su grado. La aproximación uniforme de funciones
+continuas en \([0,1]\) por polinomios, junto con la masa total uno,
+prueba la convergencia débil. Las sumas de puntos medios convergen
+en cada uno de los doce intervalos con su densidad constante, y por
+tanto aproximan todos los momentos. En dimensión fija, los coeficientes de
+ortogonalización son funciones racionales de un número finito de
+momentos, con denominadores formados por determinantes positivos de
+Gram. La convergencia de esos momentos y la positividad del límite
+aseguran la convergencia de los coeficientes.
+\end{proof}
+
+\begin{falsifier}
+Una longitud nula invalida la densidad declarada y puede destruir el
+rango de los momentos. La sustitución de la medida fija por conteos
+no normalizados en mallas distintas cambia el operador. Los residuos
+de \(g_n\) son pesos espectrales del resolvente, mientras los residuos
+de una forma canónica se definen sobre divisores geométricos: una
+identificación entre ambas nociones exige especificar la forma y el
+mapa correspondiente. Del mismo modo, \(J_n\) es adimensional; su
+identificación con un Hamiltoniano físico requiere la representación
+y la escala de acción y reloj que utilice ese sector.
+\end{falsifier}
+
+\begin{theorem}[Fidelidad de la realización espectral marcada]
+\label{thm:jacobi-marked-faithfulness}
+El operador infinito de Jacobi \(J\), junto con su vector cíclico
+unitario \(e_0\) y la carga \(Q\), determina el registro \(K\).
+Dos realizaciones de este tipo son unitariamente equivalentes mediante
+una aplicación que conserva el vector marcado y la carga si y sólo
+si sus registros coinciden. El espectro como conjunto es, en cambio,
+\([0,1]\) para todo registro positivo del dominio.
+\end{theorem}
+\begin{proof}
+Los polinomios son densos en \(L^2(\mu_K)\): primero se aproximan
+funciones continuas y después se usa su densidad para la medida finita.
+La base ortonormal construida define una aplicación unitaria que lleva
+\(e_n\) a \(\psi_n\). Bajo ella, \(J\) es la multiplicación por
+\(t\), un operador autoadjunto acotado, y \(e_0\) representa la
+función constante uno. Por tanto,
+\[
+ \langle e_0,J^re_0\rangle=m_r\qquad(r\geq0).
+\]
+Estos momentos determinan la medida: dos medidas con los mismos
+momentos coinciden en polinomios, después en funciones continuas por
+aproximación uniforme y finalmente como medidas de Borel.
+Su distribución \(F(t)=\mu_K([0,t])\) es continua y estrictamente
+creciente. Cada intervalo inicial tiene masa \(1/12\), de modo que
+\[
+ t_j=F^{-1}(j/12),\qquad
+ K_j=Q\bigl(F^{-1}(j/12)-F^{-1}((j-1)/12)\bigr).
+\]
+Una equivalencia unitaria que conserva \(e_0\) conserva los momentos
+y por ello el registro. La recíproca se sigue de la construcción única.
+
+Para el último enunciado, la densidad de \(\mu_K\) es positiva
+en todo subintervalo. Cada \(\lambda\in[0,1]\) admite funciones
+unitarias concentradas en intervalos cada vez menores alrededor de
+\(\lambda\), sobre las que la norma de \((J-\lambda I)f\)
+tiende a cero. Así todo el intervalo pertenece al espectro. Fuera de
+él, la multiplicación por \(1/(t-\lambda)\) es acotada y define
+el resolvente. Esto prueba la igualdad del espectro.
+\end{proof}
+
+El teorema distingue la extensión del espectro y la información que
+éste conserva respecto de una observación marcada. El mismo intervalo
+espectral admite las distintas distribuciones de la colección; la medida
+observada desde la unidad recupera las separaciones originales. El
+enlace con la representación grassmanniana es ahora reversible:
+los menores marcados reconstruyen \(K\), el registro construye
+\((J,e_0,Q)\), y sus momentos y cuantiles recuperan el mismo registro.
+Cada lector que factoriza por \((K,\xi)\) posee, por consiguiente,
+una expresión espectral marcada una vez conservadas las restantes
+coordenadas \(\xi\). La realización espectral contiene estructura,
+además de posiciones de polos o valores de autovalores.

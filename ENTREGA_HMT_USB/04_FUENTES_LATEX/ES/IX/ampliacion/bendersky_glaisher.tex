@@ -1,0 +1,137 @@
+\section{Derivadas regularizadas y valores espectrales impares}
+\label{ix-add:bendersky}
+
+La continuación y la ecuación funcional demostradas en la
+proposición~\ref{rz-num-03-2} permiten relacionar dos operaciones
+sobre el mismo funcional $Z$: la derivación en enteros negativos y la
+evaluación convergente en enteros positivos impares. Las coordenadas
+regionales y el operador de numeración mantienen su genealogía anterior.
+La notación $\pi$ designa la coordenada HMT que ya intervino en la
+construcción theta--Mellin.
+
+Sean $H_k=\sum_{j=1}^k1/j$, con $H_0=0$, y $\mathsf B_j$ los
+números de Bernoulli construidos por la recurrencia de la
+sección~\ref{lectura:manuscrito-04}, con $\mathsf B_1=-1/2$.
+La tipografía $\mathsf B_j$ distingue estos coeficientes de la constante
+de Meissel--Mertens. Se define la jerarquía de Bendersky--Glaisher--Kinkelin
+mediante
+\[
+ A_k=\exp\!\left(\frac{H_k\mathsf B_{k+1}}{k+1}-Z'(-k)\right),
+ \qquad k\in\mathbb N_0.
+\]
+Los puntos $-k$ son regulares. El término de Bernoulli fija la
+normalización correspondiente a cada nivel antes de su evaluación.
+
+\subsection{Covariancia de las derivadas regularizadas}
+Se utiliza aquí el funcional $Z_\lambda=\lambda^{-s}Z$, cuyo residuo
+es $\lambda^{-1}$, y se define
+\[
+ D_k(\lambda)=\exp[-Z_\lambda'(-k)].
+\]
+Este objeto conserva la normalización del operador escalado, distinta
+de la normalización de residuo unitario empleada para
+$\widehat Z_\lambda$ en la sección~\ref{ix-add:stieltjes}.
+
+\HMTresultado{Proposición}{Transporte de las derivadas regularizadas}{ix-add:regularized-scaling}
+Para $\lambda>0$ y $k\in\mathbb N_0$,
+\[
+ Z_\lambda'(-k)=\lambda^k
+       \bigl(Z'(-k)-(\log\lambda)Z(-k)\bigr),
+\]
+\[
+ D_k(\lambda)=D_k(1)^{\lambda^k}
+               \lambda^{\lambda^k Z(-k)},\qquad
+ D_k(1)=A_k\exp\!\left(-\frac{H_k\mathsf B_{k+1}}{k+1}\right).
+\]
+\textbf{Demostración.} La regla del producto aplicada a
+$\lambda^{-s}Z(s)$ da la primera identidad. Su exponencial negativa
+da la segunda, y la definición de $A_k$ da la tercera.
+\hfill$\square$
+
+En los niveles iniciales,
+\[
+\begin{aligned}
+ A_0&=e^{-Z'(0)},\\
+ \log A_1&=\frac1{12}-Z'(-1),\qquad \log A_2=-Z'(-2),\\
+ \log A_3&=-\frac{11}{720}-Z'(-3),\qquad \log A_4=-Z'(-4).
+\end{aligned}
+\]
+Por ejemplo, $D_1(1)=A_1e^{-1/12}$. Mantener el normalizador evita
+identificar dos lectores diferentes por compartir la misma derivada.
+
+\Needspace{12\baselineskip}
+\subsection{Reconstrucción de los valores impares}
+\HMTresultado{Teorema}{Correspondencia entre niveles negativos pares y positivos impares}{ix-add:odd-values}
+Para todo entero $n\geq1$,
+\[
+ Z'(-2n)=(-1)^n\frac{(2n)!}{2(2\pi)^{2n}}Z(2n+1),
+\]
+\[
+ \frac{\log D_{2n}(\lambda)}{\lambda^{2n}}
+ =\log A_{2n}
+ =(-1)^{n+1}\frac{(2n)!}{2(2\pi)^{2n}}Z(2n+1).
+\]
+\textbf{Demostración.} La ecuación funcional de la forma completada
+implica la identidad meromorfa
+\[
+ \pi^{-s/2}\Gamma(s/2)Z(s)
+ =\pi^{-(1-s)/2}\Gamma((1-s)/2)Z(1-s).
+\]
+En $s=-2n$, el segundo miembro es regular y el factor gamma del
+primero tiene un polo simple. Por tanto $Z(-2n)=0$. La recurrencia
+de gamma y su residuo en cero dan
+\[
+ \Gamma(s/2)=\frac{2(-1)^n}{n!(s+2n)}+O(1).
+\]
+Además,
+\[
+ \Gamma\!\left(n+\frac12\right)
+ =\frac{(2n)!\sqrt\pi}{4^nn!}.
+\]
+Comparar los términos constantes en la identidad meromorfa produce
+\[
+ \pi^n\frac{2(-1)^n}{n!}Z'(-2n)
+ =\pi^{-n}\frac{(2n)!}{4^nn!}Z(2n+1),
+\]
+que es la primera fórmula. La serie
+$t/(e^t-1)+t/2$ es par; por ello $\mathsf B_{2n+1}=0$ para
+$n\geq1$. La definición de $A_{2n}$ y la proposición anterior
+completan la prueba. \hfill$\square$
+
+En particular, el primer nivel par positivo satisface
+\[
+ Z(3)=4\pi^2\log A_2.
+\]
+La constante de Apéry evaluada con resto en la
+sección~\ref{lectura:manuscrito-04} queda así relacionada con una
+derivada regularizada del mismo funcional. Los intervalos allí
+demostrados se transportan por la exponencial monótona una vez
+conservadas las cotas de la coordenada regional $\pi$.
+
+El nivel cero tiene una evaluación distinta. La ecuación funcional,
+junto con reflexión y duplicación de gamma, equivale a
+\[
+ Z(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)Z(1-s).
+\]
+La fórmula de Euler
+\[
+ \Gamma(1+z)=\lim_{m\to\infty}
+ m^z\prod_{j=1}^{m}(1+z/j)^{-1}
+\]
+da $\log\Gamma(1+z)=-\gamma_0z+O(z^2)$: el coeficiente lineal es
+el límite de $\log m-H_m$, y el resto cuadrático queda controlado
+por la serie convergente de $j^{-2}$. Usando
+$Z(1-s)=-1/s+\gamma_0+O(s)$ y
+$\Gamma(1-s)=1+\gamma_0s+O(s^2)$, los términos de grado uno
+que contienen $\gamma_0$ se cancelan y resulta
+\[
+ Z(s)=-\frac12-\frac12\log(2\pi)s+O(s^2).
+\]
+En consecuencia,
+\[
+ A_0=\sqrt{2\pi},\qquad D_0(\lambda)=\sqrt{\frac{2\pi}{\lambda}}.
+\]
+La condición $n\geq1$ del teorema conserva esta diferencia: el nivel
+cero no se obtiene sustituyendo $Z(1)$, que tiene un polo, en la fórmula
+de valores impares. Las identidades de gamma expresan la normalización
+analítica posterior, sin intervenir en la selección de las semillas.

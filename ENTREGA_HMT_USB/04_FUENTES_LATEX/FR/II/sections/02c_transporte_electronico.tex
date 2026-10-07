@@ -1,0 +1,116 @@
+\subsubsection{Transport électronique bidirectionnel et registre arithmétique}
+\label{ii:transporte-electronico}
+
+La représentation centrale utilise une cellule partagée par les deux
+évaluations APP. Ses coordonnées appartiennent à \(D_9=\{1,\ldots,9\}\),
+et l'inversion \((r,c)\mapsto(10-r,10-c)\) possède l'unique point fixe
+\((5,5)\). L'état visible s'écrit \((r,c,h,v,n)\), avec
+\(h,v\in\{-1,1\}\) et un indice chronologique entier \(n\geq0\).
+Le sélecteur tritique répète \((+1,-1,0)\). Dans le feuillet additif, on lit
+\(r+c\) et l'on translate la colonne dans la direction \(h\) ; dans le
+feuillet multiplicatif, on lit \(rc\) et l'on translate la ligne dans la direction
+\(v\). Le seuil conserve la position. Les deux orientations sont
+inversées à l'achèvement de chaque intervalle de vingt-sept mises à jour.
+
+Pour exprimer la lecture et la retenue arithmétique dans la même convention positive,
+définissons
+\[
+ [z]^+_9=1+((z-1)\bmod9),\qquad
+ q_9(z)=\frac{z-[z]^+_9}{9}.
+\]
+L'évaluation précède le déplacement. Si \(a_n\) est l'entier
+lu, l'événement conserve \((a_n,[a_n]^+_9,q_9(a_n))\), le feuillet,
+la position précédente, l'orientation et le franchissement de frontière. Le
+symbole tritique est \([a_n]^+_9\bmod3\). Le relèvement spatial
+conserve, par exemple, l'entier
+\(q_9(c+h)\) lorsque \(c\) est remplacé par \([c+h]^+_9\).
+
+La représentation à cellule partagée et la représentation à deux
+curseurs de \eqref{ii:tpk-fobs-posiciones} possèdent des états visibles
+différents. Leurs registres sont reliés à l'état TPK par
+leurs applications de représentation respectives. Pour la trajectoire centrale,
+on utilise ici intégralement la mise à jour sur la cellule
+partagée qui produit le mot électronique.
+
+\begin{proposition}[Mise à jour inversible avec quotients conservés]
+\label{ii:electron-inversa-cocientes}
+Ajoutons à l'état visible deux registres entiers \(Q_+,Q_\times\)
+et deux nombres d'enroulement \(W_r,W_c\). Chaque lecture active
+incrémente le registre de son feuillet de \(q_9(a_n)\) ; chaque déplacement
+incrémente l'enroulement correspondant de son franchissement de frontière.
+Cette mise à jour possède un inverse explicite sur son image.
+\end{proposition}
+\begin{proof}
+L'indice suivant détermine le mode précédent et indique si une inversion
+des orientations vient de se produire. Cette inversion est d'abord annulée.
+Si le mode était additif, la colonne précédente est retrouvée sous la forme
+\([c-h]^+_9\) ; s'il était multiplicatif, la ligne est retrouvée sous la forme
+\([r-v]^+_9\). Le mode neutre conserve les deux coordonnées. La cellule
+retrouvée détermine de nouveau l'entier lu, son résidu, son
+quotient et le franchissement de frontière. En soustrayant ces incréments de
+\(Q_+,Q_\times,W_r,W_c\) et en inversant l'indice chronologique, on
+retrouve exactement l'état précédent. La composition de ces
+inverses permet de retrouver une histoire finie complète. La concaténation des
+événements conserve en outre l'ordre des lectures.
+\end{proof}
+
+Les registres \(Q_+,Q_\times\) représentent l'historique des quotients au moyen de sommes explicites. La construction s'intègre dans la fibre de mémoire avec ses autres coordonnées. Sa loi de composition, pour des historiques concaténables \(u,v\), est
+\[
+ Q_s(uv)=Q_s(u)+Q_s(v),\qquad s\in\{+,\times\},
+\]
+où la seconde histoire commence dans l'état final de la première.
+L'inversion algébrique d'une mise à jour soustrait ses incréments ;
+parcourir ensuite un trajet spatial de retour enregistre
+de nouvelles évaluations. Cette distinction conserve simultanément la
+réversibilité du transport et la durée de l'histoire.
+
+\begin{proposition}[Retour central et accumulation exacte]
+\label{ii:electron-memoria-retorno}
+À partir de \((r,c,h,v,n)=(5,5,1,1,0)\) et de registres initialement nuls, la
+projection spatiale et ses orientations reviennent après cinquante-quatre
+mises à jour. Dans cet intervalle,
+\[
+ (\Delta W_r,\Delta W_c)=(0,0),\qquad
+ (\Delta Q_+,\Delta Q_\times)=(10,46).
+\]
+Après \(54N\) mises à jour, pour tout entier \(N\geq0\),
+on a \((Q_+,Q_\times)=(10N,46N)\), tandis que les coordonnées
+spatiales et leurs orientations reviennent. L'indice entier prend la valeur
+\(54N\) ; le calendrier dodécaphasique modulo \(108\) revient pour
+\(N\) pair.
+\end{proposition}
+\begin{proof}
+Chaque couple de modes actifs déplace une fois chaque coordonnée. En
+vingt-sept mises à jour, les deux parcourent un tour de neuf
+positions et reviennent à la diagonale centrale ; \(h,v\) sont ensuite
+inversés. Le bloc suivant parcourt le tour opposé. Les franchissements
+spatiaux s'annulent entre les deux blocs.
+
+Dans chaque bloc, les lectures additives parcourent \(2k\),
+\(1\leq k\leq9\), dont les quotients positifs ont pour somme cinq. Les lectures
+multiplicatives du bloc positif parcourent
+\(k[k+1]^+_9\). Leur somme entière et la somme de leurs résidus sont
+\[
+ \sum_{k=1}^9 k[k+1]^+_9=249,\qquad
+ \sum_{k=1}^9[k[k+1]^+_9]^+_9=42.
+\]
+La seconde identité résulte de la liste
+\((2,6,3,2,3,6,2,9,9)\). Par division euclidienne,
+la somme des quotients est \((249-42)/9=23\). La substitution
+\(k\mapsto[k-1]^+_9\) montre que le bloc négatif contient
+le même multiensemble de produits. Les deux blocs produisent donc
+dix et quarante-six unités dans les registres respectifs.
+La projection spatiale et ses orientations reviennent à leurs valeurs
+initiales. Les règles d'activation et d'inversion se répètent lorsqu'on
+décale l'indice de \(54\), et les incréments ne dépendent pas des
+registres accumulés. La loi additive
+précédente démontre par récurrence la formule pour tout \(N\).
+\end{proof}
+
+La lecture tritique et l'orientation par fenêtres fournissent, sur
+la même trajectoire,
+\[
+ \gamma_e=\bigl((100000220)^3(120200000)^3\bigr)^2,\qquad
+ \tau_e=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+Les puissances représentent des concaténations. Les lecteurs d'écarts et de fenêtres développés dans \eqref{eq:el-kd} et \eqref{eq:el-komega} calculent tous deux \((80,54,6)\). L'évaluation s'obtient à partir de la trajectoire avant d'incorporer \(\alpha\), la section d'action ou une masse. La mémoire des quotients conserve des informations supplémentaires par rapport à ce triplet : en cent huit mises à jour, elle enregistre \((20,92)\), avec un enroulement spatial net nul. Chaque représentation maintient ainsi le type de l'observable qui la produit.

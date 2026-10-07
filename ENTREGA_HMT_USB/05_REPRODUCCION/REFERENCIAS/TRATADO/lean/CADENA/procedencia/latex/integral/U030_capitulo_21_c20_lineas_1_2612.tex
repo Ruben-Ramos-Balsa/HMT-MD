@@ -1,0 +1,2611 @@
+\chaptermark{Publicación excepcional del continuo}
+\label{chap:83-20}
+
+\input{ampliaciones_sucesoras_20260824/parte_i_ii/tex/bloques/salto_espectral_4_2_6_54}
+
+% Unidad U018. Paley, extension cuadratica finita y codigo ternario.
+% Redaccion autonoma desde la autoridad material 1063.
+
+\section{Forma de conferencia de Paley, extensión cuadrática finita y código ternario autodual}
+\label{p12-83-c20-s1:chap:paley-extension-cuadratica-codigo-ternario}
+
+La tétrada \(B_K\) construida en la unidad anterior todavía no posee una
+estrella de Witt: para definirla es preciso construir primero el sistema de
+incidencia que contiene sus hexadas. Esta unidad realiza ese paso desde el
+calibre proyectivo de las seis unidades módulo nueve, obtiene una raíz
+cuadrática interna de \(-I_6\), y construye el código ternario gráfico de
+longitud doce. Ninguna identificación se deduce de una mera igualdad de
+cardinales.
+
+\subsection{Calibre proyectivo de las \(6\) unidades módulo \(9\)}
+
+Sea
+\[
+ \mathcal U_9=(\mathbb Z/9\mathbb Z)^\times
+ =\{1,2,4,8,7,5\},
+\]
+ordenado por las potencias sucesivas de \(2\) módulo \(9\). Fijamos la
+biyección de coordenadas
+\begin{equation}
+ \theta:\mathcal U_9\longrightarrow\mathbb P^1(\mathbb F_5),
+ \qquad
+ \begin{array}{c|cccccc}
+ u&1&2&4&8&7&5\\ \hline
+ \theta(u)&\infty&0&1&2&3&4
+ \end{array}.
+ \label{p12-83-c20-s1:eq:calibre-unidades-paley}
+\end{equation}
+La aplicación \(\theta\) es un calibre de coordenadas. No se afirma que
+sea un homomorfismo entre la multiplicación de \(\mathcal U_9\) y una
+operación sobre \(\mathbb P^1(\mathbb F_5)\).
+
+Sea
+\[
+ \chi:\mathbb F_5\longrightarrow\{-1,0,1\}
+\]
+el carácter cuadrático:
+\[
+ \chi(0)=0,
+ \qquad
+ \chi(1)=\chi(4)=1,
+ \qquad
+ \chi(2)=\chi(3)=-1.
+\]
+En el orden \((\infty,0,1,2,3,4)\), definimos
+\begin{align}
+ (C_P)_{\infty,x}&=(C_P)_{x,\infty}=1,
+ &&x\in\mathbb F_5,\label{p12-83-c20-s1:eq:paley-fila-infinito}\\
+ (C_P)_{x,y}&=\chi(x-y),
+ &&x,y\in\mathbb F_5, x\neq y,\label{p12-83-c20-s1:eq:paley-entradas-finitas}\\
+ (C_P)_{x,x}&=0.
+ \label{p12-83-c20-s1:eq:paley-diagonal}
+\end{align}
+Así,
+\begin{equation}
+ C_P=
+ \begin{pmatrix}
+ 0& 1& 1& 1& 1& 1\\
+ 1& 0& 1&-1&-1& 1\\
+ 1& 1& 0& 1&-1&-1\\
+ 1&-1& 1& 0& 1&-1\\
+ 1&-1&-1& 1& 0& 1\\
+ 1& 1&-1&-1& 1& 0
+ \end{pmatrix}.
+ \label{p12-83-c20-s1:eq:matriz-conferencia-paley-autonoma}
+\end{equation}
+
+\begin{lemma}[Suma de correlación cuadrática]
+\label{p12-83-c20-s1:lem:correlacion-cuadratica-f5}
+Para \(a\neq b\) en \(\mathbb F_5\),
+\begin{equation}
+ \sum_{t\in\mathbb F_5}
+ \chi(t-a)\chi(t-b)=-1.
+ \label{p12-83-c20-s1:eq:correlacion-cuadratica-f5}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+La sustitución \(u=(t-a)/(b-a)\) es una biyección de \(\mathbb F_5\).
+Como \(\chi((b-a)^2)=1\), la suma se reduce a
+\[
+ \sum_{u\in\mathbb F_5}\chi(u(u-1)).
+\]
+La evaluación de \(u=0,1,2,3,4\) da respectivamente
+\(0,0,1,-1,-1\), cuya suma es \(-1\).
+\end{proof}
+
+\begin{proposition}[Identidad de conferencia]
+\label{p12-83-c20-s1:prop:paley-identidad-conferencia-autonoma}
+La matriz \(C_P\) es simétrica y satisface
+\begin{equation}
+ \boxed{C_PC_P^{\mathsf T}=5I_6.}
+ \label{p12-83-c20-s1:eq:paley-identidad-conferencia-autonoma}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Cada fila contiene cinco entradas de módulo uno y una entrada nula; su
+norma cuadrada es cinco. Para dos filas finitas distintas, la contribución
+de la coordenada \(\infty\) es \(+1\), mientras
+\cref{p12-83-c20-s1:lem:correlacion-cuadratica-f5} da \(-1\) para las cinco coordenadas
+finitas. Su producto escalar es cero. La suma de un carácter no trivial
+sobre \(\mathbb F_5\) es cero, por lo que la fila correspondiente a
+\(\infty\) también es ortogonal a cada fila finita.
+\end{proof}
+
+\subsection{Reducción ternaria y raíz cuadrática interna de \texorpdfstring{\(-I_6\)}{-I₆}}
+
+Reducimos \(C_P\) módulo tres, con \(-1\equiv2\pmod3\):
+\begin{equation}
+ A_W=
+ \begin{pmatrix}
+ 0&1&1&1&1&1\\
+ 1&0&1&2&2&1\\
+ 1&1&0&1&2&2\\
+ 1&2&1&0&1&2\\
+ 1&2&2&1&0&1\\
+ 1&1&2&2&1&0
+ \end{pmatrix}
+ \in M_6(\mathbb F_3).
+ \label{p12-83-c20-s1:eq:matriz-paley-witt-ternaria}
+\end{equation}
+
+\begin{theorem}[Raíz cuadrática interna de \(-I_6\)]
+\label{p12-83-c20-s1:thm:aw-cuadrado-menos-identidad-autonomo}
+Se cumple
+\begin{equation}
+ \boxed{A_W^2=-I_6.}
+ \label{p12-83-c20-s1:eq:aw-cuadrado-menos-identidad-autonomo}
+\end{equation}
+En particular,
+\[
+ A_W^{-1}=-A_W.
+\]
+\end{theorem}
+
+\begin{proof}
+La \cref{p12-83-c20-s1:prop:paley-identidad-conferencia-autonoma} da
+\[
+ A_WA_W^{\mathsf T}
+ \equiv5I_6
+ \equiv2I_6
+ =-I_6
+ \pmod3.
+\]
+Como \(A_W=A_W^{\mathsf T}\), se obtiene \(A_W^2=-I_6\).
+\end{proof}
+
+La identidad anterior es la residencia algebraica de la raíz de \(-1\)
+en este corredor. No procede del factor \(1/4\) de la inversión Hadamard:
+aquél es un escalar racional forzado por \(H_4^2=4I_4\); ésta es una
+estructura cuadrática sobre característica tres.
+
+\subsection{Extensión cuadrática a \texorpdfstring{\(\mathbb F_9\)}{F₉}}
+
+Definimos
+\begin{equation}
+ \mathbb F_9=\mathbb F_3[\iota]/(\iota^2+1),
+ \qquad \iota^2=-1.
+ \label{p12-83-c20-s1:eq:definicion-f9-autonoma}
+\end{equation}
+El polinomio \(X^2+1\) no tiene raíces en \(\mathbb F_3\), por lo que el
+cociente es un cuerpo de nueve elementos. Para
+\(V=\mathbb F_3^6\), sea
+\[
+ V_9=V\otimes_{\mathbb F_3}\mathbb F_9.
+\]
+Los operadores
+\begin{equation}
+ P_\iota=\frac12(I-\iota A_W),
+ \qquad
+ P_{-\iota}=\frac12(I+\iota A_W)
+ \label{p12-83-c20-s1:eq:proyectores-f9-paley}
+\end{equation}
+están bien definidos porque \(2\) es invertible en \(\mathbb F_3\).
+
+\begin{proposition}[Proyectores conjugados]
+\label{p12-83-c20-s1:prop:proyectores-conjugados-paley}
+Se cumplen
+\[
+ P_\iota^2=P_\iota,
+ \qquad
+ P_{-\iota}^2=P_{-\iota},
+ \qquad
+ P_\iota P_{-\iota}=0,
+ \qquad
+ P_\iota+P_{-\iota}=I.
+\]
+\end{proposition}
+
+\begin{proof}
+Usando \(\iota^2=-1\) y \(A_W^2=-I\),
+\[
+ (\iota A_W)^2=I.
+\]
+Las cuatro identidades son entonces las identidades elementales de los
+proyectores \((I\mp\iota A_W)/2\) de una involución.
+\end{proof}
+
+\begin{theorem}[Descomposición espectral conjugada]
+\label{p12-83-c20-s1:thm:descomposicion-espectral-f9-paley}
+Sea
+\[
+ E_{\pm\iota}=\ker(A_W\mp\iota I).
+\]
+Entonces
+\begin{equation}
+ V_9=E_\iota\oplus E_{-\iota},
+ \qquad
+ \dim_{\mathbb F_9}E_\iota
+ =\dim_{\mathbb F_9}E_{-\iota}=3.
+ \label{p12-83-c20-s1:eq:descomposicion-espectral-f9-paley}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+El polinomio mínimo de \(A_W\) divide \(X^2+1\), que se escinde sobre
+\(\mathbb F_9\) con raíces simples \(\pm\iota\). Los proyectores de
+\cref{p12-83-c20-s1:prop:proyectores-conjugados-paley} producen la suma directa. Como
+\(A_W\) tiene coeficientes en \(\mathbb F_3\), el automorfismo de
+Frobenius intercambia los dos autoespacios; sus dimensiones son iguales y
+suman seis.
+\end{proof}
+
+Esta construcción dota \(\mathbb F_3^6\) de estructura de módulo de rango
+tres sobre \(\mathbb F_9\), mediante
+\begin{equation}
+ (a+b\iota)\cdot v:=av+b(vA_W).
+ \label{p12-83-c20-s1:eq:accion-f9-sobre-f3-seis}
+\end{equation}
+La igualdad \(3^6=9^3\) queda así acompañada por una acción explícita; no
+se usa como argumento cardinal.
+
+\subsection{Código gráfico ternario de longitud \(12\)}
+
+Definimos
+\begin{equation}
+ c:\mathbb F_3^6\longrightarrow\mathbb F_3^{12},
+ \qquad
+ c(q)=(q,qA_W),
+ \label{p12-83-c20-s1:eq:aplicacion-codigo-grafico-witt}
+\end{equation}
+y
+\begin{equation}
+ C_W:=\operatorname{im}c.
+ \label{p12-83-c20-s1:eq:definicion-codigo-witt-ternario}
+\end{equation}
+Su matriz generadora es
+\[
+ G_W=(I_6\mid A_W).
+\]
+
+\begin{theorem}[Inyectividad y autodualidad]
+\label{p12-83-c20-s1:thm:cw-inyectivo-autodual}
+La aplicación \(c\) es inyectiva, \(\dim C_W=6\) y
+\begin{equation}
+ \boxed{C_W=C_W^\perp.}
+ \label{p12-83-c20-s1:eq:cw-autodual}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La primera mitad de \(c(q)\) es \(q\), por lo que
+\(\operatorname{pr}_1\circ c=\operatorname{id}\); esto prueba la
+inyectividad y la dimensión. Además,
+\[
+ G_WG_W^{\mathsf T}
+ =I_6+A_WA_W^{\mathsf T}
+ =I_6+2I_6=0
+\]
+en \(\mathbb F_3\). Por tanto \(C_W\subseteq C_W^\perp\). Ambos espacios
+tienen dimensión seis, luego son iguales.
+\end{proof}
+
+Para \(r=0,\ldots,12\), sea
+\[
+ N_r:=\#\{q\in\mathbb F_3^6:
+            \operatorname{wt}(q,qA_W)=r\}.
+\]
+La enumeración de las \(3^6=729\) entradas produce
+\begin{equation}
+ N_0=1,
+ \qquad
+ N_6=264,
+ \qquad
+ N_9=440,
+ \qquad
+ N_{12}=24,
+ \label{p12-83-c20-s1:eq:censo-pesos-cw}
+\end{equation}
+y \(N_r=0\) en los demás pesos.
+
+\begin{theorem}[Enumerador y distancia mínima]
+\label{p12-83-c20-s1:thm:enumerador-cw-autonomo}
+El código \(C_W\) posee parámetros
+\[
+ \boxed{C_W=[12,6,6]_3}
+\]
+y enumerador de pesos
+\begin{equation}
+ \boxed{W_{C_W}(y)=1+264y^6+440y^9+24y^{12}.}
+ \label{p12-83-c20-s1:eq:enumerador-pesos-cw}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La dimensión y la autodualidad ya se demostraron. El censo
+\eqref{p12-83-c20-s1:eq:censo-pesos-cw} recorre las \(729\) palabras sin muestreo. Su
+menor peso no nulo es seis, que es la distancia mínima de un código lineal.
+La suma \(1+264+440+24=729\) controla que ninguna palabra fue omitida.
+\end{proof}
+
+\subsection{Naturaleza de la estructura obtenida}
+
+Se han construido tres objetos distintos y tres flechas tipadas:
+\[
+ \mathcal U_9
+ \xrightarrow{\theta}\mathbb P^1(\mathbb F_5)
+ \xrightarrow{\chi}C_P
+ \xrightarrow{\bmod3}A_W,
+\]
+\[
+ A_W^2=-I_6
+ \quad\Longrightarrow\quad
+ \mathbb F_3^6\cong\mathbb F_9^3
+ \quad\Longrightarrow\quad
+ C_W=\{(q,qA_W):q\in\mathbb F_3^6\}.
+\]
+La primera flecha es un calibre, la segunda usa el carácter cuadrático y la
+tercera es reducción de coeficientes. La estructura sobre
+\(\mathbb F_9\) es finita; no se identifica con una estructura compleja
+real o analítica.
+
+\subsection{Obstrucciones del corredor Paley–\(C_W\): biyección, \(A_W^2=-I_6\), autodualidad y censo de \(729\) palabras}
+
+\begin{criterion}[Refutación del corredor Paley--\(C_W\)]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \item \(\theta\) no es biyectiva o se usa como homomorfismo sin prueba;
+ \item la suma \eqref{p12-83-c20-s1:eq:correlacion-cuadratica-f5} difiere de \(-1\);
+ \item \(C_PC_P^{\mathsf T}\neq5I_6\);
+ \item \(A_W^2\neq-I_6\);
+ \item los proyectores \eqref{p12-83-c20-s1:eq:proyectores-f9-paley} no son
+       complementarios;
+ \item la aplicación \(q\mapsto(q,qA_W)\) pierde inyectividad o
+       autodualidad;
+ \item el censo no suma \(729\), difiere de
+       \eqref{p12-83-c20-s1:eq:censo-pesos-cw}, o presenta una palabra de peso entre uno
+       y cinco;
+ \item se infiere \(\mathbb F_3^6\cong\mathbb F_9^3\) únicamente de
+       \(3^6=9^3\), omitiendo la acción \eqref{p12-83-c20-s1:eq:accion-f9-sobre-f3-seis}.
+\end{enumerate}
+\end{criterion}
+
+
+% Unidad U019. Sistema de Witt, campo de estrellas y grupo M12.
+% Redaccion autonoma desde la autoridad material 1063.
+
+\section{Sistema de Steiner ternario, involuciones de estrella de Witt y generación de \texorpdfstring{\(M_{12}\)}{M12}}
+\label{p12-83-c20-s2:chap:sistema-witt-estrellas-m12}
+
+La unidad precedente construyó el código autodual
+\(C_W=[12,6,6]_3\). Ahora se proyectivizan sus palabras de peso seis,
+se prueba la propiedad de Steiner, y sólo entonces se define la estrella
+asociada a la tétrada \(B_K\). Este orden impide convertir una figura de
+incidencia en un objeto añadido por semejanza visual.
+
+\subsection{Soportes proyectivos de peso \(6\)}
+
+Sea
+\begin{equation}
+ \mathcal H_W
+ :=\{\operatorname{supp}(c):c\in C_W,
+                              \operatorname{wt}(c)=6\}.
+ \label{p12-83-c20-s2:eq:familia-soportes-peso-seis}
+\end{equation}
+Cada soporte aparece para el par de palabras \(\{c,-c\}\). En efecto, si dos
+palabras de peso seis con el mismo soporte no fueran proporcionales, se podría
+escalar una de ellas para cancelar una coordenada al restarlas; se obtendría
+una palabra no nula de \(C_W\) de peso menor que seis, contra la distancia
+mínima. Como tampoco existe una palabra no nula igual a su opuesta en
+característica tres, cada órbita proyectiva tiene exactamente dos elementos.
+Por tanto,
+\begin{equation}
+ |\mathcal H_W|=\frac{264}{2}=132.
+ \label{p12-83-c20-s2:eq:numero-hexadas-cw}
+\end{equation}
+
+Para \(T\in\binom{[12]}5\), definimos
+\begin{equation}
+ \nu(T):=\#\{H\in\mathcal H_W:T\subseteq H\}.
+ \label{p12-83-c20-s2:eq:incidencia-cinco-hexada}
+\end{equation}
+La enumeración exacta de los
+\[
+ \binom{12}{5}=792
+\]
+subconjuntos de cinco puntos produce
+\begin{equation}
+ \nu(T)=1
+ \qquad
+ \text{para todo }T\in\binom{[12]}5.
+ \label{p12-83-c20-s2:eq:unicidad-cinco-en-hexada}
+\end{equation}
+
+\begin{theorem}[Sistema de Witt ternario]
+\label{p12-83-c20-s2:thm:w12-autonomo}
+El sistema de incidencia
+\[
+ W_{12}:=([12],\mathcal H_W)
+\]
+es el sistema de Steiner
+\begin{equation}
+ \boxed{W_{12}=S(5,6,12).}
+ \label{p12-83-c20-s2:eq:w12-steiner-autonomo}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La igualdad \eqref{p12-83-c20-s2:eq:unicidad-cinco-en-hexada} es precisamente la
+propiedad de Steiner. El número de bloques también se recupera de la doble
+cuenta de pares \((T,H)\) con \(T\subset H\):
+\[
+ |\mathcal H_W|\binom65=\binom{12}{5},
+ \qquad
+ |\mathcal H_W|=\frac{792}{6}=132.
+\]
+\end{proof}
+
+\subsection{Residuo de una tétrada y descomposición en \(4\) componentes incidentes}
+
+Sea \(B\in\binom{[12]}4\). En un sistema \(S(5,6,12)\), el número de
+hexadas que contienen \(B\) es
+\begin{equation}
+ \lambda_4
+ =\frac{\binom{12-4}{5-4}}{\binom{6-4}{5-4}}
+ =\frac82=4.
+ \label{p12-83-c20-s2:eq:lambda-cuatro-w12}
+\end{equation}
+Escribimos estas cuatro hexadas como
+\[
+ H_i=B\sqcup P_i,
+ \qquad |P_i|=2,
+ \qquad i=1,\ldots,4.
+\]
+
+\begin{lemma}[Partición residual de una tétrada]
+\label{p12-83-c20-s2:lem:particion-residual-tetrada-witt}
+Los cuatro pares \(P_1,\ldots,P_4\) son disjuntos y
+\begin{equation}
+ [12]\setminus B
+ =P_1\sqcup P_2\sqcup P_3\sqcup P_4.
+ \label{p12-83-c20-s2:eq:particion-residual-tetrada-witt}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Si dos pares residuales compartieran un punto \(p\), las correspondientes
+hexadas contendrían el mismo subconjunto \(B\cup\{p\}\) de cinco puntos,
+en contradicción con la unicidad de Steiner. Los cuatro pares son, pues,
+disjuntos; contienen ocho puntos y agotan el complemento de \(B\).
+\end{proof}
+
+\begin{definition}[Estrella e involución de estrella de Witt]
+\label{p12-83-c20-s2:def:estrella-witt-involucion}
+La estrella centrada en \(B\) es
+\begin{equation}
+ \mathscr S_B
+ :=\{H\in\mathcal H_W:B\subseteq H\}
+ =\{B\sqcup P_1,\ldots,B\sqcup P_4\}.
+ \label{p12-83-c20-s2:eq:estrella-witt-general}
+\end{equation}
+Si \(P_i=\{p_i^-,p_i^+\}\), su involución es
+\begin{equation}
+ \sigma_B:=\prod_{i=1}^{4}(p_i^-\ p_i^+).
+ \label{p12-83-c20-s2:eq:involucion-estrella-witt-general}
+\end{equation}
+La permutación \(\sigma_B\) fija puntualmente \(B\) e intercambia los
+extremos de cada pétalo residual.
+\end{definition}
+
+El término matemático empleado en adelante es \emph{estrella de Witt} o
+\emph{involución de estrella de Witt}. No se trata de una estrella
+euclídea.
+
+\subsection{Estrella seleccionada por la tétrada del sello}
+
+La unidad dodecafásica produjo, sin usar el diseño de Steiner,
+\[
+ B_K=\{4,6,9,10\}.
+\]
+Ahora que \(W_{12}\) está construido, su estrella queda bien definida. Las
+cuatro hexadas incidentes son
+\begin{align}
+ H_{13}&=B_K\sqcup\{1,3\}
+       =\{1,3,4,6,9,10\},
+ \label{p12-83-c20-s2:eq:hexada-petalo-13}\\
+ H_{2,11}&=B_K\sqcup\{2,11\}
+       =\{2,4,6,9,10,11\},
+ \label{p12-83-c20-s2:eq:hexada-petalo-211}\\
+ H_{5,7}&=B_K\sqcup\{5,7\}
+       =\{4,5,6,7,9,10\}
+       =H_\alpha^-,
+ \label{p12-83-c20-s2:eq:hexada-petalo-57}\\
+ H_{8,12}&=B_K\sqcup\{8,12\}
+       =\{4,6,8,9,10,12\}.
+ \label{p12-83-c20-s2:eq:hexada-petalo-812}
+\end{align}
+En consecuencia,
+\begin{equation}
+ \boxed{
+ \sigma_{B_K}=(1\ 3)(2\ 11)(5\ 7)(8\ 12).}
+ \label{p12-83-c20-s2:eq:involucion-estrella-witt-bk}
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  font=\small,
+  core/.style={draw,double,rounded corners=2mm,align=center,
+    minimum width=4.0cm,minimum height=1.3cm,fill=black!4},
+  petal/.style={draw,rounded corners=2mm,align=center,
+    minimum width=3.55cm,minimum height=1.08cm,fill=black!2},
+  negative/.style={petal,line width=1.1pt,double,fill=black!10},
+  arr/.style={->,thick}
+]
+\node[core] (B) at (0,0)
+ {\(\displaystyle B_K=\{4,6,9,10\}\)\\
+  puntos fijados por \(\sigma_{B_K}\)};
+\node[petal] (P13) at (0,3.0)
+ {\(P_1=\{1,3\}\), \((1\ 3)\)\\
+  \(H_{13}=B_K\sqcup P_1\)};
+\node[petal] (P211) at (5.25,0)
+ {\(P_2=\{2,11\}\), \((2\ 11)\)\\
+  \(H_{2,11}=B_K\sqcup P_2\)};
+\node[negative] (P57) at (0,-3.0)
+ {\(P_3=\{5,7\}\), \((5\ 7)\)\\
+  \(H_{5,7}=H_\alpha^-\)};
+\node[petal] (P812) at (-5.25,0)
+ {\(P_4=\{8,12\}\), \((8\ 12)\)\\
+  \(H_{8,12}=B_K\sqcup P_4\)};
+\draw[arr] (B)--(P13);
+\draw[arr] (B)--(P211);
+\draw[arr] (B)--(P57);
+\draw[arr] (B)--(P812);
+\node[align=center,font=\footnotesize] at (0,-4.35)
+ {\(\mathscr S_{B_K}
+   =\{H_{13},H_{2,11},H_{5,7},H_{8,12}\}\).\\
+  El diagrama representa incidencia, no distancia geométrica.};
+\end{tikzpicture}
+\caption{Estrella de Witt centrada en \(B_K\). El centro es la tétrada
+fija; los cuatro pétalos son los pares residuales que determinan la
+involución.}
+\label{p12-83-c20-s2:fig:estrella-witt-bk-autonoma}
+\end{figure}
+
+\subsection{Campo global de las 495 estrellas}
+
+Existe una estrella para cada tétrada, por lo que
+\begin{equation}
+ \#\{\mathscr S_B:B\in\tbinom{[12]}4\}
+ =\binom{12}{4}=495.
+ \label{p12-83-c20-s2:eq:numero-estrellas-witt}
+\end{equation}
+El censo exacto verifica
+\begin{equation}
+ \sigma_B(\mathcal H_W)=\mathcal H_W
+ \qquad
+ \text{para toda }B\in\binom{[12]}4.
+ \label{p12-83-c20-s2:eq:estrellas-conservan-hexadas}
+\end{equation}
+Definimos
+\begin{equation}
+ \Gamma_\star
+ :=\langle\sigma_B:B\in\tbinom{[12]}4\rangle
+ \leq\operatorname{Aut}(W_{12}).
+ \label{p12-83-c20-s2:eq:grupo-generado-estrellas-witt}
+\end{equation}
+
+Un conjunto generador de seis tétradas es
+\[
+ 1234,
+ \quad1235,
+ \quad1236,
+ \quad1245,
+ \quad1345,
+ \quad2345.
+\]
+Los órdenes de los subgrupos obtenidos al añadir sus involuciones
+sucesivamente son
+\begin{equation}
+ 1, 2, 6, 18, 360, 7920, 95040.
+ \label{p12-83-c20-s2:eq:cadena-ordenes-generadores-m12}
+\end{equation}
+
+\begin{theorem}[Generación del grupo de Mathieu \(M_{12}\)]
+\label{p12-83-c20-s2:thm:495-estrellas-m12-autonomo}
+Se cumple
+\begin{equation}
+ \boxed{
+ \langle\sigma_B:B\in\tbinom{[12]}4\rangle
+ =\operatorname{Aut}(W_{12})
+ \cong M_{12}.}
+ \label{p12-83-c20-s2:eq:estrellas-generan-m12}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Cada \(\sigma_B\) conserva las \(132\) hexadas, luego
+\(\Gamma_\star\leq\operatorname{Aut}(W_{12})\). El censo de Schreier de
+los seis generadores indicados produce orden \(95040\). El grupo de
+automorfismos de \(S(5,6,12)\) es \(M_{12}\) y tiene ese mismo orden; por
+tanto la inclusión es una igualdad.
+\end{proof}
+
+Una estrella aislada genera únicamente
+\[
+ \langle\sigma_B\rangle\cong C_2.
+\]
+La conclusión sobre \(M_{12}\) pertenece al campo global de las
+\(495\) involuciones, no a \(\sigma_{B_K}\) considerada aisladamente.
+
+\subsection{Acción sobre el módulo de aumentación}
+
+Sea
+\[
+ V_{11}=\mathbf1^\perp\subset\mathbb R^{12}.
+\]
+La involución \(\sigma_B\) fija las cuatro coordenadas de \(B\) y actúa
+por cuatro transposiciones sobre su complemento. En \(\mathbb R^{12}\)
+posee ocho direcciones de autovalor \(+1\) y cuatro de autovalor \(-1\).
+La dirección constante pertenece al primer autoespacio. Por tanto,
+\begin{equation}
+ \operatorname{Spec}(\sigma_B|_{V_{11}})
+ =\{1^{[7]},(-1)^{[4]}\},
+ \qquad
+ \frac1{11}\operatorname{Tr}(\sigma_B|_{V_{11}})=\frac3{11}.
+ \label{p12-83-c20-s2:eq:espectro-involucion-estrella-aumentacion}
+\end{equation}
+Es una involución firmada; no es un proyector positivo de rango tres.
+
+\subsection{Obstrucciones de \(W_{12}\), del campo de \(495\) involuciones de estrella y de la generación de \(M_{12}\)}
+
+\begin{criterion}[Refutación de \(W_{12}\), sus estrellas y \(M_{12}\)]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \item la proyectivización de las \(264\) palabras de peso seis no produce
+       \(132\) soportes;
+ \item existe un subconjunto de cinco puntos contenido en cero o en más de
+       una hexada;
+ \item una tétrada no pertenece exactamente a cuatro hexadas;
+ \item los cuatro pares residuales no particionan el complemento de la
+       tétrada;
+ \item los pétalos de \(B_K\) no son
+       \(\{1,3\},\{2,11\},\{5,7\},\{8,12\}\);
+ \item alguna de las \(495\) involuciones no conserva
+       \(\mathcal H_W\);
+ \item el grupo generado no tiene orden \(95040\);
+ \item se atribuye \(M_{12}\) a una única estrella en vez de al campo
+       global de involuciones;
+ \item se introduce la estrella antes de construir \(W_{12}\).
+\end{enumerate}
+\end{criterion}
+
+
+% Unidad U020. Prolongacion binaria W12--W24 y M24.
+% Redaccion autonoma desde la autoridad material 1063.
+
+\section{Extensión binaria relativa a una dodecada, sistema \texorpdfstring{\(W_{24}\)}{W24} y grupo \texorpdfstring{\(M_{24}\)}{M24}}
+\label{p12-83-c20-s3:chap:dodecada-w24-m24}
+
+El sistema \(W_{12}\) construido sobre doce fases admite una prolongación
+binaria cuando se declara un código de Golay extendido, una dodecada y un
+isomorfismo de incidencia. Esos datos son entradas relativas de esta rama:
+no se deducen únicamente de \(C_W\), y no intervienen en la rama reticular
+ternaria que conducirá al retículo de Leech.
+
+\subsection{Código binario de Golay y octadas}
+
+Sea
+\[
+ \mathcal G_{24}\subset\mathbb F_2^{24}
+\]
+el código binario extendido de Golay. Sus pesos son
+\begin{equation}
+ 0, 8, 12, 16, 24.
+ \label{p12-83-c20-s3:eq:pesos-golay-binario-extendido}
+\end{equation}
+Los soportes de las palabras de peso ocho forman el sistema de Steiner
+\begin{equation}
+ W_{24}=S(5,8,24).
+ \label{p12-83-c20-s3:eq:w24-steiner-octadas}
+\end{equation}
+Sus bloques se denominan \emph{octadas}. Fijemos una dodecada \(D\), es
+decir, el soporte de una palabra de peso doce, y sea \(\mathcal O_{24}\)
+la familia de octadas.
+
+Definimos
+\begin{equation}
+ \mathcal H(D)
+ :=\{O\cap D:O\in\mathcal O_{24},\ |O\cap D|=6\}.
+ \label{p12-83-c20-s3:eq:hexadas-residuales-dodecada}
+\end{equation}
+
+\begin{theorem}[Diseño residual de una dodecada]
+\label{p12-83-c20-s3:thm:diseno-residual-dodecada-autonomo}
+El sistema residual es
+\begin{equation}
+ \boxed{(D,\mathcal H(D))\cong S(5,6,12).}
+ \label{p12-83-c20-s3:eq:diseno-residual-dodecada-w12}
+\end{equation}
+Además, cada \(H\in\mathcal H(D)\) posee una única octada \(O_H\) tal que
+\begin{equation}
+ O_H\cap D=H.
+ \label{p12-83-c20-s3:eq:elevacion-unica-hexada-octada}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Sea \(A\subset D\), con \(|A|=5\). En \(W_{24}=S(5,8,24)\) existe una
+única octada \(O_A\) que contiene \(A\). Si \(j=|O_A\cap D|\), la suma
+binaria de las palabras características de \(O_A\) y \(D\) pertenece a
+\(\mathcal G_{24}\) y tiene peso
+\[
+ 8+12-2j=20-2j.
+\]
+Como \(A\subseteq O_A\cap D\), se tiene \(5\leq j\leq8\). Los cuatro
+pesos posibles \(10,8,6,4\), combinados con
+\eqref{p12-83-c20-s3:eq:pesos-golay-binario-extendido}, fuerzan \(j=6\). Así, todo
+subconjunto de cinco puntos de \(D\) pertenece a una hexada residual única.
+
+Si dos octadas tuvieran la misma intersección hexádica con \(D\), ambas
+contendrían los mismos cinco puntos de esa hexada, contradiciendo la
+unicidad en \(S(5,8,24)\). Esto prueba también la unicidad del
+levantamiento.
+\end{proof}
+
+\subsection{Calibre relativo entre el diseño HMT y la dodecada}
+
+Para relacionar la construcción anterior con el diseño obtenido de
+\(C_W\), deben declararse explícitamente
+\begin{equation}
+ (D,\ell),
+ \qquad
+ \ell:W_{12}^{\rm HMT}
+ \xrightarrow{\sim}(D,\mathcal H(D)),
+ \label{p12-83-c20-s3:eq:dato-relativo-dodecada-alineamiento}
+\end{equation}
+donde \(\ell\) es un isomorfismo de incidencia. Si \(\ell_*\) denota su
+acción sobre bloques, definimos
+\begin{equation}
+ \widehat\iota_{D,\ell}
+ :=\iota_D\circ\ell_*:
+ W_{12}^{\rm HMT}\longrightarrow W_{24},
+ \qquad
+ \widehat\iota_{D,\ell}(H)=O_{\ell(H)}.
+ \label{p12-83-c20-s3:eq:elevacion-tipificada-w12-w24}
+\end{equation}
+La composición \(\widehat\iota_{D,\ell}\) evita aplicar
+\(\iota_D\), cuyo dominio es \(\mathcal H(D)\), directamente a una hexada
+que todavía vive en \([12]_{\rm HMT}\).
+
+\begin{proposition}[Inyectividad de la elevación relativa]
+\label{p12-83-c20-s3:prop:inyectividad-elevacion-w12-w24}
+La aplicación \(\widehat\iota_{D,\ell}\) es inyectiva y conserva la
+incidencia entre puntos y hexadas después de aplicar \(\ell\).
+\end{proposition}
+
+\begin{proof}
+El isomorfismo \(\ell\) es biyectivo sobre bloques. Por el
+\cref{p12-83-c20-s3:thm:diseno-residual-dodecada-autonomo}, cada hexada residual posee una
+única octada elevadora. Dos hexadas HMT con la misma imagen tendrían la misma
+hexada residual y, por biyectividad de \(\ell\), serían iguales.
+\end{proof}
+
+No existe una elección absoluta de \((D,\ell)\) previa a este calibre. El
+objeto invariante es la clase de la construcción bajo cambio simultáneo de
+dodecada y alineamiento.
+
+\subsection{Ley de incidencia \texorpdfstring{\(4+1\)}{4+1} sobre una tétrada}
+
+Para una tétrada \(B\subset D\), los parámetros derivados de los dos
+sistemas de Steiner son
+\begin{equation}
+ \lambda_4(W_{12})
+ =\frac{\binom81}{\binom21}=4,
+ \qquad
+ \lambda_4(W_{24})
+ =\frac{\binom{20}1}{\binom41}=5.
+ \label{p12-83-c20-s3:eq:ley-cuatro-mas-uno-witt}
+\end{equation}
+Por tanto, las cinco octadas que contienen \(B\) se descomponen de manera
+única en
+\begin{equation}
+ \{O_H:H\in\mathcal H(D),\ B\subset H\}
+ \sqcup\{O_B^\perp\}.
+ \label{p12-83-c20-s3:eq:descomposicion-cinco-octadas}
+\end{equation}
+Las cuatro primeras satisfacen \(|O_H\cap D|=6\); la quinta satisface
+\begin{equation}
+ O_B^\perp\cap D=B.
+ \label{p12-83-c20-s3:eq:octada-transversal-tetrada}
+\end{equation}
+
+Para \(B=B_K\), las cuatro elevaciones residuales corresponden a los
+pétalos
+\[
+ \{1,3\},
+ \qquad
+ \{2,11\},
+ \qquad
+ \{5,7\},
+ \qquad
+ \{8,12\},
+\]
+y la quinta octada es la transversal \(O_{B_K}^\perp\). Esta ley explica
+la transición de cuatro hexadas a cinco octadas sin identificar una cara
+de un cubo con una hexada ni un vértice con una octada.
+
+\subsection{Correspondencia de estratos y libertad del triple positivo}
+
+La estructura de cinco regiones del canal \(\pi\) tiene tipos
+\[
+ 1_\perp+1_{--}+3_{++}.
+\]
+La incidencia sobre \(B_K\) tiene tipos
+\[
+ 1_{\rm transversal}+1_{H^-}+3_{\rm restantes}
+\]
+después de señalar la hexada negativa. Existe, por tanto, una
+correspondencia natural entre \emph{estratos de rol}:
+\begin{equation}
+ 1_\perp\longleftrightarrow O_{B_K}^\perp,
+ \qquad
+ 1_{--}\longleftrightarrow
+ \widehat\iota_{D,\ell}(H_\alpha^-),
+ \qquad
+ 3_{++}\longleftrightarrow
+ \mathcal O_{B_K}^{+,3}.
+ \label{p12-83-c20-s3:eq:correspondencia-estratos-cinco-cinco}
+\end{equation}
+Aquí \(\mathcal O_{B_K}^{+,3}\) es el conjunto no ordenado de las otras
+tres octadas residuales. Una biyección individual entre las tres regiones
+positivas y esas tres octadas exige declarar un calibre adicional de
+\(S_3\). La coincidencia del patrón \(1+1+3\) no determina por sí sola ese
+ordenamiento.
+
+\subsection{Grupo de automorfismos del sistema de octadas}
+
+\begin{theorem}[Grupo de Mathieu \(M_{24}\)]
+\label{p12-83-c20-s3:thm:automorfismos-w24-m24}
+El grupo de automorfismos del sistema de Steiner de octadas es
+\begin{equation}
+ \boxed{
+ \operatorname{Aut}(W_{24})\cong M_{24},
+ \qquad
+ |M_{24}|=244823040.}
+ \label{p12-83-c20-s3:eq:automorfismos-w24-m24}
+\end{equation}
+\end{theorem}
+
+El teorema identifica el grupo clásico de automorfismos del dato binario
+de entrada. No afirma que \(M_{24}\) se genere a partir de una sola
+dodecada, ni que el código ternario \(C_W\) determine por sí solo
+\(\mathcal G_{24}\).
+
+\subsection{Separación categórica respecto de la rama reticular}
+
+La rama construida en esta unidad es
+\begin{equation}
+ (W_{12}^{\rm HMT};\mathcal G_{24},D,\ell)
+ \longrightarrow W_{24}
+ \longrightarrow\operatorname{Aut}(W_{24})\cong M_{24}.
+ \label{p12-83-c20-s3:eq:rama-binaria-w24-m24}
+\end{equation}
+La rama reticular que se construirá después es
+\begin{equation}
+ C_W\longrightarrow N(A_2^{12})
+ \xrightarrow{\text{vecino de índice tres}}\Lambda_{24}.
+ \label{p12-83-c20-s3:eq:rama-ternaria-niemeier-leech-anunciada}
+\end{equation}
+Sus constructores, dominios y codominios son distintos. En particular,
+\begin{equation}
+ \boxed{
+ \text{no se introduce ninguna flecha }
+ W_{24}\longrightarrow\Lambda_{24}.}
+ \label{p12-83-c20-s3:eq:no-flecha-w24-leech}
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  node distance=13mm and 16mm,
+  box/.style={draw,rounded corners=1.5mm,align=center,
+    inner xsep=3mm,inner ysep=2.2mm},
+  arr/.style={->,thick}
+]
+\node[box] (cw) {\(C_W\)};
+\node[box,right=of cw] (w12) {\(W_{12}\)};
+\node[box,right=of w12] (w24) {\(W_{24}\)};
+\node[box,right=of w24] (m24) {\(M_{24}\)};
+\node[box,below=of cw] (cw2) {\(C_W\)};
+\node[box,right=of cw2] (n) {\(N(A_2^{12})\)};
+\node[box,right=of n] (leech) {\(\Lambda_{24}\)};
+\draw[arr] (cw)--(w12);
+\draw[arr] (w12)--node[above,font=\scriptsize]
+ {\((\mathcal G_{24},D,\ell)\)} (w24);
+\draw[arr] (w24)--(m24);
+\draw[arr] (cw2)--node[below,font=\scriptsize]
+ {pegado ternario} (n);
+\draw[arr] (n)--node[below,font=\scriptsize]
+ {\(3\)-vecino} (leech);
+\node[below=5mm of w24,font=\footnotesize,align=center]
+ {La alineación vertical no es una flecha.};
+\end{tikzpicture}
+\caption{Bifurcación tipada de las prolongaciones binaria y ternaria.}
+\label{p12-83-c20-s3:fig:bifurcacion-w24-leech-autonoma}
+\end{figure}
+
+\subsection{Obstrucciones de la prolongación binaria \(W_{12}\to W_{24}\): código de Golay, octadas, alineamiento y separación de la rama de Leech}
+
+\begin{criterion}[Refutación de la prolongación binaria]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \item el espectro de pesos de \(\mathcal G_{24}\) contiene un peso no
+       listado en \eqref{p12-83-c20-s3:eq:pesos-golay-binario-extendido};
+ \item los soportes de peso ocho no forman \(S(5,8,24)\);
+ \item una intersección residual de una octada con \(D\) que contiene cinco
+       puntos de \(D\) tiene cardinal distinto de seis;
+ \item una hexada residual admite cero o más de una octada elevadora;
+ \item se aplica \(\iota_D\) directamente a una hexada HMT sin el
+       alineamiento \(\ell\);
+ \item la ley de incidencia sobre una tétrada no es \(4+1\);
+ \item se ordena el triple positivo sin declarar el calibre \(S_3\);
+ \item \(\operatorname{Aut}(W_{24})\) no tiene orden \(244823040\);
+ \item se afirma que \(W_{24}\) surge de \(W_{12}\) sin el dato binario
+       \(\mathcal G_{24}\), la dodecada y el alineamiento;
+ \item se serializan las dos ramas mediante una flecha
+       \(W_{24}\to\Lambda_{24}\).
+\end{enumerate}
+\end{criterion}
+
+
+% Unidad U021. Pegado discriminante ternario y Niemeier A2^12.
+% Redaccion autonoma desde la autoridad material 1063.
+
+\section{Pegado discriminante ternario y construcción del retículo de Niemeier de tipo \texorpdfstring{\(A_2^{12}\)}{A₂¹²}}
+\label{p12-83-c20-s4:chap:pegado-niemeier-a2-doce}
+
+Esta unidad inicia la rama reticular directamente desde el código ternario
+autodual \(C_W\). El sistema binario \(W_{24}\), la dodecada y el grupo
+\(M_{24}\) no son entradas de esta construcción. La sucesión tipada es
+\[
+ C_W
+ \longrightarrow
+ (A_2^*/A_2)^{12}
+ \longrightarrow
+ N(C_W)
+ \cong N(A_2^{12}).
+\]
+
+\subsection{Retículo raíz \texorpdfstring{\(A_2\)}{A₂}}
+
+Sea
+\[
+ A_2=\mathbb Z\alpha_1\oplus\mathbb Z\alpha_2
+\]
+el retículo raíz cuya matriz de Gram, en la base ordenada
+\((\alpha_1,\alpha_2)\), es
+\begin{equation}
+ G_{A_2}=
+ \begin{pmatrix}
+ 2&-1\\
+ -1&2
+ \end{pmatrix}.
+ \label{p12-83-c20-s4:eq:gram-a2-autonomo}
+\end{equation}
+Para \(x=x_1\alpha_1+x_2\alpha_2\),
+\begin{equation}
+ \langle x,x\rangle
+ =2(x_1^2-x_1x_2+x_2^2).
+ \label{p12-83-c20-s4:eq:norma-a2-autonoma}
+\end{equation}
+En particular, \(A_2\) es par, positivo definido y
+\[
+ \det A_2=3.
+\]
+
+Definimos
+\[
+ \rho:=\alpha_1+\alpha_2.
+\]
+Entonces
+\begin{equation}
+ \rho^2=2,
+ \qquad
+ \langle\rho,\alpha_1\rangle
+ =\langle\rho,\alpha_2\rangle=1.
+ \label{p12-83-c20-s4:eq:identidades-rho-a2}
+\end{equation}
+
+\subsection{Módulo y forma discriminantes}
+
+El retículo dual es
+\[
+ A_2^*
+ :=\{x\in A_2\otimes_{\mathbb Z}\mathbb Q:
+       \langle x,A_2\rangle\subseteq\mathbb Z\}.
+\]
+Elegimos los representantes
+\begin{equation}
+ \mu_0=0,
+ \qquad
+ \mu_1=\frac{2\alpha_1+\alpha_2}{3},
+ \qquad
+ \mu_2=\frac{\alpha_1+2\alpha_2}{3}.
+ \label{p12-83-c20-s4:eq:representantes-discriminantes-a2}
+\end{equation}
+Sus emparejamientos con la base simple son
+\[
+\begin{array}{c|cc}
+ &\alpha_1&\alpha_2\\ \hline
+ \mu_1&1&0\\
+ \mu_2&0&1
+\end{array},
+\]
+por lo que \(\mu_1,\mu_2\in A_2^*\). Además,
+\[
+ 3\mu_1=2\alpha_1+\alpha_2\in A_2,
+ \qquad
+ 3\mu_2=\alpha_1+2\alpha_2\in A_2,
+\]
+mientras \(\mu_1,\mu_2\notin A_2\). Se obtiene
+\begin{equation}
+ A_2^*/A_2
+ =\{\overline\mu_0,\overline\mu_1,\overline\mu_2\}
+ \cong\mathbb Z/3\mathbb Z
+ \cong\mathbb F_3.
+ \label{p12-83-c20-s4:eq:discriminante-a2-f3}
+\end{equation}
+
+La suma de representantes se reduce explícitamente mediante
+\[
+ \mu_1+\mu_1-\mu_2=\alpha_1,
+ \qquad
+ \mu_1+\mu_2=\rho,
+ \qquad
+ \mu_2+\mu_2-\mu_1=\alpha_2.
+\]
+Por consiguiente,
+\begin{equation}
+ \mu_r+\mu_s-\mu_{r+s\,({\rm mod}\,3)}\in A_2
+ \qquad(r,s\in\mathbb F_3).
+ \label{p12-83-c20-s4:eq:adicion-representantes-discriminantes-a2}
+\end{equation}
+
+\begin{proposition}[Forma discriminante de \(A_2\)]
+\label{p12-83-c20-s4:prop:forma-discriminante-a2}
+Bajo \eqref{p12-83-c20-s4:eq:discriminante-a2-f3}, las formas bilineal y cuadrática
+discriminantes son
+\begin{align}
+ b(\overline\mu_r,\overline\mu_s)
+ &\equiv\frac{2rs}{3}\pmod{\mathbb Z},
+ \label{p12-83-c20-s4:eq:bilineal-discriminante-a2}\\
+ q(\overline\mu_r)
+ &\equiv\frac{2r^2}{3}\pmod{2\mathbb Z}.
+ \label{p12-83-c20-s4:eq:cuadratica-discriminante-a2}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+La fórmula \eqref{p12-83-c20-s4:eq:norma-a2-autonoma} da
+\[
+ \mu_1^2=\mu_2^2=\frac23,
+ \qquad
+ \langle\mu_1,\mu_2\rangle=\frac13.
+\]
+Para \(r,s\in\{0,1,2\}\), estos valores coinciden, módulo
+\(\mathbb Z\), con \(2rs/3\). La fórmula cuadrática resulta al tomar
+\(r=s\) y recordar que el retículo es par.
+\end{proof}
+
+\subsection{\(12\) factores y aplicación de pegado}
+
+Sea
+\[
+ L_0:=A_2^{12}.
+\]
+Entonces
+\[
+ L_0^*=(A_2^*)^{12},
+ \qquad
+ L_0^*/L_0\cong\mathbb F_3^{12}.
+\]
+Para \(c=(c_1,\ldots,c_{12})\in\mathbb F_3^{12}\), definimos
+\begin{equation}
+ \phi(c):=(\mu_{c_1},\ldots,\mu_{c_{12}})\in L_0^*.
+ \label{p12-83-c20-s4:eq:aplicacion-pegado-cw}
+\end{equation}
+La extensión determinada por \(C_W\) es
+\begin{equation}
+ \begin{aligned}
+ N(C_W)
+ &:=\bigcup_{c\in C_W}(L_0+\phi(c))\\
+ &=\{x\in L_0^*:x\bmod L_0\in C_W\}.
+ \end{aligned}
+ \label{p12-83-c20-s4:eq:definicion-niemeier-cw}
+\end{equation}
+
+\begin{lemma}[Clausura aditiva del pegado]
+\label{p12-83-c20-s4:lem:clausura-pegado-cw}
+El conjunto \(N(C_W)\) es un subgrupo discreto de \(L_0^*\) de rango
+veinticuatro.
+\end{lemma}
+
+\begin{proof}
+Sean \(x=\ell+\phi(c)\) y \(y=m+\phi(d)\), con \(\ell,m\in L_0\) y
+\(c,d\in C_W\). Por \eqref{p12-83-c20-s4:eq:adicion-representantes-discriminantes-a2},
+\[
+ \phi(c)+\phi(d)-\phi(c+d)\in L_0.
+\]
+Como \(C_W\) es lineal, \(c+d\in C_W\), y entonces
+\(x+y\in L_0+\phi(c+d)\). La misma identidad aplicada al opuesto da
+inversos. Las inclusiones
+\[
+ L_0\subseteq N(C_W)\subseteq L_0^*
+\]
+prueban discreción y rango veinticuatro.
+\end{proof}
+
+\subsection{Integralidad inducida por autodualidad}
+
+La forma bilineal discriminante de \(L_0\) es la suma ortogonal de doce
+copias de \eqref{p12-83-c20-s4:eq:bilineal-discriminante-a2}. Para
+\(c,d\in\mathbb F_3^{12}\),
+\begin{equation}
+ b(c,d)
+ \equiv\frac23\sum_{i=1}^{12}c_id_i
+ \pmod{\mathbb Z}.
+ \label{p12-83-c20-s4:eq:bilineal-discriminante-a2-doce}
+\end{equation}
+
+\begin{lemma}[Integralidad del pegado]
+\label{p12-83-c20-s4:lem:integralidad-pegado-cw}
+El retículo \(N(C_W)\) es integral.
+\end{lemma}
+
+\begin{proof}
+La autodualidad \(C_W=C_W^\perp\) implica
+\[
+ \sum_{i=1}^{12}c_id_i\equiv0\pmod3
+ \qquad(c,d\in C_W).
+\]
+Por \eqref{p12-83-c20-s4:eq:bilineal-discriminante-a2-doce}, la forma discriminante se
+anula sobre \(C_W\times C_W\). Por tanto, el emparejamiento de cualesquiera
+dos clases pegadas es entero.
+\end{proof}
+
+\subsection{Paridad inducida por los pesos del código}
+
+En una coordenada no nula del código, la forma cuadrática discriminante
+vale \(2/3\) módulo \(2\mathbb Z\). Por tanto,
+\begin{equation}
+ q(c)\equiv\frac23\operatorname{wt}(c)\pmod{2\mathbb Z}.
+ \label{p12-83-c20-s4:eq:cuadratica-discriminante-cw}
+\end{equation}
+
+\begin{lemma}[Paridad del pegado]
+\label{p12-83-c20-s4:lem:paridad-pegado-cw}
+El retículo \(N(C_W)\) es par.
+\end{lemma}
+
+\begin{proof}
+Los únicos pesos de \(C_W\) son \(0,6,9,12\), y
+\[
+ \frac23\{0,6,9,12\}=\{0,4,6,8\}\subseteq2\mathbb Z.
+\]
+Toda clase de pegado es isotrópica para la forma cuadrática discriminante,
+de modo que todas las normas de \(N(C_W)\) son pares.
+\end{proof}
+
+Sean \(g_1,\ldots,g_6\) las filas de \(G_W=(I_6\mid A_W)\) y
+\(\gamma_i=\phi(g_i)\). La multiplicación exacta en \(A_2^*\) da
+\begin{equation}
+ (\langle\gamma_i,\gamma_j\rangle)_{i,j=1}^{6}
+ =
+ \begin{pmatrix}
+ 4&2&2&2&2&2\\
+ 2&4&2&2&2&2\\
+ 2&2&4&2&2&2\\
+ 2&2&2&4&2&2\\
+ 2&2&2&2&4&2\\
+ 2&2&2&2&2&4
+ \end{pmatrix}.
+ \label{p12-83-c20-s4:eq:gram-generadores-pegado-cw}
+\end{equation}
+Esta matriz proporciona un control directo adicional de integralidad y
+paridad para los seis generadores de pegado.
+
+\subsection{Índice, determinante y unimodularidad}
+
+Las clases laterales de \(L_0\) que aparecen en
+\eqref{p12-83-c20-s4:eq:definicion-niemeier-cw} están indexadas por los
+\(|C_W|=729=3^6\) elementos del código y son distintas. En consecuencia,
+\begin{equation}
+ [N(C_W):L_0]=3^6.
+ \label{p12-83-c20-s4:eq:indice-niemeier-sobre-a2-doce}
+\end{equation}
+Como
+\[
+ \det L_0=(\det A_2)^{12}=3^{12},
+\]
+la fórmula del determinante para una extensión finita da
+\begin{equation}
+ \det N(C_W)
+ =\frac{\det L_0}{[N(C_W):L_0]^2}
+ =\frac{3^{12}}{(3^6)^2}=1.
+ \label{p12-83-c20-s4:eq:determinante-niemeier-cw}
+\end{equation}
+
+\subsection{Sistema de raíces inducido por la incidencia de Witt y clasificación de sus órbitas}
+
+En cada una de las dos clases discriminantes no nulas de
+\(A_2^*/A_2\), la norma mínima es
+\[
+ \mu_1^2=\mu_2^2=\frac23.
+\]
+Si \(c\in C_W\setminus\{0\}\), entonces
+\(\operatorname{wt}(c)\geq6\). Por ortogonalidad de los doce factores,
+cualquier vector de \(L_0+\phi(c)\) tiene norma al menos
+\begin{equation}
+ 6\cdot\frac23=4.
+ \label{p12-83-c20-s4:eq:cota-clases-no-triviales-niemeier}
+\end{equation}
+Por tanto, ninguna clase de pegado no trivial contiene vectores de norma
+dos. Las raíces de \(N(C_W)\) son exactamente las raíces ya presentes en
+\(L_0=A_2^{12}\).
+
+\begin{theorem}[Realización del Niemeier de tipo \(A_2^{12}\)]
+\label{p12-83-c20-s4:thm:niemeier-a2-doce-autonomo}
+El retículo \(N(C_W)\) es positivo definido, par y unimodular, y su sistema
+de raíces es \(A_2^{12}\). En consecuencia,
+\begin{equation}
+ \boxed{N(C_W)\cong N(A_2^{12}).}
+ \label{p12-83-c20-s4:eq:identificacion-niemeier-a2-doce}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La positividad procede de \(L_0^*\). La
+\cref{p12-83-c20-s4:lem:integralidad-pegado-cw,p12-83-c20-s4:lem:paridad-pegado-cw} demuestra
+integralidad y paridad; \eqref{p12-83-c20-s4:eq:determinante-niemeier-cw} demuestra
+unimodularidad. La cota \eqref{p12-83-c20-s4:eq:cota-clases-no-triviales-niemeier}
+identifica el sistema de raíces. La clasificación de Niemeier asocia de
+manera única a ese sistema de raíces el retículo indicado.
+\end{proof}
+
+\subsection{Obstrucciones del pegado ternario \(C_W\to N(A_2^{12})\): paridad, unimodularidad y sistema de raíces}
+
+\begin{criterion}[Refutación del pegado ternario]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \item alguno de los representantes \(\mu_0,\mu_1,\mu_2\) no pertenece a
+       \(A_2^*\), dos de sus clases coinciden, o falla
+       \eqref{p12-83-c20-s4:eq:adicion-representantes-discriminantes-a2};
+ \item la forma discriminante no es la dada en
+       \cref{p12-83-c20-s4:prop:forma-discriminante-a2};
+ \item \(N(C_W)\) no es cerrado bajo suma o inversos;
+ \item existe \(c,d\in C_W\) con
+       \(\frac23\sum_i c_id_i\notin\mathbb Z\);
+ \item una palabra de \(C_W\) produce
+       \(\frac23\operatorname{wt}(c)\notin2\mathbb Z\);
+ \item el índice no es \(3^6\) o el determinante no es uno;
+ \item una clase de pegado no trivial contiene un vector de norma dos;
+ \item se utiliza \(W_{24}\), una dodecada o un dato binario en cualquiera
+       de las operaciones de pegado anteriores.
+\end{enumerate}
+\end{criterion}
+
+
+% Unidad U022. Origen incidencial, vecino ternario y Leech.
+% Redaccion autonoma desde la autoridad material 1063.
+
+\section{Origen incidencial, problema radial tipado y construcción del vecino unimodular sin raíces}
+\label{p12-83-c20-s5:chap:origen-incidencial-vecino-leech}
+
+El retículo \(N(A_2^{12})\) ya está construido. Esta unidad determina un
+punto base a partir de un marco ordenado de incidencias, resuelve un
+problema variacional en un dominio declarado, verifica las tres condiciones
+del vecino de índice tres y demuestra que el resultado es el retículo de
+Leech. El vector del vecino se denota \(v_{\mathcal F_*}\): depende del
+marco incidencial y no interviene en el acarreo numérico de \(\alpha\).
+
+\subsection{Marco ordenado de incidencias}
+
+Consideremos las cuatro hexadas
+\begin{align}
+ H^-&=\{4,5,6,7,9,10\},
+ \label{p12-83-c20-s5:eq:hexada-marco-negativa}\\
+ H_e&=\{1,3,4,6,9,10\},
+ \label{p12-83-c20-s5:eq:hexada-marco-e}\\
+ H_\varphi&=\{1,2,3,4,7,9\},
+ \label{p12-83-c20-s5:eq:hexada-marco-phi}\\
+ H_{\rm APP}&=\{2,3,5,10,11,12\}.
+ \label{p12-83-c20-s5:eq:hexada-marco-app}
+\end{align}
+El dato es el marco ordenado
+\begin{equation}
+ \mathcal F:=(H^-,H_e,H_\varphi,H_{\rm APP}).
+ \label{p12-83-c20-s5:eq:marco-incidencial-ordenado}
+\end{equation}
+Definimos
+\begin{equation}
+ o(\mathcal F)
+ :=(H_e\cap H_\varphi)\setminus(H^-\cup H_{\rm APP}).
+ \label{p12-83-c20-s5:eq:operador-origen-incidencial}
+\end{equation}
+
+\begin{theorem}[Reconstrucción equivariante del origen]
+\label{p12-83-c20-s5:thm:origen-incidencial-equivariante}
+Para el marco canónico \(\mathcal F_*\),
+\begin{equation}
+ \boxed{o(\mathcal F_*)=\{1\}.}
+ \label{p12-83-c20-s5:eq:origen-incidencial-singleton}
+\end{equation}
+Además, para toda permutación simultánea \(g\in M_{12}\),
+\begin{equation}
+ o(g\mathcal F)=g\,o(\mathcal F).
+ \label{p12-83-c20-s5:eq:equivarianza-origen-incidencial}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Se tiene
+\[
+ H_e\cap H_\varphi=\{1,3,4,9\}
+\]
+y
+\[
+ (H^-\cup H_{\rm APP})\cap\{1,3,4,9\}=\{3,4,9\}.
+\]
+La diferencia es \(\{1\}\). Para la equivarianza se aplican las
+identidades
+\[
+ g(A\cap B)=gA\cap gB,
+ \quad
+ g(A\cup B)=gA\cup gB,
+ \quad
+ g(A\setminus B)=gA\setminus gB,
+\]
+válidas para toda biyección.
+\end{proof}
+
+La tétrada \(B_K=\{4,6,9,10\}\) no determina por sí sola el origen. El
+singleton se obtiene del marco ordenado completo; no es una coordenada
+elegida después de observar el resultado.
+
+\subsection{Cámara radial positiva del sistema de raíces y selección del cono dominante}
+
+Sea \(\rho_i\) la copia de \(\rho=\alpha_1+\alpha_2\) en el
+\(i\)-ésimo factor de \(A_2^{12}\). Consideramos el dominio
+\begin{equation}
+ \mathscr R_+
+ :=\left\{
+ v(a)=\sum_{i=1}^{12}a_i\rho_i:
+ a_i=1+3b_i, b_i\in\mathbb Z_{\geq0}
+ \right\}.
+ \label{p12-83-c20-s5:eq:camara-radial-positiva}
+\end{equation}
+Como los factores son ortogonales y \(\rho_i^2=2\), si
+\(S=\sum_i b_i\), entonces
+\begin{align}
+ v(a)^2
+ &=2\sum_{i=1}^{12}(1+3b_i)^2\notag\\
+ &=24+12S+18\sum_{i=1}^{12}b_i^2.
+ \label{p12-83-c20-s5:eq:norma-radial-expandida}
+\end{align}
+Reduciendo módulo dieciocho,
+\[
+ v(a)^2\equiv6+12S\pmod{18},
+\]
+y por tanto
+\begin{equation}
+ v(a)^2\equiv0\pmod{18}
+ \quad\Longleftrightarrow\quad
+ S\equiv1\pmod3.
+ \label{p12-83-c20-s5:eq:congruencia-radial-suma-b}
+\end{equation}
+
+\begin{proposition}[Mínimos en la cámara radial declarada]
+\label{p12-83-c20-s5:prop:minimos-camara-radial}
+En el subconjunto de \(\mathscr R_+\) definido por
+\(v(a)^2\equiv0\pmod{18}\), la norma mínima es \(54\). Se alcanza
+exactamente en doce vectores: para cada \(j\in\{1,\ldots,12\}\), el
+coeficiente \(a_j\) vale cuatro y los once restantes valen uno.
+\end{proposition}
+
+\begin{proof}
+La condición \eqref{p12-83-c20-s5:eq:congruencia-radial-suma-b} y la no negatividad de
+los \(b_i\) implican que el menor valor posible de \(S\) es uno. Esto
+obliga a un único índice \(j\) con \(b_j=1\) y a \(b_i=0\) para
+\(i\neq j\). Sustituyendo en \eqref{p12-83-c20-s5:eq:norma-radial-expandida},
+\[
+ v(a)^2=24+12+18=54.
+\]
+Hay doce elecciones de \(j\). El siguiente valor admisible de \(S\) es
+cuatro y produce una norma estrictamente mayor.
+\end{proof}
+
+El origen \(o(\mathcal F_*)=\{1\}\) selecciona
+\begin{equation}
+ \boxed{
+ v_{\mathcal F_*}
+ =4\rho_1+\rho_2+\cdots+\rho_{12},
+ \qquad
+ v_{\mathcal F_*}^2=54.}
+ \label{p12-83-c20-s5:eq:vector-marco-incidencial}
+\end{equation}
+
+\begin{remark}[Alcance exacto de la minimalidad]
+La norma \(54\) es mínima en la cámara radial positiva
+\eqref{p12-83-c20-s5:eq:camara-radial-positiva}, no en toda la clase residual. El vector
+\[
+ u=(\alpha_1-2\alpha_2,\rho,\ldots,\rho)
+\]
+satisface
+\[
+ \alpha_1-2\alpha_2-\rho=-3\alpha_2,
+\]
+de modo que
+\[
+ u\equiv(\rho,\ldots,\rho)
+ \equiv v_{\mathcal F_*}\pmod{3A_2^{12}}.
+\]
+Sin embargo,
+\[
+ (\alpha_1-2\alpha_2)^2
+ =2(1+2+4)=14,
+ \qquad
+ u^2=14+11\cdot2=36.
+\]
+Este testigo impide extender la afirmación de minimalidad fuera del dominio
+de \cref{p12-83-c20-s5:prop:minimos-camara-radial}.
+\end{remark}
+
+\subsection{Carácter y núcleo de congruencia}
+
+Escribimos
+\[
+ N:=N(A_2^{12}),
+ \qquad
+ v:=v_{\mathcal F_*}.
+\]
+Definimos
+\begin{equation}
+ \chi_v:N\longrightarrow\mathbb Z/3\mathbb Z,
+ \qquad
+ \chi_v(x)=\langle x,v\rangle\bmod3,
+ \label{p12-83-c20-s5:eq:caracter-vecino-leech}
+\end{equation}
+su núcleo
+\begin{equation}
+ N_0:=\ker\chi_v
+ =\{x\in N:\langle x,v\rangle\equiv0\pmod3\},
+ \label{p12-83-c20-s5:eq:nucleo-congruencia-vecino}
+\end{equation}
+y la extensión
+\begin{equation}
+ N_v:=N_0+\mathbb Z\frac v3.
+ \label{p12-83-c20-s5:eq:definicion-vecino-indice-tres}
+\end{equation}
+
+\subsection{Condición I1: sobreyectividad y exclusión de raíces}
+
+Por construcción, \(v\in A_2^{12}\subseteq N\). Las raíces de un factor
+\(A_2\) son
+\[
+ \pm\alpha_1,
+ \quad
+ \pm\alpha_2,
+ \quad
+ \pm\rho.
+\]
+Sus emparejamientos con \(\rho\) son \(\pm1\) o \(\pm2\). Todos los
+coeficientes de \(v\) son congruentes con uno módulo tres:
+\[
+ 4\equiv1\pmod3,
+ \qquad
+ 1\equiv1\pmod3.
+\]
+Por tanto, ninguna raíz de \(A_2^{12}\) tiene emparejamiento nulo con
+\(v\) módulo tres. En particular,
+\[
+ \chi_v(\alpha_{1,1})=1,
+\]
+de modo que \(\chi_v\) es sobreyectivo y
+\begin{equation}
+ [N:N_0]=3.
+ \label{p12-83-c20-s5:eq:indice-nucleo-vecino}
+\end{equation}
+Además, ninguna raíz de \(N\) pertenece a \(N_0\).
+
+\subsection{Condición I2: divisibilidad de la norma}
+
+La identidad \eqref{p12-83-c20-s5:eq:vector-marco-incidencial} da
+\begin{equation}
+ v^2=54\equiv0\pmod{18},
+ \qquad
+ \left(\frac v3\right)^2=6.
+ \label{p12-83-c20-s5:eq:condicion-i2-vecino}
+\end{equation}
+En particular, \(\langle v,v\rangle\equiv0\pmod3\), luego
+\(v\in N_0\).
+
+\subsection{Condición I3: clase dual de orden \(3\)}
+
+Si \(x\in N_0\), existe \(k\in\mathbb Z\) con
+\(\langle x,v\rangle=3k\). Por tanto,
+\[
+ \left\langle x,\frac v3\right\rangle=k\in\mathbb Z,
+\]
+y
+\begin{equation}
+ \frac v3\in N_0^*.
+ \label{p12-83-c20-s5:eq:v-tercio-en-dual-nucleo}
+\end{equation}
+Por otra parte,
+\[
+ \left\langle\frac v3,\alpha_{1,1}\right\rangle=\frac43.
+\]
+Como \(\alpha_{1,1}\in N\) y \(N\) es integral, esto demuestra
+\begin{equation}
+ \frac v3\notin N.
+ \label{p12-83-c20-s5:eq:v-tercio-no-en-niemeier}
+\end{equation}
+Finalmente, \(3(v/3)=v\in N_0\). La clase de \(v/3\) en
+\(N_0^*/N_0\) es no trivial y tiene orden exactamente tres. En
+consecuencia,
+\begin{equation}
+ [N_v:N_0]=3.
+ \label{p12-83-c20-s5:eq:indice-extension-vecino}
+\end{equation}
+
+\subsection{Paridad, integralidad y determinante del vecino}
+
+\begin{proposition}[Estructura unimodular del vecino]
+\label{p12-83-c20-s5:prop:estructura-unimodular-vecino}
+El retículo \(N_v\) es integral, par y unimodular.
+\end{proposition}
+
+\begin{proof}
+Como \(N\) es unimodular y \([N:N_0]=3\),
+\[
+ \det N_0=[N:N_0]^2\det N=9.
+\]
+Como \([N_v:N_0]=3\),
+\[
+ \det N_v=\frac{\det N_0}{[N_v:N_0]^2}=1.
+\]
+
+Sea \(y=x+m(v/3)\), con \(x\in N_0\), y escribamos
+\(\langle x,v\rangle=3k\). Entonces
+\begin{align*}
+ y^2
+ &=x^2+2m\left\langle x,\frac v3\right\rangle
+       +m^2\left(\frac v3\right)^2\\
+ &=x^2+2mk+6m^2.
+\end{align*}
+Los tres sumandos forman un entero par. La forma polarizada prueba
+integralidad, y el determinante uno prueba unimodularidad.
+\end{proof}
+
+\subsection{\(2\) clases globales y \(6\) clases locales}
+
+Globalmente, \eqref{p12-83-c20-s5:eq:definicion-vecino-indice-tres} añade sólo dos clases
+laterales no triviales:
+\[
+ N_0+\frac v3,
+ \qquad
+ N_0-\frac v3.
+\]
+Localmente, en cada factor \(A_2\), una coordenada de esas clases pertenece
+a una de las seis clases
+\begin{equation}
+ \mathscr C_{j,\pm}
+ :=A_2+\mu_j\pm\frac\rho3,
+ \qquad j\in\{0,1,2\}.
+ \label{p12-83-c20-s5:eq:seis-clases-locales-vecino}
+\end{equation}
+En la primera coordenada, \(4\rho/3\equiv\rho/3\pmod{A_2}\), por lo que
+la misma lista vale para los doce factores.
+
+\begin{table}[htbp]
+\centering
+\caption{Representantes mínimos de las seis clases laterales locales.}
+\label{p12-83-c20-s5:tab:seis-clases-locales-vecino}
+\begin{tabular}{cclc}
+\toprule
+clase&representante mínimo&\((u,v)\)&
+\(2(u^2-uv+v^2)/9\)\\
+\midrule
+\(\mathscr C_{0,-}\)&\(-\rho/3\)&\((-1,-1)\)&\(2/9\)\\
+\(\mathscr C_{0,+}\)&\( \rho/3\)&\((1,1)\)&\(2/9\)\\
+\(\mathscr C_{1,-}\)&\( \mu_1-\rho/3\)&\((1,0)\)&\(2/9\)\\
+\(\mathscr C_{1,+}\)&\( \mu_1+\rho/3-\rho\)&\((0,-1)\)&\(2/9\)\\
+\(\mathscr C_{2,-}\)&\( \mu_2-\rho/3\)&\((0,1)\)&\(2/9\)\\
+\(\mathscr C_{2,+}\)&\( \mu_2+\rho/3-\rho\)&\((-1,0)\)&\(2/9\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Aquí \((u,v)\) significa el representante
+\((u\alpha_1+v\alpha_2)/3\).
+
+\begin{lemma}[Mínimo exacto de las seis clases]
+\label{p12-83-c20-s5:lem:minimo-seis-clases-locales}
+Cada clase de \eqref{p12-83-c20-s5:eq:seis-clases-locales-vecino} tiene norma mínima
+exactamente \(2/9\).
+\end{lemma}
+
+\begin{proof}
+La norma de \((u\alpha_1+v\alpha_2)/3\) es
+\[
+ \frac29(u^2-uv+v^2).
+\]
+La forma entera \(u^2-uv+v^2\) es positiva definida. En una clase residual
+no nula no toma el valor cero, luego es al menos uno. Los seis
+representantes de la \cref{p12-83-c20-s5:tab:seis-clases-locales-vecino} alcanzan uno.
+\end{proof}
+
+\subsection{Criterio de ausencia de raíces en el retículo de Leech y consecuencia para la distancia mínima}
+
+\begin{theorem}[Ausencia de vectores de norma dos]
+\label{p12-83-c20-s5:thm:vecino-sin-raices}
+El retículo \(N_v\) no contiene vectores de norma dos.
+\end{theorem}
+
+\begin{proof}
+Todas las raíces de \(N\) son las de \(A_2^{12}\). La condición I1 prueba
+que ninguna pertenece a \(N_0\). Por tanto, la clase \(N_0\) no contiene
+vectores de norma dos.
+
+En una clase nueva \(N_0\pm v/3\), cada una de las doce coordenadas
+pertenece a una de las seis clases locales. Por
+\cref{p12-83-c20-s5:lem:minimo-seis-clases-locales}, cada coordenada contribuye al menos
+\(2/9\). La ortogonalidad da
+\[
+ \left\|x\pm\frac v3\right\|^2
+ \geq12\cdot\frac29=\frac83>2.
+\]
+Tampoco las clases nuevas contienen raíces.
+\end{proof}
+
+\subsection{Identificación con el retículo de Leech}
+
+\begin{theorem}[Construcción del retículo de Leech]
+\label{p12-83-c20-s5:thm:identificacion-vecino-leech}
+El retículo
+\begin{equation}
+ N_v
+ =\ker(\langle\,\cdot\,,v_{\mathcal F_*}\rangle\bmod3)
+  +\mathbb Z\frac{v_{\mathcal F_*}}3
+ \label{p12-83-c20-s5:eq:formula-final-vecino-leech}
+\end{equation}
+es isométrico al retículo de Leech:
+\begin{equation}
+ \boxed{N_v\cong\Lambda_{24}.}
+ \label{p12-83-c20-s5:eq:identificacion-leech-autonoma}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+El retículo \(N_v\) tiene rango veinticuatro y es positivo definido. La
+\cref{p12-83-c20-s5:prop:estructura-unimodular-vecino} demuestra que es par y unimodular;
+el \cref{p12-83-c20-s5:thm:vecino-sin-raices} demuestra que carece de raíces. Por la
+clasificación de Niemeier, existe una única clase de isometría de retículos
+positivos definidos, pares y unimodulares de rango veinticuatro sin raíces:
+el retículo de Leech.
+\end{proof}
+
+\subsection{Los 243 síndromes del código ternario perforado}
+
+Sea \(G_{11}\) el código ternario de Golay de parámetros
+\([11,6,5]_3\). Su espacio de síndromes tiene cardinal
+\begin{equation}
+ 3^{11-6}=3^5=243.
+ \label{p12-83-c20-s5:eq:numero-sindromes-golay-ternario}
+\end{equation}
+El número de errores de peso a lo sumo dos es
+\begin{equation}
+ 1+2\binom{11}{1}+2^2\binom{11}{2}
+ =1+22+220=243.
+ \label{p12-83-c20-s5:eq:bola-radio-dos-golay-ternario}
+\end{equation}
+
+\begin{proposition}[Correspondencia perfecta error--síndrome]
+\label{p12-83-c20-s5:prop:correspondencia-error-sindrome-golay}
+Cada síndrome de \(G_{11}\) posee un único representante de error de peso
+a lo sumo dos.
+\end{proposition}
+
+\begin{proof}
+La distancia mínima cinco implica que dos errores distintos de peso a lo
+sumo dos no pueden diferir en una palabra del código: su diferencia tendría
+peso a lo sumo cuatro. La aplicación error--síndrome es, por tanto,
+inyectiva sobre la bola de radio dos. Los dos conjuntos tienen cardinal
+\(243\) por \eqref{p12-83-c20-s5:eq:numero-sindromes-golay-ternario} y
+\eqref{p12-83-c20-s5:eq:bola-radio-dos-golay-ternario}; la aplicación es biyectiva.
+\end{proof}
+
+Estos \(243\) síndromes no son las \(243\) palabras visibles obtenidas del
+catálogo TPK. Comparten un cardinal, pero poseen dominios, equivalencias y
+funciones distintas.
+
+\subsection{Obstrucciones del vecino ternario \(N_v\cong\Lambda_{24}\): clase de orden \(3\), ausencia de raíces y separación de los cardinales \(243\)}
+
+\begin{criterion}[Refutación del vecino y de la identificación de Leech]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \item el operador \(o(\mathcal F)\) no produce \(\{1\}\) o no es
+       equivariante;
+ \item existe en la cámara radial un vector admisible de norma menor que
+       \(54\), o el número de minimizadores no es doce;
+ \item se afirma minimalidad global pese al testigo de norma \(36\);
+ \item \(\chi_v\) no es sobreyectivo o una raíz pertenece a \(N_0\);
+ \item \(v^2\not\equiv0\pmod{18}\) o \((v/3)^2\neq6\);
+ \item \(v/3\notin N_0^*\), \(v/3\in N\), o su clase no tiene orden tres;
+ \item el determinante de \(N_v\) no es uno o el vecino deja de ser par;
+ \item alguna de las seis clases locales tiene mínimo menor que \(2/9\);
+ \item una de las dos clases globales nuevas contiene una raíz;
+ \item se confunden las dos clases globales con las seis clases locales;
+ \item se utiliza \(W_{24}\) como antecedente del pegado o del vecino;
+ \item los \(243\) síndromes se identifican con las \(243\) palabras
+       visibles por compartir cardinal.
+\end{enumerate}
+\end{criterion}
+
+
+\section{Holonomía finita, configuración de Schläfli y simetría \texorpdfstring{\(E_6\)}{E6}}
+\label{p12-83-c20-s6:chap:holonomia-schlafli-e6-nuevo}
+\index{holonomía finita}
+\index{Schläfli}
+\index{E6@\(E_6\)}
+
+La rama de Witt no agota las estructuras excepcionales accesibles desde
+APP. La rama paralela de este capítulo parte de las dos polarizaciones
+mixtas suma--producto y producto--suma, junto con una orientación de
+plaqueta y una sección central declaradas. La curvatura calculada determina
+la forma alternante; ésta define la extensión central. No se infiere una
+extensión a partir de la sola cardinalidad 27.
+
+\subsection{Curvaturas mixtas de APP}
+
+Sobre \(T_9=(\mathbb Z/9\mathbb Z)^2\), con
+\(S(x,y)=x+y\) y \(P(x,y)=xy\), sean
+\[
+ \Delta_xf=f(x+1,y)-f(x,y),\qquad
+ \Delta_yf=f(x,y+1)-f(x,y).
+\]
+Las conexiones mixtas son
+\[
+ A^{SP}=(\Delta_xS,\Delta_yP)=(1,x),\qquad
+ A^{PS}=(\Delta_xP,\Delta_yS)=(y,1).
+\]
+Su curvatura discreta es
+\[
+ F_A=\Delta_xA_y-\Delta_yA_x.
+\]
+
+\begin{proposition}[Curvaturas orientadas opuestas]
+\label{p12-83-c20-s6:prop:curvaturas-app-e6-nuevo}
+\[
+ F_{A^{SP}}=1,\qquad F_{A^{PS}}=-1\pmod9.
+\]
+La circulación sobre un rectángulo orientado de lados \(r,s\) es,
+respectivamente, \(rs\) y \(-rs\).
+\end{proposition}
+
+\begin{proof}
+\(\Delta_xx-\Delta_y1=1\) y
+\(\Delta_x1-\Delta_yy=-1\). Un rectángulo contiene \(rs\) plaquetas; al
+sumar, las aristas interiores se cancelan y queda la circulación del borde.
+\end{proof}
+
+Para desplazamientos \(u=(a,b)\), \(v=(c,d)\), la clase alternante es
+\begin{equation}
+ \sigma(u,v)=ad-bc\pmod9.
+ \label{p12-83-c20-s6:eq:forma-alternante-e6-nueva}
+\end{equation}
+La orientación fija el signo de \(\sigma\). La sección central empleada
+abajo pertenece al calibre de esta realización; cambiarla por un coborde
+produce una extensión isomorfa, no un nuevo invariante.
+
+\subsection{Extensión central y reducción ternaria}
+
+Definimos el grupo de Heisenberg nonádico
+\begin{equation}
+ \mathcal H_9=\{(a,b,z):a,b,z\in\mathbb Z/9\mathbb Z\},
+ \quad
+ (a,b,z)(c,d,w)=(a+c,b+d,z+w+bc).
+ \label{p12-83-c20-s6:eq:heisenberg-9-nuevo}
+\end{equation}
+El conmutador de dos desplazamientos horizontales es
+\[
+ [(a,b,0),(c,d,0)]=(0,0,bc-ad),
+\]
+que registra \(-\sigma(u,v)\). Reduciendo cada coordenada módulo tres se
+obtiene
+\begin{equation}
+ H_3=\{(a,b,z):a,b,z\in\mathbb F_3\},\qquad |H_3|=27,
+ \label{p12-83-c20-s6:eq:heisenberg-3-nuevo}
+\end{equation}
+con la misma ley. El núcleo de
+\(\mathcal H_9\to H_3\) es
+\((3\mathbb Z/9\mathbb Z)^3\), de cardinal 27.
+
+\subsection{Representación de Weyl--Heisenberg y fase central}
+
+La extensión nonádica admite una realización unitaria explícita. Sea
+\[
+ \zeta_9:=\exp(2\pi i/9),
+ \qquad
+ \mathscr H_9^{\rm Sch}:=\mathbb C^9,
+\]
+con base \(\{|n\rangle:n\in\mathbb Z/9\mathbb Z\}\). Definimos
+\begin{equation}
+ X|n\rangle:=|n+1\rangle,
+ \qquad
+ Z|n\rangle:=\zeta_9^n|n\rangle.
+ \label{p12-83-c20-s6:eq:weyl-desplazamiento-fase-u029}
+\end{equation}
+Se tiene
+\[
+ ZX=\zeta_9XZ
+\]
+y, por multiplicación,
+\begin{equation}
+ (X^aZ^b)(X^cZ^d)
+ =\zeta_9^{bc}X^{a+c}Z^{b+d}.
+ \label{p12-83-c20-s6:eq:cociclo-weyl-nonadico-u029}
+\end{equation}
+
+\begin{theorem}[Representación fiel de Weyl--Heisenberg]
+\label{p12-83-c20-s6:thm:representacion-weyl-heisenberg-u029}
+La aplicación
+\begin{equation}
+ \rho_{\rm WH}:\mathcal H_9\longrightarrow
+ U(\mathscr H_9^{\rm Sch}),
+ \qquad
+ \rho_{\rm WH}(a,b,z):=\zeta_9^zX^aZ^b,
+ \label{p12-83-c20-s6:eq:representacion-weyl-heisenberg-u029}
+\end{equation}
+es una representación unitaria fiel. Para
+\(u=(a,b)\) y \(v=(c,d)\), su conmutador satisface
+\begin{equation}
+ [\rho_{\rm WH}(u,0),\rho_{\rm WH}(v,0)]
+ =\zeta_9^{\,bc-ad}I
+ =\zeta_9^{-\sigma(u,v)}I.
+ \label{p12-83-c20-s6:eq:conmutador-weyl-holonomia-u029}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La identidad \eqref{p12-83-c20-s6:eq:cociclo-weyl-nonadico-u029} reproduce el término
+\(bc\) de \eqref{p12-83-c20-s6:eq:heisenberg-9-nuevo}; de ahí la propiedad de
+homomorfismo. Si \(\zeta_9^zX^aZ^b=I\), la acción sobre la base obliga
+sucesivamente a \(a=0\), \(b=0\) y \(z=0\). Esto prueba fidelidad. Comparar
+los productos en los dos órdenes da
+\(\zeta_9^{bc-ad}\), que es la fase alternante de
+\eqref{p12-83-c20-s6:eq:forma-alternante-e6-nueva}.
+\end{proof}
+
+La representación distingue dos observables conjugados. Sean
+\[
+ Q_{\rm H}:=\operatorname{diag}(0,1,\ldots,8),
+ \qquad
+ F_{jk}:=\frac13\zeta_9^{jk},
+ \qquad
+ P_{\rm H}:=F^\dagger Q_{\rm H}F.
+\]
+Las bases propias de \(Q_{\rm H}\) y \(P_{\rm H}\) son mutuamente
+insesgadas, pues \(|F_{jk}|^2=1/9\). Para todo vector unitario
+\(\psi\in\mathscr H_9^{\rm Sch}\),
+\begin{align}
+ \operatorname{Var}_\psi(Q_{\rm H})
+ \operatorname{Var}_\psi(P_{\rm H})
+ &\ge
+ \frac14\left|
+ \langle\psi,[Q_{\rm H},P_{\rm H}]\psi\rangle
+ \right|^2,
+ \label{p12-83-c20-s6:eq:incertidumbre-weyl-u029}\\
+ H_{Q_{\rm H}}(\psi)+H_{P_{\rm H}}(\psi)
+ &\ge\log9.
+ \label{p12-83-c20-s6:eq:incertidumbre-entropica-weyl-u029}
+\end{align}
+Estos operadores son adimensionales. Una carta física de unidades es una
+realización posterior y no interviene en la extensión central.
+
+\subsection{Acción de \(10\) desplazamientos sobre el grafo de Cayley}
+
+Para un funcional lineal
+\(\ell(a,b)=pa+qb\), ponemos
+\[
+ D_\ell(a,b)=\left(a,b,\frac{ab}{2}+\ell(a,b)\right),
+ \qquad Z=(0,0,1),
+\]
+donde \(2^{-1}=2\) en \(\mathbb F_3\). El conjunto inverso-cerrado
+\begin{equation}
+ S_\ell=
+ \{D_\ell(v):v\in\mathbb F_3^2\setminus\{0\}\}
+ \cup\{Z,Z^{-1}\}
+ \label{p12-83-c20-s6:eq:conjunto-conexion-e6}
+\end{equation}
+tiene diez elementos y no contiene la identidad.
+
+\begin{theorem}[Independencia del calibre lineal]
+\label{p12-83-c20-s6:thm:independencia-calibre-e6}
+Los nueve funcionales \(\ell\) producen grafos de Cayley isomorfos. Los
+nueve conjuntos \(S_\ell\) forman una sola órbita bajo
+\(\operatorname{Aut}(H_3)\).
+\end{theorem}
+
+\begin{proof}
+La aplicación
+\[
+ \phi_\ell(a,b,z)=(a,b,z+\ell(a,b))
+\]
+es un automorfismo central y satisface
+\(\phi_\ell(S_0)=S_\ell\). Para escribir la familia completa en las
+coordenadas polarizadas de \cref{p12-83-c20-s6:eq:heisenberg-9-nuevo}, sea
+\(c(v,w)=b c\) para \(v=(a,b)\), \(w=(c,d)\). Dado
+\(M\in\operatorname{GL}(2,3)\), el defecto
+\[
+ B_M(v,w)=c(Mv,Mw)-\det(M)c(v,w)
+\]
+es simétrico, porque las partes alternantes de los dos términos coinciden.
+Definimos la corrección cuadrática
+\begin{equation}
+ q_M(v)=2B_M(v,v),
+ \qquad
+ q_M(v+w)-q_M(v)-q_M(w)=B_M(v,w),
+ \label{p12-83-c20-s6:eq:correccion-cuadratica-automorfismos-h3}
+\end{equation}
+donde \(2=2^{-1}\) en \(\mathbb F_3\). La familia completa de
+automorfismos se escribe entonces
+\begin{equation}
+ (v,t)\longmapsto
+ \bigl(Mv,\det(M)t+q_M(v)+\ell(v)\bigr),
+ \qquad M\in\operatorname{GL}(2,3),\
+ \ell\in(\mathbb F_3^2)^*.
+ \label{p12-83-c20-s6:eq:automorfismos-h3-completos}
+\end{equation}
+La identidad polar de \cref{p12-83-c20-s6:eq:correccion-cuadratica-automorfismos-h3}
+prueba directamente que el producto central se conserva. La familia tiene
+\(48\cdot9=432\) elementos. La enumeración exhaustiva de los
+\(\binom{13}{5}=1287\) subconjuntos inverso-cerrados de cardinal diez
+encuentra exactamente esos nueve con los parámetros que se derivan a
+continuación.
+\end{proof}
+
+Escribamos \(\underline S=\sum_{s\in S}s\) en
+\(\mathbb Z[H_3]\). El conteo de productos ordenados da
+\begin{equation}
+ \underline S^{\,2}
+ =10e+\underline S+5(\underline{H_3}-e-\underline S)
+ =5\underline{H_3}+5e-4\underline S.
+ \label{p12-83-c20-s6:eq:identidad-grupo-schlafli-nueva}
+\end{equation}
+En efecto, la identidad recibe diez factorizaciones; un elemento de
+\(S\) recibe una; cada uno de los otros dieciséis recibe cinco.
+
+\begin{theorem}[Grafo de las veintisiete rectas]
+\label{p12-83-c20-s6:thm:grafo-27-rectas-nuevo}
+La matriz de adyacencia \(A_\ell\) de
+\(\Gamma_\ell=\operatorname{Cay}(H_3,S_\ell)\) satisface
+\begin{equation}
+ A_\ell^2=5I-4A_\ell+5J.
+ \label{p12-83-c20-s6:eq:identidad-schlafli-nueva}
+\end{equation}
+Por tanto,
+\[
+ \Gamma_\ell=\operatorname{srg}(27,10,1,5),
+ \qquad
+ \operatorname{Spec}(A_\ell)=\{10^1,1^{20},(-5)^6\}.
+\]
+Es isomorfo al grafo de intersección de las veintisiete rectas de una
+superficie cúbica lisa.
+\end{theorem}
+
+\begin{proof}
+La representación regular de
+\cref{p12-83-c20-s6:eq:identidad-grupo-schlafli-nueva} produce
+\cref{p12-83-c20-s6:eq:identidad-schlafli-nueva}. Sus entradas dicen que todo vértice
+tiene diez vecinos, que un par adyacente tiene un vecino común y un par no
+adyacente tiene cinco. Sobre la recta constante, \(A_\ell\) actúa por 10;
+en su complemento, \(J=0\) y
+\((A_\ell-I)(A_\ell+5I)=0\). Traza cero fija las multiplicidades 20 y 6.
+
+En el modelo de una cúbica obtenida al soplar seis puntos de
+\(\mathbb P^2\), las 27 clases son
+\[
+ E_i,\qquad L_{ij}=H-E_i-E_j,\qquad
+ Q_i=2H-\sum_{j\ne i}E_j.
+\]
+Con \(H^2=1\), \(E_i^2=-1\), \(H\cdot E_i=0\) y
+\(E_i\cdot E_j=0\) para \(i\ne j\), su matriz de intersección tiene los
+mismos parámetros. La identificación con la configuración clásica usa el
+teorema de unicidad de esta realización de las 27 rectas
+\cite{Manivel2005}; no se atribuye a un certificado inexistente.
+\end{proof}
+
+La afirmación de isomorfía puede hacerse completamente efectiva mediante
+una biyección calculada. El etiquetado no es absoluto: otra sección lineal
+o una automorfía de la superficie produce otra tabla de la misma clase.
+\begin{longtable}{@{}c@{\,}c@{\,}c@{\qquad}l@{}}
+\caption{Bijección explícita entre \(H_3\) y las veintisiete clases de
+rectas.}
+\label{p12-83-c20-s6:tab:h3-27-rectas-u029}\\
+\toprule
+\(a\)&\(b\)&\(z\)&clase de recta\\
+\midrule
+\endfirsthead
+\multicolumn{4}{@{}l}{\small\itshape Cuadro \thetable\ (continuación)}\\
+\toprule
+\(a\)&\(b\)&\(z\)&clase de recta\\
+\midrule
+\endhead
+0&0&0&\(E_1\)\\
+0&0&1&\(L_{12}\)\\
+0&0&2&\(Q_2\)\\
+0&1&0&\(L_{13}\)\\
+0&1&1&\(Q_1\)\\
+0&1&2&\(E_3\)\\
+0&2&0&\(Q_3\)\\
+0&2&1&\(E_2\)\\
+0&2&2&\(L_{23}\)\\
+1&0&0&\(L_{14}\)\\
+1&0&1&\(L_{35}\)\\
+1&0&2&\(L_{26}\)\\
+1&1&0&\(L_{36}\)\\
+1&1&1&\(L_{24}\)\\
+1&1&2&\(L_{15}\)\\
+1&2&0&\(L_{25}\)\\
+1&2&1&\(L_{16}\)\\
+1&2&2&\(L_{34}\)\\
+2&0&0&\(Q_4\)\\
+2&0&1&\(L_{46}\)\\
+2&0&2&\(E_6\)\\
+2&1&0&\(E_5\)\\
+2&1&1&\(Q_6\)\\
+2&1&2&\(L_{56}\)\\
+2&2&0&\(L_{45}\)\\
+2&2&1&\(E_4\)\\
+2&2&2&\(Q_5\)\\
+\bottomrule
+\end{longtable}
+
+Como control local, los diez vecinos de \(e=(0,0,0)\) son los elementos de
+\(S_0\). La tabla los transforma en las diez clases que cortan a \(E_1\):
+las cinco \(L_{1j}\) y las cinco \(Q_j\), con \(2\le j\le6\). La
+verificación completa compara las 729 entradas de ambas matrices de
+adyacencia.
+
+El complemento \(B_\ell=J-I-A_\ell\) satisface
+\begin{equation}
+ B_\ell^2=8I+2B_\ell+8J,
+ \qquad
+ \operatorname{srg}(27,16,10,8),
+ \qquad
+ \operatorname{Spec}(B_\ell)=\{16^1,4^6,(-2)^{20}\}.
+ \label{p12-83-c20-s6:eq:complemento-schlafli}
+\end{equation}
+Éste es el grafo de Schläfli en la convención de adyacencia complementaria;
+\(A_\ell\) es el grafo de intersección de parámetros
+\((27,10,1,5)\).
+
+Cada arista pertenece a un triángulo único, pues \(\lambda=1\). El número
+de triángulos es
+\[
+ \frac{27\cdot10}{6}=45.
+\]
+El grupo completo de automorfismos tiene orden
+\[
+ 27\cdot1920=51840
+\]
+y, por su acción sobre la configuración de rectas, se identifica con
+\(W(E_6)\), no sólo por igualdad de órdenes \cite{Manivel2005}.
+
+\subsection{El retículo de raíces que realiza \texorpdfstring{\(E_6\)}{E6}}
+
+Para hacer explícito el objeto sobre el que actúa ese grupo, sea
+\begin{equation}
+ \operatorname{Pic}(X)
+ =\mathbb ZH\oplus\bigoplus_{i=1}^6\mathbb ZE_i,
+ \qquad
+ H^2=1,\qquad E_i^2=-1,\qquad H\cdot E_i=E_i\cdot E_j=0\ (i\ne j),
+ \label{p12-83-c20-s6:eq:picard-cubica-e6}
+\end{equation}
+el retículo de Picard de la explosión de seis puntos generales de
+\(\mathbb P^2\). Su clase canónica es
+\[
+ K_X=-3H+E_1+\cdots+E_6.
+\]
+El complemento ortogonal
+\begin{equation}
+ L_{E_6}=K_X^\perp\subset\operatorname{Pic}(X),
+ \qquad (x,y)_{E_6}:=-x\cdot y,
+ \label{p12-83-c20-s6:eq:reticulo-raices-e6}
+\end{equation}
+es positivo definido de rango seis. Una base de raíces simples es
+\begin{equation}
+ \begin{aligned}
+ \alpha_1&=E_1-E_2,& \alpha_2&=E_2-E_3,&
+ \alpha_3&=E_3-E_4,\\
+ \alpha_4&=E_4-E_5,& \alpha_5&=E_5-E_6,&
+ \alpha_6&=H-E_1-E_2-E_3.
+ \end{aligned}
+ \label{p12-83-c20-s6:eq:raices-simples-e6}
+\end{equation}
+Cada \(\alpha_i\) es ortogonal a \(K_X\), tiene norma dos y sus productos
+son \(-1\) exactamente para los pares adyacentes del diagrama
+\(E_6\): la cadena \(1-2-3-4-5\), con el nodo \(6\) unido al nodo \(3\).
+Por tanto, su matriz de Gram es la matriz de Cartan de \(E_6\).
+
+\begin{proposition}[Las setenta y dos raíces y sus reflexiones]
+\label{p12-83-c20-s6:prop:setenta-dos-raices-e6}
+Las raíces de \(L_{E_6}\) son
+\begin{equation}
+ \begin{aligned}
+ &E_i-E_j &&(i\ne j),\\
+ &\pm(H-E_i-E_j-E_k) &&(1\le i<j<k\le6),\\
+ &\pm(2H-E_1-\cdots-E_6),
+ \end{aligned}
+ \label{p12-83-c20-s6:eq:enumeracion-raices-e6}
+\end{equation}
+en total \(30+40+2=72\). Para cada raíz \(\alpha\),
+\begin{equation}
+ s_\alpha(x)=x+(x\cdot\alpha)\alpha
+ \label{p12-83-c20-s6:eq:reflexion-raiz-e6}
+\end{equation}
+preserva la intersección y \(K_X\). Las seis reflexiones simples generan
+\(W(E_6)\) y permutan fielmente las 27 clases
+\(E_i,L_{ij},Q_i\) de \cref{p12-83-c20-s6:thm:grafo-27-rectas-nuevo}.
+\end{proposition}
+
+\begin{proof}
+Sustituir cada clase de \cref{p12-83-c20-s6:eq:enumeracion-raices-e6} en
+\cref{p12-83-c20-s6:eq:picard-cubica-e6} da \(K_X\cdot\alpha=0\) y
+\(\alpha^2=-2\). La cuenta de clases es la indicada. La fórmula de reflexión
+es la reflexión ortogonal para la forma \(-(\cdot)\); preserva \(K_X\) porque
+\(K_X\cdot\alpha=0\). El sistema simple de
+\cref{p12-83-c20-s6:eq:raices-simples-e6} genera todas las raíces y su grupo de Coxeter es
+\(W(E_6)\). Su acción sobre las 27 clases de curvas excepcionales conserva la
+intersección, de modo que coincide con la acción sobre el grafo ya
+construido \cite{Manivel2005}.
+\end{proof}
+
+\subsection{Estratificación de las 729 palabras}
+
+Escribimos una palabra de seis trits como
+\[
+ w=(\ell_1,h_1,\ell_2,h_2,\ell_3,h_3),
+\]
+y definimos dos elementos de \(H_3\),
+\[
+ L(w)=(\ell_1,\ell_2,\ell_3),\qquad
+ H(w)=(h_1,h_2,h_3),
+\]
+usando la ley central en sus productos. Según
+\(L(w)^{-1}H(w)\), las 729 palabras se dividen en
+\begin{align*}
+ \mathcal D_\ell&=\{w:L(w)^{-1}H(w)=e\},\\
+ \mathcal I_\ell&=\{w:L(w)^{-1}H(w)\in S_\ell\},\\
+ \mathcal S_\ell&=\{w:L(w)^{-1}H(w)\notin\{e\}\cup S_\ell\}.
+\end{align*}
+
+\begin{theorem}[Partición Hensel--Schläfli]
+\label{p12-83-c20-s6:thm:particion-hensel-schlafli-nueva}
+\begin{equation}
+ 729=27+270+432,
+ \label{p12-83-c20-s6:eq:particion-729-e6-nueva}
+\end{equation}
+correspondientes a diagonal, incidencia y alabeamiento.
+\end{theorem}
+
+\begin{proof}
+Para cada uno de los 27 valores de \(L(w)\), hay un único valor de
+\(H(w)\) con diferencia identidad, diez con diferencia en \(S_\ell\) y
+dieciséis restantes. Se multiplica \(27\) por \(1,10,16\).
+\end{proof}
+
+El cardinal \(432\) del estrato alabeado coincide numéricamente con la
+multiplicidad de la región transversal de \(\pi\) en
+\cref{eq:descomposiciones-cinco-regiones-pi}. No se identifica por ello ambos objetos: aquí
+se cuentan palabras clasificadas por \(L(w)^{-1}H(w)\), mientras allí se
+cuentan preimágenes de un registro \(U_6\). Sin un entrelazador explícito y
+equivariante entre esos dominios, \(432=432\) es sólo un control cardinal.
+
+\subsection{Necesidad de la fase central}
+
+La enumeración de todos los subconjuntos inverso-cerrados de cardinal diez
+en los cinco grupos de orden 27 da
+\[
+\begin{array}{c|c|c}
+\text{grupo}&\text{abeliano}&
+\#\operatorname{srg}(27,10,1,5)\\ \hline
+C_{27}&\text{sí}&0\\
+C_9\times C_3&\text{sí}&0\\
+C_3^3&\text{sí}&0\\
+C_9\rtimes C_3&\text{no}&9\\
+H_3&\text{no}&9.
+\end{array}
+\]
+Así, conservar 27 etiquetas pero abelianizar la composición destruye la
+configuración. No bastan la cardinalidad ni el grado.
+
+Si \(\mathcal T\) es el conjunto de 45 triángulos, el cúbico
+\[
+ \mathcal C_\Gamma(x_1,\ldots,x_{27})
+ =\sum_{\{i,j,k\}\in\mathcal T}x_ix_jx_k
+\]
+recupera la adyacencia, porque cada arista está en un triángulo único. Su
+estabilizador permutacional es exactamente
+\[
+ \operatorname{Aut}(\Gamma_\ell)\cong W(E_6).
+\]
+
+\begin{figure}[htbp]
+\centering
+\[
+ \text{curvaturas APP }\pm1
+ \longrightarrow\sigma
+ \longrightarrow\mathcal H_9
+ \longrightarrow H_3
+ \longrightarrow\Gamma_{27}
+ \longrightarrow\mathcal T_{45}
+ \longrightarrow W(E_6).
+\]
+\caption{Cadena causal de la rama de holonomía mixta. Es paralela a
+\(C_W\to W_{12}\to M_{12}\) y no un eslabón de ella.}
+\label{p12-83-c20-s6:fig:cadena-holonomia-e6-u029}
+\end{figure}
+
+\begin{criterion}[Criterios de refutación de la rama \(E_6\)]
+\label{p12-83-c20-s6:crit:refutacion-rama-e6-u029}
+La rama queda refutada si las curvaturas no son opuestas, si el cociclo
+central se borra, si la corrección cuadrática
+\eqref{p12-83-c20-s6:eq:correccion-cuadratica-automorfismos-h3} no conserva el producto,
+si \eqref{p12-83-c20-s6:eq:identidad-grupo-schlafli-nueva} no produce los coeficientes
+\((10,1,5)\), si un grupo abeliano produce la misma configuración, si la
+partición no suma 729, si la tabla
+\ref{p12-83-c20-s6:tab:h3-27-rectas-u029} no entrelaza las matrices de adyacencia o si
+\(W(E_6)\) se identifica sólo por su orden y no por su acción sobre las
+veintisiete clases y las 72 raíces.
+\end{criterion}
+
+
+\section{Acoplamiento orientado APP–Fock y rigidez transversal de \(12\) fibras}
+\label{p12-83-c20-s7:chap:acoplamiento-app-fock}
+\index{APP--Fock!acoplamiento orientado}
+\index{Fock!grado dos}
+\index{orientación de hoja}
+
+El determinante ciclotómico ordinario no distingue \(C\) de \(C^{-1}\).
+La información suma--producto se conserva introduciendo explícitamente la
+paridad de hoja y una recta de orientación. El acoplamiento resultante
+produce el índice \(54\) desde el agregado APP. Una vez fijadas las cuatro
+condiciones del acoplamiento, \(54\), \(J\) y \(196884\) no son entradas de
+la evaluación. Esta independencia evaluativa no afirma unicidad universal
+del ansatz ni independencia histórica de su diseño.
+
+\subsection{Marco triangular en cada órbita}
+
+Sea
+\[
+M=\mathbb Z[\mathbb Z/9\mathbb Z]
+\]
+y sea \(M_{\mathrm{bal}}^{C_3}\) el submódulo de los elementos invariantes
+\(\nu\) cuyos seis coeficientes unitarios coinciden:
+\[
+\nu_u=c(\nu)
+\qquad
+\bigl(u\in(\mathbb Z/9\mathbb Z)^\times\bigr).
+\]
+Los coeficientes de \(e_0,e_3,e_6\) permanecen libres.
+
+Para una órbita libre
+\(\mathcal O=\{u,4u,7u\}\), pongamos
+\[
+b_v=e_v-e_{4v}\in A(\mathcal O).
+\]
+Si \(b_v^\flat\) es el covector definido por la forma de \(A_2\), las tres
+raíces del marco triangular satisfacen
+\[
+\boxed{
+\sum_{v\in\mathcal O}b_v\otimes b_v^\flat
+=3I_{A(\mathcal O)}.}
+\]
+En consecuencia,
+\[
+\sum_{v\in\mathcal O}\nu_v\,b_v\otimes b_v^\flat
+=3c(\nu)I.
+\]
+El factor tres procede de la resolución de la identidad por el marco de
+raíces.
+
+\subsection{Acoplamiento orientado \(\mathcal H_{\Sigma,\Pi}^{(m)}\) entre el balance \(C_3\), la paridad de hoja y el grado \(2\) del espacio de Fock}
+
+Para \(m\in2\mathbb N_{>0}\), sea
+\[
+\begin{aligned}
+\mathcal V_m&=\mathcal V_{\Sigma,m}\oplus\mathcal V_{\Pi,m},\\
+\mathcal V_{\Sigma,m}&=(A_2\otimes\mathbb C)^{\oplus m/2},\qquad
+\mathcal V_{\Pi,m}=(A_2\otimes\mathbb C)^{\oplus m/2},\\
+g_m&=C^{\oplus m/2}\oplus(C^{-1})^{\oplus m/2},\\
+\mathsf E_m&=I_{\mathcal V_{\Sigma,m}}
+\oplus(-I_{\mathcal V_{\Pi,m}}).
+\end{aligned}
+\]
+La especialización \(m=12\), con las etiquetas de par, hoja y órbita,
+es \(\mathcal V_{12}=W_{\mathrm{APP}}\otimes\mathbb C\). Esta notación
+evita confundir el espacio representacional con el sistema de Witt
+\(W_{12}=S(5,6,12)\). El grado dos del espacio de
+Fock y la acción inducida son
+\[
+\mathcal F_2(\mathcal V_m)
+=\mathcal V_m[2]\oplus\operatorname{Sym}^2(\mathcal V_m[1]),
+\]
+\[
+\Gamma_2(g_m)
+=g_m|_{\mathcal V_m[2]}
+\oplus\operatorname{Sym}^2(g_m|_{\mathcal V_m[1]}).
+\]
+
+Sea \(o_{\Sigma\Pi}\) la recta de orientación con signo
+\(\Pi-\Sigma\), y sea \(M_{\mathrm{bal}}^{C_3,-}\) la copia orientada en
+la que el intercambio de hojas actúa por \(\nu\mapsto-\nu\). Definimos
+\[
+\boxed{
+\begin{aligned}
+\mathcal H_{\Sigma,\Pi}^{(m)}&:
+M_{\mathrm{bal}}^{C_3,-}\longrightarrow
+\operatorname{End}(\mathcal F_2(\mathcal V_m))\otimes o_{\Sigma\Pi},\\
+\mathcal H_{\Sigma,\Pi}^{(m)}(\nu)
+&=3c(\nu)
+\left(0_{\mathcal V_m[2]}\oplus\operatorname{Sym}^2\mathsf E_m\right)
+\otimes o_{\Sigma\Pi}.
+\end{aligned}}
+\]
+La transformación es lineal en \(c\), está soportada en
+\(\operatorname{Sym}^2(\mathcal V_m[1])\), utiliza la paridad de hoja y adopta la
+normalización del marco triangular.
+
+Sea \(\sigma\) el intercambio de hojas. Entonces
+\[
+\nu\longmapsto-\nu,\qquad
+o_{\Sigma\Pi}\longmapsto-o_{\Sigma\Pi},\qquad
+\mathsf E_m\longmapsto-\mathsf E_m,
+\]
+y
+\[
+\operatorname{Sym}^2(-\mathsf E_m)
+=\operatorname{Sym}^2(\mathsf E_m).
+\]
+Por tanto,
+\[
+\mathcal H_{\Sigma,\Pi}^{(m)}(\sigma\nu)
+=\sigma\mathcal H_{\Sigma,\Pi}^{(m)}(\nu).
+\]
+Al invertir la orientación, el covector dual cambia también de signo; así
+\((-o_{\Sigma\Pi}^{\vee})(-o_{\Sigma\Pi})=1\), y la evaluación orientada
+permanece normalizada.
+
+Fijado
+\(o_{\Sigma\Pi}^{\vee}(o_{\Sigma\Pi})=1\), la traza orientada es
+\[
+\operatorname{Tr}_{o,\mathcal F_2}
+(T\otimes o_{\Sigma\Pi})
+=\operatorname{Tr}_{\mathcal F_2}(T).
+\]
+
+\begin{theorem}[Índice orientado APP--Fock]
+\label{p12-83-c20-s7:thm:indice-orientado-app-fock}
+Supóngase que \(m\) fibras \(A_2\), con \(m\) par, se reparten por igual
+entre las orientaciones \(C\) y \(C^{-1}\). Entonces
+\[
+\boxed{
+\operatorname{Tr}_{o,\mathcal F_2}
+\left(
+\mathcal H_{\Sigma,\Pi}^{(m)}(\nu)\Gamma_2(g_m)
+\right)
+=-\frac{3m\,c(\nu)}2.}
+\]
+Para el agregado producido por APP,
+\[
+\delta=\nu_\Pi-\nu_\Sigma
+=12e_0+3e_3+3e_6
+-3\sum_{u\in(\mathbb Z/9\mathbb Z)^\times}e_u,
+\]
+se tiene \(c(\delta)=-3\) y
+\[
+m=3\ \text{pares}\cdot2\ \text{hojas}\cdot2\ \text{órbitas}=12.
+\]
+Por tanto,
+\[
+\boxed{
+\operatorname{Tr}_{o,\mathcal F_2}
+\left(
+\mathcal H_{\Sigma,\Pi}^{(12)}(\delta)\Gamma_2(g_{12})
+\right)=54.}
+\]
+\end{theorem}
+
+\begin{proof}
+Sea \(A=\mathsf E_mg_m\). Las contribuciones de las dos hojas se cancelan:
+\(\operatorname{tr}A=0\). Como \(\mathsf E_m\) conmuta con \(g_m\) y
+\(\mathsf E_m^2=I\),
+\[
+\operatorname{tr}(A^2)=\operatorname{tr}(g_m^2)=-m.
+\]
+La identidad
+\[
+\operatorname{tr}(\operatorname{Sym}^2A)
+=\frac{(\operatorname{tr}A)^2+\operatorname{tr}(A^2)}2
+\]
+da \(-m/2\); el marco aporta \(3c(\nu)\).
+\end{proof}
+
+\begin{corollary}[Minimalidad del grado bosónico detector]
+\label{p12-83-c20-s7:cor:minimalidad-grado-dos-app-fock-u030}
+En la clase de acoplamientos declarada, el grado uno no detecta el agregado
+orientado y el grado dos es el primer grado bosónico positivo que lo
+detecta:
+\[
+ \operatorname{tr}(\mathsf E_mg_m)=0,
+ \qquad
+ \operatorname{tr}\!\left(
+ \operatorname{Sym}^2(\mathsf E_mg_m)
+ \right)=-\frac m2\neq0.
+\]
+\end{corollary}
+
+\begin{proof}
+La primera igualdad es la cancelación de las dos hojas. La segunda se
+obtuvo en la prueba del \cref{p12-83-c20-s7:thm:indice-orientado-app-fock}. Como el grado
+cero sólo contiene la unidad y el grado uno da traza nula, el grado dos es
+el primero con respuesta no nula.
+\end{proof}
+
+\subsection{Rigidez transversal del número de fibras}
+
+Para un entero \(m\ge1\), definimos la serie formal
+\begin{equation}
+ T_m(q):=
+ q^{-1}\prod_{n\ge1}(1+q^n+q^{2n})^{-m}
+ \in q^{-1}\mathbb Z[[q]]
+ \label{p12-83-c20-s7:eq:familia-fock-m-fibras-u030}
+\end{equation}
+y, en la suma ortogonal \(A_2^m\), el vector radial
+\begin{equation}
+ v_m:=4\rho_1+\rho_2+\cdots+\rho_m,
+ \qquad
+ \|\rho_j\|^2=2.
+ \label{p12-83-c20-s7:eq:familia-radial-m-fibras-u030}
+\end{equation}
+Construimos dos funciones enteras sin usar previamente \(m=12\):
+\[
+ F(m):=[q]T_m(q),
+ \qquad
+ R(m):=\|v_m\|^2.
+\]
+
+\begin{proposition}[Coeficiente de Fock y norma radial]
+\label{p12-83-c20-s7:prop:dos-funciones-rigidez-doce-u030}
+Para todo \(m\ge1\),
+\begin{equation}
+ F(m)=\frac{m(m-3)}2,
+ \qquad
+ R(m)=2(m+15).
+ \label{p12-83-c20-s7:eq:funciones-rigidez-doce-u030}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Hasta orden dos,
+\[
+ (1+q+q^2)^{-m}
+ =1-mq+\frac{m(m-1)}2q^2+O(q^3),
+\]
+\[
+ (1+q^2+q^4)^{-m}=1-mq^2+O(q^4).
+\]
+Los factores con \(n\ge3\) no contribuyen al coeficiente de \(q^2\).
+Como el factor exterior de \(T_m\) es \(q^{-1}\),
+\[
+ F(m)=\frac{m(m-1)}2-m=\frac{m(m-3)}2.
+\]
+Por ortogonalidad de las \(m\) copias de \(A_2\),
+\[
+ R(m)=4^2\|\rho_1\|^2+
+ \sum_{j=2}^{m}\|\rho_j\|^2
+ =32+2(m-1)=2(m+15).
+\]
+\end{proof}
+
+\begin{theorem}[Rigidez ciclotómica--radial]
+\label{p12-83-c20-s7:thm:rigidez-transversal-doce-u030}
+La igualdad \(F(m)=R(m)\) equivale a
+\begin{equation}
+ (m-12)(m+5)=0.
+ \label{p12-83-c20-s7:eq:ecuacion-rigidez-doce-u030}
+\end{equation}
+En el dominio \(m\in\mathbb Z_{>0}\), la única solución es
+\[
+ \boxed{m=12,\qquad F(12)=R(12)=54.}
+\]
+\end{theorem}
+
+\begin{proof}
+Igualar las dos expresiones de
+\eqref{p12-83-c20-s7:eq:funciones-rigidez-doce-u030} produce
+\[
+ m(m-3)=4(m+15),
+\]
+es decir,
+\[
+ m^2-7m-60=(m-12)(m+5)=0.
+\]
+La segunda raíz es negativa y queda fuera del dominio.
+\end{proof}
+
+Esta rigidez pertenece a la familia ciclotómica--radial declarada. No usa el
+valor \(54\) para escoger \(m\): construye primero \(F(m)\) y \(R(m)\), y
+resuelve después su igualdad.
+
+\subsection{Factorización del acoplamiento APP–Fock: hipótesis, invariantes y condiciones necesarias de validez y obstrucciones}
+
+El acoplamiento factoriza por
+\[
+M_{\mathrm{bal}}^{C_3,-}/\ker c
+\cong\mathbb Z\otimes o_{\Sigma\Pi},
+\]
+y el mapa inducido es inyectivo porque
+\(\operatorname{Sym}^2\mathsf E_m\neq0\).
+La fórmula queda seleccionada por las cuatro condiciones declaradas:
+linealidad en \(c\), soporte en
+\(\operatorname{Sym}^2(\mathcal V_m[1])\), paridad
+de hoja y normalización por el marco triangular. No se afirma unicidad
+entre todos los acoplamientos naturales ni independencia histórica del
+ansatz. Una vez fijadas esas condiciones, \(54\), \(J\) y \(196884\) no
+son entradas de la evaluación.
+
+Tres controles muestran que el resultado no está fijado por una
+normalización retrospectiva:
+\[
+(m,c)=(12,-2)\longmapsto36,\qquad
+(m,c)=(10,-3)\longmapsto45,
+\]
+y
+\[
+\delta_k=\delta+ke_0
+\]
+deja invariante \(\mathcal H_{\Sigma,\Pi}^{(12)}\) mientras el peso digital
+cambia de \(54\) a \(54+9k\). En particular, para \(k=1\),
+\[
+\operatorname{Tr}_{o,\mathcal F_2}
+\left(
+\mathcal H_{\Sigma,\Pi}^{(12)}(\delta+e_0)\Gamma_2(g_{12})
+\right)=54,
+\qquad
+w(\delta+e_0)=63.
+\]
+
+\begin{proposition}[Necesidad del dato de orientación]
+\label{p12-83-c20-s7:prop:orientacion-app-fock}
+Si se olvida \(o_{\Sigma\Pi}\), todo escalar natural lineal en
+\(\nu_\Pi-\nu_\Sigma\) y dependiente sólo de la clase de la representación
+se anula.
+\end{proposition}
+
+\begin{proof}
+\(C\) y \(C^{-1}\) son conjugados, por lo que la clase representacional es
+par bajo el intercambio de hojas. El agregado
+\(\nu_\Pi-\nu_\Sigma\) es impar. Sin la recta de orientación, una
+transformación simultáneamente par e impar vale cero.
+\end{proof}
+
+El teorema establece así el transporte exacto del agregado al grado dos de
+Fock. El defecto local estado a estado conserva la obstrucción de descenso
+del \cref{p12-83-c1-s5:cor:obstruccion-isotipica-app-autonoma}; ambos enunciados pertenecen a
+dominios distintos y son compatibles.
+
+
+% Unidad U031. Alineamiento APP--Witt, automorfia de orden tres,
+% construccion VOA y Moonshine.

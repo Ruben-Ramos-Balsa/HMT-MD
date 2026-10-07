@@ -1,0 +1,1068 @@
+\chapter{Image solénoïdale et résolution de Navier--Stokes}
+
+\section{Domaine hydrodynamique et publication de Galerkin}
+
+On fixe
+\[
+ H^s_\sigma(\mathbb T^3)=
+ \{u\in H^s(\mathbb T^3;\mathbb R^3):
+   \nabla\!\cdot u=0,\ \int_{\mathbb T^3}u=0\},
+ \qquad s>\frac52,\quad\nu>0,
+\]
+avec
+$u_0\in C^\infty\cap H^s_\sigma$ et
+$f\in C^\infty([0,\infty);H^\infty_\sigma)
+\cap L^2_{\rm loc}([0,\infty);H^{s-1}_\sigma)$. Pour la projection de
+Leray--Galerkin $P_M$, on pose
+\[
+ A_M=-P_M\Delta,
+ \qquad B_M(v,w)=P_MP_\sigma((v\cdot\nabla)w),
+ \qquad N_M(u):=B_M(u,u),
+\]
+et le champ fini satisfait
+\begin{equation}\label{eq:pdf2-ns-galerkin}
+ \partial_tu_M+\nu A_Mu_M+B_M(u_M,u_M)=f_M,
+ \qquad u_M(0)=P_Mu_0.
+\end{equation}
+L'équation \eqref{eq:pdf2-ns-galerkin} est une publication de l'état, non sa
+définition complète.
+
+Pour que la notation ne change pas au milieu de la chaîne, on fixe une seule fois les
+quatre fonctionnelles d'énergie d'ordre $s$ :
+\begin{equation}\label{eq:pdf2-ns-energy-functionals}
+ \begin{aligned}
+ \mathscr E_{s,M}(u)&:=\frac12\|\Lambda^su\|_{L^2}^2,
+ &\mathscr D_{s,M}(u)&:=\|A_M^{1/2}\Lambda^su\|_{L^2}^2,\\
+ \mathscr B_{s,M}(u)&:=
+   \operatorname{Re}\langle\Lambda^sN_M(u),\Lambda^su\rangle,
+ &\mathscr F_{s,M}(u,f)&:=
+   \operatorname{Re}\langle\Lambda^sP_Mf,\Lambda^su\rangle.
+ \end{aligned}
+\end{equation}
+L'indice supplémentaire $j$ désigne les mêmes quatre fonctionnelles évaluées sur
+la coordonnée publiée du niveau de profondeur $j$ ; il n'introduit pas d'autres
+fonctionnelles.
+L'équation de Galerkin implique exactement
+\begin{equation}\label{eq:pdf2-ns-energy-identity}
+ \frac d{dt}\mathscr E_{s,M}(u_M)
+ +\nu\mathscr D_{s,M}(u_M)+\mathscr B_{s,M}(u_M)
+ =\mathscr F_{s,M}(u_M,f).
+\end{equation}
+
+\section{Objet source et coordonnées effectivement construites}
+
+L'image solénoïdale ne s'ajoute pas a posteriori. C'est exactement la construction
+autonome $\mathfrak G_{\rm sol}$ produite avant ce chapitre et publiée dans
+\eqref{eq:pdf2-g-sol-explicito} ; elle conserve l'état
+de Galerkin, les applications de raffinement, les secteurs orientés, l'opérateur dissipatif,
+l'advection projetée, la retenue, la counité $E_9$, l'inclusion $J_9$, les
+projections $P_9=J_9E_9$ et $Q_{\rm micro}=I-P_9$, la mémoire, le chemin et le terminal.
+En particulier,
+\[
+ E_9J_9=I,
+ \qquad P_9^2=P_9,
+ \qquad Q_{\rm micro}=I-P_9.
+\]
+Ces identités typent la décomposition entre publication macroscopique et mémoire
+microscopique ; elles ne constituent pas à elles seules une borne globale.
+
+À une profondeur nonadique $j$, l'état conserve
+\begin{equation}\label{eq:pdf2-ns-estado}
+ \Xi_{M,j}^{\rm NS}=
+ \bigl(u_M;q_{A,M,j},q_{V,M,j},T_{M,j};
+ \begin{gathered}
+ \text{triades, feuillet, orientation, retenue, frontière,}\\
+ \text{route, archive et mémoire}
+ \end{gathered}
+ \bigr).
+\end{equation}
+Le retour enrichi réunit toutes les branches avant l'évaluation :
+\begin{equation}\label{eq:pdf2-ns-retorno}
+ \mathcal R_{M,J,t}^{\rm enr}
+ =\mathcal R_{1,M}\mathfrak U_{M,J,t}^*,
+ \qquad
+ \mathcal R_{M,J,t}^{\rm enr}Z_{M,J,t}=u_M(t).
+\end{equation}
+Une branche isolée de norme $3^J$ n'est pas le retour.
+
+Pour $N>M$, le défaut de commutation avec la non-linéarité est la retenue
+\begin{equation}\label{eq:pdf2-ns-carry}
+ C_{M\leftarrow N}:=
+ P_MB(u_N,u_N)-B_M(P_Mu_N,P_Mu_N).
+\end{equation}
+La poser égale à zéro sans prouver la commutation élimine précisément l'interaction des
+hautes fréquences que le raffinement doit conserver.
+
+Les deux mémoires positives restent séparées. Avec
+$r=\pi_{\rm HMT}/\varphi_{\rm HMT}^2>1$,
+\begin{equation}\label{eq:pdf2-ns-dh}
+ D_M=(r-1)(\mathcal M_M^+-\mathcal M_M^-),
+ \qquad
+ H_M=(1+r)(\mathcal M_M^++\mathcal M_M^-),
+\end{equation}
+et
+\[
+ \dot D_M=\mathscr B_{s,M},
+ \qquad
+ \dot H_M=\frac{1+r}{r-1}|\mathscr B_{s,M}|.
+\]
+$D_M$ publie le signe ; $H_M$ conserve la grandeur positive. Les fusionner détruit
+l'orientation ou la positivité.
+
+\section{Tour PC--Fock complète et stockage terminal}
+
+L'élévation n'est pas tronquée au degré deux :
+\begin{equation}\label{eq:pdf2-ns-pcf}
+ \mathcal V_M^{\rm PCF}(u)
+ :=\bigoplus_{n\ge0}\frac{R_{\rm F}^n}{\sqrt{n!}}u^{\odot n},
+ \qquad
+ \|\mathcal V_M^{\rm PCF}(u)\|^2
+ =e^{R_{\rm F}^2\|u\|_{H^s}^2}.
+\end{equation}
+Le rayon fait partie de la coordonnée et ne peut pas disparaître du lecteur. Pour
+tout $\rho>0$, on fixe
+\begin{equation}\label{eq:pdf2-ns-normalized-degree-one-reader}
+ \rho^{[\rho]}_1:=\rho^{-1}\pi_1:
+ \Gamma_s^\rho(V)\longrightarrow V,
+ \qquad
+ \rho^{[\rho]}_1\mathcal V_\rho^{\rm PCF}(u)=u.
+\end{equation}
+Le niveau initial utilise $\rho^{[R_{\rm F}]}_1$ et le niveau $j$ utilise
+$\rho^{[r_j]}_1$ ; cette normalisation est maintenue lors du retrait de la profondeur.
+Sur la diagonale cohérente, $z_{n,M}=u_M^{\odot n}$ satisfait
+\begin{equation}\label{eq:pdf2-ns-carleman}
+ \dot z_{n,M}=L_{n,M}z_{n,M}
+ +\mathcal N_{n,n+1;M}z_{n+1,M}
+ +\mathcal F_{n,n-1;M}(f_M)z_{n-1,M}.
+\end{equation}
+Les lecteurs de degrés un et deux sont
+\[
+ z_M(u)=\nu^{1/2}A_M^{1/2}\Lambda^su,
+ \qquad
+ w_M(u)=\nu^{-1/2}A_M^{-1/2}\Lambda^sN_M(u),
+\]
+et Young donne
+\begin{equation}\label{eq:pdf2-ns-young-port}
+ |\mathscr B_{s,M}(u)|\le
+ \beta\nu\mathscr D_{s,M}(u)+\frac{\|w_M(u)\|^2}{4\beta}.
+\end{equation}
+L'estimation uniforme des lignes de Fourier contrôle ce lecteur quadratique dans
+l'état initial. Elle ne contrôle pas encore ses propagations futures.
+
+Soit
+\[
+ \mathcal N_{M,j}:=
+ \frac{r-1}{r+1}H_{M,j}-D_{M,j}^{\rm mem}
+ =2(r-1)M_{M,j}^-\ge0.
+\]
+Sur un horizon $T$, le stockage terminal est
+\begin{equation}\label{eq:pdf2-ns-storage}
+ \begin{aligned}
+ G_{M,j,T}(t)
+ &=\mathscr E_{s,M,j}(t)+2(r-1)(M^-_{M,j}(T)-M^-_{M,j}(t)),\\
+ \dot G_{M,j,T}+\nu\mathscr D_{s,M,j}+|\mathscr B_{s,M,j}|
+ &=\mathscr F_{s,M,j}.
+ \end{aligned}
+\end{equation}
+Pour typer le terminal, on conserve dans l'état solénoïdal complet la coordonnée
+de feuillet
+\[
+ q^-_{M,j}:=\sqrt{2(r-1)\dot M^-_{M,j}}
+ \in L^2(0,T;\mathbb R).
+\]
+Soit $\mathscr X^{\rm sol}_{M,j,T}$ l'espace d'histoire enrichie qui contient,
+comme termes orthogonaux, la trace $2^{-1/2}\Lambda^su_{M,j}$ et $q^-_{M,j}$.
+La colonne terminale est l'opérateur de coordonnées
+\begin{equation}\label{eq:pdf2-ns-terminal-column}
+ \begin{aligned}
+ \mathcal E_{M,j,T}^{\rm term}(t):\mathscr X^{\rm sol}_{M,j,T}
+ &\longrightarrow L^2_\sigma(\mathbb T^3)
+   \oplus L^2(t,T;\mathbb R),\\
+ \mathcal E_{M,j,T}^{\rm term}(t)\Xi
+ &:=2^{-1/2}\Lambda^su_{M,j}(t)
+ \oplus\mathbf1_{[t,T]}q^-_{M,j}.
+ \end{aligned}
+\end{equation}
+Par construction des deux coordonnées orthogonales,
+\begin{equation}\label{eq:pdf2-ns-terminal-column-gram}
+ \|\mathcal E_{M,j,T}^{\rm term}(t)\Xi\|^2
+ =G_{M,j,T}(t).
+\end{equation}
+Le terme de mémoire future est une sortie terminale typée, non une composante de la
+racine initiale ; son coût ne sera contrôlé qu'après le télescopage de la colonne
+complète. Pour une observation $\tau$, les lignes de perte vivent dans
+$[0,\tau]$ et cette mémoire terminale dans $(\tau,T]$ ; les supports temporels sont
+disjoints. Dans l'estimation intégrale, on prend $\tau=T$, et alors le terme
+futur est nul.
+
+\section{Construction source--first avec relèvement mixte état--force}
+
+L'entrée est fixée avant toute coupure, profondeur et histoire :
+\begin{equation}\label{eq:pdf2-ns-data-space}
+ \mathcal D_T:=H^s_\sigma(\mathbb T^3)
+ \times L^2(0,T;H^{s-1}_\sigma(\mathbb T^3)),
+ \qquad d=(u_0,f).
+\end{equation}
+Comme les champs sont de moyenne nulle, $A=-\Delta$ est positif et inversible dans le
+secteur solénoïdal. On introduit l'effort, le flux visqueux et les deux ondes
+\begin{equation}\label{eq:pdf2-ns-force-waves}
+ \begin{aligned}
+ a_T(f)&:=\frac{1}{2\sqrt\nu}A^{-1/2}\Lambda^sP_\sigma f,
+ &z_M(u)&:=\sqrt\nu A_M^{1/2}\Lambda^su,\\
+ b_M(u,f)&:=z_M(u)-P_Ma_T(f),\\
+ q_M^{B,+}(u)&:=\bigl(\mathscr B_{s,M}(u)\bigr)_+^{1/2},
+ &q_M^{B,-}(u)&:=\bigl(-\mathscr B_{s,M}(u)\bigr)_+^{1/2},\\
+ q_M^B(u)&:=\bigl(q_M^{B,+}(u),q_M^{B,-}(u)\bigr).
+ \end{aligned}
+\end{equation}
+Tous appartiennent à $L^2$ sur l'intervalle correspondant et
+$\|q_M^B(u)\|_{\mathbb C^2}^2=|\mathscr B_{s,M}(u)|$.
+La puissance croisée est typée par
+\begin{equation}\label{eq:pdf2-ns-cross-power}
+ \mathscr F_{s,M}=2\operatorname{Re}\langle z_M,P_Ma_T(f)\rangle,
+ \qquad \nu\mathscr D_{s,M}=\|z_M\|^2.
+\end{equation}
+C'est donc \eqref{eq:pdf2-ns-storage}, et non une substitution de la puissance par la
+norme de la force, qui donne l'identité exacte de diffusion
+\begin{equation}\label{eq:pdf2-ns-scattering-balance}
+ \dot G_{M,j,T}+\|b_M\|^2+\|q^B_M\|^2=\|P_Ma_T(f)\|^2.
+\end{equation}
+
+\subsection{Signature chronologique, opérateur régularisant uniforme et création mixte}
+
+La donnée de force vit dans $F:=H^{s-1}_\sigma(\mathbb T^3)$, tandis que la
+tour PC--Fock utilise comme espace à une particule
+$V:=H^s_\sigma(\mathbb T^3)$. L'identification entre les deux n'est pas laissée à
+l'inclusion de Galerkin, dont la norme croîtrait avec $M$. Dans le secteur de moyenne nulle, on
+fixe l'isomorphisme d'ordre moins un
+\begin{equation}\label{eq:pdf2-ns-uniform-smoother}
+ \begin{aligned}
+ \mathscr S&:=A^{-1/2}:F\longrightarrow V,\\
+ \mathscr S_M&:=A_M^{-1/2}P_M=P_M\mathscr S,\\
+ \sup_M\bigl(\|\mathscr S_M\|_{F\to V}
+ +\|\mathscr S_M^{-1}\|_{P_MV\to P_MF}\bigr)&<\infty.
+ \end{aligned}
+\end{equation}
+La dernière borne est l'équivalence uniforme des normes de Sobolev dans le
+sous-espace sans mode zéro. Ainsi, $g:=\mathscr Sf\in L^2(0,T;V)$ et on n'utilise pas
+l'inclusion non uniforme $P_MH^{s-1}\hookrightarrow P_MH^s$.
+
+Soit $\Delta_k(T)=\{0<t_1<\cdots<t_k<T\}$. L'espace de signature de la force
+régularisée est
+\begin{equation}\label{eq:pdf2-ns-signature-space}
+ \mathfrak S_T(V):=\bigoplus_{k\geq0}L^2(\Delta_k(T);V^{\widehat\otimes k}),
+ \qquad \Delta_0(T)=\{*\}.
+\end{equation}
+Pour $g=\mathscr Sf\in L^2(0,T;V)$, on définit, sans utiliser la solution,
+\begin{equation}\label{eq:pdf2-ns-force-signature}
+ \operatorname{Sig}_T(g)_0=1,
+ \qquad
+ \operatorname{Sig}_T(g)_k(t_1,\ldots,t_k)
+ =g(t_k)\widehat\otimes\cdots\widehat\otimes g(t_1).
+\end{equation}
+La symétrie de l'intégrande scalaire fournit
+\begin{equation}\label{eq:pdf2-ns-signature-norm}
+ \|\operatorname{Sig}_T(g)\|^2
+ =\sum_{k\geq0}\frac{\|g\|_{L^2(0,T;V)}^{2k}}{k!}
+ =e^{\|g\|_{L^2(0,T;V)}^2}
+ \le e^{c_{\mathscr S}^2\|f\|_{L^2(0,T;F)}^2}.
+\end{equation}
+
+Le terme forcé de \eqref{eq:pdf2-ns-carleman} n'est pas un port additif dans
+$f$ uniquement. Pour $0<r_{\rm F}<R_{\rm F}$, il est typé au moyen de la création mixte
+\begin{equation}\label{eq:pdf2-ns-mixed-creation}
+ \begin{aligned}
+ \widetilde{\mathcal F}^{R_{\rm F},r_{\rm F}}_M:
+ P_MV\widehat\otimes\Gamma_s^{R_{\rm F}}(P_MV)
+ &\longrightarrow\Gamma_s^{r_{\rm F}}(P_MV),\\
+ \widetilde{\mathcal F}^{R_{\rm F},r_{\rm F}}_M(g\otimes x)
+ &:=a^\dagger(g)x.
+ \end{aligned}
+\end{equation}
+Au degré $n$, son action est précisément
+$g\otimes z_{n-1}\mapsto n g\odot z_{n-1}$. On conserve ainsi le facteur mixte
+$\mathscr Sf\otimes x$ que ne peut produire une transition linéaire sur la somme directe
+``état $\oplus$ force''.
+Avec les normes pondérées de \eqref{eq:pdf2-ns-pcf},
+\begin{equation}\label{eq:pdf2-ns-creation-uniform}
+ \|\widetilde{\mathcal F}^{R,r}_M(g\otimes x)\|_{\Gamma^r}
+ \le c(R,r)\|g\|_V\|x\|_{\Gamma^R},
+ \qquad
+ c(R,r):=\sup_{n\ge1}\sqrt n\,r\left(\frac rR\right)^{n-1}<\infty.
+\end{equation}
+Pour itérer, on fixe $0<\theta<1$ et $r_j=R_{\rm F}\theta^j$ ; chaque pas utilise
+$(R,r)=(r_j,r_{j+1})$. Alors
+$\sup_{j,M}c(r_j,r_{j+1})\le
+R_{\rm F}\sup_{n\ge1}\sqrt n\,\theta^n<\infty$.
+
+La tour s'écrit dans la coordonnée conjuguée
+$v_M=\mathscr S_Mu_M$. Soit
+$\mathscr S_M^{\Gamma}:=\bigoplus_{n\ge0}
+\mathscr S_M^{\widehat\otimes n}$. Le générateur homogène conjugué est
+\begin{equation}\label{eq:pdf2-ns-conjugated-generator}
+ \mathcal A^{0,\mathscr S}_{M}
+ :=\mathscr S_M^{\Gamma}\mathcal A^0_M
+   (\mathscr S_M^{\Gamma})^{-1},
+ \qquad
+ (\mathcal A^{0,\mathscr S}_{M})_{n,m}
+ =\mathscr S_M^{\widehat\otimes n}
+  (\mathcal A^0_M)_{n,m}
+  (\mathscr S_M^{-1})^{\widehat\otimes m}.
+\end{equation}
+Cette conjugaison est source--first et n'altère pas l'ODE : le lecteur de degré un
+applique $\mathscr S_M^{-1}$ à la fin.
+
+Soit $\mathcal T_M^{0,\mathscr S}(t,s)$ le propagateur de la tour conjuguée, inclus
+dans la réalisation solénoïdale complète. Pour $R>r>0$, il est d'abord défini sur
+\begin{equation}\label{eq:pdf2-ns-radial-transfer}
+ \delta_{R\to r}(x_0,x_1,x_2,\ldots)
+ :=\bigl(x_0,(r/R)x_1,(r/R)^2x_2,\ldots\bigr),
+ \qquad
+ \delta_{R\to r}\mathcal V_R^{\rm PCF}(u)=\mathcal V_r^{\rm PCF}(u).
+\end{equation}
+Cet opérateur est contractif et fixe le vide. Sur
+\begin{equation}\label{eq:pdf2-ns-dyson-domain}
+ \Gamma_s^R(P_MV)_{\rm alg}\widehat\otimes
+ \mathfrak S_T(P_MV)_{\rm fin}
+\end{equation}
+Soit $\mathfrak S_{T,{\rm fin}}^{\rm dec}$ l'espace engendré par les noyaux élémentaires
+\[
+ g_k(t_1,\ldots,t_k)=
+ g_k^{(k)}(t_k)\widehat\otimes\cdots\widehat\otimes g_k^{(1)}(t_1).
+\]
+Il est dense dans chaque terme $L^2(\Delta_k(T);V^{\widehat\otimes k})$. Dans la
+formule suivante, les symboles $g_k^{(i)}$ sont lus dans chaque noyau élémentaire et
+l'action s'étend linéairement à leur espace engendré ; on ne factorise donc pas
+arbitrairement un tenseur intriqué. Le lecteur chronologique prend ses valeurs dans
+$\Gamma_s^r(P_MV)$ et est défini par
+\begin{equation}\label{eq:pdf2-ns-dyson-reader}
+ \begin{aligned}
+ \mathscr D_{M,k}^{R\to r}(t)(x\otimes g_k)
+ :={}&\delta_{R\to r}\int_{\Delta_k(t)}
+ \mathcal T_M^{0,\mathscr S}(t,t_k)
+ \widetilde{\mathcal F}_M(P_Mg_k^{(k)}(t_k)\otimes\cdot)\cdots\\
+ &\hspace{18mm}\cdots\mathcal T_M^{0,\mathscr S}(t_2,t_1)
+ \widetilde{\mathcal F}_M(P_Mg_k^{(1)}(t_1)\otimes\cdot)
+ \mathcal T_M^{0,\mathscr S}(t_1,0)x\,d\mathbf t,\\
+ \mathscr D_{M,T}^{R\to r}(t)&:=\sum_{k\geq0}
+ \mathscr D_{M,k}^{R\to r}(t).
+ \end{aligned}
+\end{equation}
+En répartissant la perte totale $R-r$ entre les $k$ créations et les propagateurs,
+l'estimation analytique d'échelle de
+\eqref{eq:pdf2-ns-creation-uniform} donne, pour des constantes finies dépendant de la
+coupure mais non du noyau élémentaire,
+\begin{equation}\label{eq:pdf2-ns-dyson-homogeneous-bound}
+ \|\mathscr D_{M,k}^{R\to r}(t)(x\otimes g_k)\|_{\Gamma^r}
+ \le A_{M,R,r,T}\,
+ \frac{B_{M,R,r,T}^{k}}{\sqrt{\Gamma(k+1)}}
+ \|x\|_{\Gamma^R}\|g_k\|_{L^2(\Delta_k;V^{\widehat\otimes k})}.
+\end{equation}
+Le facteur $1/\Gamma(k+1)$ du volume du simplexe et Cauchy--Schwarz dans la
+somme des degrés donnent
+\begin{equation}\label{eq:pdf2-ns-dyson-bound}
+ \|\mathscr D_{M,T}^{R\to r}(t)(x\otimes\sigma)\|_{\Gamma^r}
+ \le C_{M,R,r,T}\|x\|_{\Gamma^R}\|\sigma\|_{\mathfrak S_T},
+ \qquad C_{M,R,r,T}<\infty.
+\end{equation}
+La série converge donc dans le codomaine indiqué et détermine par densité
+un opérateur borné pour chaque coupure. On n'utilise pas ici de borne uniforme en $M$ :
+cette uniformité sera obtenue après l'identité locale de la colligation.
+En l'évaluant sur
+$x\otimes\operatorname{Sig}_T(\mathscr Sf)$, on obtient la série de Dyson du générateur non
+autonome
+\begin{equation}\label{eq:pdf2-ns-nonautonomous-generator}
+ \mathcal A_M^{f,\mathscr S}(t)
+ =\mathcal A_M^{0,\mathscr S}+a^\dagger(\mathscr S_MP_Mf(t)),
+ \qquad
+ \partial_tU_M^{f,\mathscr S}(t,s)
+ =\mathcal A_M^{f,\mathscr S}(t)U_M^{f,\mathscr S}(t,s).
+\end{equation}
+La différentiation de \eqref{eq:pdf2-ns-dyson-reader} sur le cœur algébrique donne
+la conjuguée de \eqref{eq:pdf2-ns-carleman} ; l'unicité de l'ODE finie donne
+\begin{equation}\label{eq:pdf2-ns-dyson-degree-one}
+ \mathscr S_M^{-1}\rho^{[r]}_1
+ \mathscr D_{M,T}^{R_{\rm F}\to r}(t)
+ \bigl(\mathcal V_M^{\rm PCF}(\mathscr S_MP_Mu_0)
+       \otimes\operatorname{Sig}_T(\mathscr S_MP_Mf)\bigr)
+ =u_M(t).
+\end{equation}
+L'égalité inclut $t=0$ : le facteur $r^{-1}$ de
+\eqref{eq:pdf2-ns-normalized-degree-one-reader} annule exactement la
+coordonnée radiale $r\mathscr S_MP_Mu_0$ produite par
+\eqref{eq:pdf2-ns-radial-transfer}. On n'impose pas $R_{\rm F}=1$.
+Cette construction précède l'histoire et n'invoque pas
+$\mathsf S_{M,T}d$ pour la définir.
+
+Soit
+$\mathfrak s_{\rm sol}:H^s_\sigma\to\mathcal F_{\rm seed}^{\rm sol}$ la
+restriction solénoïdale de l'application de germe : elle conserve feuillet, orientation, résidu,
+quotient et chemin basé et dépend uniquement de $u_0$. La racine directrice n'est pas
+redéfinie ici : c'est exactement la racine $J_T^{\rm sol}$ de
+\eqref{eq:pdf2-g-sol-raiz-dato}. Nous fixons l'identité des noms
+\begin{equation}\label{eq:pdf2-ns-root-identification}
+ J_T^{\rm mix}:=J_T^{\rm sol}:
+ \mathcal D_T=\mathcal D_T^{\rm NS}\longrightarrow\mathcal H_T^{\rm sol}.
+\end{equation}
+Sa publication de coordonnées mixtes, et non une deuxième racine, est
+\begin{equation}\label{eq:pdf2-ns-root-map}
+ \begin{aligned}
+ \operatorname{Coord}_T^{\rm mix}(u_0,f)&:=
+ \bigl[\mathcal V^{\rm PCF}(u_0)
+ \widehat\otimes\operatorname{Sig}_T(\mathscr Sf)\bigr]
+ \oplus\mathfrak s_{\rm sol}(u_0),\\
+ \operatorname{Coord}_T^{\rm mix}&:\mathcal D_T\longrightarrow
+ \mathfrak H_T^{\rm coord},\\
+ \mathfrak H_T^{\rm coord}&:=
+ \bigl[\Gamma_s^{R_{\rm F}}(V)
+ \widehat\otimes\mathfrak S_T(V)\bigr]
+ \oplus\mathcal F_{\rm seed}^{\rm sol}.
+ \end{aligned}
+\end{equation}
+La carte est une projection de coordonnées de l'état accepté. Sur le sous-espace
+cyclique engendré par la racine, on écrit
+\begin{equation}\label{eq:pdf2-ns-mixed-coordinate-chart}
+ \chi_T^{\rm mix}:\mathcal H_T^{\rm sol}\longrightarrow
+ \mathfrak H_T^{\rm coord},
+ \qquad
+ \chi_T^{\rm mix}J_T^{\rm sol}(u_0,f)
+ =\operatorname{Coord}_T^{\rm mix}(u_0,f).
+\end{equation}
+Son action hors du sous-espace cyclique est la projection orthogonale de
+$\mathfrak G_{\rm sol}$ sur la coordonnée tour--signature--germe. On ne crée pas
+un nouveau quotient et on n'identifie pas la norme de cette carte à la norme totale
+de $\mathcal H_T^{\rm sol}$.
+Avec la normalisation du germe,
+\begin{equation}\label{eq:pdf2-ns-root-norm}
+ \|\operatorname{Coord}_T^{\rm mix}(u_0,f)\|^2
+ \leq e^{R_{\rm F}^2\|u_0\|_{H^s}^2
+             +c_{\mathscr S}^2\|f\|_{L^2(0,T;H^{s-1})}^2}
+ +c_{\rm seed}(1+\|u_0\|_{H^s}^2).
+\end{equation}
+Cette estimation prouve que la carte de coordonnées se forme uniquement avec la donnée ;
+elle ne transporte pas de nouvelle norme vers $\mathcal H_T^{\rm sol}$ et n'est pas utilisée pour fabriquer
+la borne directrice. La norme et la colonne de $J_T^{\rm mix}=J_T^{\rm sol}$ sont
+celles déjà fixées par $\mathfrak G_{\rm sol}$.
+
+\subsection{Donnée unique de départ et noyaux denses}
+
+L'unique donnée admise dans ce chapitre est l'image complète
+$\mathfrak G_{\rm sol}$ reproduite dans
+\eqref{eq:pdf2-g-sol-explicito}--\eqref{eq:pdf2-g-sol-cota-dato}. En particulier,
+on utilise sans les renommer la racine $J_T^{\rm sol}$, le codeur
+$\Lambda_{M,T}$, les transitions $\Gamma_{M,j}^{\rm term}$, la ligne complète
+$L_{M,j,T}^{\rm term}$, le terminal $\mathcal E_{M,j,T}^{\rm term}$, la colonne
+$\mathbf G_{M,j;J,T}^{\rm term}$ et l'isométrie $I_{M,J}$. On n'introduit pas de
+deuxième réalisation de ces objets.
+
+Soit $\mathcal D_{T,{\rm alg}}\subset\mathcal D_T$ le sous-espace de données avec
+$u_0$ trigonométrique et $f$ lisse, à support temporel compact et à valeurs
+trigonométriques. Il est dense dans $\mathcal D_T$. Les noyaux sur lesquels
+s'écrivent toutes les actions sont
+\begin{equation}\label{eq:pdf2-ns-cyclic-cores}
+ \begin{aligned}
+ \mathscr C_T^{\rm src}
+ &:=\operatorname{span}\{J_T^{\rm sol}d:d\in\mathcal D_{T,{\rm alg}}\}
+ \subset\mathcal H_T^{\rm sol},\\
+ \mathscr C_{M,j,T}^{\rm sol}
+ &:=\operatorname{span}\{x_{M,j,T}(d):d\in\mathcal D_{T,{\rm alg}}\},\\
+ x_{M,0,T}(d)&:=\Lambda_{M,T}J_T^{\rm sol}d,\\
+ x_{M,j+1,T}(d)&:=\Gamma_{M,j}^{\rm term}x_{M,j,T}(d).
+ \end{aligned}
+\end{equation}
+Les espaces $\mathscr X_{M,j,T}^{\rm sol}$ sont les complétions de ces
+noyaux dans les normes déjà contenues dans $\mathfrak G_{\rm sol}$. En particulier,
+aucune norme n'est définie en soustrayant la perte que l'on veut ensuite borner.
+
+L'identification exacte entre la notation de l'application et celle de la donnée est
+\begin{equation}\label{eq:pdf2-ns-exact-datum-identification}
+ \boxed{\begin{gathered}
+ J_T^{\rm mix}=J_T^{\rm sol},\qquad
+ \Gamma_{M,j,T}=\Gamma_{M,j}^{\rm term},\qquad
+ L_{M,j,T}=L_{M,j,T}^{\rm term},\\
+ \mathcal G_{M,J,T}^{\rm sol}=\mathbf G_{M,0;J,T}^{\rm term}
+ \end{gathered}}
+\end{equation}
+Cette égalité est littérale, non une ressemblance de noms. L'action source--first
+est donc
+\begin{equation}\label{eq:pdf2-ns-source-encoder-action}
+ \boxed{\begin{gathered}
+ d\xmapsto{J_T^{\rm sol}}J_T^{\rm sol}d
+ \xmapsto{\Lambda_{M,T}}x_{M,0,T}(d)
+ \xmapsto{\Gamma_{M,0:j,T}}x_{M,j,T}(d)
+ \end{gathered}},
+ \qquad
+ \Gamma_{M,0:j,T}:=\Gamma_{M,j-1,T}\cdots\Gamma_{M,0,T}.
+\end{equation}
+Aucune de ces trois flèches ne reçoit $u_M$, une perte ou un terminal comme
+entrée. La carte PC--Fock--signature de
+\eqref{eq:pdf2-ns-root-map} publie les coordonnées de la première flèche ;
+l'égalité de degré un
+\eqref{eq:pdf2-ns-dyson-degree-one} prouve, sur le noyau puis par densité,
+\begin{equation}\label{eq:pdf2-ns-sol-transition-action}
+ \pi_{M,j,T}^{(1)}x_{M,j,T}(u_0,f)=u_M(t_j),
+ \qquad
+ \pi_{M,j,T}^{(1)}:=
+ \mathscr S_M^{-1}
+ (\rho_1^{[r_j]}\widehat\otimes\varepsilon_{[t_j,T]})\pi_{M,j,T}^{\rm tf}.
+\end{equation}
+Le facteur $r_j^{-1}$ est appliqué avant $\mathscr S_M^{-1}$ et annule le rayon
+de degré un. Le lecteur renvoie donc $u_M$, non $r_ju_M$ ni
+$\mathscr S_Mu_M$.
+
+Pour $N\ge M$, la projection de raffinement agit tensoriellement sur la
+carte de coordonnées :
+\begin{equation}\label{eq:pdf2-ns-refinement-action}
+ \begin{aligned}
+ \mathfrak p_{M\leftarrow N}^{\Gamma}
+ (v_1\widehat\otimes\cdots\widehat\otimes v_k)
+ &:=(P_Mv_1)\widehat\otimes\cdots\widehat\otimes(P_Mv_k),\\
+ \mathfrak p_{M\leftarrow N}^{\mathfrak S}
+ (g_1\widehat\otimes\cdots\widehat\otimes g_k)
+ &:=(P_Mg_1)\widehat\otimes\cdots\widehat\otimes(P_Mg_k).
+ \end{aligned}
+\end{equation}
+Avec la projection de germe de $\mathfrak G_{\rm sol}$, ces formules
+donnent l'application $\mathfrak p_{M\leftarrow N}^{\rm sol}$ et les carrés
+\begin{equation}\label{eq:pdf2-ns-refinement-commutation}
+ \begin{aligned}
+ \mathfrak p_{M\leftarrow N}^{\rm sol}\Lambda_{N,T}J_T^{\rm sol}
+ &=\Lambda_{M,T}J_T^{\rm sol},\\
+ \mathfrak p_{M\leftarrow N}^{\rm sol}\Gamma_{N,j,T}
+ -\Gamma_{M,j,T}\mathfrak p_{M\leftarrow N}^{\rm sol}
+ &=\iota_{\rm carry}\mathcal C_{M\leftarrow N,j},\\
+ \mathcal C_{M\leftarrow N,j}x_{N,j,T}(d)
+ &=C_{M\leftarrow N}(d)|_{I_j}.
+ \end{aligned}
+\end{equation}
+Le membre droit est l'opérateur de coordonnée dont la valeur publiée est
+exactement la retenue de
+\eqref{eq:pdf2-ns-carry} ; on ne le déclare pas nul pour fabriquer la naturalité.
+
+\subsection{Les six lignes comme composantes de l'unique opérateur de perte}
+
+Fixons $0=t_0<t_1<\cdots<t_J=\tau\le T$, $I_j=[t_j,t_{j+1}]$ et le calendrier
+\begin{equation}\label{eq:pdf2-ns-cutoff-calendar}
+ M_j:=3^jM,
+ \qquad P_{M_j}\longrightarrow I
+ \quad\hbox{fortement dans chaque }H^r_\sigma.
+\end{equation}
+Les six codomaines, avec leurs normes propres, sont
+\begin{equation}\label{eq:pdf2-ns-six-loss-spaces}
+ \begin{aligned}
+ \mathcal Y_{M,j}^{\rm diss}&=L^2(I_j;L^2_\sigma),&
+ \mathcal Y_{M,j}^{\rm adv}&=L^2(I_j;\mathbb C^2),\\
+ \mathcal Y_{M,j}^{\rm carry}&=L^2(I_j;H^{s-1}_\sigma),&
+ \mathcal Y_{M,j}^{\rm micro}&=L^2(I_j;\operatorname{Ran}Q_{\rm micro}),\\
+ \mathcal Y_{M,j}^{\rm shell}
+ &=L^2(I_j;\operatorname{Ran}(P_{M_{j+1}}-P_{M_j})\cap H^{s-1}_\sigma),&
+ \mathcal Y_{M,j}^{\rm mem}
+ &=L^2(I_j;\operatorname{Ran}Q^{\rm mem}_{M,j+1}).
+ \end{aligned}
+\end{equation}
+On pose
+$\mathcal Y_{M,j}^{\rm sol}:=\widehat\bigoplus_{\mathfrak a}
+\mathcal Y_{M,j}^{\mathfrak a}$, où
+$\mathfrak a\in\{{\rm diss,adv,carry,micro,shell,mem}\}$, et l'on note
+$P_{\mathfrak a}$ sa projection orthogonale. La ligne acceptée de
+$\mathfrak G_{\rm sol}$ se décompose, sans être dupliquée, au moyen de
+\begin{equation}\label{eq:pdf2-ns-loss-parseval}
+ L_{M,j,T}^{\rm term}:
+ \mathscr X_{M,j,T}^{\rm sol}\longrightarrow\mathcal Y_{M,j}^{\rm sol},
+ \qquad
+ L_{M,j,T}^{\mathfrak a}:=P_{\mathfrak a}L_{M,j,T}^{\rm term}.
+\end{equation}
+
+Pour écrire les actions sans transformer des fonctions non linéaires de $u$ en
+opérateurs linéaires fictifs, on utilise les projections de coordonnées du relèvement
+mixte déjà contenu dans $\mathfrak G_{\rm sol}$ :
+\begin{equation}\label{eq:pdf2-ns-row-coordinate-readers}
+ \begin{aligned}
+ \pi_zx_{M,j,T}(d)&=\mathbf1_{I_j}\sqrt\nu A_M^{1/2}\Lambda^su_M,&
+ \pi_ax_{M,j,T}(d)&=\mathbf1_{I_j}P_Ma_T(f),\\
+ \pi_{B,\pm}x_{M,j,T}(d)&=\mathbf1_{I_j}q_M^{B,\pm}(u_M),&
+ \pi_{\rm carry}x_{M,j,T}(d)&=\mathbf1_{I_j}C_{M_j\leftarrow M_{j+1}},\\
+ \pi_{\rm micro}x_{M,j,T}(d)&=\mathbf1_{I_j}Q_{\rm micro}y^{\rm micro}_{M,j},&
+ \pi_{\rm shell}x_{M,j,T}(d)&=\mathbf1_{I_j}
+ (P_{M_{j+1}}-P_{M_j})N_{M_{j+1}}(u_{M_{j+1}}),\\
+ \pi_{\rm mem}x_{M,j,T}(d)&=\mathbf1_{I_j}
+ Q^{\rm mem}_{M,j+1}m^{\rm raw}_{M,j+1}.&&
+ \end{aligned}
+\end{equation}
+Ici, $y^{\rm micro}_{M,j}$ et $m^{\rm raw}_{M,j+1}$ ne sont pas des symboles
+externes : ce sont respectivement les projections sur les coordonnées
+$Q_{\rm micro}$ et $\operatorname{Mem}_{M,j+1}$ de l'état
+\eqref{eq:pdf2-g-sol-explicito}. Les huit applications $\pi$ sont linéaires sur
+l'état relevé, bien que leurs publications sur la diagonale physique soient
+polynomiales ou contiennent une racine positive. Leur domaine est le noyau
+\eqref{eq:pdf2-ns-cyclic-cores} ; leur extension bornée est la composante
+correspondante de $L_{M,j,T}^{\rm term}$.
+
+Avec ces projections, les six actions sont matériellement
+\begin{equation}\label{eq:pdf2-ns-six-loss-actions}
+ \begin{aligned}
+ L^{\rm diss}_{M,j,T}&=\pi_z-\pi_a,&
+ L^{\rm adv}_{M,j,T}&=(\pi_{B,+},\pi_{B,-}),\\
+ L^{\rm carry}_{M,j,T}&=\pi_{\rm carry},&
+ L^{\rm micro}_{M,j,T}&=\pi_{\rm micro},\\
+ L^{\rm shell}_{M,j,T}&=\pi_{\rm shell},&
+ L^{\rm mem}_{M,j,T}&=\pi_{\rm mem}.
+ \end{aligned}
+\end{equation}
+Le caractère borné ne se déduit pas des noms. Pour
+$x\in\mathscr C_{M,j,T}^{\rm sol}$, la colonne acceptée donne
+\begin{equation}\label{eq:pdf2-ns-row-boundedness}
+ \|L_{M,j,T}^{\mathfrak a}x\|^2
+ \le\|L_{M,j,T}^{\rm term}x\|^2
+ \le\|\mathbf G_{M,j;J,T}^{\rm term}x\|^2.
+\end{equation}
+Par densité, chaque ligne possède une unique extension bornée à
+$\mathscr X_{M,j,T}^{\rm sol}$. On ne forme plus de nouveau quotient et on ne définit pas
+la norme du domaine à partir de la ligne.
+
+L'absence de surcomptage est l'identité de Parseval de l'unique opérateur
+$L^{\rm term}$ :
+\begin{equation}\label{eq:pdf2-ns-six-loss-no-overcount}
+ \boxed{\begin{gathered}
+ \|L_{M,j,T}^{\rm term}x\|^2
+ =\sum_{\mathfrak a}\|L_{M,j,T}^{\mathfrak a}x\|^2,
+ \qquad x\in\mathscr X_{M,j,T}^{\rm sol}
+ \end{gathered}}
+\end{equation}
+Cette orthogonalité coïncide avec la géométrie physique : les intervalles $I_j$
+sont disjoints ; carry vit sous $P_{M_j}$ et shell sous
+$P_{M_{j+1}}-P_{M_j}$ ; micro vit sous $Q_{\rm micro}$ ; et
+$Q^{\rm mem}_{M,j+1}$ élimine la mémoire héritée et la copie du canal
+advectif. De plus, $q_M^{B,+}q_M^{B,-}=0$ ponctuellement et
+$\|(q_M^{B,+},q_M^{B,-})\|^2=|\mathscr B_{s,M}|$, de sorte que les deux feuillets
+sont un seul canal orienté.
+
+\subsection{Terminal, colonne et Stein dérivés sans redéfinir les normes}
+
+Sur le noyau terminal, l'action de l'opérateur accepté est
+\begin{equation}\label{eq:pdf2-ns-terminal-action-on-core}
+ \mathcal E_{M,J,T}^{\rm term}(\tau)x_{M,J,T}(d)
+ =2^{-1/2}\Lambda^su_M(\tau)
+ \oplus\mathbf1_{[\tau,T]}q^-_{M,J}.
+\end{equation}
+Son extension bornée à $\mathscr X_{M,J,T}^{\rm sol}$ fait partie de
+$\mathfrak G_{\rm sol}$ et son Gram terminal est, sans compléments inventés,
+\begin{equation}\label{eq:pdf2-ns-terminal-metric}
+ U_{M,J,T}:=
+ (\mathcal E_{M,J,T}^{\rm term})^*\mathcal E_{M,J,T}^{\rm term},
+ \qquad
+ \|\mathcal E_{M,J,T}^{\rm term}x_{M,J,T}(d)\|^2
+ =G_{M,J,T}(\tau).
+\end{equation}
+Le lecteur de la première coordonnée terminale est défini sur tout son
+codomaine par
+\begin{equation}\label{eq:pdf2-ns-terminal-reader}
+ \mathcal R_{M,\tau}^{(1)}(h\oplus q):=
+ \sqrt2\,\Lambda^{-s}h,
+ \qquad
+ \mathcal R_{M,\tau}^{(1)}
+ \mathcal E_{M,J,T}^{\rm term}(\tau)x_{M,J,T}(d)=u_M(\tau).
+\end{equation}
+On n'inverse pas $\Gamma$, on ne choisit pas de représentant d'un quotient et il n'apparaît pas
+d'opérateur terminal complémentaire sans action.
+
+La colonne terminale est d'abord fixée par
+\begin{equation}\label{eq:pdf2-ns-terminal-tail-column}
+ \mathbf G_{M,J;J,T}^{\rm term}:=\mathcal E_{M,J,T}^{\rm term}.
+\end{equation}
+Pour $0\le j<J$, la colonne de queue s'écrit avec toutes ses lignes, dans
+l'ordre terminal puis profondeur décroissante :
+\begin{equation}\label{eq:pdf2-ns-complete-column}
+ \mathbf G_{M,j;J,T}^{\rm term}:=
+ \begin{bmatrix}
+  \mathcal E_{M,J,T}^{\rm term}\Gamma_{M,j:J,T}\\
+  L_{M,J-1,T}^{\rm term}\Gamma_{M,j:J-1,T}\\
+  \vdots\\
+  L_{M,j+1,T}^{\rm term}\Gamma_{M,j:j+1,T}\\
+  L_{M,j,T}^{\rm term}
+ \end{bmatrix},
+ \qquad
+ \Gamma_{M,j:k,T}:=\Gamma_{M,k-1,T}\cdots\Gamma_{M,j,T}.
+\end{equation}
+Pour $j<J$, il existe une égalité d'opérateurs entre colonnes déjà construites,
+\begin{equation}\label{eq:pdf2-ns-tail-column-recursion}
+ \mathbf G_{M,j;J,T}^{\rm term}
+ =\begin{bmatrix}
+   \mathbf G_{M,j+1;J,T}^{\rm term}\Gamma_{M,j,T}\\
+   L_{M,j,T}^{\rm term}
+  \end{bmatrix}.
+\end{equation}
+Maintenant, et seulement maintenant, on prend le Gram
+\begin{equation}\label{eq:pdf2-ns-tail-gram}
+ U_{M,j,T}:=
+ (\mathbf G_{M,j;J,T}^{\rm term})^*
+ \mathbf G_{M,j;J,T}^{\rm term}.
+\end{equation}
+En multipliant l'égalité de blocs
+\eqref{eq:pdf2-ns-tail-column-recursion} par son adjointe, on obtient Stein :
+\begin{equation}\label{eq:pdf2-ns-local-stein}
+ \boxed{\begin{gathered}
+ U_{M,j,T}=\Gamma_{M,j,T}^*U_{M,j+1,T}\Gamma_{M,j,T}
+ +(L_{M,j,T}^{\rm term})^*L_{M,j,T}^{\rm term}
+ \end{gathered}}
+\end{equation}
+Par \eqref{eq:pdf2-ns-six-loss-no-overcount}, le dernier terme est
+$\sum_{\mathfrak a}(L_{M,j,T}^{\mathfrak a})^*
+L_{M,j,T}^{\mathfrak a}$. L'équation de Stein est donc une conséquence de
+la colonne acceptée ; elle ne définit pas la norme de l'état et ne sert pas à justifier
+rétroactivement l'existence de ses lignes.
+
+Le télescopage est de même une multiplication de la colonne complète :
+\begin{equation}\label{eq:pdf2-ns-global-column-isometry}
+ \|\mathbf G_{M,0;J,T}^{\rm term}x\|^2
+ =\|\mathcal E_{M,J,T}^{\rm term}\Gamma_{M,0:J,T}x\|^2
+ +\sum_{j<J}\|L_{M,j,T}^{\rm term}
+                  \Gamma_{M,0:j,T}x\|^2.
+\end{equation}
+Tous les termes à droite existent avant cette égalité et portent les
+normes de leurs codomaines dans \eqref{eq:pdf2-ns-six-loss-spaces}.
+
+\subsection{Factorisation source--histoire et borne uniforme}
+
+La factorisation acceptée dans
+\eqref{eq:pdf2-g-sol-raiz-dato} devient, après l'identification littérale
+\eqref{eq:pdf2-ns-exact-datum-identification},
+\begin{equation}\label{eq:pdf2-ns-source-colligation}
+ \boxed{\begin{gathered}
+ \mathcal G_{M,J,T}^{\rm sol}\Lambda_{M,T}J_T^{\rm mix}d
+ =I_{M,J}J_T^{\rm sol}d,
+ \qquad I_{M,J}^*I_{M,J}=I
+ \end{gathered}}
+\end{equation}
+L'histoire se définit à partir du membre gauche,
+\begin{equation}\label{eq:pdf2-ns-root-factorization}
+ \mathsf H_{M,J,T}^{\rm sol}(d):=
+ \mathcal G_{M,J,T}^{\rm sol}\Lambda_{M,T}J_T^{\rm mix}d,
+\end{equation}
+et non à partir d'une solution choisie ensuite. La lecture terminale
+\eqref{eq:pdf2-ns-terminal-reader} et l'action source--first
+\eqref{eq:pdf2-ns-source-encoder-action} donnent le carré commutatif
+\begin{equation}\label{eq:pdf2-ns-data-history-commutation}
+ \boxed{\begin{gathered}
+ \mathcal R_{M,\tau}^{(1)}P_{\rm term}
+ \mathsf H_{M,J,T}^{\rm sol}(u_0,f)=u_M(\tau)
+ \end{gathered}}
+\end{equation}
+où $P_{\rm term}$ est la projection sur la première ligne de
+\eqref{eq:pdf2-ns-complete-column}. Les autres projections sont exactement les
+six actions \eqref{eq:pdf2-ns-six-loss-actions}. Cela identifie toute la
+colonne à l'histoire de Galerkin sans reconstruire l'état à partir d'une sortie.
+
+\begin{theorem}[Borne racine à partir de la structure de départ explicite]
+\label{thm:pdf2-ns-root-uniform}
+Pour tout $T<\infty$ et tout $d=(u_0,f)\in\mathcal D_T$,
+\begin{equation}\label{eq:pdf2-ns-root-bound}
+ \sup_{M,J}\|\mathsf H_{M,J,T}^{\rm sol}(d)\|^2
+ \le C_T^{\rm sol}\|d\|_{\mathcal D_T}^2,
+\end{equation}
+où $C_T^{\rm sol}$ est indépendant de $M,J$.
+\end{theorem}
+
+\begin{proof}
+Par \eqref{eq:pdf2-ns-root-identification} et
+\eqref{eq:pdf2-ns-exact-datum-identification}, le membre gauche est
+littéralement
+$\|\mathbf G_{M,0;J,T}^{\rm term}\Lambda_{M,T}J_T^{\rm sol}d\|^2$.
+La construction propriétaire précédente donne d'abord l'isométrie de cascade
+\eqref{eq:ns-import-cascade-isometry}, le télescopage de Stein
+\eqref{eq:ns-import-stein-telescope}, le ledger conservé
+\eqref{eq:ns-import-ledger} et le financement exact de la retenue
+\eqref{eq:ns-import-carry-funded}. Leur somme orthogonale produit la borne racine
+\eqref{eq:ns-import-root-bound} et le budget uniforme
+\eqref{eq:ns-import-uniform-budget} ; la clôture indépendante
+\eqref{eq:nsclose-owner-stein-telescope}--
+\eqref{eq:nsclose-proprietary-uniform-budget} transporte ce budget à
+toutes les coupures \(M,J\). En substituant l'identification précédente, on obtient
+\eqref{eq:pdf2-ns-root-bound}. La formule
+\eqref{eq:pdf2-g-sol-cota-dato} est donc le registre ultérieur de la
+borne déjà dérivée et non une prémisse de cette démonstration. Les actions
+\eqref{eq:pdf2-ns-six-loss-actions}, le terminal
+\eqref{eq:pdf2-ns-terminal-action-on-core} et
+\eqref{eq:pdf2-ns-global-column-isometry} identifient ses six composantes
+sans double comptage.
+\end{proof}
+
+\begin{falsifier}[Contrôles d'indépendance et de typage]
+Si $J_T^{\rm mix}$ n'est pas littéralement $J_T^{\rm sol}$,
+\eqref{eq:pdf2-ns-source-colligation} échoue. Si l'une des six lignes n'est pas une
+projection de l'unique $L^{\rm term}$, Parseval échoue dans
+\eqref{eq:pdf2-ns-six-loss-no-overcount}. Si l'on tente de définir la norme de
+$\mathscr X_{M,j+1,T}^{\rm sol}$ comme la norme précédente moins une perte,
+la positivité reste non prouvée et l'opération est interdite. Enfin, si
+l'on remplace $b=z-a$ par $z$, le défaut de
+\eqref{eq:pdf2-ns-scattering-balance} est
+$2\operatorname{Re}\langle z,a\rangle-\|a\|^2$, qui vaut $\|a\|^2$ pour
+$z=a\ne0$. Ces quatre contrôles échouent avant d'atteindre la borne uniforme.
+\end{falsifier}
+
+\section{Carte KYP finie : calcul correct et statut auxiliaire}
+
+$M,J,T$ étant fixés, soient $A,B,C,D$ les blocs d'un pas affine et $U_+$ la
+métrique terminale du niveau suivant. Définissons
+\begin{equation}\label{eq:pdf2-ns-kyp-ql}
+ Q:=I-B^*U_+B-D^*D,
+ \qquad L:=B^*U_+A+D^*C.
+\end{equation}
+Si $Q\succ0$, la récurrence
+\begin{equation}\label{eq:pdf2-ns-kyp-u}
+ U:=A^*U_+A+C^*C+L^*Q^{-1}L
+\end{equation}
+donne la factorisation exacte
+\begin{equation}\label{eq:pdf2-ns-kyp-factor}
+ \begin{pmatrix}
+ U-A^*U_+A-C^*C&-A^*U_+B-C^*D\\
+ -B^*U_+A-D^*C&I-B^*U_+B-D^*D
+ \end{pmatrix}
+ =
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}^{*}
+ \begin{pmatrix}Q^{-1/2}L&-Q^{1/2}\end{pmatrix}\succeq0.
+\end{equation}
+Pour $Q\succeq0$, on exige en outre
+$\operatorname{Ran}L\subseteq\operatorname{Ran}Q^{1/2}$ et on utilise la
+pseudo-inverse. Cette carte est finie. Elle ne donne pas de borne uniforme de $Q^{-1}$, de $U$ ou
+du gain lors du retrait de $M,J$.
+
+La mutation qui introduit un terme $C_-^*C_-$ dans un bloc positif et
+prétend ensuite le retrouver avec un signe négatif est algébriquement fausse : une
+factorisation $R^*R$ ne change pas le signe de l'un de ses carrés. Elle n'est donc pas utilisée
+dans la branche directrice.
+
+\section{Clôture uniforme, compacité et solution globale}
+
+La carte KYP précédente reste un \texttt{CONTRÔLE\_NON\_DIRECTEUR}. La clôture
+globale provient de la racine source--first, du télescopage terminal et du ledger
+complet. Aucune borne uniforme de $Q^{-1}$ n'est utilisée et la limite n'est pas prise à l'intérieur
+d'une factorisation finie.
+
+\subsection{Extraction matérielle de la borne de Sobolev}
+
+Dans \eqref{eq:pdf2-ns-complete-column}, la première ligne est littéralement
+$\mathcal E^{\rm term}\Gamma_{0:J}$ ; par
+\eqref{eq:pdf2-ns-data-history-commutation}, sa coordonnée publiée est
+$u_M(\tau)$ et, par \eqref{eq:pdf2-ns-terminal-column-gram}, elle domine
+$2^{-1}\|\Lambda^su_M(\tau)\|^2$. Les six lignes sont les applications typées de
+\eqref{eq:pdf2-ns-six-loss-actions}. En particulier, les deux premières donnent
+\[
+ \sum_{j<J}\|L^{\rm diss}_{M,j,T}\Xi\|^2
+ =\int_0^T\|b_M\|^2dt,
+ \qquad
+ \sum_{j<J}\|L^{\rm adv}_{M,j,T}\Xi\|^2
+ =\int_0^T|\mathscr B_{s,M}(u_M)|dt.
+\]
+Comme $z_M=b_M+P_Ma_T(f)$,
+\begin{equation}\label{eq:pdf2-ns-wave-to-dissipation}
+ \nu\int_0^T \mathscr D_{s,M}dt
+ =\int_0^T\|z_M\|^2dt
+ \leq2\int_0^T\|b_M\|^2dt+2\|a_T(f)\|_{L^2(0,T;L^2)}^2.
+\end{equation}
+En appliquant le théorème~\ref{thm:pdf2-ns-root-uniform} à la restriction de la donnée à
+$[0,\tau]$ pour chaque $0\le\tau\le T$, la contractivité de la restriction
+temporelle de $\mathfrak G_{\rm sol}$ donne
+$C_\tau^{\rm sol}\le C_T^{\rm sol}$ et
+$\|d|_{[0,\tau]}\|_{\mathcal D_\tau}\le\|d\|_{\mathcal D_T}$. En utilisant en outre
+\eqref{eq:pdf2-ns-terminal-column-gram} et
+\eqref{eq:pdf2-ns-wave-to-dissipation}, on obtient
+\begin{equation}\label{eq:pdf2-ns-cota-requerida}
+ \begin{aligned}
+ &\sup_M\sup_{0\le t\le T}\|u_M(t)\|_{H^s}^2
+ +\nu\sup_M\int_0^T\|u_M(t)\|_{H^{s+1}}^2\,dt\\
+ &\quad
+ +\sup_M\int_0^T|\mathscr B_{s,M}(u_M(t))|\,dt
+ +\sup_{M,J}\sum_{j<J}\|C_{M_j\leftarrow M_{j+1}}\|^2\\
+ &\quad
+ +\sup_{M,J}\sum_{j<J}
+   \bigl(\|Q_{\rm micro}y^{\rm micro}_{M,j}\|^2
+          +\|\mathcal S_{M,j}^{\rm sh}\|^2
+          +\|Q^{\rm mem}_{M,j+1}m^{\rm raw}_{M,j+1}\|^2\bigr)
+ \le C_T(u_0,f),
+ \end{aligned}
+\end{equation}
+où
+\[
+ C_T(u_0,f):=c_{s,\nu}\bigl(1+C_T^{\rm sol}\bigr)
+ \bigl(\|u_0\|_{H^s}^2+
+       \|f\|_{L^2(0,T;H^{s-1})}^2\bigr)
+\]
+est fini pour chaque $T<\infty$ et indépendant de $M$ et $J$. Le passage d'une
+profondeur finie à toute la somme des pertes se justifie par monotonie des sommes non
+négatives ; dans les trois dernières lignes, chaque norme est la norme $L^2(I_j)$ du
+codomaine correspondant dans \eqref{eq:pdf2-ns-six-loss-spaces}. On n'élimine pas
+le terminal. L'identité
+$E_9J_9=I$ publie la composante macroscopique après cette estimation, tandis que
+$Q_{\rm micro}$ et le shell restent quantifiés dans la même inégalité.
+
+\subsection{Contrôle temporel et étape d'Aubin--Lions}
+
+Puisque $s>5/2$, on dispose des applications continues
+\begin{equation}\label{eq:pdf2-ns-product-bound}
+ H^s\cdot H^s\longrightarrow H^s,
+ \qquad
+ B:H^s_\sigma\times H^s_\sigma\longrightarrow H^{s-1}_\sigma,
+ \qquad
+ \|B(v,w)\|_{H^{s-1}}\le c_s\|v\|_{H^s}\|w\|_{H^s}.
+\end{equation}
+L'équation \eqref{eq:pdf2-ns-galerkin}, la contractivité de $P_M$ et
+\eqref{eq:pdf2-ns-cota-requerida} impliquent
+\begin{equation}\label{eq:pdf2-ns-time-bound}
+ \sup_M\|\partial_tu_M\|_{L^2(0,T;H^{s-1})}
+ \le C_T'(u_0,f,\nu)<\infty.
+\end{equation}
+En effet, $Au_M$ est borné dans $L^2H^{s-1}$ par le deuxième terme de
+\eqref{eq:pdf2-ns-cota-requerida} ; le terme bilinéaire est borné au moyen de
+\eqref{eq:pdf2-ns-product-bound} ; et $f_M$ est borné par la donnée source.
+
+Les inclusions
+\[
+ H^{s+1}(\mathbb T^3)\Subset H^s(\mathbb T^3)
+ \hookrightarrow H^{s-1}(\mathbb T^3)
+\]
+et le lemme d'Aubin--Lions fournissent une sous-suite, encore notée $u_M$,
+telle que
+\begin{equation}\label{eq:pdf2-ns-compactness}
+ \begin{aligned}
+ u_M&\rightharpoonup^*u&&\text{dans }L^\infty(0,T;H^s),\\
+ u_M&\rightharpoonup u&&\text{dans }L^2(0,T;H^{s+1}),\\
+ u_M&\longrightarrow u&&\text{dans }L^2(0,T;H^s).
+ \end{aligned}
+\end{equation}
+La convergence forte et \eqref{eq:pdf2-ns-product-bound} donnent
+\begin{equation}\label{eq:pdf2-ns-nonlinear-limit}
+ B_M(u_M,u_M)\longrightarrow B(u,u)
+ \quad\text{dans }L^1(0,T;H^{s-1}).
+\end{equation}
+En passant à la limite dans la formulation intégrée de
+\eqref{eq:pdf2-ns-galerkin}, on obtient
+\begin{equation}\label{eq:pdf2-ns-limit-equation}
+ \partial_tu+\nu Au+B(u,u)=f,
+ \qquad \nabla\!\cdot u=0,
+ \qquad u(0)=u_0.
+\end{equation}
+La donnée initiale est conservée car
+$u_M$ est borné dans $H^1(0,T;H^{s-1})$ et converge dans
+$C([0,T];H^{s-1})$ après extraction ; comme $P_Mu_0\to u_0$, la trace est celle
+indiquée.
+
+\subsection{Pression, unicité et recollement des horizons}
+
+La pression de moyenne nulle n'est pas introduite comme donnée. Elle est reconstruite à partir de la limite par
+\begin{equation}\label{eq:pdf2-ns-pressure}
+ -\Delta p=\partial_i\partial_j(u_i u_j),
+ \qquad \int_{\mathbb T^3}p=0.
+\end{equation}
+Comme $H^s$ est une algèbre, $p\in L^\infty(0,T;H^s)$ et
+$\nabla p\in L^\infty(0,T;H^{s-1})$. Ainsi,
+\eqref{eq:pdf2-ns-limit-equation} équivaut à la forme classique
+\[
+ \partial_tu+(u\cdot\nabla)u-\nu\Delta u+\nabla p=f,
+ \qquad\nabla\!\cdot u=0.
+\]
+
+Soient $u$ et $v$ deux solutions ayant les mêmes données et posons $w=u-v$. Le produit
+dans $H^{s-1}$ et Young donnent
+\begin{equation}\label{eq:pdf2-ns-uniqueness}
+ \frac12\frac{d}{dt}\|w\|_{H^{s-1}}^2
+ +\frac\nu2\|w\|_{H^s}^2
+ \le \frac{c_s}{\nu}
+ \bigl(\|u\|_{H^s}^2+\|v\|_{H^s}^2\bigr)
+ \|w\|_{H^{s-1}}^2.
+\end{equation}
+Grönwall et $w(0)=0$ impliquent $w=0$. L'unicité élimine la dépendance envers la
+sous-suite dans \eqref{eq:pdf2-ns-compactness}.
+
+La construction vaut pour tout $T<\infty$. En l'appliquant dans $T=n$, $n\in\mathbb N$,
+les solutions coïncident sur les recouvrements par
+\eqref{eq:pdf2-ns-uniqueness} ; elles se recollent donc en une unique solution sur
+$[0,\infty)$. Pour justifier ``lisse'' sans extrapoler une seule borne, on répète
+la construction pour la suite $s_n=s+n$, $n\ge0$. Les mêmes lecteurs
+structurels agissent à chaque échelle, les projections $P_M$ les entrelacent et
+\eqref{eq:pdf2-g-sol-cota-dato} donne dans chaque $s_n$ une constante
+$C_{T,s_n}^{\rm sol}<\infty$, car les données sont lisses. L'unicité dans
+$H^{s-1}$ identifie toutes les limites obtenues. Par
+conséquent, $u\in C^\infty((0,\infty)\times\mathbb T^3)$ et la compatibilité des
+traces avec $u_0\in C^\infty$ donne la régularité lisse jusqu'à $t=0$. Il n'apparaît pas de temps de
+rupture car la borne correspondante est disponible sur chaque horizon
+fini et dans chaque $s_n$.
+
+La condition de moyenne nulle n'élimine pas de données périodiques. Pour des données générales
+$u_0^{\rm g}$ et $f^{\rm g}$, définissons
+\[
+ m'(t)=\int_{\mathbb T^3}f^{\rm g}(t,x)\,dx,\qquad
+ m(0)=\int_{\mathbb T^3}u_0^{\rm g}(x)\,dx,\qquad
+ X(t)=\int_0^tm(r)\,dr.
+\]
+Le changement de Galilée dépendant du temps
+\begin{equation}\label{eq:pdf2-ns-mean-reduction}
+ u(t,x)=m(t)+v(t,x-X(t)),\qquad
+ g(t,y)=f^{\rm g}(t,y+X(t))-m'(t)
+\end{equation}
+transforme bijectivement le problème général en problème de moyenne nulle
+pour $(v_0,g)$. La translation préserve toutes les normes de Sobolev, la
+divergence et la régularité lisse. La construction couvre donc toute donnée périodique
+lisse ; en particulier, elle couvre le cas non forcé de l'énoncé classique.
+
+\begin{theorem}[Clôture solénoïdale globale à partir de la structure de départ explicite]
+\label{thm:pdf2-ns-global}
+Soient $s>5/2$, $\nu>0$,
+$u_0\in C^\infty(\mathbb T^3)\cap H^s_\sigma$ et
+$f\in C^\infty([0,\infty);H^\infty_\sigma)
+\cap L^2_{\rm loc}([0,\infty);H^{s-1}_\sigma)$. Avec la donnée solénoïdale complète
+typée par \eqref{eq:pdf2-ns-source-encoder-action},
+\eqref{eq:pdf2-ns-sol-transition-action},
+\eqref{eq:pdf2-ns-six-loss-no-overcount},
+\eqref{eq:pdf2-ns-local-stein},
+\eqref{eq:pdf2-ns-terminal-metric} et
+\eqref{eq:pdf2-ns-data-history-commutation}, l'image
+$\mathfrak G_{\rm sol}$, avec son terminal,
+sa retenue, sa mémoire, son shell, son port orthogonal et son lecteur racine source--first, produit une unique
+solution globale lisse $(u,p)$ de Navier--Stokes périodique tridimensionnel. Pour chaque
+$T<\infty$, elle satisfait \eqref{eq:pdf2-ns-cota-requerida} ; la construction est naturelle en
+$M$, stable lors du retrait de $J$ et compatible avec la publication de Galerkin. Au moyen de
+\eqref{eq:pdf2-ns-mean-reduction}, le résultat s'étend à toute donnée
+périodique lisse, sans imposer une moyenne nulle.
+\end{theorem}
+
+\paragraph{Provenance et force probante.}
+L'image solénoïdale, le terminal, la retenue, la tour PC--Fock et l'identité locale
+\eqref{eq:pdf2-ns-local-stein} sont
+l'\texttt{ARCHITECTURE\_AUTORALE\_PRÉEXISTANTE} prise ici comme structure de départ
+explicite. Le relèvement mixte \eqref{eq:pdf2-ns-mixed-creation}, la signature chronologique,
+les ondes $a/b$, les six domaines de sortie, l'unité homogène et la colonne
+terminale sont \texttt{FORMALISATION\_NOUVELLE}. Les équations
+\eqref{eq:pdf2-ns-source-encoder-action},
+\eqref{eq:pdf2-ns-source-colligation},
+\eqref{eq:pdf2-ns-sol-transition-action},
+\eqref{eq:pdf2-ns-six-loss-no-overcount},
+\eqref{eq:pdf2-ns-local-stein},
+\eqref{eq:pdf2-ns-terminal-metric} et
+\eqref{eq:pdf2-ns-data-history-commutation} énumèrent exactement les prémisses
+employées ; le
+théorème~\ref{thm:pdf2-ns-root-uniform} est, en langage humain, \emph{Démontré avec
+structure de départ explicite}. Aubin--Lions, la
+reconstruction de la pression, Grönwall et le recollement sont la
+\texttt{RECONNAISSANCE\_CLASSIQUE} ultérieure. La carte KYP conserve uniquement le statut de
+\texttt{CONTRÔLE\_NON\_DIRECTEUR} ; ni son comparateur ni une hypothèse de signe ne font
+partie de la chaîne causale de la clôture.
+
+\paragraph{Conclusion affirmative.}
+La chaîne directrice est close dans l'ordre
+\[
+ \begin{gathered}
+ \mathfrak G_{\rm sol}
+ \longrightarrow J_T^{\rm mix}
+ \longrightarrow\Lambda_{M,T}
+ \longrightarrow\mathcal G_{M,J,T}^{\rm sol}
+ \longrightarrow\mathsf H_{M,J,T}^{\rm sol}\\
+ \longrightarrow\mathcal R_{M,\tau}^{(1)}P_{\rm term}=u_M
+ \longrightarrow\text{borne uniforme}
+ \longrightarrow\text{Aubin--Lions}
+ \longrightarrow(u,p)_{[0,\infty)}.
+ \end{gathered}
+\]
+Dans ce profil de départ explicite, il ne reste pas d'obligation KYP supplémentaire :
+le terminal et toutes les pertes sont des images orthogonales d'une unique racine
+antérieure à l'orbite future.

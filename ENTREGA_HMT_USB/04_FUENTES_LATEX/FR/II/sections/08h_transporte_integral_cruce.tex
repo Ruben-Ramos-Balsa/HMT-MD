@@ -1,0 +1,185 @@
+% FORMALIZACION_NUEVA de la elevacion de N39, compatible con (rho9,q9),
+% T_d y Upd_t; arquitectura de residuo/cociente y orientacion preexistente.
+% Fragmento de investigacion separado. No selecciona las reglas CKM N42.
+\subsubsection{Transport de retenue arithmétique et holonomie entière du croisement arithmétique}
+\label{subsec:transporte-entero-cruce}
+
+La lecture modulaire du croisement admet une réalisation entière qui maintient
+l’information accumulée lors du franchissement du bord. On développe ici cette
+réalisation au moyen des quotients de transport. Son domaine est une coordinatisation
+relevée du support APP ; l’assignation ultérieure d’une région à un secteur
+angulaire conserve sa propre application d’incidence.
+
+\paragraph{Coordinatisation nonadique et transport relevé.}
+On emploie la décomposition exacte
+\[
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\left\lfloor\frac{n-1}{9}\right\rfloor,
+ \qquad n=\rho_9(n)+9q_9(n).
+\]
+Une position relevée est
+$z=(x,y,q_x,q_y)\in D_9^2\times\mathbb Z^2$, où
+$X=x+9q_x$ et $Y=y+9q_y$. L'incrément entier $u$ de la première
+coordonnée agit par
+\[
+ T^x_u(x,y,q_x,q_y)=
+ \bigl(\rho_9(x+u),y,q_x+c_9(x;u),q_y\bigr),\qquad
+ c_9(x;u)=\left\lfloor\frac{x+u-1}{9}\right\rfloor.
+\]
+La deuxième coordonnée se transporte de la même manière. Les avances
+cardinales correspondent à $u=\pm1$ ; l'incrément nul conserve l'état.
+Le cocycle satisfait
+\[
+ c_9(x;u+v)=c_9(x;u)+c_9(\rho_9(x+u);v).
+\]
+En effet, les deux membres sont le quotient de l'unique décomposition de
+$x+u+v$ avec résidu dans $D_9$. Par conséquent,
+$T^x_vT^x_u=T^x_{u+v}$ et $T^x_{-u}=(T^x_u)^{-1}$ ; les transports
+des deux coordonnées commutent. L'état conserve le nombre de franchissements
+du bord, même lorsque la position visible revient.
+
+\paragraph{Feuillets relevés et mise à jour des registres.}
+La réalisation entière est fixée en prolongeant les opérations arithmétiques
+APP aux coordonnées transportées :
+\begin{align*}
+ \widetilde S(z)&=X+Y=x+y+9(q_x+q_y),\\
+ \widetilde P(z)&=XY
+ =xy+9(q_xy+q_yx)+81q_xq_y.
+\end{align*}
+À chaque position, le registre des deux feuillets est conservé :
+\[
+ \bigl(\rho_9(\widetilde S),q_9(\widetilde S),
+       \rho_9(\widetilde P),q_9(\widetilde P)\bigr).
+\]
+Si $e:z\to z'$ est un lien et $T$ le feuillet sélectionné, son incrément
+intégral s'obtient à partir du registre avant et après le transport :
+\begin{equation}
+ \delta_e\widetilde T=
+ \rho_9(\widetilde T(z'))-\rho_9(\widetilde T(z))
+ +9\bigl(q_9(\widetilde T(z'))-q_9(\widetilde T(z))\bigr).
+ \label{eq:cruce-incremento-registro}
+\end{equation}
+Cette identité explicite la conservation : le saut du résidu et
+l’accroissement du quotient reconstruisent ensemble la variation du feuillet.
+La sélection de feuillet, le transport cardinal et la mise à jour du
+registre sont des opérations distinctes. Dans cette coordinatisation, on compose d’abord la
+sélection ordonnée de feuillets $(T_x,T_y)$ avec $T_d$ et avec la mise à jour
+de leurs quotients ; la formule ne postule pas que tout le TPK soit réduit
+à cette représentation locale.
+
+\begin{proposition}[Courbure entière et transport de frontière]
+\label{prop:cruce-stokes-integral}
+Définissons
+$\widetilde A_x=\delta_x\widetilde T_x$ et
+$\widetilde A_y=\delta_y\widetilde T_y$, au moyen de
+\eqref{eq:cruce-incremento-registro}, et soit
+\[
+ \widetilde F_{xy}(X,Y)=
+ \widetilde A_x(X,Y)+\widetilde A_y(X+1,Y)
+ -\widetilde A_x(X,Y+1)-\widetilde A_y(X,Y).
+\]
+Les choix homogènes ont une courbure nulle. Les choix mixtes
+$(\widetilde S,\widetilde P)$ et
+$(\widetilde P,\widetilde S)$ ont respectivement pour courbures les entiers
+$+1$ et $-1$. Pour le bord positif d'un rectangle
+$R_{a,b}$ de côtés entiers $a,b>0$,
+\[
+ \widetilde W_{SP}(\partial R_{a,b})=ab,\qquad
+ \widetilde W_{PS}(\partial R_{a,b})=-ab.
+\]
+Le résultat est indépendant du point de base et du nombre de franchissements
+des raccords nonadiques.
+\end{proposition}
+
+\begin{proof}
+La reconstruction exacte des deux feuillets donne
+\[
+ \delta_x\widetilde S=\delta_y\widetilde S=1,
+ \qquad\delta_x\widetilde P=Y,
+ \qquad\delta_y\widetilde P=X.
+\]
+Ainsi, la connexion $SP$ est $(1,X)$, de courbure
+$1+(X+1)-1-X=1$ ; la connexion $PS$ est $(Y,1)$, de courbure
+$Y+1-(Y+1)-1=-1$. Pour un feuillet unique, les différences
+mixtes s'annulent. La somme des courbures des $ab$ plaquettes annule chaque
+lien intérieur avec son inverse et conserve les liens de frontière.
+On obtient ainsi $\pm ab$ dans $\mathbb Z$. Les quotients transportés
+garantissent que la même identité vaut lors du franchissement de tout raccord.
+\end{proof}
+
+L'accumulateur de frontière peut à son tour être conservé sous forme nonadique :
+$W=r_W+9q_W$. Pour une contribution entière $w_e$, il est mis à jour par
+\[
+ r_W'=\rho_9(r_W+w_e),\qquad
+ q_W'=q_W+\left\lfloor\frac{r_W+w_e-1}{9}\right\rfloor.
+\]
+La composition par liens fournit la même somme que son évaluation
+entière directe. Dans cette coordinatisation, le zéro entier a pour coordonnées
+$(r_W,q_W)=(9,-1)$ ; c’est une représentation arithmétique de l’accumulateur,
+sans identification supplémentaire avec les différents zéros orientés du TRIT.
+
+\paragraph{Trois opérations sur l'orientation.}
+Soit $\gamma$ une route cardinale fermée. Son inversion temporelle
+$\gamma^{-1}$ inverse l'ordre des liens et l'orientation de chacun ;
+par additivité,
+\[
+ \widetilde W_{SP}(\gamma^{-1})=-\widetilde W_{SP}(\gamma).
+\]
+L'échange des feuillets satisfait également
+\[
+ \widetilde W_{PS}(\gamma)=-\widetilde W_{SP}(\gamma).
+\]
+Pour le vérifier sur toute route, observons que la somme des deux
+connexions est l'incrément exact de
+$\widetilde S+\widetilde P=X+Y+XY$ ; son intégrale sur une boucle est nulle.
+
+Le demi-tour simultané des deux directions agit, d’autre part,
+par $J_c(X,Y)=(2c_x-X,2c_y-Y)$, avec $2c\in\mathbb Z^2$,
+de sorte qu’il préserve la coordinatisation du réseau. Pour un lacet, on a
+\[
+ \widetilde W_{SP}(J_c\gamma)=\widetilde W_{SP}(\gamma).
+\]
+En effet, la contribution horizontale fermée est nulle et la verticale
+se transforme comme
+$\sum (2c_x-X)(-\delta Y)=\sum X\delta Y$, car
+$\sum\delta Y=0$. Un demi-tour spatial préserve donc
+l’orientation aréale de cette coordinatisation. Sa combinaison avec l’inversion temporelle
+ou avec l’échange de feuillets se calcule en composant les opérations
+correspondantes.
+
+La différence est pertinente pour le registre électronique : l'inversion
+simultanée des deux déplacements tous les $27$ pas d'avancement produit, dans
+des fenêtres de $9$, la suite
+\[
+ \tau_j=(-1)^{\lfloor j/3\rfloor},\qquad 0\leq j<12,
+ \qquad (+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+Cette suite enregistre les orientations d'avancement. L'holonomie requiert
+en outre les liens parcourus, les feuillets sélectionnés et les quotients
+accumulés. Ainsi, le transport de l'orientation électronique est conservé
+sans identifier un demi-tour des deux axes à l'inversion temporelle
+d'une boucle.
+
+\paragraph{Application au croisement marqué et portée sectorielle.}
+Pour le croisement rectangulaire de côtés $4$ et $7$, cette réalisation évalue
+exactement
+\[
+ \widetilde W_{SP}=28=1+9\cdot3,\qquad
+ \widetilde W_{SP}(\gamma^{-1})=-28=8+9(-4).
+\]
+L’entier conserve l’aire orientée ; le résidu isolé représente seulement
+sa classe nonadique. Par exemple, à partir de $(7,1)$, les représentants
+périodiques des liens ont pour somme $-35$, tandis que la correction de
+retenue ajoute $63$ et retrouve $28$.
+
+Dans l'incidence marquée du lecteur angulaire, le $4$ est
+$|H_e\cap P_\pi|$ et le $7$ est le pivot marqué $p_\varphi$.
+La lecture rectangulaire fournit une réalisation entière du produit
+$|H_e\cap P_\pi|\,p_\varphi$ une fois ce croisement déclaré.
+L'application qui identifie cette région au secteur $12$ doit conserver
+la marque et l'orientation du système sectoriel de
+la Définition~\ref{def:ii09-sistema-sectorial}. Les affectations
+sectorielles $12,23,13$ et leurs combinaisons de $A,h,\Delta^\circ$
+sont une spécification supplémentaire à la loi d'holonomie rectangulaire.
+Le présent résultat matérialise le relèvement d'aire, la retenue arithmétique et
+leurs involutions, avec ces données de départ explicites.

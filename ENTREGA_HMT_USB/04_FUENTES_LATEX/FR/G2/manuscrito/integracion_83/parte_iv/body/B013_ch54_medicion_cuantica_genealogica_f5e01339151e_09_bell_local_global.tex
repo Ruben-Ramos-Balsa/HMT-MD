@@ -1,0 +1,249 @@
+\section{État global, instruments locaux et corrélations triadiques de Bell}
+\label{chap:bell-local-global}
+
+La question posée par Bell \cite{Bell1964} relie la description locale des résultats à la structure globale de leurs corrélations. Elle demande si une famille de probabilités conjointes admet une décomposition en réponses locales conditionnées par un même état préalable. Dans HMT, cette question dispose d’un domaine naturel : l’état enrichi conserve la généalogie, l’orientation, la retenue et la mémoire de frontière, tandis que chaque instrument exprime une coordonnée locale. La richesse de l’état commun et la forme probabiliste de ses lectures constituent des données mathématiques distinctes. La première organise la provenance de la corrélation ; la seconde détermine sa position par rapport au polytope local de Bell.
+
+Ce chapitre vise à parcourir cette chaîne complète. Nous partirons d’une préparation globale sur l’espace des états TPK, définirons les instruments des deux ailes, retrouverons la borne CHSH et démontrerons sa stabilité sous l’enrichissement de l’état partagé ; nous passerons ensuite à l’alphabet ternaire propre au TRIT. Dans ce nouveau domaine, l’unité d’information est le trit et l’inégalité pertinente est CGLMP. La structure elliptique interne fournit en outre une réalisation réelle de la transformée de Fourier d’ordre trois au moyen de l’opérateur \(J_E^2=-I\). Il en résulte une formulation précise de la relation entre totalité holographique, lecture locale et corrélation quantique.
+
+\subsection{Préparation enrichie et instruments de frontière}
+
+Soit \(X_{\rm enr}\) l’espace des états enrichis de TPK et soit \(\mu\) une mesure de probabilité décrivant la préparation commune. Un élément \(x\in X_{\rm enr}\) comprend l’état local ainsi que son histoire de transport. La lecture est introduite au moyen d’instruments. Pour deux ailes, Alice et Bob, avec des ensembles de réglages \(\mathcal A\) et \(\mathcal B\), écrivons
+\[
+ \mathcal I_A^a:X_{\rm enr}\longrightarrow\mathcal D(\mathcal O_A),
+ \qquad
+ \mathcal I_B^b:X_{\rm enr}\longrightarrow\mathcal D(\mathcal O_B),
+\]
+où \(\mathcal D(\mathcal O)\) désigne le simplexe des distributions sur l’alphabet des résultats \(\mathcal O\). Pour chaque état préparé, les noyaux \(\mathcal I_A^a(A\mid x)\) et \(\mathcal I_B^b(B\mid x)\) expriment les probabilités produites par les lecteurs locaux.
+
+La forme locale factorisée de la distribution conjointe est
+\begin{equation}
+ P_{\rm loc}(A,B\mid a,b)
+ =\int_{X_{\rm enr}}
+   \mathcal I_A^a(A\mid x)\,
+   \mathcal I_B^b(B\mid x)\,\dd\mu(x).
+ \label{eq:bell-hmt-factorizado}
+\end{equation}
+Cette équation conserve un état global commun et permet que cet état possède une mémoire arbitrairement riche. Son assertion caractéristique est la factorisation des réponses une fois \(x\) fixé. L’indépendance des réglages exige en outre que la mesure \(\mu\) soit commune à tous les choix de \(a\) et de \(b\), et l’échantillonnage complet exige que la population observée représente cette même préparation pour toutes les paires de réglages.
+
+Cette distinction se rattache directement à la définition HMT de la mesure. Le couplage réversible entre système et appareil produit un état conjoint ; l’instrument sélectionne une partition de cet état et le lecteur en exprime une fibre. Pour un réglage \(a\) et un résultat \(A\), la fibre
+\[
+ \Omega_{a,A}
+ =\{x\in X_{\rm enr}:\operatorname{Out}_a(x)=A\}
+\]
+représente l’ensemble des histoires compatibles avec la lecture. Des réglages différents induisent des partitions différentes d’un même espace ; la variable aléatoire produite est donc typée par son contexte instrumental. La contextualité se formule ainsi dans le même langage d’instruments, de fibres et de survie.
+
+\subsection{Factorisation locale, borne CHSH et stabilité sous enrichissement}
+
+Considérons d’abord des résultats binaires \(\mathcal O_A=\mathcal O_B=\{-1,+1\}\) et deux réglages par aile. Les corrélations et la fonctionnelle de Clauser--Horne--Shimony--Holt \cite{ClauserHorneShimonyHolt1969} sont
+\begin{equation}
+ E_{ab}=\sum_{A,B=\pm1}AB\,P(A,B\mid a,b),
+ \qquad
+ S_{\rm CHSH}=E_{00}+E_{01}+E_{10}-E_{11}.
+ \label{eq:chsh}
+\end{equation}
+
+\begin{theorem}[Borne CHSH sous factorisation locale]
+\label{thm:chsh-local}
+Si la distribution conjointe a la forme \eqref{eq:bell-hmt-factorizado}, si la préparation est indépendante des réglages et si l’échantillonnage préserve la population commune dans les quatre paires de réglages, alors
+\[
+ \lvert S_{\rm CHSH}\rvert\leq2.
+\]
+\end{theorem}
+
+\begin{proof}
+Pour chaque \(x\), définissons les espérances conditionnelles
+\[
+ \overline A_a(x)=\sum_{A=\pm1}A\,\mathcal I_A^a(A\mid x),
+ \qquad
+ \overline B_b(x)=\sum_{B=\pm1}B\,\mathcal I_B^b(B\mid x).
+\]
+Toutes deux appartiennent à \([-1,1]\). L’intégrande de \(S_{\rm CHSH}\) est
+\[
+ \overline A_0(\overline B_0+\overline B_1)
+ +\overline A_1(\overline B_0-\overline B_1).
+\]
+Pour tous \(u,v\in[-1,1]\), on a \(\lvert u+v\rvert+\lvert u-v\rvert\leq2\). La valeur absolue de l’intégrande n’excède donc pas \(2\). L’intégration par rapport à une unique mesure de probabilité \(\mu\) conserve la borne.
+\end{proof}
+
+Le théorème conduit à une conséquence particulièrement importante pour HMT.
+
+\begin{corollary}[Persistance de la borne sous enrichissement de l’état]
+\label{cor:no-go-bell-memoria}
+Remplacer une variable cachée élémentaire par l’état complet \(x\in X_{\rm enr}\) conserve la borne \(\lvert S_{\rm CHSH}\rvert\leq2\) pourvu que les deux instruments continuent de se factoriser comme dans \eqref{eq:bell-hmt-factorizado}.
+\end{corollary}
+
+\begin{proof}
+L’état \(x\) joue le rôle de la variable partagée dans \cref{thm:chsh-local}. L’argument dépend de la factorisation des réponses conditionnelles et d’une préparation commune aux quatre paires de réglages ; la dimension interne de \(X_{\rm enr}\) laisse ces deux propriétés intactes.
+\end{proof}
+
+Ce corollaire fixe positivement le lieu d’action d’une théorie HMT des corrélations quantiques. La généalogie globale fournit le domaine commun. Pour réaliser une violation, le morphisme physique doit fournir une règle conjointe non séparable. Dans cette formulation, la corrélation de Bell exprime une propriété de la représentation conjointe de l’état, compatible avec l’indépendance opérationnelle des marginales.
+
+\subsection{Extension de l’entropie binaire au système qutrit et émergence de l’invariant \(\log 3\)}
+
+Le TRIT sélectionne naturellement l’alphabet \(\mathbb Z/3\mathbb Z\). Pour une distribution \(p=(p_0,p_1,p_2)\), son entropie exprimée en trits est
+\begin{equation}
+ H_3(p)=-\sum_{j=0}^{2}p_j\log_3p_j
+       =\frac{H_e(p)}{\log 3}.
+ \label{eq:entropia-base-tres}
+\end{equation}
+La même relation vaut pour l’information mutuelle ; pour éviter de la confondre avec la fonctionnelle de Bell qui apparaîtra bientôt, nous la noterons
+\[
+ \mathsf I^{(3)}(X:Y)
+ =\frac{\mathsf I^{(e)}(X:Y)}{\log 3}.
+\]
+
+\begin{proposition}[Invariance de la localité sous changement d’unité d’information]
+\label{prop:log3-localidad}
+Le passage des logarithmes naturels aux logarithmes en base trois multiplie les entropies et les informations par la constante positive \((\log 3)^{-1}\). Il conserve les distributions conjointes, leurs marginales et la condition de factorisation locale.
+\end{proposition}
+
+\begin{proof}
+L’identité \(\log_3u=(\log u)/(\log 3)\) démontre la première assertion. La seconde découle du fait que le changement de base agit sur la valeur quantifiant une distribution déjà donnée et laisse invariants aussi bien ses termes que les noyaux stochastiques qui la factorisent.
+\end{proof}
+
+L’apparition de \(\log 3\) situe l’analyse dans une unité d’information adaptée à l’alphabet ternaire. Le changement substantiel pour Bell est le passage de deux à trois résultats par instrument. Ce passage conduit de la fonctionnelle binaire CHSH à une inégalité qutrit et permet à la structure TRIT d’intervenir tant dans la définition des réglages que dans le choix des unités.
+
+\subsection{L’inégalité CGLMP pour \(3\) résultats}
+
+Soient \(A_1,A_2,B_1,B_2\) des variables à valeurs dans \(\mathbb Z/3\mathbb Z\) ; toutes les égalités de cette section s’entendent modulo trois. Définissons la fonctionnelle de Collins--Gisin--Linden--Massar--Popescu \cite{CGLMP2002}
+\begin{align}
+ I_3^{\rm CGLMP}={}&P(A_1=B_1)+P(B_1=A_2+1)
+ +P(A_2=B_2)+P(B_2=A_1)\notag\\
+ &-P(A_1=B_1-1)-P(B_1=A_2)
+ -P(A_2=B_2-1)-P(B_2=A_1-1).
+ \label{eq:cglmp-tres}
+\end{align}
+
+\begin{theorem}[Borne locale triadique]
+\label{thm:cglmp-local}
+Toute distribution de quatre instruments ternaires admettant un modèle local factorisé satisfait
+\[
+ I_3^{\rm CGLMP}\leq2.
+\]
+\end{theorem}
+
+\begin{proof}
+L’ensemble des distributions locales est l’enveloppe convexe des assignations déterministes ; il suffit donc de prouver la borne à ses sommets. Pour une assignation fixée, écrivons
+\[
+ x=A_1-B_1,\qquad y=B_1-A_2,\qquad
+ z=A_2-B_2,\qquad t=B_2-A_1.
+\]
+La relation de fermeture est \(x+y+z+t=0\). En ces termes,
+\[
+\begin{aligned}
+ I_3^{\rm CGLMP}={}&
+ \mathbf1_{x=0}+\mathbf1_{y=1}
+ +\mathbf1_{z=0}+\mathbf1_{t=0}\\
+ &-\mathbf1_{x=2}-\mathbf1_{y=0}
+ -\mathbf1_{z=2}-\mathbf1_{t=2}.
+\end{aligned}
+\]
+Les vingt-sept choix de \((x,y,z)\) déterminent \(t\). Pour \(y=0\), les neuf configurations produisent une fois \(-4\), sept fois \(-1\) et une fois \(2\) ; pour \(y=1\), elles produisent trois fois \(-1\) et six fois \(2\) ; pour \(y=2\), elles produisent six fois \(-1\) et trois fois \(2\). Le maximum sur tous les sommets est \(2\), et la convexité conserve cette borne.
+\end{proof}
+
+L’inégalité précédente décrit la frontière convexe des modèles locaux dans le même alphabet que celui utilisé par HMT. Son évaluation physique part d’une distribution conjointe obtenue à partir d’une préparation et de quatre instruments concrets. La condition \(I_3^{\rm CGLMP}>2\), lorsqu’elle est obtenue avec un échantillon complet et des réglages fixés indépendamment, exclut une factorisation locale du type \eqref{eq:bell-hmt-factorizado} pour des résultats ternaires.
+
+\subsection{Transformée triadique issue de la structure elliptique interne}
+
+La réalisation des réglages qutrit exige une transformation qui mélange les trois sorties. Soit \(E\) un espace euclidien réel muni d’une structure complexe orthogonale \(J_E\), c’est-à-dire
+\[
+ J_E^2=-I,
+ \qquad
+ J_E^{\!*}=-J_E.
+\]
+Définissons
+\[
+ \omega_J=\exp\!\left(\frac{2\pi}{3}J_E\right),
+ \qquad
+ \omega_J^3=I,
+ \qquad
+ I+\omega_J+\omega_J^2=0.
+\]
+Sur \(E\otimes\mathbb R^3\), la transformée triadique interne est
+\begin{equation}
+ \mathcal F_3^{(J)}
+ =\frac1{\sqrt3}\sum_{r,s=0}^{2}
+   \omega_J^{rs}\otimes|r\rangle\langle s|.
+ \label{eq:fourier-triadica-interna}
+\end{equation}
+
+\begin{proposition}[Orthogonalité de la transformée triadique interne]
+\label{prop:fourier-triadica-unitaria}
+L’application \(\mathcal F_3^{(J)}\) est orthogonale et son inverse s’obtient en remplaçant \(J_E\) par \(-J_E\) :
+\[
+ \bigl(\mathcal F_3^{(J)}\bigr)^{-1}
+ =\mathcal F_3^{(-J)}.
+\]
+Dans une carte qui identifie \(J_E\) à la multiplication par \(i\), elle retrouve la matrice de Fourier complexe d’ordre trois.
+\end{proposition}
+
+\begin{proof}
+L’orthogonalité de \(J_E\) implique \((\omega_J^k)^{\!*}=\omega_J^{-k}\). Le bloc \((r,r')\) de \(\mathcal F_3^{(J)}\mathcal F_3^{(-J)}\) est
+\[
+ \frac13\sum_{s=0}^{2}\omega_J^{(r-r')s}.
+\]
+La somme vaut \(I\) si \(r=r'\) et zéro dans les deux autres cas par \(I+\omega_J+\omega_J^2=0\). La composition est donc l’identité. La dernière assertion résulte de \(\exp(\theta J_E)\leftrightarrow e^{i\theta}\) dans la carte complexe.
+\end{proof}
+
+Cette construction rend le type elliptique du TRIT opératoire dans les instruments de Bell. Un réglage local peut être composé à partir de \(\mathcal F_3^{(J)}\), de transports diagonaux de phase et de projecteurs sur la base ternaire. Les transports d’orientation et de mémoire de chaque aile doivent déterminer ces phases avant l’évaluation de l’inégalité. Ainsi, \(J_E\) fournit la rotation interne, tandis que le registre généalogique fournit la sélection généalogique des instruments.
+
+\subsection{Représentation conjointe et indépendance des marginales}
+
+La confluence avec la mécanique quantique s’exprime au moyen d’une application de réalisation
+\begin{equation}
+ \mathcal R_{\rm Bell}:X_{\rm enr}\longrightarrow
+ \mathcal D(\mathcal H_A\otimes\mathcal H_B),
+ \label{eq:realizacion-bell}
+\end{equation}
+où \(\mathcal D(\mathcal H_A\otimes\mathcal H_B)\) est l’espace des opérateurs densité. Soient \(\{M_{A,k}^{a}\}_{k\in\mathbb Z/3\mathbb Z}\) et \(\{N_{B,\ell}^{b}\}_{\ell\in\mathbb Z/3\mathbb Z}\) des POVM locales. La règle conjointe est
+\begin{equation}
+ P(k,\ell\mid a,b)
+ =\int_{X_{\rm enr}}
+  \operatorname{tr}\!\left[
+   \mathcal R_{\rm Bell}(x)
+   \bigl(M_{A,k}^{a}\otimes N_{B,\ell}^{b}\bigr)
+  \right]\dd\mu(x).
+ \label{eq:born-bell-hmt}
+\end{equation}
+
+\begin{proposition}[Indépendance des marginales par complétude locale]
+\label{prop:no-signaling-hmt}
+Si
+\[
+ \sum_{\ell=0}^{2}N_{B,\ell}^{b}=I_B
+ \quad\text{pour tout }b,
+\]
+alors la marginale d’Alice est indépendante du réglage de Bob. L’assertion symétrique vaut pour l’autre aile.
+\end{proposition}
+
+\begin{proof}
+En sommant \eqref{eq:born-bell-hmt} sur \(\ell\), la complétude remplace \(\sum_\ell N_{B,\ell}^{b}\) par \(I_B\). On obtient
+\[
+ \sum_{\ell}P(k,\ell\mid a,b)
+ =\int\operatorname{tr}\!\left[
+   \mathcal R_{\rm Bell}(x)
+   \bigl(M_{A,k}^{a}\otimes I_B\bigr)
+  \right]\dd\mu(x),
+\]
+une expression indépendante de \(b\).
+\end{proof}
+
+L’équation \eqref{eq:realizacion-bell} fixe le type de l’entrelaceur entre la généalogie HMT et l’espace biparti de la réalisation physique. Lorsque \(\mathcal R_{\rm Bell}(x)\) est séparable pour presque tout \(x\), la distribution peut être réécrite au moyen de variables partagées et demeure dans le domaine local. Une réalisation non séparable peut quitter cette factorisation tout en conservant, par la proposition précédente, l’indépendance des marginales par rapport au réglage distant. Corrélation globale et transmission d’un signal sont donc des propriétés différentes de la même construction.
+
+\subsection{Reconstruction holographique de la corrélation par classes de parcours indiscernables}
+
+La structure HMT organise désormais la question locale--globale au moyen d’objets typés. La totalité est une section compatible du système d’extensions, avec mémoire de sa généalogie. Chaque aile expérimentale est une frontière munie d’un instrument qui exprime une fibre. La préparation conjointe fixe l’état commun ; les instruments fixent les questions locales ; la règle de Born fixe les probabilités ; CHSH ou CGLMP déterminent si ces probabilités admettent une décomposition locale.
+
+La corrélation holographique se réalise comme lecture d’un même état global au sein d’une représentation conjointe. L’indépendance des marginales assure que chaque statistique locale demeure invariante vis-à-vis du réglage distant, tandis que la non-séparabilité peut empêcher que la distribution complète se réduise à des réponses indépendantes conditionnées par une variable classique.
+
+Une hiérarchie probatoire précise est ainsi établie. Les bornes locales CHSH et CGLMP, la persistance de la borne sous enrichissement de l’état, l’invariance lors du passage à \(\log 3\), la transformée \(\mathcal F_3^{(J)}\) et l’indépendance des marginales par complétude des POVM sont des résultats mathématiques établis. L’architecture HMT de Bell est fixée par
+\[
+ X_{\rm enr}
+ \xrightarrow{\ \mathcal R_{\rm Bell}\ }
+ \mathcal D(\mathcal H_A\otimes\mathcal H_B)
+ \xrightarrow{\ M^a\otimes N^b\ }
+ P(k,\ell\mid a,b)
+ \xrightarrow{\ \mathrm{CGLMP}\ }
+ I_3^{\rm CGLMP}.
+\]
+L’évaluation d’une violation HMT concrète s’obtient en construisant \(\mathcal R_{\rm Bell}\) et les quatre instruments à partir du registre généalogique enrichi, en certifiant leur indépendance des réglages et en calculant la distribution sans postsélection. Le chapitre fournit le domaine, les opérateurs, les bornes et le critère de réalisation ; l’évaluation numérique est réservée à la distribution dérivée de ces instruments.

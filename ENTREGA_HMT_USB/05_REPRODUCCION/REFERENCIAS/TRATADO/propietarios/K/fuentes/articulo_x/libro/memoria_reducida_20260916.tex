@@ -1,0 +1,94 @@
+\subsection{Reducción causal de la actualización bilateral}
+\label{lib04:reduccion-causal}
+
+La actualización unitaria anterior realiza el transporte del estado y de su
+memoria en un mismo espacio. La observación de la primera componente admite
+una descripción equivalente que conserva explícitamente la contribución del
+registro. Esta descripción se obtiene del transporte ya construido, con los
+mismos coeficientes y la misma orientación; la memoria eliminada de la lista
+de variables reaparece como dependencia de los estados anteriores.
+
+Fijemos los operadores \(A,D\) de \eqref{lib04:ad} y una realización
+\(H\oplus H\). Para \(n\geq0\), sean
+\begin{equation}
+ v_{n+1}=Av_n-D^*m_n,\qquad
+ m_{n+1}=Dv_n+A^*m_n.
+ \label{lib04:recurrencia-memoria}
+\end{equation}
+La actualización conjunta es \(\mathscr R_a\) y conserva
+\(\|v_n\|^2+\|m_n\|^2\).
+
+\begin{proposition}[Eliminación exacta del registro auxiliar]
+\label{lib04:prop-memoria-reducida}
+Para todo \(n\geq0\), con la suma vacía interpretada como cero,
+\begin{align}
+ m_n&=(A^*)^n m_0+
+       \sum_{k=0}^{n-1}(A^*)^{n-1-k}Dv_k,
+       \label{lib04:memoria-explicita}\\
+ v_{n+1}&=Av_n-D^*(A^*)^n m_0
+       +\sum_{k=0}^{n-1}\mathscr K_{n-1-k}v_k,
+       \label{lib04:evolucion-reducida}\\
+ \mathscr K_j&=-D^*(A^*)^jD\quad(j\geq0).
+       \label{lib04:nucleo-retardo}
+\end{align}
+La ecuación reducida, junto con \eqref{lib04:memoria-explicita}, es
+equivalente a la recurrencia conjunta para los mismos datos \((v_0,m_0)\).
+\end{proposition}
+\begin{proof}
+La primera identidad vale para \(n=0\). Si vale para \(n\), la segunda
+ecuación de \eqref{lib04:recurrencia-memoria} proporciona
+\[
+ m_{n+1}=(A^*)^{n+1}m_0+
+ \sum_{k=0}^{n-1}(A^*)^{n-k}Dv_k+Dv_n,
+\]
+que es la identidad en \(n+1\). Sustituirla, en profundidad \(n\), en
+la primera ecuación demuestra \eqref{lib04:evolucion-reducida}.
+Recíprocamente, si \(v_n\) satisface esta última y se define \(m_n\)
+por \eqref{lib04:memoria-explicita}, la misma diferencia de sumas prueba
+\(m_{n+1}=Dv_n+A^*m_n\); la otra ecuación se recupera por sustitución.
+\end{proof}
+
+El núcleo \(\mathscr K_j\) describe una transferencia hacia el registro,
+\(j\) actualizaciones dentro de él y una reentrada en la componente leída.
+El término \(-D^*(A^*)^nm_0\) conserva la memoria inicial. Su supresión
+corresponde al caso particular \(m_0=0\), no a una identidad del transporte
+general. En \eqref{lib04:evolucion-reducida} intervienen únicamente el
+estado actual y los estados anteriores. La causalidad de esta reducción
+procede del orden de la recurrencia conjunta.
+
+La normalización del balance proporciona además una estimación explícita.
+Como \(Q_-=aI-U\), se tiene
+\(\|A\|^2\leq r_a=(a+1)^3/((a+1)^3+a^3)<1\), mientras que
+\(D^*D\leq I\). Por tanto,
+\begin{equation}
+ \|\mathscr K_j\|\leq r_a^{j/2},\qquad
+ \sum_{j\geq0}\|\mathscr K_j\|
+ \leq\frac{1}{1-\sqrt{r_a}}.
+ \label{lib04:cota-nucleo-retardo}
+\end{equation}
+Esta cota controla el peso de la memoria en la ecuación reducida; la norma
+del estado conjunto sigue conservándose por la actualización unitaria.
+
+La proposición es la realización temporal de la reducción de Schur de
+\cref{mem:prop-schur}. En las series formales
+\(V(z)=\sum_{n\geq0}v_nz^n\) y
+\(M(z)=\sum_{n\geq0}m_nz^n\), las recurrencias dan
+\(V=v_0+zAV-zD^*M\) y \(M=m_0+zDV+zA^*M\). Eliminando \(M\),
+\begin{equation}
+ V(z)=\bigl[I-zA+z^2D^*(I-zA^*)^{-1}D\bigr]^{-1}
+       \bigl[v_0-zD^*(I-zA^*)^{-1}m_0\bigr].
+ \label{lib04:schur-bilateral}
+\end{equation}
+Las inversas formales existen porque sus términos constantes son identidades;
+las series de los estados y el resolvente conjunto también convergen para
+\(|z|<1\). La fuente inicial y el operador efectivo se transforman juntos.
+Un lector que actúe también sobre \(m_n\) conserva su contribución mediante
+\eqref{lib04:memoria-explicita}, conforme a \eqref{mem:schur-lector}.
+
+La reentrada aquí descrita actualiza un registro entrante. La política de
+archivo que sigue conserva, en cambio, cada complemento en una coordenada
+distinta. Ambas operaciones poseen su propia ley de conservación. El núcleo
+\(\mathscr K_j\), los propagadores de Green y una fuerza dimensional son
+objetos de tipos diferentes: el primero elimina una componente de estado,
+los segundos resuelven ecuaciones de fuente con condiciones de soporte, y
+la fuerza añade una realización dinámica y sus unidades.

@@ -1,0 +1,171 @@
+import LatticeEvenProducts
+import LatticeEvenGrading
+import LatticeHalfIntegerHeisenberg
+import LatticeHalfIntegerField
+import LatticeTwistedFiniteQuotient
+import LatticeParityNondegenerate
+import LatticeHalfConformalModes
+import LatticeHalfConformalHeisenberg
+import LatticeHalfConformalVacuum
+import LatticeHalfConformalEnergy
+import LatticeHalfConformalCentralizer
+import LatticeHalfVirasoroDefect
+import LatticeHalfFockGeneration
+import LatticeHalfConformalCentralVacuum
+import LatticeHalfVirasoroBase
+import LatticeHalfVirasoroPolynomial
+import LatticeHalfVirasoroRelations
+#print axioms HMT.IV.LatticeEvenProducts.residueCoefficient_intertwines
+#print axioms HMT.IV.LatticeEvenProducts.even_residue_coe
+#print axioms HMT.IV.LatticeEvenProducts.evenField_residue_product
+#print axioms HMT.IV.LatticeEvenProducts.evenField_iterate
+#print axioms HMT.IV.LatticeEvenGrading.evenWeightSpace
+#print axioms HMT.IV.LatticeEvenGrading.evenWeightInclusion
+#print axioms HMT.IV.LatticeEvenGrading.evenWeightInclusion_injective
+#print axioms HMT.IV.LatticeEvenGrading.even_weight_finite
+#print axioms HMT.IV.LatticeEvenGrading.carrierTheta_mem_weight
+#print axioms HMT.IV.LatticeEvenGrading.evenProjector_mem_weight
+#print axioms HMT.IV.LatticeEvenGrading.evenProjection
+#print axioms HMT.IV.LatticeEvenGrading.evenProjection_of_even
+#print axioms HMT.IV.LatticeEvenGrading.evenProjection_mem_weight
+#print axioms HMT.IV.LatticeEvenGrading.even_weights_span
+#print axioms HMT.IV.LatticeEvenGrading.evenCoefficient_mem_weight
+#print axioms HMT.IV.LatticeEvenGrading.evenCoefficient_negative_weight_zero
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.frequency
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.opposite
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.frequency_opposite
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.frequency_sum_zero
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.frequency_ne_zero
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.HalfFock
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.annihilationScale
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfAnnihilate
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.annihilationScale_cancel
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfAnnihilate_vacuum
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.half_mode_ccr_apply
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.half_annihilations_commute
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfMode
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfMode_ofNat
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfMode_negSucc
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.half_heisenberg_relation_apply
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.half_heisenberg_relation
+#print axioms HMT.IV.LatticeHalfIntegerHeisenberg.halfMode_annihilation_bound
+#print axioms HMT.IV.LatticeHalfIntegerField.ramifiedExponent
+#print axioms HMT.IV.LatticeHalfIntegerField.ramifiedExponent_frequency
+#print axioms HMT.IV.LatticeHalfIntegerField.halfFieldCoefficient
+#print axioms HMT.IV.LatticeHalfIntegerField.halfFieldCoefficient_mode
+#print axioms HMT.IV.LatticeHalfIntegerField.halfFieldCoefficient_even
+#print axioms HMT.IV.LatticeHalfIntegerField.halfFieldCoefficient_bounded_pole
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_coefficient
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_mode
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_even_coefficient
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_vacuum_annihilation
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_vacuum_creation
+#print axioms HMT.IV.LatticeHalfIntegerField.halfHeisenbergField_mode_relation
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.ParityVector
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.FiniteExtension
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteExtensionFintype
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteMul
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteInv
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteExtensionGroup
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.parityProjection
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.parityCoordinates_surjective
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.parityProjection_surjective
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.parityCoordinates_zero_iff_double
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.extensionTheta
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.theta_displacement
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.parityProjection_kernel
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.thetaQuotientEquiv
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteExtension_card
+#print axioms HMT.IV.LatticeTwistedFiniteQuotient.finiteExtension_card_rank24
+#print axioms HMT.IV.LatticeParityNondegenerate.even_pairings_imply_double
+#print axioms HMT.IV.LatticeParityNondegenerate.parityPair_radical_iff
+#print axioms HMT.IV.LatticeParityNondegenerate.parityGram_nondegenerate
+#print axioms HMT.IV.LatticeParityNondegenerate.finite_commute_iff
+#print axioms HMT.IV.LatticeParityNondegenerate.finite_mem_center_iff
+#print axioms HMT.IV.LatticeParityNondegenerate.finite_center_exact
+#print axioms HMT.IV.LatticeHalfConformalModes.creationHalfTerm
+#print axioms HMT.IV.LatticeHalfConformalModes.annihilationHalfTerm
+#print axioms HMT.IV.LatticeHalfConformalModes.creationHalfTerm_finite
+#print axioms HMT.IV.LatticeHalfConformalModes.annihilationHalfTerm_finite
+#print axioms HMT.IV.LatticeHalfConformalModes.halfNormalMode
+#print axioms HMT.IV.LatticeHalfConformalModes.halfNormalMode_apply
+#print axioms HMT.IV.LatticeHalfConformalModes.quadraticMode
+#print axioms HMT.IV.LatticeHalfConformalModes.quadraticMode_apply
+#print axioms HMT.IV.LatticeHalfConformalModes.halfMode_nonnegative_vacuum
+#print axioms HMT.IV.LatticeHalfConformalModes.halfNormalMode_nonnegative_vacuum
+#print axioms HMT.IV.LatticeHalfConformalModes.quadraticMode_nonnegative_vacuum
+#print axioms HMT.IV.LatticeHalfConformalModes.halfNormalMode_neg_one_vacuum
+#print axioms HMT.IV.LatticeHalfConformalModes.quadraticMode_neg_one_vacuum
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.product_half_commutator
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.creation_half_delta
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.annihilation_half_delta
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.halfNormalMode_commutator
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.gram_contract_half
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.gram_contract_half_swapped
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.quadraticMode_half_commutator_apply
+#print axioms HMT.IV.LatticeHalfConformalHeisenberg.quadraticMode_half_commutator
+#print axioms HMT.IV.LatticeHalfConformalVacuum.halfAnnihilate_single
+#print axioms HMT.IV.LatticeHalfConformalVacuum.halfAnnihilate_double_nonzero
+#print axioms HMT.IV.LatticeHalfConformalVacuum.halfAnnihilate_double_zero
+#print axioms HMT.IV.LatticeHalfConformalVacuum.half_double_contraction
+#print axioms HMT.IV.LatticeHalfConformalVacuum.halfNormalMode_one_double
+#print axioms HMT.IV.LatticeHalfConformalVacuum.gram_double_contraction
+#print axioms HMT.IV.LatticeHalfConformalVacuum.quadraticMode_one_double
+#print axioms HMT.IV.LatticeHalfConformalVacuum.quadratic_commutator_one_neg_one_vacuum
+#print axioms HMT.IV.LatticeHalfConformalVacuum.shiftedQuadraticMode
+#print axioms HMT.IV.LatticeHalfConformalVacuum.shifted_zero_vacuum
+#print axioms HMT.IV.LatticeHalfConformalVacuum.vacuum_shift_forced
+#print axioms HMT.IV.LatticeHalfConformalEnergy.half_product_energy
+#print axioms HMT.IV.LatticeHalfConformalEnergy.creation_half_energy
+#print axioms HMT.IV.LatticeHalfConformalEnergy.annihilation_half_energy
+#print axioms HMT.IV.LatticeHalfConformalEnergy.finsum_energy
+#print axioms HMT.IV.LatticeHalfConformalEnergy.halfNormalMode_energy
+#print axioms HMT.IV.LatticeHalfConformalEnergy.quadratic_energy_comm_apply
+#print axioms HMT.IV.LatticeHalfConformalEnergy.quadratic_energy_comm
+#print axioms HMT.IV.LatticeHalfConformalEnergy.shifted_energy_comm
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.shiftedModes
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.shifted_comm_half
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.defect
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.defect_comm_half
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.half_centralizer_normal
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.half_centralizer_quadratic
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.half_centralizer_shifted
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.defect_comm_quadratic
+#print axioms HMT.IV.LatticeHalfConformalCentralizer.defect_comm_shifted
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.energy_defect
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.defect_eq_zero_of_nonresonant
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.conformal_comm_nonresonant
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.defect_skew
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.comm_eq_defect
+#print axioms HMT.IV.LatticeHalfVirasoroDefect.resonant_comm_eq_defect
+#print axioms HMT.IV.LatticeHalfFockGeneration.commuting_creators_generator
+#print axioms HMT.IV.LatticeHalfFockGeneration.commuting_creators_mul
+#print axioms HMT.IV.LatticeHalfFockGeneration.commuting_creators_apply
+#print axioms HMT.IV.LatticeHalfFockGeneration.endomorphism_determined_by_one
+#print axioms HMT.IV.LatticeHalfFockGeneration.commuting_creators_eq_scalar
+#print axioms HMT.IV.LatticeHalfFockGeneration.commuting_creators_eq_zero
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.halfNormalMode_neg_two_vacuum
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadraticMode_neg_two_vacuum
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadraticMode_two_single
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadraticMode_two_pair
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadraticMode_two_pair_zero_one
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadraticMode_two_pair_one_zero
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.quadratic_commutator_two_neg_two_vacuum
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.shifted_two_vacuum_defect
+#print axioms HMT.IV.LatticeHalfConformalCentralVacuum.forced_shift_central_vacuum
+#print axioms HMT.IV.LatticeHalfVirasoroBase.defect_comm_create
+#print axioms HMT.IV.LatticeHalfVirasoroBase.defect_one_neg_one_vacuum
+#print axioms HMT.IV.LatticeHalfVirasoroBase.defect_two_neg_two_vacuum
+#print axioms HMT.IV.LatticeHalfVirasoroBase.defect_one_neg_one
+#print axioms HMT.IV.LatticeHalfVirasoroBase.defect_two_neg_two
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.defect_recurrence
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.resonant_defect_from_two
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.resonant_defect_nat
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.resonant_defect_all
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.defect_all
+#print axioms HMT.IV.LatticeHalfVirasoroPolynomial.shifted_commutator_polynomial
+#print axioms HMT.IV.LatticeHalfVirasoroRelations.virasoro_commutator
+#print axioms HMT.IV.LatticeHalfVirasoroRelations.virasoro_central_charge_twentyFour
+#print axioms HMT.IV.LatticeHalfVirasoroRelations.virasoro_commutator_apply
+#print axioms HMT.IV.LatticeHalfVirasoroRelations.vacuum_conformal_weight_three_halves

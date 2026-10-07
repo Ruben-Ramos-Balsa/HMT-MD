@@ -1,0 +1,19 @@
+import LatticeEvenRestrictedDual
+#print axioms HMT.IV.LatticeEvenRestrictedDual.vanishesAbove
+#print axioms HMT.IV.LatticeEvenRestrictedDual.representativeBelow
+#print axioms HMT.IV.LatticeEvenRestrictedDual.homogeneousRepresentative_pair_same
+#print axioms HMT.IV.LatticeEvenRestrictedDual.representativeBelow_pair_weight
+#print axioms HMT.IV.LatticeEvenRestrictedDual.representativeBelow_pair
+#print axioms HMT.IV.LatticeEvenRestrictedDual.representative_unique
+#print axioms HMT.IV.LatticeEvenRestrictedDual.representativeBelow_independent
+#print axioms HMT.IV.LatticeEvenRestrictedDual.vanishesAbove_mono
+#print axioms HMT.IV.LatticeEvenRestrictedDual.boundedDual
+#print axioms HMT.IV.LatticeEvenRestrictedDual.reconstruct
+#print axioms HMT.IV.LatticeEvenRestrictedDual.reconstruct_pair
+#print axioms HMT.IV.LatticeEvenRestrictedDual.reconstruction
+#print axioms HMT.IV.LatticeEvenRestrictedDual.reconstruction_injective
+#print axioms HMT.IV.LatticeEvenRestrictedDual.pairing_has_bounded_weight_support
+#print axioms HMT.IV.LatticeEvenRestrictedDual.pairingEmbedding
+#print axioms HMT.IV.LatticeEvenRestrictedDual.reconstruction_pairingEmbedding
+#print axioms HMT.IV.LatticeEvenRestrictedDual.pairingEmbedding_reconstruction
+#print axioms HMT.IV.LatticeEvenRestrictedDual.restrictedDualEquivalence

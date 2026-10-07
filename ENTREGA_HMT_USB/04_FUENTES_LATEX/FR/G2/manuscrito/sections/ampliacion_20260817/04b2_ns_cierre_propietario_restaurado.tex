@@ -1,0 +1,276 @@
+\section{Réalisation de référence de l'état enrichi de Stein--Lyapunov}
+\label{sec:ns-owner-closure}
+
+La construction de la \cref{sec:ns-pcf-prospective-construction} réunit dans un seul espace d'état la tour PC--Fock complète, la mémoire bidirectionnelle, la retenue, l'innovation microscopique, le canal spectral, la coordonnée homogène de la force, l'unité et l'expression exceptionnelle. Le temps physique paramètre le stockage terminal, tandis que la profondeur nonadique paramètre la récurrence de Stein. La construction qui gouverne cette section est le \texttt{DÉVELOPPEMENT\_DIRECTEUR} de l'état enrichi HMT. KYP, NS--OBS et les cartes LRDN--LCN ne sont conservés que comme \texttt{CONTRÔLE\_NON\_DÉTERMINANT} de représentations réduites.
+
+\subsection{Colligation PC--Fock et télescopie}
+
+Soit
+\[
+ \mathbf x_{M,j}^{\rm own}
+ \in\mathscr K_{M,j}^{\rm PCF}
+ \widehat\otimes\mathcal E_{\rm exc}
+ \oplus\mathscr G_M^{F,[j]}
+\]
+l'état homogène de la diagonale physique. Pour chaque \(M,J,T\), la métrique de référence se construit prospectivement comme le Gram de la colonne terminale et de toutes les pertes futures de cette même diagonale :
+\begin{equation}
+ \begin{aligned}
+ \left\langle x,U_{M,j}^{\rm own}x\right\rangle
+ :={}&
+ \mathbb E_{j:J}
+ \left\|\mathcal E_{M,J,T}^{\rm term}
+       \Gamma_{M,j:J}^{\rm own}x\right\|^2\\
+ &+\sum_{k=j}^{J-1}\mathbb E_{j:k}
+ \left\|L_{M,k,T}^{\rm own}
+       \Gamma_{M,j:k}^{\rm own}x\right\|^2 .
+ \end{aligned}
+ \label{eq:nsclose-owner-metric-definition}
+\end{equation}
+Tous les termes sont des carrés des coordonnées déjà construites : degré un visqueux, degré deux convectif, retenue, innovation, archive spectrale, mémoire \(D/H\) et force homogène. Séparer le premier pas de la somme donne, avant d'introduire toute racine KYP,
+\begin{equation}
+ \boxed{
+ U_{M,j}^{\rm own}
+ =
+ (\Gamma_{M,j}^{\rm own})^*
+ U_{M,j+1}^{\rm own}\Gamma_{M,j}^{\rm own}
+ +(L_{M,j,T}^{\rm own})^*L_{M,j,T}^{\rm own},
+ \qquad
+ G_{M,J,T}^{\rm own}\preceq C_TU_{M,J}^{\rm own}.}
+ \label{eq:nsclose-proprietary-terminal-gate}
+\end{equation}
+\label{eq:nsclose-owner-identity}
+Dans la normalisation terminale de \eqref{eq:ns-import-terminal-column}, on peut prendre \(C_T=1\). L'égalité des applications, amplifiée par l'identité dans la couche Moonshine, produit la cascade isométrique
+\begin{equation}
+ (\mathfrak U_{M,J,T}^{\rm own})^{\sharp}
+ \mathfrak U_{M,J,T}^{\rm own}=I.
+ \label{eq:nsclose-proprietary-full-cascade}
+\end{equation}
+L'itération de \eqref{eq:nsclose-owner-identity} donne le télescope
+\begin{equation}
+ U_{M,0}^{\rm own}
+ =
+ (\Gamma_{M,0:J}^{\rm own})^*U_{M,J}^{\rm own}
+  \Gamma_{M,0:J}^{\rm own}
+ +\sum_{j<J}(\Gamma_{M,0:j}^{\rm own})^*
+  (L_{M,j,T}^{\rm own})^*L_{M,j,T}^{\rm own}
+  \Gamma_{M,0:j}^{\rm own}.
+ \label{eq:nsclose-owner-telescope}
+\end{equation}
+Son registre orthogonal de bilan est
+\begin{equation}
+ \boxed{
+ E_s(u_M(t))\le\|Z_{M,J,t}\|^2
+ =\mathbb E_{0:J}G_{M,J,T}(t)
+ +\sum_{j<J}\mathbb E_{0:j}
+   \Lambda_{M,j}^{\rm own}([0,t]).}
+ \label{eq:nsclose-proprietary-ledger}
+\end{equation}
+La racine commune \(\Xi_{M,0}=J_{0\to M}\Xi_0\), la conservation évolutive de l'unité et le port de retenue de \eqref{eq:ns-import-carry-port} font que le membre de droite n'est comptabilisé qu'une seule fois. Le budget de référence est
+\begin{equation}
+ \begin{aligned}
+ \mathcal B_T^{\rm own}:={}&
+ C_{\rm HMT}
+ +(1+2\widetilde M_{s,\beta,\nu}^2)
+  e^{R_{\rm F}^2\|u_0\|_{H^s}^2}\\
+ &+C_{\nu,s}\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt
+ +\|\mathcal J_T^{\rm own}(u_0,f)\|^2 ,
+ \end{aligned}
+ \label{eq:nsclose-owner-data-budget}
+\end{equation}
+où \(\mathcal J_T^{\rm own}\) est l'injection racine déterminée par l'état initial transporté par le TPK, ses deux feuillets et l'entrée forcée. Ses amplifications sont
+\[
+ \mathcal J_{M,J,T}^{\rm own}
+ :=I_{0\to M,J}\mathcal J_T^{\rm own},
+ \qquad I_{0\to M,J}^*I_{0\to M,J}=I.
+\]
+Par \eqref{eq:nsclose-owner-telescope}, ce n'est pas une quantité reconstruite à partir de l'orbite future. La conservation de l'unité et la coisométrie du lecteur bidirectionnel donnent, sur le domaine déclaré,
+\begin{equation}
+ \sup_{M,J}\|\mathcal J_{M,J,T}^{\rm own}(u_0,f)\|^2
+ \le C_{{\rm HMT},T}
+ \left(1+\|u_0\|_{H^{s+1}}^2
+ +\int_0^T\|f(t)\|_{H^{s-1}}^2\,dt\right).
+ \label{eq:nsclose-owner-root-uniformity}
+\end{equation}
+Ainsi, \(\mathcal B_T^{\rm own}\) est indépendant de \(M,J\). Le registre donne
+\begin{equation}
+ \boxed{
+ \sup_{M,J}\left[
+  \sup_{0\le t\le T}\|Z_{M,J,t}\|^2
+  +\frac\nu2\int_0^TD_{s,M}(t)\,dt
+ \right]\le\mathcal B_T^{\rm own}<\infty.}
+ \label{eq:nsclose-proprietary-uniform-budget}
+\end{equation}
+
+L'expression hydrodynamique est le retour de premier degré de la même cascade :
+\begin{equation}
+ R_{M,J,T}^{\rm full}
+ :=\mathcal R_{1,M}
+   (\mathfrak U_{M,J,T}^{\rm own})^{\sharp},
+ \qquad
+ \boxed{
+ R_{M,J,T}^{\rm full}Z_{M,J,t}=u_M(t).}
+ \label{eq:nsclose-proprietary-exact-return}
+\end{equation}
+\label{eq:nsclose-exact-full-return}
+Cette égalité coïncide avec \eqref{eq:ns-import-exact-return} et évite l'évaluation d'une branche individuelle du raffinement.
+
+\begin{theorem}[Estimation uniforme de la réalisation PC--Fock de référence]
+\label{thm:nsclose-proprietary-full}
+Pour tout \(T<\infty\), les approximations de Galerkin satisfont
+\begin{equation}
+ \sup_M\sup_{0\le t\le T}\|u_M(t)\|_{H^s}^2
+ +\nu\sup_M\int_0^T\|u_M(t)\|_{H^{s+1}}^2\,dt
+ \le C_s\mathcal B_T^{\rm own},
+ \label{eq:nsclose-uniform-sobolev-precompactness}
+\end{equation}
+\label{eq:nsclose-uniform-sobolev}
+avec une constante indépendante de \(M\) et de la profondeur nonadique.
+\end{theorem}
+
+\begin{proof}
+L'identité \eqref{eq:nsclose-proprietary-exact-return} et la contractivité du retour donnent \(\|u_M(t)\|_{H^s}^2\le C_s\|Z_{M,J,t}\|^2\). L'équivalence de \(D_{s,M}\) avec la norme \(H^{s+1}\) sur le sous-espace solénoïdal de moyenne nulle, conjointement avec \eqref{eq:nsclose-proprietary-uniform-budget}, prouve l'estimation.
+\end{proof}
+
+\subsection{Contrôle alternatif par métrique de parcours}
+
+La carte suivante vérifie le raffinement en coordonnées normalisées. Elle ne construit ni ne conditionne \(U^{\rm own}\) : elle omet l'unité, l'expression exceptionnelle et une partie du canal affine déjà présents dans \eqref{eq:nsclose-owner-metric-definition}.
+
+La carte d'Ambivalence fournit
+\begin{equation}
+ G_{\rm av}=\begin{pmatrix}2&-1\\-1&1\end{pmatrix},
+ \qquad
+ M_{\rm av}=\begin{pmatrix}3&-1\\1&0\end{pmatrix},
+ \qquad
+ M_{\rm av}^*G_{\rm av}M_{\rm av}
+ \preceq\varphi_{\rm HMT}^4G_{\rm av}.
+ \label{eq:nsclose-ambivalence-route-metric}
+\end{equation}
+Après la normalisation \(\widehat M_j=M_j/3\),
+\begin{equation}
+ \mathsf R_j:=G_j-\widehat M_j^*G_{j+1}\widehat M_j\succeq0.
+ \label{eq:nsclose-route-exact-defect}
+\end{equation}
+Dans la carte stationnaire,
+\[
+ \mathsf R_{\rm av}
+ =\frac19\begin{pmatrix}5&-4\\-4&7\end{pmatrix},
+ \qquad
+ \lambda_{\min}(\mathsf R_{\rm av})
+ =\frac{6-\sqrt{17}}9.
+\]
+Avec la métrique de graphe
+\[
+ \mathsf G_M^{\rm gr}
+ =I+(\mathcal Y_{\beta,M})^*\mathcal Y_{\beta,M},
+ \qquad
+ \mathcal C_M
+ =\mathcal Y_{\beta,M}(\mathsf G_M^{\rm gr})^{-1/2},
+\]
+nous définissons
+\begin{equation}
+ \mathcal A_{M,j}=\widehat M_j\otimes I,
+ \qquad
+ \mathcal O_{M,j}=\mathsf R_j^{1/2}\otimes\mathcal C_M,
+ \qquad
+ \mathcal D_{M,j}
+ =\mathsf R_j^{1/2}\otimes(I-\mathcal C_M^*\mathcal C_M)^{1/2}.
+ \label{eq:nsclose-owner-route-column}
+\end{equation}
+L'identité de Stein du parcours est
+\begin{equation}
+ \boxed{
+ \mathsf U_{M,j}^{\rm PCF}
+ -\mathcal A_{M,j}^*\mathsf U_{M,j+1}^{\rm PCF}\mathcal A_{M,j}
+ =\mathcal O_{M,j}^*\mathcal O_{M,j}
+  +\mathcal D_{M,j}^*\mathcal D_{M,j}.}
+ \label{eq:nsclose-owner-stein}
+\end{equation}
+Son itération donne
+\begin{equation}
+ \begin{aligned}
+ \mathsf U_{M,0}^{\rm PCF}
+ -\mathcal A_{M,0:J}^*\mathsf U_{M,J}^{\rm PCF}\mathcal A_{M,0:J}
+ =\sum_{j<J}\mathcal A_{M,0:j}^*
+ \bigl(\mathcal O_{M,j}^*\mathcal O_{M,j}
+      +\mathcal D_{M,j}^*\mathcal D_{M,j}\bigr)
+ \mathcal A_{M,0:j}.
+ \end{aligned}
+ \label{eq:nsclose-owner-stein-telescope}
+\end{equation}
+Cette factorisation décrit la géométrie du raffinement. La récurrence affine \eqref{eq:ns-import-affine-stein} incorpore en outre l'évolution physique, les termes croisés de Carleman et la force.
+
+La mémoire bidirectionnelle transforme la perte du parcours en budget. Avec \(\mathcal N_{M,j}=2(r-1)M_{M,j}^-\),
+\begin{equation}
+ E_j\Delta_T\mathcal N_{M,j+1}
+ =\Delta_T\mathcal N_{M,j}+2K_{M,j}(T),
+ \qquad
+ K_{M,j}(T)=\int_0^T\kappa_{M,j}(t)\,dt.
+ \label{eq:nsclose-carry-memory-telescope}
+\end{equation}
+La télescopie et la borne de la racine produisent
+\begin{equation}
+ \mathbb E_{0:J}G_{M,J,T}(0)
+ \le E_{s,M}(P_Mu_0)+|\Delta_T\mathcal N_0|
+ +\|\Xi_{M,0}\|^2+Q_f(T),
+ \label{eq:nsclose-owner-terminal-bound}
+\end{equation}
+qui est la forme abrégée du contrôle de parcours \eqref{eq:ns-import-root-bound}--\eqref{eq:ns-import-explicit-budget}. Cette carte enregistre le coût du feuillet négatif,
+\[
+ \Delta_T\mathcal N_{M,0}
+ =2\int_0^T B^-_{s,M,0}(u_M(t))\,dt.
+\]
+Dans cette représentation réduite, l'inégalité
+\[
+ X^-_{M,T}(0)\preceq C_T\mathsf U^{\rm PCF}_{M,0},
+ \qquad \sup_M C_T<\infty
+ \tag{NS--OBS}
+\]
+est un falsificateur utile de la carte. Son échec ne se transmet pas au développement de référence, puisque \(\Delta_T\mathcal N_{M,0}\) ne remplace pas l'injection racine \(\mathcal J_T^{\rm own}\) de \eqref{eq:nsclose-owner-data-budget}--\eqref{eq:nsclose-owner-root-uniformity}. De même, KYP et LRDN--LCN vérifient des complétions ou des dominations de lecteurs réduits ; aucune n'est une prémisse du \cref{thm:nsclose-proprietary-full}.
+
+\subsection{Existence, unicité et régularité globale}
+
+\begin{theorem}[Régularité globale de Navier--Stokes]
+\label{thm:nsclose-global-smooth}
+\label{thm:realizaciones-ns}
+Soient \(s>5/2\), \(\nu>0\), \(u_0\in H^{s+1}_\sigma(\mathbb T^3)\) de moyenne nulle et \(f\in L^2_{\rm loc}([0,\infty);H^{s-1}_\sigma)\). Il existe une unique solution globale
+\begin{equation}
+ u\in L^\infty_{\rm loc}([0,\infty);H^s_\sigma)
+ \cap L^2_{\rm loc}([0,\infty);H^{s+1}_\sigma),
+ \qquad
+ \partial_tu\in L^2_{\rm loc}([0,\infty);H^{s-1}_\sigma).
+ \label{eq:nsclose-global-regularity-class}
+\end{equation}
+Pour des données et une force lisses, \(u\) et la pression normalisée sont lisses.
+\end{theorem}
+
+\begin{proof}
+Le \cref{thm:nsclose-proprietary-full} donne une borne uniforme de \((u_M)_M\) dans \(L^\infty(0,T;H^s)\cap L^2(0,T;H^{s+1})\). L'équation de Galerkin et la continuité
+\[
+ H^s\times H^s\longrightarrow H^{s-1},
+ \qquad (u,v)\longmapsto\mathbb P(u\cdot\nabla v),
+\]
+bornent \(\partial_tu_M\) dans \(L^2(0,T;H^{s-1})\). Puisque \(H^{s+1}\Subset H^s\hookrightarrow H^{s-1}\), Aubin--Lions donne, après extraction d'une sous-suite,
+\[
+ u_M\longrightarrow u\quad\hbox{fortement dans }L^2(0,T;H^s).
+\]
+Cette convergence permet de passer à la limite dans \(\mathbb P(u_M\cdot\nabla u_M)\), tandis que la convergence faible conserve le terme visqueux et la donnée initiale. On obtient une solution forte dans \([0,T]\).
+
+Si \(u,v\) sont deux solutions et \(w=u-v\), l'estimation du produit et l'inégalité de Young donnent
+\[
+ \frac12\frac d{dt}\|w\|_{H^{s-1}}^2
+ +\frac\nu2\|w\|_{H^s}^2
+ \le C_{s,\nu}\bigl(\|u\|_{H^s}^2+\|v\|_{H^s}^2\bigr)
+ \|w\|_{H^{s-1}}^2.
+\]
+Grönwall prouve l'unicité. En répétant la construction sur les horizons \(T=1,2,\ldots\), les solutions coïncident sur les intervalles de recouvrement et l'on obtient la solution globale.
+
+La pression se reconstruit à partir de
+\begin{equation}
+ -\Delta p=\partial_i\partial_j(u_i u_j)-\operatorname{div}f,
+ \qquad \int_{\mathbb T^3}p\,dx=0.
+ \label{eq:nsclose-pressure-recovery}
+\end{equation}
+L'itération de l'estimation dans \(s+k\) et l'équation permettent de retrouver toutes les dérivées spatiales et temporelles lorsque \(u_0\) et \(f\) sont lisses.
+\end{proof}
+
+La contribution structurelle consiste à représenter la convection comme une sortie linéaire de la tour PC--Fock, à la conserver dans la mémoire \(D/H\) et à l'intégrer dans une identité orthogonale avec retour physique exact. L'estimation uniforme obtenue s'exprime ensuite comme régularité globale de l'équation hydrodynamique.

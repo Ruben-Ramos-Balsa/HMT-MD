@@ -1,0 +1,733 @@
+\section{Noyau topologique de phase et génération du catalogue de germes}
+\label{act21:tpk:capitulo}
+
+Les deux évaluations de l'APP acquièrent une efficacité générative lorsque l'on précise
+quelle évaluation agit, en quelle position elle s'effectue, comment cette position se déplace
+et quelle information chaque transition conserve. Le \emph{Topological Phase Kernel},
+abrégé en TPK et dénommé en espagnol \emph{núcleo topológico de fase}, réunit
+ces opérations dans une dynamique sur des états enrichis. Sa définition
+comprend la sélection, le transport, la mise à jour arithmétique et la conservation du
+registre. La construction finie développée dans ce chapitre fournit
+les germes sur lesquels agiront les relèvements régionaux et le prolongement
+coinductif.
+
+Le résultat principal de cette étape est un catalogue généré et classé :
+les conditions initiales des deux curseurs produisent des émissions entières ;
+leur lecture ternaire détermine des mots orientés ; l'action diédrale organise
+ces mots en orbites. Chaque étape conserve ses préimages et les relations
+qui permettent de revenir à la description précédente. La chaîne de cardinaux
+\[
+ 104\,976\longrightarrow468\longrightarrow243\subset729,
+ \qquad 243\longrightarrow43,
+\]
+désigne sous une forme abrégée des objets différents. Chaque objet est ensuite construit et chaque dénombrement
+est justifié, avant que l'un d'eux soit utilisé comme donnée de
+la sélection régionale.
+
+\subsection{Sélection de phase, transport et état enrichi}
+\label{act21:tpk:operaciones}
+
+\subsubsection{Sélecteur tritique de phase opérationnelle}
+
+La phase nonadique prend ses valeurs en \(D_9=\{1,\ldots,9\}\). Le sélecteur  
+tritique est la fonction
+\begin{equation}
+ M_{\mathrm{ph}}:D_9\longrightarrow\{-1,0,+1\},\qquad
+ M_{\mathrm{ph}}(g)=
+ \begin{cases}
+ +1,&g\in\{1,4,7\},\\
+ -1,&g\in\{2,5,8\},\\
+ 0,&g\in\{3,6,9\}.
+ \end{cases}
+ \label{act21:tpk:selector}
+\end{equation}
+Dans la réalisation émettrice, la valeur \(+1\) active l'évaluation additive,
+\(-1\) active l'évaluation multiplicative et \(0\) enregistre l'événement
+neutre. L'orientation cardinale du curseur est une autre coordonnée de l'état.
+Cette séparation permet de fixer simultanément quelle opération est lue et dans quelle
+direction est transporté son point d'évaluation.
+
+Pour les transitions numérotées par \(t\geq1\), la phase précédant la lecture est
+\begin{equation}
+ g_t=1+[(t-1)]_9,\qquad \epsilon_t=M_{\mathrm{ph}}(g_t),
+ \label{act21:tpk:fase}
+\end{equation}
+où \([n]_b\) désigne le représentant de \(n\) modulo \(b\) dans
+\(\{0,\ldots,b-1\}\). Une fenêtre de neuf transitions contient la suite
+\((+1,-1,0,+1,-1,0,+1,-1,0)\).
+
+\subsubsection{Curseurs orientés et transport cardinal}
+
+Des indices \(I_9=\{0,\ldots,8\}\) sont utilisés pour les positions et des étiquettes positives \((a,b)=(i+1,j+1)\) pour les évaluations APP. Un curseur fini est
+\[
+ c=(i,j;d)\in\mathcal S:=I_9^2\times\mathcal D,
+ \qquad \mathcal D=\{N,E,S,O\}.
+\]
+Les quatre directions agissent par
+\[
+ v_N=(-1,0),\quad v_E=(0,1),\quad
+ v_S=(1,0),\quad v_O=(0,-1).
+\]
+L'application cardinale correspondant à \(d\) est
+\[
+ T_d(i,j)=\bigl([i+(v_d)_1]_9,[j+(v_d)_2]_9\bigr).
+\]
+Ainsi, \(M_{\mathrm{ph}}\) et \(T_d\) ont des domaines, des codomaines et des actions différents. L'activation tritique sélectionne l'un des deux curseurs ; le transport cardinal modifie sa position dans la direction que ce curseur conserve déjà.
+
+Le relèvement entier du curseur est
+\(\widetilde c=(x,y;d)\in\mathbb Z^2\times\mathcal D\), avec position finie
+\(([x]_9,[y]_9)\). Ses nombres de tours sont récupérés en
+\begin{equation}
+ x=9\lfloor x/9\rfloor+[x]_9,\qquad
+ y=9\lfloor y/9\rfloor+[y]_9.
+ \label{act21:tpk:vueltas}
+\end{equation}
+Ces deux divisions concernent le transport spatial. La division d'une
+évaluation additive ou multiplicative constitue un registre arithmétique
+distinct, qui sera conservé conjointement avec elles.
+
+\subsubsection{Composition de la transition}
+
+L'état de la réalisation finie comprend les deux curseurs relevés,
+leurs directions, la phase, les accumulateurs de la fenêtre active, la liste
+ordonnée des blocs déjà émis et le registre des transitions. Chaque registre
+local contient les positions antérieures, les évaluations entières des deux
+feuillets, leurs restes et quotients, le régime actif et les orientations.
+Les champs de préfixe et de frontière qui apparaîtront dans un prolongement seront
+incorporés au même état avec leurs règles de compatibilité.
+
+La transition s'ordonne comme
+\begin{equation}
+ \mathcal U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+ \label{act21:tpk:composicion}
+\end{equation}
+La sélection détermine le régime et conserve l'échantillon antérieur à tout déplacement. Le transport applique le mouvement actif et l'inversion cardinale prescrite par le calendrier. L'actualisation incorpore cet échantillon aux accumulateurs et au registre ; à la fin d'une fenêtre, elle émet son bloc. La composition utilise donc un échantillon antérieur au transport bien que son archivage définitif s'effectue à la fin de la transition.
+
+\subsection{Conditions initiales et énumération réversible}
+\label{act21:tpk:semillas}
+
+Les feuillets additif et multiplicatif disposent de curseurs indépendants. Le
+domaine des conditions initiales est le produit ordonné
+\[
+ \Omega_{\mathrm{seed}}=\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S|=9^2\cdot4=324.
+\]
+Par conséquent,
+\begin{equation}
+ |\Omega_{\mathrm{seed}}|=324^2=104\,976.
+ \label{act21:tpk:censo-inicial}
+\end{equation}
+Le nombre \(81\) compte des positions ; \(324\) compte des positions orientées d'un curseur ; \(104\,976\) compte des paires ordonnées de curseurs. Le choix d'une position en APP conserve uniquement une partie d'une condition initiale de l'émetteur.
+
+On fixe la numérotation
+\[
+ \operatorname{ind}(N)=0,\quad\operatorname{ind}(E)=1,\quad
+ \operatorname{ind}(S)=2,\quad\operatorname{ind}(O)=3,
+\]
+et l'on définit
+\begin{equation}
+ \nu(i,j;d)=4(9i+j)+\operatorname{ind}(d).
+ \label{act21:tpk:indice-semilla}
+\end{equation}
+
+\begin{proposition}[Énumération exacte des conditions initiales]
+\label{act21:tpk:enumeracion}
+L'application \(\nu\) est une bijection de \(\mathcal S\) sur
+\(\{0,\ldots,323\}\). Le couple d'indices se code de manière réversible
+par \(324\nu_++\nu_\times\in\{0,\ldots,104\,975\}\).
+\end{proposition}
+\begin{proof}
+La division par quatre restaure
+\[
+ \operatorname{ind}(d)=[\nu]_4,\qquad
+ j=[\lfloor\nu/4\rfloor]_9,\qquad i=\lfloor\nu/36\rfloor.
+\]
+Les bornes du domaine garantissent que ces trois quantités appartiennent à
+leurs ensembles d'indices et reconstruisent \(\nu\) au moyen de
+\eqref{act21:tpk:indice-semilla}. Pour le couple, la division euclidienne par
+\(324\) restitue le quotient \(\nu_+\) et le reste \(\nu_\times\).
+\end{proof}
+
+L'énumération parcourt le domaine complet avant tout regroupement
+régional. Les indices servent à localiser les préimages d'une
+émission, en conservant explicitement la condition qui a produit chaque trajectoire.
+
+\subsection{Évaluation des feuillets et registre arithmétique}
+\label{act21:tpk:lecturas}
+
+En une position positive \((a,b)\), les évaluations entières sont
+\(A_+(a,b)=a+b\) et \(A_\times(a,b)=ab\). Pour \(n>0\), on conserve
+\begin{equation}
+ \rho_9(n)=1+[n-1]_9,\qquad
+ q_9(n)=\lfloor(n-1)/9\rfloor,\qquad
+ n=\rho_9(n)+9q_9(n).
+ \label{act21:tpk:division-evaluacion}
+\end{equation}
+L'activation additive incorpore \(\rho_9(A_+)\) à l'accumulateur correspondant. L'activation multiplicative utilise un observable du résidu \(\rho_9(A_\times)\), défini ci-dessous.
+
+\subsubsection{Exposant discret dans les unités modulo neuf}
+
+Les puissances de \(2\) modulo \(9\) parcourent
+\[
+ 2^0,2^1,\ldots,2^5\equiv1,2,4,8,7,5\pmod9,
+ \qquad 2^6\equiv1\pmod9.
+\]
+Le logarithme discret dans ce groupe de six unités se représente par
+\begin{equation}
+ \ell_9(1)=0,\quad\ell_9(2)=1,\quad\ell_9(4)=2,
+ \quad\ell_9(8)=3,\quad\ell_9(7)=4,\quad\ell_9(5)=5.
+ \label{act21:tpk:logaritmo}
+\end{equation}
+La loi émettrice étend l'observable par le biais de \(\ell_9(3)=\ell_9(6)=\ell_9(9)=0\). Pour conserver son origine, l'échantillon enregistré inclut le résidu original et l'indicateur d'appartenance au groupe d'unités. Ainsi, une valeur observée nulle peut provenir de l'unité \(1\) ou de l'un des trois résidus non inversibles, et son origine demeure récupérable.
+
+\subsubsection{Ordre de lecture et mouvement}
+
+Les évaluations s'effectuent aux positions antérieures à la transition.
+Si \(\epsilon_t=+1\), on accumule la lecture additive et on déplace son curseur.
+Si \(\epsilon_t=-1\), on accumule l'exposant discret multiplicatif et on
+déplace le second curseur. Si \(\epsilon_t=0\), on incrémente le compteur
+neutre et on conserve les deux positions.
+
+À la fin des étapes \(27\) et \(54\), les deux directions sont remplacées
+par leurs opposées. Les fenêtres s'enchaînent en conservant leurs positions et
+orientations. Au début de chaque fenêtre, seuls ses trois accumulateurs locaux sont remis à zéro ; le registre précédent reste disponible.
+
+\begin{proposition}[Inversion du transport relevé]
+\label{act21:tpk:inversion}
+Soient \(a,b\in\{0,1\}\) les indicateurs d'activation et d'inversion d'un
+curseur. Si \(\operatorname{opp}\) échange \(N\leftrightarrow S\) et
+\(E\leftrightarrow O\), la transformation
+\[
+ F_{a,b}(z,d)=\bigl(z+a v_d,\operatorname{opp}^{\,b}(d)\bigr)
+\]
+admet pour inverse
+\[
+ F_{a,b}^{-1}(z',d')=
+ \bigl(z'-a v_{\operatorname{opp}^{\,b}(d')},
+       \operatorname{opp}^{\,b}(d')\bigr).
+\]
+La réduction spatiale modulo neuf entrelace cette transformation avec le
+transport fini.
+\end{proposition}
+\begin{proof}
+Appliquer deux fois l'opposition restaure la direction initiale. Une fois
+cette direction récupérée, la soustraction de \(a v_d\) annule le déplacement.
+Pour la projection spatiale, il suffit de l'égalité
+\([z+a v_d]_9=[[z]_9+a v_d]_9\), composante par composante. L'inversion de
+direction conserve cette égalité.
+\end{proof}
+
+La phase détermine les indicateurs utilisés par l'inverse. Le registre
+spatial et l'arithmétique peuvent ainsi être conservés conjointement, même en
+traversant le bord du représentant \(I_9^2\).
+
+\subsection{Six fenêtres et émission décimale par blocs}
+\label{act21:tpk:emision}
+
+\subsubsection{Accumulation dans une fenêtre nonadique}
+
+La fenêtre \(m\), avec \(1\leq m\leq6\), comprend les étapes
+\(9m-8,\ldots,9m\). Soient \(S_m\) la somme de ses résidus positifs
+additifs actifs, \(E_m\) la somme de ses exposants discrets actifs et
+\(Z_m\) son nombre d'événements neutres.
+
+\begin{lemma}[Multiplicités d'activation]
+\label{act21:tpk:tres-eventos}
+Chaque fenêtre contient trois activations additives, trois multiplicatives et
+trois neutres. En particulier, \(Z_m=3\).
+\end{lemma}
+\begin{proof}
+Les phases d'une fenêtre parcourent exactement \(1,\ldots,9\). Chacun
+des trois ensembles de \eqref{act21:tpk:selector} a pour cardinal trois.
+\end{proof}
+
+Les six fenêtres forment \(54\) transitions et produisent six blocs.  
+Cette longueur appartient à l'émetteur initial défini ici. La continuation  
+en profondeur agit ensuite sur les mots et leurs registres compatibles.
+
+\subsubsection{Règle de codification décimale}
+
+La loi émettrice spécifie les chiffres
+\begin{align}
+ d_{m,1}&=[S_m]_{10},\notag\\
+ d_{m,2}&=[S_m+E_m]_{10},\notag\\
+ d_{m,3}&=[3S_m+5E_m+7Z_m]_{10},\notag\\
+ U_m&=100d_{m,1}+10d_{m,2}+d_{m,3}.
+ \label{act21:tpk:bloque-decimal}
+\end{align}
+Les poids \(100,10,1\) sont les positions des centaines, des dizaines et des unités.
+L'indice \(10\) indique le reste décimal, et chaque bloc satisfait
+\(0\leq U_m\leq999\). Le mot émis est la suite ordonnée
+\(\mathbf U=(U_1,\ldots,U_6)\), de largeur fixe de trois chiffres par bloc.
+
+Les coefficients \(3,5,7\) constituent les poids explicites de cette loi
+émettrice. Une fois la règle fixée, chaque chiffre se calcule à partir des
+accumulateurs, et les résultats de ce chapitre se déduisent de cette règle.
+Le nombre \(1\) qui apparaît sous sa forme réduite a une origine
+additionnelle concrète : \(7Z_m=21\equiv1\pmod{10}\).
+
+Si \(s_m=[S_m]_{10}\) et \(e_m=[E_m]_{10}\), on obtient
+\begin{equation}
+ G(s_m,e_m)=100s_m+10[s_m+e_m]_{10}
+                   +[3s_m+5e_m+1]_{10}=U_m.
+ \label{act21:tpk:acoplamiento-firmas}
+\end{equation}
+La lettre \(e_m\) désigne ici une composante de la signature d'exposants discrets. Sa définition appartient à l'émetteur fini.
+
+\begin{proposition}[Récupération des deux signatures]
+\label{act21:tpk:recuperacion-firmas}
+L'application \(G:\{0,\ldots,9\}^2\to\{0,\ldots,999\}\) est injective.
+Pour un bloc \(U=100a+10b+c\) de son image, l'inverse est
+\[
+ s=a,\qquad e=[b-a]_{10},\qquad
+ c=[3s+5e+1]_{10}.
+\]
+En conséquence, le mot \(\mathbf U\) détermine les deux signatures de six composantes \(\mathbf s\) et \(\mathbf e\).
+\end{proposition}
+\begin{proof}
+Les deux derniers termes de \eqref{act21:tpk:acoplamiento-firmas} appartiennent à
+\(\{0,\ldots,99\}\), de sorte que la centaine récupère \(s\). La dizaine
+est \([s+e]_{10}\) ; en soustrayant \(s\) et en réduisant modulo dix, on récupère
+\(e\). L'unité vérifie la troisième congruence. La reconstruction s'applique
+indépendamment aux six positions du mot.
+\end{proof}
+
+Les totaux entiers \(S_m,E_m\) se retrouvent à partir des lectures enregistrées ;
+les centaines et les dizaines retrouvent leurs restes. Par exemple, un total
+\(S_m=15\) produit \(s_m=5\). Cette différence identifie exactement
+quelle information chaque niveau de codage conserve.
+
+\subsubsection{Codification positionnelle du mot de six blocs}
+
+Les six blocs admettent une codification entière à largeur fixe,
+\begin{equation}
+ \mathscr N(\mathbf U)=\sum_{m=1}^{6}U_m1000^{6-m},
+ \qquad0\leq\mathscr N(\mathbf U)<1000^6.
+ \label{act21:tpk:entero-base1000}
+\end{equation}
+Le premier bloc occupe la position de plus haut poids et le sixième, celle des unités de base mille. Un bloc \(058\) occupe une position complète avec une valeur entière \(58\) ; sa largeur de trois chiffres fait partie de la présentation décimale de cette position.
+
+\begin{proposition}[Récupération positionnelle des émissions]
+\label{act21:tpk:inversa-base1000}
+La codification \eqref{act21:tpk:entero-base1000} détermine le mot complet
+par le biais de
+\[
+ U_m=\left[\left\lfloor
+ \frac{\mathscr N(\mathbf U)}{1000^{6-m}}\right\rfloor\right]_{1000},
+ \qquad1\leq m\leq6.
+\]
+\end{proposition}
+\begin{proof}
+En divisant par \(1000^{6-m}\), les blocs précédents produisent des multiples entiers de \(1000\), le bloc \(m\) produit \(U_m\), et la contribution des suivants appartient à \([0,1)\). La partie entière élimine cette dernière contribution et le résidu modulo \(1000\) élimine les premières.
+\end{proof}
+
+Cette codification conserve les six émissions. Son domaine possède des positions ordonnées de base mille, tandis que le domaine APP possède des positions spatiales modulo neuf. La composition maintient les deux indices : \(m\) identifie une fenêtre d'émission et \((i,j)\) identifie la cellule visitée lors d'une transition de cette fenêtre.
+
+\subsection{Calcul complet d'une émission qui commence par 501}
+\label{act21:tpk:ejemplo501}
+
+On fixe les conditions initiales
+\[
+ c_{+,0}=(0,4;N),\qquad c_{\times,0}=(2,3;N),
+ \qquad \nu_+=16,\quad\nu_\times=84.
+\]
+Les positions positives initiales sont \((1,5)\) et \((3,4)\). L'indice
+chronologique précédent est \(t=0\), la première phase lue est \(g_1=1\) et le
+registre est vide. Ces coordonnées sont les entrées
+du calcul ; les blocs s'obtiennent en exécutant la récurrence.
+
+\begin{table}[htbp]
+\caption{Première fenêtre : lectures précédentes et accumulation active.}
+\label{act21:tpk:tabla-501}
+\small
+\begin{tabular}{@{}rcccrrr@{}}
+\toprule
+\(t\)&\(\epsilon_t\)&position \(+\)&position \(\times\)&
+\(\Delta S\)&\(\Delta E\)&\((S,E,Z)\)\\
+\midrule
+1&\(+1\)&\((1,5)\)&\((3,4)\)&6&0&\((6,0,0)\)\\
+2&\(-1\)&\((9,5)\)&\((3,4)\)&0&0&\((6,0,0)\)\\
+3&0&\((9,5)\)&\((2,4)\)&0&0&\((6,0,1)\)\\
+4&\(+1\)&\((9,5)\)&\((2,4)\)&5&0&\((11,0,1)\)\\
+5&\(-1\)&\((8,5)\)&\((2,4)\)&0&3&\((11,3,1)\)\\
+6&0&\((8,5)\)&\((1,4)\)&0&0&\((11,3,2)\)\\
+7&\(+1\)&\((8,5)\)&\((1,4)\)&4&0&\((15,3,2)\)\\
+8&\(-1\)&\((7,5)\)&\((1,4)\)&0&2&\((15,5,2)\)\\
+9&0&\((7,5)\)&\((9,4)\)&0&0&\((15,5,3)\)\\
+\bottomrule
+\end{tabular}
+\notatabla{Les positions sont des étiquettes positives des cellules antérieures au mouvement. Les événements neutres augmentent uniquement \(Z\).}
+\end{table}
+
+Les trois évaluations additives actives sont
+\[
+ 1+5=6,\qquad9+5=14=5+9,\qquad8+5=13=4+9,
+\]
+de telle sorte que \(S_1=6+5+4=15\). Les trois évaluations multiplicatives actives
+sont \(3\cdot4=12\), \(2\cdot4=8\) et \(1\cdot4=4\). Leurs résidus
+positifs sont \(3,8,4\), avec des observables \(0,3,2\) ; par conséquent,
+\(E_1=5\). Enfin \(Z_1=3\). La règle décimale donne
+\[
+ d_{1,1}=[15]_{10}=5,\quad
+ d_{1,2}=[15+5]_{10}=0,\quad
+ d_{1,3}=[45+25+21]_{10}=1,
+\]
+et on obtient \(U_1=501\).
+
+La seconde lecture additive précédente a pour quotient arithmétique \(1\),
+tandis que son curseur relevé se trouve en \((-1,4;N)\), avec un nombre de tours
+verticaux \(-1\). Ce sont deux données différentes du même registre. Toutes deux
+interviennent dans la récupération intégrale de l'évaluation et de sa position.
+
+\begin{table}[htbp]
+\caption{Les six fenêtres de la condition initiale \((16,84)\).}
+\label{act21:tpk:tabla-seis501}
+\begin{tabular}{@{}rrrrrrrr@{}}
+\toprule
+\(m\)&pas&\(S_m\)&\(E_m\)&\(Z_m\)&\(s_m\)&\(U_m\)&\([-U_m]_3\)\\
+\midrule
+1&1--9&15&5&3&5&501&0\\
+2&10--18&6&5&3&6&614&1\\
+3&19--27&24&5&3&4&498&0\\
+4&28--36&21&5&3&1&169&2\\
+5&37--45&12&5&3&2&272&1\\
+6&46--54&12&5&3&2&272&1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Le mot résultant et ses signatures sont
+\begin{align*}
+ \mathbf U&=(501,614,498,169,272,272),\\
+ \mathbf s&=(5,6,4,1,2,2),&
+ \mathbf e&=(5,5,5,5,5,5).
+\end{align*}
+L'inversion cardinale après l'étape \(27\) modifie les parcours des
+trois fenêtres finales. Le bloc répété \(272\) correspond à deux
+fenêtres successives possédant leurs propres positions et leur propre registre chronologique.
+
+Comme deuxième cas, la condition initiale minimale \((\nu_+,\nu_\times)=(0,0)\)
+produit
+\[
+ \mathbf U=(252,109,252,903,850,850),\quad
+ \mathbf s=(2,1,2,9,8,8),\quad
+ \mathbf e=(3,9,3,1,7,7).
+\]
+Dans ce cas, les deux curseurs retournent à leur position et orientation initiales
+après \(54\) transitions. La phase nonadique effectue six tours, le
+compteur chronologique avance de \(54\) unités et le registre contient
+\(54\) échantillons. La lecture positionnelle du retour et
+l'histoire enregistrée décrivent des propriétés distinctes de l'exécution.
+
+\subsection{Factorisation du recensement fini}
+\label{act21:tpk:censo}
+
+Les signatures \(f_+(\nu)=\mathbf s\) et \(f_\times(\nu)=\mathbf e\) se
+calculent en exécutant le curseur correspondant pendant les six fenêtres.
+L'indépendance des positions et des directions entre les deux curseurs donne
+\begin{equation}
+ T_{\mathrm{em}}(\nu_+,\nu_\times)
+   =G^{(6)}\bigl(f_+(\nu_+),f_\times(\nu_\times)\bigr),
+ \label{act21:tpk:factorizacion}
+\end{equation}
+où \(G^{(6)}\) applique \eqref{act21:tpk:acoplamiento-firmas} à chaque position.
+La factorisation permet d'énumérer d'abord \(324+324\) trajectoires et
+de combiner ensuite les signatures distinctes, en conservant la multiplicité de
+leurs préimages.
+
+\par\noindent\begin{minipage}{\linewidth}
+\subsubsection{Images des deux signatures}
+
+Les tableaux suivants comprennent toutes les signatures. Leur multiplicité est le
+nombre de conditions initiales qui les produisent ; l'indice minimal localise
+l'une de ces conditions. La préimage complète est définie par
+\[
+ f_\sigma^{-1}(a)=\{\nu\in\{0,\ldots,323\}:f_\sigma(\nu)=a\}.
+\]
+La récurrence des sections précédentes détermine chaque élément de cet
+ensemble par un calcul entier fini.
+
+\begin{table}[H]
+\centering\fontsize{9.5}{11.4}\selectfont
+\setlength{\abovecaptionskip}{8pt}\setlength{\belowcaptionskip}{6pt}
+\renewcommand{\arraystretch}{1.12}
+\caption{Les dix-huit signatures additives.}
+\label{act21:tpk:firmas-aditivas}
+\begin{tabular}{@{}lrr@{\qquad}lrr@{}}
+\toprule
+signature&multiplicité&\(\nu_{\min}\)&signature&multiplicité&\(\nu_{\min}\)\\
+\midrule
+\texttt{122564}&18&17&\texttt{564122}&18&16\\
+\texttt{122898}&18&24&\texttt{645212}&18&4\\
+\texttt{212645}&18&5&\texttt{654889}&18&33\\
+\texttt{212988}&18&0&\texttt{889221}&18&13\\
+\texttt{221456}&18&29&\texttt{889654}&18&32\\
+\texttt{221889}&18&12&\texttt{898122}&18&25\\
+\texttt{456221}&18&28&\texttt{898465}&18&20\\
+\texttt{465898}&18&21&\texttt{988212}&18&1\\
+\texttt{546988}&18&9&\texttt{988546}&18&8\\
+\bottomrule
+\end{tabular}
+
+\par\vspace{12pt}
+
+\caption{Les vingt-six signatures multiplicatives.}
+\label{act21:tpk:firmas-multiplicativas}
+\begin{tabular}{@{}lrr@{\qquad}lrr@{}}
+\toprule
+signature&multiplicité&\(\nu_{\min}\)&signature&multiplicité&\(\nu_{\min}\)\\
+\midrule
+\texttt{000000}&108&8&\texttt{555555}&24&84\\
+\texttt{177393}&8&1&\texttt{555717}&8&14\\
+\texttt{177555}&8&54&\texttt{555771}&8&18\\
+\texttt{177771}&8&11&\texttt{555933}&8&24\\
+\texttt{339555}&8&6&\texttt{717555}&8&12\\
+\texttt{339771}&8&15&\texttt{717717}&8&21\\
+\texttt{339933}&8&59&\texttt{717933}&8&19\\
+\texttt{393177}&8&0&\texttt{771177}&8&9\\
+\texttt{393393}&8&45&\texttt{771339}&8&13\\
+\texttt{393555}&8&40&\texttt{771555}&8&16\\
+\texttt{555177}&8&52&\texttt{933339}&8&57\\
+\texttt{555339}&8&4&\texttt{933555}&8&26\\
+\texttt{555393}&8&41&\texttt{933717}&8&17\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}\par
+
+
+\begin{proposition}[Image et multiplicités de l'émetteur]
+\label{act21:tpk:468}
+L'image \(\mathcal U_6=\operatorname{im}T_{\mathrm{em}}\) contient
+\(468\) mots distincts. Ses préimages se répartissent en \(432\)
+fibres de cardinal \(144\), \(18\) de cardinal \(432\) et \(18\) de
+cardinal \(1944\).
+\end{proposition}
+\begin{proof}
+L'évaluation exhaustive de l'algorithme de la section ~\ref{act21:tpk:algoritmo} sur les indices \(0,\ldots,323\) donne les deux tableaux ci-dessus. La première partition a \(18\) classes de cardinal \(18\), et la seconde \(24\) classes de cardinal \(8\), une de cardinal \(24\) et une de cardinal \(108\). Les sommes \(18\cdot18=324\) et \(24\cdot8+24+108=324\) vérifient la masse totale des deux partitions. La proposition ~\ref{act21:tpk:recuperacion-firmas} rend injectif le couplage de ses images ; par conséquent, il y a \(18\cdot26=468\) émissions. Par \eqref{act21:tpk:factorizacion}, la préimage d'un couple de signatures est le produit de ses deux préimages. On obtient \(18\cdot24=432\) produits de cardinal \(18\cdot8=144\), \(18\) de cardinal \(18\cdot24=432\) et \(18\) de cardinal \(18\cdot108=1944\). Enfin,
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+La partie énumérative est une vérification finie exacte de la récurrence ;
+la factorisation explique pourquoi ce décompte couvre toutes les paires.
+\end{proof}
+
+L'émission de l'exemple \ref{act21:tpk:ejemplo501} a une fibre de cardinal
+\(18\cdot24=432\). L'exemple d'indices \((0,0)\) a une fibre de
+cardinal \(18\cdot8=144\). Dans les deux cas, le mot émis récupère
+les signatures, tandis que l'identification d'une condition initiale particulière
+utilise son indice ou son registre de trajectoire.
+
+\subsection{Lecture ternaire orientée et conservation des fibres}
+\label{act21:tpk:reduccion-ternaria}
+
+La réduction orientée agit séparément sur chaque bloc :
+\begin{equation}
+ \Psi:\mathcal U_6\longrightarrow\mathbb F_3^6,\qquad
+ \Psi(U_1,\ldots,U_6)=([-U_1]_3,\ldots,[-U_6]_3).
+ \label{act21:tpk:psi}
+\end{equation}
+Son signe fixe une orientation du catalogue. L'identification équilibrée
+\(0\mapsto0\), \(1\mapsto+1\), \(2\mapsto-1\) s'applique ensuite,
+composante par composante.
+
+Le module neuf organise les évaluations et positions d'APP ; les restes modulo dix forment chaque chiffre ; la base mille regroupe trois positions décimales ; le module trois détermine la signature ternaire de chaque bloc. Ces quatre usages ont des objets et des fonctions définis. En particulier, \(\Psi\) lit six blocs et produit six trits ; une conversion positionnelle de l'entier formé par dix-huit chiffres serait une autre opération.
+
+Pour les deux conditions calculées, on obtient
+\begin{align*}
+ \Psi(501,614,498,169,272,272)&=(0,1,0,2,1,1),\\
+ \Psi(252,109,252,903,850,850)&=(0,2,0,0,2,2).
+\end{align*}
+L'émetteur décimal est défini avant cette réduction. La fonction de
+\(\Psi\) est de produire l'objet ternaire sur lequel agissent la symétrie
+orbitale et les sélecteurs régionaux. Cette fonction explique sa position dans la
+généalogie : elle relie une émission déjà calculée à une classification structurale.
+
+L'image \(\mathcal W_6:=\Psi(\mathcal U_6)\) contient exactement
+\(243\) mots au sein de l'ensemble ambiant de \(3^6=729\) mots.
+L'énumération de l'algorithme final donne l'histogramme
+\begin{equation}
+\begin{array}{c|rrrrrr}
+ |\Psi^{-1}(w)|&1&2&3&4&5&6\\\hline
+ \text{nombre de mots }w&132&66&18&3&6&18.
+\end{array}
+\label{act21:tpk:fibras-ternarias}
+\end{equation}
+Les sommes des deux lectures sont
+\[
+132+66+18+3+6+18=243,
+\qquad132+2\cdot66+3\cdot18+4\cdot3+5\cdot6+6\cdot18=468.
+\]
+La première compte les mots ternaires ; la seconde récupère le nombre d'émissions réparties entre ses fibres.
+
+\begin{example}[Deux émissions avec la même signature ternaire]
+\label{act21:tpk:colision}
+Les émissions
+\[
+ (498,501,614,252,252,109),\qquad
+ (870,810,923,252,252,109)
+\]
+sont distinctes et toutes deux ont pour image \((0,0,1,0,0,2)\) par \(\Psi\).
+Chacune a \(144\) conditions initiales. Le mot ternaire conserve
+une classe de lecture ; les émissions et leurs préimages distinguent les données
+qui convergent vers cette classe.
+\end{example}
+
+La conservation des fibres s'exprime concrètement par
+\[
+ \mathcal F_w=\{\mathbf U\in\mathcal U_6:\Psi(\mathbf U)=w\},
+ \qquad
+ \Omega_{\mathbf U}=T_{\mathrm{em}}^{-1}(\mathbf U).
+\]
+Ainsi, la préimage complète de \(w\) dans le domaine initial est l'union disjointe des ensembles \(\Omega_{\mathbf U}\), avec \(\mathbf U\in\mathcal F_w\). Le registre enrichi peut conserver l'émission, ses signatures et la condition initiale ainsi que sa lecture ternaire. L'inverse exacte se réfère alors à la donnée enregistrée avec son type ; le mot de six trits pris isolément conserve la portée précise de \eqref{act21:tpk:psi}.
+
+\subsection{Action diédrale et les quarante-trois orbites}
+\label{act21:tpk:orbitas}
+
+Sur six coordonnées se définissent les permutations
+\begin{align}
+ r(u_1,u_2,u_3,u_4,u_5,u_6)
+   &=(u_3,u_1,u_2,u_5,u_6,u_4),\\
+ s(u_1,u_2,u_3,u_4,u_5,u_6)
+   &=(u_4,u_5,u_6,u_1,u_2,u_3).
+ \label{act21:tpk:generadores-diedrales}
+\end{align}
+La première fait tourner les deux groupes de trois coordonnées dans des sens conjugués ;
+la seconde échange les deux groupes. Leur composition satisfait
+\(r^3=s^2=1\) et \(srs=r^{-1}\). Elles engendrent ainsi une action du groupe diédral
+\(D_3\), à six éléments.
+
+\begin{proposition}[Équivariance et stabilité du catalogue]
+\label{act21:tpk:equivarianza}
+La réduction \(\Psi\) commute avec l'action de \(D_3\). Les ensembles
+\(\mathcal U_6\) et \(\mathcal W_6\) sont stables sous leurs générateurs.
+\end{proposition}
+\begin{proof}
+L'égalité \(\Psi(g\mathbf U)=g\Psi(\mathbf U)\) se vérifie en chaque
+coordonnée parce que \(g\) permute les positions et \(\Psi\) applique la même
+réduction à chaque position. La stabilité du catalogue constitue une autre
+vérification : en générant ses \(468\) éléments par
+\eqref{act21:tpk:factorizacion}, on vérifie que \(r\mathbf U\) et
+\(s\mathbf U\) appartiennent à nouveau à cet ensemble. L'algorithme de la
+section~\ref{act21:tpk:algoritmo} effectue ces vérifications d'appartenance.
+L'équivariance transmet ensuite la stabilité à son image ternaire.
+\end{proof}
+
+\begin{proposition}[Décomposition orbitale complète]
+\label{act21:tpk:43}
+L'ensemble \(\mathcal W_6\) se décompose en \(43\) orbites : \(38\)
+de cardinal six et \(5\) de cardinal trois.
+\end{proposition}
+\begin{proof}
+Pour chaque \(w\in\mathcal W_6\) on forme
+\[
+ \mathcal O(w)=\{w,rw,r^2w,sw,srw,sr^2w\}.
+\]
+On choisit comme représentant le mot lexicographiquement minimal de cet ensemble. Deux mots ont le même représentant exactement lorsqu'ils appartiennent à la même orbite. L'algorithme génère la liste des représentants du tableau~\ref{act21:tpk:representantes} ; la somme de leurs cardinaux vaut \(38\cdot6+5\cdot3=243\). Comme chaque mot du catalogue participe à cette opération et que le catalogue est stable, la liste couvre toute l'image.
+\end{proof}
+
+\begin{table}[htbp]
+\caption{Représentants minimaux et cardinaux des quarante-trois orbites.}
+\label{act21:tpk:representantes}
+\small
+\begin{tabular}{@{}lr@{\qquad}lr@{\qquad}lr@{}}
+\toprule
+représentant&cardinal&représentant&cardinal&représentant&cardinal\\
+\midrule
+\texttt{001002}&6&\texttt{002112}&6&\texttt{012222}&6\\
+\texttt{001011}&6&\texttt{002211}&6&\texttt{021022}&6\\
+\texttt{001012}&6&\texttt{002220}&6&\texttt{021121}&6\\
+\texttt{001021}&6&\texttt{011021}&6&\texttt{021202}&6\\
+\texttt{001022}&6&\texttt{011112}&6&\texttt{022022}&3\\
+\texttt{001100}&3&\texttt{011120}&6&\texttt{022112}&6\\
+\texttt{001101}&6&\texttt{011201}&6&\texttt{022121}&6\\
+\texttt{001110}&6&\texttt{011211}&6&\texttt{022202}&3\\
+\texttt{001112}&6&\texttt{011220}&6&\texttt{022211}&6\\
+\texttt{001202}&6&\texttt{011222}&6&\texttt{022222}&6\\
+\texttt{001210}&6&\texttt{012112}&6&\texttt{112112}&3\\
+\texttt{001211}&6&\texttt{012121}&6&\texttt{112211}&3\\
+\texttt{001220}&6&\texttt{012202}&6&\texttt{112222}&6\\
+\texttt{001222}&6&\texttt{012210}&6&&\\
+\texttt{002012}&6&\texttt{012220}&6&&\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Les orbites héritent des invariants entiers de leurs fibres. Pour chaque mot,
+\(n(w)=|\mathcal F_w|\) compte les émissions, tandis que
+\[
+ M(w)=\sum_{\mathbf U\in\mathcal F_w}|\Omega_{\mathbf U}|
+\]
+compte les conditions initiales. Le recensement des symboles
+\(c(w)=(n_0,n_1,n_2)\) enregistre combien de fois chaque classe ternaire apparaît.
+Ces données, conjointement avec l'orientation et le support des parcours,
+fournissent les prédicats de la sélection régionale ultérieure. La
+classification conserve ainsi plus d'information que la forme d'un mot
+représentant.
+
+\subsection{Algorithme autonome d'énumération et de contrôle}
+\label{act21:tpk:algoritmo}
+
+L'énumération utilise les entiers, les listes finies et les opérations déjà définies.  
+Le procédé suivant précise son exécution ; \(\sigma\) prend les valeurs  
+\(+\) et \(\times\).
+
+\begin{enumerate}
+\item Pour chaque \(\nu=0,\ldots,323\), récupérer \((i,j;d)\) par
+l'inverse de \eqref{act21:tpk:indice-semilla}. Initialiser une liste vide de signatures.
+\item Pour chaque fenêtre \(m=1,\ldots,6\), initialiser l'accumulateur \(A=0\).
+Parcourir \(t=9m-8,\ldots,9m\), calculant \(\epsilon_t\) par
+\eqref{act21:tpk:fase}.
+\item Si \(\sigma=+\) et \(\epsilon_t=+1\), ajouter
+\(\rho_9(i+j+2)\) à \(A\) et mettre à jour
+\((i,j)\leftarrow T_d(i,j)\). Si \(\sigma=\times\) et
+\(\epsilon_t=-1\), ajouter
+\(\ell_9(\rho_9((i+1)(j+1)))\) et effectuer le même transport.
+\item À la fin de \(t=27\) ou \(t=54\), remplacer \(d\) par son opposée.  
+À la conclusion de la fenêtre, ajouter \([A]_{10}\) à la liste des signatures.  
+Conserver la position et la direction pour la fenêtre suivante.
+\item Grouper les \(324\) indices par égalité de leurs listes de six
+composants. Ces deux groupements donnent \(f_+\), \(f_\times\) et toutes
+leurs préimages.
+\item Pour chaque paire de signatures distinctes, appliquer \(G^{(6)}\).
+Attribuer à l'émission la multiplicité produit des deux préimages.
+Vérifier la récupération des signatures dans chaque bloc et la somme des
+multiplicités \(104\,976\).
+\item Appliquer \(\Psi\) à chaque émission et regrouper par égalité de mots.
+Compter les \(243\) valeurs et les multiplicités de
+\eqref{act21:tpk:fibras-ternarias}.
+\item Appliquer \(r,s\) à chaque émission et vérifier son appartenance au catalogue.
+Pour chaque mot ternaire, former ses six images diédriques, éliminer les
+répétitions et enregistrer son minimum lexicographique. Compter les \(43\)
+orbites et les deux tailles du tableau~\ref{act21:tpk:representantes}.
+\end{enumerate}
+
+L'exécution se termine : le premier tronçon évalue \(648\) trajectoires de \(54\) transitions ; le deuxième combine \(468\) couples de signatures ; le troisième regroupe un ensemble de \(243\) mots. Une vérification directe supplémentaire peut exécuter les \(104\,976\) couples et vérifier la factorisation \eqref{act21:tpk:factorizacion} ; sa portée coïncide avec le même domaine fini.
+
+\subsection{Conservation du registre et fonction des germes}
+\label{act21:tpk:conclusion}
+
+Soit \(\mathsf{Sample}(q_t)\) l'échantillon antérieur à la transition et \(\mathcal M_t\) le registre accumulé. La mise à jour de la mémoire est
+\begin{equation}
+ \mathcal M_{t+1}=\mathcal M_t\mathbin{\Vert}\mathsf{Sample}(q_t),
+ \label{act21:tpk:archivo}
+\end{equation}
+où \(\Vert\) désigne la concaténation ordonnée. La récurrence donne
+\[
+ \mathcal M_n=\mathcal M_0\mathbin{\Vert}
+ (\mathsf{Sample}(q_0),\ldots,\mathsf{Sample}(q_{n-1})).
+\]
+Les accumulateurs se reconstruisent en additionnant les contributions actives de
+chaque segment de neuf enregistrements. Leurs quotients, les tours des
+curseurs et les orientations restent associés aux mêmes transitions.
+L'exécution détermine ce registre au moyen de la récurrence ; le fichier
+préserve la provenance concrète des lectures.
+
+À la fin de cette étape sont construits le domaine complet des conditions
+initiales, l'émission décimale, ses deux signatures récupérables, l'image ternaire,
+ses fibres et sa classification orbitale. Les recensements \(104\,976\), \(468\),
+\(243\), \(729\) et \(43\) ont désormais un domaine et un mécanisme d'obtention.
+Les sélections régionales recevront ces structures avec leurs invariants,
+et les élévations agiront sur des mots orientés dont la provenance est
+conservée. Cette continuité fait du catalogue fini un antécédent
+constructif du développement coinductif.

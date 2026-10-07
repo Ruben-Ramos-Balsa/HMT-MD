@@ -1,0 +1,56 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[x=.55cm,y=.55cm, every node/.style={font=\small}]
+  \draw[step=1,black!13,very thin] (.5,.5) grid (9.5,9.5);
+  \foreach \k in {1,...,9} {
+    \node[below] at (\k,.35) {$\k$};
+    \node[left] at (.35,\k) {$\k$};
+  }
+  \node[below] at (5,-.3) {coordinate $c$};
+  \node[rotate=90] at (-.7,5) {coordinate $r$};
+  \foreach \r in {1,...,9} {
+    \foreach \c in {1,...,9} {
+      \pgfmathtruncatemacro{\pr}{mod(\r,2)}
+      \pgfmathtruncatemacro{\pc}{mod(\c,2)}
+      \ifnum\pr=1
+        \ifnum\pc=1
+          \draw[fill=black] (\c,\r) circle (.075);
+        \else
+          \draw[fill=white] (\c,\r+.105)--(\c-.105,\r-.075)--(\c+.105,\r-.075)--cycle;
+        \fi
+      \else
+        \ifnum\pc=1
+          \draw[fill=black!45] (\c,\r-.105)--(\c-.105,\r+.075)--(\c+.105,\r+.075)--cycle;
+        \else
+          \draw[fill=black!70] (\c-.075,\r-.075) rectangle (\c+.075,\r+.075);
+        \fi
+      \fi
+    }
+  }
+  \draw[black!65,dashed] (3,3) rectangle (7,7);
+  \draw[black!65,dashed] (1,1) rectangle (9,9);
+  \draw[line width=.65pt] (5,5) circle (.28);
+  \draw[->,black!50] (2,3) to[bend right=10] (8,7);
+  \node[fill=white,inner sep=2pt] at (7.6,4.55) {$\rho_{\mathrm c}$};
+  \begin{scope}[shift={(11,8.7)}]
+    \draw[fill=black] (0,0) circle (.075);
+    \node[right] at (.35,0) {$\ell$: odd--odd};
+    \draw[fill=white] (0,-.995)--(-.105,-1.175)--(.105,-1.175)--cycle;
+    \node[right] at (.35,-1.1) {$\nu$: odd--even};
+    \draw[fill=black!45] (0,-2.305)--(-.105,-2.125)--(.105,-2.125)--cycle;
+    \node[right] at (.35,-2.2) {$d$: even--odd};
+    \draw[fill=black!70] (-.075,-3.375) rectangle (.075,-3.225);
+    \node[right] at (.35,-3.3) {$u$: even--even};
+    \node[anchor=west,text width=4.4cm,align=left,font=\footnotesize]
+      at (-.15,-5.9) {The dashed lines show the strata of combinatorial radius $2$ and $4$. The centre is the unique fixed point of cellular inversion.};
+  \end{scope}
+\end{tikzpicture}
+\caption[Classification on the positional atlas]{Classification on the positional atlas. The marks distinguish the
+four internal parity classes, preceding their physical realisations.
+Depth is measured by $g(r,c)=\max(|r-5|,|c-5|)$.
+The arrow illustrates $(2,3)\mapsto(8,7)$ under cellular inversion;
+it does not represent a dynamic trajectory or a change of flavour.
+The central circle marks $(5,5)$, at depth zero.}
+\label{vi:fig:atlas}
+\end{figure}
+

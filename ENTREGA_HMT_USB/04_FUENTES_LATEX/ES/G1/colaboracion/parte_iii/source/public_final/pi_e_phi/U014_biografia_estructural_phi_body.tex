@@ -1,0 +1,626 @@
+% Unidad U014. Biografía estructural completa del carácter de autoescala.
+
+\label{gfp:b:chap:biografia-completa-phi}
+
+\section{Selección finita de la semilla de autoescala}
+
+Sea \(\mathcal U_6\subset\{0,\ldots,999\}^6\) el catálogo de las
+\(468\) emisiones distintas construido en el
+\cref{gfp:b:chap:semillas-emisor-54}, y sea
+\[
+ \Psi:\mathcal U_6\longrightarrow\mathbb F_3^6,
+ \qquad
+ \Psi(U)=((-U_j)\bmod3)_{j=1}^{6}.
+\]
+Para \(w\in\Psi(\mathcal U_6)\), recordamos los invariantes
+\[
+ n(w)=\#\Psi^{-1}(w),
+ \qquad
+ M(w)=\sum_{U\in\Psi^{-1}(w)}\operatorname{mult}(U),
+\]
+y el vector de ocupación
+\[
+ \nu(w)=
+ \bigl(\#\{j:w_j=0\},\#\{j:w_j=1\},\#\{j:w_j=2\}\bigr).
+\]
+
+\begin{theorem}[Selección orbital de la autoescala]
+\label{gfp:b:thm:seleccion-orbital-phi}
+La acción diedral sobre \(\Psi(\mathcal U_6)\) contiene una única órbita
+que satisface el predicado de autoescala
+\[
+ n(w)=1,
+ \qquad
+ M(w)=144,
+ \qquad
+ \nu(w)=(2,2,2).
+\]
+El calibre interno
+\[
+ \operatorname{diag}_c=6,
+ \qquad
+ \operatorname{card}=ES
+\]
+selecciona en esa órbita la palabra
+\[
+ \boxed{w_6^{\varphi}=121200.}
+\]
+Su única emisión es
+\[
+ \boxed{U_{\varphi}=(830,943,830,109,252,252),}
+\]
+de multiplicidad \(144\), firma multiplicativa \(555933\), orientación
+aditiva \(ES\), soporte multiplicativo de cardinal seis y tipo residual
+\(A\).
+\end{theorem}
+
+\begin{proof}
+La proyección directa da
+\[
+ U_{\varphi}\bmod3=(2,1,2,1,0,0),
+ \qquad
+ -U_{\varphi}\bmod3=(1,2,1,2,0,0).
+\]
+La enumeración se efectúa sobre las \(243\) palabras visibles y sus
+\(43\) órbitas, no sobre una selección de ejemplos. El predicado conjunto
+\(n=1\), \(M=144\), \(\nu=(2,2,2)\) deja una órbita. Dentro de ella, la
+diagonal y la orientación declaradas dejan una emisión. En esta etapa no
+se ha introducido la ecuación \(x^2-x-1=0\), una tabla decimal ni el nombre
+convencional de la constante.
+\end{proof}
+
+\section{Elevación por bloques y \(1^{\mathrm a}\) frontera coinductiva}
+
+Sea \(b_1=w_6^{\varphi}\), y sea
+\(\varepsilon=(0,0,1,1)\). Con las matrices \(L_0,L_1\) construidas en el
+\cref{gfp:b:chap:orbitas-elevacion-r36}, definimos
+\[
+ b_{k+1}=b_kL_{\varepsilon_k}\pmod3
+ \qquad(1\leq k\leq4),
+\]
+y concatenamos
+\[
+ w_{6(k+1)}^{\varphi}=w_{6k}^{\varphi}\mathbin{\|}b_{k+1}.
+\]
+El cálculo matricial produce, bloque por bloque,
+\[
+\begin{aligned}
+ b_1&=121200,\\
+ b_2&=112202,\\
+ b_3&=121020,\\
+ b_4&=010210,\\
+ b_5&=010200,
+\end{aligned}
+\]
+y, por tanto,
+\begin{equation}
+ \boxed{
+ w_{30}^{\varphi}
+ =121200|112202|121020|010210|010200.}
+ \label{gfp:b:eq:w30-phi}
+\end{equation}
+La neutralidad dual de la frontera añade
+\[
+ u_5^{\varphi}=102011,
+\]
+de modo que
+\begin{equation}
+ \boxed{
+ w_{36}^{\varphi}
+ =121200|112202|121020|010210|010200|102011.}
+ \label{gfp:b:eq:w36-phi}
+\end{equation}
+
+\begin{remark}[Dos usos distintos de una palabra visible]
+La palabra \(102011\) es también visible en la biografía de \(e\). La
+igualdad de una proyección no identifica los estados enriquecidos: el canal,
+el prefijo, el cociente, el acarreo, la fase y la memoria pertenecen al tipo
+del objeto. Esta separación es obligatoria antes de construir cualquier
+carácter real.
+\end{remark}
+
+\section{Del calendario trítico al multigrafo de incidencia}
+
+\subsection{Regla modal primitiva}
+
+El calendario trítico primitivo es
+\[
+ (+1,-1,0).
+\]
+Fijamos dos modos visibles, \(\Sigma\) y \(\Pi\), y la regla
+\begin{equation}
+ +1:m\longmapsto\Sigma,
+ \qquad
+ -1:m\longmapsto\Pi,
+ \qquad
+ 0:m\longmapsto m.
+ \label{gfp:b:eq:regla-modal-primitiva-phi}
+\end{equation}
+Con la condición de cierre cíclico, la órbita modal producida por
+\eqref{gfp:b:eq:regla-modal-primitiva-phi} es
+\[
+ \boxed{(\Sigma,\Pi,\Pi).}
+\]
+Los tres pares consecutivos son
+\[
+ \Sigma\longrightarrow\Pi,
+ \qquad
+ \Pi\longrightarrow\Pi,
+ \qquad
+ \Pi\longrightarrow\Sigma.
+\]
+
+\begin{definition}[Matriz de incidencia cronológica]
+Para \(i,j\in\{\Sigma,\Pi\}\), sea
+\[
+ N_3(i,j)=
+ \#\{r\in\mathbb Z/3\mathbb Z:(m_r,m_{r+1})=(i,j)\}.
+\]
+El subíndice \(3\) cuenta instantes del calendario primitivo; no denota una
+potencia matricial.
+\end{definition}
+
+\begin{theorem}[Descenso necesario de la incidencia modal]
+\label{gfp:b:thm:descenso-incidencia-modal-phi}
+En el orden \((\Sigma,\Pi)\),
+\begin{equation}
+ \boxed{
+ N_3=
+ \begin{pmatrix}
+ 0&1\\
+ 1&1
+ \end{pmatrix}.}
+ \label{gfp:b:eq:N3-phi}
+\end{equation}
+Por repetición exacta del calendario,
+\begin{equation}
+ \boxed{
+ N_9=3N_3,
+ \qquad
+ N_{27}=9N_3,
+ \qquad
+ N_{108}=36N_3.}
+ \label{gfp:b:eq:incidencias-9-27-108-phi}
+\end{equation}
+Estas tres igualdades son igualdades de conteos de aristas; no afirman
+\(N_9=N_3^3\), \(N_{27}=N_3^9\) ni \(N_{108}=N_3^{36}\).
+\end{theorem}
+
+\begin{proof}
+No aparece \(\Sigma\to\Sigma\); cada uno de los otros tres pares aparece
+una vez. Esto determina las cuatro entradas de \(N_3\). Los calendarios de
+longitud \(9\), \(27\) y \(108\) contienen respectivamente \(3\), \(9\)
+y \(36\) copias del bloque primitivo. Cada repetición multiplica todos los
+conteos por el mismo entero, lo que prueba
+\eqref{gfp:b:eq:incidencias-9-27-108-phi}.
+\end{proof}
+
+\subsection{Publicación areal--volumétrica}
+
+La etiqueta modal y la hoja geométrica son objetos distintos. La carta
+de publicación es
+\[
+ \mathfrak g_{\rm av}(\Sigma)=\mathscr H_{\rm ar},
+ \qquad
+ \mathfrak g_{\rm av}(\Pi)=\mathscr H_{\rm vol}.
+\]
+Transportando \eqref{gfp:b:eq:N3-phi} por \(\mathfrak g_{\rm av}\), obtenemos
+el operador de incidencia
+\begin{equation}
+ \boxed{
+ F_{\rm av}=
+ \begin{pmatrix}
+ 0&1\\
+ 1&1
+ \end{pmatrix}.}
+ \label{gfp:b:eq:Fav-derivada-phi}
+\end{equation}
+Así, las dos transiciones cruzadas, la única autorretención volumétrica y la
+ausencia de autorretención areal se derivan del calendario; no son cuatro
+entradas independientes.
+
+\begin{remark}[Alcance del descenso]
+Olvidar la fase elemental no produce por sí solo un cociente de Markov
+fuerte del Topological Phase Kernel, porque el modo visible no determina
+cuál de los tres operadores internos actuará en el siguiente paso. Lo que
+sí desciende sin hipótesis adicional es el multigrafo de aristas de un
+bloque completo. Su envolvente mínimo de memoria uno tiene matriz de
+adyacencia \(F_{\rm av}\).
+\end{remark}
+
+\section{Rayo positivo invariante y unicidad de la autoescala}
+
+\begin{theorem}[Rayo de Perron derivado]
+\label{gfp:b:thm:rayo-perron-phi}
+El cono positivo de \(F_{\rm av}\) contiene un único rayo propio. Si lo
+normalizamos como \(v=(1,x)^{\mathsf T}\), entonces
+\[
+ x^2-x-1=0,
+ \qquad
+ x>0,
+\]
+y, por tanto,
+\begin{equation}
+ \boxed{x=\frac{1+\sqrt5}{2}=\varphi.}
+ \label{gfp:b:eq:phi-perron}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La ecuación \(F_{\rm av}v=\lambda v\) da, coordenada a coordenada,
+\[
+ x=\lambda,
+ \qquad
+ 1+x=\lambda x.
+\]
+Al eliminar \(\lambda\) resulta \(x^2-x-1=0\). Sus raíces son
+\((1\pm\sqrt5)/2\), y sólo la positiva pertenece al interior del cono. La
+matriz \(F_{\rm av}\) es primitiva, pues \(F_{\rm av}^2\) tiene todas sus
+entradas positivas; el teorema de Perron--Frobenius garantiza que ese rayo
+positivo es simple y único. El nombre \(\varphi\) se asigna después de esta
+construcción.
+\end{proof}
+
+\begin{corollary}[Ecuación escalar de autoescala]
+\[
+ \varphi=1+\frac1\varphi,
+ \qquad
+ \varphi^2=\varphi+1,
+ \qquad
+ \varphi^{-1}=\varphi-1.
+\]
+Estas identidades son consecuencias de \eqref{gfp:b:eq:phi-perron}; no seleccionan
+la semilla ni la matriz.
+\end{corollary}
+
+\section{Publicación de la autoescala \(\varphi\) mediante potencias de Fibonacci y convergencia diofántica}
+
+Sea \(F_0=0\), \(F_1=1\) y
+\[
+ F_{n+1}=F_n+F_{n-1}\qquad(n\geq1).
+\]
+
+\begin{theorem}[Potencias exactas de la incidencia]
+\label{gfp:b:thm:potencias-fibonacci-phi}
+Para todo \(n\geq1\),
+\begin{equation}
+ \boxed{
+ F_{\rm av}^{\,n}=
+ \begin{pmatrix}
+ F_{n-1}&F_n\\
+ F_n&F_{n+1}
+ \end{pmatrix}.}
+ \label{gfp:b:eq:potencias-Fav-fibonacci}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Para \(n=1\), la identidad es la definición de \(F_{\rm av}\). Si vale
+para \(n\), la multiplicación a la derecha por \(F_{\rm av}\) da
+\[
+ \begin{pmatrix}
+ F_n&F_{n-1}+F_n\\
+ F_{n+1}&F_n+F_{n+1}
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+ F_n&F_{n+1}\\
+ F_{n+1}&F_{n+2}
+ \end{pmatrix},
+\]
+que es el caso \(n+1\).
+\end{proof}
+
+\begin{theorem}[Identidad de Cassini]
+\label{gfp:b:thm:cassini-phi}
+Para todo \(n\geq1\),
+\begin{equation}
+ \boxed{F_{n+1}F_{n-1}-F_n^2=(-1)^n.}
+ \label{gfp:b:eq:cassini-phi}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+El determinante de \(F_{\rm av}\) es \(-1\). Tomando determinantes en
+\eqref{gfp:b:eq:potencias-Fav-fibonacci},
+\[
+ F_{n-1}F_{n+1}-F_n^2
+ =\det(F_{\rm av}^{\,n})=(-1)^n.
+\]
+\end{proof}
+
+Definimos \(r_n=F_{n+1}/F_n\) para \(n\geq1\). De Cassini se sigue
+\[
+ r_n-r_{n-1}
+ =\frac{F_{n+1}F_{n-1}-F_n^2}{F_nF_{n-1}}
+ =\frac{(-1)^n}{F_nF_{n-1}}.
+\]
+Por tanto, las aproximaciones alternan alrededor del rayo de Perron.
+
+\begin{proposition}[Horquillas racionales de Perron]
+\label{gfp:b:prop:horquillas-perron-phi}
+Para \(m\geq1\),
+\begin{equation}
+ \frac{F_{2m+2}}{F_{2m+1}}
+ <\varphi<
+ \frac{F_{2m+1}}{F_{2m}},
+ \label{gfp:b:eq:horquilla-fibonacci-phi}
+\end{equation}
+y la anchura es
+\begin{equation}
+ \boxed{
+ \frac{F_{2m+1}}{F_{2m}}
+ -\frac{F_{2m+2}}{F_{2m+1}}
+ =\frac{1}{F_{2m}F_{2m+1}}.}
+ \label{gfp:b:eq:anchura-fibonacci-phi}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La alternancia anterior sitúa los cocientes pares por debajo y los impares
+por encima de \(\varphi\). La fórmula de la anchura es
+\eqref{gfp:b:eq:cassini-phi} con \(n=2m+1\), tras poner ambas fracciones sobre
+denominador común. Como \(F_n\to\infty\), la anchura tiende a cero.
+\end{proof}
+
+\section{Incidencia de memoria de orden \(1\) y medida de Parry del envolvente simbólico}
+
+Sea \(X_{\rm av}\) el menor subshift de tipo finito sobre
+\(\{\mathscr H_{\rm ar},\mathscr H_{\rm vol}\}\) que admite exactamente
+los tres pares observados en el calendario modal. Su matriz de adyacencia es
+\(F_{\rm av}\).
+
+\begin{theorem}[Transición y medida de Parry]
+\label{gfp:b:thm:parry-phi}
+Sea \(r=(1,\varphi)^{\mathsf T}\). La matriz estocástica de Parry es
+\begin{equation}
+ \boxed{
+ P_{ij}=
+ \frac{(F_{\rm av})_{ij}r_j}{\varphi r_i}
+ =
+ \begin{pmatrix}
+ 0&1\\
+ \varphi^{-2}&\varphi^{-1}
+ \end{pmatrix}.}
+ \label{gfp:b:eq:parry-matriz-phi}
+\end{equation}
+La medida estacionaria de vértices es proporcional a
+\((1,\varphi^2)\), luego
+\begin{equation}
+ \boxed{
+ \frac{\mu_{\rm ar}}{\mu_{\rm vol}}=\varphi^{-2}.}
+ \label{gfp:b:eq:parry-razon-phi}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La suma de la fila \(i\) de \(P\) es
+\[
+ \frac{(F_{\rm av}r)_i}{\varphi r_i}=1.
+\]
+Como \(F_{\rm av}\) es simétrica, los vectores propios izquierdo y derecho
+coinciden. Los pesos estacionarios son proporcionales a sus productos
+coordenada a coordenada, es decir, a \((1,\varphi^2)\). La razón entre los
+dos pesos es \(\varphi^{-2}\).
+\end{proof}
+
+\begin{remark}[Tres medidas que no deben confundirse]
+La frecuencia cronológica de la órbita primitiva es
+\[
+ \nu_{\rm cyc}(\mathscr H_{\rm ar})=\frac13,
+ \qquad
+ \nu_{\rm cyc}(\mathscr H_{\rm vol})=\frac23.
+\]
+La medida uniforme \(\tau_{468}\) vive sobre el catálogo de emisiones. La
+medida de Parry vive sobre historias admisibles de longitud arbitraria. La
+primera cuenta instantes, la segunda cuenta emisiones y la tercera pondera
+cilindros dinámicos. Ninguna es una aproximación de las otras.
+\end{remark}
+
+\section{Carácter multiplicativo y conservación cilíndrica}
+
+Para una ruta admisible \(\gamma:i\to j\) de longitud \(n\), definimos
+\begin{equation}
+ \chi_P(\gamma)=\varphi^n\frac{r_i}{r_j}.
+ \label{gfp:b:eq:caracter-parry-phi}
+\end{equation}
+
+\begin{proposition}[Multiplicatividad por concatenación]
+\label{gfp:b:prop:multiplicatividad-parry-phi}
+Si \(\gamma_1:i\to j\) y \(\gamma_2:j\to k\), entonces
+\[
+ \chi_P(\gamma_2\circ\gamma_1)
+ =\chi_P(\gamma_2)\chi_P(\gamma_1).
+\]
+Sobre una ruta cerrada de longitud \(n\),
+\[
+ \chi_P(\gamma)=\varphi^n.
+\]
+\end{proposition}
+
+\begin{proof}
+La longitud se suma y la coordenada intermedia telescopa:
+\[
+ \varphi^{n_1+n_2}\frac{r_i}{r_k}
+ =\left(\varphi^{n_1}\frac{r_i}{r_j}\right)
+  \left(\varphi^{n_2}\frac{r_j}{r_k}\right).
+\]
+Si \(i=k\), el cociente terminal es uno.
+\end{proof}
+
+Normalizamos el vector izquierdo como
+\[
+ \ell=\frac{r}{1+\varphi^2},
+ \qquad
+ \ell^{\mathsf T}r=1.
+\]
+La medida de un cilindro es
+\[
+ \mu[x_0\cdots x_n]
+ =\ell_{x_0}r_{x_n}\varphi^{-n}.
+\]
+Por tanto,
+\begin{equation}
+ V_n(x)
+ :=\frac{\mu[x_0]}{\mu[x_0\cdots x_n]}
+ =\varphi^n\frac{r_{x_0}}{r_{x_n}}
+ =\chi_P(x_0\cdots x_n).
+ \label{gfp:b:eq:volumen-cilindrico-phi}
+\end{equation}
+Para una dimensión tipada \(D>0\), la escala
+\[
+ a_n^{(D)}(x)=V_n(x)^{1/D}
+\]
+satisface la ley exacta
+\begin{equation}
+ \boxed{
+ \bigl(a_n^{(D)}(x)\bigr)^D
+ \mu[x_0\cdots x_n]=\mu[x_0].}
+ \label{gfp:b:eq:conservacion-cilindrica-phi}
+\end{equation}
+
+En dimensión tres y sobre retornos cerrados,
+\[
+ \frac{a_9}{a_0}=\varphi^3,
+ \qquad
+ \frac{a_{27}}{a_0}=\varphi^9,
+ \qquad
+ \frac{a_{108}}{a_0}=\varphi^{36}.
+\]
+Si \(A_k=a_{9k}\), entonces
+\begin{equation}
+ A_{k+1}-2A_k+A_{k-1}
+ =A_{k-1}(\varphi^3-1)^2>0.
+ \label{gfp:b:eq:convexidad-retornos-phi}
+\end{equation}
+Ésta es convexidad en profundidad de retorno; no se interpreta como una
+magnitud cinemática sin una carta adicional de duración.
+
+\section{Memoria cuadrática y rama contraída}
+
+Los autovalores de \(F_{\rm av}\) son
+\[
+ \varphi,
+ \qquad
+ -\varphi^{-1}.
+\]
+La rama contraída cambia de orientación en cada iteración. Para conservar
+ese signo antes de elevar al cuadrado, pasamos a
+\(\operatorname{Sym}^2(\mathbb R^2)\). En la base
+\((x^2,2xy,y^2)\),
+\begin{equation}
+ \operatorname{Sym}^2(F_{\rm av})=
+ \begin{pmatrix}
+ 0&0&1\\
+ 0&1&2\\
+ 1&1&1
+ \end{pmatrix}.
+ \label{gfp:b:eq:sym2-Fav-phi}
+\end{equation}
+
+\begin{theorem}[Espectro de la memoria de segundo orden]
+\label{gfp:b:thm:espectro-sym2-phi}
+\[
+ \det\bigl(tI-\operatorname{Sym}^2(F_{\rm av})\bigr)
+ =(t+1)(t^2-3t+1),
+\]
+y
+\begin{equation}
+ \boxed{
+ \operatorname{Spec}\bigl(\operatorname{Sym}^2(F_{\rm av})\bigr)
+ =\{\varphi^2,-1,\varphi^{-2}\}.}
+ \label{gfp:b:eq:espectro-sym2-phi}
+\end{equation}
+El único modo estable positivo es \(\varphi^{-2}\).
+\end{theorem}
+
+\begin{proof}
+Los autovalores de una potencia simétrica de grado dos son los productos
+\(\lambda_1^2\), \(\lambda_1\lambda_2\) y \(\lambda_2^2\). Con
+\(\lambda_1=\varphi\) y \(\lambda_2=-\varphi^{-1}\), se obtienen
+\(\varphi^2\), \(-1\) y \(\varphi^{-2}\). La primera excede uno, la
+segunda tiene módulo uno y la tercera pertenece a \((0,1)\).
+\end{proof}
+
+Sobre una ruta cerrada con \(V_n=\varphi^n\), el modo estable satisface
+\begin{equation}
+ \boxed{M_n=\varphi^{-2n}=V_n^{-2}.}
+ \label{gfp:b:eq:modo-estable-phi}
+\end{equation}
+
+\section{Realización hiperbólica normalizada de la autoescala: \(\exp(2\log\varphi\,J_h)=F_{\mathrm{av}}^2\)}
+
+Sea
+\[
+ A=F_{\rm av}^{\,2}=
+ \begin{pmatrix}1&1\\1&2\end{pmatrix},
+ \qquad
+ J_h=\frac{2A-3I}{\sqrt5}.
+\]
+Entonces
+\[
+ J_h^2=I,
+ \qquad
+ A=\frac32I+\frac{\sqrt5}{2}J_h.
+\]
+Como
+\[
+ \cosh(2\log\varphi)=\frac32,
+ \qquad
+ \sinh(2\log\varphi)=\frac{\sqrt5}{2},
+\]
+se obtiene
+\begin{equation}
+ \boxed{
+ \exp(2\log\varphi\,J_h)=F_{\rm av}^{\,2}.}
+ \label{gfp:b:eq:realizacion-hiperbolica-phi}
+\end{equation}
+La constante de autoescala es, por tanto, simultáneamente el autovalor de
+Perron de la incidencia y el parámetro exponencial de su realización
+hiperbólica normalizada.
+
+\section{Caracterización, horquillas y prolongación}
+
+La construcción finita determina el rayo positivo de \(F_{\rm av}\). La
+caracterización analítica posterior es
+\[
+ x^2-x-1=0,
+ \qquad x>0.
+\]
+Las horquillas \eqref{gfp:b:eq:horquilla-fibonacci-phi} tienen extremos racionales
+y anchura explícita \eqref{gfp:b:eq:anchura-fibonacci-phi}. Para cada nivel
+nonádico \(K\), elegimos el menor \(m=m_{\varphi}(K)\) cuya horquilla queda
+contenida en un único subcilindro entre los \(729\) elementos de la fibra
+ambiente. La minimalidad convierte la localización en una función, no en una
+elección tácita.
+
+Los cilindros seleccionados son compatibles con los truncamientos y sus
+diámetros tienden a cero. Su intersección contiene un único real; el
+\cref{gfp:b:thm:rayo-perron-phi} lo identifica con \(\varphi\). Los cocientes de
+Fibonacci son, pues, certificados racionales de la localización, no datos
+decimales empleados para decidir la semilla.
+
+\Needspace{22\baselineskip}
+\section{Certificado interno de unicidad, compatibilidad y convergencia de la autoescala de Perron}
+
+\begin{remark}[Certificado y control de validez: Refutación de la biografía de autoescala]
+La construcción queda refutada si ocurre cualquiera de los hechos
+siguientes:
+\begin{enumerate}
+ \setlength{\itemsep}{0.15\baselineskip}
+ \item el predicado finito selecciona más de una órbita o más de una emisión;
+ \item la recurrencia \(L_0,L_0,L_1,L_1\) no produce
+       \eqref{gfp:b:eq:w30-phi};
+ \item el calendario no produce exactamente los tres pares usados en
+       \eqref{gfp:b:eq:N3-phi};
+ \item se confunde un múltiplo de conteo \(N_{9},N_{27},N_{108}\) con una
+       potencia de \(N_3\);
+ \item \(F_{\rm av}\) posee otro rayo propio positivo;
+ \item falla \eqref{gfp:b:eq:potencias-Fav-fibonacci} o la identidad de Cassini;
+ \item las horquillas racionales no son encajadas o no contraen su anchura;
+ \item se identifica la frecuencia cronológica, la medida uniforme del
+       catálogo o la medida de Parry;
+ \item una tabla decimal interviene antes de construir el rayo de Perron;
+ \item un cilindro seleccionado no trunca al cilindro anterior.
+\end{enumerate}
+\end{remark}

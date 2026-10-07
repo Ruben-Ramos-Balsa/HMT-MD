@@ -1,0 +1,36 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,font=\small]
+\begin{scope}[xshift=1.8cm,yshift=.3cm]
+\draw[->,gray] (0,-.5)--(0,3.65) node[above] {\(n/9\)};
+\foreach \k in {0,1,2,3}{
+ \draw[gray!60,dashed] (-1.1,\k)--(1.1,\k);
+ \node[left,font=\footnotesize] at (-1.1,\k){\(\k\)};
+}
+\draw[black,line width=.65pt,domain=0:27,samples=260,smooth,variable=\n]
+ plot ({cos(40*\n)},{\n/9+.14*sin(40*\n)});
+\foreach \n in {0,...,27}{
+ \fill ({cos(40*\n)},{\n/9+.14*sin(40*\n)}) circle (.026);
+}
+\foreach \k in {0,1,2,3}{\fill (1,\k) circle (.045);}
+\node[align=center,text width=3.3cm,font=\footnotesize] at (0,-1.02)
+ {Same phase at \(n=0,9,18,27\);\\distinct memory degree.};
+\end{scope}
+\begin{scope}[xshift=4.2cm,yshift=.5cm]
+\node[anchor=west] at (0,3.1){\(z_n(0)=\lfloor(n+1)\delta\rfloor-\lfloor n\delta\rfloor\)};
+\draw[->] (0,1.7)--(9,1.7) node[right]{\(n\)};
+\foreach \n in {21,43,65,87,109,131,152,174,196,218}{
+ \draw[line width=.6pt] ({\n*.039},1.7)--({\n*.039},2.25);
+ \fill ({\n*.039},2.25) circle (.033);
+ \node[below,font=\scriptsize] at ({\n*.039},1.7){\n};
+}
+\foreach \a/\b/\g in {21/43/22,43/65/22,65/87/22,87/109/22,109/131/22,131/152/21,152/174/22,174/196/22,196/218/22}{
+ \node[font=\footnotesize] at ({(\a+\b)*.0195},2.55){\g};
+}
+\node[anchor=west,align=left,text width=8.3cm] at (0,.55)
+ {The irrational coding determines the intervals between events. The return of the nonadic phase does not turn this sequence into a periodic word.};
+\end{scope}
+\end{tikzpicture}
+\caption{Two complementary representations of transport. On the left, the helix \((\cos(2\pi n/9),\allowbreak\sin(2\pi n/9),\allowbreak n/9)\) is projected: after nine steps, the phase returns while the height increases. On the right, the first ten events of the lower word for \(\delta=\log_{10}(10/9)\) are shown, with exact spacings of \(21\) or \(22\). The helical representation introduces no additional physical metric.}
+\label{fig:holonomia-esturmiana}
+\end{figure}

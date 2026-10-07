@@ -1,0 +1,135 @@
+% Propietario conservado: /Users/ruben/Documents/ChatGPT/jueces y controles/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/delivery/ARTICLE_V_ES_ARGUMENTAL_20260915/manuscrito/sections/16_dinamica_temporal_finita.tex
+% Extracto íntegro por residencia del cierre físico-matemático sucesor.
+\section{Cristal temporal finito: excitación periódica, respuesta subarmónica y estabilidad espectral}
+\label{v:sec:hmtf2-cristal-temporal}
+
+\subsection{Excitación periódica inducida por el reloj de 108 estados}
+
+Sea \(N=108\),
+\[
+ \mathcal H_{\rm clk}=\mathbb C^N,\qquad
+ S|j\rangle=|j+1\rangle,\qquad
+ Z|j\rangle=\zeta^j|j\rangle,\qquad
+ \zeta=\exp(2\pi{\rm i}/N).
+\]
+En la base de Fourier \(\{|\widetilde k\rangle\}_{k=0}^{N-1}\), fijamos
+\[
+ H_{\rm clk}
+ =\hbar_{\rm int}\frac{2\pi}{Nt_0}
+ \sum_{k=0}^{N-1}k|\widetilde k\rangle\langle\widetilde k|,
+ \qquad
+ \exp\!\left(-\frac{{\rm i}}{\hbar_{\rm int}}H_{\rm clk}t_0\right)=S.
+\]
+Esta igualdad fija el reloj de partida. Para exhibir un impulso periódico no
+constante, sea \(0<\eta<1\), \(T_{\rm d}=t_0\), y
+definamos, en cada periodo,
+\[
+ H_{\rm d}(t)=
+ \begin{cases}
+  0,&0\leq t<\eta T_{\rm d},\\[2mm]
+  (1-\eta)^{-1}H_{\rm clk},
+  &\eta T_{\rm d}\leq t<T_{\rm d}.
+ \end{cases}
+ \qquad H_{\rm d}(t+T_{\rm d})=H_{\rm d}(t).
+\]
+Como los dos tramos conmutan, su propagador de Floquet es
+\[
+ U_F
+ =\mathcal T\exp\!\left(
+ -\frac{{\rm i}}{\hbar_{\rm int}}\int_0^{T_{\rm d}}H_{\rm d}(t)\,\mathrm dt
+ \right)
+ =\exp\!\left(-\frac{{\rm i}}{\hbar_{\rm int}}H_{\rm clk}T_{\rm d}\right)
+ =S.
+\]
+
+Definimos los observables hermíticos
+\[
+ Q=\frac{Z+Z^\dagger}{2},
+ \qquad
+ P=\frac{Z-Z^\dagger}{2{\rm i}}.
+\]
+
+\begin{theorem}[Subarmonía primitiva del cristal temporal finito HMT]
+\label{v:thm:hmtf2-subarmonia-108}
+Para \(\rho_{j_0}=|j_0\rangle\langle j_0|\), el vector de orden
+\[
+ \mathbf q_n
+ =\left(
+ \operatorname{Tr}\rho_{j_0}U_F^{-n}QU_F^n,\,
+ \operatorname{Tr}\rho_{j_0}U_F^{-n}PU_F^n
+ \right)
+\]
+satisface
+\[
+ \mathbf q_n
+ =\left(
+ \cos\frac{2\pi(j_0+n)}N,\,
+ \sin\frac{2\pi(j_0+n)}N
+ \right).
+\]
+Su periodo primitivo es \(N T_{\rm d}=108T_{\rm d}\), mientras el drive
+posee periodo \(T_{\rm d}\). Por tanto, el sistema realiza una respuesta
+subarmónica primitiva de orden \(108\) en el dominio finito declarado.
+\end{theorem}
+
+\begin{proof}
+La relación de Weyl \(S^{-1} Z S=\zeta Z\) da
+\(S^{-n} Z S^n=\zeta^n Z\). Su parte real y su parte imaginaria producen la
+fórmula. Si un entero \(d>0\) fuera un periodo, se tendría
+\(\zeta^d=1\); la primitividad de \(\zeta\) obliga a \(N\mid d\).
+\end{proof}
+
+\subsection{Estabilidad espectral finita}
+
+La separación mínima entre raíces distintas de la unidad es
+\[
+ g_N=\min_{k\ne\ell}|\zeta^k-\zeta^\ell|
+ =2\sin\frac{\pi}{N}>0.
+\]
+
+\begin{theorem}[Rigidez covariante y estabilidad espectral finita]
+\label{v:thm:hmtf2-estabilidad-cristal}
+Se cumplen las dos afirmaciones siguientes.
+
+\begin{enumerate}
+ \item Para toda unitaria \(V\), la terna
+ \[
+  U_F^{(V)}=V U_F V^\dagger,\qquad
+  Z^{(V)}=V Z V^\dagger,\qquad
+  \rho^{(V)}=V\rho V^\dagger
+ \]
+ conserva exactamente la relación de Weyl, la subarmonía de orden \(N\) y
+ la amplitud del vector de orden.
+ \item Si \(U'\) es unitario y
+ \(\|U'-U_F\|=\varepsilon<g_N/2\), los \(N\) discos de radio
+ \(g_N/2\) centrados en \(\{\zeta^k\}\) separan de modo único los sectores
+ espectrales de \(U'\). Sus proyectores de Riesz tienen el mismo rango que
+ los de \(U_F\) a lo largo de toda deformación que permanezca en esa bola.
+ Además, para todo observable \(A\), todo estado \(\rho\) y todo \(n\geq0\),
+ \[
+ \left|
+ \operatorname{Tr}\rho\left(U'^{-n}AU'^n-U_F^{-n}AU_F^n\right)
+ \right|
+ \leq 2n\varepsilon\|A\|.
+ \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+La primera parte se obtiene conjugando cada identidad. Para la segunda, la
+separación \(g_N\) impide que dos sectores entren en el mismo contorno; la
+continuidad de los proyectores de Riesz mantiene sus rangos. La identidad
+telescópica da
+\(\|U'^n-U_F^n\|\leq n\varepsilon\), y la misma cota vale para las
+potencias inversas. La desigualdad de expectativas resulta de insertar y
+sustraer \(U'^{-n}AU_F^n\).
+\end{proof}
+
+El objeto obtenido es un \emph{cristal temporal finito HMT} con drive,
+observable subarmónico y estabilidad espectral cuantificada. Que un material
+macroscópico realice esta clase, conserve coherencia a gran volumen o
+presente protección pretermal o localizada pertenece a
+\textsc{reconocimiento externo}; no es un residual matemático de la
+construcción finita.
+
+

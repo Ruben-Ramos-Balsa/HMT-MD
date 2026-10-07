@@ -1,0 +1,305 @@
+\section{Analytic reconstruction of energy and refinement memory}
+\label{sec:limite-energetico-k}
+
+The positive separations constructed from the dodecaphasic register
+determine an ordered partition and, by the preceding section, a
+Dirichlet form on its nodal values. Its refinement has two complementary
+operations: harmonic interpolation preserves the energy of inherited
+data, whereas each detail records the variation added between those
+data. Passage to unlimited depth consists in assembling this compatible
+collection through a norm controlling the sum of its details. The result
+concerns the one-dimensional analytic realization of energy; it retains
+as its antecedent the HMT construction of the register and the joint
+discrete structure of the continuum.
+
+\subsection{Nested partitions and interpolation spaces}
+
+Fix the initial partition
+\(P_0=\{0=t_0<t_1<\cdots<t_{12}=1\}\), whose lengths are
+\(d_j=t_j-t_{j-1}=K_j/\sum_iK_i>0\). Let
+\((P_n)_{n\geq0}\) be a sequence of nested finite partitions of
+\([0,1]\), obtained by subdividing the preceding intervals.
+We write
+\[
+ |P_n|=\max\{b-a:[a,b]\text{ is an interval of }P_n\},
+ \qquad \lim_{n\to\infty}|P_n|=0.
+\]
+Repeated subdivision of each interval into a fixed number of equal
+successors, at least two, satisfies this condition. For other rules,
+mesh contraction is an explicit hypothesis of this reader.
+Successor labels and their carry data accompany the subdivision and
+preserve the provenance of the refinement.
+
+Let \(V_n\) be the complex space of continuous functions on \([0,1]\)
+that are affine on each interval of \(P_n\). The energy and energy
+norm are defined by
+\begin{equation}
+ \mathcal E_n(f)
+ =\sum_{[a,b]\in P_n}\frac{|f(b)-f(a)|^2}{b-a}
+ =\int_0^1|f'(x)|^2\,dx,
+ \qquad
+ \|f\|_{\mathcal E}^2=|f(0)|^2+\mathcal E_n(f).
+ \label{eq:energia-afines-k}
+\end{equation}
+The integral equality follows because the derivative of an affine
+function is constant on each interval. The energy thus agrees exactly
+with the nodal form already constructed. The inclusion
+\(V_n\subset V_{n+1}\) interprets the same affine function on a
+finer partition; it preserves both \(f(0)\) and the energy and is
+isometric for \(\|\cdot\|_{\mathcal E}\).
+
+The initial value has a precise function: it fixes the constant
+component identified by the Dirichlet form as its kernel. Energy
+controls differences, and the pair consisting of the initial value
+and those differences determines the observable. In the Sobolev space
+\(H^1([0,1];\mathbb C)\), whose elements have an absolutely continuous
+representative with weak derivative in \(L^2\), this norm is equivalent
+to the usual norm. Indeed, \(f(x)=f(0)+\int_0^xf'(t)\,dt\)
+controls the norm of \(f\) in terms of \(|f(0)|\) and
+\(\|f'\|_{L^2}\); integration of the same identity in turn controls
+\(|f(0)|\) through \(\|f\|_{L^2}+\|f'\|_{L^2}\).
+
+\subsection{Reconstruction of a function from its compatible values}
+
+\begin{theorem}[Energy reconstruction and completion of interpolations]
+\label{thm:limite-energia-h1-k}
+Let \(f_n\in V_n\) be a collection compatible under restriction to
+inherited nodes:
+\[
+ f_{n+1}(a)=f_n(a)
+ \quad\text{for every node }a\text{ of }P_n.
+\]
+If \(\sup_n\mathcal E_n(f_n)<\infty\), there is a unique function
+\(f\in H^1([0,1];\mathbb C)\), considered in its continuous
+representative, whose values at all these nodes are the prescribed
+ones. Moreover, \(f_n\to f\) uniformly and in \(H^1\), and
+\begin{equation}
+ \int_0^1|f'(x)|^2\,dx
+ =\lim_{n\to\infty}\mathcal E_n(f_n).
+ \label{eq:limite-energia-h1-k}
+\end{equation}
+Conversely, nodal interpolation of any element of \(H^1\) produces
+a collection of this kind. Thus the completion of \(\bigcup_n V_n\)
+in the energy norm is \(H^1([0,1];\mathbb C)\).
+\end{theorem}
+
+\begin{proof}
+Set \(g_n=f_n'\in L^2([0,1];\mathbb C)\). For \(m\geq n\),
+compatibility of the values at the endpoints of each interval
+\([a,b]\) of \(P_n\) gives
+\[
+ \frac1{b-a}\int_a^bg_m(x)\,dx
+ =\frac{f_m(b)-f_m(a)}{b-a}
+ =\frac{f_n(b)-f_n(a)}{b-a}
+ =g_n\big|_{(a,b)}.
+\]
+Let \(W_n\) be the space of \(L^2\) functions constant on each
+interval of \(P_n\), and let \(Q_n:L^2\to W_n\) be the orthogonal
+projection given by averages over these intervals. The preceding
+identity states \(Q_ng_m=g_n\). Consequently, \(g_m-g_n\) is
+orthogonal to \(g_n\), and
+\begin{equation}
+ \|g_m-g_n\|_{L^2}^2
+ =\mathcal E_m(f_m)-\mathcal E_n(f_n).
+ \label{eq:pitagoras-gradientes-k}
+\end{equation}
+The energies are nondecreasing and bounded. The Pythagorean identity
+proves that \((g_n)\) is a Cauchy sequence in \(L^2\), with
+limit \(g\). Define
+\[
+ f(x)=f_0(0)+\int_0^xg(t)\,dt.
+\]
+This function belongs to \(H^1\), has weak derivative \(g\),
+and, by the Cauchy--Schwarz inequality, satisfies
+\begin{equation}
+ \sup_{x\in[0,1]}|f_n(x)-f(x)|
+ \leq\|g_n-g\|_{L^2}\longrightarrow0.
+ \label{eq:convergencia-uniforme-energia-k}
+\end{equation}
+Uniform convergence preserves every prescribed nodal value; together
+with convergence of the derivatives in \(L^2\), it gives convergence
+in \(H^1\). Convergence of the derivative norms proves
+\eqref{eq:limite-energia-h1-k}. The union of the nodes is dense
+because \(|P_n|\to0\); two continuous representatives with the same
+values on that union agree. This gives uniqueness.
+
+For the converse, take \(f\in H^1\) in its continuous representative,
+and let \(f_n\) be its interpolation at the nodes of \(P_n\).
+Its derivative is \(g_n=Q_nf'\). The projections \(Q_n\) are
+contractive on \(L^2\). For a continuous function \(v\), the
+error \(|Q_nv-v|\) is bounded by its modulus of continuity evaluated
+at \(|P_n|\), which tends to zero. Density of continuous functions
+in \(L^2\) and contractivity imply \(Q_ng\to g\) for every
+\(g\in L^2\): given a continuous approximant \(v\), use
+\[
+ \|Q_ng-g\|_{L^2}
+ \leq 2\|g-v\|_{L^2}+\|Q_nv-v\|_{L^2}.
+\]
+Applying this convergence to \(g=f'\) gives convergence of the
+derivatives and, through \eqref{eq:convergencia-uniforme-energia-k},
+of the functions. Contractivity bounds their energies by
+\(\|f'\|_{L^2}^2\), and convergence of the norms again proves
+the limit identity. Every function in \(H^1\) is therefore an
+energy limit of elements of \(\bigcup_nV_n\).
+Equivalence of norms and completeness of \(H^1\) identify the
+stated completion.
+\end{proof}
+
+The argument describes concretely what is preserved when passing from
+the network to the function. Each finite derivative records the average
+of all subsequent derivatives on its interval; refinement adds orthogonal
+components that retain this average. Bounded energy controls the total
+sum of these additions. The continuous value is then recovered by
+integrating the limit derivative and preserving the initial value.
+Through this explicit route, the analytic realization assembles the
+compatible information of the finite levels.
+
+\subsection{Orthogonal decomposition of memory by scales}
+
+Let \(H_n\) be harmonic interpolation of the values on \(P_n\)
+to the nodes of \(P_{n+1}\), interpreted as a function in
+\(V_{n+1}\), and define the detail
+\[
+ z_{n+1}=f_{n+1}-H_nf_n.
+\]
+By \eqref{eq:detalle-energia-k}, the detail vanishes at inherited
+nodes. Its derivative has zero average on each old interval and is
+orthogonal to \(W_n\). For different levels, the derivative of an
+earlier detail belongs to that space of constant functions; the
+derivatives of the details are therefore mutually orthogonal.
+The same orthogonality holds against \(f_0'\).
+
+\begin{proposition}[Energy identity and recovery of the details]
+\label{prop:memoria-energetica-escalas-k}
+For every finite depth \(N\),
+\begin{equation}
+ \mathcal E_N(f_N)
+ =\mathcal E_0(f_0)
+ +\sum_{n=0}^{N-1}\mathcal E_{n+1}(z_{n+1}).
+ \label{eq:energia-telescopica-detalles-k}
+\end{equation}
+If the collection satisfies the hypotheses of
+Theorem~\ref{thm:limite-energia-h1-k}, the series on the right
+converges and its sum is \(\int_0^1|f'|^2\). The data \(f_0\)
+and all the details determine the complete compatible collection and
+its analytic realization.
+\end{proposition}
+\begin{proof}
+The finite identity follows by summing
+\(\mathcal E_{n+1}(f_{n+1})
+=\mathcal E_n(f_n)+\mathcal E_{n+1}(z_{n+1})\), the orthogonal
+decomposition of the preceding section. The summands are nonnegative,
+and the partial sums converge by \eqref{eq:limite-energia-h1-k}.
+Finite reconstruction is performed recursively through
+\(f_{n+1}=H_nf_n+z_{n+1}\); the preceding theorem then determines
+the limit function. Conversely, a function in \(H^1\) determines
+its interpolations and, by taking differences, all these details.
+Each arrow thus preserves its own data.
+\end{proof}
+
+Variational elimination of interior nodes selects the zero detail
+at the eliminated level. Preserving the details allows recovery of
+any compatible finite-energy configuration. The effective response
+and the complete configuration thus have a precise relationship:
+the former records the minimum over the interior variables; the
+latter adds the orthogonal components and their energy.
+
+\subsection{Transport of the analytic realization under the positive flow}
+
+The direction \(u=P_3P_{11}K\), recovered before energy evaluation
+\cite{hmtX}, determines the separation collection in
+\eqref{eq:schur-flujo-k}. Its parameter \(s\in\mathbb R\)
+describes this analytic deformation. Write
+\[
+ d_j(s)=\frac{K_je^{su_j}}{\sum_\ell K_\ell e^{su_\ell}},
+ \qquad
+ t_i(s)=\sum_{j=1}^id_j(s),
+ \qquad
+ a_j(s)=\frac{d_j(s)}{d_j(0)}>0.
+\]
+Let \(F_s:[0,1]\to[0,1]\) be the map sending each \(t_i(0)\)
+to \(t_i(s)\) and affine on the initial intervals. It is an
+increasing homeomorphism, with slope \(a_j(s)\) on the interval
+\([t_{j-1}(0),t_j(0)]\). Its inverse is also piecewise affine,
+and both maps are Lipschitz.
+
+Suppose each subdivision inherits the length fractions and direction
+of its predecessor interval, as in the preceding section. All refined nodes
+are then transported through the same \(F_s\). Denote their partitions
+by \(P_n(s)=F_s(P_n(0))\) and their interpolation spaces by
+\(V_n(s)\). The map
+\[
+ U_s f=f\circ F_s^{-1}
+\]
+transports \(V_n(0)\) to \(V_n(s)\), preserves corresponding
+nodal values, and extends this action to \(H^1\).
+
+\begin{theorem}[Energy equivalence and commutation with refinement]
+\label{thm:transporte-h1-flujo-k}
+For every \(f\in H^1([0,1];\mathbb C)\),
+\begin{equation}
+ \int_0^1|(U_sf)'(y)|^2\,dy
+ =\sum_{j=1}^{12}\frac1{a_j(s)}
+ \int_{t_{j-1}(0)}^{t_j(0)}|f'(x)|^2\,dx.
+ \label{eq:transporte-energia-h1-k}
+\end{equation}
+For \(s\) in any compact interval, the energy norms before and
+after transport are uniformly equivalent, and \(|P_n(s)|\to0\)
+uniformly on that compact interval. Harmonic interpolation and
+restriction to inherited nodes commute with \(U_s\); reconstruction
+and minimization of the details are transported both at finite depth
+and in the \(H^1\) realization.
+\end{theorem}
+
+\begin{proof}
+On initial interval \(j\), the chain rule and change of variable
+\(y=F_s(x)\) give \((U_sf)'(F_s(x))=f'(x)/a_j(s)\) and
+\(dy=a_j(s)\,dx\). Integration and summation over the intervals
+prove \eqref{eq:transporte-energia-h1-k}. The formula holds for
+absolutely continuous representatives, and its right-hand side is finite.
+
+Fix a compact parameter interval. Continuity and positivity of the
+twelve factors give constants \(0<a_-\leq a_+<\infty\) such that
+\(a_-\leq a_j(s)\leq a_+\) for every \(j\) and every \(s\)
+in that compact interval. Therefore,
+\[
+ \frac1{a_+}\mathcal E(f)
+ \leq\mathcal E(U_sf)
+ \leq\frac1{a_-}\mathcal E(f),
+ \qquad
+ |P_n(s)|\leq a_+|P_n(0)|.
+\]
+Since \((U_sf)(0)=f(0)\), we also obtain
+\[
+ \min\{1,a_+^{-1}\}\|f\|_{\mathcal E}^2
+ \leq\|U_sf\|_{\mathcal E}^2
+ \leq\max\{1,a_-^{-1}\}\|f\|_{\mathcal E}^2.
+\]
+These bounds prove uniform equivalence and preservation of the
+decreasing-mesh condition.
+
+On each predecessor edge, the interpolation coefficients are the partial
+sums of the inherited fractions, independent of \(s\).
+If \(H_n(s)\) denotes its interpolation, then
+\(U_sH_n(0)=H_n(s)U_s\) on the corresponding spaces.
+Restriction commutes because the nodes are transported with their values.
+The decomposition into harmonic function and detail is preserved,
+and the Schur identity in \eqref{eq:schur-flujo-k} preserves its
+variational characterization. Finally, bounded continuity of \(U_s\)
+allows passage to the \(H^1\) limit. In particular, a collection
+reconstructed before transport subsequently converges to \(U_sf\),
+with the same transported nodal values.
+\end{proof}
+
+The law \eqref{eq:transporte-energia-h1-k} identifies the exact
+metric factors of the deformation: the length change of each interval
+inversely modifies its energy contribution. Equivalence of norms
+preserves finite-energy configurations, and the detail archive preserves
+their reconstruction. This gives a complete analytic realization of
+this reader of the positive register. Its compatibility with canonical
+forms is articulated on subdivisions of a fixed domain: summing forms
+preserves the meromorphic object, whereas variational reduction and
+the details preserve the energy response and refined observable.
+Identification with higher-rank amplituhedral forms retains the
+specific conditions of covering, degree, and residue correspondence
+established for that realization.

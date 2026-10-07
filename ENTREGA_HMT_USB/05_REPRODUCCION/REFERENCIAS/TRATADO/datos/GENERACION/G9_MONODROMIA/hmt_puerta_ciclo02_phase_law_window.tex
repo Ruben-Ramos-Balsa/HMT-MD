@@ -1,0 +1,85 @@
+
+\section*{PUERTA--CICLO--02: ciclo de fases 1--9}
+
+Se define la fase de puerta por
+\[
+\boxed{g(K)=K\bmod 9,\quad 0\equiv9.}
+\]
+Como el prefijo \(w_{30}\) ya contiene cuatro triadas, el primer ciclo posterior no empieza en la fase 1, sino en
+\[
+\boxed{5,6,7,8,9,1,2,3,4.}
+\]
+Por tanto, cuando se dice que la puerta 10 repite la 1, la frase correcta es:
+\[
+\boxed{K=10\text{ vuelve a la fase }1,\text{ pero no vuelve al mismo estado.}}
+\]
+Hay retorno de fase, no periodicidad simple. La memoria/carry cambia el estado.
+
+\subsection*{Primer ciclo posterior a \(w_{30}\)}
+\[
+\begin{array}{c|c|c|c|c|c}
+ t & K & g & (|\pi|,|e|,|\varphi|) & \text{simetria} & \text{tipo}\\
+\hline
+5 & 5 & 5 & 39,151,151 & e=phi & ordinary \
+6 & 6 & 6 & 110,110,69 & pi=e & ordinary \
+7 & 7 & 7 & 81,29,81 & pi=phi & orientation \
+8 & 8 & 8 & 59,59,59 & sync & sync+orientation \
+9 & 9 & 9 & 43,43,43 & sync & sync+orientation \
+10 & 10 & 1 & 32,32,32 & sync & sync \
+11 & 11 & 2 & 23,24,23 & pi=phi & ordinary \
+12 & 12 & 3 & 17,17,17 & sync & sync \
+13 & 13 & 4 & 13,13,13 & sync & sync \
+\end{array}
+\]
+
+La zona clave es
+\[
+\boxed{K=8,9,10}
+\]
+con sincronizacion completa. En particular, \(K=9\) tiene
+\[
+\boxed{|C^\pi|=|C^e|=|C^\varphi|=43.}
+\]
+
+\subsection*{Resumen por fases}
+\[
+\begin{array}{c|c|c|p{9cm}}
+ g & \#\text{sync} & \#\text{orientacion} & \text{primeras apariciones}\\
+\hline
+1 & 5 & 1 & t10/K10:32:32:32:sync, t19/K19:3:3:3:sync \
+2 & 2 & 2 & t11/K11:23:24:23:ordinary, t20/K20:2:2:2:sync, t21/K20:611:527:723:stutter+orientation \
+3 & 2 & 3 & t12/K12:17:17:17:sync, t22/K21:421:242:483:orientation \
+4 & 2 & 0 & t13/K13:13:13:13:sync \
+5 & 2 & 3 & t5/K5:39:151:151:ordinary, t14/K14:9:10:9:ordinary \
+6 & 0 & 2 & t6/K6:110:110:69:ordinary, t15/K15:7:7:8:ordinary \
+7 & 3 & 3 & t7/K7:81:29:81:orientation, t16/K16:6:6:6:sync \
+8 & 4 & 2 & t8/K8:59:59:59:sync+orientation, t17/K17:4:4:4:sync \
+9 & 4 & 3 & t9/K9:43:43:43:sync+orientation, t18/K18:4:4:4:sync \
+\end{array}
+\]
+
+\subsection*{Nucleo especular}
+En \(t=8\), la firma de orientacion deja tres matrices locales, todas con \(\varphi\) fijo y \(\pi+e\) constante. La supervivencia futura selecciona la matriz central. En \(t=9\), la firma deja dos matrices, otra vez con \(\varphi\) fijo y \(\pi/e\) como par movil. La supervivencia selecciona una sola.
+
+\[
+\boxed{\varphi=\text{eje fijo},\qquad \pi/e=\text{espejo movil},\qquad \text{el futuro orienta.}}
+\]
+
+\subsection*{Ley de puerta}
+La torre no tiene una unica clase de evento. Tiene una gramatica tipada:
+\[
+\boxed{\text{poda}}
+\quad
+\boxed{\text{sincronizacion}}
+\quad
+\boxed{\text{orientacion especular}}
+\quad
+\boxed{\text{stutter/reapertura}}
+\quad
+\boxed{\text{supervivencia futura}}.
+\]
+La puerta 10 repite la fase 1, pero con otro estado; esto es exactamente el retorno con memoria. La ley general no es periodo, sino ciclo de fase con carry.
+
+\[
+\boxed{\text{cada ciclo de 9 puertas devuelve la fase, pero no borra la memoria.}}
+\]

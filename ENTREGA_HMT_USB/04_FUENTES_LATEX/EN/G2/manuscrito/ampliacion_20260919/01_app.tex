@@ -1,0 +1,589 @@
+\section{Arithmetic construction of APP}
+\label{app:construccion-explicita}
+
+The name \emph{All Possible Paths}, abbreviated APP, designates the arithmetic structure of trajectories built on a grid of nine rows and nine columns. Its main presentation is the multiplication table of the integers from one to nine, reduced by means of the positive digital root. Addition is involved both in the accumulation that produces each row and in a second evaluation of the same positions. The trajectories traverse this single support and preserve the order of the operations performed.
+
+The development begins with the visible construction of APP and continues with the operations needed to preserve its arithmetic information. The remainder and quotient recover each integer evaluation; the carry determines how these recoveries compose; the translation record distinguishes the return to a position from the accumulated circulation. These are foundations of the generative dynamics. The TRIT, an oriented ternary unit with values $-1,0,+1$, will provide the regime of each transition; the \emph{Topological Phase Kernel}, TPK, or topological phase kernel, will compose selection, transport and memory updating. Its operator definition is based on the objects constructed here.
+
+\subsection{Construction of the APP matrix through multiplication and digital root}
+\label{sec:app-soporte}
+
+\subsubsection{Arrangement of the integers from one to nine}
+
+\begin{definicion}[Ordered nonadic support]
+\label{def:app-soporte}
+Define $D_9=\{1,2,\ldots,9\}$ and the two-dimensional support $\mathcal X_9=D_9\times D_9$. A position is an ordered pair $x=(i,j)$; the first coordinate identifies the row and the second, the column. Rows increase southward and columns eastward.
+\end{definicion}
+
+The support contains $9^2=81$ positions. The distinction between position and evaluation is essential: several positions can receive the same arithmetic result while retaining different coordinates. For example, $(2,3)$ and $(3,2)$ have equal sum and product, while the orientation of their coordinates distinguishes them.
+
+In row $i$, the accumulation of $i$ repeated $j$ times determines the entry in column $j$:
+\[
+ P(i,j)=\underbrace{i+\cdots+i}_{j\text{ summands}}=ij.
+\]
+The integer table is thus obtained first. Each column increment adds the row index; each row increment adds the column index.
+
+\input{ampliacion_20260919/generated/producto}
+
+The positive digital root is calculated by repeatedly adding the decimal digits until an integer from $1$ to $9$ is obtained. For example,
+\[
+ 16\longmapsto1+6=7,\qquad
+ 20\longmapsto2+0=2,\qquad
+ 25\longmapsto2+5=7,\qquad
+ 81\longmapsto8+1=9.
+\]
+Applying it to each of the eighty-one entries produces the main APP matrix. Using the notation $\rho_9$ for this reduction, we write $\Pi(i,j)=\rho_9(ij)$.
+
+\input{ampliacion_20260919/generated/residuo_producto}
+
+The first row reproduces $1,\ldots,9$; the second distributes the increment two in the order $2,4,6,8,1,3,5,7,9$; the third traverses $3,6,9$ three times. The last row and the last column have value $9$. These patterns arise from the operation applied to each entry and from the convention that represents the zero class modulo nine by $9$. Rows whose indices are coprime to nine traverse all nine residues; the remaining rows concentrate several positions on the same residue. The proof and the information preserved by this concentration are developed in the following sections.
+
+The block of rows $4,5$ and columns $4,5$ can already be read directly:
+\[
+ \begin{pmatrix}16&20\\20&25\end{pmatrix}
+ \xrightarrow{\ \rho_9\ }
+ \begin{pmatrix}7&2\\2&7\end{pmatrix}.
+\]
+Its selection by congruence, its spectral decomposition and its geometric realizations will be the subject of \cref{geo:chap}. This localization fixes from now on the positions that produce the block.
+
+\subsubsection{Positions, intervals and central inversion}
+
+The sequence $1,\ldots,9$ contains eight intervals between consecutive integers. Adding the cyclic transition $9\to1$ yields nine links. This convention makes it possible to specify the relationship between length, number of positions and combinatorial period. When the endpoints $0$ and $10$ are also considered on a linear scale, the reference support changes: it is advisable to state explicitly which endpoints and which intervals are involved in each construction.
+
+With both endpoints, the linear subdivision is written
+\[
+ [0,1],\ [1,2],\ [2,3],\ [3,4],\ [4,5],\
+ [5,6],\ [6,7],\ [7,8],\ [8,9],\ [9,10].
+\]
+These are ten segments determined by eleven integer marks. The inversion $i\mapsto10-i$ exchanges the endpoints and preserves the central mark $5$; on the nine interior integers it induces the pairs $(1,9)$, $(2,8)$, $(3,7)$ and $(4,6)$, as well as the fixed integer $5$. The same inversion will act on each coordinate of the two-dimensional support.
+
+Before evaluating sum or product, the positional table is
+\begin{tablacompleta}[htbp]
+\caption{The eighty-one positions before their arithmetic evaluation.}
+\label{tab:app-posiciones}
+{\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{c*{9}{c}}
+\toprule
+$i\backslash j$ &1&2&3&4&5&6&7&8&9\\
+\midrule
+1 &$(1,1)$&$(1,2)$&$(1,3)$&$(1,4)$&$(1,5)$&$(1,6)$&$(1,7)$&$(1,8)$&$(1,9)$\\
+2 &$(2,1)$&$(2,2)$&$(2,3)$&$(2,4)$&$(2,5)$&$(2,6)$&$(2,7)$&$(2,8)$&$(2,9)$\\
+3 &$(3,1)$&$(3,2)$&$(3,3)$&$(3,4)$&$(3,5)$&$(3,6)$&$(3,7)$&$(3,8)$&$(3,9)$\\
+4 &$(4,1)$&$(4,2)$&$(4,3)$&$(4,4)$&$(4,5)$&$(4,6)$&$(4,7)$&$(4,8)$&$(4,9)$\\
+5 &$(5,1)$&$(5,2)$&$(5,3)$&$(5,4)$&$(5,5)$&$(5,6)$&$(5,7)$&$(5,8)$&$(5,9)$\\
+6 &$(6,1)$&$(6,2)$&$(6,3)$&$(6,4)$&$(6,5)$&$(6,6)$&$(6,7)$&$(6,8)$&$(6,9)$\\
+7 &$(7,1)$&$(7,2)$&$(7,3)$&$(7,4)$&$(7,5)$&$(7,6)$&$(7,7)$&$(7,8)$&$(7,9)$\\
+8 &$(8,1)$&$(8,2)$&$(8,3)$&$(8,4)$&$(8,5)$&$(8,6)$&$(8,7)$&$(8,8)$&$(8,9)$\\
+9 &$(9,1)$&$(9,2)$&$(9,3)$&$(9,4)$&$(9,5)$&$(9,6)$&$(9,7)$&$(9,8)$&$(9,9)$\\
+\bottomrule
+\end{tabular}}
+\end{tablacompleta}
+
+\subsubsection{Representation of the zero remainder and preservation of the quotient}
+
+\begin{definicion}[Positive remainder and nonadic quotient]
+\label{def:app-residuo}
+For each integer $n\geq1$, define
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\left\lfloor\frac{n-1}{9}\right\rfloor.
+ \label{eq:app-rho-q}
+\end{equation}
+The pair $\bigl(\rho_9(n),q_9(n)\bigr)$ is the complete nonadic record of $n$.
+\end{definicion}
+
+The choice of representatives $1,\ldots,9$ assigns the integer $9$ to the zero residue class. Thus, $9$, $18$ and $27$ have the same positive remainder and respective quotients $0$, $1$ and $2$. The residue coordinate describes a class; the quotient determines the integer lift within that class.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Exact arithmetic restitution]
+\label{thm:app-reconstruccion}
+The map
+\begin{equation}
+ \mathbb N_{>0}\longrightarrow D_9\times\mathbb N_0,
+ \qquad n\longmapsto\bigl(\rho_9(n),q_9(n)\bigr)
+\end{equation}
+is bijective. Its inverse is $(r,q)\mapsto r+9q$. In particular,
+\begin{equation}
+ n=\rho_9(n)+9q_9(n).
+ \label{eq:app-restitution}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Euclidean division of $n-1$ by $9$ produces a unique pair $(q,t)$ with $q\geq0$, $0\leq t\leq8$ and $n-1=9q+t$. Setting $r=t+1$ yields $n=r+9q$ with $r\in D_9$. This is precisely the pair defined in \eqref{eq:app-rho-q}.
+
+Conversely, given $r\in D_9$ and $q\in\mathbb N_0$, the integer $n=r+9q$ satisfies $n-1=(r-1)+9q$. Its Euclidean division returns the same remainder $r-1$ and the same quotient $q$. Both inverse compositions are thereby proved.
+\end{proof}
+\end{bloqueindivisible}
+
+This restitution fixes the meaning of preserving arithmetic information at the initial stage: exactly the data needed to recover the integer are preserved. The orientation of an operation and the record of a sequence of operations will be incorporated with their own coordinates. The quotient of an isolated evaluation therefore has a precise scope within the complete construction.
+
+\begin{ejemplo}[Two lifts of a residue class]
+The integers $10$ and $19$ are represented as $(1,1)$ and $(1,2)$. Their first coordinate coincides; the second makes it possible to recover $1+9=10$ and $1+18=19$ respectively.
+\end{ejemplo}
+
+\subsubsection{Digital root and decimal evaluation}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Expression for the digital root]
+\label{prop:app-raiz-digital}
+The iterated sum of the decimal digits of a positive integer $n$ terminates at $\rho_9(n)$.
+\end{proposicion}
+
+\begin{proof}
+Write $n=\sum_{k=0}^{m}d_k10^k$, with $0\leq d_k\leq9$. Since $10\equiv1\pmod9$, we have $n\equiv\sum_kd_k\pmod9$. For $n\geq10$, at least one digit with positive index is nonzero, so that
+\[
+ n-\sum_kd_k=\sum_{k\geq1}d_k(10^k-1)>0.
+\]
+The iteration strictly decreases while the integer has more than one digit. It terminates at an integer in $D_9$ and preserves the class modulo nine. Uniqueness of the positive representative identifies the result with $\rho_9(n)$.
+\end{proof}
+\end{bloqueindivisible}
+
+The integer zero admits the conventional digital root $0$. The positive representation of the residue group, in turn, represents its class by $9$. Both conventions are fixed by their domains: the digital root acts on integers; the positive section selects representatives of residue classes. This clarification becomes relevant when decimal blocks with leading zeros appear.
+
+\subsection{Additive and multiplicative evaluations of APP}
+\label{sec:app-evaluaciones}
+
+\subsubsection{Joint definition of the two evaluations}
+
+\begin{definicion}[Enriched arithmetic evaluation of APP]
+\label{def:app-evaluacion}
+For $(i,j)\in\mathcal X_9$, define
+\begin{align}
+ S(i,j)&=i+j, & P(i,j)&=ij,\\
+ \Sigma(i,j)&=\rho_9(i+j), & \Pi(i,j)&=\rho_9(ij),\\
+ q_+(i,j)&=q_9(i+j), &q_\times(i,j)&=q_9(ij).
+\end{align}
+The simultaneous evaluation is
+\begin{equation}
+ \mathcal A(i,j)=\bigl((\Sigma(i,j),q_+(i,j)),
+                         (\Pi(i,j),q_\times(i,j))\bigr).
+ \label{eq:app-two-evaluations}
+\end{equation}
+The state at this stage also retains the position $(i,j)$.
+\end{definicion}
+
+The values of $S$ range over the integers from $2$ to $18$; those of $P$ lie between $1$ and $81$. The operation is performed first in the integers and then decomposed into remainder and quotient. This order makes it possible to recognize which content comes from the integer calculation and which content corresponds to its modular representation.
+
+Multiplication here admits its construction by iterated addition:
+\[
+ P(i,1)=i,\qquad P(i,j+1)=P(i,j)+i,
+ \qquad P(i,j)=\underbrace{i+\cdots+i}_{j\text{ summands}}.
+\]
+By induction on $j$, this recurrence produces $ij$. Each row of the multiplicative table is therefore obtained by successively adding its index. The additive evaluation is constructed by adding the two position indices just once. Both operations arise from the integers of the support, with explicitly distinct rules.
+
+For $2\leq k\leq10$, the equation $i+j=k$ has $k-1$ solutions in $D_9^2$. For $11\leq k\leq18$, it has $19-k$. In multiplication, the multiplicity of a value $m$ is
+\[
+ \#\{i\in D_9:i\mid m\text{ and }m/i\in D_9\}.
+\]
+These multiplicities count positions with a given evaluation and preserve the difference between the number of positions and the number of distinct values.
+
+\input{ampliacion_20260919/generated/suma}
+
+\begin{bloqueindivisible}
+\begin{corolario}[Simultaneous restitution of the two evaluations]
+\label{cor:app-evaluaciones-restituidas}
+At each APP position, the evaluated integers are recovered exactly by
+\begin{equation}
+ S=\Sigma+9q_+,
+ \qquad P=\Pi+9q_\times.
+ \label{eq:app-s-p-lift}
+\end{equation}
+\end{corolario}
+
+\begin{proof}
+Apply \cref{thm:app-reconstruccion} to the positive integers $i+j$ and $ij$ at the same position $(i,j)$.
+\end{proof}
+\end{bloqueindivisible}
+
+\subsubsection{Residue atlas and quotient records}
+
+The residue multiplicative matrix already presented is now completed with the additive residues and the two quotient records. These three tables, together with the main APP matrix, display the coordinates of \eqref{eq:app-two-evaluations} separately. Reading them jointly reconstructs the two integer tables. This breakdown makes visible a property decisive for subsequent development: equality of residues can coexist with differences in quotient.
+
+\input{ampliacion_20260919/generated/residuo_suma}
+\input{ampliacion_20260919/generated/cociente_suma}
+\input{ampliacion_20260919/generated/cociente_producto}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Records of the center and residue coincidence]
+\label{prop:app-centro}
+The positions $(5,5)$ and $(8,2)$ have the same residue pair $(\Sigma,\Pi)=(1,7)$ and different multiplicative records:
+\begin{align}
+ \mathcal A(5,5)&=((1,1),(7,2)),\\
+ \mathcal A(8,2)&=((1,1),(7,1)).
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+At $(5,5)$, the evaluations are $10=1+9$ and $25=7+18$. At $(8,2)$, they are $10=1+9$ and $16=7+9$. Dividing the difference by nine produces the indicated quotients.
+\end{proof}
+\end{bloqueindivisible}
+
+The multiplicative record of the center is therefore $(7,2)$: a remainder and a quotient. This typed identification must accompany any subsequent use of these digits. A decimal concatenation, a coordinate of the support and a remainder--quotient pair designate different objects and admit different operations.
+
+\subsubsection{Transposition and central inversion}
+
+The transposition $\sigma(i,j)=(j,i)$ preserves both evaluations by commutativity. Its fixed points are the nine diagonal positions; the other seventy-two positions are distributed into thirty-six two-element orbits. On the cardinal directions, it exchanges north with west and east with south.
+
+The central inversion $\rho_c(i,j)=(10-i,10-j)$ satisfies $\rho_c^2=\Id$. The fixed-point equation is equivalent to $2i=10$ and $2j=10$, yielding the unique fixed point $(5,5)$. This property is an internal geometric characterization of the center. Subsequent physical interpretations must preserve the concrete operation from which it arises.
+
+The joint evaluation $(S,P)$ determines the multiset $\{i,j\}$, since both numbers are the roots of $t^2-St+P$. Retaining the ordered pair adds the orientation of the coordinates and distinguishes the two orders when $i\neq j$.
+
+\subsection{Cardinal transport and circulation record}
+\label{sec:app-transporte}
+
+\subsubsection{Translation group of the support}
+
+We identify each coordinate of $D_9$ with its class in $\mathbb Z/9\mathbb Z$. The support thus acquires the structure of the additive group
+\[
+ X_9=(\mathbb Z/9\mathbb Z)^2.
+\]
+The positive representation again selects the integers $1,\ldots,9$. The four elementary displacements are
+\begin{equation}
+ \nu(N)=(-1,0),\quad \nu(E)=(0,1),\quad
+ \nu(S)=(1,0),\quad \nu(O)=(0,-1).
+\end{equation}
+The transition in direction $a$ is $x\mapsto x+\nu(a)$ in $X_9$. Each transition has the inverse determined by the opposite direction. Upon crossing an edge of the matrix representation, reduction returns a position in the same support; the integer displacement remains part of the record.
+
+Write $T_N,T_E,T_S,T_O$ for the four translations. The sum of opposite vectors is zero; therefore,
+\[
+ T_N\circ T_S=T_S\circ T_N=\Id,
+ \qquad T_E\circ T_O=T_O\circ T_E=\Id.
+\]
+Interior cases and boundary crossings are displayed in the following table. At each crossing, the difference between the integer coordinate reached and its positive representative is a multiple of nine.
+
+\begin{tablacompleta}[htbp]
+\caption{Interior transitions and boundary crossings in the matrix representation of APP.}
+\label{tab:app-frontera}
+\begin{tabular}{ccll}
+\toprule
+Direction & Vector & Caso interior & Boundary crossing\\
+\midrule
+$N$ &$(-1,0)$&$(5,5)\to(4,5)$&$(1,5)\to(0,5)\equiv(9,5)$\\
+$E$ &$(0,1)$&$(5,5)\to(5,6)$&$(5,9)\to(5,10)\equiv(5,1)$\\
+$S$ &$(1,0)$&$(5,5)\to(6,5)$&$(9,5)\to(10,5)\equiv(1,5)$\\
+$O$ &$(0,-1)$&$(5,5)\to(5,4)$&$(5,1)\to(5,0)\equiv(5,9)$\\
+\bottomrule
+\end{tabular}
+\notatabla{Congruence of pairs is interpreted coordinate by coordinate modulo nine. The intermediate pair belongs to the integer lift of the displacement.}
+\end{tablacompleta}
+
+The corresponding Cayley graph has eighty-one vertices and four outgoing edges at each vertex. It therefore contains $324$ directed edges and $162$ undirected edges. The directed count preserves the distinction between a transition and its inverse.
+
+Its cellular realization is obtained by arranging nine columns and nine rows of squares and performing the periodic identifications of opposite edges. With ninety degrees between the two directions of the planar representation, the resulting lattice has $81$ vertices, $162$ edges and $81$ two-dimensional cells. Its Euler characteristic is $81-162+81=0$. The toroidal description belongs to this cellular realization of the support and its identifications; the arithmetic definition remains given by $X_9$ and its translations.
+
+\subsubsection{Sequences of displacements and integer lift}
+
+Let $w=a_1\cdots a_r$ be a sequence of directions of length $r$. Given an initial position $x_0$, its trajectory is defined by
+\[
+ x_k=x_0+\sum_{\ell=1}^{k}\nu(a_\ell)\quad\text{in }X_9,
+ \qquad 0\leq k\leq r.
+\]
+The accumulated integer displacement is
+\begin{equation}
+ d(w)=\sum_{\ell=1}^{r}\nu(a_\ell)
+      =\bigl(\#S-\#N,\#E-\#O\bigr)\in\mathbb Z^2.
+ \label{eq:app-displacement}
+\end{equation}
+There are $81\cdot4^r$ pairs of initial position and cardinal sequence of length $r$. This count corresponds to the complete cardinal alphabet; the TPK admissibility criteria will act on this support with their additional records.
+
+For $r=0$, the empty sequence acts as the identity: each position retains its initial value and the accumulated displacement is $(0,0)$. There are exactly eighty-one pairs of initial position and empty sequence. Under concatenation, the empty sequence is the identity element.
+
+\begin{bloqueindivisible}
+\begin{teorema}[Positional return and number of turns]
+\label{thm:app-transporte}
+The trajectory of $w$ returns to its initial position if and only if $d(w)\in9\mathbb Z^2$. For a closed trajectory, the vector
+\begin{equation}
+ \operatorname{wind}(w)=\frac{d(w)}9\in\mathbb Z^2
+\end{equation}
+records the oriented turns in the two periodic directions. It is additive under concatenation of closed trajectories. Reversing the trajectory changes its sign.
+\end{teorema}
+
+\begin{proof}
+The equality $x_r=x_0$ in $(\mathbb Z/9\mathbb Z)^2$ is equivalent to divisibility by nine of both coordinates of $d(w)$. The sum of displacements is additive under concatenation. The inverse trajectory is obtained by reversing the order of the directions and replacing each with its opposite; its displacement is $-d(w)$. Division by nine preserves these identities.
+\end{proof}
+\end{bloqueindivisible}
+
+\begin{ejemplo}[Two returns with different records]
+The sequence $E^9$ and the sequence $EO$ return to the initial position. Their turn vectors are, respectively, $(0,1)$ and $(0,0)$. The terminal point coincides in both cases, while the circulation record distinguishes the two paths.
+\end{ejemplo}
+
+The turn vector preserves net circulation. The complete order of transitions contains additional information: the sequences $EO$ and $NS$ have the same zero vector and different transitions. The progressive construction of the state will retain each record according to the operation to be recovered. In this way, terminal position, net circulation and ordered trajectory retain clearly differentiated functions.
+
+\subsection{Carry composition and change of section}
+\label{sec:app-cociclo}
+
+\subsubsection{The cocycle of the positive section}
+
+Let $s_9:\mathbb Z/9\mathbb Z\to D_9$ be the section of positive representatives. For two classes $a,b$, define
+\begin{equation}
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+ \label{eq:app-cocycle}
+\end{equation}
+The numerator is divisible by nine. Since the first two quantities are between one and nine and the third represents their sum, $c_9(a,b)$ belongs to $\{0,1\}$. The identity
+\[
+ s_9(a)+s_9(b)=s_9(a+b)+9c_9(a,b)
+\]
+expresses the carry produced when adding positive representatives.
+
+\begin{bloqueindivisible}
+\begin{teorema}[Associative compatibility of the carry]
+\label{thm:app-cociclo}
+For arbitrary $a,b,c\in\mathbb Z/9\mathbb Z$,
+\begin{equation}
+ c_9(a,b)+c_9(a+b,c)
+ =c_9(b,c)+c_9(a,b+c).
+ \label{eq:app-cocycle-associativity}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+We multiply the expression on the left by nine and substitute \eqref{eq:app-cocycle}. The terms $s_9(a+b)$ cancel, leaving
+\[
+ s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c).
+\]
+The same substitution in the expression on the right cancels $s_9(b+c)$ and produces the identical expression. Division by nine proves the equality.
+\end{proof}
+\end{bloqueindivisible}
+
+The identity expresses the independence of the total carry from the two parenthesizations of a triple sum. Repeating it yields compatibility of any finite sum with its modular reduction. The record makes explicit the term connecting the integer calculation with the residue operation.
+
+\subsubsection{Positive residue and usual residue normalizations}
+
+The usual section $s_0$ takes values in $\{0,\ldots,8\}$. If $\delta_0(a)$ equals one for the zero class and zero for the others, the two sections are related by
+\begin{equation}
+ s_9(a)=s_0(a)+9\delta_0(a).
+\end{equation}
+We define $c_0$ by the same expression as \eqref{eq:app-cocycle}, replacing $s_9$ with $s_0$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Exact transformation of the carry]
+\label{prop:app-cambio-seccion}
+The two cocycles satisfy
+\begin{equation}
+ c_9(a,b)=c_0(a,b)+\delta_0(a)+\delta_0(b)-\delta_0(a+b).
+ \label{eq:app-section-change}
+\end{equation}
+In particular, $c_9(0,a)=1$ and $c_0(0,a)=0$.
+\end{proposicion}
+
+\begin{proof}
+We substitute $s_9=s_0+9\delta_0$ at the three occurrences of the section in \eqref{eq:app-cocycle}. The terms in $s_0$ produce $c_0$ and the remaining terms produce the displayed difference of indicators. For $a=0$, the identity is evaluated directly.
+\end{proof}
+\end{bloqueindivisible}
+
+The change of section modifies the cocycle by a coboundary. This formulation identifies exactly which term changes when the zero class is represented by $9$ or by $0$. Restitution of the integer remains consistent under both conventions when the quotient is transformed simultaneously.
+
+To make the boundary cases explicit, set $\varepsilon(a,b)=c_9(a,b)-c_0(a,b)$. Formula \eqref{eq:app-section-change} produces the following partition:
+\begin{tablacompleta}[H]
+\caption{Correction of the carry under a change of section.}
+\label{tab:app-casos-seccion}
+\begin{tabular}{lc}
+\toprule
+Condition on the classes & $\varepsilon(a,b)$\\
+\midrule
+$a=b=0$ & $1+1-1=1$\\
+Exactly one of $a,b$ is zero & $1$\\
+$a\neq0$, $b\neq0$, $a+b=0$ & $-1$\\
+$a\neq0$, $b\neq0$, $a+b\neq0$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{tablacompleta}
+The first row makes explicit the overlap of the zero conditions; the four rows are disjoint and cover all pairs of classes.
+
+\subsection{Integer balances and multiplicative structure}
+\label{sec:app-balances}
+
+\subsubsection{The six totals of the arithmetic atlas}
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Totals of the evaluations and their records]
+\label{prop:app-totales}
+The sum over the eighty-one positions satisfies
+\begin{align}
+ \sum S&=810, &\sum P&=2025,\\
+ \sum\Sigma&=405, &\sum\Pi&=459,\\
+ \sum q_+&=45, &\sum q_\times&=174.
+ \label{eq:app-six-totals}
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+The sum $1+\cdots+9$ equals $45$. By separation of the two coordinates,
+\[
+ \sum_{i,j}(i+j)=9\cdot45+9\cdot45=810,
+ \qquad \sum_{i,j}ij=45^2=2025.
+\]
+Each row of the residue additive evaluation contains a permutation of the nine representatives, with sum $45$. Therefore, $\sum\Sigma=9\cdot45=405$.
+
+In residue multiplication, the rows with indices $1,2,4,5,7,8$ are permutations and sum to $45$. The rows with indices $3$ and $6$ contain each of the representatives $3,6,9$ three times and sum to $54$. The row with index $9$ contains nine entries of value $9$ and sums to $81$. This yields $\sum\Pi=6\cdot45+2\cdot54+81=459$.
+
+Finally, we sum \eqref{eq:app-s-p-lift}: $\sum q_+=(810-405)/9=45$ and $\sum q_\times=(2025-459)/9=174$.
+\end{proof}
+\end{bloqueindivisible}
+
+\input{ampliacion_20260919/generated/totales_filas}
+
+\subsubsection{Difference between addition and multiplication}
+
+The difference between the two evaluations decomposes at each position as
+\begin{equation}
+ P-S=(\Pi-\Sigma)+9(q_\times-q_+).
+ \label{eq:app-difference-local}
+\end{equation}
+Summing the complete atlas yields
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{eq:app-difference-global}
+\end{equation}
+The total residue contrast is $54$; the quotient contrast is $129$ and contributes $1161$ to the total integer contrast $1215$. The local equality determines the global one without changing the meaning of any of the records.
+
+This decomposition makes it possible to track the residue value and its integer lift separately. When these data participate in subsequent operators, the provenance of the coefficients will be fixed by the evaluation and the sum that produced them. The appearance of $54$ acquires a specific arithmetic meaning here, prior to any subsequent dimensional interpretation.
+
+\subsubsection{Units, radical ideal and ternary extraction}
+
+In the ring $R=\mathbb Z/9\mathbb Z$, a residue is invertible exactly when it is coprime to nine. Therefore,
+\[
+ R^\times=\{1,2,4,5,7,8\},
+ \qquad 1^{-1}=1,\quad2^{-1}=5,\quad4^{-1}=7,\quad8^{-1}=8.
+\]
+The multiplicative rows corresponding to these indices are permutations. For indices $3$ and $6$, the image has three residues; for index $0$, positively represented by $9$, it has one.
+
+The inverses are checked by composition. The additive translation $b\mapsto a+b$ is inverted by $c\mapsto c-a$; both compositions return the initial argument. If $a$ is a unit, the multiplicative map $b\mapsto ab$ is inverted by $c\mapsto a^{-1}c$, since $a^{-1}(ab)=b$ and $a(a^{-1}c)=c$. The six indicated units are verified through the products $1\cdot1=1$, $2\cdot5=10\equiv1$, $4\cdot7=28\equiv1$ and $8\cdot8=64\equiv1$; the two intermediate pairs also provide the inverses of $5$ and $7$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Radical structure of nonadic multiplication]
+\label{prop:app-radical}
+The ideal $\mathfrak m=(3)=\{0,3,6\}$ satisfies $\mathfrak m^2=0$. Multiplication by three has kernel and image both equal to $\mathfrak m$. The map
+\begin{equation}
+ R/\mathfrak m\longrightarrow\mathfrak m,
+ \qquad x+\mathfrak m\longmapsto3x
+ \label{eq:app-radical}
+\end{equation}
+is an isomorphism of vector spaces over $\mathbb F_3$.
+\end{proposicion}
+
+\begin{proof}
+The product of two multiples of three is a multiple of nine; hence $\mathfrak m^2=0$. The equality $3x=0$ in $R$ is equivalent to $x\in\mathfrak m$ and the values of $3x$ range over $\mathfrak m$. If $x-y\in\mathfrak m$, then $3(x-y)=0$; thus, \eqref{eq:app-radical} is well defined. Its kernel is zero and its image contains all three elements of the codomain. Additivity and compatibility with scalars in $\mathbb F_3$ follow immediately from multiplication in $R$.
+\end{proof}
+\end{bloqueindivisible}
+
+The operation in \eqref{eq:app-radical} preserves the linear structure. The product of two elements of $\mathfrak m$ is zero, whereas the quotient $R/\mathfrak m$ is the field with three elements. This distinction determines the algebraic type of the isomorphism.
+
+The visible sequence $3,6,9$ admits two ternary evaluations. Its direct reduction modulo three is $(0,0,0)$. Extracting the factor three identifies $3k$ with its coordinate $k\bmod3$ and produces $(1,2,0)$. The first operation calculates the class of the original integer; the second calculates the internal coordinate of the ideal. Their distinction prepares the typing of the ternary reader without anticipating its dynamics.
+
+\subsection{Operator realization of the evaluations}
+\label{sec:app-operadores}
+
+\subsubsection{Additive resolution of the identity}
+
+The operator representation is constructed from the residue evaluations already defined. Let $\mathcal H_9=\mathbb C^9$, with orthonormal basis $(e_r)_{r\in R}$, and let $P_r=e_re_r^*$ be the projector onto the direction of $e_r$. To position $(a,b)\in R^2$ we assign the additive projector $P^+_{ab}=P_{a+b}$.
+
+\begin{bloqueindivisible}
+\begin{proposicion}[Operator identity by rows and columns]
+\label{prop:app-aditivo-operador}
+Each entry $P^+_{ab}$ is a rank-one orthogonal projector and
+\begin{equation}
+ \sum_{b\in R}P^+_{ab}=I_9,
+ \qquad \sum_{a\in R}P^+_{ab}=I_9.
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Orthonormality implies $P_r^2=P_r=P_r^*$ and $\sum_rP_r=I_9$. For fixed $a$, the translation $b\mapsto a+b$ permutes all residues; analogously for fixed $b$. Both sums are therefore the sum of the nine basis projectors.
+\end{proof}
+\end{bloqueindivisible}
+
+The realization expresses the Latin property of the additive table through a resolution of the identity. The Hilbert space acts here as the codomain of an explicit representation of the constructed arithmetic.
+
+\subsubsection{Multiplicities of the multiplicative operator}
+
+We define $P^\times_{ab}=P_{ab}$ and $T_a=\sum_bP^\times_{ab}$, where the subscript $ab$ denotes the product of residues. For $a\in R^\times$, we obtain $T_a=I_9$. For $a=3$ or $a=6$,
+\begin{equation}
+ T_a=3(P_0+P_3+P_6),
+\end{equation}
+and for $a=0$, we obtain $T_0=9P_0$.
+
+These identities are proved by counting the preimages of each residue under $b\mapsto ab$. In the two rows with ternary image, the residues $0,3,6$ each have three preimages. In the zero row, the residue $0$ has nine. Consequently, the ranks of $T_a$ are respectively $9$, $3$ and $1$; its nonzero eigenvalues are $1$, $3$ and $9$. In all three cases, the trace retains the value $9$.
+
+The operator thus records both the concentration of multiplicities and the total number of contributions. Equality of traces coexists with differences in rank and spectrum. This distinction provides a complete example of preservation of an aggregate quantity with transformation of its operator distribution.
+
+\subsection{Decimal blocks and compatibility between moduli}
+\label{sec:app-base-mil}
+
+\subsubsection{Base-thousand decomposition}
+
+For $N\in\mathbb N_0$, Euclidean division by one thousand produces
+\begin{equation}
+ N=1000Q+B,\qquad 0\leq B<1000.
+ \label{eq:app-base1000}
+\end{equation}
+The block $B$ has the width-three decimal notation
+\[
+ B=100a+10b+c,\qquad a,b,c\in\{0,\ldots,9\}.
+\]
+The width is preserved even when leading zeros appear: the block $001$ has three digit positions and integer value one. The index of the block in a sequence and the quotient $Q$ preserve the scale information required by refinement.
+
+In the first APP table, sums and products are less than one thousand. Their remainder modulo one thousand coincides with their integer value. Reduction modulo nine has a different function: it produces the evaluations $\Sigma$ and $\Pi$ and their quotients. Comparison of the two moduli therefore begins with the concrete operations that each performs.
+
+\subsubsection{Exact identity between quotients}
+
+\begin{bloqueindivisible}
+\begin{teorema}[Compatibility of nonadic and decimal records]
+\label{thm:app-compatibilidad-mil}
+Let $N>0$ and let \eqref{eq:app-base1000} be its Euclidean division by one thousand. Then
+\begin{equation}
+ \rho_9(N)=\rho_9(Q+B),\qquad
+ q_9(N)=111Q+q_9(Q+B).
+ \label{eq:app-cross-module}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Since $N>0$, we have $Q+B>0$. The identity $1000=999+1$ gives
+\[
+ N=999Q+(Q+B)=9\cdot111Q+(Q+B).
+\]
+We apply nonadic restitution to the last term:
+\[
+ N=\rho_9(Q+B)+9\bigl(111Q+q_9(Q+B)\bigr).
+\]
+The remainder belongs to $D_9$ and the quotient is a nonnegative integer. Uniqueness in \cref{thm:app-reconstruccion} identifies them with $\rho_9(N)$ and $q_9(N)$.
+\end{proof}
+\end{bloqueindivisible}
+
+\begin{ejemplo}[Crossing the decimal threshold]
+For $N=1001$, division by one thousand produces $Q=1$, $B=1$. The formula gives $\rho_9(N)=\rho_9(2)=2$ and $q_9(N)=111$. The final block considered in isolation has remainder one; incorporating the quotient recovers the remainder two of the complete integer.
+
+For $N=1000$, we obtain $(\rho_9,q_9)=(1,111)$; for $N=999$, we obtain $(9,110)$. The transition between the two integers simultaneously changes the positive representative and the quotient.
+\end{ejemplo}
+
+\subsubsection{Recomposition of a finite sequence of blocks}
+
+\begin{bloqueindivisible}
+\begin{corolario}[Sum of blocks and restitution of scale]
+\label{cor:app-bloques}
+Let $N=\sum_{k=0}^{m}B_k1000^k>0$, with $0\leq B_k<1000$, and let $S_B=\sum_kB_k$. Then
+\begin{align}
+ \rho_9(N)&=\rho_9(S_B),\\
+ q_9(N)&=q_9(S_B)+
+ \sum_{k=1}^{m}B_k\frac{1000^k-1}{9}.
+ \label{eq:app-blocks-complete}
+\end{align}
+\end{corolario}
+
+\begin{proof}
+Subtracting $S_B$ from the expansion of $N$ produces $\sum_{k\geq1}B_k(1000^k-1)$. Each coefficient $1000^k-1$ is divisible by nine. Substituting $S_B=\rho_9(S_B)+9q_9(S_B)$ and applying uniqueness of restitution yields both identities.
+\end{proof}
+\end{bloqueindivisible}
+
+The remainder depends on the sum of the blocks; the second formula also preserves their position through powers of one thousand. The order and scale of the expansion are explicit in the integer record. This identity delimits the function of modulus one thousand in the present chapter. The selection of blocks by the calendar, the tritic orientation and the coinductive extension correspond to the TPK operations that will be developed on this basis.
+
+\subsection{Dependencies established for the tritic stage}
+\label{sec:app-dependencias}
+
+The construction has produced an ordered support of eighty-one positions, two simultaneous integer evaluations and their reversible decompositions. It has also produced the cardinal translations, the circulation record, the carry cocycle and the internal ternary structure of the multiplicative ideal. The projector realization and the compatibility of decimal blocks are obtained after these operations and retain their explicit domains.
+
+At this stage, exact reconstruction concerns the arithmetic evaluations; restitution of a complete trajectory requires its ordered record. This hierarchy determines the transition to the enriched state: each new operation must indicate which coordinates it uses, what it modifies and what it preserves. The introduction of TRIT can then be based on the ternary reduction and integer lift already defined; the introduction of TPK can act on concrete transitions and records.
+
+The subsequent development of the regions and constants will be inserted into that generative sequence. Its exposition must preserve the difference between the operator that generates an output and the formula that allows it to be recognized or evaluated in a later language. The arithmetic basis is proved here in the detail needed to track both functions without interchanging them.

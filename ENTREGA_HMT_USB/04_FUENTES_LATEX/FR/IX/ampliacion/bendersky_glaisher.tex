@@ -1,0 +1,126 @@
+\section{Dérivées régularisées et valeurs spectrales impaires}
+\label{ix-add:bendersky}
+
+La continuation et l'équation fonctionnelle démontrées dans la
+proposition~\ref{rz-num-03-2} permettent de relier deux opérations
+sur la même fonctionnelle $Z$ : la dérivation aux entiers négatifs et l'
+évaluation convergente aux entiers positifs impairs. Les coordonnées
+régionales et l'opérateur de numération maintiennent leur généalogie antérieure.
+La notation $\pi$ désigne la coordonnée HMT qui est déjà intervenue dans la
+construction thêta--Mellin.
+
+Soient $H_k=\sum_{j=1}^k1/j$, avec $H_0=0$, et $\mathsf B_j$ les nombres de Bernoulli construits par la récurrence de la section~\ref{lectura:manuscrito-04}, avec $\mathsf B_1=-1/2$. La typographie $\mathsf B_j$ distingue ces coefficients de la constante de Meissel--Mertens. On définit la hiérarchie de Bendersky--Glaisher--Kinkelin par
+\[
+ A_k=\exp\!\left(\frac{H_k\mathsf B_{k+1}}{k+1}-Z'(-k)\right),
+ \qquad k\in\mathbb N_0.
+\]
+Les points $-k$ sont réguliers. Le terme de Bernoulli fixe la
+normalisation correspondant à chaque niveau avant son évaluation.
+
+\subsection{Covariance des dérivées régularisées}
+On utilise ici la fonctionnelle $Z_\lambda=\lambda^{-s}Z$, dont le résidu
+est $\lambda^{-1}$, et on définit
+\[
+ D_k(\lambda)=\exp[-Z_\lambda'(-k)].
+\]
+Cet objet conserve la normalisation de l'opérateur mis à l'échelle, distincte de la normalisation à résidu unitaire employée pour $\widehat Z_\lambda$ dans la section~\ref{ix-add:stieltjes}.
+
+\HMTresultado{Proposition}{Transport des dérivées régularisées}{ix-add:regularized-scaling}
+Pour $\lambda>0$ et $k\in\mathbb N_0$,
+\[
+ Z_\lambda'(-k)=\lambda^k
+       \bigl(Z'(-k)-(\log\lambda)Z(-k)\bigr),
+\]
+\[
+ D_k(\lambda)=D_k(1)^{\lambda^k}
+               \lambda^{\lambda^k Z(-k)},\qquad
+ D_k(1)=A_k\exp\!\left(-\frac{H_k\mathsf B_{k+1}}{k+1}\right).
+\]
+\textbf{Démonstration.} La règle du produit appliquée à
+$\lambda^{-s}Z(s)$ donne la première identité. Son exponentielle négative
+donne la seconde, et la définition de $A_k$ donne la troisième.
+\hfill$\square$
+
+Aux niveaux initiaux,
+\[
+\begin{aligned}
+ A_0&=e^{-Z'(0)},\\
+ \log A_1&=\frac1{12}-Z'(-1),\qquad \log A_2=-Z'(-2),\\
+ \log A_3&=-\frac{11}{720}-Z'(-3),\qquad \log A_4=-Z'(-4).
+\end{aligned}
+\]
+Par exemple, $D_1(1)=A_1e^{-1/12}$. Maintenir le normalisateur évite
+d'identifier deux lecteurs différents parce qu'ils partagent la même dérivée.
+
+\Needspace{12\baselineskip}
+\subsection{Reconstruction des valeurs impaires}
+\HMTresultado{Théorème}{Correspondance entre niveaux négatifs pairs et positifs impairs}{ix-add:odd-values}
+Pour tout entier $n\geq1$,
+\[
+ Z'(-2n)=(-1)^n\frac{(2n)!}{2(2\pi)^{2n}}Z(2n+1),
+\]
+\[
+ \frac{\log D_{2n}(\lambda)}{\lambda^{2n}}
+ =\log A_{2n}
+ =(-1)^{n+1}\frac{(2n)!}{2(2\pi)^{2n}}Z(2n+1).
+\]
+\textbf{Démonstration.} L'équation fonctionnelle de la forme complétée
+implique l'identité méromorphe
+\[
+ \pi^{-s/2}\Gamma(s/2)Z(s)
+ =\pi^{-(1-s)/2}\Gamma((1-s)/2)Z(1-s).
+\]
+En $s=-2n$, le second membre est régulier et le facteur gamma du
+premier possède un pôle simple. Par conséquent, $Z(-2n)=0$. La récurrence
+de gamma et son résidu en zéro donnent
+\[
+ \Gamma(s/2)=\frac{2(-1)^n}{n!(s+2n)}+O(1).
+\]
+De plus,
+\[
+ \Gamma\!\left(n+\frac12\right)
+ =\frac{(2n)!\sqrt\pi}{4^nn!}.
+\]
+La comparaison des termes constants dans l'identité méromorphe produit
+\[
+ \pi^n\frac{2(-1)^n}{n!}Z'(-2n)
+ =\pi^{-n}\frac{(2n)!}{4^nn!}Z(2n+1),
+\]
+qui est la première formule. La série
+$t/(e^t-1)+t/2$ est paire ; d'où $\mathsf B_{2n+1}=0$ pour
+$n\geq1$. La définition de $A_{2n}$ et la proposition précédente
+achèvent la preuve. \hfill$\square$
+
+En particulier, le premier niveau pair positif satisfait
+\[
+ Z(3)=4\pi^2\log A_2.
+\]
+La constante d'Apéry évaluée avec reste dans la section~\ref{lectura:manuscrito-04} est ainsi reliée à une dérivée régularisée de la même fonctionnelle. Les intervalles qui y sont démontrés sont transportés par l'exponentielle monotone une fois conservées les bornes de la coordonnée régionale $\pi$.
+
+Le niveau zéro possède une évaluation différente. L'équation fonctionnelle,
+conjointement avec la réflexion et la duplication de gamma, équivaut à
+\[
+ Z(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)Z(1-s).
+\]
+La formule d'Euler
+\[
+ \Gamma(1+z)=\lim_{m\to\infty}
+ m^z\prod_{j=1}^{m}(1+z/j)^{-1}
+\]
+donne $\log\Gamma(1+z)=-\gamma_0z+O(z^2)$ : le coefficient linéaire est
+la limite de $\log m-H_m$, et le reste quadratique est contrôlé
+par la série convergente de $j^{-2}$. En utilisant
+$Z(1-s)=-1/s+\gamma_0+O(s)$ et
+$\Gamma(1-s)=1+\gamma_0s+O(s^2)$, les termes de degré un
+qui contiennent $\gamma_0$ s'annulent et l'on obtient
+\[
+ Z(s)=-\frac12-\frac12\log(2\pi)s+O(s^2).
+\]
+En conséquence,
+\[
+ A_0=\sqrt{2\pi},\qquad D_0(\lambda)=\sqrt{\frac{2\pi}{\lambda}}.
+\]
+La condition $n\geq1$ du théorème conserve cette différence : le niveau
+zéro ne s'obtient pas en substituant $Z(1)$, qui possède un pôle, dans la formule
+des valeurs impaires. Les identités de gamma expriment la normalisation
+analytique ultérieure, sans intervenir dans la sélection des germes.

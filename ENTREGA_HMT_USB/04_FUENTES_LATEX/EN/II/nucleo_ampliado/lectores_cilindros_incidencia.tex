@@ -1,0 +1,660 @@
+% Demonstrative expansion DF003--DF007. The integral source is unchanged.
+% Common owner of the Lean files cited in these comments:
+% output/PAQUETE_ARTICULO_I_INTEGRACION_ESTADO_CAMPOS_20260919/.
+% Causal placement of the first section: after the coinductive regional
+% readers and before their registers are used as inputs to K selection.
+% Causal placement of the second section: after the marked
+% Paley--Witt--Golay--Leech construction and before reconstruction of the VOA.
+% Both expository cuts preserve the same APP--TRIT--TPK origin.
+
+\section[Regional generation and refinement]{Integral compatibility of regional generation, cylindrical refinement, and incidence}
+\label{act21:sec:df-lectores-cilindros}
+
+Regional prolongation produces ordered sequences of blocks together with
+their reading depths. The Archimedean projection and ternary incidence
+are calculated on these same sequences. The connection between the two
+realizations can be formulated entirely through integer operations:
+selection by rational intervals, Euclidean division, lifting of six
+trits, carry reading, and the Witt transformation. This formulation makes
+it possible to trace each coefficient from its generating block to its
+subsequent use.
+
+The construction uses the three regional readers already obtained from the
+APP--TRIT--TPK state. We denote them by the indices
+\(c\in\{\mathrm P,\mathrm E,\mathrm F\}\), corresponding, respectively,
+to the closure, propagation, and autoscaling regions. Their real realization
+will be written as \(v_c\). The subsequent identifications
+\(v_{\mathrm P}=\pi_{\mathrm{HMT}}\),
+\(v_{\mathrm E}=e_{\mathrm{HMT}}\), and
+\(v_{\mathrm F}=\varphi_{\mathrm{HMT}}\) preserve this causal order.
+The operation that emits a block inspects the rational intervals of the
+regional reader; the real value enters the proof of correctness of that
+operation.
+
+\subsection{Positional emission through rational separation of cells}
+\label{act21:subsec:df-emision-racional}
+
+% Source: lean/biblioteca/RegionalPublicationComposition.lean,
+% produced_brackets, eventual_publication, joint_eventual_publication,
+% search_terminates, stopped_cell_correct, publications_compatible.
+
+For each region, two rational sequences
+\(\ell_c(j),u_c(j)\), constructed by its reader, are available and satisfy
+\[
+ \ell_c(j)\leq v_c\leq u_c(j).
+\]
+The cell-separation property proved for these readers states that, for
+each integer \(s>0\), there exists \(J\) such that, for every \(j\geq J\),
+\begin{equation}
+ \lfloor s\ell_c(j)\rfloor
+ =\lceil su_c(j)\rceil-1
+ =\lfloor sv_c\rfloor.
+ \label{act21:eq:df-separacion-celdas}
+\end{equation}
+Avoidance of rational boundaries by the regional values is the hypothesis
+of the preceding theorems that guarantees this separation. Here we use
+their operational conclusion together with the readers and intervals
+that produce it.
+
+\begin{definition}[Separation index and emitted prefix]
+For \(s>0\), let
+\[
+ j_c(s)=\min\{j\in\mathbb N:
+ \lfloor s\ell_c(j)\rfloor=\lceil su_c(j)\rceil-1\}.
+\]
+For an integer base \(b\geq2\) and a depth \(n\geq0\), define
+\begin{equation}
+ P_c(b,n)=\lfloor b^n\ell_c(j_c(b^n))\rfloor.
+ \label{act21:eq:df-publicacion-prefijo}
+\end{equation}
+The prefix contains the integer part and the first \(n\) positions in base
+\(b\); consequently, \(P_c(b,0)\) is the regional integer part.
+\end{definition}
+
+\begin{theorem}[Termination and correctness of emission]
+\label{act21:thm:df-emision-correcta}
+The index \(j_c(s)\) exists for every \(s>0\). The emitted prefixes satisfy
+\begin{equation}
+ P_c(b,n)=\lfloor b^n v_c\rfloor,
+ \qquad
+ P_c(b,n)\leq b^n v_c<P_c(b,n)+1.
+ \label{act21:eq:df-prefijo-correcto}
+\end{equation}
+For each scale \(s\), a single sufficiency index \(J(s)\) can also be
+chosen that is valid simultaneously for all three regions.
+\end{theorem}
+
+\begin{proof}
+The eventual equality in \eqref{act21:eq:df-separacion-celdas} makes the set
+defining \(j_c(s)\) nonempty. Its minimum exists by the well-ordering of
+\(\mathbb N\). At any index where the equality holds, the rational lower
+bound gives
+\(\lfloor s\ell_c(j)\rfloor\leq\lfloor sv_c\rfloor\).
+The upper bound, together with avoidance of a cell boundary, gives
+\(\lfloor sv_c\rfloor\leq\lceil su_c(j)\rceil-1\).
+When the two integer endpoints coincide, the intervening integer coincides
+with them. This proves \eqref{act21:eq:df-prefijo-correcto}. For the joint
+statement, it suffices to take the maximum of the three sufficiency indices
+obtained at the same scale. The joint index controls all three emissions
+simultaneously, while each region retains its own intervals.
+\end{proof}
+
+\begin{proposition}[Exact compatibility of prefixes]
+\label{act21:prop:df-prefijos-compatibles}
+For \(n,m\geq0\),
+\begin{equation}
+ \left\lfloor\frac{P_c(b,n+m)}{b^m}\right\rfloor=P_c(b,n).
+ \label{act21:eq:df-truncamiento}
+\end{equation}
+In particular, the next block
+\(d_c(b,n)=P_c(b,n+1)\bmod b\) satisfies
+\begin{equation}
+ P_c(b,n+1)=bP_c(b,n)+d_c(b,n),\qquad 0\leq d_c(b,n)<b.
+ \label{act21:eq:df-paso-posicional}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write \(b^n v_c=N+\theta\), with
+\(N=P_c(b,n)\) and \(0\leq\theta<1\). Then
+\(P_c(b,n+m)=b^mN+\lfloor b^m\theta\rfloor\), and the second summand
+belongs to \(\{0,\ldots,b^m-1\}\). Euclidean division by \(b^m\)
+recovers \(N\). The specialization \(m=1\) yields
+\eqref{act21:eq:df-paso-posicional} and its residual bound.
+\end{proof}
+
+\subsection{Regional blocks of six trits at arbitrary depth}
+\label{act21:subsec:df-bloques-arbitrarios}
+
+% Source: deltas/integracion/JointRegionalFrontier.lean,
+% publish_base729_eq_base3, generated_block_from_longer_prefix,
+% generated_block_eq_finite, generated_signature_eq_finite.
+
+The integer equality \(729=3^6\) determines the grouping of six ternary
+positions into a block. For \(t\geq0\), define
+\begin{equation}
+ u_c(t)=P_c(729,t+1)\bmod729,
+ \qquad
+ B_{c,j}(t)=
+ \left\lfloor\frac{u_c(t)}{3^{5-j}}\right\rfloor\bmod3,
+ \quad 0\leq j<6.
+ \label{act21:eq:df-bloque-y-banda}
+\end{equation}
+Thus \(B_c(t)\) is an ordered word of six trits, and
+\begin{equation}
+ u_c(t)=\sum_{j=0}^{5}B_{c,j}(t)3^{5-j}.
+ \label{act21:eq:df-elevacion-banda}
+\end{equation}
+The word and its integer lift are mutually recoverable representations
+of the same emitted block.
+
+\begin{theorem}[Stability of extraction at any depth]
+\label{act21:thm:df-bloque-estable}
+For every \(n\),
+\[
+ P_c(729,n)=P_c(3,6n).
+\]
+If \(t<n\), then
+\begin{equation}
+ u_c(t)=
+ \left\lfloor\frac{P_c(729,n)}{729^{n-t-1}}\right\rfloor\bmod729.
+ \label{act21:eq:df-bloque-prefijo-largo}
+\end{equation}
+Consequently, every extension of the prefix preserves all previously
+emitted blocks and all signatures calculated from them.
+\end{theorem}
+
+\begin{proof}
+The first equality follows because both prefixes are separated at the same
+scale, \(729^n=3^{6n}\), and from
+Theorem~\ref{act21:thm:df-emision-correcta}. For the second, apply
+\eqref{act21:eq:df-truncamiento} at depths \(n\) and \(t+1\), and then take
+the residue modulo \(729\). The ternary extraction in
+\eqref{act21:eq:df-bloque-y-banda} is deterministic. Any explicit function of
+those eighteen coordinates therefore retains the same result when the
+prefix is extended.
+\end{proof}
+
+The construction is quantified over \(t\in\mathbb N\). A table
+materializing one hundred blocks is a finite evaluation of this
+construction; formula \eqref{act21:eq:df-bloque-prefijo-largo} determines its
+compatibility with every subsequent extension exactly.
+
+\begin{example}[First joint block]
+Evaluation of the selected regional readers gives the words
+\[
+ B_{\mathrm P}(0)=010211,\qquad
+ B_{\mathrm E}(0)=201101,\qquad
+ B_{\mathrm F}(0)=121200.
+\]
+Their lifting by \eqref{act21:eq:df-elevacion-banda} produces
+\[
+ u_{\mathrm P}(0)=103,\qquad
+ u_{\mathrm E}(0)=523,\qquad
+ u_{\mathrm F}(0)=450.
+\]
+For example,
+\(201101_3=2\cdot243+27+9+1=523\).
+All six positions, including leading zeros, are retained in the band
+representation. The leading zero in \(010211\) has a defined position
+even though the decimal notation for \(103\) does not contain it.
+\end{example}
+
+\subsection{Transition registers and reconstruction of linear lifts}
+\label{act21:subsec:df-registros-transicion}
+
+% Sources: deltas/integracion/RegionalTransitionRecords.lean and
+% GeneratedTransitionRecords.lean; lean/biblioteca/TPKLifts.lean.
+% The reconstructed links are R(0)->R(1) and R(2)->R(3).
+
+Over \(\mathbb F_3\), collect two consecutive emissions from each region
+in the matrix
+\begin{equation}
+ R(t)=
+ \begin{pmatrix}
+ B_{\mathrm P}(t)\\ B_{\mathrm P}(t+1)\\
+ B_{\mathrm E}(t)\\ B_{\mathrm E}(t+1)\\
+ B_{\mathrm F}(t)\\ B_{\mathrm F}(t+1)
+ \end{pmatrix}.
+ \label{act21:eq:df-registro-matricial}
+\end{equation}
+This definition fixes both the regional order and the temporal order.
+The first four registers are
+\[
+ X_0=R(0),\quad Y_0=R(1),\quad X_1=R(2),\quad Y_1=R(3).
+\]
+Their values, obtained by extraction from the regional prefixes, are
+\begin{align*}
+ X_0&=\begin{pmatrix}
+0&1&0&2&1&1\\0&1&2&2&2&2\\2&0&1&1&0&1\\
+1&2&1&2&2&1\\1&2&1&2&0&0\\1&1&2&2&0&2
+\end{pmatrix},&
+ Y_0&=\begin{pmatrix}
+0&1&2&2&2&2\\0&1&0&2&1&1\\1&2&1&2&2&1\\
+1&0&2&0&1&1\\1&1&2&2&0&2\\1&2&1&0&2&0
+\end{pmatrix},\\[1ex]
+ X_1&=\begin{pmatrix}
+0&1&0&2&1&1\\0&0&2&1&1&1\\1&0&2&0&1&1\\
+0&1&2&2&2&2\\1&2&1&0&2&0\\0&1&0&2&1&0
+\end{pmatrix},&
+ Y_1&=\begin{pmatrix}
+0&0&2&1&1&1\\1&1&0&2&2&1\\0&1&2&2&2&2\\
+1&0&2&0&1&1\\0&1&0&2&1&0\\0&1&0&2&0&0
+\end{pmatrix}.
+\end{align*}
+
+\begin{theorem}[Unique reconstruction of the two initial links]
+\label{act21:thm:df-elevaciones-reconstruidas}
+The equations \(X_0L_0=Y_0\) and \(X_1L_1=Y_1\) each have a unique
+solution in \(M_6(\mathbb F_3)\). These solutions are
+\begin{align*}
+ L_0&=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},&
+ L_1&=\begin{pmatrix}
+2&1&2&0&2&2\\1&2&1&1&2&0\\1&2&1&1&1&2\\
+0&1&0&0&2&1\\2&0&2&1&0&1\\0&2&2&2&1&1
+\end{pmatrix}.
+\end{align*}
+Both matrices are invertible.
+\end{theorem}
+
+\begin{proof}
+The matrices
+\begin{align*}
+ A_0&=\begin{pmatrix}
+1&1&2&0&1&2\\0&0&1&0&0&1\\2&1&2&1&0&1\\
+0&2&0&1&0&2\\2&1&1&0&2&2\\2&1&1&1&1&2
+\end{pmatrix},&
+ A_1&=\begin{pmatrix}
+1&0&1&2&0&0\\0&0&1&1&2&2\\0&1&2&0&1&1\\
+1&1&0&2&0&0\\1&1&2&1&1&2\\1&0&0&0&0&2
+\end{pmatrix}
+\end{align*}
+satisfy \(A_iX_i=X_iA_i=I\), by multiplication in \(\mathbb F_3\).
+The solutions are therefore forced by \(L_i=A_iY_i\); multiplication
+produces the two displayed matrices. Their inverses are
+\begin{align*}
+ L_0^{-1}&=\begin{pmatrix}
+1&2&0&2&0&2\\2&0&2&2&0&0\\2&1&2&0&2&0\\
+1&0&0&0&2&0\\0&2&1&1&2&0\\2&2&2&2&2&2
+\end{pmatrix},&
+ L_1^{-1}&=\begin{pmatrix}
+2&0&2&1&2&1\\2&1&0&0&2&0\\2&0&2&2&0&2\\
+2&0&0&1&1&0\\1&1&1&1&1&0\\2&0&1&2&2&0
+\end{pmatrix}.
+\end{align*}
+The bilateral verification \(L_iL_i^{-1}=L_i^{-1}L_i=I\) proves exact
+recovery of each transformed word. All products use residues \(0,1,2\)
+with their interpretation in \(\mathbb F_3\).
+\end{proof}
+
+The causal reading of this result is precise: the regional emissions
+produce \(R(t)\); the registers \(R(0),\ldots,R(3)\) determine the two
+lifts above; their inverses recover the transformed words. Continuity
+for every \(t\) belongs to the coinductive readers and
+Theorem~\ref{act21:thm:df-bloque-estable}. The matrix reconstruction proved here
+has the two links specified in its statement as its domain.
+
+\subsection{Simultaneous refinement in ternary and decimal bases}
+\label{act21:subsec:df-cilindros-mixtos}
+
+% Source: deltas/integracion/RegionalCylinderTransition.lean.
+
+A ternary emission of six trits and a decimal emission of three digits
+are readings in different bases. To preserve their relationship, record
+the state
+\[
+ s=(n,k,N,D),
+\]
+where \(N\) is a prefix at depth \(n\) in base \(729\), and \(D\) is
+a prefix at depth \(k\) in base \(1000\). Their Archimedean cylinders are
+\begin{equation}
+ I_{729}(s)=\left[\frac{N}{729^n},\frac{N+1}{729^n}\right),\qquad
+ I_{1000}(s)=\left[\frac{D}{1000^k},\frac{D+1}{1000^k}\right).
+ \label{act21:eq:df-cilindros}
+\end{equation}
+The half-open upper endpoint assigns each value to a unique cell at a
+given base and depth.
+
+\begin{definition}[Integer compatibility defects]
+Define
+\begin{align}
+ A(s)&=N1000^k-D729^n,\label{act21:eq:df-defecto-inferior}\\
+ B(s)&=(N+1)1000^k-D729^n=A(s)+1000^k.
+ \label{act21:eq:df-defecto-superior}
+\end{align}
+The state is compatible when
+\begin{equation}
+ A(s)<729^n,\qquad B(s)>0.
+ \label{act21:eq:df-compatibilidad}
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Integer criterion for intersection]
+The cylinders in \eqref{act21:eq:df-cilindros} have a nonempty intersection if
+and only if \eqref{act21:eq:df-compatibilidad} holds.
+\end{lemma}
+
+\begin{proof}
+Two half-open intervals \([a,b)\) and \([c,d)\), with \(a<b\) and
+\(c<d\), intersect exactly when \(a<d\) and \(c<b\). Applying this
+condition to \eqref{act21:eq:df-cilindros} and multiplying by the positive
+denominators gives
+\(N1000^k<(D+1)729^n\) and
+\(D729^n<(N+1)1000^k\). These are the two inequalities in
+\eqref{act21:eq:df-compatibilidad}.
+\end{proof}
+
+\begin{definition}[Update of depths and prefixes]
+For \(0\leq u<729\) and \(0\leq d<1000\), define
+\begin{align*}
+ T_u(n,k,N,D)&=(n+1,k,729N+u,D),\\
+ T_{u,d}(n,k,N,D)&=(n+1,k+1,729N+u,1000D+d).
+\end{align*}
+The first operation refines only the ternary cylinder. The second refines
+both readings and preserves both depths in the state.
+\end{definition}
+
+\begin{proposition}[Exact boundary recurrences]
+\label{act21:prop:df-rec-frontera}
+The updates above satisfy
+\begin{align}
+ A(T_u s)&=729A(s)+u1000^k,\label{act21:eq:df-rec-ternaria}\\
+ A(T_{u,d}s)&=729000A(s)+u1000^{k+1}-d729^{n+1}.
+ \label{act21:eq:df-rec-conjunta}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+For the first identity,
+\[
+ (729N+u)1000^k-D729^{n+1}
+ =729(N1000^k-D729^n)+u1000^k.
+\]
+For the second,
+\begin{align*}
+ &(729N+u)1000^{k+1}-(1000D+d)729^{n+1}\\
+ &\qquad=729000(N1000^k-D729^n)
+      +u1000^{k+1}-d729^{n+1}.
+\end{align*}
+Both are integer identities preceding any real approximation.
+\end{proof}
+
+\begin{theorem}[Refinement of the generated regional cylinders]
+\label{act21:thm:df-refinamiento-generado}
+Let
+\[
+ s_c(n,k)=(n,k,P_c(729,n),P_c(1000,k)).
+\]
+Then \(s_c(n,k)\) is compatible for all \(n,k\). Moreover,
+\begin{align*}
+ T_{u_c(n)}s_c(n,k)&=s_c(n+1,k),\\
+ T_{u_c(n),d_c(1000,k)}s_c(n,k)&=s_c(n+1,k+1).
+\end{align*}
+Euclidean division of the refined prefixes recovers the preceding
+prefixes exactly. For every \(a,b\geq0\),
+\[
+ \frac{P_c(729,n+a)-P_c(729,n+a)\bmod729^a}{729^a}
+ =P_c(729,n),
+\]
+and the analogous identity holds in base \(1000\).
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{act21:thm:df-emision-correcta} places \(v_c\) simultaneously in
+both intervals in \eqref{act21:eq:df-cilindros}; the intersection criterion
+gives compatibility. The update identities are
+\eqref{act21:eq:df-paso-posicional} in each base. Recovery follows from
+\eqref{act21:eq:df-truncamiento}. Thus the defect recurrence and prefix
+recovery are consequences of the same update.
+\end{proof}
+
+\begin{example}[First pair of regional cylinders]
+For \(n=k=1\), evaluation of the three regions gives
+\[
+\begin{array}{c|rr|rr}
+ c&N&D&A&B\\\hline
+ \mathrm P&2290&3141&211&1211\\
+ \mathrm E&1981&2718&-422&578\\
+ \mathrm F&1179&1618&-522&478
+\end{array}
+\]
+In all three rows, \(A<729\) and \(B>0\). The first prefix column
+decomposes as \(2290=3\cdot729+103\),
+\(1981=2\cdot729+523\), and \(1179=729+450\): exactly the previously
+emitted six-trit blocks reappear. The different signs of \(A\) express
+the relative positions of the two lower endpoints without altering the
+regional value's membership in both intervals.
+\end{example}
+
+\subsection{Selection of the next block by the regional reader}
+
+Compatibility of two intervals expresses a relationship between readings.
+Determining the next block additionally uses the rational interval
+produced by the region. This operation can be formulated without
+discarding the depth history.
+
+\begin{definition}[Admissibility of regional prolongation]
+For fixed \(c,n\), let \(s=729^{n+1}\) and \(j=j_c(s)\). A residue
+\(u\in\{0,\ldots,728\}\) is admissible when
+\begin{equation}
+ \lfloor s\ell_c(j)\rfloor
+ \leq729P_c(729,n)+u
+ \leq\lceil su_c(j)\rceil-1.
+ \label{act21:eq:df-admisibilidad}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Uniqueness of the prolongation compatible with the reader]
+\label{act21:thm:df-prolongacion-unica}
+Condition \eqref{act21:eq:df-admisibilidad} is equivalent to \(u=u_c(n)\).
+There is therefore exactly one admissible prolongation of each region
+at each depth.
+\end{theorem}
+
+\begin{proof}
+At the separation index, both integer endpoints in
+\eqref{act21:eq:df-admisibilidad} coincide with \(P_c(729,n+1)\).
+The condition is therefore equivalent to
+\(729P_c(729,n)+u=P_c(729,n+1)\).
+By \eqref{act21:eq:df-paso-posicional}, the right-hand side is
+\(729P_c(729,n)+u_c(n)\). Cancelling the common term gives equality
+of the residues. Conversely, this equality satisfies the condition.
+\end{proof}
+
+The effective dependence of this selection is fully specified:
+selected region, rational reader, depth, separation index, preceding
+prefix, and next residue. The defect \(A\) summarizes a boundary
+relationship; the state \((n,k,N,D)\) and the regional intervals retain
+the data used by the update.
+
+\subsection{Ternary signature, carry, Witt incidence, and reading clock}
+\label{act21:subsec:df-firma-conjunta}
+
+% Sources: lean/regional/N69RegionalSignature.lean,
+% deltas/integracion/JointRegionalFrontier.lean and JointCylinderSignature.lean.
+
+At a fixed depth \(t\), write \(B_{c,j}=B_{c,j}(t)\). For each column
+\(j\), calculate the following integers and residues:
+\begin{align}
+ S_j&=B_{\mathrm P,j}+B_{\mathrm E,j}+B_{\mathrm F,j},
+ &q_j&=S_j\bmod3,
+ &c_j&=\left\lfloor S_j/3\right\rfloor,
+ \label{act21:eq:df-firma-qc}\\
+ a_j&=(B_{\mathrm P,j}+B_{\mathrm E,j}-B_{\mathrm F,j})\bmod3,
+ &w_j&=\sum_c\mathbf1_{B_{c,j}\ne0},
+ &\bar w_j&=w_j\bmod3.
+ \label{act21:eq:df-firma-axial}
+\end{align}
+The residue of the axial expression is taken in the integers. An
+implementation using natural numbers calculates it as
+\((B_{\mathrm P,j}+B_{\mathrm E,j}+3-B_{\mathrm F,j})\bmod3\),
+which preserves that residue exactly.
+
+The ternary incidence matrix used by the reader is
+\begin{equation}
+ W=\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&2&2\\
+1&1&0&2&1&2\\
+1&1&2&0&2&1\\
+1&2&1&2&0&1\\
+1&2&2&1&1&0
+\end{pmatrix}.
+\label{act21:eq:df-matriz-witt}
+\end{equation}
+Two residual charges are preserved for each region:
+\begin{equation}
+ v_c^{\mathrm{res}}=\sum_j B_{c,j}\bmod3,
+ \qquad
+ v_c^{\mathrm W}=\sum_j(B_cW)_j\bmod3.
+ \label{act21:eq:df-cargas-residuales}
+\end{equation}
+The reader's complete signature is
+\(\mathcal S(B)=(q,a,c,w,\bar w,v^{\mathrm{res}},v^{\mathrm W})\).
+Its structure separately preserves the column residue, carry, axial
+contrast, support weight, and the two charge readings.
+
+\begin{theorem}[Exact recovery and bounds of the signature]
+\label{act21:thm:df-recuperacion-firma}
+For each column and each region,
+\begin{align}
+ S_j&=q_j+3c_j,&0\leq q_j,a_j&<3,&0\leq c_j&\leq2,
+ \label{act21:eq:df-recuperacion-total}\\
+ B_{\mathrm F,j}&=2(q_j+3-a_j)\bmod3,&0\leq w_j&\leq3,
+ &0\leq\bar w_j&<3.
+ \label{act21:eq:df-recuperacion-eje}
+\end{align}
+Moreover,
+\begin{equation}
+ v_c^{\mathrm W}
+ =\left(\sum_j\bigl((B_cW)_j\bmod3\bigr)\right)\bmod3.
+ \label{act21:eq:df-witt-reduccion}
+\end{equation}
+The stated recoveries determine each column's total and its autoscaling
+coordinate; the regional register additionally preserves the three
+ordered bands.
+\end{theorem}
+
+\begin{proof}
+Identity \eqref{act21:eq:df-recuperacion-total} is Euclidean division of
+\(S_j\) by \(3\). Each summand of \(S_j\) lies between \(0\) and
+\(2\), so \(0\leq S_j\leq6\) and \(c_j\leq2\). In \(\mathbb F_3\),
+subtracting the two congruences defining \(q_j\) and \(a_j\) gives
+\(q_j-a_j=2B_{\mathrm F,j}\). Since the inverse of \(2\) is \(2\),
+this yields \eqref{act21:eq:df-recuperacion-eje}; the summand \(3\) permits
+an expression using natural numbers. The bounds on \(w_j\) follow by
+summing three indicators. Finally, reducing an integer sum modulo \(3\)
+is equivalent to reducing each summand and then reducing their sum,
+which proves \eqref{act21:eq:df-witt-reduccion}.
+\end{proof}
+
+\begin{example}[Signature of the first joint block]
+The three initial bands produce
+\begin{align*}
+ q&=(0,0,2,2,1,2),&a&=(1,2,0,1,1,2),\\
+ c&=(1,1,0,1,0,0),&w&=(2,2,2,3,1,2),\\
+ v^{\mathrm{res}}&=(2,2,0),&v^{\mathrm W}&=(2,1,1).
+\end{align*}
+The fourth column has total \(2+1+2=5\); its signature records
+\(q_3=2\) and \(c_3=1\), so \(q_3+3c_3=5\).
+Axial recovery gives
+\(2(2+3-1)\bmod3=2\), precisely the autoscaling coordinate.
+The Witt images, reduced componentwise, are
+\[
+ (2,0,2,1,1,2),\qquad
+ (0,0,0,2,0,2),\qquad
+ (2,1,1,2,1,0).
+\]
+Their residual sums by row yield the three charges \((2,1,1)\).
+\end{example}
+
+\begin{definition}[Integer clock of decimal reading]
+The transition index \(t\) and decimal expansion depth are related by
+\begin{equation}
+ \kappa(t)=\max\{k\in\mathbb N:1000^k\leq3^{6(t+1)}\}.
+ \label{act21:eq:df-reloj}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Characterization and monotonicity of the clock]
+\label{act21:prop:df-reloj}
+The integer \(\kappa(t)\) is uniquely determined by
+\begin{equation}
+ 1000^{\kappa(t)}\leq729^{t+1}<1000^{\kappa(t)+1}.
+ \label{act21:eq:df-reloj-cotas}
+\end{equation}
+The function \(\kappa\) is monotone and satisfies
+\(\kappa(20)=\kappa(21)=20\).
+\end{proposition}
+
+\begin{proof}
+The powers of \(1000\) are strictly increasing and unbounded; there is
+therefore a unique interval between consecutive powers containing
+\(729^{t+1}\). Monotonicity of the latter expression proves that of
+\(\kappa\). The final two evaluations are the integer comparisons
+\[
+ 1000^{20}\leq729^{21}<1000^{21},\qquad
+ 1000^{20}\leq729^{22}<1000^{21}.
+\]
+These comparisons use exact integer powers.
+\end{proof}
+
+Equality of decimal depth at two distinct transitions explains why both
+indices must be retained: the reading clock can remain constant while
+the ternary band advances and its signature is updated. Chronological
+information resides in the ordered register of transitions.
+
+\subsection{Composition theorem for the block, cylinder, and signature}
+
+\begin{theorem}[Joint compatibility of regional readings]
+\label{act21:thm:df-composicion-conjunta}
+For each depth \(n\), there exists a unique triple of blocks
+\((u_{\mathrm P},u_{\mathrm E},u_{\mathrm F})\) satisfying regional
+admissibility \eqref{act21:eq:df-admisibilidad} in all three regions.
+This triple is \((u_{\mathrm P}(n),u_{\mathrm E}(n),u_{\mathrm F}(n))\).
+Simultaneously:
+\begin{enumerate}
+\item each block updates its cylinder through recurrences
+\eqref{act21:eq:df-rec-ternaria} and \eqref{act21:eq:df-rec-conjunta};
+\item its six trits produce the signature
+\(\mathcal S(B_{\mathrm P}(n),B_{\mathrm E}(n),B_{\mathrm F}(n))\);
+\item the column totals are recovered as \(q+3c\), and the Witt charges
+are obtained from the same bands through
+\eqref{act21:eq:df-witt-reduccion};
+\item every deeper prefix returns exactly these blocks, truncated
+cylinders, and signatures.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Apply Theorem~\ref{act21:thm:df-prolongacion-unica} to each of the three
+regional indices. Coordinatewise uniqueness gives joint uniqueness.
+Substitute those same residues into the operations \(T_u,T_{u,d}\),
+which allows Theorem~\ref{act21:thm:df-refinamiento-generado} to be applied.
+The deterministic application of \eqref{act21:eq:df-bloque-y-banda} produces
+the bands used by
+\eqref{act21:eq:df-firma-qc}--\eqref{act21:eq:df-cargas-residuales}. The recovery
+identities are those of Theorem~\ref{act21:thm:df-recuperacion-firma}.
+Finally, Theorem~\ref{act21:thm:df-bloque-estable} and truncation in each base
+prove stability at greater depth. At every step the identity of the
+emitted block has been preserved; neither reading requires the selection
+of a different block.
+\end{proof}
+
+The conclusion is an operational compatibility between cylindrical
+contraction and preservation of incidence. Both use the same generated
+register, retain the depths, and admit integer recovery. This result
+is the explicit form of the connection
+\[
+ \text{emitted regional block}
+ \longrightarrow
+ \begin{cases}
+ \text{cylinder and integer boundary},\\
+ \text{band, signature, carry, and Witt charge}.
+ \end{cases}
+\]
+The subsequent development of incidence and fields uses the second
+reading while preserving its common provenance with the first.

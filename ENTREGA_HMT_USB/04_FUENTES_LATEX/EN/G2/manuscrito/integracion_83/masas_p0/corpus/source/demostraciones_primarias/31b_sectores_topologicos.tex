@@ -1,0 +1,385 @@
+% Vista científica exacta materializada desde una rama condicional.
+% Fuente: source/demostraciones_primarias/31_06c_sectores_topologicos_no_omision.tex; rama: HMTIncludeTopologicalBlock.
+% No modifica el contenido matemático de la rama de origen.
+\chapter[Incidence and Topological Sectors]{Incidence, Fibonacci and topological sectors}
+\label{chap:incidencia-fibonacci-topologia}
+\index{topological sector}\index{Fibonacci, ring based}
+\index{braid group}
+
+The residue--support incidence prolongs the atlas toward fusion and braid
+structures. The order is essential: first the based Fibonacci ring
+and its dimensions are constructed; the algebraic representations
+of braids and the pointed center are then studied. Each object preserves its own
+domain and is not identified with a physical particle merely because it shares a name or
+cardinal.
+
+\section{Residue-incident support}
+\label{sec:incidencia-residuo-soporte}
+
+We fix the residue classes and the supports in the order
+\[
+ \begin{aligned}
+ C_1&=\{1,4,7\},&
+ C_2&=\{2,5,8\},&
+ C_0&=\{3,6,9\},\\
+ \mathcal D_{\rm act}&=\{1,3,5,7\},&
+ \mathcal D_{\rm evt}&=\{2,4,6,8\},&
+ \mathcal D_{\bar0}^{(9)}&=\{9\}.
+ \end{aligned}
+\]
+The final symbol means ‘support of the null nonadic residue’. It does not designate
+the complete domain \(D_9=\{1,\ldots,9\}\) or a physical zero-mass sector.
+
+Let \(E_{\mathcal D}\cong\mathbb Z^3\) and
+\(E_C\cong\mathbb Z^3\) be the free modules with ordered bases
+\[
+ (\mathcal D_{\rm act},\mathcal D_{\rm evt},
+   \mathcal D_{\bar0}^{(9)})
+ \quad\text{and}\quad
+ (C_1,C_2,C_0),
+\]
+respectively. The incidence map
+\(B_{\rm res,sup}:E_{\mathcal D}\to E_C\) counts intersections.
+
+\begin{theorem}[Smith form and image of incidence]
+\label{thm:incidencia-residuo-soporte}
+In the preceding bases,
+\[
+ B_{\rm res,sup}
+ =\bigl(|C_i\cap\mathcal D_j|\bigr)_{i,j}
+ =
+ \begin{pmatrix}
+ 2&1&0\\
+ 1&2&0\\
+ 1&1&1
+ \end{pmatrix}.
+\]
+Moreover,
+\[
+ \det B_{\rm res,sup}=3,\qquad
+ \operatorname{SNF}(B_{\rm res,sup})
+ =\operatorname{diag}(1,1,3),
+\]
+\[
+ \operatorname{im}B_{\rm res,sup}
+ =\{(u,v,w)\in\mathbb Z^3:u+v\equiv0\pmod3\}.
+\]
+If
+\[
+ P=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix},
+\]
+the simultaneous exchange
+\(C_1\leftrightarrow C_2\) and
+\(\mathcal D_{\rm act}\leftrightarrow\mathcal D_{\rm evt}\) is equivariant:
+\[
+ P B_{\rm res,sup}P=B_{\rm res,sup}
+ \qquad\Longleftrightarrow\qquad
+ PB_{\rm res,sup}=B_{\rm res,sup}P.
+\]
+\end{theorem}
+
+\begin{proof}
+The nine entries follow from the intersections.
+\[
+\begin{array}{cccc}
+ &\mathcal D_{\rm act}&\mathcal D_{\rm evt}
+ &\mathcal D_{\bar0}^{(9)}\\
+ C_1&\{1,7\}&\{4\}&\varnothing\\
+ C_2&\{5\}&\{2,8\}&\varnothing\\
+ C_0&\{3\}&\{6\}&\{9\}.
+\end{array}
+\]
+The expansion by the third column gives
+\[
+ \det B_{\rm res,sup}
+ =\det\begin{pmatrix}2&1\\1&2\end{pmatrix}=3.
+\]
+The greatest common divisor of the entries is one. The smallest second-order
+minor formed by the first and third rows and the second and third columns
+has determinant one:
+\[
+ \det\begin{pmatrix}1&0\\1&1\end{pmatrix}=1.
+\]
+By the Smith divisors, \(d_1=d_2=1\). The product
+\(d_1d_2d_3\) agrees with the absolute value of the determinant, which the
+preceding calculation fixes at three. Consequently,
+
+\[
+ d_1d_2d_3=3.
+\]
+The normal form is therefore \(\operatorname{diag}(1,1,3)\).
+
+Each column satisfies \(u+v\equiv0\pmod3\), so the image is contained
+in the indicated submodule. Conversely, if \(u+v\equiv0\pmod3\), then
+\[
+ x=\frac{2u-v}{3},\qquad
+ y=\frac{2v-u}{3},\qquad
+ z=w-x-y
+\]
+are integers and
+\[
+ B_{\rm res,sup}(x,y,z)^{\mathsf T}=(u,v,w)^{\mathsf T}.
+\]
+This proves equality of images. Finally, explicit multiplication
+by \(P\) exchanges the first two rows and the first two columns and
+leaves the matrix invariant.
+\end{proof}
+
+\begin{criterion}[Incidence control]
+\label{crit:incidencia-residuo-soporte}
+The theorem would be falsified by a single miscounted intersection, a minor that altered
+the Smith divisors, a vector of the image with \(u+v\not\equiv0\pmod3\),
+a vector satisfying the congruence but admitting no exhibited preimage,
+or the loss of equivariance \(PBP=B\).
+\end{criterion}
+
+\section[Fibonacci-based Ring]{Based ring associated with the incidence
+  \texorpdfstring{\(F_{\rm av}\)}{F\_av}}
+\label{sec:anillo-basado-fibonacci}
+
+The \cref{thm:descenso-necesario-fav} proves, from the orbit of
+modes \((\Sigma,\Pi,\Pi)\), the matrix
+\[
+ F_{\rm av}=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.
+\]
+From this matrix the following based ring is obtained.
+
+\begin{definition}[Fibonacci-based Ring]
+\label{def:anillo-basado-fibonacci}
+Let
+\[
+ K_{\rm Fib}:=\mathbb Z\mathbf 1\oplus\mathbb Z\tau
+\]
+the free abelian group with unit \(\mathbf 1\) and bilinear product fixed by
+\[
+ \tau\cdot\mathbf 1=\tau,\qquad
+ \tau\cdot\tau=\mathbf 1+\tau.
+\]
+In this stratum, \(+\) and \(\cdot\) are the addition and multiplication of the
+ring. The categorical symbols \(\oplus\) and \(\otimes\) are reserved for
+a categorification chosen subsequently.
+\end{definition}
+
+\begin{theorem}[Realization of \(F_{\rm av}\) and Perron dimension]
+\label{thm:anillo-fibonacci-fav}
+In the ordered basis \((\mathbf 1,\tau)\), multiplication by \(\tau\) in
+\(K_{\rm Fib}\) has matrix \(F_{\rm av}\). If
+\(F_0=0\), \(F_1=1\), and
+\(F_{n+1}=F_n+F_{n-1}\) for \(n\geq1\), then
+\[
+ \tau^n=F_{n-1}\mathbf 1+F_n\tau
+ \qquad(n\geq1).
+\]
+The unique homomorfismo positivo of dimension that envia
+\(\mathbf 1\) to one satisfies
+\[
+ \operatorname{FPdim}(\tau)=\varphi.
+\]
+Identification of the two typed sheets with the basis
+\((\mathbf 1,\tau)\) completely determines this ring and its positive
+dimension.
+\end{theorem}
+
+\begin{proof}
+The columns of the matrix of multiplication by \(\tau\) are the coordinates
+of
+\[
+ \tau\cdot\mathbf 1=\tau
+ \quad\text{and}\quad
+ \tau\cdot\tau=\mathbf 1+\tau;
+\]
+they are therefore \((0,1)^{\mathsf T}\) and \((1,1)^{\mathsf T}\), respectively.
+Thus one obtains \(F_{\rm av}\).
+
+The power formula holds for \(n=1\). If it holds for \(n\), then
+\[
+ \tau^{n+1}
+ =F_{n-1}\tau+F_n(\mathbf 1+\tau)
+ =F_n\mathbf 1+F_{n+1}\tau,
+\]
+which closes the induction. Finally, a positive multiplicative dimension
+\(d=\operatorname{FPdim}(\tau)\) obeys
+\[
+ d^2=1+d.
+\]
+Its roots are \(\varphi\) and \(-\varphi^{-1}\); positivity selects
+\(d=\varphi\).
+\end{proof}
+
+The designation \emph{Fibonacci} is thus explained by the fusion
+rule itself: upon iterating \(\tau\), the two possible channels appear with
+consecutive multiplicities \(F_{n-1}\) and \(F_n\). The space of fusion states
+therefore grows with asymptotic ratio \(\varphi\). This is the
+combinatorial basis of its computational use: information is encoded in global
+fusion channels and not in a mass assigned to a point.
+
+\begin{criterion}[Conditions for a Fibonacci categorification]
+\label{crit:categorificacion-fibonacci}
+The annular layer would be refuted if the multiplication matrix were not
+\(F_{\rm av}\), if the power recurrence failed, or if the positive
+dimension were not \(\varphi\). A braided categorification whose
+Grothendieck ring is that of \cref{def:anillo-basado-fibonacci} additionally requires a
+monoidal functor
+\[
+ \mathfrak C_{\rm Fib}:\mathsf{TPK}
+ \dashrightarrow\mathcal C_{\rm Fib},
+\]
+the verification of the pentagon and hexagon in its image and an internal rule that
+selects gauge and chirality.
+These conditions are not consequences of the annular identity by itself.
+\end{criterion}
+
+\section[Braid Characters]{Six characters and four braid twists}
+\label{sec:rescate-trenzas-ex02}
+
+Let \(B_n\), \(n\geq2\), be the Artin braid group with generators
+\(\sigma_1,\ldots,\sigma_{n-1}\) and relations
+\[
+ \sigma_i\sigma_{i+1}\sigma_i
+ =\sigma_{i+1}\sigma_i\sigma_{i+1},
+ \qquad
+ \sigma_i\sigma_j=\sigma_j\sigma_i\quad(|i-j|\geq2),
+\]
+and let \(w:B_n\to\mathbb Z\) be the sum of the exponents. The readers
+\[
+ w_2:=w\bmod2,\qquad w_3:=w\bmod3
+\]
+are brought together, by the Chinese remainder theorem, in
+\[
+ w_6:B_n\longrightarrow
+ \mathbb Z/2\mathbb Z\times\mathbb Z/3\mathbb Z
+ \simeq\mathbb Z/6\mathbb Z.
+\]
+
+\begin{theorem}[Abelianization, six characters and permutation torsions]
+\label{thm:trenzas-caracteres-z6}
+For \(n\geq2\),
+\[
+ B_n^{\rm ab}\simeq\mathbb Z,
+\]
+through \(w\). Consequently, \(w_6\) produces six unitary characters
+\[
+ \chi_k(b)
+ :=\exp\!\left(\frac{2\pi\mathrm i k}{6}w(b)\right),
+ \qquad k\in\mathbb Z/6\mathbb Z.
+\]
+
+Let \(V\ne0\) be a Hilbert space, let
+\(P_i:V^{\otimes n}\to V^{\otimes n}\) be the exchange of the factors
+\(i,i+1\), and let \(q\in\mu_6\). The rule
+\[
+ \rho_q(\sigma_i):=qP_i,
+ \qquad
+ \rho_q(b)=q^{w(b)}\pi_n(b),
+\]
+where \(\pi_n\) is the permutation representation, defines a
+representation of \(B_n\). This representation descends to the symmetric group
+if and only if
+\[
+ q^2=1.
+\]
+For the four values \(q\in\mu_6\setminus\{\pm1\}\),
+\[
+ \operatorname{Inv}(\rho_q)=0.
+\]
+Those four values define genuinely braided scalar torsions, but
+do not by themselves constitute four Fock spaces nor four physical
+anyonic sectors.
+\end{theorem}
+
+\begin{proof}
+In every abelian quotient, the braid relation gives
+\[
+ 2[\sigma_i]+[\sigma_{i+1}]
+ =[\sigma_i]+2[\sigma_{i+1}],
+\]
+and thus all generators have the same class. No other relation remains on
+that class, since \(w(\sigma_i)=1\); hence the abelianization is
+\(\mathbb Z\).
+
+The operators \(P_i\) satisfy the braid relations and
+\(P_i^2=I\). Multiplying each generator by the same scalar \(q\) preserves
+both relations, so \(\rho_q\) is a representation. To
+factor through \(S_n\), it must satisfy the additional relation
+\(\sigma_i^2=1\), and
+\[
+ \rho_q(\sigma_i)^2=q^2I.
+\]
+This proves criterion \(q^2=1\).
+
+If \(v\) were invariant, then
+\(qP_i v=v\), that is, \(P_i v=q^{-1}v\), for every \(i\). Since each
+involution \(P_i\) has only eigenvalues \(\pm1\), no such nonzero vector
+exists when \(q\ne\pm1\). Consequently,
+\(\operatorname{Inv}(\rho_q)=0\) for the remaining four values.
+\end{proof}
+
+When \(\dim V>1\) and \(n\geq3\), the operators \(P_1\) and \(P_2\) do not
+commute; hence the full representation does not become Abelian merely because
+it arises from a scalar character. The character \(\chi_k\) and the representation
+\(\rho_q\) are distinct objects: the former is one-dimensional; the latter
+retains the permutation action.
+
+\section[Modular center and topological realizations]{Modular center pointed and Fibonacci realization conditions Ising}
+\label{sec:centro-apuntado-no-go}
+
+Let
+\[
+ A=(\mathbb Z/9\mathbb Z)^2
+\]
+and let \(\operatorname{Vec}_A\) be the category of
+\(A\)-graded vector spaces with trivial associator. Fixing a nondegenerate bicharacter
+identifies \(\widehat A\) with \(A\), but does not alter the following counts.
+
+\begin{theorem}[Pointed center and dimensional obstruction]
+\label{thm:centro-apuntado-no-go}
+The Drinfeld center
+\[
+ \mathcal Z(\operatorname{Vec}_A)
+\]
+is a pointed modular category whose simple objects are parameterized by
+\((a,\chi)\in A\times\widehat A\). It therefore has
+\[
+ |A|\,|\widehat A|=81^2=6561
+\]
+simple, all of quantum dimension one, and total quantum dimension
+\[
+ \mathcal D
+ =\sqrt{\sum_{x\ {\rm simple}}d_x^2}
+ =\sqrt{6561}=81.
+\]
+In this category, neither the Fibonacci ring nor the Ising sector can be
+realized while preserving simple objects and Frobenius--Perron dimensions: they require,
+respectively, a simple object of dimension \(\varphi\) and one of dimension
+\(\sqrt2\).
+\end{theorem}
+
+\begin{proof}
+For a finite abelian group and trivial associator, every simple object of the
+center is determined by a degree \(a\in A\) and a character
+\(\chi\in\widehat A\) that specifies its half-braiding. Both the graded
+object and the character are one-dimensional; consequently, all the
+simple objects are invertible and have quantum dimension one. Since
+\(|A|=|\widehat A|=9^2=81\), the number of pairs is \(81^2\), and the formula of
+\(\mathcal D\) gives \(81\).
+
+Every fusion subcategory of a pointed category is again pointed;
+in particular, its simple objects have dimension one. This contradicts
+\(\operatorname{FPdim}(\tau)=\varphi\) for Fibonacci and
+\(d_\sigma=\sqrt2\) for Ising. The obstruction is dimensional and does not depend
+on a similarity of names or cardinalities.
+\end{proof}
+
+\begin{criterion}[Conditions for a physical realization of the sectors]
+\label{crit:promocion-sectores-topologicos}
+The results of
+\cref{thm:trenzas-caracteres-z6,thm:centro-apuntado-no-go} would be
+algebraically falsified by failure of the Artin relations, the
+criterion \(q^2=1\), the census \(6561\), pointedness, or
+\(\mathcal D=81\). A physical realization additionally requires a
+Hamiltonian or driven protocol, a spectral gap, realizable braid
+operators, protection against perturbations, and a map from the
+enriched multisections. None of these data follows solely from
+the two preceding algebraic theorems.
+\end{criterion}

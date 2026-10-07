@@ -1,0 +1,133 @@
+import LatticeResidueCreation
+import LatticeResidueTranslation
+import LatticeDongAllIndices
+import LatticeStateFieldProducts
+import LatticeConformalGrading
+import LatticeConformalHeisenberg
+import LatticeConformalCentralizer
+import LatticeVirasoroDefect
+import LatticeVirasoroPolynomial
+import LatticeConformalCentralCharge
+import LatticeVirasoroRelations
+import SelectedConformalVertex
+import LatticeEvenLocality
+import LatticeEvenConformal
+#print axioms HMT.IV.LatticeResidueCreation.residue_right_vacuum
+#print axioms HMT.IV.LatticeResidueCreation.residue_negative_vacuum
+#print axioms HMT.IV.LatticeResidueCreation.residue_constant_vacuum
+#print axioms HMT.IV.LatticeResidueCreation.residue_creates
+#print axioms HMT.IV.LatticeResidueCreation.stateField_residue_creates
+#print axioms HMT.IV.LatticeResidueTranslation.left_kernel_value
+#print axioms HMT.IV.LatticeResidueTranslation.right_kernel_value
+#print axioms HMT.IV.LatticeResidueTranslation.left_kernel_step
+#print axioms HMT.IV.LatticeResidueTranslation.right_kernel_step
+#print axioms HMT.IV.LatticeResidueTranslation.leftTerm_translation
+#print axioms HMT.IV.LatticeResidueTranslation.rightTerm_translation_zero
+#print axioms HMT.IV.LatticeResidueTranslation.rightTerm_translation_succ
+#print axioms HMT.IV.LatticeResidueTranslation.left_sum_translation
+#print axioms HMT.IV.LatticeResidueTranslation.right_sum_translation
+#print axioms HMT.IV.LatticeResidueTranslation.residueField_translation
+#print axioms HMT.IV.LatticeDongAllIndices.integrand_second_annihilator_nonnegative
+#print axioms HMT.IV.LatticeDongAllIndices.integrand_second_nonnegative_with_factor
+#print axioms HMT.IV.LatticeDongAllIndices.integrand_residue_locality_nonnegative
+#print axioms HMT.IV.LatticeDongAllIndices.residueField_localAt_nonnegative
+#print axioms HMT.IV.LatticeDongAllIndices.residueField_localAt_all_indices
+#print axioms HMT.IV.LatticeDongAllIndices.residueField_local_all_indices
+#print axioms HMT.IV.LatticeStateFieldProducts.stateField_residue_product
+#print axioms HMT.IV.LatticeStateFieldProducts.stateField_product_coefficient
+#print axioms HMT.IV.LatticeStateFieldProducts.stateField_iterate
+#print axioms HMT.IV.LatticeConformalGrading.conformal_weight_space
+#print axioms HMT.IV.LatticeConformalGrading.conformal_weight_finite
+#print axioms HMT.IV.LatticeConformalGrading.conformal_weights_span
+#print axioms HMT.IV.LatticeConformalGrading.conformal_weight_zero
+#print axioms HMT.IV.LatticeConformalGrading.coefficient_energy
+#print axioms HMT.IV.LatticeConformalGrading.coefficient_mem_weight
+#print axioms HMT.IV.LatticeConformalGrading.coefficient_negative_weight_zero
+#print axioms HMT.IV.LatticeConformalHeisenberg.creationTerm_heisenberg
+#print axioms HMT.IV.LatticeConformalHeisenberg.annihilationTerm_heisenberg
+#print axioms HMT.IV.LatticeConformalHeisenberg.product_commutator
+#print axioms HMT.IV.LatticeConformalHeisenberg.finsum_integer_delta
+#print axioms HMT.IV.LatticeConformalHeisenberg.integer_delta_finite
+#print axioms HMT.IV.LatticeConformalHeisenberg.creation_commutator_delta
+#print axioms HMT.IV.LatticeConformalHeisenberg.annihilation_commutator_delta
+#print axioms HMT.IV.LatticeConformalHeisenberg.finsum_commutator
+#print axioms HMT.IV.LatticeConformalHeisenberg.normalCoefficient_heisenberg_commutator
+#print axioms HMT.IV.LatticeConformalHeisenberg.gram_contract_modes
+#print axioms HMT.IV.LatticeConformalHeisenberg.gram_contract_modes_swapped
+#print axioms HMT.IV.LatticeConformalHeisenberg.conformalMode_heisenberg_commutator_apply
+#print axioms HMT.IV.LatticeConformalHeisenberg.conformalMode_heisenberg_commutator
+#print axioms HMT.IV.LatticeConformalCentralizer.comm
+#print axioms HMT.IV.LatticeConformalCentralizer.comm_smul_left
+#print axioms HMT.IV.LatticeConformalCentralizer.comm_smul_right
+#print axioms HMT.IV.LatticeConformalCentralizer.comm_sub_left
+#print axioms HMT.IV.LatticeConformalCentralizer.comm_jacobi_associative
+#print axioms HMT.IV.LatticeConformalCentralizer.conformal_comm_heisenberg
+#print axioms HMT.IV.LatticeConformalCentralizer.defect
+#print axioms HMT.IV.LatticeConformalCentralizer.defect_comm_heisenberg
+#print axioms HMT.IV.LatticeConformalCentralizer.heisenberg_centralizer_normal
+#print axioms HMT.IV.LatticeConformalCentralizer.heisenberg_centralizer_conformal
+#print axioms HMT.IV.LatticeConformalCentralizer.defect_comm_conformal
+#print axioms HMT.IV.LatticeVirasoroDefect.comm_skew
+#print axioms HMT.IV.LatticeVirasoroDefect.comm_sub_right
+#print axioms HMT.IV.LatticeVirasoroDefect.comm_jacobi_left
+#print axioms HMT.IV.LatticeVirasoroDefect.energy_defect
+#print axioms HMT.IV.LatticeVirasoroDefect.defect_eq_zero_of_nonresonant
+#print axioms HMT.IV.LatticeVirasoroDefect.conformal_comm_nonresonant
+#print axioms HMT.IV.LatticeVirasoroDefect.defect_skew
+#print axioms HMT.IV.LatticeVirasoroDefect.comm_eq_defect
+#print axioms HMT.IV.LatticeVirasoroDefect.defect_one_neg_one
+#print axioms HMT.IV.LatticeVirasoroDefect.resonant_comm_eq_defect
+#print axioms HMT.IV.LatticeVirasoroDefect.defect_recurrence
+#print axioms HMT.IV.LatticeVirasoroPolynomial.centralPolynomial
+#print axioms HMT.IV.LatticeVirasoroPolynomial.centralPolynomial_recurrence
+#print axioms HMT.IV.LatticeVirasoroPolynomial.centralPolynomial_neg
+#print axioms HMT.IV.LatticeVirasoroPolynomial.cancel_smul_end
+#print axioms HMT.IV.LatticeVirasoroPolynomial.resonant_defect_from_two
+#print axioms HMT.IV.LatticeVirasoroPolynomial.resonant_defect_nat
+#print axioms HMT.IV.LatticeVirasoroPolynomial.resonant_defect_all
+#print axioms HMT.IV.LatticeVirasoroPolynomial.defect_all
+#print axioms HMT.IV.LatticeVirasoroPolynomial.conformal_commutator_polynomial
+#print axioms HMT.IV.LatticeConformalCentralCharge.chargedGround
+#print axioms HMT.IV.LatticeConformalCentralCharge.hmode_positive_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.hmode_zero_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.normal_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.conformal_two_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.conformal_zero_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.conformal_neg_two_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.conformal_two_single
+#print axioms HMT.IV.LatticeConformalCentralCharge.conformal_two_double
+#print axioms HMT.IV.LatticeConformalCentralCharge.gram_trace
+#print axioms HMT.IV.LatticeConformalCentralCharge.defect_two_neg_two_ground
+#print axioms HMT.IV.LatticeConformalCentralCharge.defect_two_neg_two
+#print axioms HMT.IV.LatticeVirasoroRelations.virasoro_commutator
+#print axioms HMT.IV.LatticeVirasoroRelations.virasoro_central_charge_twentyFour
+#print axioms HMT.IV.LatticeVirasoroRelations.virasoro_commutator_apply
+#print axioms HMT.I.SelectedConformalVertex.selected_vertex_products
+#print axioms HMT.I.SelectedConformalVertex.selected_virasoro
+#print axioms HMT.I.SelectedConformalVertex.selected_local_conformal_publication
+#print axioms HMT.IV.LatticeEvenLocality.crossing_power_restrict
+#print axioms HMT.IV.LatticeEvenLocality.evenField_localAt
+#print axioms HMT.IV.LatticeEvenLocality.evenField_local
+#print axioms HMT.IV.LatticeEvenLocality.evenField_add
+#print axioms HMT.IV.LatticeEvenLocality.evenField_smul
+#print axioms HMT.IV.LatticeEvenLocality.evenStateField
+#print axioms HMT.IV.LatticeEvenLocality.evenStateField_apply
+#print axioms HMT.IV.LatticeEvenLocality.evenField_vacuum_coefficient
+#print axioms HMT.IV.LatticeEvenLocality.evenField_creates
+#print axioms HMT.IV.LatticeEvenLocality.evenStateField_injective
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalState
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalState_coe
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalField
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode_coe
+#print axioms HMT.IV.LatticeEvenConformal.even_virasoro_commutator
+#print axioms HMT.IV.LatticeEvenConformal.even_virasoro_central_charge_twentyFour
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode_neg_one_eq_translation
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode_zero_energy
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalState_weight_two
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode_neg_two_vacuum
+#print axioms HMT.IV.LatticeEvenConformal.evenConformalMode_vacuum
+#print axioms HMT.IV.LatticeEvenConformal.even_eigenspace_eq_comap
+#print axioms HMT.IV.LatticeEvenConformal.even_weight_space
+#print axioms HMT.IV.LatticeEvenConformal.even_weight_zero_vacuum_line
+#print axioms HMT.IV.LatticeEvenConformal.even_weight_one_zero

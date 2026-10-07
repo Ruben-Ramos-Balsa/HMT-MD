@@ -1,0 +1,24 @@
+import LatticeTwistedPairProduct
+import LatticeOrbifoldFullStateFields
+#print axioms HMT.IV.LatticeTwistedPairProduct.contragredientCoefficient_bounded
+#print axioms HMT.IV.LatticeTwistedPairProduct.boundedCoefficient
+#print axioms HMT.IV.LatticeTwistedPairProduct.pairCoefficient
+#print axioms HMT.IV.LatticeTwistedPairProduct.pairCoefficient_pair
+#print axioms HMT.IV.LatticeTwistedPairProduct.pairCoefficient_unique
+#print axioms HMT.IV.LatticeTwistedPairProduct.contragredientCoefficient_homogeneous_lower
+#print axioms HMT.IV.LatticeTwistedPairProduct.contragredientCoefficient_lower
+#print axioms HMT.IV.LatticeTwistedPairProduct.pairCoefficient_lower
+#print axioms HMT.IV.LatticeTwistedPairProduct.twistedPairFieldAt
+#print axioms HMT.IV.LatticeTwistedPairProduct.twistedPairField
+#print axioms HMT.IV.LatticeTwistedPairProduct.twistedPairField_coefficient
+#print axioms HMT.IV.LatticeTwistedPairProduct.twistedPairField_pair
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_coefficient
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_vacuum
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_creation
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_negative_vacuum
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_injective
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_twisted_even
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_twisted_twisted
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_conformal_coefficient
+#print axioms HMT.IV.LatticeOrbifoldFullStateFields.stateField_conformal_virasoro

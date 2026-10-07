@@ -1,0 +1,349 @@
+\section{Trajectoire électronique, spectre de retour et conservation de la masse
+}
+\label{vi:sec:trayectoria-espectral-masa}
+
+Cette section développe, sur l’opérateur de masse déjà construit, la partie
+dynamique qui conserve la trajectoire électronique. Elle n’introduit ni seconde
+définition de l’électron ni calibration supplémentaire. La chaîne causale est la
+même que celle de l’article :
+
+\[
+ \mathrm{APP}\longrightarrow\mathrm{TRIT}\longrightarrow\mathrm{TPK}
+ \longrightarrow X_{\rm enr}
+ \longrightarrow\mathcal C_{\rm cont}^{\rm disc}
+ \longrightarrow (\Gamma_e,\tau_e,\sigma_e)
+ \longrightarrow M^\beta .
+\]
+Les coordonnées $\pi_{\rm HMT},\varphi_{\rm HMT},e_{\rm HMT}$ et
+$\alpha_{\rm HMT}$ sont des sorties HMT corrélées engendrées à partir de l’état
+enrichi ; elles ne sont pas introduites comme données conventionnelles. L’analyse de Fourier
+qui apparaît plus bas s’applique au mot déjà produit et ne sélectionne pas la route.
+
+
+\subsection{Objets centraux distincts et mémoire de la fibre
+}
+
+La cellule fixe $(5,5)$, la donnée de frontière $111111$, l’émission transversale
+$555555$ et l’orientation $\tau_e=(+++---)^2$ ne sont pas des noms d’un même
+objet. L’involution cellulaire
+
+\[
+ \rho_c(r,c)=(10-r,10-c)
+\]
+possède un unique point fixe, $(5,5)$. En celui-ci,
+
+\[
+ 5+5=1+9,\qquad 5\cdot5=7+2\cdot9,
+\]
+tandis qu’en $(8,2)$ et $(2,8)$ la somme est conservée mais le quotient
+du produit change. La cellule fixe détermine l’exception centrale ; le registre de
+frontière et l’émission transversale conservent d’autres coordonnées de l’état.
+
+
+En particulier, la fibre de $555555$ dans le canal de produit contient
+$24$ positions orientées. Après une avancée du TPK, elle se distribue en
+
+\[
+ 555177,\qquad 555717,\qquad 555771,
+\]
+avec huit positions par sortie. La valeur suivante n’est pas fonction de la signature
+scalaire isolée : pour reconstruire l’évolution, il faut conserver la classe de
+mémoire et l’orientation. Cette distinction est la raison pour laquelle l’opérateur
+de masse agit sur des fibres de routes et non sur une liste de chiffres.
+
+
+\subsection{Support cellulaire exact de la trajectoire centrale
+}
+
+La trajectoire de~\eqref{vi:dep:trayectoria-electron} commence en
+$(r,c,h,v)=(5,5,1,1)$. Chaque bloc TRIT $(+1,-1,0)$ fait avancer une fois chaque
+coordonnée et conserve un pas de seuil. Aux extrémités de chaque bloc, on
+a $r=c$ ; au pas intermédiaire,
+
+\[
+ c-r\equiv h\pmod 9.
+\]
+Neuf blocs parcourent toutes les positions de la diagonale correspondante.
+Les inversions simultanées de $(h,v)$ aux pas $27,54,81$ ajoutent la
+diagonale conjuguée sans réinitialiser l’état. Par conséquent, la projection
+cellulaire des $108$ pas a pour support exact
+
+\begin{equation}
+ \operatorname{Supp}_{\rm cell}(\Gamma_e)
+ =\left\{(r,c)\in\{1,\ldots,9\}^2:
+ c-r\equiv0,1,-1\pmod9\right\},
+ \qquad
+ \left|\operatorname{Supp}_{\rm cell}(\Gamma_e)\right|=27.
+ \label{vi:eq:soporte-electron-27}
+\end{equation}
+L’égalité s’obtient par la règle de mise à jour, non par un comptage
+rétrospectif. Elle décrit une morphologie discrète de trajectoire dans le tore
+positionnel. Sa réalisation comme ruban de Möbius requiert en outre le transport
+d’orientation et le recollement de la section~\ref{vi:sec:conjugacion} ; on
+n’identifie pas le support fini à une forme matérielle tridimensionnelle.
+
+
+\subsection{Deux histoires, une orientation sectorielle et une reconstruction exacte
+}
+
+La biographie centrale contient les histoires
+
+\begin{equation}
+ e_{++}=(2,2,5,-4,-3,-2)^2,
+ \qquad
+ e_{--}=(4,3,2,-2,-2,-5)^2.
+ \label{vi:eq:historias-electronicas}
+\end{equation}
+Toutes deux s’expriment dans la coordinatisation sectorielle fixe
+$\Sigma_{12}=(+++---)^2$. L’orientation absolue de la récurrence se
+transporte séparément ; on n’identifie pas le signe d’une histoire à
+l’étiquette sectorielle. Les deux histoires ont une somme nulle et le même histogramme
+de valeurs absolues, mais pas la même mémoire positionnelle.
+
+
+Pour une histoire $e=(e_0,\ldots,e_{11})$, nous définissons
+
+\begin{equation}
+ p_i=e_i+e_{i+6},\qquad a_i=e_i-e_{i+6},
+ \qquad s_C=\sum_{i=0}^{5}p_i,
+ \qquad M_i=p_i-p_5\quad(0\leq i<5).
+ \label{vi:eq:codificador-memoria-electron}
+\end{equation}
+Le décodeur est
+
+\begin{equation}
+ p_5=\frac{s_C-\sum_{i=0}^{4}M_i}{6},\quad
+ p_i=p_5+M_i,\quad
+ e_i=\frac{p_i+a_i}{2},\quad e_{i+6}=\frac{p_i-a_i}{2}.
+ \label{vi:eq:decodificador-memoria-electron}
+\end{equation}
+Les conditions d’intégralité sont la divisibilité par six de la première
+expression et la parité commune de $p_i$ et de $a_i$. Pour
+\eqref{vi:eq:historias-electronicas}, on obtient
+
+\[
+ M^{++}=(8,8,14,-4,-2),\qquad
+ M^{--}=(18,16,14,6,6),\qquad a=0.
+\]
+Substituer ces données dans~\eqref{vi:eq:decodificador-memoria-electron}
+restitue les douze composantes. La distinction des histoires est ainsi prouvée
+même si une lecture partielle coïncide. On n’en conclut pas que leurs masses doivent être
+différentes : un lecteur de masse peut être invariant sous un transport qui
+conserve moins de coordonnées que l’état enrichi.
+
+
+\subsection{Identité spectrale du lecteur de retour
+}
+
+Soit $\tau=(\tau_0,\ldots,\tau_{11})\in\{-1,+1\}^{12}$ et soient les indices
+cycliques. Nous définissons
+
+\begin{equation}
+ C_s(\tau)=\sum_{j=0}^{11}\tau_j\tau_{j+s},
+ \qquad
+ \Omega(\tau)=-2C_1-4C_2-6C_3,
+ \qquad
+ P_6(\tau)=\frac{C_6}{2}.
+ \label{vi:eq:lectores-correlacion}
+\end{equation}
+La première égalité est la forme développée de
+$\Omega=4A_3-3A_4$ déjà démontrée dans
+\eqref{vi:dep:KOmega}. Pour rendre visibles les modes qui transportent la
+correction, nous introduisons, après avoir produit $\tau$,
+
+\begin{equation}
+ T_k(\tau)=\sum_{j=0}^{11}\tau_j
+ e^{-2\pi i k j/12},\qquad 0\leq k<12.
+ \label{vi:eq:dft-retorno}
+\end{equation}
+
+\begin{proposition}[Décomposition spectrale exacte
+]
+Pour tout mot réel de longueur douze,
+
+\begin{align}
+ C_s&=\frac1{12}\sum_{k=0}^{11}|T_k|^2
+          \cos\!\left(\frac{2\pi ks}{12}\right),\label{vi:eq:wiener-khinchin-finito}\\
+ \Omega&=\frac1{12}\sum_{k=0}^{11}|T_k|^2w_k,
+ \quad
+ w_k=-2\cos\theta_k-4\cos2\theta_k-6\cos3\theta_k,
+ \quad\theta_k=\frac{2\pi k}{12},\label{vi:eq:omega-espectral}\\
+ P_6&=\frac1{24}\sum_{k=0}^{11}|T_k|^2(-1)^k.
+ \label{vi:eq:p6-espectral}
+\end{align}
+\end{proposition}
+\begin{proof}
+En développant $|T_k|^2$ apparaît
+$\sum_{j,\ell}\tau_j\tau_\ell e^{-2\pi ik(j-\ell)/12}$.
+La somme sur $k$ vaut douze lorsque $j-\ell$ coïncide avec le déplacement
+prescrit et zéro sinon. C’est l’orthogonalité finie des caractères
+et elle démontre~\eqref{vi:eq:wiener-khinchin-finito}. Insérer successivement
+$s=1,2,3$ dans~\eqref{vi:eq:lectores-correlacion} produit
+\eqref{vi:eq:omega-espectral} ; $s=6$ produit
+\eqref{vi:eq:p6-espectral}.
+
+\end{proof}
+
+Pour $\tau_e=(+++---)^2$, on peut écrire, avec
+$z_k=e^{-2\pi ik/12}$,
+
+\begin{equation}
+ T_k=(1+(-1)^k)(1-z_k^3)(1+z_k+z_k^2).
+ \label{vi:eq:factorizacion-tk-electron}
+\end{equation}
+Seuls $k=2,6,10$ subsistent, avec
+
+\[
+ T_2=4-4i\sqrt3,\qquad T_6=4,\qquad
+ T_{10}=4+4i\sqrt3,
+\]
+et, par conséquent,
+\begin{equation}
+ |T_2|^2=64,\qquad |T_6|^2=16,\qquad |T_{10}|^2=64.
+ \label{vi:eq:potencias-espectrales-electron}
+\end{equation}
+Les poids $w_2,w_6,w_{10}$ sont $7,4,7$. En conséquence,
+
+\begin{equation}
+ \Omega(\tau_e)=\frac{64\cdot7+16\cdot4+64\cdot7}{12}=80,
+ \qquad P_6(\tau_e)=6.
+ \label{vi:eq:omega-p6-electron}
+\end{equation}
+Cela récupère le second lecteur de~\eqref{vi:dep:KOmega} à partir des modes
+de la trajectoire. Le mot alterné $(+-)^6$, qui conserve le même
+histogramme de signes, a $|T_6|^2=144$ et produit $\Omega=48$ ; il constitue
+un contrôle négatif du fait que l’ordre, et pas seulement le comptage, intervient.
+Les translations cycliques multiplient $T_k$ par une phase et conservent
+$|T_k|^2$, de sorte que le lecteur ne récupère pas à lui seul l’origine temporelle.
+
+
+La contribution de retour à l’exposant électronique s’exprime par
+
+\begin{equation}
+ \kappa_e=
+ \frac1{12}\sum_{k=0}^{11}|T_k|^2
+ \left(w_k+\frac{\Delta_4}{2}(-1)^k\right)-54\alpha_{\rm HMT}
+ =80-54\alpha_{\rm HMT}+6\Delta_4.
+ \label{vi:eq:kappa-espectral-electron}
+\end{equation}
+Cette identité n’introduit pas d’hamiltonien spatial : elle démontre que le
+correcteur de masse déjà défini est une fonctionnelle spectrale exacte du mot
+de retour.
+
+
+\subsection{Extension de l’équation électronique aux multisections
+}
+
+Le registre d’une route $\gamma$ fournit
+$\sigma_\gamma=(n_A,s_C,k_\Delta,b_{120},b_\zeta)$ et les coordonnées de
+tour $\eta_\gamma=(\eta_h)_h$. Dans une coordinatisation commune, le caractère raffiné est
+
+\begin{equation}
+ \begin{aligned}
+ \log\chi_{\rm ref}(\sigma_\gamma,\eta_\gamma)
+ &=n_Ax+\frac{s_C}{6}y+k_\Delta\Delta_4+b_\zeta\zeta_{270}
+   +b_{120}s_{120}+\sum_{h\in\langle90,120\rangle}\eta_hs_h\\
+ &=n_Ax+\frac{s_C}{6}y+k_\Delta\Delta_4+b_\zeta\zeta_{270}
+   +\sum_{h\in\langle90,120\rangle}N_hs_h,\\
+ N_h&:=\eta_h+b_{120}\mathbf1_{\{h=120\}}.
+ \end{aligned}
+ \label{vi:eq:caracter-refinado-explicito}
+\end{equation}
+où $x=A_{\rm rad}$, $y=C^*_{\rm rad}$,
+$\zeta_{270}=135\Delta_4^2$ et $s_h=q_-^h-q_+^h$. Les deux lignes sont la
+même évaluation : $b_{120}$ n’apparaît qu’une seule fois, comme terme explicite ou
+absorbé dans $N_{120}$. Pour une tour infinie, on exige la convergence absolue
+de la dernière série. Cette formule conserve séparément la torsion $\zeta_{270}$,
+les deux feuillets et les deux compositions de hauteur $360=4\cdot90=3\cdot120$.
+
+
+Dans la base de routes d’une fibre, soit
+$B^r e_\gamma=\kappa_\gamma^r e_\gamma$, avec $r=D$ ou $\Omega$. La loi
+opératorielle de la section~\ref{vi:sec:operador-masa} donne, dans sa coordinatisation diagonale,
+
+\begin{equation}
+ \boxed{
+ \frac{m_\gamma^\beta}{m_e^\beta}=
+ \chi_{\rm ref}(\sigma_\gamma-\sigma_e,
+                 \eta_\gamma-\eta_e)
+ R_{\rm act}^{\kappa_\gamma-\kappa_e}.}
+ \label{vi:eq:ley-masas-trayectoria}
+\end{equation}
+L’équation électronique est la section de référence de cette identité, non
+un chiffre expérimental utilisé pour choisir des routes. Les étiquettes physiques sont
+attribuées après la construction des fibres, des représentations et des canaux ; la ressemblance
+numérique ne remplace pas cet appariement prospectif.
+
+
+\subsection{Critère opératoriel de transport à masse fixe
+}
+
+Nous définissons la coordonnée adimensionnelle
+
+\begin{equation}
+ \Lambda_\gamma:=\log\frac{m_\gamma^\beta}{m_e^\beta}
+ \label{vi:eq:lambda-masa-ruta}
+\end{equation}
+dans une coordinatisation commune avec des masses positives. Ce symbole n’est ni la longueur
+réciproque $\Lambda=L_\alpha X^{-1}$ ni la coordonnée
+$\bar\lambda_\Gamma$ employée dans d’autres sections.
+
+
+Soit $\mathscr D$ un domaine fini de routes stable sous un transport TPK
+bijectif $F:\mathscr D\to\mathscr D$, et soit
+$V_Fe_\gamma=e_{F\gamma}$ son opérateur de permutation. Alors
+
+\begin{equation}
+ [M^\beta,V_F]e_\gamma
+ =m_e^\beta\left(e^{\Lambda_{F\gamma}}-e^{\Lambda_\gamma}\right)
+ e_{F\gamma}.
+ \label{vi:eq:conmutador-masa-transporte}
+\end{equation}
+Par conséquent,
+\begin{equation}
+ [M^\beta,V_F]=0
+ \quad\Longleftrightarrow\quad
+ \Lambda_{F\gamma}=\Lambda_\gamma
+ \quad\text{pour toute }\gamma\in\mathscr D.
+ \label{vi:eq:criterio-conservacion-masa}
+\end{equation}
+En utilisant~\eqref{vi:eq:caracter-refinado-explicito}, la condition est
+
+\begin{equation}
+ \delta n_Ax+\frac{\delta s_C}{6}y
+ +\delta k_\Delta\Delta_4+\delta b_\zeta\zeta_{270}
+ +\sum_h\delta N_hs_h
+ +\delta\kappa\log R_{\rm act}=0.
+ \label{vi:eq:balance-conservacion-masa}
+\end{equation}
+Ici,
+\(
+ \delta N_h=\delta\eta_h+
+ \delta b_{120}\mathbf1_{\{h=120\}},
+\)
+de sorte que la différence conserve les coordonnées de tour originales et
+ajoute le terme d’incidence de $b_{120}$ exactement une fois.
+Elle se vérifie après avoir produit $F$ au moyen du TPK ; on ne sélectionne pas
+$F$ rétrospectivement par la valeur de la masse. Le critère permet que
+les événements et la mémoire changent pourvu que la coordonnée totale soit conservée.
+Il n’affirme ni que tout transport TPK conserve la masse ni qu’il épuise la dynamique
+d’un système lié. Ses hypothèses sont : domaine stable, transport
+bijectif, coordinatisation fixe, masses positives et convergence des tours.
+
+
+\subsection{Résultat conjoint
+}
+
+Les équations~\eqref{vi:eq:soporte-electron-27},
+\eqref{vi:eq:decodificador-memoria-electron},
+\eqref{vi:eq:kappa-espectral-electron},
+\eqref{vi:eq:ley-masas-trayectoria} et
+\eqref{vi:eq:criterio-conservacion-masa} ferment une même chaîne. La
+trajectoire centrale parcourt exactement vingt-sept cellules ; ses histoires
+conservent une mémoire réversible ; le retour possède trois modes non nuls qui
+produisent $(\Omega,P_6)=(80,6)$ ; la loi des masses étend la section
+électronique aux multisections ; et le commutateur identifie exactement
+quels transports préservent la masse. Morphologie cellulaire, spectre de retour et
+grandeur sont des lecteurs coordonnés du même état enrichi, non des
+observables interchangeables.
+

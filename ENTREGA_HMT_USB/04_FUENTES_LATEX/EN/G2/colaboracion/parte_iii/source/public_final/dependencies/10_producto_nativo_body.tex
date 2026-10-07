@@ -1,0 +1,726 @@
+\label{int:chap:producto-nativo}
+\index{native product}
+
+The Euclidean residue--quotient extension of APP contains two local maps: the additive map normalizes collisions, and the multiplicative map produces partial products. In this section, the global multiplication of words is constructed using exclusively both maps. The correspondence with integer multiplication will be a consequence of the intertwiner, not the definition of the operation.
+
+\section{Euclidean coordinates of the local cell}
+
+\begin{definition}[Additive and multiplicative applications on the same support]
+Let $\Dnine=\{1,\ldots,9\}$. For $a,b\in\Dnine$ they are defined by Euclidean division
+with remainder in $\Dnine$:
+\begin{align}
+ a+b&=9q^+(a,b)+R^+(a,b),\label{int:eq:local-plus}\\
+ ab&=9q^\times(a,b)+R^\times(a,b).\label{int:eq:local-times}
+\end{align}
+In particular, the zero remainder is represented by $9$ and the quotient is reduced by
+one unit. The quadruple
+\[
+ \CellRQ(a,b)=
+ (R^+(a,b),q^+(a,b);R^\times(a,b),q^\times(a,b))
+\]
+is the local arithmetic extension by residue and quotient.
+\end{definition}
+
+Aggregation by the three classes modulo three of the visible table
+\(R^\times\) defines a matrix distinct from the local maps:
+\[
+(M_\Pi)_{rs}
+=\frac19
+\sum_{\substack{a\equiv r\;(3)\\b\equiv s\;(3)}}R^\times(a,b),
+\qquad r,s\in\{1,2,0\},
+\]
+and, in that order of classes,
+\[
+M_\Pi=
+\begin{pmatrix}4&5&6\\5&4&6\\6&6&9\end{pmatrix}.
+\]
+Thus, \(q^+\) and \(q^\times\) are quotient coordinates of a cell,
+whereas \(M_\Pi\) is an aggregate operator on residual classes.
+
+The $81$ cells satisfy exactly
+\[
+\begin{array}{c|rrrr}
+ &\sum R&\sum q&\sum(9q+R)\\\hline
+ +&405&45&810\\
+ \times&459&174&2025
+\end{array}
+\]
+and therefore
+\[
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129=1215.
+\]
+The quotient $q^\times$ is necessary for reconstruction. For example,
+\[
+ 2\cdot5=9\cdot1+1.
+\]
+If only $R^\times$ is preserved, the product $10$ is conflated with the
+visible value $1$.
+
+\subsection{Cocycles of associativity and distributivity}
+
+The coherence of the transducer can already be decided in the cell. For every
+$a,b,c\in\Dnine$ the three identities are verified
+\begin{align}
+q^+(a,b)+q^+(R^+(a,b),c)
+&=q^+(b,c)+q^+(a,R^+(b,c)),\label{int:eq:cocycle-plus}\\
+q^\times(R^\times(a,b),c)+cq^\times(a,b)
+&=q^\times(a,R^\times(b,c))+aq^\times(b,c),
+\label{int:eq:cocycle-times}\\
+q^\times(a,R^+(b,c))+aq^+(b,c)
+&=q^+(R^\times(a,b),R^\times(a,c))\notag\\
+&\quad+q^\times(a,b)+q^\times(a,c).
+\label{int:eq:cocycle-distributive}
+\end{align}
+
+\begin{theorem}[Local coherence of the Euclidean extension]
+The identities \eqref{int:eq:cocycle-plus}--\eqref{int:eq:cocycle-distributive},
+together with the corresponding equalities of residues, express
+respectively additive associativity, multiplicative associativity, and
+distributivity in the residue--quotient extension. The three families have
+zero discrepancies in the $9^3=729$ triples.
+\end{theorem}
+
+\begin{proof}
+Expanding $(a+b)+c$ through \eqref{int:eq:local-plus}, the coefficient of
+nine is the left-hand side of \eqref{int:eq:cocycle-plus}; expanding
+$a+(b+c)$ yields the right-hand side. Uniqueness of division with remainder in
+$\Dnine$ equates both residues and quotients. The same argument applied to
+$(ab)c=a(bc)$ gives \eqref{int:eq:cocycle-times}. Finally, the two expansions of
+$a(b+c)=ab+ac$ produce \eqref{int:eq:cocycle-distributive}. Direct enumeration
+of the \(729\) cases of each identity confirms the algebraic
+calculation.
+\end{proof}
+
+\section{Bijectivity of numbering}
+
+The symbol $9$ is not identified with zero. In $\CellRQ$, $9$ represents a
+complete crossing of the nonadic boundary. Replacing it with the digits
+$0,\ldots,8$ would eliminate the Euclidean quotient that intervenes in the
+intertwining.
+
+\begin{definition}[Canonical words]
+Let
+\[
+ \Wnine^+=\bigsqcup_{\ell\geq1}\Dnine^\ell,
+ \qquad \Wnine=\{\varnothing\}\sqcup\Wnine^+.
+\]
+Words are written from the least significant digit. We define
+\[
+ \operatorname{ev}_9(u_0,\ldots,u_{\ell-1})
+ =\sum_{j=0}^{\ell-1}u_j9^j,
+ \qquad \operatorname{ev}_9(\varnothing)=0.
+\]
+\end{definition}
+
+\begin{theorem}[Uniqueness of the normal form]
+The evaluation $\operatorname{ev}_9$ is a bijection from $\Wnine^+$ onto
+$\N_{\geq1}$, and from $\Wnine$ onto $\N_0$.
+\end{theorem}
+
+\begin{proof}
+The words of length $\ell$ cubren the intervalo
+\[
+ \frac{9^\ell-1}{8}
+ \leq \operatorname{ev}_9(u)
+ \leq 9\frac{9^\ell-1}{8}.
+\]
+The minimum of the next interval is one unit greater than the maximum of the
+preceding one. Within each interval, division of $n-1$ by nine uniquely determines
+the digit
+\[
+ d=(n-1)\bmod9+1
+\]
+and the quotient that is encoded recursively. The process terminates because the
+quotient strictly decreases.
+\end{proof}
+
+Examples:
+\[
+ 9\longleftrightarrow(9),\qquad
+ 10\longleftrightarrow(1,1),\qquad
+ 81\longleftrightarrow(9,8),\qquad
+ 1000\longleftrightarrow(1,3,3,1).
+\]
+
+\section{Fibers of the residual projections on the integral liftings}
+
+For this block, we distinguish two alphabets. The normal form
+\(\Wnine\) uses the digits \(\{1,\ldots,9\}\), written from the least
+significant. By contrast, \(\mathscr B_9\) denotes the conventional positional
+representations in base nine, with digits \(\{0,\ldots,8\}\) and the most
+significant on the left. The two types are not identified.
+
+Let
+\[
+ \mathscr W_{10}^{(2)}=\{0,\ldots,9\}^2,\qquad
+ \rho_{10}(a,b)=(b,a),\qquad
+ \operatorname{ev}_{10}(a,b)=10a+b,
+\]
+and let \(q_9:\mathbb N\to\mathbb Z/9\mathbb Z\) be the residual reduction.
+
+\begin{lemma}[Residual descent of decimal reversal]
+\label{int:pf84:SYN30-RHO-DESC}
+Reversion on decimal words of length two is involutive and its
+shadow modulo nine is the identity:
+\[
+ \rho_{10}^2=I,\qquad
+ q_9\!\left(\operatorname{ev}_{10}(\rho_{10}(a,b))\right)
+ =
+ q_9\!\left(\operatorname{ev}_{10}(a,b)\right).
+\]
+Fixed length preserves the initial zeros.
+\end{lemma}
+
+\begin{proof}
+The doble permutation recovers \((a,b)\). Ifnce \(10\equiv1\pmod9\),
+\[
+ 10b+a\equiv a+b\equiv10a+b\pmod9.
+\]
+A word whose double reversal were not itself, or whose digit sum
+changed modulo nine, would refute the lemma.
+\end{proof}
+
+\begin{lemma}[Residual Square Descent]
+\label{int:pf84:SYN30-SQ-DESC}
+The map \(s(n)=n^2\) induces the residual endomap
+\[
+ [n]_9\longmapsto[n]_9^2,
+ \qquad q_9(s(n))=q_9(n)^2.
+\]
+\end{lemma}
+
+\begin{proof}
+The compatibility of a congruence with the product gives
+\(n\equiv m\pmod9\Rightarrow n^2\equiv m^2\pmod9\). An integer for which
+\(q_9(n^2)\ne q_9(n)^2\) would refute the statement.
+\end{proof}
+
+\begin{proposition}[Residual fibers of the full reversal]
+\label{int:pf84:SYN30-RHO-NONFAITH}
+The residual shadow does not reconstruct the integral lift
+\(\widehat\rho_{10}=\operatorname{ev}_{10}\circ\rho_{10}\). Indeed,
+\[
+ 18\equiv27\pmod9,\qquad
+ \widehat\rho_{10}(1,8)=81\ne72=\widehat\rho_{10}(2,7).
+\]
+\end{proposition}
+
+\begin{proof}
+Both integers belong to residue class zero, but their reversals are
+distinct. Therefore, there is no
+\(\overline\rho:\mathbb Z/9\mathbb Z\to\mathbb N\) that simultaneously factors
+those two values.
+\end{proof}
+
+\begin{proposition}[Residual fibres of the entire square]
+\label{int:pf84:SYN30-SQ-NONFAITH}
+The same shadow likewise does not reconstruct the integer square:
+\[
+ 18\equiv27\pmod9,\qquad
+ 18^2=324\ne729=27^2.
+\]
+\end{proposition}
+
+\begin{proof}
+A function \(\overline s:\mathbb Z/9\mathbb Z\to\mathbb N\) that
+factorized \(s\) would have to assign the two values
+\(324\) and \(729\) to the same zero class, which is impossible.
+\end{proof}
+
+\begin{corollary}[Cross-witness \(27\)--\(72\)--\(729\)]
+\label{int:pf84:SYN30-CROSS-WITNESS}
+\[
+ \widehat\rho_{10}(2,7)=72,\qquad
+ 27^2=729=9^3=3^6,
+\]
+and, in the alfabeto convencional \(\mathscr B_9\),
+\[
+ 27=30_9,\qquad72=80_9,\qquad729=1000_9.
+\]
+The three integers have residual shadow zero and positive digital root nine.
+\end{corollary}
+
+\begin{proof}
+The two operations are computed directly; successive divisions by
+nine produce the three expressions. The result would fail if
+\(\mathscr B_9\) were confused with \(\Wnine\), if any of the expressions were incorrect,
+or if it were claimed that faithful residual descent reconstructs the operation and its
+complete genealogy.
+\end{proof}
+
+\section{Native adder and quotient propagation}
+
+\begin{algorithm}[Word addition]
+Two words are traversed by positions, with initial carry \(c_0=0\). If there are
+two digits at a position, \eqref{int:eq:local-plus} is applied; if there is only one,
+that digit is taken as the provisional residue and the provisional quotient is zero.
+When \(c_j\ne0\), a second additive cell is applied to the provisional residue
+and to \(c_j\). The new residue is published, and the sum of the
+quotients is transported to the next position. If a nonzero carry remains upon
+completion, it is published as the final digit. In this manner, the local cells never receive the
+absent symbol \(0\), which does not belong to \(\Dnine\).
+\end{algorithm}
+
+\begin{lemma}[Adder Invariant]
+If $u\boxplus_\#v$ is the word produced by the preceding algorithm,
+\[
+ \operatorname{ev}_9(u\boxplus_\#v)
+ =\operatorname{ev}_9(u)+\operatorname{ev}_9(v).
+\]
+The intermediate carry lies in $\{0,1,2\}$.
+\end{lemma}
+
+\begin{proof}
+After processing the positions $0,\ldots,k-1$, let $c_k$ be the pending quotient.
+The local identities imply
+\[
+ \sum_{j<k}(u_j+v_j)9^j
+ =\sum_{j<k}w_j9^j+c_k9^k,
+\]
+including the absent digits as zero. Each new cell preserves this
+equality. The local maximum is $9+9+2=20$, so that $c_{k+1}\leq2$. At the
+end the last quotient is published, and the global identity remains.
+\end{proof}
+
+\section{Multiplication by a digit}
+
+\begin{algorithm}[Scalar transducer]
+With $d\in\Dnine$ fixed, each digit $u_j$ produces
+\[
+ u_jd=9q_j+r_j,
+ \qquad
+ (r_j,q_j)=\bigl(R^\times(u_j,d),q^\times(u_j,d)\bigr).
+\]
+Let $c_j\in\{0,\ldots,9\}$ be the incoming quotient. Since $0\notin\Dnine$,
+the transition is defined by branches:
+\[
+ (w_j,c_{j+1})=
+ \begin{cases}
+ (r_j,q_j),&c_j=0,\\[1mm]
+ \bigl(R^+(r_j,c_j),q_j+q^+(r_j,c_j)\bigr),&c_j\in\Dnine.
+ \end{cases}
+\]
+Thus, no local map is evaluated outside its domain. The first
+branch expresses the absence of a pending quotient; the second normalizes the
+collision by means of the additive map.
+\end{algorithm}
+
+\begin{lemma}[Scalar invariant]
+The word $d\odot_\#u$ produced by the transducer satisfies
+\[
+ \operatorname{ev}_9(d\odot_\#u)
+ =d\operatorname{ev}_9(u).
+\]
+The multiplicative quotient belongs to $\{0,\ldots,9\}$.
+\end{lemma}
+
+\begin{proof}
+The argument is that of the adder, replacing each local summand by
+$u_jd$. If $c_j=0$, the identity
+$u_jd=9q_j+r_j$ directly preserves the partial equality. If
+$c_j\in\Dnine$, the second Euclidean division gives
+\[
+ r_j+c_j=9q^+(r_j,c_j)+R^+(r_j,c_j),
+\]
+and preserves the same equality after transporting
+$q_j+q^+(r_j,c_j)$. The maximum $9\cdot9+9=90$ and the remainder form in
+$\Dnine$ keep the quotient within the declared bound. The last quotient is
+published as a digit.
+\end{proof}
+
+\section{Global product by Horner}
+
+\begin{definition}[Native product]
+Let $v=(v_0,\ldots,v_{m-1})$. Partiendo of $a_m=\varnothing$, is defined for
+$j=m-1,\ldots,0$
+\[
+ a_j=(9\odot_\#a_{j+1})\boxplus_\#(v_j\odot_\#u).
+\]
+The result is
+\[
+ u\boxtimes_\#v:=a_0.
+\]
+\end{definition}
+
+This definition does not contain
+\[
+ \operatorname{dec}_9(\operatorname{ev}_9(u)\operatorname{ev}_9(v)).
+\]
+The evaluation will appear only in the proof of entanglement.
+
+\begin{theorem}[Native multiplicativity]
+For all words $u,v\in\Wnine$,
+\begin{equation}
+ \label{int:eq:ev-multiplicative}
+ \boxed{
+ \operatorname{ev}_9(u\boxtimes_\#v)
+ =\operatorname{ev}_9(u)\operatorname{ev}_9(v).}
+\end{equation}
+The empty word is absorbing, and $(1)$ is the unit.
+\end{theorem}
+
+\begin{proof}
+By the two previous lemmas,
+\[
+ \operatorname{ev}_9(a_j)
+ =9\operatorname{ev}_9(a_{j+1})
+  +v_j\operatorname{ev}_9(u).
+\]
+Horner's iteration gives
+\[
+ \operatorname{ev}_9(a_0)
+ =\operatorname{ev}_9(u)
+  \sum_{j=0}^{m-1}v_j9^j.
+\]
+The last factor is $\operatorname{ev}_9(v)$. The uniqueness of the normal form
+identifies the resulting word.
+\end{proof}
+
+\begin{corollary}[Multiplicative monoid of words]
+The structure
+\[
+\WordMonoid=(\Wnine,\boxtimes_\#,(1))
+\]
+is a commutative monoid; the empty word is its absorbing element. Its
+construction does not use global multiplication of integers.
+\end{corollary}
+
+The shortest boundary example is
+\[
+ (9)\boxtimes_\#(9)=(9,8),
+ \qquad 9+8\cdot9=81.
+\]
+The \(17\) local cells of multiplication produce
+\[
+ (9,8)\boxtimes_\#(9,8)=(9,8,8,8),
+ \qquad \operatorname{ev}_9(9,8,8,8)=6561.
+\]
+
+\section{Matrix linearization of the genealogical state and construction of the completely positive entangler}
+
+\begin{definition}[Hilbert Sectors]
+Let
+\[
+ \Krad=\ell^2(\Wnine^+),
+ \qquad
+ \Hplus=\ell^2(\N_{\geq1}).
+\]
+We define on the canonical bases
+\[
+ W_\times e_u=e_{\operatorname{ev}_9(u)}.
+\]
+In \(\Hplus\), the number operator is denoted by
+\[
+ \mathsf N e_n=n e_n,
+ \qquad \Spec(\mathsf N)=\N_{\geq1}.
+\]
+The vacuum may be added separately as a vacuum vector $e_0$; it is not
+confused with $\Hplus$, whose spectrum begins at one.
+\end{definition}
+
+\begin{theorem}[Unitarity and multiplicative square]
+$W_\times$ is unitary. In the algebraic kernel
+$\mathbb C[\Wnine^+\times\Wnine^+]$, let
+\[
+ \mu_\#(e_u\otimes e_v)=e_{u\boxtimes_\#v},
+ \qquad
+ \mu_{\N}(e_a\otimes e_b)=e_{ab}.
+\]
+Then the square holds.
+\[
+\begin{CD}
+\Krad\otimes_{\mathrm{alg}}\Krad @>{W_\times\otimes W_\times}>>
+\Hplus\otimes_{\mathrm{alg}}\Hplus\\
+@V{\mu_\#}VV @VV{\mu_{\N}}V\\
+\Krad @>>{W_\times}> \Hplus
+\end{CD}
+\]
+and therefore, the square commutes.
+\end{theorem}
+
+\begin{proof}
+The bijection of normal forms sends one orthonormal basis to another and proves
+unitarity. On a basic tensor, both paths produce
+$e_{\operatorname{ev}_9(u)\operatorname{ev}_9(v)}$ by
+\eqref{int:eq:ev-multiplicative}. Linearity gives the equality on the kernel.
+\end{proof}
+
+The maps $\mu_\#$ and $\mu_{\N}$, initially defined on the respective
+algebraic kernels, are densely defined and unbounded. For
+\(c=(c_{u,v})\in\ell^2(\Wnine^+\times\Wnine^+)\), each sum over a product fiber
+is finite. The adjoint of \(\mu_\#\) contains all finite-support vectors
+in its domain, so that \(\mu_\#\) is closable. The domain of its
+closure is
+\[
+ \Dom(\overline{\mu_\#})=
+ \left\{c\in\ell^2(\Wnine^+\times\Wnine^+):
+ \sum_{w\in\Wnine^+}
+ \left|\sum_{u\boxtimes_\#v=w}c_{u,v}\right|^2<\infty
+ \right\}.
+\]
+Each fiber is finite because $\operatorname{ev}_9$ identifies it with the ordered
+pairs of divisors of an integer. The same description holds for
+\(\overline{\mu_{\N}}\) after applying \(W_\times\otimes W_\times\), and
+$W_\times$ intertwines the graphs of both closures.
+
+\section{Native coproduct and native antipode}
+
+The multiplicative opening is now defined before looking at the codomain:
+\[
+ \Delta_\#e_w
+ =\sum_{u\boxtimes_\#v=w}e_u\otimes e_v.
+\]
+The sum is obtained by enumerating products of the transducer. One does not ask whether
+one ordinary integer divides another.
+In the integer sector define, on the corresponding algebraic kernel,
+\[
+ \Delta_\times e_n
+ =\sum_{\substack{a,b\in\N_{\geq1}\\ab=n}}e_a\otimes e_b.
+\]
+Both coproducts enumerate ordered pairs.
+
+\begin{theorem}[Native coassociativity]
+In the algebraic core,
+\[
+ (\Delta_\#\otimes I)\Delta_\#
+ =(I\otimes\Delta_\#)\Delta_\#.
+\]
+Moreover,
+\[
+ (W_\times\otimes W_\times)\Delta_\#
+ =\Delta_\times W_\times.
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides of the first equality enumerate every native triple
+$a\boxtimes_\#b\boxtimes_\#c=w$ exactly once. The second equality follows from the bijection
+between fibers induced by \eqref{int:eq:ev-multiplicative}.
+\end{proof}
+
+\begin{theorem}[Complete arithmetic coproduct]
+\label{int:pf84:C06}
+In the algebraic kernel
+\(c_{00}(\mathbb N_{\geq1})\subset\ell^2(\mathbb N_{\geq1})\), let
+\[
+ \Delta_\times e_n=\sum_{ab=n}e_a\otimes e_b.
+\]
+Its closure has domain
+\[
+ \operatorname{Dom}(\overline{\Delta_\times})
+ =
+ \left\{x=(x_n):
+ \sum_{n\geq1}d(n)|x_n|^2<\infty\right\},
+\]
+is coassociative on the kernel and, for \(Qe_n=ne_n\), satisfies
+\[
+ (\log Q\otimes I+I\otimes\log Q)\Delta_\times
+ =\Delta_\times\log Q.
+\]
+\end{theorem}
+
+\begin{proof}
+The supports of \(\Delta_\times e_n\) are orthogonal for distinct integers,
+and their squared norm is the number \(d(n)\) of divisors, which yields the weighted
+domain of the closure. The two coassociativity relations reindex the same sum
+over \(abc=n\). Finally, \(\log a+\log b=\log n\) in each term
+proves the intertwining. A triple factorization counted differently, or failure of
+this identity, would falsify the theorem.
+\end{proof}
+
+\begin{theorem}[Reduced coproduct and irreducible selector]
+\label{int:pf84:C07}
+In the sector integer, the coproducto reducido
+\[
+ \Delta_\times^{\rm red}e_n
+ =\sum_{\substack{ab=n\\a,b>1}}e_a\otimes e_b
+\]
+is closable. The operator
+\[
+ N_\times^{\rm red}
+ =\bigl(\overline{\Delta_\times^{\rm red}}\bigr)^*
+  \overline{\Delta_\times^{\rm red}}
+\]
+is positive self-adjoint and diagonal:
+\[
+ N_\times^{\rm red}e_n=d_{\rm red}(n)e_n.
+\]
+Its kernel is generated by \(e_1\) and by the \(e_p\) with \(p\) irreducible;
+therefore,
+\[
+ P_{\Irr}
+ =\mathbf1_{\{0\}}(N_\times^{\rm red})
+  -\lvert e_1\rangle\langle e_1\rvert
+\]
+select the irreducibles and exclude the unit.
+
+In the native sector, the corresponding coproduct is
+\[
+ \widetilde\Delta_\#e_w
+ =\sum_{\substack{u\boxtimes_\#v=w\\u,v\ne(1)}}e_u\otimes e_v.
+\]
+The entrelazador \(W_\times\) transports
+\(\Delta_\times^{\rm red}\), \(N_\times^{\rm red}\) and \(P_{\Irr}\) toward
+\(\widetilde\Delta_\#\),
+\[
+ A_\#:=
+ \bigl(\overline{\widetilde\Delta_\#}\bigr)^*
+ \overline{\widetilde\Delta_\#},
+ \qquad
+ P_{\Irr,\#}
+ =(I-P_{(1)})\mathbf1_{\{0\}}(A_\#),
+ \qquad
+ P_{(1)}=\lvert e_{(1)}\rangle\langle e_{(1)}\rvert.
+\]
+\end{theorem}
+
+\begin{proof}
+The supports of the images of two distinct basis vectors are orthogonal.
+The squared norm of
+\(\Delta_\times^{\rm red}e_n\) is \(d_{\rm red}(n)\), which vanishes
+exactly for \(n=1\) or \(n\) irreducible. This proves the diagonalization
+and the declared kernel; subtracting the projector of \(e_1\) removes the unit.
+The multiplicativity of \(W_\times\) identifies the integer fibers with the
+native fibers and transports the three operators. A composite in the kernel,
+an irreducible outside it, or inclusion of the unit in \(P_{\Irr}\)
+would refute the theorem.
+\end{proof}
+
+\begin{proposition}[Nonadic coincidence of primes and composites]
+\label{int:pf84:B05}
+Let \(\gcd(n,90)=1\),
+\(\tau_n=\operatorname{ord}_n(10)\) and
+\[
+ M_n=\frac{10^{\tau_n}-1}{n}.
+\]
+Then \(M_n\equiv0\pmod9\), both for primes and for composites. In
+particular, the nonadic closure and the isolated decimal period are not a
+selector of irreducibles.
+\end{proposition}
+
+\begin{proof}
+Because \(9\mid10^{\tau_n}-1\) and because \(n\) is invertible modulo nine, divisibility by nine survives passage to the quotient. The primes \(7,13\) and the composites \(77,91,143\) share period six; the Carmichael numbers provide additional controls. The statement would be falsified only if the congruence or the period separated all primes from all composites in the declared domain.
+\end{proof}
+
+This statement is strictly arithmetic: it identifies factorization
+fibers and the operators they induce on the sector of normal
+forms.
+
+\ifdefined\HMTInternalTraceability
+\section{Monoidal extension of the native product to compatible histories}
+\label{int:pf84:SYN-05D-HIST}
+
+The result distinguishes the space \(\Krad\) of canonical normal forms and
+the space \(\mathcal K_{\#,\mathrm{hist}}\) of complete histories of
+cells and propagated quotients.
+Many histories may produce the same normal form. Therefore,
+$W_\times$ is unitary on $\Krad$, but the projection of a history onto
+its value prevents it from being injective on all transport classes.
+
+Let \(\mathscr X_n^{\rm hist}\) be the set of enriched histories of
+depth \(n\) and let
+\(\mathcal H_n=\ell^2(\mathscr X_n^{\rm hist})\). Denote by \(P_n\) the
+orthogonal projection onto the subspace generated by surviving
+histories, and suppose a multiplication \(\mu_n\) is defined on an
+algebraic domain of
+\(\mathcal H_n\otimes_{\mathrm{alg}}\mathcal H_n\). A monoidal extension
+of the word product to the inverse system consists of a family of
+maps \(\iota_n:\Krad\to\mathcal H_n\) that commutes with the
+depth restrictions and satisfies, for every \(n\),
+\[
+ P_n\,\iota_n\mu_\#
+ =P_n\,\mu_n
+ (\iota_n\otimes\iota_n)
+\]
+in the algebraic kernel. This equality is the compatibility condition that
+defines the extension. The preceding theorems establish neither the existence nor
+the uniqueness of a family \((\iota_n)_n\); they prove the product in the
+monoid \(\WordMonoid\) and determine the equation that an extension to the history
+space must satisfy. The transfer therefore retains the status of an
+\emph{open program}: it does not inherit the exactness of the product in
+\(\WordMonoid\). The nonexistence of a compatible family, failure to
+commute with truncations, loss of survival, quotient,
+carry, orientation, or memory, or failure to satisfy the preceding identity
+are its falsifiers.
+\fi
+
+\section{Exhaustive enumeration and necessity of structural coordinates}
+
+The finite enumeration comprises:
+\[
+\begin{array}{@{}lr@{}}
+\toprule
+\text{Test}&\text{Result}\\\midrule
+\text{Cells per local map}&81\\
+\text{Reversible numbering paths}&59050\\
+\text{Intertwiner pairs}&532900\\
+\text{Intertwiner errors}&0\\
+\text{Associative triples}&531441\\
+\text{Associative errors}&0\\
+\text{Coproduct window}&1\text{ to }500\\
+\text{Irreducibles obtained}&95\\
+\bottomrule
+\end{array}
+\]
+
+\begin{definition}[Multiplicative quotient]
+Preserving only $R^\times$ transforms $2\cdot5=10$ into the visible value $1$.
+Perturbing $q^\times(9,9)$ from $8$ to $7$ transforms $81$ into $72$. The local
+quotient is necessary.
+\end{definition}
+
+\begin{definition}[Additive application]
+The multiplicative map produces partial products, but does not resolve their collisions.
+Removing $q^+$ breaks the global normalization; for example, it no longer reproduces
+the intermediate quotients of $10\cdot18=180$.
+\end{definition}
+
+\begin{definition}[Coordinates and boundary symbol]
+Ordinary zero is not a digit of the construction. The empty word is
+$0$, and the symbol $9$ preserves its value and quotient. Mixing
+zero-indexed positional coordinates with the labels $1,\ldots,9$ changes the
+cells.
+\end{definition}
+
+\begin{proposition}[Exact scope of the ablations and of the finite census]
+\label{int:pf84:D10}
+The preceding ablations prove, within the declared conventions:
+\begin{enumerate}
+  \item without \(q^\times\), \(2\cdot5=10\) colapsa to the residue visible \(1\);
+  \item cambiar \(q^\times(9,9)=8\) by \(7\) transforms \(81\) in \(72\);
+  \item without \(q^+\), normalization of the additive collisions fails.
+\end{enumerate}
+The exhaustive enumeration comprises the \(2\cdot81=162\) cells of the two
+maps, the \(729\) local triples, \(532\,900\) word pairs, and
+the \(95\) irreducibles no greater than \(500\). The indicated identities are
+proved on these finite domains, but the coinductive survival
+of every TPK history is not.
+\end{proposition}
+
+\begin{proof}
+The three counterexamples are computed directly with
+\eqref{int:eq:local-plus} and \eqref{int:eq:local-times}. The enumeration of the four
+finite domains produces the cardinals written in the statement and does not add
+any coinductive identity to those already proved in the monoid
+of words.
+\end{proof}
+
+\section{Algebraic structure of the word monoid}
+
+The construction proves, in the monoid \(\WordMonoid\):
+\begin{enumerate}
+ \item a unique normal form for each nonnegative integer;
+ \item global sum and product constructed solely from the two local maps;
+ \item symbolic conservation of the value under quotient propagation;
+ \item a unitary $W_\times$ and the exact multiplicative square;
+ \item a divisor coproduct and an irreducible selector defined natively;
+ \item the need to preserve the transport class when leaving the
+normal-form sector.
+\end{enumerate}
+
+Passage to the enriched space now reduces to an existence problem:
+constructing a family \((\iota_n)_n\) compatible with the depth restrictions
+and proving that it satisfies the equation of the preceding section.
+This question is distinct from the exact intertwiner on
+\(\WordMonoid\), which is already determined by the normal form and the
+local maps.

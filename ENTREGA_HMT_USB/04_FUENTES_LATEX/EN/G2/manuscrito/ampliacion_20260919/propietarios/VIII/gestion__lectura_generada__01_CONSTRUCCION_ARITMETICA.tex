@@ -1,0 +1,287 @@
+% Propietario conservado: /Users/ruben/Documents/New project/output/REVISION_ARGUMENTAL_APERTURAS_CIERRES_20260915/VIII/spanish_source/gestion/lectura_generada/01_CONSTRUCCION_ARITMETICA.tex
+\section{Native product, factorization, and irreducibility}
+\label{viii:lectura:manuscrito-01}
+This chapter develops the arithmetic sector of normal forms over the common kernel and the correlative construction of the continuum in Section~\ref{viii:lectura:manuscrito-05}. The local operation extends to words, its fibers distinguish the irreducibles, and evaluation makes it possible to recognize the primes. The development recovers the native product of the corpus; its documentary provenance is collected in Appendix~\ref{viii:ap:procedencia-reproduccion}.
+
+\subsection{Composition of residues and quotients in multiplication}
+Selecting prime numbers requires a multiplication to have been constructed. In Triadic Modular Holography, this operation must be presented from the two APP sheets, preserving both the residual coordinate and its quotient. The residue alone makes it possible to recognize a congruence class. The residue–quotient pair makes it possible to reconstruct the integer result of the local operation. This distinction determines which information must be transported when composing the cells.
+
+Let $D_9=\{1,\ldots,9\}$. For each pair $(a,b)\in D_9^2$, the additive and multiplicative sheets are written as
+
+\[
+a+b=R_+(a,b)+9Q_+(a,b),\qquad
+ab=R_\times(a,b)+9Q_\times(a,b),
+\]
+with $R_+,R_\times\in D_9$. The choice of the positive representative uniquely fixes the four data. In particular, a result divisible by nine has its residue represented by $9$, and its quotient is one less than that of Euclidean division with zero remainder. This is an exact representation convention, which must be maintained throughout the construction.
+
+For example,
+
+\[
+2\cdot5=1+9\cdot1,\qquad 9\cdot9=9+9\cdot8.
+\]
+The first result preserves the information that distinguishes $10$ from $1$; the second preserves that which distinguishes $81$ from $9$. If the quotient is omitted at one of these steps, a subsequent multiplication acts on a different object. Arithmetic memory here is not an interpretation added to the algorithm: it participates in reconstructing its result.
+
+The two sheets are coupled even during multiplication. The product of two digits generates a pair $(R_\times,Q_\times)$; when the quotient from a preceding position is incorporated into the current position, the additive sheet is needed again. The global operation composes both sheets.
+
+\HMTresultado{Proposition}{Local compatibility of the quotients}{rz-num-01-1}
+The quotients satisfy the identities required to associate and distribute the operations without changing the reconstructed integer. For example, for addition,
+
+\[
+Q_+(a,b)+Q_+\bigl(R_+(a,b),c\bigr)
+=Q_+(b,c)+Q_+\bigl(a,R_+(b,c)\bigr).
+\]
+For multiplication,
+
+\[
+Q_\times\bigl(R_\times(a,b),c\bigr)+cQ_\times(a,b)
+=Q_\times\bigl(a,R_\times(b,c)\bigr)+aQ_\times(b,c).
+\]
+\textbf{Proof.} Substituting the two decompositions of $a+b+c$, the final residues are the same positive representative of its class modulo nine. Subtracting them and dividing by nine gives the first equality. For $abc$, the same argument is applied to
+
+\[
+\bigl(R_\times(a,b)+9Q_\times(a,b)\bigr)c
+=a\bigl(R_\times(b,c)+9Q_\times(b,c)\bigr).
+\]
+The distributive identity is obtained by reconstructing $a(b+c)=ab+ac$ with the two sheets. In all three cases, uniqueness of the residual representation determines exactly the quotient that must accompany it. \hfill\(\square\)
+
+These identities make it possible to organize the operation record: two parenthesizations produce the same integer without requiring their execution histories to be identified. Equality of the result and identity of the history are different assertions.
+
+\subsection{Nonadic words and normal form}
+The extension to arbitrarily large integers uses finite sequences of digits from $D_9$. The orientation adopted runs from the least significant to the most significant position. For $u=(u_0,\ldots,u_{r-1})$, let
+
+\[
+\operatorname{ev}_9(u)=\sum_{j=0}^{r-1}u_j9^j.
+\]
+The empty sequence represents zero. In this bijective numeration, the symbol $9$ remains a digit; it does not become a zero without a quotient.
+
+\HMTresultado{Proposition}{Existence and uniqueness of the normal form}{rz-num-01-2}
+The preceding evaluation is a bijection between finite words over $D_9$, including the empty word, and nonnegative integers.
+
+\textbf{Proof.} If $n>0$, define
+
+\[
+d(n)=1+((n-1)\bmod9),\qquad q(n)=\frac{n-d(n)}9.
+\]
+Then $d(n)\in D_9$, $q(n)\ge0$, and $q(n)<n$. Iteration terminates at zero and produces a word whose evaluation is $n$. For uniqueness, the first digit of any word evaluating to $n$ must represent the class of $n$ modulo nine within $D_9$; it must therefore be $d(n)$. Removing it and dividing by nine reduces the question to $q(n)$. Induction proves uniqueness. \hfill\(\square\)
+
+Some normal forms are
+
+\[
+9\leftrightarrow(9),\quad
+10\leftrightarrow(1,1),\quad
+81\leftrightarrow(9,8),\quad
+1000\leftrightarrow(1,3,3,1).
+\]
+The representation is checked directly: $1000=1+3\cdot9+3\cdot9^2+9^3$. This last equality does not by itself identify the word of an integer with the cubic completion of a geometric domain. The two occurrences of $1000$ have different objects and operations; an identification would require its map.
+
+The normal form is an arithmetic coordinate. The TPK state additionally preserves orientation, sheet, route, boundary, and transport memory. When different histories produce the same normal form, the evaluation map brings their values together, but does not establish a bijection between those histories. The development of the article must preserve both levels and the map relating them.
+
+\subsection{Genealogical construction of the product on records}
+Word addition is performed position by position. If a position contains two digits, the additive sheet is consulted. If it contains only one, that digit is retained. The quotient arriving from the preceding position is incorporated through another additive lookup, and the quotients of both lookups are added. If \(a+b=r+9q\) and \(r+c=r'+9q'\), then \(q+q'\) is transported. For example, \(9+9+1=1+9\cdot2\). The incoming quotient lies between zero and two; when it is zero, no additional cell is consulted. An absent position is not an APP cell containing the digit zero.
+
+Multiplication by a digit $d\in D_9$ acts analogously: at each position, the multiplicative sheet is first applied to the digit of the word and to $d$; the pending quotient is then incorporated through the additive sheet. The new quotient is the sum of the quotient of the local product and that of this additive lookup, and lies between zero and nine. The procedure terminates by appending the final quotient when it is nonzero.
+
+Denote these operations by $u\boxplus v$ and $d\odot u$. If $v=(v_0,\ldots,v_{m-1})$, the native product is constructed through the recurrence
+
+\[
+a_m=\varnothing,\qquad
+a_j=(9\odot a_{j+1})\boxplus(v_j\odot u),
+\quad j=m-1,\ldots,0,
+\]
+and $u\boxtimes v=a_0$ is defined. Every operation on the right-hand side uses the two local sheets already defined. Word evaluation does not intervene as an instruction for computing the product.
+
+\HMTresultado{Theorem}{Exactness of the native product}{rz-num-01-3}
+For all finite words $u,v$,
+
+\[
+\operatorname{ev}_9(u\boxtimes v)
+=\operatorname{ev}_9(u)\operatorname{ev}_9(v).
+\]
+\textbf{Proof.} The cell reconstruction identities prove, by induction over positions, that
+
+\[
+\operatorname{ev}_9(u\boxplus v)
+=\operatorname{ev}_9(u)+\operatorname{ev}_9(v),\qquad
+\operatorname{ev}_9(d\odot u)=d\operatorname{ev}_9(u).
+\]
+The product recurrence preserves the invariant
+
+\[
+\operatorname{ev}_9(a_j)
+=\operatorname{ev}_9(u)\sum_{k=j}^{m-1}v_k9^{k-j}.
+\]
+The case $j=m$ is immediate. If it holds for $j+1$, multiplying by nine and adding $v_j\operatorname{ev}_9(u)$ yields the case $j$. For $j=0$, the asserted equality follows. \hfill\(\square\)
+
+\HMTresultado{Corollary}{Multiplicative structure of the normal forms}{rz-num-01-4}
+The nonempty words, with the product $\boxtimes$, form a commutative monoid whose unit is $(1)$. Upon adjoining the empty word, it is absorbing.
+
+\textbf{Proof.} Evaluation is multiplicative by the theorem and injective by Proposition~\ref{viii:rz-num-01-2}. Associativity, commutativity, and the identity are verified after evaluation and recovered by injectivity. \hfill\(\square\)
+
+The proof makes it possible to recognize ordinary multiplication in the constructed operation. The logical order matters: the cell transducer is first defined and its invariant is proved; its integer realization is then identified.
+
+\subsection{Multiplicative openings and selection of irreducibles}
+Once the product has been constructed, factorization can be defined as its fiber. For each nonempty word $w$, let
+
+\[
+\operatorname{Fac}(w)=\{(u,v):u\boxtimes v=w\}.
+\]
+This fiber is finite. Indeed, if $n=\operatorname{ev}_9(w)$, exactness implies $\operatorname{ev}_9(u)\operatorname{ev}_9(v)=n$, with both factors positive and no greater than $n$. Finiteness justifies the algebraic sum
+
+\[
+\Delta e_w=\sum_{(u,v)\in\operatorname{Fac}(w)}e_u\otimes e_v.
+\]
+The order in the factor pair is preserved. For $n=12$, for example, the evaluations of the fiber are
+
+\[
+(1,12),(2,6),(3,4),(4,3),(6,2),(12,1).
+\]
+The reduced coproduct removes the two decompositions containing the unit, for $w\ne(1)$:
+
+\[
+\widetilde\Delta e_w
+=\sum_{\substack{u\boxtimes v=w\\u\ne(1),\ v\ne(1)}}e_u\otimes e_v.
+\]
+Set $\widetilde\Delta e_{(1)}=0$. This convention allows the unit to be treated separately, without confusing it with an irreducible.
+
+\HMTresultado{Definition}{Native irreducible}{rz-num-01-5}
+A word $w\ne(1)$ is multiplicatively irreducible if $\widetilde\Delta e_w=0$.
+
+The definition receives no table of primes and uses no decimal period. It asks whether the operation already constructed admits a nontrivial opening.
+
+\HMTresultado{Theorem}{Recognition of the primes}{rz-num-01-6}
+Evaluation establishes a bijection between native irreducibles and positive prime numbers.
+
+\textbf{Proof.} If $w=u\boxtimes v$ with factors different from the unit, its evaluation is the product of two integers greater than one; it is therefore not prime. Conversely, if $\operatorname{ev}_9(w)=ab$, with $a,b>1$, their normal forms $u,v$ satisfy
+
+\[
+\operatorname{ev}_9(u\boxtimes v)=ab=\operatorname{ev}_9(w).
+\]
+Injectivity gives $u\boxtimes v=w$, so that $w$ is not irreducible. The bijection of normal forms completes the proof. \hfill\(\square\)
+
+This result identifies a property of the operation with the property of its integer realization. Prime values appear upon evaluating the selected objects, after the product and its fibers have been defined.
+
+\HMTresultado{Proposition}{Coassociativity}{rz-num-01-7}
+On the algebraic space generated by positive words,
+
+\[
+(\Delta\otimes I)\Delta=(I\otimes\Delta)\Delta.
+\]
+\textbf{Proof.} Both sides enumerate, with coefficient one, the ordered triples $(u,v,z)$ whose product is $w$. Associativity of the product identifies the two parenthesizations, and all sums are finite. \hfill\(\square\)
+
+\subsection{Operator realization of the selector}
+In \(\mathcal H=\ell^2(\mathcal W_9^+)\), with orthonormal basis \(\{e_w\}\), the coproduct is first defined on finite linear combinations. The supports of $\Delta e_w$ and $\Delta e_{w'}$ are disjoint if $w\ne w'$: an ordered pair has a unique product. Hence,
+
+\[
+\|\Delta e_w\|^2=|\operatorname{Fac}(w)|,
+\qquad
+\|\widetilde\Delta e_w\|^2=r(w),
+\]
+where $r(w)$ counts the ordered nontrivial openings.
+
+The closure of $\widetilde\Delta$ has domain
+
+\[
+\left\{x=\sum_wx_we_w\in\mathcal H:\sum_wr(w)|x_w|^2<\infty\right\}.
+\]
+Its associated positive operator is diagonal:
+
+\[
+A_{\mathrm{irr}}=\overline{\widetilde\Delta}^{\,*}\overline{\widetilde\Delta},
+\qquad A_{\mathrm{irr}}e_w=r(w)e_w.
+\]
+Its maximal domain is
+
+\[
+\operatorname{Dom}(A_{\mathrm{irr}})
+=\left\{x\in\mathcal H:\sum_wr(w)^2|x_w|^2<\infty\right\}.
+\]
+The projector onto the irreducibles is then
+
+\[
+P_{\mathrm{irr}}=(I-P_{(1)})\mathbf1_{\{0\}}(A_{\mathrm{irr}}).
+\]
+The formula incorporates two distinct exclusions: the kernel removes all words possessing a nontrivial opening, and $I-P_{(1)}$ removes the unit. Positivity comes from a squared norm and has a specific meaning here: it counts decompositions. It is not yet an assertion about the positivity of another form, such as the completed Weil form.
+
+\subsection{Normalized readout of the TPK prefix and preservation of genealogy}
+The normal form admits an explicit composition with the integer prefix produced by the TPK. Denote by \(\beta_9=\operatorname{ev}_9^{-1}\) the normalizer of Proposition~\ref{viii:rz-num-01-2}. Here \(K\) is the block depth of the TPK state, distinct from the length \(k\) of an elementary history in the emission tree. The construction applies to a regional coordinate of the block state; the same calculation applies to each of the three coordinates with its own record.
+
+For the deep row vector \(x_K\in\mathbb Z^6\), the integer TPK step uses the matrix
+
+\[
+A_H=
+\begin{pmatrix}
+2&2&2&1&2&1\\
+2&1&2&2&1&1\\
+1&0&0&1&0&2\\
+0&0&1&1&1&0\\
+2&2&2&0&2&1\\
+2&1&2&1&0&0
+\end{pmatrix}
+\]
+and produces
+
+\[
+y_K=x_KA_H,\qquad
+u_{K+1}=y_K\bmod3,\qquad
+x_{K+1}=\frac{y_K-u_{K+1}}3.
+\]
+The block \(u_{K+1}\in\mathbb F_3^6\), with representatives \(\overline u_j\in\{0,1,2\}\), has index
+
+\[
+I(u_{K+1})=\sum_{j=1}^{6}\overline u_j3^{6-j},
+\qquad 0\leq I(u_{K+1})<729.
+\]
+The cylindrical readout updates the prefix through
+
+\[
+N_{K+1}=729N_K+I(u_{K+1}).
+\]
+The matrix \(A_H\) belongs to the TPK kernel update. In the following composition it is not replaced by an external arithmetic rule: the block and its index come from the step just executed.
+
+\HMTresultado{Proposition}{Compatibility of the native prefix and its normal form}{rz-num-01-8}
+If \(w_K=\beta_9(N_K)\), then
+
+\[
+w_{K+1}
+=\bigl(\beta_9(729)\boxtimes w_K\bigr)
+\boxplus\beta_9(I(u_{K+1})).
+\]
+The typed truncation of this readout is
+
+\[
+\varrho(w)=
+\beta_9\!\left(
+\left\lfloor\frac{\operatorname{ev}_9(w)}{729}\right\rfloor
+\right);
+\qquad \varrho(w_{K+1})=w_K.
+\]
+\textbf{Proof.} Compatibility of word addition and multiplication proves that the evaluation of the right-hand side is
+
+\[
+729\operatorname{ev}_9(w_K)+I(u_{K+1})
+=729N_K+I(u_{K+1})=N_{K+1}.
+\]
+Uniqueness of the normal form gives the first equality. Since the block index lies between zero and \(728\), the integer quotient of \(N_{K+1}\) by \(729\) is \(N_K\). Applying \(\beta_9\) proves the truncation identity. \hfill\(\square\)
+
+Truncation does not consist of deleting three digits from a bijective word. For example, \(\beta_9(729)=(9,8,8)\), whereas the integer quotient of \(729\) by \(729\) is one; deleting its three digits would produce the empty word. The rule \(\varrho\) preserves the residue and quotient convention defining the numeration.
+
+The proposition normalizes an already generated prefix and preserves its compatibility under refinement. Its application to the state retains, in the original record, the block \(u_{K+1}\), the deep quotient \(x_{K+1}\), the carries of the decimal chart, the phase and the route. It does not assert that \(w_K\) reconstructs those coordinates by itself or that any word is published by a fixed regional section. The equality of normal forms refers to the numerical prefix; the identity of the histories is decided in the complete state.
+
+The record accompanying the product contains the lookups of both sheets and their residues and quotients. It makes it possible to explain why an output was obtained and to reproduce the operation. The transducer result does not, however, exhaust the state of a TPK prolongation: a normal form may be reached by different histories.
+
+Therefore, integration with the dynamics preserves the direction of each map: the TPK state publishes its prefix, and the latter admits the normalized reading just constructed. Compatibility of a product on histories additionally requires specifying its domain, transport and survival. It does not require inverting a numerical reading that does not individualize the history. The identity of values does not replace that compatibility square; each application must be accompanied by the specific operation and the information it preserves.
+
+The starting point of the arithmetic is already specified: two local operations, a normal form, a global transducer, its fibers, and a selector. The spectral extension must use these results without retrospectively changing their origin.
+
+\subsection{Correspondence with the preserved implementation}
+The code \texttt{a9\_\allowbreak{}native.\allowbreak{}py} implements the operations in this order:
+
+\begin{enumerate}
+\item Local addition and multiplication cells.
+\item Bijective nonadic encoding and separate evaluation.
+\item Word addition and multiplication by a digit.
+\item Word product recurrence.
+\item Enumeration of product fibers.
+\item Selection of irreducibles by absence of a nontrivial opening.
+\end{enumerate}
+The checker uses integer multiplication and a conventional primality test after generating the outputs. These operations check the implementation; they are not incorporated into the body of the word producer. Checks that suppress a quotient or alter a cell document which dependency is broken. The reproduction receipts state the size of the checked window; that computational scope is kept separate from the preceding general proofs.

@@ -1,0 +1,637 @@
+% Extracción quirúrgica del propietario V2 05b: líneas 100--359.
+% El resto permanece en este archivo como procedencia, pero no se publica.
+\iffalse
+% Macroestructura solenoidal estrictamente interna del continuo discreto.
+% Este módulo no introduce ninguna ecuación clásica ni un problema exterior.
+
+\chapter{Internal macrostructure of balance, memory, and telescopia}
+\label{chap:pdfv2-sol-interna}
+
+\begin{statusbox}
+The only input of this chapter is the discrete structure of the continuum.
+The branch \(\mathrm{sol}\) is constructed before any exterior scalar evaluation
+and before any classical differential formulation.  Its complete chain is
+\[
+ \mathcal C_{\rm cont}^{\rm disc}
+ \supset\mathcal C_{\rm cont}^{\rm sol}
+ \xrightarrow{\operatorname{Res}_{\rm sol}}
+ \mathcal G_{\rm sol}
+ \xrightarrow{\operatorname{pr}_{X,{\rm sol}}}
+ X_{\chi,{\rm sol}}
+ \xrightarrow{\mathcal A_{\rm sol}}
+ \mathfrak M_{\rm sol}
+ \xrightarrow{\mathcal P_{\rm sol}}
+ \mathcal C_{\rm sol}^{\rm HMT}.
+\]
+Each arrow preserves as coordinates the history and the apparatus that
+produces it.  No image in this chain is a quotient that forgets its source.
+\end{statusbox}
+
+\section{Proper domain prior to any subsequent evaluation}
+\label{sec:pdfv2-sol-dominio}
+
+Let
+\[
+ x=(x_0\xrightarrow{e_0}x_1\xrightarrow{e_1}\cdots)
+ \in\mathcal C_{\rm cont}^{\rm disc}
+\]
+a surviving history.  Each edge \(e_j\) preserves its two sheets,
+orientation, residue, quotient, and integer carry.  Let
+\(N_j^+(e_j)\) and \(N_j^-(e_j)\) be the multiplicities of the two sheets, and let
+\(\Delta_{\gamma_j}\in\mathbb Z\) be the oriented coefficient of the route, with the
+carry of the composition already incorporated.  The internal signed increment is
+\begin{equation}\label{eq:pdfv2-sol-b}
+ b_j=b(e_j):=
+ \Delta_{\gamma_j}\bigl(N_j^+(e_j)-N_j^-(e_j)\bigr)\in\mathbb Z.
+\end{equation}
+It is not obtained by evaluating an external path: it is a coordinate of the ledger of the edge itself.
+
+Its positive and negative parts are constructed by
+\begin{equation}\label{eq:pdfv2-sol-bpm}
+ b_j^+:=\frac{|b_j|+b_j}{2},
+ \qquad
+ b_j^-:=\frac{|b_j|-b_j}{2}.
+\end{equation}
+Therefore,
+\begin{equation}\label{eq:pdfv2-sol-bpm-identidades}
+ b_j=b_j^+-b_j^-,
+ \qquad
+ |b_j|=b_j^++b_j^-,
+ \qquad
+ b_j^+b_j^-=0.
+\end{equation}
+
+The two original memoirs and their two readers are
+\begin{align}
+ M_0^+=M_0^-&=0,
+ &M_j^+&=\sum_{0\leq i<j}b_i^+,
+ &M_j^-&=\sum_{0\leq i<j}b_i^-;
+ \label{eq:pdfv2-sol-memorias}\\
+ D_j^0&:=M_j^+-M_j^-,
+ &H_j^0&:=M_j^++M_j^-.
+ \label{eq:pdfv2-sol-dh}
+\end{align}
+Consequently,
+\begin{equation}\label{eq:pdfv2-sol-dh-diferencias}
+ D_{j+1}^0-D_j^0=b_j,
+ \qquad
+ H_{j+1}^0-H_j^0=|b_j|.
+\end{equation}
+Signed memory \(D^0\) and total memory \(H^0\) remain distinct
+objects; retaining only their final difference would destroy the genealogy.
+
+The substructure \(\mathcal C_{\rm cont}^{\rm sol}\) consists of the histories
+for which, in every prefix and every nonadic refinement:
+\begin{enumerate}
+ \item the increments \eqref{eq:pdfv2-sol-b} and the two memories
+       \eqref{eq:pdfv2-sol-memorias} exist;
+ \item the fine cylinders are grouped into fibres of nine extensions with the
+       same projective probability law;
+ \item the depth and resolution projections defined below are
+       compatible with the history extensions;
+ \item each loss row and each terminal column is finite at a finite
+       horizon;
+ \item every prefix admits at least one compatible extension to any
+       subsequent horizon.
+\end{enumerate}
+These are conditions of membership in the branch, not silent premises
+attributed to an arbitrary history.
+
+\fi
+\section{Common nonadic refinement: inclusion, balance expectation and memory}
+\label{sec:pdfv2-sol-e9j9}
+
+Let \(Y_j(x)\) be the finite set of cylinders compatible with the prefix
+\(x_{\leq j}\), endowed with the projective measure \(\mu_j\).  The truncation
+\[
+ \tau_{j+1,j}:Y_{j+1}(x)\longrightarrow Y_j(x)
+\]
+has nine admissible extensions over each cylinder. Finite spaces are considered.
+\[
+ \mathscr H_j(x):=\ell^2\bigl(Y_j(x),\mu_j\bigr).
+\]
+The inclusion and the nonadic expectation are
+\begin{align}
+ J_{9,j}:\mathscr H_j&\longrightarrow\mathscr H_{j+1},
+ &(J_{9,j}f)(y)&=f(\tau_{j+1,j}y),
+ \label{eq:pdfv2-sol-j9}\\
+ E_{9,j}:\mathscr H_{j+1}&\longrightarrow\mathscr H_j,
+ &(E_{9,j}g)(z)&=\frac1{9}
+   \sum_{\tau_{j+1,j}y=z}g(y).
+ \label{eq:pdfv2-sol-e9}
+\end{align}
+The projective compatibility of \(\mu_{j+1}\) and \(\mu_j\) gives
+\begin{equation}\label{eq:pdfv2-sol-ej-projector}
+ E_{9,j}J_{9,j}=I_{\mathscr H_j},
+ \qquad
+ J_{9,j}^*=E_{9,j},
+ \qquad
+ P_{9,j}:=J_{9,j}E_{9,j}=P_{9,j}^*=P_{9,j}^2.
+\end{equation}
+The complementary microscopic projector is
+\begin{equation}\label{eq:pdfv2-sol-qmicro-preliminar}
+ Q_{9,j}:=I-P_{9,j}.
+\end{equation}
+
+If \(b_f\) is the increment on the fine fiber and
+\begin{equation}\label{eq:pdfv2-sol-bcoarse}
+ b_c:=E_{9,j}b_f,
+\end{equation}
+the elementary convexity of \(|\cdot|\) constructs, rather than postulates, the carry of
+cancellation
+\begin{equation}\label{eq:pdfv2-sol-kappa}
+ \kappa_j
+ :=\frac{E_{9,j}|b_f|-|b_c|}{2}\geq0.
+\end{equation}
+Indeed, using \(t^\pm=(|t|\pm t)/2\), one obtains
+\begin{align}
+ E_{9,j}b_f^+
+ &=\frac{E_{9,j}|b_f|+E_{9,j}b_f}{2}
+   =b_c^++\kappa_j,
+ \label{eq:pdfv2-sol-jensen-plus}\\
+ E_{9,j}b_f^-
+ &=\frac{E_{9,j}|b_f|-E_{9,j}b_f}{2}
+   =b_c^-+\kappa_j.
+ \label{eq:pdfv2-sol-jensen-minus}
+\end{align}
+Both sheets lose the same amount when compressed; therefore, the signed
+difference is preserved while total memory records the cancellation:
+\begin{equation}\label{eq:pdfv2-sol-jensen-dh}
+ E_{9,j}(b_f^+-b_f^-)=b_c,
+ \qquad
+ E_{9,j}(b_f^++b_f^-)=|b_c|+2\kappa_j.
+\end{equation}
+
+\section{Orthogonal factorization of the degrees of depth and of the resolution layers in \(\mathscr H_j^{\mathrm{depth}}\widehat\otimes\mathscr H_j^{\mathrm{res}}\)}
+\label{sec:pdfv2-sol-micro-shell}
+
+To prevent the same loss from being counted both as depth and as
+resolution, the space at each level is typed as
+\begin{equation}\label{eq:pdfv2-sol-factor-hilbert}
+ \mathscr H_j
+ =\mathscr H_j^{\rm depth}\widehat\otimes
+  \mathscr H_j^{\rm res}.
+\end{equation}
+For \(j\geq1\), the first factor carries
+\[
+ P_j^{\rm depth}:=J_{9,j-1}E_{9,j-1}
+ \quad\text{on }\mathscr H_j^{\rm depth},
+\]
+and \(P_0^{\rm depth}=I\) is fixed. The second factor carries the finite
+shell partition inherited from the cylinder boundary. If
+\(\sigma_j:Y_j^{\rm res}\to S_j\) is that partition, its operators are
+\begin{align}
+ J_j^{\rm res}f&=f\circ\sigma_j,
+ &E_j^{\rm res}g(s)&=
+ \frac1{\#\sigma_j^{-1}(s)}
+ \sum_{\sigma_j(y)=s}g(y),
+ \label{eq:pdfv2-sol-shell-je}\\
+ P_j^{\rm res}&:=J_j^{\rm res}E_j^{\rm res}.
+ \label{eq:pdfv2-sol-shell-p}
+\end{align}
+
+The three mutually orthogonal projectors are defined.
+\begin{align}
+ P_j^{\rm term}
+ &:=P_j^{\rm depth}\otimes P_j^{\rm res},
+ \label{eq:pdfv2-sol-pterm}\\
+ Q_j^{\rm micro}
+ &:=(I-P_j^{\rm depth})\otimes I,
+ \label{eq:pdfv2-sol-qmicro}\\
+ Q_j^{\rm shell}
+ &:=P_j^{\rm depth}\otimes(I-P_j^{\rm res}).
+ \label{eq:pdfv2-sol-qshell}
+\end{align}
+Then
+\begin{equation}\label{eq:pdfv2-sol-ortogonalidad}
+ Q_j^{\rm micro}Q_j^{\rm shell}=0,
+ \qquad
+ I=P_j^{\rm term}+Q_j^{\rm micro}+Q_j^{\rm shell},
+\end{equation}
+and, for all \(\xi\in\mathscr H_j\),
+\begin{equation}\label{eq:pdfv2-sol-pitagoras}
+ \|\xi\|^2
+ =\|P_j^{\rm term}\xi\|^2
+  +\|Q_j^{\rm micro}\xi\|^2
+  +\|Q_j^{\rm shell}\xi\|^2.
+\end{equation}
+The term
+\((I-P_j^{\rm depth})\otimes(I-P_j^{\rm res})\) does not appear a second time: it is already
+contained exactly once in \(Q_j^{\rm micro}\).
+
+\section{Cylinder extensions and full row of losses}
+\label{sec:pdfv2-sol-gamma-loss}
+
+An extension of cylinders from level \(j\) to level \(j+1\) induces the map
+\begin{equation}\label{eq:pdfv2-sol-gamma}
+ \Gamma_j:\mathscr H_j\longrightarrow\mathscr H_{j+1},
+ \qquad
+ \Gamma_j f=f\circ\tau_{j+1,j},
+\end{equation}
+with all leaf, orientation, carry, memory, and path labels
+transported in the cylinder basis.  For \(n>j\), we write
+\begin{equation}\label{eq:pdfv2-sol-gamma-composition}
+ \Gamma_{j:n}:=\Gamma_{n-1}\cdots\Gamma_j,
+ \qquad
+ \Gamma_{j:j}:=I.
+\end{equation}
+
+On \(\mathscr H_j\), the nonnegative increments define multiplication
+operators
+\begin{equation}\label{eq:pdfv2-sol-loss-multipliers}
+ B_j^+:=M_{\sqrt{b_j^+}},
+ \qquad
+ B_j^-:=M_{\sqrt{b_j^-}},
+ \qquad
+ K_j:=M_{\sqrt{2\kappa_j}}.
+\end{equation}
+Each root is taken pointwise over the finite set of cylinders; if a
+coordinate is zero, its operator is zero.  The space of losses is the external
+orthogonal sum
+\[
+ \mathscr E_j
+ :=\mathscr H_j^{(+)}\oplus\mathscr H_j^{(-)}
+   \oplus\mathscr H_j^{(\kappa)}
+   \oplus\mathscr H_j^{({\rm micro})}
+   \oplus\mathscr H_j^{({\rm shell})},
+\]
+and the complete row is
+\begin{equation}\label{eq:pdfv2-sol-loss-row}
+ L_j:\mathscr H_j\longrightarrow\mathscr E_j,
+ \qquad
+ L_j\xi
+ =\bigl(
+ B_j^+\xi,B_j^-\xi,K_j\xi,
+ Q_j^{\rm micro}\xi,Q_j^{\rm shell}\xi
+ \bigr).
+\end{equation}
+Therefore,
+\begin{equation}\label{eq:pdfv2-sol-loss-norm}
+ \|L_j\xi\|^2
+ =\|B_j^+\xi\|^2+\|B_j^-\xi\|^2+\|K_j\xi\|^2
+  +\|Q_j^{\rm micro}\xi\|^2
+  +\|Q_j^{\rm shell}\xi\|^2.
+\end{equation}
+The positive part, negative part, cancellation carry, microstructure, and shell
+each appear once. They are neither merged into an anonymous constant nor
+repeated in two summands.
+
+\section{Complete history terminal}
+\label{sec:pdfv2-sol-terminal}
+
+Let \(\operatorname{Hist}_{J}^{\rm sol}\) be the set of histories
+surviving to the horizon \(J\), each with its package of thirteen
+coordinates.  The terminal space is defined as the free space on these
+complete records:
+\begin{equation}\label{eq:pdfv2-sol-terminal-space}
+ \mathscr T_J^{\rm sol}
+ :=\ell^2\!\left(
+ \left\{(h,D_{{\rm sol},J}(h)):
+ h\in\operatorname{Hist}_{J}^{\rm sol}\right\}
+ \right).
+\end{equation}
+The terminal evaluation
+\begin{equation}\label{eq:pdfv2-sol-terminal-evaluation}
+ E_J^{\rm term}:\mathscr H_J\longrightarrow\mathscr T_J^{\rm sol}
+\end{equation}
+sends each basic cylinder vector to the complete record of the history that
+generates it and extends linearly.  In particular, the terminal retains
+fiber, relations, numbers, orientation, carry, memory, boundary, route,
+multisection, survival, and reader.  It is not replaced by the last visible
+value of the route.
+
+\section{Observation column, Gram operator, and telescoping}
+\label{sec:pdfv2-sol-gram}
+
+For \(0\leq j\leq J\), the complete future column is
+\begin{equation}\label{eq:pdfv2-sol-g-column}
+ \begin{aligned}
+ G_{j;J}:\mathscr H_j&\longrightarrow
+ \mathscr T_J^{\rm sol}\oplus
+ \bigoplus_{n=j}^{J-1}\mathscr E_n,\\
+ G_{j;J}\xi
+ &:={}
+ E_J^{\rm term}\Gamma_{j:J}\xi
+ \ \oplus\ 
+ \bigoplus_{n=j}^{J-1}L_n\Gamma_{j:n}\xi.
+ \end{aligned}
+\end{equation}
+For \(j=J\), the sum of perdidas is empty and
+\(G_{J;J}=E_J^{\rm term}\).  The Gram terminal is
+\begin{equation}\label{eq:pdfv2-sol-u-gram}
+ U_{j;J}:=G_{j;J}^*G_{j;J}\succeq0.
+\end{equation}
+
+Rearranging the orthogonal sum of the codomain yields the literal identity.
+\begin{equation}\label{eq:pdfv2-sol-g-recursion}
+ G_{j;J}\xi
+ \simeq
+ \bigl(L_j\xi,\,G_{j+1;J}\Gamma_j\xi\bigr).
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:pdfv2-sol-stein}
+ \boxed{U_{j;J}
+ =L_j^*L_j+\Gamma_j^*U_{j+1;J}\Gamma_j}
+\end{equation}
+and
+\begin{equation}\label{eq:pdfv2-sol-stein-difference}
+ U_{j;J}-\Gamma_j^*U_{j+1;J}\Gamma_j
+ =L_j^*L_j\succeq0.
+\end{equation}
+There is no sign mutation: the loss term is on the positive side
+of the identity because it arises from a sum of squares.
+
+Iterating \eqref{eq:pdfv2-sol-stein} yields the exact telescoping identity
+\begin{equation}\label{eq:pdfv2-sol-telescopia-operatorial}
+ U_{j;J}
+ =\Gamma_{j:J}^*(E_J^{\rm term})^*E_J^{\rm term}\Gamma_{j:J}
+  +\sum_{n=j}^{J-1}
+   \Gamma_{j:n}^*L_n^*L_n\Gamma_{j:n},
+\end{equation}
+o, in quadratic form,
+\begin{equation}\label{eq:pdfv2-sol-telescopia-normas}
+ \langle U_{j;J}\xi,\xi\rangle
+ =\|E_J^{\rm term}\Gamma_{j:J}\xi\|^2
+  +\sum_{n=j}^{J-1}\|L_n\Gamma_{j:n}\xi\|^2.
+\end{equation}
+The first term preserves the complete terminal future; the sum preserves,
+level by level, all the losses and all the carries that led to it.
+
+\iffalse
+\section{The thirteen coordinates of the constraint}
+\label{sec:pdfv2-sol-trece}
+
+For a prefix \(x_{\leq j}\), it is defined
+\begin{equation}\label{eq:pdfv2-sol-d-package}
+ \begin{aligned}
+ D_{{\rm sol},j}(x):=\bigl(&
+ \mathcal F_{{\rm sol},j},
+ \operatorname{Ext}_{\Gamma,{\rm sol},j},
+ \operatorname{Rel}_{{\rm sol},j},
+ \mathcal N_{{\rm sol},j},
+ \operatorname{or}_{{\rm sol},j},
+ \operatorname{Carr}_{{\rm sol},j},
+ \operatorname{Mem}_{{\rm sol},j},\\
+ &\partial_{{\rm sol},j},
+ \gamma_{{\rm sol},j},
+ \operatorname{Msect}_{{\rm sol},j},
+ \operatorname{Surv}_{{\rm sol},j},
+ \operatorname{Term}_{{\rm sol},j},
+ \mathcal L_{{\rm sol},j}\bigr).
+ \end{aligned}
+\end{equation}
+Its components are as follows.
+\begin{enumerate}
+ \item \(\mathcal F_{{\rm sol},j}\) contains the cylinders \(Y_j\), their projective
+       measure, \(\mathscr H_j^{\rm depth}\),
+       \(\mathscr H_j^{\rm res}\), their tensor products, and the five
+       spaces of losses.
+ \item \(\operatorname{Ext}_{\Gamma,{\rm sol},j}\) contains
+       \(J_{9,j},E_{9,j},\Gamma_j,\Gamma_{j:n}\), the shell inclusions, and
+       all the truncation and refinement maps.
+ \item \(\operatorname{Rel}_{{\rm sol},j}\) contains
+       \eqref{eq:pdfv2-sol-bpm-identidades},
+       \eqref{eq:pdfv2-sol-ej-projector},
+       \eqref{eq:pdfv2-sol-jensen-plus}--
+       \eqref{eq:pdfv2-sol-jensen-minus},
+       \eqref{eq:pdfv2-sol-ortogonalidad} and
+       \eqref{eq:pdfv2-sol-stein}.
+ \item \(\mathcal N_{{\rm sol},j}\) conserves
+       \(j,J,9,b_j,b_j^+,b_j^-,\kappa_j\), sheet multiplicities, fiber sizes,
+       and shell dimensions.
+ \item \(\operatorname{or}_{{\rm sol},j}\) preserves
+       \(\Delta_{\gamma_j}\), the path order, and the inversion action
+       \(b_j\mapsto-b_j\), which interchanges \(b_j^+\) and \(b_j^-\) without changing
+       \(|b_j|\) or \(\kappa_j\).
+ \item \(\operatorname{Carr}_{{\rm sol},j}\) preserves the integer TPK carry, the composition carry and the cancellation carry \(\kappa_j\) as distinct coordinates.
+ \item \(\operatorname{Mem}_{{\rm sol},j}\) is
+       \((M_j^+,M_j^-,D_j^0,H_j^0)\) together with the ordered ledger of all
+       preceding increments.
+ \item \(\partial_{{\rm sol},j}\) contains the oriented cylinder boundary,
+       the increments \(b_j\), the row \(L_j\), and the Stein differences.
+ \item \(\gamma_{{\rm sol},j}\) is the complete route \(e_0e_1\cdots e_{j-1}\), not merely
+its endpoints.
+ \item \(\operatorname{Msect}_{{\rm sol},j}\) contains all compatible
+       nonadic and shell extensions; it does not choose a prolongation.
+ \item \(\operatorname{Surv}_{{\rm sol},j}\) records the horizons
+       \(J\geq j\) for which \(G_{j;J}\), \(U_{j;J}\), and
+       compatible terminal objects exist.
+ \item \(\operatorname{Term}_{{\rm sol},j}\) contains
+       \(E_J^{\rm term}\Gamma_{j:J}\), the complete record of history and
+       the trece coordinates in each horizon.
+ \item \(\mathcal L_{{\rm sol},j}\) internally publishes
+       \((b^\pm,M^\pm,D^0,H^0,\kappa,Q^{\rm micro},Q^{\rm shell},
+       L,G,U)\) and its identities.
+\end{enumerate}
+
+For an extension \(u:x_j\to x_{j'}\), the coordinated transport
+\(u_{{\rm sol},j',j}\) satisfies
+\begin{equation}\label{eq:pdfv2-sol-naturality-d}
+ u_{{\rm sol},j',j}D_{{\rm sol},j'}(x_{j'})
+ =D_{{\rm sol},j}(\tau_{j',j}x_{j'}).
+\end{equation}
+The equality includes all five components of \(L\), the complete terminal, and
+the composition of \(\Gamma\); it is not an equality of cardinalities alone.
+
+\section{Constraint graph and dependent object}
+\label{sec:pdfv2-sol-graphs}
+
+We define
+\begin{equation}\label{eq:pdfv2-sol-g-graph}
+ \mathcal G_{\rm sol}:=\operatorname{Graph}(D_{\rm sol}),
+ \qquad
+ \operatorname{Res}_{\rm sol}(x):=(x,D_{\rm sol}x).
+\end{equation}
+The first projection is inverse over the graph:
+\begin{equation}\label{eq:pdfv2-sol-res-inverse}
+ \pi_1\operatorname{Res}_{\rm sol}=I,
+ \qquad
+ \operatorname{Res}_{\rm sol}\pi_1=I_{\mathcal G_{\rm sol}}.
+\end{equation}
+
+Let \(\chi_{\rm sol}(x)\) be the complete multisection formed by all the
+cylinders, refinements, shells, rows of losses, and terminals compatible
+with \(x\).  Then
+\begin{equation}\label{eq:pdfv2-sol-xchi}
+ X_{\chi,{\rm sol}}
+ :=\{(\chi_{\rm sol}(x),x,D_{\rm sol}x):
+ x\in\mathcal C_{\rm cont}^{\rm sol}\},
+\end{equation}
+and
+\begin{equation}\label{eq:pdfv2-sol-prx}
+ \operatorname{pr}_{X,{\rm sol}}(x,D_{\rm sol}x)
+ :=(\chi_{\rm sol}(x),x,D_{\rm sol}x).
+\end{equation}
+Again, the projection that preserves \((x,D_{\rm sol}x)\) is inverse on
+this dependent image.
+
+\section{Internal assembler and publisher}
+\label{sec:pdfv2-sol-assembler-publisher}
+
+The ambient space \(\mathscr M_{\rm sol}^{\rm amb}\) consists of compatible
+systems
+\[
+ \bigl(
+ \{b,b^\pm,M^\pm,D^0,H^0,\kappa\},
+ \{E_9,J_9,P^{\rm term},Q^{\rm micro},Q^{\rm shell}\},
+ \{\Gamma,L,E^{\rm term},G,U\}
+ \bigr)
+\]
+with all the previous identities. The raw assembler is
+\begin{equation}\label{eq:pdfv2-sol-assembler}
+ \begin{aligned}
+ a_{\rm sol}:X_{\chi,{\rm sol}}&\longrightarrow
+ \mathscr M_{\rm sol}^{\rm amb},\\
+ a_{\rm sol}(\chi(x),x,Dx)&:=
+ \bigl(
+ \{b,b^\pm,M^\pm,D^0,H^0,\kappa\}_x,
+ \{E_9,J_9,P,Q\}_x,
+ \{\Gamma,L,E^{\rm term},G,U\}_x
+ \bigr).
+ \end{aligned}
+\end{equation}
+The macrostructure preserves its antecedent through
+\begin{equation}\label{eq:pdfv2-sol-macro-graph}
+ \mathfrak M_{\rm sol}:=\operatorname{Graph}(a_{\rm sol}),
+ \qquad
+ \mathcal A_{\rm sol}(z):=(z,a_{\rm sol}z).
+\end{equation}
+
+Let \(\mathscr Y_{\rm sol}^{\rm int}\) be the type of certificates formed by
+the identities
+\begin{equation}\label{eq:pdfv2-sol-certificate-list}
+ \begin{gathered}
+ b=b^+-b^-,\qquad |b|=b^++b^-,\\
+ E_9J_9=I,\qquad J_9E_9=P_9,\\
+ E_9b_f^\pm=b_c^\pm+\kappa,\qquad\kappa\geq0,\\
+ I=P^{\rm term}+Q^{\rm micro}+Q^{\rm shell},
+ \qquad Q^{\rm micro}Q^{\rm shell}=0,\\
+ U_{j;J}=L_j^*L_j+\Gamma_j^*U_{j+1;J}\Gamma_j,\\
+ \langle U_{j;J}\xi,\xi\rangle
+ =\|E_J^{\rm term}\Gamma_{j:J}\xi\|^2
+  +\sum_{n=j}^{J-1}\|L_n\Gamma_{j:n}\xi\|^2,
+ \end{gathered}
+\end{equation}
+together with the naturality of all arrows. The raw publisher
+\begin{equation}\label{eq:pdfv2-sol-publisher}
+ p_{\rm sol}^{\rm raw}:\mathfrak M_{\rm sol}
+ \longrightarrow\mathscr Y_{\rm sol}^{\rm int}
+\end{equation}
+publish that certificate without removing the macroobject. Finally,
+\begin{equation}\label{eq:pdfv2-sol-output-graph}
+ \mathcal C_{\rm sol}^{\rm HMT}
+ :=\operatorname{Graph}(p_{\rm sol}^{\rm raw}),
+ \qquad
+ \mathcal P_{\rm sol}(m):=(m,p_{\rm sol}^{\rm raw}m).
+\end{equation}
+
+\section{Solenoidal Generation Internal Theorem}
+\label{sec:pdfv2-sol-theorem}
+
+\begin{theorem}[Internal generation of the balance macrostructure]
+\label{thm:pdfv2-sol-internal-generation}
+For every \(x\in\mathcal C_{\rm cont}^{\rm sol}\), the chain
+\[
+ \mathcal C_{\rm cont}^{\rm sol}
+ \xrightarrow{\operatorname{Res}_{\rm sol}}
+ \mathcal G_{\rm sol}
+ \xrightarrow{\operatorname{pr}_{X,{\rm sol}}}
+ X_{\chi,{\rm sol}}
+ \xrightarrow{\mathcal A_{\rm sol}}
+ \mathfrak M_{\rm sol}
+ \xrightarrow{\mathcal P_{\rm sol}}
+ \mathcal C_{\rm sol}^{\rm HMT}
+\]
+naturally constructs a macrostructure containing both memories, the cancellation carry, the orthogonal micro/shell separation, the complete row of losses, the future column, the full-history terminal object, the Gram matrix, and the telescoping structure. The thirteen coordinates of the continuum can be recovered by successive projections from any point in the chain.
+\end{theorem}
+
+\begin{proof}
+The identities \eqref{eq:pdfv2-sol-bpm-identidades} and
+\eqref{eq:pdfv2-sol-dh-diferencias} are obtained directly from the
+positive and negative decomposition of the integer increment; therefore the
+memories are not added data.  The formulas
+\eqref{eq:pdfv2-sol-j9}--\eqref{eq:pdfv2-sol-e9}, together with the projective
+measure, prove \(E_9J_9=I\), \(J_9^*=E_9\), and that \(P_9\) is an
+orthogonal projector.
+
+The triangle inequality gives
+\(E_9|b_f|\geq|E_9b_f|=|b_c|\), so that
+\(\kappa\geq0\).  Substituting
+\(b^\pm=(|b|\pm b)/2\) proves
+\eqref{eq:pdfv2-sol-jensen-plus} and
+\eqref{eq:pdfv2-sol-jensen-minus} without an additional hypothesis.
+
+The tensorial definitions
+\eqref{eq:pdfv2-sol-pterm}--\eqref{eq:pdfv2-sol-qshell} prove that
+\(P^{\rm term}\), \(Q^{\rm micro}\), and \(Q^{\rm shell}\) are orthogonal and
+sum to the identity. Consequently, row \(L_j\) counts each sector only
+once.
+
+The definition \eqref{eq:pdfv2-sol-g-column} orthogonally separates the terminal
+and the losses of each level.  Separating the first summand of losses produces
+\eqref{eq:pdfv2-sol-g-recursion}.  Taking the adjoint and composing proves the
+Stein identity \eqref{eq:pdfv2-sol-stein}; iterating it proves
+\eqref{eq:pdfv2-sol-telescopia-operatorial} and
+\eqref{eq:pdfv2-sol-telescopia-normas}.  Every term is a squared norm,
+so the opposite sign cannot appear.
+
+Compatibility of cylinder truncation, expectation, projections, and
+extensions \(\Gamma\) yields the naturality
+\eqref{eq:pdfv2-sol-naturality-d}. Finally,
+\(\mathcal G_{\rm sol}\), \(\mathfrak M_{\rm sol}\), and
+\(\mathcal C_{\rm sol}^{\rm HMT}\) are graphs, and
+\(X_{\chi,{\rm sol}}\) is a dependent object that explicitly preserves
+its antecedent. The first projection at each stage recovers the preceding
+stage. Thus no composition erases history, memory, multisection,
+terminal, or reader.
+\end{proof}
+
+\section{Probative origin and forgers}
+\label{sec:pdfv2-sol-provenance-falsifiers}
+
+\paragraph{Result recovered.}
+The signed increment with carry, the separation \(b=b^+-b^-\), the memories
+\(M^\pm,D^0,H^0\), the pair \(E_9,J_9\), the Jensen carry \(\kappa\), cylinder
+extension, the loss row, the terminal, the Gram matrix, Stein, and telescoping
+belong to the already constructed architecture.
+
+\paragraph{New Formalization.}
+Explicit formalizations of that architecture are the typing prior to every
+external evaluation, the factorization
+\(\mathscr H^{\rm depth}\widehat\otimes\mathscr H^{\rm res}\), the orthogonal
+separation preventing double counting, the free terminal on histories with
+thirteen coordinates, and the four nonablative graph packagings.
+
+\begin{criterion}[Internal falsifiers of the branch \(\mathrm{sol}\)]
+\label{crit:pdfv2-sol-falsifiers}
+The construction fails if any of the following occurs:
+\begin{enumerate}
+ \item \(b\neq b^+-b^-\) o \(|b|\neq b^++b^-\);
+ \item \(E_9J_9\neq I\), the measure is not projective or \(P_9\) is not a
+       projector;
+ \item \(\kappa<0\) or fail
+       \(E_9b_f^\pm=b_c^\pm+\kappa\);
+ \item \(Q^{\rm micro}Q^{\rm shell}\neq0\), or the same sector appears in
+       both summands of row \(L\);
+ \item one of \(b^+,b^-,\kappa,Q^{\rm micro},Q^{\rm shell}\) is omitted or
+       counted twice;
+ \item the terminal preserves only the visible value and not the
+history with its thirteen coordinates;
+ \item the Stein identity fails or the telescoping contains a sign
+       contrary to a sum of squares;
+ \item an extension does not commute with \(E_9,J_9,L,G,U\);
+ \item the multisection of continuations is replaced with a retrospectively chosen prolongation;
+ \item any of the thirteen coordinates is omitted.
+\end{enumerate}
+In the last case, the binding diagnosis is: \emph{object replaced;
+conclusion not transferable}.
+\end{criterion}
+
+\begin{warningbox}
+This chapter concludes only the internal construction of
+\(\mathcal C_{\rm sol}^{\rm HMT}\). It contains no classical differential
+equation, classical initial data, map from external data, or
+conclusion concerning an external problem. Those intertwiners belong to another
+document and do not govern the existence of this macrostructure.
+\end{warningbox}
+\fi

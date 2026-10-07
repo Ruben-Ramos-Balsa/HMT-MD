@@ -1,0 +1,178 @@
+\section{Reconstrucción de la geometría positiva desde la memoria nonádica}
+\label{sec:memory}
+
+La extracción dodecafásica conserva más información que una dirección de
+deformación. La dirección selecciona un movimiento; el registro completo
+determina también la partición sobre la que ese movimiento actúa. La
+recuperación del registro a partir de sus memorias permite formular esta
+distinción como un teorema de reconstrucción. El resultado procede de la
+composición de las compresiones nonádicas del corpus \cite{hmtX}; su aplicación
+geométrica conserva la carga uniforme y los complementos de ambas etapas.
+
+En esta sección se numeran las coordenadas de cero a once. Sea
+\(\mathsf S:\RR^{12}\to\RR^{12}\) el desplazamiento
+\((\mathsf Sx)_i=x_{i+1}\), con índices módulo doce. En la coordenatización euclídea
+posterior al estado enriquecido, definimos
+\[
+ T_j=\frac{8I+\mathsf S^j}{9},\qquad
+ D_j=\frac{\sqrt8}{9}(\mathsf S^j-I),\qquad j\in\{3,4\}.
+\]
+El coeficiente ocho cuenta las posiciones ordinarias de la coordenatización nonádica;
+la novena posición contiene el transporte. La ortogonalidad del desplazamiento
+implica por multiplicación directa
+\[
+ T_j^*T_j+D_j^*D_j=I.
+\]
+La primera memoria es el complemento de la primera compresión; la segunda
+se toma sobre el estado que ya atravesó esa compresión. Por tanto,
+\begin{equation}
+ q=\mathbf1^*K,\qquad m_0=D_3K,\qquad m_1=D_4T_3K,
+ \qquad MK=(m_0,m_1).
+ \label{eq:mem-data}
+\end{equation}
+El orden de la composición forma parte del objeto. La aplicación
+\(M:\RR^{12}\to\RR^{24}\) conserva dos observaciones correlacionadas,
+producidas por una misma trayectoria lineal.
+
+\begin{theorem}[Inversión exacta de la representación de memoria]
+\label{thm:memory-inversion}
+La aplicación \(K\mapsto(q,MK)\) es un isomorfismo lineal entre
+\(\RR^{12}\) y \(\RR\times\operatorname{im}M\). Su inversa se obtiene
+mediante
+\begin{align}
+ T_3^{-1}&=\frac{512I-64\mathsf S^3+8\mathsf S^6-\mathsf S^9}{455},
+ \label{eq:memory-T-inverse}\\
+ b&=-\frac9{\sqrt8}m_0,\qquad
+ c=-\frac9{\sqrt8}T_3^{-1}m_1,\qquad w_i=c_i-b_{i+1},\notag\\
+ B_0&=0,\qquad B_i=\sum_{j=0}^{i-1}w_j,\qquad
+ K_i=\frac{q+\sum_{j=0}^{11}B_j}{12}-B_i.
+ \label{eq:memory-inverse}
+\end{align}
+\end{theorem}
+\begin{proof}
+Escribiendo \(X=\mathsf S^3\), se tiene \(X^4=I\) y
+\((8I+X)(512I-64X+8X^2-X^3)=4095I\). Dividir por nueve
+prueba \eqref{eq:memory-T-inverse}. Todos los operadores utilizados son
+polinomios del mismo desplazamiento y conmutan. Así,
+\[
+ b=(I-\mathsf S^3)K,\qquad c=(I-\mathsf S^4)K,
+ \qquad w_i=K_i-K_{i+1}.
+\]
+La suma telescópica da \(B_i=K_0-K_i\); sumar esta igualdad sobre
+las doce posiciones proporciona \eqref{eq:memory-inverse}. Además,
+\(MK=0\) equivale a invariancia bajo \(\mathsf S^3\) y
+\(\mathsf S^4\). Como \(\mathsf S=\mathsf S^4(\mathsf S^3)^{-1}\),
+el núcleo es exactamente \(\RR\mathbf1\). La carga recupera esa
+componente y demuestra la inyectividad. La descomposición
+\(K=(q/12)\mathbf1+K^\perp\) prueba la sobreyectividad sobre el
+codominio declarado.
+\end{proof}
+
+La forma geométrica queda determinada por la información que una lectura
+comprimida parecía haber desplazado. El complemento vectorial contiene las
+diferencias entre posiciones; la carga contiene la componente común. Su
+reunión reconstruye las doce coordenadas antes de normalizarlas como
+longitudes. Esta afirmación relaciona operaciones efectivas: compresión,
+archivo de complementos e inversión. La conservación de una norma expresa
+una propiedad distinta y, por sí sola, más débil que esa recuperabilidad.
+
+\subsection{Cono de memoria compatible y estabilidad de los menores}
+
+Sea \(L\) la pseudoinversa de \(M\), con imagen
+\(\mathbf1^\perp\). Equivalentemente,
+\[
+ L=\left(M^*M\big|_{\mathbf1^\perp}\right)^{-1}M^*,
+ \qquad LM=P_{11},\qquad K=\frac q{12}\mathbf1+Lm.
+\]
+La notación de inversa restringida se interpreta como un operador que toma
+valores en \(\mathbf1^\perp\). La positividad estricta del registro
+equivale a pertenecer al cono abierto
+\begin{equation}
+ \mathcal M_+=\left\{(q,m)\in\RR\times\operatorname{im}M:
+ \frac q{12}\mathbf1+Lm>0\right\}.
+ \label{eq:memory-positive-cone}
+\end{equation}
+Las desigualdades son coordenadas. El cono tiene dimensión doce; su sección
+de carga positiva fija tiene dimensión once. En particular, las veinticuatro
+entradas de las dos memorias satisfacen relaciones de compatibilidad.
+
+\begin{proposition}[Constante óptima de reconstrucción en norma euclídea]
+\label{prop:memory-stability}
+Se cumple \(\|L\|=9/4\). Para perturbaciones arbitrarias de las observaciones,
+\begin{equation}
+ \|\delta K\|^2\leq\frac{|\delta q|^2}{12}
+ +\frac{81}{16}\bigl(\|\delta m_0\|^2+\|\delta m_1\|^2\bigr).
+ \label{eq:memory-stability}
+\end{equation}
+\end{proposition}
+\begin{proof}
+La base de Fourier diagonaliza \(\mathsf S\). Si \(z^{12}=1\),
+el autovalor de \(M^*M\) en el modo correspondiente es
+\[
+ \lambda(z)=\frac8{81}|z^3-1|^2
+ +\frac8{81}|z^4-1|^2\left|\frac{8+z^3}{9}\right|^2.
+\]
+Evaluar los doce modos da
+\[
+ \operatorname{Spec}(M^*M)=
+ \left\{0^{[1]},(16/81)^{[2]},(8/27)^{[2]},(32/81)^{[1]},
+ (952/2187)^{[4]},(1256/2187)^{[2]}\right\}.
+\]
+Los exponentes entre corchetes indican multiplicidad. El menor autovalor
+positivo es \(16/81\), de donde \(\|L\|=9/4\). La componente uniforme
+\((\delta q/12)\mathbf1\) es ortogonal a \(L\delta m\); la identidad
+pitagórica y la norma de \(L\) producen \eqref{eq:memory-stability}.
+\end{proof}
+
+Para pasar a la geometría intervalar recuperamos la numeración de uno a doce
+y ponemos \(d_j=K_j/q\), \(t_0=0\),
+\(t_j=\sum_{r=1}^j d_r\). El cono \eqref{eq:memory-positive-cone}
+determina exactamente \(0=t_0<t_1<\cdots<t_{12}=1\), y por tanto
+\[
+ \Delta_{ij}=t_j-t_i=\sum_{i<r\leq j}d_r>0\qquad(i<j).
+\]
+Son los menores de la matriz de caminos que se construye en la sección
+\ref{app:network-cluster}. Su dependencia respecto de la memoria es
+explícita. Los puntos \((t_j,t_j^2)\) quedan igualmente determinados y
+producen la realización amplituhedral de rango uno desarrollada después.
+
+Si la raíz del miembro derecho de \eqref{eq:memory-stability} es menor que
+\(\min_j K_j\), la reconstrucción perturbada permanece en el cono positivo.
+Para el registro expresado, \(\min_jK_j=58\); a carga fija basta
+\[
+ \sqrt{\|\delta m_0\|^2+\|\delta m_1\|^2}<\frac{232}{9}.
+\]
+La cota conserva el orden de los vértices y el signo de todos los menores
+ordenados. Describe estabilidad de esta coordenatización matemática, con la
+normalización indicada. Para observaciones fuera de \(\operatorname{im}M\),
+la reconstrucción utiliza la proyección \(MLm\); el residuo
+\((I-ML)m\) se conserva separadamente cuando interesa recuperar la
+observación íntegra.
+
+\subsection{Recuperación nodal y reducción a la frontera}
+
+La partición obtenida tiene también una realización cuadrática:
+\[
+ \mathcal E_d(f)=\sum_{j=1}^{12}\frac{|f_j-f_{j-1}|^2}{d_j}
+ =f^*L_df.
+\]
+El laplaciano nodal recupera cada longitud por
+\(d_j=-1/(L_d)_{j-1,j}\). Si se conservan únicamente los extremos
+globales, la minimización elimina los nodos interiores y produce, en
+cambio, la matriz \(\left(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\right)\),
+puesto que \(\sum_jd_j=1\). El lector nodal distingue la forma intervalar;
+el lector de dos extremos sólo observa su longitud total.
+
+La demostración de esta eliminación se formula íntegramente en la sección
+energética: la prolongación afín minimizante \(Hf\) y el detalle \(z\),
+nulo en los nodos antiguos, satisfacen
+\[
+ \mathcal E_{\widetilde d}(Hf+z)
+ =\mathcal E_d(f)+\mathcal E_{\widetilde d}(z).
+\]
+El segundo término es no negativo y se anula exactamente para el detalle
+nulo. La lectura efectiva conserva la energía mínima; el par \((f,z)\)
+conserva además la configuración refinada. Así, positividad de menores,
+positividad energética y recuperabilidad de memoria se relacionan mediante
+mapas definidos sobre la misma partición, manteniendo sus respectivos
+espacios de llegada.

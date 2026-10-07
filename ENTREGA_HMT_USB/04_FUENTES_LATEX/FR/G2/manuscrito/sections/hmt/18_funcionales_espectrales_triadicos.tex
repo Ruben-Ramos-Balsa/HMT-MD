@@ -1,0 +1,1012 @@
+\chapter{Construction analytique des fonctionnelles de la tour triadique}
+\label{chap:funcionales-espectrales-triadicos}
+
+La synthèse précédente a situé les constantes spectrales au sein de la
+tour triadique. Ce bloc contient leur construction analytique primaire :
+suite d'opérateurs autoadjoints sur des cycles d'ordre \(3^m\), limite de
+traces de chaleur et transformée de Mellin. Les constantes classiques apparaissent
+comme évaluations, parties finies ou dérivées de la fonctionnelle méromorphe
+résultante, non comme des préfixes reconnus dans un catalogue.
+
+La normalisation de l'opérateur $D_m$ contient explicitement $\pi$ dans l'échelle
+qui relie le laplacien discret au noyau de chaleur gaussien. Cette
+sous-section constitue donc une extension analytique de la branche
+archimédienne déjà construite. Les constantes spectrales ultérieures s'obtiennent
+simultanément à partir de la fonctionnelle résultante, avec cette normalisation pour hypothèse
+de départ.
+
+\section{Limites inductives et échelle de raffinement}
+
+Le prolongement spectral exige de distinguer deux niveaux analytiques. Le
+premier correspond à des familles bornées et compatibles ; le second, à des
+opérateurs non bornés, pour lesquels l'entrelacement algébrique ne
+résout pas à lui seul les problèmes de domaine.
+
+\begin{theorem}[Limite inductive bornée]
+\label{pf84:E03-06}
+Soient \(J_m:\mathcal H_m\to\mathcal H_{m+1}\) des isométries et
+\(A_m\in\mathcal B(\mathcal H_m)\) des opérateurs autoadjoints tels que
+\[
+ A_{m+1}J_m=J_mA_m,
+ \qquad
+ \sup_m\lVert A_m\rVert<\infty.
+\]
+Il existe un unique opérateur borné autoadjoint \(A\) sur
+\(\mathcal H_\infty=\varinjlim(\mathcal H_m,J_m)\) dont la restriction à chaque
+niveau est \(A_m\).
+\end{theorem}
+
+\begin{proof}
+Sur l'union algébrique dense, on définit
+\[
+ A[J_{m,\infty}\xi]:=J_{m,\infty}A_m\xi.
+\]
+L'entrelacement rend la définition indépendante du représentant. La
+borne uniforme permet de prolonger \(A\) par continuité à
+\(\mathcal H_\infty\) ; la symétrie sur le sous-espace dense et le caractère borné
+impliquent son autoadjonction.
+\end{proof}
+
+\begin{remark}[Contrôle pour les opérateurs non bornés]
+\label{pf84:E03-07}
+Si les \(A_m\) ne sont pas bornés, l'identité
+\(A_{m+1}J_m=J_mA_m\) ne définit qu'une action sur une union de domaines.
+Pour obtenir un opérateur fermé ou autoadjoint, il faut déclarer les domaines
+transportés, prouver la fermabilité et contrôler les indices de
+déficience, ou bien démontrer l'autoadjonction essentielle sur un cœur commun
+compatible. Omettre ces obligations constitue une erreur de type, non une
+abréviation de la preuve.
+\end{remark}
+
+Soit maintenant \(\mathcal S_\infty\) un ensemble non vide de sections
+survivantes compatibles et soit \(\mathcal P_m\) l'ensemble fini de leurs
+préfixes de longueur \(m\). Nous écrivons
+\[
+ \mathcal H_m:=\ell^2(\mathcal P_m),
+ \qquad
+ E_m(\gamma,\gamma')=
+ \begin{cases}
+ 1,&\gamma'\text{ prolonge }\gamma,\\
+ 0,&\text{sinon},
+ \end{cases}
+\]
+et
+\[
+ d_m(\gamma):=
+ \#\{\gamma'\in\mathcal P_{m+1}:\gamma'\mapsto\gamma\},
+ \qquad
+ D_m^{\deg}:=E_mE_m^*=\operatorname{diag}(d_m(\gamma)).
+\]
+Nous nous restreignons au sous-espace vivant \(d_m(\gamma)>0\), et chaque préfixe de
+niveau \(m+1\) possède un parent unique.
+
+\begin{theorem}[Isométrie normalisée de prolongement]
+\label{pf84:C01}
+L'opérateur
+\[
+ J_m:=E_m^*(D_m^{\deg})^{-1/2}:
+ \mathcal H_m\longrightarrow\mathcal H_{m+1}
+\]
+est une isométrie, et
+\[
+ J_me_\gamma=
+ \frac1{\sqrt{d_m(\gamma)}}
+ \sum_{\gamma'\mapsto\gamma}e_{\gamma'}.
+\]
+\end{theorem}
+
+\begin{proof}
+L'unicité du parent donne
+\[
+ J_m^*J_m
+ =(D_m^{\deg})^{-1/2}E_mE_m^*(D_m^{\deg})^{-1/2}=I.
+\]
+La formule sur \(e_\gamma\) s'obtient en développant la colonne
+correspondante de \(E_m^*\).
+\end{proof}
+
+En posant
+\[
+ \mathcal K_m:=\mathcal H_{m+1}\ominus J_m\mathcal H_m,
+ \qquad
+ \mathcal H_{\mathrm{surv}}
+ \cong\mathcal H_0\oplus\bigoplus_{m\ge0}\mathcal K_m,
+\]
+on définit l'opérateur de raffinement
+\[
+ \mathcal R|_{\mathcal H_0}=0,
+ \qquad
+ \mathcal R|_{\mathcal K_m}=3^{m+1}I_{\mathcal K_m},
+\]
+de domaine maximal
+\[
+ \Dom(\mathcal R)=
+ \mathcal H_0\oplus
+ \left\{(\xi_m)_{m\ge0}:
+ \sum_{m\ge0}3^{2m+2}\lVert\xi_m\rVert^2<\infty\right\}.
+\]
+
+\begin{theorem}[Opérateur de raffinement]
+\label{pf84:C02}
+Si chaque \(\mathcal K_m\) est de dimension finie, \(\mathcal R\) est positif,
+autoadjoint et à résolvante compacte. Son spectre mesure la profondeur de
+raffinement ; il ne constitue pas un spectre de nombres premiers ni de zéros.
+\end{theorem}
+
+\begin{proof}
+La décomposition orthogonale réduit \(\mathcal R\) à des blocs scalaires réels
+sur son domaine maximal, ce qui prouve la positivité et l'autoadjonction. Les
+valeurs propres \(3^{m+1}\) s'échappent à l'infini et leurs multiplicités sont finies ;
+la résolvante est donc compacte. Un bloc de dimension infinie à
+valeur propre bornée réfuterait cette dernière conclusion.
+\end{proof}
+
+\section{Opérateurs entier, premier et orbital}
+
+Soit \(\mathscr W_{\mathrm{bal}}\) l'ensemble des mots ternaires
+équilibrés réduit au moyen du théorème
+\cref{pf84:C03}. Sur \(\ell^2(\mathscr W_{\mathrm{bal}})\), l'opérateur
+\[
+ Be_w=b(w)e_w
+\]
+est pris sur son domaine maximal. Sa restriction au sous-espace des entiers
+positifs est notée \(Q\).
+
+\begin{theorem}[Opérateurs entier et positif]
+\label{pf84:C04}
+L'opérateur \(B\) est autoadjoint, possède un spectre simple \(\ZZ\) et une
+résolvante compacte. L'opérateur \(Q\) possède un spectre simple
+\(\NN_{\ge1}\) et une résolvante compacte.
+\end{theorem}
+
+\begin{proof}
+La bijection de \cref{pf84:C03} énumère chaque entier exactement une fois. Un
+opérateur diagonal réel sur son domaine maximal est autoadjoint ; comme ses entrées
+s'échappent à l'infini hors des ensembles finis, sa résolvante est compacte. La
+restriction positive conserve ces propriétés.
+\end{proof}
+
+La preuve classique omise de l'inversion thêta, du prolongement et de l'équation
+fonctionnelle est fusionnée une seule fois avec la réalisation triadique déjà construite
+dans \cref{pf84:C05}. On y fixe littéralement
+\(\Theta_B=1+2\Theta_+\) et \(Z=\mathcal Z_3\) ; ce bloc ne
+définit donc pas une seconde origine de \(\zeta\).
+
+Soit \(\mathbb P\) l'ensemble des nombres premiers ordinaires,
+\(\mathfrak h_{\mathbb P}:=\ell^2(\mathbb P)\) et
+\[
+ H_{\mathbb P}e_p=(\log p)e_p.
+\]
+Dans l'espace de Fock bosonique \(\Gamma_s(\mathfrak h_{\mathbb P})\), les occupations
+\((k_p)_p\) sont à support fini.
+
+\begin{theorem}[Représentation de Fock de la factorisation]
+\label{pf84:C08}
+L'application sur les bases
+\[
+ U_F\lvert(k_p)_p\rangle=e_{\prod_pp^{k_p}}
+\]
+se prolonge en un opérateur unitaire
+\[
+ U_F:\Gamma_s(\mathfrak h_{\mathbb P})
+ \longrightarrow\ell^2(\NN_{\ge1})
+\]
+et satisfait
+\[
+ U_F\,d\Gamma(H_{\mathbb P})\,U_F^*=\log Q.
+\]
+\end{theorem}
+
+\begin{proof}
+La factorisation unique donne une bijection entre les occupations finies et les entiers
+positifs, donc une identification unitaire des bases orthonormales.
+De plus,
+\[
+ \sum_pk_p\log p=\log\!\left(\prod_pp^{k_p}\right),
+\]
+ce qui prouve l'entrelacement. La structure de départ explicite est le
+choix des modes premiers et de l'espace de Fock symétrique.
+\end{proof}
+
+Sur
+\[
+ \mathcal H_{\mathrm{orb}}
+ :=\ell^2\{(p,k,\varepsilon):
+ p\in\mathbb P,\ k\ge1,\ \varepsilon=\pm1\},
+\]
+nous définissons
+\[
+ D_{\mathrm{orb}}e_{p,k,\varepsilon}
+ =\varepsilon k\log p\,e_{p,k,\varepsilon},
+ \qquad
+ W_{\log}e_{p,k,\varepsilon}
+ =(\log p)e_{p,k,\varepsilon}.
+\]
+
+\begin{proposition}[Trace orbitale]
+\label{pf84:C09}
+L'opérateur \(D_{\mathrm{orb}}\) est autoadjoint et à résolvante compacte. Si
+\(f\in C_c(\RR)\) est bornée, alors
+\[
+ \Tr\!\left(
+ W_{\log}e^{-|D_{\mathrm{orb}}|/2}f(D_{\mathrm{orb}})
+ \right)
+ =
+ \sum_{p,k}(\log p)p^{-k/2}
+ \bigl[f(k\log p)+f(-k\log p)\bigr].
+\]
+\end{proposition}
+
+\begin{proof}
+La diagonale est réelle et ses longueurs s'échappent de tout compact avec
+multiplicité finie. Le support compact de \(f\) fait que le produit
+régulé est de rang fini ; sa trace est la somme des entrées diagonales.
+L'indice \(p\) parcourt ici les nombres premiers ordinaires. Le résultat réalise le
+côté premier classique, mais n'identifie pas \(D_{\mathrm{orb}}\) à un opérateur
+dual des zéros.
+\end{proof}
+
+\section{Forme complétée de Guinand--Weil}
+
+Nous fixons
+\[
+ \mathcal D_{\mathrm W}:=C_c^\infty(\RR),
+ \qquad
+ \widehat\psi(t)=\int_{\RR}\psi(x)e^{-itx}\,\dd x,
+ \qquad
+ \psi(x)=\frac1{2\pi}\int_{\RR}\widehat\psi(t)e^{itx}\,\dd t,
+\]
+et, pour \(\psi,\phi\in\mathcal D_{\mathrm W}\),
+\[
+ h_{\psi,\phi}(z)
+ :=\widehat\psi(z)\,
+ \overline{\widehat\phi(\overline z)}.
+\]
+Sur la droite réelle \(h_{\psi,\psi}=|\widehat\psi|^2\).
+
+\begin{definition}[Classe de test]
+\label{pf84:E01}
+La classe de test est \(\mathcal D_{\mathrm W}\), stable par dérivation,
+réflexion et translation. On utilise l'inverse
+\[
+ \check h(x)=\frac1{2\pi}\int_{\RR}h(t)e^{itx}\,\dd t.
+\]
+La régularité et le support compact fournissent une décroissance rapide dans les bandes
+et un support compact pour \(\check h\), conditions qui garantissent la
+convergence des blocs suivants.
+\end{definition}
+
+Sea \(\psi_\Gamma=\Gamma'/\Gamma\). Definimos
+\[
+ \Irr_\#:=
+ \left\{\operatorname{ev}_9(w):
+ w\in\mathscr W_9^+,\ 
+ P_{\Irr,\#}e_w=e_w\right\}.
+\]
+Par \cref{pf84:C07}, cette image coïncide avec les nombres premiers ordinaires ; elle n'est
+utilisée ici que pour typer l'indice du bloc orbital, sans répéter cette
+preuve.
+\begin{align}
+ \mathcal P(h)&:=h(i/2)+h(-i/2),\\
+ \mathcal G(h)&:=-\log\pi\,\check h(0)
+ +\frac1{2\pi}\int_{\RR}h(t)
+ \Re\psi_\Gamma\!\left(\frac14+\frac{it}{2}\right)\dd t,\\
+ \mathcal O_\#(\check h)&:=
+ \sum_{p\in\Irr_\#}\sum_{k\ge1}
+ (\log p)p^{-k/2}
+ \bigl[\check h(k\log p)+\check h(-k\log p)\bigr].
+\end{align}
+
+\begin{definition}[Fonctionnelle complétée]
+\label{pf84:E02}
+Pour \(h=h_{\psi,\phi}\), on fixe
+\[
+ \mathcal W(h):=\mathcal P(h)+\mathcal G(h)
+ -\mathcal O_\#(\check h).
+\]
+Le bloc orbital provient du sélecteur irréductible du
+\cref{chap:producto-nativo} ; les blocs polaire et gamma appartiennent à la
+complétion classique de zêta. Cette différence de provenance est conservée dans
+la notation et dans la preuve.
+\end{definition}
+
+\begin{theorem}[Formule explicite de Guinand--Weil]
+\label{pf84:E03} Pour \(\psi,\phi\in C_c^\infty(\RR)\) et \(h=h_{\psi,\phi}\),
+\[
+ \lim_{T\to\infty}
+ \sum_{\substack{\rho:\,\zeta(\rho)=0\\|\Im\rho|\le T}}
+ h\!\left(\frac{\rho-1/2}{i}\right)
+ =\mathcal W(h),
+\]
+où les zéros non triviaux sont comptés avec multiplicité et la limite est
+prise avec la symétrisation classique.
+\end{theorem}
+
+\begin{proof}
+Paley--Wiener place \(h_{\psi,\phi}\) dans la classe admissible de la formule
+explicite. Les pôles de
+\(\Lambda_\zeta(s)=\pi^{-s/2}\Gamma(s/2)\zeta(s)\) produisent
+\(\mathcal P\), le facteur archimédien produit \(\mathcal G\) et le produit
+d'Euler produit la somme sur les puissances premières. L'identification de cette
+dernière somme à \(\mathcal O_\#\) s'effectue uniquement au moyen de
+\cref{pf84:E04} ; ainsi, la preuve de primalité native n'est pas dupliquée.
+\end{proof}
+
+\begin{proposition}[Réindexation du bloc orbital]
+\label{pf84:E04}
+Si les irréductibles du produit natif coïncident exactement avec les nombres premiers
+ordinaires et que les poids
+\((\log p)p^{-k/2}\) et les deux orientations \(\pm k\log p\) sont conservés, alors
+\[
+ \mathcal O_\#(\check h)=\mathcal O(\check h).
+\]
+\end{proposition}
+
+\begin{proof}
+La bijection entre irréductibles natifs et nombres premiers réindexe la somme sans
+modifier les indices, les poids ni les arguments. Un irréductible non premier, un nombre premier
+absent ou un changement de poids réfuterait l'identité.
+\end{proof}
+
+\begin{remark}[Séparation méromorphe--entière]
+\label{pf84:E05}
+La fonction \(\Lambda_\zeta\) possède des pôles simples en \(0\) et \(1\), qui
+engendrent le bloc polaire. En revanche,
+\[
+ \xi(s)=\frac12s(s-1)\Lambda_\zeta(s)
+\]
+est entière : les facteurs \(s(s-1)\) annulent précisément ces pôles. On
+n'attribue donc pas de pôles en \(0\) ou \(1\) à \(\xi\).
+\end{remark}
+
+\begin{definition}[Forme hermitienne et préopérateur]
+\label{pf84:E06}
+On définit
+\[
+ \mathcal B_{\mathrm W}(\psi,\phi)
+ :=\mathcal W(h_{\psi,\phi}),
+ \qquad
+ \mathcal V_{\mathrm W}:=
+ \mathcal D_{\mathrm W}/\operatorname{Rad}\mathcal B_{\mathrm W},
+\]
+et, sur le quotient algébrique, la règle candidate
+\[
+ D_{\mathrm W,0}[\psi]:=[-i\psi'].
+\]
+On ne présuppose pas que \(\mathcal B_{\mathrm W}\) soit positive ni que
+\(\mathcal V_{\mathrm W}\) soit déjà un espace de Hilbert. La règle n'est
+bien définie qu'après avoir prouvé l'invariance du radical.
+\end{definition}
+
+\begin{theorem}[Symétrie algébrique et invariances]
+\label{pf84:E07}
+Le radical est invariant sous \(-i\,\dd/\dd x\) ;
+\(D_{\mathrm W,0}\) est bien défini et
+\(\mathcal B_{\mathrm W}\)-symétrique. Les translations
+\(T_a\psi(x)=\psi(x-a)\) préservent la forme et la réflexion
+\(J\psi(x)=\psi(-x)\) satisfait
+\[
+ JD_{\mathrm W,0}J=-D_{\mathrm W,0}.
+\]
+\end{theorem}
+
+\begin{proof}
+La convention de Fourier donne
+\[
+ h_{-i\psi',\phi}(z)=h_{\psi,-i\phi'}(z).
+\]
+L'identité vaut avant l'application de l'un quelconque des trois blocs de
+\(\mathcal W\), de sorte que la dérivée préserve le radical et que le
+préopérateur est symétrique. Les phases opposées des translations s'annulent
+dans \(h\) ; la réflexion change le signe de la dérivée et laisse invariants les
+blocs polaire, gamma et orbital. Cette symétrie algébrique n'équivaut pas encore
+à l'autoadjonction dans un Hilbert positif.
+\end{proof}
+
+\section{Géométrie locale de la droite critique}
+
+\begin{lemma}[Coordonnée de Möbius de la droite critique]
+\label{pf84:RH-01}
+Pour \(s\in\CC\setminus\{0,1\}\), soit
+\[
+ \tau(s):=i\frac{s-1}{s}.
+\]
+Avec \(F(s)=1-s\) et
+\(C(s)=\overline s\),
+\[
+ \tau(Fs)=-\frac1{\tau(s)},
+ \qquad
+ \tau(Cs)=-\overline{\tau(s)},
+\]
+et
+\[
+ \tau(Fs)=\tau(Cs)
+ \iff |\tau(s)|=1
+ \iff \Re s=\frac12.
+\]
+\end{lemma}
+
+\begin{proof}
+Les deux identités s'obtiennent par substitution directe. Leur égalité
+équivaut à \(\tau(s)^{-1}=\overline{\tau(s)}\), c'est-à-dire
+\(|\tau(s)|=1\) ; développer cette dernière condition donne
+\(\Re s=1/2\). Pour les zéros de zêta, les symétries
+fonctionnelle et conjuguée sont en outre requises. L'équivalence paramètre la droite ; elle ne place pas à elle
+seule les zéros sur celle-ci.
+\end{proof}
+
+\begin{lemma}[Signe local de Hermite--Biehler]
+\label{pf84:RH-04}
+Soit \(A\) une fonction entière réelle ayant un zéro réel simple \(a\). Pour
+\(z=a+iy\), \(y>0\) suffisamment petit,
+\[
+|A(z)-iA'(z)|^2-|A(z)+iA'(z)|^2
+ =-4A'(a)^2y+O(y^2)<0.
+\]
+La convention locale associée à \(A\) est
+\[
+ E_A:=A+iA'.
+\]
+Ce n'est qu'en spécialisant \(A=\Xi\) et en supposant en outre que \(a\) est un zéro réel
+simple de \(\Xi\) que l'on obtient
+\[
+ E_\Xi=\Xi+i\Xi'.
+\]
+\end{lemma}
+
+\begin{proof}
+On développe \(A\) et \(A'\) en séries de Taylor autour de \(a\), en utilisant
+\(A(a)=0\) et \(A'(a)\ne0\), et l'on conserve les termes du premier ordre en
+\(y\). Le résultat est strictement local : il ne démontre pas que \(E_A\) possède la
+propriété globale de Hermite--Biehler.
+\end{proof}
+
+\begin{proposition}[Obstruction par les lois de comptage]
+\label{pf84:E14}
+Soit
+\[
+ N_A(T):=\Tr\mathbf1_{[-T,T]}(A).
+\]
+Les opérateurs \(Q\), \(B\), \(D_{\mathrm{orb}}\) et \(\mathcal R\) ne
+possèdent pas à eux seuls la loi de comptage exigée d'un éventuel opérateur dual
+des zéros.
+\end{proposition}
+
+\begin{proof}
+Para \(T\ge1\),
+\[
+ N_Q(T)=\lfloor T\rfloor,
+ \qquad
+ N_B(T)=2\lfloor T\rfloor+1.
+\]
+Le théorème des nombres premiers donne
+\[
+ N_{D_{\mathrm{orb}}}(T)
+ =2\sum_{p\le e^T}\left\lfloor\frac{T}{\log p}\right\rfloor
+ \ge2\pi(e^T)\sim\frac{2e^T}{T}.
+\]
+Enfin, \(N_{\mathcal R}(T)\) est constante sur chaque intervalle
+multiplicatif \([3^m,3^{m+1})\), car \(\mathcal R\) n'a que des niveaux
+\(3^{m+1}\) de multiplicités finies.
+
+Pour
+\(\Xi(z)=\xi(1/2+iz)\), l'équation fonctionnelle implique
+\(\Xi(-z)=\Xi(z)\) ; les zéros \(\pm\gamma\) ont la même multiplicité et
+\[
+ N_{\mathrm{sym}}(T)=2N_+(T)+O(1).
+\]
+Par conséquent, la convention bilatérale exige
+\[
+ N_{\mathrm{sym}}(T)\sim\frac{T}{\pi}\log T,
+\]
+tandis que la convention unilatérale équivalente, sous cette symétrie et cet appariement des
+multiplicités, exige
+\[
+ N_+(T)\sim\frac{T}{2\pi}\log T.
+\]
+Aucune des quatre fonctions précédentes n'a cette asymptotique.
+\end{proof}
+
+\section{Laplaciens sur les cycles d'ordre \texorpdfstring{$3^m$}{puissances de trois}}
+
+Pour $m\geq 1$, soient
+
+\[
+ N_m=3^m,
+ \qquad
+ C_m=\ZZ/N_m\ZZ,
+\]
+
+et considérons le laplacien combinatoire
+
+\[
+ (\Delta_m f)(j)=2f(j)-f(j+1)-f(j-1),
+ \qquad f\in\ell^2(C_m).
+\]
+
+Les caractères
+
+\[
+ e_{m,n}(j)=N_m^{-1/2}
+ \exp\!\left(\frac{2\pi i n j}{N_m}\right),
+ \qquad n\in C_m,
+\]
+
+forment une base orthonormale et satisfont
+
+\[
+ \Delta_m e_{m,n}
+ =4\sin^2\!\left(\frac{\pi n}{N_m}\right)e_{m,n}.
+\]
+
+Comme $N_m$ est impair, chaque classe de $C_m$ possède un unique représentant
+$\widetilde n$ avec
+
+\[
+ -\frac{N_m-1}{2}\leq\widetilde n\leq\frac{N_m-1}{2}.
+\]
+
+Nous définissons l'opérateur autoadjoint $D_m$ par
+
+\begin{equation}
+ D_m e_{m,n}
+ =\frac{N_m}{\sqrt\pi}
+ \sin\!\left(\frac{\pi\widetilde n}{N_m}\right)e_{m,n}.
+ \label{eq:operador-espectral-Dm}
+\end{equation}
+
+Alors
+
+\begin{equation}
+ D_m^2=\frac{N_m^2}{4\pi}\,\Delta_m.
+ \label{eq:Dm-laplaciano}
+\end{equation}
+
+Soit $P_0$ la projection orthogonale sur le caractère constant. Pour toute
+fonction paire bornée $F$ sur le spectre de $D_m$, nous introduisons la trace
+positive
+
+\begin{equation}
+ \operatorname{Tr}^{+}_m\!\bigl(F(D_m)\bigr)
+ :=\frac12\operatorname{Tr}
+ \!\left(F(D_m)P_0^{\perp}\right).
+ \label{eq:traza-positiva}
+\end{equation}
+
+Le facteur $1/2$ sélectionne une contribution par paire spectrale
+$\{n,-n\}$ ; l'élimination de $P_0$ exclut la valeur propre nulle.
+
+\begin{theorem}[Limite thêta des traces de chaleur]
+\label{thm:limite-theta-triadico}
+Pour tout $x>0$,
+\[
+ \lim_{m\to\infty}
+ \operatorname{Tr}^{+}_m\!\left(e^{-xD_m^2}\right)
+ =\Theta_+(x)
+ :=\sum_{n\geq1}e^{-\pi n^2x}.
+\]
+\end{theorem}
+
+\begin{proof}
+La trace bilatérale, une fois le mode constant retiré, est
+\[
+ \sum_{\substack{n\in C_m\\n\neq0}}
+ \exp\!\left[
+ -\frac{N_m^2x}{\pi}
+ \sin^2\!\left(\frac{\pi\widetilde n}{N_m}\right)
+ \right].
+\]
+Pour chaque entier fixé $n$, le terme converge vers $e^{-\pi n^2x}$. De plus,
+pour $|\widetilde n|\leq N_m/2$, l'inégalité
+$\sin y\geq 2y/\pi$, valable sur $0\leq y\leq\pi/2$, fournit une
+majorante gaussienne sommable et indépendante de $m$. La convergence
+dominée appliquée à la somme discrète implique
+\[
+ \lim_{m\to\infty}
+ \operatorname{Tr}\!\left(e^{-xD_m^2}P_0^\perp\right)
+ =\sum_{n\in\ZZ\setminus\{0\}}e^{-\pi n^2x}.
+\]
+La division par deux établie dans \eqref{eq:traza-positiva} conserve une
+contribution de chaque paire $\{n,-n\}$ et donne $\Theta_+(x)$.
+\end{proof}
+
+\section{Transformée thêta--Mellin}
+
+Pour $\Re s>1$, nous définissons
+
+\begin{equation}
+ \mathcal Z_{3}(s)
+ :=
+ \frac{\displaystyle
+ \int_0^\infty\Theta_+(x)x^{s/2-1}\,\dd x}
+ {\pi^{-s/2}\Gamma(s/2)}.
+ \label{eq:funcional-theta-mellin}
+\end{equation}
+
+La convergence absolue permet d'intégrer terme à terme. Comme
+
+\[
+ \int_0^\infty e^{-\pi n^2x}x^{s/2-1}\,\dd x
+ =\Gamma(s/2)(\pi n^2)^{-s/2},
+\]
+
+on obtient
+
+\begin{equation}
+ \mathcal Z_3(s)=\sum_{n\geq1}n^{-s}=\zeta(s),
+ \qquad \Re s>1.
+ \label{eq:Z3-zeta}
+\end{equation}
+
+L'égalité se prolonge méromorphiquement par le prolongement de la fonction
+zêta de Riemann \cite{Apostol1976}. Dans la suite, toutes les évaluations
+proviennent de \eqref{eq:funcional-theta-mellin}, de ses dérivées ou de la
+décomposition résiduelle de sa série de Dirichlet.
+
+\begin{theorem}[Inversion thêta et équation fonctionnelle]
+\label{pf84:C05}
+Avec la notation opératorielle précédente,
+\[
+ \Theta_B(x):=\Tr(e^{-\pi xB^2})
+ =1+2\Theta_+(x),
+ \qquad
+ Z(s):=\Tr(Q^{-s})=\mathcal Z_3(s)
+ \quad(\Re s>1).
+\]
+La sommation de Poisson et la transformée de Mellin produisent
+\[
+ \Theta_B(x)=x^{-1/2}\Theta_B(1/x)
+\]
+et le prolongement de
+\[
+ \xi(s)=\frac12s(s-1)\pi^{-s/2}\Gamma(s/2)Z(s),
+ \qquad
+ \xi(s)=\xi(1-s).
+\]
+\end{theorem}
+
+\begin{proof}
+L'égalité \(\Theta_B=1+2\Theta_+\) sépare le mode zéro et apparie
+\(\pm n\) ; l'identité \(Z=\mathcal Z_3\) est
+\eqref{eq:Z3-zeta}. La sommation de Poisson appliquée à la gaussienne donne
+l'inversion de \(\Theta_B\). Dans le demi-plan de convergence, l'intégration
+terme à terme fournit
+\[
+ \pi^{-s/2}\Gamma(s/2)Z(s)
+ =\int_0^\infty x^{s/2-1}\Theta_+(x)\,\dd x.
+\]
+En divisant l'intégrale en \((0,1)\) et \((1,\infty)\), en appliquant l'inversion
+thêta à la première partie et en séparant les deux pôles classiques, on obtient le
+prolongement et l'équation fonctionnelle. Cette unique preuve classique incorporée
+ne localise pas les zéros de \(\zeta\).
+\end{proof}
+
+\section{Décomposition résiduelle modulo trois}
+
+Pour $r\in\{0,1,2\}$, soit
+
+\begin{equation}
+ Z_r(s)=
+ \sum_{\substack{n\geq1\\n\equiv r\pmod3}}n^{-s}.
+ \label{eq:canales-residuales-Zr}
+\end{equation}
+
+En termes de la zêta de Hurwitz,
+
+\[
+ Z_0(s)=3^{-s}\zeta(s),
+ \qquad
+ Z_1(s)=3^{-s}\zeta\!\left(s,\frac13\right),
+ \qquad
+ Z_2(s)=3^{-s}\zeta\!\left(s,\frac23\right).
+\]
+
+Les trois termes ont pour résidu $1/3$ en $s=1$. Nous écrivons leurs
+développements de Laurent sous la forme
+
+\begin{equation}
+ Z_r(1+z)-\frac1{3z}=\sum_{n\geq0}c_{r,n}\,z^n,
+ \qquad
+ \zeta(1+z)-\frac1z=\sum_{n\geq0}a_n\,z^n.
+ \label{eq:coeficientes-Laurent-residuales}
+\end{equation}
+
+\begin{theorem}[Décomposition des coefficients de Laurent]
+\label{thm:descomposicion-laurent-triadica}
+Pour tout $n\geq0$,
+\[
+ a_n=c_{0,n}+c_{1,n}+c_{2,n},
+ \qquad
+ \gamma_n=(-1)^n n!\,a_n.
+\]
+Si $\chi_{-3}$ désigne le caractère réel non principal modulo trois, alors
+\[
+ \frac{L^{(n)}(1,\chi_{-3})}{n!}=c_{1,n}-c_{2,n}.
+\]
+De plus, avec \(\lambda=\log3\),
+\[
+ c_{0,n}=\frac13\left[
+ \frac{(-\lambda)^{n+1}}{(n+1)!}
+ +\sum_{k=0}^{n}a_k\frac{(-\lambda)^{n-k}}{(n-k)!}
+ \right].
+\]
+Ces trois identités déterminent de manière unique
+\((c_{0,n},c_{1,n},c_{2,n})\) à partir de
+\((a_n,L^{(n)}(1,\chi_{-3}))\) et des coefficients agrégés d'ordre
+inférieur.
+\end{theorem}
+
+\begin{proof}
+La partition des entiers positifs en classes résiduelles fournit
+$\zeta=Z_0+Z_1+Z_2$. En soustrayant les pôles en $s=1$ et en comparant les
+coefficients de \eqref{eq:coeficientes-Laurent-residuales}, on obtient la
+première identité. La deuxième coïncide avec la convention usuelle pour les
+constantes de Stieltjes. De plus,
+$Z_1-Z_2=L(s,\chi_{-3})$ ; les pôles de $Z_1$ et $Z_2$ s'annulent et la
+comparaison des coefficients donne la troisième relation. Enfin,
+\[
+ Z_0(1+z)=\frac13e^{-\lambda z}\zeta(1+z).
+\]
+Le produit des deux séries de Laurent fournit la formule explicite
+pour \(c_{0,n}\). La somme et la différence retrouvent alors
+\(c_{1,n}\) et \(c_{2,n}\), ce qui prouve l'unicité affirmée.
+\end{proof}
+
+La somme des trois termes retrouve le secteur agrégé ; la différence des
+classes $1$ et $2$ conserve l'orientation du caractère ; la comparaison
+avec la classe divisible par trois enregistre le changement d'échelle. Ces trois
+combinaisons sont linéairement indépendantes et déterminent les trois
+coefficients $c_{r,n}$.
+
+\section{Euler--Mascheroni et constantes de Stieltjes}
+
+Soit
+
+\[
+ C_r:=\operatorname*{FP}_{s=1}Z_r(s).
+\]
+
+Les identités classiques pour la fonction digamma donnent
+\cite{Apostol1976,Lagarias2013}
+
+\begin{equation}
+ C_0=\frac{\gamma-\log3}{3},
+ \label{eq:C0-parte-finita}
+\end{equation}
+
+\begin{equation}
+ C_1=\frac\gamma3+\frac{\log3}{6}+\frac{\pi}{6\sqrt3},
+ \qquad
+ C_2=\frac\gamma3+\frac{\log3}{6}-\frac{\pi}{6\sqrt3}.
+ \label{eq:C1-C2-partes-finitas}
+\end{equation}
+
+\begin{corollary}
+\label{cor:gamma-log3-L1}
+Les parties finies satisfont
+\[
+ \boxed{\gamma=C_0+C_1+C_2},
+\]
+\[
+ \boxed{L(1,\chi_{-3})=C_1-C_2=\frac{\pi}{3\sqrt3}},
+\]
+\[
+ \boxed{\log3=C_1+C_2-2C_0}.
+\]
+\end{corollary}
+
+\begin{proof}
+À l'ordre zéro, le \cref{thm:descomposicion-laurent-triadica} donne
+$a_0=c_{0,0}+c_{1,0}+c_{2,0}$. Par définition,
+$a_0=\gamma$ et $c_{r,0}=C_r$, ce qui prouve la première égalité. La
+différence des deux classes orientées est
+$C_1-C_2=L(1,\chi_{-3})$. En substituant
+\eqref{eq:C0-parte-finita}--\eqref{eq:C1-C2-partes-finitas}, on obtient les
+deux autres identités.
+\end{proof}
+
+Une unique extraction des coefficients au moyen de la formule intégrale de
+Cauchy appliquée à \eqref{eq:coeficientes-Laurent-residuales} détermine
+simultanément $\gamma_0,\ldots,\gamma_6$. Les discrétisations à 96 et
+192 nœuds coïncident jusqu'à l'ordre $10^{-87}$ ; l'identité des
+coefficients provient toutefois du
+\cref{thm:descomposicion-laurent-triadica} et non de cette comparaison numérique.
+
+\section{Évaluation de la constante d'Apéry}
+
+\begin{proposition}
+\label{prop:evaluacion-apery}
+La fonctionnelle \eqref{eq:funcional-theta-mellin} satisfait
+\[
+ \boxed{
+ \mathcal Z_3(3)=\zeta(3)
+ =1.202056903159594285399738161511449\ldots}.
+\]
+\end{proposition}
+
+\begin{proof}
+L'égalité exacte est la spécialisation $s=3$ de \eqref{eq:Z3-zeta}.
+Pour certifier tout préfixe décimal sans modifier la fonctionnelle,
+considérons $S_N=\sum_{n=1}^{N}n^{-3}$. Le critère intégral donne
+\[
+ S_N+\frac1{2(N+1)^2}
+ <\zeta(3)<
+ S_N+\frac1{2N^2}.
+\]
+Les intervalles rationnels emboîtés résultants déterminent les chiffres
+imprimés.
+\end{proof}
+
+L'irrationalité de $\zeta(3)$ est le théorème classique d'Apéry
+\cite{Apery1979} ; elle ne se déduit pas de la seule évaluation de la fonctionnelle.
+
+\section{Constante de Glaisher--Kinkelin}
+
+La dérivée spectrale en $s=-1$ définit
+
+\begin{equation}
+ \boxed{
+ A_{\mathrm{GK}}
+ =\exp\!\left(\frac1{12}-\mathcal Z_3'(-1)\right)}.
+ \label{eq:glaisher-kinkelin-espectral}
+\end{equation}
+
+C'est la formule du déterminant régularisé associé au produit
+hyperfactoriel \cite{Vardi1988}. Une dérivation centrale à cinq points,
+évaluée à deux échelles, fournit
+
+\[
+ A_{\mathrm{GK}}
+ =1.2824271291006226368753425688697917\ldots.
+\]
+
+Le terme $1/12$ appartient à la régularisation de l'hyperfactorielle et n'est pas
+introduit comme paramètre d'ajustement.
+
+\section{Constante d'Euler--Kronecker du corps d'Eisenstein}
+
+Le caractère $\chi_{-3}$ détermine le corps quadratique imaginaire
+
+\[
+ F_{-3}=\QQ(\sqrt{-3}),
+ \qquad
+ \zeta_{F_{-3}}(s)=\zeta(s)L(s,\chi_{-3}).
+\]
+
+Sa constante d'Euler--Kronecker est
+
+\begin{equation}
+ \boxed{
+ \gamma_{F_{-3}}
+ =\gamma+\frac{L'(1,\chi_{-3})}{L(1,\chi_{-3})}}.
+ \label{eq:euler-kronecker-eisenstein}
+\end{equation}
+
+Les coefficients résiduels de
+\eqref{eq:coeficientes-Laurent-residuales} donnent
+
+\[
+ L(1,\chi_{-3})
+ =0.6045997880780726168646927525473852\ldots,
+\]
+\[
+ L'(1,\chi_{-3})
+ =0.2226629869686015094866602627647443\ldots,
+\]
+
+et, par \eqref{eq:euler-kronecker-eisenstein},
+
+\[
+ \gamma_{F_{-3}}
+ =0.9454972808716807032397499941581890\ldots.
+\]
+
+Le choix de $F_{-3}$ provient du caractère résiduel modulo trois, et non
+d'une recherche sur les valeurs décimales de constantes de corps
+quadratiques.
+
+\section{Produit local associé aux nombres premiers jumeaux}
+
+Pour un motif fini $H=\{h_1,\ldots,h_k\}\subset\ZZ$, nous définissons
+
+\[
+ \nu_p(H):=\left|\{-h_1,\ldots,-h_k\}\bmod p\right|,
+ \qquad
+ \sigma_p(H)=
+ \frac{1-\nu_p(H)/p}{(1-1/p)^k}.
+\]
+
+Pour $H=\{0,2\}$, les facteurs locaux conduisent à
+
+\begin{equation}
+ C_2^{\mathrm{twin}}
+ =\prod_{p>2}\frac{p(p-2)}{(p-1)^2}.
+ \label{eq:constante-primos-gemelos}
+\end{equation}
+
+Soit \(P_X\) le produit restreint aux nombres premiers \(2<p\leq X\). Pour
+\(p>X\), tous les facteurs appartiennent à \((0,1)\) ; en étendant le produit
+de la queue des nombres premiers à tous les entiers, on obtient la borne
+télescopique
+\[
+ \prod_{n>X}\left(1-\frac1{(n-1)^2}\right)
+ =\frac{X-1}{X}
+ \leq
+ \prod_{p>X}\left(1-\frac1{(p-1)^2}\right)<1.
+\]
+Le produit \(P_{2\times10^6}\), évalué avec arrondi décimal dirigé, et
+cette inégalité rationnelle pour la queue donnent
+
+\begin{equation}
+ 0.6601615071224244826403933551
+ <C_2^{\mathrm{twin}}<
+ 0.6601618372035081248537566591.
+ \label{eq:intervalo-primos-gemelos}
+\end{equation}
+
+Le décompte direct jusqu'à $10^6$ contient 8169 paires de nombres premiers jumeaux. La
+convergence du produit local et ce recensement fini n'impliquent pas
+l'existence d'une infinité de paires ; cette dernière est une proposition arithmétique
+distincte.
+
+\section{Constante de Meissel--Mertens et hamiltonien premier}
+
+La constante de Meissel--Mertens est définie par
+
+\begin{equation}
+ B_1=\lim_{x\to\infty}
+ \left(\sum_{p\leq x}\frac1p-\log\log x\right)
+ \label{eq:meissel-mertens-def}
+\end{equation}
+
+et satisfait
+
+\begin{equation}
+ B_1=\gamma+
+ \sum_p\left(\log\!\left(1-\frac1p\right)+\frac1p\right).
+ \label{eq:meissel-mertens-euler}
+\end{equation}
+
+Avec la notation de \cref{pf84:C08}, nous posons
+\[
+ \mathcal F_P:=\Gamma_s(\mathfrak h_{\mathbb P}),
+ \qquad
+ H_P:=d\Gamma(H_{\mathbb P}).
+\]
+Ni l'espace de Fock bosonique des modes premiers ni son hamiltonien ne sont redéfinis ici.
+L'opérateur déjà construit a pour fonction de partition
+
+\begin{equation}
+ \operatorname{Tr}_{\mathcal F_P}(e^{-sH_P})
+ =\prod_p\frac1{1-p^{-s}}
+ =\zeta(s),
+ \qquad \Re s>1.
+ \label{eq:hamiltoniano-primo-zeta}
+\end{equation}
+
+Soit \(\mathcal H_P^{(1)}\) le sous-espace à une particule, engendré par
+\(\{|p\rangle:p\text{ premier}\}\). Alors
+\[
+ \operatorname{Tr}_{\mathcal H_P^{(1)}}\!\left(
+ e^{-H_P}\mathbf 1_{(-\infty,\log x]}(H_P)\right)
+ =\sum_{p\leq x}\frac1p.
+\]
+Ainsi, \(B_1\) est la partie finie, lorsque \(x\to\infty\), de cette trace
+spectrale tronquée après soustraction de \(\log\log x\). L'égalité
+\eqref{eq:hamiltoniano-primo-zeta} présuppose la décomposition de Fock sur
+les nombres premiers ; elle constitue donc une représentation opératorielle du produit
+d'Euler, non une déduction de la primalité à partir du laplacien
+triadique.
+
+\section{Dépendance à l'égard de l'opérateur}
+
+Les évaluations précédentes partagent l'opérateur
+\eqref{eq:operador-espectral-Dm}, la trace positive
+\eqref{eq:traza-positiva} et la transformée
+\eqref{eq:funcional-theta-mellin}. D'autres constantes exigent des dynamiques
+distinctes. La constante de Catalan est associée au caractère modulo quatre
+$\chi_{-4}$, tandis que la constante de Khinchin appartient à l'opérateur de
+Gauss et à sa mesure invariante. Un préfixe de l'une quelconque d'entre elles peut
+apparaître dans un catalogue fini sans que la fonctionnelle triadique la sélectionne.
+Cette dépendance opératorielle distingue l'évaluation spectrale de la
+capacité purement combinatoire de codage.

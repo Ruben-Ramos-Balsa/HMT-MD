@@ -1,0 +1,166 @@
+\section{Observable return and persistence of the register}
+\label{nuclear:9}
+\subsection{Joint recovery from complete returns}
+
+Let \(X\) be the domain of calibrated complete histories in \cref{ret:extension}, including the calendar origin and, when used, the discrete chart index. The states preserve the transitions and the memory register. Write \(r=\operatorname{Ret}_+:X\to Y_+\) for sampling at complete returns, with \(Y_+=r(X)\).
+
+The result in \cref{ret:homeomorfismo} provides its explicit inverse: \(x_{3j+s}=F^s(y_j)\), for \(s=0,1,2\). Reconstruction uses the complete state preserved at each return and the effective update; \eqref{ret:conjugacion} also preserves transport.
+
+Let \(a:X\to R_{\rm HMT}\) be numerical evaluation by cylinders and \(q:X\to E_\infty\) incidence with its gauge, according to \cref{sec:generacion,exc:doble-lectura,exc:limite-inverso}. Let \(d:X\to X\) be a reversible continuous transport, with the gauge transported. On \(Y_+\), define
+
+\[
+a_+=a\circ r^{-1},\qquad q_+=q\circ r^{-1},\qquad d_+=r\circ d\circ r^{-1}.
+\]
+
+Then
+
+\begin{equation}
+\boxed{(a,q)=(a_+,q_+)\circ r,\qquad rd=d_+r.}
+\label{nuc09:lecturas}
+\end{equation}
+
+\begin{proof}
+This is \cref{ret:lecturas}: the compositions with \(r\) and \(r^{-1}\) cancel, and the inverse of \(d_+\) is \(rd^{-1}r^{-1}\). Both readers are transported from the same complete state.
+\end{proof}
+
+In particular, for \(N\in\ZZ_{>0}\), \(d^Nx=x\) if and only if \(d_+^Nr(x)=r(x)\). Conjugation preserves periodicity or aperiodicity of the complete state. The dynamics of a partial reader is determined through its own transport factor.
+
+\subsection{Explicit subsequent representation of transport}
+
+On the already generated set of histories, consider the subsequent realization \(H=\ell^2(X)\), with orthonormal basis \((\delta_x)_{x\in X}\) and counting measure. Every vector has at most countable support. Reversible transport determines
+
+\[
+C\delta_x=\delta_{d x},\qquad C^{-1}\delta_x=\delta_{d^{-1}x}.
+\]
+
+The bijection \(d\) proves that \(C\) is unitary. This representation preserves the complete labels of the histories. The space \(X\) and its transport precede this linear realization.
+
+The nonadic chart in \cref{nuclear:2} determines
+
+\[
+T=\frac{8I+C}{9},\qquad
+\eta v=\frac1{27}(8(C-I)v,-(C-I)v,\ldots,-(C-I)v),
+\]
+
+\[
+I-T^*T=\eta^*\eta=\frac8{81}(I-C)^*(I-C).
+\]
+
+Let \(P\) be the orthogonal projection onto \(\ker(I-C)\). The spectral proof in \cref{nuclear:2,nuclear:3} gives \(T^N\to P\) strongly. Telescoping provides the isometry
+
+\[
+\mathcal Vv=(Pv,\eta v,\eta Tv,\eta T^2v,\ldots),\qquad
+\mathcal M=\operatorname{Im}\mathcal V.
+\]
+
+The register shift \(B\) preserves the first component and removes the first memory block. On the compatible image,
+
+\begin{equation}
+\boxed{\widehat C=\mathcal VC\mathcal V^{-1}
+=(9B-8I)|_{\mathcal M}.}
+\label{nuc09:transporte-recuperado}
+\end{equation}
+
+The inverse of the representation is given by
+
+\begin{equation}
+v=Pv+\sum_{j\ge0}T^{*j}\eta^*(\eta T^jv).
+\label{nuc09:inversa-registro}
+\end{equation}
+
+\begin{proof}
+The defect identity telescopes up to \(N\); its limit preserves the norm exactly. The identities \(\mathcal VT=B\mathcal V\) and \(C=9T-8I\) give \eqref{nuc09:transporte-recuperado}. The isometry \(\mathcal V\) is surjective onto \(\mathcal M\); taking its adjoint gives \eqref{nuc09:inversa-registro}, with norm convergence of the series. Unitarity of the recovered transport is established on \(\mathcal M\).
+\end{proof}
+
+For \(A\in\mathcal B(H)\), let \(\widehat A=\mathcal VA\mathcal V^{-1}\) on \(\mathcal M\). This correspondence preserves norm, products, adjoints, and commutators, since \(\mathcal V^{-1}=\mathcal V^*|_{\mathcal M}\). It jointly represents the numerical observables, the incidence observables, and their relations with \(C\).
+
+\subsection{Numerical convergence and correlations with incidence}
+
+The cylinders in \eqref{eq:cilindro} supply six trits per block in the chart of integer index \(m(x)\). Write
+
+\[
+\xi_n(x)=\sum_{k=1}^{6n}d_k(x)3^{-k},\qquad
+\xi(x)=a(x)-m(x),\qquad 0\le\xi(x)-\xi_n(x)\le3^{-6n}.
+\]
+
+Here \(d_k\in\{0,1,2\}\) is the subsequent ternary reading of the trit; its balanced orientation preserves its own typing. The chart retains \(m\) separately, including the endpoint convention, and reconstructs \(a=m+\xi\). At endpoints with dual representation, \(\xi\) is interpreted in that chart.
+
+Let \(M_f\) denote multiplication by \(f\) on \(\ell^2(X)\). The normalization \(0\le\xi_n\le\xi\le1\) makes \(M_\xi\) and \(M_{\xi_n}\) contractions. For a set \(B\) in the finite incidence codomain of \(q_j\), define \(E_{j,B}=M_{\mathbf1_{q_j^{-1}(B)}}\). This is the projector onto the histories satisfying that incidence.
+
+\begin{theorem}[Simultaneous conservation of precision and transport]
+\label{nuc09:precision}
+For every \(t\in\ZZ\),
+
+\begin{equation}
+\boxed{
+\left\|\widehat C^{-t}\widehat M_\xi\widehat C^t
+-\widehat C^{-t}\widehat M_{\xi_n}\widehat C^t\right\|
+=\|M_\xi-M_{\xi_n}\|\le729^{-n}.}
+\label{nuc09:error-observable}
+\end{equation}
+
+The relations among the incidence projectors, their products, and their transport are preserved exactly. For an ordered product of contractions containing \(r\) numerical observables \(M_\xi\), evaluated at arbitrary integer times, and any finite number of exact incidence or unitary factors, replacing those \(r\) factors by \(M_{\xi_n}\) changes the product in norm by at most
+
+\begin{equation}
+\boxed{r\,729^{-n}.}
+\label{nuc09:error-producto}
+\end{equation}
+
+The same bound holds for any matrix element between unit vectors. The factors may be noncommutative; their order is preserved.
+\end{theorem}
+
+\begin{proof}
+The norm of a multiplication operator on \(\ell^2(X)\) is \(\sup_{x\in X}|f(x)|\); the ternary tail proves the first bound. Conjugation by \(C^t\) and by \(\mathcal V\) preserves the norm. For products \(A_1\cdots A_s\) and \(B_1\cdots B_s\), use
+
+\[
+\prod_{i=1}^s A_i-\prod_{i=1}^s B_i
+=\sum_{j=1}^s B_1\cdots B_{j-1}(A_j-B_j)A_{j+1}\cdots A_s.
+\]
+
+The exact factors give zero difference; each of the remaining \(r\) contributes norm at most \(729^{-n}\). Submultiplicativity and the bound one for the other factors prove \eqref{nuc09:error-producto}. Cauchy--Schwarz gives the assertion about matrix elements.
+\end{proof}
+
+This uniformity preserves precision when the complete approximate observable is transported. The operator \(C\) and incidence remain exact in \eqref{nuc09:error-observable}. The index \(n\) measures cylinder depth; \(t\) measures iterations of the transport \(d\); \(j\) in \eqref{nuc09:inversa-registro} measures compression iterations.
+
+\subsection{Covariance of the memory operator under return}
+
+Restrict \(X\) and its atomic representation to the graded reversible sector \(X_{\rm rev,grad}\) of the clock in \eqref{eq:weyl-relojes}. The integer memory degree \(q_{\rm mem}\) is preserved in each history. For \(d=\Gamma_9\), its update is \(q_{\rm mem}(dx)=q_{\rm mem}(x)+1\). The memory operator \(D\) is multiplication by \(q_{\rm mem}\), with domain
+
+\[
+\operatorname{Dom}D=\{v:\sum_{x\in X}|q_{\rm mem}(x)|^2|v_x|^2<\infty\}.
+\]
+
+The index change \(x\mapsto dx\) and the inequalities \((q\pm1)^2\le2q^2+2\) prove that \(C\) and \(C^{-1}\) preserve this domain. On it,
+
+\begin{equation}
+C^*DC=D+I,\qquad
+\widehat C^*\widehat D\widehat C=\widehat D+I_{\mathcal M},
+\qquad\operatorname{Dom}\widehat D=\mathcal V\operatorname{Dom}D.
+\label{nuc09:memoria}
+\end{equation}
+
+\begin{proof}
+On \(\delta_x\), the left-hand side equals \(q_{\rm mem}(dx)\delta_x=(q_{\rm mem}(x)+1)\delta_x\). The identity extends to the indicated domain by truncating the support in the graph norm of \(D\). The second equality is obtained by unitary conjugation to \(\mathcal M\).
+\end{proof}
+
+By induction, \(q_{\rm mem}(d^Nx)=q_{\rm mem}(x)+N\). Every integer \(N>0\) changes the complete state. Every orbit of \(d\) is infinite; a square-summable function constant on each of these orbits is zero. In this bilateral realization, \(P=0\). Formula \eqref{nuc09:inversa-registro} then reconstructs the complete linear state from its memory complements. This conclusion uses the effective grading of the clock.
+
+Phase return coexists with the memory increment in \eqref{nuc09:memoria}. Sturmian aperiodicity and its complexity belong to the symbolic factor in \cref{sec:generacion}; the present result preserves the graded dynamics of the complete state.
+
+\subsection{Incidence, refinement, and three regimes}
+
+The register \(K\) also has the complete realization in \cref{nuclear:5}, \(\mathcal Fk=(\mu(k),IP_0k/6)\). Its inverse preserves the twelve coordinates, including the mean. Applying \(\mathcal F\) to the corresponding fibres and retaining the history labels transports this representation. The map \(\mathcal F\circ K\) preserves exactly the fibres of the reader \(K\); recovery of complete histories comes from \(r\) or from their effective labels.
+
+The isometric refinement systems in \cref{nuclear:1,nuclear:3,nuclear:5} preserve \(\mathcal V\) and \(C\) through their intertwining squares. The proof uses the levelwise realizations constructed there. The atomic representation \(\ell^2(X)\) and the projective-measure realizations \(L^2\) retain their corresponding domains and measures.
+
+The connection with folding and unfolding is developed in \cref{euler-trit-generadores,euler-trit-evaluaciones}: Coxeter, nilpotent transport, and the action of \(F_{\rm av}^2\). For each two-dimensional realization \(E\) preserving the alternating form \(\Omega\), the nonadic chart satisfies
+
+\begin{equation}
+\Omega=T_E^*\Omega T_E+D_E^*\Omega D_E,
+\qquad T_E=(8I+E)/9,\quad D_E=\sqrt8(E-I)/9.
+\label{nuc09:balance-alternante}
+\end{equation}
+
+The algebraic expansion cancels the cross terms and uses \(E^*\Omega E=\Omega\). In the real realization, \(*\) means transpose. The oriented law brings together the three regimes through the forms and transports of \cref{nuclear:7,nuclear:8}. Its realization as action also uses the normalizations and connections specified there.
+
+The relation to connection dynamics is formulated through the constructions in \cref{nuclear:6,nuclear:7,nuclear:8}. The identities \eqref{nuc09:transporte-recuperado}--\eqref{nuc09:balance-alternante} preserve their representation, the precision of the observables, and the transported forms.

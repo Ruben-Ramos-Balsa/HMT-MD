@@ -1,0 +1,627 @@
+\section{Construcción proyectiva de la recta real y estructura conjunta del continuo}
+\label{sec:construccion-proyectiva-recta}
+
+\subsection{Configuraciones finitas y sistema de restricciones}
+
+Para cada profundidad \(k\geq0\), sea \(\mathsf A_k\) el conjunto finito de
+prefijos celulares de APP. Una emisión admisible
+\(\varepsilon:a\to a'\) determina, para
+\(\diamond\in\{\Sigma,\Pi\}\), la división exacta
+\begin{equation}
+ \delta^\diamond(\varepsilon)
+ =\operatorname{res}^\diamond(\varepsilon)
+  +9\operatorname{quo}^\diamond(\varepsilon),
+ \qquad
+ \operatorname{res}^\diamond(\varepsilon)\in\{0,\ldots,8\},
+ \qquad
+ \operatorname{quo}^\diamond(\varepsilon)\in\mathbb Z.
+ \label{eq:division-app-configuracion-nuclear}
+\end{equation}
+El levantamiento TRIT proporciona
+\begin{equation}
+ \Delta(\varepsilon)
+ =\operatorname{or}(\varepsilon)+3\kappa(\varepsilon),
+ \qquad
+ \operatorname{or}(\varepsilon)\in\{-1,0,+1\},
+ \qquad
+ \kappa(\varepsilon)\in\mathbb Z.
+ \label{eq:division-trit-configuracion-nuclear}
+\end{equation}
+La coordenada de fase y memoria pertenece a
+\(\mathbb Z_{\geq0}\times\mathbb Z/9\mathbb Z\). Con
+\(\bar r\in\{0,\ldots,8\}\), el odómetro nonádico es
+\begin{equation}
+ \sigma_9(w,r)
+ =\left(
+ w+\left\lfloor\frac{\bar r+1}{9}\right\rfloor,
+ r+[1]_9\right),
+ \qquad
+ \sigma_9^9(w,r)=(w+1,r).
+ \label{eq:odometro-configuraciones}
+\end{equation}
+
+\begin{definition}[Configuración genealógica completa]
+Sea \(\gamma=\varepsilon_1\cdots\varepsilon_k\) una ruta admisible. Su
+configuración de nivel \(k\) es
+\begin{equation}
+\begin{aligned}
+ \widehat x_k(\gamma)=\bigl(
+ &a_{\leq k};\operatorname{Sh}_{\leq k};
+ \mathbf{res}_k,\mathbf{quo}_k;
+ \mathbf{or}_k,\boldsymbol\kappa_k;
+ \mathsf Q_k,g_k,q_k^{(9)},\beta_k,m_k;\\
+ &\partial\gamma,\gamma,\operatorname{Reg}(\gamma)
+ \bigr),
+ \label{eq:configuracion-genealogica-nuclear}
+\end{aligned}
+\end{equation}
+donde \(\operatorname{Sh}_j=(\Sigma_j,\Pi_j)\),
+\(\mathsf Q_k=(q_k^{(9)},g_k)\),
+\(\beta_k=[q_k^{(9)}]_{12}\), y
+\begin{equation}
+ \operatorname{Reg}(\gamma)
+ =\bigl(\lambda(\varepsilon_1),\ldots,
+ \lambda(\varepsilon_k)\bigr)
+ \label{eq:registro-ordenado-nuclear}
+\end{equation}
+conserva fuente, destino, residuos, cocientes, orientación, acarreo,
+frontera y fases anterior y posterior de cada transición.
+\end{definition}
+
+Sea
+\begin{equation}
+ \widehat{\mathcal X}_k
+ =\{\widehat x_k(\gamma):|\gamma|=k\}.
+ \label{eq:espacios-finitos-configuraciones}
+\end{equation}
+El truncamiento de la última emisión y la prolongación neutra definen
+\begin{equation}
+ \rho_{k+1,k}:\widehat{\mathcal X}_{k+1}
+ \longrightarrow\widehat{\mathcal X}_k,
+ \qquad
+ \eta_k:\widehat{\mathcal X}_k
+ \longrightarrow\widehat{\mathcal X}_{k+1},
+ \qquad
+ \rho_{k+1,k}\eta_k=\id.
+ \label{eq:restriccion-seccion-configuraciones}
+\end{equation}
+
+\begin{proposition}[Finitud, no vacuidad y sobreyectividad]
+\label{prop:finitud-sobreyectividad-configuraciones}
+Si cada configuración posee un conjunto finito no vacío de emisiones
+admisibles y la prolongación neutra está definida en todo nivel, entonces
+\(\widehat{\mathcal X}_k\) es finito y no vacío para todo \(k\), y
+\(\rho_{k+1,k}\) es sobreyectiva.
+\end{proposition}
+
+\begin{proof}
+La afirmación se prueba por inducción. El nivel inicial es finito y no vacío.
+La unión finita de los conjuntos finitos no vacíos de emisiones produce el
+nivel siguiente. Para cada \(x\in\widehat{\mathcal X}_k\), la identidad
+\(\rho_{k+1,k}(\eta_k(x))=x\) proporciona una preimagen explícita.
+\end{proof}
+
+\subsection{Límite inverso, cilindros y medida canónica}
+
+El espacio de historias completas es
+\begin{equation}
+ \widehat\Omega
+ =\varprojlim_k
+ \bigl(\widehat{\mathcal X}_k,\rho_{k+1,k}\bigr)
+ =\left\{(x_k)_{k\geq0}:
+ \rho_{k+1,k}(x_{k+1})=x_k\right\}.
+ \label{eq:limite-inverso-historias}
+\end{equation}
+
+\begin{theorem}[Compacidad y existencia de historias completas]
+\label{thm:compacidad-historias-completas}
+El espacio \(\widehat\Omega\) es compacto y no vacío. Cada elemento conserva,
+a toda profundidad, las dos hojas APP, la orientación TRIT, el acarreo, la
+fase, la memoria, la frontera, la ruta y el registro ordenado.
+\end{theorem}
+
+\begin{proof}
+El producto \(\prod_{k\geq0}\widehat{\mathcal X}_k\), con cada factor
+discreto, es compacto. Las ecuaciones
+\(\rho_{k+1,k}(x_{k+1})=x_k\) definen un subconjunto cerrado. La
+sobreyectividad de los enlaces garantiza la propiedad de intersección finita
+de los cilindros compatibles; la compacidad proporciona un elemento de su
+intersección. Las aplicaciones de restricción conservan por definición cada
+campo del prefijo.
+\end{proof}
+
+Para \(x_k\in\widehat{\mathcal X}_k\), sea
+\(\operatorname{Em}(x_k)\) el conjunto de sus emisiones admisibles y sea
+\(d(x_k)=\#\operatorname{Em}(x_k)\). La probabilidad local uniforme
+\begin{equation}
+ p_{x_k}(\varepsilon)=\frac1{d(x_k)}
+ \label{eq:probabilidad-local-configuracion}
+\end{equation}
+asigna a una historia finita
+\(h=(\varepsilon_{k+1},\ldots,\varepsilon_N)\) el peso
+\begin{equation}
+ \mu_{k,N}(h)=\prod_{j=k}^{N-1}\frac1{d(x_j)}.
+ \label{eq:peso-historia-finita}
+\end{equation}
+Los pesos son proyectivamente consistentes:
+\begin{equation}
+ \sum_h\mu_{k,N}(h)=1,
+ \qquad
+ (\pi_{N+1,N})_*\mu_{k,N+1}=\mu_{k,N}.
+ \label{eq:consistencia-medida-proyectiva}
+\end{equation}
+
+\begin{theorem}[Medida genealógica]
+\label{thm:medida-genealogica}
+Existe una única medida de Borel \(\mu\) sobre \(\widehat\Omega\) cuyo valor
+en cada cilindro de prefijo \([h]\) es \(\mu_{k,N}(h)\). Su soporte es
+\(\widehat\Omega\). Toda simetría genealógica que preserve los grados de
+emisión preserva \(\mu\).
+\end{theorem}
+
+\begin{proof}
+La consistencia \eqref{eq:consistencia-medida-proyectiva} define una medida
+finitamente aditiva sobre el álgebra de cilindros. La extensión de
+Carathéodory determina una única medida de Borel. Todo cilindro no vacío
+posee peso positivo, de donde se obtiene soporte pleno. Una simetría que
+preserva los grados permuta historias de igual peso y, por tanto, preserva la
+medida en el álgebra generadora y en su extensión boreliana.
+\end{proof}
+
+\subsection{Las cinco construcciones inseparables}
+
+Cada emisión \(\varepsilon:x\to y\) determina simultáneamente las estructuras
+\begin{align}
+ \mathcal T_\varepsilon
+ &=(U_\varepsilon,\sigma_x,\sigma_y,
+ A_\varepsilon,\eta_\varepsilon),
+ &&\text{transporte polar y telescopía espectral},
+ \label{eq:componente-transporte-polar}\\
+ \mathcal B_\varepsilon
+ &=(b_\varepsilon,b_\varepsilon^+,b_\varepsilon^-;
+ M^+,M^-,D,H,\kappa^{\rm can}),
+ &&\text{balance firmado y memoria acumulativa},
+ \label{eq:componente-balance-firmado}\\
+ \mathcal I_\varepsilon
+ &=(\operatorname{Cel}_{\TPK}(\varepsilon),q,B,W_c(q)),
+ &&\text{incidencia celular y curvatura de acarreo},
+ \label{eq:componente-incidencia-celular}\\
+ \mathcal P_\varepsilon
+ &=(I_y,J_y,\kappa_{y,N},\delta_y,C_{y,N},F_\varepsilon),
+ &&\text{complejo de puertos y cono del retorno},
+ \label{eq:componente-complejo-puertos}\\
+ \mathcal H_\varepsilon
+ &=\Bigl(\Psi_\varepsilon,K_\varepsilon,
+ \operatorname{Det}(C_{y,N}),H_*(C_{y,N}),\notag\\
+ &\hspace{2.2em}\operatorname{Smith}(C_{y,N}),
+ \operatorname{Bock}(C_{y,N})\Bigr),
+ &&\text{invariantes homológicos y determinantales}.
+ \label{eq:componente-homologico-determinantal}
+\end{align}
+Las cinco componentes poseen la misma fuente, el mismo destino, la misma
+ruta y el mismo registro. Sea \(\mathcal E_k\) el espacio finito de
+configuraciones completas de profundidad \(k\), incluidas sus emisiones
+supervivientes, y sea \(\mathcal Z_k\) el producto tipado de los cinco
+codominios. El ensamblaje es
+\begin{equation}
+ \mathcal O_k:\mathcal E_k\longrightarrow\mathcal Z_k,
+ \qquad
+ \widehat x_k\longmapsto
+ \bigl(\mathcal T_k,\mathcal B_k,\mathcal I_k,
+       \mathcal P_k,\mathcal H_k\bigr).
+ \label{eq:ensamblaje-cinco-construcciones}
+\end{equation}
+Los mapas de restricción satisfacen
+\begin{equation}
+ u^{\mathcal Z}_{\ell,k}\circ\mathcal O_\ell
+ =\mathcal O_k\circ u^{\mathcal E}_{\ell,k},
+ \qquad \ell\geq k.
+ \label{eq:naturalidad-cinco-construcciones}
+\end{equation}
+
+\begin{theorem}[Construcción conjunta del continuo]
+\label{thm:cinco-construcciones-inseparables}
+Existe una única aplicación
+\begin{equation}
+ \mathcal O_\infty:
+ \Cdisc:=\varprojlim_k\mathcal E_k
+ \longrightarrow
+ \mathcal Z_\infty:=\varprojlim_k\mathcal Z_k
+ \label{eq:operador-conjunto-continuo}
+\end{equation}
+cuyas proyecciones finitas son las aplicaciones
+\(\mathcal O_k\). Las realizaciones espectral, solenoidal, gauge,
+cohomológica y determinantal son proyecciones tipadas de
+\(\mathcal O_\infty\); comparten una única sección de dominio.
+\end{theorem}
+
+\begin{proof}
+La igualdad \eqref{eq:naturalidad-cinco-construcciones} convierte
+\((\mathcal O_k)_k\) en un cono compatible sobre el sistema
+\((\mathcal Z_k)_k\). La propiedad universal del límite inverso determina
+una única aplicación \(\mathcal O_\infty\). Cada realización se obtiene al
+componerla con la proyección correspondiente del producto tipado. La
+eliminación de una componente modifica el codominio y destruye la
+reconstrucción conjunta de los invariantes que esa componente conserva.
+\end{proof}
+
+Esta inseparabilidad es estructural. Transporte, balance, incidencia,
+cohomología y determinante no constituyen cinco mecanismos de generación.
+Constituyen cinco coordenadas functoriales del mismo sistema de historias.
+El constructor del continuo es la aplicación
+\begin{equation}
+ G_{\rm cont}:
+ \varprojlim_N\operatorname{Surv}^{(\chi)}_N
+ \longrightarrow\Cdisc,
+ \label{eq:constructor-conjunto-continuo}
+\end{equation}
+y \(\mathcal O_\infty\) actúa sobre el objeto ya construido por
+\(G_{\rm cont}\).
+
+\subsection{Evaluación arquimediana y reconstrucción de
+\texorpdfstring{\(\mathbb R\)}{R}}
+
+Para \(L\geq0\) y \(N\in\mathbb Z\), sea
+\begin{equation}
+ J_{N,L}=
+ \left[\frac{N}{3^L},\frac{N+1}{3^L}\right],
+ \qquad
+ \operatorname{diam}J_{N,L}=3^{-L}.
+ \label{eq:cilindros-ternarios-cerrados}
+\end{equation}
+La etiqueta posicional adopta la convención semiabierta
+\(\{x\in\mathbb R:N3^{-L}\leq x<(N+1)3^{-L}\}\), excepto en el extremo derecho de una carta
+compacta. Esta convención asigna una sola expansión a cada frontera; el
+intervalo cerrado \(J_{N,L}\) se emplea en el argumento de compacidad.
+
+Un lector arquimediano \(L_{\rm arq}\) asigna a
+\(\widehat x=(x_k)_k\in\widehat\Omega\) una familia encajada
+\(J_k(\widehat x)\) tal que
+\begin{equation}
+ J_{k+1}(\widehat x)\subseteq J_k(\widehat x),
+ \qquad
+ \operatorname{diam}J_k(\widehat x)\longrightarrow0.
+ \label{eq:encaje-contraccion-arquimediana}
+\end{equation}
+Se define
+\begin{equation}
+ \operatorname{Val}(\widehat x)
+ =\text{el único elemento de }
+ \bigcap_{k\geq0}J_k(\widehat x).
+ \label{eq:evaluacion-arquimediana-definitiva}
+\end{equation}
+
+\begin{theorem}[Recta real como cociente de historias]
+\label{thm:recta-real-cociente-historias}
+Supóngase que, para cada \(m\geq1\), los cilindros compatibles cubren
+coherentemente \(K_m=[-m,m]\). Entonces la evaluación induce un
+homeomorfismo
+\begin{equation}
+ \widehat\Omega^{(m)}/\!\sim_{\mathbb R}
+ \xrightarrow{\;\cong\;}K_m,
+ \qquad
+ \widehat x\sim_{\mathbb R}\widehat y
+ \Longleftrightarrow
+ \operatorname{Val}(\widehat x)
+ =\operatorname{Val}(\widehat y).
+ \label{eq:homeomorfismo-cociente-real}
+\end{equation}
+Las inclusiones \(K_m\hookrightarrow K_{m+1}\) producen
+\begin{equation}
+ \varinjlim_m
+ \bigl(\widehat\Omega^{(m)}/\!\sim_{\mathbb R}\bigr)
+ \cong\mathbb R.
+ \label{eq:recta-real-agotamiento}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La intersección de compactos encajados es no vacía, y la convergencia de los
+diámetros prueba su unicidad. El cilindro de una profundidad suficientemente
+grande controla uniformemente la variación de la evaluación, lo que prueba
+continuidad. La cobertura coherente construye una historia compatible sobre
+cada punto de \(K_m\), de modo que la evaluación es sobreyectiva. El
+cociente identifica exactamente sus fibras. La aplicación inducida es una
+biyección continua desde un compacto hacia el espacio de Hausdorff \(K_m\);
+por tanto, es un homeomorfismo. El agotamiento por los compactos
+\([-m,m]\) prueba \eqref{eq:recta-real-agotamiento}.
+\end{proof}
+
+\subsection{Cifra, valor, número, medida, escala y dimensión}
+
+\begin{definition}[Cifra]
+Fijado un lector posicional \(L\), la cifra de profundidad \(k\) es
+\begin{equation}
+ d_{L,k}(x_k)=\pi_{L,k}^{\rm vis}(x_k).
+ \label{eq:definicion-cifra}
+\end{equation}
+Es una coordenada finita del estado \(x_k\).
+\end{definition}
+
+\begin{definition}[Número y presentación]
+Un número HMT es una sección compatible
+\begin{equation}
+ \boldsymbol x=(x_k)_{k\geq0}\in
+ \varprojlim_k\operatorname{Surv}_k,
+ \qquad \rho_{k+1,k}(x_{k+1})=x_k.
+ \label{eq:definicion-numero-hmt}
+\end{equation}
+Una presentación es el par \((\boldsymbol x,L)\) formado por la sección y un
+lector cuyo dominio la contiene.
+\end{definition}
+
+\begin{definition}[Valor]
+El valor de una presentación arquimediana es
+\begin{equation}
+ \operatorname{Val}_L(\boldsymbol x)
+ =\bigcap_{k\geq0}J_{L,k}(\boldsymbol x)\in\mathbb R,
+ \label{eq:definicion-valor}
+\end{equation}
+donde la igualdad identifica la intersección unipuntual con su elemento.
+La fibra \(\operatorname{Val}_L^{-1}(r)\) contiene las genealogías que el
+lector \(L\) evalúa mediante la coordenada \(r\).
+\end{definition}
+
+\begin{definition}[Medida y escala]
+Una medida es la composición
+\begin{equation}
+ (x,a)\in\mathcal C
+ \longmapsto\mathcal O(x,a)
+ \longmapsto\chi_u(\mathcal O(x,a))\in\mathbb R,
+ \label{eq:definicion-medida}
+\end{equation}
+donde \(x\) es un estado, \(a\) es un lector o aparato,
+\(\mathcal C\) es la relación de compatibilidad,
+\(\mathcal O\) es el observable tipado y \(\chi_u\) es una carta de unidad.
+La escala es la profundidad \(k\) junto con el diámetro del cilindro
+evaluado. Refinar la escala sustituye un cilindro por un subcilindro y
+conserva el prefijo genealógico.
+\end{definition}
+
+La clasificación aritmética pertenece al valor. En una carta de base mil,
+\begin{equation}
+ r=a_0+\sum_{n\geq1}\frac{b_n}{1000^n},
+ \qquad b_n\in\{0,\ldots,999\},
+ \label{eq:expansion-base-mil-clasificacion}
+\end{equation}
+una expansión racional termina exactamente cuando el denominador reducido
+divide alguna potencia de \(1000\); es finalmente periódica exactamente
+para los racionales; y es aperiódica para los irracionales. La algebraicidad
+se determina por la anulación de un polinomio no nulo de
+\(\mathbb Q[X]\); la trascendencia es el complemento de la clausura
+algebraica de \(\mathbb Q\). La clasificación genealógica pertenece a la
+sección y distingue estabilización, periodicidad completa, monodromía con
+avance de memoria y prolongación coinductiva aperiódica.
+
+La dimensión se determina antes de su realización métrica. Sea \(G\) el
+grafo orientado de estados visibles y sean
+\(c_1,\ldots,c_d\in Z^1(G;\mathbb Z)\) cociclos cuyas clases generan un
+submódulo libre de rango \(d\) en \(H^1(G;\mathbb Z)\). Para una ruta
+\(\gamma\),
+\begin{equation}
+ Q_j(\gamma)=\sum_{e\in\gamma}c_j(e),
+ \qquad
+ \widetilde\gamma=
+ \bigl(q_{\rm vis}(\gamma),Q_1(\gamma),\ldots,Q_d(\gamma)\bigr).
+ \label{eq:levantamiento-cohomologico-dimension}
+\end{equation}
+
+\begin{definition}[Dimensión genealógica]
+La dimensión genealógica de un sistema de transporte es el rango del
+submódulo de \(H^1(G;\mathbb Z)\) generado por las clases de memoria
+independientes que deben conservarse para reconstruir sus rutas.
+\end{definition}
+
+\begin{theorem}[Minimalidad de las coordenadas de memoria]
+\label{thm:minimalidad-dimension-memoria}
+Sea \(Q:Z_1(G;\mathbb Z)\to\mathbb Z^d\) la evaluación de los \(d\)
+cociclos independientes. Si \(m\) contadores aditivos se obtienen mediante
+\(\widehat Q=AQ\), con \(A:\mathbb Z^d\to\mathbb Z^m\), y existe
+\(B:\mathbb Z^m\to\mathbb Z^d\) tal que \(Q=B\widehat Q\), entonces
+\begin{equation}
+ m\geq d.
+ \label{eq:cota-rango-dimension}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La independencia de las clases implica
+\(\operatorname{rank}\operatorname{im}Q=d\). Las factorizaciones dan
+\[
+ d=\operatorname{rank}\operatorname{im}Q
+ \leq\operatorname{rank}\operatorname{im}\widehat Q
+ \leq m.
+\]
+\end{proof}
+
+Una pantalla dimensional
+\(\Sigma_n(x)=(K_n,M_n(x),\beta_n(x),\mathcal R_n(x))\) realiza esas
+memorias mediante el cociente
+\begin{equation}
+ d_{\Sigma_n}(x)
+ =\dim_{K_n}\frac{M_n(x)}{\mathcal R_n(x)}
+ =g_n-\operatorname{rank}_{K_n}R_n(x),
+ \label{eq:dimension-realizada-cociente}
+\end{equation}
+cuando \(M_n(x)\cong K_n^{g_n}\) y las columnas de \(R_n(x)\) generan las
+relaciones. La dimensión realizada es el número de canales independientes
+que sobreviven a las relaciones de frontera. La cadena
+\begin{equation}
+ \text{estado TPK}\longrightarrow\Sigma_n(x)
+ \longrightarrow s_D\in\Gamma(L_D)
+ \xrightarrow{\;\chi_u\;}[s_D]_u\in\mathbb R
+ \label{eq:cadena-medicion-dimensional}
+\end{equation}
+separa estado, tipo dimensional, magnitud y coordenada numérica.
+
+\subsection{Doble evaluación del estado genealógico}
+
+Sea \(\mathfrak X\subseteq\widehat\Omega\) el espacio compacto de historias
+provistas de un calibre excepcional \(\chi_{\rm exc}\). Sobre una misma
+sección actúan
+\begin{equation}
+ \mathfrak R:\mathfrak X\longrightarrow\mathbb R,
+ \qquad
+ \mathfrak E_{\chi_{\rm exc}}:
+ \mathfrak X\longrightarrow\mathbf{Exc}.
+ \label{eq:dos-evaluaciones-mismo-dominio}
+\end{equation}
+La primera contrae cilindros hasta su valor; la segunda conserva incidencia,
+polaridad, orientación, frontera y cámara reticular.
+
+\begin{theorem}[Doble evaluación]
+\label{thm:doble-evaluacion}
+La aplicación
+\begin{equation}
+ \mathfrak D_{\chi_{\rm exc}}(x)
+ =\bigl(\mathfrak R(x),\mathfrak E_{\chi_{\rm exc}}(x)\bigr)
+ \label{eq:aplicacion-doble-evaluacion}
+\end{equation}
+es la evaluación conjunta de una única sección. Si la familia
+\(\{\mathfrak R,\mathfrak E_{\chi_{\rm exc}}\}\) separa puntos de
+\(\mathfrak X\), entonces \(\mathfrak D_{\chi_{\rm exc}}\) es inyectiva.
+\end{theorem}
+
+\begin{proof}
+Ambas aplicaciones poseen el mismo dominio y conmutan con las restricciones
+del sistema proyectivo. Si las dos componentes de
+\(\mathfrak D_{\chi_{\rm exc}}(x)\) y
+\(\mathfrak D_{\chi_{\rm exc}}(y)\) coinciden, la propiedad de separación
+implica \(x=y\).
+\end{proof}
+
+La realización arquimediana y la excepcional son dos proyecciones
+matemáticas del estado genealógico. La realización dimensional es un funtor
+posterior hacia secciones de rectas dimensionales. La distinción de
+codominios preserva la unidad causal y evita identificar valor, incidencia y
+magnitud.
+
+\subsection{Alcance cardinal y relación con ZFC}
+
+Sea \(H\) un espacio polaco de historias con topología de cilindros. Una
+realización analítica es un conjunto \(A\subseteq\mathbb R\) para el que
+existen un boreliano
+\(C\subseteq H\times\mathbb N^{\mathbb N}\) y un lector boreliano
+\(F:H\to\mathbb R\) tales que
+\begin{equation}
+ A=\{F(x):\exists z\in\mathbb N^{\mathbb N},\ (x,z)\in C\}.
+ \label{eq:publicacion-analitica-hmt}
+\end{equation}
+
+\begin{theorem}[Dicotomía cardinal de las realizaciones analíticas]
+\label{thm:dicotomia-cardinal-analitica}
+Toda realización \(A\) de la forma
+\eqref{eq:publicacion-analitica-hmt} es numerable o posee cardinal
+\(2^{\aleph_0}\).
+\end{theorem}
+
+\begin{proof}
+El conjunto \(A\) es analítico como imagen boreliana de la proyección de un
+boreliano en un espacio polaco. El teorema del conjunto perfecto establece
+que todo analítico no numerable contiene una copia homeomorfa del espacio de
+Cantor \(2^{\mathbb N}\). Por tanto,
+\(2^{\aleph_0}\leq|A|\leq|\mathbb R|=2^{\aleph_0}\).
+\end{proof}
+
+El cardinal inicial relativo a esta categoría es
+\begin{equation}
+ \aleph_{1,\HMT}^{\rm an}
+ :=\min\{|A|:A\text{ es una realización analítica no numerable}\},
+ \qquad
+ \aleph_{1,\HMT}^{\rm an}=2^{\aleph_0}.
+ \label{eq:cardinal-analitico-hmt}
+\end{equation}
+Este símbolo designa el primer cardinal no numerable dentro de la clase de
+realizaciones analíticas. El cardinal clásico \(\aleph_1\) es el primer
+ordinal no numerable de un universo conjuntista. La igualdad entre ambos es
+exactamente la hipótesis clásica del continuo.
+
+Sea
+\begin{equation}
+ Q_{\HMT}:=\widehat\Omega/\!\sim_{\mathbb R}\cong\mathbb R.
+ \label{eq:cociente-hmt-cardinal}
+\end{equation}
+En ZFC son equivalentes
+\begin{equation}
+\begin{aligned}
+ 2^{\aleph_0}=\aleph_1
+ &\Longleftrightarrow Q_{\HMT}\hookrightarrow\omega_1\\
+ &\Longleftrightarrow
+ \exists\rho:\widehat\Omega\to\omega_1,\quad
+ \rho(x)=\rho(y)\Longleftrightarrow
+ \mathfrak R(x)=\mathfrak R(y)\\
+ &\Longleftrightarrow
+ Q_{\HMT}\text{ admite un buen orden de tipo }\omega_1.
+\end{aligned}
+ \label{eq:equivalencias-ch-hmt}
+\end{equation}
+La construcción topológica
+\(Q_{\HMT}\cong\mathbb R\) y la existencia de un buen orden de tipo
+\(\omega_1\) son propiedades distintas. La primera se demuestra mediante
+cilindros y cocientes; la segunda depende del universo conjuntista.
+
+La insuficiencia genealógica del formalismo extensional se expresa de forma
+precisa: el elemento \(r\in\mathbb R\) determina una clase de equivalencia en
+\(Q_{\HMT}\), mientras ZFC no asigna canónicamente a \(r\) una sección de
+\(\widehat\Omega\), su orientación, su acarreo, su fase o su memoria. Esta
+afirmación caracteriza una diferencia de estructura, no una contradicción
+formal de los axiomas de ZFC.
+
+La presentación finita de APP, TRIT y TPK puede codificarse por un real
+\(a_{\HMT}\subseteq\omega\). Sea
+\begin{equation}
+ U_{\HMT}=L[a_{\HMT}],
+ \qquad
+ \mathbb R^{U_{\HMT}}=\mathcal P(\omega)\cap U_{\HMT}.
+ \label{eq:universo-constructible-hmt}
+\end{equation}
+
+\begin{theorem}[Hipótesis del continuo en el envolvente constructible]
+\label{thm:ch-envolvente-constructible}
+Existe en \(U_{\HMT}\), definible a partir de \(a_{\HMT}\), una biyección
+\begin{equation}
+ b_{\HMT}:\omega_1^{U_{\HMT}}
+ \xrightarrow{\;\sim\;}\mathbb R^{U_{\HMT}},
+ \qquad
+ U_{\HMT}\models 2^{\aleph_0}=\aleph_1.
+ \label{eq:biyeccion-ch-envolvente}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Escribamos \(a=a_{\HMT}\) y \(M=L[a]\). Por condensación relativizada, todo
+real \(x\in\mathbb R^M\) aparece en algún nivel
+\(L_{\alpha+1}[a]\) con \(\alpha<\omega_1^M\). Defínase
+\[
+ \rho_a(x)=\min\{\alpha<\omega_1^M:x\in L_{\alpha+1}[a]\},
+ \qquad
+ R_\alpha=\{x:\rho_a(x)=\alpha\}.
+\]
+Cada \(R_\alpha\) es numerable en \(M\). Sea
+\(j_\alpha:R_\alpha\hookrightarrow\omega\) la inyección mínima para el buen
+orden constructible relativo y sea
+\[
+ D=\{(\alpha,j_\alpha(x)):
+ \alpha<\omega_1^M,\ x\in R_\alpha\}.
+\]
+La aplicación \(E:D\to\mathbb R^M\), dada por
+\(E(\alpha,j_\alpha(x))=x\), es biyectiva. El orden lexicográfico de \(D\)
+posee tipo a lo sumo
+\(\omega\cdot\omega_1^M=\omega_1^M\); como \(D\) no es numerable, su tipo
+es \(\omega_1^M\). La composición de \(E\) con el isomorfismo de orden
+\(\omega_1^M\to D\) proporciona \(b_{\HMT}\).
+\end{proof}
+
+El alcance lógico queda determinado por
+\begin{equation}
+ U_{\HMT}\models\mathsf{CH}.
+ \label{eq:alcance-interno-ch}
+\end{equation}
+Una extensión exterior puede contener reales adicionales y satisfacer
+\(\neg\mathsf{CH}\). La construcción genealógica resuelve la producción
+topológica y dimensional del continuo y decide CH en su envolvente
+constructible; la decisión de CH en un universo exterior requiere especificar
+ese universo. Esta separación conserva la exactitud de los tres resultados:
+la recta real es un cociente de historias, las realizaciones analíticas
+satisfacen la dicotomía del conjunto perfecto y el envolvente
+\(L[a_{\HMT}]\) satisface CH.

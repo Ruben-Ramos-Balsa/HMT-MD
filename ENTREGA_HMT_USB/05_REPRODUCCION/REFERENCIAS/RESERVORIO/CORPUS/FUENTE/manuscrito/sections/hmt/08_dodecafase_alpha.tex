@@ -1,0 +1,990 @@
+\chapter{El cierre dodecafásico de \texorpdfstring{\(\alpha\)}{alpha}}
+\label{chap:alpha}
+\index{alpha@\(\alpha\)}
+\index{ciclo dodecafásico}
+
+Esta sección establece el cierre dodecafásico mediante aritmética entera en
+base mil. La construcción explicita las doce recurrencias, los cocientes
+euclídeos propagados y las condiciones de frontera que determinan la salida.
+
+\section{El selector terminal de los tres canales}
+\label{sec:selector-terminal-alpha-rev6}
+
+El cierre reúne tres generaciones ya construidas, pero no las identifica por
+su nombre decimal. A profundidad terminal, los catálogos de colas compatibles
+poseen cardinales
+\[
+ |\mathcal T_\pi|=196,\qquad
+ |\mathcal T_e|=197,\qquad
+ |\mathcal T_\varphi|=196.
+\]
+El objeto de selección es, por tanto,
+\(\mathcal T_\pi\times\mathcal T_e\times\mathcal T_\varphi\), con
+\[
+ 196\cdot197\cdot196=7\,567\,952
+\]
+ternas posibles.
+
+La frontera de coordenadas fijada por el lector terminal es
+\[
+ q=(1,2,2,1,2,0)\in\mathbb F_3^6.
+\]
+La ley de canal \(\pi+e-\varphi\) posee vector de signos
+\[
+ \sigma=(1,1,-1)=(1,1,2)\in\mathbb F_3^3
+\]
+y recta dual no nula
+\[
+ \langle2\sigma\rangle
+ =\langle(2,2,1)\rangle.
+\]
+El primer dato actúa sobre las columnas de la frontera; el segundo, sobre
+sus filas. No son dos rasgos intercambiables.
+
+\begin{theorem}[Selector matricial terminal de \(\alpha\)]
+\label{thm:selector-terminal-alpha-rev6}
+En el catálogo terminal anterior, las firmas locales de Gram, norma, peso y
+distancia de Hamming reducen las \(7\,567\,952\) ternas a \(331\). Al exigir
+el margen de columnas \(q\) quedan dos candidatas:
+\[
+ (120,197,157),\qquad(129,197,148).
+\]
+La condición de que la carga de filas pertenezca a la recta del canal
+\(\langle\sigma\rangle\) selecciona exactamente la segunda. Sus bloques son
+\[
+ \boxed{
+ b_\pi=021020,\qquad
+ b_e=001220,\qquad
+ b_\varphi=100210.}
+\]
+\end{theorem}
+
+\begin{proof}
+Las dos matrices terminales que sobreviven al margen de columnas son
+\[
+B_0=
+\begin{pmatrix}
+0&2&0&2&2&0\\
+0&0&1&2&2&0\\
+1&0&1&0&1&0
+\end{pmatrix},
+\qquad
+B_1=
+\begin{pmatrix}
+0&2&1&0&2&0\\
+0&0&1&2&2&0\\
+1&0&0&2&1&0
+\end{pmatrix}.
+\]
+Sus sumas de filas en \(\mathbb F_3\) son, respectivamente,
+\[
+ (0,2,0),\qquad(2,2,1).
+\]
+La primera no pertenece a
+\(\langle(1,1,2)\rangle=\{0,(1,1,2),(2,2,1)\}\); la segunda sí, pues
+\((2,2,1)=2\sigma\). Por tanto sólo \(B_1\) satisface simultáneamente la
+frontera de coordenadas y la carga del canal. Sus tres filas son los bloques
+mostrados y corresponden a la terna \((129,197,148)\).
+\end{proof}
+
+El teorema no obtiene \(q\) de la carga de filas: \(q\) es el dato
+coordenado del lector terminal y \(\sigma\) es la orientación del canal.
+Lo demostrado es que, una vez declaradas ambas fronteras del mismo objeto,
+la rama real es única. Esta separación impide convertir una firma encontrada
+a posteriori en una ley supuestamente derivada.
+
+\begin{definition}[Dos lecturas del estado terminal enriquecido]
+Sea
+\[
+ x_{\rm term}\in\mathcal X_{\rm TPK}^{\rm term,enr}
+ \subseteq\mathcal X_{\rm TPK}^{[108]}.
+\]
+Este estado es la salida
+\[
+ x_{\rm term}
+ =(\mathcal U_{108}\circ\cdots\circ\mathcal U_1)(x_{\rm seed})
+\]
+de la tubería completa de selección, transporte y actualización del TPK.
+El selector anterior es la lectura
+\[
+ \pi_{\rm term}(x_{\rm term})
+ =B_{\rm term}
+ :=\begin{pmatrix}021020\\001220\\100210\end{pmatrix}.
+\]
+El registro orientado y el lector de los canales de \(90^\circ\) y
+\(120^\circ\) producen, desde el libro del mismo estado,
+\begin{equation}\label{eq:alpha-subespacio-firmado}
+ \mathcal E_{108}^{90,120}\!
+ \left(\mathcal R_{12}(x_{\rm term})\right)
+ =(b^{90},b^{120},Q_{\rm TPK}),
+\end{equation}
+con
+\[
+\begin{aligned}
+ b^{90}={}&(-495,-116,-684,108,601,-90,
+             -173,-88,313,560,-397,461),\\
+ b^{120}={}&(-425,-281,-481,671,-255,30,
+              475,-543,680,251,6,-128),\\
+ Q_{\rm TPK}={}&6263.
+\end{aligned}
+\]
+Para \(r=1,2,3\), sean
+\[
+ B_r=\sum_{j=0}^{3}b^{120}_{r+3j},\qquad
+ A_1=\frac{Q_{\rm TPK}+2B_1+B_2}{3},\qquad
+ A_2=A_1-B_1,\qquad A_3=A_2-B_2,
+\]
+y \(d_{r,j}=b^{90}_{r+3j}\). El lector armónico \(\Pi_H\) forma los
+bloques
+\begin{equation}\label{eq:alpha-modulo-imagen-H12}
+ \Pi_H^{(r)}
+ =\bigl(A_r,d_{r,1}-d_{r,3},
+              d_{r,0}+d_{r,2},d_{r,0}-d_{r,2}\bigr)
+\end{equation}
+y los intercala por columnas. La lectura firmada es, por tanto, la
+composición producida
+\begin{equation}\label{eq:alpha-Rsgn-definido}
+ \boxed{
+ R_{\rm sgn}:=
+ \Pi_H\circ\mathcal E_{108}^{90,120}\circ\mathcal R_{12}:
+ \mathcal X_{\rm TPK}^{\rm term,enr}
+ \longrightarrow
+ \mathcal U_{12}^{\rm sgn}:=\operatorname{im}R_{\rm sgn}.}
+\end{equation}
+Ni \(U\) ni \(K\) son coordenadas añadidas al dominio: \(U\) es la salida
+de \eqref{eq:alpha-Rsgn-definido}, y \(K\) será su única preimagen integral
+por Hadamard.
+No se afirma una factorización
+\(B_{\rm term}\to U_{12}^{\rm sgn}\): ambas salidas conservan componentes
+distintas del mismo estado terminal.
+
+Para \(N'\geq N\geq108\), los truncamientos actúan sólo sobre las historias
+enriquecidas:
+\begin{equation}\label{eq:alpha-truncamiento-firmado-preserva-KU}
+ \tau_{N',N}:
+ \mathcal X_{\rm TPK}^{[N'],\rm enr}
+ \longrightarrow\mathcal X_{\rm TPK}^{[N],\rm enr}.
+\end{equation}
+Si \(R_{\rm sgn,N}\) denota la misma composición en profundidad \(N\), la
+naturalidad es el cuadrado concreto
+\begin{equation}\label{eq:alpha-cuadrado-naturalidad-Rsgn}
+ \boxed{
+ R_{\rm sgn,N}\circ\tau_{N',N}
+ =R_{\rm sgn,N'}.}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Construcción reversible de la coordenada firmada]
+\label{thm:alpha-Rsgn-construido}
+El compuesto \eqref{eq:alpha-Rsgn-definido}, aplicado al estado terminal
+producido, da exactamente
+\begin{equation}\label{eq:alpha-Rsgn-evaluacion}
+ U=R_{\rm sgn}(x_{\rm term})
+ =(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997).
+\end{equation}
+Su inversión por tres bloques de Hadamard de orden cuatro produce después
+\[
+ \boxed{
+ K=(234,543,140,729,659,824,621,058,914,794,146,601).}
+\]
+La transformación es invertible; satisface el cuadrado
+\eqref{eq:alpha-cuadrado-naturalidad-Rsgn} bajo los truncamientos
+\eqref{eq:alpha-truncamiento-firmado-preserva-KU}; y es independiente de
+\(\alpha\), CODATA y de toda cifra metrológica.
+\end{theorem}
+
+\begin{proof}
+Las fórmulas \eqref{eq:alpha-subespacio-firmado} y
+\eqref{eq:alpha-modulo-imagen-H12} dan
+\[
+ (B_1,B_2,B_3)=(972,-1073,101),\qquad
+ (A_1,A_2,A_3)=(2378,1406,2479),
+\]
+y producen los tres bloques firmados
+\[
+\begin{aligned}
+ U^{(1)}&=(2378,-452,-668,-322),\\
+ U^{(2)}&=(1406,998,-204,-28),\\
+ U^{(3)}&=(2479,-551,-371,-997).
+\end{aligned}
+\]
+Su intercalado es \eqref{eq:alpha-Rsgn-evaluacion}. Como
+\(H_4^2=4I_4\) y
+\(\det(H_4\oplus H_4\oplus H_4)=(-16)^3=-4096\), se tiene
+\begin{equation}\label{eq:alpha-Rsgn-inversa}
+ K=\mathcal H_{12}^{-1}U
+ =\frac14\mathcal H_{12}U
+\end{equation}
+después de deshacer la permutación de órbitas. En efecto,
+\[
+ H_4U^{(1)}=(936,2916,2484,3176),\quad
+ H_4U^{(2)}=(2172,2636,232,584),
+\]
+y
+\[
+ H_4U^{(3)}=(560,3296,3656,2404).
+\]
+La división forzada por cuatro da las órbitas
+\((234,729,621,794)\), \((543,659,058,146)\) y
+\((140,824,914,601)\), cuyo intercalado es el sello declarado.
+
+Como control independiente, los operadores cíclicos
+\((D_3K)_m=K_m-K_{m+3}\) y
+\((D_4K)_m=K_m-K_{m+4}\), junto con \(Q(K)=\sum_mK_m\), satisfacen
+\begin{equation}\label{eq:alpha-extractor-90-120}
+ \operatorname{rank}(D_3,D_4)=11,
+ \qquad
+ \operatorname{rank}(D_3,D_4,Q)=12.
+\end{equation}
+Por ello \((D_3K,D_4K,Q(K))\) reconstruye un único sello; además, el
+cálculo recupera exactamente
+\[
+ D_3K=b^{90},\qquad D_4K=b^{120},\qquad Q(K)=Q_{\rm TPK},
+\]
+lo cual certifica el lector previo del registro, sin convertir sus salidas
+en entradas. El truncamiento
+\eqref{eq:alpha-truncamiento-firmado-preserva-KU} no reescribe las primeras
+ciento ocho ventanas del libro; por ello ambos miembros de
+\eqref{eq:alpha-cuadrado-naturalidad-Rsgn} leen el mismo registro y
+producen \(U\). Ninguna de las matrices utilizadas contiene \(\alpha\) ni
+un dato experimental.
+\end{proof}
+
+El calendario observable de 108 pasos es una proyección estrictamente más
+pobre: reiniciar sus cursores cada 9 pasos borra precisamente las
+coordenadas bidireccionales que el registro enriquecido conserva. Por
+eso el registro crudo no sustituye al estado enriquecido y no se usa para
+reconstruir \(R_{\rm sgn}\). El teorema de selección anterior construye
+\(B_{\rm term}\); el teorema \ref{thm:alpha-Rsgn-construido} construye, de
+manera separada, la segunda publicación del mismo estado.
+
+\section{Estado dodecafásico y aplicaciones reversibles}
+
+El teorema de esta sección recibe del
+teorema~\ref{thm:alpha-Rsgn-construido} el vector firmado
+\[
+\Usgn=(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997).
+\]
+La ruta tipada demostrada a partir de esa entrada es
+\[
+\Usgn\longleftrightarrow K,
+\]
+\[
+K\longleftrightarrow(D_3K,D_4K,Q),
+\]
+\[
+(P,E,\Phi,K,c_{13}=0)
+\longleftrightarrow A=\alpha_{12}.
+\]
+La evaluación directa no recibe \(\alpha\) ni un valor metrológico como
+entrada. Recibe \(\Usgn\), las tres representaciones arquimedianas y la
+condición de frontera. El
+\cref{thm:selector-terminal-alpha-rev6} construye antes la selección de los
+tres bloques terminales; la presente capa comienza con el vector firmado que
+los transporta al cierre dodecafásico. La traza reducida de una sola
+coordenada posicional no interviene en esta determinación.
+
+\begin{remark}[Dos representaciones dodecafásicas de tipos distintos]
+\[
+U_{12}^{\rm cat}=U_6\Vert U_6
+\]
+es una palabra periódica del catálogo, mientras
+\[
+\Usgn=(2378,1406,2479,-452,998,-551,-668,-204,-371,-322,-28,-997)
+\]
+es un vector entero firmado del espacio completo de estados de TPK\@. El primero pertenece a una
+representación de bloques y tiene periodo seis. El segundo conserva orientación, no es
+una palabra base mil y no tiene ese periodo. No son intercambiables.
+\end{remark}
+
+\section{El vector canónico y las tres órbitas}
+
+El vector dodecafásico es
+\[
+\boxed{
+K=(234,543,140,729,659,824,621,058,914,794,146,601).}
+\]
+Su suma es
+\[
+Q(K)=6263.
+\]
+El paso tres divide \(\Cdoce\) en tres órbitas de cuatro sectores:
+\[
+\begin{aligned}
+K^{(1)}&=(K_1,K_4,K_7,K_{10})=(234,729,621,794),\\
+K^{(2)}&=(K_2,K_5,K_8,K_{11})=(543,659,058,146),\\
+K^{(3)}&=(K_3,K_6,K_9,K_{12})=(140,824,914,601).
+\end{aligned}
+\]
+Cada órbita recorre cuatro sectores separados por \(90^\circ\). Las etiquetas
+cardinales norte--este--sur--oeste aparecen después de fijar origen y orientación; el orden
+primario es \((m,m+3,m+6,m+9)\).
+
+\section{Primera representación: transformada de Hadamard}
+
+Sea
+\[
+H_4=
+\begin{pmatrix}
+1&1&1&1\\
+1&1&-1&-1\\
+1&-1&1&-1\\
+1&-1&-1&1
+\end{pmatrix}.
+\]
+La acción sobre las tres órbitas da
+\[
+\begin{aligned}
+H_4K^{(1)}&=(2378,-452,-668,-322),\\
+H_4K^{(2)}&=(1406,998,-204,-28),\\
+H_4K^{(3)}&=(2479,-551,-371,-997).
+\end{aligned}
+\]
+Al intercalar por columnas recuperamos
+\[
+\mathcal H_{12}(K)=\Usgn.
+\]
+Como
+\[
+H_4^2=4I_4,
+\qquad
+\det H_4=-16,
+\]
+la transformación global es invertible sobre \(\mathbb Q^{12}\):
+\[
+K^{(r)}=\frac14H_4U^{(r)},
+\qquad
+\det\mathcal H_{12}=(-16)^3=-4096\ne0.
+\]
+En la representación canónica, la inversa produce un único vector entero de
+\([0,999]^{12}\).
+
+\begin{theorem}[Estructura integral de la transformación de Hadamard]
+\label{thm:smith-hadamard}
+La forma normal de Smith del bloque \(H_4\), denotada por
+\(\operatorname{SNF}(H_4)\), es
+\[
+ \operatorname{SNF}(H_4)=\operatorname{diag}(1,2,2,4).
+\]
+En consecuencia, para la suma directa de los tres bloques,
+\[
+ \operatorname{coker}\mathcal H_{12}
+ \cong(\mathbb Z/2\mathbb Z)^6\oplus(\mathbb Z/4\mathbb Z)^3,
+\]
+y la imagen de \(\mathbb Z^{12}\) posee índice \(4096\). Un vector
+\(u\in\mathbb Z^4\) pertenece a \(H_4\mathbb Z^4\) exactamente cuando
+\[
+ H_4u\equiv0\pmod 4.
+\]
+\end{theorem}
+
+\begin{proof}
+El máximo común divisor de las entradas de \(H_4\) es uno. Los menores de
+orden dos son pares y alguno tiene valor absoluto dos; los menores de orden
+tres son múltiplos de cuatro y alguno tiene valor absoluto cuatro; por
+último, \(\lvert\det H_4\rvert=16\). Los divisores determinantes son,
+por tanto, \(1,2,4,16\), de donde se obtienen los factores invariantes
+\(1,2,2,4\). La suma directa de tres bloques repite estos factores y tiene
+índice \(16^3=4096\). Puesto que \(H_4^{-1}=H_4/4\), la última
+congruencia equivale a la integralidad de la preimagen.
+\end{proof}
+
+\section{Transportador ciclotómico relativo entre los sectores tres y cuatro}
+\label{sec:transportador-ciclotomico-a34-rev8}
+
+Sea \(\mathsf R\) la rotación regular del ciclo \(C_{12}\) sobre
+\(\mathbb Q^{12}\), y sean
+\[
+ W_d^{\rm cyc}:=\ker\Phi_d(\mathsf R)
+\]
+sus sectores ciclotómicos. Los proyectores racionales sobre los sectores de
+órdenes tres y cuatro pueden escribirse
+\[
+ \Pi_3=
+ \frac14(I+\mathsf R^3+\mathsf R^6+\mathsf R^9)
+ -\frac1{12}\sum_{k=0}^{11}\mathsf R^k,
+\]
+\[
+ \Pi_4=
+ \frac16(I-\mathsf R^2+\mathsf R^4-\mathsf R^6
+              +\mathsf R^8-\mathsf R^{10}).
+\]
+Para fijar el orden de coordenadas, sea
+\[
+ \mathsf P_{\rm orb}(z_1,\ldots,z_{12})
+ =\bigl((z_1,z_4,z_7,z_{10}),
+        (z_2,z_5,z_8,z_{11}),
+        (z_3,z_6,z_9,z_{12})\bigr).
+\]
+La transformada global usada arriba es, en el orden natural de \(C_{12}\),
+\[
+ \mathcal H_{12}
+ :=\mathsf P_{\rm orb}^{-1}
+   (H_4\oplus H_4\oplus H_4)\mathsf P_{\rm orb}.
+\]
+Es decir, \(H_4\oplus H_4\oplus H_4\) actúa en el orden de las tres
+órbitas de paso tres, no sobre tres cuaternas contiguas del orden natural.
+Definimos entonces el transportador relativo
+\[
+ A_{34}:=\left.\Pi_4\mathcal H_{12}\Pi_3
+          \right|_{W_3^{\rm cyc}}:
+ W_3^{\rm cyc}\longrightarrow W_4^{\rm cyc}.
+\]
+
+\begin{theorem}[Transportador ciclotómico dodecafásico]
+\label{thm:transportador-ciclotomico-a34-rev8}
+En las bases
+\[
+ u_1=(1,-1,0)^{\times4},\qquad
+ u_2=(0,1,-1)^{\times4}
+\]
+de \(W_3^{\rm cyc}\), y
+\[
+ v_1=(1,0,-1,0)^{\times3},\qquad
+ v_2=(0,1,0,-1)^{\times3}
+\]
+de \(W_4^{\rm cyc}\), se cumple
+\[
+ A_{34}u_1=\frac23(v_1-v_2),\qquad
+ A_{34}u_2=\frac23(v_1+v_2),
+\]
+y, por tanto,
+\[
+ \boxed{\det A_{34}=\frac89}.
+\]
+En particular, \(A_{34}\) es un isomorfismo racional entre ambos sectores.
+\end{theorem}
+
+\begin{proof}
+Se sustituyen las cuatro sucesiones periódicas anteriores en las expresiones
+de \(\Pi_3,\Pi_4\) y en los tres bloques de Hadamard. La matriz de \(A_{34}\)
+en las bases declaradas es
+\[
+ \begin{pmatrix}
+  2/3&2/3\\
+ -2/3&2/3
+ \end{pmatrix},
+\]
+cuyo determinante es \(8/9\).
+\end{proof}
+
+La involución racional que intercambia \(W_3^{\rm cyc}\) y
+\(W_4^{\rm cyc}\) mediante \(A_{34}\) y \(A_{34}^{-1}\), y fija
+\(W_{12}^{\rm cyc}\), transporta la suma
+\(W_4^{\rm cyc}\oplus W_{12}^{\rm cyc}\) a
+\(W_3^{\rm cyc}\oplus W_{12}^{\rm cyc}\). En esta última suma, el polinomio
+ciclotómico de la rotación es
+\[
+ \Phi_3(x)\Phi_{12}(x),
+\]
+que coincide con el polinomio del Coxeter de tipo \(E_6\). Ésta es una firma
+espectral exacta y prepara el corredor geométrico posterior.
+
+\begin{statusbox}[title={Transporte racional y continuación integral}]
+El operador \(A_{34}\) realiza el transporte ciclotómico racional entre los
+sectores de órdenes tres y cuatro. Al fijar \(W_{12}^{\rm cyc}\), sitúa la
+dodecafase en el sector espectral exacto
+\(\Phi_3\Phi_{12}\) de tipo \(E_6\). La continuación integral se construye
+mediante dos fuentes posteriores y compatibles: el
+\cref{thm:entrelazador-dodecafase-witt} proporciona la isometría
+\(M_{12}\)-equivariante hacia el módulo de Witt, y el
+\cref{thm:identificacion-isometrica-tres-proyectores} encadena los tres
+proyectores de incidencia. Sobre esa realización integral, el
+\cref{p12-83-c20-s6:thm:grafo-27-rectas-nuevo} construye el grafo de las
+veintisiete rectas y el
+\cref{p12-83-c20-s6:chap:holonomia-schlafli-e6-nuevo} identifica su acción de
+Weyl. Así, \(A_{34}\) fija la etapa racional de la genealogía y los
+entrelazadores de Witt--Schläfli realizan su prolongación reticular e
+incidencial.
+\end{statusbox}
+
+La separación de signo es
+\[
+U_{12}^{+}
+=(2378,1406,2479,0,998,0,0,0,0,0,0,0),
+\]
+\[
+U_{12}^{-}
+=(0,0,0,452,0,551,668,204,371,322,28,997),
+\]
+y
+\[
+\Usgn=U_{12}^{+}-U_{12}^{-}.
+\]
+
+\section{Segunda representación: diferencias transversales}
+
+Con índices en \(\{1,\ldots,12\}\) y la convención cíclica
+\[
+ K_{m+r}:=K_{1+((m+r-1)\bmod12)},
+\]
+definimos
+\[
+(D_3K)_m=K_m-K_{m+3},
+\qquad
+(D_4K)_m=K_m-K_{m+4}.
+\]
+El extractor transversal dodecafásico es el operador
+\[
+ \mathcal E_{\mathrm{dod}}
+ :=(D_3,D_4,Q).
+\]
+El subíndice ``dod'' declara su dominio. Los desplazamientos tres y cuatro
+corresponden a separaciones angulares de \(90^\circ\) y \(120^\circ\) en el
+ciclo orientado \(C_{12}\), pero \(\mathcal E_{\mathrm{dod}}\) no es el operador de
+incidencia hexada--octada ni el núcleo angular utilizado posteriormente en
+las torres.
+Los datos son
+\[
+\begin{aligned}
+D_3K={}&(-495,-116,-684,108,601,-90,\\
+       &\qquad-173,-88,313,560,-397,461),\\[1mm]
+D_4K={}&(-425,-281,-481,671,-255,30,\\
+       &\qquad475,-543,680,251,6,-128),\\[1mm]
+Q={}&6263.
+\end{aligned}
+\]
+Si \(D_3v=D_4v=0\), el vector es constante en los pasos tres y cuatro. Como
+\(\gcd(3,4)=1\), esos pasos conectan todo el ciclo y
+\[
+\ker D_3\cap\ker D_4=\langle\mathbf1\rangle.
+\]
+Por tanto
+\[
+\operatorname{rank}(D_3,D_4)=11.
+\]
+La carga total elimina la traslación constante, porque
+\(Q(\mathbf1)=12\ne0\). Luego
+\[
+\boxed{\operatorname{rank}(D_3,D_4,Q)=12,}
+\]
+y
+\[
+K\longleftrightarrow(D_3K,D_4K,Q)
+\]
+es un sistema de coordenadas exacto.
+
+\begin{theorem}[Forma normal integral del sistema transversal]
+\label{thm:smith-dodecafase}
+Sea
+\[
+ \mathcal D=(D_3,D_4,Q):
+ \mathbb Z^{12}\longrightarrow\mathbb Z^{25}.
+\]
+Sus factores invariantes no nulos son
+\[
+ \operatorname{SNF}(\mathcal D)
+ =\operatorname{diag}(\underbrace{1,\ldots,1}_{11},12),
+\]
+y, por consiguiente,
+\[
+ \operatorname{coker}\mathcal D
+ \cong\mathbb Z^{13}\oplus\mathbb Z/12\mathbb Z.
+\]
+\end{theorem}
+
+\begin{proof}
+Las filas de \((D_3,D_4)\) son incidencias orientadas del grafo
+\[
+ \operatorname{Cay}
+ \bigl(\mathbb Z/12\mathbb Z,\{\pm3,\pm4\}\bigr).
+\]
+Como los pasos tres y cuatro generan \(\mathbb Z/12\mathbb Z\), el grafo
+es conexo.
+Las incidencias de un árbol generador proporcionan once menores reducidos
+unimodulares; los once primeros factores invariantes son, pues, iguales a
+uno.
+
+Todo menor de orden doce contiene la fila \(Q\), ya que el bloque de
+incidencias tiene rango once. Al sumar las once primeras columnas a la
+última, operación unimodular, la última columna se anula en las filas de
+incidencia y vale doce en la fila \(Q\). Todos los menores máximos son
+divisibles por doce. La elección de las once incidencias de un árbol da un
+menor restante de valor absoluto uno y, por tanto, un determinante máximo
+de valor absoluto doce. El último factor invariante es exactamente doce.
+\end{proof}
+
+La componente \(\mathbb Z/12\mathbb Z\) registra la condición de
+compatibilidad integral de la carga total con el potencial reconstruido.
+En particular, la unicidad racional probada por el rango se refina aquí a
+una afirmación sobre la red integral y su única obstrucción torsional.
+
+El observable firmado también puede reconstruirse desde estas coordenadas.
+Para \(r=1,2,3\), sea
+\[
+B_r=\sum_{j=0}^{3}(D_4K)_{r+3j}.
+\]
+Se obtiene
+\[
+(B_1,B_2,B_3)=(972,-1073,101).
+\]
+Las sumas orbitales son
+\[
+A_1=\frac{Q+2B_1+B_2}{3}=2378,
+\quad
+A_2=A_1-B_1=1406,
+\quad
+A_3=A_2-B_2=2479.
+\]
+Si
+\(d_{r,j}=(D_3K)_{r+3j}\) para \(j=0,1,2,3\), con la misma convención
+cíclica, el bloque firmado de la órbita \(r\) es
+\[
+(A_r,d_{r,1}-d_{r,3},d_{r,0}+d_{r,2},d_{r,0}-d_{r,2}),
+\]
+exactamente el bloque Hadamard correspondiente.
+
+\begin{remark}[Codominios de \(\mathcal H_{12}\) y
+\(\mathcal E_{\mathrm{dod}}\)]
+La escritura correcta es
+\[
+\mathcal H_{12}(K)=\Usgn,
+\qquad
+\mathcal E_{\mathrm{dod}}(K)=(D_3K,D_4K,Q).
+\]
+Ambas representaciones son compatibles porque reconstruyen el mismo vector,
+pero no se ha definido aquí un diagrama entre sus codominios. Sus fórmulas y
+codominios son distintos. Compartir los pasos \(3/4\) o los índices \(90/120\) no
+autoriza a identificarlas.
+\end{remark}
+
+\section{Las tres coordenadas arquimedianas}
+
+Los vectores de doce tríadas son
+\[
+\begin{aligned}
+P={}&(141,592,653,589,793,238,462,643,383,279,502,884),\\
+E={}&(718,281,828,459,045,235,360,287,471,352,662,497),\\
+\Phi={}&(618,033,988,749,894,848,204,586,834,365,638,117).
+\end{aligned}
+\]
+En forma concatenada:
+\[
+\begin{aligned}
+\iota(P)&=141592653589793238462643383279502884,\\
+\iota(E)&=718281828459045235360287471352662497,\\
+\iota(\Phi)&=618033988749894848204586834365638117.
+\end{aligned}
+\]
+\(P\) es la coordenada decimal compartida por las cinco regiones de
+\(\pi\); el cálculo no afirma que esas regiones sean idénticas.
+
+\section{Recurrencia de acarreo en base mil}
+
+Fijamos
+\[
+c_{13}=0
+\]
+y calculamos de derecha a izquierda, \(m=12,11,\ldots,1\):
+\[
+s_m=P_m+E_m-\Phi_m-K_m+c_{m+1},
+\]
+\[
+A_m=s_m\bmod1000,
+\qquad
+c_m=\frac{s_m-A_m}{1000},
+\qquad0\le A_m<1000.
+\]
+La tabla se imprime en orden creciente de índice, pero cada acarreo procede de la fila
+inferior.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3.3pt}
+\begin{longtable}{@{}r|rrrr|rr|rr@{}}
+\caption{Cierre dodecafásico completo en base mil.}\label{tab:acarreo-alpha}\\
+\toprule
+\(m\)&\(P_m\)&\(E_m\)&\(\Phi_m\)&\(K_m\)&\(c_{m+1}\)&\(s_m\)&\(A_m\)&\(c_m\)\\
+\midrule
+\endfirsthead
+\toprule
+\(m\)&\(P_m\)&\(E_m\)&\(\Phi_m\)&\(K_m\)&\(c_{m+1}\)&\(s_m\)&\(A_m\)&\(c_m\)\\
+\midrule
+\endhead
+1&141&718&618&234&0&7&007&0\\
+2&592&281&033&543&0&297&297&0\\
+3&653&828&988&140&\(-1\)&352&352&0\\
+4&589&459&749&729&\(-1\)&\(-431\)&569&\(-1\)\\
+5&793&045&894&659&\(-2\)&\(-717\)&283&\(-1\)\\
+6&238&235&848&824&\(-1\)&\(-1200\)&800&\(-2\)\\
+7&462&360&204&621&0&\(-3\)&997&\(-1\)\\
+8&643&287&586&058&\(-1\)&285&285&0\\
+9&383&471&834&914&\(-1\)&\(-895\)&105&\(-1\)\\
+10&279&352&365&794&0&\(-528\)&472&\(-1\)\\
+11&502&662&638&146&0&380&380&0\\
+12&884&497&117&601&0&663&663&0\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+Los acarreos son
+\[
+(c_1,\ldots,c_{13})
+=(0,0,0,-1,-1,-2,-1,0,-1,-1,0,0,0).
+\]
+Los valores negativos de \(s_m\) son préstamos ordinarios en base mil. La
+división euclídea fija resto y cociente de forma única.
+
+La salida es
+\[
+\boxed{
+A=(007,297,352,569,283,800,997,285,105,472,380,663),}
+\]
+y por tanto
+\[
+\boxed{
+\begin{aligned}
+\alpha_{12}
+&:=\frac{7297352569283800997285105472380663}{10^{36}},\\
+&=0.007297352569283800997285105472380663.
+\end{aligned}}
+\]
+Este racional es la ventana dodecafásica inicial de la sección compatible
+generada por el transporte TPK. Si
+\(\rho_{N',N}:C_{N'}^\alpha\to C_N^\alpha\) son sus truncamientos, la
+salida completa es
+\[
+ \boxed{
+ \alpha_{\mathrm{HMT}}
+ :=\varprojlim_N\alpha_N,\qquad
+ \rho_{N',N}(\alpha_{N'})=\alpha_N,\qquad
+ \alpha_{36}=\alpha_{12}.}
+\]
+El retorno de fase prolonga la memoria y estrecha los cilindros
+supervivientes a profundidad arbitraria; no reinicia el estado ni termina la
+construcción en treinta y seis cifras.
+
+\section{La identidad afín completa}
+
+Coordenada a coordenada,
+\[
+\boxed{
+P_m+E_m-\Phi_m-K_m+c_{m+1}
+=A_m+1000c_m.}
+\]
+Si
+\[
+C=(c_1,\ldots,c_{12}),
+\qquad
+C^+=(c_2,\ldots,c_{13}),
+\]
+la forma vectorial correcta es
+\[
+\boxed{P+E-\Phi-K+C^+-1000C=A.}
+\]
+Para evitar identificar las colas finitas con las constantes completas,
+definimos
+\[
+ \tau_{36}(x)=10^{-36}\left\lfloor10^{36}
+ \bigl(x-\lfloor x\rfloor\bigr)\right\rfloor,
+ \qquad
+ \kappa(K)=10^{-36}\iota(K).
+\]
+La notación decimal exacta de la identidad concatenada es entonces
+\[
+ \tau_{36}(\pi)+\tau_{36}(e)-\tau_{36}(\varphi)-\kappa(K)
+ =\alpha_{12}.
+\]
+Sin el truncamiento explícito, la inmersión \(\kappa\) y el cociclo
+\(C^+-1000C\), la igualdad coordenada sería falsa.
+
+Definimos
+\[
+\iota(v_1,\ldots,v_{12})
+=\sum_{m=1}^{12}v_m1000^{12-m}.
+\]
+Al multiplicar cada recurrencia por \(1000^{12-m}\) y sumar, los acarreos
+telescopan:
+\[
+\iota(P)+\iota(E)-\iota(\Phi)-\iota(K)-\iota(A)
+=1000^{12}c_1-c_{13}.
+\]
+Como \(c_1=c_{13}=0\):
+\[
+\boxed{
+\iota(P)+\iota(E)-\iota(\Phi)-\iota(K)=\iota(A).}
+\]
+Los dos enteros restantes son
+\[
+\iota(K)=234543140729659824621058914794146601,
+\]
+\[
+\iota(A)=007297352569283800997285105472380663.
+\]
+
+\section{Inversión y equivalencia de las tres representaciones}
+
+La recurrencia se invierte por
+\[
+K_m=P_m+E_m-\Phi_m+c_{m+1}-A_m-1000c_m,
+\]
+y la representación entera concatenada por
+\[
+\iota(K)=\iota(P)+\iota(E)-\iota(\Phi)-\iota(A).
+\]
+El diagrama completo es
+\[
+\boxed{
+K\longleftrightarrow\Usgn,
+\qquad
+K\longleftrightarrow(D_3K,D_4K,Q),
+\qquad
+K\longleftrightarrow A\mid(P,E,\Phi,c_{13}=0).}
+\]
+Las dos primeras son representaciones lineales; la tercera, una aplicación
+afín reversible en la fibra
+condicionada por \(P,E,\Phi\) y la frontera.
+
+\begin{remark}[Conmutatividad del cierre]
+La aplicación directa obtiene \(K\) desde la representación firmada y produce
+\(A\). La fórmula inversa demuestra que la salida y la frontera recuperan el
+mismo vector sin libertad residual. La invertibilidad no constituye una
+evidencia estadística independiente; la conmutatividad de las tres
+representaciones es una propiedad algebraica del cierre.
+\end{remark}
+
+La unicidad se expresa en tres niveles de la misma construcción:
+\begin{enumerate}
+  \item fijados el vector firmado, \(P,E,\Phi\) y la frontera, el vector y la
+  salida son únicos;
+  \item las representaciones son reversibles y conmutativas;
+  \item la genealogía completa
+  \(\mathrm{APP}\to\mathrm{TRIT}\to\mathrm{TPK}\) produce esas primitivas
+  antes del cierre local, y sus truncamientos compatibles prolongan la
+  identidad a la sección coinductiva \(\alpha_{\mathrm{HMT}}\).
+\end{enumerate}
+
+\section{Condición de frontera dodecafásica}
+
+La primera ventana dodecafásica usa \(c_{13}=0\) y termina en
+\[
+\ldots|380|663.
+\]
+Esta frontera forma parte del dominio de la aplicación afín reversible. La
+prolongación no introduce otro sistema: itera el mismo transporte graduado
+del TPK sobre
+\[
+ w_6\to w_{12}\to w_{18}\to w_{24}\to w_{30}\to R_{36}\to G_9
+\]
+y construye las ventanas sucesivas con retorno de fase, avance de memoria y
+acarreo terminal compatible. El
+\cref{sec:l9s102:alpha-dos-vias} demuestra que los cuadrados de truncamiento
+de esta vía y del lector analítico conmutan y que sus cilindros
+supervivientes poseen intersección unitaria.
+
+\subsection{Clase integral del acarreo}
+
+La condición terminal puede compararse con el problema periódico. Sea
+\(S\) el desplazamiento cíclico sobre \(\mathbb Z^{12}\) y, para una base
+entera \(b\geq2\), definamos
+\[
+ \partial_b=S-bI.
+\]
+La identidad afín periódica adopta la forma
+\[
+ A=P+E-\Phi-K+\partial_bC.
+\]
+Para todo \(h\in\mathbb Z^{12}\), la transformación
+\[
+ K\longmapsto K+\partial_bh,
+ \qquad
+ C\longmapsto C+h
+\]
+conserva \(A\). Así, la elección de acarreos es una elección de
+representante dentro de una clase integral.
+
+\begin{proposition}[Cociente periódico del acarreo]
+\label{prop:cociente-periodico-acarreo}
+En un ciclo de longitud doce,
+\[
+ \operatorname{coker}(S-bI)\cong
+ \mathbb Z/(b^{12}-1)\mathbb Z.
+\]
+La concatenación en base \(b\), tomada módulo \(b^{12}-1\), determina la
+clase periódica.
+\end{proposition}
+
+\begin{proof}
+El módulo cíclico se identifica con
+\(\mathbb Z[t]/(t^{12}-1)\). Imponer la relación \(t=b\) produce
+\(\mathbb Z/(b^{12}-1)\mathbb Z\). La evaluación del polinomio de
+coeficientes es la concatenación en base \(b\), con la orientación fijada
+por el orden de los doce sectores.
+\end{proof}
+
+El cierre de \(\alpha\) no emplea el cociente periódico: utiliza una cadena
+orientada con extremo derecho y exige \(c_{13}=0\). La división euclídea
+selecciona entonces un único representante. Esta diferencia explica por
+qué la frontera abierta forma parte de la definición de la aplicación y no
+puede reemplazarse por una identificación cíclica de los acarreos.
+
+\section{Comparación con la referencia metrológica}
+
+Después de la generación, la aritmética entera de la primera ventana
+verifica el reconocimiento
+\[
+\boxed{
+\alpha_{12}
+=10^{-36}
+\left\lfloor\frac{10^{36}}{137.035999084}\right\rfloor.}
+\]
+Su inversa es
+\[
+\alpha_{12}^{-1}
+=137.03599908400000000000000000000001066588\ldots,
+\]
+y reproduce exactamente la cadena central publicada en el ajuste de 2018 del
+Committee on Data for Science and Technology (CODATA) \cite{Tiesinga2021CODATA}:
+\[
+\boxed{137.035999084.}
+\]
+No es una coincidencia de coma flotante. Las treinta y seis cifras de
+\(\alpha_{12}\) constituyen el truncamiento exacto del recíproco de la
+cadena central impresa. Esta comprobación finita no define
+\(\alpha_{\mathrm{HMT}}\) ni limita su profundidad: la sección coinductiva
+ya producida determina todas sus ventanas compatibles, mientras CODATA sólo
+reconoce después el prefijo que su resolución experimental permite
+contrastar.
+
+El reconocimiento metrológico no forma parte de la recurrencia. El resultado
+matemático es la identidad exacta de las dos vías
+\[
+ \alpha_A=\alpha_B=\alpha_{\mathrm{HMT}},
+\]
+cuyas ventanas dodecafásicas son determinadas por el vector firmado, las
+tres palabras generadas y las fronteras compatibles. La tabla de CODATA
+sólo compara después una salida ya fijada.
+
+La comparación con ajustes metrológicos posteriores es un control externo
+separado. La salida HMT queda congelada y, por ello, puede ser contrastada sin
+modificar el generador.
+
+\section{Independencia de las coordenadas y rigidez}
+
+Las pruebas del cierre distinguen modificaciones profundas de perturbaciones
+locales:
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Variante & Resultado & Qué controla \\
+\midrule
+protocolo canónico derecha--izquierda & igualdad exacta & referencia \\
+usar \(U_6\Vert U_6\) como \(K\) & falla macroscópicamente & distinción de tipos \\
+rotar \(K\) & rompe el cierre & origen dodecafásico \\
+reflejar \(K\) & invierte el borde & orientación \\
+acarreo izquierda--derecha & cambia la palabra & sentido del transporte \\
+perturbar \(K_i\) en una unidad & falla la palabra exacta & rigidez profunda \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Una perturbación local puede alterar sólo una cifra profunda; sigue siendo una
+refutación de la igualdad exacta. Las variantes estructurales producen fallos
+mayores y muestran que el cierre no es invariante bajo órdenes arbitrarios.
+
+\begin{remark}[Estructura del cierre dodecafásico]
+El cierre de \(\alpha\) comprende un ciclo orientado, dos representaciones
+exactas del vector \(K\), doce entradas tipadas, una recurrencia de derecha a
+izquierda, trece acarreos, una condición de frontera y una identidad entera
+telescópica. Estos datos determinan la salida de manera reproducible.
+\end{remark}

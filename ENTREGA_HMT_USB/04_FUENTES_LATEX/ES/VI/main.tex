@@ -1,0 +1,102 @@
+% Fuente maestra de trabajo. La compilación de entrega requiere preflight_vi.py.
+% El cuerpo está integrado; su autonomía completa no está declarada.
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=25mm,bottom=24mm,left=27mm,right=27mm,headheight=15pt,headsep=8mm,footskip=12mm]{geometry}
+\usepackage{fontspec,amsmath,mathtools,amsthm,unicode-math}
+\usepackage[spanish,es-nodecimaldot,es-noquoting]{babel}
+\usepackage{microtype,xcolor,fancyhdr,titlesec,booktabs,longtable,array,tabularx}
+\usepackage{graphicx,tikz,enumitem,float,needspace}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,matrix}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\setmainfont{STIXTwoText-Regular.otf}[BoldFont=STIXTwoText-Bold.otf,ItalicFont=STIXTwoText-Italic.otf,BoldItalicFont=STIXTwoText-BoldItalic.otf]
+\setmathfont{STIXTwoMath-Regular.otf}
+\renewcommand{\boldsymbol}[1]{\symbfit{#1}}
+\hypersetup{pdftitle={Partículas, persistencia y derivación del espectro de masas},pdfauthor={Oumar Haidara Fall; Rubén Ramos Balsa},pdfsubject={Definición estructural de partícula, clasificación de estados y construcción del operador de masa}}
+\newcommand{\Autores}{Oumar Haidara Fall \textperiodcentered\ Rubén Ramos Balsa}
+\newcommand{\RR}{\mathbb R}\newcommand{\ZZ}{\mathbb Z}\newcommand{\QQ}{\mathbb Q}\newcommand{\CC}{\mathbb C}\newcommand{\FF}{\mathbb F}
+\newcommand{\Id}{\operatorname{id}}\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Span}{\operatorname{span}}\newcommand{\Cyl}{\operatorname{Cyl}}
+\newcommand{\square}{\mdlgwhtsquare}
+\newcommand{\TPK}{\mathrm{TPK}}\newcommand{\APP}{\mathrm{APP}}\newcommand{\TRIT}{\{-1,0,+1\}}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}\newtheorem{proposition}[theorem]{Proposición}\newtheorem{corollary}[theorem]{Corolario}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definición}\newtheorem{axiom}[theorem]{Axioma}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Observación}
+\numberwithin{equation}{section}
+\setlength{\parindent}{1em}\setlength{\parskip}{3pt plus 1pt minus .5pt}\setlength{\emergencystretch}{2em}
+\renewcommand{\normalsize}{\fontsize{10.5}{13.4}\selectfont}\normalsize
+\setlist{nosep,topsep=5pt}
+\titleformat{\section}{\fontsize{13}{16}\selectfont\bfseries}{\thesection}{.65em}{}
+\titleformat{\subsection}{\fontsize{11.2}{14}\selectfont\bfseries}{\thesubsection}{.65em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{.65em}{}
+\AddToHook{cmd/subsection/before}{\Needspace{7\baselineskip}}
+\AddToHook{cmd/subsubsection/before}{\Needspace{6\baselineskip}}
+\setcounter{tocdepth}{2}
+\makeatletter
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{1.5em}{3.4em}}
+\makeatother
+\titlespacing*{\section}{0pt}{17pt}{9pt}\titlespacing*{\subsection}{0pt}{13pt}{6pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\fontsize{8}{10}\selectfont Partículas, persistencia y derivación del espectro de masas}
+\fancyhead[R]{}
+\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{.2pt}
+\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+\clubpenalties 3 10000 10000 0
+\widowpenalties 3 10000 10000 0
+\AddToHook{cmd/section/before}{\clearpage}
+\raggedbottom
+\newcommand{\CatalogRouteReference}{El \emph{Catálogo estructural y metrológico de partículas}, anexo de datos de esta entrega, enumera las 324 rutas orientadas en su sección 2 y los 855 registros metrológicos en su sección 3. Las definiciones y demostraciones del presente artículo están incluidas en su cuerpo y sus apéndices.}
+% BEGIN NUCLEO_ADITIVO_20260921_PREAMBULO
+\input{nucleo_ampliado/compatibilidad_editorial.tex}
+% END NUCLEO_ADITIVO_20260921_PREAMBULO
+\newif\ifHMTDeltaEnglish\HMTDeltaEnglishfalse
+\newcommand{\HMTLang}[2]{\ifHMTDeltaEnglish#2\else#1\fi}
+% Apertura independiente del índice: corrección quirúrgica 20260928.
+\let\HMTIndiceOriginal\tableofcontents
+\renewcommand{\tableofcontents}{\clearpage\begingroup\setlength{\parskip}{0pt}\fontsize{9.2}{10.5}\selectfont\HMTIndiceOriginal\endgroup\clearpage}
+\begin{document}
+\input{sections/00_portada.tex}
+\input{sections/00_resumen.tex}
+\tableofcontents
+\clearpage
+\begingroup\setlength{\parskip}{2pt}\fontsize{10}{11.8}\selectfont
+\input{sections/01_introduccion.tex}
+\par\endgroup
+\clearpage
+\input{sections/nucleo.tex}
+\clearpage% BEGIN NUCLEO_ADITIVO_20260921_CONTINUO
+\clearpage
+\input{nucleo_ampliado/continuo_conjunto.tex}
+% END NUCLEO_ADITIVO_20260921_CONTINUO
+\input{sections/14_generacion_regional.tex}
+\clearpage\input{sections/15_aritmetica_historias.tex}
+\clearpage% BEGIN NUCLEO_ADITIVO_20260921_SELECCION
+\clearpage
+\input{nucleo_ampliado/lectores_cilindros_incidencia.tex}
+\input{nucleo_ampliado/calendario_completo.tex}
+\clearpage
+\input{nucleo_ampliado/seleccion_registro_k.tex}
+\input{nucleo_ampliado/censo_terminal_completo.tex}
+\clearpage
+% END NUCLEO_ADITIVO_20260921_SELECCION
+\input{sections/09_dependencias_anteriores.tex}
+\clearpage\input{sections/02_particula_persistencia.tex}
+\clearpage\input{sections/03_conjugacion_mobius.tex}
+\clearpage\input{sections/04_atlas_familias.tex}
+\clearpage\input{sections/05_registro_operador_masa.tex}
+% BEGIN AMPLIACION_MEMORIA_COMPATIBILIDAD_20260922
+\input{ampliacion_20260922.tex}
+% END AMPLIACION_MEMORIA_COMPATIBILIDAD_20260922
+\clearpage\input{sections/05b_electron_estados_ley_masas_20260927.tex}
+\clearpage\input{sections/13_fock_pauli_composicion.tex}
+\clearpage\input{sections/08_familias_y_compuestos.tex}
+\clearpage\input{sections/10_sectores_topologicos.tex}
+\clearpage\input{sections/06_kepler_sommerfeld.tex}
+\clearpage\input{sections/07_contraste_metrologico.tex}
+\clearpage\input{sections/90_conclusiones.tex}
+\clearpage\appendix
+\input{sections/14_apendice_censo_regional.tex}
+\clearpage\input{sections/11_apendices_catalogo.tex}
+\clearpage\input{sections/99_bibliografia.tex}
+\end{document}

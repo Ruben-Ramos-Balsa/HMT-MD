@@ -1,0 +1,555 @@
+\section{TRIT: ternary orientation, carry and quadratic representation}
+\label{trit:capitulo}
+
+The construction of APP jointly preserves position, the
+additive and multiplicative evaluations and their nonadic decompositions. The oriented ternary reduction
+now acts on these data. Its task is twofold: to distinguish
+the three operational classes of an evaluation and to preserve the integer coordinate
+that allows it to be restored. This distinction is subsequently involved in the phase
+selection of the topological phase kernel, called TPK after its initials in
+English, \emph{Topological Phase Kernel}.
+
+The term \emph{trit} designates a ternary unit. In the balanced convention
+of HMT its values are \(-1,0,+1\). The same alphabet admits different
+functions depending on the domain: reading an arithmetic evaluation, selecting
+an operational mode or indexing a quadratic realization. Each function
+is defined with its domain and the information it preserves.
+
+The development begins with the integer evaluations of APP. Quadratic
+realizations appear later as representations of the tritic type already
+determined. The concrete construction of their generators and the Euler
+extension are developed in chapter~\ref{eul:capitulo}, after introducing
+the calendar and the TPK mode selection.
+
+\subsection{Balanced ternary reduction of APP evaluations}
+\label{trit:reduccion}
+
+At a position \((i,j)\), with \(i,j\in\{1,\ldots,9\}\), the integer
+evaluations are \(S(i,j)=i+j\) and \(P(i,j)=ij\). Each preserves its positive
+remainder modulo nine and its quotient. Ternary reduction is applied to the
+corresponding evaluation and produces another pair of coordinates.
+
+\begin{definicion}[Oriented ternary decomposition]
+\label{trit:def:balanceada}
+Let
+\[
+ \mathcal T=\{-1,0,+1\},\qquad
+ c_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3c_3(n),\quad n\in\mathbb Z.
+\]
+The decomposition and restitution maps are
+\[
+ \mathcal B_3:\mathbb Z\longrightarrow\mathcal T\times\mathbb Z,
+ \qquad \mathcal B_3(n)=(r_3(n),c_3(n)),
+\]
+\[
+ \mathcal L_3:\mathcal T\times\mathbb Z\longrightarrow\mathbb Z,
+ \qquad \mathcal L_3(r,c)=r+3c.
+\]
+The first component is the balanced ternary representative; the second
+is the extension quotient.
+\end{definicion}
+
+\begin{proposicion}[Exact restitution and uniqueness]
+\label{trit:prop:restitucion}
+The maps \(\mathcal B_3\) and \(\mathcal L_3\) are inverses.
+In particular, for every integer \(n\),
+\[
+ n=r_3(n)+3c_3(n),\qquad r_3(n)\in\mathcal T,
+\]
+and this expression is unique.
+\end{proposicion}
+\begin{proof}
+If \(c=\lfloor(n+1)/3\rfloor\), then
+\(3c\le n+1<3c+3\). Therefore \(-1\le n-3c<2\), and the integer
+\(r=n-3c\) belongs to \(\mathcal T\). If
+\(r+3c=s+3d\), with \(r,s\in\mathcal T\), the integer \(r-s\) is a multiple
+of three and lies between \(-2\) and \(2\). Thus, \(r=s\) and \(c=d\).
+Finally, for any pair \((r,c)\),
+\(\lfloor(r+3c+1)/3\rfloor=c\), since \(0\le r+1\le2\).
+This proves both inverse compositions.
+\end{proof}
+
+The oriented section of the quotient \(\mathbb Z/3\mathbb Z\) is fixed by
+\[
+ [0]_3\longmapsto0,\qquad [1]_3\longmapsto+1,
+ \qquad [2]_3\longmapsto-1.
+\]
+Replacing \(2\) with \(-1\) is accompanied by the necessary quotient:
+\(2=-1+3\). The integer evaluation remains recoverable in the pair.
+
+\begin{tablacompleta}
+\caption{Balanced decomposition of the nine positions on an APP line.}
+\label{trit:tabla:nueve}
+\begin{tabular}{c*{9}{r}}
+\toprule
+\(n\)&1&2&3&4&5&6&7&8&9\\
+\midrule
+\(r_3(n)\)&1&$-1$&0&1&$-1$&0&1&$-1$&0\\
+\(c_3(n)\)&0&1&1&1&2&2&2&3&3\\
+\bottomrule
+\end{tabular}
+\notatabla{Coincidence of ternary representatives preserves three
+distinct positions in each class; their quotients restore the integers.}
+\end{tablacompleta}
+
+For example, at \((i,j)=(5,5)\), the sum equals \(10\) and the product equals
+\(25\). Both ternary readings give \(+1\), while their
+complete decompositions are
+\[
+ \mathcal B_3(10)=(1,3),\qquad
+ \mathcal B_3(25)=(1,8).
+\]
+The common signature identifies a residue type; the sheet and quotient distinguish
+the two evaluations. The APP state also preserves the position that
+produced them.
+
+\subsubsection{Compatibility between moduli nine and three}
+
+Write the nonadic decomposition of an evaluation as
+\[
+ n=R_9(n)+9q_9(n),\qquad R_9(n)\in\{1,\ldots,9\}.
+\]
+Reducing its positive representative ternarily yields
+\[
+ R_9(n)=r_3(R_9(n))+3c_3(R_9(n)).
+\]
+Substituting,
+\begin{equation}
+ r_3(n)=r_3(R_9(n)),\qquad
+ c_3(n)=c_3(R_9(n))+3q_9(n).
+\label{trit:eq:compatibilidad39}
+\end{equation}
+Uniqueness of the balanced decomposition proves both identities.
+The visible reduction modulo three can be performed on the nonadic
+remainder, while the complete reconstruction also transports the
+previous quotient.
+
+In the product \(5\cdot5=25\), the nonadic decomposition is
+\(25=7+9\cdot2\). Since \(7=1+3\cdot2\), the preceding formula gives
+\(25=1+3(2+3\cdot2)=1+3\cdot8\). Both reading orders restore
+the same integer because the quotients compose explicitly.
+
+\subsection{Arithmetic of ternary states with carry}
+\label{trit:aritmetica}
+
+Preserving the pairs makes it possible to transfer the APP operations to
+balanced coordinates. The transfer determines the additive carry and
+the cross terms of the product.
+
+\begin{definicion}[Balanced additive carry]
+For \(r,s\in\mathcal T\), let
+\[
+ r\oplus s=r_3(r+s),\qquad
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+The integer \(\chi(r,s)\) is the carry produced when normalizing the sum of
+the two representatives.
+\end{definicion}
+
+\begin{tablacompleta}
+\caption{Additive carry of the balanced ternary section.}
+\begin{tabular}{c|rrr}
+\toprule
+\(\chi(r,s)\)&\(s=-1\)&\(s=0\)&\(s=+1\)\\
+\midrule
+\(r=-1\)&$-1$&0&0\\
+\(r=0\)&0&0&0\\
+\(r=+1\)&0&0&1\\
+\bottomrule
+\end{tabular}
+\notatabla{The two extremes encode
+\(-1-1=1-3\) and \(1+1=-1+3\).}
+\end{tablacompleta}
+
+\begin{proposicion}[Recoverable operations]
+\label{trit:prop:operaciones}
+If \(n=r+3c\) and \(m=s+3d\), with \(r,s\in\mathcal T\), then
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r\oplus s,c+d+\chi(r,s)\bigr),
+ \label{trit:eq:suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr)
+ \label{trit:eq:producto}
+\end{align}
+are, respectively, the decompositions of \(n+m\) and \(nm\).
+\end{proposicion}
+\begin{proof}
+The sum decomposes as
+\[
+ n+m=r+s+3(c+d)
+     =r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+In the product,
+\[
+ nm=(r+3c)(s+3d)=rs+3(rd+sc+3cd).
+\]
+The integer \(rs\) belongs to \(\mathcal T\). Both expressions are
+normalized; uniqueness in proposition~\ref{trit:prop:restitucion}
+identifies their components.
+\end{proof}
+
+These laws distinguish accumulation and multiplication in the record.
+The sum aggregates the quotients and adds the residue carry. The product
+also combines each representative with the quotient of the other evaluation.
+This arithmetic content is maintained when the operations are incorporated
+into a TPK transition.
+
+\begin{ejemplo}[Sum and product of two evaluations]
+From \(2=-1+3\) and
+\(4=1+3\) follows
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+Restitution produces \(6\) and \(8\), respectively. In the second
+operation, the quotient is \((-1)\cdot1+1\cdot1+3\cdot1\cdot1=3\).
+\end{ejemplo}
+
+\begin{proposicion}[Cocycle identity and associativity]
+\label{trit:prop:cociclo}
+For \(r,s,t\in\mathcal T\),
+\begin{equation}
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\label{trit:eq:cociclo}
+\end{equation}
+The operations \(\boxplus\) and \(\boxtimes\), together with their identity
+elements and additive inverses transported by \(\mathcal B_3\), make
+\(\mathcal T\times\mathbb Z\) a ring isomorphic to \(\mathbb Z\).
+\end{proposicion}
+\begin{proof}
+When normalizing \((r+s)+t\), the total quotient is the first side of
+\eqref{trit:eq:cociclo}; when normalizing \(r+(s+t)\), it is the second.
+The final representatives coincide because they represent the same class
+modulo three. Uniqueness of the complete decomposition requires the
+quotients to coincide as well. By proposition~\ref{trit:prop:operaciones},
+\(\mathcal L_3\) is a bijection preserving sum and product. It therefore transports
+associativity, distributivity and commutativity of the
+integer operations. Its identity elements are \((0,0)\) and \((1,0)\).
+\end{proof}
+
+The cocycle proof expresses a concrete compatibility of the record:
+normalization can be performed in stages without changing the final
+evaluation. If the sequence of operations is of interest, the record also preserves
+the order of the normalizations performed.
+
+\subsection{Ternary refinement and recovery at arbitrary depth}
+\label{trit:refinamiento}
+
+The decomposition is iterated on the quotient. Given \(n_0\in\mathbb Z\),
+define recursively
+\[
+ r_k=r_3(n_k),\qquad n_{k+1}=c_3(n_k),\qquad k\ge0.
+\]
+Each transition satisfies \(n_k=r_k+3n_{k+1}\). Composing these
+equalities produces a restitution at any prescribed depth.
+
+\begin{proposicion}[Restitution of a truncation]
+\label{trit:prop:profundidad}
+For every \(N\ge1\),
+\begin{equation}
+ n_0=\sum_{k=0}^{N-1}3^kr_k+3^Nn_N.
+\label{trit:eq:restitucionN}
+\end{equation}
+The sequence \((r_0,\ldots,r_{N-1})\), together with the terminal quotient
+\(n_N\), determines \(n_0\) exactly.
+\end{proposicion}
+\begin{proof}
+For \(N=1\), the identity is the initial decomposition. If it holds for
+\(N\), substitute \(n_N=r_N+3n_{N+1}\) into the last term to
+obtain the formula for \(N+1\). Restitution also reconstructs the
+intermediate quotients, starting at \(n_N\) and applying
+\(n_k=r_k+3n_{k+1}\) in reverse order.
+\end{proof}
+
+\begin{ejemplo}[A carry crossing three levels]
+The evaluation \(26\) successively gives
+\[
+ 26=-1+3\cdot9,\qquad 9=0+3\cdot3,
+ \qquad 3=0+3\cdot1,\qquad1=1+3\cdot0.
+\]
+Its representatives, ordered from lower to higher power, are
+\((-1,0,0,1)\). Restitution is \(26=-1+27\). The zero symbol at the
+intermediate levels preserves a position and a determined quotient.
+\end{ejemplo}
+
+\begin{proposicion}[Termination for a fixed integer]
+Iteration of the balanced quotient reaches zero for every initial
+integer. Once trailing zeros are removed, the finite balanced ternary
+expansion of an integer is unique.
+\end{proposicion}
+\begin{proof}
+For \(|n|\ge2\),
+\( |c_3(n)|\le(|n|+1)/3<|n|\).
+For \(n\in\{-1,0,1\}\), the quotient is zero. The absolute value
+strictly decreases while it is at least two, so the
+iteration terminates. If two expansions represent the same integer,
+their reduction modulo three fixes the same first representative; subtracting it
+and dividing by three repeats the argument for all positions.
+\end{proof}
+
+This result concerns the arithmetic of a fixed integer. In
+TPK extensions, the record length increases and new
+evaluations can be generated. There, depth corresponds to a compatible
+sequence of states, whose construction requires the survival
+rules. Formula~\eqref{trit:eq:restitucionN} provides the local
+restitution mechanism that those extensions must preserve.
+
+\subsection{Two ternary coordinates of a nonadic class}
+\label{trit:nonadico}
+
+The reduction of \(\mathbb Z/9\mathbb Z\) modulo three has three elements
+in each fiber. The additional coordinate can be written as a residue
+ternary quotient.
+
+\begin{proposicion}[Nonadic coordinates with carried addition]
+\label{trit:prop:beta}
+The map
+\[
+ \beta:\mathcal T\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad \beta(r,\bar c)=[r+3c]_9
+\]
+is a bijection of sets. Nonadic addition and multiplication take the
+form
+\begin{align}
+ \beta(r,\bar c)+\beta(s,\bar d)
+ &=\beta\bigl(r\oplus s,\overline{c+d+\chi(r,s)}\bigr),
+ \label{trit:eq:beta-suma}\\
+ \beta(r,\bar c)\beta(s,\bar d)
+ &=\beta\bigl(rs,\overline{rd+sc}\bigr).
+ \label{trit:eq:beta-producto}
+\end{align}
+\end{proposicion}
+\begin{proof}
+Changing \(c\) to \(c+3k\) changes \(r+3c\) by \(9k\), so
+the map is well defined. If two images coincide, reduction
+modulo three fixes the same \(r\). The remaining difference, divided by
+three, fixes the same class \(\bar c\). Injectivity between two sets
+of nine elements proves bijectivity. The operations come from
+\eqref{trit:eq:suma} and \eqref{trit:eq:producto}; the term \(3cd\) in the
+multiplicative quotient vanishes upon reduction modulo three.
+\end{proof}
+
+The carry establishes the composition law between the two levels. For
+example,
+\[
+ \beta(1,0)+\beta(1,0)=\beta(-1,1).
+\]
+The second coordinate records the step performed by the integer sum before
+its residue reading. In particular, \(\mathbb Z/9\mathbb Z\) has
+elements of order nine, whereas the additive group of
+\(\mathbb F_3^2\) has exponent three. The preceding bijection preserves
+the sum through the explicit carried law.
+
+The three APP positions \(3,6,9\) are written
+\[
+ [3]_9=\beta(0,1),\qquad
+ [6]_9=\beta(0,2),\qquad
+ [9]_9=\beta(0,0).
+\]
+On the ideal \(3\mathbb Z/9\mathbb Z\), extraction of the second
+coordinate is
+\[
+ [3c]_9\longmapsto[c]_3.
+\]
+This is an additive bijection with \(\mathbb F_3\). It differs from
+direct reduction modulo three, which assigns zero to all three elements.
+Moreover, the product of two elements of this ideal is zero modulo nine.
+Its multiplicative structure thus retains a function different from
+multiplication in the field \(\mathbb F_3\).
+
+\subsubsection{The fiber of six ternary positions}
+
+An oriented word of length six belongs to \(\mathcal T^6\),
+with \(3^6=729\) possibilities. The choice of representatives induces a
+bijection with \(\mathbb F_3^6\). Grouping positions in pairs and
+applying \(\beta\) also yields a set-theoretic bijection with
+\((\mathbb Z/9\mathbb Z)^3\). The transported law uses the carry
+of each pair.
+
+The census of words actually emitted by the TPK is performed after
+constructing its emitter and chronology. The ambient fiber of \(729\)
+elements fixes coordinate capacity; the set of emissions and its ternary
+image are determined by the operational rules. This separation makes it possible
+to preserve, in the subsequent census, both multiplicities and the
+distinct records sharing a visible word.
+
+\subsection{Oriented involution and transport memory}
+\label{trit:involucion}
+
+\begin{proposicion}[Compatibility with sign reversal]
+For all \(n\in\mathbb Z\),
+\[
+ \mathcal B_3(-n)=(-r_3(n),-c_3(n)).
+\]
+\end{proposicion}
+\begin{proof}
+From \(n=r+3c\) we deduce \(-n=(-r)+3(-c)\). Since \(-r\in\mathcal T\),
+uniqueness of the decomposition proves the statement.
+\end{proof}
+
+For a sequence of signatures of length \(m\), define
+\[
+ \mathcal C_{\rm rev}(\tau_1,\ldots,\tau_m)
+ =(-\tau_m,\ldots,-\tau_1).
+\]
+The second application restores the initial order and signs, so
+that \(\mathcal C_{\rm rev}^{2}=\operatorname{id}\). In a sequence
+of pairs, the same rule simultaneously transports
+\((r_k,c_k)\mapsto(-r_{m+1-k},-c_{m+1-k})\). The length and each
+restorable evaluation are determined.
+
+Division memory and transport memory serve different
+purposes. The pair \((r_3(n),c_3(n))\) reconstructs an integer evaluation.
+Reconstructing a trajectory also requires the initial position,
+orientations, sequence of modes and boundary crossings. Two paths
+can reach the same evaluation and preserve different transport
+records. The enriched state integrates both orders of information.
+
+In the temporal interpretation adopted by HMT, \(+1\) corresponds to
+return with memory, \(0\) to the present threshold and \(-1\) to the opening of
+conjugate extensions. This assignment fixes a regime reader.
+Effective evolution requires the TPK transition on the complete
+records; its iterations determine which phase returns and which memory is
+incremented.
+
+\subsection{Quadratic algebras of the three regimes}
+\label{trit:cuadraticas}
+
+The tritic index has an algebraic realization through a quadratic
+relation. Its integral formulation precedes the choice of the scalar
+field and allows discrete information to be separated from subsequent
+analytic realizations.
+
+\begin{definicion}[Quadratic algebra of tritic type]
+For \(\tau\in\mathcal T\), define
+\[
+ \mathcal Q_{\tau,\mathbb Z}=\mathbb Z[u]/(u^2+\tau).
+\]
+For a commutative ring \(A\), its realization by change of scalars is
+\[
+ \mathcal Q_{\tau,A}=A[u]/(u^2+\tau).
+\]
+The class of \(u\), written \(J_\tau\), satisfies
+\(J_\tau^2=-\tau I\).
+\end{definicion}
+
+Division by the monic polynomial \(u^2+\tau\) provides a unique
+expression \(aI+bJ_\tau\). The product is calculated by reducing only the
+quadratic term:
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+ =(ac-\tau bd)I+(ad+bc)J_\tau.
+\label{trit:eq:producto-cuadratico}
+\end{equation}
+This multiplication represents the quadratic regime. The arithmetic of
+balanced pairs, for its part, preserves integers and their quotients
+through \eqref{trit:eq:suma} and \eqref{trit:eq:producto}.
+
+\subsubsection{Nine-element realizations}
+
+Over \(\mathbb F_3\), the three algebras have nine elements and admit
+the following classification:
+\[
+ \mathcal Q_{+1,\mathbb F_3}\cong\mathbb F_9,\qquad
+ \mathcal Q_{0,\mathbb F_3}=\mathbb F_3[\varepsilon]/(\varepsilon^2),
+ \qquad
+ \mathcal Q_{-1,\mathbb F_3}\cong\mathbb F_3\times\mathbb F_3.
+\]
+
+\begin{proposicion}[Distinction of the three finite types]
+\label{trit:prop:tres-tipos}
+The first algebra is a field; the second contains a nonzero
+nilpotent; the third has two nontrivial orthogonal idempotents whose
+sum is the identity. The three are pairwise nonisomorphic.
+\end{proposicion}
+\begin{proof}
+The polynomial \(u^2+1\) takes the values \(1,2,2\) on \(0,1,2\);
+it is therefore irreducible over \(\mathbb F_3\). Its quotient is a
+field of degree two. In the second case, the class \(\varepsilon\) is
+nonzero and satisfies \(\varepsilon^2=0\). In the third,
+\(u^2-1=(u-1)(u+1)\), with coprime factors. The evaluation
+\(a+bu\mapsto(a+b,a-b)\) is an isomorphism to
+\(\mathbb F_3\times\mathbb F_3\). The elements
+\(2(1+u)\) and \(2(1-u)\) are its two coordinate idempotents.
+These algebraic properties distinguish the three types.
+\end{proof}
+
+In the development of exceptional incidence, a concretely
+constructed ternary operator satisfying \(A_W^2=-I\) induces the action of
+\(\mathbb F_9\) on its space. If that space is \(\mathbb F_3^6\),
+the dimension over \(\mathbb F_9\) is three: the action is defined by
+\((a+b\iota)v=av+bA_Wv\). The operator fixes multiplication by the
+quadratic unit. The corresponding Paley construction supplies that
+operator in its causal place; the present classification establishes the
+content of the relation it must satisfy.
+
+\subsubsection{Conjugation, algebraic norm and inverse}
+
+In the real realization, conjugation and the algebraic norm are
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+
+\begin{proposicion}[Multiplicative norm and inverse restitution]
+\label{trit:prop:norma}
+For \(z,w\in\mathcal Q_{\tau,\mathbb R}\),
+\[
+ z\bar z=N_\tau(z)I,
+ \qquad N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+An element \(z\) is invertible exactly when \(N_\tau(z)\ne0\);
+in that case \(z^{-1}=\bar z/N_\tau(z)\).
+\end{proposicion}
+\begin{proof}
+The product \eqref{trit:eq:producto-cuadratico} gives
+\((aI+bJ_\tau)(aI-bJ_\tau)=(a^2+\tau b^2)I\).
+Conjugation is multiplicative and the algebra is commutative, so
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). If the norm is nonzero,
+the formula exhibits an inverse. If \(zw=I\), multiplicativity gives
+\(N_\tau(z)N_\tau(w)=1\), forcing \(N_\tau(z)\ne0\).
+\end{proof}
+
+The matrix representation
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}
+\]
+is faithful and has determinant \(a^2+\tau b^2\). For \(\tau=+1\), the
+form is positive definite. For \(\tau=0\), it depends only on
+\(a\), while \(J_0\) retains a nonzero linear component. For
+\(\tau=-1\), the form has signature \((1,1)\); the directions
+\(I\pm J_{-1}\) are zero divisors.
+
+In particular, the word \emph{norm} here designates a multiplicative quadratic
+form. The positive norms of Hilbert spaces, used
+in other realizations of the state, retain their own definition.
+
+\subsubsection{Composition of ratios between coordinates}
+
+A direction with nonzero scalar component is represented by
+\(I+uJ_\tau\). Multiplication produces
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+ =(1-\tau uv)I+(u+v)J_\tau.
+\]
+When \(1-\tau uv\ne0\), the ratio between the components of the product is
+\begin{equation}
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\label{trit:eq:razones}
+\end{equation}
+The scalar factor \(1-\tau uv\) forms part of the complete product.
+If only the ratio is retained, that factor must be recorded when
+it is involved in a subsequent reconstruction. If the denominator vanishes,
+the product is examined in its two components: it can represent a
+direction with zero scalar component or the zero element.
+
+The quadratic classification thus prepares a precise reading of the three
+regimes. Selection of a regime preserves its index, arithmetic
+preserves its carries and transport preserves the oriented sequence.
+The TPK composes these data through explicit operators. On that
+composition will be built the concrete generators and the preservation
+of forms that articulates the Euler extension.

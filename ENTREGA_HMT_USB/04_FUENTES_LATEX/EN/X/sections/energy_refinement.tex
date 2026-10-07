@@ -1,0 +1,280 @@
+% Bounded development: interval energy reader of the register K.
+% Status: added formalization on K and the Schur identities
+% already present in the corpus. No historical novelty is attributed to Schur.
+\section{Dirichlet forms and variational equivalence of refinement}
+\label{sec:energia-refinamiento-k}
+
+The positive representation of the dodecaphasic register defines an
+ordered partition through
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+ \qquad d_j=K_j/6263,
+ \qquad t_i=\sum_{j=1}^id_j.
+\]
+The register is received from the composition
+\(x_{\rm term}\mapsto\mathcal R_{12}\mapsto
+(b^{90},b^{120},Q_{\rm TPK})\mapsto U_{\rm sgn}\mapsto K\),
+subsequent to APP--TRIT--TPK and its enriched state, in accordance
+with the readers reconstructed in \cite{hmtX}. This section applies
+a quadratic reader to the resulting partition. Depths will be compared
+through restrictions to inherited endpoints, so that every energy
+coefficient retains its origin in an already produced positive separation.
+
+The corpus contains a weighted difference energy for the graph of
+the two memories and a Schur reduction of the complete forms.
+Here these operations are brought together on the interval network
+of the register. The specialization to conductances \(1/d_j\),
+the interpolation operator, and its compatibility with deformation
+of the separations constitute the formalization developed in this section.
+
+\subsection{Reconstruction of separations from the stiffness matrix}
+
+Let \(d=(d_1,\ldots,d_m)\), with \(d_j>0\), and let
+\(f=(f_0,\ldots,f_m)\in\mathbb C^{m+1}\) be the values of an
+observable at the partition endpoints. Define
+\begin{equation}
+ \mathcal E_d(f)=\sum_{j=1}^{m}\frac{|f_j-f_{j-1}|^2}{d_j},
+ \qquad L_d=D^*\operatorname{diag}(d_1^{-1},\ldots,d_m^{-1})D,
+ \label{eq:energia-intervalar}
+\end{equation}
+where \(D:\mathbb C^{m+1}\to\mathbb C^m\) is the oriented incidence
+operator, \((Df)_j=f_j-f_{j-1}\), and the asterisk denotes the
+Hermitian adjoint. Thus \(\mathcal E_d(f)=f^*L_df\).
+The stiffness matrix has entries
+\[
+ (L_d)_{00}=d_1^{-1},\quad (L_d)_{mm}=d_m^{-1},\quad
+ (L_d)_{ii}=d_i^{-1}+d_{i+1}^{-1}\quad(1\le i<m),
+\]
+\[
+ (L_d)_{i-1,i}=(L_d)_{i,i-1}=-d_i^{-1},
+\]
+and all other entries vanish. It is Hermitian positive semidefinite,
+its kernel consists of the constant functions, and its form is positive
+definite on the quotient by that kernel. The complete matrix recovers
+the separations through
+\begin{equation}
+ d_j=-\frac1{(L_d)_{j-1,j}}.
+ \label{eq:recuperacion-d-rigidez}
+\end{equation}
+
+\begin{proposition}[Equivalence between separations and the complete nodal reader]
+\label{prop:energia-bidireccional}
+The map \(d\mapsto L_d\) is a bijection between
+\((0,\infty)^m\) and the set of real symmetric tridiagonal matrices
+whose entries immediately adjacent to the diagonal are negative and
+whose row sums are zero. Its inverse is
+\eqref{eq:recuperacion-d-rigidez}. The normalization
+\(\sum_jd_j=1\) is equivalent to
+\(\sum_{j=1}^m-1/(L_d)_{j-1,j}=1\).
+\end{proposition}
+\begin{proof}
+The explicit formulas for \(L_d\) satisfy all the conditions.
+Conversely, the negative adjacent entries determine unique positive
+separations through \eqref{eq:recuperacion-d-rigidez}. The zero
+sum of each row determines its diagonal entries as the sum of
+incident conductances. Tridiagonality makes all remaining entries
+zero. The matrix in \eqref{eq:energia-intervalar} is recovered
+exactly; its positive semidefiniteness then follows from the
+factorization \(D^*\operatorname{diag}(1/d_j)D\).
+\end{proof}
+
+The weighted discrete derivative \(J_j=(f_j-f_{j-1})/d_j\) is the
+oriented flow of edge \(j\). At interior vertices,
+\((L_df)_i=J_i-J_{i+1}\); at the endpoints,
+\((L_df)_0=-J_1\) and \((L_df)_m=J_m\). The interior equation
+\(L_df=0\) expresses that the flow has the same value on every edge.
+This defines a quadratic observable of the interval reader;
+its realization as a physical quantity requires the relevant dimensional chart.
+
+\subsection{Harmonic interpolation, Schur complement, and detail reconstruction}
+
+Refine each separation as
+\(d_j=\sum_{c=1}^{r_j}\delta_{j,c}\), with \(\delta_{j,c}>0\).
+Let \(\widetilde d\) be the concatenation of these separations,
+\(R\) restriction to the old endpoints, and \(H\) the interpolation
+defined by
+\begin{equation}
+ (Hf)_{j,c}=(1-\theta_{j,c})f_{j-1}+\theta_{j,c}f_j,
+ \qquad
+ \theta_{j,c}=\frac{\sum_{a=1}^c\delta_{j,a}}{d_j}.
+ \label{eq:interpolacion-armonica-k}
+\end{equation}
+Shared endpoints are counted only once. We have \(RH=I\).
+
+\begin{theorem}[Isometric refinement of the energy]
+\label{thm:energia-schur-refinamiento}
+For every vector of old values \(f\),
+\begin{equation}
+ H^*L_{\widetilde d}H=L_d,
+ \qquad L_{\widetilde d}H=R^*L_d,
+ \qquad
+ \min_{Rg=f}\mathcal E_{\widetilde d}(g)=\mathcal E_d(f).
+ \label{eq:isometria-energia-k}
+\end{equation}
+The minimizer is unique and equals \(Hf\). Every \(g\) admits
+the unique decomposition
+\begin{equation}
+ g=H(Rg)+z,\qquad Rz=0,
+ \qquad
+ \mathcal E_{\widetilde d}(g)
+ =\mathcal E_d(Rg)+\mathcal E_{\widetilde d}(z).
+ \label{eq:detalle-energia-k}
+\end{equation}
+\end{theorem}
+\begin{proof}
+On an old edge, write \(h_c=g_{j,c}-g_{j,c-1}\), so that
+\(\sum_ch_c=f_j-f_{j-1}=a\). If
+\(h_c=\delta_{j,c}a/d_j+r_c\), then \(\sum_cr_c=0\) and
+\[
+ \sum_c\frac{|h_c|^2}{\delta_{j,c}}
+ =\frac{|a|^2}{d_j}+\sum_c\frac{|r_c|^2}{\delta_{j,c}}.
+\]
+The equality follows by expansion; the cross term is proportional to
+\(\sum_cr_c\) and vanishes. The minimum is attained exactly when
+all \(r_c\) vanish, the condition determining
+\eqref{eq:interpolacion-armonica-k}. Summing over the edges gives
+the minimum and the energy decomposition. The flow of \(Hf\) is
+constant within every old edge, so its interior components of
+\(L_{\widetilde d}Hf\) vanish and its inherited components agree
+with \(L_df\). This proves the second matrix identity; multiplying
+by \(H^*\), using \(RH=I\), gives the first.
+\end{proof}
+
+The term \(\mathcal E_{\widetilde d}(z)\) is nonnegative and
+vanishes exactly for \(z=0\): a zero-energy detail would be constant
+and, vanishing at the inherited endpoints, would vanish throughout
+the network. The pair \((Rg,z)\) preserves the complete refined
+vector and allows its recovery through \(g=H(Rg)+z\).
+Minimization selects its harmonic component; storing the detail \(z\)
+retains the information that the reduced form alone does not distinguish.
+Conservation of the observed energy and conservation of the refined
+state are thus expressed by different explicit maps.
+
+Ordering vertices as inherited endpoints \(E\) and interior vertices
+\(I\), write
+\[
+ L_{\widetilde d}=\begin{pmatrix}A&B^*\\B&C\end{pmatrix}.
+\]
+For a refinement with interior vertices, the block \(C\) is
+positive definite: a function vanishing at the endpoints and having
+zero energy is constant on every subinterval and therefore identically
+zero. We obtain
+\begin{equation}
+ H=\begin{pmatrix}I\\-C^{-1}B\end{pmatrix},\qquad
+ \operatorname{Schur}_{I}(L_{\widetilde d})
+ =A-B^*C^{-1}B=L_d.
+ \label{eq:schur-intervalar-k}
+\end{equation}
+If refinement preserves all vertices and introduces none, the same
+statement reduces to \(H=I\) and \(L_{\widetilde d}=L_d\).
+
+\begin{proposition}[Naturality of prolongations and elimination]
+\label{prop:energia-naturalidad-sucesiva}
+For three nested partitions, harmonic interpolations and Schur
+complements satisfy
+\begin{equation}
+ H_{n+2\leftarrow n}
+ =H_{n+2\leftarrow n+1}H_{n+1\leftarrow n},
+ \qquad
+ \operatorname{Schur}_{n+1\to n}
+ \bigl(\operatorname{Schur}_{n+2\to n+1}(L_{n+2})\bigr)=L_n.
+ \label{eq:energia-naturalidad-sucesiva}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Interpolation of affine values on an interval remains the same affine
+function after any subdivision of that interval. This proves the
+first identity. Minimizing first over vertices added at the last
+level and then over those at the intermediate level amounts to
+minimizing over all of them, with the same inherited endpoints fixed.
+The variational identity in \eqref{eq:isometria-energia-k} and
+uniqueness of the minimizer prove the second identity. Restriction
+of the minimum is therefore performed through the same composition
+as harmonic prolongation of the data.
+\end{proof}
+
+\subsection{Dirichlet-to-Neumann response and energy defect of an extension}
+
+If only the initial and final endpoints are preserved, let
+\(D_0=\sum_{j=1}^md_j\). For values \((a,b)\), the harmonic
+solution is
+\[
+ f_i=a+(b-a)\frac{\sum_{j=1}^id_j}{D_0},\qquad
+ J_j=(b-a)/D_0.
+\]
+Its Dirichlet-to-Neumann operator, taking boundary values to outgoing
+flows, is
+\begin{equation}
+ \Lambda_d=\frac1{D_0}
+ \begin{pmatrix}1&-1\\-1&1\end{pmatrix},\qquad
+ \min\mathcal E_d=\frac{|b-a|^2}{D_0}.
+ \label{eq:dtn-intervalar-k}
+\end{equation}
+When values are prescribed at all inherited vertices, the same
+argument gives the multipoint response operator \(\Lambda=L_d\).
+
+An approximate extension \(g=(f,y)\), where \(y\) collects the
+values at interior vertices, has interior residual \(r=Bf+Cy\).
+The exact identity
+\begin{equation}
+ \mathcal E_{\widetilde d}(g)-f^*\Lambda f
+ =r^*C^{-1}r\ge0
+ \label{eq:residual-dtn-k}
+\end{equation}
+follows from \(y+C^{-1}Bf=C^{-1}r\) and the decomposition
+\[
+ g^*L_{\widetilde d}g
+ =f^*(A-B^*C^{-1}B)f
+ +(y+C^{-1}Bf)^*C(y+C^{-1}Bf).
+\]
+Thus the effective value and the detail retain a complete Hermitian
+decomposition. In particular, if a linear extension is
+\(\widetilde H=\begin{pmatrix}I\\Z\end{pmatrix}\), its residual
+matrix is \(\mathscr R=B+CZ\), and
+\[
+ \widetilde H^*L_{\widetilde d}\widetilde H-\Lambda
+ =\mathscr R^*C^{-1}\mathscr R\succeq0.
+\]
+A zero residual characterizes exact harmonic interpolation.
+This energy residual lives in the space of interior vertices;
+cancellation of residues of meromorphic forms belongs to another
+boundary map and retains its own definition.
+
+\subsection{Commutation of refinement and the separation flow}
+
+Let \(u=P_3P_{11}K\) be the algebraic direction already recovered
+from the register readers \cite{hmtX}. For the real parameter \(s\),
+define
+\[
+ d_j(s)=\frac{K_je^{su_j}}{\sum_\ell K_\ell e^{su_\ell}}.
+\]
+Fix positive fractions \(\vartheta_{j,c}\) summing to one for each
+\(j\). The inherited refinement is
+\[
+ \delta_{j,c}(s)=\vartheta_{j,c}d_j(s),\qquad
+ u_{j,c}=u_j.
+\]
+First producing the refined weights \(K_j\vartheta_{j,c}\) and
+then deforming them gives the same collection: the successors have identical
+exponential factors, and their coefficients sum to \(K_j\).
+For every \(s\),
+\begin{equation}
+ \operatorname{Schur}_{I}(L_{\widetilde d(s)})=L_{d(s)},
+ \qquad H^*L_{\widetilde d(s)}H=L_{d(s)}.
+ \label{eq:schur-flujo-k}
+\end{equation}
+In this parent--children comparison, \(H\) is constant: its
+coefficients are the partial sums of \(\vartheta_{j,c}\).
+By contrast, interpolation from the two global endpoints uses
+\(t_i(s)=\sum_{j\le i}d_j(s)\) and changes with the parameter.
+Both statements correspond to different restrictions of the same network.
+
+The normalization \(\sum_jd_j(s)=1\) makes the global two-endpoint
+operator remain equal to
+\(\left(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\right)\).
+The all-node matrix \(L_{d(s)}\) does preserve the deformation and
+recovers it through \eqref{eq:recuperacion-d-rigidez}. The information
+loss in the two-endpoint reader is identified exactly: it retains the
+total length and its flows, whereas the nodal reader retains all
+separations. The detail archive provides the complement needed to
+reconstruct the refined observable.

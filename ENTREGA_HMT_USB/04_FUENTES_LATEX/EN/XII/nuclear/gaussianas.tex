@@ -1,0 +1,150 @@
+\section{Covariance, normal form, and Gaussian spectrum}
+\label{app:gaussianas-espectro}
+
+The positive action section \(\hbar_a\) and the preceding canonical realization determine the normalization used here. The correspondence between covariance, spectrum, purity, and entropy is proved for a finite number of modes; Fock space retains all its occupations. Symplectic reduction and the Gaussian formulas are established results reproduced here to make their application to memory transport self-contained.
+
+\subsection{Canonical coordinates and characteristic function}
+On \(L^2(\RR^d)\), let \(\widehat q_j=\widehat Q_j/\sqrt{\hbar_a}\), \(\widehat p_j=\widehat P_j/\sqrt{\hbar_a}\), and \(\widehat z=(\widehat q_1,\widehat p_1,\ldots,\widehat q_d,\widehat p_d)\). On Schwartz space,
+\[
+ [\widehat z_j,\widehat z_k]=iJ_{jk}I,\qquad
+ J=\bigoplus_{j=1}^d\begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\]
+This convention fixes the sign of the canonical form. The Weyl operators \(\mathcal W(\xi)=\exp(i\xi^{\mathsf T}\widehat z)\) are defined through the self-adjoint closures of the indicated linear combinations. For a centred state \(\rho\) with finite second moments, the normalized covariance and its characteristic function are
+\[
+ W_{jk}=\Tr\rho(\widehat z_j\widehat z_k+\widehat z_k\widehat z_j),
+ \qquad \chi_\rho(\xi)=\Tr(\rho\mathcal W(\xi)),\qquad
+ V=\frac{\hbar_a}{2}W.
+\]
+The state is centred Gaussian when
+\begin{equation}
+ \chi_\rho(\xi)=\exp(-\xi^{\mathsf T}W\xi/4).
+ \label{app:eq:caracteristica-gaussiana}
+\end{equation}
+The expectation of \((c^{\mathsf T}\widehat z)^\dagger
+(c^{\mathsf T}\widehat z)\) is \(c^\dagger(W+iJ)c/2\); hence \(W+iJ\geq0\). Moreover, \(W>0\): if \(v\) is real and \(v^{\mathsf T}Wv=0\), positivity implies \((W+iJ)v=0\), hence \(Jv=0\) and \(v=0\).
+
+\begin{lemma}[Uniqueness of the characteristic function]
+\label{app:lem:unicidad-weyl}
+Two trace-class operators with the same characteristic function are equal.
+\end{lemma}
+\begin{proof}
+Regrouping positions and momenta as \(\xi=(u,v)\),
+\[
+ (\mathcal W(u,v)f)(x)=e^{iu\cdot(x+v/2)}f(x+v).
+\]
+For a finite-rank operator with Schwartz vectors and kernel \(K_A\),
+\[
+ \Tr(A\mathcal W(u,v))=\int K_A(x+v/2,x-v/2)e^{iu\cdot x}\,dx.
+\]
+Plancherel and the change of variables with absolute Jacobian one give
+\[
+ \|A\|_{\rm HS}^2=(2\pi)^{-d}\int_{\RR^{2d}}
+ |\Tr(A\mathcal W(\xi))|^2\,d\xi.
+\]
+The preceding operators are dense in trace class. Convergence in that norm implies Hilbert--Schmidt convergence and uniform convergence of the characteristic functions, because their difference is bounded by \(\|A-B\|_1\). The equality extends in \(L^2\). Applying it to the difference of the operators proves the assertion.
+\end{proof}
+
+\subsection{Symplectic reduction of the positive form}
+\begin{theorem}[Williamson normal form]
+\label{app:thm:williamson}
+For a real symmetric matrix \(W>0\) of order \(2d\), there exist \(S\in\operatorname{Sp}(2d,\RR)\) and \(\nu_j>0\) such that
+\[
+ W=SDS^{\mathsf T},\qquad D=\bigoplus_j\nu_jI_2.
+\]
+The eigenvalues of \(JW\) are \(\pm i\nu_j\). The condition \(W+iJ\geq0\) is equivalent to \(\nu_j\geq1\) for every \(j\).
+\end{theorem}
+\begin{proof}
+The matrix \(B=W^{1/2}JW^{1/2}\) is antisymmetric and invertible. If \(-B^2u=\nu^2u\) and \(\|u\|=1\), the vector \(v=-Bu/\nu\) has unit norm and is orthogonal to \(u\); it satisfies \(Bu=-\nu v\), \(Bv=\nu u\). The complement of this pair is invariant. Iteration produces an orthogonal matrix \(O\) with \(O^{\mathsf T}BO=JD\). Defining \(S=W^{1/2}OD^{-1/2}\),
+\[
+ S^{\mathsf T}JS=J,\qquad SDS^{\mathsf T}=W.
+\]
+The similarity \(W^{1/2}(JW)W^{-1/2}=B\) determines the values \(\nu_j\), with multiplicity. Congruence by \(S^{-1}\) transforms \(W+iJ\) into \(D+iJ\); each block has eigenvalues \(\nu_j+1\) and \(\nu_j-1\).
+\end{proof}
+
+\begin{lemma}[Unitary implementation in a finite number of modes]
+\label{app:lem:implementacion-simplectica}
+Every symplectic matrix \(S\) admits a unitary \(U_S\) satisfying \(U_S^\dagger\mathcal W(\xi)U_S=\mathcal W(S^{\mathsf T}\xi)\). The conjugation \(\rho\mapsto U_S\rho U_S^\dagger\) transports covariance by \(W\mapsto SWS^{\mathsf T}\).
+\end{lemma}
+\begin{proof}
+In the polar decomposition \(S=OP\), the identity \(J^{-1}(S^{\mathsf T}S)J=(S^{\mathsf T}S)^{-1}\), applied to the positive square root through spectral calculus, proves \(PJP=J\). Then \(O\) is orthogonal symplectic. The eigenspaces of \(P\) are paired by \(J\) with eigenvalues \(\lambda,\lambda^{-1}\); the eigenspace of eigenvalue one is \(J\)-invariant. Hence an orthogonal symplectic matrix \(K\) reduces \(P\) to \(\bigoplus_j\operatorname{diag}(e^{r_j},e^{-r_j})\).
+
+The dilation is implemented by
+\[
+ (\mathcal D_rf)(x)=e^{-\frac12\sum_jr_j}
+ f(e^{-r_1}x_1,\ldots,e^{-r_d}x_d).
+\]
+A change of variables proves its unitarity and the conjugation of \((\widehat q_j,\widehat p_j)\) to \((e^{r_j}\widehat q_j,e^{-r_j}\widehat p_j)\). An orthogonal symplectic transformation commutes with \(J\) and corresponds to a matrix \(u\in U(d)\) on \(a_j=(\widehat q_j+i\widehat p_j)/\sqrt2\). Its second quantization \(\Gamma(u)=\bigoplus_{n\geq0}u^{\otimes_s n}\) is unitary on \(\mathcal F_s(\CC^d)\), and the identity on finite symmetric products gives the transformation of the \(a_j\).
+
+The Hermite basis identifies this space with \(L^2(\RR^d)\). To justify its completeness, if \(f\) is orthogonal to all polynomials multiplied by \(e^{-|x|^2/2}\), the entire function \(F(z)=\int f(x)e^{-|x|^2/2}e^{z\cdot x}\,dx\) has all derivatives zero at the origin. Thus \(F=0\); restricting to \(z=i\xi\), Fourier uniqueness gives \(f=0\). Normalizations and orthogonality follow from creation and annihilation. Composition of the preceding implementations produces \(U_S\). The Weyl equality implies \(\chi_{U_S\rho U_S^\dagger}(\xi)=\chi_\rho(S^{\mathsf T}\xi)\), proving the covariance law.
+\end{proof}
+
+\subsection{Calculation of the spectrum of the isotropic density operator}
+In one mode, the normalized coherent states are
+\[
+ |z\rangle=e^{-|z|^2/2}\sum_{n\geq0}\frac{z^n}{\sqrt{n!}}|n\rangle.
+\]
+Their position-space wavefunction, \(\pi^{-1/4}\exp[-(x-q_0)^2/2+ip_0(x-q_0/2)]\), where \(q_0=\sqrt2\Re z\), \(p_0=\sqrt2\Im z\), gives by integration
+\[
+ \langle z|\mathcal W(u,v)|z\rangle
+ =e^{-(u^2+v^2)/4}e^{i(uq_0+vp_0)}.
+\]
+For \(s>0\), the integral
+\[
+ \rho^{(s)}=\frac1{\pi s}\int_{\CC} e^{-|z|^2/s}
+ |z\rangle\langle z|\,d^2z
+\]
+converges in trace class, is positive, and has trace one. Angular integration cancels its entries off the occupation diagonal; radial integration gives
+\[
+ \langle n|\rho^{(s)}|n\rangle=\frac{s^n}{(1+s)^{n+1}},\qquad
+ \chi_{\rho^{(s)}}(u,v)=e^{-(2s+1)(u^2+v^2)/4}.
+\]
+With \(\nu=2s+1\), the unique Gaussian state of covariance \(\nu I_2\) is, by Lemma~\ref{app:lem:unicidad-weyl},
+\begin{equation}
+ \rho_\nu=(1-t)\sum_{n\geq0}t^n|n\rangle\langle n|,
+ \qquad t=\frac{\nu-1}{\nu+1}.
+ \label{app:eq:estado-geometrico}
+\end{equation}
+The case \(\nu=1\) is the projector onto the vacuum.
+
+\begin{theorem}[Spectrum, purity, and entropy]
+\label{app:thm:espectro-gaussiano}
+A centred Gaussian state with covariance \(W\) and symplectic eigenvalues \(\nu_1,\ldots,\nu_d\) is unitarily equivalent to \(\bigotimes_j\rho_{\nu_j}\). Its eigenvalues are
+\[
+ \lambda_{\symbf{n}}=\prod_j(1-t_j)t_j^{n_j},\qquad
+ t_j=\frac{\nu_j-1}{\nu_j+1},\quad \symbf{n}\in\mathbb N^d.
+\]
+With \(0\log0=0\),
+\begin{align}
+ \Tr\rho^2&=\prod_j\nu_j^{-1}=(\det W)^{-1/2},
+ \label{app:eq:pureza-general}\\
+ -\Tr(\rho\log\rho)&=\sum_j
+ \left[\frac{\nu_j+1}{2}\log\frac{\nu_j+1}{2}
+ -\frac{\nu_j-1}{2}\log\frac{\nu_j-1}{2}\right].
+ \label{app:eq:entropia-general}
+\end{align}
+\end{theorem}
+\begin{proof}
+Williamson gives \(W=SDS^{\mathsf T}\). The product of the isotropic density operators has characteristic function \(e^{-\xi^{\mathsf T}D\xi/4}\). Unitary implementation and Weyl uniqueness prove the equivalence and spectral formula. In one mode,
+\[
+ \sum_{n\geq0}(1-t)^2t^{2n}=\frac{1-t}{1+t}=\nu^{-1},
+\]
+and
+\[
+ -\sum_{n\geq0}(1-t)t^n\log((1-t)t^n)
+ =-\log(1-t)-\frac{t}{1-t}\log t.
+\]
+Substitution of \(t=(\nu-1)/(\nu+1)\) proves the formulas; the limit at \(t=0\) is zero. In the finite product, Tonelli justifies summing the nonnegative entropy terms, and \(\det W=\prod_j\nu_j^2\) gives the determinantal expression.
+\end{proof}
+
+If the state is the reduction of a pure bipartite vector, its eigenvalues are the squares of the Schmidt coefficients. The singular-value decomposition of the Hilbert--Schmidt operator defined by that vector proves equality of the nonzero spectra of the two reductions. The calculated entropy is then the entanglement entropy.
+
+\subsection{Preparation and transport of the two covariances}
+The subsequent application uses two identical pure Gaussian inputs. In general, for \(M\in\operatorname{Sp}(2d,\RR)\), their covariance is \(V_0=(\hbar_a/2)MM^{\mathsf T}\), and the joint input has covariance \(V_0\oplus V_0\). The physical transport is obtained by conjugating \(U_H\) by \(M\oplus M\). In the balanced chart, the normalized input covariance is \(I_{4d}\); with
+\[
+ T=\frac{8I+H}{9},\qquad D=\frac{\sqrt8(H-I)}9,
+\]
+the first reduction has
+\[
+ W=TT^{\mathsf T}+DD^{\mathsf T}=\frac{8I+HH^{\mathsf T}}9.
+\]
+Its characteristic function is obtained by setting the arguments of the second group of modes to zero. It therefore remains Gaussian, and the preceding theorems compute its entire spectrum without truncating the occupation register.

@@ -1,0 +1,234 @@
+\section{Reconstruction analytique de l’énergie et mémoire du raffinement}
+\label{sec:limite-energetico-k}
+
+Les séparations positives construites à partir du registre dodécaphasique déterminent une partition ordonnée et, d'après la section précédente, une forme de Dirichlet sur ses valeurs nodales. Son raffinement possède deux opérations complémentaires : l'interpolation harmonique conserve l'énergie des données héritées, tandis que chaque détail enregistre la variation incorporée entre ces données. Le passage à une profondeur illimitée consiste à réunir cette collection compatible au moyen d'une norme contrôlant la somme de ses détails. Le résultat concerne la réalisation analytique unidimensionnelle de l'énergie ; il conserve comme antécédent la construction HMT du registre et de la structure discrète conjointe du continu.
+
+\subsection{Partitions emboîtées et espaces d’interpolation}
+
+Fixons la partition initiale
+\(P_0=\{0=t_0<t_1<\cdots<t_{12}=1\}\), dont les longueurs sont
+\(d_j=t_j-t_{j-1}=K_j/\sum_iK_i>0\). Soit
+\((P_n)_{n\geq0}\) une suite de partitions finies emboîtées de
+\([0,1]\), obtenues par subdivision des intervalles précédents.
+Nous écrirons
+\[
+ |P_n|=\max\{b-a:[a,b]\text{ est un intervalle de }P_n\},
+ \qquad \lim_{n\to\infty}|P_n|=0.
+\]
+La subdivision répétée de chaque intervalle en un nombre fixe de successeurs égaux, au moins deux, satisfait cette condition. Pour d'autres règles, la contraction du maillage est une hypothèse explicite de ce lecteur. Les étiquettes des successeurs et leurs données de retenue accompagnent la subdivision et conservent la provenance du raffinement.
+
+Soit \(V_n\) l’espace complexe des fonctions continues sur \([0,1]\)
+qui sont affines sur chaque intervalle de \(P_n\). L’énergie et la norme
+énergétique sont définies par
+\begin{equation}
+ \mathcal E_n(f)
+ =\sum_{[a,b]\in P_n}\frac{|f(b)-f(a)|^2}{b-a}
+ =\int_0^1|f'(x)|^2\,dx,
+ \qquad
+ \|f\|_{\mathcal E}^2=|f(0)|^2+\mathcal E_n(f).
+ \label{eq:energia-afines-k}
+\end{equation}
+L’égalité intégrale résulte du fait que la dérivée d’une fonction affine est
+constante sur chaque intervalle. L’énergie coïncide ainsi exactement avec
+la forme nodale déjà construite. L’inclusion \(V_n\subset V_{n+1}\)
+interprète la même fonction affine dans une partition plus fine ; elle conserve
+aussi bien \(f(0)\) que l’énergie et est isométrique pour
+\(\|\cdot\|_{\mathcal E}\).
+
+La valeur initiale a une fonction précise : elle fixe la composante constante
+que la forme de Dirichlet identifie dans son noyau. L’énergie contrôle
+les différences, et le couple formé par la valeur initiale et ces différences
+détermine l’observable. Dans l’espace de Sobolev
+\(H^1([0,1];\mathbb C)\), dont les éléments ont un représentant
+absolument continu de dérivée faible dans \(L^2\), cette norme est
+équivalente à la norme usuelle. En effet,
+\(f(x)=f(0)+\int_0^xf'(t)\,dt\) contrôle la norme de \(f\) à
+partir de \(|f(0)|\) et de \(\|f'\|_{L^2}\) ; l’intégration de la
+même identité contrôle à son tour \(|f(0)|\) au moyen de
+\(\|f\|_{L^2}+\|f'\|_{L^2}\).
+
+\subsection{Reconstruction d’une fonction à partir de ses valeurs compatibles}
+
+\begin{theorem}[Reconstruction énergétique et complétion des interpolations]
+\label{thm:limite-energia-h1-k}
+Soit \(f_n\in V_n\) une collection compatible par restriction aux nœuds hérités :
+\[
+ f_{n+1}(a)=f_n(a)
+ \quad\text{pour tout nœud }a\text{ de }P_n.
+\]
+Si \(\sup_n\mathcal E_n(f_n)<\infty\), il existe une unique fonction
+\(f\in H^1([0,1];\mathbb C)\), considérée par son représentant
+continu, dont les valeurs en tous ces nœuds sont celles prescrites. De plus,
+\(f_n\to f\) uniformément et dans \(H^1\), et
+\begin{equation}
+ \int_0^1|f'(x)|^2\,dx
+ =\lim_{n\to\infty}\mathcal E_n(f_n).
+ \label{eq:limite-energia-h1-k}
+\end{equation}
+Réciproquement, l'interpolation nodale de tout élément de \(H^1\) produit une collection de cette classe. Par conséquent, la complétion de \(\bigcup_n V_n\) pour la norme énergétique est \(H^1([0,1];\mathbb C)\).
+\end{theorem}
+
+\begin{proof}
+Posons \(g_n=f_n'\in L^2([0,1];\mathbb C)\). Pour
+\(m\geq n\), la compatibilité des valeurs aux extrémités de chaque
+intervalle \([a,b]\) de \(P_n\) fournit
+\[
+ \frac1{b-a}\int_a^bg_m(x)\,dx
+ =\frac{f_m(b)-f_m(a)}{b-a}
+ =\frac{f_n(b)-f_n(a)}{b-a}
+ =g_n\big|_{(a,b)}.
+\]
+Soit \(W_n\) l’espace des fonctions de \(L^2\) constantes sur chaque
+intervalle de \(P_n\), et soit \(Q_n:L^2\to W_n\) la projection
+orthogonale donnée par les moyennes sur ces intervalles. L’identité
+précédente affirme \(Q_ng_m=g_n\). Par conséquent,
+\(g_m-g_n\) est orthogonal à \(g_n\) et
+\begin{equation}
+ \|g_m-g_n\|_{L^2}^2
+ =\mathcal E_m(f_m)-\mathcal E_n(f_n).
+ \label{eq:pitagoras-gradientes-k}
+\end{equation}
+Les énergies sont croissantes et bornées. L'identité de Pythagore prouve que \((g_n)\) est une suite de Cauchy dans \(L^2\), de limite \(g\). Définissons
+\[
+ f(x)=f_0(0)+\int_0^xg(t)\,dt.
+\]
+Cette fonction appartient à \(H^1\), a pour dérivée faible \(g\) et
+vérifie, par l’inégalité de Cauchy--Schwarz,
+\begin{equation}
+ \sup_{x\in[0,1]}|f_n(x)-f(x)|
+ \leq\|g_n-g\|_{L^2}\longrightarrow0.
+ \label{eq:convergencia-uniforme-energia-k}
+\end{equation}
+La convergence uniforme conserve chaque valeur nodale prescrite ; jointe à
+la convergence des dérivées dans \(L^2\), elle donne la convergence dans
+\(H^1\). La convergence des normes des dérivées prouve
+\eqref{eq:limite-energia-h1-k}. L’union des nœuds est dense car
+\(|P_n|\to0\) ; deux représentants continus ayant les mêmes valeurs
+sur cette union coïncident. On obtient l’unicité.
+
+Pour la réciproque, prenons \(f\in H^1\) dans son représentant continu et soit \(f_n\) son interpolation aux nœuds de \(P_n\). Sa dérivée est \(g_n=Q_nf'\). Les projections \(Q_n\) sont contractantes dans \(L^2\). Pour une fonction continue \(v\), l'erreur \(|Q_nv-v|\) est bornée par son module de continuité évalué en \(|P_n|\), qui tend vers zéro. La densité des fonctions continues dans \(L^2\) et la contractivité impliquent \(Q_ng\to g\) pour tout \(g\in L^2\) : étant donné un approximant continu \(v\), on utilise
+\[
+ \|Q_ng-g\|_{L^2}
+ \leq 2\|g-v\|_{L^2}+\|Q_nv-v\|_{L^2}.
+\]
+En appliquant cette convergence à \(g=f'\), on obtient la convergence
+des dérivées et, au moyen de \eqref{eq:convergencia-uniforme-energia-k},
+celle des fonctions. La contractivité borne leurs énergies par
+\(\|f'\|_{L^2}^2\), et la convergence des normes prouve de
+nouveau l’identité de la limite. Toute fonction de \(H^1\) est donc
+limite énergétique d’éléments de \(\bigcup_nV_n\).
+L’équivalence des normes et la complétude de \(H^1\) identifient
+la complétion énoncée.
+\end{proof}
+
+L’argument décrit concrètement ce qui est conservé lors du passage du réseau
+à la fonction. Chaque dérivée finie enregistre la moyenne de toutes les
+dérivées ultérieures dans son intervalle ; lors du raffinement, on incorpore des
+composantes orthogonales qui maintiennent cette moyenne. L’énergie bornée
+contrôle la somme totale de ces incorporations. La valeur continue se
+retrouve alors en intégrant la dérivée limite et en conservant la valeur
+initiale. La réalisation analytique réunit, par cette voie explicite,
+l’information compatible des niveaux finis.
+
+\subsection{Décomposition orthogonale de la mémoire par échelles}
+
+Soit \(H_n\) l’interpolation harmonique des valeurs de \(P_n\)
+sur les nœuds de \(P_{n+1}\), interprétée comme fonction de
+\(V_{n+1}\), et définissons le détail
+\[
+ z_{n+1}=f_{n+1}-H_nf_n.
+\]
+D'après \eqref{eq:detalle-energia-k}, le détail s'annule aux nœuds hérités. Sa dérivée est de moyenne nulle sur chaque ancien intervalle et est orthogonale à \(W_n\). Pour des niveaux distincts, la dérivée d'un détail antérieur appartient à cet espace de fonctions constantes ; les dérivées des détails sont donc orthogonales entre elles. La même orthogonalité vaut par rapport à \(f_0'\).
+
+\begin{proposition}[Identité d’énergie et récupération des détails]
+\label{prop:memoria-energetica-escalas-k}
+Pour toute profondeur finie \(N\),
+\begin{equation}
+ \mathcal E_N(f_N)
+ =\mathcal E_0(f_0)
+ +\sum_{n=0}^{N-1}\mathcal E_{n+1}(z_{n+1}).
+ \label{eq:energia-telescopica-detalles-k}
+\end{equation}
+Si la collection satisfait les hypothèses du théorème~\ref{thm:limite-energia-h1-k}, la série du membre droit converge et sa somme est \(\int_0^1|f'|^2\). Les données \(f_0\) et tous les détails déterminent la collection compatible complète et sa réalisation analytique.
+\end{proposition}
+\begin{proof}
+L’identité finie résulte de la somme de
+\(\mathcal E_{n+1}(f_{n+1})
+=\mathcal E_n(f_n)+\mathcal E_{n+1}(z_{n+1})\), qui est la
+décomposition orthogonale de la section précédente. Les termes sont
+non négatifs et les sommes partielles convergent par
+\eqref{eq:limite-energia-h1-k}. La reconstruction finie s’effectue
+récursivement au moyen de \(f_{n+1}=H_nf_n+z_{n+1}\) ; le théorème
+précédent détermine ensuite la fonction limite. Réciproquement, une
+fonction de \(H^1\) détermine ses interpolations et, par différence,
+tous ces détails. Chaque flèche conserve ainsi ses données propres.
+\end{proof}
+
+L'élimination variationnelle des nœuds intérieurs sélectionne le détail nul au niveau éliminé. La conservation des détails permet de récupérer toute configuration compatible d'énergie finie. La réponse effective et la configuration complète possèdent ainsi une relation précise : la première enregistre le minimum sur les variables intérieures ; la seconde ajoute les composantes orthogonales et leur énergie.
+
+\subsection{Transport de la réalisation analytique sous le flot positif}
+
+La direction \(u=P_3P_{11}K\), récupérée avant l'évaluation énergétique \cite{hmtX}, détermine la collection de séparations de \eqref{eq:schur-flujo-k}. Son paramètre \(s\in\mathbb R\) décrit cette déformation analytique. Écrivons
+\[
+ d_j(s)=\frac{K_je^{su_j}}{\sum_\ell K_\ell e^{su_\ell}},
+ \qquad
+ t_i(s)=\sum_{j=1}^id_j(s),
+ \qquad
+ a_j(s)=\frac{d_j(s)}{d_j(0)}>0.
+\]
+Soit \(F_s:[0,1]\to[0,1]\) l’application qui envoie chaque
+\(t_i(0)\) sur \(t_i(s)\) et qui est affine sur les intervalles initiaux.
+C’est un homéomorphisme croissant, de pente \(a_j(s)\) sur
+l’intervalle \([t_{j-1}(0),t_j(0)]\). Son inverse est également affine
+par intervalles et les deux applications sont lipschitziennes.
+
+Supposons que chaque subdivision hérite des fractions de longueur et de la direction de son intervalle prédécesseur, comme dans la section précédente. Tous les nœuds raffinés sont alors transportés par le même \(F_s\). Notons leurs partitions \(P_n(s)=F_s(P_n(0))\) et leurs espaces d'interpolation \(V_n(s)\). L'application
+\[
+ U_s f=f\circ F_s^{-1}
+\]
+transporte \(V_n(0)\) vers \(V_n(s)\), préserve les valeurs nodales correspondantes et prolonge cette action à \(H^1\).
+
+\begin{theorem}[Équivalence énergétique et commutation avec le raffinement]
+\label{thm:transporte-h1-flujo-k}
+Pour tout \(f\in H^1([0,1];\mathbb C)\),
+\begin{equation}
+ \int_0^1|(U_sf)'(y)|^2\,dy
+ =\sum_{j=1}^{12}\frac1{a_j(s)}
+ \int_{t_{j-1}(0)}^{t_j(0)}|f'(x)|^2\,dx.
+ \label{eq:transporte-energia-h1-k}
+\end{equation}
+Pour \(s\) dans tout intervalle compact, les normes énergétiques avant et après le transport sont uniformément équivalentes et \(|P_n(s)|\to0\) uniformément sur ce compact. L'interpolation harmonique et la restriction aux nœuds hérités commutent avec \(U_s\) ; la reconstruction et la minimisation des détails se transportent aussi bien à profondeur finie que dans la réalisation \(H^1\).
+\end{theorem}
+
+\begin{proof}
+Sur l’intervalle initial \(j\), la règle de dérivation en chaîne et le changement
+de variable \(y=F_s(x)\) fournissent
+\((U_sf)'(F_s(x))=f'(x)/a_j(s)\) et \(dy=a_j(s)\,dx\).
+L’intégration et la somme sur les intervalles prouvent
+\eqref{eq:transporte-energia-h1-k}. La formule vaut pour les
+représentants absolument continus, et son membre droit est fini.
+
+Un intervalle compact de paramètres étant fixé, la continuité et la positivité
+des douze facteurs donnent des constantes \(0<a_-\leq a_+<\infty\)
+telles que \(a_-\leq a_j(s)\leq a_+\) pour tout \(j\) et
+tout \(s\) de ce compact. Par conséquent,
+\[
+ \frac1{a_+}\mathcal E(f)
+ \leq\mathcal E(U_sf)
+ \leq\frac1{a_-}\mathcal E(f),
+ \qquad
+ |P_n(s)|\leq a_+|P_n(0)|.
+\]
+Comme \((U_sf)(0)=f(0)\), on obtient en outre
+\[
+ \min\{1,a_+^{-1}\}\|f\|_{\mathcal E}^2
+ \leq\|U_sf\|_{\mathcal E}^2
+ \leq\max\{1,a_-^{-1}\}\|f\|_{\mathcal E}^2.
+\]
+Ces bornes prouvent l’équivalence uniforme et la conservation de la
+condition de maillage décroissant.
+
+Sur chaque arête prédécesseur, les coefficients d'interpolation sont les sommes partielles des fractions héritées, indépendantes de \(s\). Si \(H_n(s)\) désigne son interpolation, on a \(U_sH_n(0)=H_n(s)U_s\) sur les espaces correspondants. La restriction commute parce que les nœuds sont transportés avec leurs valeurs. La décomposition en fonction harmonique et détail est conservée, et l'identité de Schur de \eqref{eq:schur-flujo-k} préserve sa caractérisation variationnelle. Enfin, la continuité bornée de \(U_s\) permet de passer à la limite \(H^1\). En particulier, une collection reconstruite avant le transport converge ensuite vers \(U_sf\), avec les mêmes valeurs nodales transportées.
+\end{proof}
+
+La loi \eqref{eq:transporte-energia-h1-k} identifie les facteurs métriques exacts de la déformation : le changement de longueur de chaque intervalle modifie inversement sa contribution énergétique. L'équivalence des normes conserve les configurations d'énergie finie, et l'archive des détails conserve leur reconstruction. On obtient ainsi une réalisation analytique complète de ce lecteur du registre positif. Sa compatibilité avec les formes canoniques s'articule sur les subdivisions d'un domaine fixe : la somme des formes conserve l'objet méromorphe, tandis que la réduction variationnelle et les détails conservent la réponse énergétique et l'observable raffiné. L'identification avec des formes amplituédriques de rang supérieur conserve les conditions spécifiques de couverture, de degré et de correspondance des résidus établies pour cette réalisation.

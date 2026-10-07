@@ -1,0 +1,381 @@
+% Propuesta separada; no modifica el bloque común del artículo I.
+% Procedencia: artículo II, revisión 05, registro_incidencias.tex y
+% registro_imagen_integral.tex; aclaraciones de índices de revisiones 06/07.
+% Inserción prevista inmediatamente antes de subsec:k-terminal.
+\subsection{Evaluación de incidencias y determinación de las coordenadas transversales}
+\label{iii:r25:incidencias}
+
+El registro dodecafásico conserva una historia de visitas y trazas
+orientadas. Sus coordenadas transversales se obtienen mediante una
+composición de operaciones: evaluación aritmética de las visitas,
+recuento por ventanas, normalización decimal y diferencias cíclicas.
+La reconstrucción del registro a partir de esas diferencias constituye
+otra operación, cuya existencia y unicidad se demostrarán después.
+Esta separación permite precisar tanto los datos utilizados por el
+extractor como la información que transmite a la lectura armónica.
+
+Sea $\mathscr L$ un registro de incidencias producido por la selección,
+el transporte y la actualización de una historia APP--TRIT--TPK.
+Cada visita conserva su ruta, posición APP, hoja, instante,
+multiplicidad y clase de frontera; cada traza conserva sus miembros,
+orientación, multiplicidad y longitud en la unidad declarada por su
+lector. Las ventanas son
+\[
+ E_m=\{9(m-1)+1,\ldots,9m\},\qquad 1\leq m\leq12.
+\]
+La evaluación de la hoja de suma o producto determina el entero
+$n(v)$ de cada visita y su división positiva
+\[
+ n(v)=r(v)+9q(v),\qquad 1\leq r(v)\leq9.
+\]
+El residuo se calcula sobre esa evaluación. La clase de frontera de
+una visita de residuo $9$ se conserva mediante
+$\epsilon_\partial(v)=1$ en la corona y $-1$ en el interior.
+
+La presentación incidencial del registro utiliza los tres recuentos
+\begin{align}
+ A_m&=\sum_{v\in E_m}w(v)
+       \mathbf1_{\{1,3,5,7\}}(r(v)),\label{iii:r25:recuento-a}\\
+ C_m&=\sum_{j\geq0}
+       \bigl(\nu^-_{120,m}(j)-\nu^+_{120,m}(j)\bigr),
+       \label{iii:r25:recuento-c}\\
+ V_m&=\sum_{v\in E_m}w(v)
+       \mathbf1_{\{9\}}(r(v))\epsilon_\partial(v).
+       \label{iii:r25:recuento-v}
+\end{align}
+Aquí $w(v)$ es la multiplicidad incidencial y
+$\nu^\pm_{120,m}(j)$ cuenta las trazas orientadas del canal indicado
+de longitud reducida $120(1+3j)$, según la enumeración del registro.
+La colección de trazas y su multiplicidad son datos de la evaluación,
+con la regla de producción que les corresponde. La suma entera requiere
+soporte finito o una construcción que determine su significado.
+La longitud reducida de una traza y el número de instantes de la
+ventana son magnitudes tipadas diferentes; la unidad del lector
+especifica su relación. Los símbolos $A_m,C_m,V_m$ designan aquí
+recuentos enteros, distintos del par angular y del operador constitutivo.
+
+Sea $[x]_{10}\in\{0,\ldots,9\}$ el representante euclídeo.
+La normalización conserva también el cociente en
+\[
+ x=[x]_{10}+10\lfloor x/10\rfloor.
+\]
+Se forma el bloque
+\begin{equation}
+ z_m=100[A_m]_{10}+10[C_m]_{10}+[V_m]_{10},
+ \qquad 0\leq z_m\leq999.
+ \label{iii:r25:bloque}
+\end{equation}
+Con índices cíclicos módulo $12$, sean
+\[
+ (D_a z)_m=z_m-z_{m+a},\qquad a\in\{3,4\},
+ \qquad Q(z)=\sum_{m=1}^{12}z_m.
+\]
+La composición incidencial queda expresada por
+\begin{equation}
+ \mathcal E_{\rm cnt}(\mathscr L)
+ =\mathcal D(z):=(D_3z,D_4z,Q(z))\in\mathbb Z^{25}.
+ \label{iii:r25:composicion}
+\end{equation}
+Sus argumentos son las visitas y trazas con sus reglas de recuento.
+La evaluación no recibe $K$, $U$, $\alpha$ ni las coordenadas
+transversales esperadas. Para identificarla con
+$\mathcal E_{108}^{90,120}$ se conserva además la composición con
+la colección y las incidencias efectivas del estado terminal. La
+invertibilidad de $\mathcal D$ determina una reconstrucción posterior;
+por sí sola no selecciona esa colección de incidencias.
+
+\begin{proposition}[Información residual determinada por el extractor]
+\label{iii:r25:residuos}
+Sean $N,N'\in\mathbb Z^{12\times3}$ dos registros de recuentos,
+ordenados por $(A,C,V)$. Para las operaciones
+\eqref{iii:r25:bloque}--\eqref{iii:r25:composicion},
+\[
+ \mathcal E_{\rm cnt}(N)=\mathcal E_{\rm cnt}(N')
+ \quad\Longleftrightarrow\quad N-N'\in10\mathbb Z^{36}.
+\]
+Los $36$ residuos sectoriales determinan exactamente la salida de
+$25$ coordenadas. Los cocientes y las procedencias constituyen
+información adicional del registro.
+\end{proposition}
+\begin{proof}
+La igualdad módulo $10$ produce los mismos bloques y sus mismas
+coordenadas transversales. Recíprocamente, la igualdad de las
+coordenadas da $D_3(z-z')=D_4(z-z')=0$. Los pasos $3$ y $4$
+generan el ciclo de longitud $12$, por lo que $z-z'$ es constante.
+La igualdad de $Q$ anula esa constante. La expansión de cada entero
+de $0$ a $999$ en tres cifras decimales es única; se recuperan así
+los tres residuos de cada ventana.
+\end{proof}
+
+La proposición es válida para todo el dominio entero indicado. No
+postula que las $36$ clases sean independientes sobre el subconjunto
+de registros admisibles producido por TPK.
+
+\subsection{Imagen integral e inversión de las coordenadas transversales}
+\label{iii:r25:imagen-seccion}
+
+Para expresar la inversión se reindexan los bloques por
+$i\in\mathbb Z/12\mathbb Z$, de $0$ a $11$. Sean
+$(Sz)_i=z_{i+1}$, $D_3=I-S^3$ y $D_4=I-S^4$.
+Dada una terna entera $(b,c,q)$, defínanse
+\begin{equation}
+ w_i=c_i-b_{i+1},\qquad
+ P_0=0,\quad P_i=\sum_{j=0}^{i-1}w_j\ (1\leq i\leq12),
+ \qquad T(w)=\sum_{i=0}^{11}P_i.
+ \label{iii:r25:incrementos}
+\end{equation}
+
+\begin{theorem}[Caracterización de la imagen integral]
+\label{iii:r25:imagen}
+Una terna $(b,c,q)\in\mathbb Z^{25}$ pertenece a
+$\operatorname{im}\mathcal D$ si y sólo si
+\begin{align}
+ b_i&=w_i+w_{i+1}+w_{i+2},\qquad 0\leq i<12,
+       \label{iii:r25:relaciones}\\
+ \sum_{i=0}^{11}w_i&=0,\label{iii:r25:cierre}\\
+ q+T(w)&\equiv0\pmod {12}.\label{iii:r25:congruencia}
+\end{align}
+Su única preimagen entera es
+\begin{equation}
+ z_i=\frac{q+T(w)}{12}-P_i,\qquad0\leq i<12.
+ \label{iii:r25:inversa}
+\end{equation}
+Las doce relaciones \eqref{iii:r25:relaciones} y la relación
+\eqref{iii:r25:cierre} son linealmente independientes sobre
+$\mathbb Q$.
+\end{theorem}
+\begin{proof}
+Para una salida de $\mathcal D$,
+\[
+ c_i-b_{i+1}
+ =(z_i-z_{i+4})-(z_{i+1}-z_{i+4})=z_i-z_{i+1}.
+\]
+Tres incrementos consecutivos suman $b_i$ y la suma cíclica de
+todos ellos es cero. Además, $P_i=z_0-z_i$, de donde
+$q=12z_0-T(w)$. Se obtienen las condiciones y la fórmula inversa.
+Recíprocamente, la congruencia hace enteras las coordenadas de
+\eqref{iii:r25:inversa} y el cierre permite prolongarlas
+cíclicamente. Sus diferencias adyacentes son $w_i$, luego $D_3z=b$
+y
+\[
+ (D_4z)_i=w_i+w_{i+1}+w_{i+2}+w_{i+3}
+ =w_i+b_{i+1}=c_i.
+\]
+La suma da $Q(z)=q$. La fórmula determina también la unicidad.
+Finalmente, el cambio entero invertible
+$(b,c)\mapsto(b,w=c-Sb)$ transforma las doce primeras relaciones
+en $b=(I+S+S^2)w$: cada una despeja una coordenada diferente de
+$b$. El cierre $\sum_iw_i=0$ añade una relación independiente.
+\end{proof}
+
+La imagen racional tiene dimensión $12$. La condición integral añade
+la congruencia de orden $12$ de \eqref{iii:r25:congruencia}.
+Los once incrementos $w_0,\ldots,w_{10}$ y la carga $q$ son
+coordenadas suficientes, con $w_{11}=-\sum_{i=0}^{10}w_i$.
+Las $25$ coordenadas conservan esos $12$ grados de libertad
+mediante $13$ relaciones lineales. Si la terna proviene además de
+\eqref{iii:r25:bloque}, la inversa pertenece a
+$\{0,\ldots,999\}^{12}$ y recupera sus tres residuos por ventana.
+
+\subsubsection{Concordancia con la transformación armónica}
+
+La transformación $\mathcal H_{12}$ actúa mediante $H_4$ en las
+órbitas $(r,r+3,r+6,r+9)$, $r=0,1,2$, donde
+\[
+ H_4=\begin{pmatrix}
+ 1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1
+ \end{pmatrix},\qquad H_4^2=4I_4.
+\]
+Para una terna compatible, sean
+\[
+ B_r=\sum_{j=0}^3c_{r+3j},\qquad
+ a_0=\frac{q+2B_0+B_1}{3},\quad
+ a_1=a_0-B_0,\quad a_2=a_1-B_1.
+\]
+El lector armónico tiene bloques
+\[
+ (\Pi_H(b,c,q))^{(r)}
+ =(a_r,b_{r+3}-b_{r+9},b_r+b_{r+6},b_r-b_{r+6}).
+\]
+
+\begin{proposition}[Concordancia de reconstrucciones]
+\label{iii:r25:hadamard}
+Sobre $\operatorname{im}\mathcal D$ se cumple
+\[
+ \Pi_H\mathcal D=\mathcal H_{12},\qquad
+ \mathcal D^{-1}=\tfrac14\mathcal H_{12}\Pi_H.
+\]
+La imagen de $\Pi_H$ restringida a ese dominio es
+\[
+ \mathcal L_H=
+ \{u\in\mathbb Z^{12}:\mathcal H_{12}u\equiv0\pmod4\}.
+\]
+\end{proposition}
+\begin{proof}
+Para $z=\mathcal D^{-1}(b,c,q)$, sean
+$h_r=\sum_{j=0}^3z_{r+3j}$. El desplazamiento de cuatro posiciones
+lleva cada órbita a la siguiente; por tanto $B_r=h_r-h_{r+1}$.
+La identidad $q=h_0+h_1+h_2$ da $a_r=h_r$.
+En una órbita escribamos $(x_0,x_1,x_2,x_3)$ para sus coordenadas
+y $d_j=x_j-x_{j+1}$. Se verifican
+\[
+ \begin{aligned}
+ d_1-d_3&=x_0+x_1-x_2-x_3,\\
+ d_0+d_2&=x_0-x_1+x_2-x_3,\\
+ d_0-d_2&=x_0-x_1-x_2+x_3.
+ \end{aligned}
+\]
+Son las tres filas restantes de $H_4x$. La inversión y la
+caracterización integral se deducen de $\mathcal H_{12}^2=4I$.
+\end{proof}
+
+La condición de congruencia armónica controla la salida de $\Pi_H$;
+la pertenencia de los canales a $\operatorname{im}\mathcal D$
+requiere además \eqref{iii:r25:relaciones}--\eqref{iii:r25:congruencia}.
+Un control negativo exacto consiste en tomar $b=0$, $q=0$ y
+$c=e_0-e_3$. Las tres sumas orbitales de $c$ se anulan, de modo
+que $\Pi_H(b,c,q)=0$, pero se incumplen las relaciones de imagen.
+La lectura armónica no sustituye el control de compatibilidad de
+los canales.
+
+\subsection{Conjugación, covariancia y memoria del registro incidencial}
+\label{iii:r25:transporte}
+
+Sea $\rho(m)=13-m$. Si la conjugación de incidencias invierte el
+orden de las ventanas, conserva las clases aritmética y de frontera
+de las visitas e intercambia los canales de las trazas, entonces
+\[
+ (A_m^\dagger,C_m^\dagger,V_m^\dagger)
+ =(A_{\rho(m)},-C_{\rho(m)},V_{\rho(m)}).
+\]
+Con $c_m=[C_m]_{10}$, la normalización decimal da
+\begin{equation}
+ z_m^\dagger=z_{\rho(m)}
+ +100\mathbf1_{\{c_{\rho(m)}\ne0\}}-20c_{\rho(m)}.
+ \label{iii:r25:conjugacion}
+\end{equation}
+En efecto, $[-C]_{10}=0$ si $[C]_{10}=0$ y vale
+$10-[C]_{10}$ en los demás casos. La negación del canal se
+aplica antes de reconstruir el bloque decimal.
+
+La aplicación a una involución concreta conserva también los
+extremos de las ventanas. Para una ruta
+$\gamma=(x_0,\ldots,x_n)$ leída antes del avance,
+\begin{equation}
+ \sum_{k=0}^{n-1}f(x_{n-k})
+ =\sum_{k=0}^{n-1}f(x_k)+f(x_n)-f(x_0).
+ \label{iii:r25:extremos}
+\end{equation}
+Ambas sumas contienen los mismos términos interiores; la diferencia
+es el extremo final menos el inicial. En rutas cerradas esa
+corrección se anula. En ventanas abiertas se incorpora antes de
+reducir módulo $10$.
+
+\begin{proposition}[Consecuencia de una reducción periódica]
+\label{iii:r25:periodo}
+Si el observable de una colección fija de rutas satisface
+$o(t+54)=o(t)$, sus multiplicidades se conservan bajo ese retorno
+y el mismo lector local actúa en ventanas de nueve instantes,
+entonces
+\[
+ (A,C,V)_{m+6}=(A,C,V)_m,\qquad z_{m+6}=z_m.
+\]
+\end{proposition}
+\begin{proof}
+La traslación $t\mapsto t+54$ lleva cada ventana biyectivamente
+a la situada seis posiciones después y conserva cada incidencia
+contada y su multiplicidad. La igualdad se transmite a los recuentos
+y a sus normalizaciones decimales.
+\end{proof}
+
+Una presentación con doce bloques distintos conserva, por tanto,
+información que no factoriza por ese observable de período $54$:
+selección de incidencias, orientación, extremos, multiplicidad o
+memoria. La proposición delimita el efecto de esa reducción; no
+atribuye período $54$ a la historia completa.
+
+\subsubsection{Determinación sobre órbitas y acumulación de eventos}
+
+Fijar solamente $Q(z)=q$ deja una clase afín del retículo
+\[
+ \mathcal Z_0=\{v\in\mathbb Z^{12}:\sum_i v_i=0\}
+ =\bigoplus_{i=0}^{10}\mathbb Z(e_i-e_{11}).
+\]
+Por ejemplo, $100\mathbf1+e_0$ y $100\mathbf1+e_1$ tienen
+carga $1201$ y satisfacen los controles de imagen mediante sus
+respectivos canales. Son testigos de las ecuaciones de compatibilidad,
+sin atribución de pertenencia a las historias terminales HMT.
+
+\begin{proposition}[Covariancia cíclica]
+\label{iii:r25:covariancia}
+Sea $\rho$ la traslación de ventanas de un registro $R$, de
+período mínimo $p\mid12$, y sea $S$ la traslación de sus
+coordenadas. Un lector covariante sobre esa órbita queda determinado
+por $z\in\operatorname{Fix}(S^p)$. La condición $Q(z)=q$
+admite soluciones enteras si y sólo si $12/p$ divide a $q$;
+cuando existen, forman una clase afín de rango $p-1$.
+\end{proposition}
+\begin{proof}
+La regla $F(\rho^jR)=S^jz$ está bien definida exactamente si
+$S^pz=z$. Estos vectores repiten $12/p$ veces un bloque de
+longitud $p$, y su carga es $\frac{12}{p}\sum_{i=0}^{p-1}z_i$.
+La fórmula prueba la divisibilidad y el rango. La covariancia de
+los canales se sigue de $D_aS=SD_a$ y $QS=Q$.
+\end{proof}
+
+En la coordenatización armónica, la acción correspondiente es
+$\widehat S_H=\mathcal H_{12}S\mathcal H_{12}/4$.
+Si el origen está marcado, la acción transporta también esa marca.
+El período de la órbita aquí indicada no se identifica con el de
+la historia enriquecida. Para una lectura inicial $F_{108}$ ya
+definida, la naturalidad bajo truncamiento se expresa mediante
+$F_N=F_{108}\circ\tau_{N,108}$; esta identidad conserva la
+evaluación inicial sin seleccionar su regla de producción.
+
+\begin{proposition}[Composición aditiva de contribuciones incidenciales]
+\label{iii:r25:eventos}
+Supóngase que el estado inicial y cada evento $a_t$ producen,
+mediante reglas previamente fijadas sobre el registro, contribuciones
+$(\delta w_t,\delta q_t)$ tales que
+\[
+ \sum_i\delta w_{t,i}=0,
+ \qquad \delta q_t+T(\delta w_t)\equiv0\pmod {12}.
+\]
+Con condiciones iniciales compatibles $(w^{(0)},q^{(0)})$,
+la actualización por suma determina un único registro en cada etapa.
+Su incremento es
+\[
+ \delta z_{t,i}=
+ \frac{\delta q_t+T(\delta w_t)}{12}-P_i(\delta w_t).
+\]
+La construcción respeta la concatenación de segmentos y conserva
+la lectura de un prefijo bajo prolongaciones posteriores.
+\end{proposition}
+\begin{proof}
+Las condiciones de compatibilidad se conservan por suma y la
+inversa \eqref{iii:r25:inversa} es aditiva en $(w,q)$.
+La inducción fija cada estado. La suma sobre segmentos concatenados
+es la suma de sus contribuciones; un prefijo recibe los mismos
+sumandos antes y después de la prolongación.
+\end{proof}
+
+Esta proposición da un criterio suficiente para la acumulación
+aditiva, no una exigencia de linealidad de todo lector TPK.
+Cuando los eventos se transportan por acciones no triviales, sus
+contribuciones se expresan en la coordenatización terminal mediante el cociclo
+afín correspondiente. Las reglas de evento y el estado inicial
+conservan en ambos casos su procedencia incidencial.
+
+El desarrollo anterior determina el paso
+\[
+ \mathscr L\longmapsto(A,C,V)\longmapsto z
+ \longmapsto(D_3z,D_4z,Q(z))\longmapsto\mathcal H_{12}z
+\]
+con las condiciones de cada aplicación. Su dominio es distinto del
+registro regional del apéndice~\ref{iii:nucleo-finito}: allí las
+ecuaciones $X_aL_a=Y_a$ determinan los levantamientos a partir de
+transiciones ternarias. Aquí las incidencias de visitas y trazas
+determinan bloques enteros y sus canales. La unicidad de una
+reconstrucción no reemplaza la producción del registro que utiliza
+la otra. Ambas conservan sus primitivas, operaciones y pruebas en
+la cadena APP--TRIT--TPK.

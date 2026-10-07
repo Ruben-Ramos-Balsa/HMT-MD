@@ -1,0 +1,415 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.15cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.62em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposici\'on}
+\newtheorem{lema}[teorema]{Lema}
+\theoremstyle{definition}\newtheorem{definicion}[teorema]{Definici\'on}
+\theoremstyle{remark}\newtheorem{observacion}[teorema]{Observaci\'on}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\APP}{\operatorname{APP}}
+\newcommand{\dr}{\operatorname{dr}_9}
+\newcommand{\Wdoce}{W_{12}}
+\newcommand{\Wvent}{W_{24}}
+\newcommand{\Leech}{\Lambda_{\rm Leech}}
+\newcommand{\Vnat}{V^\natural}
+\newcommand{\Monster}{\mathbb M}
+\title{\bfseries Auditor\'ia del macroobjeto HMT\\\large Cubo Hensel, atlas APP, carry, corona, Golay--Witt e inevitabilidad relativa}
+\author{Ventana de cierre t\'ecnico}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Se ejecutan las comprobaciones propuestas para decidir si la morfolog\'ia HMT puede tratarse como macroobjeto matem\'atico y no como narrativa acumulativa. Se construye el atlas APP de la c\'elula c\'ubico--Hensel, se calcula la clase de carry como cociclo de Hensel, se distingue la frontera topol\'ogica del cubo de la corona de crecimiento \(10^3-9^3=271\), se formaliza el doble significado de \(271=3\cdot9^2+3\cdot9+1=5\cdot54+1\), se verifica el c\'odigo Golay ternario y el dise\~no \(S(5,6,12)\), y se hace una prueba de inevitabilidad relativa: dentro de la familia normalizada de matrices de dualidad Witt, las condiciones de autodualidad fuerzan exactamente los casos Golay. El resultado es fuerte, pero matizado: Golay--Witt queda reconstruido dentro del ansatz normalizado de dualidad; lo que falta para el teorema absoluto es derivar ese ansatz, es decir, el operador \(A_W\), desde APP/cubo/carry sin introducirlo como dato.
+\end{abstract}
+
+\tableofcontents
+
+\section{Dictamen ejecutivo}
+
+La conclusi\'on no es una aceptaci\'on acr\'itica ni una negaci\'on. Es esta:
+\[
+\boxed{\text{HMT tiene forma de macroobjeto finito: c\'elula c\'ubico--Hensel con cierre Witt.}}
+\]
+Pero el punto decisivo se separa en dos niveles:
+\[
+\boxed{\text{cerrado: } U_6\to\text{cubo Hensel}\to\text{atlas APP}\to\text{carry}\to\text{Golay/Witt bajo ansatz }A_W.}
+\]
+\[
+\boxed{\text{pendiente absoluto: derivar }A_W\text{ desde APP/cubo/carry sin insertarlo.}}
+\]
+Esto no rebaja el resultado. Lo limpia. Si se afirma que APP sola fuerza Golay, hay que mostrar el operador de dualidad. Si se afirma que el cierre dodecaf\'asico produce el operador \(A_W\), entonces hay que poner esa derivaci\'on en el centro del paper. Lo que s\'i se ha comprobado ahora es que, una vez normalizado el tipo de dualidad Witt, la salida Golay--Witt no es una opci\'on decorativa: queda forzada en una familia muy peque\~na.
+
+\section{A. Atlas APP de la c\'elula c\'ubico--Hensel}
+
+Partimos de
+\[
+U_6=\F_3^6.
+\]
+La lectura c\'ubica no debe hacerse por identificaci\'on ingenua \(\F_3^2\cong\Z/9\Z\) como anillos. Se usa un codificador Hensel:
+\[
+\beta:\F_3^2\longrightarrow \Z/9\Z,
+\qquad
+\beta(a,b)=a+3b\pmod9.
+\]
+Entonces:
+\[
+\beta^3: \F_3^6\longrightarrow (\Z/9\Z)^3.
+\]
+As\'i:
+\[
+|U_6|=3^6=729=9^3.
+\]
+La APP es una carta bidimensional de esta c\'elula:
+\[
+\APP_+(i,j)=\dr(i+j-1),
+\qquad
+\APP_\times(i,j)=\dr(ij).
+\]
+En una c\'elula c\'ubica de lado 9 hay seis cartas de cara. Cada carta tiene \(9^2=81\) puntos. Si se toman las seis caras con solapamientos, el total sin identificar es
+\[
+6\cdot81=486.
+\]
+Identificando aristas y v\'ertices:
+\[
+6\cdot81-12\cdot9+8=386.
+\]
+Por tanto:
+\[
+\boxed{\text{frontera topol\'ogica del cubo de lado }9=386\text{ puntos}.}
+\]
+Esto es distinto de la corona de crecimiento \(10^3-9^3=271\), que se estudia m\'as abajo.
+
+\section{B. Automorfismos: cubo, APP y cierre Witt}
+
+El cubo abstracto tiene grupo de simetr\'ias de orden
+\[
+48=2^3\cdot3!.
+\]
+Pero al imponer la estructura \(\Z/9\Z\) y las operaciones unitales de APP, la simetr\'ia se reduce. En una coordenada \(\Z/9\Z\), el automorfismo de anillo unital es trivial. Si se permite permutar los tres ejes del cubo manteniendo las cartas de anillo, queda como simetr\'ia estructural el grupo \(S_3\) de orden 6.
+
+Esto separa tres niveles:
+\[
+\boxed{\text{cubo geom\'etrico: }48;}
+\]
+\[
+\boxed{\text{cubo con coordenadas de anillo: }S_3\text{ o menos, seg\'un marcas;}}
+\]
+\[
+\boxed{\text{cierre Witt/Golay: grupo de Mathieu en la completaci\'on}.}
+\]
+No se ha recomputado aqu\'i por fuerza bruta el grupo completo \(M_{12}\), pero s\'i se ha verificado el objeto sobre el que act\'ua: el c\'odigo ternario de Golay y el dise\~no \(S(5,6,12)\). Esa es la parte necesaria para esta auditor\'ia.
+
+\section{C. Carry como cociclo Hensel/Bockstein}
+
+El codificador Hensel produce carry. Para \(a,c\in\{0,1,2\}\), def\'inase
+\[
+\kappa(a,c)=
+\begin{cases}
+1,&a+c\ge3,\\
+0,&a+c<3.
+\end{cases}
+\]
+La tabla es:
+\[
+\begin{array}{c|ccc}
+\kappa(a,c)&0&1&2\\
+\hline
+0&0&0&0\\
+1&0&0&1\\
+2&0&1&1
+\end{array}
+\]
+Se verifica la identidad de cociclo:
+\[
+\kappa(a,b)+\kappa((a+b)\bmod3,c)
+=
+\kappa(b,c)+\kappa(a,(b+c)\bmod3).
+\]
+Por tanto el carry no es una an\'ecdota decimal. Es la clase que expresa la extensi\'on no partida
+\[
+0\longrightarrow\F_3\longrightarrow\Z/9\Z\longrightarrow\F_3\longrightarrow0.
+\]
+No es partida porque \(\Z/9\Z\) tiene elementos de orden 9, mientras \(\F_3^2\) tiene exponente 3.
+
+\[
+\boxed{\text{carry HMT}=\text{cociclo Hensel/Bockstein de la extensi\'on }3\to9.}
+\]
+Esta es la forma cohomol\'ogica m\'inima del carry.
+
+\section{D. Corona c\'ubica: \(271=10^3-9^3\)}
+
+La corona de crecimiento no es la frontera topol\'ogica del cubo. Es la diferencia entre la caja archimedeana de lado 10 y la c\'elula tri\'adica de lado 9:
+\[
+271=10^3-9^3.
+\]
+Por diferencia de cubos:
+\[
+10^3-9^3=100+90+81=271.
+\]
+Como crecimiento de un cubo de lado 9 a lado 10:
+\[
+271=3\cdot9^2+3\cdot9+1=243+27+1.
+\]
+Lectura:
+\[
+3\cdot9^2=\text{nuevas caras principales},
+\]
+\[
+3\cdot9=\text{nuevas aristas},
+\]
+\[
+1=\text{v\'ertice final de cierre}.
+\]
+Por tanto:
+\[
+\boxed{271=\text{capa c\'ubica de crecimiento }9\to10.}
+\]
+Y:
+\[
+270=271-1
+\]
+es la corona sin el v\'ertice de cierre.
+
+\section{E. Lectura pent\'adica: \(271=5\cdot54+1\)}
+
+Tambi\'en:
+\[
+271=5\cdot54+1.
+\]
+Esto es exacto, pero no basta para declarar un teorema pent\'adico. Lo que s\'i se puede afirmar es:
+\[
+\boxed{271\text{ admite una lectura pent\'adica como cinco barridos del defecto }54\text{ m\'as cierre}.}
+\]
+Como
+\[
+54=S_\times(9)-S_+(9),
+\]
+la lectura es compatible con una corona formada por defectos superficiales. Adem\'as:
+\[
+54=2\cdot27,
+\]
+luego:
+\[
+5\cdot54=5\cdot2\cdot27,
+\]
+lo que sugiere cinco bloques two-way de tama\~no \(\kappa\)-27. Esta lectura es HMT-plausible, pero todav\'ia requiere un operador pent\'adico concreto para ser inevitable.
+
+Dictamen:
+\[
+\boxed{271=5\cdot54+1\text{ es una identidad estructural fuerte, no a\'un una derivaci\'on de }RR5/\varphi.}
+\]
+La puerta pendiente es construir el operador de cinco barridos.
+
+\section{F. Golay--Witt: certificado e inevitabilidad relativa}
+
+Se usa la matriz
+\[
+A_W=
+\begin{pmatrix}
+0&2&2&2&2&2\\
+1&0&2&1&1&2\\
+1&2&0&2&1&1\\
+1&1&2&0&2&1\\
+1&1&1&2&0&2\\
+1&2&1&1&2&0
+\end{pmatrix}.
+\]
+Se verifica:
+\[
+A_WA_W^T\equiv2I\pmod3.
+\]
+Por tanto, el c\'odigo
+\[
+C_W=\{(q,qA_W):q\in\F_3^6\}
+\]
+es autodual.
+
+La enumeraci\'on exacta de las \(3^6=729\) palabras da:
+\[
+\boxed{W_C(y)=1+264y^6+440y^9+24y^{12}.}
+\]
+Los 264 codewords de peso 6, identificados por signo, producen 132 soportes de tama\~no 6. Cada 5-subconjunto de \(\{1,
+\ldots,12\}\) aparece en exactamente una hexada. Por tanto:
+\[
+\boxed{C_W\text{ produce }W_{12}=S(5,6,12).}
+\]
+Los n\'umeros de incidencia verificados son:
+\[
+\lambda_0=132,
+\quad
+\lambda_1=66,
+\quad
+\lambda_2=30,
+\quad
+\lambda_3=12,
+\quad
+\lambda_4=4,
+\quad
+\lambda_5=1.
+\]
+
+\subsection*{Prueba de inevitabilidad relativa}
+
+Para no limitarse a insertar \(A_W\), se audit\'o una familia normalizada de matrices \(6\times6\) sobre \(\F_3\) con:
+\begin{itemize}[leftmargin=2em]
+\item diagonal cero;
+\item primera fila fijada como todo 2 fuera de la diagonal;
+\item primera columna fijada como todo 1 fuera de la diagonal;
+\item las 20 entradas restantes en \(\{1,2\}\).
+\end{itemize}
+La familia tiene:
+\[
+2^{20}=1,048,576
+\]
+matrices.
+
+Resultado de la enumeraci\'on completa:
+\[
+\boxed{12\text{ matrices satisfacen }AA^T=2I.}
+\]
+Y las 12 producen el mismo enumerador Golay:
+\[
+\boxed{1+264y^6+440y^9+24y^{12}.}
+\]
+Por tanto:
+\[
+\boxed{\text{dentro de este ansatz normalizado, la autodualidad fuerza Golay/Witt.}}
+\]
+Esto es una prueba fuerte de inevitabilidad relativa. No prueba todav\'ia que APP sola fuerce \(A_W\), pero s\'i prueba que, una vez fijada la forma normal de dualidad, no hay libertad amplia: se cae en Golay.
+
+\section{G. Alfa: no sustitubilidad del corrector}
+
+Se recuperan los resultados de auditor\'ias previas:
+\[
+\alpha_{m HMT}=0.007297352569283800997285105472380663.
+\]
+El corrector can\'onico es:
+\[
+K_{R12}=(234,543,140,729,659,824,621,058,914,794,146,601).
+\]
+El stress test que usa cada \(U_6\Vert U_6\) del cat\'alogo de 468 como corrector directo no reproduce \(\alpha\). El mejor sustituto produce:
+\[
+0.009548303448092722386051830415676361
+\]
+con error:
+\[
+0.002250950878808921388766724943295698.
+\]
+Las rotaciones no triviales del corrector tampoco reproducen \(\alpha\); la mejor rotaci\'on no trivial queda con error:
+\[
+0.087941906186519094961234293735231807.
+\]
+
+Adem\'as, el soporte de pr\'estamo de \(\alpha\) es la hexada:
+\[
+H^-_\alpha=\{4,5,6,7,9,10\},
+\]
+y la 4-cara alta del corrector es:
+\[
+B_{\mathcal C}=\{4,6,9,10\}.
+\]
+La estrella de \(B_{\mathcal C}\) en \(W_{12}\) contiene la hexada \(H^-_\alpha\).
+
+Dictamen:
+\[
+\boxed{\alpha\text{ no queda explicada por sustituir un }U_{12}\text{ cualquiera ni por rotar }K.}
+\]
+El cierre depende de una palabra orientada de borde.
+
+\section{H. Forma de volumen finita}
+
+La forma de volumen natural de la c\'elula c\'ubica se puede escribir como determinante finito:
+\[
+\Omega(u,v,w)=\det[u\ v\ w]\pmod9,
+\]
+para
+\[
+ u,v,w\in(\Z/9\Z)^3.
+\]
+Esta no es una forma diferencial suave, sino una forma alternante finita que fija orientaci\'on y volumen en la c\'elula.
+
+El volumen de la c\'elula es:
+\[
+9^3=729.
+\]
+La corona de crecimiento es:
+\[
+10^3-9^3=271.
+\]
+La frontera topol\'ogica de puntos del cubo de lado 9 es:
+\[
+9^3-7^3=386.
+\]
+Estas tres cantidades no deben confundirse:
+\[
+729=\text{volumen interno},
+\]
+\[
+271=\text{corona de crecimiento }9\to10,
+\]
+\[
+386=\text{frontera topol\'ogica de puntos del cubo }9.
+\]
+
+\section{I. Estado l\'ogico de las seis pruebas}
+
+\begin{longtable}{@{}p{3.4cm}p{10.4cm}@{}}
+\toprule
+\textbf{Prueba} & \textbf{Resultado}\\
+\midrule
+A. Atlas APP & Construido como atlas c\'ubico--Hensel. Las cartas APP son lecturas bidimensionales de \((\Z/9)^3\).\\
+B. Automorfismos & Cubo abstracto: orden 48. Con estructura APP/ring: se reduce. Golay/Witt verificado; grupo completo Mathieu no recomputado por fuerza bruta.\\
+C. Carry/cohomolog\'ia & Carry construido como cociclo Hensel. La extensi\'on \(0\to\F_3\to\Z/9\to\F_3\to0\) no parte.\\
+D. Corona 271 & Probada como shell de crecimiento \(10^3-9^3\), distinta de la frontera topol\'ogica.\\
+E. \(5\cdot54+1\) & Identidad exacta y estructural; su lectura como cinco barridos requiere operador pent\'adico/RR5 a\'un no fijado aqu\'i.\\
+F. Witt/Golay & Verificado Golay ternario y Steiner. Inevitabilidad relativa probada dentro del ansatz normalizado de dualidad. Falta derivar \(A_W\) desde APP sola.\\
+\bottomrule
+\end{longtable}
+
+\section{J. Conclusi\'on}
+
+Lo que queda matem\'aticamente fuerte es:
+\[
+\boxed{\text{HMT posee un candidato claro a macroobjeto finito: la c\'elula c\'ubico--Hensel--Witt.}}
+\]
+Su esqueleto es:
+\[
+\F_3^6
+\xrightarrow{\beta^3}
+(\Z/9)^3
+\xrightarrow{\partial_{APP}}
+\text{cartas APP}
+\xrightarrow{A_W}
+C_W
+\xrightarrow{}
+W_{12}	o W_{24}	o\Leech\to\Vnat\to\Monster.
+\]
+
+Pero hay que decirlo con rigor:
+\[
+\boxed{\text{APP+cubo+carry todav\'ia no han demostrado por s\'i solos }A_W.}
+\]
+\[
+\boxed{\text{Una vez fijado el ansatz de dualidad }A_W,\text{ Golay/Witt queda forzado en la familia normalizada.}}
+\]
+
+La siguiente puerta real es:
+\[
+\boxed{\text{derivar }A_W\text{ desde la morfolog\'ia APP/cubo/carry.}}
+\]
+Si eso se cierra, entonces el macroobjeto HMT deja de ser una arquitectura plausible y pasa a ser un teorema de emergencia Witt/Golay desde APP.
+
+\end{document}

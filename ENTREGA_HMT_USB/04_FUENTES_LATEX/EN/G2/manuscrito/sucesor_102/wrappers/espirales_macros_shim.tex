@@ -1,0 +1,68 @@
+% Adaptador mínimo para las correspondencias espirales genealógicas.
+% El preámbulo autónomo no se importa: sólo se registran símbolos y colores
+% que los cuerpos científicos usan de manera efectiva.
+\makeatletter
+\@ifundefined{color@HMTNavy}{\definecolor{HMTNavy}{HTML}{17324D}}{}
+\@ifundefined{color@HMTBlue}{\definecolor{HMTBlue}{HTML}{315E7D}}{}
+\@ifundefined{color@HMTRed}{\definecolor{HMTRed}{HTML}{8A3D36}}{}
+\@ifundefined{color@HMTGold}{\definecolor{HMTGold}{HTML}{9B7B3E}}{}
+\@ifundefined{color@HMTGray}{\definecolor{HMTGray}{HTML}{5F6870}}{}
+\@ifundefined{color@HMTLight}{\definecolor{HMTLight}{HTML}{F2F4F5}}{}
+\@ifundefined{color@HMTLine}{\definecolor{HMTLine}{HTML}{C9CFD3}}{}
+\providecommand{\enr}{\mathrm{enr}}
+\providecommand{\AffEnd}{\operatorname{AffEnd}}
+\providecommand{\Hist}{\operatorname{Hist}}
+\providecommand{\Led}{\operatorname{Led}}
+\providecommand{\Carr}{\operatorname{Carr}}
+\providecommand{\ev}{\operatorname{ev}}
+\providecommand{\sd}{\operatorname{sd}}
+\providecommand{\id}{\operatorname{id}}
+\providecommand{\im}{\operatorname{im}}
+\providecommand{\Spec}{\operatorname{Spec}}
+\providecommand{\arcosh}{\operatorname{arcosh}}
+\providecommand{\N}{\mathbb N}
+\providecommand{\T}{\mathbb T}
+\providecommand{\ii}{\mathrm i}
+\providecommand{\twoway}{\textit{bidirectional}}
+\providecommand{\ph}{\mathrm{ph}}
+\providecommand{\mem}{\mathrm{mem}}
+\providecommand{\rad}{\mathrm{rad}}
+\providecommand{\arq}{\mathrm{arq}}
+\providecommand{\e}{\mathrm e}
+\providecommand{\F}{\mathbb F}
+\providecommand{\Z}{\mathbb Z}
+\providecommand{\R}{\mathbb R}
+\providecommand{\dd}{\,\mathrm d}
+
+% Los propietarios de correspondencias espirales se distribuyen por
+% residencia causal. Sus etiquetas conservan un espacio de nombres único y
+% sus divisiones autónomas se subordinan a la jerarquía del capítulo receptor.
+\newenvironment{HMTSpiralIntegratedBody}{%
+  \begingroup
+  % Las copias públicas ya llevan el prefijo material ``espiral:'' en cada
+  % etiqueta y referencia. Esto incluye los labels diferidos de amsmath, que
+  % no podían asegurarse mediante una redefinición local de \label.
+  \let\part\HMTBookSection
+  \let\chapter\HMTBookSubsection
+  \let\section\HMTBookSubsubsection
+  \let\subsection\HMTBookParagraph
+  \let\subsubsection\HMTBookSubparagraph
+}{\endgroup}
+
+\newenvironment{HMTSpiralChapterBody}{%
+  \begingroup
+  \let\chapter\HMTBookSection
+  \let\section\HMTBookSubsection
+  \let\subsection\HMTBookSubsubsection
+  \let\subsubsection\HMTBookParagraph
+}{\endgroup}
+
+\newenvironment{HMTSpiralAppendixBody}{%
+  \begingroup
+  \let\part\HMTBookChapter
+  \let\chapter\HMTBookSection
+  \let\section\HMTBookSubsection
+  \let\subsection\HMTBookSubsubsection
+  \let\subsubsection\HMTBookParagraph
+}{\endgroup}
+\makeatother

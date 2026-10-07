@@ -1,0 +1,234 @@
+% Desarrollo acotado: lector energético intervalar del registro K.
+% Estatuto: formalización añadida sobre K y sobre las identidades de Schur
+% ya presentes en el corpus. No se atribuye novedad histórica a Schur.
+\section{Formes de Dirichlet et équivalence variationnelle du raffinement}
+\label{sec:energia-refinamiento-k}
+
+La représentation positive du registre dodécaphasique définit une partition ordonnée au moyen de
+\[
+ K=(234,543,140,729,659,824,621,58,914,794,146,601),
+ \qquad d_j=K_j/6263,
+ \qquad t_i=\sum_{j=1}^id_j.
+\]
+Le registre est reçu de la composition
+\(x_{\rm term}\mapsto\mathcal R_{12}\mapsto
+(b^{90},b^{120},Q_{\rm TPK})\mapsto U_{\rm sgn}\mapsto K\),
+postérieure à APP--TRIT--TPK et à son état enrichi, conformément aux lecteurs
+reconstruits dans \cite{hmtX}. Cette section applique
+un lecteur quadratique à la partition résultante. La comparaison entre
+profondeurs s’effectuera par restrictions aux extrémités héritées, de sorte
+que chaque coefficient de l’énergie conserve son origine dans une séparation
+positive déjà produite.
+
+Le corpus contient une énergie pondérée de différences pour le graphe des
+deux mémoires et une réduction de Schur des formes complètes. On
+réunit ici ces opérations sur le réseau d’intervalles du registre. La
+spécialisation aux conductances \(1/d_j\), l’opérateur d’interpolation
+et sa compatibilité avec la déformation des séparations constituent
+la formalisation développée dans cette section.
+
+\subsection{Reconstruction des séparations à partir de la matrice de rigidité}
+
+Soit \(d=(d_1,\ldots,d_m)\), avec \(d_j>0\), et soient
+\(f=(f_0,\ldots,f_m)\in\mathbb C^{m+1}\) les valeurs d’un observable
+aux extrémités de la partition. Nous définissons
+\begin{equation}
+ \mathcal E_d(f)=\sum_{j=1}^{m}\frac{|f_j-f_{j-1}|^2}{d_j},
+ \qquad L_d=D^*\operatorname{diag}(d_1^{-1},\ldots,d_m^{-1})D,
+ \label{eq:energia-intervalar}
+\end{equation}
+où \(D:\mathbb C^{m+1}\to\mathbb C^m\) est l'opérateur d'incidence orientée, \((Df)_j=f_j-f_{j-1}\), et l'astérisque désigne l'adjonction hermitienne. Ainsi \(\mathcal E_d(f)=f^*L_df\). La matrice de rigidité a pour entrées
+\[
+ (L_d)_{00}=d_1^{-1},\quad (L_d)_{mm}=d_m^{-1},\quad
+ (L_d)_{ii}=d_i^{-1}+d_{i+1}^{-1}\quad(1\le i<m),
+\]
+\[
+ (L_d)_{i-1,i}=(L_d)_{i,i-1}=-d_i^{-1},
+\]
+et les autres sont nuls. Elle est hermitienne positive semi-définie, son noyau
+est constitué des fonctions constantes et sa forme est définie positive
+sur le quotient par ce noyau. La matrice complète retrouve les
+séparations par
+\begin{equation}
+ d_j=-\frac1{(L_d)_{j-1,j}}.
+ \label{eq:recuperacion-d-rigidez}
+\end{equation}
+
+\begin{proposition}[Équivalence entre séparations et lecteur nodal complet]
+\label{prop:energia-bidireccional}
+L'application \(d\mapsto L_d\) est une bijection entre \((0,\infty)^m\) et l'ensemble des matrices réelles symétriques tridiagonales dont les entrées immédiatement adjacentes à la diagonale sont négatives et dont la somme de chaque ligne est nulle. Son inverse est \eqref{eq:recuperacion-d-rigidez}. La normalisation \(\sum_jd_j=1\) équivaut à \(\sum_{j=1}^m-1/(L_d)_{j-1,j}=1\).
+\end{proposition}
+\begin{proof}
+Les formules explicites de \(L_d\) vérifient toutes les conditions.
+Réciproquement, les entrées adjacentes négatives déterminent des séparations
+positives uniques par \eqref{eq:recuperacion-d-rigidez}. La somme nulle de
+chaque ligne détermine ses entrées diagonales comme la somme des
+conductances incidentes. La tridiagonalité fixe à zéro les entrées
+restantes. On récupère exactement la matrice de
+\eqref{eq:energia-intervalar} ; sa semi-définie positivité découle alors
+de la factorisation \(D^*\operatorname{diag}(1/d_j)D\).
+\end{proof}
+
+La dérivée discrète pondérée \(J_j=(f_j-f_{j-1})/d_j\) est le flux orienté de l'arête \(j\). Aux sommets intérieurs, \((L_df)_i=J_i-J_{i+1}\) ; aux extrémités, \((L_df)_0=-J_1\) et \((L_df)_m=J_m\). L'équation intérieure \(L_df=0\) exprime que le flux a la même valeur sur chaque arête. Cette définition est celle d'un observable quadratique du lecteur d'intervalles ; sa réalisation comme grandeur physique requiert la coordinatisation dimensionnelle pertinente.
+
+\subsection{Interpolation harmonique, complément de Schur et reconstruction du détail}
+
+Raffinons chaque séparation sous la forme \(d_j=\sum_{c=1}^{r_j}\delta_{j,c}\), avec \(\delta_{j,c}>0\). Soit \(\widetilde d\) la concaténation de ces séparations, \(R\) la restriction aux anciennes extrémités et \(H\) l'interpolation définie par
+\begin{equation}
+ (Hf)_{j,c}=(1-\theta_{j,c})f_{j-1}+\theta_{j,c}f_j,
+ \qquad
+ \theta_{j,c}=\frac{\sum_{a=1}^c\delta_{j,a}}{d_j}.
+ \label{eq:interpolacion-armonica-k}
+\end{equation}
+Les extrémités partagées ne sont comptées qu’une fois. On a \(RH=I\).
+
+\begin{theorem}[Raffinement isométrique de l’énergie]
+\label{thm:energia-schur-refinamiento}
+Pour tout vecteur de valeurs anciennes \(f\),
+\begin{equation}
+ H^*L_{\widetilde d}H=L_d,
+ \qquad L_{\widetilde d}H=R^*L_d,
+ \qquad
+ \min_{Rg=f}\mathcal E_{\widetilde d}(g)=\mathcal E_d(f).
+ \label{eq:isometria-energia-k}
+\end{equation}
+Le minimiseur est unique et vaut \(Hf\). Tout \(g\) admet la
+décomposition unique
+\begin{equation}
+ g=H(Rg)+z,\qquad Rz=0,
+ \qquad
+ \mathcal E_{\widetilde d}(g)
+ =\mathcal E_d(Rg)+\mathcal E_{\widetilde d}(z).
+ \label{eq:detalle-energia-k}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Sur une ancienne arête, écrivons \(h_c=g_{j,c}-g_{j,c-1}\), de sorte que \(\sum_ch_c=f_j-f_{j-1}=a\). Si \(h_c=\delta_{j,c}a/d_j+r_c\), alors \(\sum_cr_c=0\) et
+\[
+ \sum_c\frac{|h_c|^2}{\delta_{j,c}}
+ =\frac{|a|^2}{d_j}+\sum_c\frac{|r_c|^2}{\delta_{j,c}}.
+\]
+L’égalité s’obtient en développant ; le terme croisé est proportionnel à
+\(\sum_cr_c\) et s’annule. Le minimum est atteint exactement lorsque
+tous les \(r_c\) sont nuls, condition qui détermine
+\eqref{eq:interpolacion-armonica-k}. En sommant les arêtes, on obtient
+le minimum et la décomposition énergétique. Le flux de \(Hf\) est
+constant à l’intérieur de chaque ancienne arête, de sorte que ses composantes
+intérieures de \(L_{\widetilde d}Hf\) sont nulles et ses composantes héritées
+coïncident avec \(L_df\). Cela prouve la seconde identité matricielle ; en
+multipliant par \(H^*\), en utilisant \(RH=I\), on obtient la première.
+\end{proof}
+
+Le terme \(\mathcal E_{\widetilde d}(z)\) est non négatif et s’annule
+exactement pour \(z=0\) : un détail d’énergie nulle serait constant et,
+en s’annulant aux extrémités héritées, il s’annulerait sur tout le réseau.
+La paire \((Rg,z)\) conserve le vecteur raffiné complet et permet
+de le retrouver par \(g=H(Rg)+z\). La minimisation sélectionne sa
+composante harmonique ; l’archivage du détail \(z\) maintient
+l’information que la seule forme réduite ne distingue pas. La conservation
+de l’énergie observée et la conservation de l’état raffiné sont
+ainsi exprimées par des applications différentes et explicites.
+
+En ordonnant les sommets comme extrémités héritées \(E\) et sommets intérieurs \(I\), nous écrivons
+\[
+ L_{\widetilde d}=\begin{pmatrix}A&B^*\\B&C\end{pmatrix}.
+\]
+Pour un raffinement comportant des sommets intérieurs, le bloc \(C\) est défini positif : une fonction nulle aux extrémités dont l'énergie est nulle est constante sur chaque sous-intervalle et, par conséquent, identiquement nulle. On obtient
+\begin{equation}
+ H=\begin{pmatrix}I\\-C^{-1}B\end{pmatrix},\qquad
+ \operatorname{Schur}_{I}(L_{\widetilde d})
+ =A-B^*C^{-1}B=L_d.
+ \label{eq:schur-intervalar-k}
+\end{equation}
+Si le raffinement conserve tous les sommets et n'en introduit aucun, la même affirmation se réduit à \(H=I\) et \(L_{\widetilde d}=L_d\).
+
+\begin{proposition}[Naturalité des prolongements et de l'élimination]
+\label{prop:energia-naturalidad-sucesiva}
+Pour trois partitions emboîtées, les interpolations harmoniques et les compléments de Schur satisfont
+\begin{equation}
+ H_{n+2\leftarrow n}
+ =H_{n+2\leftarrow n+1}H_{n+1\leftarrow n},
+ \qquad
+ \operatorname{Schur}_{n+1\to n}
+ \bigl(\operatorname{Schur}_{n+2\to n+1}(L_{n+2})\bigr)=L_n.
+ \label{eq:energia-naturalidad-sucesiva}
+\end{equation}
+\end{proposition}
+\begin{proof}
+L’interpolation de valeurs affines sur un intervalle demeure la
+même fonction affine après toute subdivision de cet intervalle.
+Cela prouve la première identité. Minimiser d’abord sur les sommets
+incorporés au dernier niveau puis sur ceux du niveau intermédiaire
+revient à minimiser sur leur totalité, avec les mêmes extrémités héritées fixées.
+L’identité variationnelle de \eqref{eq:isometria-energia-k} et l’unicité
+du minimiseur prouvent la seconde identité. La restriction du minimum
+se réalise donc au moyen de la même composition que le prolongement
+harmonique des données.
+\end{proof}
+
+\subsection{Réponse de Dirichlet à Neumann et défaut énergétique d’une extension}
+
+Si seules les extrémités initiale et finale sont conservées, soit \(D_0=\sum_{j=1}^md_j\). Pour des valeurs \((a,b)\), la solution harmonique est
+\[
+ f_i=a+(b-a)\frac{\sum_{j=1}^id_j}{D_0},\qquad
+ J_j=(b-a)/D_0.
+\]
+Son opérateur de Dirichlet à Neumann, qui transforme les valeurs de frontière en
+flux sortants, est
+\begin{equation}
+ \Lambda_d=\frac1{D_0}
+ \begin{pmatrix}1&-1\\-1&1\end{pmatrix},\qquad
+ \min\mathcal E_d=\frac{|b-a|^2}{D_0}.
+ \label{eq:dtn-intervalar-k}
+\end{equation}
+Lorsque la valeur est prescrite à tous les sommets hérités, leur opérateur de réponse multiponctuelle est, par le même argument, \(\Lambda=L_d\).
+
+Une extension approchée \(g=(f,y)\), où \(y\) réunit les valeurs
+aux sommets intérieurs, a pour résidu intérieur
+\(r=Bf+Cy\). L’identité exacte
+\begin{equation}
+ \mathcal E_{\widetilde d}(g)-f^*\Lambda f
+ =r^*C^{-1}r\ge0
+ \label{eq:residual-dtn-k}
+\end{equation}
+se déduit de \(y+C^{-1}Bf=C^{-1}r\) et de la décomposition
+\[
+ g^*L_{\widetilde d}g
+ =f^*(A-B^*C^{-1}B)f
+ +(y+C^{-1}Bf)^*C(y+C^{-1}Bf).
+\]
+Ainsi, la valeur effective et le détail maintiennent une décomposition
+hermitienne complète. En particulier, si une
+extension linéaire est \(\widetilde H=\begin{pmatrix}I\\Z\end{pmatrix}\), sa matrice de résidus est \(\mathscr R=B+CZ\) et
+\[
+ \widetilde H^*L_{\widetilde d}\widetilde H-\Lambda
+ =\mathscr R^*C^{-1}\mathscr R\succeq0.
+\]
+Le résidu nul caractérise l'interpolation harmonique exacte. Ce résidu énergétique se situe dans l'espace des sommets intérieurs ; l'annulation des résidus des formes méromorphes appartient à une autre application de frontière et conserve sa propre définition.
+
+\subsection{Commutation du raffinement et du flux des séparations}
+
+Soit \(u=P_3P_{11}K\) la direction algébrique déjà retrouvée à partir des
+lecteurs du registre \cite{hmtX}. Pour le paramètre réel \(s\), définissons
+\[
+ d_j(s)=\frac{K_je^{su_j}}{\sum_\ell K_\ell e^{su_\ell}}.
+\]
+Étant fixées des fractions positives \(\vartheta_{j,c}\) de somme un pour chaque
+\(j\), le raffinement hérité est
+\[
+ \delta_{j,c}(s)=\vartheta_{j,c}d_j(s),\qquad
+ u_{j,c}=u_j.
+\]
+Produire d'abord les poids raffinés \(K_j\vartheta_{j,c}\) et les déformer donne la même collection : les successeurs ont une exponentielle identique et leurs coefficients ont pour somme \(K_j\). Pour tout \(s\),
+\begin{equation}
+ \operatorname{Schur}_{I}(L_{\widetilde d(s)})=L_{d(s)},
+ \qquad H^*L_{\widetilde d(s)}H=L_{d(s)}.
+ \label{eq:schur-flujo-k}
+\end{equation}
+Dans cette comparaison parent--enfants, \(H\) est constant : ses coefficients
+sont les sommes partielles de \(\vartheta_{j,c}\). En revanche,
+l’interpolation à partir des deux extrémités globales utilise
+\(t_i(s)=\sum_{j\le i}d_j(s)\) et change avec le paramètre. Les deux
+affirmations correspondent à des restrictions différentes du même réseau.
+
+La normalisation \(\sum_jd_j(s)=1\) fait que l'opérateur global à deux extrémités reste égal à \(\left(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\right)\). La matrice de tous les nœuds \(L_{d(s)}\) conserve, elle, la déformation et la récupère au moyen de \eqref{eq:recuperacion-d-rigidez}. La perte d'information dans le lecteur à deux extrémités est identifiée exactement : il retient la longueur totale et ses flux, tandis que le lecteur nodal retient toutes les séparations. L'archive des détails fournit le complément nécessaire pour reconstruire l'observable raffiné.

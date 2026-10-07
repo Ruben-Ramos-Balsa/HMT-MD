@@ -1,0 +1,298 @@
+\subsection{Accumulated memory and transport resolvents}
+\label{subsec:memoria-resolvente}
+
+Calendar return does not remove increments produced during the journey.
+To express this distinction in operator form, an accumulated trajectory-event
+record is constructed first, followed by its generating series. Reduction
+of memory variables will be performed on this transport, also preserving
+the source and output reader.
+
+\subsubsection{Oriented events and record update}
+
+Let \((d_t)\) be the sequence of integer direction codes retained by
+a TPK trajectory. The code \(d_t\) and the cursor's cardinal direction
+are different coordinates; no identification of their alphabets is assumed.
+We number the windows starting from zero:
+\[
+ I_m=\{9m+1,\ldots,9m+9\},\qquad m\geq0.
+\]
+In the first cycle, \(I_m\) is window \(E_{m+1}\) of the
+dodecaphase record. Its orientation is
+\[
+\sigma=(1,1,1,-1,-1,-1,1,1,1,-1,-1,-1).
+\]
+For a prolonged history, \(\sigma_m\in\{-1,1\}\) is the sign
+retained in the corresponding window. The signed event is
+\begin{equation}
+ a_m=\sigma_m\sum_{t\in I_m}
+       \mathbf1_{\{2,4,6,8\}}(d_t),\qquad |a_m|\leq9.
+ \label{mem:evento}
+\end{equation}
+Each summand is incorporated when its transition occurs. This definition
+counts trace events; it does not select directions through a value
+that is to be obtained later.
+
+Let \(\mathbf e_0,\ldots,\mathbf e_{11}\) be the basis of \(\ZZ^{12}\)
+and \(S\mathbf e_j=\mathbf e_{j+1\bmod12}\). Write
+\(R=S^{-1}\). The accumulated record in fixed coordinates satisfies
+\[
+z_{m+1}=z_m+a_m\mathbf e_{m\bmod12}.
+\]
+A prefix with no accumulated history starts at \(z_0=0\); at a different
+origin, \(z_0\) retains the preceding record.
+The frame accompanying the calendar is \(y_m=S^{-m}z_m\).
+
+\begin{proposition}[Update and return with memory]
+\label{mem:prop-actualizacion}
+The record in the moving frame satisfies
+\begin{equation}
+ y_{m+1}=Ry_m+\eta_m,\qquad
+ \eta_m=a_mR\mathbf e_0.
+ \label{mem:actualizacion}
+\end{equation}
+For every \(n\geq1\),
+\begin{equation}
+ y_n=R^ny_0+\sum_{j=0}^{n-1}R^{n-1-j}\eta_j.
+ \label{mem:iteracion}
+\end{equation}
+In particular,
+\begin{equation}
+ y_{12}=y_0+\sum_{j=0}^{11}a_j\mathbf e_j.
+ \label{mem:retorno12}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplying the update of \(z_m\) by \(S^{-(m+1)}\) gives
+\(y_{m+1}=S^{-1}y_m+a_mS^{-1}\mathbf e_0\), since
+\(S^{-m}\mathbf e_{m\bmod12}=\mathbf e_0\).
+Formula \eqref{mem:iteracion} follows by induction.
+For \(n=12\), \(R^{12}=I\) and
+\(R^{11-j}\eta_j=a_jR^{12-j}\mathbf e_0=a_j\mathbf e_j\),
+which proves \eqref{mem:retorno12}.
+\end{proof}
+
+Thus twelve windows restore the frame and preserve the event vector.
+The count alone does not recover the order of all steps within each
+window; that order remains in the recorded trajectory.
+
+To specify the balance, define
+\[
+ D_3=I-S^3,\quad D_4=I-S^4,\quad
+ B=D_3^{\mathsf T}D_3+D_4^{\mathsf T}D_4,
+\]
+\[
+ \mathcal M(y)=\tfrac12y^{\mathsf T}By,
+ \qquad q(y)=\sum_{j=0}^{11}y_j.
+\]
+The first is a quadratic form of the record; the second records the sum
+of its coordinates. They are not identified here with physical energy or charge.
+
+\begin{proposition}[Event-induced balance]
+\label{mem:prop-balance}
+Update \eqref{mem:actualizacion} satisfies
+\begin{equation}
+ \begin{aligned}
+ \mathcal M(y_{m+1})-\mathcal M(y_m)
+   &=a_m(By_m)_0+2a_m^2,\\
+ q(y_{m+1})-q(y_m)&=a_m.
+ \end{aligned}
+ \label{mem:balance}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Expanding the products gives
+\(B=4I-S^3-S^{-3}-S^4-S^{-4}\); hence
+\(R^{\mathsf T}BR=B\) and \(B_{00}=4\).
+Since \(y_{m+1}=R(y_m+a_m\mathbf e_0)\), the quadratic difference
+is \(a_m\mathbf e_0^{\mathsf T}By_m+\tfrac12a_m^2B_{00}\).
+The coordinate sum is invariant under permutation \(R\),
+giving the second equality.
+\end{proof}
+
+\Needspace{20\baselineskip}
+\subsubsection{Generating series and uniform memory control}
+
+The series preserves all increments, not only their sum at the end of
+a cycle. With a formal variable \(u\), let
+\[
+ Y(u)=\sum_{m\geq0}y_mu^m,\qquad
+ H_\eta(u)=\sum_{m\geq0}\eta_mu^m.
+\]
+
+\begin{proposition}[Resolvent and tail bound]
+\label{mem:prop-serie}
+The formal identity
+\begin{equation}
+ Y(u)=(I-uR)^{-1}\bigl(y_0+uH_\eta(u)\bigr)
+ \label{mem:serie}
+\end{equation}
+holds. Both series converge for \(|u|<1\). If \(\ell:\RR^{12}\to\RR\)
+is linear, \(L=\|\ell\|_{1\to\RR}\), \(M_0=\|y_0\|_1\), and
+\(0<r<1\), then, for every integer \(N\geq0\) and \(|u|\leq r\),
+\begin{equation}
+ \left|\sum_{m>N}\ell(y_m)u^m\right|
+ \leq Lr^{N+1}\left(
+ \frac{M_0+9(N+1)}{1-r}+\frac{9r}{(1-r)^2}\right).
+ \label{mem:cota}
+\end{equation}
+The derivative series converges uniformly on every disk
+\(|u|\leq r<1\).
+\end{proposition}
+\begin{proof}
+Multiplying \eqref{mem:actualizacion} by \(u^{m+1}\) and summing gives
+\(Y-y_0=uRY+uH_\eta\). The constant term of \(I-uR\) is
+invertible, so its formal inverse is \(\sum_{k\geq0}u^kR^k\).
+Moreover, \(R\) preserves the \(\ell^1\) norm and
+\(\|\eta_m\|_1\leq9\), whence
+\(\|y_m\|_1\leq M_0+9m\).
+For the tail, sum the majorants
+\(L(M_0+9m)r^m\), using
+\[
+ \sum_{m>N}r^m=\frac{r^{N+1}}{1-r},\qquad
+ \sum_{m>N}mr^m=r^{N+1}
+ \left(\frac{N+1}{1-r}+\frac r{(1-r)^2}\right).
+\]
+Finally, \(\sum_{m\geq1}Lm(M_0+9m)r^{m-1}<\infty\)
+majorizes the derivative series and proves its uniform convergence.
+\end{proof}
+
+The variable \(u\) counts windows of nine transitions. Identifying it
+with another reader's variable requires preserving that clock and the
+map relating the two readings.
+
+\subsubsection{Memory elimination: operator, source, and reader}
+
+On a domain where the update is fixed as \(U:X\to X\),
+the free vector space \(V=\QQ^{(X)}\) on the states admits the operator
+\(T\delta_x=\delta_{U(x)}\). The clock is included in \(x\) if
+the transition depends on it. This linear extension preserves distinct
+states even when they share an observable phase.
+
+Consider a decomposition \(V=V_0\oplus V_1\), where \(V_1\)
+is the auxiliary sector to be eliminated, and write
+\[
+ T=\begin{pmatrix}A&B_1\\C&D\end{pmatrix},\qquad
+ v=\binom{v_0}{v_1},\qquad \ell=(\ell_0,\ell_1).
+\]
+Here \(A:V_0\to V_0\), \(B_1:V_1\to V_0\),
+\(C:V_0\to V_1\), and \(D:V_1\to V_1\).
+The following identities are formal; they also hold wherever the
+resolvents converge.
+
+\begin{proposition}[Schur reduction with source and reader]
+\label{mem:prop-schur}
+Let
+\[
+ D_u=(I-uD)^{-1},\qquad
+ \mathscr F(u)=I-uA-u^2B_1D_uC.
+\]
+The retained component of \((I-uT)^{-1}v\) is
+\begin{equation}
+ w_0=\mathscr F(u)^{-1}\bigl(v_0+uB_1D_uv_1\bigr),
+ \qquad w_1=D_u(v_1+uCw_0).
+ \label{mem:schur-fuente}
+\end{equation}
+Its complete reading satisfies
+\begin{equation}
+ \begin{split}
+ \ell(I-uT)^{-1}v
+ ={}&(\ell_0+u\ell_1D_uC)
+       \mathscr F(u)^{-1}(v_0+uB_1D_uv_1)\\
+    &+\ell_1D_uv_1.
+ \end{split}
+ \label{mem:schur-lector}
+\end{equation}
+\end{proposition}
+\begin{proof}
+The two equations of \((I-uT)w=v\) are
+\(w_0=v_0+uAw_0+uB_1w_1\) and
+\(w_1=v_1+uCw_0+uDw_1\).
+Solving the second and substituting it into the first gives
+\eqref{mem:schur-fuente}; applying \(\ell_0\) and \(\ell_1\)
+to the two components gives \eqref{mem:schur-lector}.
+All formal inverses exist because their constant terms are identities.
+\end{proof}
+
+The term \(u^2B_1D_uC=\sum_{k\geq0}u^{k+2}B_1D^kC\)
+describes departure into memory, \(k\) steps within it, and a return.
+By contrast, \(u\ell_1D_uC\) reads memory before that return.
+Thus reducing only the operator does not necessarily preserve the
+observation: the source and reader must also be transformed.
+
+The distinction is visible in the cycle already constructed. If \(P\)
+retains \(\mathbf e_0\), then \(PRP=0\), but
+\begin{equation}
+ \left\langle\mathbf e_0,(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac1{1-u^{12}},\qquad
+ \left\langle\mathbf e_{11},(I-uR)^{-1}\mathbf e_0\right\rangle
+ =\frac u{1-u^{12}}.
+ \label{mem:ejemplo-ciclo}
+\end{equation}
+Indeed, \(R^n\mathbf e_0=\mathbf e_{-n\bmod12}\): the two
+series collect, respectively, \(n\equiv0\) and
+\(n\equiv1\pmod{12}\). The resolvent of the compression is \(I\),
+whereas compression of the resolvent preserves the omitted returns.
+This example concerns the twelve-window record, not the entire TPK state.
+
+\subsubsection{Segment composition and coherence of reduction}
+
+Let three composable affine transports be
+\(F_i(y)=R_i y+b_i\), with compatible domains and codomains.
+The memory produced by the complete journey is
+\begin{equation}
+ F_3F_2F_1(y)
+ =R_3R_2R_1y+b_3+R_3b_2+R_3R_2b_1.
+ \label{mem:cociclo-tres}
+\end{equation}
+The proof is successive substitution of the three affine formulas.
+Grouping the first two segments first, or the last two, produces the
+same expression; the factors transport each increment from its point
+of origin. In \eqref{mem:actualizacion},
+\(R_i=R\) and \(b_i\) is the event of its window.
+
+Eliminating several layers preserves a similar coherence.
+To make it explicit, now decompose
+\(V=V_0\oplus V_1\oplus V_2\) and write
+\[
+ T=\begin{pmatrix}
+ A&B_1&B_2\\C_1&D_{11}&D_{12}\\C_2&D_{21}&D_{22}
+ \end{pmatrix},\qquad Q_2=(I-uD_{22})^{-1}.
+\]
+Eliminating the third component leaves the four blocks
+\begin{equation}
+ \begin{aligned}
+ A'&=A+uB_2Q_2C_2,&
+ B_1'&=B_1+uB_2Q_2D_{21},\\
+ C_1'&=C_1+uD_{12}Q_2C_2,&
+ D_{11}'&=D_{11}+uD_{12}Q_2D_{21}.
+ \end{aligned}
+ \label{mem:schur-intermedio}
+\end{equation}
+
+\begin{proposition}[Transitivity of elimination]
+If \(D_*=(D_{ij})_{i,j=1}^2\), the complement obtained in two stages
+coincides with that obtained by eliminating both memories together:
+\begin{equation}
+ \begin{split}
+ I-uA'-u^2B_1'(I-uD_{11}')^{-1}C_1'
+ ={}&I-uA\\
+ &-u^2(B_1\ B_2)(I-uD_*)^{-1}\binom{C_1}{C_2}.
+ \end{split}
+ \label{mem:schur-transitivo}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Solving the third equation of \((I-uT)w=v\) and substituting it into
+the first two produces \eqref{mem:schur-intermedio}. Eliminating the
+second component then gives the left-hand side of
+\eqref{mem:schur-transitivo}. Solving the two memory equations
+together gives the right-hand side, by Proposition~\ref{mem:prop-schur}.
+The formal solution is unique because \(I-uT\) has constant term
+\(I\). Both procedures also transform the source and reader according
+to \eqref{mem:schur-fuente}--\eqref{mem:schur-lector}.
+\end{proof}
+
+Balance \eqref{mem:balance} describes record increments.
+The preceding identities allow them to be transported when memory is
+reused in dodecaphase closure; they do not by themselves determine
+additional analytic coefficients.

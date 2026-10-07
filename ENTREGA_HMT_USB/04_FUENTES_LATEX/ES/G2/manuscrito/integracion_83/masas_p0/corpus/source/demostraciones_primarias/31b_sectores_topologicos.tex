@@ -1,0 +1,385 @@
+% Vista científica exacta materializada desde una rama condicional.
+% Fuente: source/demostraciones_primarias/31_06c_sectores_topologicos_no_omision.tex; rama: HMTIncludeTopologicalBlock.
+% No modifica el contenido matemático de la rama de origen.
+\chapter[Incidencia y sectores topológicos]{Incidencia, Fibonacci y sectores topológicos}
+\label{chap:incidencia-fibonacci-topologia}
+\index{sector topológico}\index{Fibonacci, anillo basado}
+\index{grupo de trenzas}
+
+La incidencia residuo--soporte prolonga el atlas hacia estructuras de fusión
+y trenza. El orden es esencial: primero se construye el anillo basado
+Fibonacci y sus dimensiones; después se estudian las representaciones
+algebraicas de trenzas y el centro apuntado. Cada objeto conserva su propio
+dominio y no se identifica con una partícula física por compartir nombre o
+cardinal.
+
+\section{Incidencia residuo--soporte}
+\label{sec:incidencia-residuo-soporte}
+
+Fijamos las clases de residuo y los soportes en el orden
+\[
+ \begin{aligned}
+ C_1&=\{1,4,7\},&
+ C_2&=\{2,5,8\},&
+ C_0&=\{3,6,9\},\\
+ \mathcal D_{\rm act}&=\{1,3,5,7\},&
+ \mathcal D_{\rm evt}&=\{2,4,6,8\},&
+ \mathcal D_{\bar0}^{(9)}&=\{9\}.
+ \end{aligned}
+\]
+El último símbolo significa «soporte del residuo nonádico nulo». No designa
+el dominio completo \(D_9=\{1,\ldots,9\}\) ni un sector físico de masa nula.
+
+Sean \(E_{\mathcal D}\cong\mathbb Z^3\) y
+\(E_C\cong\mathbb Z^3\) los módulos libres con bases ordenadas
+\[
+ (\mathcal D_{\rm act},\mathcal D_{\rm evt},
+   \mathcal D_{\bar0}^{(9)})
+ \quad\text{y}\quad
+ (C_1,C_2,C_0),
+\]
+respectivamente. La aplicación de incidencia
+\(B_{\rm res,sup}:E_{\mathcal D}\to E_C\) cuenta intersecciones.
+
+\begin{theorem}[Forma de Smith e imagen de la incidencia]
+\label{thm:incidencia-residuo-soporte}
+En las bases precedentes,
+\[
+ B_{\rm res,sup}
+ =\bigl(|C_i\cap\mathcal D_j|\bigr)_{i,j}
+ =
+ \begin{pmatrix}
+ 2&1&0\\
+ 1&2&0\\
+ 1&1&1
+ \end{pmatrix}.
+\]
+Además,
+\[
+ \det B_{\rm res,sup}=3,\qquad
+ \operatorname{SNF}(B_{\rm res,sup})
+ =\operatorname{diag}(1,1,3),
+\]
+\[
+ \operatorname{im}B_{\rm res,sup}
+ =\{(u,v,w)\in\mathbb Z^3:u+v\equiv0\pmod3\}.
+\]
+Si
+\[
+ P=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix},
+\]
+el intercambio simultáneo
+\(C_1\leftrightarrow C_2\) y
+\(\mathcal D_{\rm act}\leftrightarrow\mathcal D_{\rm evt}\) es equivariante:
+\[
+ P B_{\rm res,sup}P=B_{\rm res,sup}
+ \qquad\Longleftrightarrow\qquad
+ PB_{\rm res,sup}=B_{\rm res,sup}P.
+\]
+\end{theorem}
+
+\begin{proof}
+Las nueve entradas proceden de las intersecciones
+\[
+\begin{array}{cccc}
+ &\mathcal D_{\rm act}&\mathcal D_{\rm evt}
+ &\mathcal D_{\bar0}^{(9)}\\
+ C_1&\{1,7\}&\{4\}&\varnothing\\
+ C_2&\{5\}&\{2,8\}&\varnothing\\
+ C_0&\{3\}&\{6\}&\{9\}.
+\end{array}
+\]
+La expansión por la tercera columna da
+\[
+ \det B_{\rm res,sup}
+ =\det\begin{pmatrix}2&1\\1&2\end{pmatrix}=3.
+\]
+El máximo común divisor de las entradas es uno. El menor de orden dos
+formado por las filas primera y tercera y las columnas segunda y tercera
+tiene determinante uno:
+\[
+ \det\begin{pmatrix}1&0\\1&1\end{pmatrix}=1.
+\]
+Por los divisores de Smith, \(d_1=d_2=1\). El producto
+\(d_1d_2d_3\) coincide con el valor absoluto del determinante, que el
+cálculo anterior fija en tres. Por consiguiente,
+
+\[
+ d_1d_2d_3=3.
+\]
+La forma normal es, por tanto, \(\operatorname{diag}(1,1,3)\).
+
+Cada columna satisface \(u+v\equiv0\pmod3\), así que la imagen está contenida
+en el submódulo indicado. Recíprocamente, si \(u+v\equiv0\pmod3\), entonces
+\[
+ x=\frac{2u-v}{3},\qquad
+ y=\frac{2v-u}{3},\qquad
+ z=w-x-y
+\]
+son enteros y
+\[
+ B_{\rm res,sup}(x,y,z)^{\mathsf T}=(u,v,w)^{\mathsf T}.
+\]
+Esto prueba la igualdad de imágenes. Finalmente, la multiplicación explícita
+por \(P\) intercambia las dos primeras filas y las dos primeras columnas y
+deja la matriz invariante.
+\end{proof}
+
+\begin{criterion}[Control de la incidencia]
+\label{crit:incidencia-residuo-soporte}
+Falsaría el teorema una sola intersección mal contada, un menor que alterase
+los divisores de Smith, un vector de la imagen con \(u+v\not\equiv0\pmod3\),
+un vector que satisficiera la congruencia pero no admitiese la preimagen
+exhibida, o la pérdida de la equivarianza \(PBP=B\).
+\end{criterion}
+
+\section[Anillo basado de Fibonacci]{Anillo basado asociado a la incidencia
+  \texorpdfstring{\(F_{\rm av}\)}{F\_av}}
+\label{sec:anillo-basado-fibonacci}
+
+El \cref{thm:descenso-necesario-fav} demuestra, a partir de la órbita de
+modos \((\Sigma,\Pi,\Pi)\), la matriz
+\[
+ F_{\rm av}=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.
+\]
+De esta matriz se obtiene el siguiente anillo basado.
+
+\begin{definition}[Anillo basado de Fibonacci]
+\label{def:anillo-basado-fibonacci}
+Sea
+\[
+ K_{\rm Fib}:=\mathbb Z\mathbf 1\oplus\mathbb Z\tau
+\]
+el grupo abeliano libre con unidad \(\mathbf 1\) y producto bilineal fijado por
+\[
+ \tau\cdot\mathbf 1=\tau,\qquad
+ \tau\cdot\tau=\mathbf 1+\tau.
+\]
+En este estrato, \(+\) y \(\cdot\) son la adición y la multiplicación del
+anillo. Los símbolos categóricos \(\oplus\) y \(\otimes\) se reservan para
+una categorificación elegida posteriormente.
+\end{definition}
+
+\begin{theorem}[Realización de \(F_{\rm av}\) y dimensión de Perron]
+\label{thm:anillo-fibonacci-fav}
+En la base ordenada \((\mathbf 1,\tau)\), la multiplicación por \(\tau\) en
+\(K_{\rm Fib}\) tiene matriz \(F_{\rm av}\). Si
+\(F_0=0\), \(F_1=1\) y
+\(F_{n+1}=F_n+F_{n-1}\) para \(n\geq1\), entonces
+\[
+ \tau^n=F_{n-1}\mathbf 1+F_n\tau
+ \qquad(n\geq1).
+\]
+El único homomorfismo positivo de dimensión que envía
+\(\mathbf 1\) a uno satisface
+\[
+ \operatorname{FPdim}(\tau)=\varphi.
+\]
+La identificación de las dos hojas tipadas con la base
+\((\mathbf 1,\tau)\) determina por completo este anillo y su dimensión
+positiva.
+\end{theorem}
+
+\begin{proof}
+Las columnas de la matriz de multiplicación por \(\tau\) son las coordenadas
+de
+\[
+ \tau\cdot\mathbf 1=\tau
+ \quad\text{y}\quad
+ \tau\cdot\tau=\mathbf 1+\tau;
+\]
+por tanto son \((0,1)^{\mathsf T}\) y \((1,1)^{\mathsf T}\), respectivamente.
+Se obtiene así \(F_{\rm av}\).
+
+La fórmula de potencias vale para \(n=1\). Si vale para \(n\), entonces
+\[
+ \tau^{n+1}
+ =F_{n-1}\tau+F_n(\mathbf 1+\tau)
+ =F_n\mathbf 1+F_{n+1}\tau,
+\]
+lo que cierra la inducción. Finalmente, una dimensión multiplicativa positiva
+\(d=\operatorname{FPdim}(\tau)\) obedece
+\[
+ d^2=1+d.
+\]
+Sus raíces son \(\varphi\) y \(-\varphi^{-1}\); la positividad selecciona
+\(d=\varphi\).
+\end{proof}
+
+La denominación \emph{Fibonacci} queda así explicada por la propia regla de
+fusión: al iterar \(\tau\), los dos canales posibles aparecen con
+multiplicidades consecutivas \(F_{n-1}\) y \(F_n\). El espacio de estados de
+fusión crece, por tanto, con razón asintótica \(\varphi\). Ésta es la base
+combinatoria de su uso computacional: la información se codifica en canales
+globales de fusión y no en una masa asignada a un punto.
+
+\begin{criterion}[Condiciones de una categorización Fibonacci]
+\label{crit:categorificacion-fibonacci}
+La capa anular quedaría refutada si la matriz de multiplicación no fuese
+\(F_{\rm av}\), si fallase la recurrencia de potencias o si la dimensión
+positiva no fuese \(\varphi\). Una categorización trenzada cuyo anillo de
+Grothendieck sea el de la \cref{def:anillo-basado-fibonacci} exige además un
+funtor monoidal
+\[
+ \mathfrak C_{\rm Fib}:\mathsf{TPK}
+ \dashrightarrow\mathcal C_{\rm Fib},
+\]
+la verificación de pentágono y hexágono en su imagen y una regla interna que
+seleccione calibre y quiralidad.
+Estas condiciones no son consecuencias de la identidad anular por sí sola.
+\end{criterion}
+
+\section[Caracteres de trenza]{Seis caracteres y cuatro torsiones de trenza}
+\label{sec:rescate-trenzas-ex02}
+
+Sea \(B_n\), \(n\geq2\), el grupo de trenzas de Artin con generadores
+\(\sigma_1,\ldots,\sigma_{n-1}\), relaciones
+\[
+ \sigma_i\sigma_{i+1}\sigma_i
+ =\sigma_{i+1}\sigma_i\sigma_{i+1},
+ \qquad
+ \sigma_i\sigma_j=\sigma_j\sigma_i\quad(|i-j|\geq2),
+\]
+y sea \(w:B_n\to\mathbb Z\) la suma de exponentes. Los lectores
+\[
+ w_2:=w\bmod2,\qquad w_3:=w\bmod3
+\]
+se reúnen, por el teorema chino del resto, en
+\[
+ w_6:B_n\longrightarrow
+ \mathbb Z/2\mathbb Z\times\mathbb Z/3\mathbb Z
+ \simeq\mathbb Z/6\mathbb Z.
+\]
+
+\begin{theorem}[Abelianización, seis caracteres y torsiones de permutación]
+\label{thm:trenzas-caracteres-z6}
+Para \(n\geq2\),
+\[
+ B_n^{\rm ab}\simeq\mathbb Z,
+\]
+mediante \(w\). En consecuencia, \(w_6\) produce seis caracteres unitarios
+\[
+ \chi_k(b)
+ :=\exp\!\left(\frac{2\pi\mathrm i k}{6}w(b)\right),
+ \qquad k\in\mathbb Z/6\mathbb Z.
+\]
+
+Sea \(V\ne0\) un espacio de Hilbert, sea
+\(P_i:V^{\otimes n}\to V^{\otimes n}\) el intercambio de los factores
+\(i,i+1\), y sea \(q\in\mu_6\). La regla
+\[
+ \rho_q(\sigma_i):=qP_i,
+ \qquad
+ \rho_q(b)=q^{w(b)}\pi_n(b),
+\]
+donde \(\pi_n\) es la representación de permutación, define una
+representación de \(B_n\). Esta representación desciende al grupo simétrico
+si y sólo si
+\[
+ q^2=1.
+\]
+Para los cuatro valores \(q\in\mu_6\setminus\{\pm1\}\),
+\[
+ \operatorname{Inv}(\rho_q)=0.
+\]
+Esos cuatro valores definen torsiones escalares genuinamente trenzadas, pero
+no constituyen por sí solos cuatro espacios de Fock ni cuatro sectores
+anyónicos físicos.
+\end{theorem}
+
+\begin{proof}
+En todo cociente abeliano, la relación de trenza da
+\[
+ 2[\sigma_i]+[\sigma_{i+1}]
+ =[\sigma_i]+2[\sigma_{i+1}],
+\]
+luego todos los generadores tienen la misma clase. No queda otra relación
+sobre esa clase, pues \(w(\sigma_i)=1\); por tanto la abelianización es
+\(\mathbb Z\).
+
+Los operadores \(P_i\) satisfacen las relaciones de trenza y
+\(P_i^2=I\). Multiplicar cada generador por el mismo escalar \(q\) conserva
+las dos relaciones, de modo que \(\rho_q\) es una representación. Para
+factorizar a través de \(S_n\) debe satisfacer la relación adicional
+\(\sigma_i^2=1\), y
+\[
+ \rho_q(\sigma_i)^2=q^2I.
+\]
+Esto prueba el criterio \(q^2=1\).
+
+Si \(v\) fuera invariante, entonces
+\(qP_i v=v\), es decir, \(P_i v=q^{-1}v\), para todo \(i\). Como cada
+involución \(P_i\) sólo tiene autovalores \(\pm1\), no existe tal vector no
+nulo cuando \(q\ne\pm1\). Por consiguiente,
+\(\operatorname{Inv}(\rho_q)=0\) para los cuatro valores restantes.
+\end{proof}
+
+Cuando \(\dim V>1\) y \(n\geq3\), los operadores \(P_1\) y \(P_2\) no
+conmutan; por ello la representación completa no se vuelve abeliana por
+proceder de un carácter escalar. El carácter \(\chi_k\) y la representación
+\(\rho_q\) son objetos distintos: el primero es unidimensional; la segunda
+retiene la acción de permutación.
+
+\section[Centro modular y realizaciones topológicas]{Centro modular apuntado y condiciones de realización Fibonacci e Ising}
+\label{sec:centro-apuntado-no-go}
+
+Sea
+\[
+ A=(\mathbb Z/9\mathbb Z)^2
+\]
+y sea \(\operatorname{Vec}_A\) la categoría de espacios vectoriales
+\(A\)-graduados con asociador trivial. Fijar un bicharácter no degenerado
+identifica \(\widehat A\) con \(A\), pero no altera los conteos siguientes.
+
+\begin{theorem}[Centro apuntado y obstrucción dimensional]
+\label{thm:centro-apuntado-no-go}
+El centro de Drinfeld
+\[
+ \mathcal Z(\operatorname{Vec}_A)
+\]
+es una categoría modular apuntada cuyos simples se parametrizan por
+\((a,\chi)\in A\times\widehat A\). Por tanto posee
+\[
+ |A|\,|\widehat A|=81^2=6561
+\]
+simples, todos de dimensión cuántica uno, y dimensión cuántica total
+\[
+ \mathcal D
+ =\sqrt{\sum_{x\ {\rm simple}}d_x^2}
+ =\sqrt{6561}=81.
+\]
+En esta categoría no puede realizarse, preservando simples y dimensiones de
+Frobenius--Perron, ni el anillo Fibonacci ni el sector Ising: éstos requieren
+respectivamente un simple de dimensión \(\varphi\) y un simple de dimensión
+\(\sqrt2\).
+\end{theorem}
+
+\begin{proof}
+Para un grupo abeliano finito y asociador trivial, cada objeto simple del
+centro queda determinado por un grado \(a\in A\) y un carácter
+\(\chi\in\widehat A\) que especifica su media trenza. Tanto el objeto
+graduado como el carácter son unidimensionales; en consecuencia, todos los
+simples son invertibles y tienen dimensión cuántica uno. Como
+\(|A|=|\widehat A|=9^2=81\), el número de pares es \(81^2\), y la fórmula de
+\(\mathcal D\) da \(81\).
+
+Toda subcategoría de fusión de una categoría apuntada vuelve a ser apuntada;
+en particular, sus simples tienen dimensión uno. Esto contradice
+\(\operatorname{FPdim}(\tau)=\varphi\) para Fibonacci y
+\(d_\sigma=\sqrt2\) para Ising. La obstrucción es dimensional y no depende
+de una semejanza de nombres o cardinales.
+\end{proof}
+
+\begin{criterion}[Condiciones para una realización física de los sectores]
+\label{crit:promocion-sectores-topologicos}
+Los resultados de
+\cref{thm:trenzas-caracteres-z6,thm:centro-apuntado-no-go} quedarían
+algebraicamente falsados por un fallo de las relaciones de Artin, del
+criterio \(q^2=1\), del censo \(6561\), de la apuntabilidad o de
+\(\mathcal D=81\). Una realización física exige, además, un
+Hamiltoniano o protocolo impulsado, una brecha espectral, operadores de
+trenza realizables, protección frente a perturbaciones y un mapa desde las
+multisecciones enriquecidas. Ninguno de esos datos se deduce únicamente de
+los dos teoremas algebraicos anteriores.
+\end{criterion}

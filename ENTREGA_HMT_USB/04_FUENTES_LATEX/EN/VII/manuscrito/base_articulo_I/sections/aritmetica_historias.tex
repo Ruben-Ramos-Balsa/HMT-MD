@@ -1,0 +1,241 @@
+% Incorporación al final de extension.tex; no contiene una sección principal.
+% Procedencia: RESULTADO_RECUPERADO; explicitación sectorial de las hipótesis.
+% Fuentes leídas: monografía Doble proyección holográfica (cantera editorial),
+% manuscrito/local/01_tesis_recuperada.tex y
+% manuscrito/generated/algebra_holonomica.tex, especialmente §§1--7 y 21.
+% Definición rectora de número: manuscrito/flattened/main_autosuficiente.tex,
+% secciones que comienzan en líneas 22137 y 23000 de la cantera de 775 páginas.
+% No se adopta su presentación global como prueba de todas las flechas TPK.
+
+\subsection{Number as a compatible section and value as a readout}
+\label{hist:seccion}
+
+The distinction between state and observation makes it possible to specify which object is
+prolonged as resolution increases. At depth \(n\), let \(X_n\)
+be the set of admissible states produced by APP--TRIT--TPK. Their data
+include position, sum and product sheets, residues and quotients, regime,
+orientation, carry, phase, route, boundary, memory, and survival. They are not
+independent coordinates: arithmetic evaluations and previous transports
+impose their relations. A prolongation preserves these relations
+in every predecessor, even as it adds new steps and new memory data.
+This is the meaning of the arithmetic of histories developed in
+(see \ref{hist:algebra}; \ref{hist:doble-varianza}).
+
+Let \(r_{m,n}:X_m\to X_n\), for \(m\geq n\), be the depth
+restrictions, with \(r_{n,n}=\operatorname{id}\) and
+\(r_{\ell,n}=r_{m,n}\circ r_{\ell,m}\). Each restriction preserves the
+prefix and the information already determined within it.
+
+\begin{definition}[Compatible numerical section]
+An HMT number is a compatible history of the state system:
+\begin{equation}
+ x=(x_n)_{n\geq0}\in X_\infty:=\varprojlim_n X_n,
+ \qquad r_{m,n}(x_m)=x_n.
+ \label{hist:limite-inverso}
+\end{equation}
+A readout is an additional operation on a specified domain of these
+histories. A digit is a finite observation; a scalar value is an
+evaluation of the readout. The pair consisting of the section and its readout constitutes
+a read presentation, not a redefinition of the section's identity.
+\end{definition}
+
+On the Archimedean domain \(X_\infty^{\mathrm{Arch}}\), the readout associates
+a closed cylinder with each prefix, preserves their nesting, and makes
+their diameters tend to zero. It thus determines
+\begin{equation}
+ \operatorname{ev}_{\mathbb R}:X_\infty^{\mathrm{Arch}}\longrightarrow
+ \mathbb R,\qquad
+ \{\operatorname{ev}_{\mathbb R}(x)\}=\bigcap_n I_n(x).
+ \label{hist:evaluacion}
+\end{equation}
+The concrete construction of these cylinders and the decision of their boundaries
+are developed in Section~\ref{sec:generacion}. Definition
+\eqref{hist:limite-inverso} does not by itself assert that the image of
+\eqref{hist:evaluacion} is the whole line: a coverage assertion
+requires its own theorem. Nor does equality of values establish,
+without an injectivity result, equality of their histories. This separation
+allows precision to be understood as depth while preserving the difference
+between the arithmetic predecessor and its scalar realization.
+
+\subsection{Composition of histories and memory multiplier}
+\label{hist:algebra}
+
+Fix a sector of states at depth \(n\) and a category
+\(\mathcal C\) whose arrows are their admissible histories. Composition
+is written \(vu=v\circ u\): first traverse \(u\), then \(v\).
+Elementary steps arise from TPK selection, transport, and
+update. A local trit fiber admits the notation
+\(\mathbb R[J_x]/(J_x^2+\tau(x)1_x)\), where
+\(\tau(x)\in\{+1,0,-1\}\). Regime and orientation belong to the
+transported state; a transition between regimes does not amount to
+identifying their quadratic algebras.
+
+The following formulation specifies an algebraic sector of that composition.
+For each object \(x\), a unital associative real algebra \(A_x\)
+is given, possibly noncommutative. For each \(u:x\to y\), a
+unital homomorphism \(\rho_u:A_x\to A_y\) is given. Assume a strict action:
+\begin{equation}
+ \rho_{\operatorname{id}_x}=\operatorname{id}_{A_x},\qquad
+ \rho_v\rho_u=\rho_{vu}.
+ \label{hist:accion-estricta}
+\end{equation}
+For each composable pair \(u:x\to y\), \(v:y\to z\), fix an
+invertible central multiplier
+\(\Omega(v,u)\in Z(A_z)^\times\). Require the normalization
+\(\Omega(\operatorname{id}_y,u)=\Omega(u,\operatorname{id}_x)=1_y\)
+and, for each composable triple, the identity
+\begin{equation}
+ \rho_w\bigl(\Omega(v,u)\bigr)\Omega(w,vu)
+   =\Omega(w,v)\Omega(wv,u).
+ \label{hist:cociclo}
+\end{equation}
+These are explicit hypotheses on the transports and their coefficients, not a
+consequence of calling the dynamics holonomic. When this presentation is applied
+to a TPK sector, its \(\rho_u\) and \(\Omega(v,u)\) must be identified.
+Transitions expressed through bimodules require preserving that
+structure and are not replaced by \eqref{hist:accion-estricta}.
+
+The space of finite sums
+\[
+ \mathcal H(\mathcal C,A,\rho,\Omega)
+   =\bigoplus_{u\in\operatorname{Mor}(\mathcal C)} A_{t(u)}T_u
+\]
+receives the bilinear product
+\begin{equation}
+ (aT_v)(bT_u)=a\rho_v(b)\Omega(v,u)T_{vu},
+ \label{hist:producto}
+\end{equation}
+if the arrows are composable, and zero otherwise. Here \(t(u)\)
+denotes the terminal state. The sum gathers histories with coefficients; the
+product concatenates histories while preserving the register multiplier.
+
+\begin{proposition}[Sectorial associativity with a central multiplier]
+Under \eqref{hist:accion-estricta} and \eqref{hist:cociclo}, the product
+\eqref{hist:producto} is associative. If the set of objects is finite,
+its unit is \(\sum_x1_xT_{\operatorname{id}_x}\).
+\end{proposition}
+\begin{proof}
+For \(u:x\to y\), \(v:y\to z\), \(w:z\to t\), let
+\(a\in A_y\), \(b\in A_z\), \(c\in A_t\). The two coefficients
+of \(T_{wvu}\) are
+\begin{align*}
+ ((cT_w)(bT_v))(aT_u):\quad&
+ c\rho_w(b)\Omega(w,v)\rho_{wv}(a)\Omega(wv,u),\\
+ (cT_w)((bT_v)(aT_u)):\quad&
+ c\rho_w(b)\rho_w\rho_v(a)\rho_w(\Omega(v,u))\Omega(w,vu).
+\end{align*}
+The strict action identifies \(\rho_w\rho_v(a)\) with \(\rho_{wv}(a)\).
+Centrality of \(\Omega(w,v)\) allows it to be moved to the right of
+that factor; \eqref{hist:cociclo} then equates the remaining products.
+The coefficients \(a,b,c\) are not permuted. If the triple is not composable,
+both parenthesizations are zero by their initial and terminal states.
+Bilinearity completes the proof. Local identities and the
+normalization of \(\Omega\) verify the stated unit.
+\end{proof}
+
+Calendar carry provides an effective example. In the category
+with one object and arrows \(C_9\), take coefficients
+\(A=\mathbb R[z,z^{-1}]\), the identity action, and
+\[
+ \Omega(b,a)=z^{c_0(a,b)},\qquad
+ c_0(a,b)=\left\lfloor\frac{a+b}{9}\right\rfloor,
+ \quad 0\leq a,b<9.
+\]
+Both carry sums of a triple equal
+\(\lfloor(a+b+c)/9\rfloor\); hence
+\eqref{hist:cociclo} holds. The formal variable \(z\) records the winding without
+assigning it a numerical value. Subsequently imposing \(z^{12}=1\) recovers the
+dodecaphasic register of the calendar \eqref{eq:extension108}; retaining
+\(z\) without that relation distinguishes successive windings. The example realizes
+the memory of this calendar without identifying it with all TPK
+memory.
+
+\subsection{Double variance of refinement and preservation of the unit}
+\label{hist:doble-varianza}
+
+Restricting states prolongs observables in the opposite direction.
+Consider the function algebras, with pointwise product,
+\(D_n=\operatorname{Fun}(X_n,\mathbb R)\). Precomposition defines
+\begin{equation}
+ r_{m,n}^*:D_n\longrightarrow D_m,
+ \qquad r_{m,n}^*f=f\circ r_{m,n}.
+ \label{hist:precomposicion}
+\end{equation}
+These are unital morphisms; they are also injective when the corresponding
+restrictions are surjective. The direct limit
+\(D_{\mathrm{cyl}}=\varinjlim_n(D_n,r_{n+1,n}^*)\) gathers
+finite-depth observations. This algebra is not identified here
+with the entire route algebra: prolonging transport operators also requires
+their compatibilities with refinement.
+
+\begin{lemma}[Unit and naturality of evaluation]
+If \(e_x\) is the indicator of \(x\in X_n\), then
+\begin{equation}
+ r_{m,n}^*e_x=\sum_{y:\,r_{m,n}(y)=x}e_y,
+ \qquad r_{m,n}^*1_n=1_m,
+ \label{hist:unidad}
+\end{equation}
+and, for every \(f\in D_n\), \(y\in X_m\),
+\[
+ \langle r_{m,n}^*f,y\rangle=\langle f,r_{m,n}y\rangle.
+\]
+Each section \(x\in X_\infty\) determines a well-defined evaluation
+\(D_{\mathrm{cyl}}\to\mathbb R\), given by \([f]\mapsto f(x_n)\)
+for \(f\in D_n\).
+\end{lemma}
+\begin{proof}
+The fibers of \(r_{m,n}\) partition \(X_m\). Their
+indicators are orthogonal and sum to \(1_m\), proving
+\eqref{hist:unidad}. Naturality is the definition of precomposition.
+Finally, \((r_{m,n}^*f)(x_m)=f(x_n)\), so two compatible
+representatives give the same evaluation in the direct limit.
+\end{proof}
+
+The global unit is the constant-one function on all possibilities;
+the individual section selects a compatible history. Preserving the
+former does not mean immobilizing the latter. Refinement can increase
+the number of extensions and the depth of each history while maintaining
+the unit and all evaluations of its predecessors.
+
+\subsection{Phase return, Weyl representation, and two readouts}
+\label{hist:puente-lecturas}
+
+The law \eqref{eq:holonomia-memoria} acquires an operator realization
+in the bilateral suspension to be constructed in
+Section~\ref{sec:generacion}. There, \(T\) is one-step advancement,
+\(V_9\) observes the nonadic phase, \(W_\delta\) the rotation phase, and
+\(D_M\) the memory degree. Writing
+\(\widehat\Gamma_9=T^9\) for the winding in this representation,
+the Weyl relations \eqref{eq:weyl-relojes} imply, on finitely
+supported vectors,
+\begin{equation}
+ \begin{aligned}
+ V_9\widehat\Gamma_9&=\widehat\Gamma_9V_9,\qquad
+ W_\delta\widehat\Gamma_9=e^{2\pi i9\delta}
+     \widehat\Gamma_9W_\delta,\\
+ [D_M,\widehat\Gamma_9]&=\widehat\Gamma_9.
+ \end{aligned}
+ \label{hist:tres-retornos}
+\end{equation}
+The first equality follows from \(\zeta_9^9=1\); the second from nine
+applications of the covariance of \(W_\delta\); the third expresses
+the unit memory increment. The finite phase returns, while irrational
+rotation and memory distinguish the next state. The
+characters and parameter \(\delta\) are subsequently realized from the
+numerical construction specified there: they do not retrospectively select
+the seeds. This representation describes observables and translations of
+the suspension; it does not replace all coordinates or all operators
+of the TPK.
+
+The double readout prolongs the same distinction between history and observable.
+On its Archimedean domain, \eqref{hist:evaluacion} is applied; on the
+calibrated incidence domain, the maps \(Q_n\) in
+Section~\ref{exc:doble-lectura} preserve words and boundary
+frames. The equality proved there,
+\(r_{n,m}Q_n=Q_mp_{n,m}\), determines their prolongation \(Q_\infty\).
+On the common domain of both readouts one may jointly consider
+\(\operatorname{ev}_{\mathbb R}(x)\) and \(Q_\infty(x)\): the
+former retains the value; the latter, the transported incidence that its
+codomain preserves. The section precedes both. This articulation permits
+passing from the arithmetic of histories to constants and the exceptional
+readout without turning their realizations into new initial data.

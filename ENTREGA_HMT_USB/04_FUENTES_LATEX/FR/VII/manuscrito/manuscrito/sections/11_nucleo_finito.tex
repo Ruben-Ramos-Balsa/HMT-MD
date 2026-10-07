@@ -1,0 +1,362 @@
+\section{Énumération exhaustive et détermination finie des opérateurs de transport}
+\label{iii:nucleo-finito}
+
+Cet appendice développe deux opérations finies avec des données de départ
+différentes. La première énumère les conditions initiales des deux curseurs
+et construit leurs émissions au moyen de la récurrence arithmétique déclarée.
+La seconde détermine les opérateurs de transport à partir du registre
+régional des transitions. La séparation de leurs domaines permet de préciser
+ce que produit chaque démonstration : l’énumération construit le catalogue des
+émissions ; la reconstruction matricielle détermine les opérateurs compatibles
+avec le registre. Le théorème de reconstruction n’est pas employé comme démonstration
+de la production antérieure de ce registre.
+
+Les primitives de la première opération sont le support $I_9^2$, les quatre
+orientations cardinales, le sélecteur tritique, la lecture antérieure au
+déplacement, les inversions d’orientation et la règle d’émission.
+Leurs définitions sont réunies ci-dessous. Celles de la seconde sont les
+quatre matrices de transitions de~\eqref{iii:nf-registro}.
+Leur reconstruction unique est démontrée dans le
+théorème~\ref{iii:nf-unicidad} ; le calendrier qui en résulte est exprimé
+dans~\eqref{iii:nf-calendario}. Ces déterminations conservent
+les données de départ déclarées pour chaque opération.
+
+\subsection{Domaine complet des conditions initiales}
+
+Soit $I_9=\{0,\ldots,8\}$ et soit
+\[
+ \mathcal D=\{N,E,S,O\},\qquad
+ v_N=(-1,0),\quad v_E=(0,1),\quad
+ v_S=(1,0),\quad v_O=(0,-1).
+\]
+Une condition initiale de curseur est $s=(i,j,d)\in
+\mathcal S=I_9^2\times\mathcal D$. Les deux curseurs sont indépendants
+dans le domaine initial
+\begin{equation}
+ \Omega=\mathcal S_+\times\mathcal S_\times,
+ \qquad |\mathcal S|=9^2\cdot4=324,
+ \qquad |\Omega|=324^2=104\,976.
+ \label{iii:nf-dominio}
+\end{equation}
+L’indice $i$ correspond à l’étiquette positive $i+1$ d’APP. Pour
+des entiers positifs, la réduction positive est $\rho_9(n)=1+[(n-1)]_9$,
+où $[a]_b$ désigne le représentant dans $\{0,\ldots,b-1\}$.
+Les évaluations résiduelles des deux feuillets sont
+\[
+ \sigma(i,j)=\rho_9(i+j+2),\qquad
+ \varpi(i,j)=\rho_9((i+1)(j+1)).
+\]
+Le lecteur multiplicatif fini utilise
+\begin{equation}
+ \begin{array}{c|rrrrrrrrr}
+ a&1&2&3&4&5&6&7&8&9\\ \hline
+ \ell_9(a)&0&1&0&2&5&0&4&3&0
+ \end{array}.
+ \label{iii:nf-log}
+\end{equation}
+Sur les unités, $\ell_9$ est l’exposant discret en base $2$.
+Sur $3,6,9$, la valeur $0$ constitue l’extension déclarée de
+l’observable d’émission ; l’appartenance à ce secteur demeure dans le
+registre de trajectoire.
+
+Pour $1\le t\le54$, on définit
+\[
+ r_t=1+[(t-1)]_9,
+ \qquad
+ \tau_t=
+ \begin{cases}
+ +1,&r_t\in\{1,4,7\},\\
+ -1,&r_t\in\{2,5,8\},\\
+ 0,&r_t\in\{3,6,9\}.
+ \end{cases}
+\]
+Chaque curseur conserve sa position $z_t$ immédiatement avant le pas
+$t$ et son vecteur d’orientation $v_t$. Le curseur additif est actif
+lorsque $\tau_t=+1$ ; le multiplicatif, lorsque $\tau_t=-1$. Pour chacun
+d’entre eux, avec l’indicateur d’activité $a_t$, la mise à jour est
+\begin{equation}
+ z_{t+1}=[z_t+a_tv_t]_9,
+ \qquad
+ v_{t+1}=
+ \begin{cases}
+ -v_t,&t\in\{27,54\},\\
+ v_t,&t\notin\{27,54\}.
+ \end{cases}
+ \label{iii:nf-actualizacion}
+\end{equation}
+La lecture du pas $t$ est effectuée en $z_t$, avant le déplacement.
+L’événement neutre conserve les deux positions. Cette convention fixe
+sans ambiguïté les extrémités des fenêtres et l’effet des
+inversions cardinales.
+
+Dans les fenêtres $W_m=\{9m-8,\ldots,9m\}$, $1\le m\le6$, soient
+\begin{align}
+ S_m(s_+)&=\sum_{\substack{t\in W_m\\\tau_t=+1}}
+                 \sigma(z_t^+),&
+ E_m(s_\times)&=\sum_{\substack{t\in W_m\\\tau_t=-1}}
+                 \ell_9(\varpi(z_t^\times)),
+ \label{iii:nf-firmas}\\
+ s_m&=[S_m]_{10},&e_m&=[E_m]_{10}.\notag
+\end{align}
+Dans chaque fenêtre, il y a trois événements de chaque type. Les signatures $s$ et $e$
+sont les six composantes de ces résidus, non les entiers $S_m,E_m$
+antérieurs à leur réduction.
+
+\subsection{Recensement des signatures et des émissions}
+
+L’émission d’une paire de conditions initiales est déterminée par
+\begin{equation}
+ U_m=100s_m+10[s_m+e_m]_{10}+[3s_m+5e_m+1]_{10},
+ \qquad 1\le m\le6.
+ \label{iii:nf-emision}
+\end{equation}
+Le terme final $1$ est $[7\cdot3]_{10}$, correspondant aux trois
+événements neutres. Les coefficients de cette règle font partie de la
+récurrence déclarée. Les constantes réelles étudiées ultérieurement
+n’interviennent ni dans l’énumération de son domaine ni dans son évaluation.
+
+\begin{proposition}[Factorisation injective du catalogue fini]
+\label{iii:nf-inyectividad}
+L’émission distingue chaque paire de signatures $(s,e)$. Il y a $18$ signatures
+additives et $26$ multiplicatives ; leurs paires produisent $468$ émissions.
+Les multiplicités de ces émissions sont $144$, $432$ et $1944$,
+avec $432$, $18$ et $18$ émissions respectivement.
+\end{proposition}
+
+\begin{proof}
+Le chiffre des centaines de $U_m$ restitue $s_m$. Si $b_m$ est son chiffre des
+dizaines, alors $e_m=[b_m-s_m]_{10}$. Le chiffre des unités vérifie
+la troisième congruence de \eqref{iii:nf-emision}. Par conséquent, le
+couplage est injectif.
+
+Le recensement s’obtient en parcourant, dans l’ordre cartésien complet,
+$i=0,\ldots,8$, $j=0,\ldots,8$ et $d=N,E,S,O$, et en appliquant les $54$
+pas de \eqref{iii:nf-actualizacion}. Les $324$ conditions additives
+se répartissent entre les $18$ signatures suivantes, chacune avec $18$
+préimages. Dans les tableaux, une suite de six chiffres représente
+les six composantes ordonnées d’une signature.
+\begin{center}
+\begin{tabular}{ccc}
+$122564$&$122898$&$212645$\\
+$212988$&$221456$&$221889$\\
+$456221$&$465898$&$546988$\\
+$564122$&$645212$&$654889$\\
+$889221$&$889654$&$898122$\\
+$898465$&$988212$&$988546$
+\end{tabular}
+\end{center}
+Pour le curseur multiplicatif, les signatures et leurs multiplicités sont
+\begin{center}
+\begin{tabular}{rr@{\qquad}rr}
+Signature&Multiplicité&Signature&Multiplicité\\ \hline
+$000000$&$108$&$555555$&$24$\\
+$177393$&$8$&$555717$&$8$\\
+$177555$&$8$&$555771$&$8$\\
+$177771$&$8$&$555933$&$8$\\
+$339555$&$8$&$717555$&$8$\\
+$339771$&$8$&$717717$&$8$\\
+$339933$&$8$&$717933$&$8$\\
+$393177$&$8$&$771177$&$8$\\
+$393393$&$8$&$771339$&$8$\\
+$393555$&$8$&$771555$&$8$\\
+$555177$&$8$&$933339$&$8$\\
+$555339$&$8$&$933555$&$8$\\
+$555393$&$8$&$933717$&$8$
+\end{tabular}
+\end{center}
+Ces tableaux résultent des sommes finies \eqref{iii:nf-firmas}, dont le
+domaine, l’ordre de lecture et les inversions sont déjà spécifiés. Leurs sommes
+de multiplicités sont $18\cdot18=324$ et
+$24\cdot8+24+108=324$. Le domaine cartésien
+\eqref{iii:nf-dominio} permet de réaliser n’importe quelle paire de signatures.
+L’injectivité fournit $18\cdot26=468$ émissions et les
+multiplicités
+\[
+ (18\cdot24,\ 18\cdot8)=(432,144),\qquad
+ (18,\ 18\cdot24)=(18,432),\qquad
+ (18,\ 18\cdot108)=(18,1944),
+\]
+où chaque paire indique le nombre d’émissions et la multiplicité de sa fibre.
+Enfin,
+\[
+ 432\cdot144+18\cdot432+18\cdot1944=104\,976.
+\]
+L’énumération épuise ainsi le domaine complet des conditions initiales.
+\end{proof}
+
+La réduction ternaire orientée est
+\[
+ \Psi(U)=([-U_1]_3,\ldots,[-U_6]_3).
+\]
+Appliquée aux $18\cdot26$ émissions des tableaux précédents,
+elle produit le recensement des fibres suivant. Ici, $r$ compte les émissions
+distinctes, non les conditions initiales.
+\begin{equation}
+ \begin{array}{c|rrrrrr}
+ r&1&2&3&4&5&6\\ \hline
+ \#\{w:\#\Psi^{-1}(w)=r\}&132&66&18&3&6&18
+ \end{array}.
+ \label{iii:nf-censo-ternario}
+\end{equation}
+La somme de la deuxième ligne est $243$, tandis que sa somme pondérée
+par $r$ est $468$. On distingue ainsi l’image de $243$ mots
+de l’espace ambiant $\mathbb F_3^6$, qui contient $729$ mots. Le certificat
+joint conserve toutes les signatures avec leurs préimages, les $468$
+émissions et leur réduction ternaire ; les formules précédentes fournissent
+une procédure complète pour les reconstruire.
+
+\subsection{Registre des transitions et reconstruction des relèvements}
+
+Dans cette partie, on fixe le registre régional du propriétaire cité.
+Soient $b_0^\chi,\ldots,b_4^\chi\in\mathbb F_3^6$, avec
+$\chi\in\{\mathsf C,\mathsf P,\mathsf A\}$, ses trois suites.
+Le registre organise les transitions $b_0\to b_1\to b_2$ dans
+$X_0,Y_0$ et les transitions $b_2\to b_3\to b_4$ dans $X_1,Y_1$,
+avec des vecteurs lignes et le même ordre régional :
+\begingroup\small
+\begin{equation}
+\begin{aligned}
+X_0&=\begin{pmatrix}
+0&1&0&2&1&1\\0&1&2&2&2&2\\2&0&1&1&0&1\\
+1&2&1&2&2&1\\1&2&1&2&0&0\\1&1&2&2&0&2
+\end{pmatrix},&
+Y_0&=\begin{pmatrix}
+0&1&2&2&2&2\\0&1&0&2&1&1\\1&2&1&2&2&1\\
+1&0&2&0&1&1\\1&1&2&2&0&2\\1&2&1&0&2&0
+\end{pmatrix},\\[1ex]
+X_1&=\begin{pmatrix}
+0&1&0&2&1&1\\0&0&2&1&1&1\\1&0&2&0&1&1\\
+0&1&2&2&2&2\\1&2&1&0&2&0\\0&1&0&2&1&0
+\end{pmatrix},&
+Y_1&=\begin{pmatrix}
+0&0&2&1&1&1\\1&1&0&2&2&1\\0&1&2&2&2&2\\
+1&0&2&0&1&1\\0&1&0&2&1&0\\0&1&0&2&0&0
+\end{pmatrix}.
+\end{aligned}
+\label{iii:nf-registro}
+\end{equation}
+\endgroup
+La production précédente s’exprime chez son propriétaire au moyen de la
+composition de sélection, de transport et de mise à jour :
+\[
+ x_{j+1}^{\chi}
+ =\mathcal U_{9j+9}\circ\cdots\circ\mathcal U_{9j+1}(x_j^{\chi}),
+ \qquad b_j^\chi=\Pi_6(x_j^\chi),
+ \qquad\mathcal U_t=\mathsf{Upd}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+\]
+Le résultat suivant part du registre \eqref{iii:nf-registro}.
+Sa démonstration permet de reconstruire les opérateurs et de vérifier la
+compatibilité des transitions ; elle n’attribue pas à l’inversion matricielle
+la production coordonnée des états $x_j^\chi$.
+
+\begin{proposition}[Unicité sur le registre régional]
+\label{iii:nf-unicidad}
+Les systèmes $X_aL_a=Y_a$, $a=0,1$, ont une solution unique sur
+$\mathbb F_3$. Les deux solutions sont
+\begingroup\small
+\begin{equation}
+L_0=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},\qquad
+L_1=\begin{pmatrix}
+2&1&2&0&2&2\\1&2&1&1&2&0\\1&2&1&1&1&2\\
+0&1&0&0&2&1\\2&0&2&1&0&1\\0&2&2&2&1&1
+\end{pmatrix}.
+\label{iii:nf-lifts}
+\end{equation}
+\endgroup
+\end{proposition}
+
+\begin{proof}
+L’élimination dans $\mathbb F_3$ donne $\det X_0=1$ et
+$\det X_1=2=-1$. Chaque application $L\mapsto X_aL$ est donc
+un automorphisme de l’espace des matrices de dimension $36$ ; dans une
+vectorisation par colonnes, elle est représentée par $I_6\otimes X_a$.
+On obtient $L_a=X_a^{-1}Y_a$. La multiplication des matrices de
+\eqref{iii:nf-lifts} par les matrices $X_a$ respectives reproduit les
+deux matrices $Y_a$ de \eqref{iii:nf-registro} ; existence et unicité
+sont établies sur ce registre.
+\end{proof}
+
+Les trois suites résultantes, avec une séparation explicite en blocs,
+sont
+\begin{align*}
+ B^{\mathsf C}&=010211\mid012222\mid010211\mid002111\mid110221,\\
+ B^{\mathsf P}&=201101\mid121221\mid102011\mid012222\mid102011,\\
+ B^{\mathsf A}&=121200\mid112202\mid121020\mid010210\mid010200.
+\end{align*}
+Chaque bloc conserve ses six positions. La concaténation n’est pas
+identifiée à un entier en base dix.
+
+\subsection{Exhaustivité du calendrier et stabilité de la reconstruction}
+
+Un calendrier binaire est $c=(c_0,c_1,c_2,c_3)\in\{0,1\}^4$.
+On définit le nombre de transitions incompatibles avec le registre par
+\begin{equation}
+ d(c)=\sum_{\chi\in\{\mathsf C,\mathsf P,\mathsf A\}}
+       \sum_{j=0}^{3}
+       \mathbf1\{b_j^\chi L_{c_j}\ne b_{j+1}^\chi\}.
+ \label{iii:nf-calendario}
+\end{equation}
+Les multiplications des suites précédentes par
+\eqref{iii:nf-lifts} donnent
+\[
+ d(c)=3\,d_{\rm H}(c,(0,0,1,1)),
+\]
+où $d_{\rm H}$ est la distance de Hamming : à chacune des
+quatre positions, l’opérateur alternatif ne satisfait pas les trois
+transitions régionales. Le recensement complet est
+\begin{center}
+\begin{tabular}{cr@{\qquad}cr@{\qquad}cr@{\qquad}cr}
+$c$&$d(c)$&$c$&$d(c)$&$c$&$d(c)$&$c$&$d(c)$\\ \hline
+$0000$&$6$&$0100$&$9$&$1000$&$9$&$1100$&$12$\\
+$0001$&$3$&$0101$&$6$&$1001$&$6$&$1101$&$9$\\
+$0010$&$3$&$0110$&$6$&$1010$&$6$&$1110$&$9$\\
+$0011$&$0$&$0111$&$3$&$1011$&$3$&$1111$&$6$
+\end{tabular}
+\end{center}
+Par conséquent, $0011$ est l’unique calendrier qui reproduit les
+trois suites complètes.
+
+La sensibilité aux entrées des matrices admet également une
+preuve exhaustive sans approximations. Une modification unitaire
+remplace $L_a$ par $L_a+\lambda E_{ij}$, avec
+$a\in\{0,1\}$, $1\le i,j\le6$ et
+$\lambda\in\mathbb F_3\setminus\{0\}$. Il y a
+$2\cdot6\cdot6\cdot2=144$ modifications de ce type. Comme
+$X_a$ est inversible,
+\[
+ X_a(L_a+\lambda E_{ij})-Y_a
+ =\lambda X_aE_{ij}\ne0.
+\]
+Toute modification détruit au moins une des transitions du
+registre correspondant. Le certificat exécutable énumère en outre
+les $144$ modifications et conserve, pour chacune, le nombre de
+transitions non satisfaites.
+
+La propriété démontrée est la rigidité des opérateurs par rapport au
+registre régional fixé. Pour reproduire une construction antérieure
+du registre lui-même, l’action coordonnée de ses opérateurs
+de sélection, de transport et de mise à jour est nécessaire. Cette dépendance reste
+séparée du théorème de rigidité, du catalogue fini des émissions et
+des réalisations analytiques ultérieures.
+
+\subsection{Certificat de reproduction et résidence des données}
+
+Le programme \texttt{verificar\_nucleo\_finito.py} parcourt les $324$
+conditions de chaque curseur et forme le produit des classes résultantes.
+Le catalogue documentaire est chargé après cette construction pour
+comparer les émissions et leurs multiplicités. Dans la seconde partie,
+les quatre matrices de transitions sont extraites de la copie littérale
+du propriétaire ; les solutions sont calculées par élimination exacte
+modulo $3$ avant de les comparer aux matrices imprimées. Le reçu
+\texttt{NUCLEO\_FINITO.json} conserve les domaines, les préimages,
+les émissions, les $16$ calendriers et les $144$ modifications.
+
+La vérification utilise des entiers et des résidus exacts. Elle ne reçoit ni valeurs
+métrologiques ni développements réels des constantes. Sa portée
+est celle des opérations finies et des données de départ spécifiées
+dans cet appendice. Les démonstrations de compatibilité à profondeur
+illimitée et les identifications physiques conservent leurs domaines
+et leurs obligations d’exposition respectifs.

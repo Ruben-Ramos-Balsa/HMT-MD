@@ -1,0 +1,123 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage{xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\title{\bfseries N71 --- Selector de pares \((u,\delta)\) por frontera\\
+\large De la dinámica exacta de cilindros al acoplamiento de tres canales}
+\author{HMT / auditoría técnica}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+N71 implementa la recomendación posterior a N70: no buscar un mapa afín \(B_t\to B_{t+1}\), sino expresar el selector sobre los pares candidatos \((u,\delta)\) de la transición exacta de cilindros. Para cada canal, N70 genera muchos pares compatibles. N71 acopla los tres canales mediante la firma de frontera \((q,a,c,\operatorname{colw},\rho_W,r)\). La rama real siempre aparece en la selección auditada \(t=5,\ldots,25\), pero la selección no siempre es única. La supervivencia al siguiente cilindro reduce varias ambigüedades. El resultado es un selector acoplado fuerte, no aún una ley autónoma de firma.
+\end{abstract}
+
+\section{Pares de cilindro}
+
+Para cada canal, la transición exacta de N70 produce pares:
+\[
+(u^\chi,\delta^\chi)
+\]
+compatibles con:
+\[
+A'<3^{L+6},\qquad B'>0.
+\]
+Aquí \(u^\chi\in\{0,\ldots,728\}\) es el nuevo bloque ternario, y \(\delta^\chi\) es la nueva triada decimal si \(\Delta K=1\).
+
+\section{Acoplamiento de frontera}
+
+Los tres bloques candidatos forman:
+\[
+B=
+\begin{pmatrix}
+u^\pi\\u^e\\u^\varphi
+\end{pmatrix}.
+\]
+Se impone:
+\[
+q=\mathbf1^TB,
+\quad
+a=(1,1,-1)B,
+\quad
+c=\frac{\mathbf1^TB-q}{3},
+\]
+\[
+\operatorname{colw},
+\quad
+\rho_W=(BA_W)\mathbf1,
+\quad
+r=B\mathbf1.
+\]
+Esta firma filtra los productos de candidatos de los tres canales.
+
+\section{Auditoría}
+
+\[
+\begin{array}{c|c|c|c|c|c|c}
+t&\Delta K&(|\pi|,|e|,|\varphi|)&\#\text{sig}&\#\text{sel}&\#\text{surv}&\text{dictamen}\\
+\hline
+5 & 1 & (729,729,729) & 2 & 2 & 1 & survival selects \\
+6 & 1 & (729,729,729) & 6 & 6 & 3 & ambiguous \\
+7 & 1 & (729,729,729) & 11 & 11 & 3 & ambiguous \\
+8 & 1 & (729,729,729) & 3 & 3 & 2 & ambiguous \\
+9 & 1 & (729,729,729) & 3 & 3 & 1 & survival selects \\
+10 & 1 & (729,729,729) & 11 & 11 & 1 & survival selects \\
+11 & 1 & (729,729,729) & 3 & 3 & 1 & survival selects \\
+12 & 1 & (729,729,729) & 5 & 5 & 1 & survival selects \\
+13 & 1 & (729,729,729) & 3 & 3 & 1 & survival selects \\
+14 & 1 & (729,729,729) & 3 & 3 & 1 & survival selects \\
+15 & 1 & (729,729,729) & 5 & 5 & 1 & survival selects \\
+16 & 1 & (729,275,729) & 11 & 11 & 1 & survival selects \\
+17 & 1 & (661,729,709) & 6 & 6 & 1 & survival selects \\
+18 & 1 & (221,299,729) & 3 & 1 & 0 & unique \\
+19 & 1 & (481,216,729) & 1 & 1 & 0 & unique \\
+20 & 0 & (611,527,723) & 5 & 5 & 5 & ambiguous \\
+21 & 1 & (729,729,729) & 2 & 2 & 2 & ambiguous \\
+22 & 1 & (729,729,729) & 1 & 1 & 0 & unique \\
+23 & 1 & (729,729,729) & 3 & 3 & 2 & ambiguous \\
+24 & 1 & (729,729,729) & 3 & 3 & 1 & survival selects \\
+\end{array}
+\]
+
+\section{Controles negativos}
+
+Los selectores de un solo canal fallan: máximo solapamiento, centro de cilindro o margen de supervivencia no recuperan sistemáticamente la rama real. Esto confirma que el selector es acoplado y de frontera, no métrico por canal.
+
+\section{Dictamen}
+
+\[
+\boxed{
+\text{verde: la rama real aparece siempre dentro del selector }(u,\delta).
+}
+\]
+\[
+\boxed{
+\text{verde: el selector acopla los tres canales por frontera.}
+}
+\]
+\[
+\boxed{
+\text{rojo: métricas por canal como ley autónoma.}
+}
+\]
+\[
+\boxed{
+\text{amarillo: unicidad global sin recurrir a supervivencia/inverso límite.}
+}
+\]
+\[
+\boxed{
+\text{amarillo: derivar la firma futura sin usarla como diana.}
+}
+\]
+\end{document}

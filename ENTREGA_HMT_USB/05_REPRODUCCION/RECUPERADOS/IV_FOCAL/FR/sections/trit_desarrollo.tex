@@ -1,0 +1,309 @@
+% Ampliación acumulativa del TRIT; se inserta antes de la figura de regímenes.
+% No sustituye ni elimina el desarrollo precedente.
+\subsubsection{Division équilibrée et composition des relèvements}
+\label{trit-ampl-div-balanceada}
+
+La réduction ternaire permet d'exprimer une évaluation entière d'APP en une
+coordonnée visible et une coordonnée de prolongation. Sa fonction ne consiste
+pas seulement à abréger l'écriture d'un entier : elle fournit une règle de
+composition qui détermine comment le quotient est modifié lorsqu'on additionne ou
+multiplie des évaluations. Le choix équilibré explicite en outre la
+compatibilité de cette règle avec l'inversion du signe.
+
+\begin{definition}[Coordonnées ternaires équilibrées]
+\label{trit-ampl-def-coordenadas}
+Pour \(n\in\mathbb Z\), soient
+\[
+ q_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3q_3(n).
+\]
+L'application
+\[
+ \mathcal B:\mathbb Z\longrightarrow\TRIT\times\mathbb Z,\qquad
+ n\longmapsto(r_3(n),q_3(n))
+\]
+est appelée décomposition ternaire équilibrée. Son inverse est
+\(\mathcal L(r,c)=r+3c\).
+\end{definition}
+
+En effet, \(r_3(n)\in\{-1,0,+1\}\). Si deux paires représentent le même entier,
+\(r+3c=s+3d\), alors \(r-s\) est un multiple de \(3\) et appartient à l'intervalle
+\([-2,2]\) ; nécessairement \(r=s\) et \(c=d\). La représentation est donc
+unique. La division peut être répétée sur \(q_3(n)\), de sorte que chaque niveau
+conserve la donnée nécessaire pour reconstruire le précédent. Le quotient n'est pas une
+perturbation du résidu : il constitue sa coordonnée complémentaire.
+
+La signature obtenue à partir d'une évaluation \(F\), avec \(F=S\) ou \(F=P\) dans APP, est \(r_3\circ F\). Lorsque la réduction agit sur le curseur de phase, la même section équilibrée produit les classes \(\{1,4,7\}\), \(\{2,5,8\}\) et \(\{3,6,9\}\), de valeurs \(+1,-1,0\). Le sélecteur du TPK défini ci-après utilise ces classes pour déterminer le mode opératoire. La lecture d'une évaluation et la sélection d'un mode ont ainsi la même réduction ternaire, mais des domaines et des fonctions différents.
+
+\Needspace{16\baselineskip}
+\begin{proposition}[Arithmétique des couples équilibrés]
+\label{trit-ampl-prop-aritmetica}
+Soient \(n=r+3c\) et \(m=s+3d\), avec \(r,s\in\TRIT\). Définissons
+\[
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+Les opérations entières sont transportées vers les couples au moyen de
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r_3(r+s),c+d+\chi(r,s)\bigr),
+ \label{trit-ampl-eq-suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr).
+ \label{trit-ampl-eq-producto}
+\end{align}
+L'application \(\mathcal L\) conserve les deux opérations.
+\end{proposition}
+\begin{proof}
+L'égalité \(r+s=r_3(r+s)+3\chi(r,s)\) donne
+\[
+ n+m=r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+D'autre part,
+\[
+ nm=rs+3(rd+sc+3cd).
+\]
+Comme le produit de deux représentants équilibrés appartient de nouveau à
+\(\{-1,0,+1\}\), il ne nécessite pas de réduction résiduelle supplémentaire. L'unicité
+de la décomposition démontre les deux formules.
+\end{proof}
+
+Par exemple, \(2=(-1)+3\) et \(4=1+3\). Leur somme et leur produit se reconstruisent
+sous la forme
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+Les évaluations résultantes sont \(6\) et \(8\). La somme des quotients suffit
+dans cet exemple additif ; dans le produit interviennent les termes croisés
+\(rd\), \(sc\) et \(3cd\). L'écart entre les deux opérations réside
+également dans la coordonnée de prolongement, et pas seulement dans le résidu.
+
+Le terme \(\chi\) est un cocycle de la section équilibrée. Si
+\(r\oplus s=r_3(r+s)\), il satisfait
+\[
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\]
+Les deux membres représentent le quotient de la même somme de trois entiers.
+Cette identité garantit que le regroupement des opérations ne change pas l'
+évaluation reconstruite. En même temps, la projection sur la première
+composante supprime cette comptabilité : \(1+1=-1+3\), tandis que la lecture
+résiduelle conserve uniquement \(-1\). L'information éliminée est
+déterminée, dans ce cas, par \(\chi(1,1)=1\).
+
+La relation avec le module \(9\) conserve une seconde échelle discrète. L'application
+\[
+ \beta:\TRIT\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad (r,\bar c)\longmapsto r+3c\pmod9
+\]
+est bien définie et bijective. Changer le représentant de \(\bar c\) ajoute un multiple de \(9\) ; réciproquement, une égalité d'images fixe d'abord \(r\) par réduction modulo \(3\), puis \(\bar c\). L'addition transportée par cette bijection contient le terme \(\chi(r,s)\) de \eqref{trit-ampl-eq-suma}, maintenant réduit modulo \(3\). Ainsi, les deux niveaux ternaires ne se composent pas par une addition indépendante des coordonnées : la normalisation du premier niveau modifie le second.
+
+En particulier, les classes \(3\), \(6\) et \(0\) de
+\(\mathbb Z/9\mathbb Z\) ont pour première composante \(0\), mais pour seconde
+composante \(1\), \(2\) et \(0\), respectivement. La distinction déjà observée
+entre la réduction directe et l'extraction de la coordonnée de l'idéal apparaît
+comme une propriété de \(\beta\). Conserver cette coordonnée empêche que le
+secteur résiduel nul se transforme artificiellement en une seule position.
+Le module \(1000\), utilisé ensuite pour organiser les blocs décimaux,
+remplit une autre fonction de représentation positionnelle ; son quotient est conservé
+au moyen de la division correspondante. Un changement de base conserve l'entier
+lorsqu'il retient le résidu et le quotient, tandis que la coïncidence des résidus
+dans des bases différentes n'identifie pas à elle seule leurs états de transport.
+
+\Needspace{11\baselineskip}
+\subsubsection{Inversion, classe résiduelle et coordonnées non visibles}
+\label{trit-ampl-inversion}
+
+L'inversion additive se relève sans ambiguïté :
+\[
+ \mathcal B(-n)=(-r_3(n),-q_3(n)).
+\]
+En particulier, \(3\), \(0\) et \(-3\) ont pour coordonnées
+\((0,1)\), \((0,0)\) et \((0,-1)\). Ils partagent une signature nulle, mais représentent des
+évaluations distinctes. Dans une transition restreinte à un quotient d'
+amplitude maximale \(1\), ce sont les trois possibilités de la fibre visible au-dessus de
+zéro ; dans un relèvement entier général, cette fibre contient tous les couples
+\((0,c)\), avec \(c\in\mathbb Z\).
+
+La coordonnée de quotient récupère l'entier évalué, mais ne récupère pas à elle seule la trajectoire qui l'a produit. Deux chemins d'APP peuvent partager évaluation, résidu et quotient, et différer par l'orientation, la succession des modes ou l'enroulement. La décomposition \(\mathcal B\) est donc intégrée à l'état de transport, au lieu de le remplacer. La mémoire arithmétique d'une division et la mémoire d'une trajectoire sont des coordonnées liées, et non des synonymes.
+
+Pour une suite de signatures de longueur \(n\), l'inversion orientée est
+\[
+ C_{\rm rev}(\tau_1,\ldots,\tau_n)
+   =(-\tau_n,\ldots,-\tau_1).
+\]
+L'appliquer deux fois restitue la suite. L'opération inverse l'ordre des
+positions et le signe de chaque signature ; elle conserve sa longueur et les
+positions nulles dans l'ordre inversé. Dans le paramétrage adopté,
+elle échange le retour avec mémoire, associé à \(+1\), et l'ouverture
+bidirectionnelle, associée à \(-1\), tout en maintenant le seuil \(0\). Le transport
+des autres données d'une trajectoire est spécifié au moyen de
+l'involution correspondante du TPK.
+
+Cette inversion de signatures doit être distinguée de la conjugaison dans une
+algèbre quadratique. La première peut changer le type \(\tau\) ; la seconde,
+construite ci-dessous, agit à l'intérieur du type déjà fixé. La
+distinction empêche d'attribuer à une inversion de signe une équivalence
+algébrique entre des régimes différents.
+
+\subsubsection{Produit quadratique, conjugaison et norme algébrique}
+\label{trit-ampl-norma}
+
+Un élément de \(\mathbb A_\tau\) possède une expression unique \(aI+bJ_\tau\). La relation \(J_\tau^2=-\tau I\) détermine son produit :
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+   =(ac-\tau bd)I+(ad+bc)J_\tau.
+ \label{trit-ampl-producto-cuadratico}
+\end{equation}
+Il s'agit d'une réalisation réelle du type déjà sélectionné. Les coordonnées \(a,b\) ne sont pas des résidus d'APP, et le produit \eqref{trit-ampl-producto-cuadratico} ne remplace pas \eqref{trit-ampl-eq-producto} ; il exprime une autre opération, dans le codomaine quadratique déclaré.
+
+\begin{definition}[Conjugaison et norme algébrique]
+\label{trit-ampl-def-norma}
+La conjugaison du type \(\tau\) et sa norme algébrique sont
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+\end{definition}
+
+\begin{proposition}[Multiplicativité et inversibilité]
+\label{trit-ampl-prop-norma}
+Pour \(z,w\in\mathbb A_\tau\),
+\[
+ z\bar z=N_\tau(z)I,\qquad
+ N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+De plus, \(z\) est inversible si et seulement si \(N_\tau(z)\ne0\), et dans ce cas
+\[
+ z^{-1}=\frac{\bar z}{N_\tau(z)}.
+\]
+\end{proposition}
+\begin{proof}
+Le produit de \(aI+bJ_\tau\) et de \(aI-bJ_\tau\) est
+\((a^2+\tau b^2)I\). La conjugaison est multiplicative et l'algèbre est
+commutative, de sorte que
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). Si la norme ne s'annule pas, la
+formule indiquée fournit l'inverse. Réciproquement, si \(zw=I\), la
+multiplicativité implique \(N_\tau(z)N_\tau(w)=1\).
+\end{proof}
+
+La forme quadratique \(N_\tau\) n'est définie positive que dans le type elliptique. Pour \(\tau=0\), elle vaut \(a^2\), et l'élément \(J_0\) est non nul bien que son carré et sa norme soient nuls. Pour \(\tau=-1\), elle vaut \(a^2-b^2\) ; les éléments non nuls \(I+J_{-1}\) et \(I-J_{-1}\) ont une norme nulle et leur produit s'annule. La norme algébrique est ici une forme quadratique multiplicative : elle ne présuppose pas une norme positive d'espace vectoriel.
+
+Les trois types peuvent être réalisés fidèlement au moyen de
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}.
+\]
+Le déterminant de cette matrice est \(N_\tau(aI+bJ_\tau)\). Sont ainsi
+représentées, avec une même expression matricielle, la structure
+complexe, la structure des nombres duaux et la structure réelle scindée.
+Chacune conserve sa loi et ses diviseurs de zéro. La forme de signature
+\((1,1)\) du dernier cas a une interprétation lorentzienne en dimension
+\(1+1\) ; l'identification d'une métrique physique exige en outre un espace,
+un champ et une règle de transport spécifiques.
+
+\subsubsection{Conservation multiplicative et composition des évolutions}
+\label{trit-ampl-evoluciones}
+
+L'exponentielle déjà obtenue appartient à l'ensemble des éléments de norme un :
+\[
+ N_\tau\bigl(\exp(tJ_\tau)\bigr)=1.
+\]
+Cette conservation se maintient lors de la composition des paramètres. En effet, tous les
+facteurs sont des fonctions du même générateur, et
+\[
+ \exp(tJ_\tau)\exp(sJ_\tau)=\exp((t+s)J_\tau).
+\]
+En comparant les deux composantes, on déduit les lois d'addition
+\begin{align}
+ C_\tau(t+s)&=C_\tau(t)C_\tau(s)-\tau S_\tau(t)S_\tau(s),\\
+ S_\tau(t+s)&=S_\tau(t)C_\tau(s)+C_\tau(t)S_\tau(s).
+\end{align}
+La conjugaison remplace \(t\) par \(-t\) et coïncide avec l'inversion dans
+ce sous-groupe. Elle ne change pas \(\tau\) : elle inverse une évolution du régime
+choisi.
+
+Dans le type elliptique, la forme conservée est \(a^2+b^2\), et la trajectoire exponentielle parcourt le cercle de norme un. Dans le type hyperbolique, les coordonnées propres sont \(u=a+b\), \(v=a-b\), avec \(uv=N_{-1}(z)\). L'exponentielle donne
+\[
+ (u,v)=(e^t,e^{-t}),\qquad uv=1.
+\]
+La croissance d'une coordonnée s'accompagne de la contraction de l'autre.
+La conservation exprime une relation entre les deux coordonnées ; elle n'affirme pas que
+chacune reste constante.
+
+Dans le type parabolique,
+\[
+ (I+tJ_0)(I+sJ_0)=I+(t+s)J_0,\qquad
+ (I+tJ_0)^{-1}=I-tJ_0.
+\]
+L'évolution ne s'arrête pas du fait que \(J_0^2=0\). La nilpotence élimine les
+termes d'ordre au moins deux, mais conserve le terme linéaire qui
+transporte le paramètre. Le symbole visible \(0\), l'
+élément nul de l'algèbre et le générateur non nul \(J_0\) sont distincts. Cette distinction
+est nécessaire pour décrire le seuil sans l'identifier à l'absence d'
+état ou de dynamique.
+
+\begin{proposition}[Composition de coordonnées affines]
+\label{trit-ampl-prop-pendientes}
+Dans la coordinatisation où la composante scalaire ne s'annule pas, représentons une
+direction par \(I+uJ_\tau\). Si \(1-\tau uv\ne0\), la direction de son
+produit avec \(I+vJ_\tau\) a pour coordonnée
+\[
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\]
+\end{proposition}
+\begin{proof}
+On a
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+   =(1-\tau uv)I+(u+v)J_\tau.
+\]
+La division par la composante scalaire donne l'expression annoncée.
+\end{proof}
+
+La coordinatisation affine conserve le rapport entre les composantes, et non le facteur scalaire
+par lequel on a divisé. Lorsque \(1-\tau uv=0\), il faut examiner le produit avant de
+changer de coordinatisation : il peut avoir une direction définie avec une composante scalaire
+nulle, ou être l'élément nul en présence de diviseurs de zéro. La loi de
+composition appartient toujours à l'algèbre complète ; la singularité d'une
+coordonnée n'équivaut pas automatiquement à une singularité de l'objet.
+Cette formule réapparaîtra dans la lecture régionale elliptique. Son emploi exige
+de maintenir le dénominateur et, le cas échéant, le facteur de normalisation.
+
+\subsubsection{Transport du type et réalisations ultérieures}
+\label{trit-ampl-puentes}
+
+Les algèbres \(\mathbb A_{+1}\), \(\mathbb A_0\) et
+\(\mathbb A_{-1}\) ne sont pas isomorphes en tant qu'algèbres réelles unitaires.
+La première est un corps ; la deuxième contient un nilpotent non nul ; la
+troisième possède des idempotents non triviaux et est isomorphe à
+\(\mathbb R\times\mathbb R\). Le changement de signature qui organise une
+route ne peut donc pas s'interpréter comme un isomorphisme indifférencié entre les
+trois réalisations. Le TPK conserve l'indice de régime, les domaines et
+l'opérateur effectif qui agit à chaque transition.
+
+\input{sections/prueba_local_app.tex}
+
+La proposition~\ref{ivloc:algebra} établit que la paire de projections des feuillets de APP
+produit un commutateur normalisé dont le carré est \(-I\). Le même bloc
+contient une involution de carré \(I\) et deux directions nilpotentes. La
+réalisation conjointe est démontrée sur cette paire concrète de projections ;
+la classification précédente explique pourquoi les trois relations quadratiques
+peuvent apparaître dans une même algèbre matricielle sans être identifiées entre elles.
+
+Dans le prolongement exceptionnel, la matrice de Paley réduite modulo \(3\) satisfait \(A_W^2=-I_6\). La relation dote l'espace ternaire d'une structure de dimension \(3\) sur \(\mathbb F_9\). Son lien avec une racine opératorielle réelle s'exprime au moyen de la présentation entière
+\[
+ \mathbb Z[u]/(u^2+1).
+\]
+Les changements de base vers \(\mathbb F_3\) et vers \(\mathbb R\) produisent des
+représentations de cette même relation. Chacune conserve sa caractéristique,
+sa dimension et son information d'incidence. Le développement des
+opérateurs respectifs établit le lien, et non l'égalité de leurs
+cardinaux.
+
+La conservation de la norme un décrit donc les réalisations
+quadratiques des évolutions. La conservation des quotients, de l'orientation et de la
+trajectoire appartient à l'état arithmétique transporté. Les deux propriétés
+interviennent dans la construction, avec des fonctions différentes : l'une détermine les
+identités des représentations ; l'autre permet de composer, de reconstruire et de
+prolonger les opérations qui les produisent.

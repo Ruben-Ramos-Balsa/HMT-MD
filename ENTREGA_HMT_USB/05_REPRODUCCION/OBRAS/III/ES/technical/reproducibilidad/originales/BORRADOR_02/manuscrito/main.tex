@@ -1,0 +1,1183 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot,es-noquoting]{babel}
+\usepackage{fontspec}
+\setmainfont{texgyrepagella-regular.otf}[
+ BoldFont=texgyrepagella-bold.otf,ItalicFont=texgyrepagella-italic.otf,
+ BoldItalicFont=texgyrepagella-bolditalic.otf]
+\setsansfont{texgyreheros-regular.otf}[BoldFont=texgyreheros-bold.otf,
+ ItalicFont=texgyreheros-italic.otf]
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{unicode-math}
+\setmathfont{texgyrepagella-math.otf}
+\usepackage[a4paper,top=25mm,bottom=25mm,left=28mm,right=28mm]{geometry}
+\usepackage{microtype,booktabs,tabularx,array,enumitem,needspace,etoolbox,placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+\definecolor{ink}{HTML}{183D4A}
+\definecolor{accent}{HTML}{8C3D2E}
+\usepackage[colorlinks=true,linkcolor=ink,citecolor=ink,urlcolor=ink]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape Holografía modular triádica}
+\fancyhead[R]{\small Acción, geometría e información}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\footskip}{13mm}
+\pretocmd{\section}{\par\Needspace{12\baselineskip}}{}{}
+\pretocmd{\subsection}{\par\Needspace{9\baselineskip}}{}{}
+\raggedbottom
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\setlist{nosep,leftmargin=1.5em}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
+\AtBeginEnvironment{definition}{\Needspace{8\baselineskip}}
+\AtBeginEnvironment{proposition}{\Needspace{8\baselineskip}}
+\AtBeginEnvironment{theorem}{\Needspace{8\baselineskip}}
+\newcommand{\HMT}{\mathrm{HMT}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Cstar}{C^{*}}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\I}{\mathrm I}
+\newenvironment{apunte}[1]{\par\Needspace{6\baselineskip}\smallskip
+\begin{quote}\small\raggedright\color{ink}\noindent\textbf{Apunte de borrador: #1.}\ }
+{\end{quote}\smallskip}
+\hypersetup{pdftitle={Acción, geometría e información en Holografía Modular Triádica},pdfauthor={Material de trabajo dirigido por Rubén Ramos Balsa},pdfsubject={Prototipo expositivo; fuentes HMT–MD y desarrollos de septiembre de 2026}}
+\title{\color{ink}Acción, geometría e información en Holografía Modular Triádica\\[5pt]\large El funcional de Barbero--Immirzi y la estructura de área}
+\author{Rubén Ramos Balsa}
+\date{\small 6 de septiembre de 2026; revisión de 7 de septiembre\\[3pt]
+\textcolor{accent}{Borrador 0.2 para discusión con el autor}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Se desarrolla la relación entre la estructura generadora de Holografía
+Modular Triádica, sus realizaciones cuadráticas y la construcción de la
+acción. La exposición parte de las posiciones y operaciones de APP,
+introduce los regímenes orientados del TRIT y mantiene la memoria del
+transporte TPK. El sello dodecafásico se caracteriza mediante su reconstrucción
+integral y su lectura periódica reversible. A partir de las publicaciones
+numéricas y angulares se estudia el funcional de Barbero--Immirzi, cuyo
+contenido de incidencia determina la normalización del área.
+La lectura conjunta del área y del Hamiltoniano modular distingue las
+ocupaciones de borde que una lectura total identifica. La reciprocidad
+entre las secciones de acción y gravedad conserva, en la realización
+circular declarada, el área de Planck.
+La métrica, la conexión con torsión y el Hamiltoniano modular se presentan
+con sus funciones respectivas. Este borrador reúne las demostraciones
+locales y desarrolla su interpretación estructural; las notas editoriales
+identifican las integraciones necesarias para la autonomía del artículo.
+\end{abstract}\noindent\textbf{Palabras clave:} Holografía Modular Triádica; acción; Barbero--Immirzi;
+memoria de transporte; geometría areal; holonomía.
+\medskip
+
+\noindent\small\textit{Nota editorial.} Este documento es un material preparatorio
+para discusión del argumento, de la notación y de la selección de pruebas.
+No reemplaza el tratado ni constituye una entrega científica final.
+Las afirmaciones de cada resultado se circunscriben a sus dominios explícitos.
+La asistencia de inteligencia artificial se ha utilizado en la organización,
+redacción y comprobación local; la autoría de las fuentes se conserva en el
+expediente de procedencia.\normalsize
+\clearpage
+
+\section{Fundamentos discretos y organización geométrica}
+\label{sec:inicio}
+\subsection{Marcas interiores y disposición transversal}
+Se parte del camino marcado
+\[
+\mathsf P_{10}:0\longrightarrow1\longrightarrow\cdots
+\longrightarrow9\longrightarrow10.
+\]
+Los extremos delimitan la carta y las nueve posiciones interiores forman
+$\mathcal D_9=\{1,\ldots,9\}$. La representación mediante un segmento
+sirve para ordenar marcas: en este punto no se presupone una recta real
+completa. La fuente distingue expresamente el soporte finito y su
+publicación límite posterior \cite{segmento}.
+
+\begin{definition}[Carta positiva y continuación con acarreo]
+La carta $\lambda_9:\mathcal D_9\to\Z/9\Z$ envía $a$ a su clase
+residual, con $\lambda_9(9)=[0]_9$. El sucesor visible $u_+$ y su
+incremento de memoria $\kappa_+$ se definen por
+\[
+u_+(a)=\begin{cases}a+1,&a<9,\\1,&a=9,\end{cases}
+\qquad
+\kappa_+(a)=\begin{cases}0,&a<9,\\1,&a=9.\end{cases}
+\]
+Se cumple exactamente $a+1=u_+(a)+9\kappa_+(a)$.
+\end{definition}
+El retorno $9\to1$ afecta al representante; el acarreo distingue
+la prolongación del estado. Para cualquier entero positivo $n$,
+\[
+n=9q_9(n)+\operatorname{dr}_9(n),\quad
+q_9(n)=\left\lfloor\frac{n-1}{9}\right\rfloor,\quad
+\operatorname{dr}_9(n)=1+((n-1)\bmod9).
+\]
+La segunda disposición, transversal a la primera, construye
+$\mathcal D_9\times\mathcal D_9$. Sus coordenadas se representan
+horizontal y verticalmente, antes de identificar los lados mediante
+la continuación modular. El resultado es la carta de 81 celdas
+del toro aritmético $X_9$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=6.8mm,y=6.8mm,>=Latex,font=\small]
+\fill[ink!5] (.5,.5) rectangle (9.5,9.5);
+\draw[step=1,ink!15] (.5,.5) grid (9.5,9.5);
+\draw[->,ink,thick] (0,0)--(10.6,0) node[right] {$j$};
+\draw[->,ink,thick] (0,0)--(0,10.6) node[above] {$i$};
+\foreach \k in {0,...,10}{
+ \draw (\k,.09)--(\k,-.09) node[below] {\k};
+ \draw (.09,\k)--(-.09,\k);
+}
+\foreach \k in {1,...,10}{\node[left] at (-.12,\k) {\k};}
+\foreach \i in {1,...,9}{\foreach \j in {1,...,9}{
+ \pgfmathtruncatemacro{\v}{1+mod(\i*\j-1,9)}
+ \node[font=\footnotesize] at (\j,\i) {\v};
+}}
+\draw[accent,thick] (.5,8.5) rectangle (9.5,9.5);
+\draw[accent,thick] (8.5,.5) rectangle (9.5,9.5);
+\node[align=left,font=\small,text width=43mm,anchor=west] at (11,6.5)
+ {Una posición\\dos evaluaciones\\$\Sigma(i,j)$ y $\Pi(i,j)$};
+\node[align=left,font=\small,text width=43mm,anchor=west] at (11,3.3)
+ {Tabla mostrada:\\$\Pi(i,j)=\operatorname{dr}_9(ij)$\\Borde marcado: clase nula};
+\end{tikzpicture}
+\caption{Construcción horizontal y vertical de la carta APP. Se dibuja el
+representante multiplicativo de cada celda. El orden ascendente de la
+coordenada vertical es una convención gráfica; las rutas cardinales se
+declaran después. Las posiciones y sus valores aritméticos son objetos distintos.}
+\label{fig:app-construction}
+\end{figure}
+
+Cada fila multiplicativa es una acumulación del mismo incremento:
+$ij=i+\cdots+i$ con $j$ sumandos, y cada columna expresa la
+acumulación transversal. Las evaluaciones suma y producto actúan en el
+mismo soporte; no constituyen dos APP independientes.
+El gnomon de la última fila y columna tiene $9+8=17$ celdas,
+de modo que $81=64+17$. La extensión volumétrica distingue
+$1000=729+243+27+1$, preservando interior, caras, aristas y cierre.
+No se identifican esos estratos únicamente porque alguno comparta cardinal
+con un espacio de palabras.
+
+\begin{apunte}{orden compartido de los dos artículos}
+La apertura coordinada con el artículo de $\alpha$ y del electrón será:
+segmento marcado, carta vertical, operaciones y caminos, semillas,
+orientación TRIT y composición TPK. Este dibujo y sus definiciones se
+proponen para ambos borradores; la extensión expositiva podrá diferir.
+Los nueve lugares interiores no se confunden con los diez intervalos
+consecutivos que separan las once marcas de $\mathsf P_{10}$.
+\end{apunte}
+
+\subsection{La acción como estructura y como lectura}
+La pregunta de este artículo no es únicamente qué valor publica una constante,
+sino qué operaciones producen ese valor y qué información permite recuperarlas.
+En Holografía Modular Triádica, abreviada HMT, un registro conserva la hoja
+aritmética, la orientación, el cociente, el acarreo y la historia de transporte.
+La evaluación escalar es una aplicación de ese registro; no lo sustituye.
+
+El núcleo de partida está constituido por APP, TRIT y el
+\emph{Topological Phase Kernel} (TPK). APP proporciona el soporte y sus
+operaciones; TRIT determina la orientación local; TPK compone los transportes,
+la memoria y la prolongación compatible. Las publicaciones
+$\pi_{\HMT},\varphi_{\HMT},e_{\HMT},\alpha_{\HMT}$ pertenecen a una misma
+genealogía, con un orden constructivo interno. Las primeras lecturas pueden
+preceder a la clausura dodecafásica de $\alpha_{\HMT}$ sin convertirse
+en valores convencionales introducidos desde fuera.
+
+El paso hacia Mecánica Dimensional se efectúa mediante los lectores de
+acción, duración y magnitud. Este artículo se concentra en una composición
+particular: el registro produce una escala y dos secciones orientadas de acción;
+la rama angular publica los canales conjugados; la incidencia de borde
+determina un funcional cuya realización se identifica con el parámetro de
+Barbero--Immirzi. La geometría excepcional procede de la proyección de
+incidencia del mismo estado. La coincidencia de origen no identifica sus
+codominios: se conservan los mapas entre ellos.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,node distance=10mm,
+box/.style={draw=ink,rounded corners=2pt,align=center,font=\small,
+text width=40mm,minimum height=12mm,inner sep=4pt},
+every path/.style={draw=ink}]
+\node[box,text width=134mm] (base) at (0,0) {APP--TRIT--TPK\\Estado, orientación, acarreo, memoria y prolongación compatible};
+\node[box] (num) at (-3.6,-1.8) {Lecturas numéricas\\$\pi,\varphi,e,\alpha$};
+\node[box] (exc) at (3.6,-1.8) {Incidencia excepcional\\Witt, Golay, Leech};
+\node[box] (act) at (-3.6,-3.6) {Recta de acción\\$H_5,\eta_{\rm ret},\Sigma_H$};
+\node[box] (inc) at (3.6,-3.6) {Borde marcado\\Incidencias $90/120$};
+\node[box,text width=52mm] (gam) at (0,-5.4) {Funcional angular y areal\\$\gamma_{\HMT}$};
+\draw[->] (base.south)-|(num.north);
+\draw[->] (base.south)-|(exc.north);
+\draw[->] (num)--(act);
+\draw[->] (exc)--(inc);
+\draw[->] (act.south)|-(gam.west);
+\draw[->] (inc.south)|-(gam.east);
+\end{tikzpicture}
+\caption{Organización de las dependencias del artículo. Las flechas distinguen
+publicaciones y transportes; no representan una identificación entre un valor
+numérico y un grupo excepcional. La construcción angular se explicita en la sección~\ref{sec:action}.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Soporte y memoria aritmética}
+En la fuente APP, el soporte es $X_9=(\Z/9\Z)^2$, con caminos cardinales.
+La raíz digital positiva se escribe
+\[
+\operatorname{dr}(n)=1+((n-1)\bmod9).
+\]
+Las dos evaluaciones de un vértice $(i,j)$ son
+$\Sigma(i,j)=\operatorname{dr}(i+j)$ y
+$\Pi(i,j)=\operatorname{dr}(ij)$. Sus elevaciones satisfacen
+\[
+i+j=R^+_{ij}+9q^+_{ij},
+\qquad
+ij=R^\times_{ij}+9q^\times_{ij}.
+\]
+Los cocientes permiten recuperar lo que la reducción oculta. En una
+transición ternaria balanceada, $a+b=r+3c$ distingue igualmente el residuo
+$r$ y el acarreo $c$. Los estados $(0,1),(0,0),(0,-1)$ tienen una misma
+lectura visible y distinta información de transporte.
+
+\begin{definition}[Semilla orientada y trayectoria]
+Sea $\mathscr D=\{N,E,S,O\}$ el alfabeto cardinal. Una condición inicial
+de doble cursor pertenece a
+$(X_9\times\mathscr D)^2$; su cardinal es
+$(81\cdot4)^2=104\,976$. Una semilla no es la palabra que publica:
+el censo de la fuente distingue 468 emisiones decimales $U_6$,
+243 palabras ternarias visibles $w_6$ y el ambiente de 729 palabras
+de longitud seis. Las fibras conservan la multiplicidad de procedencia.
+\end{definition}
+Para $x_0\in X_9$ y $w=d_1\cdots d_r$, la ruta es
+$x_k=x_0+\sum_{j=1}^k\delta(d_j)\pmod9$.
+El transporte cardinal conserva el punto inicial y la palabra.
+El censo no sustituye la prolongación: ésta compone los niveles
+$w_6,w_{12},w_{18},w_{24},w_{30},R_{36},G_9$,
+con retorno de fase y avance de memoria.
+
+\begin{apunte}{autonomía del artículo}
+La versión individual debe explicar el censo y la prolongación conjunta,
+no pedir al lector que acepte 468 o 243 como datos sin antecedente.
+La recopilación conserva la fuente completa; aquí se fijan los tipos
+para desarrollar esa prueba en la siguiente revisión sin alterar las
+construcciones posteriores de acción.
+\end{apunte}
+
+El número genealógico se organiza mediante secciones compatibles de los
+cilindros supervivientes. La contracción de esos cilindros publica la
+realización arquimediana; la proyección conjugada conserva incidencia.
+Las cinco construcciones del continuo permanecen como componentes del mismo
+objeto, no como antecedentes escogidos por el resultado físico buscado.
+La exposición completa de este núcleo y sus figuras se comparte
+documentalmente con el artículo dedicado a $\alpha$ y al electrón
+\cite{app,trit,tpk,witt}. El presente prototipo desarrolla a continuación
+las consecuencias de registro y acción que le son propias.
+
+\input{sections/geometria.tex}
+
+\section{Actualización dodecafásica y memoria publicada}
+\label{sec:eta}
+Sea $d_t$ la dirección producida por una traza TPK. Las doce ventanas
+$E_m=\{9m+1,\ldots,9m+9\}$, $0\le m<12$, dividen los 108 pasos del registro.
+La orientación es
+\[
+\Sigma_{12}=(+,+,+,-,-,-,+,+,+,-,-,-).
+\]
+El evento de una ventana es la salida
+\begin{equation}
+a_m=\Sigma_{12}(m)
+\sum_{t\in E_m}\mathbf1_{\{2,4,6,8\}}(d_t).
+\label{eq:events}
+\end{equation}
+La notación $a_m$ evita confundir este evento con el número de Euler.
+El registro fuente conserva además la orientación TRIT, la firma,
+el acarreo y el segmento de historia correspondiente \cite{registro}.
+
+\begin{proposition}[Incremento producido por el transporte]
+Sea $\mathbf e_m$ la base de $\R^{12}$ y
+$S\mathbf e_m=\mathbf e_{m+1\pmod{12}}$. Si
+$z_{m+1}=z_m+a_m\mathbf e_m$ y $y_m=S^{-m}z_m$, entonces
+\begin{equation}
+y_{m+1}=S^{-1}y_m+\eta_m,
+\qquad
+\eta_m=a_mS^{-1}\mathbf e_0.
+\label{eq:eta}
+\end{equation}
+Después de una vuelta completa,
+\begin{equation}
+y_{12}=y_0+\sum_{m=0}^{11}a_m\mathbf e_m.
+\label{eq:cycle}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplicar la actualización de $z_m$ por $S^{-(m+1)}$ da
+\[
+y_{m+1}=S^{-1}y_m+a_mS^{-(m+1)}\mathbf e_m
+=S^{-1}y_m+a_mS^{-1}\mathbf e_0.
+\]
+Al iterar, el coeficiente del evento $a_m$ es
+$S^{-(12-m)}\mathbf e_0=\mathbf e_m$. Como $S^{12}=I$,
+se obtiene \eqref{eq:cycle}.
+\end{proof}
+
+Por tanto, $\eta_m$ no es una fuerza libre elegida para imponer una
+conservación: es una publicación del evento TPK. La igualdad de fase
+después de una vuelta no cancela los eventos acumulados. Este lector
+conserva los recuentos, mientras el registro completo conserva además su
+orden y procedencia. Se distingue $\eta_m$, incremento vectorial, de
+$\eta_{\rm ret}$, mantisa escalar de acción, y de $\eta_{\rm el}$,
+parámetro de forma que se introducirá en la sección~\ref{sec:ellipse}.
+
+\subsection{Balance cuadrático}
+Definimos
+\[
+D_3=I-S^3,\quad D_4=I-S^4,\quad
+B=D_3^{\mathsf T}D_3+D_4^{\mathsf T}D_4,\qquad
+\mathcal M(y)=\tfrac12 y^{\mathsf T}By.
+\]
+Se cumplen $S^{\mathsf T}BS=B$ y $B_{00}=4$. Sustituyendo
+\eqref{eq:eta} se deduce exactamente
+\begin{equation}
+\mathcal M(y_{m+1})-\mathcal M(y_m)
+=a_m(By_m)_0+2a_m^2.
+\end{equation}
+Asimismo, la carga $q(y)=\sum_jy_j$ satisface
+$q(y_{m+1})-q(y_m)=a_m$.
+La prueba es la expansión del polinomio cuadrático tras retirar la
+permutación $S^{-1}$. Ningún valor metrológico entra en ese cálculo.
+La forma $\mathcal M$ mide este registro; su interpretación como una
+energía física determinada requeriría el lector dimensional correspondiente.
+
+\input{sections/sello_y_lectura.tex}
+
+\section{Descomposición cíclica y representaciones determinantales}
+Los proyectores cíclicos
+\[
+P_3=\tfrac14(I+S^3+S^6+S^9),\qquad
+P_4=\tfrac13(I+S^4+S^8)
+\]
+tienen imágenes de dimensiones tres y cuatro. Si $E=P_3-P_4$, entonces
+\begin{equation}
+\frac{\Tr E}{12}=-\frac1{12}.
+\label{eq:minus12}
+\end{equation}
+El escalar procede de una diferencia de rangos normalizada, no de una
+suma ordinaria de enteros positivos.
+
+\begin{theorem}[Representación determinantal del lector de canal]
+Sean $\mathcal H_3=\operatorname{Fix}(S^3)$ y
+$\mathcal H_4=\operatorname{Fix}(S^4)$. Para $0<s<1$,
+\begin{equation}
+F(s)=\frac{\det_{\mathcal H_3}(I-sS)}{\det_{\mathcal H_4}(I-sS)}
+=\frac{1-s^3}{1-s^4}
+=\frac{1+s+s^2}{1+s+s^2+s^3}.
+\label{eq:det}
+\end{equation}
+Su prolongación continua en $s=1$ vale $3/4$.
+\end{theorem}
+\begin{proof}
+La restricción de $S$ a cada imagen es un ciclo de tres o cuatro
+posiciones, respectivamente. Sus polinomios característicos dan
+$\det(I-sS)=1-s^r$ para $r=3,4$. Al cancelar el factor común $1-s$,
+queda la última expresión, regular en $s=1$.
+\end{proof}
+
+La sustitución $s=q^{30}$ publica
+$F(q^{30})=(1-q^{90})/(1-q^{120})$.
+El mismo par de espacios que produce \eqref{eq:minus12}
+produce el cociente de canal. No se identifica por esta igualdad
+una matriz de doce coordenadas con todo el estado TPK.
+
+\subsection{Información orientada y sector complejo}
+En el sector antipodal $V_-=\operatorname{Ran}((I-S^6)/2)$,
+el operador $J=S^3$ satisface $J^2=-I$ y $J^{\mathsf T}=-J$.
+Con $Q=P_4(I-S^6)/2$ se tiene
+\[
+\operatorname{rank}Q=2,\qquad E|_{V_-}=-Q,\qquad B|_{V_-}=5I-3Q.
+\]
+En $\operatorname{Ran}Q$, $S^2=-I$ y el determinante es $1+s^2$.
+Así,
+\[
+F(s)=\frac{1+s+s^2}{1+s}\,\frac1{1+s^2}.
+\]
+La inversión de orientación cambia el signo de la forma
+$\omega(u,v)=\langle Ju,v\rangle$, pero conserva $B$ y $F$.
+La evaluación escalar no distingue todos los transportes orientados.
+
+La traza transportada produce además
+\[
+a_n^{\rm tr}=\Tr(S^nE)=3\mathbf1_{3\mid n}-4\mathbf1_{4\mid n},
+\]
+y, para $|s|<1$,
+\[
+-\log F(s)=\sum_{n\ge1}\frac{a_n^{\rm tr}}n\,s^n.
+\]
+Esta familia de momentos conecta el presente bloque con los lectores
+espectrales recopilados. Su desarrollo aritmético completo, incluido
+Catalán, tendrá una residencia propia; no se presupone aquí que una
+identidad de funciones decida por sí sola su naturaleza aritmética.
+
+\section{Construcción de la escala y de las secciones de acción}
+\label{sec:action}
+Esta rama utiliza $\alpha_{\HMT}$ y $\varphi_{\HMT}$ ya publicadas.
+En el cierre local de cuatro hojas aparece
+\[
+H_4=
+\begin{pmatrix}
+1&1&1&1\\1&1&-1&-1\\1&-1&1&-1\\1&-1&-1&1
+\end{pmatrix}.
+\]
+Los divisores determinantes son $1,2,4,16$; por tanto,
+\[
+\operatorname{SNF}(H_4)=\operatorname{diag}(1,2,2,4),
+\qquad
+G_H=\operatorname{coker}H_4\simeq
+\Z/2\Z\oplus\Z/2\Z\oplus\Z/4\Z.
+\]
+El lector de norma de la fuente aplica la sección constante
+$s_\alpha(g)=\alpha_{\HMT}$ a los dieciséis elementos:
+\begin{equation}
+\Sigma_H=\varphi_{\HMT}
+\prod_{g\in G_H}s_\alpha(g)
+=\varphi_{\HMT}\alpha_{\HMT}^{16}.
+\end{equation}
+La fórmula distingue el índice del conúcleo, la norma sobre él y la
+actuación única de la autoescala. El texto propietario desarrolla el
+lector y sus cotas \cite{accion}. La valoración decimal publicada satisface
+\[
+\alpha_{\HMT}^{16}<10^{-34}
+<\Sigma_H<10^{-33},
+\qquad \lfloor\log_{10}\Sigma_H\rfloor=-34.
+\]
+El exponente así obtenido pertenece a la lectura interna. La carta
+de unidades físicas es una operación posterior.
+
+\subsection{Carácter regional, retorno orientado y coordenadas angulares}
+La rama regional produce \cite{retorno}
+\begin{align}
+H_5={}&\frac12\sqrt{\frac{1000\alpha}{\varphi}}-\alpha
++\frac9{16}\alpha^2-\frac59\alpha^3
++\frac7{48}\alpha^4-\frac1{54}\alpha^5,\\
+x_A={}&\frac{50\pi}{9}\alpha,\qquad D_A=e^{-2x_A},\\
+\mathscr C_\pi(\alpha)={}&169\alpha^6+
+\frac{D_A\alpha^7}{1-D_A\alpha},\\
+\eta_{\rm ret}={}&H_5-\frac{90}{\pi}\mathscr C_\pi(\alpha).
+\end{align}
+En estas ecuaciones $\pi,\varphi,e,\alpha$ designan las publicaciones
+HMT. Los coeficientes y el selector $169$ conservan sus propietarios
+regionales en la recopilación; este prototipo no sustituye su construcción
+por la mera exhibición de las fórmulas.
+
+Sea $\mathcal L_S$ la recta de acción con base positiva $\mathcal U_S$.
+Las secciones son
+\begin{equation}
+\hbar_{\rm pre}=H_5\,10^{-34}\mathcal U_S,\qquad
+\hbar_{\rm ret}=\eta_{\rm ret}\,10^{-34}\mathcal U_S.
+\end{equation}
+Sus lecturas aditiva y multiplicativa,
+\[
+\delta_{2w}=H_5-\eta_{\rm ret},\qquad
+R_{\rm act}=\frac{H_5}{\eta_{\rm ret}},
+\]
+conservan aspectos distintos del retorno. Para $h_a=2\pi\hbar_a$,
+la acción de una fase obedece
+\[
+\mathcal S(\theta)=\hbar_a\theta_{\rm rad}
+=h_a\frac{\theta_{\deg}}{360}.
+\]
+La rama angular se publica después en sus propias coordenadas:
+\[
+A_{\deg}=1000\alpha,\qquad
+C^*_{\deg}=2(\eta_{\rm ret}+\alpha),\qquad
+q_\pm=\exp\left[-\frac{\pi}{180}(A\pm C^*)\right].
+\]
+La distinción entre el incremento $\eta_m$ de \eqref{eq:eta}
+y la mantisa $\eta_{\rm ret}$ es esencial: no se identifican
+por compartir una letra ni mediante una analogía de retorno.
+
+\section{Incidencia hexádico--octádica y funcional de Barbero--Immirzi}
+\label{sec:barbero}
+Sea $H\hookrightarrow O$ una inclusión marcada, $|H|=6$, $|O|=8$.
+Los objetos de incidencia
+\[
+\mathcal F_6=H\times\binom H2,\qquad
+\mathcal F_8=O\times\binom H2
+\]
+tienen cardinales $90$ y $120$. Su diferencia normalizada da
+\[
+\frac{|\mathcal F_6|-|\mathcal F_8|}{24\binom62}=-\frac1{12}.
+\]
+Esta es una realización combinatoria del mismo escalar.
+Una igualdad numérica con \eqref{eq:minus12} no borra
+la distinción entre los espacios sobre los que se ha calculado.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,every node/.style={font=\small}]
+\draw[rounded corners,draw=ink] (-1.8,-1.35) rectangle (1.8,1.35);
+\foreach \a in {0,60,...,300}{
+\fill[ink] (\a:0.83) circle(2pt);}
+\node at (0,-1.7) {$H:\ 6$ puntos};
+\draw[->,thick,ink] (2.1,0)--(3.6,0);
+\node[above] at (2.85,0.1) {inclusión marcada};
+\draw[rounded corners,draw=ink] (4,-1.35) rectangle (7.6,1.35);
+\foreach \a in {0,60,...,300}{
+\fill[ink] ($(5.8,0)+(\a:0.83)$) circle(2pt);}
+\fill[accent] (4.5,0) circle(2pt);
+\fill[accent] (7.1,0) circle(2pt);
+\node at (5.8,-1.7) {$O:\ 8$ puntos};
+\node at (0,-2.35) {$6\binom62=90$};
+\node at (5.8,-2.35) {$8\binom62=120$};
+\end{tikzpicture}
+\caption{Incidencia marcada de seis a ocho puntos. El dibujo representa
+los conjuntos y la inclusión; no pretende convertir las caras o vértices
+de un cubo en bloques de Steiner sin su mapa de incidencia.}
+\end{figure}
+
+\subsection{Los pesos preceden al coeficiente de polo}
+En el módulo libre de sucesos orientados, la fuente fija la cadena
+fundamental de la vuelta \cite{precedencia}
+\[
+c_{12}^{+}=
+\sum_{j\in\Z/12\Z}[j,\mathcal F_6]
+-[\partial_{\rm ret},\mathcal F_8].
+\]
+La multiplicidad doce corresponde a los sectores y la multiplicidad uno
+a la costura orientada. La involución cambia la orientación de la cadena
+completa. Sea
+\[
+S_m(q)=\frac{q^m}{1-q^{3m}},\qquad 0<q<1.
+\]
+El lector lineal asigna $S_{90}$ a cada sector y $S_{120}$ a la costura;
+en consecuencia,
+\[
+\mathscr R(c_{12}^{+})=12S_{90}-S_{120}.
+\]
+
+\begin{theorem}[Coeficiente de polo y evaluación conjugada]
+La imagen de la cadena fundamental tiene coeficiente $1/24$
+respecto de $(1-q)^{-1}$ y residuo $-1/24$ respecto de $(q-1)^{-1}$.
+Su evaluación en los canales previamente generados determina
+\begin{equation}
+\gamma_{\HMT}=
+\frac{\pi AC^*}{180}
++12\bigl[S_{90}(q_-)-S_{90}(q_+)\bigr]
+-\bigl[S_{120}(q_-)-S_{120}(q_+)\bigr].
+\label{eq:gamma}
+\end{equation}
+\end{theorem}
+\begin{proof}
+La factorización $1-q^{3m}=(1-q)\sum_{j=0}^{3m-1}q^j$ implica
+$\lim_{q\uparrow1}(1-q)S_m(q)=1/(3m)$. Por linealidad,
+\[
+\frac{12}{270}-\frac1{360}=\frac1{24}.
+\]
+La coordenada $q-1$ invierte el signo del residuo.
+La evaluación conjugada y la componente angular de la fuente
+producen \eqref{eq:gamma}.
+\end{proof}
+
+El certificado diofántico $4a-3b=45$ admite los pares
+$(12+3t,1+4t)$, $t\ge0$; certifica la minimalidad de $(12,1)$,
+pero no reemplaza el origen de las multiplicidades en la cadena.
+La evaluación conservada en el propietario es
+\[
+\gamma_{\HMT}
+=0.27400767269445927474725526077398041940\ldots.
+\]
+Esta cifra es una salida del funcional fuente; no es un valor externo
+usado para seleccionar $A$, $C^*$ o sus coeficientes.
+
+\subsection{Paridad y sensibilidad estructural}
+Al invertir $C^*$ se intercambian $q_+$ y $q_-$ y cambia de signo
+la componente angular. Por ello
+\[
+\gamma_{\HMT}(A,-C^*)=-\gamma_{\HMT}(A,C^*).
+\]
+El funcional conserva orientación, mientras que otros lectores,
+como $q_+q_-$, son pares. Esta diferencia precede a su interpretación física.
+
+\section{Elipse de acción y reciprocidad modular}
+\label{sec:ellipse}
+Fijadas las salidas $A,C^*,\hbar>0$ en la carta
+$|C^*/A|<1$, definimos
+\[
+\eta_{\rm el}=\operatorname{artanh}(C^*/A),\quad
+a_S=\sqrt{2\hbar}\,e^{\eta_{\rm el}/2},\quad
+b_S=\sqrt{2\hbar}\,e^{-\eta_{\rm el}/2}.
+\]
+Las coordenadas canónicas equilibradas tienen unidad de raíz de acción;
+no se suman aquí posición y momento sin una carta dimensional.
+Se cumplen
+\[
+a_Sb_S=2\hbar,\qquad
+\tau_{\rm el}=i\,\frac{b_S}{a_S},\qquad
+R_{\rm el}=\sqrt{\frac{b_S}{a_S}}
+=\left(\frac{A-C^*}{A+C^*}\right)^{1/4}.
+\]
+La raíz positiva determina la composición $\tau_{\rm el}=iR_{\rm el}^2$,
+y permite recuperar la razón angular:
+\[
+\frac{C^*}{A}=\frac{1-R_{\rm el}^4}{1+R_{\rm el}^4}.
+\]
+La inversión de forma envía $R_{\rm el}$ a $R_{\rm el}^{-1}$ y
+$\tau_{\rm el}$ a $-1/\tau_{\rm el}$ \cite{elipse}.
+
+\begin{proposition}[Energía coincidente, acción distinguible]
+Sea
+\[
+D(\eta)=\begin{pmatrix}e^\eta&0\\0&e^{-\eta}\end{pmatrix},
+\quad
+S_2=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+\quad
+J_2=\begin{pmatrix}0&-1\\1&0\end{pmatrix}.
+\]
+Ambos mapas satisfacen $T^{\mathsf T}D(-\eta)T=D(\eta)$.
+Sin embargo, para $\omega=\dd Q\wedge\dd P$,
+\[
+S_2^*\omega=-\omega,\qquad J_2^*\omega=\omega.
+\]
+Si $\mathcal I(\gamma)=\oint_\gamma P\,\dd Q$ sobre una curva cerrada,
+\[
+\mathcal I(S_2\gamma)=-\mathcal I(\gamma),\qquad
+\mathcal I(J_2\gamma)=\mathcal I(\gamma).
+\]
+\end{proposition}
+\begin{proof}
+La conjugación intercambia las entradas diagonales de $D$.
+Los determinantes de $S_2,J_2$ son $-1,1$, respectivamente, lo que
+prueba la transformación de $\omega$. Para $\lambda=P\,\dd Q$,
+\[
+S_2^*\lambda=\dd(PQ)-\lambda,\qquad
+J_2^*\lambda=\lambda-\dd(PQ).
+\]
+Integrar la diferencial exacta sobre la curva cerrada completa la prueba.
+\end{proof}
+
+La energía cuadrática y el módulo no bastan para distinguir ambos
+transportes. La orientación de la acción sí los distingue, incluso
+en la forma circular. El marcado geométrico es así parte de la lectura
+recuperable, no un adorno añadido al valor.
+
+\section{Operador de área y reconstrucción de la información sectorial}
+\label{sec:area}
+El reagrupamiento de seis trits construye una biyección entre
+$(\Z/9\Z)^3$ y $(\Z/27\Z)^2$, ambos de cardinal $729$.
+La biyección no se presenta como isomorfismo aditivo. Sobre un bloque
+de borde $9\times9$, la fuente descompone 36 enlaces en dos
+conjuntos de 18, etiquetados por los canales $90$ y $120$.
+
+Sea $N_e=\operatorname{diag}(0,1,2)$ en cada enlace y
+$N_{90},N_{120}$ las sumas por sector. Fijada la escala
+\[
+\theta_{\rm clk}=\frac{C^*}{6}\frac{\pi}{180},\qquad
+a_0=\frac{1+2\cos(10^\circ)}3\theta_{\rm clk},
+\]
+el operador areal normalizado es
+\[
+\widehat{\mathcal A}/\ell_P^2
+=\gamma_{\HMT}a_0(N_{90}+N_{120}).
+\]
+Su espectro tiene valores $n\gamma_{\HMT}a_0$, $0\le n\le72$,
+con multiplicidades dadas por $(1+z+z^2)^{36}$.
+La prueba consiste en sumar los autovalores $0,1,2$ de los
+36 factores tensoriales \cite{area}.
+
+\begin{theorem}[Recuperación de los sectores de borde]
+Sean
+\[
+N=N_{90}+N_{120},\qquad D=90N_{90}+120N_{120}.
+\]
+Entonces
+\begin{equation}
+N_{90}=4N-\frac D{30},\qquad
+N_{120}=\frac D{30}-3N.
+\label{eq:recover}
+\end{equation}
+Por tanto, el total y el lector ponderado recuperan conjuntamente
+las dos ocupaciones.
+\end{theorem}
+\begin{proof}
+La matriz $\left(\begin{smallmatrix}1&1\\90&120\end{smallmatrix}\right)$
+tiene determinante $30$. Su inversión da \eqref{eq:recover}.
+En el dominio de ocupaciones enteras, la imagen satisface
+$D\in30\Z$ y $90N\le D\le120N$.
+\end{proof}
+
+El Hamiltoniano modular de la fuente es
+$K_A=-\log\rho_A=cI+\Delta_{\rm mod}D$.
+Para $\Delta_{\rm mod}\ne0$ y normalización conocida,
+$D=(K_A-cI)/\Delta_{\rm mod}$ publica el segundo observable.
+Este operador describe la estructura espectral del estado reducido;
+no se identifica por notación con el generador de evolución temporal.
+El área conserva la ocupación total y la pareja añade la procedencia.
+Por ejemplo, $(N_{90},N_{120})=(1,0)$ y $(0,1)$ comparten $N=1$,
+pero tienen $D=90$ y $D=120$.
+
+\input{sections/lectura_modular.tex}
+
+\subsection{Estado reducido, descomposición de Schmidt y entropía de entrelazamiento}
+Si $\rho_A=\sum_\nu p_\nu|\nu\rangle\langle\nu|$,
+la purificación
+\[
+|\Psi\rangle=\sum_\nu\sqrt{p_\nu}\,
+|\nu\rangle_A|\nu\rangle_B
+\]
+satisface $\Tr_B|\Psi\rangle\langle\Psi|=\rho_A$.
+Así, $-\Tr(\rho_A\log\rho_A)$ es la entropía de entrelazamiento
+de esta bipartición pura concreta. El estado ampliado declara
+qué sistema porta esa interpretación.
+
+Para una involución de dos hojas con un autovector de cada signo,
+\[
+\rho_y=\frac{e^{-yR}}{2\cosh y},\qquad R^2=I,
+\]
+la diagonalización proporciona
+\[
+S(\rho_y)=\log(2\cosh y)-y\tanh y,\qquad
+D(\rho_y\Vert\rho_{-y})=2y\tanh y.
+\]
+La entropía es par en $y$; la distancia compara explícitamente
+las dos orientaciones. No se identifica esta entropía de dos niveles
+con la capacidad $81\log3$ del corte triádico.
+
+\section{Acción, gravedad e información térmica}
+\label{sec:gravity}
+\subsection{Período dodecafásico y realización circular de la acción}
+El calendario ya construido determina $T_{108}=108t_0$.
+En su realización circular,
+\[
+\omega_{108}=\frac{2\pi}{108t_0},\qquad
+R_{108}=\frac{c_{\rm int}}{\omega_{108}}
+=\frac{54}{\pi}\ell_0,\qquad \ell_0=c_{\rm int}t_0.
+\]
+La unidad $\ell_0$ y las cartas de tiempo y velocidad se mantienen
+explícitas; la carta SI no selecciona el ciclo.
+Para cada sección orientada de acción $a\in\{\mathrm{pre},\mathrm{ret}\}$,
+\[
+E_{108,a}=\hbar_a\omega_{108},\qquad
+m_{108,a}=\frac{E_{108,a}}{c_{\rm int}^2}.
+\]
+La longitud reducida y la completa son respectivamente
+\[
+\frac{\hbar_a}{m_{108,a}c_{\rm int}}=R_{108},
+\qquad
+\frac{h_a}{m_{108,a}c_{\rm int}}=2\pi R_{108}.
+\]
+La misma acción y la misma duración intervienen en ambas lecturas
+\cite{autodual}.
+
+\begin{proposition}[Selector de coincidencia de radios]
+En la familia dimensional
+\[
+G_a(\vartheta)=\vartheta\frac{c_{\rm int}^5t_0^2}{\hbar_a},
+\qquad \vartheta>0,
+\]
+la condición de la realización circular
+$G_a(\vartheta)m_{108,a}/c_{\rm int}^2=R_{108}$
+tiene la única solución
+\[
+\vartheta^\circ_{108}=(54/\pi)^2.
+\]
+\end{proposition}
+\begin{proof}
+El primer radio es
+$r_g(\vartheta)=\vartheta(\pi/54)\ell_0$.
+Compararlo con $(54/\pi)\ell_0$, con $\ell_0>0$, reduce la
+igualdad a una ecuación lineal estrictamente creciente.
+\end{proof}
+La condición de coincidencia es parte explícita de esta realización;
+el teorema resuelve su coeficiente sin usar un valor metrológico de $G$.
+El radio aquí empleado es $Gm/c^2$, por lo que no se traslada
+inadvertidamente el factor dos de la convención $2Gm/c^2$.
+
+\begin{proposition}[Acción y gravedad recíprocas, área conservada]
+En las dos cartas anteriores,
+\[
+\frac{G_{\rm pre}}{G_{\rm ret}}=R_{\rm act}^{-1},\qquad
+\hbar_aG_a=\vartheta^\circ_{108}c_{\rm int}^5t_0^2,
+\qquad
+\ell_P^2=\frac{\hbar_aG_a}{c_{\rm int}^3}
+=\vartheta^\circ_{108}\ell_0^2.
+\]
+\end{proposition}
+\begin{proof}
+La definición de $G_a$ contiene $\hbar_a^{-1}$ y el resto de factores
+es común a las dos cartas. Tomar el cociente y el producto da
+las tres igualdades.
+\end{proof}
+Esta reciprocidad explica por qué la información de orientación puede
+variar sin que cambie el área. Se dispone así de una relación precisa
+entre la elipse de acción, la escala de Planck y el operador areal
+de la sección~\ref{sec:area}.
+
+\subsection{Normalización térmica y energía por ciclo}
+La relación térmica del corpus publica
+\begin{equation}
+k_B\Theta_{\rm clk}\log3
+=\frac{h_a}{108t_0}
+=\frac{\hbar_a}{t_P}=E_{P,a},
+\qquad t_P=\frac{54}{\pi}t_0.
+\label{eq:thermalclock}
+\end{equation}
+El factor $\log3$ mide la información de la terna equiprobable;
+la energía del reloj incorpora la acción ya generada.
+La identidad conserva el producto $k_B\Theta_{\rm clk}$ como sección
+de energía y hace explícita la carta térmica utilizada \cite{termica}.
+
+La realización radiativa proporciona, en esta escala,
+\[
+n_\gamma\ell_P^3=\frac{2\zeta(3)}{\pi^2\log^3 3},\qquad
+\frac{u_\gamma\ell_P^3}{E_P}
+=\frac{\pi^2}{15\log^4 3},\qquad
+\frac{s_\gamma\ell_P^3}{k_B}
+=\frac{4\pi^2}{45\log^3 3}.
+\]
+Aquí se encuentran dos invariantes distintos: $\log3$ conserva la
+información TRIT y $\zeta(3)$ el momento de ocupación bosónica.
+Su presencia en una misma expresión ofrece una conexión pertinente
+con un artículo posterior sobre constantes y momentos espectrales,
+sin convertir una constante en nombre intercambiable de la otra.
+
+\begin{apunte}{Boltzmann y alcance editorial}
+Conservar la ecuación \eqref{eq:thermalclock} en el cuerpo enlaza acción,
+tiempo e información. Para exponer además el valor individual de $k_B$,
+se reunirá aquí su carta de temperatura y el constructor de esa
+normalización, en vez de deducir dos valores independientes de una
+sola ecuación para su producto. Las fórmulas radiativas pueden quedar
+como interludio o desarrollarse en otro artículo: el material íntegro
+se preserva en la recopilación.
+\end{apunte}
+
+\subsection{Barbero--Immirzi en la realización Cartan--Holst}
+Una vez construido $\gamma_{\HMT}$, la fuente lo realiza como
+coeficiente de la acción de Holst. En la carta geométrica declarada,
+sea $e^I$ una co-tétrada no degenerada, $\omega^{IJ}$ una conexión,
+$\Sigma^{IJ}=e^I\wedge e^J$ y
+$F^{IJ}=\dd\omega^{IJ}+\omega^I{}_K\wedge\omega^{KJ}$.
+Con $\kappa=8\pi G/c^4$, la acción especializada es
+\begin{equation}
+\begin{aligned}
+S[e,\omega,\Psi]
+={}&\frac1{2\kappa c}\int
+\Sigma_{IJ}\wedge(\star F^{IJ}+\gamma_{\HMT}^{-1}F^{IJ})\\
+&-\frac{\Lambda}{\kappa c}\int\operatorname{vol}_e
++S_m[e,\omega,\Psi].
+\end{aligned}
+\label{eq:holst}
+\end{equation}
+La convención de corriente es
+$\delta_\omega S_m=-\tfrac12\int\delta\omega^{IJ}\wedge\sigma_{IJ}$.
+La variación de \eqref{eq:holst}, bajo las condiciones de borde
+del propietario, da
+\[
+D_\omega[(\star+\gamma_{\HMT}^{-1}I)\Sigma^{IJ}]
+=\kappa c\,\sigma^{IJ}.
+\]
+Se obtiene usando $\delta F=D_\omega\delta\omega$, integrando por partes
+y haciendo nulo el coeficiente de la variación arbitraria
+\cite{holst}. La orientación de la frontera y la normalización
+de la corriente forman parte de esta fórmula.
+
+En firma lorentziana, $\star^2=-I$ sobre bivectores. La identidad
+\[
+(\star+\gamma^{-1}I)^{-1}
+=\frac{\gamma^2}{1+\gamma^2}(-\star+\gamma^{-1}I)
+\]
+se comprueba multiplicando ambos miembros: los términos cruzados se
+cancelan y queda $(1+\gamma^{-2})I$ antes de normalizar.
+Así, el parámetro ya construido interviene en la respuesta torsional,
+no únicamente en un valor de tabla.
+Las identidades
+$D_\omega T^I=F^I{}_J\wedge e^J$ y $D_\omega F^{IJ}=0$
+mantienen conectados torsión, curvatura y balance.
+
+\begin{apunte}{gravedad como parte del argumento}
+Esta sección permite discutir gravedad, área e información sin añadir
+un capítulo desligado de la acción. El desarrollo definitivo reunirá
+el transporte desde el registro TPK a la co-tétrada y la conexión,
+sus clases de holonomía y las cartas de $G$ y $\Lambda$.
+Se han conservado los propietarios completos de esa realización.
+La métrica lorentziana, la carta de Minkowski, el radio recíproco y
+las geometrías de curvatura constante deben colocarse donde sus
+aplicaciones efectivas sean necesarias; el borrador no decide
+todavía si sus desarrollos ocuparán el cuerpo o un suplemento.
+\end{apunte}
+
+\section{Transporte angular y continuación excepcional}
+\label{sec:cp}
+\label{sec:extension}
+La relación con CKM debe exhibir un mapa, no sólo proximidad narrativa
+con Barbero. En las coordenadas de la fuente,
+\[
+\symbf\theta=M(A,h_\theta,\Delta)^{\mathsf T},\quad h_\theta=C^*/6,
+\qquad
+M=\begin{pmatrix}
+2&-5&28\\0&7&-25/2\\1&-20&-2/3
+\end{pmatrix},
+\quad \det M=-3857/6.
+\]
+Aquí $h_\theta$ es una coordenada angular, distinta de la constante de Planck $h$.
+Sean $c_h=(-5,7,-20)^{\mathsf T}$ y
+$\ell_h=(75,176,-150)/3857$. Se comprueba
+$\ell_hc_h=1$ y que $\ell_h$ anula las otras columnas. Por tanto,
+\[
+\mathcal R_{\rm CKM}=I-2c_h\ell_h
+=M\operatorname{diag}(1,-1,1)M^{-1}
+\]
+satisface $\mathcal R_{\rm CKM}^2=I$ y
+$\mathcal R_{\rm CKM}M=M\operatorname{diag}(1,-1,1)$.
+La prueba sigue de $(c_h\ell_h)^2=c_h\ell_h$.
+Es el transporte de la inversión de hoja al espacio de mezcla.
+La fórmula actúa sobre tres ángulos; en esta acción particular,
+$\delta_{\rm CP}=9A$ permanece fija \cite{ckm}.
+La operación completa exige conservar también el lector complejo de
+amplitudes, que la fuente publica separadamente.
+La procedencia de las columnas de $M$ se conserva con sus constructores
+en la recopilación para el desarrollo autónomo posterior.
+
+\subsection{Paridad de rutas y conjugación de amplitudes}
+En la ruta $\rho=((i_t,j_t,\ell_t);d_t)$, los operadores del corpus
+actúan como
+\[
+P:(i,j)\mapsto(i,-j),\qquad
+C_{\rm hoja}:\Sigma\leftrightarrow\Pi,\quad C^*\mapsto-C^*,
+\]
+mientras $T$ invierte el orden del registro y cada dirección.
+La acción discreta
+\[
+\mathcal A_\lambda(\rho)
+=\sum_{t=2}^L\left(
+1-\delta_{d_t,d_{t-1}}
++\lambda(1-\delta_{\ell_t,\ell_{t-1}})\right)
+\]
+se conserva bajo cada operación y bajo su composición.
+La prueba es combinatoria: una permutación global del alfabeto preserva
+la igualdad entre vecinos, y la inversión del orden conserva el número
+de cambios. Esta identidad usa la ruta registrada y sus hojas
+\cite{cpt}.
+
+El lector complejo ya está explícito en el tratado. Con
+$c_{ab}=\cos\theta_{ab}$ y $s_{ab}=\sin\theta_{ab}$,
+\begin{equation}
+\resizebox{\linewidth}{!}{$\displaystyle
+V(\symbf\theta,\delta)=
+\begin{pmatrix}
+c_{12}c_{13}&s_{12}c_{13}&s_{13}e^{-i\delta}\\
+-s_{12}c_{23}-c_{12}s_{23}s_{13}e^{i\delta}&
+c_{12}c_{23}-s_{12}s_{23}s_{13}e^{i\delta}&s_{23}c_{13}\\
+s_{12}s_{23}-c_{12}c_{23}s_{13}e^{i\delta}&
+-c_{12}s_{23}-s_{12}c_{23}s_{13}e^{i\delta}&c_{23}c_{13}
+\end{pmatrix}.$}
+\label{eq:ckm-full}
+\end{equation}
+Los ángulos de la carta se convierten a radianes antes de aplicar
+las funciones trigonométricas.
+
+\begin{proposition}[Conjugación exacta del lector complejo]
+Para ángulos reales,
+\[
+\overline{V(\symbf\theta,\delta)}
+=V(\symbf\theta,-\delta),\qquad
+J(\symbf\theta,-\delta)=-J(\symbf\theta,\delta),
+\]
+donde
+$J=c_{12}c_{23}c_{13}^2s_{12}s_{23}s_{13}\sin\delta$.
+\end{proposition}
+\begin{proof}
+En \eqref{eq:ckm-full}, todos los factores trigonométricos son reales.
+La conjugación intercambia $e^{i\delta}$ y $e^{-i\delta}$; el seno
+de la fase cambia de signo. Las dos identidades siguen término a término.
+\end{proof}
+
+Por tanto, la matriz $\mathcal R_{\rm CKM}$ no agota los operadores
+que deben seguirse en la realización CP. El material reunido contiene
+la paridad espacial de la ruta, la inversión de hoja y la conjugación
+compleja de las amplitudes \cite{mezcla}. La conjugación antiunitaria
+de la evolución tiene, a su vez, una residencia propia: si
+$CJ_EC^{-1}=-J_E$ y $CHC^{-1}=H$, con los dominios preservados,
+entonces $CU(t)C^{-1}=U(-t)$ para
+$U(t)=\exp(-J_EHt/\hbar)$ \cite{conjugacion}.
+
+\begin{apunte}{composición CP que debe quedar visible}
+Se conservarán contiguos el transporte de rutas, el de marcos de
+mezcla y el de amplitudes. Para un lector de realización $\mathcal V$,
+la relación que expresa la compatibilidad es
+$\mathcal V(CP_{\rm HMT}\rho)
+=D_u\overline{\mathcal V(\rho)}D_d^\dagger$,
+con las refasificaciones $D_u,D_d$ explícitas.
+Las fuentes reunidas y las identidades precedentes permiten trabajar
+ese cuadrado completo. Ni la fase fija de un mapa parcial ni una
+declaración nominal de equivalencia sustituyen su comprobación.
+Este apunte registra una tarea de composición; no cambia el teorema
+de rutas ni el lector complejo ya publicados.
+\end{apunte}
+
+\subsection{Incidencia excepcional y continuación modular}
+
+La rama de Witt comienza en un registro concreto, no en un grupo
+excepcional postulado como generador. El soporte extraído de
+$\mathbf K$ es una tétrada; el registro firmado determina una
+hexada en el marco de incidencia declarado. Las estrellas y sus
+prolongaciones conectan con los códigos, Leech y el álgebra
+$V^\natural$. El grupo Monstruo actúa en esta última, no directamente
+sobre las cifras de $\alpha$ \cite{witt}.
+
+En el artículo definitivo se expondrán las aplicaciones que unan ese
+corredor con el borde marcado usado en \eqref{eq:gamma}.
+Moonshine, la invariancia modular y la dualidad de radio son
+continuaciones relacionadas pero de tipos diferentes.
+La igualdad de invariantes modulares no demuestra por sí sola una
+equivalencia de todas las realizaciones físicas de cuerdas.
+La extensión hasta teoría M se decidirá después de disponer de sus
+mapas y de su residencia demostrativa íntegra.
+
+\clearpage
+\section{Conclusiones y desarrollo de la exposición}
+El material reunido permite organizar el artículo mediante tres
+lecturas complementarias. La actualización conserva memoria;
+la acción distingue orientación y escala; el área y el Hamiltoniano
+modular recuperan la procedencia de las ocupaciones.
+El funcional de Barbero--Immirzi enlaza la incidencia
+hexádico--octádica y la publicación angular dentro de esa organización.
+
+La primera contribución de esta redacción consiste en reunir los
+mapas que hacen precisa esa continuidad. El incremento $\eta_m$
+se calcula desde el evento TPK, el escalar $-1/12$ conserva su
+representación operatoria, y los pesos $12:-1$ preceden al
+coeficiente de polo $1/24$. Las ecuaciones de acción se sitúan
+antes de las magnitudes que las consumen.
+
+La siguiente composición del manuscrito incorporará las pruebas
+completas de los lectores regionales, las figuras del registro
+y de Witt, la conexión de incidencia con la geometría areal
+y las cartas dimensionales de reconocimiento. La recopilación
+separada conserva ya sus propietarios sin reducirlos a las
+fórmulas mostradas. El criterio de selección será la necesidad
+matemática de cada antecedente, no una cifra de páginas.
+
+\subsection{Definiciones de trabajo para la lectura estructural}
+Las siguientes formulaciones reúnen conceptos ya presentes en las fuentes;
+su función en el borrador es orientar la exposición, no atribuirles
+una novedad histórica por cambiar su redacción.
+
+\paragraph{Número genealógico.}
+Objeto de lectura que retiene, además de la publicación escalar, la
+clase de rutas compatibles, la hoja, la orientación y la memoria
+pertinentes. El escalar constituye una proyección del objeto; la igualdad
+de escalares se distingue de la equivalencia de estados transportados
+\cite{segmento,registro}.
+
+\paragraph{Sección orientada de acción.}
+Elemento positivo de la recta de acción cuya elección de orientación
+conserva la razón $R_{\rm act}$, y cuya realización sobre una curva
+permite distinguir los transportes mediante la integral $\oint P\,\dd Q$.
+La forma elíptica separa el área $2\pi\hbar$ de la deformación modular
+\cite{accion,elipse}.
+
+\paragraph{Funcional de incidencia orientada.}
+La expresión $\Gamma_{6\to8}$ reúne la lectura angular bilineal y la
+diferencia de los dos canales de incidencia. Sus pesos proceden de la
+cadena dodecafásica y su signo conserva la inversión de hoja. Su
+realización de Barbero--Immirzi incorpora este contenido a la respuesta
+areal y torsional \cite{precedencia,holst}.
+
+\paragraph{Recuperación de procedencia.}
+Un conjunto de observables recupera una coordenada de origen cuando su
+aplicación conjunta es invertible sobre el dominio declarado.
+La pareja $(N,D)$ es un ejemplo explícito: recupera $N_{90},N_{120}$,
+mientras $N$ por separado conserva sólo su suma. Esta propiedad local
+no se extrapola sin prueba a todas las coordenadas del estado.
+
+\begin{apunte}{jerarquía para la siguiente revisión}
+Mantener como eje acción, orientación, incidencia y recuperación.
+Las cifras comparativas acompañarán ese argumento. La ampliación
+excepcional y las realizaciones geométricas se situarán por su
+necesidad en la cadena, sin convertir la acumulación de nombres
+en sustituto de las aplicaciones que los relacionan.
+\end{apunte}
+
+\clearpage
+\appendix
+\section{Notas de procedencia y alcance de la revisión}
+La revisión conserva los resultados, las ecuaciones y las figuras del
+prototipo anterior. Las adiciones reúnen la lectura geométrica, la
+reversibilidad del sello y la normalización del Hamiltoniano modular.
+Las formulaciones matemáticas se acompañan de sus hipótesis; las notas
+de integración distinguen los desarrollos que se incorporarán a la
+siguiente revisión.
+
+La documentación de procedencia y los programas de comprobación se
+mantienen en el suplemento digital. Sus identificadores de trabajo
+no forman parte de la nomenclatura matemática del artículo. El
+inventario técnico del prototipo se conserva íntegro en ese suplemento.
+
+Las referencias que siguen corresponden a manuscritos de Rubén Ramos
+Balsa y a desarrollos documentados del corpus HMT--MD, todavía inéditos.
+Se citan para preservar atribución y procedencia, no como publicaciones
+arbitradas. La versión destinada a lectura independiente incorporará
+en el cuerpo las demostraciones previas que todavía se citan mediante
+estos manuscritos.
+\clearpage
+\begin{thebibliography}{99}
+\raggedright
+\small
+\setlength{\itemsep}{4pt}
+\setlength{\parsep}{0pt}
+\setlength{\parskip}{0pt}
+\bibitem{geometria} R. Ramos Balsa. \emph{Álgebras cuadráticas y generadores concretos de los regímenes TRIT}.
+Manuscrito inédito, sección de realizaciones elíptica, parabólica e hiperbólica.
+Fuente conservada en el suplemento digital.
+\bibitem{minkowski} R. Ramos Balsa. \emph{El radión: realización de Minkowski y holonomía orientada}.
+Manuscrito inédito, sección de incidencia cúbica y orientación causal.
+Fuente conservada en el suplemento digital.
+\bibitem{segmento} Corpus HMT--MD. \emph{Construcción genealógica del continuo}.
+Segmento marcado, carta positiva y continuación con acarreo. Manuscrito inédito.
+\bibitem{app} Corpus HMT--MD. \emph{APP: soporte, operaciones y caminos}.
+Fuente \texttt{03\_app\_ortograma.tex}; manuscrito inédito.
+\bibitem{trit} Corpus HMT--MD. \emph{Estado local ternario y orientación del transporte}.
+Fuente \texttt{02\_trit\_geometrias.tex}; manuscrito inédito.
+\bibitem{tpk} Corpus HMT--MD. \emph{Árbol operatorio del TPK}.
+Fuente \texttt{03h\_arbol\_operatorio\_tpk\_rev11.tex}; manuscrito inédito.
+\bibitem{registro} Corpus HMT--MD. \emph{Registro dodecafásico firmado y reconstrucción integral del sello}.
+Unidad U016; manuscrito inédito.
+\bibitem{accion} Corpus HMT--MD. \emph{Derivación de la escala de acción}.
+Fuentes \texttt{c28\_accion.tex} y delta c34, manuscritos inéditos.
+\bibitem{retorno} Corpus HMT--MD. \emph{Carácter regional y mantisa reducida de acción; recta de acción}.
+Deltas c35--c36, manuscritos inéditos.
+\bibitem{precedencia} Corpus HMT--MD. \emph{Cadena fundamental dodecafásica y funcional hexádico--octádico}.
+Fuentes c43, manuscritos inéditos.
+\bibitem{area} Corpus HMT--MD. \emph{Operador de área, Hamiltoniano modular y memoria}.
+Manuscritos inéditos.
+\bibitem{ckm} Corpus HMT--MD. \emph{Transformación racional involutiva en el espacio de parámetros CKM}.
+Fuente \texttt{c41\_ckm.tex}; manuscrito inédito.
+\bibitem{witt} Corpus HMT--MD. \emph{Bandera y rama excepcional}.
+Fuente \texttt{15\_bandera\_y\_rama\_excepcional.tex}; manuscrito inédito.
+\bibitem{elipse} Coordinación HMT--MD, 6 de septiembre de 2026.
+\emph{Forma elíptica, radio modular y acción orientada}. Manuscrito inédito.
+\bibitem{eta} Coordinación HMT--MD, 6 de septiembre de 2026.
+\emph{Actualización TPK, memoria publicada y determinantes dodecafásicos}.
+Texto y verificador, manuscritos inéditos.
+\bibitem{autodual} Corpus HMT--MD. \emph{Identidad autodual Planck--CT108}.
+Realización circular y reciprocidad de las cartas de acción. Manuscritos inéditos.
+\bibitem{termica} Corpus HMT--MD. \emph{Relación térmica intrínseca de la escala 108}.
+Fuente c40; manuscrito inédito.
+\bibitem{holst} Corpus HMT--MD. \emph{Realización Cartan--Holst--Barbero}.
+Propietario B028, copia G03; sector gravitatorio completo en G02.
+\bibitem{cpt} Corpus HMT--MD. \emph{Conjugación, paridad y reversión temporal en el registro}.
+Fuente 08a; manuscrito inédito.
+\bibitem{mezcla} Corpus HMT--MD. \emph{Mezcla CKM y violación CP}.
+Fuente 74; manuscrito inédito.
+\bibitem{conjugacion} Corpus HMT--MD. \emph{Conjugación antiunitaria y orientación temporal}.
+Fuente 82; manuscrito inédito.
+\end{thebibliography}
+\end{document}

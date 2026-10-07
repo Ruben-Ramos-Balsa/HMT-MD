@@ -1,0 +1,254 @@
+\section{Noyau formel de l'holographie modulaire triadique}
+\label{sec:nucleo}
+
+L'holographie modulaire triadique, abrégée HMT, commence par une structure finie de positions et d'opérations. L'ordre de construction importe : les positions reçoivent des évaluations arithmétiques, les transitions acquièrent une signature ternaire et la dynamique conserve l'information nécessaire pour les prolonger. Ce n'est qu'ensuite que les réalisations numériques sont formées. Une constante reconnue à la fin de ce processus ne remplace ni la règle qui a produit sa région ni l'histoire qui détermine son évaluation.
+
+La dénomination \emph{All Possible Paths}, APP, exprime le rôle des chemins sur le support. Elle est adoptée comme dénomination de la construction, avec une référence conceptuelle à la formulation par chemins de la mécanique quantique ; elle ne suppose pas que sa loi arithmétique soit l'intégrale de chemins de Feynman. Le \emph{Topological Phase Kernel}, TPK,\footnote{Les auteurs dédient également les initiales TPK à Tan Pengkiang. Cette dédicace est indépendante de la définition mathématique.} désigne la composition de la sélection, du transport, de la mise à jour de la mémoire et du prolongement. Les sigles ne sont maintenus qu'après la définition des objets qu'ils représentent.
+
+\subsection{APP : support positionnel et évaluations arithmétiques}
+
+Considérons les neuf marques intérieures d'une droite graduée entre zéro et dix,
+\[
+ D_9=\{1,2,3,4,5,6,7,8,9\}.
+\]
+Leur disposition horizontale et verticale produit les quatre-vingt-une positions de \(D_9^2\). Les marques intérieures ne doivent pas être confondues avec les dix intervalles unitaires de la droite de référence. Cette disposition fixe un alphabet et deux directions ; elle n'utilise pas encore un développement réel pour décider d'une trajectoire.
+
+L'identification cyclique des positions conduit au support
+\[
+ X_9=(\ZZ/9\ZZ)^2.
+\]
+La coordinatisation par représentants positifs conserve le symbole neuf pour la classe nulle. Pour tout entier positif, on définit
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),\qquad
+ q_9(n)=\frac{n-\rho_9(n)}9,
+ \qquad n=\rho_9(n)+9q_9(n).
+ \label{eq:residuo-cociente}
+\end{equation}
+La racine numérique positive est donc un choix de représentant de la classe résiduelle. Elle ne conserve pas à elle seule l'entier antérieur à la réduction ; la coordonnée \(q_9\) fournit précisément l'information manquante.
+
+À chaque position \((i,j)\), l'accumulation de \(i\) répétée \(j\) fois produit \(ij\). Les deux évaluations entières et leurs projections sont
+\[
+ S(i,j)=i+j,\qquad P(i,j)=ij,\qquad
+ \Sigma(i,j)=\rho_9(i+j),\quad \Pi(i,j)=\rho_9(ij).
+\]
+La symétrie \((i,j)\mapsto(j,i)\) échange les directions d'accumulation et conserve les deux évaluations. C'est une propriété d'un unique support, et non une identification ultérieure entre deux matrices indépendantes.
+
+\begin{definition}[Évaluation arithmétique relevée]
+L'évaluation d'APP qui conserve les deux feuillets est
+\begin{equation}
+ \mathcal A(i,j)=
+ \bigl((R^+_{ij},q^+_{ij}),(R^\times_{ij},q^\times_{ij})\bigr)
+ =\bigl((\rho_9(i+j),q_9(i+j)),(\rho_9(ij),q_9(ij))\bigr).
+ \label{eq:app-levantada}
+\end{equation}
+Le terme \emph{feuillet} indique ici une évaluation sur le même support : additive ou multiplicative. Les deux coordonnées de quotient appartiennent à l'état arithmétique et ne sont pas éliminées lors de la réduction des résidus.
+\end{definition}
+
+\input{figures/app.tex}
+
+\begin{proposition}[Reconstruction des évaluations]
+Les deux couples de \eqref{eq:app-levantada} déterminent exactement \(i+j\) et \(ij\). Les résidus isolés ne déterminent ni ces évaluations entières ni leurs quotients.
+\end{proposition}
+\begin{proof}
+La première affirmation est \eqref{eq:residuo-cociente} appliquée à chaque feuillet. Pour la seconde, \(10=1+9\) et \(19=1+2\cdot9\) ont le même résidu et des quotients distincts. Sur le support bidimensionnel, les positions \((5,5)\) et \((8,2)\) donnent la même somme et le même résidu du produit, mais les produits \(25=7+18\) et \(16=7+9\). La projection résiduelle identifie des données que l'évaluation relevée distingue.
+\end{proof}
+
+\subsubsection{Graphe de Cayley, topologie toroïdale et degré d'enroulement}
+
+Les translations cardinales sont données, en coordonnées de ligne et de colonne, par
+\[
+ \nu_N=(-1,0),\quad\nu_E=(0,1),\quad
+ \nu_S=(1,0),\quad\nu_O=(0,-1),\qquad T_d(x)=x+\nu_d.
+\]
+La première coordonnée augmente vers le sud et la seconde vers l'est. Le graphe
+\[
+ \mathscr G_9=\operatorname{Cay}(X_9,\{\nu_N,\nu_E,\nu_S,\nu_O\})
+\]
+est le réseau cyclique bidimensionnel : il possède quatre-vingt-un sommets et quatre arêtes orientées sortantes par sommet. C'est un graphe de Cayley pour la structure \emph{additive} du support. La multiplication des résidus possède des diviseurs de zéro et ne transforme pas toutes les lignes d'APP en un groupe multiplicatif.
+
+Un mot cardinal \(w=d_1\cdots d_r\) et une origine \(x_0\) déterminent
+\[
+ x_k=x_0+\sum_{j=1}^k\nu_{d_j}\pmod9.
+\]
+Il existe \(81\cdot4^r\) chemins orientés de longueur \(r\), retours et retours en arrière compris. Lorsque le chemin se ferme, son déplacement entier avant réduction définit
+\begin{equation}
+ \operatorname{wind}(w)=\frac19
+ \bigl(\#S(w)-\#N(w),\#E(w)-\#O(w)\bigr)\in\ZZ^2.
+\end{equation}
+L'inversion du chemin change le signe de ce vecteur. Le retour à la même position résiduelle n'impose donc pas que l'enroulement soit nul. C'est le premier exemple d'une différence qui réapparaîtra dans le retour de phase : une coordonnée peut se refermer tandis qu'une autre enregistre une évolution non triviale.
+
+\subsubsection{Quotient de transport et identité de cocycle}
+
+Soit \(s_9:\ZZ/9\ZZ\to D_9\) la section des représentants positifs. Le quotient de transport associé à la composition additive, également appelé \emph{retenue} en arithmétique positionnelle, est
+\[
+ c_9(a,b)=\frac{s_9(a)+s_9(b)-s_9(a+b)}9.
+\]
+Le caractère compositionnel de cette mémoire s'exprime par une identité exacte.
+
+\begin{lemma}[Identité de cocycle]
+Pour \(a,b,c\in\ZZ/9\ZZ\),
+\[
+ c_9(a,b)+c_9(a+b,c)=c_9(b,c)+c_9(a,b+c).
+\]
+\end{lemma}
+\begin{proof}
+Les deux sommes sont égales à
+\[
+ \frac{s_9(a)+s_9(b)+s_9(c)-s_9(a+b+c)}9.
+\]
+L'associativité de la somme des représentants relevés requiert précisément ce terme supplémentaire lors de la composition dans le quotient.
+\end{proof}
+
+Avec des représentants positifs, ce cocycle n'est pas normalisé en l'identité : \(c_9(0,a)=1\). Si \(s_0\) prend ses représentants dans \(\{0,\ldots,8\}\), sa retenue normalisée \(c_0\) satisfait
+\[
+ c_9(a,b)=c_0(a,b)+\mathbf1_{a=0}+\mathbf1_{b=0}-\mathbf1_{a+b=0}.
+\]
+La différence est le changement de section ; elle n'altère pas l'identité de cocycle. La décomposition ultérieure du calendrier en phase et fenêtre utilisera les représentants de zéro à huit.
+
+Les totaux des deux évaluations distinguent la contribution visible et celle conservée dans le quotient :
+\[
+ \sum S=810,\quad\sum P=2025,\quad
+ \sum\Sigma=405,\quad\sum\Pi=459,
+\]
+\[
+ \sum q^+=45,\qquad\sum q^\times=174.
+\]
+On en obtient
+\begin{equation}
+ 2025-810=(459-405)+9(174-45)=54+9\cdot129.
+ \label{eq:defecto-integrado}
+\end{equation}
+La différence somme--produit ne se réduit pas au défaut visible \(54\). L'identité conserve également le défaut de quotient \(129\). Le supprimer modifierait l'arithmétique transportée, même si le tableau résiduel demeurait identique.
+
+\subsubsection{Réduction ternaire et radical multiplicatif}
+
+L'anneau \(R=\ZZ/9\ZZ\) a pour groupe des unités \(\{1,2,4,5,7,8\}\) et pour idéal maximal
+\[
+ \mathfrak m=(3)=\{0,3,6\},\qquad\mathfrak m^2=0.
+\]
+Toute ligne additive est une permutation des neuf représentants. Une ligne multiplicative l'est exactement lorsque son indice est une unité. Les lignes trois et six contiennent trois valeurs répétées ; la ligne neuf contient uniquement le représentant de la classe nulle. Le repliement multiplicatif distingue donc déjà, avant toute géométrie continue, les unités du secteur nilpotent.
+
+L'application \(x\mapsto3x\) a un noyau et une image égaux à \(\mathfrak m\). Elle induit un isomorphisme d'espaces vectoriels sur \(\FF_3\),
+\[
+ R/\mathfrak m\longrightarrow\mathfrak m,\qquad [x]\longmapsto3x,
+\]
+mais pas un isomorphisme d'anneaux. En particulier, la suite visible \(3,6,9\) admet deux lectures différentes : sa réduction directe modulo trois est \(0,0,0\), tandis que l'extraction du facteur trois suivie de la réduction de sa coordonnée interne donne \(1,2,0\). Cette seconde opération conserve une coordonnée de l'idéal ; ce n'est pas la même projection que la réduction directe du nombre original.
+
+\subsubsection{Réalisation latine de l'évaluation additive}
+
+La différence entre les deux évaluations peut également s'exprimer au moyen d'
+opérateurs. Soit \((e_r)_{r\in\ZZ/9\ZZ}\) la base orthonormale de \(\CC^9\).
+L'affectation \(v_{ab}=e_{a+b}\) produit une base orthonormale dans chaque ligne
+et chaque colonne. Les projecteurs \(P_{ab}=v_{ab}v_{ab}^{*}\) satisfont
+\[
+ \sum_bP_{ab}=I_9=\sum_aP_{ab},\qquad P_{ab}^2=P_{ab}.
+\]
+En effet, chaque translation \(b\mapsto a+b\) permute les neuf résidus. On obtient une réalisation par des projecteurs de rang un d'un carré latin, dans la terminologie des carrés latins quantiques \cite{mustovicary,delascuevas2023}. Cette construction part du feuillet additif déjà défini et explicite l'application vers sa représentation opératorielle.
+
+L'évaluation multiplicative conserve un autre contenu : pour \(a=3\), les
+vecteurs \(e_{3b}\) répètent les résidus \(0,3,6\), et
+\[
+ \sum_{b\in\ZZ/9\ZZ}|e_{3b}\rangle\langle e_{3b}|
+ =3\bigl(|e_0\rangle\langle e_0|+|e_3\rangle\langle e_3|
+                    +|e_6\rangle\langle e_6|\bigr).
+\]
+La multiplicité est enregistrée dans l'opérateur et caractérise le radical
+multiplicatif. Le support toroïdal, la propriété latine et la
+résolution opératorielle de l'identité sont donc des propriétés qui exigent
+des définitions différentes. Les carrés magiques quantiques étudiés par
+De las Cuevas, Drescher et Netzer exigent des entrées positives et des sommes de lignes
+et de colonnes égales à l'identité ; leur théorie distingue en outre les
+dilatations à entrées commutatives\cite{delascuevas2020}. Cette référence
+fournit un langage précis pour comparer les réalisations d'APP.
+
+\subsection{TRIT : orientation et régimes quadratiques}
+
+\begin{definition}[Signature ternaire et relèvement local]
+La signature TRIT utilise l'identification équilibrée
+\[
+ \FF_3\longrightarrow\TRIT,\qquad 0\mapsto0,\quad1\mapsto+1,\quad2\mapsto-1.
+\]
+Pour \(n\in\ZZ\), son relèvement conserve \(n=r+3c\), où \(r\in\TRIT\) et \(c\in\ZZ\). Dans une transition d'amplitude locale bornée, les trois états \((0,-1),(0,0),(0,+1)\) peuvent présenter le même résidu nul et des retenues distinctes.
+\end{definition}
+
+La signature ne remplace pas la trajectoire. Un zéro résiduel ne signifie pas l'absence d'information d'orientation, de phase ou de quotient. Il n'introduit pas non plus à lui seul une grandeur physique. Sa fonction est de distinguer algébriquement les classes de transport qui seront réalisées ci-après.
+
+\subsubsection{Trois régimes quadratiques et une exponentielle commune}
+
+Une fois la signature ternaire obtenue, sa réalisation quadratique est définie par
+\begin{equation}
+ \mathbb A_\tau=\RR[X]/(X^2+\tau),\qquad \tau\in\TRIT.
+ \label{eq:algebras-trit}
+\end{equation}
+Si \(J_\tau\) est la classe de \(X\), alors \(J_\tau^2=-\tau I\). La structure distingue le type elliptique \(\tau=+1\), le type parabolique \(\tau=0\) et le type hyperbolique \(\tau=-1\). La réalisation réelle ne génère pas la signature : elle exprime les types que la réduction orientée a déjà produits.
+
+\begin{proposition}[Exponentiation des trois types]
+Dans chaque algèbre \eqref{eq:algebras-trit},
+\begin{equation}
+ \exp(tJ_\tau)=C_\tau(t)I+S_\tau(t)J_\tau,
+\end{equation}
+où
+\[
+ C_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n}}{(2n)!},\qquad
+ S_\tau(t)=\sum_{n\ge0}\frac{(-\tau)^nt^{2n+1}}{(2n+1)!}.
+\]
+Les trois réalisations sont
+\[
+ \begin{array}{c|c|c}
+ \tau&J_\tau^2&\exp(tJ_\tau)\\\hline
+ +1&-I&\cos t\,I+\sin t\,J_\tau\\
+ 0&0&I+tJ_\tau\\
+ -1&I&\cosh t\,I+\sinh t\,J_\tau.
+ \end{array}
+\]
+\end{proposition}
+\begin{proof}
+Séparer les termes pairs et impairs de la série exponentielle et substituer \(J_\tau^{2n}=(-\tau)^nI\) et \(J_\tau^{2n+1}=(-\tau)^nJ_\tau\) donne les formules. Pour \(\tau=0\), tous les termes de degré au moins deux s'annulent. Dans les deux autres cas, on retrouve les séries trigonométriques ou hyperboliques.
+\end{proof}
+
+L'exponentielle est commune aux trois régimes : elle n'est pas attribuée exclusivement à la branche parabolique. Les invariants
+\[
+ C_\tau(t)^2+\tau S_\tau(t)^2=1
+\]
+se déduisent de \(\exp(tJ_\tau)\exp(-tJ_\tau)=I\). Le même principe algébrique conserve l'unité à travers des réalisations qui diffèrent par leur type quadratique.
+
+Dans le régime hyperbolique, \(P_\pm=(I\pm J_{-1})/2\) sont des projecteurs complémentaires et
+\[
+ \exp(tJ_{-1})=e^tP_++e^{-t}P_-.
+\]
+La croissance et la contraction apparaissent conjointement dans deux directions propres. Dans le régime elliptique, le paramètre décrit une rotation ; dans le régime parabolique, une translation nilpotente. L'interprétation temporelle adoptée par HMT associe \(+1\) au retour à mémoire, \(0\) au seuil et \(-1\) à l'ouverture bidirectionnelle. Cette interprétation exige un ordre de paramétrage ; elle n'ajoute pas un quatrième type algébrique.
+
+\input{sections/trit_desarrollo.tex}
+
+\input{figures/regimenes_trit.tex}
+
+\newpage
+\subsection{TPK : noyau topologique de phase}
+
+La dynamique utilise le sélecteur de phase
+\[
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+\]
+Sa valeur décide quelle évaluation opère. Le transport cardinal déplace le curseur correspondant ; le registre conserve la valeur précédente, le nouveau quotient, l'orientation et la transition. La sélection et le transport sont donc des fonctions distinctes : un signe ternaire n'est pas un déplacement du tore.
+
+Nous désignerons par \(\widehat X\) l'espace des états arithmétiques avec mémoire de trajectoire. Un élément contient les positions et les directions des deux curseurs, le mode actif, la signature TRIT, la phase, les résidus et les quotients des deux évaluations, les retenues, le préfixe construit et les données de frontière. Lorsqu'un cylindre de raffinement est introduit, il fait partie de l'état. La notation évite de remplacer l'objet par une version réduite qui ne conserve que le symbole visible.
+
+\begin{definition}[Mise à jour du TPK]
+Soient \(\mathsf{Sel}_t\) la sélection du mode au moyen de \(M_{\rm ph}\), \(\mathsf{Tra}_t\) le transport cardinal relevé et \(\mathsf{Mem}_t\) la mise à jour des registres. La transition est
+\begin{equation}
+ \mathcal U_t=\mathsf{Mem}_t\circ\mathsf{Tra}_t\circ\mathsf{Sel}_t.
+ \label{eq:actualizacion}
+\end{equation}
+Chaque application conserve les champs qu'elle ne modifie pas et met à jour les autres au moyen de la division euclidienne et de la concaténation de la trajectoire.
+\end{definition}
+
+La notation \eqref{eq:actualizacion} exprime l'ordre de composition et ne remplace pas les règles effectives. La section suivante spécifie complètement sa réalisation finie à deux curseurs. Ensuite, le prolongement ne s'obtiendra pas en effaçant sa mémoire et en répétant la première émission, mais en transportant les préfixes et leurs frontières compatibles. Ainsi, APP fournit les évaluations, TRIT distingue leurs régimes et TPK compose leur évolution.
+
+\input{sections/tpk_desarrollo_integrado.tex}
+
+\input{sections/memoria_resolvente.tex}

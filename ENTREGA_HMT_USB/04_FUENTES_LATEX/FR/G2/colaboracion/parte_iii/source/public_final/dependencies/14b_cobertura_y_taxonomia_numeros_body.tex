@@ -1,0 +1,985 @@
+\label{chap:cobertura-taxonomia-numeros}
+\index{nombre HMT!taxonomie}
+\index{transducteur de Hensel!décalage complet}
+\index{nombre rationnel!périodicité}
+
+Le \cref{chap:numero-medicion} a défini un nombre HMT comme une section
+compatible du système inverse de survie, et non comme une suite de
+chiffres dépourvue de généalogie. Il restait cependant deux questions qu'il
+convient de séparer avec précision. La première est une question de
+\emph{représentation} : quelles valeurs réelles le transducteur
+3-adique peut-il représenter avant d'imposer les filtres particuliers de clôture ? La seconde est
+une question de \emph{sélection} : quelles sections de l'espace brut sont
+choisies par APP, TRIT et TPK lorsque l'on exige simultanément leurs
+compatibilités ? Cette section résout la première, formule la seconde comme
+une restriction explicite du domaine et extrait de la carte de base mille une
+taxonomie complète des valeurs visibles. Les outils de base sont
+l'arithmétique \(p\)-adique, la dynamique symbolique et la caractérisation positionnelle
+des rationnels \cite{Koblitz1984,LindMarcus1995,HardyWright2008}.
+
+La distinction est structurelle. Un langage capable de représenter tout ruban ne
+sélectionne pas de ce seul fait le ruban de \(\pi\), de \(e\), de \(\varphi\) ou
+de \(\alpha\). À l'inverse, une loi de sélection ne peut pas être évaluée si
+l'espace dans lequel elle agit n'a pas été construit auparavant. Représentation et sélection
+sont deux théorèmes consécutifs, et non deux noms pour une même étape.
+
+\section{Transducteur de Hensel non filtré et décalage complet sur les fibres ternaires}
+
+Soit \(p\) un nombre premier, soit \(d\geq1\) et soit
+\(A\in\operatorname{GL}_d(\mathbb Z)\). Pour un vecteur ligne
+\(x_t\in\mathbb Z_p^d\), nous définissons
+\begin{equation}
+ y_t=x_tA,
+ \qquad
+ u_t=y_t\bmod p\in\mathbb F_p^d,
+ \qquad
+ x_{t+1}=\frac{y_t-u_t}{p}.
+ \label{eq:transductor-hensel-general}
+\end{equation}
+Le bloc \(u_t\) est l'émission visible et \(x_{t+1}\) est la mémoire qui
+subsiste après retrait de ce chiffre.
+
+\begin{theorem}[Conjugaison de Hensel avec le décalage complet]
+\label{thm:shift-hensel-completo}
+Pour tout \(T\geq1\), l'application
+\[
+ \Psi_T:(\mathbb Z/p^T\mathbb Z)^d
+ \longrightarrow(\mathbb F_p^d)^T,
+ \qquad
+ x_0\longmapsto(u_0,\ldots,u_{T-1}),
+\]
+est bijective. Son inverse est
+\begin{equation}
+ x_0\equiv
+ \sum_{t=0}^{T-1}p^t u_tA^{-(t+1)}
+ \pmod {p^T}.
+ \label{eq:inversa-hensel-finita}
+\end{equation}
+En passant à la limite inverse, on obtient un homéomorphisme
+\[
+ \Psi:\mathbb Z_p^d\xrightarrow{\ \sim\ }
+ (\mathbb F_p^d)^{\mathbb N}.
+\]
+Si \(S_A\) désigne la mise à jour \(x_t\mapsto x_{t+1}\) et
+\(\sigma\) supprime le premier bloc d'un ruban, alors
+\[
+ \Psi\circ S_A=\sigma\circ\Psi.
+\]
+\end{theorem}
+
+\begin{proof}
+De \cref{eq:transductor-hensel-general}, on obtient
+\[
+ x_t=(u_t+px_{t+1})A^{-1}.
+\]
+L'itération de cette identité donne
+\[
+ x_0=
+ \sum_{t=0}^{T-1}p^t u_tA^{-(t+1)}
+ +p^Tx_TA^{-T}.
+\]
+Le dernier terme s'annule modulo \(p^T\), ce qui prouve qu'un mot de
+\(T\) blocs détermine au plus une classe initiale. Réciproquement, étant donné
+un mot quelconque, on fixe \(x_T=0\) et l'on reconstruit à rebours au moyen de
+\(x_t=(u_t+px_{t+1})A^{-1}\). L'égalité
+\(x_tA=u_t+px_{t+1}\) vérifie que la classe obtenue émet le mot
+prescrit. Par conséquent, \(\Psi_T\) est bijective.
+
+Les bijections sont compatibles avec la réduction modulo \(p^T\). Leurs limites
+inverses produisent l'homéomorphisme \(\Psi\) ; de manière équivalente, la série de
+\cref{eq:inversa-hensel-finita} converge dans \(\mathbb Z_p^d\). Appliquer
+\(S_A\) retire exactement le bloc \(u_0\), ce qui correspond donc à
+appliquer \(\sigma\) au ruban.
+\end{proof}
+
+Dans l'instance HMT, \(p=3\), \(d=6\) et la matrice publiée a pour
+déterminant un. C'est pourquoi
+\begin{equation}
+ \mathbb Z_3^6\simeq(\mathbb F_3^6)^{\mathbb N},
+ \qquad |\mathbb F_3^6|=3^6=729.
+ \label{eq:hmt-shift-729}
+\end{equation}
+Chaque ruban de blocs de six trits possède une unique mémoire 3-adique initiale.
+La matrice détermine la mise en coordonnées et la dynamique de lecture ;
+l'universalité de l'alphabet démontre qu'elle n'exclut aucun ruban.
+
+\begin{corollary}[Entropie et mesure de Haar]
+La mise à jour de Hensel brute est conjuguée au décalage unilatéral
+complet de
+\(729\) symboles. Son entropie topologique est \(6\log3\). La mesure de Haar de
+\(\mathbb Z_3^6\) est transportée vers la mesure produit uniforme sur les
+blocs.
+\end{corollary}
+
+\begin{proof}
+Il existe \(729^T=3^{6T}\) cylindres de longueur \(T\), et chaque classe modulo
+\(3^T\) a une masse de Haar \(3^{-6T}\). La conjugaison du
+\cref{thm:shift-hensel-completo} transporte les deux propriétés vers le
+décalage.
+\end{proof}
+
+La conclusion probabiliste concerne l'espace brut muni de Haar. Elle
+n'affirme pas que les sections publiées des constantes ont été échantillonnées
+selon cette mesure ni qu'elles sont algorithmiquement aléatoires.
+
+\section{Carte ternaire équilibrée des entiers}
+
+La carte 3-adique brute et la carte archimédienne n'épuisent pas les types numériques
+de la classification HMT. Pour l'opérateur entier, on utilise le mot vide ainsi que les
+mots réduits
+\[
+ \mathscr W_{\mathrm{bal}}
+ :=\{\varnothing\}\cup
+ \{a_1\cdots a_m:
+ a_j\in\{-1,0,+1\},\ a_1\ne0\}.
+\]
+Nous définissons récursivement
+\[
+ b(\varnothing)=0,
+ \qquad
+ b(wa)=3b(w)+a.
+\]
+
+\begin{theorem}[Représentation ternaire équilibrée unique]
+\label{pf84:C03}
+L'évaluation
+\[
+ b:\mathscr W_{\mathrm{bal}}\longrightarrow\ZZ
+\]
+est bijective. Les mots dont le premier trit est \(+1\) représentent les
+entiers positifs et ceux qui commencent par \(-1\), les négatifs.
+\end{theorem}
+
+\begin{proof}
+Pour \(n\ne0\), le dernier trit \(a\) est le représentant unique de
+\(n\bmod3\) dans \(\{-1,0,+1\}\). Le parent
+\[
+ \frac{n-a}{3}
+\]
+a une valeur absolue strictement inférieure. L'itération se termine en \(0\), de
+sorte que tout entier possède un développement fini. L'unicité du résidu
+équilibré à chaque pas prouve l'unicité du mot. Le signe est
+fixé par le premier trit non nul.
+\end{proof}
+
+\begin{remark}
+Cette bijection est une carte arithmétique exacte. Elle n'identifie pas tous les
+mots équilibrés à des sections survivantes TPK ni ne remplace la
+généalogie, la retenue ou l'orientation d'une route enrichie.
+\end{remark}
+
+\section{Surjectivité de la carte archimédienne non filtrée sur \(\mathbb R\)}
+
+Concaténons les coordonnées des blocs
+\(u_t\in\mathbb F_3^6\) pour obtenir un ruban
+\((a_n)_{n\geq1}\in\{0,1,2\}^{\mathbb N}\). Son évaluation ternaire est
+\[
+ \operatorname{ev}_3((a_n))=
+ \sum_{n\geq1}\frac{a_n}{3^n}\in[0,1].
+\]
+Nous adoptons la convention canonique qui exclut la représentation avec une queue
+ultimement constante de deux seulement lorsque le même point possède un autre développement
+dans la carte. L'extrémité \(1\) conserve donc son unique représentation
+fractionnaire \(0.222\ldots{}_3\).
+
+\begin{theorem}[Couverture archimédienne brute]
+\label{thm:cobertura-arquimediana-bruta}
+L'application
+\[
+ P_{\rm raw}:\mathbb Z_3^6
+ \xrightarrow{\Psi}(\mathbb F_3^6)^{\mathbb N}
+ \xrightarrow{\operatorname{flat}}\{0,1,2\}^{\mathbb N}
+ \xrightarrow{\operatorname{ev}_3}[0,1]
+\]
+est continue et surjective. Par conséquent,
+\[
+ \mathbb Z_3^6/\!\sim_{P_{\rm raw}}
+ \ \cong\ [0,1]
+\]
+comme espace de valeurs, où \(x\sim_{P_{\rm raw}}y\) si leurs évaluations
+coïncident.
+\end{theorem}
+
+\begin{proof}
+Tout chiffre ternaire appartient à un unique bloc consécutif de six chiffres,
+de sorte que \(\operatorname{flat}\) est une bijection d'espaces de rubans.
+Toute \(r\in[0,1]\) possède un développement ternaire ; le
+\cref{thm:shift-hensel-completo} fournit l'unique mémoire 3-adique qui
+émet ses blocs. La continuité se vérifie par cylindres : fixer \(T\)
+blocs fixe \(6T\) chiffres et enferme la valeur dans un intervalle de diamètre
+\(3^{-6T}\). L'identification du quotient à l'image est la factorisation
+canonique d'une application surjective par ses fibres.
+\end{proof}
+
+Une seule carte 3-adique est compacte et ne peut donc pas couvrir de manière
+continue une droite non bornée. La globalisation correcte utilise une famille
+dénombrable de cartes.
+
+\begin{corollary}[Couverture archimédienne dénombrable de \(\mathbb R\)]
+\label{cor:atlas-hmt-reales}
+Soit
+\[
+ \widehat X_{\rm raw}=\mathbb Z\times\mathbb Z_3^6,
+ \qquad
+ \widehat P_{\rm raw}(m,x)=m+P_{\rm raw}(x).
+\]
+Alors \(\widehat P_{\rm raw}\) est surjective sur \(\mathbb R\).
+En conséquence, tout réel admet au moins une généalogie de Hensel brute et
+\[
+ \widehat X_{\rm raw}/\!\sim_{\widehat P_{\rm raw}}
+ \ \cong\ \mathbb R
+\]
+comme ensemble de valeurs.
+\end{corollary}
+
+\begin{proof}
+Pour \(r\in\mathbb R\), prenons \(m=\lfloor r\rfloor\) et appliquons le
+\cref{thm:cobertura-arquimediana-bruta} à \(r-m\in[0,1)\).
+\end{proof}
+
+Ce résultat précise l'affirmation selon laquelle \(\mathbb R\) est l'image
+archimédienne quotient d'une
+structure généalogique : la projection oublie la mémoire 3-adique et conserve
+le point évalué. L'affirmation démontrée ici concerne la complétion
+\emph{brute}. Si \(X_{\rm surv}\subseteq\mathbb Z_3^6\) désigne le sous-espace
+qui satisfait en outre une famille concrète de clôtures APP--TRIT--TPK, alors
+\[
+ P_{\rm raw}(X_{\rm surv})=[0,1]
+\]
+est un théorème supplémentaire. Le transducteur garantit une capacité complète ; la
+survie détermine quelle partie de cette capacité est réalisée par le système
+restreint.
+
+On ne déduit pas non plus ici que la somme et le produit natifs de TPK descendent à
+tout le quotient global. On peut transporter l'arithmétique usuelle depuis
+\(\mathbb R\), mais démontrer qu'elle coïncide avec des opérations construites avant
+l'évaluation exige le théorème de descente correspondant.
+
+Dans cette construction, les cylindres ne sont pas des infinitésimaux non nuls de
+\(\mathbb R\). Chaque cylindre de profondeur finie a un diamètre positif,
+et la suite des diamètres converge vers zéro. Deux sections qui coïncident jusqu'à
+la profondeur \(T\) et diffèrent ensuite forment une \emph{perturbation de
+queue} ; leur différence archimédienne est bornée par le diamètre du cylindre
+commun. C'est la formulation exacte des ``cylindres qui tendent vers zéro''
+dans la droite réelle ordinaire.
+
+\section{Carte positionnelle en base \(10^3\) et classification des sections publiées}
+
+La complétion cubique
+\(1000=729+243+27+1\) rend naturel le regroupement des chiffres décimaux en blocs
+\(b_n\in\{0,\ldots,999\}\). Pour un ruban de blocs, nous définissons
+\[
+ \operatorname{ev}_{1000}(b_1,b_2,\ldots)
+ =\sum_{n\geq1}\frac{b_n}{1000^n}.
+\]
+Le développement canonique exclut une queue ultimement constante de blocs
+\(999\). Cette convention résout la duplicité des extrémités de cylindre.
+
+\begin{theorem}[Taxonomie visible en base mille]
+\label{thm:taxonomia-base-mil}
+Soit \(x\in[0,1)\) et soit \((b_n)\) son développement canonique en base mille.
+Alors :
+\begin{enumerate}
+\item \(x\) possède un développement fini si et seulement si, écrit comme
+fraction irréductible \(a/q\), on a \(q\mid1000^N\) pour un certain \(N\) ;
+de manière équivalente, les seuls nombres premiers qui divisent \(q\) sont \(2\) et \(5\).
+\item \(x\) est rationnel si et seulement si \((b_n)\) est ultimement périodique.
+\item \(x\) est irrationnel si et seulement si \((b_n)\) n'est pas ultimement
+périodique.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Un développement qui se termine à la profondeur \(N\) a la forme
+\(D/1000^N\) ; une fois réduit, son dénominateur ne contient que les nombres premiers \(2\) et
+\(5\). Réciproquement, si \(q\mid1000^N\), alors \(a/q\) s'écrit avec
+\(N\) blocs.
+
+Si, après un préfixe de longueur \(r\), se répète une période de longueur
+\(s\) dont l'entier en base mille est \(P\), la queue est une série géométrique :
+\[
+ \frac{P}{1000^r(1000^s-1)},
+\]
+et la valeur est rationnelle. À l'inverse, en développant \(a/q\), les restes de la
+division successive ne peuvent prendre que \(q\) valeurs. Un reste nul produit un
+développement fini ; la répétition d'un reste produit une période. La troisième
+affirmation est la négation exacte de la seconde.
+\end{proof}
+
+Le mot \emph{fraction} désigne une présentation \(a/q\) d'un rationnel,
+et non une espèce numérique supplémentaire. Il ne faut pas non plus confondre périodicité et
+algébricité. Un réel est algébrique lorsqu'il annule un polynôme non nul de
+\(\mathbb Q[X]\) ; il est transcendant lorsqu'il ne le fait pas. Cette seconde
+classification est indépendante de la base utilisée pour écrire les chiffres.
+Par exemple,
+\[
+ \varphi^2-\varphi-1=0
+\]
+fait de \(\varphi\) un irrationnel algébrique, tandis que la transcendance
+de \(e\) et \(\pi\) découle de théorèmes classiques externes à HMT\@.
+
+\section{Concaténation, réduction nonadique et retenue}
+
+La compatibilité entre la carte cubique et la racine numérique est une identité
+arithmétique, et non une ressemblance visuelle. Si \(u_j\in\{0,\ldots,999\}\) et
+\[
+ D_n=1000D_{n-1}+u_n,
+ \qquad D_0=0,
+\]
+alors \(D_n\) est l'entier obtenu en concaténant les \(n\) premiers
+blocs.
+
+\begin{theorem}[Congruence nonadique de contrôle de la carte cubique]
+\label{thm:checksum-nonadico-base-mil}
+Pour tout \(n\geq1\),
+\[
+ D_n\equiv\sum_{j=1}^n u_j\pmod9.
+\]
+Par conséquent, concaténation en base mille, réduction modulo neuf et racine numérique
+sont compatibles.
+\end{theorem}
+
+\begin{proof}
+Comme \(1000\equiv1\pmod9\), la récurrence donne
+\(D_n\equiv D_{n-1}+u_n\pmod9\). L'itération à partir de \(D_0=0\) produit la
+formule.
+\end{proof}
+
+Dans la clôture dodécaphasique de \(\alpha\), l'équation de retenue par bloc
+a la forme
+\[
+ P_m+E_m-\Phi_m-K_m+c_{m+1}=A_m+1000c_m.
+\]
+Réduite modulo neuf,
+\[
+ A_m\equiv
+ P_m+E_m-\Phi_m-K_m+c_{m+1}-c_m
+ \pmod9.
+\]
+Si les retenues extrêmes s'annulent, la somme télescopique élimine la mémoire
+intermédiaire. Le résidu global de la sortie coïncide alors avec le résidu
+de la combinaison des entrées. Cette loi explique pourquoi le registre nonadique
+contrôle la concaténation décimale ; elle ne sélectionne pas à elle seule les blocs qui
+doivent être concaténés.
+
+\section{Coordonnée nonadique relevée et retour de phase}
+
+La réduction modulo neuf ne doit pas être confondue avec l'identification des
+entiers qui possèdent le même résidu. Soit
+\[
+ I_9=\{1,2,\ldots,9\}.
+\]
+Pour chaque entier positif \(n\), nous définissons sa \emph{phase nonadique} et son
+\emph{indice de tour} par
+\begin{equation}
+ \rho_9(n)=1+((n-1)\bmod9),
+ \qquad
+ \kappa_9(n)=\frac{n-\rho_9(n)}9.
+ \label{eq:coordenada-nonadica-levantada}
+\end{equation}
+La première coordonnée est la racine numérique écrite dans l'alphabet
+\(I_9\), de sorte que la classe résiduelle zéro est représentée par la phase \(9\).
+La seconde enregistre combien de tours complets ont précédé la phase
+visible.
+
+\begin{theorem}[Décomposition nonadique avec mémoire]
+\label{thm:descomposicion-nonadica-memoria}
+L'application
+\[
+ \Theta_9:\mathbb N_{>0}\longrightarrow\mathbb N_0\times I_9,
+ \qquad
+ n\longmapsto\bigl(\kappa_9(n),\rho_9(n)\bigr),
+\]
+est bijective, d’inverse
+\[
+ \Theta_9^{-1}(q,r)=9q+r.
+\]
+Dans ces coordonnées, le successeur arithmétique est conjugué à la dynamique
+\begin{equation}
+ \mathcal S_9(q,r)=
+ \begin{cases}
+  (q,r+1),&1\leq r<9,\\
+  (q+1,1),&r=9.
+ \end{cases}
+ \label{eq:sucesor-nonadico-levantado}
+\end{equation}
+En particulier, le pas visible \(9\to1\) est un retour de phase accompagné
+par l'incrément irréversible \(q\to q+1\) ; ce n'est pas une égalité entre les
+entiers \(9\) et \(10\).
+\end{theorem}
+
+\begin{proof}
+La division euclidienne de \(n-1\) par \(9\) fournit de manière unique
+\(n-1=9q+s\), avec \(q\in\mathbb N_0\) et \(0\leq s<9\). En prenant
+\(r=s+1\), on obtient \(n=9q+r\), avec \(r\in I_9\), ce qui démontre à la fois
+l'existence, l'unicité et la formule inverse. Si \(r<9\), ajouter une unité
+incrémente seulement \(r\). Si \(r=9\), l'égalité
+\(9q+9+1=9(q+1)+1\) donne la seconde branche de
+\cref{eq:sucesor-nonadico-levantado}.
+\end{proof}
+
+Ce relèvement sépare trois notions que le chiffre isolé mélange :
+\begin{enumerate}
+\item l'unité d'avancée, réalisée par le successeur ;
+\item la phase visible \(r\), qui parcourt le cycle nonadique ;
+\item la mémoire accumulée \(q\), qui distingue les retours d'une même phase.
+\end{enumerate}
+La projection \((q,r)\mapsto r\) oublie le nombre de tours et satisfait
+\[
+ \rho_9(n+9)=\rho_9(n),
+ \qquad
+ \kappa_9(n+9)=\kappa_9(n)+1.
+\]
+C'est le modèle arithmétique élémentaire du mécanisme qui, dans l'état TPK
+enrichi, conserve en outre les quotients de Hensel, l'orientation, la signature et la donnée
+de frontière. Un retour de mot visible peut ainsi coexister avec une
+généalogie distincte.
+
+Zéro n'appartient pas à \(I_9\) : on l'ajoute comme point de base séparé avant
+d'appliquer \(\Theta_9\). Pour les entiers négatifs, on conserve le module
+positif de la décomposition et l'on joint une orientation
+\(\varepsilon\in\{-1,+1\}\). En conséquence, ni le signe ni zéro ne se
+déduisent de la phase résiduelle. Ce typage évite de transformer une carte
+cyclique en une identité arithmétique fausse.
+
+\begin{theorem}[Entier orienté et signe généalogique]
+\label{thm:entero-orientado-signo-genealogico}
+L'application
+\[
+\Theta_9^\pm:
+\mathbb Z\setminus\{0\}
+\longrightarrow
+\{-1,+1\}\times\mathbb N_0\times I_9,
+\]
+\[
+n\longmapsto
+\bigl(\operatorname{sgn}(n),
+      \kappa_9(|n|),
+      \rho_9(|n|)\bigr)
+\]
+est bijective, d’inverse
+\[
+(\varepsilon,q,r)\longmapsto\varepsilon(9q+r).
+\]
+La négation arithmétique agit par
+\[
+(\varepsilon,q,r)\longmapsto(-\varepsilon,q,r):
+\]
+inverse l'orientation et conserve la grandeur, la phase et la mémoire des tours.
+\end{theorem}
+
+\begin{proof}
+Le \cref{thm:descomposicion-nonadica-memoria} fournit de manière unique
+\(|n|=9q+r\), avec \(q\in\mathbb N_0\) et \(r\in I_9\). Le signe d'un entier
+non nul est également unique. La formule inverse recompose \(n\), et remplacer
+\(n\) par \(-n\) ne change que \(\varepsilon\).
+\end{proof}
+
+Ainsi, un négatif n'est ni une phase résiduelle spéciale ni une quantité
+``impossible''. C'est la même grandeur nonadique transportée avec une orientation
+généalogique opposée. Cette structure sera prolongée en mécanique dimensionnelle
+par l'antisection particule--antiparticule.
+
+Itérer \(\kappa_9\) produit une tour finie pour tout entier ordinaire ; dans
+la complétion inverse, une suite compatible de quotients peut être
+infinie. La différence entre les deux cas anticipe la taxonomie HMT : la valeur
+visible répond au développement positionnel, tandis que le type généalogique
+répond à l'évolution complète de ses mémoires.
+
+\section{2 axes de classification : valeur visible et généalogie de transport}
+
+La taxonomie précédente classe la valeur projetée. HMT ajoute un second
+axe que l'écriture décimale ordinaire écarte. Pour une section
+\(x\in\Omega_\infty^{\rm Arch}\), nous distinguons :
+\[
+ \begin{array}{rcl}
+ \text{type visible}&=&
+ \text{fini, périodique ou non périodique ; algébrique ou transcendant},\\
+ \text{type généalogique}&=&
+ \text{classe de retenue, orientation, fermeture et monodromie de }x.
+ \end{array}
+\]
+Deux sections peuvent partager le même réel et différer selon le second axe. Un
+réel rationnel possède un développement visible ultimement périodique, mais une
+présentation enrichie redondante peut conserver une mémoire interne non
+périodique que l'évaluation oublie. La périodicité de la \emph{valeur} se
+rapporte toujours à son développement canonique ; la périodicité de la
+\emph{généalogie} se rapporte à l'état enrichi de TPK.
+
+Cette séparation fournit une définition concise :
+\begin{equation}
+ \boxed{
+ \text{nombre HMT}
+ =
+ \text{section compatible avec mémoire};
+ \qquad
+ \text{valeur réelle}
+ =
+ \text{sa classe d'évaluation}.}
+ \label{eq:numero-hmt-y-valor-real}
+\end{equation}
+Mesurer dans cette carte consiste à coupler la section au lecteur, à fixer un cylindre et à
+conditionner les prolongements compatibles. Augmenter la précision signifie
+rétrécir le cylindre, et non consommer la généalogie qui reste dans la fibre.
+
+\section{Mémoire de profondeur arbitraire dans les systèmes d'émission finie}
+
+La récurrence visible de neuf phases ne peut coexister avec une sortie
+irrationnelle que si l'état complet conserve une information qui ne se réduit pas à
+ces neuf étiquettes. Le résultat suivant rend cette nécessité exacte.
+
+\begin{theorem}[Caractérisation par émetteurs finis]
+\label{thm:emisor-finito-racional}
+Soit \(Q\) un ensemble fini, \(F:Q\to Q\) une transition déterministe,
+\(o:Q\to\{0,\ldots,999\}\) une sortie et \(q_0\in Q\). Le ruban
+\(b_n=o(F^{n-1}(q_0))\) est ultimement périodique et son évaluation est rationnelle.
+Réciproquement, tout ruban ultimement périodique admet un émetteur déterministe
+fini.
+\end{theorem}
+
+\begin{proof}
+Parmi \(|Q|+1\) états consécutifs, deux états égaux apparaissent. Dès la première
+répétition, le déterminisme impose la répétition de tout le futur, de sorte que le
+ruban est ultimement périodique. Le \cref{thm:taxonomia-base-mil} donne la
+rationalité. Pour la réciproque, il suffit de construire une chaîne d'états pour le
+préfixe et un cycle pour la période.
+\end{proof}
+
+Par conséquent, une loi qui engendre exactement \(e\), \(\pi\) ou tout autre
+irrationnel ne peut pas consister uniquement en un automate déterministe à
+états finis qui se répète sans mémoire supplémentaire. Elle peut utiliser une limite
+inverse, une mémoire 3-adique, une profondeur croissante ou une entrée
+apériodique ; tous ces mécanismes fournissent un état effectif non borné.
+Dans HMT, le retour visible
+\(g_{\rm vis}(n+9)=g_{\rm vis}(n)\) n'impose pas le retour de la retenue, de
+l'orientation ni de la frontière. Cette différence est précisément l'endroit où
+peut résider un développement non périodique.
+
+\section{Le carré local de \texorpdfstring{\(e\)}{e} et la rupture de mémoire}
+
+Pour un mot décimal \(a_1\cdots a_n\), nous appellerons \emph{carré local}
+de longueur \(\ell\) à la position \(i\) une factorisation
+\[
+ a_i\cdots a_{i+2\ell-1}=vv,
+ \qquad |v|=\ell.
+\]
+Cette notion relève de la combinatoire des mots. Elle n'affirme pas que la queue
+infinie possède une période.
+
+\begin{theorem}[Caractérisation finie du carré \(1828^2\)]
+\label{thm:cuadrado-local-e}
+Considérons les \(243\) mots du catalogue et le lecteur fixé
+\(w_6\mapsto w_{30}\mapsto d_1d_2d_3d_4\), avec quatre triades en base mille.
+Il existe un unique mot dont la lecture contient un carré de longueur quatre
+commençant au deuxième chiffre décimal. C'est
+\[
+ w_e=201101,
+ \qquad
+ 718281828459=7\,\underbrace{1828\,1828}_{(1828)^2}\,459.
+\]
+La répétition ne se prolonge pas en une troisième copie : le chiffre qu'exigerait cette
+continuation serait \(1\), tandis que le chiffre effectif est \(4\). Dans tout le
+catalogue, il n'existe qu'un autre carré de longueur quatre,
+\[
+ 575157518472=\underbrace{5751\,5751}_{\text{carré local}}\,8472,
+\]
+qui commence au premier chiffre.
+\end{theorem}
+
+\begin{proof}
+L'énumération exhaustive évalue les \(243\) mots par arithmétique
+entière. Le profil des carrés pour les longueurs \(1,\ldots,6\) contient
+\[
+ 240,\ 21,\ 3,\ 2,\ 0,\ 0
+\]
+occurrences, réparties entre
+\[
+ 153,\ 19,\ 3,\ 2,\ 0,\ 0
+\]
+mots. Les deux occurrences de longueur quatre sont exactement celles de
+l'énoncé. Deux énumérations entières indépendantes reproduisent le même recensement
+et leurs sorties complètes coïncident terme à terme.
+\end{proof}
+
+Le mot \(w_e\) possède en outre la chaîne de relèvement
+\[
+201101\mid121221\mid102011\mid012222\mid102011.
+\]
+Les troisième et cinquième blocs visibles coïncident. En revanche,
+les états qui les transportent ne coïncident pas. Avant les deux émissions, leurs réductions
+modulo \(27\) sont
+\[
+(25,11,7,17,8,16),
+\qquad
+(7,8,4,23,26,7),
+\]
+et les quotients de Hensel ultérieurs sont
+\[
+(6,13,9,2,13,1),
+\qquad
+(15,0,3,19,23,25).
+\]
+Par conséquent, le retour \(102011\) est un retour de la projection visible, et non
+de l'état enrichi. C'est la formulation exacte de la répétition locale
+qui se rompt : le quotient conserve une généalogie que le bloc résiduel
+n'enregistre pas.
+
+En conséquence, le début
+\[
+e=2.718281828459\ldots
+\]
+ne présente pas de ``semi-périodicité'', mais un carré local de mot avec
+retour visible et rupture de mémoire. Le résultat est exhaustif dans le cadre du
+lecteur fixé ; son contenu est combinatoire et dynamique, et non une inférence
+d'irrationalité à partir de douze chiffres.
+
+\section[2 mesures finies de l'émetteur 468 à 243]{2 mesures finies de l'émetteur \texorpdfstring{\(468\to243\)}{468→243} : fréquence uniforme et priorité structurelle}
+
+Le catalogue public distingue \(468\) émissions et \(104\,976\) germes.
+Soit
+\[
+ q:E_{468}\longrightarrow W_{243}
+\]
+l'application qui oublie la signature d'émission et conserve le mot de six
+trits. Il existe deux mesures naturelles, parce qu'il existe deux univers finis de dénombrement :
+\[
+ \mu_{468}(w)=\frac{|q^{-1}(w)|}{468},
+ \qquad
+ \mu_{\rm seed}(w)=
+ \frac{\sum_{e\in q^{-1}(w)}m(e)}{104\,976},
+\]
+où \(m(e)\) est la multiplicité des germes de l'émission \(e\).
+
+\begin{theorem}[Mesures canoniques relatives à l'univers dénombré]
+\label{thm:medidas-emisor-468}
+La mesure uniforme sur \(E_{468}\) est l'unique probabilité invariante sous
+toutes les permutations de ses émissions ; sa mesure image est \(\mu_{468}\).
+La mesure uniforme sur les \(104\,976\) germes induit
+\(\mu_{\rm seed}\). Leurs histogrammes exacts sont
+\[
+\begin{array}{c|rrrrrr}
+|q^{-1}(w)|&1&2&3&4&5&6\\ \hline
+\#\{w\}&132&66&18&3&6&18
+\end{array}
+\]
+et
+\[
+\begin{array}{c|rrrrrrrrr}
+\text{poids des germes}
+&144&288&432&576&864&1008&1440&1944&2088\\ \hline
+\#\{w\}
+&120&54&18&9&15&6&3&12&6.
+\end{array}
+\]
+Pour les trois mots distingués par le lecteur, on obtient
+\[
+\begin{array}{c|cc}
+&\mu_{468}&\mu_{\rm seed}\\ \hline
+\pi&5/468&7/729\\
+e&1/468&1/729\\
+\varphi&1/468&1/729.
+\end{array}
+\]
+\end{theorem}
+
+\begin{proof}
+L'invariance sous le groupe symétrique rend égales les masses de tous les
+points de \(E_{468}\) ; la normalisation les fixe à \(1/468\). La formule de
+la mesure image résulte de la sommation sur chaque fibre. Le même argument sur
+l'ensemble des germes produit la seconde mesure. Les histogrammes s'obtiennent
+par énumération exhaustive du catalogue fini de \(468\) émissions et de \(243\)
+mots ; leurs sommes vérifient
+\[
+132+66+18+3+6+18=243,
+\]
+\[
+132+2\cdot66+3\cdot18+4\cdot3+5\cdot6+6\cdot18=468
+\]
+et la somme totale des poids est \(104\,976\).
+\end{proof}
+
+La non-uniformité de la mesure image est un théorème fini : des mots distincts
+ont des nombres distincts de réalisations. En revanche, il n'existe pas de
+probabilité uniforme normalisable sur tout \(\mathbb R\), et ces mesures
+n'ordonnent pas intrinsèquement tous les réels. Le mot de \(\pi\) appartient
+à l'une des six fibres de taille cinq et de poids \(1008\) ; il n'est le maximum
+unique d'aucun des deux histogrammes. Sa singularité démontrée procède
+de la structure composée de ses cinq régions, de sa partition orientée
+\(3+2\) et de ses compatibilités ultérieures, et non de la déclaration a priori d'une
+probabilité absolue sur le continu.
+
+\section{Sélecteur orbital fini antérieur au lecteur archimédien}
+\label{sec:selector-orbital-constantes}
+
+Les mesures précédentes révèlent des multiplicités, mais un mot isolé de
+six trits dépend encore d'une orientation. Le catalogue possède une symétrie
+interne qui permet de sélectionner d'abord des classes non orientées, puis de fixer
+un représentant. Écrivons un mot comme \(abc\mid def\) et définissons
+\[
+ r(abc\mid def)=cab\mid efd,
+ \qquad
+ s(abc\mid def)=def\mid abc.
+\]
+Ces permutations agissent également sur les six coordonnées de la donnée
+\(U_6\). Dans le catalogue complet, elles satisfont
+\[
+ r^3=1,
+ \qquad s^2=1,
+ \qquad srs=r^{-1},
+\]
+de sorte qu'elles engendrent une action que nous notons \(D_3^{\rm cat}\). L'action utilise
+l'étiquetage TRIT fixe
+\[
+ \Psi(U_6)=(-U_6\bmod3)
+\]
+et la partition publiée des six coordonnées en deux triades.
+
+Pour un mot \(w\), soient \(f(w)=|q^{-1}(w)|\) le nombre d'émissions,
+\(m(w)\) sa masse de germes et
+\[
+ \nu(w)=(n_0(w),n_1(w),n_2(w))
+\]
+son recensement ordonné de trits. Soit en outre \(d(e)\) la classe diagonale additive d'une
+émission et \(o(e)\in\{\mathrm{ES},\mathrm{NO}\}\) son orientation
+publiée.
+
+\begin{theorem}[Sélection orbitale interne des trois mots]
+\label{thm:selector-orbital-constantes}
+L'action \(D_3^{\rm cat}\) préserve l'ensemble des \(468\) émissions,
+la projection \(q:E_{468}\to W_{243}\) et la multiplicité des germes. Son
+action sur \(W_{243}\) possède exactement \(43\) orbites : \(38\) de taille
+six et cinq de taille trois. Dans ce quotient, les unicités suivantes
+sont vérifiées.
+
+\begin{enumerate}
+\item Il existe une unique orbite \(\mathcal O_\pi\) de taille six telle que, pour
+tout \(w\in\mathcal O_\pi\),
+\[
+ f(w)=5,
+ \qquad m(w)=1008,
+ \qquad
+ \{m(e):e\in q^{-1}(w)\}=\{432,144,144,144,144\}.
+\]
+C'est
+\[
+\mathcal O_\pi=
+\{001112,010211,100121,112001,121100,211010\},
+\]
+et tous ses mots ont le recensement \(\nu=(2,3,1)\).
+
+\item Considérons les orbites de taille six dont les mots ont une seule
+émission, de multiplicité \(144\), et dont le support diagonal conjoint est
+\(\{0,3,6\}\). Il y en a exactement six. Parmi elles, il existe une unique orbite
+avec le même recensement \((2,3,1)\) que \(\mathcal O_\pi\) :
+\[
+\mathcal O_e=
+\{011120,012110,101201,110012,120011,201101\}.
+\]
+
+\item Dans le même secteur, il existe une unique orbite équilibrée, c'est-à-dire avec
+\(\nu=(2,2,2)\) :
+\[
+\mathcal O_\varphi=
+\{002112,020211,112002,121200,200121,211020\}.
+\]
+\end{enumerate}
+
+Enfin, la clause d'orientation
+\begin{equation}
+ \exists e\in q^{-1}(w):
+ \qquad d(e)=6,
+ \qquad o(e)=\mathrm{ES}
+ \label{eq:gauge-orbital-constantes}
+\end{equation}
+sélectionne un unique représentant de chaque orbite et produit, respectivement,
+\[
+ \boxed{010211,\qquad201101,\qquad121200.}
+\]
+\end{theorem}
+
+\begin{proof}
+Les relations de groupe se vérifient directement comme des identités de
+permutations de six coordonnées. L'énumération des \(468\) lignes
+vérifie que \(r\) et \(s\) envoient chaque \(U_6\) sur une autre ligne du catalogue de
+même multiplicité, et que la projection ternaire commute avec les deux
+actions. Par conséquent, les orbites peuvent se calculer sur les \(243\) mots
+sans perdre les fibres.
+
+La partition exhaustive donne l'histogramme des tailles
+\[
+ 38\cdot6+5\cdot3=243.
+\]
+En filtrant ces \(43\) orbites par le premier prédicat, il en reste exactement une ;
+en filtrant par fibre à un point, multiplicité minimale et support diagonal
+\(\{0,3,6\}\), il en reste six. Le recensement \((2,3,1)\) ne laisse qu'une orbite dans le
+premier cas et le recensement équilibré \((2,2,2)\) n'en laisse qu'une dans le second.
+Enfin, la recherche d'un relèvement avec \(d=6\) et orientation
+\(\mathrm{ES}\) laisse un mot dans chacune des trois orbites. Toutes les
+filtrations sont réalisées sur des descripteurs structurels du catalogue avant de consulter le
+lecteur décimal.
+\end{proof}
+
+Les prédicats du théorème peuvent être réunis en un invariant de sélection.
+Pour une orbite \(\mathcal O\), nous définissons son \emph{profil orbital}
+\[
+ \Sigma_{\rm cat}(\mathcal O)=
+ \bigl(
+ |\mathcal O|,\ f,\ m,\ \mathcal M_{\rm fib},\
+ \mathcal D,\ \nu
+ \bigr),
+\]
+où \(f\) est la taille de la fibre, \(m\) la masse des germes,
+\(\mathcal M_{\rm fib}\) le multiensemble des multiplicités de ses
+relèvements, \(\mathcal D\) le support diagonal lorsqu'il est employé et \(\nu\)
+le recensement des trits. Les trois classes distinguées occupent des positions différentes
+dans cet espace d'invariants :
+\[
+\begin{array}{c|c|c|c|c|c}
+\mathcal O&|\mathcal O|&f&m&\mathcal M_{\rm fib}&(\mathcal D,\nu)\\ \hline
+\mathcal O_\pi&6&5&1008&\{432,144,144,144,144\}&(-,(2,3,1))\\
+\mathcal O_e&6&1&144&\{144\}&(\{0,3,6\},(2,3,1))\\
+\mathcal O_\varphi&6&1&144&\{144\}&(\{0,3,6\},(2,2,2)).
+\end{array}
+\]
+La singularité démontrée ne signifie pas que ces nombres reçoivent une
+probabilité absolue sur \(\mathbb R\). Elle signifie qu'au sein de l'univers
+fini produit par l'émetteur et avant l'évaluation des chiffres, leurs classes sont
+séparables par des invariants internes et que la classe de \(\pi\) possède une fibre
+régionale d'un type distinct. C'est la formulation mathématique d'une
+priorité structurelle dans HMT\@.
+
+Le contrôle négatif est informatif. Si l'on omet le support diagonal
+\(\{0,3,6\}\), il existe quatre orbites à fibre unique équilibrées et
+\(\mathcal O_\varphi\) cesse d'être unique. Avant de fixer la jauge, il y a six
+orientations possibles dans chaque orbite. Après sa fixation, le mot de
+\(\pi\) conserve trois relèvements positifs de \(U_6\), et non une seule région.
+Ainsi, le théorème sélectionne le mot orienté mais respecte la multiplicité
+géométrique des cinq régions.
+
+La non-uniformité se renforce lors du passage aux orbites :
+\[
+\begin{array}{c|cc}
+&\text{émissions}&\text{germes}\\ \hline
+\mathcal O_\pi&5/78&14/243\\
+\mathcal O_e&1/78&2/243\\
+\mathcal O_\varphi&1/78&2/243.
+\end{array}
+\]
+Ces quotients restent des masses du catalogue fini, et non des probabilités
+attribuées aux nombres réels évalués.
+
+L'avancée causale est précise. Les trois mots cessent d'être des entrées
+nommées : ils sont retrouvés à partir de la symétrie et des invariants finis
+d'APP--TPK, relativement à l'action \(D_3^{\rm cat}\), à l'étiquetage TRIT,
+à la répartition \(3+3\) et à la jauge d'orientation de
+\cref{eq:gauge-orbital-constantes}. La preuve n'utilise ni \(L_0\), ni \(L_1\),
+ni chiffres décimaux, ni \(\alpha\), ni CODATA, ni l'état dodécaphasique. Restent des
+affirmations ultérieures l'unicité absolue de cette action parmi tous les
+automorphismes possibles, la déduction de la jauge au lieu de sa déclaration, la
+canonicité du lecteur \(L_0/L_1\) indépendante de la valeur cible et l'émission coinductive des
+développements infinis.
+
+\section{Position de \texorpdfstring{\(\pi,e,\varphi\) et \(\alpha\)}{pi, e, phi et alpha} dans la classification}
+
+Le \cref{thm:shift-hensel-completo} explique pourquoi tout préfixe
+décimal peut être réémis à partir d'un état 3-adique : la capacité brute est
+universelle. Par conséquent, la simple opération d'aller-retour sur un ruban ne sélectionne pas une
+constante. Le contenu distinctif de la construction publiée se trouve
+dans les objets antérieurs et postérieurs à cette réémission :
+\begin{enumerate}
+\item les fibres finies et les cinq régions distinctes de \(\pi\) ;
+\item le lecteur archimédien typé qui associe mots, cylindres et blocs ;
+\item la dodécaphase signée et la clôture réversible
+\[
+U_{12}^{\rm sgn}
+\longleftrightarrow K
+\longleftrightarrow(D_3K,D_4K,Q)
+\longleftrightarrow\alpha_{\rm HMT};
+\]
+\item les critères de comparaison qui séparent une équivalence de cartes d'un
+sélecteur antérieur à l'évaluation.
+\end{enumerate}
+
+Les douze triplets décimaux publiés de \(\pi,e,\varphi\) sont des coordonnées
+finies exactes du lecteur enrichi. La chaîne imprimée de trente-six
+chiffres est la projection dodécaphasique rationnelle
+\(\alpha_{12}=\pi_{12}(\alpha_{\rm HMT})\) :
+\[
+\frac{7297352569283800997285105472380663}{10^{36}}.
+\]
+L'identité exacte dans cette fenêtre est
+\[
+\alpha_{12}
+:=\pi_{12}(\alpha_{\rm HMT})
+=\frac{7297352569283800997285105472380663}{10^{36}}.
+\]
+La récurrence compatible à profondeur arbitraire construit la section
+infinie
+\[
+ \alpha_{\rm HMT}:=\varprojlim_N A^{(N)},
+\]
+et chaque fenêtre rationnelle est une projection exacte de ce même objet. Le
+noyau \(E_{21/22}\) construit, dans une autre carte, la racine positive simple
+finie \(\alpha_E\) ; le transport gradué du TPK prolonge ce noyau en
+une famille compatible dont la racine limite est \(\alpha_B\). Si
+\(\alpha_A:=\varprojlim_N\rho_N(\alpha_{12})\), les carrés de troncature
+des deux familles commutent et déterminent à chaque profondeur le même
+cylindre survivant. Le théorème exact des deux voies établit donc
+\[
+ \boxed{\alpha_A=\alpha_B=\alpha_{\rm HMT}}.
+\]
+L'égalité de \(\operatorname{Tr}_9(\alpha_E^{-1})\) et de
+\(\operatorname{Tr}_9(\alpha_{12}^{-1})\) est le premier certificat fini de
+cette identité ; elle ne la définit pas, ne limite pas sa portée et ne sélectionne pas les
+prolongements. La projection typée conserve la distinction entre la section
+coinductive, sa fenêtre rationnelle et la racine analytique sans séparer leur identité
+à la limite.
+
+La racine carrée de \(-1\) appartient à une autre carte. Dans le
+\cref{chap:algebras-cuadraticas-orden-nueve}, on construit
+\[
+\mathbb F_9=\mathbb F_3[\iota]/(\iota^2+1),
+\qquad \iota^2=-1,
+\]
+et l'on démontre que la matrice de Witt réalise cette structure quadratique. Il s'agit
+d'une extension algébrique finie exacte, et non d'une catégorie visible de
+développements réels.
+
+\section{Carte de Hensel non filtrée, survie et frontière globale}
+
+Les contrôles suivants sont des falsificateurs des résultats finis
+précédents :
+\begin{enumerate}
+\item que deux états distincts modulo \(3^T\) émettent le même mot de
+\(T\) blocs, ou qu'il existe un mot sans préimage ;
+\item que l'inverse explicite de
+\cref{eq:inversa-hensel-finita} échoue ;
+\item qu'il apparaisse un rationnel dont le développement canonique ne soit pas ultimement
+périodique, ou un irrationnel dont le développement le soit ;
+\item qu'un émetteur déterministe fini produise un ruban non ultimement
+périodique ;
+\item que les recensements du catalogue ne totalisent pas \(468\), \(243\) et \(104\,976\),
+ou que les mesures des trois mots ne coïncident pas avec l'énumération.
+\end{enumerate}
+
+La carte de Hensel brute
+\[
+\mathbb Z_3^6\longrightarrow[0,1]
+\]
+est continue et surjective ; en ajoutant la partie entière, son atlas brut couvre
+\(\mathbb R\). Ce résultat exact n'implique pas que toute fibre brute contienne
+un représentant qui survive aux filtres supplémentaires. Les fenêtres
+finies publiées et les lecteurs nommés de \(\pi,e,\varphi\) sont vérifiés
+dans HMT, relativement à leurs germes, régions,
+orientations et règles enrichies.
+
+\ifdefined\HMTInternalTraceability
+Pour un préfixe filtré, soit \(T_u\) l'arbre des prolongements compatibles.
+Si \(T_u\) est à ramification finie et possède un nœud à toute profondeur, le
+lemme de König produit une branche infinie ; si, en outre, chaque niveau stable est
+unitaire, la branche est unique. Cet énoncé est conditionnel : la non-vacuité universelle de \(T_u\)
+pour tout préfixe n'a pas été démontrée. Restent donc
+comme \textsc{programme ouvert} la couverture de toutes les fibres par des
+survivants filtrés et la descente bien définie de la somme et du produit
+natifs au quotient archimédien.
+\fi

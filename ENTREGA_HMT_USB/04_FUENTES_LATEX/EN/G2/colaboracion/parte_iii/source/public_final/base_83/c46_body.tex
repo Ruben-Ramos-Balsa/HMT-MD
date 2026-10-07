@@ -1,0 +1,154 @@
+\label{chap:p3-83-46-godel_turing}
+
+\section{Effective decidability of each finite window of projective multiplicities}
+
+\begin{proposition}
+At a fixed depth \(N\), if the domains are finite and the atomic
+observables are computable, every formula in the finite language
+\(L_N\) is semantically decidable.
+\end{proposition}
+
+\begin{proof}
+Atomic formulas are computed; connectives are decided by truth
+tables; each quantifier ranges over a finite domain. The conclusion follows by
+induction on syntactic complexity.
+\end{proof}
+
+The decidability of each window does not necessarily provide a single
+algorithm that decides a property of the complete tower.
+
+\section{Effective tower associated with the computation of projective multiplicities}
+
+Let \(T_e\) be the Turing machine with index \(e\). For each \(n\), define
+\[
+ X_n^e
+ =
+ \{b_n\}
+ \cup
+ \{c_n:T_e\text{ has not halted in its first }n\text{ steps}\}.
+\]
+Links preserve existing labels:
+\[
+  p_{n+1,n}(b_{n+1})=b_n,
+  \qquad
+  p_{n+1,n}(c_{n+1})=c_n.
+\]
+The visible tower has to single symbol \(v_n\), and
+\[
+  q_n(b_n)=q_n(c_n)=v_n.
+\]
+
+\begin{theorem}[Global multiplicity and stopping]
+\label{p3-83-c46-s1:thm:halt-fibre}
+\[
+ \#q_\infty^{-1}(\boldsymbol v)
+ =
+ \begin{cases}
+ 1,&T_e\text{ stops},\\
+ 2,&T_e\text{ never halts}.
+ \end{cases}
+\]
+Therefore, no total algorithm decides uniqueness of the global fiber for
+all effective towers in this family.
+\end{theorem}
+
+\begin{proof}
+The branch \(\boldsymbol b=(b_n)\) always exists. If \(T_e\) halts at
+step \(h\), the states \(c_n\) disappear from \(h\) onward and do not form a
+global section. If it never halts, \(\boldsymbol c=(c_n)\) is a second
+section. A decider for uniqueness would decide \(\HALT\), contradicting
+\citep{turing1936}.
+\end{proof}
+
+We define
+\[
+  U_e:\#q_\infty^{-1}(\boldsymbol v)=1.
+\]
+Then \(U_e\iff T_e\downarrow\).
+
+\begin{theorem}[Uniform incompleteness]
+\label{p3-83-c46-s1:thm:uniform-incompleteness}
+Let \(\mathsf T\) be a recursively axiomatizable theory that formalizes the
+towers \(X^e\) and is semantically correct for \(U_e\) and
+\(\neg U_e\). Then \(\mathsf T\) does not decide every \(U_e\).
+\end{theorem}
+
+\begin{proof}
+If each \(U_e\) were to decide, for an index \(e\) one would enumerate in parallel
+the proofs of \(U_e\) and \(\neg U_e\) until finding one. By correctness,
+the first would appear exactly when the machine halts and the second
+when it does not. A decider of \(\HALT\) would be obtained.
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[>=Latex,node distance=11mm and 15mm,
+  box/.style={rounded corners,draw=hmtblue,fill=hmtlightblue,
+    minimum width=39mm,minimum height=13mm,align=center},
+  warn/.style={rounded corners,draw=hmtred,fill=hmtlightred,
+    minimum width=39mm,minimum height=13mm,align=center}]
+  \node[box] (sim) {finite simulation of \(T_e\)};
+  \node[box,below=of sim] (levels) {\(X_n^e\) computable\\for every \(n\)};
+  \node[box,below=of levels] (fibre)
+    {\(\#q_\infty^{-1}(v)=1\iff T_e\downarrow\)};
+  \node[warn,below left=of fibre] (undec) {no uniform decider};
+  \node[warn,below right=of fibre] (inc)
+    {sound effective theory\\incomplete for \(U_e\)};
+  \draw[->,thick,hmtblue] (sim)--(levels);
+  \draw[->,thick,hmtblue] (levels)--(fibre);
+  \draw[->,thick,hmtred] (fibre)--(undec);
+  \draw[->,thick,hmtred] (fibre)--(inc);
+\end{tikzpicture}
+\caption{From the finite decision to uniform incompleteness.}
+\label{p3-83-c46-s1:fig:godel-turing}
+\end{figure}
+
+\section{Finite completeness of the HMT levels and exact domain of the Gödel--Turing obstruction}
+
+The academic name used is:
+\[
+\boxed{\text{HMT uniform incompleteness theorem for projective multiplicities}.}
+\]
+The abbreviated designation “third Gödel result in HMT” is also used. The proof
+is Gödel--Turing: it does not reproduce the self-referential diagonal of
+\cite{goedel1931}, but instead reduces HALT to the multiplicity of a fibre.
+
+\begin{remark}[Conditions of validity]
+The theorem does not prove the inconsistency of ZFC. Nor does it preclude a
+direct proof that a particular tower has a unique section. It precludes a
+universal uniqueness procedure for all effective towers.
+\end{remark}
+
+% REMATE_LOCAL_GODEL_CONCLUSION
+\Needspace{25\baselineskip}
+\section{Exact relationship with the \(9\) phases of the Topological Phase Kernel}
+
+The \(9\) phases of the TPK provide a concrete algorithm that, with its declared readers,
+partitions the refinement block into \(729\) subcylinders and selects one of them
+at each finite stage.
+The passage to the infinite section uses a global theorem of nonemptiness,
+compatibility, and unitarity.
+
+The Gödel--Turing result says:
+\[
+\text{there is no uniqueness decider for every effective tower}.
+\]
+It does not state:
+\[
+\text{no concrete tower can have a uniform proof of its own}.
+\]
+And a particular proof does not provide the universally forbidden decisor.
+
+
+\begin{remark}[Structural Conclusion]
+Finite decidability, existence of the limit, uniqueness of an instance, and uniform
+decidability of all instances are four levels. Holographic closure
+requires that they be declared, rather than automatically transferring a property from one
+level to another.
+\end{remark}
+
+\begin{remark}[Separation of results and scope]
+The reducing tower, the equivalence \(U_e\iff T_e\downarrow\), and the metamathematical
+theorem are \emph{results established in the preceding sections}. The central position within
+the closure of infinity is an expository organization that alters neither the logical content nor the theorem's domain.
+\end{remark}

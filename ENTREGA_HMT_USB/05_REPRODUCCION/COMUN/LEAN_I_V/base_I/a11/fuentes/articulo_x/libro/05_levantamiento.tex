@@ -1,0 +1,442 @@
+\section{Levantamiento unitario del refinamiento y transporte de lectores}
+\label{lib05:levantamiento}
+
+La biyección por residuos de la \cref{lib03:teo-residuo} y el
+balance bilateral de la \cref{lib04:teo-balance} admiten una
+composición explícita. Una terna aritmética admisible, que contiene
+una pareja y su acarreo, determina una pareja refinada. La
+linealización de esta biyección sobre bases ortonormales proporciona
+un transporte unitario; dos transportes de ese tipo pueden actuar
+como las dos realizaciones del balance bilateral.
+
+La realización se establece después de los objetos generados por
+APP--TRIT--TPK. Su dominio combinatorio comprende las parejas y los
+acarreos que satisfacen las condiciones escritas abajo. La norma
+conservada por su linealización es la suma de cuadrados de amplitudes
+sobre esas etiquetas; la conservación aritmética de
+\(L_c(x,y)=(Bx-c,By+c)\) continúa siendo la suma de las dos
+coordenadas tras reescalar. La composición relaciona ambas
+conservaciones mediante una aplicación concreta.
+
+\subsection{Biyección de los estados aritméticos admisibles}
+\label{lib05:biyeccion}
+
+Sean \(B\geq2\) y \(M\geq1\) enteros. Definimos
+\begin{align}
+ \mathcal D_{B,M}
+ &=\bigl\{(x,y,c)\in\mathbb Z_{\geq0}^2
+                 \times\{0,\ldots,B-1\}:x+y=M,\ c\leq Bx\bigr\},
+ \label{lib05:dominio}\\
+ \mathcal E_{BM}
+ &=\bigl\{(X,Y)\in\mathbb Z_{\geq0}^2:X+Y=BM\bigr\}.
+ \label{lib05:codominio}
+\end{align}
+La condición \(c\leq Bx\) mantiene la no negatividad de la
+primera coordenada de la salida. Para \(x=0\) sólo admite
+\(c=0\); para \(x\geq1\) admite todo el alfabeto canónico.
+
+\begin{theorem}[Correspondencia exacta de etiquetas]
+\label{lib05:teo-biyeccion}
+La aplicación
+\begin{equation}
+ \ell_{B,M}:\mathcal D_{B,M}\longrightarrow\mathcal E_{BM},
+ \qquad (x,y,c)\longmapsto(Bx-c,By+c)
+ \label{lib05:mapa-etiquetas}
+\end{equation}
+es biyectiva. Ambos conjuntos tienen cardinal \(BM+1\). Su inversa
+está dada por
+\begin{equation}
+ c=Y\bmod B,\qquad y=\frac{Y-c}{B},\qquad x=\frac{X+c}{B}.
+ \label{lib05:inversa-etiquetas}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+La condición de dominio y la identidad
+\(Bx-c+By+c=BM\) aseguran que la imagen pertenece a
+\(\mathcal E_{BM}\). Dada una pareja de ese conjunto, el residuo
+\(c\) es el único elemento del alfabeto que satisface
+\(Y\equiv c\pmod B\). Como \(X+Y\) es divisible por \(B\),
+\(X+c\) también lo es. La división euclídea de \(Y\) da
+\(y\geq0\), y \(X+c\geq0\) da \(x\geq0\). Si \(c>0\),
+\(x=0\) exigiría \(X=-c<0\), por lo que se conserva la
+admisibilidad. La suma de las preimágenes es \(M\), y la
+sustitución verifica la imagen original. La unicidad del residuo y
+de los cocientes demuestra la biyección.
+
+Hay \(M+1\) etiquetas con \(c=0\) y \(M\) con cada acarreo
+positivo; por tanto el cardinal es
+\((M+1)+(B-1)M=BM+1\), coincidente con el de la salida.
+\end{proof}
+
+La prueba explicita el extremo de frontera del dominio, condición
+necesaria para la igualdad de cardinales. La nueva etiqueta de acarreo
+es una parte tipada de la entrada al refinamiento.
+
+\subsection{Unitariedad sobre las amplitudes de las etiquetas}
+\label{lib05:unitariedad}
+
+Tomemos los espacios de Hilbert reales o complejos con medida de conteo
+\begin{equation}
+ \mathscr H_D=\ell^2(\mathcal D_{B,M}),\qquad
+ \mathscr H_E=\ell^2(\mathcal E_{BM}),
+ \label{lib05:hilbert}
+\end{equation}
+y sus bases ortonormales etiquetadas. Definimos linealmente
+\begin{equation}
+ J_{B,M}|x,y,c\rangle=|Bx-c,By+c\rangle.
+ \label{lib05:j}
+\end{equation}
+Se escribirá \(J\) cuando los parámetros estén fijados.
+
+\begin{proposition}[Levantamiento unitario]
+\label{lib05:prop-unitaria}
+El operador \(J:\mathscr H_D\to\mathscr H_E\) es unitario:
+\(J^*J=I_D\), \(JJ^*=I_E\). El adjunto recupera cada etiqueta
+mediante \eqref{lib05:inversa-etiquetas}.
+\end{proposition}
+
+\begin{proof}
+La \cref{lib05:teo-biyeccion} asegura que \(J\) transforma
+biyectivamente dos bases ortonormales completas. Para
+\(\psi=\sum_{d\in\mathcal D}\psi_d|d\rangle\),
+\[
+ \|J\psi\|^2
+ =\sum_{e\in\mathcal E}|\psi_{\ell_{B,M}^{-1}(e)}|^2
+ =\sum_{d\in\mathcal D}|\psi_d|^2=\|\psi\|^2.
+\]
+La sobreyectividad prueba las dos identidades unitarias y la
+biyección inversa describe el adjunto sobre cada vector de base.
+\end{proof}
+
+La etiqueta \(|73,27,1\rangle\) tiene norma uno; los enteros
+\(73,27,1\) describen sus valores aritméticos, no sus amplitudes.
+La construcción representa un procesamiento reversible de etiquetas
+o amplitudes. Una realización física concreta conserva, además,
+el protocolo que prepare y transporte tales amplitudes.
+
+\subsection{Lectores diagonales de proporción y acarreo}
+\label{lib05:diagonales}
+
+Para una función real \(h\) sobre un conjunto finito, denotemos
+por \(M_h\) su operador diagonal: cada vector de base se multiplica
+por el valor de \(h\) en su etiqueta. La biyección satisface
+\begin{equation}
+ J^*M_hJ=M_{h\circ\ell_{B,M}}.
+ \label{lib05:lector-diagonal}
+\end{equation}
+Se demuestra actuando sobre todos los vectores de la base.
+
+Definamos en la salida
+\begin{equation}
+ f_E(X,Y)=\frac{X}{BM},\quad
+ g_E(X,Y)=\frac{Y}{BM},\quad
+ \gamma_E(X,Y)=Y\bmod B,
+ \label{lib05:lectores-salida}
+\end{equation}
+y en la entrada \(f_D=x/M\), \(g_D=y/M\), \(\gamma_D=c\).
+La identidad \eqref{lib05:lector-diagonal} proporciona
+\begin{align}
+ J^*M_{f_E}J&=M_{\,x/M-c/(BM)},\nonumber\\
+ J^*M_{g_E}J&=M_{\,y/M+c/(BM)},\nonumber\\
+ J^*M_{\gamma_E}J&=M_c.
+ \label{lib05:transporte-fracciones}
+\end{align}
+Los dos primeros lectores transportan la transferencia de unidad.
+Como \(f_E+g_E=1\), su suma es \(I_E\) y su compresión es
+\(I_D\). El tercer lector conserva exactamente el acarreo como
+observable entero, con su representación residual en la salida.
+
+\subsection{Rutas completas a profundidad arbitraria}
+\label{lib05:rutas}
+
+Sea \(\mathcal P_n(B,M)\) el conjunto de rutas de longitud \(n\)
+que parten de todas las parejas no negativas de suma \(M\) y, en
+cada etapa, satisfacen las condiciones de
+\eqref{lib05:dominio} para la suma correspondiente. Una ruta conserva
+su pareja inicial y sus \(n\) acarreos admisibles. Sea
+\(\Phi_n\) la aplicación que asigna a cada ruta su pareja final.
+
+\begin{theorem}[Recuperación de rutas a toda profundidad finita]
+\label{lib05:teo-rutas}
+Para todo \(n\geq0\),
+\begin{equation}
+ \Phi_n:\mathcal P_n(B,M)\longrightarrow\mathcal E_{B^nM}
+ \quad\hbox{es biyectiva},\qquad
+ |\mathcal P_n(B,M)|=B^nM+1.
+ \label{lib05:biyeccion-rutas}
+\end{equation}
+Su linealización
+\begin{equation}
+ J_n:\ell^2(\mathcal P_n(B,M))\longrightarrow
+          \ell^2(\mathcal E_{B^nM}),\qquad
+ J_n|\pi\rangle=|\Phi_n(\pi)\rangle
+ \label{lib05:jn}
+\end{equation}
+es unitaria.
+\end{theorem}
+
+\begin{proof}
+Desde una pareja de suma \(B^nM\), el residuo de
+\eqref{lib05:inversa-etiquetas} recupera el último acarreo y una
+única pareja previa de suma \(B^{n-1}M\). Repetir \(n\) veces
+produce una única ruta cuya entrada suma \(M\). La composición
+directa recupera el extremo original, lo que prueba biyección e
+inversa. La cuenta también se obtiene desde las entradas: las
+\(M\) parejas con \(x_0\geq1\) admiten \(B^n\) palabras cada
+una, mientras que \((0,M)\) sólo admite la palabra de todos
+ceros. El total es \(MB^n+1\). La transformación biyectiva de
+bases ortonormales demuestra la unitariedad de \(J_n\).
+\end{proof}
+
+Conocida la profundidad, los lectores sobre la pareja final son
+\begin{equation}
+ c_j=\left\lfloor\frac{Y}{B^{n-j}}\right\rfloor\bmod B,
+ \quad y_0=\left\lfloor\frac{Y}{B^n}\right\rfloor,
+ \quad x_0=M-y_0,
+ \qquad 1\leq j\leq n.
+ \label{lib05:lectores-ruta}
+\end{equation}
+Estas funciones son diagonales y recuperan la memoria completa de
+las operaciones finitas. La compatibilidad con prolongación es
+\begin{equation}
+ \Phi_{n+1}(\pi,c)=L_c(\Phi_n(\pi)).
+ \label{lib05:compatibilidad-prolongacion}
+\end{equation}
+Al pasar de \(n\) a \(n+1\), se incorpora la nueva etiqueta
+admisible de acarreo. Los espacios aumentan su dimensión y la
+etiqueta de frontera sólo admite \(c=0\); por ello el dominio del
+paso siguiente conserva la admisibilidad, en lugar de reemplazarla
+por un producto irrestricto con \(B\) dígitos.
+
+\subsection{Entrada fijada e imagen exacta}
+\label{lib05:entrada-fija}
+
+Si se fija una pareja inicial \((x_0,y_0)\), con \(x_0\geq1\),
+hay \(B^n\) rutas y su imagen es exactamente
+\begin{equation}
+ \bigl\{(B^nx_0-C,B^ny_0+C):0\leq C\leq B^n-1\bigr\}.
+ \label{lib05:imagen-fija}
+\end{equation}
+La \cref{lib03:cor-palabra} demuestra que los \(B^n\)
+acumulados son distintos y recuperan las respectivas palabras. La
+linealización es unitaria hacia el subespacio generado por esta
+imagen. Si \(x_0=0\), la imagen consta de una sola etiqueta.
+
+Los cilindros de la \cref{lib03:teo-cilindros} corresponden a una
+entrada fijada. El dominio completo de
+\eqref{lib05:biyeccion-rutas} reúne todas las parejas de suma \(M\).
+Ambas construcciones poseen inversas explícitas, pero sus imágenes
+y cardinales son diferentes. La profundidad arbitraria expresa la
+validez de la prueba para todo \(n\); el límite de la lectura y
+sus fronteras sigue siendo el establecido en la
+\cref{lib03:limite}.
+
+\subsection{Acoplamiento bilateral del refinamiento}
+\label{lib05:bilateral}
+
+Sea \(R\) una permutación previamente declarada de
+\(\mathcal D_{B,M}\), linealizada unitariamente en
+\(\mathscr H_D\). Definimos los dos transportes
+\begin{equation}
+ \mathcal B=J,\qquad \mathcal C=JR:
+            \mathscr H_D\longrightarrow\mathscr H_E.
+ \label{lib05:dos-transportes}
+\end{equation}
+La permutación forma parte de la especificación del procedimiento
+y se fija antes de evaluar una lectura de salida.
+Para \(a>0\), \(p=a^2+a+1\), \(N=(2a+1)p\),
+\begin{equation}
+ Q_-=J(aI-R),\qquad Q_+=J((a+1)I+R).
+ \label{lib05:q-refinamiento}
+\end{equation}
+
+\begin{proposition}[Distribución y recuperación de amplitudes refinadas]
+\label{lib05:prop-bilateral}
+Los operadores \eqref{lib05:q-refinamiento} cumplen
+\begin{equation}
+ (a+1)Q_-^*Q_-+aQ_+^*Q_+=NI_D,
+ \label{lib05:balance}
+\end{equation}
+y la aplicación
+\begin{equation}
+ W_a\psi=\frac1{\sqrt N}
+    \bigl(\sqrt{a+1}\,Q_-\psi,\sqrt a\,Q_+\psi\bigr)
+ \label{lib05:w}
+\end{equation}
+es isométrica. Para los canales sin normalizar
+\(u=Q_-\psi\), \(v=Q_+\psi\),
+\begin{equation}
+ J\psi=\frac{u+v}{2a+1},\qquad
+ \psi=J^*\frac{u+v}{2a+1}.
+ \label{lib05:inversa-bilateral}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Las dos aplicaciones \(\mathcal B,\mathcal C\) son unitarias.
+Los términos cruzados de los Grams de \(Q_-\) y \(Q_+\) tienen
+coeficientes \(-a\) y \(a+1\), respectivamente. Las ponderaciones
+del balance los cancelan, mientras los términos diagonales suman
+\(N\), como en la \cref{lib04:teo-balance}. La normalización
+demuestra la isometría. La suma de los canales es
+\((2a+1)J\psi\), y la unitariedad de \(J\) da la inversa.
+\end{proof}
+
+Desde los canales normalizados se recupera directamente la entrada
+por \(W_a^*\), con norma inversora uno; este adjunto ya incorpora
+\(J^*\). La fórmula alternativa
+\eqref{lib05:inversa-bilateral} separa la recuperación de \(J\psi\)
+por suma de la aplicación de \(J^*\), cuya acción sobre etiquetas
+se calcula mediante residuos. Quedan compuestos el refinamiento
+aritmético reversible y el transporte bilateral de amplitudes.
+
+\begin{proposition}[Compatibilidad en el espacio refinado]
+\label{lib05:prop-compatibilidad}
+Un par sin normalizar \((u,v)\) pertenece a la imagen de
+\(\psi\mapsto(Q_-\psi,Q_+\psi)\) si y sólo si
+\begin{equation}
+ \bigl[(a+1)I_E+JRJ^*\bigr]u
+ =\bigl[aI_E-JRJ^*\bigr]v.
+ \label{lib05:compatibilidad}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La igualdad equivale a
+\(JRJ^*(u+v)=av-(a+1)u\). Si se cumple, definamos
+\(\psi=J^*(u+v)/(2a+1)\). Al sustituir en
+\eqref{lib05:q-refinamiento}, esa identidad da
+\(Q_-\psi=u\) y \(Q_+\psi=v\). La necesidad resulta de
+insertar los canales verdaderos. Todas las composiciones actúan
+en \(\mathscr H_E\), por lo que sus tipos están definidos.
+\end{proof}
+
+\subsection{Ley de los observables sobre los dos canales}
+\label{lib05:ley-lectores}
+
+\begin{theorem}[Compresión bilateral de un lector refinado]
+\label{lib05:teo-lector}
+Para \(F=F^*\) sobre \(\mathscr H_E\), escribamos
+\(F_J=J^*FJ\). Entonces
+\begin{equation}
+ W_a^*\operatorname{diag}(F,F)W_a
+ =\frac{a(a+1)F_J+R^*F_JR}{p}.
+ \label{lib05:lector-bilateral}
+\end{equation}
+El lector \(F_J\) se conserva exactamente si y sólo si conmuta
+con \(R\).
+\end{theorem}
+
+\begin{proof}
+Expandir \((a+1)Q_-^*FQ_-+aQ_+^*FQ_+\) cancela los
+términos mixtos. El coeficiente de \(\mathcal B^*F\mathcal B\)
+es \(a(a+1)(2a+1)\); el de
+\(\mathcal C^*F\mathcal C\) es \(2a+1\). Dividir por
+\(N\), sustituir \(\mathcal C=JR\) y usar
+\(F_J=J^*FJ\) prueba la fórmula. La igualdad con \(F_J\)
+equivale a \(R^*F_JR=F_J\), o a \([F_J,R]=0\) por
+unitariedad.
+\end{proof}
+
+En el caso \(a=8\), los pesos son \(72/73\) y \(1/73\).
+El lector identidad recupera la norma. Un lector no constante
+puede cambiar aun cuando la norma se conserve; su variación está
+calculada por \eqref{lib05:lector-bilateral}.
+El operador que conserva exactamente un lector original \(A\)
+en la imagen completa es \(W_aAW_a^*\), cuya identidad de imagen
+es \(W_aW_a^*\). Leer \(\operatorname{diag}(F,F)\) corresponde
+a la compresión específica del teorema, y no sustituye
+automáticamente ese observable transportado.
+
+\subsection{Ejemplo aritmético de dimensión mil uno}
+\label{lib05:ejemplo}
+
+Tomemos \(B=10\), \(M=100\). Los espacios de etiquetas tienen
+dimensión \(1001\), y
+\begin{equation}
+ d_1=(73,27,1)\longmapsto e_1=(729,271).
+ \label{lib05:ejemplo-etiqueta}
+\end{equation}
+Los lectores diagonales dan
+\begin{equation}
+ f_E(e_1)=\frac{729}{1000}
+ =\frac{73}{100}-\frac1{1000},\qquad
+ g_E(e_1)=\frac{271}{1000},\qquad \gamma_E(e_1)=1.
+ \label{lib05:ejemplo-lectores}
+\end{equation}
+Declaremos \(R\) como la transposición de las etiquetas
+admisibles \(d_1=(73,27,1)\) y \(d_2=(73,27,2)\), dejando
+fijas las demás. La segunda imagen es \(e_2=(728,272)\).
+La regla de transposición se ha fijado sobre las etiquetas, antes
+de cualquier comparación con una constante.
+
+Para \(a=8\) y \(\psi=|d_1\rangle\),
+\begin{equation}
+ Q_-\psi=8|e_1\rangle-|e_2\rangle,\qquad
+ Q_+\psi=9|e_1\rangle+|e_2\rangle.
+ \label{lib05:ejemplo-canales}
+\end{equation}
+Las normas cuadradas son \(65\) y \(82\), y
+\begin{equation}
+ 9\cdot65+8\cdot82=585+656=1241=17\cdot73.
+ \label{lib05:ejemplo-balance}
+\end{equation}
+La suma de los canales es \(17|e_1\rangle\). La inversa
+\eqref{lib05:inversa-bilateral} y el residuo recuperan
+\(|d_1\rangle\), incluido el acarreo uno.
+
+Si se evalúa \(F=M_{f_E}\) diagonalmente en ambos canales
+normalizados, la \cref{lib05:teo-lector} da
+\begin{equation}
+ \begin{split}
+ \langle W_8\psi,\operatorname{diag}(F,F)W_8\psi\rangle
+ &=\frac{72\cdot729+728}{73\cdot1000}\\
+ &=\frac{729}{1000}-\frac1{73000}.
+ \end{split}
+ \label{lib05:ejemplo-fraccion}
+\end{equation}
+La lectura complementaria es uno menos esta cantidad. Para el
+lector diagonal de acarreo se obtiene
+\begin{equation}
+ \frac{72\cdot1+2}{73}=\frac{74}{73}.
+ \label{lib05:ejemplo-acarreo}
+\end{equation}
+El acarreo original sigue siendo recuperable exactamente: el
+observable \(W_8M_cW_8^*\) tiene sobre \(W_8|d_1\rangle\)
+el valor propio uno. El valor \(74/73\) es la respuesta del
+lector diagonal aplicado a ambos canales, cuyo transporte relativo
+está especificado por \eqref{lib05:lector-bilateral}. El ejemplo
+distingue conservación de la información y variación de una lectura
+particular.
+
+\subsection{Articulación con el registro generado y dominios de aplicación}
+\label{lib05:dominios}
+
+La unitaria \(J\) actúa sobre \(BM+1\) etiquetas, mientras que
+la realización de \(K\) tiene doce coordenadas. En el ejemplo,
+\(1001\) cuenta parejas refinadas de suma mil, y doce cuenta
+ventanas del registro producido. Ambas dimensiones conservan su
+origen combinatorio específico.
+
+Una composición particular entre esos dos portadores puede formularse
+mediante un selector material de doce rutas distintas, con su
+procedencia y sus operadores. Si ese selector proporciona una
+isometría
+\(J_{12}:\mathbb R^{12}\to\ell^2(\mathcal D_{B,M})\), entonces
+\(JJ_{12}\) es isométrica, y el entrelazamiento de los lectores se
+comprueba sobre ella. Esta es la hipótesis de esa composición
+adicional, no una identificación implícita por el número de
+coordenadas. Las aplicaciones bilaterales ya definidas directamente
+sobre \(K\) en la \cref{lib04:bilateral} conservan sus dominios
+completos sin utilizar ese selector adicional.
+
+El resultado de esta sección reúne una biyección aritmética, su
+unitaria, lectores diagonales entrelazados, recuperación de rutas a
+cualquier profundidad finita y una composición bilateral explícita.
+El dominio de rutas es el definido en
+\eqref{lib05:biyeccion-rutas}. Las aplicaciones a historias
+filtradas por TPK conservan sus reglas de supervivencia y de
+prolongación; la correspondencia de etiquetas prueba aquí el
+transporte declarado, sin reemplazar esos operadores por un dominio
+aritmético irrestricto.

@@ -1,0 +1,491 @@
+\section{Correlative construction of the continuum: histories, transport, incidence and terminal}
+\label{iv:continuo-conjunto}
+The arithmetic expressed by a normal form preserves a precise readout of the state producing it. To situate that readout within HMT, the histories, sheets and operations acting on them must also be maintained. This chapter brings together that common substrate. Its different constructions are obtained from the same APP–TRIT–TPK execution tree; expository divisions allow their properties to be studied without turning them into independent domains chosen by a subsequent application.
+
+The starting point is the formal kernel presented earlier. An admissible emission contains the APP operation, TRIT orientation, sheet change, residue and quotient, together with the effective TPK memory update. When only a residue is expressed, the execution history still belongs to the starting object. Two executions with identical final readouts are not identified on that ground alone.
+
+\subsection{Admissible histories and memory by composition}
+\label{iv:cont:historias}
+Let \(X_k\) be the set of admissible histories of length \(k\). Its elements are constructed by successive emissions from the kernel's initial domain. Write \(h\varepsilon\) for prolongation of \(h\) by an admissible emission \(\varepsilon\), and \(\rho_k(h\varepsilon)=h\) for deletion of the last emission. The emission label is preserved, even when different labels produce the same expressed state.
+
+On the two arithmetic sheets, local data satisfy the exact divisions
+
+\[
+\delta_\diamond=r_\diamond+9q_\diamond,
+\qquad 0\leq r_\diamond<9,
+\qquad \diamond\in\{\Sigma,\Pi\}.
+\]
+The oriented TRIT coordinate likewise admits an expression \(\Delta=o_r+3\kappa\), with the oriented representative declared by the kernel. Preservation of the quotient allows these representations to be composed without replacing an emission by its isolated residue.
+
+In a memory chart, an emission's update is written
+
+\[
+U_\varepsilon(m)=C_\varepsilon m+\kappa_\varepsilon.
+\]
+For a trajectory \(\alpha=(\varepsilon_1,\ldots,\varepsilon_k)\), the effective operation is the ordered composition of these updates. Its linear part and translation are
+
+\[
+C_\alpha=C_{\varepsilon_k}\cdots C_{\varepsilon_1},
+\qquad
+\kappa_\alpha=
+\sum_{j=1}^{k}C_{\varepsilon_k}\cdots
+C_{\varepsilon_{j+1}}\kappa_{\varepsilon_j}.
+\]
+The empty product in the last sum is the identity.
+
+\begin{proposition}[Affine compatibility of concatenation]
+\label{iv:cont:concatenacion}
+If \(\alpha\) precedes \(\beta\), then
+
+\[
+C_{\beta\alpha}=C_\beta C_\alpha,
+\qquad
+\kappa_{\beta\alpha}=C_\beta\kappa_\alpha+\kappa_\beta,
+\qquad
+U_{\beta\alpha}=U_\beta U_\alpha.
+\]
+\end{proposition}
+\begin{proof}
+Substituting \(U_\alpha(m)\) into \(U_\beta\) produces \(C_\beta C_\alpha m+C_\beta\kappa_\alpha+\kappa_\beta\). Decomposition into linear part and translation gives the three identities. Associativity of composition proves that the result does not depend on an auxiliary subdivision of the trajectory.
+\end{proof}
+
+This cocycle identity is the precise content of accumulated memory. The quantity transported by a second trajectory depends on the chart update it performs; it is not, in general, the untransported sum of two registers.
+
+Nonadic return preserves a second distinction. In phase and winding coordinates, with \(\bar r\in\{0,\ldots,8\}\), its representation is
+
+\[
+\sigma_9(w,r)=
+\left(w+\left\lfloor\frac{\bar r+1}{9}\right\rfloor,
+r+1\pmod9\right),
+\qquad
+\sigma_9^9(w,r)=(w+1,r).
+\]
+During nine steps, exactly one crossing from \(8\) to \(0\) occurs. Phase returns and the winding coordinate increases. Enriched holonomy also retains the memory updates accompanying this route.
+
+\subsection{Tree refinement and measure of histories}
+\label{iv:cont:medida}
+Fix the finite nonempty initial set of admissible seeds, with strictly positive initial masses summing to \(1\). In this subsection each history has a finite positive number of prolongations. Deletion of emissions defines the refinement maps. Kernel admissibility supplies the prolongations; when a residence uses a neutral emission, that emission explicitly gives a section of \(\rho_k\). Existence of that section concerns the tree including this emission, not every arbitrary restriction of routes.
+
+Let \(d(h)\geq1\) be the number of admissible emissions at \(h\). Equiprobable choice among its successors defines
+
+\[
+\mu(h\varepsilon)=\frac{\mu(h)}{d(h)}.
+\]
+More generally, a positive local distribution \(p(\varepsilon\mid h)\), summing to \(1\), defines \(\mu(h\varepsilon)=\mu(h)p(\varepsilon\mid h)\). This second formulation preserves the readout's weights when numbers of prolongations are not uniform.
+
+\begin{proposition}[Cylindrical compatibility and conditional expectation]
+\label{iv:cont:esperanza}
+At each level one has
+
+\[
+\sum_{\rho_k(y)=x}\mu(y)=\mu(x).
+\]
+On the spaces \(L^2(X_k,\mu_k)\), the maps
+
+\[
+(J_kf)(y)=f(\rho_k(y)),
+\qquad
+(E_kg)(x)=\sum_{\rho_k(y)=x}\frac{\mu(y)}{\mu(x)}g(y)
+\]
+satisfy \(E_k=J_k^*\), \(E_kJ_k=I\) and \(\|J_kf\|=\|f\|\).
+
+\end{proposition}
+\begin{proof}
+The first identity is normalization of local probabilities. Applying it to \(|f(x)|^2\) gives the isometry. Grouping by predecessors the sum defining \(\langle J_kf,g\rangle\) yields the formula for \(E_k\); on a function constant on each fibre, that formula returns its value.
+\end{proof}
+
+Compatible masses define a probability measure on the space of infinite histories: the cylinder of a finite history receives its mass \(\mu(h)\). The measure extends from the cylinder algebra, and uniqueness follows because the cylinders generate the sigma-algebra. If the tree is finitely branching and every history has a prolongation, the inverse limit of its levels under emission deletion is nonempty. In the cylindrical topology, every nonempty cylinder has positive measure.
+
+This measure distinguishes histories converging to the same representation. The uniform measure on terminal values would be a different readout, since it would remove the multiplicities just preserved by the construction.
+
+\subsection{Sheetwise transport and exact accounting of outputs}
+\label{iv:cont:transporte}
+First consider the space whose orthonormal basis consists of histories at level \(k\). Transport preserving the label of each prolongation is
+
+\[
+\mathcal U_ke_h=
+\sum_{\varepsilon\ \mathrm{admissible\ at}\ h}
+\sqrt{p(\varepsilon\mid h)}\,e_{h\varepsilon}.
+\]
+The successor sets of distinct predecessors are disjoint. Normalization of \(p\) therefore proves \(\mathcal U_k^*\mathcal U_k=I\). The representation using history masses is related to this one by the diagonal basis change incorporating \(\sqrt{\mu(h)}\).
+
+The sheet label belongs to a history's complete register. Write
+\[
+\widehat h=((h_0,s_0),\ldots,(h_k,s_k)),\qquad
+s_j\in\{\Sigma,\Pi\},
+\]
+where \(s_j\) is the active sheet at step \(j\). Prolongation adds the emission and sheet \(s_{k+1}\) determined by the TPK operational selector, preserving the entire prefix, including the initial sheet. In the basis of these lifted histories,
+\[
+\mathcal U_ke_{\widehat h}
+=\sum_{\varepsilon\ \mathrm{admissible\ at}\ \widehat h}
+\sqrt{p(\varepsilon\mid\widehat h)}\,e_{\widehat h\varepsilon},
+\qquad
+P_ke_{\widehat h}=\mathbf1_{s_k=\Sigma}e_{\widehat h},\quad
+Q_k=I-P_k.
+\]
+Thus, \(P_k\) reads the current sheet, while the distinction between histories is maintained by their complete prefixes. Two initial histories reaching the same active sheet still have distinct successors. The isometry proof using disjoint collections of prolongations applies verbatim to this basis.
+Tritic orientation is another register coordinate: the value \(0\) preserves the threshold readout on each sheet and does not add a third sheet to this decomposition. We now separate sheet preservation from sheet interchange:
+
+\[
+A_k=P_{k+1}\mathcal U_kP_k+Q_{k+1}\mathcal U_kQ_k,
+\qquad
+\eta_k=Q_{k+1}\mathcal U_kP_k+P_{k+1}\mathcal U_kQ_k.
+\]
+\begin{proposition}[Sheetwise Gram identity]
+\label{iv:cont:gram}
+For a linear transport \(U\), whether or not it is isometric, the preceding decomposition satisfies
+
+\[
+A^*A+\eta^*\eta=PU^*UP+QU^*UQ.
+\]
+In particular, for \(U=\mathcal U_k\),
+
+\[
+A_k^*A_k+\eta_k^*\eta_k=I.
+\]
+\end{proposition}
+\begin{proof}
+In \(A^*A\) and \(\eta^*\eta\), mixed terms containing \(P_{k+1}Q_{k+1}\) vanish. Summing the remaining terms yields \(P_kU^*(P_{k+1}+Q_{k+1})UP_k\) and its analogue with \(Q_k\). The first identity follows from complementarity of the projectors; the second additionally uses \(U^*U=I\).
+\end{proof}
+
+The first identity is the general formula. Replacing its right-hand side by \(U^*U\) requires the cross-blocks of that Gram operator to vanish. Isometric preservation by history transport provides this condition here; it must not be attributed automatically to a subsequent compression.
+
+Write \(F_{0,0}=I\), \(F_{0,n}=A_{n-1}\cdots A_0\) and \(T_N=F_{0,N}^*F_{0,N}\).
+
+\begin{theorem}[Finite decomposition with terminal residual]
+\label{iv:cont:terminal}
+For each horizon \(N\),
+
+\[
+I=\sum_{n=0}^{N-1}
+F_{0,n}^*\eta_n^*\eta_nF_{0,n}+T_N.
+\]
+The sequence \(T_N\) is positive and decreasing and has a positive strong limit \(T_\infty\). The sum of outputs converges strongly to \(I-T_\infty\).
+
+\end{theorem}
+\begin{proof}
+Proposition~\ref{iv:cont:gram} gives \(T_n-T_{n+1}=F_{0,n}^*\eta_n^*\eta_nF_{0,n}\). Telescoping summation proves the finite equality and monotonicity. For each vector, the quadratic forms decrease to a limit; polarization defines a bounded positive form and, by the representation theorem for bounded forms, an operator \(T_\infty\). Convergence is strong because, for a positive operator \(S\leq I\), \(\|Sv\|^2\leq\langle v,Sv\rangle\); apply this to \(S=T_N-T_\infty\).
+\end{proof}
+
+The terminal residual is preserved until its extinction is proved in the domain considered. This distinction prevents phase return alone from becoming a hypothesis that all histories are exhausted.
+
+\subsection{Oriented balance and cancellation under refinement}
+\label{iv:cont:balance}
+A history carries its accumulated orientation \(o(h)\) and the counts of its visits to the two sheets. The corresponding local balance is
+
+\[
+b(h)=o(h)\bigl(N_\Sigma(h)-N_\Pi(h)\bigr),
+\qquad
+b^+=\frac{|b|+b}{2},\quad b^-=\frac{|b|-b}{2}.
+\]
+When a readout expresses the average over prolongations, define \(b_c=Eb_f\). Orientation remains in the argument of \(b_f\); it is not removed before averaging.
+
+\begin{proposition}[Exact cancellation defect]
+\label{iv:cont:cancelacion}
+The quantity
+
+\[
+\kappa_{\mathrm{can}}=
+\frac{E|b_f|-|Eb_f|}{2}
+\]
+is nonnegative and satisfies
+
+\[
+E(b_f^+)=(b_c)^++\kappa_{\mathrm{can}},
+\qquad
+E(b_f^-)=(b_c)^-+\kappa_{\mathrm{can}}.
+\]
+\end{proposition}
+\begin{proof}
+The weighted triangle inequality gives \(|Eb_f|\leq E|b_f|\). Writing the positive and negative parts as \((|b|\pm b)/2\) yields both equalities.
+\end{proof}
+
+The information omitted when only the balance is expressed is the common cancellation of opposite contributions. This quantity is determined from the same prolongations used by the preceding transport. The factor \(1/9\) appears only when the fibre contains nine equally weighted successors; conditional expectation is the rule that remains valid for general branching and weights.
+
+\subsection{Ternary sheet incidence and rectangular complex}
+\label{iv:cont:incidencia-rectangular}
+The two sheets determine the module \(V=\mathbb F_3e_\Sigma\oplus\mathbb F_3e_\Pi\). Its four projective directions are the lines generated by \(e_\Sigma,e_\Pi,e_\Sigma+e_\Pi,e_\Sigma-e_\Pi\). They yield six unordered pairs. The eight nonzero vectors are their oriented representatives. Thus the counts \(4,6,8\) belong to distinct operations on a single sheet module.
+
+On the six pair positions, define
+
+\[
+(Ba)_{\{L,L'\}}=a_L+a_{L'},
+\qquad
+s(q)=\sum_{\{L,L'\}}q_{\{L,L'\}}.
+\]
+Each direction occurs in three pairs; hence \(sB=0\) in \(\mathbb F_3\). The readout \(W(q)=\mathbf1_{s(q)=0}-1/3\) is invariant under \(q\mapsto q+Ba\). On the uniform ambient space \(\mathbb F_3^6\), its moments are
+
+\[
+\mathbb EW=0,\qquad
+\mathbb EW^2=\frac29,\qquad
+\mathbb EW^3=\frac2{27}.
+\]
+Indeed, \(s\) is surjective and each fibre contains \(3^5\) elements. The readout equals \(2/3\) with probability \(1/3\) and \(-1/3\) with probability \(2/3\). These averages describe the uniform ambient space; the distribution induced by a subset of histories must be computed with its own multiplicities, already preserved in \(X_k\).
+
+To fix the ports without losing multiplicities, at depth \(k\) retain the labelled readouts \(\lambda_\Sigma(h)=(h,\Sigma)\) and \(\lambda_\Pi(h)=(h,\Pi)\). Their sets are
+\[
+I_k=\{\lambda_\Sigma(h):h\in X_k\},\qquad
+J_k=\{\lambda_\Pi(h):h\in X_k\}.
+\]
+They are finite and nonempty because \(X_k\) is. Values, quotients and residues are expressed on these ports; equality of values does not identify their labels. The product \(I_k\times J_k\) is the rectangular-readout domain, within which the support of admissible incidences is recorded.
+
+With this level fixed, write \(I=I_k\), \(J=J_k\) and \(A_N=\mathbb Z/3^N\mathbb Z\). Choose reference ports \(i_0,j_0\). This choice merely provides coordinates for reconstruction formulas. The maps
+
+\[
+\kappa(u,v)_{ij}=u_i-v_j,
+\qquad
+(\delta w)_{ij}=w_{ij}-w_{ij_0}-w_{i_0j}+w_{i_0j_0}
+\]
+define the following sequence, valid over the finite ring \(A_N\):
+
+\[
+0\longrightarrow A_N\longrightarrow
+A_N^I\oplus A_N^J\mathrel{\mathop{\longrightarrow}^{\kappa}}
+A_N^{I\times J}\mathrel{\mathop{\longrightarrow}^{\delta}}
+A_N^{(I\setminus\{i_0\})\times(J\setminus\{j_0\})}
+\longrightarrow0.
+\]
+\begin{proposition}[Exactness of rectangular incidence]
+\label{iv:cont:rectangular-exacta}
+The preceding sequence is exact, with first arrow given by the constant diagonal.
+
+\end{proposition}
+\begin{proof}
+The equality \(u_i-v_j=0\) for every pair forces all coordinates of \(u\) and \(v\) to be the same constant. Direct substitution gives \(\delta\kappa=0\). If \(\delta w=0\), take \(u_i=w_{ij_0}\) and \(v_j=w_{i_0j_0}-w_{i_0j}\). Then \(u_i-v_j=w_{ij}\). Finally, any matrix in the last term extends with zero reference row and column; its image under \(\delta\) is the initial matrix. The proof uses only addition and subtraction, so it requires no division by a ring unit.
+\end{proof}
+
+Reduction from \(A_{N+1}\) to \(A_N\), with \(k,I_k,J_k,i_0,j_0\) fixed, commutes with both maps. Reconstruction formulas are the same at each modular depth. This is the arithmetic compatibility proved in this subsection. Prolongation of histories \(k\to k+1\) preserves prefix labels; its maps between port sets are distinct data from the ring change \(N\to N+1\).
+
+These maps are obtained from emission deletion:
+\[
+\rho_k^\Sigma(h\varepsilon,\Sigma)=(h,\Sigma),\qquad
+\rho_k^\Pi(h\varepsilon,\Pi)=(h,\Pi).
+\]
+Fix a reference history with compatible prolongations, whose existence was proved for the tree without terminal leaves. Its two labels define compatible reference ports at every level. Coordinate transport is precomposition:
+\[
+(L_ku)_{i'}=u_{\rho_k^\Sigma(i')},\quad
+(L_kv)_{j'}=v_{\rho_k^\Pi(j')},\quad
+(L_kw)_{i'j'}=w_{\rho_k^\Sigma(i'),\rho_k^\Pi(j')}.
+\]
+For the sequence's last module, first extend the matrix by zero in the reference row and column, apply this same formula and restrict to the new complement of the reference ports. This rule defines \(L_k\) even when a new port has the marked port as its predecessor.
+
+\begin{proposition}[Naturality of the rectangular complex under prolongation]
+\label{iv:rectangular-natural}
+The preceding maps satisfy
+\(L_k\kappa_k=\kappa_{k+1}L_k\) and
+\(L_k\delta_k=\delta_{k+1}L_k\).
+They also commute with coefficient reduction
+\(A_{N+1}\to A_N\) and compose according to prefix deletion.
+\end{proposition}
+\begin{proof}
+The first identity follows from
+\(u_{\rho_k^\Sigma(i')}-v_{\rho_k^\Pi(j')}\).
+In the second, each of the four terms defining \(\delta\)
+is transported by the same precomposition. Compatibility of the
+marked ports identifies their rows and columns; when a predecessor is
+the marked port, the four terms cancel and agree with
+extension by zero. All formulas consist of additions and subtractions with
+integer coefficients, so they commute with modular reduction.
+Composition of precompositions is precomposition with the
+composite prefix, proving the last statement.
+\end{proof}
+
+\subsection{Memory complex and compatibility of incidences}
+\label{iv:cont:memoria}
+The same accumulated memory coordinate \(c_y\in\mathbb Z\), at a residence \(y\), defines a free integer complex. Its reduction to \(A_N\) uses the same integer register before reduction; successive depths are therefore compatible. Its generators are \(f_y\) in degree \(2\), \(e_y,b_y,r_y\) in degree \(1\), and \(g_y\) in degree \(0\):
+
+\[
+\partial f_y=3c_y e_y+b_y,\qquad
+\partial e_y=g_y,\qquad
+\partial b_y=-3c_y g_y,\qquad
+\partial r_y=0.
+\]
+The identity \(\partial^2=0\) is verified on \(f_y\) through \(3c_yg_y-3c_yg_y=0\), and is immediate on the other generators.
+
+If a trajectory \(\alpha:y\to y'\) updates memory, its transport in the complex sends the identically named generators to their new representatives, except that
+
+\[
+\Psi_\alpha(b_y)=b_{y'}+3(c_{y'}-c_y)e_{y'}.
+\]
+\begin{proposition}[Naturality of the memory complex]
+\label{iv:cont:memoria-natural}
+One has \(\partial\Psi_\alpha=\Psi_\alpha\partial\) and \(\Psi_{\beta\alpha}=\Psi_\beta\Psi_\alpha\). The maps extend linearly over the chosen coefficient ring.
+
+\end{proposition}
+\begin{proof}
+On \(f_y\), the image of its boundary is \(3c_ye_{y'}+b_{y'}+3(c_{y'}-c_y)e_{y'} =3c_{y'}e_{y'}+b_{y'}\). On \(b_y\), the boundary of its image is \(-3c_{y'}g_{y'}+3(c_{y'}-c_y)g_{y'}=-3c_yg_{y'}\). The other two cases are immediate. In a concatenation, memory differences sum telescopically, proving the second identity.
+\end{proof}
+
+The relation between two representatives of the same residence can also be written as an explicit boundary. For an integer coordinate \(v\), reduced in the same ring when appropriate, let
+
+\[
+z^-=r_y,\qquad z^+=r_y+3c_yv e_y+v b_y,
+\qquad h_*=-vf_y.
+\]
+Then \(\partial h_*=z^--z^+\). Under a transport also updating \(v\), the correction \(K_\alpha=(v_{y'}-v_y)f_{y'}\) satisfies \(K_{\beta\alpha}=K_\beta+\Psi_\beta K_\alpha\). The symbols \(K_\alpha\) of this local homotopy do not denote the dodecaphasic seal \(K\): they belong to another domain and their role is specified by the preceding identity. That role can also be checked in the equality
+
+\[
+z^+_{y'}-\Psi_\alpha z^+_y=\partial K_\alpha.
+\]
+Both sides equal \((v_{y'}-v_y)(3c_{y'}e_{y'}+b_{y'})\).
+
+\begin{proposition}[Homology and memory of the local complex]
+\label{iv:cont:memoria-homologia}
+Over \(\mathbb Z\), or after reduction to \(A_N\), one has
+
+\[
+H_0(\Gamma)=H_2(\Gamma)=0,
+\qquad H_1(\Gamma)\cong A_N[r_y]
+\]
+in the modular realization, and \(H_1(\Gamma)\cong\mathbb Z[r_y]\) in the integer realization.
+
+\end{proposition}
+\begin{proof}
+Define the degree-\(1\) homotopy by \(h(g_y)=e_y\), \(h(b_y)=f_y\), and zero on the other generators. Let \(p\) be projection onto the summand generated by \(r_y\), and \(\iota\) its inclusion. Checking on each generator gives
+
+\[
+\partial h+h\partial=I-\iota p.
+\]
+In particular, on \(b_y\) the terms \(3c_ye_y\) and \(-3c_ye_y\) cancel. The complex homotopy retracts onto the module generated by \(r_y\), concentrated in degree \(1\), proving the assertion.
+\end{proof}
+
+The transport \(\Psi_\alpha\) is a determinant-\(1\) shear. Thus this complex explicitly preserves how \(c_y\) changes at chain level, but its local homology does not distinguish values of that coordinate. Complete memory remains in the labels and transports of the source state; it is not recovered from \(H_1\) alone. A memory-dependent numerical torsion requires the specified assembly and determinantal readout in addition to this local complex.
+
+\subsection{Assembly with terminal paths}
+\label{iv:cont:ensamblaje}
+For a finite horizon, residences and their prolongations form a path category. To each residence \(\nu\), assign the free module \(W(\nu)=A_N[\operatorname{Path}(\nu,\mathrm{Term})]\), preserving each terminal continuation as a generator. An initial trajectory acts on \(W\) by precomposition. The complex \(\Gamma(\nu)\) of the preceding subsection acts covariantly through \(\Psi\).
+
+Assembly uses both transports in the same bigraded module:
+
+\[
+\mathcal B_{q,r}=
+\bigoplus_{\nu_0\to\cdots\to\nu_q}
+W(\nu_q)\otimes_{A_N}\Gamma_r(\nu_0).
+\]
+The normalized path complex is used: degenerate chains containing identities are omitted. The finite horizon then bounds the number of strict prolongations and the horizontal degree. The horizontal boundary deletes an intermediate residence by composing adjacent arrows. At the first endpoint it transports \(\Gamma\); at the last it precomposes \(W\). Alternating signs give the path boundary \(d_{\mathrm{bar}}\). The total differential is
+
+\[
+D=d_{\mathrm{bar}}+(-1)^q\partial_\Gamma.
+\]
+The face identities cancel the terms of \(d_{\mathrm{bar}}^2\) in pairs. Naturality from Proposition~\ref{iv:cont:memoria-natural} implies that \(d_{\mathrm{bar}}\) commutes with \(\partial_\Gamma\); the factor \((-1)^q\) cancels the cross-terms of the square. Thus \(D^2=0\). Compatibility is proved on path generators and is not introduced through a label asserting membership in a complex.
+
+Terminal evaluation does not require choosing a particular history either. For each continuation \(h\), the effective composition of its updates is applied. The result preserves the pair consisting of \(h\) and its readout, with its multiplicity. If \(k<\ell<N\), continuations decompose as a disjoint union of prefixes up to \(\ell\) and their continuations up to \(N\). Proposition~\ref{iv:cont:concatenacion} proves that direct evaluation and evaluation of these two parts produce the same readout. This gives the terminal naturality square.
+
+Path modules, incidences, memory transport and their differentials arise from the same prolongations. Their assembly does not consist of adding five coordinates to a state that would then be preserved by definition: their relations are constructed through sums, boundaries and effective compositions, and verified on their generators.
+
+\subsection{Determinants, limit and arithmetic readout}
+\label{iv:cont:determinantes}
+At each residence, the free local complex \(\Gamma\) admits its graded determinant line
+
+\[
+\operatorname{Det}\Gamma=
+\bigotimes_r\left(\bigwedge^{\mathrm{rk}\Gamma_r}\Gamma_r\right)^{(-1)^r}.
+\]
+The total assembly of the preceding subsection, in turn, has modules \(\operatorname{Tot}_d\mathcal B=\bigoplus_{q+r=d}\mathcal B_{q,r}\). At finite horizon and over the same ring, these are free of finite rank and only finitely many are nonzero. Its line is
+\[
+\operatorname{Det}(\operatorname{Tot}\mathcal B)=
+\bigotimes_{q,r}
+\left(\bigwedge^{\operatorname{rk}\mathcal B_{q,r}}
+\mathcal B_{q,r}\right)^{(-1)^{q+r}}.
+\]
+This formula follows from direct-sum decomposition in each degree. It distinguishes the local complex's line from that of assembly with all paths; their bases are ordered through the preserved labels. Modular reduction commutes with these exterior powers because the modules and their bases arise from the same free integer modules at fixed horizon.
+The line is defined by the modules and their degrees, both over \(\mathbb Z\) and after reduction to \(A_N\); a negative exponent denotes the dual module. A nonzero numerical torsion additionally requires specifying the complex over a field, its bases and the relevant homology identifications. To compute Smith factors, the integer matrix produced before reduction is used, not an arbitrary lift of a modular matrix. A square integer block with nonzero determinant is invertible over \(\mathbb Q\); its reduction is invertible over \(A_N\) only when that determinant is a unit, that is, when it is not divisible by \(3\). Refinement of memories and incidences allows stability of the relevant invariant factors to be formulated and checked; these conditions do not follow from existence of the determinant line.
+
+Passage to the limit preserves compatible inverse systems of residues, histories and their multiplicities. The squares proved in the preceding subsections remain commutative because their maps are given by the same formulas at every level. For an Archimedean coordinate, the additional step is to express nonempty cylindrical intervals, compatible by inclusion and with diameter tending to zero. Their nested compact closures have a one-point intersection: existence follows from compactness and uniqueness from the diameter bound. This is the value of the limit readout. If the intervals are half-open, the point may belong only to their closures; the boundary representation rule then determines its positional expression. The value does not replace the history producing it. The other representation preserves the incidences of the same state. The two destinations share their origin without thereby receiving the same information.
+
+In the following chapters, the coinductive regions, dodecaphasic register and exceptional incidence are expressed from that substrate through their respective maps. The Hilbert-space realization subsequently preserves phase labels and specifies its own unital inclusion; duality and the screens act on the codomains constructed there. The joint operations brought together here transmit histories, sheets, orientation and memory to these representations. Identifying a concrete functional with an external analytic form in turn requires writing its action on generators and verifying its inner products: the conservation identities of this chapter do not replace that composition.
+
+\subsection{Provenance, verification and scope}
+\label{iv:cont:mapa-correlativo}
+% RESULTADO_RECUPERADO: 04b2_operaciones_intrinsecas_correlativas.tex,
+% eq:pdfv2-cor-accion-sp/sol/gau/coh/det and eq:pdfv2-cor-memorias.
+% The internal marks sp/sol/gau/coh/det correspond, in that order,
+% to the following five rows; they are not five independent domains.
+The five operations are recognized by their action on the same
+histories and by the relations proved in the preceding subsections.
+The affine memory transport \(U_\alpha\) and linear
+history transport \(\mathcal U_k\) have the respective domains of
+Sections~\ref{iv:cont:historias}
+and~\ref{iv:cont:transporte}. The sheet grading is
+\(\sigma_k=P_k-Q_k\). For a history
+\(h_j=(\varepsilon_1,\ldots,\varepsilon_j)\), accumulation of the
+balance is made explicit by
+\[
+ M_0^\pm=0,\qquad
+ M_k^\pm(h_k)=\sum_{j=1}^k b^\pm(h_j),\qquad
+ M_{k+1}^\pm(h_k\varepsilon)
+ =M_k^\pm(h_k)+b^\pm(h_k\varepsilon).
+\]
+Each summand is the signed readout of the corresponding prefix,
+defined in Section~\ref{iv:cont:balance}. Separating the last
+summand proves the update; the identities
+\(M_k^+-M_k^-=\sum_{j=1}^kb(h_j)\) and
+\(M_k^++M_k^-=\sum_{j=1}^k|b(h_j)|\) follow from the
+definitions of the positive and negative parts. Accumulation and
+conditional cancellation are thus distinct operations on the
+same contributions.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{.21\linewidth}p{.48\linewidth}p{.23\linewidth}@{}}
+\toprule
+Joint operation & Objects and effective action & Development and proof\\
+\midrule
+Sheet transport and grading
+& \(\mathcal U_k:\ell^2(\widehat X_k)\to
+\ell^2(\widehat X_{k+1})\), with \(\widehat X_k\) consisting of
+lifted histories; \(\sigma_k=P_k-Q_k\), \(A_k\) and
+\(\eta_k\) preserve or interchange the current sheet.
+& Section~\ref{iv:cont:transporte}; Proposition~\ref{iv:cont:gram}
+and Theorem~\ref{iv:cont:terminal}.\\[5pt]
+Balance, cancellation and memory
+& \(b:X_k\to\ZZ\), \(b^\pm:X_k\to\mathbb N_0\);
+accumulation \(M_k^\pm\) over prefixes and cancellation
+\(\kappa_{\mathrm{can}}=(E|b_f|-|Eb_f|)/2\) when publishing
+the conditional average.
+& Section~\ref{iv:cont:balance};
+Proposition~\ref{iv:cont:cancelacion}.\\[5pt]
+Ternary sheet incidence
+& \(B:\FF_3^4\to\FF_3^6\),
+\((Ba)_{\{L,L'\}}=a_L+a_{L'}\); the full ambient space
+of \(q\) is preserved, with \(sB=0\) and \(W(q+Ba)=W(q)\).
+& First part of
+Section~\ref{iv:cont:incidencia-rectangular}.\\[5pt]
+Ports and rectangular complex
+& \(\kappa:A_N^{I_k}\oplus A_N^{J_k}\to
+A_N^{I_k\times J_k}\), \(\kappa(u,v)_{ij}=u_i-v_j\);
+the difference \(\delta\) and precomposition \(L_k\)
+preserve labels and their multiplicities.
+& Propositions~\ref{iv:cont:rectangular-exacta}
+and~\ref{iv:rectangular-natural}.\\[5pt]
+Cellular memory, filling and determinant line
+& \(\Psi_\alpha:\Gamma_y\to\Gamma_{y'}\),
+\(K_\alpha\in\Gamma_{y',2}\),
+\(\partial h_*=z^--z^+\); the lines
+\(\operatorname{Det}\Gamma\) and
+\(\operatorname{Det}(\operatorname{Tot}\mathcal B)\)
+are formed on the corresponding based complexes.
+& Sections~\ref{iv:cont:memoria}--\ref{iv:cont:determinantes};
+Propositions~\ref{iv:cont:memoria-natural}
+and~\ref{iv:cont:memoria-homologia}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The table identifies five actions of one construction: each
+prefix preserves its sheets, orientation, residues, quotients, memory
+and terminal prolongations. Port precomposition takes
+coordinates from one level to its refinement; coefficient reduction
+takes \(A_{N+1}\) to \(A_N\). Their directions and domains are
+distinct, and their commutative squares are made explicit in
+Proposition~\ref{iv:rectangular-natural}. The assembly in
+Section~\ref{iv:cont:ensamblaje} simultaneously uses
+terminal continuations and transport of the memory complex;
+its composition formulas bring together the table's actions on the
+same history system. Reading a determinant line
+as a scalar preserves the conditions on bases, homology and
+nonsingularity in Section~\ref{iv:cont:determinantes}.
+
+This development brings together the constructions of state, tree and common measure; the correlative intrinsic operations; and terminal assembly with naturality and limit proved in this section. Their balance, incidence and memory identities are incorporated, with proofs within this chapter. The five continuum constructions are maintained as operations on the same tree. The exposition extends their local proofs and makes explicit the conditions of each specialization: isometric transport, uniform weights, terminal extinction and nonsingularity of a determinantal block.
+
+The accompanying checker compares exact instances of the cocycles, weighted cancellation, rectangular sequence and memory complex. These checks accompany the text's general proofs and verify the operators defined here in their respective domains. The subsequent passage towards exceptional representations and the Hilbert-space realization preserves their actions on generators: Section~\ref{iv:hilbert} specifies the phase fibre, Weyl operators and inclusions determining their closures. Documentary preservation and finite checks retain their function of traceability and comparison for these proofs.

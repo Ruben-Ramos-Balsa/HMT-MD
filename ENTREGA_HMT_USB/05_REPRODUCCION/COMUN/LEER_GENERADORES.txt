@@ -1,0 +1,156 @@
+REPRODUCCIÓN FOCAL / FOCAL REPRODUCTION / REPRODUCTION CIBLÉE
+
+ES — El lanzador conserva las fuentes originales byte a byte y adapta sólo
+sus rutas en memoria. --plan comprueba existencia, SHA-256 y sintaxis, sin
+importar ni ejecutar ciencia. Ejecutar requiere una carpeta nueva fuera de
+toda la entrega. Python 3.10 o posterior y su biblioteca estándar; sin Lean,
+Mathlib, instalación de paquetes ni conexión de red para estas cuatro unidades.
+
+EN — The launcher preserves original source bytes and changes only in-memory
+path bindings. --plan checks existence, SHA-256 and syntax without importing
+or running scientific code. Execution requires a new folder outside the
+entire delivery. Python 3.10+ and its standard library are sufficient; no Lean,
+Mathlib, package installation or network connection for these four units.
+
+FR — Le lanceur conserve les sources originales octet par octet et n’adapte
+que les chemins en mémoire. --plan contrôle existence, SHA-256 et syntaxe sans
+importer ni exécuter de code scientifique. L’exécution exige un nouveau dossier
+extérieur à la livraison. Python 3.10+ et sa bibliothèque standard suffisent ;
+aucun Lean, Mathlib, ajout de paquet ou réseau pour ces quatre unités.
+
+COMPROBAR / CHECK / VÉRIFIER
+Desde la raíz de la entrega / From the delivery root / Depuis sa racine :
+
+  python3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit all --plan
+
+Windows PowerShell :
+
+  py -3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit all --plan
+
+El resultado PASS_STATIC_PLANS sólo acredita estas rutas/huellas y sintaxis;
+no significa que se haya repetido el cálculo ni comprobado nuevas matemáticas.
+PASS_STATIC_PLANS validates only these paths/hashes and syntax, not a rerun or
+a new mathematical verification. PASS_STATIC_PLANS ne certifie que chemins,
+empreintes et syntaxe, sans nouveau calcul ni validation mathématique.
+
+EJECUTAR / RUN / EXÉCUTER
+Elegir UNA unidad y una carpeta nueva externa / Choose ONE unit and a new
+external folder / Choisir UNE unité et un nouveau dossier extérieur :
+
+  python3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit regional --output-dir /ruta/externa/regional_nuevo
+  python3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit n69 --output-dir /ruta/externa/n69_nuevo
+  python3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit refinamiento_carta --output-dir /ruta/externa/carta_nueva
+  python3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit rombo --output-dir /tmp/hmt_rombo_nuevo
+
+Windows PowerShell (adaptar la carpeta / adapt the folder / adapter le dossier) :
+
+  py -3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit n69 --output-dir C:/HMT/resultados_n69_nuevos
+  py -3 -I -S 05_REPRODUCCION/COMUN/reproducir_generadores_portable.py --unit rombo --output-dir C:/HMT/rombo_nuevo
+
+No usar -O: se conservan los assert del original de refinamiento. La carpeta
+de salida no debe existir. El lanzador rechaza destinos dentro de la entrega.
+Do not use -O: the original refinement assertions are retained. The output
+folder must not exist. Delivery-internal destinations are refused.
+Ne pas utiliser -O : les assertions originales sont conservées. Le dossier de
+sortie ne doit pas exister. Les destinations dans la livraison sont refusées.
+
+UNIDADES / UNITS / UNITÉS
+
+regional:
+  Fuente / Source : CERTIFICADOS_K/lectura_conjunta/python/lectores_regionales.py
+  main() original; rutas ROOT_CERTIFICATE, FINITE_R36_CONTROL y OUTPUT adaptadas.
+  Salida / Output / Sortie : CERTIFICADO_SELECTOR_GLOBAL.json.
+  El control R36 es posterior; no se transforma en entrada generativa.
+  The R36 control remains posterior, not a generating input.
+  Le contrôle R36 reste postérieur, non une entrée génératrice.
+
+n69:
+  Fuente / Source : CERTIFICADOS_K/lectura_conjunta/python/regenerate_n69_original.py
+  main() original; rutas READER, SIGNATURE_OWNER y REFERENCE adaptadas.
+  Salidas / Outputs / Sorties : N69_REGENERATED.csv y N69_REGENERATION.json.
+  La tabla de comparación se lee después de generar, como en el original.
+  The comparison table is read after generation, as in the original.
+  La table de comparaison est lue après génération, comme dans l’original.
+
+refinamiento_carta:
+  Se llama run() del original 22_verificar_refinamiento_cambio_carta.py.
+  Sólo cambia OWNER hacia REFINAMIENTO_CARTA/construir_libro_pleno.py.
+  Salida / Output / Sortie : REFINAMIENTO_CAMBIO_CARTA.json.
+  El consumidor extrae por AST require/encode_trits/Cylinder; no ejecuta la
+  campaña del propietario. Conserva los ejemplos racionales y el alcance focal:
+  no certifica selección de constantes ni admisibilidad global.
+  The original consumer extracts require/encode_trits/Cylinder by AST without
+  running the owner campaign. Explicit rational fixtures and focal scope remain
+  unchanged; it does not certify constant selection or global admissibility.
+  Le consommateur extrait require/encode_trits/Cylinder par AST sans lancer
+  la campagne propriétaire. Les exemples rationnels et la portée ciblée restent
+  inchangés ; ni sélection des constantes ni admissibilité globale ne sont certifiées.
+
+rombo — CONTROL HISTÓRICO / HISTORICAL CONTROL / CONTRÔLE HISTORIQUE:
+  Fuente conservada / Preserved source / Source conservée:
+  ../REFERENCIAS/TRATADO/evidencia/complementaria/lectura_dodecafasica/rombo_nueve_fases/verificar_rombo_nueve_fases.py
+  main() original; no es un generador vigente ni cambia la autoridad CURRENT.
+  Usa sólo la instantánea CURRENT 2026-07-22.2 fijada por SHA-256. Sus capas
+  finitas, condicionadas a primitivas y de reconocimiento posterior no cambian.
+  Los 16 insumos se autentican: ocho reutilizan archivos ya conservados y ocho
+  se encuentran en ROMBO_HISTORICO/entradas. ENTRADAS.json registra sus nombres
+  originales, rutas actuales y huellas. Cinco fuentes de procedencia sólo se
+  leen para obtener su hash; no se ejecutan ni se importan.
+  Al ejecutar, el lanzador copia los 16 insumos byte a byte a una vista i/ de
+  la carpeta externa y enlaza ROOT/HERE/CERTIFICATE y los Path de entrada.
+  Conserva las claves originales source_sha256, el separador / y los finales
+  de línea LF del certificado. Compara el nuevo certificado byte a byte con
+  el conservado; una diferencia se registra como fallo, no como nuevo PASS.
+  No se ha realizado este cálculo durante la preparación de la entrega.
+
+  Original main(); this is not a current generator or a change to CURRENT.
+  Only the SHA-pinned historical 2026-07-22.2 snapshot is used. All original
+  finite, primitive-conditioned and posterior-recognition layers remain.
+  Sixteen authenticated inputs (eight reused, eight in ROMBO_HISTORICO/entradas)
+  are copied unchanged into an external historical-name view i/. ROOT, HERE,
+  CERTIFICATE and input Paths are rebound; historical source_sha256 keys,
+  forward slashes and LF endings are retained. Five provenance sources are
+  hashed only, never imported or run. The newly written certificate must match
+  the preserved one byte for byte. This calculation was not run in preparation.
+
+  main() original ; ni générateur actuel ni changement de l’autorité CURRENT.
+  Seule l’instantané historique 2026-07-22.2 fixé par SHA est utilisé. Les couches
+  finies, conditionnées par des primitives et de reconnaissance postérieure
+  restent inchangées. Les seize entrées authentifiées (huit réutilisées, huit
+  dans ROMBO_HISTORICO/entradas) sont copiées à l’identique dans une vue externe
+  i/. Seuls ROOT/HERE/CERTIFICATE et les chemins d’entrée sont réaffectés.
+  Les clés source_sha256 historiques, / et les fins de ligne LF sont conservés.
+  Cinq sources de provenance sont seulement hachées, jamais importées ni
+  exécutées. Le nouveau certificat doit être identique à celui conservé.
+  Ce calcul n’a pas été exécuté pendant la préparation.
+
+  Salida / Output / Sortie : CERTIFICADO_ROMBO_NUEVE_FASES.json.
+  Rombo requiere una salida corta: su ruta absoluta no debe superar 79
+  caracteres; el lanzador comprueba que la vista histórica no supere 259.
+  Rombo needs a short output root (at most 79 characters); historical view
+  paths are checked against 259 characters. Rombo exige une racine de sortie
+  courte (79 caractères au plus) ; les chemins sont limités à 259 caractères.
+
+Cada ejecución escribe RECIBO_ADAPTADOR.json sólo en la carpeta externa.
+Each run writes RECIBO_ADAPTADOR.json only in the external folder.
+Chaque exécution écrit RECIBO_ADAPTADOR.json uniquement dans le dossier extérieur.
+
+Para usar una copia del lanzador fuera de la entrega, añadir --usb-root seguido
+de la raíz de la entrega / For a launcher outside the delivery, add --usb-root
+and the delivery root / Hors livraison, ajouter --usb-root et sa racine.
+
+--input-overlay es sólo para --plan durante integración: busca en staging
+únicamente archivos aún ausentes, sin sustituir archivos ya instalados.
+--input-overlay is a plan-only integration option for staged files absent from
+the delivery; existing files are not replaced. --input-overlay est réservé à
+--plan : fichiers en staging encore absents, sans remplacer les fichiers livrés.
+
+Verificación de esta adaptación: se han comprobado sintaxis y --plan contra
+la entrega y los insumos exactos en staging; no se ejecutaron las cuatro unidades ni se
+probó Windows. Los recibos/PDF/CSV/JSON científicos originales se conservan.
+Validation of this adapter: syntax and --plan checked against the delivery and
+exact staged inputs; the four scientific runs and Windows execution were not performed. Original
+scientific receipts/PDF/CSV/JSON remain preserved.
+Validation de l’adaptation : syntaxe et --plan contrôlés sur la livraison et les
+entrées exactes en staging ; les quatre calculs et l’exécution Windows n’ont pas été effectués. Les reçus,
+PDF/CSV/JSON scientifiques originaux sont conservés.

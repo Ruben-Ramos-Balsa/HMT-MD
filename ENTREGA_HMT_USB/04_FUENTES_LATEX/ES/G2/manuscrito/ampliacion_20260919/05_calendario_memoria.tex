@@ -1,0 +1,455 @@
+\section{Conexión nonádica, extensión del calendario y memoria de transporte}
+\label{cap:calendario}
+
+La cronología del TPK combina una fase observable, un registro dodecafásico
+y una memoria de las transiciones realizadas. Su relación se determina por
+la composición de los desplazamientos. El paso por la frontera de fase
+incrementa un cociente; la conservación de ese cociente distingue los
+retornos sucesivos. Esta estructura proporciona la base aritmética de la
+holonomía nonádica y de su representación bilateral.
+
+Conviene fijar desde el comienzo los tres objetos que intervienen. La fase
+pertenece a un ciclo de nueve posiciones. El calendario finito retiene doce
+vueltas de ese ciclo. La historia enriquecida conserva, además, el número
+entero de vueltas y los registros de posición, orientación, hoja, acarreo y
+frontera. Cada reducción conserva una observación determinada de la misma
+evolución; la información disponible se precisa mediante sus proyecciones.
+
+\subsection{Incidencia de los modos aritméticos}
+\label{sec:cal-incidencia}
+
+\subsubsection{Selección, permanencia y sucesión cíclica}
+
+Sean $\Sigma$ y $\Pi$ los modos correspondientes a las evaluaciones aditiva
+y multiplicativa de APP. El selector de fase recorre, en cada bloque de tres
+eventos, la sucesión $(+1,-1,0)$. Su acción sobre el modo $m$ es
+\[
+ +1:m\longmapsto\Sigma,\qquad
+ -1:m\longmapsto\Pi,\qquad
+ 0:m\longmapsto m.
+\]
+El evento neutral conserva el modo precedente. Partiendo del cierre cíclico
+del bloque, los tres modos registrados son, por tanto,
+\[
+ (\Sigma,\Pi,\Pi).
+\]
+La tercera posición conserva la etiqueta de modo multiplicativo
+seleccionada en el evento anterior. En el emisor, ese evento neutral
+incrementa únicamente el contador $Z$. Esta distinción permite
+construir la incidencia directamente desde las transiciones del calendario.
+
+\begin{proposicion}[Incidencia modal del bloque trítico]
+\label{prop:cal-incidencia}
+Al contar los pares consecutivos del bloque, incluido su cierre, y ordenar
+los modos como $(\Sigma,\Pi)$, se obtiene
+\begin{equation}
+ F_{\rm av}=\begin{pmatrix}0&1\\1&1\end{pmatrix}.
+ \label{eq:cal-incidencia}
+\end{equation}
+En una sucesión de $3q$ eventos compuesta por $q$ repeticiones del bloque,
+el recuento de transiciones es $qF_{\rm av}$.
+\end{proposicion}
+\begin{proof}
+Los pares ordenados son $\Sigma\to\Pi$, $\Pi\to\Pi$ y
+$\Pi\to\Sigma$. Cada uno aparece una vez; $\Sigma\to\Sigma$
+aparece cero veces. Éstas son, respectivamente, las entradas superior
+derecha, inferior derecha, inferior izquierda y superior izquierda de la
+matriz. Cada repetición añade exactamente los mismos tres pares, incluido
+el enlace desde el último modo de un bloque hasta el primero del siguiente.
+La suma de los recuentos es $qF_{\rm av}$.
+\end{proof}
+
+Las longitudes $9$, $27$ y $108$ producen así $3F_{\rm av}$,
+$9F_{\rm av}$ y $36F_{\rm av}$. Estas matrices cuentan eventos de un
+itinerario periódico ya fijado. Las potencias de $F_{\rm av}$ cuentan
+concatenaciones admitidas por su incidencia. Se trata de dos operaciones
+matemáticas distintas sobre la misma matriz: suma de ocurrencias y
+composición de transiciones.
+
+\subsubsection{Concatenación de incidencias y recurrencia inducida}
+
+Definamos enteros $a_0=0$, $a_1=1$ y
+$a_{n+1}=a_n+a_{n-1}$ para $n\geq1$. Su aparición se obtiene de la
+multiplicación de la matriz ya construida.
+
+\begin{proposicion}[Potencias de la incidencia modal]
+\label{prop:cal-potencias}
+Para todo $n\geq1$,
+\[
+ F_{\rm av}^{\,n}=
+ \begin{pmatrix}a_{n-1}&a_n\\a_n&a_{n+1}\end{pmatrix},
+ \qquad
+ a_{n-1}a_{n+1}-a_n^2=(-1)^n.
+\]
+\end{proposicion}
+\begin{proof}
+Para $n=1$, la fórmula reproduce \eqref{eq:cal-incidencia} porque
+$a_2=1$. Si la fórmula vale para $n$, la multiplicación por $F_{\rm av}$
+da
+\[
+ \begin{pmatrix}
+ a_n&a_{n-1}+a_n\\a_{n+1}&a_n+a_{n+1}
+ \end{pmatrix}
+ =\begin{pmatrix}a_n&a_{n+1}\\a_{n+1}&a_{n+2}\end{pmatrix}.
+\]
+La inducción prueba la primera identidad. Tomando determinantes y usando
+$\det F_{\rm av}=-1$ se obtiene la segunda.
+\end{proof}
+
+En particular, $F_{\rm av}^{2}=F_{\rm av}+I$. Esta identidad permite
+normalizar un generador hiperbólico mediante
+\begin{equation}
+ J_{-1}=\frac{2F_{\rm av}^{2}-3I}{\sqrt5}
+       =\frac{2F_{\rm av}-I}{\sqrt5},
+ \qquad J_{-1}^{2}=I.
+ \label{eq:cal-generador-hiperbolico}
+\end{equation}
+En efecto, $(2F_{\rm av}-I)^2=4(F_{\rm av}+I)-4F_{\rm av}+I=5I$.
+El coeficiente $5$ procede aquí de la identidad matricial. La representación
+cuadrática y la extensión de Euler utilizan este generador después de su
+construcción modal.
+
+La recurrencia $(a_n)$ admite posteriormente su identificación con la
+sucesión de Fibonacci. El orden demostrativo de este apartado es explícito:
+selector trítico, sucesión de modos, conteo de aristas, incidencia y
+recurrencia. La identificación de la sucesión conserva ese orden. La
+generación regional coinductiva tiene además sus propios emisores, filtros,
+elevaciones y condiciones de supervivencia; la recurrencia modal precisa
+una de sus realizaciones estructurales.
+
+\subsection{Extensión aritmética del calendario}
+
+\subsubsection{Descomposición en fase y posición dodecafásica}
+
+Escribimos $C_q=\ZZ/q\ZZ$ para el grupo aditivo de residuos módulo $q$.
+La posición de un calendario de $108=12\cdot9$ eventos posee una
+descomposición única
+\[
+ t=9b+r,\qquad 0\leq b<12,\quad0\leq r<9,
+\]
+para el representante $0\leq t<108$. La coordenada $r$ es la fase
+nonádica; $b$ identifica la posición de la vuelta en el registro
+dodecafásico. La escala $108$ reúne esos dos registros según la ley de
+composición con acarreo.
+
+\begin{teorema}[Extensión del calendario con acarreo]
+\label{thm:cal-extension}
+Las aplicaciones
+\[
+ \iota:C_{12}\longrightarrow C_{108},\quad[b]\longmapsto[9b],
+ \qquad p:C_{108}\longrightarrow C_9,\quad[t]\longmapsto[t]_9
+\]
+determinan una sucesión exacta
+\begin{equation}
+ 0\longrightarrow C_{12}\xrightarrow{\ \iota\ }C_{108}
+ \xrightarrow{\ p\ }C_9\longrightarrow0.
+ \label{eq:cal-extension}
+\end{equation}
+En las coordenadas $(b,r)$, la adición viene dada por
+\begin{equation}
+ (b,r)\oplus(b',r')=
+ \left(\left[b+b'+\left\lfloor\frac{r+r'}9\right\rfloor\right]_{12},
+ [r+r']_9\right).
+ \label{eq:cal-ley-grupo}
+\end{equation}
+Esta extensión carece de sección homomorfa.
+\end{teorema}
+\begin{proof}
+La igualdad $[9b]=0$ en $C_{108}$ equivale a $12\mid b$, por lo que
+$\iota$ es inyectiva. La aplicación $p$ es sobreyectiva y su núcleo
+consiste exactamente en las clases múltiplos de nueve, imagen de
+$\iota$. Esto demuestra la exactitud.
+
+Para sumar dos representantes, se escribe
+\[
+ 9b+r+9b'+r'
+ =9\left(b+b'+\left\lfloor\frac{r+r'}9\right\rfloor\right)
+   +[r+r']_9.
+\]
+La reducción del primer coeficiente módulo doce da
+\eqref{eq:cal-ley-grupo}. Supongamos ahora que existe una sección
+homomorfa $s:C_9\to C_{108}$. El representante $a$ de $s([1])$
+satisface $a\equiv1\pmod9$ y $9a\equiv0\pmod{108}$. La segunda
+condición implica $12\mid a$, de donde $a\equiv0\pmod3$; la primera
+implica $a\equiv1\pmod3$. La contradicción demuestra la última
+afirmación.
+\end{proof}
+
+\subsubsection{Cociclo, inversa y restitución}
+
+El término
+\[
+ \kappa_9(r,s)=\left\lfloor\frac{r+s}9\right\rfloor,
+ \qquad 0\leq r,s<9,
+\]
+registra el cruce del umbral. Su identidad de composición es
+\begin{equation}
+ \kappa_9(r,s)+\kappa_9([r+s]_9,u)
+ =\kappa_9(s,u)+\kappa_9(r,[s+u]_9).
+ \label{eq:cal-cociclo}
+\end{equation}
+Ambos lados son $\lfloor(r+s+u)/9\rfloor$: basta sustituir
+$r+s=9\kappa_9(r,s)+[r+s]_9$, o la descomposición análoga de $s+u$.
+La identidad asegura que el cociente acumulado es independiente de la
+parentización de tres sumandos.
+
+La inversa de $(b,r)$ queda determinada por
+\[
+ -(b,r)=
+ \begin{cases}
+ ([-b]_{12},0),&r=0,\\
+ ([-b-1]_{12},9-r),&1\leq r<9.
+ \end{cases}
+\]
+El término adicional $-1$ representa la corrección exacta de frontera al
+invertir un residuo interior. Por ejemplo, el representante $t=17$ tiene
+coordenadas $(1,8)$. Su inversa es $(-2,1)$ en las coordenadas con
+primer componente módulo doce: $9(-2)+1=-17$. El residuo invertido y
+el cociente corregido restituyen conjuntamente el entero opuesto.
+
+\subsection{Elevación entera y holonomía nonádica}
+
+\subsubsection{Fase finita y contador de vueltas}
+
+La división euclídea se extiende a todo $k\in\ZZ$:
+\[
+ k=9m+r,\qquad m=\left\lfloor\frac k9\right\rfloor,
+ \quad0\leq r<9.
+\]
+El par $(m,r)$ determina exactamente $k$. Su reducción
+$(m,r)\mapsto([m]_{12},r)$ recupera el calendario finito. En la
+elevación entera, una vuelta de nueve pasos actúa por
+\begin{equation}
+ (r,m)\longmapsto(r,m+1).
+ \label{eq:cal-vuelta-entera}
+\end{equation}
+Doce vueltas restituyen las dos coordenadas finitas y trasladan el
+contador entero en doce unidades. La memoria enriquecida incluye ese
+contador junto con el registro ordenado de las transiciones.
+
+\subsubsection{Composición de prolongaciones admisibles}
+
+En el nivel $k$, representamos el estado regional enriquecido por
+\[
+ \widehat x_k=(B_k,C_k,p_k,c_k,\Sigma_k,W_k,g_k,m_k).
+\]
+$B_k$ reúne los bloques regionales; $C_k$ es el cilindro compatible;
+$p_k$ es el prefijo; $c_k$ registra el acarreo; $\Sigma_k$ conserva la
+frontera y $W_k$ la incidencia. Las últimas coordenadas son la fase y
+el contador de vueltas. Los operadores de prolongación actúan sobre
+este estado completo, con las dependencias de cada componente.
+
+\begin{definicion}[Holonomía nonádica del sistema de prolongación]
+Sean $\mathcal R_k\subseteq\widehat X_k\times\widehat X_{k+1}$
+las relaciones admisibles producidas por el TPK. La composición de una
+vuelta es
+\[
+ \Gamma_{9,k}=\mathcal R_{k+8}\circ\cdots\circ\mathcal R_k.
+\]
+Para $s\geq1$, la composición de $s$ vueltas es
+\[
+ \Gamma_{9s,k}=
+ \Gamma_{9,k+9(s-1)}\circ\cdots\circ\Gamma_{9,k}.
+\]
+\end{definicion}
+
+La composición relacional retiene las prolongaciones que satisfacen
+simultáneamente las restricciones del estado. Una trayectoria admisible
+individualiza una sucesión de tales transiciones. La notación distingue
+la relación de admisibilidad, la trayectoria elegida y la observación
+finita de su fase.
+
+\begin{proposicion}[Retorno de fase y avance de memoria]
+\label{prop:cal-memoria}
+En una trayectoria cuya regla de vuelta es
+$g_{k+9}=g_k$, $m_{k+9}=m_k+1$, toda composición admisible de $s$
+vueltas satisface
+\[
+ g_{k+9s}=g_k,\qquad m_{k+9s}=m_k+s,
+ \qquad [m_{k+9s}]_{12}=[m_k+s]_{12}.
+\]
+\end{proposicion}
+\begin{proof}
+El caso $s=1$ es la regla de vuelta. Al componer una vuelta adicional
+con la trayectoria ya construida, la fase se conserva y el contador
+recibe otra unidad. La inducción demuestra las dos primeras igualdades;
+la proyección módulo doce da la tercera.
+\end{proof}
+
+El registro permite reconocer cada retorno como una transformación de
+la historia. La fase observable expresa una periodicidad, mientras que
+el contador y las coordenadas de frontera distinguen sus realizaciones
+sucesivas. Las demostraciones de prolongación regional especifican
+adicionalmente qué cilindros sobreviven y qué prefijos quedan determinados.
+
+\subsection{Representación bilateral del transporte de fase}
+
+\subsubsection{Desplazamiento unitario y grupo de vueltas}
+
+La elevación del índice admite una representación en
+$\mathcal H_{\rm ind}=\ell^2(\ZZ)$. Su base ortonormal se escribe
+$e_k=e_{r,m}$ cuando $k=9m+r$. Definimos $Te_k=e_{k+1}$, es decir,
+\[
+ Te_{r,m}=\begin{cases}
+ e_{r+1,m},&r<8,\\e_{0,m+1},&r=8.
+ \end{cases}
+\]
+La transformación permuta biyectivamente una base ortonormal y se
+extiende por continuidad a un operador unitario. La inversa lleva
+$e_{r,m}$ a $e_{r-1,m}$ cuando $r>0$ y lleva $e_{0,m}$ a
+$e_{8,m-1}$.
+
+\begin{teorema}[Representación fiel del contador de vueltas]
+\label{thm:cal-representacion}
+Sea $S=T^9$. Entonces
+\[
+ S^se_{r,m}=e_{r,m+s},\qquad s\in\ZZ.
+\]
+La aplicación $s\mapsto S^s$ es una representación unitaria fiel de
+$(\ZZ,+)$.
+\end{teorema}
+\begin{proof}
+Nueve pasos conservan el residuo y aumentan el cociente en una unidad.
+La misma identidad aplicada al inverso proporciona la fórmula para
+exponentes negativos. Las potencias satisfacen
+$S^{s+t}=S^sS^t$. Si $S^s=I$, la igualdad
+$e_{r,m+s}=e_{r,m}$ fuerza $s=0$ por la independencia de los vectores
+de la base. Esto prueba la fidelidad.
+\end{proof}
+
+El espacio de índices es una realización del contador. El espacio de
+estados del TPK incorpora además los datos aritméticos e incidenciales.
+La inversión unitaria del índice se aplica a su recubrimiento bilateral;
+la inversión de una transición completa utiliza el archivo de esa
+transición y sus condiciones de admisibilidad.
+
+\subsubsection{Operador de memoria y corrección de frontera}
+
+Definamos, sobre los vectores de soporte finito,
+\[
+ D_Me_k=\left\lfloor\frac k9\right\rfloor e_k,
+ \qquad \mathcal Ie_k=e_{-k},
+ \qquad P_0e_k=\begin{cases}e_k,&9\mid k,\\0,&9\nmid k.\end{cases}
+\]
+Este dominio es denso y estable bajo las operaciones consideradas.
+
+\begin{proposicion}[Identidades de memoria e inversión]
+En dicho dominio se cumplen
+\begin{equation}
+ [D_M,S]=S,\qquad
+ \mathcal IT\mathcal I=T^{-1},\qquad
+ \mathcal ID_M\mathcal I=-D_M-(I-P_0).
+ \label{eq:cal-inversion}
+\end{equation}
+\end{proposicion}
+\begin{proof}
+Si $k=9m+r$, entonces
+$D_MS e_k=(m+1)e_{k+9}$ y $SD_Me_k=me_{k+9}$, lo que prueba
+el conmutador. La composición $\mathcal IT\mathcal I$ lleva
+$e_k$ a $e_{k-1}$. Finalmente,
+\[
+ \left\lfloor\frac{-k}9\right\rfloor
+ =\begin{cases}-m,&r=0,\\-m-1,&r>0.\end{cases}
+\]
+La acción diagonal del último miembro de \eqref{eq:cal-inversion}
+coincide con esa expresión en cada vector de la base. La linealidad
+concluye la demostración.
+\end{proof}
+
+La corrección $I-P_0$ localiza la contribución de frontera en las fases
+interiores. Al invertir el recorrido, el cociente y el residuo se
+transforman de manera conjunta. Esa identidad expresa aritméticamente
+la información que desaparece cuando se observa únicamente la fase.
+
+\subsection{Capacidad de refinamiento y vacancias aritméticas}
+
+\subsubsection{Comparación exacta de bloques ternarios y decimales}
+
+Un bloque de seis trits dispone de $3^6=729$ configuraciones en su
+espacio ambiente. Un bloque decimal de tres cifras dispone de $10^3=1000$
+posiciones. Sus cardinales definen una capacidad aritmética de
+codificación. Para $n\geq0$, sea
+\begin{equation}
+ \mathcal C_n=\max\{a\in\NN:1000^a\leq729^{n+1}\}.
+ \label{eq:cal-capacidad-entera}
+\end{equation}
+La definición compara enteros y puede evaluarse exactamente. En una
+representación logarítmica posterior,
+\[
+ \rho=\log_{1000}729=\log_{10}9,\qquad
+ \delta=1-\rho,\qquad
+ \mathcal C_n=\lfloor(n+1)\rho\rfloor.
+\]
+La razón $\rho$ pertenece a $(0,1)$ y es irracional. Si
+$\rho=p/q$ con enteros positivos, se tendría $10^p=9^q$;
+la factorización prima de ambos miembros lo impide.
+
+\begin{definicion}[Registro de vacancias de capacidad]
+Se definen
+\[
+ Z_n=\lfloor(n+1)\delta\rfloor,\qquad
+ z_n=\lfloor(n+1)\delta\rfloor-\lfloor n\delta\rfloor,
+ \quad n\geq0.
+\]
+El valor $z_n\in\{0,1\}$ registra la retención de capacidad en el
+paso correspondiente. Se tiene $z_0=0$ en el origen elegido.
+\end{definicion}
+
+\begin{teorema}[Balance de capacidad y vacancias]
+\label{thm:cal-capacidad}
+Para $n\geq0$ en la primera identidad y $n\geq1$ en la segunda,
+\begin{equation}
+ \mathcal C_n+Z_n=n,
+ \qquad \mathcal C_n-\mathcal C_{n-1}=1-z_n.
+ \label{eq:cal-capacidad}
+\end{equation}
+En particular, para $0\leq a<b$,
+\[
+ \mathcal C_b-\mathcal C_a+\sum_{n=a+1}^{b}z_n=b-a.
+\]
+\end{teorema}
+\begin{proof}
+La irracionalidad de $\delta$ implica
+$\lceil(n+1)\delta\rceil=\lfloor(n+1)\delta\rfloor+1$.
+Por tanto,
+\[
+ \lfloor(n+1)(1-\delta)\rfloor
+ =n+1-\lceil(n+1)\delta\rceil=n-Z_n.
+\]
+La diferencia entre dos igualdades consecutivas da la segunda identidad
+para $n\geq1$. La suma telescópica demuestra la fórmula en un intervalo.
+\end{proof}
+
+El registro $Z_n$ puede obtenerse mediante $n-\mathcal C_n$,
+utilizando sólo la comparación entera
+\eqref{eq:cal-capacidad-entera}. Las funciones logarítmicas expresan
+la misma construcción en coordenadas analíticas. La primera retención
+de capacidad ocurre entre $n=20$ y $n=21$:
+\[
+ \mathcal C_{19}=19,\quad\mathcal C_{20}=20,\quad
+ \mathcal C_{21}=20,\quad\mathcal C_{22}=21.
+\]
+La historia recibe un bloque adicional mientras la capacidad decimal
+permanece constante. La vacancia registra precisamente ese desfase.
+
+\subsubsection{Diferenciación de los índices operativos}
+
+La fase del emisor finito, la fase de prolongación regional y la capacidad
+decimal pertenecen a índices declarados. La conexión nonádica conserva
+la fase tras nueve pasos de su propio índice; la vacancia conserva una
+capacidad durante un paso del índice de bloques. La comparación entre
+ambas se expresa por
+\[
+ [\mathcal C_n]_q=\bigl[[n]_q-[Z_n]_q\bigr]_q,
+ \qquad q=9\ \text{o}\ 108.
+\]
+El desfase depende del registro acumulado de vacancias. Conservarlo
+permite transformar una lectura de fase en la otra sin identificar
+indebidamente los dos calendarios.
+
+La estructura obtenida enlaza selección modal, composición del acarreo,
+holonomía y refinamiento. La memoria cumple funciones precisas en cada
+nivel: restituye cocientes, distingue vueltas, registra transiciones y
+controla la capacidad de codificación. Estas operaciones constituyen el
+soporte temporal y archivístico sobre el que actúan los lectores regionales
+y las realizaciones de conservación de la unidad.

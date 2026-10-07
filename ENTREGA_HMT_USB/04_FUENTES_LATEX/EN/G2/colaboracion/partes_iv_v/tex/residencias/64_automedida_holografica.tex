@@ -1,0 +1,418 @@
+% Propietario recuperado íntegro: observador, automedida y Stokes holográfico finito.
+% Notación propia del propietario original, preservada localmente para su consumo modular.
+\providecommand{\X}{\mathcal X}
+\providecommand{\Acal}{\mathfrak a}
+\providecommand{\bd}{\partial}
+\providecommand{\oneE}{\mathbf 1_E}
+
+\section{Algebraic foundations of phase sewing and self-measurement}
+
+\begin{definition}[Geometry of Phase Sewing]
+A \emph{phase-stitching
+geometry} is a system
+\[
+\X=(X,\oplus,\otimes,\tau,C_n,L,\mathfrak c,v),
+\]
+where (X) is a finite local support; \(\oplus\) and \(\otimes\) are its
+two internal transport laws; \(\tau:X\to D\) is the residual map;
+\(C_n\) is an oriented cycle; \(L\) is a lattice whose real space
+\(W=L\otimes_{\mathbb Z}\mathbb R\) carries a positive inner product;
+\(\mathfrak c\in\mathbb P(D^n)\) is a distinguished nontrivial residual
+class; and \(v\in L\) is its primitive representative in the fixed chamber.
+A transport \(\omega\in C^1(C_n;W)\) is \emph{admissible} when the harmonic
+mode of its decomposition belongs to the line
+\(\mathbb Rv\subset W\).
+\end{definition}
+
+\begin{theorem}[Exact harmonic decomposition on a cycle]
+\label{thm:hodge-cycle}
+For every (1)-cochain \(\omega\in C^1(C_n;W)\), there exists a unique
+decomposition
+\[
+  \omega=d\Phi+u\oneE,
+\]
+with \(\Phi\in C^0(C_n;W)\), normalizada by \(\Phi(0)=0\), and \(u\in W\).
+\end{theorem}
+
+\begin{proof}
+If \(e_0,\ldots,e_{n-1}\) are the oriented edges of the cycle, define
+\[
+ u=\frac1n\sum_{j=0}^{n-1}\omega(e_j),
+ \qquad y_j=\omega(e_j)-u.
+\]
+Then \(\sum_jy_j=0\). The partial sums
+\(\Phi(k)=\sum_{j=0}^{k-1}y_j\), with \(\Phi(0)=0\), determine a
+well-defined 0-cochain and verify \(d\Phi(e_j)=y_j\), including the
+final edge. For uniqueness,
+\(d\Phi+u\oneE=d\Psi+w\oneE\) yields, after summing over the cycle,
+\(n(w-u)=0\); therefore \(u=w\), and normalization eliminates the
+remaining constant from \(\Phi-\Psi\).
+\end{proof}
+
+\begin{definition}[Seam defect]
+The piecewise-continuous lift \(\Gamma_\omega:[0,1]\to W\) is fixed by
+\[
+ \Gamma_\omega\!\left(\frac{j+1}{n}\right)
+ -\Gamma_\omega\!\left(\frac jn\right)=\omega(e_j).
+\]
+Its stitching defect is
+\[
+ \bd\Gamma_\omega
+ =\Gamma_\omega(1)-\Gamma_\omega(0)
+ =\sum_{j=0}^{n-1}\omega(e_j).
+\]
+\end{definition}
+
+\begin{proposition}[Telescoping cancellation of the exact term]
+\label{prop:exact-vanish}
+For every (0)-cochain \(\Phi\), one has
+\[
+ \sum_{j=0}^{n-1}(d\Phi)(e_j)=0.
+\]
+Consequently, the stitching defect depends exclusively on the harmonic
+mode \(u\oneE\) of the decomposition of \cref{thm:hodge-cycle}.
+\end{proposition}
+
+\begin{proof}
+The sum of \(\Phi(j+1)-\Phi(j)\) telescopes over the cycle. Thus, if
+\(\omega=d\Phi+u\oneE\), then
+\(\bd\Gamma_\omega=nu\).
+\end{proof}
+
+\begin{theorem}[Universal Theorem of Sewing]
+\label{thm:universal-sewing}
+Let \(\X\) be a phase-stitching geometry, and let \(\omega\) be an
+admissible transport. There exists a unique real scalar \(\Acal_\X(\omega)\) such that
+\[
+ \bd\Gamma_\omega=\Acal_\X(\omega)v,
+ \qquad
+ \Acal_\X(\omega)
+ =\frac{\langle\bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}.
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:hodge-cycle}, \(\omega=d\Phi+u\oneE\), with unique \(u\).
+Admissibility provides a unique \(\lambda\in\mathbb R\) with
+\(u=\lambda v\). The \cref{prop:exact-vanish} gives
+\(\bd\Gamma_\omega=n\lambda v\); it suffices to define
+\(\Acal_\X(\omega)=n\lambda\) and project orthogonally onto
+\(\mathbb Rv\).
+\end{proof}
+
+\section{Joint observer--observable state, intrinsic self-measurement, and Stokes' holographic identity}\label{sec:observer-holo}
+
+This section makes explicit three claims that elsewhere in the manuscript appeared only in narrative form. The first is that the \emph{observer} does not introduce the invariant, but selects a polarization, a trivialization, and a reading orientation. The second is that the \emph{self-measure} is not a metaphor, but the unique normalized linear functional compatible with the residual boundary mode. The third is that the so-called \emph{holographic principle} admits, in this finite framework, an exact formulation through discrete Stokes: the same scalar can be read on the boundary as a seam defect or in the \emph{bulk} as projected total curvature.
+
+From a historical standpoint, these three components permit the classical notion of
+measurement to be reformulated. In standard metrology, a measurement is traceable when it can be related to a reference
+through a documented and unbroken chain of comparisons; and, since 2019, the SI has been defined
+by fixed values of constants of nature \cite{NISTTraceability2023,BIPMSI2019}.
+The present framework does not deny that scheme: it displaces it to a prior level, at which the
+"unit" is no longer first an external standard, but an internal residual mode. Measurement then ceases to
+be a comparison with an artifact and becomes a reading of an intrinsic closure.
+
+\subsection{The Observer as Polarization, Trivialization, and Orientation}
+
+The most stable geometric interpretation of the observer problem is as follows. The local support has at least two internal polarizations, one additive and the other multiplicative. In the standard language of finite quantum kinematics, both polarizations generate a Weyl--Heisenberg extension in which the central phase records the order of the transports \cite{Tolar2014,Vourdas2006}. The observer adds no new dynamics to the system; the observer selects a representative of the same transport class.
+
+\begin{definition}[Edge Observer]
+Let $\X=(X,\oplus,\otimes,\tau,C_n,L,\mathfrak c,v)$ be a phase-stitching geometry, and let
+$\omega\in C^1(C_n;W)$ be an admissible transport. A \emph{boundary observer} is a pair
+\[
+\mathcal O=(\varepsilon,\Phi),
+\qquad
+\varepsilon\in\{+1,-1\},
+\qquad
+\Phi\in C^0(C_n;W),
+\]
+that acts on $\omega$ by
+\[
+\omega^{\mathcal O}:=\varepsilon\,\omega+d\Phi.
+\]
+The sign $\varepsilon$ encodes the reading orientation, and the $0$-cochain $\Phi$ encodes the
+trivialization or choice of gauge.
+\end{definition}
+
+\begin{remark}
+At the local level, the choice between an additive reader and a multiplicative reader should be understood as a polarization of the same phase support. At the global boundary level, that choice is absorbed into the class of the observed $1$-cochain. The geometrically relevant object is therefore the cohomology class, rather than the particular representative.
+\end{remark}
+
+\begin{proposition}[Observer Covariance]\label{prop:observer-covariance}
+For every admissible transport $\omega$ and every boundary observer
+$\mathcal O=(\varepsilon,\Phi)$, one has
+\[
+\Acal_\X(\omega^{\mathcal O})=\varepsilon\,\Acal_\X(\omega).
+\]
+In particular, self-measurement is invariant under a change of trivialization and changes sign only when
+the orientation is reversed.
+\end{proposition}
+
+\begin{proof}
+Using the definition of seam defect and linearity, it is obtained
+\[
+\bd\Gamma_{\omega^{\mathcal O}}
+=
+\sum_{e\in C_n}\bigl(\varepsilon\,\omega(e)+(d\Phi)(e)\bigr)
+=
+\varepsilon\sum_{e\in C_n}\omega(e)+\sum_{e\in C_n}(d\Phi)(e).
+\]
+The sum of the exact term telescopes and equals $0$ by
+Proposition~\ref{prop:exact-vanish}. Hence
+\[
+\bd\Gamma_{\omega^{\mathcal O}}=\varepsilon\,\bd\Gamma_\omega.
+\]
+Projecting onto the residual line $\R v$ by means of the formula in
+Theorem~\ref{thm:universal-sewing}, one concludes
+\[
+\Acal_\X(\omega^{\mathcal O})
+=
+\frac{\langle \bd\Gamma_{\omega^{\mathcal O}},v\rangle}{\langle v,v\rangle}
+=
+\varepsilon\,\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}
+=
+\varepsilon\,\Acal_\X(\omega).
+\]
+\end{proof}
+
+\begin{corollary}[The observer does not create the invariant]\label{cor:observer-does-not-create}
+Two boundary observers differing only by gauge measure the same closure scalar. Therefore,
+the observer fixes a reading but does not manufacture the residual mode.
+\end{corollary}
+
+\begin{remark}
+This proposition resolves the observer problem at precisely the level at which the present framework
+can resolve it. The observer does not disappear, but its role changes: it does not introduce the pattern; rather,
+it selects a polarization and an orientation for an invariant already generated by the
+structure itself. In this sense, the theory is \emph{observer-covariant}.
+\end{remark}
+
+\subsection{Uniqueness of the intrinsic autofunctional}
+
+The next step consists in formalizing the idea that the system measures itself. To this end, one must
+distinguish between the local density of the harmonic mode and the global magnitude of boundary closure.
+
+\begin{definition}[Self-measure density and global closure]
+Let $\omega$ be an admissible transport on $C_n$. We define the
+\emph{self-measure density} by
+\[
+\mu_\X(\omega):=\frac{1}{n}\,\Acal_\X(\omega)
+=\frac{1}{n}\,\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}.
+\]
+Equivalently, if
+\[
+\omega=d\Phi+u\oneE
+\qquad\text{with }u\in\R v,
+\]
+then $u=\mu_\X(\omega)\,v$.
+Llamaremos \emph{closure global} to the scalar
+\[
+\Acal_\X(\omega)=n\,\mu_\X(\omega).
+\]
+\end{definition}
+
+\begin{lemma}[One-dimensional quotient of admissible transports]\label{lem:one-dimensional-quotient}
+Let $\mathcal T_{\mathrm{adm}}\subset C^1(C_n;W)$ be the subspace of admissible transports. Then
+the quotient
+\[
+\mathcal T_{\mathrm{adm}}/dC^0(C_n;W)
+\]
+is a real vector space of dimension $1$, canonically generated by the class of
+$\,v\oneE$.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:hodge-cycle}, every $\omega\in\mathcal T_{\mathrm{adm}}$ can be written uniquely
+as
+\[
+\omega=d\Phi+u\oneE.
+\]
+The admissibility imposes $u\in\R v$, so that the class of $\omega$ modulo exacts remains
+completely determinada by the real scalar $\lambda$ such that $u=\lambda v$. In consequence,
+the quotient is isomorfo to $\R v$, and therefore one-dimensional.
+\end{proof}
+
+\begin{theorem}[Uniqueness of the Auto-measure]\label{thm:uniqueness-self-measurement}
+Let $F:\mathcal T_{\mathrm{adm}}\to\R$ be a linear functional such that:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F(\omega+d\Phi)=F(\omega)$ for every $\Phi\in C^0(C_n;W)$;
+\item $F(v\oneE)=1$.
+\end{enumerate}
+Then
+\[
+F=\mu_\X.
+\]
+In particular, the self-measure is the
+\emph{unique} normalized linear functional
+compatible with the distinguished residual mode.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:one-dimensional-quotient}, the quotient
+$\mathcal T_{\mathrm{adm}}/dC^0(C_n;W)$ is one-dimensional and is generated by the class of
+$v\oneE$. Every gauge-invariant linear map factors through that quotient and is
+completely determined by its value on the generator. The normalization
+$F(v\oneE)=1$ then uniquely fixes the functional. By definition,
+\[
+\mu_\X(v\oneE)=\frac1n\frac{\langle nv,v\rangle}{\langle v,v\rangle}=1,
+\]
+and, moreover, $\mu_\X$ is linear and gauge invariant. Hence $F=\mu_\X$.
+\end{proof}
+
+\begin{corollary}[Auto-measure in the HMT case]\label{cor:self-measurement-hmt}
+In the strong dodecaphase specialization, where $n=12$ and $v=v_\alpha$, one has
+\[
+\mu_{\mathrm{HMT}}(\omega)=\frac{\alpha}{12},
+\qquad
+\Acal_{\mathrm{HMT}}(\omega)=\alpha.
+\]
+Thus, the number $\alpha$ is the global closure of the boundary, and $\alpha/12$ is the elementary density of
+self-measure per phase.
+\end{corollary}
+
+\begin{remark}
+This formulation changes the meaning of ``unit''. In classical metrology, the unit is an
+external reference to which a result is linked through a calibration chain
+\cite{NISTTraceability2023,BIPMSI2019}. Here normalization proceeds from the system itself: vector
+$v$ is not imported from outside, but is generated internally as the minimum lift of the
+distinguished residual class. In this precise sense, the unit is a \emph{self-measurement}.
+\end{remark}
+
+\subsection{Finite holographic principle: boundary, \emph{bulk}, and discrete Stokes}
+
+What appeared in the prologue as holographic intuition now admits an exact form. The crucial
+fact is that the same scalar can be read in two ways: as boundary holonomy or as the
+total projected curvature of the \emph{bulk}. This does not identify the theory with the
+quantum-gravitational holography of 't Hooft or Susskind \cite{tHooft1993,Susskind1995}; it does, however,
+produce a finite and literal analogue of reduction to the boundary.
+
+\begin{definition}[\emph{Finite bulk} with cyclic boundary]
+A finite \emph{bulk} with cyclic boundary is an oriented cellular complex of dimension $2$
+\[
+K=K^{(0)}\cup K^{(1)}\cup K^{(2)}
+\]
+whose oriented boundary satisfies
+\[
+\partial K\cong C_n.
+\]
+Given a $1$-cochain $\Omega\in C^1(K;W)$, we call \emph{discrete curvature} the
+$2$-cochain
+\[
+F_\Omega:=d\Omega\in C^2(K;W).
+\]
+If $\Omega\vert_{\partial K}=\omega$, we shall say that $\Omega$ is a \emph{bulk extension} of the
+boundary transport $\omega$.
+\end{definition}
+
+\begin{theorem}[Projected discrete Stokes]\label{thm:discrete-stokes-projected}
+Let $K$ be a finite bulk with boundary $\partial K\cong C_n$, and let $\Omega\in C^1(K;W)$ be a
+bulk extension of an admissible transport $\omega$ on the boundary. Then
+\[
+\bd\Gamma_\omega
+=
+\sum_{e\subset \partial K}\Omega(e)
+=
+\sum_{f\in K^{(2)}}F_\Omega(f).
+\]
+In particular,
+\[
+\Acal_\X(\omega)
+=
+\frac{\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v\right\rangle}{\langle v,v\rangle}.
+\]
+\end{theorem}
+
+\begin{proof}
+The first equality is simply the definition of seam defect applied to the restriction of
+$\Omega$ to the boundary. The second is the discrete Stokes formula for cochains: the oriented sum
+over the boundary of a complex equals the sum, over all $2$-cells, of the oriented
+coboundary of the $1$-cochain. That is,
+\[
+\sum_{e\subset \partial K}\Omega(e)=\sum_{f\in K^{(2)}}(d\Omega)(f)=\sum_{f\in K^{(2)}}F_\Omega(f).
+\]
+Projecting onto the residual line $\R v$ and using
+Theorem~\ref{thm:universal-sewing} yields the final formula.
+\end{proof}
+
+\begin{corollary}[Obstruction to a flat \emph{bulk}]\label{cor:no-flat-bulk}
+If an admissible boundary transport $\omega$ admits a flat bulk extension,
+that is, an $\Omega$ with $F_\Omega=0$, then
+\[
+\Acal_\X(\omega)=0.
+\]
+Equivalently, if $\Acal_\X(\omega)\neq 0$, every bulk extension of the boundary must carry
+nonzero discrete curvature.
+\end{corollary}
+
+\begin{proof}
+This is an immediate consequence of Theorem~\ref{thm:discrete-stokes-projected}. If
+$F_\Omega=0$, then the projected sum of curvatures equals $0$, and therefore
+$\Acal_\X(\omega)=0$.
+\end{proof}
+
+\begin{corollary}[Finite holographic reading]\label{cor:finite-holography}
+The closure invariant may be read equivalently as a boundary observable or as the integrated
+curvature of the \emph{bulk}:
+\[
+\Acal_\X(\omega)
+=
+\frac{\langle \bd\Gamma_\omega,v\rangle}{\langle v,v\rangle}
+=
+\frac{\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v\right\rangle}{\langle v,v\rangle}.
+\]
+In this precise sense, the system satisfies a finite holographic principle.
+\end{corollary}
+
+\begin{remark}
+The preceding corollary is the most literal and strongest form of the holographic principle that the manuscript
+can sustain through internal proofs. It does not assert a complete gravitational duality. It asserts something more
+modest and exact: the relevant physical--mathematical scalar of the system \emph{factors through the boundary} and,
+if extended to a \emph{bulk}, coincides with the total projected curvature of that \emph{bulk}.
+When $\Acal_\X(\omega)=\alpha$, the equality states that $\alpha$ is simultaneously a boundary
+holonomy and an integrated curvature.
+\end{remark}
+
+\begin{corollary}[Geometric consequence for HMT]\label{cor:hmt-bulk-curvature}
+In the strong HMT case, every bulk filling of the dodecaphase cycle that extends the canonical
+boundary transport must satisfy
+\[
+\left\langle \sum_{f\in K^{(2)}}F_\Omega(f),v_\alpha\right\rangle
+=
+\alpha\,\langle v_\alpha,v_\alpha\rangle
+=
+54\alpha.
+\]
+In particular, the HMT boundary admits no flat filling; its \emph{bulk} necessarily carries nonzero
+projected total curvature.
+\end{corollary}
+
+\begin{proof}
+It suffices to apply Corollary~\ref{cor:finite-holography} with $v=v_\alpha$ and use the fact that
+$\langle v_\alpha,v_\alpha\rangle=54$.
+\end{proof}
+
+
+
+\begin{remark}[On the geometry of the \emph{bulk}]
+Theorem~\ref{thm:discrete-stokes-projected} does not by itself identify the metric geometry of the \emph{bulk}; it does impose a very strong negative condition: when $\Acal_\X(\omega)\neq 0$, the filling cannot be exactly or discretely flat. If, moreover, one seeks a global completion compatible with the modular reading of the boundary, the natural candidate ceases to be the Euclidean disk and becomes a modular-type \emph{bulk}. In classical theory, modular functions live on the upper half-plane $\mathbb H$, and the Klein invariant $J(\tau)$ classifies the global complex torus \cite{DLMFModular}. The present result does not yet prove that identification, but it does justify why the intuition of a non-Euclidean \emph{bulk} is mathematically reasonable.
+\end{remark}
+
+\subsection{Structural Consequences of Polarization, Self-Measurement, and Discrete Stokes Identity}
+
+The preceding three components permit the interpretation of observer, self-measurement, and holography to be fixed with a degree of precision that was previously only sketched.
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item The \textbf{observer} is a choice of polarization, orientation, and gauge. It changes the reading,
+but not the residual mode, except for the sign associated with the orientation.
+\item The \textbf{self-measurement} is the unique normalized linear functional on the admissible space of
+transports. It requires no external pattern because its normalization arises from the internal minimal lift.
+\item The \textbf{holographic
+principle} acquires an exact form: the relevant scalar can be read
+entirely on the boundary or entirely as the projected total curvature of
+the bulk.
+\end{enumerate}
+
+This triple identification allows the central thesis of the manuscript to be reformulated more strongly:
+not only is $\alpha$ an Archimedean boundary invariant, but, within the finite framework
+considered here, $\alpha$ is the first scalar that a self-inertial phase cell produces when
+measuring itself and projecting all its effective curvature onto the distinguished residual mode.

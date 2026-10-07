@@ -1,0 +1,353 @@
+# Profundidad, memoria y realización de los retornos dodecafásicos
+
+Ampliación demostrativa del 29 de septiembre de 2026. Antecedente conservado: `DESARROLLO_DEMOSTRATIVO_FEIGENBAUM.md` y su certificado racional de ocho raíces. Esta ampliación conserva la familia y los manuscritos publicados.
+
+## 1. Construcción heredada y objeto focal
+
+APP evalúa suma y producto sobre las dos hojas de la retícula de dígitos, conservando cociente y residuo. TRIT determina régimen y orientación. El transporte TPK selecciona, transporta y actualiza el estado con sus registros de acarreo, frontera y memoria. Sus lectores actúan sobre la misma estructura discreta del continuo. La prolongación `w6→w12→w18→w24→w30→R36→G9` conserva esta procedencia; la vuelta nonádica retorna la fase y aumenta la memoria.
+
+El lector crítico de la rueda dodecafásica ya fijado en el corpus produce
+\[
+\phi_j=\frac{(3j-1)\pi_{\rm HMT}}{18},\qquad
+w_j(\eta)=\frac{1+\eta[12\cos(3\phi_j)-\cos(4\phi_j)]}{12},
+\]
+\[
+k_{j,\eta}=\sqrt{\frac2{\sum_\ell w_\ell(\eta)\phi_\ell^2}}\,\phi_j,
+\quad u_\eta(x)=\sum_{j=1}^{12}w_j(\eta)(1-\cos(k_{j,\eta}x)),
+\quad f_{\lambda,\eta}(x)=1-\lambda u_\eta(x).
+\]
+Se conserva el representante angular orientado utilizado por el momento. La coordenada \(\pi_{\rm HMT}\) es una salida anterior de la misma construcción; su factor se cancela en las frecuencias normalizadas del sector uniforme. \(\lambda\) es el parámetro libre de esta familia posterior. La cifra objetivo de Feigenbaum permanece fuera de sus entradas.
+
+El desarrollo antecedente demuestra, para \(|\eta|\le1/40\), pesos positivos de suma uno, \(\sum w_jk_j^2=2\), \(0<k_j<3<\pi\), criticidad cuadrática, crecimiento estricto de \(u_\eta\) en \((0,1]\), y
+\[
+f_{\lambda,\eta}([-1,1])\subseteq[-1,1],\qquad
+S f_{\lambda,\eta}(x)\le-640/47647<0
+\]
+para \(0<\lambda\le2/u_\eta(1)\) y \(0<|x|\le1\).
+
+Esta ampliación compone tres operaciones recuperadas: el refinamiento con acarreo de XI, los lectores cilíndricos del álgebra holonómica y la conservación bilateral de memoria. El horizonte de iteración, la profundidad de lectura y el calendario TPK conservan sus dominios distintos.
+
+## 2. Crecimiento exterior y resolución interior
+
+La ley de refinamiento del artículo XI, con base entera \(B\ge2\), es
+\[
+L_c(x,y)=(Bx-c,By+c),\qquad 0\le c<B.
+\]
+Para una palabra \(c_1\ldots c_m\), su registro es
+\[
+C_m=\sum_{j=1}^m c_jB^{m-j},\qquad
+(x_m,y_m)=(B^mx_0-C_m,B^my_0+C_m).
+\]
+La suma exterior vale \(B^mM_0\), con \(M_0=x_0+y_0\). La lectura normalizada del registro pertenece al cilindro
+\[
+I_m(C_m)=\left[\frac{C_m}{B^m},\frac{C_m+1}{B^m}\right],
+\qquad \operatorname{diam}I_m=B^{-m}.
+\]
+La pareja entera y la escala recuperan los cocientes, residuos y ceros iniciales de la palabra. Los extremos con doble expansión conservan su marca de frontera. Así se coordinan crecimiento de soporte y refinamiento de lectura sin identificar historias distintas por su sola imagen límite.
+
+La composición es exacta:
+\[
+L_D^{[b]}\circ L_C^{[a]}=L_{B^bC+D}^{[a+b]}.
+\]
+Por asociatividad, agrupar una historia de dieciocho eventos en nueve bloques de dos o en dos bloques de nueve produce el mismo registro. A nivel de retorno \(2^N\), el horizonte común es \(9\,2^N\). La prueba es una igualdad de composición sobre la misma historia ordenada; mantiene sus acarreos y sus subbloques recuperables.
+
+El cristal aporta la formulación de límites:
+\[
+X_\infty=\varprojlim X_m,\qquad
+r^*a=a\circ r,\qquad
+r^*e_x=\sum_{r(y)=x}e_y,
+\qquad \mathfrak H_{\rm cyl}=\varinjlim\mathfrak H_m.
+\]
+Los estados se restringen; los lectores se prolongan. La preimagen preserva productos, unidad e idempotentes. Una familia exactamente compatible induce un lector en el límite directo. Los aproximantes que sólo son compatibles hasta error requieren, además, una estimación de convergencia en su completación. La sección siguiente proporciona esa estimación para el retorno crítico.
+
+### Capacidad y vacancias del registro
+
+El lector de capacidad de XI compara bloques de \(729\) y \(1000\) posibilidades. Con \(\rho=\log_{1000}729=\log_{10}9\), conserva
+\[
+\mathcal C_k=\lfloor(k+1)\rho\rfloor,\qquad
+\mathcal C_k-\mathcal C_{k-1}=1-z_k,
+\]
+\[
+\mathcal C_b-\mathcal C_a+\sum_{k=a+1}^b z_k=b-a,
+\qquad T_{\rm cap}(a)=\lceil a/\rho\rceil-1\quad(a\ge1).
+\]
+Cada vacancia registra una transición durante la cual se mantiene la capacidad; la longitud cronológica queda conservada en el balance. La fase de capacidad y la fase cronológica son lectores distintos.
+
+Para almacenar un prefijo de \(m\) dígitos de base nueve, una capacidad decimal suficiente es
+\[
+a(m)=\left\lceil\frac{m\rho}{3}\right\rceil.
+\]
+El cociente y el residuo permiten convertir el entero \(C_m\) entre bases, manteniendo aparte la profundidad \(m\). Se cumplen
+\[
+9^m\le1000^{a(m)}\le729^{T_{\rm cap}(a(m))+1}.
+\]
+Estas desigualdades también se deciden mediante potencias enteras, sin redondear logaritmos. El presupuesto de lectura de la sección siguiente se traduce así a capacidad del registro conservando las unidades. Esta cuenta dimensiona el almacenamiento; las reglas de supervivencia determinan, adicionalmente, qué historias nativas son admisibles.
+
+## 3. Presupuesto explícito de profundidad para cada retorno
+
+**Teorema.** Fijado \(|\eta|\le1/40\), normalícense
+\[
+t=\lambda u_\eta(1)/2\in[0,1],\qquad z=(x+1)/2,
+\]
+\[
+F_{t,\eta}(z)=1-t\frac{u_\eta(2z-1)}{u_\eta(1)},\qquad z\in[0,1].
+\]
+Para todo entero \(q\ge1\) y dos parámetros \(t,s\),
+\[
+\left|F_{t,\eta}^{q}(1/2)-F_{s,\eta}^{q}(1/2)\right|
+\le S_q|t-s|,
+\qquad S_q=\sum_{j=0}^{q-1}(6\sqrt2)^j<9^q.
+\]
+En consecuencia, un cilindro de parámetros en base nueve, de profundidad \(m=2^N+r\), encierra la lectura del retorno \(q=2^N\) en un intervalo de diámetro inferior a \(9^{-r}\).
+
+**Demostración.** La función \((1-\cos v)/v^2\) decrece para \(0<v<\pi\): el signo de su derivada es el de \(v\sin v-2(1-\cos v)\), negativo porque \(\tan(v/2)>v/2\). Por el segundo momento,
+\[
+u_\eta(1)\ge\frac{1-\cos3}{9}\sum_jw_jk_j^2
+=\frac{2(1-\cos3)}9>\frac13.
+\]
+La última desigualdad se verifica, por ejemplo, acotando \(\cos3\) mediante su suma de Taylor alternada hasta grado ocho, que es menor que \(-1/2\). Además, Cauchy–Schwarz da \(|u_\eta'(x)|\le\sqrt2\) en la recta real. Se deduce
+\[
+\operatorname{Lip}_zF_{t,\eta}\le6\sqrt2<9,\qquad
+\operatorname{Lip}_tF_{t,\eta}\le1.
+\]
+Si \(d_j\) es la diferencia entre las dos órbitas, entonces \(d_0=0\) y \(d_{j+1}\le6\sqrt2\,d_j+|t-s|\). La inducción prueba la suma geométrica. Para \(|t-s|\le9^{-m}\), el diámetro es menor que \(9^{q-m}\). Sustituir \(q=2^N\) y \(m=q+r\) termina la prueba. □
+
+La cota controla la incertidumbre de parámetro con \(\eta\) fijado. Una implementación añade y propaga separadamente el error de evaluación de cosenos y de redondeo; el certificado racional antecedente ofrece esas operaciones. La cota es suficiente y conservadora, con coste que crece con el horizonte.
+
+**Lector límite.** Realícese \(t\) desde \((x_0,y_0)=(1,0)\), \(B=9\), de modo que
+\[
+(x_m,y_m)=(9^m-C_m,C_m),\qquad t_m=C_m/9^m.
+\]
+Los lectores \(E_{q,m}=F_{t_m,\eta}^{q}(1/2)\), llevados a un nivel común, cumplen
+\[
+\|E_{q,m+a}-r^*E_{q,m}\|_\infty\le S_q9^{-m}.
+\]
+Convergen uniformemente a un lector continuo \(E_q\) en la completación del álgebra cilíndrica. La versión conjuntista
+\[
+J_{q,m}(C)=\{F_{t,\eta}^{q}(1/2):t\in I_m(C)\}
+\]
+es exactamente anidada y sus diámetros tienden a cero. Este resultado da el paso al límite de la **lectura a horizonte fijo**, con control de profundidad a cualquier horizonte solicitado.
+
+## 4. Palabra de duplicación y lector nonádico de la cronología
+
+Los ocho itinerarios certificados en el antecedente obedecen
+\[
+W_1=+,\qquad W_{n+1}=W_n\,(-1)^n\,W_n.
+\]
+Su continuación prefijal única es
+\[
+\tau_j=(-1)^{v_2(j)},\qquad j\ge1;
+\qquad \tau_{2j}=-\tau_j,\quad\tau_{2j+1}=+.
+\]
+La prueba utiliza \(v_2(2^n+r)=v_2(r)\) para \(0<r<2^n\). Es una recurrencia a toda profundidad, y la coincidencia con los ocho retornos calculados constituye su comprobación finita en la familia.
+
+En el orden lexicográfico con paridad de un mapa con máximo crítico, el factor de orientación previo al lugar \(k\) es \(\prod_{j<k}(-\tau_j)\). La palabra \(\tau\) es estrictamente mayor que cualquiera de sus desplazamientos positivos. En efecto, el primer desacuerdo con un desplazamiento impar ocurre en \(k=1\) o \(2\); un desplazamiento par reduce la comparación a la mitad y duplica \(k\). Por tanto el primer desacuerdo está en \(k=2^r\). Allí
+\[
+\prod_{j<2^r}(-\tau_j)=(-1)^r=\tau_{2^r},
+\]
+y la diferencia orientada con el signo opuesto es positiva. Esta demostración también prueba aperiodicidad.
+
+El registro cronológico conserva
+\[
+K=\rho_9(K)+9q_9(K).
+\]
+Su lector diádico es
+\[
+\ell_n(B_K)=[\rho_9(K)+9q_9(K)]_{2^n}=[K]_{2^n}.
+\]
+Sobre la carta de historias en que \(\Gamma_9 B_K=B_{K+9}\),
+\[
+\ell_n(\Gamma_9B_K)=\ell_n(B_K)+9\pmod{2^n},\qquad
+\pi_{n+1,n}\ell_{n+1}=\ell_n.
+\]
+Como nueve es impar, el avance por nueve visita las \(2^n\) posiciones. Su conjugación con el avance unitario es \(j\mapsto9j\). Para \(0<j<2^n\),
+\[
+v_2(9j\bmod2^n)=v_2(j),
+\]
+de modo que el remuestreo nonádico conserva también la palabra orientada en cada ciclo certificado.
+
+Este lector utiliza residuo **y** cociente. Las fases de \(K=1\) y \(K=10\) coinciden módulo nueve, mientras sus signos diádicos son opuestos. La memoria distingue las dos historias. La propiedad aritmética del remuestreo vale para todo multiplicador impar; el calendario HMT fija aquí la elección de nueve.
+
+## 5. Memoria bilateral compatible a profundidad infinita
+
+Sean \(\mathcal H_n=\ell^2(\mathbb Z/2^n\mathbb Z)\),
+\[
+C_ne_j=e_{j+1},\qquad
+J_ne_j=(e_j+e_{j+2^n})/\sqrt2.
+\]
+Una comprobación sobre la base da \(J_n^*J_n=I\) y \(C_{n+1}J_n=J_nC_n\), incluidos los términos de borde.
+
+El artículo XI aporta los proyectores
+\[
+P_0=\frac19\begin{pmatrix}8&-\sqrt8\\-\sqrt8&1\end{pmatrix},\qquad
+P_1=\frac19\begin{pmatrix}1&\sqrt8\\\sqrt8&8\end{pmatrix}.
+\]
+Son ortogonales y complementarios. Por tanto
+\[
+\mathbb U_n=P_0\otimes I+P_1\otimes C_n
+=\begin{pmatrix}T_n&D_n\\D_n&R_n\end{pmatrix}
+\]
+es unitario, con
+\[
+T_n=(8I+C_n)/9,\quad D_n=\sqrt8(C_n-I)/9,\quad R_n=(I+8C_n)/9.
+\]
+La naturalidad ya probada implica
+\[
+\mathbb U_{n+1}(I_2\otimes J_n)=(I_2\otimes J_n)\mathbb U_n,
+\quad \mathbb U_n^a=P_0\otimes I+P_1\otimes C_n^a
+\quad(a\in\mathbb Z).
+\]
+El límite de Hilbert se identifica con \(L^2(\mathbb Z_2,\mu_{\rm Haar})\), llevando \(e_j^{(n)}\) a \(2^{n/2}\mathbf1_{j+2^n\mathbb Z_2}\). Las identidades se prolongan por densidad y acotación. Para todo vector \(v\) y todo tiempo entero \(a\),
+\[
+\boxed{\|T_{\infty,a}v\|^2+\|D_{\infty,a}v\|^2=\|v\|^2,}
+\]
+\[
+\boxed{v=T_{\infty,a}^*(T_{\infty,a}v)+D_{\infty,a}^*(D_{\infty,a}v).}
+\]
+Aquí \(T_{\infty,a}=(8I+C_\infty^a)/9\). La composición bilateral conserva el archivo entre pasos; componer solamente \(T_n\) describe otra operación.
+
+La permutación \(S_ne_j=e_{9j\bmod2^n}\) satisface
+\[
+S_{n+1}J_n=J_nS_n,\qquad S_nC_nS_n^{-1}=C_n^9.
+\]
+Así se obtiene en el límite
+\[
+S_\infty C_\infty S_\infty^{-1}=C_\infty^9,
+\quad (I_2\otimes S_\infty)\mathbb U_\infty
+(I_2\otimes S_\infty^{-1})=\mathbb U_\infty^9.
+\]
+La representación temporal es fiel: \(C_\infty^a=C_\infty^b\) fuerza \(2^n\mid a-b\) para todo \(n\), de donde \(a=b\). Preparaciones particulares pueden conservar simetrías temporales. La identidad operatoria conserva esta distinción.
+
+El punto proyectivo \(([K]_{2^n})_n\) y un vector de \(L^2\) tienen tipos diferentes: una historia puntual induce una Dirac, mientras las amplitudes normalizables pertenecen al espacio de Hilbert. El resultado construye un lector equivarante de la cronología; las restantes coordenadas nativas del TPK acompañan el registro completo.
+
+## 6. Existencia y separación de las obligaciones asintóticas
+
+### 6.1. Realización de la palabra infinita en toda la franja
+
+**Teorema de existencia.** Para cada \(|\eta|\le1/40\) existe al menos un
+\[
+\lambda_\infty(\eta)\in
+\left[\frac1{2u_\eta(1)},\frac2{u_\eta(1)}\right]
+\]
+tal que
+\[
+\boxed{\operatorname{sign}f_{\lambda_\infty(\eta),\eta}^{j}(0)
+=(-1)^{v_2(j)}\quad\text{para todo }j\ge1.}
+\]
+La conclusión realiza el itinerario infinito de duplicación dentro de la familia fijada. El cuantificador de existencia se mantiene separado de una selección única y de la ley de distancias entre parámetros superestables.
+
+**Demostración.** Fijamos \(\eta\). Escribimos \(K_\lambda\) para la palabra de signos de la órbita crítica; cuando ésta retorna por primera vez a cero, la palabra termina en ese cero. Usamos el orden unimodal con máximo, cuyo factor antes de comparar el símbolo \(j\) es el producto de los signos \(-K_i\), \(i<j\).
+
+En el extremo izquierdo la imagen de todo el intervalo está en \([1/2,1]\); por tanto \(K_-=+++\cdots\). En el extremo derecho la órbita es \(0\mapsto1\mapsto-1\mapsto-1\), de donde \(K_+=+---\cdots\). Comparando los símbolos segundo y tercero, respectivamente, se obtiene
+\[
+K_-<\tau<K_+.
+\]
+
+Si \(K_{\lambda_0}\) es infinita y distinta de \(\tau\), la primera diferencia ocurre en un lugar finito. La continuidad de los correspondientes iterados hace localmente constante el lado de la comparación. Queda examinar un parámetro superestable, de primer período \(p\), con palabra \(W0\), donde \(|W|=p-1\).
+
+Para \(\lambda\) cercano a \(\lambda_0\), sea \(g_\lambda=f_{\lambda,\eta}^p\) y \(a=g_\lambda(0)\). Se tiene \(g_\lambda'(0)=0\), y una cota local uniforme de la segunda derivada da
+\[
+g_\lambda(x)=a+O(x^2).
+\]
+Para \(|a|\) suficientemente pequeño y distinto de cero, \(g_\lambda\) lleva \([-2|a|,2|a|]\) en \([a-|a|/2,a+|a|/2]\). Los retornos conservan el signo de \(a\), y las \(p-1\) posiciones intermedias conservan \(W\). Las palabras vecinas son, por ello, \((W+)^\infty\) o \((W-)^\infty\); los parámetros con \(a=0\) conservan \(W0\).
+
+Si \(\tau\) difiere de \(W\) antes del lugar \(p\), esa diferencia fija el mismo lado para las tres palabras. Si comparte \(W\), pongamos
+\[
+s=\tau_p,\qquad e=\prod_{j<p}(-\tau_j),\qquad A=Ws.
+\]
+El signo de la comparación de \(\tau\) con \(W0\) y con \((W,-s)^\infty\) es \(es\). Para compararla con \(A^\infty\), sea \(q\) el primer lugar en que \(\tau_{p+q}\ne\tau_q\). Existe por aperiodicidad. Hasta el lugar \(p+q-1\), ambas palabras coinciden, y el signo de orientación se factoriza como \(O_pO_{q-1}\), con \(O_p=-es\). La maximalidad estricta ya demostrada da
+\[
+O_{q-1}(\tau_q-\tau_{p+q})>0.
+\]
+En consecuencia, la comparación de \(\tau\) con \(A^\infty\) tiene signo \(-O_p=es\). Las tres posibilidades locales están al mismo lado de \(\tau\).
+
+Si ningún parámetro realizara \(\tau\), los conjuntos \(\{\lambda:K_\lambda<\tau\}\) y \(\{\lambda:K_\lambda>\tau\}\) serían abiertos, disjuntos, no vacíos y cubrirían el intervalo de parámetros. La conexidad del intervalo excluye esa partición. Existe, por tanto, el parámetro anunciado. □
+
+Este argumento de continuidad de itinerarios se aplica después de fijar el generador HMT y su familia analítica; sus hipótesis se verifican aquí directamente. La construcción conserva la palabra infinita sin introducir como dato un parámetro de la familia cuadrática ni el valor universal.
+
+### 6.2. Márgenes que impiden perder el itinerario al tomar límites
+
+Escribamos \(c_p=f_{\lambda,\eta}^p(0)\). Una cota racional uniforme suficiente es
+\[
+|f'|,|f''|\le16,\qquad
+B_p:=16^p\frac{16^p-1}{15}\ge\|(f^p)''\|_{[-1,1]}.
+\]
+En efecto, \(1-\cos v\ge v^2/2-v^4/24\ge v^2/8\) para \(|v|\le3\), de modo que \(u_\eta(1)\ge1/4\), \(\lambda\le8\) y ambas derivadas se acotan por \(16\), usando los momentos. La regla de la cadena prueba por inducción la cota \(B_p\).
+
+La palabra \(\tau\) satisface \(\tau_{2p}=-\tau_p\) para todo \(p\). Para cualquiera de sus realizaciones, \(c_{2p}\) y \(c_p\) tienen signos opuestos. Como \((f^p)'(0)=0\), Taylor da
+\[
+|c_{2p}-c_p|\le\tfrac12B_p|c_p|^2.
+\]
+El lado izquierdo es mayor que \(|c_p|\), y por tanto
+\[
+\boxed{|c_p|>2/B_p>0.}
+\]
+Para cada horizonte fijo existe así un margen uniforme que impide que una sucesión de realizaciones pierda su signo al converger. En las coordenadas compactas \((\eta,b)\), \(b=\lambda u_\eta(1)\in[1/2,2]\), el conjunto de realizaciones de \(\tau\) es cerrado y compacto, y su proyección sobre toda la franja de \(\eta\) es sobreyectiva.
+
+El mismo argumento sirve para un árbol de prefijos: si se realizan todos los prefijos de \(\tau\), una subsucesión compacta conserva cada signo, porque los prefijos suficientemente largos incluyen simultáneamente los lugares \(p\) y \(2p\). El teorema de existencia proporciona ahora la no vacuidad que ese argumento necesita.
+
+### 6.3. Intervalos invariantes de retorno a todos los niveles
+
+**Teorema de retornos anidados.** Para cualquiera de las realizaciones del teorema 6.1, sean \(c_j=f^j(0)\) y
+\[
+J_n=\operatorname{conv}\{c_{2^n},c_{2^{n+1}}\},\qquad n\ge1.
+\]
+Entonces \(0\in\operatorname{int}J_n\), \(J_{n+1}\subset J_n\),
+\[
+f^{2^n}(J_n)=J_n,
+\]
+y las \(2^n\) imágenes \(J_n,f(J_n),\ldots,f^{2^n-1}(J_n)\) son disjuntas. Los retornos normalizados son unimodales de máximo, con valor crítico uno y la misma palabra \(\tau\). Estos intervalos son núcleos invariantes de retorno; una normalización que exija extremos periódicos puede ampliar el núcleo al intervalo restrictivo maximal correspondiente y debe especificar ese paso.
+
+**Demostración del primer retorno.** Sea \(F\) un mapa unimodal de máximo con \(F(0)=1\) y palabra \(\tau\), y \(d_j=F^j(0)\). Sus primeros signos son \(+,-,+,+,+,-,+\). El intervalo \(I=[d_2,1]\) es invariante: \(F(d_2)=d_3>0\), \(F(1)=d_2<0\), y el máximo es uno. Pongamos \(J=[d_2,d_4]\). Como \(F\) decrece en positivos y
+\[
+F(d_3)=d_4>0> d_6=F(d_5),
+\]
+se tiene \(d_3<d_5\), y por tanto \(F(J)=[d_3,1]\).
+
+Además \(d_3>d_4\). Para comprobarlo, \(F^2\) es estrictamente creciente entre los dos puntos positivos \(d_3,d_4\), porque sus imágenes \(d_4,d_5\) son positivas. Sus valores son \(F^2(d_3)=d_5>0>d_6=F^2(d_4)\), lo que fuerza ese orden. Así \(J\) y \(F(J)\) quedan separados por un intervalo abierto, y
+\[
+F^2(J)=F([d_3,1])=[d_2,d_4]=J.
+\]
+El mapa \(F^2|_J\) tiene un único mínimo crítico: la imagen \(F(J)\) permanece positiva. La conjugación \(h(x)=d_2x\) invierte orientación y normaliza el retorno como máximo con valor uno. Su itinerario es
+\[
+\operatorname{sign}\frac{d_{2j}}{d_2}
+=-\tau_{2j}=\tau_j.
+\]
+Se puede repetir el mismo argumento a cualquier profundidad.
+
+**Disjunción inductiva.** Supónganse disjuntas las \(p=2^n\) imágenes del padre \(J_n\), y sea \(g=f^p\). El primer retorno aplicado al mapa normalizado produce \(B=J_{n+1}\), \(A=g(B)\), con \(A\cap B=\varnothing\), \(g(B)=A\), \(g(A)=B\). Para \(0\le j<p\), una intersección de \(f^j(A)\) y \(f^j(B)\), al aplicarle \(f^{p-j}\), produciría una intersección de \(B\) y \(A\). Por tanto esas dos imágenes son disjuntas. Las imágenes correspondientes a distintos \(j\) pertenecen a imágenes disjuntas del padre. Quedan demostradas las \(2p\) imágenes disjuntas y el retorno \(f^{2p}(B)=B\). La fórmula de los extremos resulta de componer las normalizaciones \(x\mapsto c_{2^n}x\). □
+
+Los conjuntos compactos
+\[
+\Lambda_n=\bigcup_{0\le j<2^n}f^j(J_n)
+\]
+son no vacíos y anidados. Su intersección \(\Lambda_\infty\) tiene un lector continuo sobre el odómetro diádico: a cada punto se le asigna la etiqueta de la única componente que ocupa a cada nivel. Todas las sucesiones compatibles de etiquetas tienen preimagen por compacidad, y el avance por \(f\) suma uno en las etiquetas. Esta aplicación es una semiconjugación sobreyectiva. Para promoverla a conjugación puntual se requiere demostrar que los diámetros de las componentes tienden a cero; esa promoción métrica se mantiene separada.
+
+### 6.4. Alcance matemático del avance
+
+Quedan demostrados el lector crítico con precisión a horizonte arbitrario, la realización del itinerario infinito para toda la franja declarada, sus intervalos invariantes de retorno a todos los niveles, la conservación bilateral en el límite de refinamiento y la compatibilidad de su cronología con la lectura nonádica. Las pruebas utilizan el crecimiento de soporte, las reglas de acarreo y los lectores ya construidos en HMT, junto con el análisis explícito de la familia que éstos publican.
+
+La teoría de universalidad paramétrica de Lyubich distingue la combinatoria de duplicación de la transversalidad respecto de la hoja estable de renormalización. Su resultado proporciona el marco de reconocimiento posterior; las hipótesis de normalización y transversalidad de la familia concreta deben conservarse al aplicarlo. Véase [Lyubich, *Feigenbaum–Coullet–Tresser Universality and Milnor’s Hairiness Conjecture*](https://www.math.stonybrook.edu/~mlyubich/Archive/Selected/universe.pdf).
+
+El siguiente enunciado métrico conserva todavía obligaciones específicas:
+\[
+\lim_{n\to\infty}
+\frac{\lambda_{n-1}-\lambda_{n-2}}{\lambda_n-\lambda_{n-1}}
+=\delta.
+\]
+Se requiere identificar la cascada elegida, transportar sus retornos al dominio funcional del renormalizador y certificar la proyección inestable del vector paramétrico, junto con el control de colas que permita pasar de certificados finitos al límite. Los ocho intervalos de raíces previos conservan su validez y su significado local. La existencia demostrada aquí permite una realización infinita; por sí sola no prueba que esos ocho intervalos sean los primeros elementos de una única cascada global.
+
+Un falsador distingue ambas obligaciones: una reparametrización tangente \(\lambda-\lambda_\infty=s^p\) conserva las órbitas y sus historias, mientras una ley \(\lambda_n-\lambda_\infty\sim C\delta^{-n}\) pasa a \(s_n\sim C^{1/p}\delta^{-n/p}\). La nueva razón de diferencias converge a \(\delta^{1/p}\). Por eso el control de la escala paramétrica aporta información adicional a la memoria y a la profundidad.
+
+El resultado infinito presente pertenece a la construcción y persistencia del itinerario, a la precisión de sus lectores y a la restitución operatoria. La identificación decimal universal queda separada con esa obligación concreta, sin convertir una razón finita en un certificado asintótico.
+
+## 7. Procedencia material y controles
+
+1. Familia crítica y ocho raíces: `DESARROLLO_DEMOSTRATIVO_FEIGENBAUM.md`, §§1–10, y `CERTIFICADO_RAICES_INTERVALOS.json`, conservados en este directorio.
+2. XI, paquete español de memoria de 22 de septiembre de 2026: `output/INSERCIONES_MEMORIA_COMPATIBILIDAD_SERIE_20260922/PAQUETES/staging/20260922T150204Z_d4ab7bd9/ES/10_MEMORIA_COMPATIBILIDAD_ES_20260922/antecedentes/paquete_predecesor/source/libro/03_refinamiento.tex`, líneas 174–417; `05_levantamiento.tex`, líneas 150–232.
+3. Mismo paquete, `modulos/10_holonomia_memoria.tex`, líneas 12–38: representación bilateral; líneas 134–140: amplificación compatible.
+4. Cristal, `output/DOBLE_PROYECCION_HOLOGRAFICA_CRISTAL_TEMPORAL_APERIODICO_MONOGRAFIA_AUTOSUFICIENTE/manuscrito/generated/algebra_holonomica.tex`, líneas 183–290: cociclo, sistemas de estados y lectores, graduación de memoria.
+5. Núcleo permanente, `PUBLICACION_HMT/REGISTRO_DE_CONTINUIDAD_ACADEMICA/NUCLEO_FORMAL_HMT_PERMANENTE/TPK_GRAFO_OPERATORIO_TIPADO.json`: OP02, OP17 y estado enriquecido. La genealogía común se hereda con sus propietarios; esta ampliación demuestra sus lectores focales.
+6. XI, fuente activa `output/INSERCIONES_MEMORIA_COMPATIBILIDAD_SERIE_20260922/ARTICULOS/10/ES/source/sections/vacancias_capacidad.tex`: capacidad, vacancias, unidades y reloj inverso.
+
+Los controles de cálculo de este directorio comprueban instancias exactas de las identidades, las palabras certificadas y falsadores de pérdida de memoria. Las pruebas escritas por inducción, continuidad y paso al límite fundamentan el alcance infinito. Los verificadores de genealogía controlan procedencia y roles causales.

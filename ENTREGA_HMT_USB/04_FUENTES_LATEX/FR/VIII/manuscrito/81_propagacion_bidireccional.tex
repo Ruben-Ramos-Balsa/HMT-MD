@@ -1,0 +1,441 @@
+% Recuperación de 13_accion_interaccion_absorbedor y83_operador_absorbedor.
+% Desarrollo del canal cronológico desde el transporte de rutas.
+% Procedencia y condiciones en PROCEDENCIA_PROPAGACION_BIDIRECCIONAL.md.
+% Los originales y la sección80 permanecen íntegros. Sin contenido de radión.
+
+\section{Propagation bidirectionnelle et condition d'absorption à la frontière}
+\label{vii:sec:propagacion-bidireccional}
+
+Le transport APP--TRIT--TPK conserve l'orientation du parcours et la mémoire qui distingue son aller de son retour. Sur cet antécédent se construisent trois opérations successives : l'action d'un historique enrichi, la propagation d'une source à travers les transports réalisés et l'imposition d'une condition commune à la frontière. L'inscription du registre dans un espace d'appareil, établie à la section~\ref{vii:sec:observador-aparato}, permet d'exprimer ces opérations par des applications linéaires sans confondre la représentation observable avec l'état qui conserve ses antécédents.
+
+La direction temporelle, la conjugaison des feuillets et la réflexion spatiale
+ont des domaines distincts. Leurs relations sont fixées d'abord sur le registre ;
+on spécifie ensuite les entrelacements utilisés par une réalisation
+dynamique. Cet ordre détermine quelle information reste dans les propagateurs
+et quelle condition introduit le choix d'une frontière absorbante.
+
+\subsection{Action des routes et involutions du registre}
+\label{vii:subsec:accion-bidireccional}
+
+Une route finie contient ses positions, ses directions cardinales
+\((d_1,\ldots,d_N)\), ses feuillets \((\mu_1,\ldots,\mu_N)\), avec
+\(\mu_t\in\{\Sigma,\Pi\}\), et les incréments de son registre
+enrichi. Pour \(\lambda\geq0\), nous définissons
+\begin{equation}
+ \mathcal A_\lambda(\gamma)
+ =\sum_{t=2}^N
+ \bigl(1-\delta_{d_t,d_{t-1}}
+       +\lambda(1-\delta_{\mu_t,\mu_{t-1}})\bigr).
+ \label{vii:eq:accion-ruta-bidireccional}
+\end{equation}
+Le premier terme compte les changements de direction ; le second compte les changements
+de feuillet avec le poids déclaré. Pour \(N\leq1\), la somme est nulle.
+L'action générale du secteur conserve en outre ses termes de frontière et de
+mémoire :
+\begin{equation}
+ \mathcal S[\gamma]
+ =\sum_{a\subset\gamma}\mathcal L_a
+  +\mathcal B_{\rm in}(\partial_-\gamma)
+  +\mathcal B_{\rm out}(\partial_+\gamma)
+  +\mathcal M(\gamma).
+ \label{vii:eq:accion-enriquecida-frontera}
+\end{equation}
+Les termes de cette expression spécifient une classe variationnelle à
+extrémités typées et à mémoire conservée. La dynamique du secteur détermine
+\(\mathcal L_a\), les conditions admissibles et le terme \(\mathcal M\).
+
+Sur les registres, nous définissons \(\mathcal C_{\rm r}\) comme l'échange global des feuillets ; \(\mathcal P_{\rm r}\) comme une réflexion de la coordinatisation spatiale et de ses directions ; et \(\mathcal T_{\rm r}\) comme l'inversion de l'ordre temporel, le remplacement de chaque direction par son opposée et l'échange des extrémités. La réflexion cardinale est une permutation involutive. L'inversion du registre signé est \(C_M(a_1,\ldots,a_N)=(-a_N,\ldots,-a_1)\). Les feuillets, les quotients et la mémoire se transportent avec le parcours complet ; la lecture scalaire d'un mot constitue une opération ultérieure.
+
+\begin{proposition}[Invariance de l'action locale de route]
+\label{vii:prop:invariancia-ruta-bidireccional}
+Dans le domaine de registres précédent,
+\[
+ \mathcal A_\lambda(\gamma)
+ =\mathcal A_\lambda(\mathcal C_{\rm r}\gamma)
+ =\mathcal A_\lambda(\mathcal P_{\rm r}\gamma)
+ =\mathcal A_\lambda(\mathcal T_{\rm r}\gamma)
+ =\mathcal A_\lambda(\mathcal C_{\rm r}\mathcal P_{\rm r}
+                              \mathcal T_{\rm r}\gamma).
+\]
+\end{proposition}
+\begin{proof}
+Une permutation globale de l'alphabet des directions conserve l'égalité
+entre directions consécutives. L'échange des deux feuillets conserve
+l'égalité entre feuillets consécutifs. L'inversion de l'ordre établit une
+bijection entre paires adjacentes, et la substitution par les directions opposées
+conserve également leurs égalités. Chaque opération conserve les deux dénombrements
+de \eqref{vii:eq:accion-ruta-bidireccional} ; leur composition les conserve.
+\end{proof}
+
+La proposition détermine la symétrie de la fonctionnelle locale. Pour qu'une transformation agisse également sur un problème dynamique à frontières fixes, elle doit transporter sa classe de prolongements admissibles et les trois autres termes de \eqref{vii:eq:accion-enriquecida-frontera}. En particulier, deux parcours ayant la même représentation finale peuvent conserver des classes variationnelles différentes du fait de leur mémoire.
+
+Une interaction entre deux sections réalisées sur une frontière \(B\)
+utilise une application de couplage
+\[
+ \mathcal I_B:E_B^{(1)}\otimes E_B^{(2)}\longrightarrow E_B^{(12)}
+\]
+et un terme \(\mathcal S_{\rm int}\) de la même action. Sa covariance s'exprime par
+\[
+ \rho_{12}(g)\mathcal I_B
+ =\mathcal I_B\bigl(\rho_1(g)\otimes\rho_2(g)\bigr).
+\]
+Lorsqu'on compose les histoires, le registre de la frontière partagée est compté
+une seule fois ; les mémoires des deux côtés sont transportées vers la section composée.
+Le couplage et cette condition de covariance sont des données de l'interaction
+concrète, distinctes des involutions du registre.
+
+\subsection{Renversement de l'évolution réalisée}
+\label{vii:subsec:reversion-evolucion}
+
+La réalisation du registre fournit un espace de Hilbert réel \(\mathcal H_{\mathbb R}\), une structure complexe orthogonale \(J_E\), avec \(J_E^2=-I\), et un hamiltonien autoadjoint \(H\). Son domaine \(\mathcal D(H)\) est invariant par \(J_E\) ; on suppose \(HJ_E=J_EH\) dans ce domaine. Soit \(\mathcal C\) une involution orthogonale qui conserve \(\mathcal D(H)\) et satisfait
+\begin{equation}
+ \mathcal C J_E\mathcal C^{-1}=-J_E,\qquad
+ \mathcal C H\mathcal C^{-1}=H.
+ \label{vii:eq:dominio-reversion-evolucion}
+\end{equation}
+La constante interne d'action \(\hbar_{\rm int}>0\) conserve sa
+génération antérieure ; elle normalise ici le groupe d'évolution.
+
+\begin{theorem}[Conjugaison temporelle du groupe]
+\label{vii:thm:reversion-evolucion}
+Le générateur \(A=-J_EH/\hbar_{\rm int}\), de domaine \(\mathcal D(H)\),
+est antiadjoint. Son groupe orthogonal, unitaire par rapport à \(J_E\), satisfait
+\begin{equation}
+ U(t)=\exp(-J_EHt/\hbar_{\rm int}),\qquad
+ \mathcal C U(t)\mathcal C^{-1}=U(-t).
+ \label{vii:eq:reversion-grupo-bidireccional}
+\end{equation}
+\end{theorem}
+\begin{proof}
+L'orthogonalité et \(J_E^2=-I\) impliquent \(J_E^*=-J_E\).
+L'invariance du domaine et la commutation avec \(H\) permettent de traiter
+\(H\) comme un opérateur autoadjoint complexe dans l'espace défini par
+\(J_E\). Par calcul fonctionnel, \(-J_EH/\hbar_{\rm int}\) est
+antiadjoint et engendre le groupe annoncé. En dimension finie, les mêmes
+affirmations découlent de la série exponentielle et de \(A^*=-A\).
+Les hypothèses sur \(\mathcal C\) donnent
+\(\mathcal C A\mathcal C^{-1}=-A\). Conjuguer le groupe, ou son calcul
+fonctionnel, produit \(\exp(-tA)=U(-t)\).
+\end{proof}
+
+L'application qui réalise l'involution signée \(C_M\) comme \(\mathcal C\)
+conserve l'orientation temporelle et le domaine précédent. La conjugaison de
+charge d'une représentation de champs conserve en outre ses propres
+caractères et opérateurs. L'égalité
+\eqref{vii:eq:reversion-grupo-bidireccional} fixe le renversement temporel
+du groupe sous les conditions exprimées.
+
+\subsection{Propagateurs du canal chronologique d'une route}
+\label{vii:subsec:green-cronologico}
+
+L'inscription isométrique du registre admet les prolongements unitaires du théorème~\ref{vii:thm:observador-entrelazador}. Fixons une réalisation bilatérale d'un canal chronologique de fibres \(\mathcal H_n\), \(n\in\mathbb Z\), et de transports unitaires \(U_n:\mathcal H_n\to\mathcal H_{n+1}\). Le choix inclut les espaces auxiliaires lorsqu'ils sont nécessaires ; il conserve la route et ses registres précédents. Nous désignons par \(U(n,k)\) le transport de \(k\) à \(n\), avec
+\[
+ U(k,k)=I,\qquad U(n,k)U(k,l)=U(n,l),\qquad
+ U(n,k)^*=U(k,n).
+\]
+Pour \(n>k\), c'est le produit \(U_{n-1}\cdots U_k\) ; pour \(n<k\),
+c'est l'inverse du transport de \(n\) à \(k\).
+
+L'espace des sources \(\mathcal J_c\) contient les sections à support
+fini. L'espace des réponses \(\mathcal F\) contient toutes les
+sections de ces fibres. L'action quadratique de la route, en unités
+internes de cette réalisation, utilise
+\[
+ (D\psi)_n=\psi_{n+1}-U_n\psi_n,\qquad
+ E[\psi]=\sum_n\|(D\psi)_n\|^2
+\]
+pour des sections à support fini. L'opérateur cinétique avec la convention
+de signe \(L=-D^*D\) est
+\begin{equation}
+ (L\psi)_n=U_n^*\psi_{n+1}-2\psi_n+U_{n-1}\psi_{n-1}.
+ \label{vii:eq:diferencia-covariante-bidireccional}
+\end{equation}
+En effet, \((D^*z)_n=z_{n-1}-U_n^*z_n\), et la substitution produit cette formule. La variation de \(E\) est \(-2\operatorname{Re}\langle\delta\psi,L\psi\rangle\).
+
+\begin{theorem}[Opérateurs de Green exacts de la différence covariante]
+\label{vii:thm:green-cronologico}
+En écrivant \(x_+=\max(x,0)\), les applications
+\begin{align}
+ (\mathsf{G}_{\rm ret}j)_n&=\sum_k(n-k)_+U(n,k)j_k,\label{vii:eq:green-ret-cronologico}\\
+ (\mathsf{G}_{\rm adv}j)_n&=\sum_k(k-n)_+U(n,k)j_k\label{vii:eq:green-adv-cronologico}
+\end{align}
+de \(\mathcal J_c\) dans \(\mathcal F\) satisfont
+\[
+ L\mathsf{G}_{\rm ret}j=L\mathsf{G}_{\rm adv}j=j.
+\]
+La réponse retardée s'annule avant la première position de la source et en celle-ci ; la réponse avancée s'annule après la dernière position et en celle-ci. Ce sont les seules solutions qui s'annulent suffisamment loin dans la direction respective. Pour \(\psi\) à support fini, on a également \(\mathsf{G}_{\rm ret}L\psi=\mathsf{G}_{\rm adv}L\psi=\psi\). Par rapport à l'accouplement avec des sources à support fini, \(\mathsf{G}_{\rm adv}=\mathsf{G}_{\rm ret}^{\dagger}\).
+\end{theorem}
+\begin{proof}
+Chaque somme possède autant de termes que la source possède de positions.
+La composition des transports réduit l'application de \(L\) à
+l'identité scalaire
+\[
+ (n+1-k)_+-2(n-k)_++(n-1-k)_+=\delta_{nk}.
+\]
+La fonction \((k-n)_+\) satisfait la même identité. Cela prouve
+les deux équations et les supports. Pour l'unicité, une solution
+homogène qui s'annule en deux positions consécutives est déterminée
+comme nulle à la suivante par \eqref{vii:eq:diferencia-covariante-bidireccional} ;
+la récurrence, utilisant des transports inversibles, se prolonge dans les deux
+directions. La différence de deux solutions ayant le même support causal
+s'annule suffisamment loin et est donc nulle.
+Appliquer cet argument à \(\psi\) et à \(\mathsf{G}_{\rm ret}L\psi\), ou au
+cas avancé, donne les identités à droite sur le support fini.
+Enfin, pour deux sources compactes, la somme double de l'appariement
+est finie et
+\[
+ \bigl((k-n)_+U(k,n)\bigr)^*=(k-n)_+U(n,k).
+\]
+Échanger les indices démontre l'adjonction indiquée.
+\end{proof}
+
+Les réponses appartiennent à \(\mathcal F\) ; en général, elles croissent
+linéairement hors de la source et n'appartiennent pas à \(\ell^2\).
+Le domaine à support fini et son appariement spécifient l'adjonction
+de Green utilisée ici. Le résultat construit la propagation du canal
+chronologique à partir de son action ; une réalisation de champs spatiaux conserve
+en outre son opérateur, sa géométrie et son domaine de propagation propres.
+
+Soit \(C_0\) une involution isométrique, linéaire ou antilinéaire, de \(\mathcal H_0\). Le transport depuis la fibre de référence construit
+\[
+ C_n=U(-n,0)C_0U(0,n):\mathcal H_n\longrightarrow\mathcal H_{-n},
+ \qquad (\mathcal C\psi)_n=C_{-n}\psi_{-n}.
+\]
+On a \(C_{-n}C_n=I\) et \(C_{n+1}U_n=U_{-n-1}^*C_n\), par composition. En particulier, \(\mathcal C^2=I\), et le changement \((n,k)\mapsto(-n,-k)\) dans les sommes précédentes prouve
+\begin{equation}
+ \mathcal C L=L\mathcal C,\qquad
+ \mathcal C \mathsf{G}_{\rm ret}\mathcal C^{-1}=\mathsf{G}_{\rm adv}.
+ \label{vii:eq:intercambio-green-cronologico}
+\end{equation}
+Lorsque \(C_0\) est la réalisation déclarée de l'involution du registre, ces formules transportent cette involution à tout le canal, sans identifier le retour de phase à une réinitialisation de la mémoire.
+
+\subsection{Échange causal et décomposition de la réponse}
+\label{vii:subsec:green-realizacion-campos}
+
+Dans une réalisation de champs, soit
+\(L:\mathcal D(L)\subset\mathcal H_\Phi\to\mathcal H_J\)
+un opérateur possédant des opérateurs de Green retardé et avancé uniques sur les domaines de
+sources admissibles. Nous notons \(J^+(S)\) et \(J^-(S)\) les
+domaines causaux futur et passé d'un support \(S\). Les conditions sont
+\[
+ \begin{gathered}
+ L\mathsf{G}_{\rm ret}=L\mathsf{G}_{\rm adv}=I,\\
+ \operatorname{supp}(\mathsf{G}_{\rm ret}j)\subset J^+(\operatorname{supp}j),\\
+ \operatorname{supp}(\mathsf{G}_{\rm adv}j)\subset J^-(\operatorname{supp}j).
+ \end{gathered}
+\]
+Soient \(C_\Phi,C_J\) des involutions isométriques, toutes deux linéaires ou toutes deux
+antilinéaires, qui transportent ces domaines,
+inversent leurs orientations causales et satisfont
+\(LC_\Phi=C_JL\). On conserve un appariement de Green pour lequel
+\(\mathsf{G}_{\rm adv}=\mathsf{G}_{\rm ret}^{\dagger}\).
+
+\begin{proposition}[Conjugaison des opérateurs de Green et parités]
+\label{vii:prop:green-paridades}
+Sous les conditions précédentes,
+\[
+ C_\Phi \mathsf{G}_{\rm ret}C_J^{-1}=\mathsf{G}_{\rm adv}.
+\]
+Sur l'espace réel des opérateurs de réponse, définissons
+\[
+ \Theta(K)=C_\Phi K C_J^{-1},\qquad
+ \mathsf P_\pm(K)=\tfrac12(K\pm\Theta(K)).
+\]
+Ce sont des projections complémentaires pour l'involution \(\Theta\), et
+\begin{equation}
+ \mathsf{G}_{\rm sym}=\tfrac12(\mathsf{G}_{\rm ret}+\mathsf{G}_{\rm adv}),\qquad
+ \mathsf{G}_{\rm rad}=\tfrac12(\mathsf{G}_{\rm ret}-\mathsf{G}_{\rm adv})
+ \label{vii:eq:descomposicion-green}
+\end{equation}
+satisfont \(\Theta(\mathsf{G}_{\rm sym})=\mathsf{G}_{\rm sym}\),
+\(\Theta(\mathsf{G}_{\rm rad})=-\mathsf{G}_{\rm rad}\),
+\(\mathsf{G}_{\rm sym}^{\dagger}=\mathsf{G}_{\rm sym}\) et
+\(L\mathsf{G}_{\rm rad}=0\). Le support de la réponse symétrique est contenu
+dans la réunion des deux domaines causaux.
+\end{proposition}
+\begin{proof}
+L'opérateur conjugué résout l'équation de source, puisque
+\[
+ LC_\Phi \mathsf{G}_{\rm ret}C_J^{-1}=C_JL\mathsf{G}_{\rm ret}C_J^{-1}=I.
+\]
+L'inversion de l'orientation envoie son support dans le domaine avancé ;
+son unicité l'identifie à \(\mathsf{G}_{\rm adv}\). Les involutions donnent
+\(\Theta^2=I\) ; développer \((I\pm\Theta)^2\) et
+\((I+\Theta)(I-\Theta)\) démontre les affirmations sur les projections.
+L'adjonction de Green démontre la symétrie et la différence des deux
+équations de source donne \(L\mathsf{G}_{\rm rad}=0\). La somme de deux réponses
+a un support contenu dans l'union de leurs supports.
+\end{proof}
+
+Si les involutions sont antilinéaires, \(\Theta\) est linéaire sur les scalaires réels ; c'est l'espace d'opérateurs utilisé dans la proposition. La conjugaison du groupe temporel, la condition de support et l'adjonction de Green sont trois propriétés distinctes, transmises par les applications de réalisation correspondantes.
+
+\subsection{Projection des courants absorbés et variation de l'action}
+\label{vii:subsec:proyeccion-absorcion}
+
+Soit \(\gamma_\partial:\mathcal H_\Phi\to\mathcal H_\partial\)
+la lecture de frontière, distincte de la route \(\gamma\). Nous définissons
+\[
+ \mathcal A_\partial=\gamma_\partial \mathsf{G}_{\rm rad}.
+\]
+La fenêtre finie fixe l'espace des sources et la lecture de frontière ;
+les opérateurs de Green conservent leur domaine de réponses. À un niveau fini avec
+des produits scalaires fixés, son inverse de
+Moore--Penrose détermine
+\begin{equation}
+ P_{\rm abs}=I-\mathcal A_\partial^+\mathcal A_\partial.
+ \label{vii:eq:proyector-absorcion}
+\end{equation}
+
+\begin{theorem}[Condition d'absorption et réponse de bord]
+\label{vii:thm:proyeccion-absorcion}
+\(P_{\rm abs}\) est la projection orthogonale sur \(\ker\mathcal A_\partial\). Pour toute source \(j\), la source \(j_{\rm abs}=P_{\rm abs}j\) satisfait
+\begin{equation}
+ \gamma_\partial \mathsf{G}_{\rm ret}j_{\rm abs}
+ =\gamma_\partial \mathsf{G}_{\rm adv}j_{\rm abs}.
+ \label{vii:eq:igualdad-borde-absorbido}
+\end{equation}
+C'est la source absorbée la plus proche de \(j\) pour le produit intérieur
+déclaré. Il existe des sources absorbées non nulles exactement lorsque
+\(\operatorname{rank}\mathcal A_\partial<\dim\mathcal H_J\).
+\end{theorem}
+\begin{proof}
+La décomposition orthogonale
+\(\mathcal H_J=\ker\mathcal A_\partial\oplus
+ \operatorname{im}\mathcal A_\partial^*\) montre que
+\(\mathcal A_\partial^+\mathcal A_\partial\) est l'identité
+sur le second terme et zéro sur le premier. Son complément est le
+projecteur annoncé. Par définition,
+\(2\mathcal A_\partial j_{\rm abs}
+ =\gamma_\partial(\mathsf{G}_{\rm ret}-\mathsf{G}_{\rm adv})j_{\rm abs}=0\).
+Pour \(k\in\ker\mathcal A_\partial\), la décomposition orthogonale donne
+\[
+ \|j-k\|^2=\|(I-P_{\rm abs})j\|^2+\|P_{\rm abs}j-k\|^2.
+\]
+L'unique minimum correspond à \(k=P_{\rm abs}j\). L'équivalence finale est le théorème du rang.
+\end{proof}
+
+Dans l'appariement de la source et du champ, l'action symétrique est
+\(\mathscr S[j]=\tfrac12\langle j,\mathsf{G}_{\rm sym}j\rangle\).
+L'adjonction déclarée rend cette quantité réelle. Pour des variations réelles,
+\[
+ \mathrm d\mathscr S[j](h)
+ =\operatorname{Re}\langle h,\mathsf{G}_{\rm sym}j\rangle.
+\]
+L'action restreinte aux sources absorbées s'écrit sur l'espace ambiant comme
+\begin{equation}
+ \mathscr S_{\rm abs}[j]
+ =\tfrac12\langle P_{\rm abs}j,\mathsf{G}_{\rm sym}P_{\rm abs}j\rangle,
+ \quad
+ \mathrm d\mathscr S_{\rm abs}[j](h)
+ =\operatorname{Re}\langle P_{\rm abs}h,\mathsf{G}_{\rm sym}P_{\rm abs}j\rangle.
+ \label{vii:eq:variacion-restringida-absorcion}
+\end{equation}
+Lorsque l'accouplement identifie champ et source par Riesz, le gradient ambiant est \(P_{\rm abs}\mathsf{G}_{\rm sym}P_{\rm abs}j\). La réponse de champ reste \(\mathsf{G}_{\rm sym}j_{\rm abs}\) ; le projecteur du gradient exprime la restriction des variations. Les formules se démontrent en développant le terme quadratique de \(j+th\) et en utilisant le caractère autoadjoint. Un terme matériel \(\mathscr S_{\rm matter}\) ajoute sa propre différentielle.
+
+\subsection{Condition absorbante explicite dans une fenêtre chronologique}
+\label{vii:subsec:absorcion-momentos}
+
+Le canal de la sous-section~\ref{vii:subsec:green-cronologico} permet
+d'évaluer cette condition sans introduire de réponse cible. Soit une
+source à support dans \(0,\ldots,N\), avec \(N\geq1\). Transportons
+ses composantes vers la fibre de référence :
+\[
+ \widehat j_k=U(0,k)j_k,\qquad
+ M_0(j)=\sum_{k=0}^N\widehat j_k,\qquad
+ M_1(j)=\sum_{k=0}^Nk\widehat j_k.
+\]
+L'identité \((n-k)_+-(k-n)_+=n-k\) donne
+\begin{equation}
+ (\mathsf{G}_{\rm ret}-\mathsf{G}_{\rm adv})j\big|_n
+ =U(n,0)\bigl(nM_0(j)-M_1(j)\bigr).
+ \label{vii:eq:diferencia-green-momentos}
+\end{equation}
+
+\begin{proposition}[Absorption et deux moments transportés]
+\label{vii:prop:absorcion-momentos}
+Si la trace évalue le champ en deux positions distinctes \(a,b\),
+l'égalité des traces avancée et retardée équivaut à
+\(M_0(j)=M_1(j)=0\). Dans une fibre de dimension \(d\), l'espace
+de telles sources est de dimension \((N-1)d\). Pour \(N\geq2\),
+il contient les sources non nulles de composantes transportées
+\((z,-2z,z,0,\ldots,0)\), \(z\neq0\).
+\end{proposition}
+\begin{proof}
+L'inversibilité de \(U(a,0)\) et de \(U(b,0)\) réduit la condition
+au bord à \(aM_0-M_1=0\) et \(bM_0-M_1=0\).
+Soustraire les équations donne \((a-b)M_0=0\), puis \(M_1=0\).
+L'application des deux moments est surjective : pour des valeurs prescrites
+\((z_0,z_1)\), il suffit de prendre
+\(\widehat j_0=z_0-z_1\), \(\widehat j_1=z_1\) et les autres
+composantes nulles. Son rang est \(2d\) ; sa nullité est
+\((N+1)d-2d\). La source indiquée possède deux moments nuls.
+\end{proof}
+
+Dans le repère transporté, écrivons
+\[
+ B_N=\begin{pmatrix}1&1&\cdots&1\\0&1&\cdots&N\end{pmatrix}.
+\]
+Le projecteur absorbant est évalué par
+\begin{equation}
+ P_N=\bigl[I-B_N^{\mathsf T}(B_NB_N^{\mathsf T})^{-1}B_N\bigr]
+       \otimes I_{\mathcal H_0}.
+ \label{vii:eq:proyector-momentos-cronologicos}
+\end{equation}
+Les deux lignes de \(B_N\) sont indépendantes pour \(N\geq1\), de sorte que l'inverse existe. Le transport unitaire entre repères envoie ce projecteur sur les fibres d'origine. Pour \(N=2\),
+\[
+ P_2=\frac16
+ \begin{pmatrix}1&-2&1\\-2&4&-2\\1&-2&1\end{pmatrix}
+ \otimes I_{\mathcal H_0}.
+\]
+Cette construction produit une classe absorbée non nulle et son opération de
+projection dans le canal chronologique. Son amplitude et son identification à un
+courant matériel conservent les règles du secteur physique correspondant.
+
+\subsection{Raffinement et continuité de la condition de bord}
+\label{vii:subsec:refinamiento-absorcion}
+
+Soient \(R_m^\Phi,R_m^J,R_m^\partial\) les applications de raffinement des
+champs, des sources et des frontières. Supposons qu'elles entrelacent les deux opérateurs de Green et la
+trace. Par composition, on obtient
+\begin{equation}
+ R_m^\Phi \mathsf{G}_{{\rm sym},m}=\mathsf{G}_{{\rm sym},m+1}R_m^J,\qquad
+ R_m^\partial\mathcal A_{\partial,m}
+ =\mathcal A_{\partial,m+1}R_m^J.
+ \label{vii:eq:refinamiento-lectura-absorcion}
+\end{equation}
+La seconde égalité envoie une source absorbée sur une autre source absorbée.
+La naturalité des projecteurs conserve en outre la structure
+orthogonale des réalisations.
+
+\begin{proposition}[Naturalité de la projection absorbante]
+\label{vii:prop:naturalidad-proyeccion-absorcion}
+Pour une isométrie de sources \(R=R_m^J\), on a \(P_{{\rm abs},m+1}R=RP_{{\rm abs},m}\) exactement lorsque
+\[
+ R(\ker\mathcal A_{\partial,m})
+       \subset\ker\mathcal A_{\partial,m+1},\qquad
+ R((\ker\mathcal A_{\partial,m})^\perp)
+       \subset(\ker\mathcal A_{\partial,m+1})^\perp.
+\]
+Avec ces conditions à tous les niveaux, les projecteurs définissent une projection orthogonale dans la complétion de la limite inductive isométrique des espaces de sources.
+\end{proposition}
+\begin{proof}
+On décompose chaque source en ses composantes dans le noyau et dans son
+complément orthogonal. Les deux inclusions impliquent qu'appliquer la
+projection avant ou après le raffinement conserve respectivement la
+première composante et annule la seconde. Réciproquement, l'égalité des
+opérateurs appliquée à chaque composante donne les deux inclusions.
+Dans la limite inductive, l'égalité permet de définir un opérateur sur l'
+union des niveaux sans dépendre du représentant. Tous les projecteurs
+ont une norme au plus égale à un, de sorte que l'opérateur s'étend à la
+complétion. Ses identités d'autoadjonction et d'idempotence, valables sur
+l'union dense, passent par continuité à la complétion.
+\end{proof}
+
+Pour prolonger également une réponse de Green à une complétion, on
+conserve ses domaines et les estimations de continuité correspondantes.
+La propagation chronologique à support fini et la factorisation de la
+réponse par l'image du bord, démontrée dans
+\ref{vii:thm:observador-factorizacion}, maintiennent ainsi leurs domaines
+respectifs pendant le raffinement.
+
+La réalisation physique de l'émission et de l'absorption compose ces opérateurs avec les courants matériels, l'action et les conditions causales du secteur. L'entrelacement doit conserver l'involution de route, l'accouplement de la source et du champ, l'action transportée et les conditions de frontière à chaque niveau. La construction précédente apporte la réversion du groupe, les opérateurs de Green du canal chronologique, la décomposition temporelle et une projection absorbante explicite ; les réalisations spatiales emploient leurs propres applications et conditions de causalité.

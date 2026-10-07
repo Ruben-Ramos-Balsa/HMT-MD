@@ -1,0 +1,311 @@
+\section{Del registro de trayectoria al operador de masa}
+\label{vi:sec:operador-masa}
+
+La construcción distingue dos operaciones. Primero, la dinámica produce
+un registro de la trayectoria. Después, un funcional extrae coordenadas
+enteras y las evalúa mediante las constantes internas ya obtenidas.
+Conservar ese orden explica cómo la masa puede ser una magnitud de la
+persistencia sin agotar su estructura.
+
+\subsection{Lectura cronológica y eventos orientados}
+
+Sea \(d_1,\ldots,d_{108}\) la lectura digital de una ruta enriquecida.
+En la coordenatización declarada, el soporte de acción es \(\{1,3,5,7\}\), y
+\[
+ n_A=\#\{t:d_t\in\{1,3,5,7\}\}.
+\]
+Se conservan además los \(12\) eventos de los bloques de \(9\) pasos:
+\[
+ e_m=\sigma_m\#\{t:9m+1\le t\le9m+9,\ d_t\in\{2,4,6,8\}\},
+ \quad 0\le m<12,
+\]
+donde \(\sigma=(+,+,+,-,-,-,+,+,+,-,-,-)\). El soporte de este
+extractor es una parte explícita de la coordenatización de lectura; su función no
+debe confundirse con el selector ternario de fase del TPK.
+
+La distribución de los eventos es relevante incluso cuando sus sumas
+coinciden. Para verla, introducimos
+\[
+ p_i=e_i+e_{i+6},\quad a_i=e_i-e_{i+6},\quad
+ s_C=\sum_{i=0}^{5}p_i,\quad M_i=p_i-p_5\ (0\le i<5).
+\]
+
+\begin{proposition}[Reconstrucción integral de los eventos]
+\label{vi:prop:eventos}
+La transformación \((e_0,\ldots,e_{11})\mapsto(s_C,M_0,\ldots,M_4,a_0,\ldots,a_5)\)
+es inyectiva sobre \(\mathbb Z^{12}\). Su imagen se caracteriza por
+\[
+ s_C-\sum_{i=0}^4M_i\equiv0\pmod6,
+ \qquad p_i\equiv a_i\pmod2\quad(0\le i<6),
+\]
+donde \(p_5=(s_C-\sum M_i)/6\) y \(p_i=p_5+M_i\) para \(i<5\).
+\end{proposition}
+\begin{proof}
+Sumar las seis expresiones de \(p_i\) da
+\(s_C=6p_5+\sum_{i<5}M_i\). Esto recupera los \(p_i\), y después
+\[
+ e_i=\frac{p_i+a_i}{2},\qquad
+ e_{i+6}=\frac{p_i-a_i}{2}.
+\]
+Las congruencias son necesarias para que esas cantidades sean enteras y
+suficientes para que las fórmulas definan una preimagen integral. Sustituir
+en la transformación directa recupera todas las coordenadas.
+\end{proof}
+
+La descomposición \(12=1+5+6\) adquiere así un significado operativo:
+el total, las diferencias y las orientaciones recuperan los eventos.
+La división por \(6\) pertenece a esa reconstrucción. Cuando el carácter
+usa \(s_C/6\), \(s_C\) sigue siendo la suma entera; una coordenada ya
+dividida no se divide una segunda vez.
+
+\subsection{Memoria torsional y firma}
+
+Para cada aparición de \(9\), la lectura conserva su predecesor.
+Definimos, con índices cíclicos,
+\[
+ j_2(d)=\begin{cases}0,&d=9,\\1,&d\in\{2,4,6,8\},\\-1,&d\in\{1,3,5,7\},\end{cases}
+ \quad z_t=\mathbf1_{\{d_t=9\}}j_2(d_{t-1}).
+\]
+Entonces
+\[
+ T_z=\sum_{t=1}^{108}z_t,\quad
+ C_z=\sum_{t\in\{27,54,81,108\}}z_t,\quad
+ k_{\Delta_4}=T_z-2C_z.
+\]
+La primera suma conserva la memoria acumulada y la segunda distingue los
+cierres de corona. Eliminar los predecesores antes de evaluar estas
+expresiones altera el objeto que se lee.
+
+Con \(\tau_m=\operatorname{sgn}(e_m)\), las restantes coordenadas son
+\[
+ b_{120}=\sum_{a=0}^{3}\operatorname{sgn}(e_a+e_{a+4}+e_{a+8}),
+ \qquad b_{\zeta}=\sum_{m=0}^{11}\tau_m\tau_{m+3},
+\]
+donde el segundo índice es módulo \(12\). Se obtiene la firma
+\[
+ L_{\mathrm{tick}}(\gamma)
+ =\sigma(\gamma)=(n_A,s_C,k_{\Delta_4},b_{120},b_{\zeta})\in\mathbb Z^5.
+\]
+Esta aplicación es determinista en la coordenatización declarada. Los signos y las
+correlaciones explican por qué la composición debe realizarse sobre el
+registro antes de extraer los \(5\) enteros: la suma de firmas no
+representa, en general, la composición de dos historias.
+
+\input{sections/05a_costura_108_1080.tex}
+
+\subsection{Carácter y especialización interna}
+
+Sea \(X=(X_A,X_C,X_4,X_{120},X_{270})\). El carácter formal es
+\[
+ \chi(\sigma;X)=\exp\!\left(n_AX_A+s_CX_C+k_{\Delta_4}X_4+
+ b_{120}X_{120}+b_{\zeta}X_{270}\right).
+\]
+Para cada \(X\), satisface
+\(\chi(\sigma+\sigma';X)=\chi(\sigma;X)\chi(\sigma';X)\)
+porque el exponente es lineal en la firma. Es una ley sobre firmas; no
+afirma que el extractor sea aditivo sobre rutas sin conservar la interfaz.
+
+La especialización emplea las coordenadas internas construidas previamente:
+\[
+ X_A=A_{\mathrm{rad}},\quad X_C=C^*_{\mathrm{rad}}/6,
+ \quad X_4=\Delta_4,\quad X_{120}=s_{120},\quad
+ X_{270}=\zeta_{270}:=135\Delta_4^2.
+\]
+El carácter es adimensional y positivo. Su efecto es una homotecia sobre
+la recta de masa. La forma exponencial determina cómo actúan los
+coeficientes; su procedencia queda fijada en los registros y construcciones
+anteriores.
+
+\subsection{Jerarquía bicapa y conservación de las dos genealogías}
+
+Escribimos \(x=A_{\mathrm{rad}}\), \(y=C^*_{\mathrm{rad}}\). En la
+cámara \(x>y>0\), los canales son
+\[
+ q_+=e^{-x-y},\qquad q_-=e^{-x+y},\qquad0<q_+<q_-<1.
+\]
+Para una involución \(R\), con \(P_\pm=(I\pm R)/2\), el operador
+de los dos canales es
+\[
+ T=q_+P_++q_-P_-.
+\]
+Sus momentos escalar y orientado se expresan como
+\[
+ c_n=q_-^n+q_+^n,\qquad s_n=q_-^n-q_+^n.
+\]
+Multiplicar estas expresiones prueba
+\[
+ c_n^2-s_n^2=4e^{-2nx},\quad
+ c_{m+n}=\frac{c_mc_n+s_ms_n}{2},\quad
+ s_{m+n}=\frac{s_mc_n+c_ms_n}{2}.
+\]
+Ambas sucesiones satisfacen
+\[
+ X_{n+2}=c_1X_{n+1}-e^{-2x}X_n,\qquad X\in\{c,s\}.
+\]
+Estas relaciones muestran que las alturas comparten un mismo operador.
+No se define una colección distinta de momentos para cada especie.
+
+\begin{proposition}[Semigrupo de alturas]
+\[
+ \langle90,120\rangle=\{90,120\}\cup\{30r:r\ge6\}.
+\]
+\end{proposition}
+\begin{proof}
+Tras dividir por \(30\), basta estudiar \(\langle3,4\rangle\).
+Los enteros \(6,7,8\) son \(3+3,3+4,4+4\); sumar \(3\) produce
+todos los enteros posteriores. Por debajo de \(6\), los únicos
+elementos positivos son \(3,4\).
+\end{proof}
+
+Las alturas \(360=4\cdot90=3\cdot120\) ilustran la diferencia entre
+igualdad de evaluación y memoria de composición. El cociente algebraico
+identifica los dos exponentes; el registro conserva si el transporte
+empleó cuatro etapas de un tipo o tres del otro.
+
+La especialización refinada tiene exponente
+\[
+ \log\chi_{\mathrm{ref}}=n_Ax+\frac{s_C}{6}y+k_{\Delta_4}\Delta_4
+ +b_{\zeta}\zeta_{270}+\sum_{h\in\langle90,120\rangle}N_hs_h,
+ \qquad N_h=\eta_h+b_{120}\mathbf1_{\{h=120\}}.
+\]
+El par \((\eta_{120},b_{120})\) se conserva aunque la evaluación use
+su suma. También se conservan separados \(s_{270}\) y
+\(\zeta_{270}\): el primero es un momento bicapa y el segundo una
+expresión cuadrática del refinamiento.
+
+\begin{proposition}[Convergencia de la evaluación refinada]
+Si \(\sum_h|N_hs_h|<\infty\), el carácter refinado define un escalar
+positivo finito y sus evaluaciones truncadas convergen a él.
+\end{proposition}
+\begin{proof}
+La hipótesis da convergencia absoluta del exponente. La continuidad de la
+exponencial permite pasar al límite; la exponencial de un real finito es
+estrictamente positiva.
+\end{proof}
+
+La convergencia evalúa una sucesión de coeficientes ya especificada.
+La selección de esos coeficientes por la ruta es una operación distinta,
+y debe acompañar a toda evaluación atribuida a una especie.
+
+La notación \(\chi_{\mathrm{full}}\) conservada en algunas fórmulas
+de evaluación de los sectores designa este mismo carácter
+\(\chi_{\mathrm{ref}}\), con los mismos argumentos y coeficientes.
+El cambio de símbolo no añade otra especialización ni otra torre.
+
+\subsection{Lectores de desplazamiento y autocorrelación}
+
+La misma ruta admite dos lecturas del retorno:
+\[
+ K_D=\left(D_{27}+D_{36},D_1,\frac{D_4-D_3}{2}\right),\qquad
+ K_\Omega=(\Omega,54,P_6).
+\]
+El primer mapa conserva defectos de desplazamiento; el segundo, memoria de
+retorno y autocorrelación. En el censo completo de \(324\) orientaciones
+hay \(14\) perfiles del primero, \(9\) del segundo y \(40\) pares
+conjuntos. Las \(18\) coincidencias tienen valor \((80,54,6)\).
+No se infiere de ello la igualdad de ambos operadores en todo el atlas.
+
+Para la ruta electrónica, los desplazamientos son
+\[
+ (D_1,D_3,D_4,D_{27},D_{36})=(54,56,68,48,32).
+\]
+La sustitución produce \(K_D=(80,54,6)\), coincidente con
+\(K_\Omega\). Su exponente es
+\[
+ \kappa_e=80-54\alpha+6\Delta_4.
+\]
+La trayectoria electrónica se construye en
+\eqref{vi:dep:trayectoria-electron}; sus lectores de desplazamiento y
+autocorrelación se evalúan, respectivamente, en
+\eqref{vi:dep:KD} y \eqref{vi:dep:KOmega}. La coincidencia
+\(K_D=K_\Omega=(80,54,6)\) pertenece al teorema de cierre beta de la
+subsección~\ref{vi:dep:beta}. Aquí esa excepción central se conserva y la
+operación se extiende a las fibras del atlas.
+
+\subsection{Operador sobre una fibra y sección dimensional}
+
+Sea \(\mathscr H_M\) el espacio de Hilbert finito con base ortonormal
+\((e_\gamma)\) etiquetada por las rutas de una multisección. Para
+\(r\in\{D,\Omega\}\), el operador de retorno se define por
+\(B_M^re_\gamma=\kappa_\gamma^re_\gamma\), con exponentes reales;
+por tanto es autoadjunto. Sea \(M_M^{(0)}\) el operador basal positivo,
+cuya conexión con el carácter se fija a continuación.
+La razón adimensional de las
+secciones de acción es \(R_{\mathrm{act}}>0\). Se define
+\[
+ M_M^{\beta,r}=R_{\mathrm{act}}^{B_M^r/2}
+ M_M^{(0)}R_{\mathrm{act}}^{B_M^r/2}.
+\]
+
+\begin{proposition}[Positividad y restricción escalar]
+El operador \(M_M^{\beta,r}\) es positivo. Si ambos operadores son
+diagonales en la base de rutas, cada valor basal \(m_\gamma^{(0)}\)
+se transforma en
+\[
+ m_\gamma^\beta=m_\gamma^{(0)}R_{\mathrm{act}}^{\kappa_\gamma}.
+\]
+\end{proposition}
+\begin{proof}
+Sea \(S=R_{\mathrm{act}}^{B_M^r/2}\), autoadjunto e invertible.
+Para todo \(v\),
+\(\langle v,SM_M^{(0)}Sv\rangle=\langle Sv,M_M^{(0)}Sv\rangle\ge0\).
+En la base diagonal, los dos factores \(S\) multiplican cada valor
+por \(R_{\mathrm{act}}^{\kappa_\gamma/2}\); su producto da la fórmula.
+\end{proof}
+
+La sección absoluta de masa se obtiene de la acción y el reloj:
+\[
+ \omega_0=\frac{2\pi}{108t_0},\qquad
+m_{\mathrm{clk}}=\hbar_{\mathrm{ret}}\omega_0c_{\mathrm{int}}^{-2}.
+\]
+En la coordenatización normalizada respecto del electrón, el operador basal anterior es
+\[
+ M_M^{(0)}e_\gamma
+ =m_e^{(0)}\,
+   \chi_{\mathrm{ref}}(\sigma_\gamma-\sigma_e,
+                       \eta_\gamma-\eta_e)e_\gamma.
+\]
+Aquí \(m_e^{(0)}\) es la realización de la coordenada electrónica
+basal, con su prefactor, su refinamiento y su base dimensional.
+Si \(E_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_E\), entonces
+\[
+ m_e^{(0)}=\varepsilon_e^{(0)}\mathcal U_Ec_{\mathrm{int}}^{-2}
+ =b_e\,m_{\mathrm{clk}},\qquad
+ b_e=\varepsilon_e^{(0)}\frac{\mathcal U_E}{E_{\mathrm{clk}}}.
+\]
+En la coordenatización \(\mathcal U_E=E_{\mathrm{clk}}\) se obtiene
+\(b_e=\varepsilon_e^{(0)}\); en otra coordenatización se conserva el cociente
+de bases indicado. Si las coordenadas de torre ya son
+relativas al electrón, se omite una segunda sustracción de \(\eta_e\).
+Esta igualdad enlaza el operador con la firma de cada ruta y conserva
+explícitamente la normalización electrónica. Una elección distinta de
+sección de referencia debe transportar también esa normalización.
+La escala de la constante reducida de Planck pertenece a esta construcción
+dimensional. El carácter y el factor de retorno actúan después como
+escalares. El electrón conserva su estructura: no se identifica con el
+cuanto cronológico \(m_{\mathrm{clk}}\).
+
+Para dos rutas en la misma coordenatización absoluta,
+\[
+ \frac{m_Y^\beta}{m_X^\beta}
+ =\chi_{\mathrm{ref}}(\sigma_Y-\sigma_X,\eta_Y-\eta_X)
+ R_{\mathrm{act}}^{\kappa_Y-\kappa_X}.
+\]
+La sección dimensional común cancela. La diferencia de los exponentes de
+retorno no cancela salvo que sea nula. Esta identidad conserva la
+distinción entre escala absoluta y estructura relativa de una colección.
+
+\subsection{El sector de propagación nula}
+
+La exponencial toma valores estrictamente positivos. La coordenatización nula se
+construye antes de ese carácter, en la realización partida
+\[
+ \mathcal A_{\mathrm{sp}}=\mathbb R[R]/(R^2-1),\quad
+ z=r_+P_++r_-P_-,\quad N(z)=r_+r_-.
+\]
+Las direcciones \(\mathbb RP_+\) y \(\mathbb RP_-\) tienen norma
+nula. Una propagación transportada en una de ellas pertenece a ese sector;
+la lectura material bicapa emplea el acoplamiento de ambas. De esta manera,
+el fotón y el sector gluónico conservan su residencia en la teoría aunque
+no constituyan una fila del carácter positivo. La realización de sus
+representaciones se expone junto a los sectores correspondientes.

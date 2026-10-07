@@ -1,0 +1,345 @@
+% Ampliación acumulativa del TRIT; se inserta antes de la figura de regímenes.
+% No sustituye ni elimina el desarrollo precedente.
+\subsubsection{División balanceada y composición de los levantamientos}
+\label{trit-ampl-div-balanceada}
+
+La reducción ternaria permite expresar una evaluación entera de APP en una
+coordenada visible y una coordenada de prolongación. Su función no consiste
+únicamente en abreviar la escritura de un entero: proporciona una regla de
+composición que determina cómo se modifica el cociente cuando se suman o se
+multiplican evaluaciones. La elección balanceada hace explícita, además, la
+compatibilidad de esa regla con la inversión de signo.
+
+\begin{definition}[Coordenadas ternarias balanceadas]
+\label{trit-ampl-def-coordenadas}
+Para \(n\in\mathbb Z\), sean
+\[
+ q_3(n)=\left\lfloor\frac{n+1}{3}\right\rfloor,\qquad
+ r_3(n)=n-3q_3(n).
+\]
+La aplicación
+\[
+ \mathcal B:\mathbb Z\longrightarrow\TRIT\times\mathbb Z,\qquad
+ n\longmapsto(r_3(n),q_3(n))
+\]
+se denomina descomposición ternaria balanceada. Su inversa es
+\(\mathcal L(r,c)=r+3c\).
+\end{definition}
+
+En efecto, \(r_3(n)\in\{-1,0,+1\}\). Si dos pares representan el mismo entero,
+\(r+3c=s+3d\), entonces \(r-s\) es múltiplo de \(3\) y pertenece al intervalo
+\([-2,2]\); necesariamente \(r=s\) y \(c=d\). La representación es, por tanto,
+única. La división puede repetirse sobre \(q_3(n)\), de manera que cada nivel
+conserva el dato necesario para reconstruir el anterior. El cociente no es una
+perturbación del residuo: constituye su coordenada complementaria.
+
+La firma obtenida de una evaluación \(F\), con \(F=S\) o \(F=P\) en APP,
+es \(r_3\circ F\). Cuando la reducción actúa sobre el cursor de fase, la misma
+sección balanceada produce las clases \(\{1,4,7\}\), \(\{2,5,8\}\) y
+\(\{3,6,9\}\), con valores \(+1,-1,0\). El selector del TPK que se define
+a continuación utiliza esas clases para determinar el modo operativo.
+La lectura de una evaluación y la selección de un modo tienen así la misma
+reducción ternaria, pero dominios y funciones diferentes.
+
+\Needspace{16\baselineskip}
+\begin{proposition}[Aritmética de los pares balanceados]
+\label{trit-ampl-prop-aritmetica}
+Sean \(n=r+3c\) y \(m=s+3d\), con \(r,s\in\TRIT\). Defínase
+\[
+ \chi(r,s)=\frac{r+s-r_3(r+s)}3.
+\]
+Las operaciones enteras se transportan a los pares mediante
+\begin{align}
+ (r,c)\boxplus(s,d)
+ &=\bigl(r_3(r+s),c+d+\chi(r,s)\bigr),
+ \label{trit-ampl-eq-suma}\\
+ (r,c)\boxtimes(s,d)
+ &=\bigl(rs,rd+sc+3cd\bigr).
+ \label{trit-ampl-eq-producto}
+\end{align}
+La aplicación \(\mathcal L\) conserva ambas operaciones.
+\end{proposition}
+\begin{proof}
+La igualdad \(r+s=r_3(r+s)+3\chi(r,s)\) da
+\[
+ n+m=r_3(r+s)+3\bigl(c+d+\chi(r,s)\bigr).
+\]
+Por otra parte,
+\[
+ nm=rs+3(rd+sc+3cd).
+\]
+Como el producto de dos representantes balanceados pertenece de nuevo a
+\(\{-1,0,+1\}\), no necesita una reducción residual adicional. La unicidad
+de la descomposición demuestra las dos fórmulas.
+\end{proof}
+
+Por ejemplo, \(2=(-1)+3\) y \(4=1+3\). Su suma y su producto se reconstruyen
+como
+\[
+ (-1,1)\boxplus(1,1)=(0,2),\qquad
+ (-1,1)\boxtimes(1,1)=(-1,3).
+\]
+Las evaluaciones resultantes son \(6\) y \(8\). La suma de cocientes basta
+en este ejemplo aditivo; en el producto intervienen los términos cruzados
+\(rd\), \(sc\) y \(3cd\). La discrepancia entre ambas operaciones reside
+también en la coordenada de prolongación, no solamente en el residuo.
+
+El término \(\chi\) es un cociclo de la sección balanceada. Si
+\(r\oplus s=r_3(r+s)\), satisface
+\[
+ \chi(r,s)+\chi(r\oplus s,t)
+ =\chi(s,t)+\chi(r,s\oplus t).
+\]
+Ambos miembros representan el cociente de la misma suma de tres enteros.
+Esta identidad garantiza que reagrupar las operaciones no cambia la
+evaluación reconstruida. Al mismo tiempo, la proyección sobre el primer
+componente suprime esa contabilidad: \(1+1=-1+3\), mientras que la lectura
+residual conserva únicamente \(-1\). La información eliminada está
+determinada, en este caso, por \(\chi(1,1)=1\).
+
+La relación con el módulo \(9\) conserva una segunda escala discreta.
+La aplicación
+\[
+ \beta:\TRIT\times\mathbb F_3\longrightarrow\mathbb Z/9\mathbb Z,
+ \qquad (r,\bar c)\longmapsto r+3c\pmod9
+\]
+está bien definida y es biyectiva. Cambiar el representante de \(\bar c\)
+añade un múltiplo de \(9\); recíprocamente, una igualdad de imágenes fija
+primero \(r\) por reducción módulo \(3\) y después \(\bar c\). La suma
+transportada por esta biyección contiene el término
+\(\chi(r,s)\) de \eqref{trit-ampl-eq-suma}, reducido ahora módulo \(3\).
+Así, los dos niveles ternarios no se componen mediante una suma
+independiente de coordenadas: la normalización del primer nivel modifica
+el segundo.
+
+En particular, las clases \(3\), \(6\) y \(0\) de
+\(\mathbb Z/9\mathbb Z\) tienen primer componente \(0\), pero segundo
+componente \(1\), \(2\) y \(0\), respectivamente. La distinción ya observada
+entre reducción directa y extracción de la coordenada del ideal aparece
+como una propiedad de \(\beta\). Conservar esa coordenada impide que el
+sector residual nulo se convierta artificialmente en una sola posición.
+El módulo \(1000\), utilizado después para organizar bloques decimales,
+cumple otra función de representación posicional; su cociente se conserva
+mediante la división correspondiente. Un cambio de base conserva el entero
+cuando retiene residuo y cociente, mientras que la coincidencia de residuos
+en bases distintas no identifica por sí sola sus estados de transporte.
+
+\Needspace{11\baselineskip}
+\subsubsection{Inversión, clase residual y coordenadas no visibles}
+\label{trit-ampl-inversion}
+
+La inversión aditiva se levanta sin ambigüedad:
+\[
+ \mathcal B(-n)=(-r_3(n),-q_3(n)).
+\]
+En particular, \(3\), \(0\) y \(-3\) tienen coordenadas
+\((0,1)\), \((0,0)\) y \((0,-1)\). Comparten firma nula, pero representan
+evaluaciones distintas. En una transición restringida a un cociente de
+amplitud máxima \(1\), son las tres posibilidades de la fibra visible sobre
+cero; en un levantamiento entero general, esa fibra contiene todos los pares
+\((0,c)\), con \(c\in\mathbb Z\).
+
+La coordenada de cociente recupera el entero evaluado, pero no recupera por
+sí sola la trayectoria que lo produjo. Dos caminos de APP pueden compartir
+evaluación, residuo y cociente, y diferir en orientación, sucesión de modos o
+enrollamiento. Por ello la descomposición \(\mathcal B\) se integra en el
+estado de transporte, en vez de sustituirlo. La memoria aritmética de una
+división y la memoria de una trayectoria son coordenadas relacionadas, no
+sinónimos.
+
+Para una sucesión de firmas de longitud \(n\), la inversión orientada es
+\[
+ C_{\rm rev}(\tau_1,\ldots,\tau_n)
+   =(-\tau_n,\ldots,-\tau_1).
+\]
+Aplicarla dos veces restituye la sucesión. La operación invierte el orden de
+las posiciones y el signo de cada firma; conserva su longitud y las
+posiciones nulas con el orden invertido. En la parametrización adoptada,
+intercambia el retorno con memoria, asociado a \(+1\), y la apertura
+bidireccional, asociada a \(-1\), manteniendo el umbral \(0\). El transporte
+de los restantes datos de una trayectoria se especifica mediante la
+involución correspondiente del TPK.
+
+Esta inversión de firmas debe distinguirse de la conjugación dentro de un
+álgebra cuadrática. La primera puede cambiar el tipo \(\tau\); la segunda,
+que se construye a continuación, actúa dentro del tipo ya fijado. La
+distinción impide atribuir a una inversión de signo una equivalencia
+algebraica entre regímenes diferentes.
+
+\subsubsection{Producto cuadrático, conjugación y norma algebraica}
+\label{trit-ampl-norma}
+
+Un elemento de \(\mathbb A_\tau\) tiene expresión única \(aI+bJ_\tau\).
+La relación \(J_\tau^2=-\tau I\) determina su producto:
+\begin{equation}
+ (aI+bJ_\tau)(cI+dJ_\tau)
+   =(ac-\tau bd)I+(ad+bc)J_\tau.
+ \label{trit-ampl-producto-cuadratico}
+\end{equation}
+Se trata de una realización real del tipo ya seleccionado. Las coordenadas
+\(a,b\) no son residuos de APP, y el producto
+\eqref{trit-ampl-producto-cuadratico} no sustituye a
+\eqref{trit-ampl-eq-producto}; expresa otra operación, en el codominio
+cuadrático declarado.
+
+\begin{definition}[Conjugación y norma algebraica]
+\label{trit-ampl-def-norma}
+La conjugación del tipo \(\tau\) y su norma algebraica son
+\[
+ \overline{aI+bJ_\tau}=aI-bJ_\tau,\qquad
+ N_\tau(aI+bJ_\tau)=a^2+\tau b^2.
+\]
+\end{definition}
+
+\begin{proposition}[Multiplicatividad e invertibilidad]
+\label{trit-ampl-prop-norma}
+Para \(z,w\in\mathbb A_\tau\),
+\[
+ z\bar z=N_\tau(z)I,\qquad
+ N_\tau(zw)=N_\tau(z)N_\tau(w).
+\]
+Además, \(z\) es invertible si y sólo si \(N_\tau(z)\ne0\), y en ese caso
+\[
+ z^{-1}=\frac{\bar z}{N_\tau(z)}.
+\]
+\end{proposition}
+\begin{proof}
+El producto de \(aI+bJ_\tau\) y \(aI-bJ_\tau\) es
+\((a^2+\tau b^2)I\). La conjugación es multiplicativa y el álgebra es
+conmutativa, por lo que
+\((zw)\overline{zw}=(z\bar z)(w\bar w)\). Si la norma no se anula, la
+fórmula indicada proporciona la inversa. Recíprocamente, si \(zw=I\), la
+multiplicatividad implica \(N_\tau(z)N_\tau(w)=1\).
+\end{proof}
+
+La forma cuadrática \(N_\tau\) es positiva definida únicamente en el tipo elíptico.
+Para \(\tau=0\), vale \(a^2\), y el elemento \(J_0\) es no nulo aunque su
+cuadrado y su norma sean cero. Para \(\tau=-1\), vale \(a^2-b^2\); los
+elementos no nulos \(I+J_{-1}\) e \(I-J_{-1}\) tienen norma cero y su
+producto se anula. La norma algebraica es aquí una forma cuadrática
+multiplicativa: no presupone una norma positiva de espacio vectorial.
+
+Los tres tipos pueden realizarse fielmente mediante
+\[
+ aI+bJ_\tau\longmapsto
+ \begin{pmatrix}a&-\tau b\\b&a\end{pmatrix}.
+\]
+El determinante de esta matriz es \(N_\tau(aI+bJ_\tau)\). Quedan
+representadas así, con una misma expresión matricial, la estructura
+compleja, la estructura de números duales y la estructura real escindida.
+Cada una conserva su ley y sus divisores de cero. La forma de firma
+\((1,1)\) del último caso tiene interpretación lorentziana en dimensión
+\(1+1\); la identificación de una métrica física requiere además un espacio,
+un campo y una regla de transporte específicos.
+
+\subsubsection{Conservación multiplicativa y composición de evoluciones}
+\label{trit-ampl-evoluciones}
+
+La exponencial ya obtenida pertenece al conjunto de elementos de norma uno:
+\[
+ N_\tau\bigl(\exp(tJ_\tau)\bigr)=1.
+\]
+Esta conservación se mantiene al componer parámetros. En efecto, todos los
+factores son funciones del mismo generador, y
+\[
+ \exp(tJ_\tau)\exp(sJ_\tau)=\exp((t+s)J_\tau).
+\]
+Al comparar las dos componentes se deducen las leyes de adición
+\begin{align}
+ C_\tau(t+s)&=C_\tau(t)C_\tau(s)-\tau S_\tau(t)S_\tau(s),\\
+ S_\tau(t+s)&=S_\tau(t)C_\tau(s)+C_\tau(t)S_\tau(s).
+\end{align}
+La conjugación cambia \(t\) por \(-t\) y coincide con la inversión dentro
+de este subgrupo. No cambia \(\tau\): invierte una evolución del régimen
+elegido.
+
+En el tipo elíptico, la forma conservada es \(a^2+b^2\), y la trayectoria
+exponencial recorre el círculo de norma uno. En el hiperbólico, las
+coordenadas propias son \(u=a+b\), \(v=a-b\), con \(uv=N_{-1}(z)\).
+La exponencial da
+\[
+ (u,v)=(e^t,e^{-t}),\qquad uv=1.
+\]
+El crecimiento de una coordenada se acompaña de la contracción de la otra.
+La conservación expresa una relación entre ambas coordenadas; no afirma que
+cada una permanezca constante.
+
+En el tipo parabólico,
+\[
+ (I+tJ_0)(I+sJ_0)=I+(t+s)J_0,\qquad
+ (I+tJ_0)^{-1}=I-tJ_0.
+\]
+La evolución no se detiene porque \(J_0^2=0\). La nilpotencia elimina los
+términos de orden al menos dos, pero conserva el término lineal que
+transporta el parámetro. Son distintos el símbolo visible \(0\), el
+elemento nulo del álgebra y el generador no nulo \(J_0\). Esta distinción
+es necesaria para describir el umbral sin identificarlo con ausencia de
+estado o de dinámica.
+
+\begin{proposition}[Composición de coordenadas afines]
+\label{trit-ampl-prop-pendientes}
+En la carta donde la componente escalar no se anula, represéntese una
+dirección mediante \(I+uJ_\tau\). Si \(1-\tau uv\ne0\), la dirección de su
+producto con \(I+vJ_\tau\) tiene coordenada
+\[
+ u\star_\tau v=\frac{u+v}{1-\tau uv}.
+\]
+\end{proposition}
+\begin{proof}
+Se tiene
+\[
+ (I+uJ_\tau)(I+vJ_\tau)
+   =(1-\tau uv)I+(u+v)J_\tau.
+\]
+Dividir por la componente escalar da la expresión anunciada.
+\end{proof}
+
+La carta afín conserva la razón entre componentes, no el factor escalar
+dividido. Cuando \(1-\tau uv=0\), debe examinarse el producto antes de
+cambiar de carta: puede tener dirección definida con componente escalar
+nula, o ser el elemento cero en presencia de divisores de cero. La ley de
+composición sigue perteneciendo al álgebra completa; la singularidad de
+una coordenada no equivale automáticamente a una singularidad del objeto.
+Esta fórmula reaparecerá en la lectura regional elíptica. Su uso requiere
+mantener el denominador y, cuando corresponda, el factor de normalización.
+
+\subsubsection{Transporte del tipo y realizaciones posteriores}
+\label{trit-ampl-puentes}
+
+Las álgebras \(\mathbb A_{+1}\), \(\mathbb A_0\) y
+\(\mathbb A_{-1}\) no son isomorfas como álgebras reales unitarias.
+La primera es un cuerpo; la segunda contiene un nilpotente no nulo; la
+tercera posee idempotentes no triviales y es isomorfa a
+\(\mathbb R\times\mathbb R\). Por ello, el cambio de firma que organiza una
+ruta no puede interpretarse como un isomorfismo indiferenciado entre las
+tres realizaciones. El TPK conserva el índice de régimen, los dominios y el
+operador efectivo que actúa en cada transición.
+
+La aplicación electrónica desarrollada en el Artículo I toma el par de
+proyecciones de las hojas de APP y construye sobre él un conmutador
+normalizado cuyo cuadrado es \(-I\). El mismo bloque realiza una involución de
+cuadrado \(I\) y dos direcciones nilpotentes. El presente artículo reutiliza
+este resultado operatorio para tipar la estructura compleja de las dos-formas
+y la respuesta de Cartan--Holst; la clasificación precedente establece por
+qué las tres relaciones cuadráticas coexisten en una misma álgebra matricial
+conservando sus dominios y sus acciones respectivas.
+
+En la prolongación excepcional, la matriz de Paley reducida módulo \(3\)
+satisface \(A_W^2=-I_6\). La relación dota al espacio ternario de una
+estructura de dimensión \(3\) sobre \(\mathbb F_9\). Su vínculo con una raíz
+operatorial real se expresa mediante la presentación integral
+\[
+ \mathbb Z[u]/(u^2+1).
+\]
+Los cambios de base a \(\mathbb F_3\) y a \(\mathbb R\) producen
+representaciones de esa misma relación. Cada una conserva su característica,
+su dimensión y su información de incidencia. El desarrollo de los
+respectivos operadores establece el enlace, no la igualdad de sus
+cardinales.
+
+La conservación de norma uno describe, por consiguiente, las realizaciones
+cuadráticas de las evoluciones. La conservación de cocientes, orientación y
+trayectoria pertenece al estado aritmético transportado. Ambas propiedades
+intervienen en la construcción, con funciones diferentes: una determina las
+identidades de las representaciones; la otra permite componer, reconstruir y
+prolongar las operaciones que las originan.

@@ -1,0 +1,91 @@
+\section*{Arithmetic formalization of the bilateral balance}
+\addcontentsline{toc}{section}{Arithmetic formalization of the bilateral balance}
+\label{libro:formalizacion-lean}
+
+The nonadic specialization of the bilateral law admits an independent
+arithmetic formalization. The point of application comes after the
+construction of its coefficients and transports: the base-ten partition fixes
+\(a=8\), and the two registers are \(8x-y\) and \(9x+y\). On this domain,
+Lean~4.21.0 verifies seven theorems using its \texttt{Std} library. The formal
+sources and execution procedure are provided as a supplement.
+This addendum states their mathematical content and relates it to
+the operator proofs in the article.
+
+\subsection*{Polynomial identity and conservation of the norm}
+
+For all \(x,y\in\mathbb Z\), we have
+\[
+ 9(8x-y)^2+8(9x+y)^2=17(72x^2+y^2).
+\]
+Expanding the two squares cancels the cross terms. When
+\(y^2=x^2\), the same equality gives
+\[
+ 9(8x-y)^2+8(9x+y)^2=17\cdot73\,x^2.
+\]
+These are the first two formalized theorems. The first expresses a
+balance for arbitrary integer inputs; the second applies the
+explicit norm-conservation hypothesis. The integer \(73=72+1\) occupies
+exactly the place it has in \cref{lib04:teo-balance}.
+
+\subsection*{Arbitrary finite dimension}
+
+Let \(n\in\mathbb N\) and \(x,y:\mathbb N\to\mathbb Z\). Define
+\[
+ S_n(x)=\sum_{j<n}x_j^2,
+ \qquad
+ E_n(x,y)=\sum_{j<n}\bigl(9(8x_j-y_j)^2+8(9x_j+y_j)^2\bigr).
+\]
+The next two theorems establish
+\[
+ E_n(x,y)=17\bigl(72S_n(x)+S_n(y)\bigr)
+\]
+and, under the hypothesis \(S_n(y)=S_n(x)\),
+\[
+ E_n(x,y)=17\cdot73\,S_n(x).
+\]
+The formal proof proceeds by induction on \(n\). The initial case is the
+empty sum; the induction step adds one coordinate and applies the polynomial
+identity already proved. The universal quantifier over \(n\) includes
+all finite dimensions. The hypothesis uses the total sum of
+squares, so it allows redistributions among coordinates.
+
+\subsection*{Recovery of the inputs}
+
+Write \(q_-=8x-y\) and \(q_+=9x+y\). The fifth and sixth theorems
+are the exact equalities
+\[
+ q_-+q_+=17x,\qquad 8q_+-9q_-=17y.
+\]
+On the image of the map \((x,y)\mapsto(q_-,q_+)\), both left-hand
+sides are multiples of \(17\). Division recovers the two
+inputs. The seventh theorem states their injectivity consequence:
+\[
+ \left.
+ \begin{aligned}
+ 8x-y&=8x'-y',\\
+ 9x+y&=9x'+y'
+ \end{aligned}
+ \right\}
+ \quad\Longrightarrow\quad x=x'\ \text{and}\ y=y'.
+\]
+Cancellation in \(\mathbb Z\) justifies this conclusion. The formal
+content coincides with recovery of the pair of registers before
+they are normalized as channels of a metric realization.
+
+\subsection*{Relation between the proofs}
+
+The formalization uses arbitrary integer variables and mathematical
+induction. It therefore constitutes a proof of the preceding statements,
+distinct from checking a finite set of examples. The system
+accepts the proof terms without added axiomatic declarations or
+deferred proofs. The supplement also records the logical
+dependencies reported by the tool for each declaration.
+
+The operator law in the body of the article has a broader domain:
+isometries between Hilbert spaces, an archive of arbitrary depth and
+conjugate readers. Its proofs are found in
+\cref{lib04:teo-balance,lib06:simetria,lib06:profundidad}. The Lean proof
+included here certifies the stated arithmetic specialization, with
+its quantifiers and starting structure. The provenance of the
+coefficients, generation of the register and exceptional realizations
+retain the earlier proofs on which they depend.

@@ -1,0 +1,145 @@
+% BEGIN REV09_SUPERVIVENCIA_PUNTO_FIJO
+\subsection{Survival by pruning prolongations}
+\label{corpus9:xi:supervivencia}
+
+Retrospective memory distinguishes histories recorded by the
+APP--TRIT--TPK operations; prospective compatibility organizes their
+admissible prolongations. Let \(S\) be the space of complete states
+reachable through these operations. Each state retains sheets, residues,
+quotients, orientation, carry, memory, and boundary data; whenever a
+transition depends on depth, depth forms part of the state.
+Let \(E\subseteq S\times S\) be the effective prolongation relation and
+\(A\subseteq S\) the admissible set determined by the compatibility of
+these records. Admissibility is thus decided through the operations and
+boundary conditions that generate the history.
+
+For \(X\subseteq S\), define
+\begin{equation}
+ \operatorname{Pre}_{E}(X)
+ =\{s\in S:\exists t\in X,\ (s,t)\in E\},
+ \qquad
+ F_{\mathrm{surv}}(X)=A\cap\operatorname{Pre}_{E}(X).
+ \label{corpus9:xi:operador-poda}
+\end{equation}
+The pruning sequence is given by
+\begin{equation}
+ V_0=A,\qquad
+ V_{n+1}=F_{\mathrm{surv}}(V_n),\qquad
+ V_\infty=\bigcap_{n\geq0}V_n.
+ \label{corpus9:xi:sucesion-poda}
+\end{equation}
+
+\begin{proposition}[Survival and the greatest fixed point]
+\label{corpus9:xi:mayor-punto-fijo}
+The set \(V_n\) consists exactly of the states in \(A\) admitting an
+\(n\)-step prolongation all of whose states belong to \(A\). The
+sequence \((V_n)\) is decreasing. If each state has finitely many
+admissible successors, then
+\[
+ V_\infty=F_{\mathrm{surv}}(V_\infty)
+          =\nu F_{\mathrm{surv}},
+\]
+where \(\nu F_{\mathrm{surv}}\) denotes the greatest fixed point under
+inclusion. Its elements are precisely the states admitting an infinite
+compatible prolongation.
+\end{proposition}
+
+\begin{proof}
+For \(n=0\), a prolongation of length zero consists of the state
+itself in \(A\). If the characterization holds for \(n\), a state
+belongs to \(V_{n+1}\) exactly when it belongs to \(A\) and has a
+successor in \(V_n\); prefixing that edge produces an admissible
+prolongation of \(n+1\) steps. This equivalence proves the assertion by
+induction. Moreover, \(V_1\subseteq V_0\), and monotonicity of
+\(F_{\mathrm{surv}}\) propagates \(V_{n+1}\subseteq V_n\).
+
+Let \(s\in V_\infty\), and write
+\(E(s)=\{t\in S:(s,t)\in E\}\). Since \(s\in V_{n+1}\) for every \(n\),
+the sets \(E(s)\cap V_n\) are nonempty, finite, and decreasing.
+Their intersection contains an element \(t\), which belongs to
+\(V_\infty\) and satisfies \((s,t)\in E\). Hence
+\(V_\infty\subseteq F_{\mathrm{surv}}(V_\infty)\).
+Conversely, monotonicity gives
+\(F_{\mathrm{surv}}(V_\infty)\subseteq V_{n+1}\) for every \(n\);
+the image also lies in \(A=V_0\), and therefore belongs to
+\(V_\infty\). This proves the fixed-point equality.
+
+If \(W=F_{\mathrm{surv}}(W)\), then \(W\subseteq A=V_0\).
+From \(W\subseteq V_n\) it follows that
+\(W=F_{\mathrm{surv}}(W)\subseteq F_{\mathrm{surv}}(V_n)=V_{n+1}\).
+Induction yields \(W\subseteq V_\infty\), proving maximality.
+Finally, the prolongation tree of a state in \(V_\infty\) is finitely
+branching and has a nonempty level at every depth. K\"onig's lemma
+provides an infinite branch. Conversely, the prefixes of any infinite
+prolongation place its initial state in every \(V_n\).
+\end{proof}
+
+\paragraph{Branching and stabilization.}
+The finiteness hypothesis has an explicit control. Consider a root
+with a distinct terminal branch of each positive integer length, all
+branches being admissible and disjoint after the root. The root
+admits prolongations of every finite length and belongs to all the
+\(V_n\); each of its successors belongs to a branch of bounded length.
+Consequently, the root has neither an infinite prolongation nor a
+successor in \(V_\infty\). This tree has infinite branching at the
+root. In contrast, if \(A\) is finite, each strict inclusion
+\(V_{n+1}\subsetneq V_n\) removes at least one state. Pruning reaches
+a fixed point after at most \(|A|\) strict layer removals.
+This bound pertains to the finite domain \(A\).
+
+\paragraph{Uniqueness of continuation.}
+For \(s\in V_\infty\), the successors retaining survival form
+\[
+ E(s)\cap V_\infty.
+\]
+The next state is uniquely selected exactly when
+\begin{equation}
+ \#\bigl(E(s)\cap V_\infty\bigr)=1.
+ \label{corpus9:xi:unicidad-sucesor}
+\end{equation}
+An infinite prolongation is unique when this condition holds at
+each state of the path. Indeed, each surviving successor has an
+infinite prolongation by the preceding proposition; two distinct
+successors produce two distinct paths. When the successor is unique
+at each step, the prefixes are determined successively.
+Several viable successors express multiplicity of prolongations
+within the same survival domain.
+
+\begin{proposition}[Conjugation of the two directions of prolongation]
+\label{corpus9:xi:conjugacion-supervivencia}
+Let \(C:S\to S\) be an involution such that \(C(A)=A\) and
+\begin{equation}
+ (x,y)\in E\quad\Longleftrightarrow\quad(Cy,Cx)\in E.
+ \label{corpus9:xi:involucion-prolongaciones}
+\end{equation}
+Let \(V_n^+\) denote pruning for \(E\), and \(V_n^-\) pruning for
+\(E^{-1}\), both with initial set \(A\). Then
+\[
+ C(V_n^+)=V_n^-\quad(n\geq0),\qquad
+ C(V_\infty^+)=V_\infty^-.
+\]
+\end{proposition}
+
+\begin{proof}
+If \(s_0,\ldots,s_n\) is an admissible path for \(E\), the sequence
+\(Cs_0,\ldots,Cs_n\) is an admissible path for \(E^{-1}\):
+for each \(j\), the hypothesis converts
+\((s_j,s_{j+1})\in E\) into \((Cs_{j+1},Cs_j)\in E\).
+All its states belong to \(A\). Applying the same operation again
+recovers the initial path because \(C^2=I\); it therefore establishes
+a bijection between finite prolongations in the two directions.
+The characterization of \(V_n^\pm\) by paths gives
+\(C(V_n^+)=V_n^-\). Since \(C\) is bijective, it commutes with the
+intersection of these sets, yielding the equality for
+\(V_\infty^\pm\).
+\end{proof}
+
+The involution transports the surviving set in one direction to
+the surviving set in the conjugate direction. Infinite
+prolongability in both directions corresponds to
+\(V_\infty^+\cap V_\infty^-\); uniqueness of a path retains the
+criterion in \eqref{corpus9:xi:unicidad-sucesor}. Retaining a
+genealogy and restricting its continuation tree are two typed
+operations on the same records. Assigning an entropy to these
+readings additionally requires the corresponding measure on histories.
+% END REV09_SUPERVIVENCIA_PUNTO_FIJO

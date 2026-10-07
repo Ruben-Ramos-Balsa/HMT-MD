@@ -1,0 +1,274 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.15cm]{geometry}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,array,longtable,enumitem,xcolor,hyperref}
+\pagecolor{white}\color{black}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.65em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{observacion}[teorema]{Observación}
+\newtheorem{conjetura}[teorema]{Conjetura}
+\newcommand{\F}{\mathbb F}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\AW}{A_W}
+\newcommand{\CW}{C_W}
+\newcommand{\Wdoce}{W_{12}}
+\title{\bfseries Derivación normalizada de la dualidad Witt\\
+\large De las seis caras cúbico--Hensel a la matriz de conferencia, Golay ternario y \(W_{12}\)}
+\author{Ventana técnica HMT}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Se ataca la puerta lógica pendiente: explicar por qué la matriz \(A_W\) que genera Golay/Witt no debe considerarse una inserción manual. El resultado demostrado aquí es condicional pero fuerte: si la frontera de la célula cúbico--Hensel se reduce a seis orientaciones y se exige una dualidad sin autoacoplo, con signos de orientación \(\pm1\) y cancelación ortogonal entre lectores distintos, entonces la matriz buscada es una matriz de conferencia normalizada de orden 6. En esa clase, la solución está determinada por un 5--ciclo sobre las cinco caras no distinguidas; hay exactamente 12 normalizaciones, todas equivalentes a ciclos pentagonales. La matriz canónica es precisamente \(A_W\). Sobre \(\F_3\), \(A_WA_W^T=2I\), y el código \(\{(q,qA_W):q\in\F_3^6\}\) es el Golay ternario extendido, con enumerador \(1+264y^6+440y^9+24y^{12}\) y diseño \(S(5,6,12)\). La frontera que queda es clara: derivar las hipótesis de conferencia directamente desde APP/carry/cubo, no desde el ansatz de dualidad.
+\end{abstract}
+
+\section{La pregunta precisa}
+La pregunta no es si \(A_W\) produce Golay. Eso ya está verificado. La pregunta fuerte es:
+\[
+\boxed{\text{¿por qué aparece }A_W\text{ desde la célula }U_6\text{ y sus cartas APP?}}
+\]
+La respuesta parcial que sí podemos cerrar es:
+\[
+\boxed{\text{dentro de la clase natural de dualidades ortogonales de seis caras, }A_W\text{ es inevitable.}}
+\]
+Eso no es aún el teorema absoluto \(APP+cubo+carry\Rightarrow A_W\), pero sí elimina la impresión de arbitrariedad: \(A_W\) es la forma normalizada de una matriz de conferencia de orden 6.
+
+\section{Seis caras y condición de dualidad}
+La célula cúbico--Hensel se lee como
+\[
+U_6=\F_3^6\xrightarrow{\beta^3}(\Z/9\Z)^3.
+\]
+Sus seis orientaciones de borde son
+\[
+X^-,X^+,Y^-,Y^+,Z^-,Z^+.
+\]
+Una dualidad de frontera debe convertir una lectura visible en una lectura dual sobre las otras orientaciones. Las condiciones mínimas son:
+\begin{enumerate}[leftmargin=2em]
+\item no hay autoacoplo de una cara consigo misma: diagonal cero;
+\item los acoplos son signos de orientación: entradas \(\pm1\);
+\item lectores distintos no deben interferir en energía total: filas ortogonales;
+\item cada cara ve cinco caras restantes: norma cuadrada \(5\).
+\end{enumerate}
+Por tanto buscamos una matriz real \(C\in\{0,\pm1\}^{6\times6}\) tal que
+\[
+C_{ii}=0,
+\qquad
+C_{ij}=\pm1\ (i\ne j),
+\qquad
+CC^T=5I.
+\]
+Esto es exactamente una matriz de conferencia de orden 6.
+
+\section{Normalización HMT}
+Fijamos una cara distinguida: la cara de cierre/unidad. Normalizamos:
+\[
+C_{1j}=-1\quad(j>1),
+\qquad
+C_{i1}=+1\quad(i>1).
+\]
+Esta elección no pierde generalidad esencial: corresponde a fijar signo y orientación de la unidad de cierre.
+
+La matriz canónica obtenida es
+\[
+C_W=
+\begin{pmatrix}
+0&-1&-1&-1&-1&-1\\
+1&0&-1&1&1&-1\\
+1&-1&0&-1&1&1\\
+1&1&-1&0&-1&1\\
+1&1&1&-1&0&-1\\
+1&-1&1&1&-1&0
+\end{pmatrix}.
+\]
+Se verifica exactamente:
+\[
+C_WC_W^T=5I.
+\]
+Pasando a \(\F_3\), con \(-1\equiv2\), obtenemos
+\[
+A_W=
+\begin{pmatrix}
+0&2&2&2&2&2\\
+1&0&2&1&1&2\\
+1&2&0&2&1&1\\
+1&1&2&0&2&1\\
+1&1&1&2&0&2\\
+1&2&1&1&2&0
+\end{pmatrix}.
+\]
+Como \(5\equiv2\pmod3\),
+\[
+\boxed{A_WA_W^T\equiv2I\pmod3.}
+\]
+
+\section{El pentágono oculto}
+La submatriz de las cinco caras no distinguidas es una matriz de Seidel de un 5--ciclo: dos signos negativos por vértice y dos positivos. En la forma canónica, los acoplos negativos son los bordes de un pentágono.
+
+Así, el objeto de seis caras contiene una estructura pentádica interna:
+\[
+\boxed{\text{cara distinguida }1 + \text{ciclo pentagonal de las cinco caras restantes}.}
+\]
+Esto explica por qué el 5 no aparece como adorno: el cierre ortogonal de seis caras fuerza un pentágono sobre las cinco caras no distinguidas.
+
+\section{Enumeración exhaustiva}
+Enumeré todas las matrices normalizadas con diagonal cero, primera fila \(-1\), primera columna \(+1\) y entradas \(\pm1\) en los otros veinte lugares. Hay
+\[
+2^{20}=1,048,576
+\]
+posibilidades. Sólo
+\[
+\boxed{12}
+\]
+satisfacen
+\[
+CC^T=5I.
+\]
+Las 12 son exactamente los 12 ciclos pentagonales sobre cinco puntos:
+\[
+\frac{(5-1)!}{2}=12.
+\]
+Por tanto, una vez fijada la cara de cierre, la dualidad ortogonal de seis caras no es libre: equivale a elegir un pentágono. Todas las opciones son equivalentes por relabeling de las cinco caras.
+
+\section{De conferencia a Golay ternario}
+Definimos
+\[
+C_W=\{(q,qA_W):q\in\F_3^6\}\subset\F_3^{12}.
+\]
+La matriz generadora es
+\[
+G=[I_6\mid A_W].
+\]
+Entonces
+\[
+GG^T=I_6+A_WA_W^T\equiv I_6+2I_6\equiv0\pmod3.
+\]
+Así, \(C_W\) es autodual.
+
+La enumeración de sus \(3^6=729\) palabras da:
+\[
+\boxed{W_C(y)=1+264y^6+440y^9+24y^{12}.}
+\]
+En particular, la distancia mínima es 6, y el código es el Golay ternario extendido \([12,6,6]_3\).
+
+\section{De Golay a Witt}
+Los 264 codewords de peso 6 se agrupan por signo \(c\sim -c\), dando
+\[
+\frac{264}{2}=132
+\]
+soportes de tamaño 6. Esos soportes son las hexadas de \(W_{12}\). La auditoría de incidencias da:
+\[
+\lambda_0=132,
+\lambda_1=66,
+\lambda_2=30,
+\lambda_3=12,
+\lambda_4=4,
+\lambda_5=1.
+\]
+En particular:
+\[
+\boxed{\lambda_5=1,}
+\]
+es decir, todo 5--subconjunto de \([12]\) está contenido en una única hexada. Luego
+\[
+\boxed{W_{12}=S(5,6,12).}
+\]
+
+
+
+\section{Construcción de Paley: por qué aparece el cinco}
+La matriz de conferencia de orden 6 no es un objeto aislado. Es la matriz de Paley asociada al cuerpo \(\F_5\), normalizada por signos. Tomamos el conjunto proyectivo
+\[
+\PP^1(\F_5)=\{\infty,0,1,2,3,4\},
+\]
+de tamaño 6. Sea \(\chi\) el carácter cuadrático de \(\F_5\):
+\[
+\chi(1)=\chi(4)=1,
+\qquad
+\chi(2)=\chi(3)=-1,
+\qquad
+\chi(0)=0.
+\]
+Definimos la matriz de Paley \(P\) por
+\[
+P_{\infty,x}=P_{x,\infty}=1,
+\qquad
+P_{x,y}=\chi(x-y)\quad(x,y\in\F_5,\ x\ne y),
+\qquad
+P_{ii}=0.
+\]
+Entonces
+\[
+PP^T=5I.
+\]
+Multiplicar las cinco columnas finitas por \(-1\) lleva \(P\) a la normalización HMT \(C_W\). Por tanto, la matriz \(A_W\) no es sólo una solución de búsqueda: es la conferencia de Paley de \(\PP^1(\F_5)\), escrita en la orientación de frontera HMT.
+
+Esto explica la irrupción del componente pentádico:
+\[
+\boxed{\text{seis caras normalizadas }=\PP^1(\F_5)=\infty+5.}
+\]
+La cara distinguida es \(\infty\); las cinco restantes forman la línea finita \(\F_5\). El patrón de signos viene dado por residuos cuadráticos módulo 5. Así, el pentágono de las cinco caras no distinguidas no es adorno: es la geometría de Paley de \(\F_5\).
+
+\[
+\boxed{\text{cubo de seis orientaciones}+\text{ortogonalidad}\Longrightarrow\PP^1(\F_5)\Longrightarrow A_W.}
+\]
+
+Esta es una mejora del cierre: el paso de seis caras a \(A_W\) puede expresarse mediante un objeto clásico finito, la conferencia de Paley de orden 6. La puerta pendiente se vuelve aún más concreta: justificar desde APP/carry que la frontera de seis orientaciones debe llevar precisamente la estructura \(\PP^1(\F_5)\) con carácter cuadrático.
+
+\section{Qué queda demostrado}
+Queda demostrado:
+\[
+\boxed{\text{seis caras + dualidad signada + ortogonalidad }\Rightarrow\text{ matriz de conferencia}.}
+\]
+\[
+\boxed{\text{matriz de conferencia normalizada de orden 6 }\Rightarrow\text{ pentágono interno}.}
+\]
+\[
+\boxed{\text{forma normalizada }\Rightarrow A_W.}
+\]
+\[
+\boxed{A_W\Rightarrow\text{Golay ternario extendido}.}
+\]
+\[
+\boxed{\text{Golay ternario extendido}\Rightarrow W_{12}=S(5,6,12).}
+\]
+
+\section{Qué falta para el teorema absoluto}
+La única puerta que queda es:
+\[
+\boxed{APP+cubo+carry\Rightarrow\text{dualidad signada ortogonal de seis caras}.}
+\]
+Es decir, falta demostrar que las condiciones de conferencia no son un ansatz razonable, sino la consecuencia inevitable del atlas APP y del cociclo Hensel/carry.
+
+La ruta natural es:
+\begin{enumerate}[leftmargin=2em]
+\item construir las seis cartas APP de la frontera del cubo;
+\item definir sus transiciones por reversión ordinal, carry Hensel y dualidad de orientación;
+\item medir el acoplo entre dos cartas por el signo del defecto suma/producto;
+\item demostrar que la matriz de acoplos tiene diagonal cero y filas ortogonales;
+\item entonces la matriz de conferencia y, por tanto, \(A_W\), salen automáticamente.
+\end{enumerate}
+
+\section{Conclusión}
+La conclusión correcta no es todavía ``APP solo implica Golay''. La conclusión demostrada es más precisa y más fuerte que una inserción manual:
+\[
+\boxed{\text{la frontera de seis caras, si se cierra ortogonalmente, fuerza una matriz de conferencia pentagonal}.}
+\]
+\[
+\boxed{\text{esa matriz es }A_W\text{ y genera Golay/Witt}.}
+\]
+Por tanto, HMT queda reducido a una puerta formal muy concreta:
+\[
+\boxed{\text{derivar la ortogonalidad de conferencia desde APP/carry}.}
+\]
+Si esa puerta se cierra, entonces:
+\[
+\boxed{APP+cubo+carry\Longrightarrow Golay/Witt\Longrightarrow Moonshine.}
+\]
+\end{document}

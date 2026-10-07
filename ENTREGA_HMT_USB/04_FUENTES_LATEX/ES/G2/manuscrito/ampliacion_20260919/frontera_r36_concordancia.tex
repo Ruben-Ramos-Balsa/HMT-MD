@@ -1,0 +1,338 @@
+% Incorporación ampliativa: CG-006, SR-032--SR-035 del inventario REV05.
+% Residencia: inmediatamente después de la construcción de R36, antes de G9.
+% Propietario computacional: 16_CIERRE_GLOBAL_HMT_MD_2026-07-22/
+% 01_SELECTOR_CONSTANTES/selector_interno_constantes.py, líneas 31--63,
+% 131--180, 185--240 y 267--321.
+% Recuperación y cambio de representación: output/REVISION_EDITORIAL_HMT_MD_
+% 20260905/03_PRUEBAS/verificar_generacion_infinita_nonadica.py,
+% líneas 54--77, 651--723 y 974--1147.
+% Exposición de origen: ampliaciones_sucesoras_20260824/parte_i_ii/owners/
+% U008_orbitas_elevacion_r36.tex, líneas 210--358.
+% Estatuto: RESULTADO_RECUPERADO; exposición de enumeración y naturalidad
+% reunida sin promover la concordancia en R36 a equivalencia global.
+
+\section[Selección y transporte de la primera frontera]{Selección combinatoria y transporte de representación de la primera frontera conjunta}
+\label{r36c:sec:frontera}
+
+La primera frontera conjunta recibe los bloques ya producidos por las
+semillas APP, la reducción trítica y el calendario de elevación del TPK.
+Su construcción conserva la diferencia entre tres operaciones: determinar
+las distribuciones admisibles, orientar sus dos canales laterales y
+transportar la incidencia al sistema de coordenadas excepcional. La
+presente exposición desarrolla estas operaciones sobre el mismo estado
+finito. Los nombres de las coordenadas reales designan sus lectores
+posteriores; las condiciones de selección que siguen actúan sobre
+palabras ternarias, matrices de transporte e incidencias enteras.
+
+\subsection{Estado regional anterior a la frontera}
+
+Sea $\mathcal W\subset\mathbb F_3^6$ el repertorio de $243$ palabras
+visibles obtenido del censo de emisiones APP--TRIT--TPK. Para un vector
+fila $s\in\mathcal W$, definimos
+\[
+ b_0(s)=s,\quad b_1(s)=sL_0,\quad b_2(s)=sL_0^2,\quad
+ b_3(s)=sL_0^2L_1,\quad b_4(s)=sL_0^2L_1^2,
+\]
+con operaciones en $\mathbb F_3$. Las matrices previamente derivadas de
+los registros regionales son
+\[
+L_0=\begin{pmatrix}
+2&2&2&1&2&1\\2&1&2&2&1&1\\1&0&0&1&0&2\\
+0&0&1&1&1&0\\2&2&2&0&2&1\\2&1&2&1&0&0
+\end{pmatrix},\qquad
+L_1=\begin{pmatrix}
+2&1&2&0&2&2\\1&2&1&1&2&0\\1&2&1&1&1&2\\
+0&1&0&0&2&1\\2&0&2&1&0&1\\0&2&2&2&1&1
+\end{pmatrix}.
+\]
+El selector regional anterior entrega
+\[
+s_{\rm cl}=010211,\qquad s_{\rm pr}=201101,
+\]
+mediante las condiciones
+$b_2(s_{\rm cl})=b_0(s_{\rm cl})$,
+$b_4(s_{\rm pr})=b_2(s_{\rm pr})$ y
+$b_1(s_{\rm cl})=b_3(s_{\rm pr})$.
+En esta etapa, los bloques corrientes son
+\[
+b_4(s_{\rm cl})=110221,\qquad
+b_4(s_{\rm pr})=102011.
+\]
+La concatenación conserva los cinco bloques de cada registro; el vector
+$b_4$ es la entrada de seis coordenadas que recibe la relación de frontera.
+
+Para expresar fielmente la relación recuperada se utiliza la matriz de
+incidencia en su representación de origen,
+\begin{equation}
+A^{\rm o}=\begin{pmatrix}
+0&1&1&1&1&1\\1&0&1&1&2&2\\1&1&0&2&1&2\\
+1&1&2&0&2&1\\1&2&1&2&0&1\\1&2&2&1&1&0
+\end{pmatrix}.
+\label{r36c:eq:ao}
+\end{equation}
+Se verifica $(A^{\rm o})^2=-I$ en $M_6(\mathbb F_3)$; por tanto,
+$(A^{\rm o})^{-1}=-A^{\rm o}$. Más adelante se transportará esta
+representación, junto con sus vectores, a la utilizada por el lector
+excepcional.
+
+\subsection{Ecuación de compatibilidad y saturación columnar}
+
+El eje de la frontera queda fijado por
+$z=b_4(s_{\rm pr})=102011$. Para cada $s\in\mathcal W$ se define
+\begin{align}
+m(s)&=b_4(s)A^{\rm o}L_1^3,\\
+q(s)&=m(s)+z,\\
+\widetilde q(s)&=s(A^{\rm o})^{-1}L_0^3(A^{\rm o})^3.
+\label{r36c:eq:compat-datos}
+\end{align}
+La condición de compatibilidad es $q(s)=\widetilde q(s)$. Las filas
+laterales $x,y\in\mathbb F_3^6$ satisfacen $x+y=m(s)$; la frontera
+ordenada es $B=(x,y,z)^{\mathsf T}$.
+
+Para formar el residuo y el acarreo se usan los representantes enteros
+$0,1,2$ de cada trit. Si $S_j=x_j+y_j+z_j$, se exige
+\[
+q_j=S_j\bmod3,\qquad c_j=\frac{S_j-q_j}{3}=1,
+\]
+y la ocupación columnar viene dada por
+\begin{equation}
+\mathbf1_{\{x_j\ne0\}}+\mathbf1_{\{y_j\ne0\}}+\mathbf1_{\{z_j\ne0\}}
+=2+\mathbf1_{\{z_j\ne0,\ m_j(s)\ne2\}}.
+\label{r36c:eq:ocupacion}
+\end{equation}
+La neutralidad dual completa la condición mediante
+\begin{equation}
+BA^{\rm o}\mathbf1=0\quad\hbox{en }\mathbb F_3^3.
+\label{r36c:eq:neutralidad}
+\end{equation}
+El residuo, el acarreo y la ocupación intervienen conjuntamente: la
+reducción modular conserva el residuo y el registro entero distingue las
+distribuciones que lo producen.
+
+\begin{lemma}[Resolución de la compatibilidad regional]
+\label{r36c:lem:compatibilidad}
+La ecuación $q(s)=\widetilde q(s)$ tiene, en $\mathbb F_3^6$, las tres
+soluciones
+\[
+020010,\qquad121200,\qquad222120.
+\]
+Su intersección con el repertorio visible es
+$\{121200,222120\}$.
+\end{lemma}
+\begin{proof}
+La ecuación se escribe $sD=z$, donde
+\[
+D=(A^{\rm o})^{-1}L_0^3(A^{\rm o})^3
+   -L_0^2L_1^2A^{\rm o}L_1^3
+ =\begin{pmatrix}
+2&1&1&2&2&2\\0&2&0&0&0&1\\0&0&0&0&1&0\\
+1&2&2&2&2&0\\1&2&2&0&1&2\\1&2&0&2&2&2
+\end{pmatrix}.
+\]
+La eliminación sobre $\mathbb F_3$ da la parametrización
+\[
+s=(t,2,t,2t,1+2t,0),\qquad t\in\mathbb F_3.
+\]
+Su sustitución verifica las seis ecuaciones y agota sus soluciones. En
+el repertorio generado $\mathcal W$, las dos palabras correspondientes a
+$t=1,2$ están presentes y la correspondiente a $t=0$ está ausente. Esta
+última comprobación es una consulta exacta al censo de palabras visibles,
+anterior a cualquier lectura arquimediana.
+\end{proof}
+
+\begin{proposition}[Determinación del eje de autoescala]
+La compatibilidad, el acarreo unitario y la ocupación columnar seleccionan
+$s_{\rm au}=121200$ entre las dos soluciones visibles del
+lema~\ref{r36c:lem:compatibilidad}. Se obtiene
+\[
+b_4(s_{\rm au})=010200,\qquad
+m(s_{\rm au})=210112,\qquad q=012120,
+\]
+con ocupación $223232$.
+\end{proposition}
+\begin{proof}
+Para $s=222120$ se calculan
+$b_4(s)=222000$, $m(s)=201010$ y $q(s)=000021$.
+En su tercera columna, $m_3=1$ y $z_3=2$. La ocupación requerida es tres,
+de modo que $x_3,y_3$ deben ser ambos distintos de cero. La única pareja
+con $x_3+y_3\equiv1\pmod3$ es $(2,2)$; su suma entera con $z_3=2$ es
+seis y produce acarreo dos. Contradice $c_3=1$.
+
+Para $s=121200$ las seis columnas admiten, respectivamente, las parejas
+\[
+\begin{array}{c|cccccc}
+j&1&2&3&4&5&6\\\hline
+(x_j,y_j)&(0,2),(2,0)&(2,2)&(1,2),(2,1)&(2,2)&(2,2)&(0,2),(2,0).
+\end{array}
+\]
+Cada pareja satisface las ecuaciones de residuo, acarreo y ocupación.
+Hay, por tanto, ocho disposiciones antes de aplicar la neutralidad dual.
+\end{proof}
+
+\begin{theorem}[Enumeración exacta de las orientaciones de frontera]
+\label{r36c:thm:dos}
+Las condiciones anteriores determinan exactamente
+\[
+B_- =\begin{pmatrix}021222\\222220\\102011\end{pmatrix},
+\qquad
+B_+ =\begin{pmatrix}222220\\021222\\102011\end{pmatrix}.
+\]
+Ambas tienen residuo $012120$, acarreo $111111$ y ocupación $223232$.
+\end{theorem}
+\begin{proof}
+La prueba anterior reduce la enumeración a ocho posibilidades. Puesto que
+$A^{\rm o}\mathbf1=(2,1,1,1,1,1)^{\mathsf T}$, la neutralidad de una
+fila $v$ equivale a $2v_1+v_2+\cdots+v_6=0$ en $\mathbb F_3$.
+Su evaluación en las ocho disposiciones es
+\[
+\begin{array}{c|c|c}
+x&y&(xA^{\rm o}\mathbf1,yA^{\rm o}\mathbf1,zA^{\rm o}\mathbf1)\\\hline
+021220&222222&(1,2,0)\\
+021222&222220&(0,0,0)\\
+022220&221222&(2,1,0)\\
+022222&221220&(1,2,0)\\
+221220&022222&(2,1,0)\\
+221222&022220&(1,2,0)\\
+222220&021222&(0,0,0)\\
+222222&021220&(2,1,0).
+\end{array}
+\]
+Las filas segunda y séptima son las únicas soluciones. Las sumas
+columnarias enteras de cualquiera de ellas son $(3,4,5,4,5,3)$, que
+recuperan el residuo y el acarreo declarados.
+\end{proof}
+
+\subsection{Longitud dirigida y orientación de la frontera}
+
+El transporte regional define un grafo dirigido sobre $\mathbb F_3^6$,
+con aristas $v\to vL_0$ y $v\to vL_1$. Para vectores $u,v$ alcanzables
+entre sí, sea
+\[
+d(u,v)=\min\{n\ge0:\exists\epsilon_1,\ldots,\epsilon_n\in\{0,1\},
+\ v=uL_{\epsilon_1}\cdots L_{\epsilon_n}\}.
+\]
+Esta longitud es un dato combinatorio del transporte. Su suma sobre las
+tres filas conserva las etiquetas regionales:
+\[
+\mathcal L(B)=d(110221,B_1)+d(102011,B_2)+d(010200,B_3).
+\]
+
+\begin{proposition}[Selección por longitud dirigida]
+\label{r36c:prop:minimo}
+Se cumple $\mathcal L(B_-)=23$ y $\mathcal L(B_+)=20$. En el dominio
+de las dos fronteras admisibles, el mínimo es único y selecciona $B_+$.
+\end{proposition}
+\begin{proof}
+Los caminos mínimos y sus longitudes son
+\[
+\begin{array}{c|c|c|c|c}
+ &\text{origen}&\text{destino}&\text{palabra de transporte}&d\\\hline
+B_-&110221&021222&01100011&8\\
+ &102011&222220&10111111&8\\
+ &010200&102011&1010101&7\\\hline
+B_+&110221&222220&1111&4\\
+ &102011&021222&001100101&9\\
+ &010200&102011&1010101&7.
+\end{array}
+\]
+Cada palabra se verifica por multiplicación sucesiva de sus matrices.
+Para comprobar también la minimalidad se forman las capas disjuntas
+\[
+F_0(u)=\{u\},\qquad
+F_{n+1}(u)=\bigl(F_n(u)L_0\cup F_n(u)L_1\bigr)
+\setminus\bigcup_{j=0}^{n}F_j(u).
+\]
+Una inducción en $n$ demuestra que $F_n(u)$ es exactamente el conjunto
+de vértices a distancia $n$: toda palabra mínima de longitud $n+1$
+procede de una palabra mínima de longitud $n$, y el cociente por las
+capas anteriores elimina los recorridos de menor longitud.
+La enumeración obtenida con las dos matrices expuestas arriba da
+\[
+\begin{array}{c|rrrrrrrrrr}
+u\backslash n&0&1&2&3&4&5&6&7&8&9\\\hline
+110221&1&2&4&8&16&32&60&105&156&177\\
+102011&1&2&3&5&10&20&37&71&119&171\\
+010200&1&2&4&8&15&30&56&100&148&172.
+\end{array}
+\]
+Los destinos de la primera tabla pertenecen por primera vez a las capas
+allí indicadas. Esta enumeración es finita, utiliza únicamente los
+productos módulo tres y coincide con el recorrido por anchura del
+certificado ejecutable. Sumando las tres longitudes resulta $8+8+7=23$
+y $4+9+7=20$.
+\end{proof}
+
+La orientación de la representación APP mediante cilindros semiabiertos
+selecciona previamente la misma matriz $B_+$ en esta frontera. El
+teorema~\ref{r36c:thm:dos} y la
+proposición~\ref{r36c:prop:minimo} establecen así la concordancia de
+ambas selecciones sobre el conjunto concreto $\{B_-,B_+\}$. El dominio
+de esta concordancia es la primera frontera conjunta. La prolongación
+coinductiva conserva sus propias relaciones de admisibilidad, memoria,
+supervivencia y orientación en cada profundidad.
+
+\subsection{Naturalidad del cambio de representación excepcional}
+
+La matriz empleada por el lector excepcional en la representación activa es
+\[
+A^{\rm a}=\begin{pmatrix}
+0&1&1&1&1&1\\1&0&1&2&2&1\\1&1&0&1&2&2\\
+1&2&1&0&1&2\\1&2&2&1&0&1\\1&1&2&2&1&0
+\end{pmatrix}.
+\]
+La permutación de coordenadas
+\[
+R_p(v_1,v_2,v_3,v_4,v_5,v_6)
+=(v_1,v_2,v_3,v_5,v_6,v_4)
+\]
+transporta simultáneamente la palabra y la matriz de incidencia.
+
+% REMATE_LOCAL_R36
+\Needspace{36\baselineskip}
+\begin{theorem}[Entrelazamiento de la incidencia de frontera]
+\label{r36c:thm:cambio}
+Para todo $v\in\mathbb F_3^6$,
+\[
+R_p(vA^{\rm o})=R_p(v)A^{\rm a}.
+\]
+La transformación es invertible y conserva la neutralidad dual, los
+residuos, los acarreos y las ocupaciones, expresados en las coordenadas
+transportadas. En particular, la terna seleccionada tiene las dos
+representaciones
+\[
+\begin{array}{c|c|c}
+&\text{representación de origen}&\text{representación excepcional}\\\hline
+\text{clausura}&222220&222202\\
+\text{propagación}&021222&021222\\
+\text{autoescala}&102011&102110.
+\end{array}
+\]
+\end{theorem}
+\begin{proof}
+Si $p=(1,2,3,5,6,4)$, la comparación de las entradas de ambas matrices
+da $A^{\rm a}_{ij}=A^{\rm o}_{p(i),p(j)}$. Para la coordenada $j$,
+\[
+\bigl(R_p(v)A^{\rm a}\bigr)_j
+=\sum_i v_{p(i)}A^{\rm o}_{p(i),p(j)}
+=\sum_kv_kA^{\rm o}_{k,p(j)}
+=\bigl(R_p(vA^{\rm o})\bigr)_j.
+\]
+La inversa es
+$R_p^{-1}(w)=(w_1,w_2,w_3,w_6,w_4,w_5)$.
+Como $R_p$ permuta coordenadas, conserva su suma y transporta
+coordenada a coordenada las sumas enteras, sus residuos módulo tres,
+sus cocientes y las cantidades de entradas distintas de cero. De ello
+resulta la conservación de todos los registros indicados. La tabla se
+obtiene aplicando $R_p$ a las tres palabras de $B_+$ y la inversa
+recupera exactamente sus palabras originales.
+\end{proof}
+
+El lector posicional y el lector de incidencia permanecen asociados al
+mismo estado enriquecido mediante este cambio explícito de
+representación. Si $\ell_{\rm pos}$ es el lector en la representación
+de origen, su expresión sobre la representación transportada es
+$\ell_{\rm pos}\circ R_p^{-1}$. Esta composición conserva el orden
+posicional: cambiar la representación de la incidencia y cambiar el
+lector son operaciones coordinadas. La primera frontera entra así en
+la prolongación con sus tres palabras, su orientación regional, su
+acarreo entero y su marco excepcional recuperables.

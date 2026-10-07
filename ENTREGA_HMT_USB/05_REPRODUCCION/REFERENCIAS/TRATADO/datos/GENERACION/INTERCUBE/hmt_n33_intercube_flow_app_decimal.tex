@@ -1,0 +1,358 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.72em}
+
+\title{\bfseries N33 --- Flujo entre cubos APP, triadas decimales y pruebas de generación}
+\author{HMT 3.0 --- ventana de cálculo}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Resumen ejecutivo}
+Esta ventana ejecuta la idea de pasar de la APP bidimensional al cubo de triadas. La tesis que se pone a prueba es que una triada decimal no debe tratarse como un número plano, sino como un punto
+\[
+(a,b,c)\in\{0,\ldots,9\}^{3},
+\]
+con lectura interna por raíz digital módulo 9. El empaquetado decimal trabaja módulo 1000, pero la lectura HMT sigue siendo módulo 9 porque
+\[
+100a+10b+c\equiv a+b+c \pmod 9.
+\]
+
+La parte verde de N33 es fuerte: la APP cúbica fija el espacio correcto de triadas, recupera
+\[
+1000=729+271,
+\]
+identifica el bulk activo y la corona decimal, y reproduce el ancla
+\[
+196884=54(3645+1).
+\]
+
+La parte roja es igualmente importante: varios flujos simples quedan descartados. Ni una regla de memoria 1 sobre triadas, ni una regla LCG módulo 1000, ni una regla local lineal elemental sobre residuos \(\mathbb F_3\) genera las triadas de \(\pi,e,\varphi\). Esto evita autoengaño: la APP cúbica da el espacio y los invariantes, pero la generación infinita requiere un flujo HMT real sobre clases \(U\), \(\kappa\)-27, SU--12 o un operador equivalente.
+
+\section{Triadas como cubos: por qué módulo 1000 y módulo 9 no se contradicen}
+Una triada decimal \(abc\) se escribe
+\[
+abc=100a+10b+c,
+\qquad a,b,c\in\{0,\ldots,9\}.
+\]
+Como
+\[
+100\equiv10\equiv1\pmod 9,
+\]
+entonces
+\[
+100a+10b+c\equiv a+b+c\pmod 9.
+\]
+Por tanto, la lectura correcta es doble:
+\[
+\boxed{\text{módulo }1000\text{ empaqueta la triada; módulo }9\text{ lee su raíz interna.}}
+\]
+
+El cubo decimal completo tiene tamaño
+\[
+10^3=1000.
+\]
+Su parte activa sin ceros tiene tamaño
+\[
+9^3=729.
+\]
+La corona con al menos una coordenada cero tiene tamaño
+\[
+10^3-9^3=271.
+\]
+Además se descompone exactamente como
+\[
+271=243+27+1,
+\]
+porque hay 243 puntos con exactamente un cero, 27 con exactamente dos ceros, y uno con tres ceros.
+
+\section{APP 2D y APP 3D: invariantes exactos}
+La APP bidimensional activa usa \((i,j)\in\{1,\ldots,9\}^2\). Definimos
+\[
+R_{+,2}(i,j)=dr_9(i+j),
+\qquad
+R_{\times,2}(i,j)=dr_9(ij).
+\]
+El cálculo exacto da
+\[
+S_{+,2}=405,
+\qquad
+S_{\times,2}=459,
+\qquad
+\Delta_{2D}=54.
+\]
+
+La APP cúbica activa usa \((i,j,k)\in\{1,\ldots,9\}^3\). Definimos
+\[
+R_{+,3}(i,j,k)=dr_9(i+j+k),
+\qquad
+R_{\times,3}(i,j,k)=dr_9(ijk).
+\]
+El cálculo exacto da
+\[
+S_{+,3}=3645,
+\qquad
+S_{\times,3}=4617,
+\qquad
+\Delta_{3D}=972.
+\]
+
+El ancla Moonshine aparece como
+\[
+\boxed{196884=54(3645+1)=\Delta_{2D}(S_{+,3}+1).}
+\]
+Esta identidad conecta el defecto bidimensional de APP con el bulk aditivo cúbico.
+
+\section{Tabla de invariantes calculados}
+\begin{center}
+\input{hmt_n33_intercube_flow_results.tex}
+\end{center}
+
+\section{Dimensión creciente: por qué el borde domina}
+Una palabra de \(m\) triadas vive en
+\[
+\{0,\ldots,9\}^{3m}.
+\]
+El bulk activo tiene tamaño
+\[
+9^{3m},
+\]
+y el contenedor completo tiene tamaño
+\[
+10^{3m}.
+\]
+La fracción de bulk activo es
+\[
+\left(\frac9{10}\right)^{3m}.
+\]
+Para \(m=12\), una palabra de 12 triadas vive en dimensión 36, y la fracción activa es
+\[
+\left(\frac9{10}\right)^{36}\approx 0.0225284.
+\]
+Esto formaliza la intuición de borde: al crecer la dimensión, la corona domina. Por eso una teoría de lectura de triadas no puede ser únicamente volumétrica; debe ser holográfica o de borde.
+
+\section{Pruebas de flujo: qué falla}
+El objetivo fuerte sería producir una transición
+\[
+F:	ext{bloque de triadas}\longrightarrow\text{siguiente bloque de triadas}
+\]
+sin introducir \(\pi,e,\varphi\) como tabla objetivo. N33 prueba varios candidatos elementales para asegurarse de no confundir espacio de estados con generador.
+
+\subsection{Memoria 1 sobre triadas}
+Se comprueba si existe una transición determinista de memoria 1
+\[
+t_n\mapsto t_{n+1}
+\]
+sobre las triadas de \(\pi,e,\varphi\). El resultado es negativo: aparecen triadas repetidas con siguientes distintos.
+
+\begin{longtable}{lrrrr}
+\toprule
+Constante & Estados únicos & Repeticiones & Conflictos & Veredicto\\
+\midrule
+\(\pi\) & 293 & 66 & 66 & falla\\
+\(e\) & 297 & 62 & 62 & falla\\
+\(\varphi\) & 301 & 58 & 58 & falla\\
+\bottomrule
+\end{longtable}
+
+Esto demuestra que la generación no puede ser un mapa local ingenuo de una triada a la siguiente.
+
+\subsection{Memoria 1 sobre direcciones \(\mathbb F_3^3\)}
+También se prueba el mapa sobre direcciones mod 3:
+\[
+(a,b,c)\bmod3\longmapsto(a',b',c')\bmod3.
+\]
+El resultado vuelve a fallar: los 27 estados aparecen, pero con muchísimos siguientes contradictorios.
+
+\begin{longtable}{lrrrr}
+\toprule
+Constante & Estados únicos & Repeticiones & Conflictos & Veredicto\\
+\midrule
+\(\pi\) & 27 & 332 & 320 & falla\\
+\(e\) & 27 & 332 & 319 & falla\\
+\(\varphi\) & 27 & 332 & 321 & falla\\
+\bottomrule
+\end{longtable}
+
+\subsection{LCG módulo 1000 y módulo 9}
+Se prueba si las primeras 24 transiciones satisfacen una regla lineal congruencial simple
+\[
+t_{n+1}=a t_n+b\pmod{1000}.
+\]
+No existe tal regla para \(\pi,e,\varphi\). También falla la versión módulo 9.
+
+\begin{longtable}{lrrr}
+\toprule
+Constante & Mejor hits mod 1000/24 & Mejor hits mod 9/24 & Veredicto\\
+\midrule
+\(\pi\) & 2 & 5 & falla\\
+\(e\) & 2 & 5 & falla\\
+\(\varphi\) & 2 & 4 & falla\\
+\bottomrule
+\end{longtable}
+
+\subsection{Autómata celular lineal local sobre \(\mathbb F_3\)}
+Se prueban reglas locales lineales sobre los bloques de 12 residuos. Para radios 0,1,2,3, la mejor precisión global sobre las transiciones de \(\pi,e,\varphi\) es:
+\[
+0.3506,
+\quad
+0.3812,
+\quad
+0.3812,
+\quad
+0.3822.
+\]
+Esto está muy lejos de una regla exacta. El resultado es útil porque descarta otra clase de explicaciones triviales.
+
+\section{Proyección icosaédrica de bloques sucesivos}
+Se proyectan bloques de 12 triadas sobre la descomposición
+\[
+\mathbb C^{12}=1\oplus3\oplus3'\oplus5.
+\]
+El bloque \(4\) permanece nulo por construcción de la acción icosaédrica. Promediando bloques, las energías centradas se distribuyen aproximadamente así:
+
+\begin{longtable}{lrrrr}
+\toprule
+Constante & \(P_3\) & \(P_{3'}\) & \(P_5\) & \(P_4\)\\
+\midrule
+\(\pi\) & 0.2399 & 0.2423 & 0.5178 & 0\\
+\(e\) & 0.2772 & 0.2357 & 0.4871 & 0\\
+\(\varphi\) & 0.2227 & 0.3082 & 0.4690 & 0\\
+\bottomrule
+\end{longtable}
+
+La lectura es interesante: la mayor parte media cae en el bloque \(5\), pero \(3\) y \(3'\) no son marginales. Esto encaja con la idea de que el cierre pentagonal sostiene la estructura, mientras que la asimetría dorada vive en la tensión \(3\leftrightarrow3'\).
+
+Sin embargo, al intentar modelar el paso de un bloque al siguiente por una permutación de \(A_5\), la correlación máxima promedio no es suficiente para hablar de flujo exacto. Esto queda clasificado como herramienta de coordenadas, no como generador.
+
+\section{Dictamen}
+El cálculo de N33 deja tres conclusiones limpias.
+
+\subsection*{Verde}
+La APP cúbica es el espacio correcto para las triadas decimales:
+\[
+10^3=729+271.
+\]
+Además:
+\[
+196884=54(3645+1).
+\]
+Esto es una identidad exacta entre APP 2D, APP 3D y el primer coeficiente grande de \(J\).
+
+\subsection*{Rojo}
+Los flujos simples no generan las triadas de \(\pi,e,\varphi\): memoria 1, LCG módulo 1000, LCG módulo 9 y autómatas celulares lineales locales fallan.
+
+\subsection*{Amarillo fuerte}
+La descomposición icosaédrica y los proyectores \(1,3,3',5\) dan coordenadas espectrales útiles para bloques de 12 triadas. Pero todavía no constituyen un mapa dinámico predictivo.
+
+\section*{Conclusión final}
+La intuición de una fractalización holográfica de cubos es correcta como espacio de estados. La triada decimal vive en un cubo \(10^3\), su bulk activo es \(9^3=729\), su corona es \(271\), y la raíz digital es la lectura interna natural. Lo que todavía no se obtiene por esta ventana es la transición infinita.
+
+La frase congelable es:
+\[
+\boxed{\text{APP cúbica fija el espacio y los invariantes; la generación infinita exige el flujo HMT sobre clases }U/\kappa27/SU12.}
+\]
+
+
+
+\appendix
+\section{Apéndice A: fórmulas cerradas del bulk activo}
+En el bulk activo \(B_d=\{1,\ldots,9\}^d\), cada una de las nueve raíces digitales aparece de forma uniforme para la lectura aditiva. Por tanto,
+\[
+S_{+,d}=\sum_{x\in B_d}dr_9(x_1+\cdots+x_d)
+=9^{d-1}(1+2+\cdots+9)=45\,9^{d-1}.
+\]
+En particular:
+\[
+S_{+,2}=45\cdot9=405,
+\qquad
+S_{+,3}=45\cdot81=3645.
+\]
+Esto explica por qué el paso de APP bidimensional a APP cúbica no es arbitrario: el cubo aumenta la potencia del bulk, pero conserva la lectura uniforme del lector aditivo.
+
+Para el lector multiplicativo se obtiene, por conteo directo en el script, el valor
+\[
+S_{\times,3}=4617.
+\]
+La diferencia cúbica \(972\) no se usa como ancla principal en N33; se reporta porque muestra que la hoja producto y la hoja suma se separan de forma no trivial también en dimensión 3.
+
+\section{Apéndice B: tabla de crecimiento de bulk y corona}
+La siguiente tabla muestra cómo crece la dominancia del borde al pasar de una triada a palabras de muchas triadas. Una palabra de \(m\) triadas vive en dimensión \(3m\). La fracción activa es \((9/10)^{3m}\).
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Triadas \(m\) & Dimensión & Fracción bulk & Fracción corona\\
+\midrule
+1 & 3 & 0.729000 & 0.271000\\
+2 & 6 & 0.531441 & 0.468559\\
+6 & 18 & 0.150095 & 0.849905\\
+12 & 36 & 0.022528 & 0.977472\\
+24 & 72 & 0.000507 & 0.999493\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Esta tabla es una de las razones por las que la palabra ``holográfico'' no es meramente ornamental: al crecer la dimensión, el volumen activo sin ceros se vuelve pequeño frente a la corona de lectura.
+
+\section{Apéndice C: ejemplos de conflictos de memoria 1}
+El script no se limita a decir que la memoria 1 falla; registra ejemplos. Para \(\pi\), la triada 592 aparece con dos siguientes distintos:
+\[
+592\mapsto653,
+\qquad
+592\mapsto307.
+\]
+También aparecen conflictos como
+\[
+117\mapsto067,
+\qquad
+117\mapsto450.
+\]
+Esto demuestra que una ley \(t_n\mapsto t_{n+1}\) sobre triadas individuales no puede generar ni siquiera el prefijo analizado sin memoria adicional.
+
+En la lectura mod 3 el fallo es todavía más severo: como sólo hay 27 estados \((a,b,c)\bmod3\), las repeticiones son inevitables, y los siguientes entran en conflicto masivo. Por eso el flujo real, si existe, no puede vivir en una sola triada ni en una dirección mod 3 aislada. Debe vivir en bloques, clases \(U\), sectores \(\kappa27\) o estados ampliados.
+
+\section{Apéndice D: autómatas locales sobre \(\mathbb F_3\)}
+Se buscaron reglas lineales locales sobre bloques de 12 residuos:
+\[
+y_i=c+\sum_{r=-R}^{R}a_r x_{i+r}\pmod3.
+\]
+Para radios \(R=0,1,2,3\), las mejores precisiones globales sobre las transiciones analizadas fueron:
+\[
+0.3506,
+\quad
+0.3812,
+\quad
+0.3812,
+\quad
+0.3822.
+\]
+Esto no es cercano a una regla exacta. Por tanto, N33 descarta la explicación ingenua de que las triadas de \(\pi,e,\varphi\) se produzcan por un autómata lineal local elemental sobre residuos mod 3.
+
+\section{Apéndice E: coordenadas icosaédricas de bloques}
+Los bloques de 12 triadas sí pueden proyectarse sobre la descomposición
+\[
+\mathbb C^{12}=1\oplus3\oplus3'\oplus5.
+\]
+El bloque \(4\) permanece nulo. En los promedios calculados, \(P_5\) absorbe alrededor de la mitad de la energía centrada de los bloques de \(\pi,e,\varphi\). Esto sugiere que la coordenada pentagonal sigue siendo relevante en la lectura de constantes, pero no define por sí sola el flujo.
+
+El intento de explicar el paso de un bloque de 12 triadas al siguiente mediante una permutación del grupo \(A_5\) tampoco da una igualdad exacta. La mejor correlación promedio queda alrededor de 0.61--0.64 según la constante. Por tanto, la acción icosaédrica es una coordenada espectral útil, no una transición completa.
+
+\section{Apéndice F: conclusión metodológica}
+La lección de N33 es doble. Primero, la intuición de tridimensionalizar APP es correcta como geometría de estado: cada triada decimal es un cubo, y la separación \(1000=729+271\) es estructural. Segundo, la generación infinita no puede salir de una lectura local trivial. Debe venir de un flujo más alto: un operador sobre clases \(U\), sobre sectores \(\kappa27\), o sobre un espacio de bloques SU--12 con memoria.
+
+Por eso N33 no cierra la generación infinita, pero sí evita dos errores: no reduce la intuición a numerología, y no acepta una transición débil como prueba. El siguiente objeto matemático debe ser un flujo canónico en el espacio de bloques, no una regla local sobre triadas.
+
+\end{document}

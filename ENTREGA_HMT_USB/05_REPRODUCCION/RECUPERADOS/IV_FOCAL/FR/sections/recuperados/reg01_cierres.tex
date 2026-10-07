@@ -1,0 +1,237 @@
+% BEGIN R28_REGIONAL_CLOSURES
+% Inserción después de REG01. No es un documento autónomo.
+% Procedencia: U012_biografia_estructural_pi.tex, líneas 175--324.
+% Testigos orientados: verificar_cierres_regionales.py; mismo problema,
+% representantes distintos de los paseos impresos en U012.
+% Emisor SHA-256: 42fdacab582de8e2d2cb7dfafc6204d200aef01249b3dcc37949e39507f066d8.
+\subsubsection{Multigraphe de blocs et cinq clôtures régionales minimales}
+\label{regcl27:seccion}
+
+Les \(468\) émissions de l'ensemble \(\mathcal U_6\), produites par
+l'émetteur APP--TRIT--TPK, déterminent un multigraphe de blocs.
+L'identification de ses points d'ancrage régionaux permet de résoudre un problème
+de couverture conjointe : parcourir les incidences APP, de propagation,
+d'auto-échelle et de chaque région de clôture dans une même marche fermée.
+Le cycle local de six raccordements de la section~\ref{sec:rec27-empalmes}
+et ces couvertures conservent leurs conditions de parcours respectives.
+
+\paragraph{Graphe de blocs et quotient exact de phase.}
+Pour \(U=(U_1,\ldots,U_6)\in\mathcal U_6\), nous définissons
+\begin{equation}
+ A(U)=(U_1,U_2,U_3),\qquad B(U)=(U_4,U_5,U_6).
+ \label{regcl27:mitades}
+\end{equation}
+Le multigraphe non orienté \(\widetilde G\) a pour sommets les triplets
+qui apparaissent comme \(A(U)\) ou \(B(U)\), et une arête étiquetée pour chaque
+\(U\), incidente à ces deux triplets. Les \(468\) étiquettes sont retenues :
+deux émissions distinctes ne sont pas identifiées parce qu'elles partagent leurs extrémités, ni
+parce que l'une échange les moitiés de l'autre.
+
+La phase interne agit sur chaque triplet par rotation cyclique :
+\begin{equation}
+ (a,b,c)\sim(b,c,a)\sim(c,a,b),\qquad
+ \operatorname{can}(a,b,c)
+ =\min_{\rm lex}\{(a,b,c),(b,c,a),(c,a,b)\}.
+ \label{regcl27:fase}
+\end{equation}
+Le graphe \(G\) remplace les extrémités de l'arête \(U\) par
+\(\operatorname{can}A(U)\) et \(\operatorname{can}B(U)\), tout en conservant
+son étiquette. L'équivalence agit exactement par les trois rotations
+cycliques de chaque sommet ; chaque émission maintient son identité en tant qu'arête.
+
+L'énumération du même émetteur et la recherche de composantes donnent
+\begin{equation}
+\begin{array}{c|r|l}
+ & |V|&\text{tailles des composantes}\\ \hline
+ \widetilde G&96&(28,28,28,4,4,4)\\
+ G&32&(28,4)
+\end{array}
+\label{regcl27:componentes}
+\end{equation}
+Pour obtenir ces données, on réunit les extrémités distinctes, on ajoute
+chaque incidence dans les deux sens et on parcourt en largeur chaque
+composante non encore visitée. L'adjacence peut être dédupliquée pour compter les
+composantes, mais les étiquettes parallèles sont conservées lors de la recherche de fermetures
+avec des arêtes prescrites.
+
+\paragraph{Ancrage APP et numérotation régionale.}
+Les trois arêtes communes sont
+\begin{equation}
+\begin{aligned}
+ U_{\rm APP}&=903|850|850|252|109|252,\\
+ U_e&=850|963|890|149|252|212,\\
+ U_\varphi&=830|943|830|109|252|252.
+\end{aligned}
+\label{regcl27:anclajes}
+\end{equation}
+Nous fixons l'extrémité \(v_{\rm APP}=\operatorname{can}A(U_{\rm APP})=850|850|903\). Dans les cinq régions déjà construites, on adopte l'ordre suivant, qui place la région transversale sur la cinquième ligne :
+\begin{equation}
+\begin{array}{c|l|c|r}
+ i&U_\pi^{(i)}&\rho_i&m_i\\ \hline
+ 1&810|923|870|169|272|272&++&144\\
+ 2&810|983|810|169|272|272&++&144\\
+ 3&870|923|810|169|272|272&++&144\\
+ 4&870|923|810|418|674|521&--&144\\
+ 5&501|614|498|169|272|272&\perp&432
+\end{array}
+\label{regcl27:regiones}
+\end{equation}
+La numérotation distingue les trois régions \(++\), le retour muté
+\( -- \) et la transversale \(\perp\). Ainsi,
+\(\rho=(++ ,++ ,++ ,--,\perp)\) et
+\(m=(144,144,144,144,432)\) dans cet ordre ; la somme reste \(1008\).
+
+\paragraph{Cinq témoins complets avec sens de parcours.}
+Dans chaque tableau, la ligne \(j\) signifie parcourir l'arête étiquetée \(e_j\) de \(v_{j-1}\) à \(v_j\). Les extrémités sont des représentants canoniques de phase. Puisque \(G\) est non orienté, la paire \((v_{j-1},v_j)\) fixe le sens de parcours de l'arête étiquetée. Chaque tableau contient exactement huit arêtes et satisfait \(v_0=v_8=v_{\rm APP}\).
+
+La recherche en largeur décrite dans la preuve fournit les
+témoins suivants, un pour chaque ensemble de quatre arêtes cibles. La
+minimalité concerne la longueur ; elle admet plusieurs marches qui la réalisent.
+\paragraph{Testigo \(i=1\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(109|252|252|850|903|850\)&\(109|252|252\)\\
+2&\(109|252|252\)&\(109|252|252|810|923|870\)&\(810|923|870\)\\
+3&\(810|923|870\)&\(810|923|870|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Testigo \(i=2\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|810|983|810\)&\(810|810|983\)\\
+3&\(810|810|983\)&\(810|983|810|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Testigo \(i=3\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+3&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+4&\(149|252|212\)&\(149|252|212|870|923|810\)&\(810|870|923\)\\
+5&\(810|870|923\)&\(870|923|810|169|272|272\)&\(169|272|272\)\\
+6&\(169|272|272\)&\(169|272|272|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Testigo \(i=4\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(169|272|272|850|903|850\)&\(169|272|272\)\\
+2&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+3&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+4&\(149|252|212\)&\(149|252|212|870|923|810\)&\(810|870|923\)\\
+5&\(810|870|923\)&\(870|923|810|418|674|521\)&\(418|674|521\)\\
+6&\(418|674|521\)&\(418|674|521|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Testigo \(i=5\).}
+\begin{center}
+\small
+\begin{tabular}{rlll}
+\hline
+\(j\)&\(v_{j-1}\)&\(e_j\)&\(v_j\)\\
+\hline
+1&\(850|850|903\)&\(109|252|252|850|903|850\)&\(109|252|252\)\\
+2&\(109|252|252\)&\(109|252|252|501|614|498\)&\(498|501|614\)\\
+3&\(498|501|614\)&\(501|614|498|169|272|272\)&\(169|272|272\)\\
+4&\(169|272|272\)&\(169|272|272|850|963|890\)&\(850|963|890\)\\
+5&\(850|963|890\)&\(850|963|890|149|252|212\)&\(149|252|212\)\\
+6&\(149|252|212\)&\(149|252|212|830|943|830\)&\(830|830|943\)\\
+7&\(830|830|943\)&\(830|943|830|109|252|252\)&\(109|252|252\)\\
+8&\(109|252|252\)&\(903|850|850|252|109|252\)&\(850|850|903\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{theorem}[Minimalité des cinq couvertures régionales]
+\label{regcl27:minimalidad}
+Pour chaque \(i\in\{1,\ldots,5\}\), parmi les marches fermées de \(G\)
+qui parcourent au moins une fois chaque arête de
+\[
+ E_i^*=\{U_{\rm APP},U_e,U_\varphi,U_\pi^{(i)}\},
+\]
+la longueur minimale, comptée avec la multiplicité des parcours, est huit.
+Les répétitions de sommets et d'arêtes sont permises.
+\end{theorem}
+
+\begin{proof}
+Toute fermeture qui parcourt \(U_{\rm APP}\) passe par \(v_{\rm APP}\).
+La rotation cyclique de sa liste d'étapes permet de commencer en ce sommet
+sans changer ni la longueur ni la couverture. Il suffit donc de résoudre le problème
+avec une origine fixe.
+
+L'espace de recherche est l'ensemble fini
+\[
+ \mathscr S_i=V(G)\times\mathcal P(E_i^*),
+ \qquad |\mathscr S_i|\le32\cdot16=512.
+\]
+L'état initial est \(s_0=(v_{\rm APP},\varnothing)\), et l'état
+terminal est \(s_*=(v_{\rm APP},E_i^*)\). Lorsqu'on parcourt une arête \(e\)
+incidente à \(v\), vers son autre extrémité \(v'\), on met à jour
+\begin{equation}
+ (v,M)\longmapsto\bigl(v',M\cup(E_i^*\cap\{e\})\bigr).
+ \label{regcl27:transicion-bfs}
+\end{equation}
+Le masque enregistre des étiquettes d'arêtes, et pas seulement des extrémités ; c'est pourquoi des arêtes parallèles distinctes ne doivent pas être fusionnées.
+
+Toutes les transitions coûtent une unité. Une file FIFO, initiée en
+\(s_0\), extrait les états par distance croissante, marque chaque état lors de
+sa première visite et garde son prédécesseur et l'étiquette parcourue.
+De façon équivalente, si \(\mathcal F_0=\{s_0\}\), les nouvelles couches sont
+\[
+ \mathcal F_{k+1}
+ =\operatorname{Succ}(\mathcal F_k)
+   \setminus\bigcup_{j=0}^{k}\mathcal F_j.
+\]
+Par récurrence, \(\mathcal F_k\) contient exactement les états dont la distance minimale à partir de \(s_0\) est \(k\). L'énumération finie sur l'émetteur indiqué donne, pour chacune des cinq régions,
+\[
+ s_*\notin\bigcup_{k=0}^{7}\mathcal F_k,\qquad s_*\in\mathcal F_8,
+ \qquad (\ell_1,\ell_2,\ell_3,\ell_4,\ell_5)=(8,8,8,8,8).
+\]
+Les tableaux présentent les cinq bornes supérieures, y compris les quatre
+étiquettes requises dans chaque cas. L'exploration exhaustive des
+couches précédentes prouve la borne inférieure. Leur combinaison prouve la
+minimalité dans le problème déclaré.
+\end{proof}
+
+La longueur huit caractérise la couverture conjointe de quatre incidences dans chaque région de clôture. Le quotient retient les étiquettes d'émission et leurs raccordements entre classes de phase ; l'évolution temporelle enrichie conserve en outre orientation et mémoire. Cette description relie les cinq régions aux mêmes ancrages de propagation, d'auto-échelle et d'APP, et complète le cycle local de six raccordements. Le prolongement coinductif maintient ses opérateurs et ses cylindres avec ces données d'orientation et de mémoire.
+% END R28_REGIONAL_CLOSURES

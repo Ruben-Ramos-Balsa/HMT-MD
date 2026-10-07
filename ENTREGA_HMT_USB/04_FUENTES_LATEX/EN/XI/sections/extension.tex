@@ -1,0 +1,301 @@
+\section{Development of the formal core: initial conditions, geometry, and refinement}
+\label{sec:extension}
+
+The support of eighty-one positions does not coincide with the domain of initial conditions of the dynamics. An initial condition must also specify an orientation, and the additive and multiplicative sheets have independent cursors. This distinction permits exhaustive reconstruction of the emission without selecting a numerical region in advance.
+
+\subsection{Initial states and the emission recurrence}
+
+For the enumeration we use indices \(I_9=\{0,\ldots,8\}\), related to the positive labels by \(i\mapsto i+1\). Let
+\[
+ \mathcal S=I_9^2\times\{N,E,S,O\},\qquad
+ \Omega_{\rm seed}=\mathcal S_+\times\mathcal S_\times.
+\]
+Each initial condition \(\omega=(s_+,s_\times)\) determines two positions and two directions. The domain comprises all ordered pairs, and hence
+\begin{equation}
+ |\mathcal S|=324,\qquad |\Omega_{\rm seed}|=324^2=104\,976.
+ \label{eq:semillas}
+\end{equation}
+The preceding parametrization is already an internal enumeration: each of the
+\(81\) pairs of positions appears with all four directions, and the Cartesian
+product preserves the \(324^2\) combinations of the two cursors. The rows
+of an emission table are fibers of this domain of initial conditions;
+no external catalog is added to define them.
+
+The finite realization uses six windows of nine transitions. At each instant \(t\), the phase signature is \(M_{\rm ph}(1+((t-1)\bmod9))\). If its value is \(+1\), the positive residue \(\Sigma(i+1,j+1)=\rho_9(i+j+2)\) of the first cursor is read and that cursor is then displaced; if its value is \(-1\), the positive residue \(\Pi(i+1,j+1)=\rho_9((i+1)(j+1))\) of the second cursor is read and the second cursor is then displaced. The zero value increments the neutral counter. At the end of transitions twenty-seven and fifty-four, the cardinal orientations are reversed. The integer evaluations and their quotients are preserved in the record, but the emitter uses the residue readings specified here.
+
+In the unit sector, the multiplicative reader uses the base-two discrete logarithm on \((\ZZ/9\ZZ)^\times\):
+\[
+ \ell_9(1)=0,\quad\ell_9(2)=1,\quad\ell_9(4)=2,\quad
+ \ell_9(8)=3,\quad\ell_9(7)=4,\quad\ell_9(5)=5.
+\]
+For the finite emission it is extended with value zero to the nonunit sector. This extension is an observable, not an identification of elements \(3,6,9\) with the multiplicative identity. The sheet and its membership in the radical sector remain in the path record.
+
+Let \(S_m\) be the sum of the three positive additive residues \(\Sigma\) in window \(m\), let \(E_m\) be the sum of the three discrete exponents of the multiplicative residues \(\Pi\), and let \(Z_m=3\) be the number of neutral events. Thus, \(S_m\) does not sum the integer evaluations \(S=i+j\), whose quotients remain in the record. With \([a]_{10}\in\{0,\ldots,9\}\), the decimal emission rule is
+\begin{align}
+ d_{m,1}&=[S_m]_{10},\notag\\
+ d_{m,2}&=[S_m+E_m]_{10},\notag\\
+ d_{m,3}&=[3S_m+5E_m+7Z_m]_{10},\notag\\
+ U_m&=100d_{m,1}+10d_{m,2}+d_{m,3}.
+ \label{eq:emisor-seis}
+\end{align}
+The integer coefficients and the calendar of this recurrence are an explicit part of the stated emission law. No values of \(\pi,\varphi,e\), or \(\alpha\) are received. Distinguishing an emission rule from a constant recognized from its output prevents the genealogy from being concealed in a table of decimals.
+
+If \(s_m=[S_m]_{10}\) and \(e_m=[E_m]_{10}\), the same rule can be written
+\begin{equation}
+ U_m=100s_m+10[s_m+e_m]_{10}+[3s_m+5e_m+1]_{10}.
+ \label{eq:acoplamiento}
+\end{equation}
+The final one is the residue of \(7Z_m=21\) modulo ten. The oriented ternary reduction of the catalog adopts the convention
+\begin{equation}
+ \Psi(U_1,\ldots,U_6)=([-U_1]_3,\ldots,[-U_6]_3).
+ \label{eq:psi-catalogo}
+\end{equation}
+The sign of this chart is explicit: changing it modifies the words and requires transporting subsequent orientations. The balanced identification of each component of \(\FF_3\) with TRIT is performed after \eqref{eq:psi-catalogo}.
+
+\begin{lemma}[Complete census of cursor signatures]
+\label{lem:censo-interno-firmas}
+The \(324\) initial conditions of each cursor are distributed among eighteen
+additive signatures of cardinality \(18\) and twenty-six multiplicative signatures: one
+of cardinality \(108\), one of cardinality \(24\), and twenty-four of cardinality \(8\).
+These cardinalities and signatures are obtained from the emitter rules, without
+consulting real values or tables of constants.
+\end{lemma}
+\begin{proof}
+Identify the directions with
+\[
+ v_N=(-1,0),\quad v_E=(0,1),\quad
+ v_S=(1,0),\quad v_O=(0,-1)
+ \qquad\text{in }(\ZZ/9\ZZ)^2.
+\]
+On the additive sheet, the signature depends only on
+\(c=i+j\pmod9\) and on the sense
+\(\epsilon(d)=+\) for \(d\in\{E,S\}\),
+\(\epsilon(d)=-\) for \(d\in\{N,O\}\). For each pair
+\((c,\epsilon)\), there are nine choices of \(i\), which fix \(j=c-i\), and
+two directions of the indicated sense. Hence each fiber contains
+\(9\cdot2=18\) seeds. Substitution into the six windows gives the complete
+table
+\[
+\begin{array}{c|cc}
+c&\epsilon=-&\epsilon=+\\ \hline
+0&212988&988212\\
+1&645212&212645\\
+2&988546&546988\\
+3&221889&889221\\
+4&564122&122564\\
+5&898465&465898\\
+6&122898&898122\\
+7&456221&221456\\
+8&889654&654889
+\end{array}
+\tag{A}
+\label{eq:tabla-firmas-aditivas}
+\]
+and its fibers are, explicitly,
+\[
+ \mathcal P_{c,+}=\{(i,c-i,d):i\in\ZZ/9\ZZ,\ d\in\{E,S\}\},
+ \quad
+ \mathcal P_{c,-}=\{(i,c-i,d):i\in\ZZ/9\ZZ,\ d\in\{N,O\}\}.
+\]
+
+For the multiplicative sheet, write
+\(M(a,b)=\rho_9((a+1)(b+1))\) and, for \(m=0,\ldots,5\), \(r=0,1,2\),
+\[
+ a_{m,r}=\begin{cases}
+ 3m+r,&0\le m\le2,\\
+ -(3(m-3)+r),&3\le m\le5.
+ \end{cases}
+\]
+The signature of \(T=(i,j,d)\) is determined componentwise by
+\begin{equation}
+ e_m(T)=\left[\sum_{r=0}^{2}
+ \ell_9\!\left(M\bigl((i,j)+a_{m,r}v_d\bigr)\right)\right]_{10}.
+ \label{eq:generador-firmas-multiplicativas}
+\end{equation}
+This expression contains all \(81\cdot4=324\) possible substitutions. The
+exhaustive classification of its values is
+\[
+\begin{array}{c|c|c}
+\text{signatures}&\text{number of signatures}&\text{cardinality of each fiber}\\ \hline
+000000&1&108\\
+555555&1&24\\
+\begin{gathered}
+177393,177555,177771,339555,339771,339933,\\
+393177,393393,393555,555177,555339,555393,\\
+555717,555771,555933,717555,717717,717933,\\
+771177,771339,771555,933339,933555,933717
+\end{gathered}&24&8
+\end{array}
+\tag{B}
+\label{eq:tabla-firmas-multiplicativas}
+\]
+Each entry in (B) is verified by substituting \(i,j\in\{0,\ldots,8\}\) and
+the four directions into \eqref{eq:generador-firmas-multiplicativas}; no
+seed is omitted because
+\(108+24+24\cdot8=324\). The fibers are disjoint because they are preimages of
+distinct signatures. Together with the calculation of the additive fibers, this proves the
+complete census.
+\end{proof}
+
+\begin{proposition}[Injective factorization of the emission]
+\label{prop:factorizacion-emision-interna}
+The word \(U=(U_1,\ldots,U_6)\) determines the two signatures \(s=(s_1,\ldots,s_6)\) and \(e=(e_1,\ldots,e_6)\). The image of the emission has \(18\cdot26=468\) elements. The ternary projection has \(243\) distinct values in the ambient space of \(729\) words.
+\end{proposition}
+\begin{proof}
+The hundreds digits of \(U_m\) recover \(s_m\). If \(b_m\) is its tens digit, then \(e_m=[b_m-s_m]_{10}\). The units digit verifies the third congruence in \eqref{eq:acoplamiento}. The coupling is therefore injective on the product of signatures.
+
+Lemma~\ref{lem:censo-interno-firmas} gives eighteen additive signatures, each
+with eighteen preimages, and twenty-six multiplicative signatures: twenty-four with
+eight preimages, one with twenty-four, and one with one hundred eight. Injectivity
+of the coupling gives \(18\cdot26\) emissions and multiplicities
+\[
+ \underbrace{432}_{18\cdot24}\text{ fibers of }144,
+ \qquad18\text{ fibers of }432,
+ \qquad18\text{ fibers of }1944.
+\]
+The sum is \(432\cdot144+18\cdot432+18\cdot1944=104\,976\). To close
+the second quotient without an external reference, apply
+\eqref{eq:acoplamiento} and then \eqref{eq:psi-catalogo} to the
+\(18\cdot26\) pairs formed by the rows of
+\eqref{eq:tabla-firmas-aditivas} and
+\eqref{eq:tabla-firmas-multiplicativas}. The count by fiber cardinality is
+\[
+\begin{array}{c|rrrrrr}
+k=\#\Psi^{-1}(w)&1&2&3&4&5&6\\ \hline
+\#\{w:\#\Psi^{-1}(w)=k\}&132&66&18&3&6&18.
+\end{array}
+\tag{C}
+\label{eq:histograma-proyeccion-ternaria}
+\]
+The two global checks
+\[
+132+66+18+3+6+18=243,
+\qquad
+132+2(66)+3(18)+4(3)+5(6)+6(18)=468
+\]
+prove both the cardinality of the image and the exhaustion of the emissions.
+The number \(243\) is the cardinality of that image, not that of the ambient space
+\(\FF_3^6\), whose cardinality is \(729\).
+\end{proof}
+
+This factorization explains the difference between finite exhaustiveness and unbounded depth. The domain \eqref{eq:semillas} is complete for the stated support and emitter; it does not contain in advance every prefix of every extension. Depth belongs to the system of compatible extensions constructed on those conditions.
+
+\subsection{Closure of the calendar and advance of memory}
+
+The calendar of one hundred eight transitions consists of twelve nonadic windows. Its group structure is more precise than an informal product of two periods:
+\begin{equation}
+ 0\longrightarrow C_{12}\xrightarrow{\iota}C_{108}
+ \xrightarrow{p}C_9\longrightarrow0,
+ \quad\iota([b])=[9b],\quad p([t])=[t]_9.
+ \label{eq:extension108}
+\end{equation}
+If \(t=9b+r\) with \(0\le r<9\), the sum of two phases produces the carry
+\[
+ (b,r)+(b',r')=
+ \left(b+b'+\left\lfloor\frac{r+r'}9\right\rfloor,\ [r+r']_9\right),
+\]
+where the first coordinate is reduced modulo twelve. The composition preserves the term that links the two coordinates.
+
+\begin{proposition}[Nonsplitting of the calendar]
+The sequence \eqref{eq:extension108} is exact and admits no section that is a group homomorphism.
+\end{proposition}
+\begin{proof}
+The kernel of reduction modulo nine is the subgroup of multiples of nine, the image of \(\iota\). If the extension split, commutativity would imply \(C_{108}\cong C_{12}\times C_9\). The first group has exponent \(108\), whereas the second has exponent \(\operatorname{lcm}(12,9)=36\), a contradiction.
+\end{proof}
+
+Nine transitions restore the nonadic phase and advance one window; one hundred eight restore the finite calendar. Neither fact requires erasing the path or restoring the prefix of an extension. The nonadic holonomy \(\Gamma_9\) denotes transport through one circuit on states with memory, so that
+\begin{equation}
+ g(\Gamma_9x)=g(x),\qquad M(\Gamma_9x)=M(x)+1.
+ \label{eq:holonomia-memoria}
+\end{equation}
+Equality of phase and the increment of memory are compatible and constitute two observations of the same transport.
+
+\input{sections/temporalidad_trit.tex}
+
+The monodromic representation of this return is developed in
+Section~\ref{mono-ampl:conexion}. There, the holonomy of the
+state is distinguished from its representation on phase and counter. The
+symbolic suspension of Section~\ref{mono-ampl:cristal} defines the
+aperiodic time-crystal model, and Section~\ref{mono-ampl:euler}
+composes that temporality with the three Euler realizations.
+
+\subsection{Observable compression and orthogonal conservation}
+
+An isometric realization permits a quantitative expression of what a reduced observation loses. Let \(U:\mathcal H\to\mathcal H\) be an isometric realization of transport through one circuit, \(U^*U=I\), and let \(J:\mathcal H_{\rm vis}\to\mathcal H\) be an isometric inclusion. Define
+\[
+ T=J^*UJ,\qquad D=(I-JJ^*)UJ.
+\]
+Then
+\begin{equation}
+ UJ=JT+D,\qquad J^*D=0,\qquad I-T^*T=D^*D.
+ \label{eq:conservacion-ortogonal}
+\end{equation}
+The final equality follows by taking the adjoint product of the first and using orthogonality. Contraction of the visible component does not by itself constitute destruction of information in the total state.
+
+\begin{proposition}[Conservation at a finite horizon]
+If \(I-T^*T=D^*D\), then, for every \(n\ge1\),
+\begin{equation}
+ I=\sum_{r=0}^{n-1}T^{*r}D^*DT^r+T^{*n}T^n.
+ \label{eq:telescopia}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Multiplying \(D^*D=I-T^*T\) by \(T^{*r}\) and \(T^r\) and summing produces a telescoping sum. The interior terms cancel, leaving \(I-T^{*n}T^n\).
+\end{proof}
+
+The final summand preserves the terminal state. Suppressing it before justifying a limit would alter the equality. This distinction is the operational content of preservation of unity under compression: the norm is distributed among the visible component, memory, and terminal, without being replaced by a single residue.
+
+\subsection{Local development: commutation, Lorentzian signature, and discrete curvature}
+
+The adjacent diagonal block with equal diagonal entries modulo nine is unique. Indeed,
+\[
+ k^2\equiv(k+1)^2\pmod9\quad\Longleftrightarrow\quad2k+1\equiv0\pmod9
+\]
+gives \(k=4\). Its visible matrix is
+\[
+ B_c=\begin{pmatrix}7&2\\2&7\end{pmatrix}=7I+2R,
+ \quad R=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad R^2=I.
+\]
+With \(P_\pm=(I\pm R)/2\), one obtains \(B_c=9P_++5P_-\). Unity under stochastic normalization and preservation of an indefinite form are two realizations of this block:
+\[
+ \frac{B_c}{9}=P_++\frac59P_-,\qquad
+ \frac{B_c}{\sqrt{45}}=\exp(\eta R),\quad\eta=\frac12\log\frac95.
+\]
+For \(Q=\operatorname{diag}(1,-1)\), the second matrix satisfies \(B_c^{\mathsf T}QB_c=45Q\). A local realization in \(SO^+(1,1)\) follows; proving it does not require introducing four-dimensional spacetime in advance.
+
+Uniform averaging over the classes \(C_1=\{1,4,7\}\), \(C_2=\{2,5,8\}\), \(C_0=\{3,6,9\}\) gives
+\[
+ M_\Pi=\begin{pmatrix}4&5&6\\5&4&6\\6&6&9\end{pmatrix},\quad
+ M_\Sigma=\begin{pmatrix}5&6&4\\6&4&5\\4&5&6\end{pmatrix}.
+\]
+The characteristic polynomial of \(M_\Pi\) is
+\[
+ (\lambda+1)((\lambda-9)^2-72),
+\]
+and hence its quadratic form has signature \((2,1)\). The local spectral jump \(9-5=4\), the coefficient \(2\), the aggregate difference \(51-45=6\), and the integrated defect \(9\cdot6=54\) describe distinct levels of the same arithmetic comparison. They are not interchangeable indices of a single operator.
+
+Discrete curvature can be described directly before this spectral realization. On residues, let \(S(x,y)=x+y\), \(P(x,y)=xy\), and let \(\Delta_x,\Delta_y\) denote the forward differences. The link variables are potential differences, \(A_x^T=\Delta_xT\), \(A_y^T=\Delta_yT\), and set
+\[
+ F(T_x,T_y)=\Delta_x\Delta_yT_y-\Delta_y\Delta_xT_x.
+\]
+Since \(\Delta_xS=\Delta_yS=1\), \(\Delta_xP=y\), and \(\Delta_yP=x\),
+\begin{equation}
+ F(S,S)=F(P,P)=0,\qquad F(S,P)=+1,\quad F(P,S)=-1\pmod9.
+\end{equation}
+Sum and product, taken separately, induce flat connections; the ordered mixture changes the sign of the plaquette curvature. Upon summing over a rectangle with side lengths \(a,b\), the interior edges cancel and the oriented boundary sum equals \(\pm ab\) modulo nine. This yields an exact relation between order of composition and boundary orientation.
+
+\subsection{Cubic completion and two notions of boundary}
+
+The enlargement of the cubic support from side length nine to side length ten admits an exact positional stratification:
+\begin{equation}
+ 10^3=9^3+3\cdot9^2+3\cdot9+1=729+243+27+1.
+ \label{eq:cubo}
+\end{equation}
+The first term corresponds to the three interior coordinates; the second to one new coordinate; the third to two; and the last to the vertex with three new coordinates. The enlargement shell contains \(271\) positions. By contrast, the internal boundary of the discrete cube of side length nine contains \(9^3-7^3=386\). The difference between these counts is a difference of domain, not a conflict of values.
+
+Dividing \eqref{eq:cubo} by \(1000\) gives a normalized partition of unity. Cubic incidence distinguishes six faces, twelve edges, and eight vertices. The subsequent link with Steiner hexads and octads requires the corresponding combinatorial maps; the cube cardinalities do not replace them. Here this completion provides the relation between bases \(729\) and \(1000\), while the exceptional extension will be developed after numerical generation, the dodecaphase register, and the constructions of \(\alpha\).
+
+\input{sections/revision_emrh.tex}
+
+\input{sections/geometria_modular.tex}
+\input{sections/aritmetica_historias.tex}

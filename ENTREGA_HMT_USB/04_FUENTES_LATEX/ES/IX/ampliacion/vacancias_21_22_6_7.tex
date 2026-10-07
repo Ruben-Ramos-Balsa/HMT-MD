@@ -1,0 +1,367 @@
+% RESULTADO_RECUPERADO y exposición autónoma ampliada; no cambia el núcleo común.
+% Propietarios cotejados:
+% Artículo I REV02/sections/vacancias_capacidad.tex, completo.
+% Monografía775/manuscrito/generated/cristal_relojes_sincronizacion.tex,
+% líneas1--223 y931--1032: capacidad, retornos e inducción TRIT.
+% Las pruebas universales de las dos escalas se reúnen aquí; el comprobador
+% ampliacion/verificar_vacancias.py añade un certificado racional finito.
+\subsection{Vacancias del refinamiento nonádico y jerarquía de retornos}
+\label{vac-add-seccion}
+
+La prolongación APP--TRIT--TPK conserva, junto al bloque expresado, el
+cilindro, la orientación y la historia que permiten continuarlo. En su
+lectura de capacidad se comparan dos cardinales ya determinados por esa
+construcción: las \(3^6=729\) posibilidades de un bloque ternario de seis
+posiciones y las \(10^3=1000\) posiciones de su coordenatización decimal de tres
+cifras. Esta comparación produce un calendario propio. Algunas
+transiciones aumentan el índice de capacidad; otras incorporan un bloque
+a la historia manteniendo dicho índice. Estas últimas son las
+\emph{vacancias de capacidad} que se estudian a continuación.
+
+El objeto considerado es, por tanto, una representación del refinamiento
+conjunto. Su definición conserva el origen en los dos soportes finitos;
+la expresión logarítmica permite demostrar las propiedades de su
+calendario. El tiempo de bloque, el índice de vacancia y el índice de
+capacidad se escribirán por separado. Esta separación hace visible por
+qué los retornos \(21/22\) y \(6/7\) pertenecen a escalas sucesivas de
+una misma construcción.
+
+\subsubsection{Capacidad decimal y conservación del incremento}
+\label{vac-add-capacidad}
+
+\begin{definition}[Índice de capacidad y vacancia]
+\label{vac-add-definicion}
+En el origen de fase \(0\), se definen
+\begin{equation}
+ \rho=\log_{1000}729=\log_{10}9,
+ \qquad \delta=1-\rho=\log_{10}(10/9),
+ \label{vac-add-densidad}
+\end{equation}
+y, para \(t\in\mathbb Z_{\geq0}\),
+\begin{equation}
+ \mathcal C_t=\lfloor(t+1)\rho\rfloor,
+ \qquad
+ z_t=\lfloor(t+1)\delta\rfloor-\lfloor t\delta\rfloor.
+ \label{vac-add-indices}
+\end{equation}
+El entero \(\mathcal C_t\) es el índice de capacidad decimal del lector;
+\(z_t=1\) señala una vacancia. La letra \(K\) permanece reservada al
+registro dodecafásico y no designa aquí un contador de capacidad.
+\end{definition}
+
+Se tiene \(0<\delta<1\). Además, \(\delta\) es irracional: si
+\(\rho=a/b\) fuese racional, con \(a,b\) enteros positivos, la igualdad
+\(9^b=10^a\) tendría valoración nula en el primo \(5\) a la izquierda
+y positiva a la derecha. Esta contradicción demuestra la irracionalidad
+de \(\rho\) y de \(1-\rho\). En particular, ningún múltiplo entero
+positivo de \(\delta\) pertenece a \(\mathbb Z\), circunstancia que
+fija sin ambigüedad los extremos de los intervalos de este desarrollo.
+
+\begin{proposition}[Balance exacto de capacidad y vacancia]
+\label{vac-add-balance}
+Para \(t\geq1\), \(z_t\in\{0,1\}\) y
+\begin{equation}
+ \mathcal C_t-\mathcal C_{t-1}=1-z_t.
+ \label{vac-add-incremento}
+\end{equation}
+En consecuencia, para \(0\leq a<b\),
+\begin{equation}
+ \mathcal C_b-\mathcal C_a+
+ \sum_{t=a+1}^{b}z_t=b-a.
+ \label{vac-add-conservacion}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Como \(0<\delta<1\), la diferencia entre las partes enteras de dos
+números separados por \(\delta\) vale \(0\) o \(1\). Por otra parte,
+la irracionalidad demostrada da
+\[
+ \mathcal C_t=t+1-\lceil(t+1)\delta\rceil
+             =t-\lfloor(t+1)\delta\rfloor.
+\]
+La resta de esta igualdad en \(t\) y \(t-1\) prueba
+\eqref{vac-add-incremento}; su suma telescópica prueba
+\eqref{vac-add-conservacion}.
+\end{proof}
+
+Cada transición aporta exactamente una unidad al lado derecho del
+balance. Esa unidad se registra como capacidad adquirida cuando
+\(z_t=0\), o como vacancia cuando \(z_t=1\). La retención del índice
+\(\mathcal C_t\) deja, por ello, una posición recuperable en la
+historia. La ecuación expresa conservación del incremento con dos
+lecturas, y no una pérdida indeterminada de información.
+
+La densidad también se deduce del mismo balance:
+\[
+ \frac1N\sum_{t=1}^{N}z_t
+ =\frac{\lfloor(N+1)\delta\rfloor}{N}\longrightarrow\delta.
+\]
+Por tanto, \((z_t)\) no es eventualmente periódica: una sucesión binaria
+eventualmente periódica tiene densidad racional. La aperiodicidad
+resulta aquí de la regla de capacidad ya fijada por \(729/1000\).
+
+\subsubsection{Determinación exacta de los intervalos \(21/22\)}
+\label{vac-add-primarios}
+
+\begin{lemma}[Cotas racionales de la pendiente]
+\label{vac-add-cotas}
+La densidad de vacancia satisface
+\begin{equation}
+ \frac7{153}<\delta<\frac6{131}.
+ \label{vac-add-cota-delta}
+\end{equation}
+Si \(\lambda=\delta^{-1}\), \(\beta=22-\lambda\) y
+\(\mu=\beta^{-1}\), entonces
+\begin{equation}
+ 21<\lambda<22,
+ \qquad \frac17<\beta<\frac16,
+ \qquad 6<\mu<7.
+ \label{vac-add-cotas-inducidas}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Se proporciona una comprobación finita por aritmética racional. Para
+\(0<u<1\), sean
+\[
+ S_N(u)=2\sum_{k=0}^{N}\frac{u^{2k+1}}{2k+1},
+ \qquad
+ R_N(u)=\frac{2u^{2N+3}}{(2N+3)(1-u^2)}.
+\]
+La integración de la serie geométrica de \(2/(1-u^2)\) da
+\[
+ S_N(u)<\log\frac{1+u}{1-u}<S_N(u)+R_N(u).
+\]
+En efecto, la cola es positiva y, sustituyendo cada denominador
+\(2k+1\) por \(2N+3\), queda acotada por la serie geométrica que
+define \(R_N\). Se aplican estas desigualdades a
+\(u=1/19,1/3,1/9\), que corresponden respectivamente a
+\(\log(10/9),\log2,\log(5/4)\), y se utiliza
+\(\log10=3\log2+\log(5/4)\).
+
+Con \(N=4\), escribiendo \(A=S_4(1/19)\),
+\(B=3S_4(1/3)+S_4(1/9)\) y
+\(E=3R_4(1/3)+R_4(1/9)\), se obtiene
+\[
+ \frac7{153}
+ <\frac{A}{B+E}
+ <\delta
+ <\frac{A+R_4(1/19)}{B}
+ <\frac6{131}.
+\]
+Las dos desigualdades exteriores se comprueban multiplicando por los
+denominadores positivos de estas sumas de cinco términos racionales.
+Así se prueba \eqref{vac-add-cota-delta} mediante una cota de resto,
+sin utilizar una expansión decimal como premisa. Al invertirla se tiene
+\(131/6<\lambda<153/7\). Restar a \(22\), y después invertir,
+produce todas las desigualdades de \eqref{vac-add-cotas-inducidas}.
+\end{proof}
+
+\begin{theorem}[Posiciones y separaciones de las vacancias]
+\label{vac-add-teorema-primario}
+Las posiciones de los eventos \(z_t=1\), ordenadas desde el primer
+evento, son exactamente
+\begin{equation}
+ p_j=\lfloor j\lambda\rfloor
+     =\left\lfloor\frac j\delta\right\rfloor,
+ \qquad j\geq1.
+ \label{vac-add-posiciones}
+\end{equation}
+Sus separaciones satisfacen
+\begin{equation}
+ h_j=p_{j+1}-p_j\in\{21,22\}.
+ \label{vac-add-huecos}
+\end{equation}
+Ambos valores aparecen infinitas veces.
+\end{theorem}
+\begin{proof}
+El evento que atraviesa el entero \(j\) ocurre precisamente cuando
+\(t\delta<j<(t+1)\delta\). La irracionalidad excluye igualdad en
+los extremos. Dividiendo por \(\delta\) se obtiene
+\(t=\lfloor j/\delta\rfloor=p_j\). Como \(\delta<1\), un paso
+atraviesa a lo sumo un entero, de modo que la enumeración es exacta.
+Escribiendo \(\lambda=21+\eta\), con \(0<\eta<1\), resulta
+\[
+ h_j=21+\lfloor(j+1)\eta\rfloor-\lfloor j\eta\rfloor,
+\]
+lo que prueba \eqref{vac-add-huecos}. Finalmente,
+\((p_{J+1}-p_1)/J\to\lambda\in(21,22)\). Si uno de los dos valores
+apareciese sólo un número finito de veces, esa media convergería al
+otro valor entero, contradicción.
+\end{proof}
+
+\subsubsection{Inducción sobre los intervalos cortos: los retornos \(6/7\)}
+\label{vac-add-secundarios}
+
+\begin{theorem}[Calendario inducido de intervalos cortos]
+\label{vac-add-teorema-secundario}
+Sea \(s_j=22-h_j\), para \(j\geq1\). Este indicador vale \(1\)
+exactamente cuando el intervalo entre vacancias es corto, de longitud
+\(21\). Con \(\beta\) y \(\mu\) definidos en el
+lema~\ref{vac-add-cotas},
+\begin{equation}
+ s_j=\lfloor(j+1)\beta\rfloor-\lfloor j\beta\rfloor.
+ \label{vac-add-indicador-corto}
+\end{equation}
+Los índices de los intervalos cortos son
+\begin{equation}
+ q_m=\lfloor m\mu\rfloor=\lfloor m/\beta\rfloor,
+ \qquad q_{m+1}-q_m\in\{6,7\},\quad m\geq1.
+ \label{vac-add-posiciones-cortos}
+\end{equation}
+Las dos separaciones se presentan infinitas veces y su orden no es
+eventualmente periódico.
+\end{theorem}
+\begin{proof}
+La irracionalidad de \(\delta\) implica la de \(\lambda\),
+\(\beta\) y \(\mu\). Puesto que \(\lambda=22-\beta\), para
+\(j\geq1\) se tiene
+\[
+ p_j=22j-\lceil j\beta\rceil
+     =22j-\lfloor j\beta\rfloor-1.
+\]
+Al restar términos consecutivos aparece
+\eqref{vac-add-indicador-corto}. Aplicando al indicador de pendiente
+\(\beta\) el argumento de cruce de enteros del teorema anterior,
+su evento \(m\) está en \(q_m=\lfloor m/\beta\rfloor\).
+La desigualdad \(6<\mu<7\) prueba las dos separaciones posibles.
+Su media converge a \(\mu\); por tanto, ambas aparecen infinitas
+veces. Además, una sucesión de separaciones eventualmente periódica
+tendría media racional, mientras \(\mu\) es irracional. Esto excluye
+también una alternancia estricta, cuya media sería \(13/2\).
+\end{proof}
+
+Los números \(6\) y \(7\) cuentan aquí \emph{intervalos entre eventos
+de vacancia}, no bloques de refinamiento. La vuelta a la escala primaria
+es igualmente explícita. Entre \(q_m\) y \(q_{m+1}\) hay un solo
+intervalo corto, situado al principio, y todos los demás son largos.
+Por consiguiente, si \(d_m=q_{m+1}-q_m\),
+\begin{equation}
+ p_{q_{m+1}}-p_{q_m}=21+22(d_m-1)=22d_m-1
+ \in\{131,153\}.
+ \label{vac-add-retorno-bloques}
+\end{equation}
+Así, \(131=14\cdot9+5\) y \(153=17\cdot9\) describen dos lecturas
+de retorno \emph{en el reloj de bloques}. La ecuación conserva la
+operación que conecta las escalas, en lugar de identificar sus
+cardinales por su sola aparición.
+
+\subsubsection{Capacidad retenida y selección del régimen TRIT}
+\label{vac-add-regimen}
+
+Sea \(v_j=\mathcal C_{p_j}\) la capacidad registrada en la vacancia
+\(j\). De \(p_j\delta<j<(p_j+1)\delta\) y \(\delta<1\) resulta
+\(\lfloor(p_j+1)\delta\rfloor=j\). Por
+\eqref{vac-add-indices},
+\begin{equation}
+ v_j=p_j-j,
+ \qquad v_{j+1}-v_j=h_j-1=21-s_j,
+ \qquad [v_{j+1}]_3=[v_j-s_j]_3.
+ \label{vac-add-transporte-mod3}
+\end{equation}
+Un intervalo largo conserva la clase módulo \(3\); uno corto la
+desplaza una unidad en sentido negativo. Aplicando el selector del
+núcleo formal a la fase positiva \(r_j=1+[v_j]_9\), se obtiene
+\begin{equation}
+ \tau_j=M_{\rm ph}(r_j),\qquad
+ M_{\rm ph}(r)=
+ \begin{cases}
+ +1,&r\in\{1,4,7\},\\
+ -1,&r\in\{2,5,8\},\\
+ 0,&r\in\{3,6,9\}.
+ \end{cases}
+ \label{vac-add-selector}
+\end{equation}
+Esta composición fija el régimen inducido por la capacidad en cada
+evento. Conserva tanto el orden de los cambios como el número de
+eventos durante los cuales permanece cada régimen.
+
+\begin{corollary}[Mesetas del régimen inducido]
+\label{vac-add-mesetas}
+Para cada \(m\geq1\), la clase \([v_j]_3\), y por tanto
+\(\tau_j\), es constante en
+\(q_m+1\leq j\leq q_{m+1}\). La longitud de cada una de estas
+mesetas completas es \(q_{m+1}-q_m\in\{6,7\}\).
+\end{corollary}
+\begin{proof}
+En el intervalo entero indicado, el siguiente cambio ocurre exactamente
+al pasar de \(j=q_{m+1}\) a \(j=q_{m+1}+1\): es la próxima posición
+donde \(s_j=1\). En todos los pasos anteriores \(s_j=0\), de modo
+que \eqref{vac-add-transporte-mod3} conserva la clase. En el extremo,
+la disminuye en una unidad. El selector \eqref{vac-add-selector}
+asigna valores distintos a las tres clases; por ello conserva las
+mismas mesetas y sus extremos.
+\end{proof}
+
+El tramo inicial \(1\leq j\leq q_1\) depende del origen elegido y
+es una restricción inicial de una meseta. En el origen presente mide
+\(q_1=6\). Las primeras veinte clases son
+\[
+ \underbrace{2,\ldots,2}_{6},\qquad
+ \underbrace{1,\ldots,1}_{7},\qquad
+ \underbrace{0,\ldots,0}_{7},
+\]
+con firmas \(0,-1,+1\), respectivamente. Cada intervalo corto
+desencadena el siguiente paso del ciclo de regímenes.
+
+Las dos fases de interés quedan definidas como
+\[
+ g_t^{\rm cron}=[t]_9,
+ \qquad g_t^{\rm cap}=[\mathcal C_t]_9,
+ \qquad
+ g_t^{\rm cap}-g_{t-1}^{\rm cap}\equiv1-z_t\pmod9.
+\]
+Una vacancia retiene la fase de capacidad mientras el tiempo de bloque
+avanza. La transición del estado enriquecido sigue siendo la composición
+TPK de selección, transporte y actualización de memoria. Por ello,
+\(\mathcal C_t=\mathcal C_{t-1}\) no reinicializa el estado ni
+reemplaza la vuelta holonómica \(\Gamma_9\) por una pausa. También
+las dos escalas inducidas mantienen esta distinción: entre los eventos
+cortos consecutivos de \eqref{vac-add-retorno-bloques}, el incremento de
+capacidad es \(21d_m-1\), es decir, \(125\) o \(146\), mientras
+el incremento de bloques es \(131\) o \(153\).
+
+\subsubsection{Muestra racionalmente certificada y procedencia}
+\label{vac-add-muestra}
+
+La tabla presenta una muestra del origen canónico. \(h_j\) es la
+separación \emph{posterior} a \(p_j\); por ello, la vacancia de
+\(j=6\), en el bloque \(131\), inicia el primer intervalo corto.
+\begin{center}
+\small
+\begin{tabular}{r|rrrrrrrrrr}
+\toprule
+\(j\)&1&2&3&4&5&6&7&8&9&10\\
+\midrule
+\(p_j\)&21&43&65&87&109&131&152&174&196&218\\
+\(h_j\)&22&22&22&22&22&21&22&22&22&22\\
+\(v_j\)&20&41&62&83&104&125&145&166&187&208\\
+\([v_j]_3\)&2&2&2&2&2&2&1&1&1&1\\
+\bottomrule
+\end{tabular}
+\end{center}
+Los primeros índices de intervalos cortos y sus separaciones son
+\[
+ (q_m)_{m=1}^{10}=(6,13,20,27,34,41,48,54,61,68),
+\]
+\[
+ (q_{m+1}-q_m)_{m=1}^{9}=(7,7,7,7,7,7,6,7,7).
+\]
+La muestra exhibe el orden efectivo, y las pruebas anteriores fijan
+su ley a profundidad arbitraria.
+
+El archivo adjunto \texttt{ampliacion/verificar\_vacancias.py} calcula
+horquillas racionales con las series y restos del
+lema~\ref{vac-add-cotas}. Cada parte entera se acepta únicamente cuando
+los dos extremos de la horquilla producen el mismo entero. Con orden
+\(16\) reproduce \(512\) eventos, hasta el bloque \(11189\), y
+\(64\) separaciones secundarias, además de las identidades de balance,
+los residuos y las mesetas. Esta comprobación finita mantiene separado
+su alcance del de los teoremas universales.
+
+El índice de capacidad, su complementariedad con las vacancias y la
+inducción del selector TRIT se recuperan del Artículo I y de los
+capítulos de calendario y reloj inducido de la monografía sobre orden
+topológico-temporal aperiódico. Aquí se reúnen sus definiciones y las
+pruebas de ambas escalas con una convención única de índices. El
+certificado racional constituye una comprobación adicional de esos
+resultados y conserva su procedencia.

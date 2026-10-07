@@ -1,0 +1,51 @@
+\begin{tikzpicture}[
+  font=\small,
+  setnode/.style={circle,draw,minimum size=6mm,inner sep=0pt,
+    font=\scriptsize\bfseries},
+  box/.style={draw,rounded corners=1.5mm,align=center,
+    text width=5.0cm,inner xsep=6pt,inner ysep=5pt},
+  arr/.style={-{Stealth[length=2.2mm]},line width=.7pt}]
+
+  % Inclusión geométrica. Las flechas parten del contorno y no atraviesan nodos.
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h1) at (-2.3,1.25) {1};
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h2) at (-1.1,1.9) {2};
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h3) at (.1,1.25) {3};
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h4) at (.1,-.15) {4};
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h5) at (-1.1,-.8) {5};
+  \node[setnode,draw=hmtblue,fill=hmtlightblue] (h6) at (-2.3,-.15) {6};
+  \node[setnode,draw=hmtgreen,fill=hmtlightgreen] (o7) at (-3.2,.55) {7};
+  \node[setnode,draw=hmtgreen,fill=hmtlightgreen] (o8) at (1.0,.55) {8};
+  \node[draw=hmtblue,dashed,rounded corners=4mm,
+    fit=(h1)(h2)(h3)(h4)(h5)(h6),inner sep=4mm,
+    label={[hmtblue,font=\bfseries]above:{hexada \(H\), \(|H|=6\)}}] (H) {};
+  \node[draw=hmtgreen,line width=.8pt,rounded corners=6mm,
+    fit=(H)(o7)(o8),inner sep=5mm,
+    label={[hmtgreen,font=\bfseries]below:{octada \(O\), \(|O|=8\), \(H\subset O\)}}] (O) {};
+
+  \node[box,draw=hmtblue,fill=hmtlightblue] (f6) at (5.3,1.35)
+    {Incidencias definidas sobre \(H\)\\[1mm]
+     \(\mathcal F_6=H\times\binom H2\),\quad
+     \(|\mathcal F_6|=6\binom62=90\)};
+  \node[box,draw=hmtgreen,fill=hmtlightgreen] (f8) at (5.3,-1.0)
+    {Extensión de incidencias a \(O\)\\[1mm]
+     \(\mathcal F_8=O\times\binom H2\),\quad
+     \(|\mathcal F_8|=8\binom62=120\)};
+  \draw[arr,hmtblue] (O.east) -- ++(.45,0) |- (f6.west);
+  \draw[arr,hmtgreen] (O.east) -- ++(.45,0) |- (f8.west);
+  \draw[arr,hmtgold] (f6.south) -- node[right,align=left,font=\footnotesize]
+    {inclusión \(\iota_{6,8}\)} (f8.north);
+
+  \node[box,draw=hmtgold,fill=hmtlightgold,text width=10.9cm]
+    (def) at (1.45,-3.80)
+    {Defecto combinatorio orientado\\[-.2mm]
+     con la normalización declarada:\\[1mm]
+     \(\displaystyle
+       \frac{|\mathcal F_6|-|\mathcal F_8|}{24\binom62}
+       =\frac{90-120}{24\cdot15}=-\frac1{12}.\)};
+  \draw[arr,hmtgold] (f8.south) -- (f8.south |- def.north);
+
+  \node[align=center,text=hmtgray,font=\footnotesize,text width=11.2cm]
+    at (1.45,-5.50)
+    {Esta identidad pertenece al mapa de incidencias. No identifica el
+     extractor dodecafásico, el semigrupo de torres ni el funcional angular.};
+\end{tikzpicture}

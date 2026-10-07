@@ -1,0 +1,1496 @@
+\chapter{Extensiones supervivientes, monodromía y dinámica del cociente}
+\label{chap:extensiones-dinamica-cociente}
+\index{supervivencia!extensión global}
+\index{monodromía!retorno nonádico}
+\index{medida!catálogo de emisiones}
+
+El lenguaje de los caminos necesita una precisión decisiva. Un camino de
+APP, una emisión visible, una historia enriquecida de TPK y una sección
+global no son cuatro nombres para el mismo objeto. Constituyen cuatro niveles
+consecutivos de una misma construcción. El camino conserva el orden
+posicional; la emisión conserva una lectura finita; la historia añade firma,
+acarreo, orientación, frontera y memoria; la sección global exige que todos
+sus prefijos sobrevivan simultáneamente a cualquier profundidad.
+
+Esta jerarquía permite separar dos cuestiones que habían permanecido
+entremezcladas. La primera es lógica: bajo qué hipótesis un prefijo finito
+pertenece de verdad a una extensión infinita compatible. La segunda es
+dinámica: qué significa transportar una sola historia y qué significa
+transferir simultáneamente todas sus continuaciones compatibles. La
+distinción es esencial en APP\@. Una trayectoria determinada lleva un estado a
+otro; una transferencia de caminos lleva una distribución de extensiones a
+otra distribución.
+
+En esta sección se resuelve el problema finito de profundidad seis. La
+cronología determinista publicada posee retorno visible y no puede seleccionar
+una probabilidad única. En cambio, el transporte sesgado por la fase nonádica,
+cuando cada canal activo se interpreta como la renovación normalizada de toda
+su fibra de continuaciones compatibles, tiene un retorno de nueve pasos
+uniforme sobre las (468) emisiones. Los pesos (1/3) dejan entonces de ser
+una elección exterior: proceden de las tres apariciones de cada firma
+(+1,-1,0) en el ciclo nonádico orientado. La normalización dentro de cada fibra sigue
+siendo una premisa matemática precisa ---el conteo uniforme de todos los
+caminos compatibles--- y no debe confundirse con el sucesor de una sola
+trayectoria. El paso al límite inverso de todas las profundidades conserva un
+enunciado propio, formulado al final de la sección.
+
+\section{\(5\) niveles de la noción de camino}
+
+Sea \(\Gamma_{\rm APP}\) la categoría de caminos cardinales del toro APP\@.
+Para cada profundidad \(m\), sea \(\mathcal H_m\) el conjunto finito de
+historias enriquecidas admisibles
+\[
+ h_m=(v_0,e_1,v_1,\ldots,e_m,v_m),
+\]
+donde cada flecha \(e_j\) transporta todos los campos declarados por TPK\@. Si
+\(n\geq m\), la aplicación
+\[
+ p_{n,m}:\mathcal H_n\longrightarrow\mathcal H_m
+\]
+elimina la cola posterior a la profundidad \(m\). La sombra posicional
+\[
+ \operatorname{sh}_m:\mathcal H_m\longrightarrow\Gamma_{\rm APP}
+\]
+olvida la fibra de memoria y conserva el camino APP subyacente.
+
+\begin{definition}[Jerarquía de extensiones]
+\label{def:jerarquia-extensiones}
+Distinguimos los objetos siguientes.
+\begin{enumerate}
+  \item Un \emph{camino APP} es un morfismo de
+  \(\Gamma_{\rm APP}\).
+  \item Una \emph{ruta observable} es una lectura de ese morfismo que
+  conserva conjuntamente las hojas de suma y producto.
+  \item Una \emph{extensión TPK} es una elevación de la ruta observable a
+  una historia \(h_m\in\mathcal H_m\), con sus datos de residuo, cociente,
+  firma, orientación, frontera, acarreo y registro.
+  \item Una \emph{extensión superviviente} es una historia finita que admite
+  prolongaciones compatibles a todo horizonte.
+  \item Una \emph{sección global} es una familia compatible
+  \(x=(h_m)_{m\geq0}\) de extensiones supervivientes.
+\end{enumerate}
+En particular, la ruta es la sombra de la extensión; no es un objeto exterior
+que la extensión elija después.
+\end{definition}
+
+Para \(h\in\mathcal H_m\), su cilindro de prolongaciones es
+\[
+ Z_m(h)=
+ \{x=(h_n)_n\in\varprojlim_n\mathcal H_n:x_m=h\}.
+\]
+En particular, toda familia de \(Z_m(h)\) satisface además
+\(p_{n,\ell}(h_n)=h_\ell\) para \(n\geq\ell\); no se admiten colecciones de
+truncamientos incompatibles.
+Definamos también
+\[
+ \mathcal S_m^{(N)}=p_{N,m}(\mathcal H_N),
+ \qquad
+ \mathcal S_m^\infty=\bigcap_{N\geq m}\mathcal S_m^{(N)}.
+\]
+
+\begin{theorem}[Criterio condicional de extensión superviviente]
+\label{thm:criterio-extension-superviviente}
+Fijemos \(h\in\mathcal H_m\) y, para \(N\geq m\), escribamos
+\[
+ \mathcal P_N(h)=\{g\in\mathcal H_N:p_{N,m}(g)=h\}.
+\]
+Supóngase que los truncamientos son coherentes y que cada
+\(\mathcal P_N(h)\) es finito. Son equivalentes:
+\begin{enumerate}
+  \item \(\mathcal P_N(h)\ne\varnothing\) para todo \(N\geq m\), es decir,
+  \(h\in\mathcal S_m^\infty\);
+  \item el árbol de prolongaciones finitas de \(h\) es finitamente ramificado
+  y tiene un nivel no vacío a toda profundidad;
+  \item \(Z_m(h)\ne\varnothing\).
+\end{enumerate}
+En consecuencia, siempre que los truncamientos supervivientes finitos sean no
+vacíos, el conjunto
+\[
+ \Omega_{\rm H}^{\rm surv}
+ =\varprojlim_m\mathcal S_m^\infty
+\]
+es exactamente el espacio de secciones globales supervivientes. El teorema no
+afirma que esos truncamientos sean no vacíos para toda entrada APP: esa
+propiedad debe demostrarse mediante el protocolo de supervivencia.
+\end{theorem}
+
+\begin{proof}
+La implicación de la tercera condición a las dos primeras se obtiene por
+truncamiento. Supongamos ahora la primera condición y ordenemos los elementos de
+\(\bigsqcup_{N\geq m}\mathcal P_N(h)\) por la relación de prefijo. Cada nivel
+es finito y no vacío, y la coherencia de los truncamientos hace de esta unión
+un árbol finitamente ramificado con nodos a cualquier profundidad; esto da la
+segunda condición. Recíprocamente, desde la segunda condición el lema de König
+proporciona una rama infinita. Sus truncamientos forman una familia compatible
+perteneciente a \(Z_m(h)\), que es la tercera condición. La misma construcción
+identifica el límite inverso indicado allí donde sus truncamientos finitos son
+no vacíos.
+\end{proof}
+
+El teorema resuelve la posible discordancia entre «prolongable hasta cada
+horizonte por separado» y «posee una prolongación global»: la finitud de las
+ramas es la hipótesis que permite escoger una única cadena compatible. No
+afirma que todos los caminos APP pertenezcan a
+\(\operatorname{sh}(\Omega_{\rm H}^{\rm surv})\). Esa cobertura exige probar
+que los cierres enriquecidos no vacían las fibras correspondientes.
+
+\section{Retorno de fase y relación de monodromía}
+
+El retorno del cociente fase--longitud se formaliza por separado en
+\cref{def:odometro-9-12,prop:proyeccion-fase-longitud}:
+\[
+(b,r)\xrightarrow{\;9\;}(b+1,r),
+\qquad
+(b,r)\xrightarrow{\;108\;}(b,r).
+\]
+Estas igualdades pertenecen al odómetro \(9\times12\). No constituyen la
+prueba de \(F_{\rm obs}^{108}=I\), que usa el estado observable y aparece más
+adelante.
+
+Sea \(\phi\) la coordenada de fase con valores en \(\mathbb Z/9\mathbb Z\).
+Un retorno visible satisface
+\[
+ \phi(h_{k+9})=\phi(h_k).
+\]
+El registro completo puede, sin embargo, cumplir
+\[
+ B(h_{k+9})\ne B(h_k).
+\]
+Esta desigualdad no es un fallo de periodicidad: es la memoria de la vuelta.
+Una acción ordinaria de \(C_9\) sobre el estado completo impondría que la
+novena potencia fuese la identidad y borraría precisamente esa información.
+
+Para tipar el retorno, sea \(H\) una hexada y
+\(P_2(H)\) su conjunto de quince pares. Sean \(\mathcal B_k\) los estados de
+registro que sobreviven en la fase \(k\), sea
+\(\mathcal T_k\subseteq\mathcal B_k\times\mathcal B_{k+1}\) la relación de
+transporte publicada y supongamos dado un codificador de fibra
+\[
+ c_k:\mathcal B_k\longrightarrow P_2(H).
+\]
+Sólo después de declarar esos codificadores se define la relación observable
+\[
+ R_k=(c_k\times c_{k+1})(\mathcal T_k)
+ \subseteq P_2(H)\times P_2(H).
+\]
+La monodromía relacional de una vuelta es
+\[
+ \mathcal M_k
+ =R_{k+8}\circ R_{k+7}\circ\cdots\circ R_k.
+\]
+
+\begin{proposition}[Clasificación del retorno nonádico dado el codificador]
+\label{prop:clasificacion-retorno-nonadico}
+Se dan tres niveles lógicamente distintos.
+\begin{enumerate}
+  \item Sin una prueba de funcionalidad, el retorno es la relación
+  \(\mathcal M_k\).
+  \item Si cada \(R_k\) es la gráfica de una aplicación
+  \(\mu_k:P_2(H)\to P_2(H)\), el transporte es el producto sesgado
+  \[
+   T(k,p)=(k+1,\mu_k(p)),
+  \]
+  y
+  \[
+   T^9(k,p)=(k,M_k(p)),
+   \qquad
+   M_k=\mu_{k+8}\circ\cdots\circ\mu_k.
+  \]
+  \item Si las \(\mu_k\) son biyectivas, \(M_k\) es una holonomía
+  automorfa. El transporte desciende a una acción ordinaria de
+  \(C_9\) sobre el estado completo si y sólo si \(M_k=I\) en todas las
+  fibras.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+La primera afirmación es la definición de imagen y composición relacional una
+vez fijados \((c_k)_k\). Bajo
+funcionalidad, nueve aplicaciones consecutivas mantienen fija la primera
+coordenada y componen sus acciones sobre la segunda. La composición de
+biyecciones es una biyección. Finalmente, \(T^9=I\) equivale exactamente a
+\(M_k=I\) para cada fase y cada punto de la fibra.
+\end{proof}
+
+\begin{corollary}[No retorno puntual bajo transporte acumulado]
+\label{pf84:E02-29}
+Sean \(q:X\to V\), \(T:X\to X\) y \(x\in X\). Si
+\[
+ q(T^9x)=q(x),\qquad
+ T^9x=\mathcal M_x\,x,\qquad
+ \mathcal M_x\,x\ne x,
+\]
+entonces la proyección retorna y el estado no:
+\[
+ q(T^9x)=q(x),\qquad T^9x\ne x.
+\]
+La hipótesis puntual \(\mathcal M_x\,x\ne x\) es indispensable; la desigualdad
+global \(\mathcal M_x\ne I\) no excluye que \(x\) sea un punto fijo.
+\end{corollary}
+
+\begin{proof}
+La primera igualdad es una hipótesis. La segunda y la separación puntual dan
+\(T^9x=\mathcal M_x\,x\ne x\). El enunciado quedaría refutado por un caso que
+satisfaga las tres premisas y tuviera \(T^9x=x\); no autoriza a sustituir la
+tercera premisa por \(\mathcal M_x\ne I\).
+\end{proof}
+
+\begin{theorem}[Suficiencia funcional de la tupla enriquecida]
+\label{pf84:E02-30}
+Sea
+\[
+ E:\mathscr X_{\rm TPK}^{\rm enr}\longrightarrow\mathscr S_E
+\]
+la tupla que conserva bloque visible, bloques nuevos y acarreo, estado de
+elevación, cilindros, firma de frontera, orientación, observable, fase y
+registro dodecafásico. Sean
+\[
+ T:\mathscr X_{\rm TPK}^{\rm enr}\to
+ \mathscr X_{\rm TPK}^{\rm enr},
+ \qquad
+ O:\mathscr X_{\rm TPK}^{\rm enr}\to Y.
+\]
+Cuando existen mapas
+\[
+ \widehat T:\mathscr S_E\to\mathscr X_{\rm TPK}^{\rm enr},
+ \qquad
+ \widehat O:\mathscr S_E\to Y
+\]
+tales que
+\[
+ T=\widehat T\circ E,\qquad O=\widehat O\circ E,
+\]
+la igualdad \(E(x)=E(y)\) implica \(T(x)=T(y)\), \(O(x)=O(y)\) y, por
+determinismo, las mismas continuaciones y salidas posteriores.
+\end{theorem}
+
+\begin{proof}
+Por factorización,
+\[
+ T(x)=\widehat T(E(x))=\widehat T(E(y))=T(y),
+ \qquad
+ O(x)=\widehat O(E(x))=\widehat O(E(y))=O(y).
+\]
+La primera igualdad permite iterar el argumento. Ésta es una condición
+suficiente, no una equivalencia no probada. Dos estados con la misma tupla y
+transiciones o salidas diferentes, el acceso a una coordenada ausente o la
+consulta de un valor objetivo son falsadores. La microfibra visible de
+cardinal cinco del \cref{pf84:E02-22} sólo controla la no fidelidad de la
+palabra \(w_6\); no demuestra esta factorización positiva.
+\end{proof}
+
+La ventana finita publicada contiene nueve retornos de fase con cambio del
+estado enriquecido y una selección local de tres continuaciones a una al
+aumentar dos horizontes. Eso prueba retorno con memoria y refuta la
+identificación del registro con un ciclo sin memoria. La extracción global de
+los nueve codificadores \(c_k\) y, a través de ellos, de las relaciones
+\(R_k\), desde todas las historias supervivientes es una operación distinta.
+La proposición anterior clasifica el retorno una vez dado el mapa
+registro--pares; no deriva ese mapa desde el estado enriquecido de TPK.
+
+El episodio concreto de la novena fase, con sus tres continuaciones, el
+bloque \(B_{11}\), la frontera \((502,662,638)\) y las desigualdades enteras
+de cilindros, se demuestra una sola vez en el
+\cref{thm:seleccion-novena-fase}. En esta residencia sólo se usa su
+consecuencia tipada:
+\[
+\#\operatorname{Surv}_{1}(B_9)=3,\qquad
+\#\operatorname{Surv}_{2}(B_9)=1.
+\]
+
+Las otras dos palabras pueden preceder la misma cola ternaria sólo al cambiar
+la extensión profunda de Hensel. Comparten una parte del residuo visible,
+pero no la genealogía del estado.
+
+\section{El catálogo de 468 emisiones como producto de canales}
+
+El catálogo finito parte del conjunto
+\(\Omega_{\rm seed}\) de \(104\,976\) presentaciones microscópicas. Sea
+\(\mathcal U_6\) el conjunto de emisiones séxtuples distintas y sea
+\[
+ F:\Omega_{\rm seed}\twoheadrightarrow\mathcal U_6.
+\]
+El censo exacto es
+\[
+ |\mathcal U_6|=468,
+ \qquad
+ \#\{U:|F^{-1}(U)|=144,432,1944\}=432,18,18.
+\]
+Estos conteos pertenecen a \(F\). Compararlos con historias TPK de
+profundidad seis requeriría un mapa explícito desde el dominio de historias
+hacia \(\Omega_{\rm seed}\); ningún resultado de esta sección presupone ese
+mapa ni identifica presentaciones del catálogo con estados enriquecidos.
+El catálogo finito proporciona, para cada emisión, una firma aditiva
+\(s\) y una firma multiplicativa \(e\). La aplicación conjunta es una
+biyección
+\[
+ \mathcal U_6\xrightarrow{\sim}
+ \mathcal S_+\times\mathcal S_\times,
+ \qquad
+ |\mathcal S_+|=18,
+ \quad
+ |\mathcal S_\times|=26.
+\]
+Así,
+\[
+ \boxed{468=18\cdot26}
+\]
+es una factorización del objeto y no sólo de su cardinal. La primera
+coordenada conserva cómo suma la emisión; la segunda, cómo acumula el
+producto. Esta separación es la forma finita explícita de la
+incompatibilidad suma--producto: ambas lecturas coexisten en el estado, pero
+cada proyección olvida la firma complementaria.
+
+La primera coordenada admite una parametrización adicional que será útil al
+compararla con la frontera nonádica. Si una semilla aditiva tiene coordenadas
+\((i,j)\in(\mathbb Z/9\mathbb Z)^2\) y orientación
+\(\varepsilon=+1\) para las direcciones este--sur y \(-1\) para
+norte--oeste, su firma completa queda determinada biyectivamente por
+\[
+ \bigl(i+j\bmod9,\varepsilon\bigr)
+ \in(\mathbb Z/9\mathbb Z)\times\{\pm1\}.
+\]
+Por tanto,
+\[
+ \boxed{\mathcal S_+\simeq
+ (\mathbb Z/9\mathbb Z)\times\{\pm1\}.}
+\]
+La coordenada producto no posee una uniformidad análoga: sus \(26\) firmas
+tienen fibras de semillas de tamaños \(8\), \(24\) y \(108\), con histograma
+\(24\times8+1\times24+1\times108=324\). Esta asimetría es estructural. El
+factor \(18\) ya contiene fase y orientación; cualquier descenso posterior
+del factor producto a una clase de pares debe conservar memoria adicional o
+aceptar fibras no uniformes.
+
+Definamos sobre \(\ell^2(\mathcal S_+\times\mathcal S_\times)\) las
+esperanzas condicionales
+\[
+\begin{aligned}
+ (E_+f)(s,e)&=\frac1{18}\sum_{s'\in\mathcal S_+}f(s',e),\\
+ (E_\times f)(s,e)&=\frac1{26}\sum_{e'\in\mathcal S_\times}f(s,e').
+\end{aligned}
+\]
+El primer operador renueva la firma aditiva y conserva la multiplicativa;
+el segundo realiza la operación dual. El tercer canal retiene ambas.
+
+\section{La trayectoria única y la transferencia de caminos}
+
+A diferencia del retorno del odómetro definido en
+\cref{def:odometro-9-12,prop:proyeccion-fase-longitud}, la proposición
+siguiente demuestra el retorno del operador observable \(F_{\rm obs}\).
+
+La ley observable publicada actualiza un solo cursor en cada paso. En las
+fases \(+1\) avanza el cursor aditivo; en las fases \(-1\), el
+multiplicativo; en las fases \(0\), ambos permanecen quietos. Después de los
+pasos \(27,54,81,108\) se invierten las dos orientaciones. Denotemos esta
+evolución determinista por \(F_{\rm obs}\).
+
+\begin{proposition}[Retorno de la cronología observable]
+\label{prop:retorno-fobs-identidad}
+Para toda elección de las dos posiciones y orientaciones iniciales, las
+posiciones y las orientaciones se restauran después de \(54\) pasos. Al
+restaurar además la fase se obtiene
+\[
+ F_{\rm obs}^{108}=I.
+\]
+Por tanto, el retorno de Poincaré de \(108\) pasos induce la identidad sobre
+\(\mathcal U_6\) y no selecciona una medida estacionaria única.
+\end{proposition}
+
+\begin{proof}
+En cada bloque de \(27\) pasos, cada cursor realiza exactamente nueve
+avances en una orientación fija. Como el espacio de posiciones es
+\(X_9=(\mathbb Z/9\mathbb Z)^2\), su desplazamiento es \(9d=0\). Al final
+del bloque se invierte \(d\). Dos bloques restauran posición y orientación;
+cuatro restauran también el índice en \(\Theta_{108}\). El retorno inducido
+es, por consiguiente, la identidad. Toda probabilidad es estacionaria para
+la identidad, de modo que ninguna queda seleccionada por esa cronología.
+\end{proof}
+
+El problema aparece incluso antes del retorno si se intenta olvidar la
+memoria de ruta. La firma producto
+\[
+ e_0=(5,5,5,5,5,5)
+\]
+tiene veinticuatro representantes. Tras un avance en su propia orientación,
+esos representantes se separan, ocho a ocho, entre
+\[
+ (5,5,5,7,1,7),\qquad
+ (5,5,5,7,7,1),\qquad
+ (5,5,5,1,7,7).
+\]
+Así, el avance producto no desciende a una aplicación de las veintiséis
+firmas: el representante que se había olvidado vuelve a ser relevante. Este
+testigo explica por qué una ruta individual no puede convertirse, por simple
+proyección, en el refresco de una fibra completa.
+
+La lectura APP es otra. En lugar de escoger un representante, conserva todas
+las continuaciones compatibles. Para formalizarla en el catálogo finito,
+consideremos las subálgebras de funciones que sólo dependen de una de las dos
+firmas. Respecto del conteo uniforme, \(E_+\) y \(E_\times\) son las
+esperanzas condicionales que olvidan exactamente la coordenada activa. Son los
+únicos proyectores de Markov que cumplen simultáneamente:
+\begin{enumerate}
+  \item preservación de la coordenada inactiva;
+  \item olvido completo de la coordenada activa;
+  \item preservación del estado de conteo uniforme.
+\end{enumerate}
+En efecto, una fila que ha olvidado la coordenada de partida debe ser
+constante sobre los \(18\), respectivamente \(26\), destinos compatibles; la
+normalización fuerza los valores \(1/18\) y \(1/26\). Ésta es la canonicidad
+relativa de la renovación: no se postula una preferencia entre ramas que APP
+declara igualmente posibles.
+
+Sea \(C_9=\mathbb Z/9\mathbb Z\), con la palabra de fase
+\[
+ \tau=(+1,-1,0,+1,-1,0,+1,-1,0).
+\]
+Escribamos
+\[
+ P_{+1}=E_+,
+ \qquad P_{-1}=E_\times,
+ \qquad P_0=I.
+\]
+
+\begin{definition}[Transferencia TPK sesgada por la fase]
+\label{def:transferencia-tpk-fase}
+Sobre \(\mathcal U_6\times C_9\) definimos
+\[
+ \mathcal K_{\rm ph}\bigl((u,r),(v,r+1)\bigr)
+ =P_{\tau(r)}(u,v),
+\]
+y hacemos cero las demás entradas. Esta definición es relativa al lector de
+todos los caminos compatibles: una fase activa renueva uniformemente la fibra
+que esa fase lee y la fase neutra retiene la emisión.
+\end{definition}
+
+\begin{theorem}[Retorno nonádico uniforme]
+\label{thm:retorno-nonadico-uniforme}
+El núcleo \(\mathcal K_{\rm ph}\) es doblemente estocástico e irreducible,
+tiene período exactamente nueve y posee un único estado estacionario,
+\[
+ \pi_{\rm ph}(u,r)=\frac1{9\cdot468}.
+\]
+En cada fibra de fase, su retorno de nueve pasos es
+\[
+ \mathcal K_{\rm ph}^{\,9}\big|_r=E_+E_\times,
+ \qquad
+ (E_+E_\times)(u,v)=\frac1{468}.
+\]
+Si la fase inicial se distribuye uniformemente, la sombra de un paso sobre
+las emisiones es
+\[
+ \overline K_{\rm ph}=\frac13(I+E_++E_\times).
+\]
+\end{theorem}
+
+\begin{proof}
+Cada \(P_{\tau(r)}\) es doblemente estocástico y el desplazamiento
+\(r\mapsto r+1\) es una permutación; su producto sesgado conserva ambas sumas.
+Los tres operadores son idempotentes y conmutan. Como cada uno aparece tres
+veces en la palabra nonádica,
+\[
+ \prod_{r\in C_9}P_{\tau(r)}
+ =E_+^3E_\times^3I^3=E_+E_\times.
+\]
+La primera esperanza olvida la firma aditiva y la segunda la multiplicativa,
+de modo que su composición asigna a cada uno de los \(18\cdot26=468\)
+destinos la probabilidad \(1/468\). Por ello, en nueve pasos se comunican dos
+estados cualesquiera de una misma fase; los pasos restantes comunican las
+fases, y el núcleo es irreducible. Todo retorno debe tener longitud múltiplo
+de nueve, mientras que la diagonal de \(\mathcal K_{\rm ph}^9\) es positiva;
+el período es nueve. La doble estocasticidad y la irreducibilidad dan el
+estado uniforme único. Finalmente, promediar las nueve fases cuenta tres
+copias de cada canal y produce la última fórmula.
+\end{proof}
+
+Olvidar la fase no es un cociente de Markov fuerte: desde una misma emisión,
+dos fases distintas aplican \(I\), \(E_+\) o \(E_\times\), que tienen filas
+distintas. El operador \(\overline K_{\rm ph}\) es una sombra promediada en la
+fase estacionaria, no el sucesor cronológico de una emisión sin fase. Esta
+distinción conserva a la vez la dinámica y el significado de la medida.
+
+\begin{definition}[Núcleo promediado inducido por la transferencia]
+\label{def:nucleo-tritico-refresco}
+Denominamos núcleo promediado del catálogo a la sombra de fase
+\[
+ \boxed{
+ K_{\rm cat}=\frac13(I+E_++E_\times).
+ }
+\]
+Los pesos son inducidos por el calendario TPK, que contiene tres ocurrencias
+de cada signo. Los operadores de renovación son inducidos relativamente a la
+normalización uniforme de todas las continuaciones compatibles de la fibra
+activa. Ninguna de las dos afirmaciones identifica \(K_{\rm cat}\) con
+\(F_{\rm obs}\).
+\end{definition}
+
+\begin{proposition}[Familia convexa de núcleos estocásticos con medida uniforme común]
+\label{prop:familia-refrescos-abc}
+Para \(a,b,c\geq0\), \(a+b+c=1\), la familia
+\[
+ K_{a,b,c}=aI+bE_++cE_\times
+\]
+está formada por núcleos simétricos y doblemente estocásticos. Si \(b,c>0\),
+son irreducibles y, por tener diagonal positiva, aperiódicos. Su espectro es
+\[
+ \operatorname{Spec}(K_{a,b,c})=
+ \{1^{[1]},(a+c)^{[17]},(a+b)^{[25]},a^{[425]}\}.
+\]
+En particular, existe un continuo de dinámicas con la misma factorización y la
+misma medida uniforme. La elección
+\(K_{\rm cat}=K_{1/3,1/3,1/3}\) no queda caracterizada por el censo solo. La
+seleccionan conjuntamente la palabra de fase TPK y la transferencia
+normalizada de la \cref{def:transferencia-tpk-fase}.
+\end{proposition}
+
+\begin{proof}
+Los tres sumandos son núcleos simétricos y estocásticos; por convexidad ocurre
+lo mismo con \(K_{a,b,c}\), y la simetría convierte la estocasticidad por filas
+en estocasticidad por columnas. Si \(b,c>0\), dos pasos permiten renovar
+sucesivamente ambas coordenadas y comunicar cualquier par de estados. Además,
+\[
+ K_{a,b,c}((s,e),(s,e))=a+\frac b{18}+\frac c{26}>0,
+\]
+de modo que el núcleo es aperiódico. En la descomposición ortogonal
+\[
+ \mathbf1\oplus\ell_0^2(\mathcal S_+)
+ \oplus\ell_0^2(\mathcal S_\times)
+ \oplus\bigl(\ell_0^2(\mathcal S_+)\otimes
+              \ell_0^2(\mathcal S_\times)\bigr),
+\]
+los pares \((E_+,E_\times)\) actúan, respectivamente, como
+\((1,1),(0,1),(1,0),(0,0)\). Se obtienen así los cuatro autovalores y las
+multiplicidades \(1,17,25,425\). Para \(b,c>0\), la irreducibilidad hace única
+la medida estacionaria uniforme, lo que exhibe la no unicidad incluso bajo
+esa exigencia.
+\end{proof}
+
+\begin{theorem}[Espectro exacto del refresco equiponderado]
+\label{thm:dinamica-cociente-468}
+El núcleo \(K_{\rm cat}\) es simétrico, doblemente estocástico,
+irreducible y aperiódico. Su espectro, con multiplicidades, es
+\[
+ \boxed{
+ \operatorname{Spec}(K_{\rm cat})
+ =\left\{1^{[1]},
+ \left(\frac23\right)^{[42]},
+ \left(\frac13\right)^{[425]}\right\}.
+ }
+\]
+En consecuencia, su brecha espectral es (1/3) y su único estado
+estacionario es
+\[
+ \boxed{
+ \tau_{468}(f)=\frac1{468}\sum_{U\in\mathcal U_6}f(U).
+ }
+\]
+\end{theorem}
+
+\begin{proof}
+Los operadores \(E_+\) y \(E_\times\) son proyectores ortogonales de
+promedio y conmutan. Las filas y columnas de cada uno suman uno; lo mismo
+ocurre con su promedio. Desde \((s,e)\) se alcanza \((s',e')\) en dos
+renovaciones, y la contribución de \(I\) proporciona una autoarista. Esto
+prueba irreducibilidad y aperiodicidad.
+
+El espacio se descompone ortogonalmente en cuatro sectores:
+\[
+ \mathbf1,
+ \qquad
+ \ell_0^2(\mathcal S_+),
+ \qquad
+ \ell_0^2(\mathcal S_\times),
+ \qquad
+ \ell_0^2(\mathcal S_+)\otimes
+ \ell_0^2(\mathcal S_\times).
+\]
+Sus dimensiones son \(1,17,25,17\cdot25\). En el sector constante actúan
+los tres sumandos como la identidad; en cada sector de una sola coordenada
+actúan como (I+I+0); en el sector de interacción, como (I+0+0).
+Dividir por tres da los autovalores y multiplicidades anunciados. Un núcleo
+finito irreducible y aperiódico posee un único estado estacionario; como es
+doblemente estocástico, éste es uniforme.
+\end{proof}
+
+El teorema es exacto relativamente a la factorización
+\(\mathcal U_6\simeq\mathcal S_+\times\mathcal S_\times\), al calendario
+TPK y al conteo uniforme de las continuaciones compatibles de cada fibra. La
+familia \(K_{a,b,c}\) demuestra que la dinámica no se deduce del censo por sí
+solo. La \cref{prop:retorno-fobs-identidad} distingue la transferencia de
+todos los caminos de la cronología de uno de ellos.
+
+\section{Elevación compensada construida desde el cociente}
+
+Escribamos \(m(U)=|F^{-1}(U)|\). A partir del núcleo ya elegido en el cociente
+definimos el núcleo de presentaciones por
+\[
+ \boxed{
+ K_{\rm seed}(x,y)
+ =\frac{K_{\rm cat}(F(x),F(y))}{m(F(y))}
+ }
+\]
+Este núcleo es estocástico. Al sumar sobre una fibra de destino se obtiene
+\[
+ \sum_{F(y)=V}K_{\rm seed}(x,y)
+ =K_{\rm cat}(F(x),V),
+\]
+independientemente del representante \(x\). Esta identidad muestra que el
+elevación construida proyecta exactamente sobre \(K_{\rm cat}\). No demuestra que
+una dinámica microscópica preexistente del estado enriquecido de TPK descienda
+al catálogo.
+
+\begin{theorem}[Elevación reversible construida desde el cociente]
+\label{thm:elevacion-reversible-cociente}
+La probabilidad
+\[
+ \widetilde\tau(x)
+ =\frac1{468\,m(F(x))}
+\]
+es estacionaria y reversible para \(K_{\rm seed}\), y
+\(F_\#\widetilde\tau=\tau_{468}\). Si
+\[
+ J_F\delta_U
+ =m(U)^{-1/2}\sum_{F(x)=U}\delta_x,
+ \qquad
+ D=\operatorname{diag}(m(U)),
+\]
+entonces
+\[
+ K_{\rm seed}J_F
+ =J_F\bigl(D^{1/2}K_{\rm cat}D^{-1/2}\bigr).
+\]
+En particular, el entrelazamiento hilbertiano sin conjugación por \(D\)
+ocurre si y sólo si \(K_{\rm cat}\) conmuta con las multiplicidades de las
+fibras.
+\end{theorem}
+
+\begin{proof}
+La normalización se sigue de que cada una de las 468 fibras recibe masa
+total (1/468). Usando la simetría de \(K_{\rm cat}\), para
+\(F(x)=U\) y \(F(y)=V\) se tiene
+\[
+ \widetilde\tau(x)K_{\rm seed}(x,y)
+ =\frac{K_{\rm cat}(U,V)}{468m(U)m(V)}
+ =\widetilde\tau(y)K_{\rm seed}(y,x).
+\]
+Esto demuestra balance detallado, estacionariedad y la identidad de la
+medida imagen.
+Aplicar ambos miembros de la última identidad a un vector base
+\(\delta_V\) da, sobre la fibra \(U\), el coeficiente
+\(K_{\rm cat}(U,V)/\sqrt{m(V)}\); ése es exactamente el coeficiente del
+operador conjugado mostrado.
+\end{proof}
+
+\begin{theorem}[Elevación de fase fiel a la quietud]
+\label{thm:elevacion-fase-semillas}
+Sea \(X=\Omega_{\rm seed}\), \(m(u)=|F^{-1}(u)|\), y definamos
+\[
+\begin{aligned}
+ L_0(x,y)&=\mathbf1_{\{x=y\}},\\
+ L_+(x,y)&=\frac{E_+(F(x),F(y))}{m(F(y))},\\
+ L_\times(x,y)&=\frac{E_\times(F(x),F(y))}{m(F(y))}.
+\end{aligned}
+\]
+Sobre \(X\times C_9\), sea
+\[
+ \widehat{\mathcal K}_{\rm ph}\bigl((x,r),(y,r+1)\bigr)
+ =L_{\tau(r)}(x,y).
+\]
+Entonces \((F,\mathrm{id}_{C_9})\) satisface la propiedad de
+\emph{agregabilidad fuerte} (\emph{strong lumpability}) de
+\(\widehat{\mathcal K}_{\rm ph}\) hacia \(\mathcal K_{\rm ph}\). El núcleo
+microscópico es irreducible, tiene período nueve y su estado estacionario
+único es
+\[
+ \widetilde\pi_{\rm ph}(x,r)
+ =\frac1{9\cdot468\,m(F(x))}.
+\]
+Su retorno nonádico satisface
+\[
+ \widehat{\mathcal K}_{\rm ph}^{\,9}
+ \bigl((x,r),(y,r)\bigr)
+ =\frac1{468\,m(F(y))}.
+\]
+\end{theorem}
+
+\begin{proof}
+La suma de \(L_+\), respectivamente \(L_\times\), sobre una fibra de destino
+es \(E_+\), respectivamente \(E_\times\), e \(L_0\) proyecta a la identidad.
+Esto prueba la agregabilidad en cada fase. Los factores \(m(F(y))\) cancelan
+al componer: primero se selecciona uniformemente la firma activa y después un
+representante de la emisión obtenida. Así, \(L_+\) y \(L_\times\) son
+proyectores conmutantes y
+\[
+ L_+L_\times(x,y)=\frac1{468\,m(F(y))}.
+\]
+La positividad de esta entrada comunica todos los representantes en nueve
+pasos. La fase fuerza que las longitudes de retorno sean múltiplos de nueve,
+y la entrada diagonal del retorno es positiva. La fórmula estacionaria se
+comprueba sumando primero los \(m(u)\) representantes de cada emisión; cada
+una de las \(9\cdot468\) clases fase--emisión recibe la misma masa.
+\end{proof}
+
+Esta elevación mejora la lectura del núcleo promediado
+\(K_{\rm seed}\): en la fase neutra conserva el representante microscópico,
+en vez de remezclar silenciosamente su fibra. Al promediar y olvidar la fase,
+ambas construcciones tienen la misma sombra \(K_{\rm cat}\), pero no la misma
+dinámica oculta. La diferencia es necesaria para respetar que el cero de TRIT
+es memoria de quietud.
+
+\section{Congruencias mínimas estables bajo avance, media vuelta y 4.º de giro: \(28\) y \(162\) clases de memoria}
+
+El testigo \(e_0=(5,5,5,5,5,5)\) muestra que la firma producto es demasiado
+gruesa para transportar una ruta. Es posible calcular exactamente la memoria
+mínima que falta. Sea
+\[
+ \mathcal X_\times=X_9\times\mathscr D_{\rm card}
+\]
+el espacio de \(324\) semillas producto. Denotemos por \(P\) el avance de una
+casilla en la orientación almacenada, por \(H\) la media vuelta de esa
+orientación y por \(Q\) el cuarto de giro
+\[
+ N\longmapsto E\longmapsto S\longmapsto O\longmapsto N.
+\]
+
+\begin{theorem}[Congruencias de avance y giro]
+\label{thm:congruencias-avance-giro}
+La congruencia mínima que refina las veintiséis firmas producto y es estable
+por \(P\) y \(H\) posee \(28\) clases: veintisiete tienen tamaño ocho y una
+tiene tamaño \(108\). La única escisión nueva es
+\[
+ (5,5,5,5,5,5)\longrightarrow
+ \mathcal L_0\sqcup\mathcal L_1\sqcup\mathcal L_2,
+ \qquad |\mathcal L_j|=8.
+\]
+Sus órbitas bajo \(P,H\) tienen tamaños
+\[
+ 9,\quad9,\quad9,\quad1.
+\]
+Al combinar este refinamiento con las dieciocho firmas aditivas se obtiene
+\[
+ 18\cdot28=504=468+36.
+\]
+
+La congruencia mínima estable por \(P\) y \(Q\) posee \(162\) clases de dos
+semillas. Cada clase es una órbita de la involución
+\[
+ J(i,j,d)=\bigl(7-i,\,7-j,\,\overline d\bigr)\pmod9.
+\]
+Los operadores inducidos por \(P,Q\) actúan transitivamente sobre las
+\(162\) clases.
+\end{theorem}
+
+\begin{proof}
+Se parte de la partición por las veintiséis firmas y se refina
+iterativamente una clase siempre que dos de sus elementos tengan imágenes en
+clases distintas por alguno de los generadores. El proceso termina porque
+\(\mathcal X_\times\) es finito. El censo exhaustivo produce, para
+\((P,H)\), el histograma \(27\times8+1\times108=324\), las cuatro órbitas
+indicadas y tres clases sobre la fibra excepcional de tamaño veinticuatro.
+Para \((P,Q)\) produce \(162\times2=324\). La comprobación directa demuestra
+que \(J\) preserva cada firma, conmuta con ambos generadores y empareja
+exactamente los dos elementos de cada clase; el grafo de clases generado por
+\(P,Q\) es conexo.
+\end{proof}
+
+El exceso \(36\) y el objeto \(R_{36}\) tienen tipos distintos. La frontera
+de profundidad treinta y seis es
+\[
+ R_{36}=
+ \begin{pmatrix}
+ 222220\\021222\\102011
+ \end{pmatrix},
+\]
+es decir, tres bloques ordenados de seis trits, uno por canal. No es un
+conjunto de treinta y seis estados. Por su parte, el término
+\(504-468=36\) cuenta memoria adicional de hoja: la media vuelta que hace
+funcional el transporte producto añade exactamente dos hojas nuevas a una
+sola firma y, al repetirlas sobre las dieciocho firmas aditivas, produce
+\(18(3-1)=36\). La coincidencia del entero (36) expresa dos graduaciones
+del transporte, profundidad de frontera y multiplicidad de hoja, pero no
+autoriza a identificar sus objetos.
+
+El cuarto de giro \(Q\) tampoco estaba escondido en \(F_{\rm obs}\). La
+cronología publicada contiene avances y medias vueltas programadas; incorporar
+\(Q\) es una ampliación explícita del alfabeto de rutas. Una vez incorporado,
+un paseo simétrico perezoso en \(P^{\pm1},Q^{\pm1}\) es irreducible y
+aperiódico sobre las \(162\) clases, y su medida uniforme es única. Ésta es la
+forma matemática exacta de «contar los giros»: el giro es una coordenada de
+transporte y no una corrección decimal posterior.
+
+\section{Cociclos de modo y orientación}
+\label{sec:cociclos-modo-orientacion}
+
+La misma regla permite definir los contadores operativos sin introducir la
+Mecánica Dimensional. Añadamos al estado el último modo activo
+\(m\in\{\Sigma,\Pi\}\). Una firma \(+1\) fija \(m=\Sigma\), una firma
+\(-1\) fija \(m=\Pi\), y una firma \(0\) conserva el modo anterior. Para una
+flecha \(a\), definamos el cociclo firmado
+\[
+ \omega_{\rm sw}(a)=
+ \begin{cases}
+  +1,&\Pi\longrightarrow\Sigma,\\
+  -1,&\Sigma\longrightarrow\Pi,\\
+  0,&\text{el modo se conserva}.
+ \end{cases}
+\]
+Su variación positiva es \(s(a)=|\omega_{\rm sw}(a)|\). Definamos además
+\(g(a)=1\) cuando cambia el par ordenado de orientaciones cardinales y
+\(g(a)=0\) cuando se conserva. Al mantener en los extremos el modo y la
+orientación terminal, las sumas
+\[
+ \Omega_{\rm sw}(\gamma)=\sum_{a\subset\gamma}\omega_{\rm sw}(a),
+ \qquad
+ S(\gamma)=\sum_{a\subset\gamma}s(a),
+ \qquad
+ G(\gamma)=\sum_{a\subset\gamma}g(a)
+\]
+son aditivas por concatenación.
+
+En una vuelta nonádica cerrada, la sucesión de modos es
+\[
+ (\Sigma,\Pi,\Pi,\Sigma,\Pi,\Pi,\Sigma,\Pi,\Pi).
+\]
+Por tanto,
+\[
+ \Omega_{\rm sw}(C_9)=0,\qquad S(C_9)=6:
+\]
+hay tres cambios \(\Pi\to\Sigma\), tres cambios
+\(\Sigma\to\Pi\) y tres retenciones. En el ciclo de \(108\) pasos,
+\[
+ \#(+1)=\#(-1)=\#(0)=36,\qquad
+ \Omega_{\rm sw}=0,\qquad S=72,\qquad G=4.
+\]
+El último número cuenta las cuatro inversiones simultáneas programadas en
+\(27,54,81,108\). Estos cociclos proceden directamente del calendario TPK\@.
+
+\subsection{Cociente de modos y correspondencia areal--volumétrica}
+\label{sec:cociente-modos-fav}
+
+El signo del calendario, la etiqueta de modo y la hoja geométrica son tres
+objetos tipados. En particular, no se identifica el signo de fase con el
+observable angular sobre dígitos. Para la correspondencia geométrica fijamos el
+lector HMT tipado
+\[
+ \mathfrak g_{\rm av}(\Sigma)=\mathscr H_{\rm ar},
+ \qquad
+ \mathfrak g_{\rm av}(\Pi)=\mathscr H_{\rm vol}.
+\]
+La primera asignación expresa la lectura aditiva o de borde; la segunda, la
+lectura multiplicativa o de interior. El mapa \(\mathfrak g_{\rm av}\) es
+parte del tipado de hojas. El resultado siguiente demuestra que, una vez
+fijado ese tipado, la dinámica TPK fuerza la incidencia entre ellas.
+
+\begin{theorem}[Descenso necesario de la incidencia de hojas]
+\label{thm:descenso-necesario-fav}
+Sea \(m_r\) el modo obtenido después de aplicar la fase \(r\) del bloque
+primitivo \((+1,-1,0)\), con la regla
+\[
+ +1:\ m\mapsto\Sigma,\qquad
+ -1:\ m\mapsto\Pi,\qquad
+ 0:\ m\mapsto m.
+\]
+La órbita cíclica de modos es \((\Sigma,\Pi,\Pi)\). Si
+\[
+ N_3(i,j)
+ :=
+ \#\{r\in\mathbb Z/3\mathbb Z:(m_r,m_{r+1})=(i,j)\},
+\]
+entonces, en el orden \((\Sigma,\Pi)\),
+\[
+ \boxed{
+ N_3=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.}
+\]
+Por repetición del calendario,
+\[
+ N_9=3N_3,\qquad N_{27}=9N_3,\qquad N_{108}=36N_3.
+\]
+Después de aplicar \(\mathfrak g_{\rm av}\), la matriz primitiva de
+incidencia es, en el orden
+\((\mathscr H_{\rm ar},\mathscr H_{\rm vol})\),
+\[
+ \boxed{
+ F_{\rm av}=
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}.}
+\]
+Así, las dos transiciones cruzadas, la única autorretención volumétrica, la
+ausencia de autorretención areal y las multiplicidades primitivas unitarias
+son consecuencias del cociente de modos de TPK; no son cuatro postulados
+añadidos.
+\end{theorem}
+
+\begin{proof}
+Los tres pares consecutivos, con cierre cíclico, son
+\[
+ \Sigma\longrightarrow\Pi,\qquad
+ \Pi\longrightarrow\Pi,\qquad
+ \Pi\longrightarrow\Sigma.
+\]
+Cada uno aparece una vez y el par
+\(\Sigma\to\Sigma\) no aparece. Esto determina las cuatro entradas de
+\(N_3\). Los calendarios de longitudes \(9,27,108\) contienen,
+respectivamente, \(3,9,36\) copias del bloque primitivo, por lo que sus
+matrices de incidencia son los múltiplos indicados. El máximo común divisor
+de las entradas no nulas de cada matriz larga elimina únicamente esa
+repetición global y devuelve \(N_3\). Finalmente,
+\(\mathfrak g_{\rm av}\) transporta \(\Sigma,\Pi\) a las hojas areal y
+volumétrica sin alterar la incidencia.
+\end{proof}
+
+La realización hiperbólica real que utiliza esta matriz y prueba su
+invariancia lorentziana se formula en
+\cref{sec:tres-generadores-concretos-trit}; allí \(F_{\rm av}\) se usa
+como antecedente, sin repetir su derivación.
+
+Este teorema debe distinguirse de una afirmación de Markov más fuerte.
+Olvidar la fase no es un cociente de Markov fuerte de
+\(\mathcal K_{\rm ph}\): el modo visible no determina cuál de los tres
+operadores \(I,E_+,E_\times\) actúa en la iteración elemental siguiente. Lo que desciende
+sin hipótesis adicional es el multigrafo de aristas de un bloque TPK\@.
+
+Existe, sin embargo, una completación de memoria uno determinada de forma
+única por ese descenso. Sea \(X_{\rm av}\) el menor subshift de tipo finito
+sobre
+\(\{\mathscr H_{\rm ar},\mathscr H_{\rm vol}\}\) que contiene todas las
+palabras obtenidas al olvidar la fase y que sólo conserva pares consecutivos.
+Todo subshift de un paso con esa propiedad debe admitir exactamente los tres
+pares observados; el menor de ellos excluye el único par no observado. Por
+tanto su matriz de adyacencia es \(F_{\rm av}\).
+
+\begin{corollary}[Medida de Parry del envolvente de memoria uno]
+\label{cor:parry-envolvente-fav}
+El subshift \(X_{\rm av}\) es primitivo, tiene entropía topológica
+\(\log\varphi\) y posee una única medida de máxima entropía. Sus pesos
+estacionarios de vértice satisfacen
+\[
+ \boxed{
+ \frac{\mu_{\rm ar}}{\mu_{\rm vol}}=\varphi^{-2}.}
+\]
+\end{corollary}
+
+\begin{proof}
+La raíz de Perron de \(F_{\rm av}\) es \(\varphi\), y un vector de Perron
+positivo es \((1,\varphi)\). Como la matriz es simétrica, los pesos de vértice
+de Parry son proporcionales al producto de los vectores izquierdo y derecho,
+es decir, a \((1,\varphi^2)\).
+\end{proof}
+
+La medida de Parry pertenece al envolvente de caminos de memoria uno. No es
+la imagen de \(\tau_{468}\), ni la frecuencia temporal de la órbita periódica
+de modos. Esta última es
+\[
+ \nu_{\rm cyc}(\mathscr H_{\rm ar})=\frac13,\qquad
+ \nu_{\rm cyc}(\mathscr H_{\rm vol})=\frac23,
+\]
+mientras \(\tau_{468}\) es uniforme sobre emisiones y la medida de Parry
+pondera historias de renovación de longitud arbitraria. Las tres medidas
+responden a preguntas distintas. La razón irracional
+\(\varphi^{-2}\) queda así derivada canónicamente del envolvente de caminos,
+sin atribuirla a un cociente de cardinales finitos.
+
+\subsubsection{Del conteo cronológico al retorno marcado por \texorpdfstring{\(\pi\)}{π}}
+\label{sec:retorno-marcado-pi-phi2}
+
+Las dos fórmulas
+\[
+ \left(\frac13,\frac23\right)
+ \qquad\text{y}\qquad
+ \frac{\mu_{\rm ar}}{\mu_{\rm vol}}=\varphi^{-2}
+\]
+no son aproximaciones una de otra. La primera cuenta los tres instantes del
+calendario primitivo \((\Sigma,\Pi,\Pi)\); la segunda pondera todas las
+historias admisibles del envolvente de memoria uno. Por eso la frecuencia
+cronológica es racional y la razón de Parry es irracional. En lo que sigue
+escribimos
+\[
+ \frac{\pi_{\rm HMT}}{\varphi^2}
+ =\pi_{\rm HMT}\varphi^{-2};
+\]
+no se trata de dividir por \(\varphi^{-2}\).
+
+La aparición de \(\varphi^{-2}\) puede verse directamente en la dinámica
+lineal. Si \(F_n\) denota el \(n\)-ésimo número de Fibonacci,
+\[
+ F_{\rm av}^{\,n}
+ =
+ \begin{pmatrix}
+  F_{n-1}&F_n\\
+  F_n&F_{n+1}
+ \end{pmatrix}
+ \qquad(n\geq1).
+\]
+Los autovalores de \(F_{\rm av}\) son
+\(\varphi\) y \(-\varphi^{-1}\). La rama contraída invierte orientación en
+una iteración. Al pasar a la memoria cuadrática, es decir, a
+\(\operatorname{Sym}^2(\mathbb R^2)\), esa inversión se registra antes de
+desaparecer el signo. En la base \((x^2,2xy,y^2)\), representando por
+filas las imágenes de los vectores básicos, el operador inducido es
+\[
+ \operatorname{Sym}^2(F_{\rm av})=
+ \begin{pmatrix}
+  0&0&1\\
+  0&1&2\\
+  1&1&1
+ \end{pmatrix},
+ \qquad
+ \chi(t)=(t+1)(t^2-3t+1).
+\]
+Sus tres autovalores son
+\[
+ \varphi^2,\qquad -1,\qquad \varphi^{-2}.
+\]
+Así, \(\varphi^{-2}\) es el modo estable positivo de la memoria de segundo
+orden. Este paso explica por qué la razón áurea aparece aquí como ley de
+retorno y no como media estadística añadida.
+
+La clausura \(\pi\) pertenece a otro nivel del mismo estado HMT: es la salida
+coinductiva del lector regional ya construido, no un autovalor nuevo de
+\(F_{\rm av}\). Sean
+\[
+ P_{\rm ar}=
+ \begin{pmatrix}1&0\\0&0\end{pmatrix},
+ \qquad
+ P_{\rm vol}=
+ \begin{pmatrix}0&0\\0&1\end{pmatrix}.
+\]
+Entre los operadores positivos que preservan las dos hojas, hay uno y sólo
+uno cuya normalización volumétrica es uno y cuya marca areal es la clausura
+generada \(\pi_{\rm HMT}\):
+\[
+ D_\pi=\pi_{\rm HMT}P_{\rm ar}+P_{\rm vol}.
+\]
+La unicidad es relativa a estas tres cláusulas explícitas: positividad,
+diagonalidad respecto de las hojas y las dos normalizaciones. Con
+\(e_{\rm ar}=(1,0)^T\) y \(e_{\rm vol}=(0,1)^T\), el retorno marcado de
+longitud \(n\) es
+\[
+ \Theta_n
+ :=
+ \frac{\langle e_{\rm ar},
+ D_\pi F_{\rm av}^{\,n}e_{\rm ar}\rangle}
+ {\langle e_{\rm vol},
+ F_{\rm av}^{\,n}e_{\rm vol}\rangle}
+ =
+ \pi_{\rm HMT}\frac{F_{n-1}}{F_{n+1}}.
+\]
+Por tanto,
+\[
+ \boxed{\displaystyle
+ \lim_{n\to\infty}\Theta_n
+ =\frac{\pi_{\rm HMT}}{\varphi^2}.}
+\]
+La marca \(\pi_{\rm HMT}\) se aplica una sola vez, en el retorno de frontera;
+no se reinyecta en cada transición. La combinatoria finita produce el modo
+estable \(\varphi^{-2}\), el lector coinductivo produce la clausura
+\(\pi_{\rm HMT}\), y \(D_\pi\) compone ambos datos sin invertir su orden
+causal.
+
+La longitud nativa \(108\) ofrece un testigo exacto de esa convergencia:
+\[
+ (F_{\rm av}^{108})_{\rm ar,ar}
+ =F_{107}=10284720757613717413913,
+\]
+\[
+ (F_{\rm av}^{108})_{\rm vol,vol}
+ =F_{109}=26925748508234281076009.
+\]
+En consecuencia,
+\[
+ \left|
+ \frac{F_{107}}{F_{109}}-\varphi^{-2}
+ \right|
+ =
+ 6.1684979916614407936\ldots\times10^{-46},
+\]
+y, después de la única marca de clausura,
+\[
+ \left|
+ \pi_{\rm HMT}\frac{F_{107}}{F_{109}}
+ -\frac{\pi_{\rm HMT}}{\varphi^2}
+ \right|
+ =
+ 1.9378907974286976068\ldots\times10^{-45}.
+\]
+Estos errores miden la aproximación finita del retorno; no son ajustes de
+\(\pi\) ni de \(\varphi\).
+
+\paragraph{Lector cilíndrico de la razón.}
+Sean \(I_n^\pi=[\underline\pi_n,\overline\pi_n]\) e
+\(I_n^\varphi=[\underline\varphi_n,\overline\varphi_n]\) los cilindros
+positivos y encajados producidos por los dos lectores HMT\@. La operación de
+intervalos
+\[
+ \mathcal Q(I,J)
+ :=
+ \left[
+ \frac{\inf I}{(\sup J)^2},
+ \frac{\sup I}{(\inf J)^2}
+ \right]
+\]
+es el menor intervalo que contiene \(x/y^2\) para todo
+\((x,y)\in I\times J\). Preserva el encaje: si los cilindros de entrada se
+refinan, también se refina \(\mathcal Q(I_n^\pi,I_n^\varphi)\). Como sus
+diámetros tienden a cero y el límite de \(I_n^\varphi\) es positivo,
+\[
+ \bigcap_n\mathcal Q(I_n^\pi,I_n^\varphi)
+ =
+ \left\{\frac{\pi_{\rm HMT}}{\varphi_{\rm HMT}^2}\right\}.
+\]
+Con los doce bloques en base mil ya publicados, el intervalo cociente fuerza
+treinta y cinco cifras decimales:
+\[
+ \frac{\pi_{\rm HMT}}{\varphi_{\rm HMT}^2}
+ =
+ 1.19998161486432666111577775331680692\ldots.
+\]
+Esta construcción conserva la procedencia de cada cifra: el numerador
+procede del cilindro de clausura y el denominador de la autoescala.
+
+\paragraph{Separación algebraica entre lectura areal, lectura volumétrica y sus codominios respectivos}
+La razón completa no puede salir de la sola álgebra racional de
+\(F_{\rm av}\). En efecto, sus funciones racionales espectrales pertenecen a
+\(\mathbb Q(\sqrt5)\); allí se encuentra \(\varphi^{-2}\), pero no el número
+trascendente \(\pi\). Por consiguiente, toda derivación que pretendiese
+obtener \(\pi/\varphi^2\) únicamente de la matriz \(2\times2\) estaría
+mal tipada. El dato trascendente debe proceder del lector coinductivo de
+clausura, o de un cociclo de frontera equivalente demostrado
+independientemente. Este control negativo fija la división de trabajo entre
+la correspondencia finita y el lector de número.
+
+\subsubsection{Involución de intercambio del cociente}
+\label{sec:espejo-pi-phi-electron-hmt}
+
+La correspondencia admite dos orientaciones exactas de una misma ley. Si
+\[
+ \mathscr R(x,y)=\frac{x}{y^2},
+ \qquad
+ \mathsf J(x,y)=(y,x),
+\]
+entonces \(\mathsf J^2=I\) y
+\[
+ \mathscr R(\pi,\varphi)=\frac{\pi}{\varphi^2},
+ \qquad
+ (\mathscr R\circ\mathsf J)(\pi,\varphi)
+ =\frac{\varphi}{\pi^2}.
+\]
+Se verifican además las identidades
+\[
+ \mathscr R(\pi,\varphi)\mathscr R(\varphi,\pi)
+ =\frac1{\pi\varphi},
+ \qquad
+ \frac{\mathscr R(\pi,\varphi)}
+ {\mathscr R(\varphi,\pi)}
+ =\left(\frac{\pi}{\varphi}\right)^3.
+\]
+Escribiendo
+\(\mathcal B_{\rm av}^{(\pi)}=\mathscr R(\pi,\varphi)\), se obtiene
+también la reparametrización exacta
+\[
+ \frac{\varphi}{\pi^2}
+ =
+ \frac1{\varphi^3
+ \bigl(\mathcal B_{\rm av}^{(\pi)}\bigr)^2},
+ \qquad
+ e^{\varphi/\pi^2}
+ =
+ \exp\!\left[
+ \frac1{\varphi^3
+ \bigl(\mathcal B_{\rm av}^{(\pi)}\bigr)^2}
+ \right].
+\]
+Así, el cambio de orientación entre cierre y crecimiento transporta la
+razón de frontera a su lectura intercambiada:
+\[
+ \frac{\pi}{\varphi^2}
+ \xleftrightarrow{\ \mathsf J\ }
+ \frac{\varphi}{\pi^2}.
+\]
+La primera orientación lee el cierre areal marcado sobre la memoria
+volumétrica cuadrática; la segunda lee el crecimiento interior sobre el
+cierre cuadrático. Esta correspondencia es un teorema del lector HMT. La
+Mecánica Dimensional aplica después la segunda orientación dentro de la
+construcción electrónica, sin convertir al electrón en antecedente de
+\(\pi\), \(\varphi\) o de la correspondencia.
+
+\subsubsection{Principio de Ambivalencia de los lectores areal y volumétrico}
+\label{sec:ambivalencia-grav-inercial-pi-phi2}
+
+El Principio de Ambivalencia afirma que la lectura areal y la lectura
+volumétrica son dos funcionales coordinados, pero no intercambiables, de un
+mismo estado con memoria. Su coincidencia en la diagonal es
+\[
+ \mathcal L_{\rm ar}^{\rm diag}(x)
+ =\mathcal L_{\rm vol}^{\rm diag}(x).
+\]
+La igualdad diagonal no borra la ambivalencia fuera de ella.
+
+Sobre la frontera areal--volumétrica, ambos lectores factorizan a través de
+una misma amplitud positiva de memoria \(\mathcal M(x)\):
+\[
+ \mathcal L_{\rm vol}(x)=\mu_{\rm vol}\mathcal M(x),
+ \qquad
+ \mathcal L_{\rm ar}(x)=
+ \pi_{\rm HMT}\mu_{\rm ar}\mathcal M(x).
+\]
+Entonces el teorema de Parry y la marca de retorno dan
+\[
+ \boxed{\displaystyle
+ \frac{\mathcal L_{\rm ar}(x)}
+ {\mathcal L_{\rm vol}(x)}
+ =\frac{\pi_{\rm HMT}}{\varphi^2}.}
+\]
+Con la normalización volumétrica, la diferencia relativa de lectores es
+\[
+ \frac{\mathcal L_{\rm ar}-\mathcal L_{\rm vol}}
+ {\mathcal L_{\rm vol}}
+ =
+ \frac{\pi_{\rm HMT}}{\varphi^2}-1
+ =
+ 0.1999816148643266611\ldots.
+\]
+La lectura física de esta correspondencia se realiza más tarde, en el capítulo de
+Cartan--Holst, después de construir holonomía, co-tétrada, conexión, torsión
+y curvatura. Aquí el resultado es enteramente HMT: una razón exacta entre
+dos lectores de la misma memoria de hoja.
+
+Conviene distinguirlos del extractor enriquecido que se utiliza después en
+Mecánica Dimensional. Allí una historia completa conserva el conteo de acción
+\(n_A\), los doce eventos orientados \(e_0,\ldots,e_{11}\) y la cocadena
+torsional a nivel de paso; de ellos se obtienen
+\[
+ s_C=\sum_{i=0}^{5}(e_i+e_{i+6}),
+ \qquad
+ W_\pm=6n_A\pm s_C.
+\]
+Los canales ya generados por HMT satisfacen entonces la identidad exacta
+\[
+ \exp\!\left(n_AA_{\rm rad}+\frac{s_C}{6}C^\ast_{\rm rad}\right)
+ =\left(q_+^{-W_+}q_-^{-W_-}\right)^{1/12}.
+\]
+Por tanto, el paso ruta--carácter angular no está ausente: se realiza sobre
+el registro dodecafásico enriquecido. Lo que este cálculo de fase prueba por sí
+solo son \(\Omega_{\rm sw},S,G\); no los sustituye ni permite reconstruir el
+registro completo después de haberlo proyectado.
+
+La medida uniforme sobre las \(104\,976\) presentaciones desciende a átomos
+de masas \(1/729\), \(1/243\) y \(1/54\), pero no a \(1/468\). En la
+microfibra quíntuple de \(\pi\), las dos probabilidades son
+\[
+ \tau_{468}(\mathscr R_\pi)=\frac5{468},
+ \qquad
+ F_\#\mu_{\rm seed}(\mathscr R_\pi)=\frac7{729}.
+\]
+Tanto la elevación promediada como la elevación de fase realizan la primera: no
+empujan la medida uniforme sobre semillas, sino que asignan la misma masa
+total a cada clase observable. La elevación de fase conserva además la
+quietud microscópica en los pasos neutros.
+
+Para relacionar la elevación de fase con las historias enriquecidas de
+profundidad seis hace falta un núcleo \(\mathcal K_6\) sobre
+\(\mathcal H_6^{\rm cat}\times C_9\). Éste desciende a
+\(\widehat{\mathcal K}_{\rm ph}\) a través de
+\(\rho_6\times\mathrm{id}_{C_9}\) si y sólo si satisface, en cada fase, la
+condición de agregabilidad fuerte
+\[
+ \sum_{\rho_6(g)=y}\mathcal K_6((h,r),(g,r+1))
+ =L_{\tau(r)}(\rho_6(h),y),
+\]
+independientemente de \(h\) dentro de cada fibra de \(\rho_6\). En ese caso,
+la composición con \(F\) proyecta a \(\mathcal K_{\rm ph}\). La construcción
+de una familia \((\mathcal K_m)_{m\geq6}\) que satisfaga esta identidad y
+conmute con todos los truncamientos es el paso restante hacia una
+transferencia del límite inverso.
+
+\section{Cociclo de escala y conservación cilíndrica}
+\label{sec:cociclo-parry-escala}
+
+Sea \(r=(1,\varphi)\) un vector de Perron--Frobenius de
+\(F_{\rm av}\). La matriz de transición de Parry es
+\[
+P_{ij}=\frac{(F_{\rm av})_{ij}r_j}{\varphi r_i}
+=
+\begin{pmatrix}
+0&1\\
+\varphi^{-2}&\varphi^{-1}
+\end{pmatrix}.
+\]
+Para una ruta admisible \(\gamma:i\to j\) de longitud \(n\),
+\[
+\mathbb P(\gamma\mid i)=\frac{r_j}{\varphi^nr_i},
+\qquad
+\boxed{\chi_P(\gamma)=\varphi^n\frac{r_i}{r_j}.}
+\]
+La telescopía prueba
+\[
+\chi_P(\gamma_2\circ\gamma_1)
+=\chi_P(\gamma_2)\chi_P(\gamma_1).
+\]
+En una ruta cerrada, \(\chi_P=\varphi^n\); su cuadrado y su inverso
+generan las combinaciones
+\[
+C_n=\frac{\chi_P^2+\chi_P^{-2}}2,\qquad
+S_n=\frac{\chi_P^2-\chi_P^{-2}}2,
+\]
+que satisfacen
+\[
+x_{n+1}=3x_n-x_{n-1}.
+\]
+
+Como \(F_{\rm av}\) es simétrica, sea
+\[
+\ell=\frac{r}{1+\varphi^2},\qquad \ell^{\mathsf T}r=1.
+\]
+La medida de un cilindro es
+\[
+\mu[x_0\cdots x_n]=\ell_{x_0}r_{x_n}\varphi^{-n}.
+\]
+Por tanto,
+\[
+\boxed{
+V_n(x)
+=\frac{\mu[x_0]}{\mu[x_0\cdots x_n]}
+=\varphi^n\frac{r_{x_0}}{r_{x_n}}
+=\chi_P(x_0\cdots x_n).}
+\]
+Para una escala de dimensión tipada \(D>0\),
+\[
+a_n^{(D)}(x)=V_n(x)^{1/D}
+\]
+cumple la ley de conservación cilíndrica
+\[
+\boxed{
+\bigl(a_n^{(D)}(x)\bigr)^D
+\mu[x_0\cdots x_n]=\mu[x_0].}
+\]
+
+En rango espacial tres y sobre retornos cerrados, escribimos
+\(a_n:=a_n^{(3)}\) y obtenemos
+\[
+\boxed{
+\frac{a_9}{a_0}=\varphi^3,\qquad
+\frac{a_{27}}{a_0}=\varphi^9,\qquad
+\frac{a_{108}}{a_0}=\varphi^{36}.}
+\]
+Si \(A_k:=a_{9k}\) para \(k\geq1\), entonces, para \(k\geq2\),
+\[
+A_{k+1}-2A_k+A_{k-1}
+=A_{k-1}(\varphi^3-1)^2>0.
+\]
+La desigualdad prueba convexidad en profundidad de retorno; una aceleración
+física requiere además una carta de duración.
+
+El cálculo primario de
+\(\operatorname{Sym}^2(F_{\rm av})\) en
+\cref{sec:retorno-marcado-pi-phi2} demuestra que su espectro es
+\(\{\varphi^2,-1,\varphi^{-2}\}\). Conservamos aquí únicamente el corolario
+para el cociclo de escala: sobre una ruta cerrada con \(V_n=\varphi^n\), el
+modo estable obedece
+\[
+\boxed{M_n=\varphi^{-2n}=V_n^{-2}.}
+\]
+La identificación de estos tres autoespacios con las tres hojas del TRIT
+exige un entrelazador; la coincidencia de cardinalidad no lo sustituye. El
+corolario quedaría refutado si la ruta cerrada no satisficiera
+\(V_n=\varphi^n\) o si el modo estable no tuviera autovalor
+\(\varphi^{-2}\).
+
+\section{Teorema de prolongación dinámica: hipótesis globales y dominio certificado}
+
+Se han construido y separado explícitamente los objetos siguientes del
+problema finito:
+\[
+ F,
+ \qquad
+ F_{\rm obs},
+ \qquad
+ \mathcal K_{\rm ph},
+ \qquad
+ \widehat{\mathcal K}_{\rm ph},
+ \qquad
+ K_{\rm cat},
+ \qquad
+ \tau_{468},
+ \qquad
+ F_{\rm av},
+ \qquad
+ \operatorname{Sym}^2(F_{\rm av}),
+ \qquad
+ D_\pi,
+ \qquad
+ \mathcal Q.
+\]
+Para \(F_{\rm obs}\) se ha probado el retorno determinista y se ha exhibido un
+testigo explícito de no descenso producto. Para \(\mathcal K_{\rm ph}\) se
+han probado la doble estocasticidad, la irreducibilidad, el período nueve, el
+retorno nonádico uniforme y la unicidad de
+\(\pi_{\rm ph}\). Para \(\widehat{\mathcal K}_{\rm ph}\) se han probado la
+agregabilidad fuerte, la conservación microscópica de la quietud y la medida
+estacionaria compensada. \(K_{\rm cat}\) ya no es un promedio sin
+procedencia: es la sombra de un paso al promediar la fase uniforme.
+El cociente de modos de TPK induce \(F_{\rm av}\); su elevación cuadrática
+separa los modos \(\varphi^2,-1,\varphi^{-2}\). El operador \(D_\pi\)
+marca una sola vez el retorno de frontera con la clausura generada, y el
+lector intervalar \(\mathcal Q\) conserva el encaje de los cilindros de
+\(\pi\) y \(\varphi\). Estos cuatro objetos construyen
+\(\pi_{\rm HMT}/\varphi_{\rm HMT}^2\) sin confundir la frecuencia temporal,
+la medida uniforme y la medida de Parry.
+
+La fuerza de esta inducción es relativa y concreta. La palabra TPK fuerza los
+pesos \(1/3\). La interpretación APP de todas las continuaciones compatibles,
+junto con el conteo uniforme, fuerza \(E_+\) y \(E_\times\). La trayectoria
+determinista \(F_{\rm obs}\) no fuerza esos operadores y, de hecho, no los
+produce. Éste no es un defecto del resultado, sino la diferencia matemática
+entre evolución de un camino y transferencia de un espacio de caminos.
+
+\ifdefined\HMTInternalTraceability
+\begin{criterion}[Elevación enriquecida de la reversión]
+\label{pf84:SYN31-RHO-LIFT}
+Se busca un subdominio \(D_\rho\subset X_{\rm TPK}^{\rm enr}\) y un mapa
+\[
+ \Theta_\rho:D_\rho\longrightarrow X_{\rm TPK}^{\rm enr}
+\]
+que eleve la reversión entera \(27\mapsto72\) del
+\cref{int:pf84:SYN30-RHO-DESC,int:pf84:SYN30-CROSS-WITNESS}. Debe conmutar con los
+lectores residual, entero y genealógico, cuantificar el cociente y el
+acarreo, y preservar orientación, ruta, retorno y, cuando el transporte sea
+invertible, monodromía, región y supervivencia.
+Sólo si \(D_\rho\) es total e invariante bajo \(\Theta_\rho\) puede exigirse
+\(\Theta_\rho^2=I\) y denominarse involución.
+
+No existe todavía esta construcción ni una prueba de involutividad. El
+programa queda falsado si no existe el mapa, si falla uno de los cuadrados
+de lectura, si se pierde memoria sin cuantificarla o si
+\(\Theta_\rho^2\ne I\) en un dominio donde se reclame involución.
+\end{criterion}
+
+\begin{criterion}[Elevación enriquecida del cuadrado]
+\label{pf84:SYN31-SQ-LIFT}
+Se busca un subdominio \(D_s\subset X_{\rm TPK}^{\rm enr}\) y un mapa
+\[
+ \Theta_s:D_s\longrightarrow X_{\rm TPK}^{\rm enr}
+\]
+que eleve \(s(n)=n^2\), en particular \(27\mapsto729\), y conmute con los
+lectores residual, entero y genealógico de
+\cref{int:pf84:SYN30-SQ-DESC,int:pf84:SYN30-CROSS-WITNESS}. Debe cuantificar
+cociente y acarreo y preservar orientación, ruta, retorno y, cuando el
+transporte sea invertible, monodromía, región y supervivencia. Este mapa no
+es involutivo y no se le impone
+\(\Theta_s^2=I\).
+
+La prueba permanece ausente. La inexistencia de \(\Theta_s\), el fallo de
+un cuadrado de lectura o la pérdida no controlada de cualquiera de las
+coordenadas enriquecidas refutarían el programa. La ablación
+\(81\mapsto72\) al cambiar \(q^\times(9,9)\) es un control independiente:
+no es una rama de \(\Theta_\rho\) ni de \(\Theta_s\), y no prueba ninguno
+de los dos mapas.
+\end{criterion}
+\fi
+
+La conclusión finita es completa en su dominio: el retorno uniforme, la
+medida estacionaria, la agregabilidad a profundidad seis y la separación
+entre evolución de una ruta y transferencia del espacio de rutas quedan
+demostrados por los objetos construidos. En particular,
+\(\widehat{\mathcal K}_{\rm ph}\) no se identifica con la cronología de
+\(F_{\rm obs}\), como muestra \cref{prop:retorno-fobs-identidad}.

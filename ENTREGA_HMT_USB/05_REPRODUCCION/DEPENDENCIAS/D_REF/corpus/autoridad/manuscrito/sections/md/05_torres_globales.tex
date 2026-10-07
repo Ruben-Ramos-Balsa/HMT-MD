@@ -1,0 +1,188 @@
+\chapter{Valores, completitud y bloques de la jerarquía espectral}
+\label{chap:torres}
+
+El operador bicapa, sus momentos y el semigrupo
+\(\mathfrak S=\langle90,120\rangle\) se definen una sola vez en el
+\cref{sec:jerarquia-espectral-infinita-rev7}. Este capítulo publica valores,
+prueba la completitud reconstructiva y separa los bloques globales. Los
+mismos enteros \(90,120\) aparecen también como cardinalidades en la
+incidencia hexada--octada, pero esa coincidencia no transporta la incidencia
+\(\iota_{6,8}\) a la carta angular ni convierte sus configuraciones en
+momentos de masa.
+
+\section{Primeras evaluaciones de la jerarquía}
+
+Los índices
+\[
+ 90,120,180,210,240,270,360,420
+\]
+son una selección de primeras alturas de \(\mathfrak S\), pues
+\[
+ 180=2\cdot90,\quad210=90+120,\quad240=2\cdot120,
+\]
+\[
+ 270=3\cdot90,\quad360=3\cdot120,
+ \quad420=2(90+120).
+\]
+Los momentos \(s_n=q_-^n-q_+^n\) y la interfaz generadora
+\(\mathcal K_{\mathrm{ang}}^{90,120}=(s_{90},s_{120})\) se usan aquí con la
+convención ya fijada; no se redefinen. La totalidad de los valores queda
+determinada por \(A\), \(\Cstar\) y la recurrencia cuadrática del lector.
+
+\begin{table}[htbp]
+\centering
+\caption{Momentos orientados de la jerarquía global.}
+\label{tab:torres}
+\begin{tabular}{@{}rr@{}}
+\toprule
+\(n\)&\(s_n\)\\
+\midrule
+90  & \(2.9516943928982796\times10^{-4}\)\\
+120 & \(1.9683511250294992\times10^{-5}\)\\
+180 & \(8.7345871869508335\times10^{-8}\)\\
+210 & \(5.8181313057291163\times10^{-9}\)\\
+240 & \(3.8754674969305336\times10^{-10}\)\\
+270 & \(2.5814553607509555\times10^{-11}\)\\
+360 & \(7.6293257871406076\times10^{-15}\)\\
+420 & \(3.3850663628348497\times10^{-17}\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}[Carácter global de los momentos]
+Las cantidades \(s_n\) de la \cref{tab:torres} son invariantes de la carta
+angular fijada. Una especie aporta coordenadas enteras que ponderan esos
+invariantes, pero no modifica \(q_\pm\) ni introduce una torre propia.
+\end{proposition}
+\begin{proof}
+Cada \(s_n\) es una función de \(q_-\) y \(q_+\). El teorema de inversión de
+canales demuestra que la aplicación conjunta
+\((A,\Cstar)\mapsto(q_+,q_-)\) es inyectiva. No aparece ninguna etiqueta de
+especie en estas definiciones.
+\end{proof}
+
+\begin{theorem}[Completitud reconstructiva de la jerarquía]
+\label{thm:completitud-reconstructiva-torres}
+Sea \(n_1<n_2<\cdots\) la enumeración creciente sin repeticiones de
+\(\mathfrak S\). Para
+\[
+ a_k:=s_{n_k}=q_-^{n_k}-q_+^{n_k}>0,
+\]
+toda razón positiva \(\rho\in\RR_{>0}\) admite una expansión absolutamente
+convergente en la jerarquía:
+\[
+ \boxed{\rho=
+ \exp\!\left(\sum_{k\geq1}\nu_k a_k\right)}
+ \qquad\text{para alguna sucesión }(\nu_k)_{k\geq1}\subset\ZZ.
+\]
+\end{theorem}
+
+\begin{proof}
+Como \(0<q_+<q_-<1\), se cumple
+\[
+ 0<a_k<q_-^{n_k}.
+\]
+Los \(n_k\) son múltiplos de \(30\) no menores que \(90\); por tanto,
+\[
+ \sum_{k\geq1}a_k
+ \leq\sum_{m\geq3}q_-^{30m}
+ =\frac{q_-^{90}}{1-q_-^{30}}<\infty,
+ \qquad a_k\longrightarrow0.
+\]
+Fijemos \(r_0=\log\rho\) y una regla de desempate para el entero más próximo.
+Definimos recursivamente
+\[
+ \nu_k=\operatorname{nint}\!\left(\frac{r_{k-1}}{a_k}\right),
+ \qquad
+ r_k=r_{k-1}-\nu_k a_k.
+\]
+La propiedad del entero más próximo da
+\[
+ |r_k|\leq\frac{a_k}{2}\longrightarrow0.
+\]
+La identidad telescópica
+\[
+ r_0=\sum_{j=1}^{N}\nu_j a_j+r_N
+\]
+implica \(r_0=\sum_{j\geq1}\nu_j a_j\). La convergencia es absoluta, pues
+\[
+ \begin{aligned}
+ \sum_{k\geq1}|\nu_k|a_k
+ &=\sum_{k\geq1}|r_{k-1}-r_k|\\
+ &\leq |r_0|+\frac{a_1}{2}
+ +\frac12\sum_{k\geq2}(a_{k-1}+a_k)<\infty.
+ \end{aligned}
+\]
+Al exponenciar se obtiene la afirmación.
+\end{proof}
+
+\begin{remark}[Alcance y control negativo]
+El teorema es una sobreyectividad reconstructiva del lenguaje de torres sobre
+\(\RR_{>0}\): prueba resolución del codominio, no selección física. El
+algoritmo recibe \(r_0=\log\rho\); si \(\rho\) es una magnitud objetivo, sus
+coeficientes son, por ello, una reconstrucción dependiente del objetivo. La
+procedencia prospectiva requiere otra flecha,
+\[
+ \text{especie}\dashrightarrow\text{extensión}
+ \longrightarrow\text{ruta}\longrightarrow\text{registro}
+ \longrightarrow\text{firma},
+\]
+y no se deduce de esta expansión. La conclusión fallaría si los \(a_k\) no
+tendieran a cero, si la cota del residuo dejara de cumplirse o si la serie de
+errores no fuera sumable.
+\end{remark}
+
+\section{Bloques globales de la acción de masa}
+
+La acción de masa utilizará la terna
+\[
+ \Dfour,\qquad s_{120},\qquad \zCorr=135\Dfour^2.
+\]
+Sus valores se calculan una sola vez. Las coordenadas
+\(k,\nu_{120},\nu_{270}\) de una firma especifican cuántas veces interviene
+cada bloque en el exponente; no cambian su valor.
+
+Conviene distinguir dos objetos que comparten el índice \(270\):
+\[
+ \boxed{\zCorr=135\Dfour^2
+ =1.66922699663643\times10^{-6}}
+\]
+y
+\[
+ \boxed{\sSpec=q_-^{270}-q_+^{270}
+ =2.58145536075096\times10^{-11}.}
+\]
+El primero es un invariante cuadrático construido a partir de \(\Dfour\); el
+segundo es un momento espectral del semigrupo. La coincidencia del subíndice no
+autoriza su identificación.
+
+\section{Combinación de orden superior}
+
+La combinación global
+\[
+ \delta\Dfour^{\rm tower}
+ =\frac{s_{180}}{24}-\frac{s_{240}}{54}
+ -24s_{360}+\frac76s_{420}
+\]
+evalúa a
+\[
+ \delta\Dfour^{\rm tower}
+ =3.632051471908759123889070967\times10^{-9}.
+\]
+La coordenada de comparación utilizada en la selección de los
+coeficientes se define como el dato escalar
+\[
+ \delta\Dfour
+ :=3.632051471908972784661641720\times10^{-9}.
+\]
+Por consiguiente, el residuo de la combinación respecto de esa coordenada es
+\[
+ \delta\Dfour^{\rm tower}-\delta\Dfour
+ =-2.1366077257075\times10^{-22}.
+\]
+La cantidad pequeña es, pues, una diferencia entre dos objetos y no el valor
+de la combinación. Todos los sumandos pertenecen a la misma jerarquía y sus
+coeficientes son globales. Como la coordenada de comparación intervino en la
+selección de los coeficientes, esta igualdad es reconstructiva. La
+combinación no se añade de nuevo a la fórmula electrónica que ya emplea
+\(\Dfour\), pues esa sustitución duplicaría la misma corrección.

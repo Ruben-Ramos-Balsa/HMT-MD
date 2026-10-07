@@ -1,0 +1,49 @@
+\section{Réversibilité logique et principe de Landauer dans les fibres de TPK}
+\label{sec:informacion-fibra-landauer-rev7}
+\index{Landauer}\index{information!fibre}
+
+Soit \((\Omega,2^\Omega,\mu)\) un espace probabilisé fini, soit \(X:\Omega\to\mathcal X\) une variable aléatoire à valeurs dans l’espace \(\mathcal X\) des états complets et soit \(q:\mathcal X\to Y\) un lecteur. La règle de chaîne donne
+\[
+ \mathsf H(X)
+ =
+ \mathsf H(q(X))+\mathsf H(X\mid q(X)).
+\]
+Le deuxième terme mesure l’information de la fibre que le lecteur n’exprime pas.
+
+\begin{theorem}[Coût de Landauer nul pour le transport complet et coût de la projection]
+\label{thm:landauer-relativo-lector-rev7}
+Si \(U:\mathcal X\to\mathcal X\) est une mise à jour bijective de l’état HMT complet, alors
+\[
+ \boxed{\mathsf H(X\mid U(X))=0.}
+\]
+Pour une sortie projetée \(q(U(X))\), l’information écartée est
+\[
+ \mathsf H(X\mid q(U(X))).
+\]
+Une réinitialisation physique qui identifie des états distincts de la mémoire doit comptabiliser cette information dans l’environnement.
+\end{theorem}
+
+\begin{proof}
+La bijectivité implique \(X=U^{-1}(U(X))\) ; \(X\) est donc déterminé par \(U(X)\) et l’entropie conditionnelle est nulle. Pour le lecteur \(q\), la règle de chaîne sépare l’entropie exprimée de l’entropie de la fibre. Si l’opération de réinitialisation n’est pas injective, la sortie ne permet plus de reconstruire l’état de mémoire. Le principe thermodynamique de Landauer borne le coût de l’implémentation en fonction de cette entropie effacée ; la mise à jour réversible ne fournit pas à elle seule de terme d’effacement.
+\end{proof}
+
+En nats et en bits, respectivement,
+\[
+ Q\ge k_B\Theta\,\mathsf H_{\rm nat},
+ \qquad
+ Q\ge k_B\Theta\log 2\,\mathsf H_{\rm bit}.
+\]
+Pour le transport bijectif de l’état complet, l’entropie d’effacement est nulle ; le terme minimal de Landauer associé exclusivement à l’effacement satisfait donc
+\[
+\boxed{Q_{\rm L}^{\min}[U]=k_B\Theta\,
+ \mathsf H(X\mid U(X))=0.}
+\]
+Pour la réinitialisation d’un TRIT uniforme, en revanche,
+\[
+ \boxed{Q_{\rm reset}\ge k_B\Theta\log3.}
+\]
+Ces deux équations situent le coût dans la perte d’information : le coût apparaît lorsque la projection ou la réinitialisation oublie la fibre. La préparation, la projection et la réinitialisation peuvent produire de l’entropie ; le transport réversible conserve l’information généalogique. La valeur nulle est la limite logique de Landauer pour cette mise à jour complète, tandis que les coûts dynamiques de contrôle, de vitesse finie et de couplage à l’environnement relèvent de la réalisation physique du dispositif.
+
+\begin{statusbox}[title={Portée du coût de Landauer nul}]
+L’égalité \(\mathsf H(X\mid U(X))=0\) est exacte pour une mise à jour bijective de l’état enrichi. La borne \(Q_{\rm reset}\ge k_B\Theta\log3\) est la spécialisation de Landauer à l’effacement d’une décision triadique uniforme. La réalisation des deux formules en joules utilise le transducteur de Boltzmann et une température physique déclarée.
+\end{statusbox}

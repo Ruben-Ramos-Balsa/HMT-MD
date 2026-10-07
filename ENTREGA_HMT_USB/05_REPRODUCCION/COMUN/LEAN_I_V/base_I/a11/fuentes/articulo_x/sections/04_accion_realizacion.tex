@@ -1,0 +1,304 @@
+% Procedencia: integral 2249, §25.10--13 y cap. 89; propietarios 02_pantalla_accion,
+% 37_cuerdas_branas_teoria_m, terna_espectral_teoria_m, capitulo_25_pantallas_teoria_m.
+\section{Acción sobre trayectorias y realización dinámica undecadimensional}
+\label{iv:accion-realizacion}
+
+La extensión de la estructura a una dinámica dimensional requiere
+transportar conjuntamente el estado, los canales y los datos de
+frontera. Esta sección comienza por un funcional definido sobre
+las trayectorias del TPK y por su ley exacta de composición.
+La superficie de mundo y el codominio undecadimensional se
+introducen después, con los mapas que deben conservar esa
+composición y los operadores ya construidos.
+
+\subsection{Descenso de una evolución y suficiencia del dato observado}
+
+Sea \(q:\mathcal X_{\mathrm{HMT}}\to Y\) una lectura
+sobreyectiva de los estados con memoria, y sea
+\(U:\mathcal X_{\mathrm{HMT}}\to\mathcal X_{\mathrm{HMT}}\)
+una evolución completa. Una evolución sobre los valores
+observados existe precisamente cuando el dato conservado por
+\(q\) basta para determinar el siguiente valor observado.
+
+\begin{theorem}[Criterio exacto de descenso por fibras]
+\label{iv:thm:descenso-fibras}
+Existe una única aplicación \(\overline U:Y\to Y\)
+que satisfaga \(qU=\overline Uq\) si y sólo si
+\begin{equation}
+ q(x)=q(y)\quad\Longrightarrow\quad q(Ux)=q(Uy).
+ \label{iv:eq:descenso-fibras}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Si existe \(\overline U\), aplicar la misma función a
+\(q(x)=q(y)\) prueba la condición. Recíprocamente, se
+define \(\overline U(q(x))=q(Ux)\). La condición
+\eqref{iv:eq:descenso-fibras} garantiza independencia del
+representante. La sobreyectividad de \(q\) define la
+aplicación en todo \(Y\) y prueba su unicidad.
+\end{proof}
+
+El teorema permite decidir qué memoria debe conservar una
+lectura. Cuando dos representantes tienen imágenes observadas
+diferentes, se puede ampliar el dato retenido, restringir
+el dominio o utilizar una correspondencia multivaluada.
+Son elecciones matemáticas distintas. En particular, el
+retorno de una coordenada de fase no autoriza a identificar
+las evoluciones de dos historias que conserven memorias
+diferentes.
+
+\subsection{Cociclo de cambios direccionales y aritméticos}
+
+Una trayectoria admisible del TPK lleva, en cada arista
+\(e_j\), una dirección \(d_j\) y un tipo aritmético
+\(t_j\). Para contabilizar los cambios en una concatenación,
+se conserva también el dato precedente. La arista aumentada es
+\(\widetilde e_j=(e_j,d_{j-1},t_{j-1})\); la pareja
+\((d_0,t_0)\) forma parte de la frontera inicial. Definimos
+\[
+ w_{\mathrm{giro}}(\widetilde e_j)
+       =\mathbf1_{\{d_j\ne d_{j-1}\}},\qquad
+ w_{\mathrm{tipo}}(\widetilde e_j)
+       =\mathbf1_{\{t_j\ne t_{j-1}\}}.
+\]
+Para \(\widetilde\gamma=(\widetilde e_1,\ldots,
+\widetilde e_R)\), sean
+\begin{equation}
+ \mathbf I(\widetilde\gamma)=
+ \left(\sum_{j=1}^R w_{\mathrm{giro}}(\widetilde e_j),
+       \sum_{j=1}^R w_{\mathrm{tipo}}(\widetilde e_j)\right)
+ =\bigl(N_{\mathrm{giro}},N_{\mathrm{tipo}}\bigr).
+ \label{iv:eq:cociclo-accion}
+\end{equation}
+Dos trayectorias se componen cuando coinciden sus extremos
+y el dato precedente de la segunda coincide con el dato
+terminal de la primera.
+
+\begin{proposition}[Aditividad con frontera conservada]
+\label{iv:prop:accion-aditiva}
+Para toda pareja composable,
+\begin{equation}
+ \mathbf I(\widetilde\gamma\widetilde\eta)
+ =\mathbf I(\widetilde\gamma)+\mathbf I(\widetilde\eta).
+ \label{iv:eq:accion-aditiva}
+\end{equation}
+Por tanto, \(\mathbf I\) es un cociclo aditivo con valores
+en \(\mathbb N^2\) sobre la categoría de trayectorias
+aumentadas. Para cada \(\lambda>0\), el funcional
+\[
+ I_\lambda(\widetilde\gamma)
+ =N_{\mathrm{giro}}(\widetilde\gamma)
+      +\lambda N_{\mathrm{tipo}}(\widetilde\gamma)
+\]
+es también aditivo.
+\end{proposition}
+\begin{proof}
+La concatenación no cambia el dato precedente de ninguna
+arista: el de la primera arista de \(\widetilde\eta\)
+coincide, por la condición de composición, con el terminal
+de \(\widetilde\gamma\). La suma sobre todas las aristas
+se divide exactamente en las dos sumas de
+\eqref{iv:eq:accion-aditiva}. Aplicar el funcional lineal
+\((a,b)\mapsto a+\lambda b\) prueba la última afirmación.
+\end{proof}
+
+La información de frontera es parte efectiva de la prueba.
+Si dos segmentos de una arista se evalúan por separado
+ignorando el enlace entre ellos, ambos pueden tener cuenta
+de giro nula aunque sus direcciones sean diferentes. El
+camino concatenado contiene entonces un giro. Conservar
+\((d_{j-1},t_{j-1})\) registra ese término en la primera
+arista del segundo segmento y restituye la aditividad.
+
+Para extremos y datos de frontera fijados, el principio de
+interacción mínima del corpus selecciona minimizadores de
+\(I_\lambda\) entre las rutas admisibles. El principio
+es una regla de selección, mientras que el siguiente
+resultado establece una propiedad de existencia finita.
+
+\begin{proposition}[Existencia finita de minimizadores]
+Si el conjunto \(\Gamma(a,b)\) de trayectorias admisibles
+con la frontera fijada es finito y no vacío, existe
+\(\gamma_*\in\Gamma(a,b)\) tal que
+\(I_\lambda(\gamma_*)\leq I_\lambda(\gamma)\)
+para todo \(\gamma\in\Gamma(a,b)\).
+\end{proposition}
+\begin{proof}
+La imagen de \(\Gamma(a,b)\) por \(I_\lambda\) es
+un conjunto finito no vacío de números reales, que posee
+un elemento mínimo y al menos una preimagen.
+\end{proof}
+
+La proposición no selecciona el valor de \(\lambda\),
+ni confunde existencia con unicidad. El valor y la regla
+de selección utilizados en una realización determinada
+deben formar parte de sus datos declarados. El funcional
+aditivo recuperado aquí cuantifica cambios del propio
+camino; su transporte a una acción dimensional constituye
+una operación ulterior.
+
+\subsection{Persistencia extendida y superficie de mundo}
+
+La realización de una ruta como objeto extendido distribuye
+su genealogía sobre una coordenada interna. Para una cuerda,
+la historia tiene dos coordenadas locales \(\sigma^a\):
+una espacial interna y otra temporal. Una realización se
+describe por un mapa \(X:\Sigma\to\mathcal M\), una
+métrica \(h_{ab}\) en la superficie de mundo y campos
+de fondo en el espacio objetivo. Las condiciones sobre
+\(\partial\Sigma\) forman parte del dominio variacional.
+Para una brana de dimensión espacial \(p\), la historia
+es un volumen de mundo de dimensión \(p+1\).
+
+El codominio variacional de cuerda que utiliza el corpus
+es la acción de Polyakov
+\begin{equation}
+ S_{\mathrm P}[X,h]
+ =-\frac{T_{\mathrm s}}2\int_\Sigma d^2\sigma\,
+ \sqrt{-h}\,h^{ab}g_{MN}(X)
+             \partial_aX^M\partial_bX^N,
+ \label{iv:eq:polyakov}
+\end{equation}
+donde \(T_{\mathrm s}\) es la tensión. La notación
+\(T_{\mathrm s}\) la distingue de la dualidad
+\(\mathsf T_0\), del transporte cardinal \(T_d\)
+y de la evolución completa \(U\).
+
+La composición de trayectorias aumentadas tiene ya la
+propiedad demostrada en \ref{iv:prop:accion-aditiva}.
+Una realización continua de esa composición debe
+especificar el mapa de caminos a configuraciones,
+su transporte de las condiciones de frontera y la
+normalización que compara \(I_\lambda\) con la acción
+continua. La integral \eqref{iv:eq:polyakov} precisa
+el codominio y sus campos; sus parámetros no eligen
+retroactivamente las emisiones ni los registros del TPK.
+
+\subsection{Realización undecadimensional y operadores graduados}
+
+La reducción dirigida por \(K\) proporciona
+\(V_{11}=\ell_K\oplus V_{10}\), y el teorema
+\ref{iv:thm:pantallas-isomorfas} coordina esa reducción
+con la pantalla reticular y la dualidad. La realización
+física se tipa mediante
+\[
+ \Xi_M:\mathscr S_M^{\mathrm{alg}}
+                  \longrightarrow\mathcal X_{11}^{\mathrm{phys}}.
+\]
+El codominio lleva métrica \(g_{MN}\), tres-forma
+\(C_{MNP}\), gravitino \(\psi_M\), acción,
+restricciones de calibre y transformaciones de
+supersimetría. Una realización operatoria incluye
+\[
+ \mathfrak S_M=(\mathcal H_{\mathrm{phys}},H,Q),\qquad
+ \mathcal H_{\mathrm{phys}}=\mathcal H_+\oplus\mathcal H_-.
+\]
+La graduación se expresa mediante una involución
+\(\Gamma\), igual a \(+I\) en \(\mathcal H_+\)
+y a \(-I\) en \(\mathcal H_-\). La supercarga
+es impar, \(\Gamma Q=-Q\Gamma\), y el
+Hamiltoniano es no negativo. La relación
+\(Q^2=H\) se entiende como igualdad de operadores,
+incluyendo sus dominios.
+
+Sea \(\mathcal H_{\mathrm{HMT}}\) una realización
+hilbertiana de los estados genealógicos pertinentes,
+con operadores \(\widehat H,\widehat Q\). Una
+isometría \(W:\mathcal H_{\mathrm{HMT}}\to
+\mathcal H_{\mathrm{phys}}\) debe transportar
+dominios, graduación y observables. Las condiciones
+operatorias se escriben
+\begin{equation}
+ W\widehat H=HW,\qquad
+ W\widehat Q=QW,\qquad
+ WU_T^{\mathrm{HMT}}=U_T^{\mathrm{phys}}W.
+ \label{iv:eq:entrelazamiento-fisico}
+\end{equation}
+
+\begin{theorem}[Transporte compatible de la supercarga]
+\label{iv:thm:supercarga-transporte}
+Supóngase \(\widehat Q^{\,2}=\widehat H\), que
+\(W D(\widehat Q)\subset D(Q)\), y que los
+entrelazamientos de \eqref{iv:eq:entrelazamiento-fisico}
+se satisfacen en sus dominios. Entonces, para
+\(\psi\in D(\widehat H)=D(\widehat Q^{\,2})\),
+\[
+ W\psi\in D(Q^2),\qquad Q^2W\psi=HW\psi.
+\]
+Si además el transporte físico de los radios respeta
+\eqref{iv:eq:conjugacion-h}, el sector compacto
+transportado conserva su espectro bajo radios recíprocos.
+\end{theorem}
+\begin{proof}
+Como \(\psi\in D(\widehat Q^2)\), tanto
+\(\psi\) como \(\widehat Q\psi\) pertenecen
+a \(D(\widehat Q)\). Por tanto, \(W\psi\in D(Q)\)
+y \(QW\psi=W\widehat Q\psi\in D(Q)\). Se puede
+aplicar \(Q\) de nuevo, y
+\[
+ Q^2W\psi=W\widehat Q^{\,2}\psi
+          =W\widehat H\psi=HW\psi.
+\]
+La igualdad espectral del sector compacto se transporta
+por la isometría y el entrelazamiento unitario de T;
+sobre la imagen cerrada de \(W\), éste es una
+equivalencia unitaria de las realizaciones correspondientes.
+\end{proof}
+
+El teorema conserva explícitamente los operadores y el
+dominio sobre el que se prueba la identidad. La
+graduación organiza dos sectores; la construcción de
+campos fermiónicos y sus relaciones de ocupación posee
+su propia estructura. Las distribuciones térmicas y el
+catálogo de especies no se utilizan en la demostración
+de las pantallas ni en la dualidad compacta de este
+artículo.
+
+\subsection{Compactificación compatible y conclusión del desarrollo}
+
+Una compactificación del estado se describe mediante
+una sección prolongable \(x_\infty\), un mapa
+\(\kappa_{\mathrm{comp}}\) hacia el espacio de módulos
+elegido y un transporte \(\mathcal U\) de los datos
+de métrica, orientación, frontera y memoria. El
+subíndice distingue este mapa de la lectura racional
+\(\kappa\) del registro dodecafásico. Su compatibilidad
+exige cuatro propiedades concretas:
+\begin{enumerate}
+\item las restricciones finitas de \(x_\infty\)
+      pertenecen a las prolongaciones admisibles del TPK;
+\item el mapa de compactificación entrelaza las dualidades,
+      \(\kappa_{\mathrm{comp}}\mathsf T
+        =\mathsf T_M\kappa_{\mathrm{comp}}\);
+\item los observables y el espectro descienden a los
+      cocientes elegidos conforme al criterio
+      \ref{iv:thm:descenso-fibras};
+\item la realización transporta la dirección
+      \(\ell_K\), las condiciones de frontera y los
+      dominios operatorios, y conserva las ecuaciones
+      de acción y supersimetría declaradas.
+\end{enumerate}
+
+Las pruebas precedentes proporcionan la realización
+hilbertiana de fase, el cierre tracial, las pantallas
+con sus mapas de cociente, la involución de radio,
+su equivalencia unitaria y el cociclo aditivo de
+trayectorias. La realización undecadimensional
+especifica los campos y las compatibilidades que
+utiliza al recibir esa estructura. Su identificación
+física completa conserva, además, las condiciones
+de tensión, osciladores, amplitudes, anomalías y
+límite de baja energía que enumera el corpus.
+Estas condiciones no alteran las identidades
+algebraicas demostradas: delimitan la afirmación
+posterior que se obtiene al transportarlas.
+
+La prolongación excepcional y la dimensional
+permanecen vinculadas por su origen común. El
+Monstruo actúa en la construcción graduada
+\(V^\natural\); el Hamiltoniano compacto y las
+pantallas reciben los datos de otros mapas del
+mismo estado. Esta formulación conserva el
+contenido positivo de la doble realización,
+con sus operaciones, sus pruebas y la información
+transmitida en cada etapa (teorema~\ref{iv:thm:supercarga-transporte}).

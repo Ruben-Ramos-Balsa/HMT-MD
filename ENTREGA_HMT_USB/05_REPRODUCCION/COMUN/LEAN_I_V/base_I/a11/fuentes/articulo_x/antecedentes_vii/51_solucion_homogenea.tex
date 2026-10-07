@@ -1,0 +1,143 @@
+% FORMALIZACION_NUEVA de la realización homogénea preexistente.
+% Prioridad de la fórmula integrada: procedencia histórica pendiente de cotejo.
+% Conserva la ecuación y el dominio del capítulo de rebote; no selecciona s_0.
+\section{Solución homogénea explícita y completitud causal}
+\label{vii:sec:solucion-homogenea}
+La determinación de la amplitud permite desarrollar una realización
+completa del rebote, además del argumento local. Se conserva la carta
+espacialmente plana de \eqref{vii:eq:dinamica-homogenea}, en unidades
+\(c=1\), con \(\rho_0,s_0,G>0\), y se especializa el sector material
+a polvo, \(w=0\), con \(\Lambda_{\mathrm{eff}}=0\).
+El coeficiente \(s_0\) es el obtenido del estado
+material en la realización correspondiente; la integración siguiente
+emplea ese coeficiente y conserva su dominio.
+
+\begin{theorem}[Integración exacta del rebote de polvo]
+\label{vii:thm:rebote-polvo}
+Pongamos
+\[
+ a_{\rm b}^3=\frac{s_0}{\rho_0},\qquad
+ \tau^2=\frac{s_0}{6\pi G\rho_0^2},\qquad u=t-t_{\rm b}.
+\]
+La solución del sistema homogéneo con
+\(a(t_{\rm b})=a_{\rm b}\) y \(H(t_{\rm b})=0\) es, para todo
+\(t\in\mathbb R\),
+\begin{equation}
+ a(t)=a_{\rm b}\left(1+\frac{u^2}{\tau^2}\right)^{1/3},
+ \qquad H(t)=\frac{2u}{3(\tau^2+u^2)},\qquad
+ \dot H(t)=\frac{2(\tau^2-u^2)}{3(\tau^2+u^2)^2}.
+ \label{vii:eq:solucion-polvo}
+\end{equation}
+Tiene un único mínimo, en \(t_{\rm b}\); es contractiva antes y
+expansiva después. La evolución es suave y satisface
+\(a(t)\geq a_{\rm b}>0\).
+\end{theorem}
+\begin{proof}
+Sea \(y=a^3\). La ecuación de Friedmann da
+\[
+ \dot y^{\,2}=24\pi G(\rho_0y-s_0).
+\]
+La función \(y=s_0/\rho_0+6\pi G\rho_0u^2\) verifica esa
+identidad y las condiciones iniciales. Sus derivadas dan las
+tres expresiones de \eqref{vii:eq:solucion-polvo}. Para comprobar
+también la ecuación de evolución, escribamos
+\[
+ \rho_{\rm b}=\frac{\rho_0^2}{s_0},\qquad
+ x=\frac{u}{\tau}.
+\]
+Entonces
+\[
+ \rho_{\rm m}=\frac{\rho_{\rm b}}{1+x^2},\qquad
+ \rho_{\rm s}=\frac{\rho_{\rm b}}{(1+x^2)^2},\qquad
+ 4\pi G\rho_{\rm b}=\frac{2}{3\tau^2}.
+\]
+Sustituir en \(\dot H=-4\pi G(\rho_{\rm m}-2\rho_{\rm s})\)
+da exactamente la tercera fórmula. Se satisface, por tanto,
+el sistema completo \((\dot a,\dot H)\), cuyo campo es suave
+para \(a>0\). Su unicidad local, prolongada sobre la solución
+explícita, fija la evolución por esas condiciones iniciales.
+El denominador es positivo para todo \(t\), y las afirmaciones
+sobre el mínimo y el signo siguen de \(H\).
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.45cm,y=1.15cm,>=Latex]
+\draw[->] (-3.25,0)--(3.3,0) node[right] {\(\displaystyle u/\tau\)};
+\draw[->] (0,0)--(0,2.8) node[above] {\(\displaystyle a/a_{\rm b}\)};
+\draw[densely dashed,gray] (-3.1,1)--(3.1,1);
+\draw[very thick,ink,domain=-3:3,samples=121,smooth]
+ plot (\x,{(1+\x*\x)^(1/3)});
+\fill[accent] (0,1) circle (1.6pt);
+\node[anchor=north east] at (-.08,.98) {\(1\)};
+\node[ink] at (-2,2.65) {Contracción};
+\node[ink] at (2,2.65) {Expansión};
+\foreach \t in {-3,-2,-1,1,2,3}
+{\draw (\t,.045)--(\t,-.045) node[below] {\(\t\)};}
+\end{tikzpicture}
+\caption{Perfil adimensional de la solución demostrada:
+\(a/a_{\rm b}=(1+(u/\tau)^2)^{1/3}\).
+Los parámetros \(a_{\rm b}\) y \(\tau\) se calculan desde
+\(\rho_0,s_0,G\); el dibujo representa toda la familia reescalada.}
+\label{vii:fig:rebote-polvo}
+\end{figure}
+
+\subsection{Curvatura finita y extensión de las geodésicas}
+La métrica realizada en esta carta es
+\(g=-dt^2+a(t)^2\,d\mathbf x^2\) sobre
+\(\mathbb R\times\mathbb R^3\). Con la convención en que
+el escalar de curvatura plano es \(R=6(\dot H+2H^2)\), la solución da
+\[
+ R(t)=\frac{4\tau^2+\frac43u^2}{(\tau^2+u^2)^2}.
+\]
+En particular, \(R(t_{\rm b})=4/\tau^2\) es finito.
+En un marco ortonormal, las componentes de Riemann dependen de
+\(H^2\) y de \(\dot H+H^2\), que son funciones acotadas en
+\(\mathbb R\). Lo mismo ocurre con las contracciones polinómicas
+de esas componentes; por ejemplo,
+\[
+ R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}
+ =12\bigl[(\dot H+H^2)^2+H^4\bigr].
+\]
+
+\begin{proposition}[Completitud de las geodésicas causales]
+\label{vii:prop:completitud-causal-polvo}
+La realización métrica precedente es geodésicamente completa
+para las geodésicas temporales y nulas de su conexión de
+Levi--Civita, en ambas direcciones.
+\end{proposition}
+\begin{proof}
+Las traslaciones espaciales proporcionan las constantes
+\(p_i=a^2\,dx^i/d\lambda\). La normalización causal da
+\[
+ \left|\frac{dt}{d\lambda}\right|
+ =\sqrt{\epsilon+\frac{|\mathbf p|^2}{a(t)^2}},
+ \qquad \epsilon=1\ \text{en el caso temporal},\quad
+ \epsilon=0\ \text{en el caso nulo}.
+\]
+Una geodésica nula no constante tiene \(|\mathbf p|>0\).
+Como \(a\geq a_{\rm b}\), en el caso temporal
+\[
+ \left|\frac{d\lambda}{dt}\right|
+ \geq\left(1+\frac{|\mathbf p|^2}{a_{\rm b}^2}\right)^{-1/2}>0,
+\]
+y en el nulo
+\(\left|d\lambda/dt\right|=a/|\mathbf p|
+ \geq a_{\rm b}/|\mathbf p|>0\).
+Así, alcanzar \(t=\pm\infty\) requiere longitud afín infinita.
+En un intervalo temporal compacto, \(a\) y sus derivadas son
+suaves y \(a\) está separado de cero. Las ecuaciones explícitas
+anteriores y \(dx^i/d\lambda=p_i/a^2\) permiten continuar la
+geodésica a través de sus extremos finitos. Quedan cubiertas
+las dos posibilidades de prolongación.
+\end{proof}
+
+El resultado de completitud pertenece a esta realización homogénea de
+polvo, con sus condiciones de espacio, materia y amplitud. Su
+persistencia local bajo perturbaciones del umbral conserva las cotas
+del teorema~\ref{vii:thm:persistencia}; esa propiedad local y la
+completitud global de la solución explícita son conclusiones distintas.
+La escala mínima procede de la relación entre densidad material y
+respuesta torsional. La memoria interviene así en una evolución
+geométrica verificable, con una realización regular de la contracción
+y la expansión.

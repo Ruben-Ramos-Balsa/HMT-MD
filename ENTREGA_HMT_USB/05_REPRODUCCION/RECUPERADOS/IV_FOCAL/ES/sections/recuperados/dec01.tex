@@ -1,0 +1,94 @@
+\subsubsection{Alfabeto decimal y congruencia de control del emisor}
+\label{sec:rec27-codigo}
+
+Se conserva la ley emisora de \eqref{act21:tpk:bloque-decimal},
+con las lecturas APP y el observable \(\ell_9\) de
+\eqref{act21:tpk:logaritmo}, los cursores de
+\ref{act21:tpk:operaciones} y el calendario de seis ventanas de
+\ref{act21:tpk:emision}. Los acumuladores son \(S_m,E_m,Z_m\), con
+\(Z_m=3\), y las cifras de salida se denotan \(d_{m,1},d_{m,2},d_{m,3}\).
+La proposición~\ref{act21:tpk:recuperacion-firmas} recupera ya las dos
+firmas residuales. Su combinación con las imágenes efectivas de los
+acumuladores determina el alfabeto siguiente.
+
+\begin{proposition}[Congruencia de control de la tercera cifra]
+Cada bloque emitido satisface
+\[
+ d_{m,3}=[5d_{m,2}-2d_{m,1}+1]_{10}.
+\]
+\end{proposition}
+\begin{proof}
+La inversa de la proposición~\ref{act21:tpk:recuperacion-firmas}
+da \([E_m]_{10}=[d_{m,2}-d_{m,1}]_{10}\). Sustituyendo
+$E_m\equiv d_{m,2}-d_{m,1}\pmod{10}$ y $Z_m=3$ en la tercera cifra se obtiene
+$3d_{m,1}+5(d_{m,2}-d_{m,1})+21\equiv5d_{m,2}-2d_{m,1}+1\pmod{10}$.
+\end{proof}
+
+\begin{proposition}[Alfabeto decimal de cuarenta y dos bloques]
+La imagen del emisor por ventana consta exactamente de los bloques
+\[
+\begin{array}{c|rrrrrrr}
+[E_m]_{10}&\multicolumn{7}{c}{U_m}\\ \hline
+0&114&227&443&556&669&885&998\\
+1&129&232&458&561&674&890&903\\
+3&149&252&478&581&694&810&923\\
+5&169&272&498&501&614&830&943\\
+7&189&292&418&521&634&850&963\\
+9&109&212&438&541&654&870&983
+\end{array}
+\]
+\end{proposition}
+\begin{proof}
+Una trayectoria cardinal lee tres términos consecutivos del ciclo aditivo
+\[
+ (2,3,4,5,6,7,8,9,1).
+\]
+Sus sumas son
+$(9,12,15,18,21,24,18,12,6)$; invertir la dirección conserva el conjunto
+de sumas. Por tanto
+\[
+ \operatorname{Im}S_m=\{6,9,12,15,18,21,24\},\qquad
+ \operatorname{Im}[S_m]_{10}=\{1,2,4,5,6,8,9\}.
+\]
+En el canal multiplicativo, un factor fijo divisible por tres aporta cero.
+Para los factores invertibles, las sumas cíclicas de tres lecturas son
+\[
+\begin{array}{c|c}
+\text{factor fijo}&\text{sumas posibles}\\\hline
+1,8&\{1,3,7,9\}\\
+2,7&\{3,5,9\}\\
+4,5&\{1,5,7\}
+\end{array}
+\]
+De aquí resulta $\operatorname{Im}E_m=\{0,1,3,5,7,9\}$.
+La alcanzabilidad puede verificarse ya en la primera ventana: todos los
+cursores de las dos tablas siguientes tienen dirección $E$.
+\[
+\begin{array}{c|rrrrrrr}
+S_1&6&9&12&15&18&21&24\\\hline
+(i_+,j_+)&(0,8)&(0,0)&(0,1)&(0,2)&(0,3)&(0,4)&(0,5)
+\end{array}
+\]
+\[
+\begin{array}{c|rrrrrr}
+E_1&0&1&3&5&7&9\\\hline
+(i_\times,j_\times)&(2,0)&(0,0)&(0,1)&(1,1)&(0,2)&(0,4)
+\end{array}
+\]
+La independencia de ambos cursores realiza cada uno de los $7\cdot6$
+pares. Las dos primeras cifras recuperan el par residual, de modo que sus
+42 imágenes son distintas. La congruencia de control fija la tercera cifra
+y produce exactamente la tabla enunciada.
+\end{proof}
+
+El bloque decimal conserva así las dos firmas residuales mediante una
+codificación inyectiva y una cifra de control. Este resultado describe el
+alfabeto del emisor finito; la prolongación de las lecturas regionales
+conserva además las condiciones de fase, orientación y memoria del estado
+enriquecido.
+
+La imagen por ventana tiene, por tanto, \(42\) bloques. La concatenación
+compatible de seis ventanas conserva el censo de \(468\) emisiones de
+la proposición~\ref{act21:tpk:468}, cuya reducción ternaria produce
+\(243\) palabras en el ambiente de \(729\). Cada cardinal cuenta el
+objeto de su etapa y conserva la procedencia del mismo emisor.

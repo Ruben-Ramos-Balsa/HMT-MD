@@ -1,0 +1,156 @@
+\label{chap:p3-83-46-godel_turing}
+
+\section{Decidibilidad efectiva de cada ventana finita de multiplicidades proyectivas}
+
+\begin{proposition}
+Fijada una profundidad \(N\), si los dominios son finitos y los observables
+atómicos son computables, toda fórmula del lenguaje finito
+\(L_N\) es semánticamente decidible.
+\end{proposition}
+
+\begin{proof}
+Las fórmulas atómicas se calculan; las conectivas se deciden por tablas de
+verdad; cada cuantificador recorre un dominio finito. Se concluye por
+inducción sobre la complejidad sintáctica.
+\end{proof}
+
+La decidibilidad de cada ventana no proporciona necesariamente un solo
+algoritmo que decida una propiedad de la torre completa.
+
+\section{Torre efectiva asociada al cómputo de multiplicidades proyectivas}
+
+Sea \(T_e\) la máquina de Turing de índice \(e\). Para cada \(n\), definimos
+\[
+ X_n^e
+ =
+ \{b_n\}
+ \cup
+ \{c_n:T_e\text{ no se ha detenido en sus primeros }n\text{ pasos}\}.
+\]
+Los enlaces conservan las etiquetas existentes:
+\[
+  p_{n+1,n}(b_{n+1})=b_n,
+  \qquad
+  p_{n+1,n}(c_{n+1})=c_n.
+\]
+La torre visible posee un solo símbolo \(v_n\), y
+\[
+  q_n(b_n)=q_n(c_n)=v_n.
+\]
+
+\begin{theorem}[Multiplicidad global y parada]
+\label{p3-83-c46-s1:thm:halt-fibre}
+\[
+ \#q_\infty^{-1}(\boldsymbol v)
+ =
+ \begin{cases}
+ 1,&T_e\text{ se detiene},\\
+ 2,&T_e\text{ nunca se detiene}.
+ \end{cases}
+\]
+Por tanto, no existe un algoritmo total que decida la unicidad de la fibra
+global para todas las torres efectivas de esta familia.
+\end{theorem}
+
+\begin{proof}
+La rama \(\boldsymbol b=(b_n)\) existe siempre. Si \(T_e\) se detiene en el
+paso \(h\), los estados \(c_n\) desaparecen a partir de \(h\) y no forman una
+sección global. Si nunca se detiene, \(\boldsymbol c=(c_n)\) es una segunda
+sección. Un decisor de la unicidad resolvería \(\HALT\), contradiciendo
+\citep{turing1936}.
+\end{proof}
+
+Definimos
+\[
+  U_e:\#q_\infty^{-1}(\boldsymbol v)=1.
+\]
+Entonces \(U_e\iff T_e\downarrow\).
+
+\begin{theorem}[Incompletitud uniforme]
+\label{p3-83-c46-s1:thm:uniform-incompleteness}
+Sea \(\mathsf T\) una teoría recursivamente axiomatizable que formaliza las
+torres \(X^e\) y es semánticamente correcta para \(U_e\) y
+\(\neg U_e\). Entonces \(\mathsf T\) no decide todos los \(U_e\).
+\end{theorem}
+
+\begin{proof}
+Si decidiera cada \(U_e\), para un índice \(e\) se enumerarían en paralelo
+las pruebas de \(U_e\) y \(\neg U_e\) hasta encontrar una. Por corrección,
+la primera aparecería exactamente cuando la máquina se detiene y la segunda
+cuando no. Se obtendría un decisor de \(\HALT\).
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[>=Latex,node distance=11mm and 15mm,
+  box/.style={rounded corners,draw=hmtblue,fill=hmtlightblue,
+    minimum width=39mm,minimum height=13mm,align=center},
+  warn/.style={rounded corners,draw=hmtred,fill=hmtlightred,
+    minimum width=39mm,minimum height=13mm,align=center}]
+  \node[box] (sim) {simulación finita de \(T_e\)};
+  \node[box,below=of sim] (levels) {\(X_n^e\) computable\\para cada \(n\)};
+  \node[box,below=of levels] (fibre)
+    {\(\#q_\infty^{-1}(v)=1\iff T_e\downarrow\)};
+  \node[warn,below left=of fibre] (undec) {sin decisor uniforme};
+  \node[warn,below right=of fibre] (inc)
+    {teoría efectiva correcta\\incompleta para los \(U_e\)};
+  \draw[->,thick,hmtblue] (sim)--(levels);
+  \draw[->,thick,hmtblue] (levels)--(fibre);
+  \draw[->,thick,hmtred] (fibre)--(undec);
+  \draw[->,thick,hmtred] (fibre)--(inc);
+\end{tikzpicture}
+\caption{De la decisión finita a la incompletitud uniforme.}
+\label{p3-83-c46-s1:fig:godel-turing}
+\end{figure}
+
+\section{Completitud finita de los niveles HMT y dominio exacto de la obstrucción Gödel--Turing}
+
+El nombre académico utilizado es:
+\[
+\boxed{\text{Teorema HMT de incompletitud uniforme para multiplicidades
+proyectivas}.}
+\]
+También se emplea la denominación abreviada «tercer resultado de Gödel en
+HMT». La prueba
+es Gödel--Turing: no reproduce la diagonal autorreferente de
+\cite{goedel1931}, sino que reduce HALT a la multiplicidad de una fibra.
+
+\begin{remark}[Condiciones de validez]
+El teorema no prueba inconsistencia de ZFC. Tampoco impide demostrar
+directamente que una torre particular posea una sección única. Impide un
+procedimiento universal de unicidad para todas las torres efectivas.
+\end{remark}
+
+% REMATE_LOCAL_GODEL_CONCLUSION
+\Needspace{25\baselineskip}
+\section{Relación exacta con las \(9\) fases del Topological Phase Kernel}
+
+Las \(9\) fases del TPK aportan un algoritmo concreto que, con sus lectores declarados,
+particiona el bloque de refinamiento en \(729\) subcilindros y selecciona uno de ellos
+en cada etapa finita.
+El paso a la sección infinita usa un teorema global de no vaciedad,
+compatibilidad y unitariedad.
+
+El resultado Gödel--Turing dice:
+\[
+\text{no existe un decisor de unicidad para toda torre efectiva}.
+\]
+No dice:
+\[
+\text{ninguna torre concreta puede tener una prueba uniforme propia}.
+\]
+Y una prueba particular no proporciona el decisor universal prohibido.
+
+
+\begin{remark}[Conclusión estructural]
+Decisión finita, existencia del límite, unicidad de una instancia y decisión
+uniforme de todas las instancias son cuatro niveles. El cierre holográfico
+exige declararlos en lugar de trasladar automáticamente una propiedad de un
+nivel a otro.
+\end{remark}
+
+\begin{remark}[Separación de resultados y alcance]
+La torre reductora, la equivalencia \(U_e\iff T_e\downarrow\) y el teorema
+metamatemático son \emph{resultados establecidos en las secciones precedentes}. La posición central dentro
+del cierre del infinito es una organización expositiva que no altera el contenido lógico ni el dominio del teorema.
+\end{remark}

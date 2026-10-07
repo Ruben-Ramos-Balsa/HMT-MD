@@ -1,0 +1,605 @@
+\section{Transports nonadiques et conservation de la mémoire}
+\label{sec:nonadic}
+
+La reconstruction de la section~\ref{sec:memory} fournit un lien effectif entre la mémoire du transport et la géométrie du registre dodécaphasique. Le registre engendré par APP--TRIT--TPK détermine ses lectures d'incidence ; les deux compressions conservent, dans des composantes séparées, la représentation terminale et ses compléments ; la réunion des mémoires avec la charge restitue les douze coordonnées. La direction géométrique et le projecteur dimensionnel sont obtenus après cette restitution. Le développement suivant établit le bilan opératoriel soutenant cette chaîne et son comportement sous raffinement, réalisation spectrale et changement de métrique \cite{HMT-VIII,hmtX}.
+
+\subsection{Calendrier à neuf phases et décomposition orthogonale}
+
+Soit \(\mathcal H\) un espace de Hilbert complexe et soit
+\(C\in\mathcal B(\mathcal H)\). La somme orthogonale de neuf copies,
+\(\mathcal H^{\oplus9}\), conserve séparément les neuf positions
+du calendrier. Nous définissons
+\begin{equation}
+ \begin{split}
+ S_C(v_0,\ldots,v_8)&=(Cv_8,v_0,\ldots,v_7),\\
+ J:\mathcal H\longrightarrow\mathcal H^{\oplus9},
+ \qquad Jv&=\frac13(v,\ldots,v).
+ \end{split}
+ \label{nt:calendar}
+\end{equation}
+La normalisation \(1/3=9^{-1/2}\) donne \(J^*J=I\). L'opérateur \(P=JJ^*\) est la projection orthogonale sur la section uniforme ; son action remplace les neuf composantes par leur moyenne. Chaque composante traverse une fois la jonction qui contient \(C\) pendant un tour, de sorte que
+\begin{equation}
+ S_C^9=I_9\otimes C.
+ \label{nt:full-return}
+\end{equation}
+Le retour de la position du calendrier réalise ainsi une action de
+\(C\) sur la fibre de mémoire.
+
+\begin{definition}
+La compression uniforme du transport et son complément sont
+\begin{equation}
+ T_C=J^*S_CJ=\frac{8I+C}{9},
+ \qquad
+ \eta_C=(I-P)S_CJ.
+ \label{nt:compression}
+\end{equation}
+La première application a pour codomaine \(\mathcal H\) ; la seconde
+a pour codomaine \(J(\mathcal H)^\perp\subset\mathcal H^{\oplus9}\).
+\end{definition}
+
+Pour \(z=(C-I)v\), le complément s'écrit
+\begin{equation}
+ \eta_Cv=\frac1{27}(8z,-z,-z,-z,-z,-z,-z,-z,-z).
+ \label{nt:complement}
+\end{equation}
+La somme de ses composantes est nulle. Les coefficients de la
+décomposition proviennent donc de la moyenne de huit
+continuations identiques et d’une continuation transportée.
+
+\begin{proposition}[Bilan de la compression et de la jonction de mémoire]
+Pour tout \(C\in\mathcal B(\mathcal H)\),
+\begin{align}
+ \eta_C^*\eta_C
+   &=\frac8{81}(I-C)^*(I-C),\label{nt:eta-gram}\\
+ I-T_C^*T_C
+   &=\eta_C^*\eta_C+\frac19(I-C^*C).\label{nt:general-balance}
+\end{align}
+Si \(C^*C=I\), l'application \(v\mapsto(T_Cv,\eta_Cv)\) est isométrique.
+\end{proposition}
+
+\begin{proof}
+L’expression~\eqref{nt:complement} donne
+\[
+ \|\eta_Cv\|^2
+ =\frac{8^2+8}{27^2}\|(C-I)v\|^2
+ =\frac8{81}\|(C-I)v\|^2.
+\]
+La polarisation prouve~\eqref{nt:eta-gram}. D’autre part,
+\[
+ T_C^*T_C
+ =\frac{64I+8C+8C^*+C^*C}{81}.
+\]
+En additionnant \eqref{nt:eta-gram}, on obtient
+\[
+ T_C^*T_C+\eta_C^*\eta_C=\frac{8I+C^*C}{9}.
+\]
+Soustraire ce résultat de \(I\) donne~\eqref{nt:general-balance}. Lorsque \(C^*C=I\), la somme des deux produits de Gram est l'identité, ce qui conserve tous les produits scalaires.
+\end{proof}
+
+Le terme \(\eta_C^*\eta_C\) mesure la dispersion entre les neuf
+composantes. Le terme \((I-C^*C)/9\) enregistre, séparément,
+la variation de la norme dans la réunion de mémoire. La réalisation
+unitaire situe toute la variation visible dans le premier terme et
+conserve la norme dans la somme orthogonale complète.
+
+\begin{proposition}[Conservation d’un observable]
+Soient \(C\) unitaire et \(A=A^*\in\mathcal B(\mathcal H)\) tels que
+\(C^*AC=A\). Alors
+\begin{equation}
+ A=T_C^*AT_C+
+   \eta_C^*(I_9\otimes A)\eta_C
+  =T_C^*AT_C+\frac8{81}(I-C)^*A(I-C).
+ \label{nt:observable-balance}
+\end{equation}
+Pour \(A\succeq0\), les deux termes de la somme sont positifs.
+\end{proposition}
+
+\begin{proof}
+La formule du complément, appliquée au produit sesquilinéaire
+défini par \(A\), prouve la seconde égalité. Le développement des
+deux termes donne
+\[
+ \frac1{81}\bigl(
+ 64A+8AC+8C^*A+C^*AC
+ +8A-8AC-8C^*A+8C^*AC\bigr)
+ =\frac{8A+C^*AC}{9}=A.
+\]
+La positivité est conservée sous une application de la forme \(B\mapsto L^*BL\).
+\end{proof}
+
+\subsection{Itération de la compression et conservation du secteur fixe}
+
+On fixe dans cette sous-section un opérateur unitaire \(C\) et l'on écrit \(T=T_C\), \(\eta=\eta_C\). Le transport \(S_C^N\) maintient toutes les phases pendant \(N\) étapes. La puissance \(T^N\), en revanche, applique successivement la compression uniforme ; à chaque étape, \(\eta T^jv\) conserve le complément de la représentation précédente. La distinction est exprimée par les opérateurs suivants.
+
+\begin{proposition}[Registre isométrique à horizon fini]
+Pour tout entier \(N\geq1\), l’application
+\begin{equation}
+ V_Nv=(T^Nv,\eta v,\eta Tv,\ldots,\eta T^{N-1}v)
+ \label{nt:finite-record}
+\end{equation}
+de \(\mathcal H\) dans
+\(\mathcal H\oplus(\mathcal H^{\oplus9})^{\oplus N}\)
+est isométrique. Si \(A\) satisfait les hypothèses de
+\eqref{nt:observable-balance}, alors
+\begin{equation}
+ A=T^{*N}AT^N+
+ \sum_{j=0}^{N-1}T^{*j}\eta^*(I_9\otimes A)\eta T^j.
+ \label{nt:telescopy}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Multiplier~\eqref{nt:observable-balance} par \(T^{*j}\) et
+\(T^j\) donne
+\[
+ T^{*j}AT^j-T^{*(j+1)}AT^{j+1}
+ =T^{*j}\eta^*(I_9\otimes A)\eta T^j.
+\]
+La somme télescopique prouve~\eqref{nt:telescopy}. Pour \(A=I\),
+le membre de droite est le produit de Gram de \(V_N\).
+Le passage de \(N\) à \(N+1\) remplace uniquement \(T^Nv\) par
+\((T^{N+1}v,\eta T^Nv)\), en conservant toutes les composantes
+de mémoire précédemment produites.
+\end{proof}
+
+\begin{theorem}[Limite de la compression et mémoire illimitée]
+Soit \(P_{\mathrm{fix}}\) la projection orthogonale sur
+\(\ker(I-C)\). Alors
+\begin{align}
+ \operatorname*{s\!-\!lim}_{N\to\infty}T^N
+   &=P_{\mathrm{fix}},\label{nt:strong-limit}\\
+ I&=P_{\mathrm{fix}}+
+ \sum_{j=0}^{\infty}T^{*j}\eta^*\eta T^j.\label{nt:infinite-record}
+\end{align}
+La série converge fortement. Pour tout observable borné
+autoadjoint qui satisfait \(C^*AC=A\), on conserve en outre
+\begin{equation}
+ A=P_{\mathrm{fix}}AP_{\mathrm{fix}}+
+ \sum_{j=0}^{\infty}
+ T^{*j}\eta^*(I_9\otimes A)\eta T^j.
+ \label{nt:infinite-observable}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Le théorème spectral de l’opérateur unitaire réalise \(C\) comme
+la fonction coordonnée \(z\) sur le cercle unité.
+La compression correspond à \(t(z)=(8+z)/9\), et
+\begin{equation}
+ 1-|t(z)|^2=\frac8{81}|1-z|^2,
+ \qquad |z|=1.
+ \label{nt:circular-defect}
+\end{equation}
+Ainsi, \(t(z)^N\) converge vers zéro en chaque \(z\ne1\) et conserve
+la valeur un en \(z=1\). La borne \(|t(z)^N|\leq1\) permet
+d’appliquer la convergence dominée à chaque mesure spectrale vectorielle.
+On obtient~\eqref{nt:strong-limit} et, par le même argument,
+\(T^{*N}\to P_{\mathrm{fix}}\) fortement. Le caractère borné de
+\(A\), avec \(\|T^N\|\leq1\), donne
+\(T^{*N}AT^N\to P_{\mathrm{fix}}AP_{\mathrm{fix}}\).
+La limite de~\eqref{nt:telescopy} prouve les deux identités.
+\end{proof}
+
+Le registre
+\[
+ V_\infty v=(P_{\mathrm{fix}}v,\eta v,\eta Tv,\eta T^2v,\ldots)
+\]
+est, par conséquent, une isométrie. Le secteur fixe conserve la partie qui persiste dans la représentation terminale ; les autres composantes demeurent dans la mémoire des compléments.
+
+Pour le décalage bilatéral
+\(C e_n=e_{n+1}\) dans \(\ell^2(\mathbb Z)\), une suite fixe
+est constante. La condition de sommabilité des carrés impose son
+annulation, de sorte que \(P_{\mathrm{fix}}=0\). Toute la norme
+est alors représentée dans les compléments. Le spectre de
+ce décalage est le cercle complet, et le maximum
+spectral de \(|t(z)|^N\) est un ; d’où
+\(\|T^N\|=1\) pour chaque \(N\). La convergence forte conserve
+ce comportement non uniforme.
+
+Pour une permutation cyclique de \(d\) positions, le secteur fixe est la droite des vecteurs uniformes. Si la permutation possède plusieurs orbites, chaque orbite apporte sa propre direction uniforme. Cette dimension détermine la partie terminale qui doit être conservée.
+
+\begin{proposition}[Compression d’un transport d’ordre trois]
+Soit \(C\) unitaire et \(C^3=I\). Alors
+\begin{equation}
+ P_{\mathrm{fix}}=\frac{I+C+C^2}{3},
+ \qquad
+ T_C^*T_C=P_{\mathrm{fix}}+
+ \frac{19}{27}(I-P_{\mathrm{fix}}).
+ \label{nt:order-three}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La moyenne des trois puissances est le projecteur orthogonal
+sur les vecteurs fixes. Comme \(C^*=C^2\),
+\[
+ T_C^*T_C=\frac{65I+8(C+C^2)}{81}
+ =\frac{57I+24P_{\mathrm{fix}}}{81},
+\]
+qui coïncide avec~\eqref{nt:order-three}.
+\end{proof}
+
+Dans la réalisation à douze positions de \(\mathbb R^{12}\), \((Sx)_i=x_{i+1}\) avec indices modulo douze, \(S^3\) est d'ordre quatre et \(S^4\) est d'ordre trois. Les quatre orbites de \(S^4\) donnent \(\operatorname{rank}P_{\mathrm{fix}}=4\). La réalisation exceptionnelle \(g_c\) de l'article~X satisfait \(g_c^3=I\) et \(\ker(I-g_c)=0\) dans son propre espace porteur ; dans celle-ci,~\eqref{nt:order-three} se réduit à \(T_{g_c}^*T_{g_c}=19I/27\) \cite{hmtX}. Le coefficient et le secteur fixe sont transportés conjointement avec le domaine.
+
+La contraction radiale \(M=qC\), \(0<q<1\), possède un autre registre
+exact :
+\begin{equation}
+ L_Nv=\bigl(\sqrt{1-q^2}\,v,
+ \sqrt{1-q^2}\,qCv,\ldots,
+ \sqrt{1-q^2}\,q^{N-1}C^{N-1}v,q^NC^Nv\bigr).
+ \label{nt:radial-record}
+\end{equation}
+Son produit de Gram est l’identité car
+\((1-q^2)\sum_{j=0}^{N-1}q^{2j}+q^{2N}=1\).
+Le terminal a pour norme \(q^N\|v\|\), et le registre infini
+conserve le produit scalaire. Le facteur \(q=5/9\) du mode
+différentiel central de l’article~VIII s’applique à un tour
+complet ; sa répartition uniforme entre neuf étapes utilise
+\(q^{1/9}S_C\), dont la neuvième puissance est
+\(q(I_9\otimes C)\) \cite{HMT-VIII}.
+
+\subsection{Réduction du registre et conservation de la trace}
+
+La direction fixe du complément dans les neuf composantes
+permet une réalisation minimale en deux termes. Définissons
+\[
+ D_C=\frac{\sqrt8}{9}(I-C).
+\]
+Les identités précédentes donnent
+\(T_C^*T_C+D_C^*D_C=I\) pour \(C\) unitaire.
+Le changement de signe par rapport à l’expression de
+\(\eta_C\) correspond à une orientation de la composante
+complémentaire et conserve son produit de Gram.
+
+\begin{proposition}[Canal positif de la compression avec mémoire]
+Pour \(C\) unitaire, l’application
+\begin{equation}
+ \mathcal Q_C(X)=T_CXT_C^*+D_CXD_C^*
+              =\frac{8X+CXC^*}{9}
+ \label{nt:channel}
+\end{equation}
+est complètement positive sur \(\mathcal B(\mathcal H)\) et conserve l'identité. Sa restriction aux opérateurs à trace conserve la trace.
+\end{proposition}
+
+\begin{proof}
+En développant les deux termes de la première expression,
+les produits \(CX\) et \(XC^*\) s’annulent. Les coefficients
+restants sont \(72/81=8/9\) pour \(X\) et \(9/81=1/9\)
+pour \(CXC^*\), ce qui prouve~\eqref{nt:channel}.
+Pour tout entier \(m\geq1\), l’amplification aux matrices
+d’ordre \(m\) est de la forme
+\[
+ X\longmapsto
+ (I_m\otimes T_C)X(I_m\otimes T_C)^*
+ +(I_m\otimes D_C)X(I_m\otimes D_C)^*.
+\]
+Chaque terme conserve la positivité ; l’application est donc
+complètement positive. La seconde expression de
+\eqref{nt:channel} donne \(\mathcal Q_C(I)=I\).
+Si \(X\) est à trace, l’invariance de la trace sous
+conjugaison unitaire implique
+\(\operatorname{Tr}\mathcal Q_C(X)=\operatorname{Tr}X\).
+\end{proof}
+
+L'application \eqref{nt:channel} s'obtient également en préparant l'isométrie \(v\mapsto T_Cv\otimes e_0+D_Cv\otimes e_1\) et en effectuant la trace partielle sur \(\mathbb C^2\). La conservation du vecteur complet appartient à l'isométrie ; la conservation de la trace de l'état réduit appartient à \(\mathcal Q_C\). Les deux affirmations découlent du même bilan orthogonal.
+
+Dans le prolongement nonadique d’algèbres finies apparaît une
+conservation complémentaire. Pour
+\(\mathcal A_d=M_{9^d}(\mathbb C)\), avec
+\(\tau_d(a)=9^{-d}\operatorname{Tr}a\), les applications
+\[
+ \iota_d(a)=a\otimes I_9,\qquad
+ \jmath_{d,j}(a)=a\otimes p_j,
+ \quad p_j=|e_j\rangle\langle e_j|
+\]
+satisfont
+\begin{align}
+ \tau_{d+1}(\iota_d(a))&=\tau_d(a),
+ &\iota_d(I)&=I,\label{nt:unital-trace}\\
+ \tau_{d+1}(\jmath_{d,j}(a))&=\frac{\tau_d(a)}9,
+ &\jmath_{d,j}(I)&=I\otimes p_j.\label{nt:corner-trace}
+\end{align}
+La démonstration utilise
+\(\operatorname{Tr}(a\otimes b)=
+\operatorname{Tr}(a)\operatorname{Tr}(b)\),
+\(\operatorname{Tr}I_9=9\) et \(\operatorname{Tr}p_j=1\).
+La première inclusion conserve toute la fibre et l’unité ;
+la seconde conserve une continuation marquée et son support.
+
+Cette distinction se manifeste également dans l'arbre des historiques enrichis. Soient \(\mathcal H_n\) les préfixes survivants de longueur \(n\), et soit \(d(h)\geq1\) le nombre d'émissions sortantes conservées de \(h\). Chaque émission avec multiplicité est représentée par des successeurs marqués distincts ; la somme suivante parcourt cet ensemble de \(d(h)\) successeurs. La loi des poids
+\[
+ \mu_{n+1}(h\epsilon)=\mu_n(h)\,p_h(\epsilon),
+ \qquad p_h(\epsilon)=d(h)^{-1}
+\]
+conserve \(\sum_{\epsilon}\mu_{n+1}(h\epsilon)=\mu_n(h)\). Par conséquent, dans \(\mathscr L_n=L^2(\mathcal H_n,\mu_n)\), l'image réciproque
+\[
+ R_nf(h\epsilon)=f(h)
+\]
+est isométrique et conserve la fonction unité. Son adjoint est
+\[
+ E_ng(h)=\sum_{\epsilon}p_h(\epsilon)g(h\epsilon),
+ \qquad E_nR_n=I,\quad E_n1=1.
+\]
+En effet, regrouper la somme de \(\|R_nf\|^2\) par prédécesseur produit \(\sum_h\mu_n(h)|f(h)|^2\) ; le même regroupement dans le produit scalaire détermine \(E_n\). La mémoire et les multiplicités demeurent présentes dans le domaine des historiques. Ces applications constituent la réalisation fonctionnelle du raffinement décrit dans l'article~X \cite{hmtX}.
+
+\subsection{Coordinatisation spectrale et réciprocité du rayon}
+
+Le transport précédent admet des réalisations spectrales possédant leurs propres domaines. La coordinatisation de Möbius de VIII agit, en coordonnées finies, par
+\begin{equation}
+ \tau(z)=\frac{z-1}{z},
+ \qquad z\in\mathbb C\setminus\{0\}.
+ \label{nt:mobius}
+\end{equation}
+L'inverse est \(z=(1-\tau)^{-1}\), pour \(\tau\ne1\). L'extension à la sphère de Riemann envoie \(0\) sur \(\infty\) et \(\infty\) sur \(1\).
+
+\begin{proposition}[Miroir spectral et rayon réciproque]
+Soit \(z^\sharp=1-\overline z\). Pour
+\(z\notin\{0,1\}\),
+\begin{equation}
+ \tau(z^\sharp)=\frac1{\overline{\tau(z)}}.
+ \label{nt:mirror}
+\end{equation}
+Si \(z=\sigma+it\), alors
+\begin{equation}
+ |\tau(z)|^2
+ =\frac{(\sigma-1)^2+t^2}{\sigma^2+t^2};
+ \qquad
+ |\tau(z)|=1\ \Longleftrightarrow\ \sigma=\frac12.
+ \label{nt:critical-circle}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+La substitution directe donne
+\[
+ \tau(1-\overline z)
+ =\frac{-\overline z}{1-\overline z}
+ =\frac{\overline z}{\overline z-1}
+ =\frac1{\overline{(z-1)/z}}.
+\]
+Le quotient des carrés des modules produit
+\eqref{nt:critical-circle} ; l’égalité entre le numérateur et le
+dénominateur équivaut à \(-2\sigma+1=0\).
+\end{proof}
+
+En écrivant \(\tau(z)=r e^{i\theta}\), avec \(r>0\), le miroir préserve \(\theta\) et transforme \(r\) en \(r^{-1}\). Son ensemble fixe dans cette coordinatisation est le cercle unité. La conjugaison \(z\mapsto\overline z\), quant à elle, produit \(\tau\mapsto\overline\tau\) et change l'orientation angulaire. Les deux involutions conservent respectivement la coordonnée angulaire et la coordonnée radiale.
+
+Sur \(z=1/2+i\gamma\), avec \(\gamma\in\mathbb R\),
+\begin{equation}
+ \tau_\gamma=\frac{\gamma+i/2}{\gamma-i/2},
+ \qquad
+ \gamma=\frac{i}{2}\frac{\tau_\gamma+1}{\tau_\gamma-1}
+       =\frac12\cot\frac{\theta}{2},
+ \quad \tau_\gamma=e^{i\theta}.
+ \label{nt:spectral-phase}
+\end{equation}
+La compactification conserve la hauteur au moyen de l'inverse ; le point \(\tau=1\) correspond à l'infini.
+
+Soit \(\mathcal D=C_c^\infty(\mathbb R;\mathbb C)\), avec sa topologie
+usuelle de fonctions tests. Pour la réalisation positive de la forme
+de Weil, on utilise expressément sa semi-définie positivité, son
+invariance par translation et sa continuité dans cette topologie, sur le
+domaine démontré par le lecteur spectral correspondant. Si
+\(\mathscr W(f,g)=\langle Ef,Eg\rangle\), son noyau est
+\(\mathcal N=\{f\in\mathcal D:\mathscr W(f,f)=0\}\), et l’on définit
+\[
+ \mathcal H_{\mathscr W}
+ =\overline{\mathcal D/\mathcal N}.
+\]
+Les translations induisent un groupe unitaire fortement continu \(U_t[f]=[f(\,\cdot-t)]\) : l'invariance préserve la norme, et la continuité des translations dans \(\mathcal D\) et de la forme prouve la continuité forte sur un sous-espace dense, puis dans tout le complété. Avec la convention \(U_t=e^{itH}\), son générateur autoadjoint agit sur les classes de fonctions tests par \(H[f]=[if']\). La transformée de Cayley de cette réalisation est l'opérateur borné
+\begin{equation}
+ C_{\mathscr W}
+ =(H+iI/2)(H-iI/2)^{-1}
+ =I+i(H-iI/2)^{-1}.
+ \label{nt:cayley-hilbert}
+\end{equation}
+Le calcul fonctionnel le rend unitaire, car le quotient
+dans~\eqref{nt:spectral-phase} est de module un pour
+\(\gamma\) réel. L’identité de compression s’applique
+à \(C_{\mathscr W}\) dans \(\mathcal H_{\mathscr W}\).
+L’espace, le domaine du générateur et la positivité
+qui permet sa construction sont les prémisses de cette
+réalisation spectrale \cite{HMT-VIII}.
+
+La mémoire bilatérale agit, en revanche, dans
+\(\ell^2(\mathbb Z)\), et les permutations \(S^3,S^4\)
+agissent dans \(\mathbb R^{12}\). Chaque réalisation détermine
+son spectre, ses secteurs fixes et l’action d’un tour.
+Les applications de transport respectives spécifient les
+compositions entre ces espaces.
+
+\subsection{Cayley sur les fonctions tests et conservation de la forme arithmétique}
+
+La même représentation arithmétique admet un lecteur de Cayley défini directement sur les fonctions tests. Fixons \(a>b>1/2\) et
+\[
+ \mathscr E_b=
+ \left\{f\in C^\infty(\mathbb R):
+   \sup_x e^{b|x|}|f^{(j)}(x)|<\infty
+   \text{ pour tout }j\geq0\right\}.
+\]
+Les fonctions lisses à support compact appartiennent à \(\mathscr E_b\). Nous définissons
+\begin{align}
+ (R_a^+f)(x)&=\int_0^\infty e^{-at}f(x+t)\,dt,
+ &(R_a^-f)(x)&=\int_0^\infty e^{-at}f(x-t)\,dt,\label{nt:resolvents}\\
+ C_af&=f-2aR_a^+f,
+ &C_a^{-1}f&=f-2aR_a^-f.\label{nt:test-cayley}
+\end{align}
+Chaque dérivée de \(R_a^\pm f\) satisfait la borne de la semi-norme correspondante de \(f\), multipliée par \((a-b)^{-1}\). Cela découle de \(e^{b|x|}|f(x\pm t)|\leq M_0e^{bt}\). Les deux applications préservent \(\mathscr E_b\).
+
+Avec la transformée
+\(\widehat f(\xi)=\int_{\mathbb R}f(x)e^{-i\xi x}\,dx\),
+l’application de Fubini donne
+\begin{equation}
+ \widehat{C_af}(\xi)
+ =c_a(\xi)\widehat f(\xi),\qquad
+ c_a(\xi)=\frac{\xi-ia}{\xi+ia}.
+ \label{nt:cayley-multiplier}
+\end{equation}
+Le multiplicateur de la seconde formule
+de~\eqref{nt:test-cayley} est \(c_a^{-1}\), ce qui prouve
+l’inverse. Pour \(\xi\in\mathbb R\),
+\(|c_a(\xi)|=1\) ; Plancherel fournit son extension
+unitaire à \(L^2(\mathbb R)\).
+
+Pour préciser la conservation arithmétique, soient
+\[
+ \mathcal C_{f,g}(u)
+ =\int_{\mathbb R}f(x)\overline{g(x-u)}\,dx,
+ \qquad
+ P_f^\pm=\int_{\mathbb R}f(x)e^{\pm x/2}\,dx.
+\]
+Les longueurs \(\ell_{p,k}=k\log p\) et les poids \(w_{p,k}=(\log p)p^{-k/2}\) sont les représentations premier--puissance du lecteur arithmétique. La forme complète de l'article~VIII s'écrit
+\begin{equation}
+ \begin{split}
+ \mathscr W(f,g)={}&c_\Gamma\mathcal C_{f,g}(0)\\
+ &+\int_0^\infty\frac{e^{-u/2}}{1-e^{-2u}}
+ \bigl[2\mathcal C_{f,g}(0)
+       -\mathcal C_{f,g}(u)-\mathcal C_{f,g}(-u)\bigr]\,du\\
+ &-\sum_{p,k}w_{p,k}
+   \bigl[\mathcal C_{f,g}(\ell_{p,k})
+        +\mathcal C_{f,g}(-\ell_{p,k})\bigr]
+ +P_f^+\overline{P_g^-}+P_f^-\overline{P_g^+},
+ \end{split}
+ \label{nt:weil-complete}
+\end{equation}
+où \(c_\Gamma=\psi(1/4)-\log\pi\), et \(\psi=\Gamma'/\Gamma\) est la dérivée logarithmique de la fonction gamma. Ces fonctions et constantes interviennent dans la réalisation analytique ultérieure du lecteur arithmétique du corpus.
+
+La borne
+\[
+ |\mathcal C_{f,g}(u)|
+ \leq M_fM_g\bigl(|u|+b^{-1}\bigr)e^{-b|u|}
+\]
+contrôle la somme sur les nombres premiers par une série convergente du type
+\(\sum_{n\geq2}(\log n)(1+\log n)n^{-b-1/2}\).
+La différence symétrique de corrélations est \(O(u^2)\)
+à l’origine, tandis que le poids gamma est \(O(u^{-1})\).
+À l’infini, ce poids décroît exponentiellement.
+La marge \(b>1/2\) assure également la convergence des
+deux lecteurs polaires. Le domaine
+de tous les termes de~\eqref{nt:weil-complete} est ainsi fixé.
+
+\begin{proposition}[Invariance arithmétique et bilan nonadique]
+Pour \(f,g\in\mathscr E_b\),
+\begin{equation}
+ \mathscr W(C_af,C_ag)=\mathscr W(f,g).
+ \label{nt:weil-invariance}
+\end{equation}
+Avec \(\mathcal T_a=(8I+C_a)/9\), on a
+\begin{equation}
+ \mathscr W(f,g)
+ =\mathscr W(\mathcal T_af,\mathcal T_ag)
+ +\frac8{81}\mathscr W((I-C_a)f,(I-C_a)g).
+ \label{nt:weil-balance}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Le multiplicateur \(c_a\) est unitaire sur la droite réelle et
+commute avec les translations. Par conséquent,
+\(\mathcal C_{C_af,C_ag}(u)=\mathcal C_{f,g}(u)\)
+pour tout \(u\). Les lecteurs polaires se transforment
+par Fubini selon
+\[
+ P_{C_af}^+
+ =-\frac{a-1/2}{a+1/2}P_f^+,\qquad
+ P_{C_af}^-
+ =-\frac{a+1/2}{a-1/2}P_f^-.
+\]
+Leurs facteurs sont réels et réciproques, de sorte que chaque produit polaire croisé reste inchangé. La réunion des termes de \eqref{nt:weil-complete} prouve~\eqref{nt:weil-invariance}. Le développement sesquilinéaire du second membre de \eqref{nt:weil-balance} annule les termes mixtes et produit \(\bigl(8\mathscr W(f,g)+
+\mathscr W(C_af,C_ag)\bigr)/9\), égal à \(\mathscr W(f,g)\).
+\end{proof}
+
+L’itération finie conserve la forme complète :
+\[
+ \mathscr W(f,g)
+ =\mathscr W(\mathcal T_a^Nf,\mathcal T_a^Ng)
+ +\frac8{81}\sum_{j=0}^{N-1}
+ \mathscr W((I-C_a)\mathcal T_a^jf,
+            (I-C_a)\mathcal T_a^jg).
+\]
+Cette identité sesquilinéaire conserve simultanément
+gamma, nombres premiers et termes polaires. Son évaluation dans une
+réalisation positive permet de l’interpréter comme répartition
+d’énergie ; sa validité algébrique précède cette
+interprétation. La marge \(a>b>1/2\) appartient au
+domaine exponentiel des fonctions tests de cette construction.
+Le Cayley~\eqref{nt:cayley-hilbert} de paramètre \(1/2\)
+appartient au domaine hilbertien de son générateur.
+
+\subsection{Covariance métrique du flux dodécaphasique}
+
+La reconstruction de la section~\ref{sec:memory} détermine \(u_K\in\mathbb R^{12}\), avec \(\mathbf1^{\mathsf T}u_K=0\) et \(u_K\ne0\). Nous écrivons \(A_K=\operatorname{diag}(u_K)\), avec la direction et la normalisation déclarées dans \eqref{eq:u-main}, et
+\[
+ g_s=e^{sA_K}\in\operatorname{GL}(12,\mathbb R).
+\]
+La trace nulle de \(A_K\) implique \(\det g_s=1\). Chaque \(g_s\) transporte les poids et les coordonnées géométriques selon la réalisation correspondante. Pour conserver également le bilan de mémoire entre coordinatisations, il faut transporter le produit scalaire.
+
+\begin{proposition}[Transport métrique de la compression et du complément]
+Soient \(V\) un espace hermitien fini, \(C_0\) unitaire et \(g:V\to V\) inversible. Nous écrivons \(g^{-*}=(g^{-1})^*\) et définissons
+\begin{equation}
+ C_g=gC_0g^{-1},\qquad
+ G_g=g^{-*}g^{-1},\qquad
+ \langle v,w\rangle_g=\langle G_gv,w\rangle.
+ \label{nt:metric-chart}
+\end{equation}
+Alors \(C_g^*G_gC_g=G_g\), et
+\begin{align}
+ T_{C_g}g&=gT_{C_0},\label{nt:metric-naturality}\\
+ \eta_{C_g}g&=g^{\oplus9}\eta_{C_0},\label{nt:eta-naturality}\\
+ G_g&=T_{C_g}^*G_gT_{C_g}
+ +\frac8{81}(I-C_g)^*G_g(I-C_g).\label{nt:metric-balance}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+La positivité de \(G_g\) s’obtient à partir de
+\(\langle G_gv,v\rangle=\|g^{-1}v\|^2\).
+En substituant~\eqref{nt:metric-chart},
+\[
+ C_g^*G_gC_g
+ =g^{-*}C_0^*g^*g^{-*}g^{-1}gC_0g^{-1}
+ =g^{-*}C_0^*C_0g^{-1}=G_g.
+\]
+L’identité \(C_gg=gC_0\) donne
+\eqref{nt:metric-naturality} en ajoutant \(8g\) et en divisant
+par neuf. Elle donne aussi
+\((C_g-I)g=g(C_0-I)\) ; sa substitution dans
+\eqref{nt:complement} prouve~\eqref{nt:eta-naturality}.
+Enfin, le développement de
+\eqref{nt:observable-balance}, avec \(A=G_g\) et
+\(C_g^*G_gC_g=G_g\), prouve
+\eqref{nt:metric-balance}.
+\end{proof}
+
+En appliquant la proposition à \(g=g_s\) et aux opérateurs \(C_0=S^3,S^4\) de la réalisation dodécaphasique, les compressions, les mémoires et leurs produits scalaires sont transportés par des carrés commutatifs explicites. L'identification \(g_s:(V,\langle\cdot,\cdot\rangle)
+\to(V,\langle\cdot,\cdot\rangle_{g_s})\) est isométrique. Par conséquent, la formule transporte également les secteurs fixes et les registres à toute profondeur :
+\[
+ P_{\mathrm{fix},s}
+ =g_sP_{\mathrm{fix},0}g_s^{-1}.
+\]
+Le projecteur du membre de droite est orthogonal relativement
+à \(G_{g_s}\).
+
+La condition de volume et la condition métrique ont
+des effets distincts. Pour la matrice rationnelle
+\[
+ g=\begin{pmatrix}2&0\\0&1/2\end{pmatrix},
+ \qquad \det g=1,
+\]
+la substitution directe dans la compression donne
+\[
+ \frac{8I+g}{9}
+ =\begin{pmatrix}10/9&0\\0&17/18\end{pmatrix},
+ \qquad
+ T_g^*T_g+\frac8{81}(I-g)^*(I-g)
+ =\frac{8I+g^*g}{9}.
+\]
+La première coordonnée se dilate dans la métrique
+euclidienne. Le bilan~\eqref{nt:metric-balance}
+conserve en revanche l’unité métrique lorsqu’on
+transporte un opérateur unitaire \(C_0\) avec
+son produit scalaire. Le déterminant contrôle
+le volume ; \(G_g\) contrôle les normes et les
+produits croisés.
+
+Le flot satisfait \(g_{-s}=g_s^{-1}\). La réciprocité du rayon de \eqref{nt:mirror} relève de la coordinatisation spectrale, et l'inversion de \(g_s\) relève de la réalisation dimensionnelle du registre. Le lien constructif utilisé ici conserve les applications explicites de la mémoire vers \(K\) et de \(K\) vers sa direction géométrique, suivies du transport métrique de chaque réalisation. Cette composition maintient, dans un même développement, la reconstruction exacte, le raffinement positif, le registre des frontières et la conservation des produits scalaires.

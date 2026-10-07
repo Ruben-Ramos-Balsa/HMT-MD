@@ -1,0 +1,523 @@
+% Unidad U015. Acoplamiento de horquillas racionales, refinamiento TPK y
+% certificación a profundidad arbitraria.
+
+\label{gfp:b:chap:precision-arbitraria-constantes}
+
+Esta unidad tiene estatuto de certificación posterior. Los prefijos y sus
+extensiones compatibles proceden de la relación interna
+\(\operatorname{Ext}\), de la supervivencia coinductiva y de las leyes de
+transición APP--TRIT--TPK. Las horquillas racionales que siguen no eligen
+entre los \(729\) elementos de una fibra: localizan en la carta arquimediana
+la extensión ya generada y certifican su precisión a profundidad arbitraria.
+
+\section{Separación tipada de los \(4\) índices de la prolongación nonádica}
+
+Para cada carácter \(\chi\in\{\pi,e,\varphi\}\) intervienen cuatro
+parámetros de naturaleza diferente:
+\begin{enumerate}
+ \item \(n\), orden de la horquilla analítica racional;
+ \item \(K\), nivel de refinamiento del Topological Phase Kernel;
+ \item \(L_K=6K\), longitud ternaria del prefijo publicado;
+ \item \(M\), número de posiciones decimales solicitado.
+\end{enumerate}
+No se postula \(n=K\), \(n=L_K\), \(K=M\) ni una proporcionalidad fija
+entre ellos. El acoplamiento se construye mediante inclusiones de intervalos
+decididas por aritmética entera.
+
+Las partes enteras son
+\[
+ m_\pi=3,
+ \qquad
+ m_e=2,
+ \qquad
+ m_\varphi=1,
+\]
+y los caracteres fraccionarios son
+\[
+ \rho_\pi=\pi-3,
+ \qquad
+ \rho_e=e-2,
+ \qquad
+ \rho_\varphi=\varphi-1.
+\]
+Las tres familias de horquillas semiabiertas se escriben
+\[
+ J_{\chi,n}=[\ell_{\chi,n},h_{\chi,n}).
+\]
+Sus extremos son racionales, contienen a \(\rho_\chi\) y satisfacen
+\[
+ \ell_{\chi,n}\nearrow\rho_\chi,
+ \qquad
+ h_{\chi,n}\searrow\rho_\chi,
+ \qquad
+ h_{\chi,n}-\ell_{\chi,n}\longrightarrow0.
+\]
+Para \(\pi\), los extremos proceden de las sumas alternadas de la identidad
+de Machin demostrada en el \cref{gfp:b:chap:biografia-pi-autonoma}; para \(e\),
+de las sumas factoriales y su resto racional del
+\cref{gfp:b:chap:biografia-completa-e}; para \(\varphi\), de los cocientes de
+Fibonacci y Cassini del \cref{gfp:b:chap:biografia-completa-phi}.
+
+\section{Cilindros ternarios y fibra ambiente inmediata}
+
+Un prefijo ternario de longitud \(L_K=6K\) se representa por un entero
+\(N_K\) con
+\[
+ 0\leq N_K<3^{L_K}.
+\]
+Su cilindro semiabierto es
+\begin{equation}
+ C(N_K,L_K)=
+ \left[
+ \frac{N_K}{3^{L_K}},
+ \frac{N_K+1}{3^{L_K}}
+ \right).
+ \label{gfp:b:eq:cilindro-nivel-K}
+\end{equation}
+La siguiente emisión añade seis trits. La fibra ambiente inmediata contiene
+\(3^6=729\) elementos, indexados por \(u\in\{0,\ldots,728\}\):
+\begin{equation}
+ C_{K,u}=
+ \left[
+ \frac{729N_K+u}{3^{L_K+6}},
+ \frac{729N_K+u+1}{3^{L_K+6}}
+ \right).
+ \label{gfp:b:eq:729-subcilindros}
+\end{equation}
+Los \(C_{K,u}\) son disjuntos y
+\[
+ C(N_K,L_K)=\bigsqcup_{u=0}^{728}C_{K,u}.
+\]
+El número \(729\) cuenta coordenadas de esta fibra ambiente; no cuenta
+semillas, emisiones distintas, órbitas ni estados sobrevivientes.
+
+\subsection{Comparación cruzada de numeradores y denominadores en la horquilla racional}
+
+Sea \(J=[\ell,h)\subset C(N_K,L_K)\), con
+\(\ell,h\in\mathbb Q\). Escribimos \(S_K=3^{L_K+6}\) y definimos
+\begin{align}
+ j_{\min}(J,K)
+ &=\max\!\left(729N_K,\left\lfloor S_K\ell\right\rfloor\right),
+ \label{gfp:b:eq:jmin-diagonal}\\
+ j_{\max}(J,K)
+ &=\min\!\left(729N_K+728,\left\lceil S_Kh\right\rceil-1\right).
+ \label{gfp:b:eq:jmax-diagonal}
+\end{align}
+
+\begin{lemma}[Criterio de localización unitaria]
+\label{gfp:b:lem:criterio-localizacion-unitaria}
+La horquilla \(J\) está contenida en un único elemento de la fibra
+\eqref{gfp:b:eq:729-subcilindros} si y sólo si
+\begin{equation}
+ \boxed{j_{\min}(J,K)=j_{\max}(J,K).}
+ \label{gfp:b:eq:jmin-igual-jmax}
+\end{equation}
+En ese caso, si \(j\) es el valor común,
+\[
+ u=j-729N_K,
+ \qquad
+ N_{K+1}=j.
+\]
+\end{lemma}
+
+\begin{proof}
+Los enteros \(j\) cuyos intervalos elementales de longitud \(S_K^{-1}\)
+intersectan \(J\) forman el intervalo entero
+\[
+ \left[
+ \lfloor S_K\ell\rfloor,
+ \lceil S_Kh\rceil-1
+ \right]\cap
+ [729N_K,729N_K+728].
+\]
+Éste contiene exactamente un elemento si y sólo si sus extremos coinciden.
+La igualdad identifica el numerador del subcilindro y, al truncar sus seis
+últimos trits, se recupera \(N_K\).
+\end{proof}
+
+\section{Certificación diagonal mínima}
+
+La generación no fija de antemano un mismo orden analítico para todos los
+niveles. Una vez producida la extensión compatible, el orden de la
+horquilla se aumenta sólo hasta certificarla de manera unitaria.
+
+\begin{definition}[Recurrencia diagonal de certificación]
+\label{gfp:b:def:recurrencia-diagonal-constantes}
+Fijada por \(\operatorname{Ext}\) una familia de cilindros compatibles
+\(C(N_K,L_K)\) cuya publicación contiene a \(\rho_\chi\), se elige un orden
+inicial \(n_\chi(K_0-1)\geq1\) y definimos recursivamente
+\begin{equation}
+ n_\chi(K)=
+ \min\left\{
+ n\geq n_\chi(K-1):
+ j_{\min}(J_{\chi,n},K)=j_{\max}(J_{\chi,n},K)
+ \right\},
+ \label{gfp:b:eq:nchi-K-minimo}
+\end{equation}
+y verificamos
+\begin{equation}
+ N_{\chi,K+1}
+ =j_{\min}(J_{\chi,n_\chi(K)},K).
+ \label{gfp:b:eq:Nchi-K-mas-uno}
+\end{equation}
+El conjunto
+\[
+ \Delta_\chi=
+ \{(n_\chi(K),K):K\geq K_0\}
+\]
+es la diagonal analítico--nonádica del carácter \(\chi\).
+\end{definition}
+
+\begin{theorem}[Existencia y unicidad de la diagonal de certificación]
+\label{gfp:b:thm:existencia-unicidad-diagonal}
+Para \(\chi\in\{\pi,e,\varphi\}\), la recurrencia
+\eqref{gfp:b:eq:nchi-K-minimo} está definida en todo nivel finito. El índice
+\(n_\chi(K)\) y la coordenada \(N_{\chi,K+1}\) son únicos.
+\end{theorem}
+
+\begin{proof}
+Supongamos generada internamente la extensión cilíndrica de nivel \(K\) que contiene a
+\(\rho_\chi\). Como \(\rho_\chi\) es irracional, no pertenece a ninguna
+frontera ternaria \(3^{-L}\mathbb Z\). Por ello está en el interior de un
+único subcilindro \(C_{K,u_*}\), a distancia positiva de sus dos extremos.
+Las horquillas \(J_{\chi,n}\) contienen a \(\rho_\chi\) y su diámetro
+tiende a cero; existe, por tanto, un \(n\) para el que la horquilla queda
+contenida en \(C_{K,u_*}\). El conjunto del mínimo en
+\eqref{gfp:b:eq:nchi-K-minimo} es no vacío y, por el buen orden de
+\(\mathbb N\), posee un menor elemento. El
+\cref{gfp:b:lem:criterio-localizacion-unitaria} prueba que la horquilla la
+localiza de manera unitaria y que el numerador localizado coincide con el ya
+generado. La inducción sobre \(K\) completa el argumento.
+\end{proof}
+
+\begin{corollary}[Ausencia de parámetros decimales]
+La diagonal se calcula con sumas, productos, potencias, divisiones euclídeas,
+pisos y techos de enteros. No recibe una cifra decimal de \(\pi\), \(e\) o
+\(\varphi\) como dato de certificación.
+\end{corollary}
+
+\section{Compatibilidad con la conexión nonádica conjunta}
+
+Sea \(\widehat x_{\chi,K}\) el estado enriquecido del canal \(\chi\) en
+el nivel \(K\). Sus coordenadas incluyen el prefijo, el cilindro, la fase,
+el cociente, el acarreo, la memoria vertical no acotada, el término terminal
+y el registro de procedencia. La fase residual es
+\[
+ g_0(K)=[K]_9\in\mathbb Z/9\mathbb Z,
+\]
+mientras la etiqueta pública es
+\[
+ g(K)=1+((K-1)\bmod9)\in\{1,\ldots,9\}.
+\]
+La memoria vertical \(q_{\rm mem}(K)\in\mathbb Z_{\geq0}\) no se reduce
+módulo \(12\); sólo su proyección dodecafásica
+\[
+ \beta(K)=q_{\rm mem}(K)\bmod12
+\]
+lo hace.
+
+Para cada \(K\), sea
+\[
+ \Gamma_{9,K}:\widehat X_K\longrightarrow\widehat X_{K+9}
+\]
+la holonomía de una vuelta de fase. Entonces
+\[
+ g_0(K+9)=g_0(K),
+ \qquad
+ q_{\rm mem}(K+9)=q_{\rm mem}(K)+1,
+ \qquad
+ \beta(K+9)=\beta(K)+1\pmod{12}.
+\]
+
+\begin{theorem}[Retorno de fase con conservación genealógica]
+\label{gfp:b:thm:retorno-fase-conservacion-genealogica}
+La igualdad de fase no reinicia el estado:
+\[
+ g_0(K+9)=g_0(K),
+ \qquad
+ \widehat x_{\chi,K+9}\ne\widehat x_{\chi,K}.
+\]
+Las profundidades \(27\), \(54\) y \(108\) son las composiciones tipadas
+\begin{align*}
+ \Gamma_{27,K}
+ &=\Gamma_{9,K+18}\circ\Gamma_{9,K+9}\circ\Gamma_{9,K},\\
+ \Gamma_{54,K}
+ &=\Gamma_{9,K+45}\circ\cdots\circ\Gamma_{9,K},\\
+ \Gamma_{108,K}
+ &=\Gamma_{9,K+99}\circ\cdots\circ\Gamma_{9,K}.
+\end{align*}
+En ningún caso son reinicios del prefijo, del acarreo, del terminal o de la
+memoria.
+\end{theorem}
+
+\begin{proof}
+La primera coordenada se calcula en \(\mathbb Z/9\mathbb Z\), mientras
+\(q_{\rm mem}\) pertenece a un monoide no acotado. Cada aplicación de
+\(\Gamma_{9,K}\) añade una unidad de memoria, seis bloques por nivel
+intermedio y la composición correspondiente de cociclos. Por ello la fase
+puede coincidir aunque el estado enriquecido no lo haga. Las fórmulas de
+profundidad muestran los índices de cada mapa y evitan componer como si todos
+fueran endomorfismos del mismo espacio.
+\end{proof}
+
+\subsection{Compresión nonádica, evaluación arquimediana y término terminal del cilindro}
+
+La realización operatorial de una vuelta satisface
+\begin{equation}
+ U_\Gamma J=JT+\eta,
+ \qquad
+ J^*\eta=0,
+ \qquad
+ I-T^*T=\eta^*\eta.
+ \label{gfp:b:eq:compresion-expresion-precision}
+\end{equation}
+La contracción visible estricta se reserva para
+\[
+ M_9=\frac59V_9;
+\]
+no se identifica con el operador de compresión \(T\). La telescopía de
+profundidad \(L\) conserva el término terminal:
+\begin{equation}
+ S_0=
+ \sum_{r=0}^{L-1}M_9^{*r}D_9^*D_9M_9^r
+ +M_9^{*L}S_0M_9^L.
+ \label{gfp:b:eq:telescopia-terminal-precision}
+\end{equation}
+Omitir el último sumando antes de probar su desaparición borraría
+información de frontera y convertiría el retorno de fase en un reinicio
+falso.
+
+\section{Sistema inverso de historias compatibles}
+
+Sea \(\mathcal H_K^\chi\) el conjunto de historias enriquecidas admisibles
+del canal \(\chi\) a profundidad \(K\), y sea
+\[
+ p_{N,K}:\mathcal H_N^\chi\longrightarrow\mathcal H_K^\chi
+ \qquad(N\geq K)
+\]
+el truncamiento. Definimos
+\[
+ \operatorname{Surv}_K^{(N)}(\chi)
+ =p_{N,K}(\mathcal H_N^\chi)
+\]
+y
+\begin{equation}
+ \operatorname{Surv}_K(\chi)
+ =\bigcap_{N\geq K}\operatorname{Surv}_K^{(N)}(\chi).
+ \label{gfp:b:eq:supervivencia-todas-profundidades}
+\end{equation}
+El objeto coinductivo es
+\begin{equation}
+ X_\chi=
+ \varprojlim_K
+ \bigl(\operatorname{Surv}_K(\chi),p_{K+1,K}\bigr).
+ \label{gfp:b:eq:limite-inverso-caracteres}
+\end{equation}
+
+\begin{theorem}[Sección compatible bajo prolongabilidad enriquecida]
+\label{gfp:b:thm:seccion-compatible-caracteres}
+Supóngase además que, sobre cada subcilindro numérico generado, la
+relación \(\operatorname{Ext}\) es no vacía, univaluada y compatible con los
+truncamientos. Entonces \(\operatorname{Ext}\) y la supervivencia producen una familia
+\[
+ x_\chi=(\widehat x_{\chi,K})_{K\geq K_0}
+\]
+que satisface
+\[
+ p_{K+1,K}(\widehat x_{\chi,K+1})
+ =\widehat x_{\chi,K}.
+\]
+Por tanto, \(x_\chi\in X_\chi\).
+\end{theorem}
+
+\begin{proof}
+El subcilindro de nivel \(K+1\) tiene numerador
+\(N_{\chi,K+1}=729N_{\chi,K}+u\). El truncamiento elimina sus seis últimos
+trits y recupera \(N_{\chi,K}\). Las demás coordenadas se obtienen por las
+leyes functoriales de acarreo, memoria, terminal y fase. La hipótesis de
+univaluación de \(\operatorname{Ext}\) fija el subcilindro y la extensión
+enriquecida; la unicidad local del
+\cref{gfp:b:lem:criterio-localizacion-unitaria} certifica después su
+localización arquimediana, y la compatibilidad de \(\operatorname{Ext}\)
+proporciona la igualdad de truncamiento.
+\end{proof}
+
+\section{Celdas decimales y precisión prescrita}
+
+Para \(M\geq1\) y \(q\in\{0,\ldots,10^M-1\}\), sea
+\[
+ D_{M,q}=
+ \left[
+ \frac{q}{10^M},
+ \frac{q+1}{10^M}
+ \right).
+\]
+Una horquilla \(J=[\ell,h)\) está contenida en una única celda decimal si
+y sólo si
+\begin{equation}
+ \boxed{
+ \left\lfloor10^M\ell\right\rfloor
+ =\left\lceil10^Mh\right\rceil-1=q.}
+ \label{gfp:b:eq:criterio-celda-decimal}
+\end{equation}
+
+\begin{definition}[Nivel mínimo de certificación decimal]
+Para \(\chi\in\{\pi,e,\varphi\}\), definimos \(K_\chi(M)\) como el menor
+nivel para el que existen un orden analítico \(n\) y un entero \(q\) tales
+que
+\begin{enumerate}
+ \item \(J_{\chi,n}\) satisface
+       \eqref{gfp:b:eq:criterio-celda-decimal};
+ \item \(J_{\chi,n}\) queda contenido en el cilindro generado por el
+       estado \(\widehat x_{\chi,K}\);
+ \item la transición al nivel siguiente satisface
+       \eqref{gfp:b:eq:jmin-igual-jmax}.
+\end{enumerate}
+El par \((K,n)\) se minimiza lexicográficamente.
+\end{definition}
+
+\begin{theorem}[Certificación a precisión decimal arbitraria de las salidas coinductivas]
+\label{gfp:b:thm:precision-decimal-arbitraria}
+Para cada \(\chi\in\{\pi,e,\varphi\}\) y cada \(M\geq1\), existe
+\(K_\chi(M)<\infty\). La sección generada determina un único prefijo decimal
+de \(M\) posiciones, y la horquilla reconoce y certifica ese prefijo. Si
+\(M'<M\), el prefijo de orden \(M\) trunca al de
+orden \(M'\), y las celdas correspondientes están encajadas.
+\end{theorem}
+
+\begin{proof}
+Los tres caracteres son irracionales: \(\varphi\) lo es por su polinomio
+cuadrático con discriminante no cuadrado; la irracionalidad de \(e\) y
+\(\pi\) se toma de sus teoremas clásicos de caracterización, posteriores a
+la construcción finita. Ninguno pertenece, pues, a una frontera decimal o
+ternaria racional. Para un \(M\) fijo, la distancia del carácter al conjunto
+finito de fronteras decimales relevantes es positiva. Las horquillas
+racionales contraen su diámetro hasta quedar en una única celda decimal.
+El \cref{gfp:b:thm:existencia-unicidad-diagonal} acopla esa horquilla con un
+cilindro TPK y con una extensión única. El mínimo lexicográfico existe por
+buen orden. La compatibilidad de la sección prueba el encajamiento al
+aumentar \(M\).
+\end{proof}
+
+\begin{corollary}[Unicidad real]
+Las celdas encajadas tienen diámetros \(10^{-M}\to0\). Su intersección es
+un singleton, identificado por las caracterizaciones precedentes con
+\(\pi\), \(e\) o \(\varphi\), respectivamente.
+\end{corollary}
+
+\section{Equivalencia de \(2\) realizaciones finitas de la ley uniforme}
+
+Los testigos de \(1,000\) y \(10,000\) posiciones no definen los
+caracteres ni limitan la prolongación. Son ejecuciones de la misma recurrencia
+uniforme con dos profundidades distintas.
+
+\begin{table}[htbp]
+\centering
+\caption{Dimensiones exactas de las ejecuciones certificadas, por canal.}
+\label{gfp:b:tab:dimensiones-ejecuciones-1000-10000}
+\begin{tabular}{lrr}
+\toprule
+Objeto contado & \(1,000\) posiciones & \(10,000\) posiciones\\
+\midrule
+Particiones exhaustivas de la fibra ambiente & 396 & 3501\\
+Trits transportados & 2376 & 21006\\
+Pares de igual fase \((K,K+9)\) & 387 & 3492\\
+Vueltas nonádicas completas & 43 & 388\\
+Elementos examinados por partición & 729 & 729\\
+Extensiones compatibles conservadas por partición & 1 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Para \(10,000\) posiciones,
+\[
+ B=3501=389\cdot9,
+ \qquad
+ 6B=21006,
+ \qquad
+ 3^{6B}>10^{10000}.
+\]
+Los primeros \(396\) bloques de la ejecución larga coinciden con la
+ejecución de \(1,000\) posiciones. En cada uno de los \(3492\) pares de
+igual fase se preserva la coordenada de fase y se prolongan el prefijo, la
+profundidad, el cilindro y la memoria. El certificado registra también las
+repeticiones eventuales de proyecciones locales sin confundirlas con retorno
+del estado completo.
+
+\section{Separación entre generación y verificación}
+
+\begin{definition}[Generador estructural]
+El generador recibe el catálogo finito, \(L_0,L_1\), el estado inicial, las
+leyes de conexión y la relación interna \(\operatorname{Ext}\). En cada nivel:
+\begin{enumerate}
+ \item enumera los \(729\) elementos de la fibra ambiente;
+ \item aplica \(\operatorname{Ext}\) y conserva la única extensión compatible;
+ \item actualiza fase, cociente, acarreo, memoria y terminal;
+ \item escribe el bloque ternario, el recibo de selección y el registro genealógico.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Verificador posterior]
+El verificador recibe las salidas cerradas del generador y las tres familias
+de horquillas racionales; calcula \(j_{\min}\) y \(j_{\max}\), certifica su
+igualdad con la extensión ya producida, reconstruye las
+particiones, comprueba los cuadrados de truncamiento, los pares
+\((K,K+9)\), las sumas de partición
+\[
+ \operatorname{killed}_{\mathrm{izq}}+1+\operatorname{killed}_{\mathrm{der}}=729,
+\]
+las identidades de contenido y, al final, la coincidencia con expansiones de referencia.
+\end{definition}
+
+\begin{theorem}[Aislamiento de los datos objetivo]
+\label{gfp:b:thm:aislamiento-datos-objetivo-precision}
+Las expansiones decimales de referencia y los datos metrológicos no
+intervienen en la selección de una extensión compatible. La comparación se
+ejecuta después de escribir los tres prefijos.
+\end{theorem}
+
+\begin{proof}
+La entrada matemática de cada decisión generativa consiste en el catálogo
+finito, \(L_0,L_1\), el estado heredado y la relación interna
+\(\operatorname{Ext}\). Los extremos racionales, potencias de \(3\), pisos y
+techos pertenecen al verificador posterior. El generador termina antes de que
+éste abra las horquillas o los controles decimales. La dirección del flujo de
+datos es
+\[
+ \text{estructura}\longrightarrow
+ \text{prefijos y ledgers}\longrightarrow
+ \text{verificación posterior};
+\]
+no existe una flecha en sentido contrario.
+\end{proof}
+
+\section{Realización finita del certificado de precisión arbitraria}
+
+Una realización material del procedimiento produce, para cada uno de los tres caracteres, un prefijo de \(10^4\) posiciones. Este corte finito es un control posterior de la construcción y no interviene en la elección de cilindros, acarreos ni extensiones compatibles. La proposición demostrada conserva alcance arbitrario en \(M\); la precisión \(10^4\) certifica una ejecución concreta, pero no limita el generador coinductivo.
+
+\section{Obstrucciones diferenciadas de la generación y de su certificación a precisión arbitraria}
+
+\begin{remark}[Certificado y control de validez: Refutación de la generación a precisión arbitraria]
+Los fallos de órbita, extensión, truncamiento o retorno refutan la generación;
+los fallos de horquilla, orden o control decimal refutan el certificado
+analítico correspondiente; y una discrepancia entre ambos refuta la
+identificación conjunta de la salida publicada. Con esta separación de tipos,
+la afirmación completa queda refutada si:
+\begin{enumerate}
+ \item se identifica cualquiera de los índices \(n,K,L_K,M\) sin un
+       teorema de enlace;
+ \item una horquilla deja de contener su carácter o no contrae su diámetro;
+ \item una etapa satisface \(j_{\min}\ne j_{\max}\) después del orden
+       declarado como mínimo;
+ \item una extensión no trunca al cilindro del nivel anterior;
+ \item el retorno de fase reinicia prefijo, acarreo, terminal o memoria;
+ \item se omite el término terminal en
+       \eqref{gfp:b:eq:telescopia-terminal-precision} sin demostrar su anulación;
+ \item los primeros \(396\) bloques de la ejecución larga difieren de la
+       ejecución corta;
+ \item un control decimal o metrológico es leído antes de cerrar la salida;
+ \item una cifra certificada difiere de la salida material del generador;
+ \item la prueba depende de que la precisión solicitada sea \(1,000\) o
+       \(10,000\), en vez de un \(M\) arbitrario.
+\end{enumerate}
+\end{remark}

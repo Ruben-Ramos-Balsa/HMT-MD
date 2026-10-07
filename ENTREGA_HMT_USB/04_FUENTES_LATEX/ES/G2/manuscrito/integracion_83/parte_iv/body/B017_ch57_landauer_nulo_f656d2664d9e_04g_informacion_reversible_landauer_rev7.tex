@@ -1,0 +1,77 @@
+\section{Reversibilidad lógica y principio de Landauer en las fibras de TPK}
+\label{sec:informacion-fibra-landauer-rev7}
+\index{Landauer}\index{información!fibra}
+
+Sea \((\Omega,2^\Omega,\mu)\) un espacio probabilizado finito, sea
+\(X:\Omega\to\mathcal X\) una variable aleatoria con valores en el espacio
+\(\mathcal X\) de estados completos y sea \(q:\mathcal X\to Y\) un lector.
+La regla de la cadena da
+\[
+ \mathsf H(X)
+ =
+ \mathsf H(q(X))+\mathsf H(X\mid q(X)).
+\]
+El segundo sumando mide la información de la fibra que el lector no
+publica.
+
+\begin{theorem}[Landauer nulo para el transporte completo y coste de la proyección]
+\label{thm:landauer-relativo-lector-rev7}
+Si \(U:\mathcal X\to\mathcal X\) es una actualización biyectiva del estado
+HMT completo,
+entonces
+\[
+ \boxed{\mathsf H(X\mid U(X))=0.}
+\]
+Para una salida proyectada \(q(U(X))\), la información descartada es
+\[
+ \mathsf H(X\mid q(U(X))).
+\]
+Un reset físico que identifique estados distintos de la memoria debe
+contabilizar esa información en el entorno.
+\end{theorem}
+
+\begin{proof}
+La biyectividad implica
+\(X=U^{-1}(U(X))\); por tanto \(X\) queda determinado por \(U(X)\) y la
+entropía condicional es cero. Para el lector \(q\), la regla de la cadena
+separa la entropía publicada de la entropía de la fibra. Si la operación de
+reinicio no es inyectiva, la salida ya no permite reconstruir el estado de
+memoria. El
+principio termodinámico de Landauer acota el coste de la implementación en
+función de esa entropía borrada; la actualización reversible no aporta por
+sí sola un término de borrado.
+\end{proof}
+
+En nats y bits, respectivamente,
+\[
+ Q\ge k_B\Theta\,\mathsf H_{\rm nat},
+ \qquad
+ Q\ge k_B\Theta\log 2\,\mathsf H_{\rm bit}.
+\]
+Para el transporte biyectivo del estado completo, la entropía de borrado es
+cero y, por tanto, el término mínimo de Landauer asociado exclusivamente al
+borrado satisface
+\[
+\boxed{Q_{\rm L}^{\min}[U]=k_B\Theta\,
+ \mathsf H(X\mid U(X))=0.}
+\]
+Para el reinicio de un TRIT uniforme, en cambio,
+\[
+ \boxed{Q_{\rm reset}\ge k_B\Theta\log3.}
+\]
+Estas dos ecuaciones localizan el coste en la pérdida de información: el
+coste aparece cuando la proyección o el reinicio olvidan la fibra.
+La preparación, la proyección y el reinicio pueden producir entropía; el
+transporte reversible conserva la información genealógica. El valor nulo es
+el límite lógico de Landauer para esa actualización completa, mientras los
+costes dinámicos de control, velocidad finita y acoplamiento al entorno
+pertenecen a la realización física del dispositivo.
+
+\begin{statusbox}[title={Alcance del Landauer nulo}]
+La igualdad \(\mathsf H(X\mid U(X))=0\) es exacta para una actualización
+biyectiva del estado enriquecido. La cota
+\(Q_{\rm reset}\ge k_B\Theta\log3\) es la especialización de Landauer al
+borrado de una decisión triádica uniforme. La realización de ambas fórmulas
+en joules utiliza el transductor de Boltzmann y una temperatura física
+declarada.
+\end{statusbox}

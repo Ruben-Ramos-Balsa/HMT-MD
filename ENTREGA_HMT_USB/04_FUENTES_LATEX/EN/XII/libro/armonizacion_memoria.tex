@@ -1,0 +1,233 @@
+\section{Carry and incidence registers and projective reconstruction of histories}
+\label{lib07:armonizacion}
+The APP--TRIT--TPK construction fixes an enriched state before
+its numerical, incidence and operator realizations. The registers
+entering that construction are distinguished by the operation
+they allow to be inverted and by the relations they preserve. This section
+brings these distinctions together and composes recovery with refinement.
+
+\subsection{Carry, history, incidence and archive}
+The carry in Sections~\ref{lib03:residuo} and
+\ref{lib03:memoria} is an integer arithmetic datum. Preserving it,
+together with depth and the final state, restores the antecedent
+through the explicit inverse~\eqref{lib03:inversa-afin}.
+The transport history contains the ordered sequence of operations,
+sheets, orientations and returns. Within it, two stages with the same phase
+may have different accumulated registers. Holonomy acts on
+that history and on the frame in which its readings are performed.
+
+The incidence register preserves the boundary relations
+used by the exceptional constructions. The ordered object \(K\)
+and its reading \(\kappa_{\rm ag}\) enter with the normalizations
+and maps of Section~\ref{lib01:identificacion}.
+Sufficiency for recovering an operator is expressed there through
+the frame responses and the corresponding inversion.
+The archive memory of Section~\ref{lib04:archivo}, in turn,
+is a sequence of components of a Hilbert space. The telescoping
+identity~\eqref{lib04:telescopia} preserves the norm between the
+remaining state and the archived components; the inverse
+\eqref{lib04:recuperacion-infinita} reconstructs the initial amplitude.
+
+These four functions are composed while preserving their types.
+A carry integer, a transport word, an incidence
+and an archived amplitude constitute distinct data of the system.
+The recovery proofs specify which combination of them
+suffices for each reading. Figure~\ref{lib07:fig-registros}
+represents this functional hierarchy.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+ node distance=9mm,
+ box/.style={draw=ink,rounded corners=2pt,fill=white,align=center,
+ text width=58mm,minimum height=15mm,font=\small},
+ arr/.style={-{Latex[length=2mm]},draw=ink,thick}]
+\node[box,text width=125mm] (s) {Enriched APP--TRIT--TPK state\\
+ operation, sheet, orientation, boundary and memory};
+\node[box] (a) at (-33mm,-30mm)
+ {Arithmetic carry\\Remainder, depth and inverse};
+\node[box] (h) at (33mm,-30mm)
+ {Transport history\\Ordered composition and holonomy};
+\node[box] (q) at (-33mm,-62mm)
+ {Incidence register\\Boundary and frame readings};
+\node[box] (m) at (33mm,-62mm)
+ {Recovery archive\\Components and reconstruction};
+\node[box,text width=125mm] (r) at (0,-94mm)
+ {Recovery compatible with refinement\\
+ Typed inverses and preserved relations};
+\draw[arr] (s.south -| a.north)--(a);
+\draw[arr] (s.south -| h.north)--(h);
+\draw[arr] (a)--(q);
+\draw[arr] (h)--(m);
+\draw[arr] (q.south)--(r.north -| q.south);
+\draw[arr] (m.south)--(r.north -| m.south);
+\end{tikzpicture}
+\caption{Organization of the registers by their role.
+The lower arrows indicate composition of recovery
+conditions, not identification of the four data types.}
+\label{lib07:fig-registros}
+\end{figure}
+
+\subsection{Refinement tree and local weights}
+Let \(H_k\) be the finite set of admissible prefixes of depth
+\(k\), with truncations \(p_{k+1,k}\), of the history system already
+constructed. An emission is counted with its multiplicity, and
+\(d(\zeta)>0\) denotes the number of emissions from \(\zeta\).
+The uniform seed distribution and the local weight
+\(1/d(\zeta)\) define \(\mu_k\). The sum of the weights of the
+extensions of a prefix equals its weight: the measures are
+compatible and determine the cylinder measure \(\mu\).
+The propositions on fiber memory and
+naturality of the measure are proved below using these explicit definitions.
+
+\subsection{Enriched readers and fiber memory}
+\label{sec:ch-memoria-fibra}
+
+The difference between history and value admits an operational criterion. At a
+finite level \(H_k\), let \(q_k:H_k\to Z_k\) be a reader and let
+\(M_k:H_k\to\mathcal M_k\) be the retained register. The enriched reader
+is \(\widehat q_k=(q_k,M_k)\). Memory distinguishes states within the same
+reader fiber; its sufficiency is checked on the domain under consideration.
+This formulation incorporates into the article itself the complete development of the
+fiber information used below.
+
+\begin{proposition}[Recoverability at a finite level]
+\label{prop:ch-recuperabilidad-fibra}
+An inverse of \(\widehat q_k\) on its image exists if and only if
+\(\widehat q_k\) is injective. For a random variable \(Z\) with
+values in \(H_k\) and distribution \(\mu_k\), we have
+\[
+ \mathsf H(Z)=\mathsf H(q_k(Z))+\mathsf H(Z\mid q_k(Z)).
+\]
+If \(\widehat q_k\) is injective on the support of \(Z\), then
+\[
+ \mathsf H(Z\mid q_k(Z),M_k(Z))=0.
+\]
+Here \(\mathsf H(Z)=-\sum_z\Pr(Z=z)\log\Pr(Z=z)\), with
+\(0\log0=0\), is finite entropy in nats; conditional entropy is
+the average entropy of the conditional distributions.
+\end{proposition}
+
+\begin{proof}
+An inverse recovers a unique antecedent, which requires injectivity;
+conversely, injectivity allows each expressed pair to be assigned its unique
+antecedent. Since \(q_k(Z)\) is a deterministic function of \(Z\),
+grouping the sum defining \(\mathsf H(Z)\) by fibers of \(q_k\) gives the
+chain rule. If the pair \((q_k(Z),M_k(Z))\) distinguishes the support,
+each corresponding conditional distribution is concentrated on a single
+state and its entropy is zero.
+\end{proof}
+
+Not publishing a coordinate and erasing the register that allows it to be recovered are
+distinct operations. This result neither identifies entropy with the cardinality
+of the continuum nor introduces a thermal interpretation: its domain, reader and
+distribution are those just fixed.
+
+\subsection{Equivariance of the measure under tree symmetries}
+\label{sec:ch-naturalidad-medida}
+
+\begin{proposition}[Joint transport of the tree and its measure]
+\label{prop:ch-naturalidad-medida}
+Let \(g=(g_k)_{k\geq0}\) be a collection of bijections \(g_k:H_k\to H_k\)
+commuting with truncations, fixing the root and transporting
+admissible emissions bijectively while preserving their multiplicities. Then
+\[
+ d(g_k\zeta)=d(\zeta),\qquad
+ (g_k)_*\mu_k=\mu_k,\qquad (g_\infty)_*\mu=\mu.
+\]
+More generally, if \(\mu_\zeta\) is the law of continuations of a
+history \(\zeta\in H_k\), we have
+\[
+ (g_\infty)_*\mu_\zeta=\mu_{g_k\zeta}.
+\]
+\end{proposition}
+
+\begin{proof}
+The bijection of emissions preserves their number with multiplicities. The
+uniform seed distribution is also invariant. Each trajectory
+and its image therefore receive the same product of local weights
+\(1/d(\zeta)\). Equality of measures follows at each level and on
+each cylinder. Coherence with truncations defines \(g_\infty\),
+and uniqueness of the measure determined by cylinders proves equality
+in the limit. The same argument, starting at \(\zeta\), proves the
+assertion about continuations.
+\end{proof}
+
+This gives the naturality of the tree and measure: a coherent change
+of representation transports the weights without requiring them to be chosen anew.
+Preservation of emissions and multiplicities is an essential hypothesis of
+the proposition, not a datum added after the construction.
+
+\subsection{Recovery of histories and transport of membership}
+\begin{proposition}[Compatibility of inverses and collections]
+\label{lib07:prop-familias}
+Let \(H_k\) be the preceding levels and \(Y_k=\widehat q_k(H_k)\).
+Suppose that \(\widehat q_k:H_k\to Y_k\) is bijective and that there exist
+truncations \(s_{k+1,k}\) such that
+\[
+ s_{k+1,k}\widehat q_{k+1}=\widehat q_k p_{k+1,k}.
+\]
+Then the finite inverses induce a bijection
+\[
+ \widehat q_\infty:\varprojlim H_k\longrightarrow\varprojlim Y_k.
+\]
+If \(H=\varprojlim H_k\), \(Y=\varprojlim Y_k\) and
+\(\mathcal T(A)=\widehat q_\infty[A]\), the map
+\(\mathcal T:\mathcal P(H)\to\mathcal P(Y)\) is bijective and
+preserves unions, intersections, relative complements and membership.
+Each restriction \(A\to\mathcal T(A)\) is a bijection.
+\end{proposition}
+\begin{proof}
+Composing the compatibility identity with the inverses gives
+\[
+ p_{k+1,k}\widehat q_{k+1}^{-1}
+   =\widehat q_k^{-1}s_{k+1,k}.
+\]
+Therefore, a compatible collection \(y=(y_k)\) determines the compatible
+collection \(x=(\widehat q_k^{-1}(y_k))\). The two coordinate
+maps are inverses. Direct image under a bijection has
+as its inverse direct image under the inverse bijection. For every
+collection \((A_i)_{i\in I}\) of subsets of \(H\),
+\[
+ \begin{aligned}
+ \mathcal T\Bigl(\bigcup_i A_i\Bigr)&=\bigcup_i\mathcal T(A_i),\\
+ \mathcal T\Bigl(\bigcap_i A_i\Bigr)&=\bigcap_i\mathcal T(A_i),\\
+ \mathcal T(H\setminus A)&=Y\setminus\mathcal T(A).
+ \end{aligned}
+\]
+The first equality uses the definition of image. For the second and
+third, uniqueness of the antecedent allows the membership
+conditions to be transferred. Finally,
+\(x\in A\) is equivalent to
+\(\widehat q_\infty(x)\in\mathcal T(A)\), which also proves
+the assertion about restrictions.
+\end{proof}
+
+The route-refinement theorem~\ref{lib05:teo-rutas}
+provides a realization of this compatibility on the arithmetic
+labels and their carries. The result distinguishes recovery
+of each state from preservation of operations on collections.
+At amplitude level, the unitary lift
+in~\ref{lib05:prop-unitaria} also transports the inner product.
+At probabilistic level, Proposition
+\ref{prop:ch-naturalidad-medida} preserves the weights when
+emissions are transported with their multiplicities.
+
+\subsection{Connection with the genealogical closure of the continuum}
+Section~\ref{sec:cierre-cardinal-nativo} constructs a genealogical
+closure \(\mathfrak G\) and establishes the cardinal identity
+\(2^{\aleph_0}=\aleph_1\) over its internal power set. The closure,
+generator code and realized history form part of its
+definition; its set-theoretic representation is established after the
+genealogical construction through the operations and proofs
+included in that section.
+
+The present connection incorporates the proofs concerning memory,
+naturality and transport of collections used by that relation with
+conservation. The proof chain remains differentiated:
+the inverses recover states; their compatibility recovers
+histories; the bijection transports membership operations;
+the genealogical closure in Section~\ref{sec:cierre-cardinal-nativo} fixes the domain
+of the cardinal statement. Recovery and the organization
+of collections are thus integrated into the double projection with their respective
+objects, operations and conclusions.
